@@ -33,7 +33,7 @@
     <link rel="stylesheet" href="../_static/julia.css" type="text/css" />
   
     <link rel="top" title="None" href="../index.html"/>
-        <link rel="prev" title="소개 글" href="../manual/introduction.html"/> 
+        <link rel="prev" title="시작하기" href="../manual/getting-started.html"/> 
 
   
   <script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.6.2/modernizr.min.js"></script>
@@ -50,8 +50,9 @@
         <!--
         <a href="../index.html" class="fa fa-home"> Julia Language</a>
         -->
-        <div role="search">
-  <form id ="rtd-search-form" class="wy-form" action="../search.html" method="get">
+        
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
     <input type="text" name="q" placeholder="Search docs" />
     <input type="hidden" name="check_keywords" value="yes" />
     <input type="hidden" name="area" value="default" />
@@ -64,6 +65,10 @@
         
             <ul>
 <li class="toctree-l1"><a class="reference internal" href="../manual/introduction.html">소개 글</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../manual/getting-started.html">시작하기</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../manual/getting-started.html#id2">다른 읽을 거리</a></li>
+</ul>
+</li>
 </ul>
 <ul class="simple">
 </ul>
@@ -71,9 +76,9 @@
 </ul>
 <ul class="current">
 <li class="toctree-l1 current"><a class="current reference internal" href="">결론</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#id2">성능</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#id3">앞으로 할 작업들</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#id4">프로젝트 상황</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id4">성능</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id5">앞으로 할 작업들</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id10">프로젝트 상황</a></li>
 </ul>
 </li>
 </ul>
@@ -92,23 +97,6 @@
       </nav>
 
 
-<script>
-  window.fbAsyncInit = function() {
-    FB.init({
-      appId      : '685509058259607',
-      xfbml      : true,
-      version    : 'v2.3'
-    });
-  };
-
-  (function(d, s, id){
-     var js, fjs = d.getElementsByTagName(s)[0];
-     if (d.getElementById(id)) {return;}
-     js = d.createElement(s); js.id = id;
-     js.src = "//connect.facebook.net/ko_KR/sdk.js";
-     fjs.parentNode.insertBefore(js, fjs);
-   }(document, 'script', 'facebook-jssdk'));
-</script>
 
       
       <div class="wy-nav-content">
@@ -136,14 +124,15 @@
 <h1>결론<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h1>
 <p>테크니컬 컴퓨팅은 아무튼 그 정의를 정확히 내리기 어렵다. 그런 연유로
 우리는 “특정 영역”을 목표로 하지 않는다. 프로그래밍 언어는 어떠한
-목적으로도 사용할 수 있는 보편성이 중요하다고 프로그래밍 언어 도입에
-관한 최근 논문은 말하고 있다. 특수한 분야에서만 쓰이는 언어는 보통 그
-분야에 제일 잘나가는 언어가 아니다. 여기에서도 보편적인 언어가 선호되어
-너른 인기를 끌고 있다. 시장을 지배할 만큼 잘 만드는게 결코 쉽지 않다는
-것, 그만큼 우리가 만드는 보편적인 언어를 개선할 기회가 클 것으로 보인다.
-서두에서 언급한 대로, 테크니컬 컴퓨팅의 모습은 부정확하게 정의되었고,
-단지 그렇게 된 것이다. 본 논문과 보다 보편적인 틀에서, 이 시장을
-이해하기 위한 작은 걸음을 내딛어 보자.</p>
+목적으로도 사용할 수 있는 보편성이 중요하다고 프로그래밍 언어
+도입:raw-latex:<a href="#id2"><span class="problematic" id="id3">`</span></a>cite{Meyerovich:2013:EAP:2509136.2509515}`에 관한 최근
+논문은 말하고 있다. 특수한 분야에서만 쓰이는 언어는 보통 그 분야에 제일
+잘나가는 언어가 아니다. 여기에서도 보편적인 언어가 선호되어 너른 인기를
+끌고 있다. 시장을 지배할 만큼 잘 만드는게 결코 쉽지 않다는 것, 그만큼
+우리가 만드는 보편적인 언어를 개선할 기회가 클 것으로 보인다. 서두에서
+언급한 대로, 테크니컬 컴퓨팅의 모습은 부정확하게 정의되었고, 단지 그렇게
+된 것이다. 본 논문과 보다 보편적인 틀에서, 이 시장을 이해하기 위한 작은
+걸음을 내딛어 보자.</p>
 <p>테크니컬 컴퓨팅 사용자들은 우선 처리할 일을 프로그래밍 언어로 직접
 기술하는게 드물다. 이게 우리가 유심히 관찰하다 프로젝트를 시작하게 된
 계기다. 현재 많은 수의 테크니컬 컴퓨팅 언어가 각 상황의 예를 나열하고
@@ -158,24 +147,22 @@
 곳곳에서 발견되고 지지되고 있다. 그리고 부분적인 정보를 기반으로 하는,
 런타임에 유용한 행위를 찾아내는 많은 방법들이 있다.</p>
 <p>이 장에서 다루지 못한 것은 더 진행을 해 보고 반영할 것이다.</p>
-<div class="section" id="id2">
-<h2>성능<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="id4">
+<h2>성능<a class="headerlink" href="#id4" title="Permalink to this headline">¶</a></h2>
 <p>추상화에 관심이 있다면, 타입 최적화(type specialization)는 성능을 올리기
 위한 첫 단계이다. 하지만 크게 보면 성능을 위해선 많은 것을 다뤄야 한다.
-<em>알고리즘 선별</em>&nbsp; 아이디어에서 다루는 “코드 선택”을 보면, 예를 들어
-프로그램의 어떤 지점에 몇몇의 알고리즘을 선별해 가장 빠른 것을 자동으로
-고른다. 줄리아는 작은 단위로 간결하게 함수를 작성하고, 적용에 필요한
-타입을 달아주고 있는데 자연스레 이러한 기능과 맞아 떨어지고 있다. 객체의
-실행 단위별로 디스패치 하는 것도 가능할 만하다.</p>
-<p>Spiral&nbsp;과 같은 고성능 코드 생성기는 데이터의 크기를 최적화 한다.
-줄리아는 배열 크기를 표현하기 쉽도록 타입 시스템이 고안되어 있으므로,
-코드를 최적화하는 동적 디스패치 패턴으로서 이를 적용해 볼 수 있다.
-줄리아는 분산 컴퓨팅 라이브러리를 포함하고 있으므로, 메모리 공유 방식의
-병렬화에 대한 탐색을 충분히 하지 못하였다. Cilk 모델&nbsp;은 우리가 목표로
-하는 성능과 추상화에 대한 좋은 본보기다.</p>
+<em>알고리즘
+선별</em>&nbsp;
+아이디어에서 다루는 “코드 선택”을 보면, 예를 들어 프로그램의 어떤 지점에
+몇몇의 알고리즘을 선별해 가장 빠른 것을 자동으로 고른다. 줄리아는 작은
+단위로 간결하게 함수를 작성하고, 적용에 필요한 타입을 달아주고 있는데
+자연스레 이러한 기능과 맞아 떨어지고 있다. 객체의 실행 단위별로 디스패치
+하는 것도 가능할 만하다.</p>
+<p>Spiral&nbsp;cite{Joerg96,Randall98}`은
+우리가 목표로 하는 성능과 추상화에 대한 좋은 본보기다.</p>
 </div>
-<div class="section" id="id3">
-<h2>앞으로 할 작업들<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="id5">
+<h2>앞으로 할 작업들<a class="headerlink" href="#id5" title="Permalink to this headline">¶</a></h2>
 <p>실무용 시스템에서는, 초기 디자인에서 제껴둔 걸 돌아보는 작업을 우리는
 해야 한다. 최적화를 기반으로 하는 다변성(polymorphism)에서 우리는
 분리해서 컴파일하는 기능을 지원하지 않고 있다. 다행히 누구도 단념하지
@@ -186,9 +173,10 @@
 계층이라 더 이상 확장할 수 없는 — 이는 언어의 한 기능으로도 적합하다. 이
 라이브러리를 사용하는 애플리케이션은 보다 효율적으로 컴파일 할 수 있다.
 계층을 추가하여(느린 것부터 바꾸는) 특정 상황에 적합한 지원을 한다. 바로
-“텔레스코핑 언어”에서 이를 핵심&nbsp;으로 다룬다.</p>
+“텔레스코핑 언어”에서 이를 핵심&nbsp;:raw-latex:<a href="#id6"><span class="problematic" id="id7">`</span></a>cite{telescoping}`으로
+다룬다.</p>
 <p>줄리아에서 고차원적 프로그래밍을 하는 방식은 다소 난해하다.
-맵예제&nbsp;[sec:implementingmap] <tt class="docutils literal"><span class="pre">map</span></tt> 함수는 <tt class="docutils literal"><span class="pre">Bottom</span></tt> 타입을 원소로
+맵예제&nbsp;[sec:implementingmap] <code class="docutils literal"><span class="pre">map</span></code> 함수는 <code class="docutils literal"><span class="pre">Bottom</span></code> 타입을 원소로
 하는 배열을 돌려준다. 입력이 비어있는 경우를 대처는 할 수 있지만 여전히
 많은 프로그래머들을 헤깔리게 하고 당황하게 만들고 있다. 애로우
 타입(nominal arrow types)을 위한 별도의 문법을 둬 이 상황이 나아지게 할
@@ -197,11 +185,11 @@
 순으로: 첫째는 타입 정보를 나타내도록 하고, 점진적으로 점검해 나가며
 안전성을 향상해 간다. 예컨데, 언어적으로 더 나은 대안을 찾으려 한다면
 제어 흐름(control flow)과 맞물리는 타입을 찾아낼 필요가 있다.
-<tt class="docutils literal"><span class="pre">TypeCheck.jl</span></tt>&nbsp;와 같은 도구는 타입 정보의 추론을 막론하여 사용할 수가
-있다.</p>
+<code class="docutils literal"><span class="pre">TypeCheck.jl</span></code>&nbsp;:raw-latex:<a href="#id8"><span class="problematic" id="id9">`</span></a>cite{typecheckjl}`와 같은 도구는 타입
+정보의 추론을 막론하여 사용할 수가 있다.</p>
 </div>
-<div class="section" id="id4">
-<h2>프로젝트 상황<a class="headerlink" href="#id4" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="id10">
+<h2>프로젝트 상황<a class="headerlink" href="#id10" title="Permalink to this headline">¶</a></h2>
 <p>줄리아는 자유 소프트웨어이며, 우리는 대부분의 코드를 작성하고 읽고
 고치는 과정을 진두지휘 하고 있다. 줄리아의 대부분은 라이브러리로서
 존재하며, 시스템을 아우르는 기여를 할 수 있게 진입 장벽을 낮추었다. 현재
@@ -217,7 +205,7 @@
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
       
-        <a href="../manual/introduction.html" class="btn btn-neutral" title="소개 글" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="../manual/getting-started.html" class="btn btn-neutral" title="시작하기" accesskey="p"><span class="fa fa-arrow-circle-left"></span> 이전 </a>
       
     </div>
   
@@ -226,7 +214,7 @@
 
   <div role="contentinfo">
     <p>
-      Last updated on Jul 12, 2015.
+      Last updated on Aug 11, 2015.
     </p>
   </div>
 
@@ -239,6 +227,24 @@
   data-width="450"
   data-show-faces="true">
 </div>
+
+<script>
+  window.fbAsyncInit = function() {
+    FB.init({
+      appId      : '685509058259607',
+      xfbml      : true,
+      version    : 'v2.3'
+    });
+  };
+
+  (function(d, s, id){
+     var js, fjs = d.getElementsByTagName(s)[0];
+     if (d.getElementById(id)) {return;}
+     js = d.createElement(s); js.id = id;
+     js.src = "https://connect.facebook.net/ko_KR/sdk.js";
+     fjs.parentNode.insertBefore(js, fjs);
+   }(document, 'script', 'facebook-jssdk'));
+</script>
 
 <div class="fb-comments" data-width="100%" data-version="v2.3"></div>
 
@@ -264,7 +270,7 @@
       <script type="text/javascript" src="../_static/jquery.js"></script>
       <script type="text/javascript" src="../_static/underscore.js"></script>
       <script type="text/javascript" src="../_static/doctools.js"></script>
-      <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+      <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
 
   
 
@@ -286,7 +292,7 @@
 <script type="text/javascript" src="../_static/jquery.word-break-keep-all.min.js"></script>
 <script type="text/javascript">
 $(document).ready(function(){
-  $('body').wordBreakKeepAll();
+  $('p').wordBreakKeepAll();
 });
 </script>
 

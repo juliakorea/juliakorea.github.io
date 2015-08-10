@@ -50,8 +50,9 @@
         <!--
         <a href="index.html" class="fa fa-home"> Julia Language</a>
         -->
-        <div role="search">
-  <form id ="rtd-search-form" class="wy-form" action="search.html" method="get">
+        
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
     <input type="text" name="q" placeholder="Search docs" />
     <input type="hidden" name="check_keywords" value="yes" />
     <input type="hidden" name="area" value="default" />
@@ -64,6 +65,10 @@
         
             <ul>
 <li class="toctree-l1"><a class="reference internal" href="manual/introduction.html">소개 글</a></li>
+<li class="toctree-l1"><a class="reference internal" href="manual/getting-started.html">시작하기</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="manual/getting-started.html#id2">다른 읽을 거리</a></li>
+</ul>
+</li>
 </ul>
 <ul class="simple">
 </ul>
@@ -71,9 +76,9 @@
 </ul>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="phdthesis/chap6.html">결론</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="phdthesis/chap6.html#id2">성능</a></li>
-<li class="toctree-l2"><a class="reference internal" href="phdthesis/chap6.html#id3">앞으로 할 작업들</a></li>
-<li class="toctree-l2"><a class="reference internal" href="phdthesis/chap6.html#id4">프로젝트 상황</a></li>
+<li class="toctree-l2"><a class="reference internal" href="phdthesis/chap6.html#id4">성능</a></li>
+<li class="toctree-l2"><a class="reference internal" href="phdthesis/chap6.html#id5">앞으로 할 작업들</a></li>
+<li class="toctree-l2"><a class="reference internal" href="phdthesis/chap6.html#id10">프로젝트 상황</a></li>
 </ul>
 </li>
 </ul>
@@ -92,23 +97,6 @@
       </nav>
 
 
-<script>
-  window.fbAsyncInit = function() {
-    FB.init({
-      appId      : '685509058259607',
-      xfbml      : true,
-      version    : 'v2.3'
-    });
-  };
-
-  (function(d, s, id){
-     var js, fjs = d.getElementsByTagName(s)[0];
-     if (d.getElementById(id)) {return;}
-     js = d.createElement(s); js.id = id;
-     js.src = "//connect.facebook.net/ko_KR/sdk.js";
-     fjs.parentNode.insertBefore(js, fjs);
-   }(document, 'script', 'facebook-jssdk'));
-</script>
 
       
       <div class="wy-nav-content">
@@ -186,7 +174,7 @@
 
   <div role="contentinfo">
     <p>
-      Last updated on Jul 12, 2015.
+      Last updated on Aug 11, 2015.
     </p>
   </div>
 
@@ -199,6 +187,24 @@
   data-width="450"
   data-show-faces="true">
 </div>
+
+<script>
+  window.fbAsyncInit = function() {
+    FB.init({
+      appId      : '685509058259607',
+      xfbml      : true,
+      version    : 'v2.3'
+    });
+  };
+
+  (function(d, s, id){
+     var js, fjs = d.getElementsByTagName(s)[0];
+     if (d.getElementById(id)) {return;}
+     js = d.createElement(s); js.id = id;
+     js.src = "https://connect.facebook.net/ko_KR/sdk.js";
+     fjs.parentNode.insertBefore(js, fjs);
+   }(document, 'script', 'facebook-jssdk'));
+</script>
 
 <div class="fb-comments" data-width="100%" data-version="v2.3"></div>
 
@@ -224,7 +230,7 @@
       <script type="text/javascript" src="_static/jquery.js"></script>
       <script type="text/javascript" src="_static/underscore.js"></script>
       <script type="text/javascript" src="_static/doctools.js"></script>
-      <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+      <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
 
   
 
@@ -246,7 +252,7 @@
 <script type="text/javascript" src="_static/jquery.word-break-keep-all.min.js"></script>
 <script type="text/javascript">
 $(document).ready(function(){
-  $('body').wordBreakKeepAll();
+  $('p').wordBreakKeepAll();
 });
 </script>
 

@@ -13,6 +13,8 @@
 Read the Docs Sphinx Theme
 **************************
 
+.. contents:: 
+
 View a working demo_ over on readthedocs.org_.
 
 This is a mobile-friendly sphinx_ theme I made for readthedocs.org_. It's
@@ -24,6 +26,7 @@ the SASS files here, rather than the .css files on RTD.
 
 .. image:: screen_mobile.png
     :width: 100%
+
 Installation
 ============
 
@@ -57,6 +60,19 @@ conf.py file:
 
     html_theme = "sphinx_rtd_theme"
     html_theme_path = ["_themes", ]
+
+Changelog
+=========
+
+
+v0.1.8
+------
+
+* Start keeping changelog :)
+* Support for third and fourth level headers in the sidebar
+* Add support for Sphinx 1.3
+* Add sidebar headers for :caption: in Sphinx toctree
+* Clean up sidebar scrolling behavior so it never scrolls out of view
 
 How the Table of Contents builds
 ================================
@@ -173,4 +189,3 @@ you can add something like this to your config. Thanks to Daniel Oaks for this.
 TODO
 ====
 * Separate some sass variables at the theme level so you can overwrite some basic colors.
-

@@ -14,9 +14,22 @@ Contents:
 
 .. toctree::
     :maxdepth: 2
+    :caption: Sweet Docs
 
     demo
     list
+
+.. toctree::
+    :titlesonly:
+
+    toc
+
+.. toctree::
+    :maxdepth: 2
+    :caption: This is an incredibly long caption for a long menu
+
+    long
+    api
 
 Maaaaath!
 =========
@@ -49,14 +62,6 @@ Giant tables
 +------------+------------+-----------+------------+------------+-----------+------------+------------+-----------+------------+------------+-----------+
 | body row 1 | column 2   | column 3  | body row 1 | column 2   | column 3  | body row 1 | column 2   | column 3  | body row 1 | column 2   | column 3  |
 +------------+------------+-----------+------------+------------+-----------+------------+------------+-----------+------------+------------+-----------+
-
-API Test
-========
-
-.. automodule:: test_py_module.test
-    :members:
-    :private-members:
-    :special-members:
 
 Optional parameter args
 -----------------------
@@ -212,6 +217,24 @@ Emphasized lines with line numbers
 Citation
 ========
 
-Here I am making a citation [1]_
+Here I am making a citation [1]_, another [2]_ and another [3]_
 
 .. [1] This is the citation I made, let's make this extremely long so that we can tell that it doesn't follow the normal responsive table stuff.
+
+.. [2] This citation has some ``code blocks`` in it, maybe some **bold** and
+       *italics* too. Heck, lets put a link to a meta citation [3]_ too.
+
+.. [3] This citation will have two backlinks.
+
+======
+Images
+======
+
+.. figure:: static/yi_jing_01_chien.jpg
+
+    This is a caption for a figure.
+
+Download links
+==============
+
+:download:`This long long long long long long long long long long long long long long long download link should be blue with icon, and should wrap white-spaces <static/yi_jing_01_chien.jpg>`

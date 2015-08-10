@@ -33,7 +33,7 @@
     <link rel="stylesheet" href="../_static/julia.css" type="text/css" />
   
     <link rel="top" title="None" href="../index.html"/>
-        <link rel="next" title="결론" href="../phdthesis/chap6.html"/>
+        <link rel="next" title="시작하기" href="getting-started.html"/>
         <link rel="prev" title="Julia Documentation" href="../index.html"/> 
 
   
@@ -51,8 +51,9 @@
         <!--
         <a href="../index.html" class="fa fa-home"> Julia Language</a>
         -->
-        <div role="search">
-  <form id ="rtd-search-form" class="wy-form" action="../search.html" method="get">
+        
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
     <input type="text" name="q" placeholder="Search docs" />
     <input type="hidden" name="check_keywords" value="yes" />
     <input type="hidden" name="area" value="default" />
@@ -65,6 +66,10 @@
         
             <ul class="current">
 <li class="toctree-l1 current"><a class="current reference internal" href="">소개 글</a></li>
+<li class="toctree-l1"><a class="reference internal" href="getting-started.html">시작하기</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="getting-started.html#id2">다른 읽을 거리</a></li>
+</ul>
+</li>
 </ul>
 <ul class="simple">
 </ul>
@@ -72,9 +77,9 @@
 </ul>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../phdthesis/chap6.html">결론</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="../phdthesis/chap6.html#id2">성능</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../phdthesis/chap6.html#id3">앞으로 할 작업들</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../phdthesis/chap6.html#id4">프로젝트 상황</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../phdthesis/chap6.html#id4">성능</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../phdthesis/chap6.html#id5">앞으로 할 작업들</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../phdthesis/chap6.html#id10">프로젝트 상황</a></li>
 </ul>
 </li>
 </ul>
@@ -93,23 +98,6 @@
       </nav>
 
 
-<script>
-  window.fbAsyncInit = function() {
-    FB.init({
-      appId      : '685509058259607',
-      xfbml      : true,
-      version    : 'v2.3'
-    });
-  };
-
-  (function(d, s, id){
-     var js, fjs = d.getElementsByTagName(s)[0];
-     if (d.getElementById(id)) {return;}
-     js = d.createElement(s); js.id = id;
-     js.src = "//connect.facebook.net/ko_KR/sdk.js";
-     fjs.parentNode.insertBefore(js, fjs);
-   }(document, 'script', 'facebook-jssdk'));
-</script>
 
       
       <div class="wy-nav-content">
@@ -176,7 +164,7 @@
 핵심 개념이다: 함수들은 서로 다른 인자 타입들을 조합함으로서 정의되고
 가장 그 정의와 맞물리는 타입을 찾아 디스패치하여 실행된다. 이 모델은 수학
 프로그래밍과 잘 맞는데, 객체 지향에선 연산자가 첫번째 인자를 &#8220;갖는&#8221; 방식이기에
-자연스럽지가 않다. 연산자는 단지 특별히 표기한 함수일 뿐이다 <tt class="docutils literal"><span class="pre">+</span></tt> 함수에 엮일
+자연스럽지가 않다. 연산자는 단지 특별히 표기한 함수일 뿐이다 <code class="docutils literal"><span class="pre">+</span></code> 함수에 엮일
 새로운 데이터 타입을 정의하려면 해당하는 메서드 정의만 추가하면 된다.
 기존 코드는 새로운 데이터 타입과 더불어 원할하게 작동한다.</p>
 <p>런타임 타입 추론(타입 지정을 점진적으로 늘려가며)을 이유로 또 이 프로젝트를
@@ -208,10 +196,10 @@
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="../phdthesis/chap6.html" class="btn btn-neutral float-right" title="결론" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="getting-started.html" class="btn btn-neutral float-right" title="시작하기" accesskey="n"> 다음 <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="../index.html" class="btn btn-neutral" title="Julia Documentation" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="../index.html" class="btn btn-neutral" title="Julia Documentation" accesskey="p"><span class="fa fa-arrow-circle-left"></span> 이전 </a>
       
     </div>
   
@@ -220,7 +208,7 @@
 
   <div role="contentinfo">
     <p>
-      Last updated on Jul 12, 2015.
+      Last updated on Aug 11, 2015.
     </p>
   </div>
 
@@ -233,6 +221,24 @@
   data-width="450"
   data-show-faces="true">
 </div>
+
+<script>
+  window.fbAsyncInit = function() {
+    FB.init({
+      appId      : '685509058259607',
+      xfbml      : true,
+      version    : 'v2.3'
+    });
+  };
+
+  (function(d, s, id){
+     var js, fjs = d.getElementsByTagName(s)[0];
+     if (d.getElementById(id)) {return;}
+     js = d.createElement(s); js.id = id;
+     js.src = "https://connect.facebook.net/ko_KR/sdk.js";
+     fjs.parentNode.insertBefore(js, fjs);
+   }(document, 'script', 'facebook-jssdk'));
+</script>
 
 <div class="fb-comments" data-width="100%" data-version="v2.3"></div>
 
@@ -258,7 +264,7 @@
       <script type="text/javascript" src="../_static/jquery.js"></script>
       <script type="text/javascript" src="../_static/underscore.js"></script>
       <script type="text/javascript" src="../_static/doctools.js"></script>
-      <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+      <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
 
   
 
@@ -280,7 +286,7 @@
 <script type="text/javascript" src="../_static/jquery.word-break-keep-all.min.js"></script>
 <script type="text/javascript">
 $(document).ready(function(){
-  $('body').wordBreakKeepAll();
+  $('p').wordBreakKeepAll();
 });
 </script>
 
