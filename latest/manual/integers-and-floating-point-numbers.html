@@ -155,8 +155,8 @@ Julia에 내장된 표준 수학 함수들은
 Julia로 하여금 연산 자원을 최대한 활용하도록 할 수 있도록 한다.
 게다가, Julia는 하드웨어에서 기본적으로 표현하지 못하는
 숫자들을 표현할 수 있게 만든
-<a class="reference internal" href="#man-arbitrary-precision-arithmetic"><span>임의 정밀도 연산</span></a> 도 지원한다.
-그러나, <a class="reference internal" href="#man-arbitrary-precision-arithmetic"><span>임의 정밀도 연산</span></a> 를 사용하면
+<a class="reference internal" href="#man-arbitrary-precision-arithmetic"><span>임의 정밀도 연산</span></a>도 지원한다.
+그러나, <a class="reference internal" href="#man-arbitrary-precision-arithmetic"><span>임의 정밀도 연산</span></a>을 사용하면
 성능상으로 느려질 수 있다.</p>
 <p>다음은 Julia에서 기본적으로 지원하는 타입이다:</p>
 <ul class="simple">
@@ -290,7 +290,7 @@ Julia로 하여금 연산 자원을 최대한 활용하도록 할 수 있도록 
 </div>
 <p>정수 리터럴은 해당 시스템이
 32비트 아키텍처인지 혹은 64비트 아키텍처인지에 따라
-타입이 결정된다:</p>
+타입이 결정된다.:</p>
 <div class="highlight-julia"><div class="highlight"><pre><span class="c"># 32비트 시스템:</span>
 <span class="n">julia</span><span class="o">&gt;</span> <span class="nb">typeof</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
 <span class="kt">Int32</span>
@@ -313,21 +313,20 @@ Julia로 하여금 연산 자원을 최대한 활용하도록 할 수 있도록 
 </div>
 <p>Julia는 부호가 있는 정수형과 부호가 없는 정수형을 위해
 <code class="xref jl jl-class docutils literal"><span class="pre">Int</span></code>와 <code class="xref jl jl-class docutils literal"><span class="pre">UInt</span></code>라는 타입 또한 정의하고 있다.:</p>
-<div class="highlight-julia"><div class="highlight"><pre><span class="o">..</span> <span class="n">code</span><span class="o">-</span><span class="n">block</span><span class="p">::</span> <span class="n">julia</span>
+<div class="highlight-julia"><div class="highlight"><pre><span class="c"># 32비트 시스템:</span>
+<span class="n">julia</span><span class="o">&gt;</span> <span class="kt">Int</span>
+<span class="kt">Int32</span>
+<span class="n">julia</span><span class="o">&gt;</span> <span class="n">UInt</span>
+<span class="n">UInt32</span>
+
+
+<span class="c"># 64비트 시스템:</span>
+<span class="n">julia</span><span class="o">&gt;</span> <span class="kt">Int</span>
+<span class="kt">Int64</span>
+<span class="n">julia</span><span class="o">&gt;</span> <span class="n">UInt</span>
+<span class="n">UInt64</span>
 </pre></div>
 </div>
-<blockquote>
-<div><p># 32비트 시스템:
-julia&gt; Int
-Int32
-julia&gt; UInt
-UInt32</p>
-<p># 64비트 시스템:
-julia&gt; Int
-Int64
-julia&gt; UInt
-UInt64</p>
-</div></blockquote>
 <p>32비트로 표현할 수 없지만 64비트로 표현이 가능한 큰 정수형 리터럴은
 시스템의 타입과는 상관없이 항상 64비트를 생성한다.:</p>
 <div class="highlight-julia"><div class="highlight"><pre><span class="c"># 32비트 혹은 64비트 시스템:</span>
@@ -777,7 +776,7 @@ Man of Floating-Point</a>을
 <span id="id14"></span><h2>임의 정밀도 연산<a class="headerlink" href="#man-arbitrary-precision-arithmetic" title="Permalink to this headline">¶</a></h2>
 <p>임의 정밀도의 정수와 부동소수점들의 연산을 위해, Julia는
 <a class="reference external" href="https://gmplib.org">GNU Multiple Precision Arithmetic Library (GMP)</a>와
-<a class="reference external" href="http://www.mpfr.org">GNU MPFR Library</a>을 각각 래핑(wrapping)하였다.
+<a class="reference external" href="http://www.mpfr.org">GNU MPFR Library</a>을 각각 래핑(wrapping)하였다
 <code class="xref jl jl-class docutils literal"><span class="pre">BigInt</span></code>와 <code class="xref jl jl-class docutils literal"><span class="pre">BigFloat</span></code> 타입은 Julia에서
 각각 임의 정밀도의 정수와 부동소수점을 다루기 위해 사용되고 있다.</p>
 <p>기본 수치 타입으로부터 임의 정밀도 정수와 부동소수점 타입을 만들기 위해
