@@ -83,6 +83,15 @@
 <li class="toctree-l2"><a class="reference internal" href="integers-and-floating-point-numbers.html#id17">리터럴 0와 1</a></li>
 </ul>
 </li>
+<li class="toctree-l1"><a class="reference internal" href="mathematical-operations.html">수학 연산들과 기본적인 함수들</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="mathematical-operations.html#id2">산술 연산</a></li>
+<li class="toctree-l2"><a class="reference internal" href="mathematical-operations.html#id3">비트 연산자</a></li>
+<li class="toctree-l2"><a class="reference internal" href="mathematical-operations.html#id4">갱신 연산자들</a></li>
+<li class="toctree-l2"><a class="reference internal" href="mathematical-operations.html#man-numeric-comparisons">수치 비교</a></li>
+<li class="toctree-l2"><a class="reference internal" href="mathematical-operations.html#man-numerical-conversions">수치 변환</a></li>
+<li class="toctree-l2"><a class="reference internal" href="mathematical-operations.html#man-elementary-functions">기초 함수</a></li>
+</ul>
+</li>
 </ul>
 <ul class="simple">
 </ul>
@@ -143,7 +152,7 @@
 <p>Julia를 처음 접할 때는 대화형 실행 환경을 통해서 시작하는 것이
 가장 쉽게 Julia를 익힐 수 있는 방법이다.
 대화형 실행 환경은 단순히 Julia 실행파일을 더블 클릭하거나, 명령창에서
-<code class="docutils literal"><span class="pre">julia</span></code> 명령어를 입력하여 실행할 수 있다.</p>
+<tt class="docutils literal"><span class="pre">julia</span></tt> 명령어를 입력하여 실행할 수 있다.</p>
 <div class="highlight-julia"><div class="highlight"><pre>$ julia
                _
    _       _ _(_)_     |  A fresh approach to technical computing
@@ -161,77 +170,81 @@ julia&gt; ans
 3
 </pre></div>
 </div>
-<p>대화형 실행 환경을 종료하기 위해서는 <code class="docutils literal"><span class="pre">^D</span></code> 를 입력하거나
-(컨트롤 키와 <code class="docutils literal"><span class="pre">d</span></code> 키를 함께 누른다.)
-<code class="docutils literal"><span class="pre">quit()</span></code> 를 대화형 실행 환경 입력창에 타이핑한다.
-대화형 실행 환경을 실행하면, 위와 같이 <code class="docutils literal"><span class="pre">julia</span></code> 배너가 보여지고,
+<p>대화형 실행 환경을 종료하기 위해서는 <tt class="docutils literal"><span class="pre">^D</span></tt> 를 입력하거나
+(컨트롤 키와 <tt class="docutils literal"><span class="pre">d</span></tt> 키를 함께 누른다.)
+<tt class="docutils literal"><span class="pre">quit()</span></tt> 를 대화형 실행 환경 입력창에 타이핑한다.
+대화형 실행 환경을 실행하면, 위와 같이 <tt class="docutils literal"><span class="pre">julia</span></tt> 배너가 보여지고,
 커서창이 사용자의 입력을 기다리며 깜빡이고 있다. 사용자가
-<code class="docutils literal"><span class="pre">1</span> <span class="pre">+</span> <span class="pre">2</span></code> 와 같은 표현식을 입력한 뒤, 엔터 버튼을 누르는 순간,
+<tt class="docutils literal"><span class="pre">1</span> <span class="pre">+</span> <span class="pre">2</span></tt> 와 같은 표현식을 입력한 뒤, 엔터 버튼을 누르는 순간,
 Julia는 표현식을 평가하고 그 결과를 보여준다.
 만약 사용자가 입력한 표현식이 세미콜론(;)으로 끝난다면,
 대화형 실행 환경은 결과를 바로 보여주지 않는다.
-대신에 <code class="docutils literal"><span class="pre">ans</span></code> 라는 변수가 결과를 보여주든 보여주지 않든
+대신에 <tt class="docutils literal"><span class="pre">ans</span></tt> 라는 변수가 결과를 보여주든 보여주지 않든
 가장 마지막으로 계산된 표현식의 결과를 저장하고 있다.
-<code class="docutils literal"><span class="pre">ans</span></code> 변수는 대화형 실행 환경에서만 존재하며, 다른 방식으로 동작하는
+<tt class="docutils literal"><span class="pre">ans</span></tt> 변수는 대화형 실행 환경에서만 존재하며, 다른 방식으로 동작하는
 Julia 코드 상에서는 나타나지 않는다.</p>
-<p><code class="docutils literal"><span class="pre">file.ji</span></code> 라는 소스 파일에 저장되어 있는 표현식을 계산하기 위해서는,
-<code class="docutils literal"><span class="pre">include(&quot;file.ji&quot;)</span></code> 와 같이 입력한다.</p>
+<p><tt class="docutils literal"><span class="pre">file.ji</span></tt> 라는 소스 파일에 저장되어 있는 표현식을 계산하기 위해서는,
+<tt class="docutils literal"><span class="pre">include(&quot;file.ji&quot;)</span></tt> 와 같이 입력한다.</p>
 <p>대화형 실행 환경을 이용하지 않고
 파일에 저장되어 있는 소스 코드를 실행하기 위해서는,
 소스 코드 파일 이름을 julia 명령어의 첫번째 매개 변수로 넣어서 실행한다.</p>
-<div class="highlight-shell"><div class="highlight"><pre><span class="nv">$ </span>julia script.jl arg1 arg2...
+<div class="highlight-shell"><div class="highlight"><pre>$ julia script.jl arg1 arg2...
 </pre></div>
 </div>
 <p>예제와 같이 julia 실행 명령 뒤에 오는 매개변수들은
-전역 상수 <code class="docutils literal"><span class="pre">ARGS</span></code> 라고 불리우는
-<code class="docutils literal"><span class="pre">script.ji</span></code> 프로그램의 명령줄 인자로 작동한다.
-<code class="docutils literal"><span class="pre">ARGS</span></code> 는 이 뿐만이 아니라
-<code class="docutils literal"><span class="pre">-e</span></code> 옵션을 통해서 julia 스크립트를 실행할 때도 설정할 수 있다.
-(아래의 <code class="docutils literal"><span class="pre">julia</span></code> 도움말을 보도록 하자.)
+전역 상수 <tt class="docutils literal"><span class="pre">ARGS</span></tt>라고 불리우는
+<tt class="docutils literal"><span class="pre">script.ji</span></tt>라는 프로그램의 명령줄 인자로 작동한다.
+이 프로그램의 이름은 전역 상수 <tt class="docutils literal"><span class="pre">PROGRAM_FILE</span></tt>에도 설정된다.
+또한 <tt class="docutils literal"><span class="pre">ARGS</span></tt> 는 이 뿐만이 아니라
+<tt class="docutils literal"><span class="pre">-e</span></tt> 옵션을 통해서 julia 스크립트를 실행할 때도 설정할 수 있음을 알 필요가 있다.
+그러나 이 경우에는 <tt class="docutils literal"><span class="pre">PROGRAM_FILE</span></tt>은 아무것도 설정되지 않은 채로 실행될 것이다.
+(아래의 <tt class="docutils literal"><span class="pre">julia</span></tt> 도움말을 보도록 하자.)
 예를 들어, 단순히 스크립트에 주어진 명령줄 인자를 출력할 때는
 다음과 같이 입력하면 된다.</p>
-<div class="highlight-shell"><div class="highlight"><pre><span class="nv">$ </span>julia -e <span class="s1">&#39;for x in ARGS; println(x); end&#39;</span> foo bar
+<div class="highlight-shell"><div class="highlight"><pre>$ julia -e <span class="s1">&#39;println(PROGRAM_FILE); for x in ARGS; println(x); end&#39;</span> foo bar
+
 foo
 bar
 </pre></div>
 </div>
 <p>아니면 저 코드를 스크립트 파일에 넣고 실행시켜도 가능하다.</p>
-<div class="highlight-shell"><div class="highlight"><pre><span class="nv">$ </span><span class="nb">echo</span> <span class="s1">&#39;for x in ARGS; println(x); end&#39;</span> &gt; script.jl
-<span class="nv">$ </span>julia script.jl foo bar
+<div class="highlight-shell"><div class="highlight"><pre>$ <span class="nb">echo</span> <span class="s1">&#39;println(PROGRAM_FILE); for x in ARGS; println(x); end&#39;</span> &gt; script.jl
+$ julia script.jl foo bar
+script.jl
 foo
 bar
 </pre></div>
 </div>
-<p><code class="docutils literal"><span class="pre">--</span></code> 구분자는 명령어와 줄리아에 넘겨줄 인자를 구분하는데 사용한다:</p>
+<p><tt class="docutils literal"><span class="pre">--</span></tt> 구분자는 명령어와 줄리아에 넘겨줄 인자를 구분하는데 사용한다:</p>
 <div class="highlight-julia"><div class="highlight"><pre><span class="o">$</span> <span class="n">julia</span> <span class="o">--</span><span class="n">color</span><span class="o">=</span><span class="n">yes</span> <span class="o">-</span><span class="n">O</span> <span class="o">--</span> <span class="n">foo</span><span class="o">.</span><span class="n">jl</span> <span class="n">arg1</span> <span class="n">arg2</span><span class="o">..</span>
 </pre></div>
 </div>
-<p>Julia는 <code class="docutils literal"><span class="pre">-p</span></code> 옵션이나 <code class="docutils literal"><span class="pre">--machinefile</span></code> 옵션을 이용하여
+<p>Julia는 <tt class="docutils literal"><span class="pre">-p</span></tt> 옵션이나 <tt class="docutils literal"><span class="pre">--machinefile</span></tt> 옵션을 이용하여
 병렬 환경에서 실행시킬 수 있다.
-<code class="docutils literal"><span class="pre">-p</span> <span class="pre">n</span></code> 옵션은 n개의 worker 프로세스를 생성하지만,
-<code class="docutils literal"><span class="pre">--machinefile</span> <span class="pre">file</span></code> 옵션은 file의 각 행에 지정된 노드마다
+<tt class="docutils literal"><span class="pre">-p</span> <span class="pre">n</span></tt> 옵션은 n개의 worker 프로세스를 생성하지만,
+<tt class="docutils literal"><span class="pre">--machinefile</span> <span class="pre">file</span></tt> 옵션은 file의 각 행에 지정된 노드마다
 worker를 생성한다.
-<code class="docutils literal"><span class="pre">file</span></code> 에 지정된 노드(machine)들은 <code class="docutils literal"><span class="pre">ssh</span></code> 로그인을 통해
+<tt class="docutils literal"><span class="pre">file</span></tt> 에 지정된 노드(machine)들은 <tt class="docutils literal"><span class="pre">ssh</span></tt> 로그인을 통해
 패스워드가 필요없이 실행할 수 있어야 하며,
 Julia는 현재 호스트와 같은 경로에 설치가 되어 있어야 한다.
-<code class="docutils literal"><span class="pre">file</span></code> 에 작성되는 노드는
-<code class="docutils literal"><span class="pre">[count*][user&#64;]host[:port]</span> <span class="pre">[bind_addr[:port]]</span></code>
+<tt class="docutils literal"><span class="pre">file</span></tt> 에 작성되는 노드는
+<tt class="docutils literal"><span class="pre">[count*][user&#64;]host[:port]</span> <span class="pre">[bind_addr[:port]]</span></tt>
 와 같은 형식으로 작성한다.
-<code class="docutils literal"><span class="pre">user</span></code> 는 현재 user id를 나타내고, <code class="docutils literal"><span class="pre">port</span></code> 는 기본 ssh port,
-<code class="docutils literal"><span class="pre">count</span></code> 는 각 노드당 생성하는 worker의 개수 (기본값 : 1)
-<code class="docutils literal"><span class="pre">bin-to</span> <span class="pre">bind_addr[:port]</span></code> 은 선택적인 옵션으로
+<tt class="docutils literal"><span class="pre">user</span></tt> 는 현재 user id를 나타내고, <tt class="docutils literal"><span class="pre">port</span></tt> 는 기본 ssh port,
+<tt class="docutils literal"><span class="pre">count</span></tt> 는 각 노드당 생성하는 worker의 개수 (기본값 : 1)
+<tt class="docutils literal"><span class="pre">bin-to</span> <span class="pre">bind_addr[:port]</span></tt> 은 선택적인 옵션으로
 다른 worker들이 현재의 worker로 연결하기 위해 필요한
 특정 ip 주소와 포트를 지정한다.</p>
 <p>만약 julia가 실행할 때마다 실행되는 코드가 있다면,
-그 코드를 <code class="docutils literal"><span class="pre">~/.juliarc.ji</span></code> 에 넣으면 된다.</p>
-<div class="highlight-shell"><div class="highlight"><pre><span class="nv">$ </span><span class="nb">echo</span> <span class="s1">&#39;println(&quot;Greetings! 你好! 안녕하세요?&quot;)&#39;</span> &gt; ~/.juliarc.jl
-<span class="nv">$ </span>julia
+그 코드를 <tt class="docutils literal"><span class="pre">~/.juliarc.ji</span></tt> 에 넣으면 된다.</p>
+<div class="highlight-shell"><div class="highlight"><pre>$ <span class="nb">echo</span> <span class="s1">&#39;println(&quot;Greetings! 你好! 안녕하세요?&quot;)&#39;</span> &gt; ~/.juliarc.jl
+$ julia
 Greetings! 你好! 안녕하세요?
 
 ...
 </pre></div>
 </div>
-<p><code class="docutils literal"><span class="pre">perl</span></code> 이나 <code class="docutils literal"><span class="pre">ruby</span></code> 와 같이,
+<p><tt class="docutils literal"><span class="pre">perl</span></tt> 이나 <tt class="docutils literal"><span class="pre">ruby</span></tt> 와 같이,
 Julia 코드를 실행하고 옵션을 지정하는 방법은 다음과 같이 여러가지가 있다.</p>
 <div class="highlight-shell"><div class="highlight"><pre>julia <span class="o">[</span>switches<span class="o">]</span> -- <span class="o">[</span>programfile<span class="o">]</span> <span class="o">[</span>args...<span class="o">]</span>
  -v, --version             버전 정보를 표시한다
@@ -239,6 +252,7 @@ Julia 코드를 실행하고 옵션을 지정하는 방법은 다음과 같이 �
 
  -J, --sysimage &lt;file&gt;     &lt;file&gt;이라는 시스템 이미지 파일을 로드한 뒤 실행한다
  --precompiled<span class="o">={</span>yes<span class="p">|</span>no<span class="o">}</span>    가능하다면 시스템 이미지에 미리 컴파일해둔 코드를 사용한다
+ --compilecache<span class="o">={</span>yes<span class="p">|</span>no<span class="o">}</span>   모듈의 사전 증분 컴파일을 활성화/비활성화
  -H, --home &lt;dir&gt;          Julia 실행파일의 위치를 지정한다
  --startup-file<span class="o">={</span>yes<span class="p">|</span>no<span class="o">}</span>   ~/.juliarc.jl를 불러온다
  -f, --no-startup          ~/.juliarc를 불러오지 않는다
@@ -256,7 +270,7 @@ Julia 코드를 실행하고 옵션을 지정하는 방법은 다음과 같이 �
                            <span class="s2">&quot;auto&quot;</span>는 현재 Julia를 실행하는 컴퓨터의 최대 코어수만큼 worker 프로세스를 생성한다
  --machinefile &lt;file&gt;      &lt;file&gt;에 나열된 호스트에서 worker 프로세스를 생성한다
 
- -i                        대화형 모드<span class="p">;</span> REPL을 돌리며 isinteractive<span class="o">()</span>는 <span class="nb">true </span>이다
+ -i                        대화형 모드<span class="p">;</span> REPL을 돌리며 isinteractive<span class="o">()</span>는 <span class="nb">true</span> 이다
  -q, --quiet               시작할 때 배너를 재거한다
  --color<span class="o">={</span>yes<span class="p">|</span>no<span class="o">}</span>          모든 텍스트에 색상을 표시하거나 표시하지 않는다
  --history-file<span class="o">={</span>yes<span class="p">|</span>no<span class="o">}</span>   작업내역을 저장하거나 로드한다
@@ -318,7 +332,7 @@ Julia 코드를 실행하고 옵션을 지정하는 방법은 다음과 같이 �
 
   <div role="contentinfo">
     <p>
-      Last updated on Aug 19, 2015.
+      Last updated on Feb 08, 2016.
     </p>
   </div>
 
@@ -374,7 +388,7 @@ Julia 코드를 실행하고 옵션을 지정하는 방법은 다음과 같이 �
       <script type="text/javascript" src="../_static/jquery.js"></script>
       <script type="text/javascript" src="../_static/underscore.js"></script>
       <script type="text/javascript" src="../_static/doctools.js"></script>
-      <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+      <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
 
   
 

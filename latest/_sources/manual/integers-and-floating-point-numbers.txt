@@ -36,7 +36,7 @@ Julia로 하여금 연산 자원을 최대한 활용하도록 할 수 있도록 
 
 ================  ========  =========      ============== ==================
 타입              부호여부  비트 수        최솟값         최댓값
-----------------  --------  ---------      -------------- ------------------
+================  ========  =========      ============== ==================
 :class:`Int8`        ✓         8            -2^7             2^7 - 1
 :class:`UInt8`                 8             0               2^8 - 1
 :class:`Int16`       ✓         16           -2^15            2^15 - 1
@@ -54,7 +54,7 @@ Julia로 하여금 연산 자원을 최대한 활용하도록 할 수 있도록 
 
 ================ ======= ==============
 타입             정밀도  비트수
----------------- ------- --------------
+================ ======= ==============
 :class:`Float16` half_          16
 :class:`Float32` single_        32
 :class:`Float64` double_        64
@@ -533,7 +533,7 @@ Julia는 :func:`eps`\ 라는 것을 제공한다.
     julia> 1.1 + 0.1
     1.2000000000000002
 
-    julia> with_rounding(Float64,RoundDown) do
+    julia> setrounding(Float64,RoundDown) do
            1.1 + 0.1
            end
     1.2
@@ -646,27 +646,27 @@ Julia는 :func:`eps`\ 라는 것을 제공한다.
     -9223372036854775809
 
     julia> typeof(y)
-    Base.GMP.BigInt
+    BigInt
 
 :class:`BigFloat` 타입에서 기본 정밀도(가수부의 비트수)와 반올림 모드는
-:func:`set_bigfloat_precision`\ 와 :func:`set_rounding`\ 를 호출함으로써
+:func:`setprecision`\ 와 :func:`setrounding`\ 를 호출함으로써
 변경할 수 있으며, 한 번 호출된 이후에는 그 설정이 계속 유지된다.
 특정 블럭의 코드에서만 정밀도와 반올림을 변경하기 위해서는
-:func:`with_bigfloat_precision`\ 와 :func:`with_rounding`\ 를 호출한다:
+``do`` 블럭의 코드에서와 같은 함수를 호출한다:
 
 .. doctest::
 
-    julia> with_rounding(BigFloat,RoundUp) do
+    julia> setrounding(BigFloat, RoundUp) do
            BigFloat(1) + parse(BigFloat, "0.1")
            end
     1.100000000000000000000000000000000000000000000000000000000000000000000000000003
 
-    julia> with_rounding(BigFloat,RoundDown) do
+    julia> setrounding(BigFloat, RoundDown) do
            BigFloat(1) + parse(BigFloat, "0.1")
            end
     1.099999999999999999999999999999999999999999999999999999999999999999999999999986
 
-    julia> with_bigfloat_precision(40) do
+    julia> setprecision(40) do
            BigFloat(1) + parse(BigFloat, "0.1")
            end
     1.1000000000004
@@ -726,20 +726,10 @@ Julia는 변수가 수치형 리터럴 바로 다음에 있으면,
 .. doctest::
 
     julia> (x-1)(x+1)
-    ERROR: MethodError: `call` has no method matching call(::Int64, ::Int64)
-    Closest candidates are:
-      Union(!Matched::Any...)
-      BoundsError()
-      BoundsError(!Matched::Any...)
-      ...
+    ERROR: MethodError: `Int64` has no method matching Int64(::Int64)
 
     julia> x(x+1)
-    ERROR: MethodError: `call` has no method matching call(::Int64, ::Int64)
-    Closest candidates are:
-      Union(!Matched::Any...)
-      BoundsError()
-      BoundsError(!Matched::Any...)
-      ...
+    ERROR: MethodError: `Int64` has no method matching Int64(::Int64)
 
 두 표현식은 함수로써 인식된다: 괄호앞에 붙는 수치형 리터럴이 아닌
 표현식들은 모두 함수와 함수의 매개변수로 인식된다.
@@ -781,7 +771,7 @@ Julia는 어떤 특정한 타입이나 주어진 변수의 타입에 따라 리�
 
 ====================== =====================================================
 함수                   설명
----------------------- -----------------------------------------------------
+====================== =====================================================
 :func:`zero(x) <zero>` ``x`` 타입이나 변수 ``x``\ 의 타입의 리터럴 0
 :func:`one(x) <one>`   ``x`` 타입이나 변수 ``x``\ 의 타입의 리터럴 1
 ====================== =====================================================
@@ -805,4 +795,3 @@ Julia는 어떤 특정한 타입이나 주어진 변수의 타입에 따라 리�
 
     julia> one(BigFloat)
     1.000000000000000000000000000000000000000000000000000000000000000000000000000000
-

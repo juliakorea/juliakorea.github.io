@@ -1,0 +1,1095 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta property="fb:app_id" content="685509058259607" />
+
+  
+  <title>수학 연산들과 기본적인 함수들</title>
+  
+
+  
+  
+
+  
+  <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../_static/julia.css" type="text/css" />
+  
+
+  
+    <link rel="stylesheet" href="../_static/julia.css" type="text/css" />
+  
+    <link rel="top" title="None" href="../index.html"/>
+        <link rel="next" title="결론" href="../phdthesis/chap6.html"/>
+        <link rel="prev" title="정수와 부동소수점으로 표현되는 실수" href="integers-and-floating-point-numbers.html"/> 
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.6.2/modernizr.min.js"></script>
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-nav-search">
+        <a href="http://julialang.org/"><img src="../_static/julia-logo.svg" class="logo"></a>
+        <!--
+        <a href="../index.html" class="fa fa-home"> Julia Language</a>
+        -->
+        
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+        
+        
+            <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="introduction.html">소개 글</a></li>
+<li class="toctree-l1"><a class="reference internal" href="getting-started.html">시작하기</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="getting-started.html#id2">다른 읽을 거리</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="variables.html">변수</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="variables.html#id2">변수명의 허용범위</a></li>
+<li class="toctree-l2"><a class="reference internal" href="variables.html#id3">코딩 컨벤션</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="integers-and-floating-point-numbers.html">정수와 부동소수점으로 표현되는 실수</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="integers-and-floating-point-numbers.html#id2">정수</a></li>
+<li class="toctree-l2"><a class="reference internal" href="integers-and-floating-point-numbers.html#id5">부동소수점으로 표현되는 실수</a></li>
+<li class="toctree-l2"><a class="reference internal" href="integers-and-floating-point-numbers.html#man-arbitrary-precision-arithmetic">임의 정밀도 연산</a></li>
+<li class="toctree-l2"><a class="reference internal" href="integers-and-floating-point-numbers.html#man-numeric-literal-coefficients">수치형 리터럴 계수</a></li>
+<li class="toctree-l2"><a class="reference internal" href="integers-and-floating-point-numbers.html#id17">리터럴 0와 1</a></li>
+</ul>
+</li>
+<li class="toctree-l1 current"><a class="current reference internal" href="">수학 연산들과 기본적인 함수들</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#id2">산술 연산</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id3">비트 연산자</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id4">갱신 연산자들</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#man-numeric-comparisons">수치 비교</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#man-numerical-conversions">수치 변환</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#man-elementary-functions">기초 함수</a></li>
+</ul>
+</li>
+</ul>
+<ul class="simple">
+</ul>
+<ul class="simple">
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../phdthesis/chap6.html">결론</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../phdthesis/chap6.html#id2">성능</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../phdthesis/chap6.html#id3">앞으로 할 작업들</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../phdthesis/chap6.html#id4">프로젝트 상황</a></li>
+</ul>
+</li>
+</ul>
+
+        
+      </div>
+      &nbsp;
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="../index.html">Julia Language</a>
+      </nav>
+
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../index.html">Docs</a> &raquo;</li>
+      
+    <li>수학 연산들과 기본적인 함수들</li>
+      <li class="wy-breadcrumbs-aside">
+        
+          
+            
+              <a href="https://github.com/juliakorea/doc/blame/master/src/julia/doc/manual/mathematical-operations.rst.txt" rel="nofollow"> 원문 보기</a>
+            
+          
+        
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document">
+            
+  <div class="section" id="man-mathematical-operations">
+<span id="id1"></span><h1>수학 연산들과 기본적인 함수들<a class="headerlink" href="#man-mathematical-operations" title="Permalink to this headline">¶</a></h1>
+<p>Julia는 모든 수치적 원시타입에 걸친 기본적인 사칙연산과 비트 연산을
+완벽하게 지원한다. 그 뿐만이 아니라 포괄적인 표준 수학 함수들을
+효율적이고 이식 가능한 형태로 구현하고 있다.</p>
+<div class="section" id="id2">
+<h2>산술 연산<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h2>
+<p>다음의 <a class="reference external" href="https://en.wikipedia.org/wiki/Arithmetic#Arithmetic_operations">arithmetic operators</a>
+는 모든 원시 수치타입에 관하여 지원된다.</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="16%" />
+<col width="23%" />
+<col width="61%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">표현식</th>
+<th class="head">이름</th>
+<th class="head">설명</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td><tt class="docutils literal"><span class="pre">+x</span></tt></td>
+<td>단항 덧셈</td>
+<td>동등 연산 (피연산자를 그대로 반환)</td>
+</tr>
+<tr class="row-odd"><td><tt class="docutils literal"><span class="pre">-x</span></tt></td>
+<td>단항 뺄셈</td>
+<td>피연산자의 부정을 대입한다.</td>
+</tr>
+<tr class="row-even"><td><tt class="docutils literal"><span class="pre">x</span> <span class="pre">+</span> <span class="pre">y</span></tt></td>
+<td>이항 덧셈</td>
+<td>덧셈을 수행</td>
+</tr>
+<tr class="row-odd"><td><tt class="docutils literal"><span class="pre">x</span> <span class="pre">-</span> <span class="pre">y</span></tt></td>
+<td>이항 뺄셈</td>
+<td>뺄셈을 수행</td>
+</tr>
+<tr class="row-even"><td><tt class="docutils literal"><span class="pre">x</span> <span class="pre">*</span> <span class="pre">y</span></tt></td>
+<td>곱셈</td>
+<td>곱셈을 수행</td>
+</tr>
+<tr class="row-odd"><td><tt class="docutils literal"><span class="pre">x</span> <span class="pre">/</span> <span class="pre">y</span></tt></td>
+<td>나눗셈</td>
+<td>나눗셈을 수행</td>
+</tr>
+<tr class="row-even"><td><tt class="docutils literal"><span class="pre">x</span> <span class="pre">\</span> <span class="pre">y</span></tt></td>
+<td>역수</td>
+<td><tt class="docutils literal"><span class="pre">y</span> <span class="pre">/</span> <span class="pre">x</span></tt> 와 같음</td>
+</tr>
+<tr class="row-odd"><td><tt class="docutils literal"><span class="pre">x</span> <span class="pre">^</span> <span class="pre">y</span></tt></td>
+<td>제곱</td>
+<td><tt class="docutils literal"><span class="pre">x``의</span> <span class="pre">``y</span></tt>th 제곱을 반환</td>
+</tr>
+<tr class="row-even"><td><tt class="docutils literal"><span class="pre">x</span> <span class="pre">%</span> <span class="pre">y</span></tt></td>
+<td>나머지</td>
+<td><tt class="docutils literal"><span class="pre">rem(x,y)</span></tt> 와 같음.</td>
+</tr>
+</tbody>
+</table>
+<p><tt class="docutils literal"><span class="pre">Bool</span></tt> 타입의 부정연산 또한 가지고 있다.</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="14%" />
+<col width="19%" />
+<col width="67%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">표현식</th>
+<th class="head">이름</th>
+<th class="head">설명</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td><tt class="docutils literal"><span class="pre">!x</span></tt></td>
+<td>부정</td>
+<td><tt class="docutils literal"><span class="pre">true</span></tt> 를 <tt class="docutils literal"><span class="pre">false</span></tt> 로 바꾸거나 그 반대의 연산</td>
+</tr>
+</tbody>
+</table>
+<p>Julia의 프로모션 문법은 다양한 타입간의 산술 연산을 자동으로 자연스럽게 처리할 수 있게 한다.
+프로모션 시스템에 관한 자세한 내용은 <em class="xref std std-ref">man-conversion-and-promotion</em>을 참고하는 것이 좋다.</p>
+<p>다음은 산술 연산을 이용한 몇 가지 간단한 예제들이다.</p>
+<div class="highlight-julia"><div class="highlight"><pre><span class="n">julia</span><span class="o">&gt;</span> <span class="mi">1</span> <span class="o">+</span> <span class="mi">2</span> <span class="o">+</span> <span class="mi">3</span>
+<span class="mi">6</span>
+
+<span class="n">julia</span><span class="o">&gt;</span> <span class="mi">1</span> <span class="o">-</span> <span class="mi">2</span>
+<span class="o">-</span><span class="mi">1</span>
+
+<span class="n">julia</span><span class="o">&gt;</span> <span class="mi">3</span><span class="o">*</span><span class="mi">2</span><span class="o">/</span><span class="mi">12</span>
+<span class="mf">0.5</span>
+</pre></div>
+</div>
+<p>(전통적으로, 연산자들과 피연산자들 간의 간격을 넓게 유지하지만,
+이 사항에 문법적인 강제성은 없다.)</p>
+</div>
+<div class="section" id="id3">
+<h2>비트 연산자<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h2>
+<p>위키피디아에 명시된 <a class="reference external" href="https://en.wikipedia.org/wiki/Bitwise_operation#Bitwise_operators">bitwise
+operators</a>
+은 모든 원시 정수 타입에 대해 Julia에서 모두 지원하고 있다.</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="11%" />
+<col width="89%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">표현식</th>
+<th class="head">이름</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td><tt class="docutils literal"><span class="pre">~x</span></tt></td>
+<td>비트 NOT 연산</td>
+</tr>
+<tr class="row-odd"><td><tt class="docutils literal"><span class="pre">x</span> <span class="pre">&amp;</span> <span class="pre">y</span></tt></td>
+<td>비트 AND 연산</td>
+</tr>
+<tr class="row-even"><td><tt class="docutils literal"><span class="pre">x</span> <span class="pre">|</span> <span class="pre">y</span></tt></td>
+<td>비트 OR 연산</td>
+</tr>
+<tr class="row-odd"><td><tt class="docutils literal"><span class="pre">x</span> <span class="pre">$</span> <span class="pre">y</span></tt></td>
+<td>비트 XOR 연산 (배타적 OR)</td>
+</tr>
+<tr class="row-even"><td><tt class="docutils literal"><span class="pre">x</span> <span class="pre">&gt;&gt;&gt;</span> <span class="pre">y</span></tt></td>
+<td>오른쪽 방향으로의 <a class="reference external" href="https://en.wikipedia.org/wiki/Logical_shift">logical shift</a></td>
+</tr>
+<tr class="row-odd"><td><tt class="docutils literal"><span class="pre">x</span> <span class="pre">&gt;&gt;</span> <span class="pre">y</span></tt></td>
+<td>오른쪽 방향으로의 <a class="reference external" href="https://en.wikipedia.org/wiki/Arithmetic_shift">arithmetic shift</a></td>
+</tr>
+<tr class="row-even"><td><tt class="docutils literal"><span class="pre">x</span> <span class="pre">&lt;&lt;</span> <span class="pre">y</span></tt></td>
+<td>왼쪽 방향으로의 논리/산술 시프트</td>
+</tr>
+</tbody>
+</table>
+<p>다음은 비트 연산을 이용한 몇 가지 간단한 예제들이다.</p>
+<div class="highlight-julia"><div class="highlight"><pre><span class="n">julia</span><span class="o">&gt;</span> <span class="o">~</span><span class="mi">123</span>
+<span class="o">-</span><span class="mi">124</span>
+
+<span class="n">julia</span><span class="o">&gt;</span> <span class="mi">123</span> <span class="o">&amp;</span> <span class="mi">234</span>
+<span class="mi">106</span>
+
+<span class="n">julia</span><span class="o">&gt;</span> <span class="mi">123</span> <span class="o">|</span> <span class="mi">234</span>
+<span class="mi">251</span>
+
+<span class="n">julia</span><span class="o">&gt;</span> <span class="mi">123</span> <span class="o">$</span> <span class="mi">234</span>
+<span class="mi">145</span>
+
+<span class="n">julia</span><span class="o">&gt;</span> <span class="o">~</span><span class="n">UInt32</span><span class="p">(</span><span class="mi">123</span><span class="p">)</span>
+<span class="mh">0xffffff84</span>
+
+<span class="n">julia</span><span class="o">&gt;</span> <span class="o">~</span><span class="n">UInt8</span><span class="p">(</span><span class="mi">123</span><span class="p">)</span>
+<span class="mh">0x84</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="id4">
+<h2>갱신 연산자들<a class="headerlink" href="#id4" title="Permalink to this headline">¶</a></h2>
+<p>모든 이항 산술연산자와 비트 연산자는 연산 결과를 왼쪽 피연산자에
+다시 대입하는 갱신 연산자 버전이 있다. <tt class="docutils literal"><span class="pre">=</span></tt> 기호를 연산자 바로 뒤에 지정하면
+연산자 갱신을 수행할 수 있다. 예를 들어,
+<tt class="docutils literal"><span class="pre">x</span> <span class="pre">+=</span> <span class="pre">3</span></tt>은 <tt class="docutils literal"><span class="pre">x</span> <span class="pre">=</span> <span class="pre">x</span> <span class="pre">+</span> <span class="pre">3</span></tt>와 같다.:</p>
+<div class="highlight-julia"><div class="highlight"><pre><span class="n">julia</span><span class="o">&gt;</span> <span class="n">x</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="mi">1</span>
+
+<span class="n">julia</span><span class="o">&gt;</span> <span class="n">x</span> <span class="o">+=</span> <span class="mi">3</span>
+<span class="mi">4</span>
+
+<span class="n">julia</span><span class="o">&gt;</span> <span class="n">x</span>
+<span class="mi">4</span>
+</pre></div>
+</div>
+<p>모든 이항 연산과 비트 연산의 갱신 연산자들은 다음과 같다.:</p>
+<div class="highlight-julia"><div class="highlight"><pre><span class="o">+=</span>  <span class="o">-=</span>  <span class="o">*=</span>  <span class="o">/=</span>  \<span class="o">=</span>  <span class="n">÷</span><span class="o">=</span>  <span class="o">%=</span>  <span class="o">^=</span>  <span class="o">&amp;=</span>  <span class="o">|=</span>  <span class="o">$=</span>  <span class="o">&gt;&gt;&gt;=</span>  <span class="o">&gt;&gt;=</span>  <span class="o">&lt;&lt;=</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p>갱신 연산자는 변수를 좌변으로 다시 바인딩한다.
+그 결과, 재바인딩되는 변수의 타입이 변할 수 있다.</p>
+<div class="last highlight-julia"><div class="highlight"><pre><span class="n">julia</span><span class="o">&gt;</span> <span class="n">x</span> <span class="o">=</span> <span class="mh">0x01</span><span class="p">;</span> <span class="nb">typeof</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+<span class="n">UInt8</span>
+
+<span class="n">julia</span><span class="o">&gt;</span> <span class="n">x</span> <span class="o">*=</span> <span class="mi">2</span> <span class="c">#Same as x = x * 2</span>
+<span class="mi">2</span>
+
+<span class="n">julia</span><span class="o">&gt;</span> <span class="nb">isa</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="kt">Int</span><span class="p">)</span>
+<span class="n">true</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="man-numeric-comparisons">
+<span id="id5"></span><h2>수치 비교<a class="headerlink" href="#man-numeric-comparisons" title="Permalink to this headline">¶</a></h2>
+<p>표준 비교 연산은 모든 원시 수치 타입에 관하여 정의되어 있다.
+types:</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="44%" />
+<col width="56%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">연산자</th>
+<th class="head">이름</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td><tt class="xref jl jl-obj docutils literal"><span class="pre">==</span></tt></td>
+<td>같다</td>
+</tr>
+<tr class="row-odd"><td><tt class="xref jl jl-obj docutils literal"><span class="pre">!=</span></tt> <tt class="xref jl jl-obj docutils literal"><span class="pre">≠</span></tt></td>
+<td>같지 않다.</td>
+</tr>
+<tr class="row-even"><td><tt class="xref jl jl-obj docutils literal"><span class="pre">&lt;</span></tt></td>
+<td>작다</td>
+</tr>
+<tr class="row-odd"><td><tt class="xref jl jl-obj docutils literal"><span class="pre">&lt;=</span></tt> <tt class="xref jl jl-obj docutils literal"><span class="pre">≤</span></tt></td>
+<td>작거나 같다.</td>
+</tr>
+<tr class="row-even"><td><tt class="xref jl jl-obj docutils literal"><span class="pre">&gt;</span></tt></td>
+<td>크다</td>
+</tr>
+<tr class="row-odd"><td><tt class="xref jl jl-obj docutils literal"><span class="pre">&gt;=</span></tt> <tt class="xref jl jl-obj docutils literal"><span class="pre">≥</span></tt></td>
+<td>크거나 같다.</td>
+</tr>
+</tbody>
+</table>
+<p>다음은 몇 가지 간단하 예제들이다.:</p>
+<div class="highlight-julia"><div class="highlight"><pre><span class="n">julia</span><span class="o">&gt;</span> <span class="mi">1</span> <span class="o">==</span> <span class="mi">1</span>
+<span class="n">true</span>
+
+<span class="n">julia</span><span class="o">&gt;</span> <span class="mi">1</span> <span class="o">==</span> <span class="mi">2</span>
+<span class="n">false</span>
+
+<span class="n">julia</span><span class="o">&gt;</span> <span class="mi">1</span> <span class="o">!=</span> <span class="mi">2</span>
+<span class="n">true</span>
+
+<span class="n">julia</span><span class="o">&gt;</span> <span class="mi">1</span> <span class="o">==</span> <span class="mf">1.0</span>
+<span class="n">true</span>
+
+<span class="n">julia</span><span class="o">&gt;</span> <span class="mi">1</span> <span class="o">&lt;</span> <span class="mi">2</span>
+<span class="n">true</span>
+
+<span class="n">julia</span><span class="o">&gt;</span> <span class="mf">1.0</span> <span class="o">&gt;</span> <span class="mi">3</span>
+<span class="n">false</span>
+
+<span class="n">julia</span><span class="o">&gt;</span> <span class="mi">1</span> <span class="o">&gt;=</span> <span class="mf">1.0</span>
+<span class="n">true</span>
+
+<span class="n">julia</span><span class="o">&gt;</span> <span class="o">-</span><span class="mi">1</span> <span class="o">&lt;=</span> <span class="mi">1</span>
+<span class="n">true</span>
+
+<span class="n">julia</span><span class="o">&gt;</span> <span class="o">-</span><span class="mi">1</span> <span class="o">&lt;=</span> <span class="o">-</span><span class="mi">1</span>
+<span class="n">true</span>
+
+<span class="n">julia</span><span class="o">&gt;</span> <span class="o">-</span><span class="mi">1</span> <span class="o">&lt;=</span> <span class="o">-</span><span class="mi">2</span>
+<span class="n">false</span>
+
+<span class="n">julia</span><span class="o">&gt;</span> <span class="mi">3</span> <span class="o">&lt;</span> <span class="o">-</span><span class="mf">0.5</span>
+<span class="n">false</span>
+</pre></div>
+</div>
+<p>정수는 일반적인 방법으로(비트간의 비교) 비교가능하다.
+부동소수점은
+<a class="reference external" href="https://en.wikipedia.org/wiki/IEEE_754-2008">IEEE 754 standard</a>
+에 따라 비교할 수 있다.:</p>
+<ul class="simple">
+<li>유한한 수들은 일반적인 방법으로 정렬된다.</li>
+<li>+0은 -0와 같지만 -0보단 크다고 할 수 없다.</li>
+<li><tt class="docutils literal"><span class="pre">Inf</span></tt> 는 <tt class="docutils literal"><span class="pre">Inf</span></tt> 자체와는 같고 <tt class="docutils literal"><span class="pre">NaN</span></tt>을 제외한 어떤 것보다도 크다.</li>
+<li><tt class="docutils literal"><span class="pre">-Inf</span></tt> 는 <tt class="docutils literal"><span class="pre">-Inf</span></tt> 자체와는 같고 <tt class="docutils literal"><span class="pre">NaN</span></tt>을 제외한 어떤 것보다도 작다.</li>
+<li><tt class="docutils literal"><span class="pre">NaN</span></tt>은 <tt class="docutils literal"><span class="pre">NaN</span></tt> 자신을 포함하여 어떤 것보다도 같거나 작거나 크지 않다.</li>
+</ul>
+<p>마지막 문장은 아마 놀라운 일일 것이기 때문에 따로 정리할 필요가 있다.</p>
+<div class="highlight-julia"><div class="highlight"><pre><span class="n">julia</span><span class="o">&gt;</span> <span class="n">NaN</span> <span class="o">==</span> <span class="n">NaN</span>
+<span class="n">false</span>
+
+<span class="n">julia</span><span class="o">&gt;</span> <span class="n">NaN</span> <span class="o">!=</span> <span class="n">NaN</span>
+<span class="n">true</span>
+
+<span class="n">julia</span><span class="o">&gt;</span> <span class="n">NaN</span> <span class="o">&lt;</span> <span class="n">NaN</span>
+<span class="n">false</span>
+
+<span class="n">julia</span><span class="o">&gt;</span> <span class="n">NaN</span> <span class="o">&gt;</span> <span class="n">NaN</span>
+<span class="n">false</span>
+</pre></div>
+</div>
+<p>그리고 이 점은 <em class="xref std std-ref">Arrays</em>를 다룰 때 골치 아픈 일이 될 수 있다.</p>
+<div class="highlight-julia"><div class="highlight"><pre><span class="n">julia</span><span class="o">&gt;</span> <span class="p">[</span><span class="mi">1</span> <span class="n">NaN</span><span class="p">]</span> <span class="o">==</span> <span class="p">[</span><span class="mi">1</span> <span class="n">NaN</span><span class="p">]</span>
+<span class="n">false</span>
+</pre></div>
+</div>
+<p>Julia는 해시 키 비교와 같은 상황에서 유용한 특정한 값에 대해 테스트할 수 있는
+몇 가지 함수들을 제공한다.</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="39%" />
+<col width="61%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">함수</th>
+<th class="head">테스트 항목</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td><tt class="xref jl jl-func docutils literal"><span class="pre">isequal(x,</span> <span class="pre">y)</span></tt></td>
+<td><tt class="docutils literal"><span class="pre">x</span></tt>와 <tt class="docutils literal"><span class="pre">y</span></tt>가 같은지에 대한 여부</td>
+</tr>
+<tr class="row-odd"><td><tt class="xref jl jl-func docutils literal"><span class="pre">isfinite(x)</span></tt></td>
+<td><tt class="docutils literal"><span class="pre">x</span></tt>가 유한한지에 대한 여부</td>
+</tr>
+<tr class="row-even"><td><tt class="xref jl jl-func docutils literal"><span class="pre">isinf(x)</span></tt></td>
+<td><tt class="docutils literal"><span class="pre">x</span></tt>가 무한한지에 대한 여부</td>
+</tr>
+<tr class="row-odd"><td><tt class="xref jl jl-func docutils literal"><span class="pre">isnan(x)</span></tt></td>
+<td><tt class="docutils literal"><span class="pre">x</span></tt>가 수가 아닌지(<tt class="docutils literal"><span class="pre">NaN</span></tt>인지)에 대한 여부</td>
+</tr>
+</tbody>
+</table>
+<p><tt class="xref jl jl-func docutils literal"><span class="pre">isequal()</span></tt>는 <tt class="docutils literal"><span class="pre">NaN</span></tt>끼리는 서로 같다고 간주한다.</p>
+<div class="highlight-julia"><div class="highlight"><pre><span class="n">julia</span><span class="o">&gt;</span> <span class="nb">isequal</span><span class="p">(</span><span class="n">NaN</span><span class="p">,</span><span class="n">NaN</span><span class="p">)</span>
+<span class="n">true</span>
+
+<span class="n">julia</span><span class="o">&gt;</span> <span class="nb">isequal</span><span class="p">([</span><span class="mi">1</span> <span class="n">NaN</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span> <span class="n">NaN</span><span class="p">])</span>
+<span class="n">true</span>
+
+<span class="n">julia</span><span class="o">&gt;</span> <span class="nb">isequal</span><span class="p">(</span><span class="n">NaN</span><span class="p">,</span><span class="n">NaN32</span><span class="p">)</span>
+<span class="n">true</span>
+</pre></div>
+</div>
+<p><tt class="xref jl jl-func docutils literal"><span class="pre">isequal()</span></tt>는 부호 있는 0을 구별할 때도 쓸 수 있다.</p>
+<div class="highlight-julia"><div class="highlight"><pre><span class="n">julia</span><span class="o">&gt;</span> <span class="o">-</span><span class="mf">0.0</span> <span class="o">==</span> <span class="mf">0.0</span>
+<span class="n">true</span>
+
+<span class="n">julia</span><span class="o">&gt;</span> <span class="nb">isequal</span><span class="p">(</span><span class="o">-</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">)</span>
+<span class="n">false</span>
+</pre></div>
+</div>
+<p>타입이 섞여 있을 때의 비교(부호 있는 정수, 부호 없는 정수, 그리고 실수 간의 비교)는
+헷갈릴 수 가 있다.
+Julia가 비교 연산을 정확히 할 수 있도록 보장하기 위해서 이 연산은 매우 조심히 해야한다.</p>
+<p>다른 타입의 경우에는 <tt class="xref jl jl-func docutils literal"><span class="pre">isequal()</span></tt>는 <tt class="xref jl jl-func docutils literal"><span class="pre">==()</span></tt>와 같기 때문에,
+만약 사용자에 의해 정의된 타입 간의 비교를 추가하고 싶으면
+<tt class="xref jl jl-func docutils literal"><span class="pre">==()</span></tt>메소드만 새로 추가해주면 된다.
+만약 동등 비교 연산을 새로 추가하고자 한다면,
+그에 상응하는 <tt class="xref jl jl-func docutils literal"><span class="pre">hash()</span></tt>메소드를 추가하여 <tt class="docutils literal"><span class="pre">isequal(x,y)</span></tt>이
+<tt class="docutils literal"><span class="pre">hash(x)</span> <span class="pre">==</span> <span class="pre">hash(y)</span></tt>를 내포할 수 있도록 해야한다.</p>
+<div class="section" id="id6">
+<h3>비교 연산의 중첨<a class="headerlink" href="#id6" title="Permalink to this headline">¶</a></h3>
+<p>Python(<a class="reference external" href="https://en.wikipedia.org/wiki/Python_syntax_and_semantics#Comparison_operators">notable exception of
+Python</a>)
+을 포함한 다른 언어와는 달리 Julia에서는 비교 연산이 임의적으로 중첩할 수 있다.</p>
+<div class="highlight-julia"><div class="highlight"><pre><span class="n">julia</span><span class="o">&gt;</span> <span class="mi">1</span> <span class="o">&lt;</span> <span class="mi">2</span> <span class="o">&lt;=</span> <span class="mi">2</span> <span class="o">&lt;</span> <span class="mi">3</span> <span class="o">==</span> <span class="mi">3</span> <span class="o">&gt;</span> <span class="mi">2</span> <span class="o">&gt;=</span> <span class="mi">1</span> <span class="o">==</span> <span class="mi">1</span> <span class="o">&lt;</span> <span class="mi">3</span> <span class="o">!=</span> <span class="mi">5</span>
+<span class="n">true</span>
+</pre></div>
+</div>
+<p>비교 연산의 중첩은 수치 코드에서 종종 그 위력을 발휘한다.
+비교 연산 중첩에서 스칼라 값의 비교는 <tt class="xref jl jl-obj docutils literal"><span class="pre">&amp;&amp;</span></tt> 연산자를 쓰고,
+배열이나 행렬 등에서의 항목간 비교는 <tt class="xref jl jl-obj docutils literal"><span class="pre">&amp;</span></tt>를 쓴다.
+예를 들어, <tt class="docutils literal"><span class="pre">0</span> <span class="pre">.&lt;</span> <span class="pre">A</span> <span class="pre">.&lt;</span> <span class="pre">1</span></tt>는 <tt class="docutils literal"><span class="pre">A</span></tt> 배열에서 0과 1 사이의 값을 가졌을 때만
+<tt class="docutils literal"><span class="pre">true</span></tt> 값을 가지는 boolean 배열을 리턴한다.</p>
+<p><tt class="xref jl jl-obj docutils literal"><span class="pre">&lt;</span></tt>는 배열 간에 비교를 위해 작동하도록 만들어진 연산자이다; <tt class="docutils literal"><span class="pre">A</span> <span class="pre">.&lt;</span> <span class="pre">B</span></tt> 연산은
+<tt class="docutils literal"><span class="pre">A</span></tt>와 <tt class="docutils literal"><span class="pre">B</span></tt> 가 같은 dimension일 때만 유효하다.
+이 연산자는 <tt class="docutils literal"><span class="pre">A</span></tt>나 <tt class="docutils literal"><span class="pre">B</span></tt>와 같은 dimension을 지닌 boolean 배열을 리턴한다.
+이런 연산을 일컫어 <em>항목간 비교 연산자(elementwise)</em>라고 한다;
+Julia는 <tt class="xref jl jl-obj docutils literal"><span class="pre">&lt;</span></tt> 이외에도 <tt class="xref jl jl-obj docutils literal"><span class="pre">*</span></tt>, <tt class="xref jl jl-obj docutils literal"><span class="pre">+</span></tt> 등의 항목간 비교 연산자를 제공한다.
+몇몇 항목간 비교 연산자는 바로 전 단락에서도 언급한 <tt class="docutils literal"><span class="pre">0</span> <span class="pre">.&lt;</span> <span class="pre">A</span> <span class="pre">.&lt;</span> <span class="pre">1</span></tt>와 같이
+스칼라 값을 피연산자로 받기도 한다. 스칼라 값이 피연산자로 될 경우에는 스칼라 값이
+배열의 각 항목으로 복제되어 들어간다는 의미이다.</p>
+<p>다음은 중첩된 비교 연산이 어떻게 평가되어지는지 나타낸다:</p>
+<div class="highlight-julia"><div class="highlight"><pre><span class="n">v</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="o">=</span> <span class="p">(</span><span class="n">println</span><span class="p">(</span><span class="n">x</span><span class="p">);</span> <span class="n">x</span><span class="p">)</span>
+
+<span class="n">julia</span><span class="o">&gt;</span> <span class="n">v</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span> <span class="o">&lt;</span> <span class="n">v</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span> <span class="o">&lt;=</span> <span class="n">v</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+<span class="mi">2</span>
+<span class="mi">1</span>
+<span class="mi">3</span>
+<span class="n">true</span>
+
+<span class="n">julia</span><span class="o">&gt;</span> <span class="n">v</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span> <span class="o">&gt;</span> <span class="n">v</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span> <span class="o">&lt;=</span> <span class="n">v</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+<span class="mi">2</span>
+<span class="mi">1</span>
+<span class="n">false</span>
+</pre></div>
+</div>
+<p>가운데에 있는 표현식은 <tt class="docutils literal"><span class="pre">v(1)</span> <span class="pre">&lt;</span> <span class="pre">v(2)</span> <span class="pre">&amp;&amp;</span> <span class="pre">v(2)</span> <span class="pre">&lt;=</span> <span class="pre">v(3)</span></tt> 와 같이
+두 번 평가되는 것 이 아니라 딱 한번만 평가된다.
+그러나, 중첩 비교 연산 시의 순서는 따로 정의되지 않았다.
+출력과 같이 부수적인 효과가 있는 표현식은 중첩 비교 연산에서 쓰지 않는 것이 바람직하다.
+그러나 어쩔 수 없이 부수적인 효과가 들어있는 표현식을 써야만 한다면,
+<tt class="xref jl jl-obj docutils literal"><span class="pre">&amp;&amp;</span></tt> 연산자를 명시적으로 써서 명시적으로 비교 연산을 수행해야 한다.
+(<em class="xref std std-ref">man-short-circuit-evaluation</em> 참고).</p>
+</div>
+<div class="section" id="id7">
+<h3>연산자 우선순위<a class="headerlink" href="#id7" title="Permalink to this headline">¶</a></h3>
+<p>Julia는 다음과 같은 순서로 연산을 수행한다. (높은 우선순위부터 낮은 우선순위로 표기)</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="14%" />
+<col width="86%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">분류</th>
+<th class="head">연산자</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>문법</td>
+<td><tt class="docutils literal"><span class="pre">.</span></tt>, <tt class="docutils literal"><span class="pre">::</span></tt></td>
+</tr>
+<tr class="row-odd"><td>지수</td>
+<td><tt class="docutils literal"><span class="pre">^</span></tt>, <tt class="docutils literal"><span class="pre">.^</span></tt> (항목 간의 연산)</td>
+</tr>
+<tr class="row-even"><td>분수</td>
+<td><tt class="docutils literal"><span class="pre">//</span></tt>, <tt class="docutils literal"><span class="pre">.//</span></tt></td>
+</tr>
+<tr class="row-odd"><td>곱셈</td>
+<td><tt class="docutils literal"><span class="pre">*</span> <span class="pre">/</span> <span class="pre">%</span> <span class="pre">&amp;</span> <span class="pre">\</span></tt>, 그리고 <tt class="docutils literal"><span class="pre">.*</span> <span class="pre">./</span> <span class="pre">.%</span> <span class="pre">.\</span></tt></td>
+</tr>
+<tr class="row-even"><td>비트 이동</td>
+<td><tt class="docutils literal"><span class="pre">&lt;&lt;</span> <span class="pre">&gt;&gt;</span> <span class="pre">&gt;&gt;&gt;</span></tt>, 그리고 <tt class="docutils literal"><span class="pre">.&lt;&lt;</span> <span class="pre">.&gt;&gt;</span> <span class="pre">.&gt;&gt;&gt;</span></tt></td>
+</tr>
+<tr class="row-odd"><td>덧셈</td>
+<td><tt class="docutils literal"><span class="pre">+</span> <span class="pre">-</span> <span class="pre">|</span> <span class="pre">$</span></tt>, 그리고 <tt class="docutils literal"><span class="pre">.+</span> <span class="pre">.-</span></tt></td>
+</tr>
+<tr class="row-even"><td>문법</td>
+<td><tt class="docutils literal"><span class="pre">:</span> <span class="pre">..</span></tt>, <tt class="docutils literal"><span class="pre">|&gt;</span></tt></td>
+</tr>
+<tr class="row-odd"><td>비교</td>
+<td><tt class="docutils literal"><span class="pre">&gt;</span> <span class="pre">&lt;</span> <span class="pre">&gt;=</span> <span class="pre">&lt;=</span> <span class="pre">==</span> <span class="pre">===</span> <span class="pre">!=</span> <span class="pre">!==</span> <span class="pre">&lt;:</span></tt>, 그리고 <tt class="docutils literal"><span class="pre">.&gt;</span> <span class="pre">.&lt;</span> <span class="pre">.&gt;=</span> <span class="pre">.&lt;=</span> <span class="pre">.==</span> <span class="pre">.!=</span></tt></td>
+</tr>
+<tr class="row-even"><td>제어 흐름</td>
+<td><tt class="docutils literal"><span class="pre">&amp;&amp;</span></tt>, <tt class="docutils literal"><span class="pre">||</span></tt>, <tt class="docutils literal"><span class="pre">?</span></tt></td>
+</tr>
+<tr class="row-odd"><td>대입</td>
+<td><tt class="docutils literal"><span class="pre">=</span> <span class="pre">+=</span> <span class="pre">-=</span> <span class="pre">*=</span> <span class="pre">/=</span> <span class="pre">//=</span> <span class="pre">\=</span> <span class="pre">^=</span> <span class="pre">÷=</span> <span class="pre">%=</span> <span class="pre">|=</span> <span class="pre">&amp;=</span> <span class="pre">$=</span> <span class="pre">&lt;&lt;=</span> <span class="pre">&gt;&gt;=</span> <span class="pre">&gt;&gt;&gt;=</span></tt>, 그리고 <tt class="docutils literal"><span class="pre">.+=</span> <span class="pre">.-=</span> <span class="pre">.*=</span> <span class="pre">./=</span> <span class="pre">.//=</span> <span class="pre">.\=</span> <span class="pre">.^=</span> <span class="pre">.÷=</span> <span class="pre">.%=</span></tt></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="section" id="man-numerical-conversions">
+<span id="id8"></span><h2>수치 변환<a class="headerlink" href="#man-numerical-conversions" title="Permalink to this headline">¶</a></h2>
+<p>Julia는 부정확한 변환에 있어서 서로 차이가 발생하는 총 세 가지 형태의 수치변환을 제공한다.</p>
+<ul class="simple">
+<li><tt class="docutils literal"><span class="pre">T(x)</span></tt> 혹은 <tt class="docutils literal"><span class="pre">convert(T,x)</span></tt>의 형태는 어떤 값 <tt class="docutils literal"><span class="pre">x</span></tt>를 타입 <tt class="docutils literal"><span class="pre">T</span></tt>로 변환한다.<ul>
+<li>만약 <tt class="docutils literal"><span class="pre">T</span></tt>가 부동 소수점 타입이라면, 결과물은 표현가능한 가장 가까운 값으로 표현될 것이며,
+그 값 중에는 <tt class="docutils literal"><span class="pre">+Inf</span></tt> 혹은 <tt class="docutils literal"><span class="pre">-Inf</span></tt>가 포함 될 수 있다.</li>
+<li>만약 <tt class="docutils literal"><span class="pre">T</span></tt>가 정수 타입이라면, <tt class="docutils literal"><span class="pre">x</span></tt>가 <tt class="docutils literal"><span class="pre">T</span></tt> 타입에 의해 표현되지 않을 때
+<tt class="docutils literal"><span class="pre">InexactError</span></tt>가 발생할 것이다.</li>
+</ul>
+</li>
+<li><tt class="docutils literal"><span class="pre">x</span> <span class="pre">%</span> <span class="pre">T</span></tt>는 <tt class="docutils literal"><span class="pre">n</span></tt>이 <tt class="docutils literal"><span class="pre">T</span></tt> 타입의 비트수일 때, 정수 <tt class="docutils literal"><span class="pre">x</span></tt>와 <tt class="docutils literal"><span class="pre">2^n</span></tt>의
+나머지를 타입 <tt class="docutils literal"><span class="pre">T</span></tt>로 변환할 것이다. 다시 말해서, 바이너리 표현에 의해 특정 부분이
+무시될 수도 있다.</li>
+<li><a class="reference internal" href="#man-rounding-functions"><em>근사 함수</em></a>는 타입 <tt class="docutils literal"><span class="pre">T</span></tt>를 부수적인 매개변수로 받는다.
+예를 들어, <tt class="docutils literal"><span class="pre">round(Int,x)</span></tt>는 <tt class="docutils literal"><span class="pre">Int(round(x))</span></tt>의 단축형 표현이다.</li>
+</ul>
+<p>다음 예제는 위의 세 가지 형태의 수치 변환을 보여준다.</p>
+<div class="highlight-julia"><div class="highlight"><pre><span class="n">julia</span><span class="o">&gt;</span> <span class="kt">Int8</span><span class="p">(</span><span class="mi">127</span><span class="p">)</span>
+<span class="mi">127</span>
+
+<span class="n">julia</span><span class="o">&gt;</span> <span class="kt">Int8</span><span class="p">(</span><span class="mi">128</span><span class="p">)</span>
+<span class="n">ERROR</span><span class="p">:</span> <span class="n">InexactError</span><span class="p">()</span>
+ <span class="k">in</span> <span class="n">call</span> <span class="n">at</span> <span class="o">./</span><span class="n">essentials</span><span class="o">.</span><span class="n">jl</span><span class="p">:</span><span class="mi">58</span>
+ <span class="k">in</span> <span class="n">eval</span> <span class="n">at</span> <span class="o">./</span><span class="n">boot</span><span class="o">.</span><span class="n">jl</span><span class="p">:</span><span class="mi">263</span>
+
+<span class="n">julia</span><span class="o">&gt;</span> <span class="kt">Int8</span><span class="p">(</span><span class="mf">127.0</span><span class="p">)</span>
+<span class="mi">127</span>
+
+<span class="n">julia</span><span class="o">&gt;</span> <span class="kt">Int8</span><span class="p">(</span><span class="mf">3.14</span><span class="p">)</span>
+<span class="n">ERROR</span><span class="p">:</span> <span class="n">InexactError</span><span class="p">()</span>
+ <span class="k">in</span> <span class="n">call</span> <span class="n">at</span> <span class="o">./</span><span class="n">essentials</span><span class="o">.</span><span class="n">jl</span><span class="p">:</span><span class="mi">58</span>
+ <span class="k">in</span> <span class="n">eval</span> <span class="n">at</span> <span class="o">./</span><span class="n">boot</span><span class="o">.</span><span class="n">jl</span><span class="p">:</span><span class="mi">263</span>
+
+<span class="n">julia</span><span class="o">&gt;</span> <span class="kt">Int8</span><span class="p">(</span><span class="mf">128.0</span><span class="p">)</span>
+<span class="n">ERROR</span><span class="p">:</span> <span class="n">InexactError</span><span class="p">()</span>
+ <span class="k">in</span> <span class="n">call</span> <span class="n">at</span> <span class="o">./</span><span class="n">essentials</span><span class="o">.</span><span class="n">jl</span><span class="p">:</span><span class="mi">58</span>
+ <span class="k">in</span> <span class="n">eval</span> <span class="n">at</span> <span class="o">./</span><span class="n">boot</span><span class="o">.</span><span class="n">jl</span><span class="p">:</span><span class="mi">263</span>
+
+<span class="n">julia</span><span class="o">&gt;</span> <span class="mi">127</span> <span class="o">%</span> <span class="kt">Int8</span>
+<span class="mi">127</span>
+
+<span class="n">julia</span><span class="o">&gt;</span> <span class="mi">128</span> <span class="o">%</span> <span class="kt">Int8</span>
+<span class="o">-</span><span class="mi">128</span>
+
+<span class="n">julia</span><span class="o">&gt;</span> <span class="n">round</span><span class="p">(</span><span class="kt">Int8</span><span class="p">,</span><span class="mf">127.4</span><span class="p">)</span>
+<span class="mi">127</span>
+
+<span class="n">julia</span><span class="o">&gt;</span> <span class="n">round</span><span class="p">(</span><span class="kt">Int8</span><span class="p">,</span><span class="mf">127.6</span><span class="p">)</span>
+<span class="n">ERROR</span><span class="p">:</span> <span class="n">InexactError</span><span class="p">()</span>
+ <span class="k">in</span> <span class="n">trunc</span> <span class="n">at</span> <span class="o">./</span><span class="n">float</span><span class="o">.</span><span class="n">jl</span><span class="p">:</span><span class="mi">357</span>
+ <span class="k">in</span> <span class="n">round</span> <span class="n">at</span> <span class="o">./</span><span class="n">float</span><span class="o">.</span><span class="n">jl</span><span class="p">:</span><span class="mi">177</span>
+ <span class="k">in</span> <span class="n">eval</span> <span class="n">at</span> <span class="o">./</span><span class="n">boot</span><span class="o">.</span><span class="n">jl</span><span class="p">:</span><span class="mi">263</span>
+</pre></div>
+</div>
+<p><em class="xref std std-ref">man-conversion-and-promotion</em>을 참고하면 사용자 정의 변한과 프로모션을
+어떻게 정의하는 지 알 수 있다.</p>
+</div>
+<div class="section" id="man-elementary-functions">
+<span id="id9"></span><h2>기초 함수<a class="headerlink" href="#man-elementary-functions" title="Permalink to this headline">¶</a></h2>
+<p>Julia는 수학 함수와 연산자의 종합 콜렉션을 제공하고 있다. 이런 수학적 연산은
+정수, 부동소수점 실수, 소수, 복소수, 증명되어질 수 있는 어떠한 수학적 정의 등을 포함하는
+합당하게 정의되어진 수치값들을 바탕으로 정의된다.</p>
+<div class="section" id="man-rounding-functions">
+<span id="id10"></span><h3>근사 함수<a class="headerlink" href="#man-rounding-functions" title="Permalink to this headline">¶</a></h3>
+<table border="1" class="docutils">
+<colgroup>
+<col width="36%" />
+<col width="46%" />
+<col width="18%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">함수</th>
+<th class="head">설명</th>
+<th class="head">리턴 값</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td><tt class="xref jl jl-func docutils literal"><span class="pre">round(x)</span></tt></td>
+<td><tt class="docutils literal"><span class="pre">x</span></tt>와 가까운 정수로 근사</td>
+<td><tt class="docutils literal"><span class="pre">typeof(x)</span></tt></td>
+</tr>
+<tr class="row-odd"><td><tt class="xref jl jl-func docutils literal"><span class="pre">round(T,</span> <span class="pre">x)</span></tt></td>
+<td><tt class="docutils literal"><span class="pre">x</span></tt>와 가까운 정수로 근사</td>
+<td><tt class="docutils literal"><span class="pre">T</span></tt></td>
+</tr>
+<tr class="row-even"><td><tt class="xref jl jl-func docutils literal"><span class="pre">floor(x)</span></tt></td>
+<td><tt class="docutils literal"><span class="pre">x</span></tt>를 <tt class="docutils literal"><span class="pre">-Inf</span></tt> 방향으로 근사</td>
+<td><tt class="docutils literal"><span class="pre">typeof(x)</span></tt></td>
+</tr>
+<tr class="row-odd"><td><tt class="xref jl jl-func docutils literal"><span class="pre">floor(T,</span> <span class="pre">x)</span></tt></td>
+<td><tt class="docutils literal"><span class="pre">x</span></tt>를 <tt class="docutils literal"><span class="pre">-Inf</span></tt> 방향으로 근사</td>
+<td><tt class="docutils literal"><span class="pre">T</span></tt></td>
+</tr>
+<tr class="row-even"><td><tt class="xref jl jl-func docutils literal"><span class="pre">ceil(x)</span></tt></td>
+<td><tt class="docutils literal"><span class="pre">x</span></tt>를 <tt class="docutils literal"><span class="pre">+Inf</span></tt> 방향으로 근사</td>
+<td><tt class="docutils literal"><span class="pre">typeof(x)</span></tt></td>
+</tr>
+<tr class="row-odd"><td><tt class="xref jl jl-func docutils literal"><span class="pre">ceil(T,</span> <span class="pre">x)</span></tt></td>
+<td><tt class="docutils literal"><span class="pre">x</span></tt>를 <tt class="docutils literal"><span class="pre">+Inf</span></tt> 방향으로 근사</td>
+<td><tt class="docutils literal"><span class="pre">T</span></tt></td>
+</tr>
+<tr class="row-even"><td><tt class="xref jl jl-func docutils literal"><span class="pre">trunc(x)</span></tt></td>
+<td><tt class="docutils literal"><span class="pre">x</span></tt>를 <tt class="docutils literal"><span class="pre">0</span></tt>을 향해 근사</td>
+<td><tt class="docutils literal"><span class="pre">typeof(x)</span></tt></td>
+</tr>
+<tr class="row-odd"><td><tt class="xref jl jl-func docutils literal"><span class="pre">trunc(T,</span> <span class="pre">x)</span></tt></td>
+<td><tt class="docutils literal"><span class="pre">x</span></tt>를 <tt class="docutils literal"><span class="pre">0</span></tt>을 향해 근사</td>
+<td><tt class="docutils literal"><span class="pre">T</span></tt></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="id11">
+<h3>나눗셈 함수<a class="headerlink" href="#id11" title="Permalink to this headline">¶</a></h3>
+<table border="1" class="docutils">
+<colgroup>
+<col width="28%" />
+<col width="72%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">함수</th>
+<th class="head">설명</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td><tt class="xref jl jl-func docutils literal"><span class="pre">div(x,y)</span></tt></td>
+<td>반올림 나눗셈; 몫이 <tt class="docutils literal"><span class="pre">0</span></tt>을 향해 근사</td>
+</tr>
+<tr class="row-odd"><td><tt class="xref jl jl-func docutils literal"><span class="pre">fld(x,y)</span></tt></td>
+<td>내림 나눗셈; 몫이 <tt class="docutils literal"><span class="pre">-Inf</span></tt>을 향해 근사</td>
+</tr>
+<tr class="row-even"><td><tt class="xref jl jl-func docutils literal"><span class="pre">cld(x,y)</span></tt></td>
+<td>올림 나눗셈; 몫이 <tt class="docutils literal"><span class="pre">+Inf</span></tt>을 향해 근사</td>
+</tr>
+<tr class="row-odd"><td><tt class="xref jl jl-func docutils literal"><span class="pre">rem(x,y)</span></tt></td>
+<td>나머지; <tt class="docutils literal"><span class="pre">x</span> <span class="pre">==</span> <span class="pre">div(x,y)*y</span> <span class="pre">+</span> <span class="pre">rem(x,y)</span></tt>를 만족; <tt class="docutils literal"><span class="pre">x</span></tt>의 부호와 같다.</td>
+</tr>
+<tr class="row-even"><td><tt class="xref jl jl-func docutils literal"><span class="pre">mod(x,y)</span></tt></td>
+<td>나머지; <tt class="docutils literal"><span class="pre">x</span> <span class="pre">==</span> <span class="pre">fld(x,y)*y</span> <span class="pre">+</span> <span class="pre">mod(x,y)</span></tt>를 만족; <tt class="docutils literal"><span class="pre">y</span></tt>의 부호와 같다.</td>
+</tr>
+<tr class="row-odd"><td><tt class="xref jl jl-func docutils literal"><span class="pre">mod2pi(x)</span></tt></td>
+<td>2pi에 대한 나머지;  <tt class="docutils literal"><span class="pre">0</span> <span class="pre">&lt;=</span> <span class="pre">mod2pi(x)</span>&nbsp; <span class="pre">&lt;</span> <span class="pre">2pi</span></tt></td>
+</tr>
+<tr class="row-even"><td><tt class="xref jl jl-func docutils literal"><span class="pre">divrem(x,y)</span></tt></td>
+<td><tt class="docutils literal"><span class="pre">(div(x,y),rem(x,y))</span></tt>를 반환</td>
+</tr>
+<tr class="row-odd"><td><tt class="xref jl jl-func docutils literal"><span class="pre">fldmod(x,y)</span></tt></td>
+<td><tt class="docutils literal"><span class="pre">(fld(x,y),mod(x,y))</span></tt>를 반환</td>
+</tr>
+<tr class="row-even"><td><tt class="xref jl jl-func docutils literal"><span class="pre">gcd(x,y...)</span></tt></td>
+<td><tt class="docutils literal"><span class="pre">x</span></tt>, <tt class="docutils literal"><span class="pre">y</span></tt>,...의 최대 공약수; <tt class="docutils literal"><span class="pre">x</span></tt>의 부호를 따른다.</td>
+</tr>
+<tr class="row-odd"><td><tt class="xref jl jl-func docutils literal"><span class="pre">lcm(x,y...)</span></tt></td>
+<td><tt class="docutils literal"><span class="pre">x</span></tt>, <tt class="docutils literal"><span class="pre">y</span></tt>,...의 최소 공배수; <tt class="docutils literal"><span class="pre">x</span></tt>의 부호를 따른다.</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="id12">
+<h3>부호와 절대값 관련 함수<a class="headerlink" href="#id12" title="Permalink to this headline">¶</a></h3>
+<table border="1" class="docutils">
+<colgroup>
+<col width="35%" />
+<col width="65%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">함수</th>
+<th class="head">설명</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td><tt class="xref jl jl-func docutils literal"><span class="pre">abs(x)</span></tt></td>
+<td><tt class="docutils literal"><span class="pre">x</span></tt>의 크기를 가지는 양수</td>
+</tr>
+<tr class="row-odd"><td><tt class="xref jl jl-func docutils literal"><span class="pre">abs2(x)</span></tt></td>
+<td><tt class="docutils literal"><span class="pre">x</span></tt>의 크기의 제곱근</td>
+</tr>
+<tr class="row-even"><td><tt class="xref jl jl-func docutils literal"><span class="pre">sign(x)</span></tt></td>
+<td><tt class="docutils literal"><span class="pre">x</span></tt>의 부호, -1, 0, 혹은 +1을 반환</td>
+</tr>
+<tr class="row-odd"><td><tt class="xref jl jl-func docutils literal"><span class="pre">signbit(x)</span></tt></td>
+<td>부호 비트가 켜져있는 지의 여부를 알려줌</td>
+</tr>
+<tr class="row-even"><td><tt class="xref jl jl-func docutils literal"><span class="pre">copysign(x,y)</span></tt></td>
+<td><tt class="docutils literal"><span class="pre">x</span></tt>의 값을 지니면서 <tt class="docutils literal"><span class="pre">y</span></tt>의 부호를 반환</td>
+</tr>
+<tr class="row-odd"><td><tt class="xref jl jl-func docutils literal"><span class="pre">flipsign(x,y)</span></tt></td>
+<td><tt class="docutils literal"><span class="pre">x</span></tt>의 값을 지니면서 <tt class="docutils literal"><span class="pre">x*y</span></tt>의 부호를 반환</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="id13">
+<h3>지수, 로그 그리고 제곱근에 관련한 함수<a class="headerlink" href="#id13" title="Permalink to this headline">¶</a></h3>
+<table border="1" class="docutils">
+<colgroup>
+<col width="31%" />
+<col width="69%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">함수</th>
+<th class="head">설명</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td><tt class="xref jl jl-func docutils literal"><span class="pre">sqrt(x)</span></tt> <tt class="docutils literal"><span class="pre">√x</span></tt></td>
+<td><tt class="docutils literal"><span class="pre">x</span></tt>의 제곱근</td>
+</tr>
+<tr class="row-odd"><td><tt class="xref jl jl-func docutils literal"><span class="pre">cbrt(x)</span></tt> <tt class="docutils literal"><span class="pre">∛x</span></tt></td>
+<td><tt class="docutils literal"><span class="pre">x</span></tt>의 삼중 제곱근</td>
+</tr>
+<tr class="row-even"><td><tt class="xref jl jl-func docutils literal"><span class="pre">hypot(x,y)</span></tt></td>
+<td>직각 삼각형에서 직각에 인접한 변의 길이가 <tt class="docutils literal"><span class="pre">x</span></tt>와 <tt class="docutils literal"><span class="pre">y</span></tt>일 때의 빗면의 길이</td>
+</tr>
+<tr class="row-odd"><td><tt class="xref jl jl-func docutils literal"><span class="pre">exp(x)</span></tt></td>
+<td><tt class="docutils literal"><span class="pre">x</span></tt>의 자연 지수 함수 (exponential)</td>
+</tr>
+<tr class="row-even"><td><tt class="xref jl jl-func docutils literal"><span class="pre">expm1(x)</span></tt></td>
+<td>0 근처의 <tt class="docutils literal"><span class="pre">x</span></tt> 값에 대한 정확한 <tt class="docutils literal"><span class="pre">exp(x)-1</span></tt> 값</td>
+</tr>
+<tr class="row-odd"><td><tt class="xref jl jl-func docutils literal"><span class="pre">ldexp(x,n)</span></tt></td>
+<td>정수 <tt class="docutils literal"><span class="pre">n</span></tt>에 대해 <tt class="docutils literal"><span class="pre">x*2^n</span></tt>를 효율적으로 계산</td>
+</tr>
+<tr class="row-even"><td><tt class="xref jl jl-func docutils literal"><span class="pre">log(x)</span></tt></td>
+<td><tt class="docutils literal"><span class="pre">x</span></tt>의 자연로그</td>
+</tr>
+<tr class="row-odd"><td><tt class="xref jl jl-func docutils literal"><span class="pre">log(b,x)</span></tt></td>
+<td><tt class="docutils literal"><span class="pre">b</span></tt>를 밑으로 하는 <tt class="docutils literal"><span class="pre">x</span></tt>의 로그값</td>
+</tr>
+<tr class="row-even"><td><tt class="xref jl jl-func docutils literal"><span class="pre">log2(x)</span></tt></td>
+<td>2를 밑으로 하는 <tt class="docutils literal"><span class="pre">x</span></tt>의 로그값</td>
+</tr>
+<tr class="row-odd"><td><tt class="xref jl jl-func docutils literal"><span class="pre">log10(x)</span></tt></td>
+<td>10을 밑으로 하는 <tt class="docutils literal"><span class="pre">x</span></tt>의 로그값(상용로그)</td>
+</tr>
+<tr class="row-even"><td><tt class="xref jl jl-func docutils literal"><span class="pre">log1p(x)</span></tt></td>
+<td>0 근처의 <tt class="docutils literal"><span class="pre">x</span></tt> 값에 대한 정확한 <tt class="docutils literal"><span class="pre">log(1+x)</span></tt> 값</td>
+</tr>
+<tr class="row-odd"><td><tt class="xref jl jl-func docutils literal"><span class="pre">exponent(x)</span></tt></td>
+<td>부동소수점 <tt class="docutils literal"><span class="pre">x</span></tt>의 지수 비트 값</td>
+</tr>
+<tr class="row-even"><td><tt class="xref jl jl-func docutils literal"><span class="pre">significand(x)</span></tt></td>
+<td>부동소수점 <tt class="docutils literal"><span class="pre">x</span></tt>의 가수 비트 값</td>
+</tr>
+</tbody>
+</table>
+<p><tt class="xref jl jl-func docutils literal"><span class="pre">hypot()</span></tt>, <tt class="xref jl jl-func docutils literal"><span class="pre">expm1()</span></tt>, 그리고 <tt class="xref jl jl-func docutils literal"><span class="pre">log1p()</span></tt> 와 같은 함수들이 필수적이고 유용하지 알고 싶다면,
+John D. Cooks 이 블로그 글을 참조하면 쉽게 이해할 수 있다:
+<a class="reference external" href="http://www.johndcook.com/blog/2010/06/07/math-library-functions-that-seem-unnecessary/">expm1, log1p, erfc</a>,
+<a class="reference external" href="http://www.johndcook.com/blog/2010/06/02/whats-so-hard-about-finding-a-hypotenuse/">hypot</a>.</p>
+</div>
+<div class="section" id="id14">
+<h3>삼각함수와 포물선 함수<a class="headerlink" href="#id14" title="Permalink to this headline">¶</a></h3>
+<p>Julia에서는 모든 표준 삼각함수들과 포물선 함수들이 정의되어 있다:</p>
+<div class="highlight-julia"><div class="highlight"><pre><span class="n">sin</span>    <span class="n">cos</span>    <span class="n">tan</span>    <span class="n">cot</span>    <span class="n">sec</span>    <span class="n">csc</span>
+<span class="n">sinh</span>   <span class="n">cosh</span>   <span class="n">tanh</span>   <span class="n">coth</span>   <span class="n">sech</span>   <span class="n">csch</span>
+<span class="n">asin</span>   <span class="n">acos</span>   <span class="n">atan</span>   <span class="n">acot</span>   <span class="n">asec</span>   <span class="n">acsc</span>
+<span class="n">asinh</span>  <span class="n">acosh</span>  <span class="n">atanh</span>  <span class="n">acoth</span>  <span class="n">asech</span>  <span class="n">acsch</span>
+<span class="n">sinc</span>   <span class="n">cosc</span>   <span class="n">atan2</span>
+</pre></div>
+</div>
+<p><a class="reference external" href="https://en.wikipedia.org/wiki/Atan2">atan2</a>을 제외한 이 함수들은
+모두 매개변수가 하나이다.
+참고로 <a class="reference external" href="https://en.wikipedia.org/wiki/Atan2">atan2</a>는 <em>x</em> 축과
+매개변수로 제공하는 (<em>x</em>, <em>y</em>)라는 좌표 간의 각도를
+<a class="reference external" href="https://en.wikipedia.org/wiki/Radian">radians</a> 단위로 반환하는 함수이다.</p>
+<p>추가적으로, <tt class="xref jl jl-func docutils literal"><span class="pre">sinpi(x)</span></tt>와 <tt class="xref jl jl-func docutils literal"><span class="pre">cospi(x)</span></tt> 는
+<tt class="xref jl jl-func docutils literal"><span class="pre">sin(pi*x)</span></tt> and <tt class="xref jl jl-func docutils literal"><span class="pre">cos(pi*x)</span></tt>의 좀 더 정확한 버전이다.</p>
+<p>삼각함수를 계산할 때 라디안 대신에 각도를 이용해서 쓰고 싶다면,
+기존의 삼각함수 명칭 뒤에 <tt class="docutils literal"><span class="pre">d</span></tt>를 붙이면 된다.
+예를 들어, <tt class="xref jl jl-func docutils literal"><span class="pre">sind(x)</span></tt>는 <tt class="docutils literal"><span class="pre">x</span></tt>가 각도로 표시될 때의 사인(sine)값을 계산한다.
+모든 삼각함수의 각도버전 리스트는 다음과 같다:</p>
+<div class="highlight-julia"><div class="highlight"><pre><span class="n">sind</span>   <span class="n">cosd</span>   <span class="n">tand</span>   <span class="n">cotd</span>   <span class="n">secd</span>   <span class="n">cscd</span>
+<span class="n">asind</span>  <span class="n">acosd</span>  <span class="n">atand</span>  <span class="n">acotd</span>  <span class="n">asecd</span>  <span class="n">acscd</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="id16">
+<h3>특별한 함수<a class="headerlink" href="#id16" title="Permalink to this headline">¶</a></h3>
+<table border="1" class="docutils">
+<colgroup>
+<col width="22%" />
+<col width="78%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">함수</th>
+<th class="head">설명</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td><tt class="xref jl jl-func docutils literal"><span class="pre">erf(x)</span></tt></td>
+<td><tt class="docutils literal"><span class="pre">x</span></tt>에서의 <a class="reference external" href="https://en.wikipedia.org/wiki/Error_function">error function</a></td>
+</tr>
+<tr class="row-odd"><td><tt class="xref jl jl-func docutils literal"><span class="pre">erfc(x)</span></tt></td>
+<td>상보 오차함수, 즉 큰 <tt class="docutils literal"><span class="pre">x</span></tt>에서의 보다 정확한 <tt class="docutils literal"><span class="pre">1-erf(x)</span></tt>.</td>
+</tr>
+<tr class="row-even"><td><tt class="xref jl jl-func docutils literal"><span class="pre">erfinv(x)</span></tt></td>
+<td><tt class="xref jl jl-func docutils literal"><span class="pre">erf()</span></tt>의 역함수</td>
+</tr>
+<tr class="row-odd"><td><tt class="xref jl jl-func docutils literal"><span class="pre">erfcinv(x)</span></tt></td>
+<td><tt class="xref jl jl-func docutils literal"><span class="pre">erfc()</span></tt>의 역함수</td>
+</tr>
+<tr class="row-even"><td><tt class="xref jl jl-func docutils literal"><span class="pre">erfi(x)</span></tt></td>
+<td><tt class="xref jl jl-const docutils literal"><span class="pre">im</span></tt>가 허수 단위 (<tt class="docutils literal"><span class="pre">√-1</span></tt>)일 때, <tt class="docutils literal"><span class="pre">-im</span> <span class="pre">*</span> <span class="pre">erf(x</span> <span class="pre">*</span> <span class="pre">im)</span></tt>로 정의되어진 허수 오차함수</td>
+</tr>
+<tr class="row-odd"><td><tt class="xref jl jl-func docutils literal"><span class="pre">erfcx(x)</span></tt></td>
+<td>스케일링된 상보 오차함수, 즉 큰 <tt class="docutils literal"><span class="pre">x</span></tt>에서의 보다 정확한 <tt class="docutils literal"><span class="pre">exp(x^2)</span> <span class="pre">*</span> <span class="pre">erfc(x)</span></tt>.</td>
+</tr>
+<tr class="row-even"><td><tt class="xref jl jl-func docutils literal"><span class="pre">dawson(x)</span></tt></td>
+<td>스케일링된 허수 오차함수, 다시 말해 Dawson 함수, 즉 큰 <tt class="docutils literal"><span class="pre">x</span></tt>에서의 보다 정확한 <tt class="docutils literal"><span class="pre">exp(-x^2)</span> <span class="pre">*</span> <span class="pre">erfi(x)</span> <span class="pre">*</span> <span class="pre">sqrt(pi)</span> <span class="pre">/</span> <span class="pre">2</span></tt>.</td>
+</tr>
+<tr class="row-odd"><td><tt class="xref jl jl-func docutils literal"><span class="pre">gamma(x)</span></tt></td>
+<td><tt class="docutils literal"><span class="pre">x</span></tt>에서의 <a class="reference external" href="https://en.wikipedia.org/wiki/Gamma_function">gamma function</a></td>
+</tr>
+<tr class="row-even"><td><tt class="xref jl jl-func docutils literal"><span class="pre">lgamma(x)</span></tt></td>
+<td>큰 <tt class="docutils literal"><span class="pre">x</span></tt>에서의 정확한 <tt class="docutils literal"><span class="pre">log(gamma(x))</span></tt></td>
+</tr>
+<tr class="row-odd"><td><tt class="xref jl jl-func docutils literal"><span class="pre">lfact(x)</span></tt></td>
+<td>큰 <tt class="docutils literal"><span class="pre">x</span></tt>에서의 정확한 <tt class="docutils literal"><span class="pre">log(factorial(x))</span></tt>; <tt class="docutils literal"><span class="pre">x</span> <span class="pre">&gt;</span> <span class="pre">1</span></tt> 일 때 <tt class="docutils literal"><span class="pre">lgamma(x+1)</span></tt>이며, 다른 경우에는 0</td>
+</tr>
+<tr class="row-even"><td><tt class="xref jl jl-func docutils literal"><span class="pre">digamma(x)</span></tt></td>
+<td><tt class="docutils literal"><span class="pre">x</span></tt>에서의 <a class="reference external" href="https://en.wikipedia.org/wiki/Digamma_function">digamma function</a> (예를 들어 <tt class="xref jl jl-func docutils literal"><span class="pre">lgamma()</span></tt>)</td>
+</tr>
+<tr class="row-odd"><td><tt class="xref jl jl-func docutils literal"><span class="pre">beta(x,y)</span></tt></td>
+<td><tt class="docutils literal"><span class="pre">x,y</span></tt>에서의 <a class="reference external" href="https://en.wikipedia.org/wiki/Beta_function">beta function</a></td>
+</tr>
+<tr class="row-even"><td><tt class="xref jl jl-func docutils literal"><span class="pre">lbeta(x,y)</span></tt></td>
+<td>큰 <tt class="docutils literal"><span class="pre">x</span></tt>혹은 <tt class="docutils literal"><span class="pre">y</span></tt>에서의 accurate <tt class="docutils literal"><span class="pre">log(beta(x,y))</span></tt></td>
+</tr>
+<tr class="row-odd"><td><tt class="xref jl jl-func docutils literal"><span class="pre">eta(x)</span></tt></td>
+<td><tt class="docutils literal"><span class="pre">x</span></tt>에서의 <a class="reference external" href="https://en.wikipedia.org/wiki/Dirichlet_eta_function">Dirichlet eta function</a></td>
+</tr>
+<tr class="row-even"><td><tt class="xref jl jl-func docutils literal"><span class="pre">zeta(x)</span></tt></td>
+<td><tt class="docutils literal"><span class="pre">x</span></tt>에서의 <a class="reference external" href="https://en.wikipedia.org/wiki/Riemann_zeta_function">Riemann zeta function</a></td>
+</tr>
+<tr class="row-odd"><td><tt class="xref jl jl-func docutils literal"><span class="pre">airy(z)</span></tt>, <tt class="xref jl jl-func docutils literal"><span class="pre">airyai(z)</span></tt>, <tt class="docutils literal"><span class="pre">airy(0,z)</span></tt></td>
+<td><tt class="docutils literal"><span class="pre">z</span></tt>에서의 <a class="reference external" href="https://en.wikipedia.org/wiki/Airy_function">Airy Ai function</a></td>
+</tr>
+<tr class="row-even"><td><tt class="xref jl jl-func docutils literal"><span class="pre">airyprime(z)</span></tt>, <tt class="xref jl jl-func docutils literal"><span class="pre">airyaiprime(z)</span></tt>, <tt class="docutils literal"><span class="pre">airy(1,z)</span></tt></td>
+<td><tt class="docutils literal"><span class="pre">z</span></tt>에서의 Airy Ai function의 미분</td>
+</tr>
+<tr class="row-odd"><td><tt class="xref jl jl-func docutils literal"><span class="pre">airybi(z)</span></tt>, <tt class="docutils literal"><span class="pre">airy(2,z)</span></tt></td>
+<td><tt class="docutils literal"><span class="pre">z</span></tt>에서의 <a class="reference external" href="https://en.wikipedia.org/wiki/Airy_function">Airy Bi function</a></td>
+</tr>
+<tr class="row-even"><td><tt class="xref jl jl-func docutils literal"><span class="pre">airybiprime(z)</span></tt>, <tt class="docutils literal"><span class="pre">airy(3,z)</span></tt></td>
+<td><tt class="docutils literal"><span class="pre">z</span></tt>에서의 Airy Bi function의 미분</td>
+</tr>
+<tr class="row-odd"><td><tt class="xref jl jl-func docutils literal"><span class="pre">airyx(z)</span></tt>, <tt class="docutils literal"><span class="pre">airyx(k,z)</span></tt></td>
+<td><tt class="docutils literal"><span class="pre">z</span></tt>에서의 스케일링 된 Airy AI function의 <tt class="docutils literal"><span class="pre">k</span></tt>차 미분</td>
+</tr>
+<tr class="row-even"><td><tt class="xref jl jl-func docutils literal"><span class="pre">besselj(nu,z)</span></tt></td>
+<td><tt class="docutils literal"><span class="pre">z</span></tt>에서의  <tt class="docutils literal"><span class="pre">nu</span></tt>차 제1종 <a class="reference external" href="https://en.wikipedia.org/wiki/Bessel_function">Bessel function</a> (<tt class="docutils literal"><span class="pre">J_a</span></tt>)</td>
+</tr>
+<tr class="row-odd"><td><tt class="xref jl jl-func docutils literal"><span class="pre">besselj0(z)</span></tt></td>
+<td><tt class="docutils literal"><span class="pre">besselj(0,z)</span></tt></td>
+</tr>
+<tr class="row-even"><td><tt class="xref jl jl-func docutils literal"><span class="pre">besselj1(z)</span></tt></td>
+<td><tt class="docutils literal"><span class="pre">besselj(1,z)</span></tt></td>
+</tr>
+<tr class="row-odd"><td><tt class="xref jl jl-func docutils literal"><span class="pre">besseljx(nu,z)</span></tt></td>
+<td><tt class="docutils literal"><span class="pre">z</span></tt>에서의 <tt class="docutils literal"><span class="pre">nu</span></tt>차 스케일링된 제1종 Bessel function(<tt class="docutils literal"><span class="pre">J_a</span></tt>)</td>
+</tr>
+<tr class="row-even"><td><tt class="xref jl jl-func docutils literal"><span class="pre">bessely(nu,z)</span></tt></td>
+<td><tt class="docutils literal"><span class="pre">z</span></tt>에서의 <tt class="docutils literal"><span class="pre">nu</span></tt>차 제2종 <a class="reference external" href="https://en.wikipedia.org/wiki/Bessel_function">Bessel function</a> (<tt class="docutils literal"><span class="pre">Y_a</span></tt>)</td>
+</tr>
+<tr class="row-odd"><td><tt class="xref jl jl-func docutils literal"><span class="pre">bessely0(z)</span></tt></td>
+<td><tt class="docutils literal"><span class="pre">bessely(0,z)</span></tt></td>
+</tr>
+<tr class="row-even"><td><tt class="xref jl jl-func docutils literal"><span class="pre">bessely1(z)</span></tt></td>
+<td><tt class="docutils literal"><span class="pre">bessely(1,z)</span></tt></td>
+</tr>
+<tr class="row-odd"><td><tt class="xref jl jl-func docutils literal"><span class="pre">besselyx(nu,z)</span></tt></td>
+<td><tt class="docutils literal"><span class="pre">z</span></tt>에서의 <tt class="docutils literal"><span class="pre">nu</span></tt>차 제2종 스케일링된 Bessel function(<tt class="docutils literal"><span class="pre">Y_a</span></tt>)</td>
+</tr>
+<tr class="row-even"><td><tt class="xref jl jl-func docutils literal"><span class="pre">besselh(nu,k,z)</span></tt></td>
+<td><tt class="docutils literal"><span class="pre">z</span></tt>에서의 <tt class="docutils literal"><span class="pre">nu</span></tt>차 제3종 <a class="reference external" href="https://en.wikipedia.org/wiki/Bessel_function">Bessel function</a> (<tt class="docutils literal"><span class="pre">H_a</span></tt>, Hankel function이라고도 불리움) ; <tt class="docutils literal"><span class="pre">k</span></tt>는 <tt class="docutils literal"><span class="pre">1</span></tt> 혹은 <tt class="docutils literal"><span class="pre">2</span></tt> 이어야만 한다.</td>
+</tr>
+<tr class="row-odd"><td><tt class="xref jl jl-func docutils literal"><span class="pre">hankelh1(nu,z)</span></tt></td>
+<td><tt class="docutils literal"><span class="pre">besselh(nu,</span> <span class="pre">1,</span> <span class="pre">z)</span></tt></td>
+</tr>
+<tr class="row-even"><td><tt class="xref jl jl-func docutils literal"><span class="pre">hankelh1x(nu,z)</span></tt></td>
+<td>스케일링된 <tt class="docutils literal"><span class="pre">besselh(nu,</span> <span class="pre">1,</span> <span class="pre">z)</span></tt></td>
+</tr>
+<tr class="row-odd"><td><tt class="xref jl jl-func docutils literal"><span class="pre">hankelh2(nu,z)</span></tt></td>
+<td><tt class="docutils literal"><span class="pre">besselh(nu,</span> <span class="pre">2,</span> <span class="pre">z)</span></tt></td>
+</tr>
+<tr class="row-even"><td><tt class="xref jl jl-func docutils literal"><span class="pre">hankelh2x(nu,z)</span></tt></td>
+<td>스케일링된 <tt class="docutils literal"><span class="pre">besselh(nu,</span> <span class="pre">2,</span> <span class="pre">z)</span></tt></td>
+</tr>
+<tr class="row-odd"><td><tt class="xref jl jl-func docutils literal"><span class="pre">besseli(nu,z)</span></tt></td>
+<td><tt class="docutils literal"><span class="pre">z</span></tt>에서의 <tt class="docutils literal"><span class="pre">nu</span></tt>차 제1종 변형 <a class="reference external" href="https://en.wikipedia.org/wiki/Bessel_function">Bessel function</a> (<tt class="docutils literal"><span class="pre">I_a</span></tt>)</td>
+</tr>
+<tr class="row-even"><td><tt class="xref jl jl-func docutils literal"><span class="pre">besselix(nu,z)</span></tt></td>
+<td><tt class="docutils literal"><span class="pre">z</span></tt>에서의 <tt class="docutils literal"><span class="pre">nu</span></tt>차 제1종 스케일링된 변형 Bessel function</td>
+</tr>
+<tr class="row-odd"><td><tt class="xref jl jl-func docutils literal"><span class="pre">besselk(nu,z)</span></tt></td>
+<td><tt class="docutils literal"><span class="pre">z</span></tt>에서의 <tt class="docutils literal"><span class="pre">nu</span></tt>차 제2종 변형 <a class="reference external" href="https://en.wikipedia.org/wiki/Bessel_function">Bessel function</a> (<tt class="docutils literal"><span class="pre">K_a</span></tt>)</td>
+</tr>
+<tr class="row-even"><td><tt class="xref jl jl-func docutils literal"><span class="pre">besselkx(nu,z)</span></tt></td>
+<td><tt class="docutils literal"><span class="pre">z</span></tt>에서의 <tt class="docutils literal"><span class="pre">nu</span></tt>차 제2종 스케일링된 변형 Bessel function</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+
+
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../phdthesis/chap6.html" class="btn btn-neutral float-right" title="결론" accesskey="n"> 다음 <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="integers-and-floating-point-numbers.html" class="btn btn-neutral" title="정수와 부동소수점으로 표현되는 실수" accesskey="p"><span class="fa fa-arrow-circle-left"></span> 이전 </a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+      Last updated on Feb 08, 2016.
+    </p>
+  </div>
+
+</footer>
+
+
+<div
+  class="fb-like"
+  data-share="true"
+  data-width="450"
+  data-show-faces="true">
+</div>
+
+<script>
+  window.fbAsyncInit = function() {
+    FB.init({
+      appId      : '685509058259607',
+      xfbml      : true,
+      version    : 'v2.3'
+    });
+  };
+
+  (function(d, s, id){
+     var js, fjs = d.getElementsByTagName(s)[0];
+     if (d.getElementById(id)) {return;}
+     js = d.createElement(s); js.id = id;
+     js.src = "https://connect.facebook.net/ko_KR/sdk.js";
+     fjs.parentNode.insertBefore(js, fjs);
+   }(document, 'script', 'facebook-jssdk'));
+</script>
+
+<div class="fb-comments" data-width="100%" data-version="v2.3"></div>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../',
+            VERSION:'X.Y.Z-unknown',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true
+        };
+    </script>
+      <script type="text/javascript" src="../_static/jquery.js"></script>
+      <script type="text/javascript" src="../_static/underscore.js"></script>
+      <script type="text/javascript" src="../_static/doctools.js"></script>
+      <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+
+<script type="text/javascript" src="../_static/jquery.word-break-keep-all.min.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){
+  $('p').wordBreakKeepAll();
+});
+</script>
+
+</body>
+</html>
