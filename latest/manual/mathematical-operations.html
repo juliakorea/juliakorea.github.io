@@ -33,7 +33,7 @@
     <link rel="stylesheet" href="../_static/julia.css" type="text/css" />
   
     <link rel="top" title="None" href="../index.html"/>
-        <link rel="next" title="결론" href="../phdthesis/chap6.html"/>
+        <link rel="next" title="복소수와 유리수" href="complex-and-rational-numbers.html"/>
         <link rel="prev" title="정수와 부동소수점으로 표현되는 실수" href="integers-and-floating-point-numbers.html"/> 
 
   
@@ -90,6 +90,11 @@
 <li class="toctree-l2"><a class="reference internal" href="#man-numeric-comparisons">수치 비교</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#man-numerical-conversions">수치 변환</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#man-elementary-functions">기초 함수</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="complex-and-rational-numbers.html">복소수와 유리수</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="complex-and-rational-numbers.html#man-complex-numbers">복소수</a></li>
+<li class="toctree-l2"><a class="reference internal" href="complex-and-rational-numbers.html#man-rational-numbers">유리수</a></li>
 </ul>
 </li>
 </ul>
@@ -643,8 +648,8 @@ Julia는 <tt class="xref jl jl-obj docutils literal"><span class="pre">&lt;</spa
 <div class="section" id="man-elementary-functions">
 <span id="id9"></span><h2>기초 함수<a class="headerlink" href="#man-elementary-functions" title="Permalink to this headline">¶</a></h2>
 <p>Julia는 수학 함수와 연산자의 종합 콜렉션을 제공하고 있다. 이런 수학적 연산은
-정수, 부동소수점 실수, 소수, 복소수, 증명되어질 수 있는 어떠한 수학적 정의 등을 포함하는
-합당하게 정의되어진 수치값들을 바탕으로 정의된다.</p>
+정수, 부동소수점 실수, 유리수, 복소수를 비롯한 어떠한 합당한 수학적 정의에 의한 수에
+대해서도 정의할 수 있다.</p>
 <div class="section" id="man-rounding-functions">
 <span id="id10"></span><h3>근사 함수<a class="headerlink" href="#man-rounding-functions" title="Permalink to this headline">¶</a></h3>
 <table border="1" class="docutils">
@@ -886,7 +891,7 @@ John D. Cooks 이 블로그 글을 참조하면 쉽게 이해할 수 있다:
 <td><tt class="xref jl jl-func docutils literal"><span class="pre">erfc()</span></tt>의 역함수</td>
 </tr>
 <tr class="row-even"><td><tt class="xref jl jl-func docutils literal"><span class="pre">erfi(x)</span></tt></td>
-<td><tt class="xref jl jl-const docutils literal"><span class="pre">im</span></tt>가 허수 단위 (<tt class="docutils literal"><span class="pre">√-1</span></tt>)일 때, <tt class="docutils literal"><span class="pre">-im</span> <span class="pre">*</span> <span class="pre">erf(x</span> <span class="pre">*</span> <span class="pre">im)</span></tt>로 정의되어진 허수 오차함수</td>
+<td><tt class="xref jl jl-const docutils literal"><span class="pre">im</span></tt>가 허수 단위 <em>i</em>일 때, <tt class="docutils literal"><span class="pre">-im</span> <span class="pre">*</span> <span class="pre">erf(x</span> <span class="pre">*</span> <span class="pre">im)</span></tt>로 정의되어진 허수 오차함수</td>
 </tr>
 <tr class="row-odd"><td><tt class="xref jl jl-func docutils literal"><span class="pre">erfcx(x)</span></tt></td>
 <td>스케일링된 상보 오차함수, 즉 큰 <tt class="docutils literal"><span class="pre">x</span></tt>에서의 보다 정확한 <tt class="docutils literal"><span class="pre">exp(x^2)</span> <span class="pre">*</span> <span class="pre">erfc(x)</span></tt>.</td>
@@ -996,7 +1001,7 @@ John D. Cooks 이 블로그 글을 참조하면 쉽게 이해할 수 있다:
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="../phdthesis/chap6.html" class="btn btn-neutral float-right" title="결론" accesskey="n"> 다음 <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="complex-and-rational-numbers.html" class="btn btn-neutral float-right" title="복소수와 유리수" accesskey="n"> 다음 <span class="fa fa-arrow-circle-right"></span></a>
       
       
         <a href="integers-and-floating-point-numbers.html" class="btn btn-neutral" title="정수와 부동소수점으로 표현되는 실수" accesskey="p"><span class="fa fa-arrow-circle-left"></span> 이전 </a>

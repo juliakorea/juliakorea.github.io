@@ -92,6 +92,11 @@
 <li class="toctree-l2"><a class="reference internal" href="mathematical-operations.html#man-elementary-functions">기초 함수</a></li>
 </ul>
 </li>
+<li class="toctree-l1"><a class="reference internal" href="complex-and-rational-numbers.html">복소수와 유리수</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="complex-and-rational-numbers.html#man-complex-numbers">복소수</a></li>
+<li class="toctree-l2"><a class="reference internal" href="complex-and-rational-numbers.html#man-rational-numbers">유리수</a></li>
+</ul>
+</li>
 </ul>
 <ul class="simple">
 </ul>
@@ -286,7 +291,7 @@ Julia로 하여금 연산 자원을 최대한 활용하도록 할 수 있도록 
 </tr>
 </tbody>
 </table>
-<p>추가적으로, <em class="xref std std-ref">man-complex-and-rational-numbers</em> 는 위에서 언급한
+<p>추가적으로, <a class="reference internal" href="complex-and-rational-numbers.html#man-complex-and-rational-numbers"><em>복소수와 유리수</em></a> 는 위에서 언급한
 타입에 기초하여 만들어졌다.
 모든 기본 수치 타입들은 유연하고, 쉽게 확장이 가능한
 <em class="xref std std-ref">type promotion system</em> 덕분에
@@ -421,8 +426,7 @@ Julia로 하여금 연산 자원을 최대한 활용하도록 할 수 있도록 
 <p><tt class="xref jl jl-func docutils literal"><span class="pre">typemin()</span></tt>과 <tt class="xref jl jl-func docutils literal"><span class="pre">typemax()</span></tt>가 제공하는 값들은
 항상 매개변수의 타입과 같은 타입을 가진다.
 (위 예제에서 쓰는 <em class="xref std std-ref">for loops</em>,
-<em class="xref std std-ref">man-strings</em>, <em class="xref std std-ref">man-string-interpolation</em>,
-과 같은 표현들은 아직 소개하지 않은 것들이다.
+<em class="xref std std-ref">man-strings</em>, <em class="xref std std-ref">man-string-interpolation</em>과 같은 표현들은 아직 소개하지 않은 것들이다.
 그러나 약간의 프로그래밍 지식이 있다면 이해하기에 별 문제가 없을 것이다.)</p>
 <div class="section" id="overflow">
 <h3>오버플로우(Overflow) 동작<a class="headerlink" href="#overflow" title="Permalink to this headline">¶</a></h3>
@@ -741,7 +745,7 @@ Julia로 하여금 연산 자원을 최대한 활용하도록 할 수 있도록 
 <p>기본 반올림 모드는 항상 <tt class="xref jl jl-const docutils literal"><span class="pre">RoundNearest</span></tt>이다.
 이는 가장 근접한 표현 가능한 값으로 반올림하되,
 만약 두 표현 가능한 값 중간에 주어진 값이 걸쳐 있으면
-가수부 값중 짝수(바이너리이므로 0)로 반올림 하는 모드이다.</p>
+가수부 값 중 짝수(바이너리이므로 0)로 반올림 하는 모드이다.</p>
 <div class="admonition warning">
 <p class="first admonition-title">Warning</p>
 <p class="last">반올림은 일반적으로 기본 산술 함수
@@ -761,17 +765,16 @@ Julia로 하여금 연산 자원을 최대한 활용하도록 할 수 있도록 
 <li>부동소수점과 관련해서 가장 확실한 가이드는 <a class="reference external" href="http://standards.ieee.org/findstds/standard/754-2008.html">IEEE 754-2008
 Standard</a>이지만, 유료이다.</li>
 <li>부동소수점이 어떻게 표현되는지에 대한 간략하면서도 명쾌한 설명은
-John D. Cook의 <a class="reference external" href="http://www.johndcook.com/blog/2009/04/06/anatomy-of-a-floating-point-number/">블로그 글</a>
-을 참고하면 된다. 같은 주제에 관하여 이와 더불어서 그의
+John D. Cook의 <a class="reference external" href="http://www.johndcook.com/blog/2009/04/06/anatomy-of-a-floating-point-number/">블로그 글</a>을 참고하면 된다. 같은 주제에 관하여 이와 더불어서 그의
 <a class="reference external" href="http://www.johndcook.com/blog/2009/04/06/numbers-are-a-leaky-abstraction/">소개글</a>글은 부동소수점이 실수의 이상적인 추상화와 다름으로써 생기는
 몇 가지 문제에 대해서도 다루고 있다.</li>
 <li>Bruce Dawson의 <a class="reference external" href="https://randomascii.wordpress.com/2012/05/20/thats-not-normalthe-performance-of-odd-floats/">series of blog posts on floating-point
-numbers</a> 도
+numbers</a>도
 추천하는 바이다.</li>
 <li>상급자들은 부동소수점의 내부 구현에 관한 이야기들과
 부동소수점 연산을 할 때 맞닥뜨릴 수 있는 수치적인 정확도에 관한 문제들에
 대해서는 David Goldberg의 논문, <a class="reference external" href="http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.22.6768&amp;rep=rep1&amp;type=pdf">What Every Computer Scientist Should Know About Floating-Point
-Arithmetic</a> 을
+Arithmetic</a>을
 참고하는 것이 좋다.</li>
 <li>부동소수점에 관한 역사, 근원, 몇 가지 이슈들 뿐만 아니라 수치 해석과 관련한
 많은 다양한 이야기들에 대한 자세한 문서를 얻고 싶다면

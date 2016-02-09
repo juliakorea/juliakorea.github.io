@@ -1,0 +1,544 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta property="fb:app_id" content="685509058259607" />
+
+  
+  <title>복소수와 유리수</title>
+  
+
+  
+  
+
+  
+  <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../_static/julia.css" type="text/css" />
+  
+
+  
+    <link rel="stylesheet" href="../_static/julia.css" type="text/css" />
+  
+    <link rel="top" title="None" href="../index.html"/>
+        <link rel="next" title="결론" href="../phdthesis/chap6.html"/>
+        <link rel="prev" title="수학 연산들과 기본적인 함수들" href="mathematical-operations.html"/> 
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.6.2/modernizr.min.js"></script>
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-nav-search">
+        <a href="http://julialang.org/"><img src="../_static/julia-logo.svg" class="logo"></a>
+        <!--
+        <a href="../index.html" class="fa fa-home"> Julia Language</a>
+        -->
+        
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+        
+        
+            <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="introduction.html">소개 글</a></li>
+<li class="toctree-l1"><a class="reference internal" href="getting-started.html">시작하기</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="getting-started.html#id2">다른 읽을 거리</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="variables.html">변수</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="variables.html#id2">변수명의 허용범위</a></li>
+<li class="toctree-l2"><a class="reference internal" href="variables.html#id3">코딩 컨벤션</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="integers-and-floating-point-numbers.html">정수와 부동소수점으로 표현되는 실수</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="integers-and-floating-point-numbers.html#id2">정수</a></li>
+<li class="toctree-l2"><a class="reference internal" href="integers-and-floating-point-numbers.html#id5">부동소수점으로 표현되는 실수</a></li>
+<li class="toctree-l2"><a class="reference internal" href="integers-and-floating-point-numbers.html#man-arbitrary-precision-arithmetic">임의 정밀도 연산</a></li>
+<li class="toctree-l2"><a class="reference internal" href="integers-and-floating-point-numbers.html#man-numeric-literal-coefficients">수치형 리터럴 계수</a></li>
+<li class="toctree-l2"><a class="reference internal" href="integers-and-floating-point-numbers.html#id17">리터럴 0와 1</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="mathematical-operations.html">수학 연산들과 기본적인 함수들</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="mathematical-operations.html#id2">산술 연산자</a></li>
+<li class="toctree-l2"><a class="reference internal" href="mathematical-operations.html#id3">비트 연산자</a></li>
+<li class="toctree-l2"><a class="reference internal" href="mathematical-operations.html#id4">갱신 연산자</a></li>
+<li class="toctree-l2"><a class="reference internal" href="mathematical-operations.html#man-numeric-comparisons">수치 비교</a></li>
+<li class="toctree-l2"><a class="reference internal" href="mathematical-operations.html#man-numerical-conversions">수치 변환</a></li>
+<li class="toctree-l2"><a class="reference internal" href="mathematical-operations.html#man-elementary-functions">기초 함수</a></li>
+</ul>
+</li>
+<li class="toctree-l1 current"><a class="current reference internal" href="">복소수와 유리수</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#man-complex-numbers">복소수</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#man-rational-numbers">유리수</a></li>
+</ul>
+</li>
+</ul>
+<ul class="simple">
+</ul>
+<ul class="simple">
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../phdthesis/chap6.html">결론</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../phdthesis/chap6.html#id2">성능</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../phdthesis/chap6.html#id3">앞으로 할 작업들</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../phdthesis/chap6.html#id4">프로젝트 상황</a></li>
+</ul>
+</li>
+</ul>
+
+        
+      </div>
+      &nbsp;
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="../index.html">Julia Language</a>
+      </nav>
+
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../index.html">Docs</a> &raquo;</li>
+      
+    <li>복소수와 유리수</li>
+      <li class="wy-breadcrumbs-aside">
+        
+          
+            
+              <a href="https://github.com/juliakorea/doc/blame/master/src/julia/doc/manual/complex-and-rational-numbers.rst.txt" rel="nofollow"> 원문 보기</a>
+            
+          
+        
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document">
+            
+  <div class="section" id="man-complex-and-rational-numbers">
+<span id="id1"></span><h1>복소수와 유리수<a class="headerlink" href="#man-complex-and-rational-numbers" title="Permalink to this headline">¶</a></h1>
+<p>Julia는 복소수와 유리수에 대한 타입을 사전 정의된 타입의 형태로 지니고 있으며,
+이 타입들은 <a class="reference internal" href="mathematical-operations.html#man-mathematical-operations"><em>표준 수학 연산</em></a>을 지원한다.
+또한 원시 타입이든 복합 타입든간에 이들 타입에 대해서 어떤 조합으로 이루어져도
+<em class="xref std std-ref">man-conversion-and-promotion</em>을 지원하고 있다.</p>
+<div class="section" id="man-complex-numbers">
+<span id="id2"></span><h2>복소수<a class="headerlink" href="#man-complex-numbers" title="Permalink to this headline">¶</a></h2>
+<p>전역 상수 <tt class="xref jl jl-const docutils literal"><span class="pre">im</span></tt> 은 -1의 양의 제곱근인 복소수 <em>i</em>를 뜻한다.
+하지만 <tt class="docutils literal"><span class="pre">i</span></tt>는 인덱스 변수 이름으로써 널리 쓰이기 때문에 이를
+전역 상수로 쓰는 것은 굉장히 위험할 수 있다.
+Julia에서는 <a class="reference internal" href="integers-and-floating-point-numbers.html#man-numeric-literal-coefficients"><em>상수를 변수와 병치</em></a>하는 것을 허용하기 때문에,
+기존에 수학에서 쓰던 표기법과 비슷하게 복소수에서 비슷한 문법을 쓸 수 있다:</p>
+<div class="highlight-julia"><div class="highlight"><pre><span class="n">julia</span><span class="o">&gt;</span> <span class="mi">1</span> <span class="o">+</span> <span class="mi">2</span><span class="nb">im</span>
+<span class="mi">1</span> <span class="o">+</span> <span class="mi">2</span><span class="nb">im</span>
+</pre></div>
+</div>
+<p>또한 표준 수치 연산을 복소수에 대해서도 모두 동일하게 적용할 수 있다:</p>
+<div class="highlight-julia"><div class="highlight"><pre><span class="n">julia</span><span class="o">&gt;</span> <span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="mi">2</span><span class="nb">im</span><span class="p">)</span><span class="o">*</span><span class="p">(</span><span class="mi">2</span> <span class="o">-</span> <span class="mi">3</span><span class="nb">im</span><span class="p">)</span>
+<span class="mi">8</span> <span class="o">+</span> <span class="mi">1</span><span class="nb">im</span>
+
+<span class="n">julia</span><span class="o">&gt;</span> <span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="mi">2</span><span class="nb">im</span><span class="p">)</span><span class="o">/</span><span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="mi">2</span><span class="nb">im</span><span class="p">)</span>
+<span class="o">-</span><span class="mf">0.6</span> <span class="o">+</span> <span class="mf">0.8</span><span class="nb">im</span>
+
+<span class="n">julia</span><span class="o">&gt;</span> <span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="mi">2</span><span class="nb">im</span><span class="p">)</span> <span class="o">+</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="mi">2</span><span class="nb">im</span><span class="p">)</span>
+<span class="mi">2</span> <span class="o">+</span> <span class="mi">0</span><span class="nb">im</span>
+
+<span class="n">julia</span><span class="o">&gt;</span> <span class="p">(</span><span class="o">-</span><span class="mi">3</span> <span class="o">+</span> <span class="mi">2</span><span class="nb">im</span><span class="p">)</span> <span class="o">-</span> <span class="p">(</span><span class="mi">5</span> <span class="o">-</span> <span class="mi">1</span><span class="nb">im</span><span class="p">)</span>
+<span class="o">-</span><span class="mi">8</span> <span class="o">+</span> <span class="mi">3</span><span class="nb">im</span>
+
+<span class="n">julia</span><span class="o">&gt;</span> <span class="p">(</span><span class="o">-</span><span class="mi">1</span> <span class="o">+</span> <span class="mi">2</span><span class="nb">im</span><span class="p">)</span><span class="o">^</span><span class="mi">2</span>
+<span class="o">-</span><span class="mi">3</span> <span class="o">-</span> <span class="mi">4</span><span class="nb">im</span>
+
+<span class="n">julia</span><span class="o">&gt;</span> <span class="p">(</span><span class="o">-</span><span class="mi">1</span> <span class="o">+</span> <span class="mi">2</span><span class="nb">im</span><span class="p">)</span><span class="o">^</span><span class="mf">2.5</span>
+<span class="mf">2.7296244647840084</span> <span class="o">-</span> <span class="mf">6.960664459571898</span><span class="nb">im</span>
+
+<span class="n">julia</span><span class="o">&gt;</span> <span class="p">(</span><span class="o">-</span><span class="mi">1</span> <span class="o">+</span> <span class="mi">2</span><span class="nb">im</span><span class="p">)</span><span class="o">^</span><span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="mi">1</span><span class="nb">im</span><span class="p">)</span>
+<span class="o">-</span><span class="mf">0.27910381075826657</span> <span class="o">+</span> <span class="mf">0.08708053414102428</span><span class="nb">im</span>
+
+<span class="n">julia</span><span class="o">&gt;</span> <span class="mi">3</span><span class="p">(</span><span class="mi">2</span> <span class="o">-</span> <span class="mi">5</span><span class="nb">im</span><span class="p">)</span>
+<span class="mi">6</span> <span class="o">-</span> <span class="mi">15</span><span class="nb">im</span>
+
+<span class="n">julia</span><span class="o">&gt;</span> <span class="mi">3</span><span class="p">(</span><span class="mi">2</span> <span class="o">-</span> <span class="mi">5</span><span class="nb">im</span><span class="p">)</span><span class="o">^</span><span class="mi">2</span>
+<span class="o">-</span><span class="mi">63</span> <span class="o">-</span> <span class="mi">60</span><span class="nb">im</span>
+
+<span class="n">julia</span><span class="o">&gt;</span> <span class="mi">3</span><span class="p">(</span><span class="mi">2</span> <span class="o">-</span> <span class="mi">5</span><span class="nb">im</span><span class="p">)</span><span class="o">^-</span><span class="mf">1.0</span>
+<span class="mf">0.20689655172413796</span> <span class="o">+</span> <span class="mf">0.5172413793103449</span><span class="nb">im</span>
+</pre></div>
+</div>
+<p>프로모션 시스템은 서로 다른 타입의 피연산자끼리의 조합도
+간단하게 바로 적용가능하도록 만들어준다:</p>
+<div class="highlight-julia"><div class="highlight"><pre><span class="n">julia</span><span class="o">&gt;</span> <span class="mi">2</span><span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="mi">1</span><span class="nb">im</span><span class="p">)</span>
+<span class="mi">2</span> <span class="o">-</span> <span class="mi">2</span><span class="nb">im</span>
+
+<span class="n">julia</span><span class="o">&gt;</span> <span class="p">(</span><span class="mi">2</span> <span class="o">+</span> <span class="mi">3</span><span class="nb">im</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span>
+<span class="mi">1</span> <span class="o">+</span> <span class="mi">3</span><span class="nb">im</span>
+
+<span class="n">julia</span><span class="o">&gt;</span> <span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="mi">2</span><span class="nb">im</span><span class="p">)</span> <span class="o">+</span> <span class="mf">0.5</span>
+<span class="mf">1.5</span> <span class="o">+</span> <span class="mf">2.0</span><span class="nb">im</span>
+
+<span class="n">julia</span><span class="o">&gt;</span> <span class="p">(</span><span class="mi">2</span> <span class="o">+</span> <span class="mi">3</span><span class="nb">im</span><span class="p">)</span> <span class="o">-</span> <span class="mf">0.5</span><span class="nb">im</span>
+<span class="mf">2.0</span> <span class="o">+</span> <span class="mf">2.5</span><span class="nb">im</span>
+
+<span class="n">julia</span><span class="o">&gt;</span> <span class="mf">0.75</span><span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="mi">2</span><span class="nb">im</span><span class="p">)</span>
+<span class="mf">0.75</span> <span class="o">+</span> <span class="mf">1.5</span><span class="nb">im</span>
+
+<span class="n">julia</span><span class="o">&gt;</span> <span class="p">(</span><span class="mi">2</span> <span class="o">+</span> <span class="mi">3</span><span class="nb">im</span><span class="p">)</span> <span class="o">/</span> <span class="mi">2</span>
+<span class="mf">1.0</span> <span class="o">+</span> <span class="mf">1.5</span><span class="nb">im</span>
+
+<span class="n">julia</span><span class="o">&gt;</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="mi">3</span><span class="nb">im</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="mi">2</span> <span class="o">+</span> <span class="mi">2</span><span class="nb">im</span><span class="p">)</span>
+<span class="o">-</span><span class="mf">0.5</span> <span class="o">-</span> <span class="mf">1.0</span><span class="nb">im</span>
+
+<span class="n">julia</span><span class="o">&gt;</span> <span class="mi">2</span><span class="nb">im</span><span class="o">^</span><span class="mi">2</span>
+<span class="o">-</span><span class="mi">2</span> <span class="o">+</span> <span class="mi">0</span><span class="nb">im</span>
+
+<span class="n">julia</span><span class="o">&gt;</span> <span class="mi">1</span> <span class="o">+</span> <span class="mi">3</span><span class="o">/</span><span class="mi">4</span><span class="nb">im</span>
+<span class="mf">1.0</span> <span class="o">-</span> <span class="mf">0.75</span><span class="nb">im</span>
+</pre></div>
+</div>
+<p>리터럴 계수는 나눗셈보다 우선순위가 높기 때문에
+<tt class="docutils literal"><span class="pre">3/4im</span> <span class="pre">==</span> <span class="pre">3/(4*im)</span> <span class="pre">==</span> <span class="pre">-(3/4*im)</span></tt>가 된다는 것을
+알아둘 필요가 있다.</p>
+<p>복소수를 다루는 표준 함수들은 다음과 같다:</p>
+<div class="highlight-julia"><div class="highlight"><pre><span class="n">julia</span><span class="o">&gt;</span> <span class="n">real</span><span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="mi">2</span><span class="nb">im</span><span class="p">)</span>
+<span class="mi">1</span>
+
+<span class="n">julia</span><span class="o">&gt;</span> <span class="n">imag</span><span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="mi">2</span><span class="nb">im</span><span class="p">)</span>
+<span class="mi">2</span>
+
+<span class="n">julia</span><span class="o">&gt;</span> <span class="n">conj</span><span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="mi">2</span><span class="nb">im</span><span class="p">)</span>
+<span class="mi">1</span> <span class="o">-</span> <span class="mi">2</span><span class="nb">im</span>
+
+<span class="n">julia</span><span class="o">&gt;</span> <span class="n">abs</span><span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="mi">2</span><span class="nb">im</span><span class="p">)</span>
+<span class="mf">2.23606797749979</span>
+
+<span class="n">julia</span><span class="o">&gt;</span> <span class="n">abs2</span><span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="mi">2</span><span class="nb">im</span><span class="p">)</span>
+<span class="mi">5</span>
+
+<span class="n">julia</span><span class="o">&gt;</span> <span class="n">angle</span><span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="mi">2</span><span class="nb">im</span><span class="p">)</span>
+<span class="mf">1.1071487177940904</span>
+</pre></div>
+</div>
+<p>일반적으로, 복소수의 절대값(<tt class="xref jl jl-func docutils literal"><span class="pre">abs()</span></tt>)은 그 복소수와 0과의 거리를 나타낸다.
+<tt class="xref jl jl-func docutils literal"><span class="pre">abs2()</span></tt>는 절대값의 제곱을 구할 때 쓰는 함수이며,
+복소수에서의 이 함수의 특별한 사용 용도는 제곱근을 구하기 어려울 때 쓴다.
+<tt class="xref jl jl-func docutils literal"><span class="pre">angle()</span></tt>은 위상각을 함수의 <em>매개변수</em>로 많이 쓰이는
+라디안으로 리턴하는 함수이다.
+다른 모든 <a class="reference internal" href="mathematical-operations.html#man-elementary-functions"><em>기초 함수</em></a>들도 복소수에 대해 정의되어 있다.</p>
+<div class="highlight-julia"><div class="highlight"><pre><span class="n">julia</span><span class="o">&gt;</span> <span class="n">sqrt</span><span class="p">(</span><span class="mi">1</span><span class="nb">im</span><span class="p">)</span>
+<span class="mf">0.7071067811865476</span> <span class="o">+</span> <span class="mf">0.7071067811865475</span><span class="nb">im</span>
+
+<span class="n">julia</span><span class="o">&gt;</span> <span class="n">sqrt</span><span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="mi">2</span><span class="nb">im</span><span class="p">)</span>
+<span class="mf">1.272019649514069</span> <span class="o">+</span> <span class="mf">0.7861513777574233</span><span class="nb">im</span>
+
+<span class="n">julia</span><span class="o">&gt;</span> <span class="n">cos</span><span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="mi">2</span><span class="nb">im</span><span class="p">)</span>
+<span class="mf">2.0327230070196656</span> <span class="o">-</span> <span class="mf">3.0518977991518</span><span class="nb">im</span>
+
+<span class="n">julia</span><span class="o">&gt;</span> <span class="n">exp</span><span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="mi">2</span><span class="nb">im</span><span class="p">)</span>
+<span class="o">-</span><span class="mf">1.1312043837568135</span> <span class="o">+</span> <span class="mf">2.4717266720048188</span><span class="nb">im</span>
+
+<span class="n">julia</span><span class="o">&gt;</span> <span class="n">sinh</span><span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="mi">2</span><span class="nb">im</span><span class="p">)</span>
+<span class="o">-</span><span class="mf">0.4890562590412937</span> <span class="o">+</span> <span class="mf">1.4031192506220405</span><span class="nb">im</span>
+</pre></div>
+</div>
+<p>일반적으로 수학 관련 함수들은 실수에 적용되었을 때는 실수를,
+복소수에 적용되었을 때는 복소수를 리턴한다.
+예를 들어, <tt class="xref jl jl-func docutils literal"><span class="pre">sqrt()</span></tt>가 <tt class="docutils literal"><span class="pre">-1</span> <span class="pre">==</span> <span class="pre">-1</span> <span class="pre">+</span> <span class="pre">0im</span></tt>임에도 불구하고,
+<tt class="docutils literal"><span class="pre">-1</span></tt>에 적용되었을 때와 <tt class="docutils literal"><span class="pre">-1</span> <span class="pre">+</span> <span class="pre">0im</span></tt>에 적용되었을 때 다르게 작동한다.</p>
+<div class="highlight-julia"><div class="highlight"><pre><span class="n">julia</span><span class="o">&gt;</span> <span class="n">sqrt</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">ERROR</span><span class="p">:</span> <span class="n">DomainError</span><span class="p">:</span>
+<span class="n">sqrt</span> <span class="n">will</span> <span class="n">only</span> <span class="k">return</span> <span class="n">a</span> <span class="n">complex</span> <span class="n">result</span> <span class="k">if</span> <span class="n">called</span> <span class="n">with</span> <span class="n">a</span> <span class="n">complex</span> <span class="n">argument</span><span class="o">.</span> <span class="n">Try</span> <span class="n">sqrt</span><span class="p">(</span><span class="n">complex</span><span class="p">(</span><span class="n">x</span><span class="p">))</span><span class="o">.</span>
+ <span class="k">in</span> <span class="n">sqrt</span> <span class="n">at</span> <span class="n">math</span><span class="o">.</span><span class="n">jl</span><span class="p">:</span><span class="mi">146</span>
+
+<span class="n">julia</span><span class="o">&gt;</span> <span class="n">sqrt</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span> <span class="o">+</span> <span class="mi">0</span><span class="nb">im</span><span class="p">)</span>
+<span class="mf">0.0</span> <span class="o">+</span> <span class="mf">1.0</span><span class="nb">im</span>
+</pre></div>
+</div>
+<p><a class="reference internal" href="integers-and-floating-point-numbers.html#man-numeric-literal-coefficients"><em>literal numeric coefficient notation</em></a>는
+변수로부터 복소수를 만들 때는 작동하지 않는다. 대신에, 이 때는 곱셈 기호가 명시적으로
+표시되어야 한다.</p>
+<div class="highlight-julia"><div class="highlight"><pre><span class="n">julia</span><span class="o">&gt;</span> <span class="n">a</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span> <span class="n">b</span> <span class="o">=</span> <span class="mi">2</span><span class="p">;</span> <span class="n">a</span> <span class="o">+</span> <span class="n">b</span><span class="o">*</span><span class="nb">im</span>
+<span class="mi">1</span> <span class="o">+</span> <span class="mi">2</span><span class="nb">im</span>
+</pre></div>
+</div>
+<p>하지만, 위 방법은 <em>추천하지 않는다</em>; 대신에 <tt class="xref jl jl-func docutils literal"><span class="pre">complex()</span></tt>를 써서
+실수부와 허수부를 직접 받아 복소수를 형성하는 것이 좋다:</p>
+<div class="highlight-julia"><div class="highlight"><pre><span class="n">julia</span><span class="o">&gt;</span> <span class="n">complex</span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="n">b</span><span class="p">)</span>
+<span class="mi">1</span> <span class="o">+</span> <span class="mi">2</span><span class="nb">im</span>
+</pre></div>
+</div>
+<p>위의 복소수 형성방법은 곱셈과 덧셈 연산을 하지 않아도 된다.</p>
+<p><tt class="xref jl jl-const docutils literal"><span class="pre">Inf</span></tt>와 <tt class="xref jl jl-const docutils literal"><span class="pre">NaN</span></tt>를 복소수의 실수부 혹은 허수부에 적용하는 것은
+<a class="reference internal" href="integers-and-floating-point-numbers.html#man-special-floats"><em>특별한 부동소수점 값들</em></a> 섹션에서 설명하고 있다:</p>
+<div class="highlight-julia"><div class="highlight"><pre><span class="n">julia</span><span class="o">&gt;</span> <span class="mi">1</span> <span class="o">+</span> <span class="nb">Inf</span><span class="o">*</span><span class="nb">im</span>
+<span class="mf">1.0</span> <span class="o">+</span> <span class="nb">Inf</span><span class="o">*</span><span class="nb">im</span>
+
+<span class="n">julia</span><span class="o">&gt;</span> <span class="mi">1</span> <span class="o">+</span> <span class="n">NaN</span><span class="o">*</span><span class="nb">im</span>
+<span class="mf">1.0</span> <span class="o">+</span> <span class="n">NaN</span><span class="o">*</span><span class="nb">im</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="man-rational-numbers">
+<span id="id3"></span><h2>유리수<a class="headerlink" href="#man-rational-numbers" title="Permalink to this headline">¶</a></h2>
+<p>Julia는 정수들 간의 비를 정확히 표현하기 위해 유리수 타입이 존재한다.
+유리수는 <tt class="xref jl jl-obj docutils literal"><span class="pre">//</span></tt> 연산자를 이용하여 표현할 수 있다:</p>
+<div class="highlight-julia"><div class="highlight"><pre><span class="n">julia</span><span class="o">&gt;</span> <span class="mi">2</span><span class="o">//</span><span class="mi">3</span>
+<span class="mi">2</span><span class="o">//</span><span class="mi">3</span>
+</pre></div>
+</div>
+<p>만약 유리수타입에서 분모와 분자에 공통 인수가 있다면,
+분모에 음수가 들어가지 않는 방향으로 약분한 형태로 저장한다;</p>
+<div class="highlight-julia"><div class="highlight"><pre><span class="n">julia</span><span class="o">&gt;</span> <span class="mi">6</span><span class="o">//</span><span class="mi">9</span>
+<span class="mi">2</span><span class="o">//</span><span class="mi">3</span>
+
+<span class="n">julia</span><span class="o">&gt;</span> <span class="o">-</span><span class="mi">4</span><span class="o">//</span><span class="mi">8</span>
+<span class="o">-</span><span class="mi">1</span><span class="o">//</span><span class="mi">2</span>
+
+<span class="n">julia</span><span class="o">&gt;</span> <span class="mi">5</span><span class="o">//-</span><span class="mi">15</span>
+<span class="o">-</span><span class="mi">1</span><span class="o">//</span><span class="mi">3</span>
+
+<span class="n">julia</span><span class="o">&gt;</span> <span class="o">-</span><span class="mi">4</span><span class="o">//-</span><span class="mi">12</span>
+<span class="mi">1</span><span class="o">//</span><span class="mi">3</span>
+</pre></div>
+</div>
+<p>위에서 언급한 약분된 형태의 유리수는 유일하기 때문에, 유리수 타입의 동등 비교는
+분모와 분자의 동등비교로 이루어 질 수 있다.
+이 표준형 유리수의 분모와 분자는
+<tt class="xref jl jl-func docutils literal"><span class="pre">num()</span></tt> 함수와 <tt class="xref jl jl-func docutils literal"><span class="pre">den()</span></tt> 함수를 이용하여 추출할 수 있다.</p>
+<div class="highlight-julia"><div class="highlight"><pre><span class="n">julia</span><span class="o">&gt;</span> <span class="n">num</span><span class="p">(</span><span class="mi">2</span><span class="o">//</span><span class="mi">3</span><span class="p">)</span>
+<span class="mi">2</span>
+
+<span class="n">julia</span><span class="o">&gt;</span> <span class="n">den</span><span class="p">(</span><span class="mi">2</span><span class="o">//</span><span class="mi">3</span><span class="p">)</span>
+<span class="mi">3</span>
+</pre></div>
+</div>
+<p>일반적으로는 분모와 분자의 직접 비교는 필요하지 않은데,
+그 이유는 유리수에 대해 표준 산술 연산과 비교 연산이 정의되어 있기 때문이다.</p>
+<div class="highlight-julia"><div class="highlight"><pre><span class="n">julia</span><span class="o">&gt;</span> <span class="mi">2</span><span class="o">//</span><span class="mi">3</span> <span class="o">==</span> <span class="mi">6</span><span class="o">//</span><span class="mi">9</span>
+<span class="n">true</span>
+
+<span class="n">julia</span><span class="o">&gt;</span> <span class="mi">2</span><span class="o">//</span><span class="mi">3</span> <span class="o">==</span> <span class="mi">9</span><span class="o">//</span><span class="mi">27</span>
+<span class="n">false</span>
+
+<span class="n">julia</span><span class="o">&gt;</span> <span class="mi">3</span><span class="o">//</span><span class="mi">7</span> <span class="o">&lt;</span> <span class="mi">1</span><span class="o">//</span><span class="mi">2</span>
+<span class="n">true</span>
+
+<span class="n">julia</span><span class="o">&gt;</span> <span class="mi">3</span><span class="o">//</span><span class="mi">4</span> <span class="o">&gt;</span> <span class="mi">2</span><span class="o">//</span><span class="mi">3</span>
+<span class="n">true</span>
+
+<span class="n">julia</span><span class="o">&gt;</span> <span class="mi">2</span><span class="o">//</span><span class="mi">4</span> <span class="o">+</span> <span class="mi">1</span><span class="o">//</span><span class="mi">6</span>
+<span class="mi">2</span><span class="o">//</span><span class="mi">3</span>
+
+<span class="n">julia</span><span class="o">&gt;</span> <span class="mi">5</span><span class="o">//</span><span class="mi">12</span> <span class="o">-</span> <span class="mi">1</span><span class="o">//</span><span class="mi">4</span>
+<span class="mi">1</span><span class="o">//</span><span class="mi">6</span>
+
+<span class="n">julia</span><span class="o">&gt;</span> <span class="mi">5</span><span class="o">//</span><span class="mi">8</span> <span class="o">*</span> <span class="mi">3</span><span class="o">//</span><span class="mi">12</span>
+<span class="mi">5</span><span class="o">//</span><span class="mi">32</span>
+
+<span class="n">julia</span><span class="o">&gt;</span> <span class="mi">6</span><span class="o">//</span><span class="mi">5</span> <span class="o">/</span> <span class="mi">10</span><span class="o">//</span><span class="mi">7</span>
+<span class="mi">21</span><span class="o">//</span><span class="mi">25</span>
+</pre></div>
+</div>
+<p>유리수는 쉽게 부동소수점 실수로 변환할 수 있다.</p>
+<div class="highlight-julia"><div class="highlight"><pre><span class="n">julia</span><span class="o">&gt;</span> <span class="n">float</span><span class="p">(</span><span class="mi">3</span><span class="o">//</span><span class="mi">4</span><span class="p">)</span>
+<span class="mf">0.75</span>
+</pre></div>
+</div>
+<p>유리수와 부동소수점 실수 간의 변환이 있어도 다음과 같이
+<tt class="docutils literal"><span class="pre">a</span> <span class="pre">==</span> <span class="pre">0</span></tt> 이면서 <tt class="docutils literal"><span class="pre">b</span> <span class="pre">==</span> <span class="pre">0</span></tt>인 경우를 제외한
+임의의 정수 <tt class="docutils literal"><span class="pre">a</span></tt>와 <tt class="docutils literal"><span class="pre">b</span></tt> 에 대해서
+유리수와 부동소수점 실수 간의 동등 비교가 성립한다.</p>
+<div class="highlight-julia"><div class="highlight"><pre><span class="n">julia</span><span class="o">&gt;</span> <span class="nb">isequal</span><span class="p">(</span><span class="n">float</span><span class="p">(</span><span class="n">a</span><span class="o">//</span><span class="n">b</span><span class="p">),</span> <span class="n">a</span><span class="o">/</span><span class="n">b</span><span class="p">)</span>
+<span class="n">true</span>
+</pre></div>
+</div>
+<p>무한대 유리수 또한 생성할 수 있다:</p>
+<div class="highlight-julia"><div class="highlight"><pre><span class="n">julia</span><span class="o">&gt;</span> <span class="mi">5</span><span class="o">//</span><span class="mi">0</span>
+<span class="mi">1</span><span class="o">//</span><span class="mi">0</span>
+
+<span class="n">julia</span><span class="o">&gt;</span> <span class="o">-</span><span class="mi">3</span><span class="o">//</span><span class="mi">0</span>
+<span class="o">-</span><span class="mi">1</span><span class="o">//</span><span class="mi">0</span>
+
+<span class="n">julia</span><span class="o">&gt;</span> <span class="nb">typeof</span><span class="p">(</span><span class="n">ans</span><span class="p">)</span>
+<span class="n">Rational</span><span class="p">{</span><span class="kt">Int64</span><span class="p">}</span>
+</pre></div>
+</div>
+<p>그러나, <tt class="xref jl jl-const docutils literal"><span class="pre">NaN</span></tt> 유리수는 생성할 수 없다:</p>
+<div class="highlight-julia"><div class="highlight"><pre><span class="n">julia</span><span class="o">&gt;</span> <span class="mi">0</span><span class="o">//</span><span class="mi">0</span>
+<span class="n">ERROR</span><span class="p">:</span> <span class="n">ArgumentError</span><span class="p">:</span> <span class="n">invalid</span> <span class="n">rational</span><span class="p">:</span> <span class="n">zero</span><span class="p">(</span><span class="kt">Int64</span><span class="p">)</span><span class="o">//</span><span class="n">zero</span><span class="p">(</span><span class="kt">Int64</span><span class="p">)</span>
+ <span class="k">in</span> <span class="n">call</span> <span class="n">at</span> <span class="n">rational</span><span class="o">.</span><span class="n">jl</span><span class="p">:</span><span class="mi">8</span>
+ <span class="k">in</span> <span class="o">//</span> <span class="n">at</span> <span class="n">rational</span><span class="o">.</span><span class="n">jl</span><span class="p">:</span><span class="mi">22</span>
+</pre></div>
+</div>
+<p>다른 타입과 마찬가지로, 프로모션 시스템은
+유리수와 다른 타입들 간의 상호작용을 어려움 없이 할 수 있도록 해준다:</p>
+<div class="highlight-julia"><div class="highlight"><pre><span class="n">julia</span><span class="o">&gt;</span> <span class="mi">3</span><span class="o">//</span><span class="mi">5</span> <span class="o">+</span> <span class="mi">1</span>
+<span class="mi">8</span><span class="o">//</span><span class="mi">5</span>
+
+<span class="n">julia</span><span class="o">&gt;</span> <span class="mi">3</span><span class="o">//</span><span class="mi">5</span> <span class="o">-</span> <span class="mf">0.5</span>
+<span class="mf">0.09999999999999998</span>
+
+<span class="n">julia</span><span class="o">&gt;</span> <span class="mi">2</span><span class="o">//</span><span class="mi">7</span> <span class="o">*</span> <span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="mi">2</span><span class="nb">im</span><span class="p">)</span>
+<span class="mi">2</span><span class="o">//</span><span class="mi">7</span> <span class="o">+</span> <span class="mi">4</span><span class="o">//</span><span class="mi">7</span><span class="o">*</span><span class="nb">im</span>
+
+<span class="n">julia</span><span class="o">&gt;</span> <span class="mi">2</span><span class="o">//</span><span class="mi">7</span> <span class="o">*</span> <span class="p">(</span><span class="mf">1.5</span> <span class="o">+</span> <span class="mi">2</span><span class="nb">im</span><span class="p">)</span>
+<span class="mf">0.42857142857142855</span> <span class="o">+</span> <span class="mf">0.5714285714285714</span><span class="nb">im</span>
+
+<span class="n">julia</span><span class="o">&gt;</span> <span class="mi">3</span><span class="o">//</span><span class="mi">2</span> <span class="o">/</span> <span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="mi">2</span><span class="nb">im</span><span class="p">)</span>
+<span class="mi">3</span><span class="o">//</span><span class="mi">10</span> <span class="o">-</span> <span class="mi">3</span><span class="o">//</span><span class="mi">5</span><span class="o">*</span><span class="nb">im</span>
+
+<span class="n">julia</span><span class="o">&gt;</span> <span class="mi">1</span><span class="o">//</span><span class="mi">2</span> <span class="o">+</span> <span class="mi">2</span><span class="nb">im</span>
+<span class="mi">1</span><span class="o">//</span><span class="mi">2</span> <span class="o">+</span> <span class="mi">2</span><span class="o">//</span><span class="mi">1</span><span class="o">*</span><span class="nb">im</span>
+
+<span class="n">julia</span><span class="o">&gt;</span> <span class="mi">1</span> <span class="o">+</span> <span class="mi">2</span><span class="o">//</span><span class="mi">3</span><span class="nb">im</span>
+<span class="mi">1</span><span class="o">//</span><span class="mi">1</span> <span class="o">-</span> <span class="mi">2</span><span class="o">//</span><span class="mi">3</span><span class="o">*</span><span class="nb">im</span>
+
+<span class="n">julia</span><span class="o">&gt;</span> <span class="mf">0.5</span> <span class="o">==</span> <span class="mi">1</span><span class="o">//</span><span class="mi">2</span>
+<span class="n">true</span>
+
+<span class="n">julia</span><span class="o">&gt;</span> <span class="mf">0.33</span> <span class="o">==</span> <span class="mi">1</span><span class="o">//</span><span class="mi">3</span>
+<span class="n">false</span>
+
+<span class="n">julia</span><span class="o">&gt;</span> <span class="mf">0.33</span> <span class="o">&lt;</span> <span class="mi">1</span><span class="o">//</span><span class="mi">3</span>
+<span class="n">true</span>
+
+<span class="n">julia</span><span class="o">&gt;</span> <span class="mi">1</span><span class="o">//</span><span class="mi">3</span> <span class="o">-</span> <span class="mf">0.33</span>
+<span class="mf">0.0033333333333332993</span>
+</pre></div>
+</div>
+</div>
+</div>
+
+
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../phdthesis/chap6.html" class="btn btn-neutral float-right" title="결론" accesskey="n"> 다음 <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="mathematical-operations.html" class="btn btn-neutral" title="수학 연산들과 기본적인 함수들" accesskey="p"><span class="fa fa-arrow-circle-left"></span> 이전 </a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+      Last updated on Feb 09, 2016.
+    </p>
+  </div>
+
+</footer>
+
+
+<div
+  class="fb-like"
+  data-share="true"
+  data-width="450"
+  data-show-faces="true">
+</div>
+
+<script>
+  window.fbAsyncInit = function() {
+    FB.init({
+      appId      : '685509058259607',
+      xfbml      : true,
+      version    : 'v2.3'
+    });
+  };
+
+  (function(d, s, id){
+     var js, fjs = d.getElementsByTagName(s)[0];
+     if (d.getElementById(id)) {return;}
+     js = d.createElement(s); js.id = id;
+     js.src = "https://connect.facebook.net/ko_KR/sdk.js";
+     fjs.parentNode.insertBefore(js, fjs);
+   }(document, 'script', 'facebook-jssdk'));
+</script>
+
+<div class="fb-comments" data-width="100%" data-version="v2.3"></div>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../',
+            VERSION:'X.Y.Z-unknown',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true
+        };
+    </script>
+      <script type="text/javascript" src="../_static/jquery.js"></script>
+      <script type="text/javascript" src="../_static/underscore.js"></script>
+      <script type="text/javascript" src="../_static/doctools.js"></script>
+      <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+
+<script type="text/javascript" src="../_static/jquery.word-break-keep-all.min.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){
+  $('p').wordBreakKeepAll();
+});
+</script>
+
+</body>
+</html>
