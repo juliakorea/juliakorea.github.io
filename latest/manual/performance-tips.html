@@ -9,7 +9,7 @@
   <meta property="fb:app_id" content="685509058259607" />
 
   
-  <title>Performance Tips &mdash; Julia Language X.Y.Z-unknown documentation</title>
+  <title>Performance Tips</title>
   
 
   
@@ -32,7 +32,7 @@
   
     <link rel="stylesheet" href="../_static/julia.css" type="text/css" />
   
-    <link rel="top" title="Julia Language X.Y.Z-unknown documentation" href="../index.html"/>
+    <link rel="top" title="None" href="../index.html"/>
         <link rel="next" title="Workflow Tips" href="workflow-tips.html"/>
         <link rel="prev" title="Stack Traces" href="stacktraces.html"/> 
 
@@ -51,8 +51,9 @@
         <!--
         <a href="../index.html" class="fa fa-home"> Julia Language</a>
         -->
-        <div role="search">
-  <form id ="rtd-search-form" class="wy-form" action="../search.html" method="get">
+        
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
     <input type="text" name="q" placeholder="Search docs" />
     <input type="hidden" name="check_keywords" value="yes" />
     <input type="hidden" name="area" value="default" />
@@ -111,7 +112,7 @@
 </li>
 <li class="toctree-l1"><a class="reference internal" href="functions.html">Functions</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="functions.html#argument-passing-behavior">Argument Passing Behavior</a></li>
-<li class="toctree-l2"><a class="reference internal" href="functions.html#the-return-keyword">The <code class="docutils literal"><span class="pre">return</span></code> Keyword</a></li>
+<li class="toctree-l2"><a class="reference internal" href="functions.html#the-return-keyword">The <tt class="docutils literal"><span class="pre">return</span></tt> Keyword</a></li>
 <li class="toctree-l2"><a class="reference internal" href="functions.html#operators-are-functions">Operators Are Functions</a></li>
 <li class="toctree-l2"><a class="reference internal" href="functions.html#operators-with-special-names">Operators With Special Names</a></li>
 <li class="toctree-l2"><a class="reference internal" href="functions.html#anonymous-functions">Anonymous Functions</a></li>
@@ -317,12 +318,12 @@
 <li class="toctree-l2"><a class="reference internal" href="stacktraces.html#viewing-a-stack-trace">Viewing a stack trace</a></li>
 <li class="toctree-l2"><a class="reference internal" href="stacktraces.html#extracting-useful-information">Extracting useful information</a></li>
 <li class="toctree-l2"><a class="reference internal" href="stacktraces.html#error-handling">Error handling</a></li>
-<li class="toctree-l2"><a class="reference internal" href="stacktraces.html#comparison-with-backtrace">Comparison with <code class="docutils literal"><span class="pre">backtrace()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="stacktraces.html#comparison-with-backtrace">Comparison with <tt class="docutils literal"><span class="pre">backtrace()</span></tt></a></li>
 </ul>
 </li>
 <li class="toctree-l1 current"><a class="current reference internal" href="">Performance Tips</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#avoid-global-variables">Avoid global variables</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#measure-performance-with-time-and-pay-attention-to-memory-allocation">Measure performance with <code class="docutils literal"><span class="pre">&#64;time</span></code> and pay attention to memory allocation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#measure-performance-with-time-and-pay-attention-to-memory-allocation">Measure performance with <tt class="docutils literal"><span class="pre">&#64;time</span></tt> and pay attention to memory allocation</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#tools">Tools</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#avoid-containers-with-abstract-type-parameters">Avoid containers with abstract type parameters</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#type-declarations">Type declarations</a></li>
@@ -338,7 +339,7 @@
 <li class="toctree-l2"><a class="reference internal" href="#tweaks">Tweaks</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#performance-annotations">Performance Annotations</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#treat-subnormal-numbers-as-zeros">Treat Subnormal Numbers as Zeros</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#code-warntype"><code class="docutils literal"><span class="pre">&#64;code_warntype</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#code-warntype"><tt class="docutils literal"><span class="pre">&#64;code_warntype</span></tt></a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="workflow-tips.html">Workflow Tips</a><ul>
@@ -350,11 +351,11 @@
 <li class="toctree-l2"><a class="reference internal" href="style-guide.html#write-functions-not-just-scripts">Write functions, not just scripts</a></li>
 <li class="toctree-l2"><a class="reference internal" href="style-guide.html#avoid-writing-overly-specific-types">Avoid writing overly-specific types</a></li>
 <li class="toctree-l2"><a class="reference internal" href="style-guide.html#handle-excess-argument-diversity-in-the-caller">Handle excess argument diversity in the caller</a></li>
-<li class="toctree-l2"><a class="reference internal" href="style-guide.html#append-to-names-of-functions-that-modify-their-arguments">Append <code class="docutils literal"><span class="pre">!</span></code> to names of functions that modify their arguments</a></li>
+<li class="toctree-l2"><a class="reference internal" href="style-guide.html#append-to-names-of-functions-that-modify-their-arguments">Append <tt class="docutils literal"><span class="pre">!</span></tt> to names of functions that modify their arguments</a></li>
 <li class="toctree-l2"><a class="reference internal" href="style-guide.html#avoid-strange-type-unions">Avoid strange type Unions</a></li>
 <li class="toctree-l2"><a class="reference internal" href="style-guide.html#avoid-type-unions-in-fields">Avoid type Unions in fields</a></li>
 <li class="toctree-l2"><a class="reference internal" href="style-guide.html#avoid-elaborate-container-types">Avoid elaborate container types</a></li>
-<li class="toctree-l2"><a class="reference internal" href="style-guide.html#use-naming-conventions-consistent-with-julia-s-base">Use naming conventions consistent with Julia&#8217;s <code class="docutils literal"><span class="pre">base/</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="style-guide.html#use-naming-conventions-consistent-with-julia-s-base">Use naming conventions consistent with Julia&#8217;s <tt class="docutils literal"><span class="pre">base/</span></tt></a></li>
 <li class="toctree-l2"><a class="reference internal" href="style-guide.html#don-t-overuse-try-catch">Don&#8217;t overuse try-catch</a></li>
 <li class="toctree-l2"><a class="reference internal" href="style-guide.html#don-t-parenthesize-conditions">Don&#8217;t parenthesize conditions</a></li>
 <li class="toctree-l2"><a class="reference internal" href="style-guide.html#don-t-overuse">Don&#8217;t overuse ...</a></li>
@@ -364,7 +365,7 @@
 <li class="toctree-l2"><a class="reference internal" href="style-guide.html#don-t-expose-unsafe-operations-at-the-interface-level">Don&#8217;t expose unsafe operations at the interface level</a></li>
 <li class="toctree-l2"><a class="reference internal" href="style-guide.html#don-t-overload-methods-of-base-container-types">Don&#8217;t overload methods of base container types</a></li>
 <li class="toctree-l2"><a class="reference internal" href="style-guide.html#be-careful-with-type-equality">Be careful with type equality</a></li>
-<li class="toctree-l2"><a class="reference internal" href="style-guide.html#do-not-write-x-f-x">Do not write <code class="docutils literal"><span class="pre">x-&gt;f(x)</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="style-guide.html#do-not-write-x-f-x">Do not write <tt class="docutils literal"><span class="pre">x-&gt;f(x)</span></tt></a></li>
 <li class="toctree-l2"><a class="reference internal" href="style-guide.html#avoid-using-floats-for-numeric-literals-in-generic-code-when-possible">Avoid using floats for numeric literals in generic code when possible</a></li>
 </ul>
 </li>
@@ -401,7 +402,7 @@
 <li class="toctree-l2"><a class="reference internal" href="../devdocs/functions.html">Julia Functions</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../devdocs/callconv.html">Calling Conventions</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../devdocs/cartesian.html">Base.Cartesian</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../devdocs/meta.html">Talking to the compiler (the <code class="docutils literal"><span class="pre">:meta</span></code> mechanism)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../devdocs/meta.html">Talking to the compiler (the <tt class="docutils literal"><span class="pre">:meta</span></tt> mechanism)</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../devdocs/subarrays.html">SubArrays</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../devdocs/sysimg.html">System Image Building</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../devdocs/llvm.html">Working with LLVM</a></li>
@@ -414,6 +415,14 @@
 <li class="toctree-l2"><a class="reference internal" href="../devdocs/backtraces.html">Reporting and analyzing crashes (segfaults)</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../devdocs/debuggingtips.html">gdb debugging tips</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../devdocs/valgrind.html">Using Valgrind with Julia</a></li>
+</ul>
+</li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../phdthesis/chap6.html">결론</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../phdthesis/chap6.html#id2">성능</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../phdthesis/chap6.html#id3">앞으로 할 작업들</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../phdthesis/chap6.html#id4">프로젝트 상황</a></li>
 </ul>
 </li>
 </ul>
@@ -494,8 +503,8 @@ defined and assigned at toplevel will be a <strong>global</strong> variable.</p>
 <p>so all the performance issues discussed previously apply.</p>
 </div>
 <div class="section" id="measure-performance-with-time-and-pay-attention-to-memory-allocation">
-<h2>Measure performance with <code class="xref jl jl-obj docutils literal"><span class="pre">&#64;time</span></code> and pay attention to memory allocation<a class="headerlink" href="#measure-performance-with-time-and-pay-attention-to-memory-allocation" title="Permalink to this headline">¶</a></h2>
-<p>The most useful tool for measuring performance is the <code class="xref jl jl-obj docutils literal"><span class="pre">&#64;time</span></code> macro.
+<h2>Measure performance with <tt class="xref jl jl-obj docutils literal"><span class="pre">&#64;time</span></tt> and pay attention to memory allocation<a class="headerlink" href="#measure-performance-with-time-and-pay-attention-to-memory-allocation" title="Permalink to this headline">¶</a></h2>
+<p>The most useful tool for measuring performance is the <tt class="xref jl jl-obj docutils literal"><span class="pre">&#64;time</span></tt> macro.
 The following example illustrates good working style:</p>
 <div class="highlight-julia"><div class="highlight"><pre><span class="n">julia</span><span class="o">&gt;</span> <span class="k">function</span><span class="nf"> f</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
            <span class="n">s</span> <span class="o">=</span> <span class="mi">0</span>
@@ -515,13 +524,13 @@ The following example illustrates good working style:</p>
 <span class="mf">2.5000025e11</span>
 </pre></div>
 </div>
-<p>On the first call (<code class="docutils literal"><span class="pre">&#64;time</span> <span class="pre">f(1)</span></code>), <code class="docutils literal"><span class="pre">f</span></code> gets compiled.  (If you&#8217;ve
-not yet used <code class="xref jl jl-obj docutils literal"><span class="pre">&#64;time</span></code> in this session, it will also compile functions
+<p>On the first call (<tt class="docutils literal"><span class="pre">&#64;time</span> <span class="pre">f(1)</span></tt>), <tt class="docutils literal"><span class="pre">f</span></tt> gets compiled.  (If you&#8217;ve
+not yet used <tt class="xref jl jl-obj docutils literal"><span class="pre">&#64;time</span></tt> in this session, it will also compile functions
 needed for timing.)  You should not take the results of this run
 seriously. For the second run, note that in addition to reporting the
 time, it also indicated that a large amount of memory was allocated.
-This is the single biggest advantage of <code class="xref jl jl-obj docutils literal"><span class="pre">&#64;time</span></code> vs. functions like
-<code class="xref jl jl-func docutils literal"><span class="pre">tic()</span></code> and <code class="xref jl jl-func docutils literal"><span class="pre">toc()</span></code>, which only report time.</p>
+This is the single biggest advantage of <tt class="xref jl jl-obj docutils literal"><span class="pre">&#64;time</span></tt> vs. functions like
+<tt class="xref jl jl-func docutils literal"><span class="pre">tic()</span></tt> and <tt class="xref jl jl-func docutils literal"><span class="pre">toc()</span></tt>, which only report time.</p>
 <p>Unexpected memory allocation is almost always a sign of some problem
 with your code, usually a problem with type-stability. Consequently,
 in addition to the allocation itself, it&#8217;s very likely that the code
@@ -539,33 +548,33 @@ an order of magnitude faster execution after the first call:</p>
 <span class="mf">2.5000025e11</span>
 </pre></div>
 </div>
-<p>Below you&#8217;ll learn how to spot the problem with <code class="docutils literal"><span class="pre">f</span></code> and how to fix it.</p>
+<p>Below you&#8217;ll learn how to spot the problem with <tt class="docutils literal"><span class="pre">f</span></tt> and how to fix it.</p>
 <p>In some situations, your function may need to allocate memory as part
 of its operation, and this can complicate the simple picture above. In
-such cases, consider using one of the <a class="reference internal" href="#man-performance-tools"><span>tools</span></a> below to diagnose problems, or write a
+such cases, consider using one of the <a class="reference internal" href="#man-performance-tools"><em>tools</em></a> below to diagnose problems, or write a
 version of your function that separates allocation from its
-algorithmic aspects (see <a class="reference internal" href="#man-preallocation"><span>Pre-allocating outputs</span></a>).</p>
+algorithmic aspects (see <a class="reference internal" href="#man-preallocation"><em>Pre-allocating outputs</em></a>).</p>
 </div>
 <div class="section" id="tools">
 <span id="man-performance-tools"></span><h2>Tools<a class="headerlink" href="#tools" title="Permalink to this headline">¶</a></h2>
 <p>Julia and its package ecosystem includes tools that may help you
 diagnose problems and improve the performance of your code:</p>
 <ul class="simple">
-<li><span class="xref std std-ref">stdlib-profiling</span> allows you to measure the performance of
+<li><em class="xref std std-ref">stdlib-profiling</em> allows you to measure the performance of
 your running code and identify lines that serve as bottlenecks.  For
 complex projects, the <a class="reference external" href="https://github.com/timholy/ProfileView.jl">ProfileView</a> package can help you
 visualize your profiling results.</li>
-<li>Unexpectedly-large memory allocations&#8212;as reported by <code class="xref jl jl-obj docutils literal"><span class="pre">&#64;time</span></code>,
-<code class="xref jl jl-obj docutils literal"><span class="pre">&#64;allocated</span></code>, or the profiler (through calls to the
+<li>Unexpectedly-large memory allocations&#8212;as reported by <tt class="xref jl jl-obj docutils literal"><span class="pre">&#64;time</span></tt>,
+<tt class="xref jl jl-obj docutils literal"><span class="pre">&#64;allocated</span></tt>, or the profiler (through calls to the
 garbage-collection routines)&#8212;hint that there might be issues with
 your code.  If you don&#8217;t see another reason for the allocations,
 suspect a type problem.  You can also start Julia with the
-<code class="docutils literal"><span class="pre">--track-allocation=user</span></code> option and examine the resulting
-<code class="docutils literal"><span class="pre">*.mem</span></code> files to see information about where those allocations
-occur.  See <a class="reference internal" href="profile.html#man-track-allocation"><span>Memory allocation analysis</span></a>.</li>
-<li><code class="docutils literal"><span class="pre">&#64;code_warntype</span></code> generates a representation of your code that can
+<tt class="docutils literal"><span class="pre">--track-allocation=user</span></tt> option and examine the resulting
+<tt class="docutils literal"><span class="pre">*.mem</span></tt> files to see information about where those allocations
+occur.  See <a class="reference internal" href="profile.html#man-track-allocation"><em>Memory allocation analysis</em></a>.</li>
+<li><tt class="docutils literal"><span class="pre">&#64;code_warntype</span></tt> generates a representation of your code that can
 be helpful in finding expressions that result in type uncertainty.
-See <a class="reference internal" href="#man-code-warntype"><span>&#64;code_warntype</span></a> below.</li>
+See <a class="reference internal" href="#man-code-warntype"><em>&#64;code_warntype</em></a> below.</li>
 <li>The <a class="reference external" href="https://github.com/tonyhffong/Lint.jl">Lint</a> and <a class="reference external" href="https://github.com/astrieanna/TypeCheck.jl">TypeCheck</a> packages can also
 warn you of certain types of programming errors.</li>
 </ul>
@@ -581,17 +590,17 @@ avoid parameterizing with abstract types where possible.</p>
 <span class="k">end</span>
 </pre></div>
 </div>
-<p>Because <code class="docutils literal"><span class="pre">a</span></code> is a an array of abstract type <code class="xref jl jl-class docutils literal"><span class="pre">Real</span></code>, it must be able
-to hold any Real value.  Since <code class="xref jl jl-class docutils literal"><span class="pre">Real</span></code> objects can be of arbitrary
-size and structure, <code class="docutils literal"><span class="pre">a</span></code> must be represented as an array of pointers to
-individually allocated <code class="xref jl jl-class docutils literal"><span class="pre">Real</span></code> objects.  Because <code class="docutils literal"><span class="pre">f</span></code> will always be
-a <code class="xref jl jl-class docutils literal"><span class="pre">Float64</span></code>, we should instead, use:</p>
+<p>Because <tt class="docutils literal"><span class="pre">a</span></tt> is a an array of abstract type <tt class="xref jl jl-class docutils literal"><span class="pre">Real</span></tt>, it must be able
+to hold any Real value.  Since <tt class="xref jl jl-class docutils literal"><span class="pre">Real</span></tt> objects can be of arbitrary
+size and structure, <tt class="docutils literal"><span class="pre">a</span></tt> must be represented as an array of pointers to
+individually allocated <tt class="xref jl jl-class docutils literal"><span class="pre">Real</span></tt> objects.  Because <tt class="docutils literal"><span class="pre">f</span></tt> will always be
+a <tt class="xref jl jl-class docutils literal"><span class="pre">Float64</span></tt>, we should instead, use:</p>
 <div class="highlight-julia"><div class="highlight"><pre><span class="n">a</span> <span class="o">=</span> <span class="kt">Float64</span><span class="p">[]</span> <span class="c"># typeof(a) = Array{Float64,1}</span>
 </pre></div>
 </div>
 <p>which will create a contiguous block of 64-bit floating-point values
 that can be manipulated efficiently.</p>
-<p>See also the discussion under <a class="reference internal" href="types.html#man-parametric-types"><span>Parametric Types</span></a>.</p>
+<p>See also the discussion under <a class="reference internal" href="types.html#man-parametric-types"><em>Parametric Types</em></a>.</p>
 </div>
 <div class="section" id="type-declarations">
 <h2>Type declarations<a class="headerlink" href="#type-declarations" title="Permalink to this headline">¶</a></h2>
@@ -609,12 +618,12 @@ helpful.</p>
        <span class="k">end</span>
 </pre></div>
 </div>
-<p>This allows <code class="docutils literal"><span class="pre">a</span></code> to be of any type. This can often be useful, but it
-does have a downside: for objects of type <code class="docutils literal"><span class="pre">MyAmbiguousType</span></code>, the
+<p>This allows <tt class="docutils literal"><span class="pre">a</span></tt> to be of any type. This can often be useful, but it
+does have a downside: for objects of type <tt class="docutils literal"><span class="pre">MyAmbiguousType</span></tt>, the
 compiler will not be able to generate high-performance code.  The
 reason is that the compiler uses the types of objects, not their
 values, to determine how to build code. Unfortunately, very little can
-be inferred about an object of type <code class="docutils literal"><span class="pre">MyAmbiguousType</span></code>:</p>
+be inferred about an object of type <tt class="docutils literal"><span class="pre">MyAmbiguousType</span></tt>:</p>
 <div class="highlight-julia"><div class="highlight"><pre><span class="n">julia</span><span class="o">&gt;</span> <span class="n">b</span> <span class="o">=</span> <span class="n">MyAmbiguousType</span><span class="p">(</span><span class="s">&quot;Hello&quot;</span><span class="p">)</span>
 <span class="n">MyAmbiguousType</span><span class="p">(</span><span class="s">&quot;Hello&quot;</span><span class="p">)</span>
 
@@ -628,16 +637,16 @@ be inferred about an object of type <code class="docutils literal"><span class="
 <span class="n">MyAmbiguousType</span>
 </pre></div>
 </div>
-<p><code class="docutils literal"><span class="pre">b</span></code> and <code class="docutils literal"><span class="pre">c</span></code> have the same type, yet their underlying
+<p><tt class="docutils literal"><span class="pre">b</span></tt> and <tt class="docutils literal"><span class="pre">c</span></tt> have the same type, yet their underlying
 representation of data in memory is very different. Even if you stored
-just numeric values in field <code class="docutils literal"><span class="pre">a</span></code>, the fact that the memory
-representation of a <code class="docutils literal"><span class="pre">UInt8</span></code> differs from a <code class="docutils literal"><span class="pre">Float64</span></code> also means
+just numeric values in field <tt class="docutils literal"><span class="pre">a</span></tt>, the fact that the memory
+representation of a <tt class="docutils literal"><span class="pre">UInt8</span></tt> differs from a <tt class="docutils literal"><span class="pre">Float64</span></tt> also means
 that the CPU needs to handle them using two different kinds of
 instructions.  Since the required information is not available in the
 type, such decisions have to be made at run-time. This slows
 performance.</p>
-<p>You can do better by declaring the type of <code class="docutils literal"><span class="pre">a</span></code>. Here, we are focused
-on the case where <code class="docutils literal"><span class="pre">a</span></code> might be any one of several types, in which
+<p>You can do better by declaring the type of <tt class="docutils literal"><span class="pre">a</span></tt>. Here, we are focused
+on the case where <tt class="docutils literal"><span class="pre">a</span></tt> might be any one of several types, in which
 case the natural solution is to use parameters. For example:</p>
 <div class="highlight-julia"><div class="highlight"><pre><span class="n">julia</span><span class="o">&gt;</span> <span class="k">type</span><span class="nc"> MyType</span><span class="p">{</span><span class="n">T</span><span class="o">&lt;:</span><span class="n">AbstractFloat</span><span class="p">}</span>
          <span class="n">a</span><span class="p">::</span><span class="n">T</span>
@@ -650,7 +659,7 @@ case the natural solution is to use parameters. For example:</p>
        <span class="k">end</span>
 </pre></div>
 </div>
-<p>because the first version specifies the type of <code class="docutils literal"><span class="pre">a</span></code> from the type of
+<p>because the first version specifies the type of <tt class="docutils literal"><span class="pre">a</span></tt> from the type of
 the wrapper object.  For example:</p>
 <div class="highlight-julia"><div class="highlight"><pre><span class="n">julia</span><span class="o">&gt;</span> <span class="n">m</span> <span class="o">=</span> <span class="n">MyType</span><span class="p">(</span><span class="mf">3.2</span><span class="p">)</span>
 <span class="n">MyType</span><span class="p">{</span><span class="kt">Float64</span><span class="p">}(</span><span class="mf">3.2</span><span class="p">)</span>
@@ -665,9 +674,9 @@ the wrapper object.  For example:</p>
 <span class="n">MyStillAmbiguousType</span>
 </pre></div>
 </div>
-<p>The type of field <code class="docutils literal"><span class="pre">a</span></code> can be readily determined from the type of
-<code class="docutils literal"><span class="pre">m</span></code>, but not from the type of <code class="docutils literal"><span class="pre">t</span></code>.  Indeed, in <code class="docutils literal"><span class="pre">t</span></code> it&#8217;s possible
-to change the type of field <code class="docutils literal"><span class="pre">a</span></code>:</p>
+<p>The type of field <tt class="docutils literal"><span class="pre">a</span></tt> can be readily determined from the type of
+<tt class="docutils literal"><span class="pre">m</span></tt>, but not from the type of <tt class="docutils literal"><span class="pre">t</span></tt>.  Indeed, in <tt class="docutils literal"><span class="pre">t</span></tt> it&#8217;s possible
+to change the type of field <tt class="docutils literal"><span class="pre">a</span></tt>:</p>
 <div class="highlight-julia"><div class="highlight"><pre><span class="n">julia</span><span class="o">&gt;</span> <span class="nb">typeof</span><span class="p">(</span><span class="n">t</span><span class="o">.</span><span class="n">a</span><span class="p">)</span>
 <span class="kt">Float64</span>
 
@@ -678,7 +687,7 @@ to change the type of field <code class="docutils literal"><span class="pre">a</
 <span class="kt">Float32</span>
 </pre></div>
 </div>
-<p>In contrast, once <code class="docutils literal"><span class="pre">m</span></code> is constructed, the type of <code class="docutils literal"><span class="pre">m.a</span></code> cannot
+<p>In contrast, once <tt class="docutils literal"><span class="pre">m</span></tt> is constructed, the type of <tt class="docutils literal"><span class="pre">m.a</span></tt> cannot
 change:</p>
 <div class="highlight-julia"><div class="highlight"><pre><span class="n">julia</span><span class="o">&gt;</span> <span class="n">m</span><span class="o">.</span><span class="n">a</span> <span class="o">=</span> <span class="mf">4.5f0</span>
 <span class="mf">4.5</span>
@@ -687,11 +696,11 @@ change:</p>
 <span class="kt">Float64</span>
 </pre></div>
 </div>
-<p>The fact that the type of <code class="docutils literal"><span class="pre">m.a</span></code> is known from <code class="docutils literal"><span class="pre">m</span></code>&#8216;s type&#8212;coupled
+<p>The fact that the type of <tt class="docutils literal"><span class="pre">m.a</span></tt> is known from <tt class="docutils literal"><span class="pre">m</span></tt>&#8216;s type&#8212;coupled
 with the fact that its type cannot change mid-function&#8212;allows the
-compiler to generate highly-optimized code for objects like <code class="docutils literal"><span class="pre">m</span></code> but
-not for objects like <code class="docutils literal"><span class="pre">t</span></code>.</p>
-<p>Of course, all of this is true only if we construct <code class="docutils literal"><span class="pre">m</span></code> with a
+compiler to generate highly-optimized code for objects like <tt class="docutils literal"><span class="pre">m</span></tt> but
+not for objects like <tt class="docutils literal"><span class="pre">t</span></tt>.</p>
+<p>Of course, all of this is true only if we construct <tt class="docutils literal"><span class="pre">m</span></tt> with a
 concrete type.  We can break this by explicitly constructing it with
 an abstract type:</p>
 <div class="highlight-julia"><div class="highlight"><pre><span class="n">julia</span><span class="o">&gt;</span> <span class="n">m</span> <span class="o">=</span> <span class="n">MyType</span><span class="p">{</span><span class="n">AbstractFloat</span><span class="p">}(</span><span class="mf">3.2</span><span class="p">)</span>
@@ -708,7 +717,7 @@ an abstract type:</p>
 </pre></div>
 </div>
 <p>For all practical purposes, such objects behave identically to those
-of <code class="docutils literal"><span class="pre">MyStillAmbiguousType</span></code>.</p>
+of <tt class="docutils literal"><span class="pre">MyStillAmbiguousType</span></tt>.</p>
 <p>It&#8217;s quite instructive to compare the sheer amount code generated for
 a simple function</p>
 <div class="highlight-julia"><div class="highlight"><pre><span class="n">func</span><span class="p">(</span><span class="n">m</span><span class="p">::</span><span class="n">MyType</span><span class="p">)</span> <span class="o">=</span> <span class="n">m</span><span class="o">.</span><span class="n">a</span><span class="o">+</span><span class="mi">1</span>
@@ -759,13 +768,13 @@ type at run-time.  This results in shorter and faster code.</p>
 <span class="n">MyAmbiguousContainer</span><span class="p">{</span><span class="kt">Int64</span><span class="p">}</span>
 </pre></div>
 </div>
-<p>For <code class="docutils literal"><span class="pre">MySimpleContainer</span></code>, the object is fully-specified by its type
+<p>For <tt class="docutils literal"><span class="pre">MySimpleContainer</span></tt>, the object is fully-specified by its type
 and parameters, so the compiler can generate optimized functions. In
 most instances, this will probably suffice.</p>
 <p>While the compiler can now do its job perfectly well, there are cases
 where <em>you</em> might wish that your code could do different things
-depending on the <em>element type</em> of <code class="docutils literal"><span class="pre">a</span></code>.  Usually the best way to
-achieve this is to wrap your specific operation (here, <code class="docutils literal"><span class="pre">foo</span></code>) in a
+depending on the <em>element type</em> of <tt class="docutils literal"><span class="pre">a</span></tt>.  Usually the best way to
+achieve this is to wrap your specific operation (here, <tt class="docutils literal"><span class="pre">foo</span></tt>) in a
 separate function:</p>
 <div class="highlight-julia"><div class="highlight"><pre><span class="k">function</span><span class="nf"> sumfoo</span><span class="p">(</span><span class="n">c</span><span class="p">::</span><span class="n">MySimpleContainer</span><span class="p">)</span>
     <span class="n">s</span> <span class="o">=</span> <span class="mi">0</span>
@@ -783,7 +792,7 @@ separate function:</p>
 optimized code in all cases.</p>
 <p>However, there are cases where you may need to declare different
 versions of the outer function for different element types of
-<code class="docutils literal"><span class="pre">a</span></code>. You could do it like this:</p>
+<tt class="docutils literal"><span class="pre">a</span></tt>. You could do it like this:</p>
 <div class="highlight-julia"><div class="highlight"><pre><span class="k">function</span><span class="nf"> myfun</span><span class="p">{</span><span class="n">T</span><span class="o">&lt;:</span><span class="n">AbstractFloat</span><span class="p">}(</span><span class="n">c</span><span class="p">::</span><span class="n">MySimpleContainer</span><span class="p">{</span><span class="n">Vector</span><span class="p">{</span><span class="n">T</span><span class="p">}})</span>
     <span class="o">...</span>
 <span class="k">end</span>
@@ -792,10 +801,10 @@ versions of the outer function for different element types of
 <span class="k">end</span>
 </pre></div>
 </div>
-<p>This works fine for <code class="docutils literal"><span class="pre">Vector{T}</span></code>, but we&#8217;d also have to write
-explicit versions for <code class="docutils literal"><span class="pre">UnitRange{T}</span></code> or other abstract types. To
+<p>This works fine for <tt class="docutils literal"><span class="pre">Vector{T}</span></tt>, but we&#8217;d also have to write
+explicit versions for <tt class="docutils literal"><span class="pre">UnitRange{T}</span></tt> or other abstract types. To
 prevent such tedium, you can use two parameters in the declaration of
-<code class="docutils literal"><span class="pre">MyContainer</span></code>:</p>
+<tt class="docutils literal"><span class="pre">MyContainer</span></tt>:</p>
 <div class="highlight-julia"><div class="highlight"><pre><span class="k">type</span><span class="nc"> MyContainer</span><span class="p">{</span><span class="n">T</span><span class="p">,</span> <span class="n">A</span><span class="o">&lt;:</span><span class="n">AbstractVector</span><span class="p">}</span>
     <span class="n">a</span><span class="p">::</span><span class="n">A</span>
 <span class="k">end</span>
@@ -807,8 +816,8 @@ prevent such tedium, you can use two parameters in the declaration of
 <span class="n">MyContainer</span><span class="p">{</span><span class="kt">Float64</span><span class="p">,</span><span class="n">UnitRange</span><span class="p">{</span><span class="kt">Float64</span><span class="p">}}</span>
 </pre></div>
 </div>
-<p>Note the somewhat surprising fact that <code class="docutils literal"><span class="pre">T</span></code> doesn&#8217;t appear in the
-declaration of field <code class="docutils literal"><span class="pre">a</span></code>, a point that we&#8217;ll return to in a moment.
+<p>Note the somewhat surprising fact that <tt class="docutils literal"><span class="pre">T</span></tt> doesn&#8217;t appear in the
+declaration of field <tt class="docutils literal"><span class="pre">a</span></tt>, a point that we&#8217;ll return to in a moment.
 With this approach, one can write functions such as:</p>
 <div class="highlight-julia"><div class="highlight"><pre><span class="k">function</span><span class="nf"> myfunc</span><span class="p">{</span><span class="n">T</span><span class="o">&lt;:</span><span class="n">Integer</span><span class="p">,</span> <span class="n">A</span><span class="o">&lt;:</span><span class="n">AbstractArray</span><span class="p">}(</span><span class="n">c</span><span class="p">::</span><span class="n">MyContainer</span><span class="p">{</span><span class="n">T</span><span class="p">,</span><span class="n">A</span><span class="p">})</span>
     <span class="k">return</span> <span class="n">c</span><span class="o">.</span><span class="n">a</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">+</span><span class="mi">1</span>
@@ -837,9 +846,9 @@ With this approach, one can write functions such as:</p>
 </pre></div>
 </div>
 <p>As you can see, with this approach it&#8217;s possible to specialize on both
-the element type <code class="docutils literal"><span class="pre">T</span></code> and the array type <code class="docutils literal"><span class="pre">A</span></code>.</p>
-<p>However, there&#8217;s one remaining hole: we haven&#8217;t enforced that <code class="docutils literal"><span class="pre">A</span></code>
-has element type <code class="docutils literal"><span class="pre">T</span></code>, so it&#8217;s perfectly possible to construct an
+the element type <tt class="docutils literal"><span class="pre">T</span></tt> and the array type <tt class="docutils literal"><span class="pre">A</span></tt>.</p>
+<p>However, there&#8217;s one remaining hole: we haven&#8217;t enforced that <tt class="docutils literal"><span class="pre">A</span></tt>
+has element type <tt class="docutils literal"><span class="pre">T</span></tt>, so it&#8217;s perfectly possible to construct an
 object like this:</p>
 <div class="highlight-julia"><div class="highlight"><pre><span class="n">julia</span><span class="o">&gt;</span> <span class="n">b</span> <span class="o">=</span> <span class="n">MyContainer</span><span class="p">{</span><span class="kt">Int64</span><span class="p">,</span> <span class="n">UnitRange</span><span class="p">{</span><span class="kt">Float64</span><span class="p">}}(</span><span class="mf">1.3</span><span class="p">:</span><span class="mi">5</span><span class="p">);</span>
 
@@ -865,13 +874,13 @@ object like this:</p>
 <span class="n">ERROR</span><span class="p">:</span> <span class="n">no</span> <span class="n">method</span> <span class="n">MyBetterContainer</span><span class="p">(</span><span class="n">UnitRange</span><span class="p">{</span><span class="kt">Float64</span><span class="p">},)</span>
 </pre></div>
 </div>
-<p>The inner constructor requires that the element type of <code class="docutils literal"><span class="pre">A</span></code> be <code class="docutils literal"><span class="pre">T</span></code>.</p>
+<p>The inner constructor requires that the element type of <tt class="docutils literal"><span class="pre">A</span></tt> be <tt class="docutils literal"><span class="pre">T</span></tt>.</p>
 </div>
 <div class="section" id="annotate-values-taken-from-untyped-locations">
 <h3>Annotate values taken from untyped locations<a class="headerlink" href="#annotate-values-taken-from-untyped-locations" title="Permalink to this headline">¶</a></h3>
 <p>It is often convenient to work with data structures that may contain
 values of any type, such as cell
-arrays (arrays of type <code class="docutils literal"><span class="pre">Array{Any}</span></code>). But, if you&#8217;re using one of
+arrays (arrays of type <tt class="docutils literal"><span class="pre">Array{Any}</span></tt>). But, if you&#8217;re using one of
 these structures and happen to know the type of an element, it helps to
 share this knowledge with the compiler:</p>
 <div class="highlight-julia"><div class="highlight"><pre><span class="k">function</span><span class="nf"> foo</span><span class="p">(</span><span class="n">a</span><span class="p">::</span><span class="n">Array</span><span class="p">{</span><span class="kt">Any</span><span class="p">,</span><span class="mi">1</span><span class="p">})</span>
@@ -881,8 +890,8 @@ share this knowledge with the compiler:</p>
 <span class="k">end</span>
 </pre></div>
 </div>
-<p>Here, we happened to know that the first element of <code class="docutils literal"><span class="pre">a</span></code> would be an
-<code class="xref jl jl-class docutils literal"><span class="pre">Int32</span></code>. Making an annotation like this has the added benefit that it
+<p>Here, we happened to know that the first element of <tt class="docutils literal"><span class="pre">a</span></tt> would be an
+<tt class="xref jl jl-class docutils literal"><span class="pre">Int32</span></tt>. Making an annotation like this has the added benefit that it
 will raise a run-time error if the value is not of the expected type,
 potentially catching certain bugs earlier.</p>
 </div>
@@ -900,7 +909,7 @@ However, they will reduce the overhead of calls to the function that
 include keyword arguments.</p>
 <p>Functions with keyword arguments have near-zero overhead for call sites
 that pass only positional arguments.</p>
-<p>Passing dynamic lists of keyword arguments, as in <code class="docutils literal"><span class="pre">f(x;</span> <span class="pre">keywords...)</span></code>,
+<p>Passing dynamic lists of keyword arguments, as in <tt class="docutils literal"><span class="pre">f(x;</span> <span class="pre">keywords...)</span></tt>,
 can be slow and should be avoided in performance-sensitive code.</p>
 </div>
 </div>
@@ -934,16 +943,16 @@ of the same type. Consider the following definition:</p>
 <div class="highlight-julia"><div class="highlight"><pre><span class="n">pos</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="o">=</span> <span class="n">x</span> <span class="o">&lt;</span> <span class="mi">0</span> <span class="o">?</span> <span class="mi">0</span> <span class="p">:</span> <span class="n">x</span>
 </pre></div>
 </div>
-<p>Although this seems innocent enough, the problem is that <code class="docutils literal"><span class="pre">0</span></code> is an
-integer (of type <code class="xref jl jl-class docutils literal"><span class="pre">Int</span></code>) and <code class="docutils literal"><span class="pre">x</span></code> might be of any type. Thus,
-depending on the value of <code class="docutils literal"><span class="pre">x</span></code>, this function might return a value of
+<p>Although this seems innocent enough, the problem is that <tt class="docutils literal"><span class="pre">0</span></tt> is an
+integer (of type <tt class="xref jl jl-class docutils literal"><span class="pre">Int</span></tt>) and <tt class="docutils literal"><span class="pre">x</span></tt> might be of any type. Thus,
+depending on the value of <tt class="docutils literal"><span class="pre">x</span></tt>, this function might return a value of
 either of two types. This behavior is allowed, and may be desirable in
 some cases. But it can easily be fixed as follows:</p>
 <div class="highlight-julia"><div class="highlight"><pre><span class="n">pos</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="o">=</span> <span class="n">x</span> <span class="o">&lt;</span> <span class="mi">0</span> <span class="o">?</span> <span class="n">zero</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="p">:</span> <span class="n">x</span>
 </pre></div>
 </div>
-<p>There is also a <code class="xref jl jl-func docutils literal"><span class="pre">one()</span></code> function, and a more general <code class="xref jl jl-func docutils literal"><span class="pre">oftype(x,y)</span></code>
-function, which returns <code class="docutils literal"><span class="pre">y</span></code> converted to the type of <code class="docutils literal"><span class="pre">x</span></code>.</p>
+<p>There is also a <tt class="xref jl jl-func docutils literal"><span class="pre">one()</span></tt> function, and a more general <tt class="xref jl jl-func docutils literal"><span class="pre">oftype(x,y)</span></tt>
+function, which returns <tt class="docutils literal"><span class="pre">y</span></tt> converted to the type of <tt class="docutils literal"><span class="pre">x</span></tt>.</p>
 </div>
 <div class="section" id="avoid-changing-the-type-of-a-variable">
 <h2>Avoid changing the type of a variable<a class="headerlink" href="#avoid-changing-the-type-of-a-variable" title="Permalink to this headline">¶</a></h2>
@@ -958,14 +967,14 @@ repeatedly within a function:</p>
 <span class="k">end</span>
 </pre></div>
 </div>
-<p>Local variable <code class="docutils literal"><span class="pre">x</span></code> starts as an integer, and after one loop iteration
-becomes a floating-point number (the result of <code class="xref jl jl-obj docutils literal"><span class="pre">/</span></code> operator). This
+<p>Local variable <tt class="docutils literal"><span class="pre">x</span></tt> starts as an integer, and after one loop iteration
+becomes a floating-point number (the result of <tt class="xref jl jl-obj docutils literal"><span class="pre">/</span></tt> operator). This
 makes it more difficult for the compiler to optimize the body of the
 loop. There are several possible fixes:</p>
 <ul class="simple">
-<li>Initialize <code class="docutils literal"><span class="pre">x</span></code> with <code class="docutils literal"><span class="pre">x</span> <span class="pre">=</span> <span class="pre">1.0</span></code></li>
-<li>Declare the type of <code class="docutils literal"><span class="pre">x</span></code>: <code class="docutils literal"><span class="pre">x::Float64</span> <span class="pre">=</span> <span class="pre">1</span></code></li>
-<li>Use an explicit conversion: <code class="docutils literal"><span class="pre">x</span> <span class="pre">=</span> <span class="pre">one(T)</span></code></li>
+<li>Initialize <tt class="docutils literal"><span class="pre">x</span></tt> with <tt class="docutils literal"><span class="pre">x</span> <span class="pre">=</span> <span class="pre">1.0</span></tt></li>
+<li>Declare the type of <tt class="docutils literal"><span class="pre">x</span></tt>: <tt class="docutils literal"><span class="pre">x::Float64</span> <span class="pre">=</span> <span class="pre">1</span></tt></li>
+<li>Use an explicit conversion: <tt class="docutils literal"><span class="pre">x</span> <span class="pre">=</span> <span class="pre">one(T)</span></tt></li>
 </ul>
 </div>
 <div class="section" id="separate-kernel-functions">
@@ -1000,17 +1009,17 @@ randomly-chosen type:</p>
 </div>
 <p>Julia&#8217;s compiler specializes code for argument types at function
 boundaries, so in the original implementation it does not know the type
-of <code class="docutils literal"><span class="pre">a</span></code> during the loop (since it is chosen randomly). Therefore the
+of <tt class="docutils literal"><span class="pre">a</span></tt> during the loop (since it is chosen randomly). Therefore the
 second version is generally faster since the inner loop can be
-recompiled as part of <code class="docutils literal"><span class="pre">fill_twos!</span></code> for different types of <code class="docutils literal"><span class="pre">a</span></code>.</p>
+recompiled as part of <tt class="docutils literal"><span class="pre">fill_twos!</span></tt> for different types of <tt class="docutils literal"><span class="pre">a</span></tt>.</p>
 <p>The second form is also often better style and can lead to more code
 reuse.</p>
 <p>This pattern is used in several places in the standard library. For
-example, see <code class="docutils literal"><span class="pre">hvcat_fill</span></code> in
+example, see <tt class="docutils literal"><span class="pre">hvcat_fill</span></tt> in
 <a class="reference external" href="https://github.com/JuliaLang/julia/blob/master/base/abstractarray.jl">abstractarray.jl</a>,
-or the <code class="docutils literal"><span class="pre">fill!</span></code> function, which we could have used instead of writing
-our own <code class="docutils literal"><span class="pre">fill_twos!</span></code>.</p>
-<p>Functions like <code class="docutils literal"><span class="pre">strange_twos</span></code> occur when dealing with data of
+or the <tt class="docutils literal"><span class="pre">fill!</span></tt> function, which we could have used instead of writing
+our own <tt class="docutils literal"><span class="pre">fill_twos!</span></tt>.</p>
+<p>Functions like <tt class="docutils literal"><span class="pre">strange_twos</span></tt> occur when dealing with data of
 uncertain type, for example data loaded from an input file that might
 contain either integers, floats, strings, or something else.</p>
 </div>
@@ -1018,8 +1027,8 @@ contain either integers, floats, strings, or something else.</p>
 <h2>Access arrays in memory order, along columns<a class="headerlink" href="#access-arrays-in-memory-order-along-columns" title="Permalink to this headline">¶</a></h2>
 <p>Multidimensional arrays in Julia are stored in column-major order. This
 means that arrays are stacked one column at a time. This can be verified
-using the <code class="docutils literal"><span class="pre">vec</span></code> function or the syntax <code class="docutils literal"><span class="pre">[:]</span></code> as shown below (notice
-that the array is ordered <code class="docutils literal"><span class="pre">[1</span> <span class="pre">3</span> <span class="pre">2</span> <span class="pre">4]</span></code>, not <code class="docutils literal"><span class="pre">[1</span> <span class="pre">2</span> <span class="pre">3</span> <span class="pre">4]</span></code>):</p>
+using the <tt class="docutils literal"><span class="pre">vec</span></tt> function or the syntax <tt class="docutils literal"><span class="pre">[:]</span></tt> as shown below (notice
+that the array is ordered <tt class="docutils literal"><span class="pre">[1</span> <span class="pre">3</span> <span class="pre">2</span> <span class="pre">4]</span></tt>, not <tt class="docutils literal"><span class="pre">[1</span> <span class="pre">2</span> <span class="pre">3</span> <span class="pre">4]</span></tt>):</p>
 <div class="highlight-julia"><div class="highlight"><pre><span class="n">julia</span><span class="o">&gt;</span> <span class="n">x</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span> <span class="mi">2</span><span class="p">;</span> <span class="mi">3</span> <span class="mi">4</span><span class="p">]</span>
 <span class="mi">2</span><span class="n">x2</span> <span class="n">Array</span><span class="p">{</span><span class="kt">Int64</span><span class="p">,</span><span class="mi">2</span><span class="p">}:</span>
  <span class="mi">1</span>  <span class="mi">2</span>
@@ -1036,19 +1045,19 @@ that the array is ordered <code class="docutils literal"><span class="pre">[1</s
 <p>This convention for ordering arrays is common in many languages like
 Fortran, Matlab, and R (to name a few). The alternative to column-major
 ordering is row-major ordering, which is the convention adopted by C and
-Python (<code class="docutils literal"><span class="pre">numpy</span></code>) among other languages. Remembering the ordering of
+Python (<tt class="docutils literal"><span class="pre">numpy</span></tt>) among other languages. Remembering the ordering of
 arrays can have significant performance effects when looping over
 arrays. A rule of thumb to keep in mind is that with column-major
 arrays, the first index changes most rapidly. Essentially this means
 that looping will be faster if the inner-most loop index is the first to
 appear in a slice expression.</p>
 <p>Consider the following contrived example. Imagine we wanted to write a
-function that accepts a <code class="xref jl jl-obj docutils literal"><span class="pre">Vector</span></code> and returns a square <code class="xref jl jl-obj docutils literal"><span class="pre">Matrix</span></code>
+function that accepts a <tt class="xref jl jl-obj docutils literal"><span class="pre">Vector</span></tt> and returns a square <tt class="xref jl jl-obj docutils literal"><span class="pre">Matrix</span></tt>
 with either the rows or the columns filled with copies of the input
 vector. Assume that it is not important whether rows or columns are
 filled with these copies (perhaps the rest of the code can be easily
 adapted accordingly). We could conceivably do this in at least four ways
-(in addition to the recommended call to the built-in <code class="xref jl jl-func docutils literal"><span class="pre">repmat()</span></code>):</p>
+(in addition to the recommended call to the built-in <tt class="xref jl jl-func docutils literal"><span class="pre">repmat()</span></tt>):</p>
 <div class="highlight-julia"><div class="highlight"><pre><span class="k">function</span><span class="nf"> copy_cols</span><span class="p">{</span><span class="n">T</span><span class="p">}(</span><span class="n">x</span><span class="p">::</span><span class="n">Vector</span><span class="p">{</span><span class="n">T</span><span class="p">})</span>
     <span class="n">n</span> <span class="o">=</span> <span class="n">size</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
     <span class="n">out</span> <span class="o">=</span> <span class="n">Array</span><span class="p">(</span><span class="n">eltype</span><span class="p">(</span><span class="n">x</span><span class="p">),</span> <span class="n">n</span><span class="p">,</span> <span class="n">n</span><span class="p">)</span>
@@ -1086,8 +1095,8 @@ adapted accordingly). We could conceivably do this in at least four ways
 <span class="k">end</span>
 </pre></div>
 </div>
-<p>Now we will time each of these functions using the same random <code class="docutils literal"><span class="pre">10000</span></code>
-by <code class="docutils literal"><span class="pre">1</span></code> input vector:</p>
+<p>Now we will time each of these functions using the same random <tt class="docutils literal"><span class="pre">10000</span></tt>
+by <tt class="docutils literal"><span class="pre">1</span></tt> input vector:</p>
 <div class="highlight-julia"><div class="highlight"><pre><span class="n">julia</span><span class="o">&gt;</span> <span class="n">x</span> <span class="o">=</span> <span class="n">randn</span><span class="p">(</span><span class="mi">10000</span><span class="p">);</span>
 
 <span class="n">julia</span><span class="o">&gt;</span> <span class="n">fmt</span><span class="p">(</span><span class="n">f</span><span class="p">)</span> <span class="o">=</span> <span class="n">println</span><span class="p">(</span><span class="n">rpad</span><span class="p">(</span><span class="n">string</span><span class="p">(</span><span class="n">f</span><span class="p">)</span><span class="o">*</span><span class="s">&quot;: &quot;</span><span class="p">,</span> <span class="mi">14</span><span class="p">,</span> <span class="sc">&#39; &#39;</span><span class="p">),</span> <span class="p">@</span><span class="n">elapsed</span> <span class="n">f</span><span class="p">(</span><span class="n">x</span><span class="p">))</span>
@@ -1099,10 +1108,10 @@ by <code class="docutils literal"><span class="pre">1</span></code> input vector
 <span class="n">copy_row_col</span><span class="p">:</span> <span class="mf">1.721531501</span>
 </pre></div>
 </div>
-<p>Notice that <code class="docutils literal"><span class="pre">copy_cols</span></code> is much faster than <code class="docutils literal"><span class="pre">copy_rows</span></code>. This is
-expected because <code class="docutils literal"><span class="pre">copy_cols</span></code> respects the column-based memory layout
-of the <code class="xref jl jl-obj docutils literal"><span class="pre">Matrix</span></code> and fills it one column at a time. Additionally,
-<code class="docutils literal"><span class="pre">copy_col_row</span></code> is much faster than <code class="docutils literal"><span class="pre">copy_row_col</span></code> because it follows
+<p>Notice that <tt class="docutils literal"><span class="pre">copy_cols</span></tt> is much faster than <tt class="docutils literal"><span class="pre">copy_rows</span></tt>. This is
+expected because <tt class="docutils literal"><span class="pre">copy_cols</span></tt> respects the column-based memory layout
+of the <tt class="xref jl jl-obj docutils literal"><span class="pre">Matrix</span></tt> and fills it one column at a time. Additionally,
+<tt class="docutils literal"><span class="pre">copy_col_row</span></tt> is much faster than <tt class="docutils literal"><span class="pre">copy_row_col</span></tt> because it follows
 our rule of thumb that the first element to appear in a slice expression
 should be coupled with the inner-most loop.</p>
 </div>
@@ -1160,7 +1169,7 @@ trivial example, compare</p>
 </div>
 <p>Preallocation has other advantages, for example by allowing the
 caller to control the &#8220;output&#8221; type from an algorithm.  In the example
-above, we could have passed a <code class="xref jl jl-class docutils literal"><span class="pre">SubArray</span></code> rather than an <code class="xref jl jl-class docutils literal"><span class="pre">Array</span></code>,
+above, we could have passed a <tt class="xref jl jl-class docutils literal"><span class="pre">SubArray</span></tt> rather than an <tt class="xref jl jl-class docutils literal"><span class="pre">Array</span></tt>,
 had we so desired.</p>
 <p>Taken to its extreme, pre-allocation can make your code uglier, so
 performance measurements and some judgment may be required.</p>
@@ -1208,8 +1217,8 @@ be harder to read. Consider:</p>
 </pre></div>
 </div>
 <p>The former results in a single network round-trip to every worker, while the
-latter results in two network calls - first by the <code class="docutils literal"><span class="pre">&#64;spawnat</span></code> and the
-second due to the <code class="docutils literal"><span class="pre">fetch</span></code> (or even a <code class="docutils literal"><span class="pre">wait</span></code>). The <code class="docutils literal"><span class="pre">fetch</span></code>/<code class="docutils literal"><span class="pre">wait</span></code>
+latter results in two network calls - first by the <tt class="docutils literal"><span class="pre">&#64;spawnat</span></tt> and the
+second due to the <tt class="docutils literal"><span class="pre">fetch</span></tt> (or even a <tt class="docutils literal"><span class="pre">wait</span></tt>). The <tt class="docutils literal"><span class="pre">fetch</span></tt>/<tt class="docutils literal"><span class="pre">wait</span></tt>
 is also being executed serially resulting in an overall poorer performance.</p>
 </div>
 <div class="section" id="fix-deprecation-warnings">
@@ -1223,13 +1232,13 @@ modified as suggested by the warnings.</p>
 <h2>Tweaks<a class="headerlink" href="#tweaks" title="Permalink to this headline">¶</a></h2>
 <p>These are some minor points that might help in tight inner loops.</p>
 <ul class="simple">
-<li>Avoid unnecessary arrays. For example, instead of <code class="xref jl jl-func docutils literal"><span class="pre">sum([x,y,z])</span></code>
-use <code class="docutils literal"><span class="pre">x+y+z</span></code>.</li>
-<li>Use <code class="xref jl jl-func docutils literal"><span class="pre">abs2(z)</span></code> instead of <code class="xref jl jl-func docutils literal"><span class="pre">abs(z)^2</span></code> for complex <code class="docutils literal"><span class="pre">z</span></code>. In general,
-try to rewrite code to use <code class="xref jl jl-func docutils literal"><span class="pre">abs2()</span></code> instead of <code class="xref jl jl-func docutils literal"><span class="pre">abs()</span></code> for complex arguments.</li>
-<li>Use <code class="xref jl jl-func docutils literal"><span class="pre">div(x,y)</span></code> for truncating division of integers instead of
-<code class="xref jl jl-func docutils literal"><span class="pre">trunc(x/y)</span></code>, <code class="xref jl jl-func docutils literal"><span class="pre">fld(x,y)</span></code> instead of <code class="xref jl jl-func docutils literal"><span class="pre">floor(x/y)</span></code>, and
-<code class="xref jl jl-func docutils literal"><span class="pre">cld(x,y)</span></code> instead of <code class="xref jl jl-func docutils literal"><span class="pre">ceil(x/y)</span></code>.</li>
+<li>Avoid unnecessary arrays. For example, instead of <tt class="xref jl jl-func docutils literal"><span class="pre">sum([x,y,z])</span></tt>
+use <tt class="docutils literal"><span class="pre">x+y+z</span></tt>.</li>
+<li>Use <tt class="xref jl jl-func docutils literal"><span class="pre">abs2(z)</span></tt> instead of <tt class="xref jl jl-func docutils literal"><span class="pre">abs(z)^2</span></tt> for complex <tt class="docutils literal"><span class="pre">z</span></tt>. In general,
+try to rewrite code to use <tt class="xref jl jl-func docutils literal"><span class="pre">abs2()</span></tt> instead of <tt class="xref jl jl-func docutils literal"><span class="pre">abs()</span></tt> for complex arguments.</li>
+<li>Use <tt class="xref jl jl-func docutils literal"><span class="pre">div(x,y)</span></tt> for truncating division of integers instead of
+<tt class="xref jl jl-func docutils literal"><span class="pre">trunc(x/y)</span></tt>, <tt class="xref jl jl-func docutils literal"><span class="pre">fld(x,y)</span></tt> instead of <tt class="xref jl jl-func docutils literal"><span class="pre">floor(x/y)</span></tt>, and
+<tt class="xref jl jl-func docutils literal"><span class="pre">cld(x,y)</span></tt> instead of <tt class="xref jl jl-func docutils literal"><span class="pre">ceil(x/y)</span></tt>.</li>
 </ul>
 </div>
 <div class="section" id="performance-annotations">
@@ -1237,22 +1246,22 @@ try to rewrite code to use <code class="xref jl jl-func docutils literal"><span 
 <p>Sometimes you can enable better optimization by promising certain program
 properties.</p>
 <ul class="simple">
-<li>Use <code class="xref jl jl-obj docutils literal"><span class="pre">&#64;inbounds</span></code> to eliminate array bounds checking within expressions.
+<li>Use <tt class="xref jl jl-obj docutils literal"><span class="pre">&#64;inbounds</span></tt> to eliminate array bounds checking within expressions.
 Be certain before doing this. If the subscripts are ever out of bounds,
 you may suffer crashes or silent corruption.</li>
-<li>Use <code class="xref jl jl-obj docutils literal"><span class="pre">&#64;fastmath</span></code> to allow floating point optimizations that are
+<li>Use <tt class="xref jl jl-obj docutils literal"><span class="pre">&#64;fastmath</span></tt> to allow floating point optimizations that are
 correct for real numbers, but lead to differences for IEEE numbers.
 Be careful when doing this, as this may change numerical results.
-This corresponds to the <code class="docutils literal"><span class="pre">-ffast-math</span></code> option of clang.</li>
-<li>Write <code class="xref jl jl-obj docutils literal"><span class="pre">&#64;simd</span></code> in front of <code class="docutils literal"><span class="pre">for</span></code> loops that are amenable to vectorization.
+This corresponds to the <tt class="docutils literal"><span class="pre">-ffast-math</span></tt> option of clang.</li>
+<li>Write <tt class="xref jl jl-obj docutils literal"><span class="pre">&#64;simd</span></tt> in front of <tt class="docutils literal"><span class="pre">for</span></tt> loops that are amenable to vectorization.
 <strong>This feature is experimental</strong> and could change or disappear in future
 versions of Julia.</li>
 </ul>
-<p>Note: While <code class="xref jl jl-obj docutils literal"><span class="pre">&#64;simd</span></code> needs to be placed directly in front of a
-loop, both <code class="xref jl jl-obj docutils literal"><span class="pre">&#64;inbounds</span></code> and <code class="xref jl jl-obj docutils literal"><span class="pre">&#64;fastmath</span></code> can be applied to
-several statements at once, e.g. using <code class="docutils literal"><span class="pre">begin</span></code> ... <code class="docutils literal"><span class="pre">end</span></code>, or even
+<p>Note: While <tt class="xref jl jl-obj docutils literal"><span class="pre">&#64;simd</span></tt> needs to be placed directly in front of a
+loop, both <tt class="xref jl jl-obj docutils literal"><span class="pre">&#64;inbounds</span></tt> and <tt class="xref jl jl-obj docutils literal"><span class="pre">&#64;fastmath</span></tt> can be applied to
+several statements at once, e.g. using <tt class="docutils literal"><span class="pre">begin</span></tt> ... <tt class="docutils literal"><span class="pre">end</span></tt>, or even
 to a whole function.</p>
-<p>Here is an example with both <code class="xref jl jl-obj docutils literal"><span class="pre">&#64;inbounds</span></code> and <code class="xref jl jl-obj docutils literal"><span class="pre">&#64;simd</span></code> markup:</p>
+<p>Here is an example with both <tt class="xref jl jl-obj docutils literal"><span class="pre">&#64;inbounds</span></tt> and <tt class="xref jl jl-obj docutils literal"><span class="pre">&#64;simd</span></tt> markup:</p>
 <div class="highlight-julia"><div class="highlight"><pre><span class="k">function</span><span class="nf"> inner</span><span class="p">(</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span> <span class="p">)</span>
     <span class="n">s</span> <span class="o">=</span> <span class="n">zero</span><span class="p">(</span><span class="n">eltype</span><span class="p">(</span><span class="n">x</span><span class="p">))</span>
     <span class="k">for</span> <span class="n">i</span><span class="o">=</span><span class="mi">1</span><span class="p">:</span><span class="n">length</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
@@ -1291,36 +1300,36 @@ to a whole function.</p>
 <span class="n">GFlop</span> <span class="p">(</span><span class="n">SIMD</span><span class="p">)</span> <span class="o">=</span> <span class="mf">17.578554163920018</span>
 </pre></div>
 </div>
-<p>The range for a <code class="docutils literal"><span class="pre">&#64;simd</span> <span class="pre">for</span></code> loop should be a one-dimensional range.
-A variable used for accumulating, such as <code class="docutils literal"><span class="pre">s</span></code> in the example, is called
-a <em>reduction variable</em>. By using <code class="xref jl jl-obj docutils literal"><span class="pre">&#64;simd</span></code>, you are asserting several
+<p>The range for a <tt class="docutils literal"><span class="pre">&#64;simd</span> <span class="pre">for</span></tt> loop should be a one-dimensional range.
+A variable used for accumulating, such as <tt class="docutils literal"><span class="pre">s</span></tt> in the example, is called
+a <em>reduction variable</em>. By using <tt class="xref jl jl-obj docutils literal"><span class="pre">&#64;simd</span></tt>, you are asserting several
 properties of the loop:</p>
 <ul class="simple">
 <li>It is safe to execute iterations in arbitrary or overlapping order,
 with special consideration for reduction variables.</li>
 <li>Floating-point operations on reduction variables can be reordered,
-possibly causing different results than without <code class="xref jl jl-obj docutils literal"><span class="pre">&#64;simd</span></code>.</li>
+possibly causing different results than without <tt class="xref jl jl-obj docutils literal"><span class="pre">&#64;simd</span></tt>.</li>
 <li>No iteration ever waits on another iteration to make forward progress.</li>
 </ul>
-<p>A loop containing <code class="docutils literal"><span class="pre">break</span></code>, <code class="docutils literal"><span class="pre">continue</span></code>, or <code class="xref jl jl-obj docutils literal"><span class="pre">&#64;goto</span></code> will cause a
+<p>A loop containing <tt class="docutils literal"><span class="pre">break</span></tt>, <tt class="docutils literal"><span class="pre">continue</span></tt>, or <tt class="xref jl jl-obj docutils literal"><span class="pre">&#64;goto</span></tt> will cause a
 compile-time error.</p>
-<p>Using <code class="xref jl jl-obj docutils literal"><span class="pre">&#64;simd</span></code> merely gives the compiler license to vectorize. Whether
+<p>Using <tt class="xref jl jl-obj docutils literal"><span class="pre">&#64;simd</span></tt> merely gives the compiler license to vectorize. Whether
 it actually does so depends on the compiler. To actually benefit from the
 current implementation, your loop should have the following additional
 properties:</p>
 <ul class="simple">
 <li>The loop must be an innermost loop.</li>
-<li>The loop body must be straight-line code. This is why <code class="xref jl jl-obj docutils literal"><span class="pre">&#64;inbounds</span></code> is
+<li>The loop body must be straight-line code. This is why <tt class="xref jl jl-obj docutils literal"><span class="pre">&#64;inbounds</span></tt> is
 currently needed for all array accesses. The compiler can sometimes turn
-short <code class="docutils literal"><span class="pre">&amp;&amp;</span></code>, <code class="docutils literal"><span class="pre">||</span></code>, and <code class="docutils literal"><span class="pre">?:</span></code> expressions into straight-line code,
+short <tt class="docutils literal"><span class="pre">&amp;&amp;</span></tt>, <tt class="docutils literal"><span class="pre">||</span></tt>, and <tt class="docutils literal"><span class="pre">?:</span></tt> expressions into straight-line code,
 if it is safe to evaluate all operands unconditionally. Consider using
-<code class="xref jl jl-func docutils literal"><span class="pre">ifelse()</span></code> instead of <code class="docutils literal"><span class="pre">?:</span></code> in the loop if it is safe to do so.</li>
+<tt class="xref jl jl-func docutils literal"><span class="pre">ifelse()</span></tt> instead of <tt class="docutils literal"><span class="pre">?:</span></tt> in the loop if it is safe to do so.</li>
 <li>Accesses must have a stride pattern and cannot be &#8220;gathers&#8221; (random-index reads)
 or &#8220;scatters&#8221; (random-index writes).</li>
 <li>The stride should be unit stride.</li>
 <li>In some simple cases, for example with 2-3 arrays accessed in a loop, the
 LLVM auto-vectorization may kick in automatically, leading to no further
-speedup with <code class="xref jl jl-obj docutils literal"><span class="pre">&#64;simd</span></code>.</li>
+speedup with <tt class="xref jl jl-obj docutils literal"><span class="pre">&#64;simd</span></tt>.</li>
 </ul>
 <p>Here is an example with all three kinds of markup. This program first
 calculates the finite difference of a one-dimensional array, and then
@@ -1383,9 +1392,9 @@ evaluates the L2-norm of the result:</p>
 <span class="mf">4.443986180758243</span>
 </pre></div>
 </div>
-<p>Here, the option <code class="docutils literal"><span class="pre">--math-mode=ieee</span></code> disables the <code class="xref jl jl-obj docutils literal"><span class="pre">&#64;fastmath</span></code>
+<p>Here, the option <tt class="docutils literal"><span class="pre">--math-mode=ieee</span></tt> disables the <tt class="xref jl jl-obj docutils literal"><span class="pre">&#64;fastmath</span></tt>
 macro, so that we can compare results.</p>
-<p>In this case, the speedup due to <code class="xref jl jl-obj docutils literal"><span class="pre">&#64;fastmath</span></code> is a factor of about
+<p>In this case, the speedup due to <tt class="xref jl jl-obj docutils literal"><span class="pre">&#64;fastmath</span></tt> is a factor of about
 3.7. This is unusually large &#8211; in general, the speedup will be
 smaller. (In this particular example, the working set of the benchmark
 is small enough to fit into the L1 cache of the processor, so that
@@ -1395,27 +1404,27 @@ case.) Also, in this case this optimization does not change the result
 &#8211; in general, the result will be slightly different. In some cases,
 especially for numerically unstable algorithms, the result can be very
 different.</p>
-<p>The annotation <code class="xref jl jl-obj docutils literal"><span class="pre">&#64;fastmath</span></code> re-arranges floating point
+<p>The annotation <tt class="xref jl jl-obj docutils literal"><span class="pre">&#64;fastmath</span></tt> re-arranges floating point
 expressions, e.g. changing the order of evaluation, or assuming that
 certain special cases (inf, nan) cannot occur. In this case (and on
 this particular computer), the main difference is that the expression
-<code class="docutils literal"><span class="pre">1</span> <span class="pre">/</span> <span class="pre">(2*dx)</span></code> in the function <code class="docutils literal"><span class="pre">deriv</span></code> is hoisted out of the loop
-(i.e. calculated outside the loop), as if one had written <code class="docutils literal"><span class="pre">idx</span> <span class="pre">=</span> <span class="pre">1</span> <span class="pre">/</span>
-<span class="pre">(2*dx)</span></code>. In the loop, the expression <code class="docutils literal"><span class="pre">...</span> <span class="pre">/</span> <span class="pre">(2*dx)</span></code> then becomes
-<code class="docutils literal"><span class="pre">...</span> <span class="pre">*</span> <span class="pre">idx</span></code>, which is much faster to evaluate. Of course, both the
+<tt class="docutils literal"><span class="pre">1</span> <span class="pre">/</span> <span class="pre">(2*dx)</span></tt> in the function <tt class="docutils literal"><span class="pre">deriv</span></tt> is hoisted out of the loop
+(i.e. calculated outside the loop), as if one had written <tt class="docutils literal"><span class="pre">idx</span> <span class="pre">=</span> <span class="pre">1</span> <span class="pre">/</span>
+<span class="pre">(2*dx)</span></tt>. In the loop, the expression <tt class="docutils literal"><span class="pre">...</span> <span class="pre">/</span> <span class="pre">(2*dx)</span></tt> then becomes
+<tt class="docutils literal"><span class="pre">...</span> <span class="pre">*</span> <span class="pre">idx</span></tt>, which is much faster to evaluate. Of course, both the
 actual optimization that is applied by the compiler as well as the
 resulting speedup depend very much on the hardware. You can examine
-the change in generated code by using Julia&#8217;s <code class="xref jl jl-func docutils literal"><span class="pre">code_native()</span></code>
+the change in generated code by using Julia&#8217;s <tt class="xref jl jl-func docutils literal"><span class="pre">code_native()</span></tt>
 function.</p>
 </div>
 <div class="section" id="treat-subnormal-numbers-as-zeros">
 <h2>Treat Subnormal Numbers as Zeros<a class="headerlink" href="#treat-subnormal-numbers-as-zeros" title="Permalink to this headline">¶</a></h2>
 <p>Subnormal numbers, formerly called <a class="reference external" href="https://en.wikipedia.org/wiki/Denormal_number">denormal numbers</a>,
 are useful in many contexts, but incur a performance penalty on some hardware.
-A call <code class="xref jl jl-func docutils literal"><span class="pre">set_zero_subnormals(true)</span></code>
+A call <tt class="xref jl jl-func docutils literal"><span class="pre">set_zero_subnormals(true)</span></tt>
 grants permission for floating-point operations to treat subnormal
 inputs or outputs as zeros, which may improve performance on some hardware.
-A call <code class="xref jl jl-func docutils literal"><span class="pre">set_zero_subnormals(false)</span></code>
+A call <tt class="xref jl jl-func docutils literal"><span class="pre">set_zero_subnormals(false)</span></tt>
 enforces strict IEEE behavior for subnormal numbers.</p>
 <p>Below is an example where subnormals noticeably impact performance on some hardware:</p>
 <div class="highlight-julia"><div class="highlight"><pre><span class="k">function</span><span class="nf"> timestep</span><span class="p">{</span><span class="n">T</span><span class="p">}(</span> <span class="n">b</span><span class="p">::</span><span class="n">Vector</span><span class="p">{</span><span class="n">T</span><span class="p">},</span> <span class="n">a</span><span class="p">::</span><span class="n">Vector</span><span class="p">{</span><span class="n">T</span><span class="p">},</span> <span class="n">Δt</span><span class="p">::</span><span class="n">T</span> <span class="p">)</span>
@@ -1444,10 +1453,10 @@ enforces strict IEEE behavior for subnormal numbers.</p>
 <span class="k">end</span>
 </pre></div>
 </div>
-<p>This example generates many subnormal numbers because the values in <code class="docutils literal"><span class="pre">a</span></code> become
+<p>This example generates many subnormal numbers because the values in <tt class="docutils literal"><span class="pre">a</span></tt> become
 an exponentially decreasing curve, which slowly flattens out over time.</p>
 <p>Treating subnormals as zeros should be used with caution, because doing so
-breaks some identities, such as <code class="docutils literal"><span class="pre">x-y==0</span></code> implies <code class="docutils literal"><span class="pre">x==y</span></code>:</p>
+breaks some identities, such as <tt class="docutils literal"><span class="pre">x-y==0</span></tt> implies <tt class="docutils literal"><span class="pre">x==y</span></tt>:</p>
 <div class="highlight-julia"><div class="highlight"><pre><span class="n">julia</span><span class="o">&gt;</span> <span class="n">x</span><span class="o">=</span><span class="mf">3f-38</span><span class="p">;</span> <span class="n">y</span><span class="o">=</span><span class="mf">2f-38</span><span class="p">;</span>
 
 <span class="n">julia</span><span class="o">&gt;</span> <span class="n">set_zero_subnormals</span><span class="p">(</span><span class="n">false</span><span class="p">);</span> <span class="p">(</span><span class="n">x</span><span class="o">-</span><span class="n">y</span><span class="p">,</span><span class="n">x</span><span class="o">==</span><span class="n">y</span><span class="p">)</span>
@@ -1459,14 +1468,14 @@ breaks some identities, such as <code class="docutils literal"><span class="pre"
 </div>
 <p>In some applications, an alternative to zeroing subnormal numbers is
 to inject a tiny bit of noise.  For example, instead of
-initializing <code class="docutils literal"><span class="pre">a</span></code> with zeros, initialize it with:</p>
+initializing <tt class="docutils literal"><span class="pre">a</span></tt> with zeros, initialize it with:</p>
 <div class="highlight-julia"><div class="highlight"><pre><span class="n">a</span> <span class="o">=</span> <span class="n">rand</span><span class="p">(</span><span class="kt">Float32</span><span class="p">,</span><span class="mi">1000</span><span class="p">)</span> <span class="o">*</span> <span class="mf">1.f-9</span>
 </pre></div>
 </div>
 </div>
 <div class="section" id="code-warntype">
-<span id="man-code-warntype"></span><h2><code class="xref jl jl-obj docutils literal"><span class="pre">&#64;code_warntype</span></code><a class="headerlink" href="#code-warntype" title="Permalink to this headline">¶</a></h2>
-<p>The macro <code class="xref jl jl-obj docutils literal"><span class="pre">&#64;code_warntype</span></code> (or its function variant <code class="xref jl jl-func docutils literal"><span class="pre">code_warntype()</span></code>)
+<span id="man-code-warntype"></span><h2><tt class="xref jl jl-obj docutils literal"><span class="pre">&#64;code_warntype</span></tt><a class="headerlink" href="#code-warntype" title="Permalink to this headline">¶</a></h2>
+<p>The macro <tt class="xref jl jl-obj docutils literal"><span class="pre">&#64;code_warntype</span></tt> (or its function variant <tt class="xref jl jl-func docutils literal"><span class="pre">code_warntype()</span></tt>)
 can sometimes be helpful in diagnosing type-related problems. Here&#8217;s an
 example:</p>
 <div class="highlight-julia"><div class="highlight"><pre><span class="n">pos</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="o">=</span> <span class="n">x</span> <span class="o">&lt;</span> <span class="mi">0</span> <span class="o">?</span> <span class="mi">0</span> <span class="p">:</span> <span class="n">x</span>
@@ -1502,39 +1511,39 @@ example:</p>
   <span class="k">end</span><span class="p">::</span><span class="kt">Float64</span>
 </pre></div>
 </div>
-<p>Interpreting the output of <code class="xref jl jl-obj docutils literal"><span class="pre">&#64;code_warntype</span></code>, like that of its cousins
-<code class="xref jl jl-obj docutils literal"><span class="pre">&#64;code_lowered</span></code>, <code class="xref jl jl-obj docutils literal"><span class="pre">&#64;code_typed</span></code>, <code class="xref jl jl-obj docutils literal"><span class="pre">&#64;code_llvm</span></code>, and
-<code class="xref jl jl-obj docutils literal"><span class="pre">&#64;code_native</span></code>, takes a little practice. Your
+<p>Interpreting the output of <tt class="xref jl jl-obj docutils literal"><span class="pre">&#64;code_warntype</span></tt>, like that of its cousins
+<tt class="xref jl jl-obj docutils literal"><span class="pre">&#64;code_lowered</span></tt>, <tt class="xref jl jl-obj docutils literal"><span class="pre">&#64;code_typed</span></tt>, <tt class="xref jl jl-obj docutils literal"><span class="pre">&#64;code_llvm</span></tt>, and
+<tt class="xref jl jl-obj docutils literal"><span class="pre">&#64;code_native</span></tt>, takes a little practice. Your
 code is being presented in form that has been partially digested on
 its way to generating compiled machine code.  Most of the expressions
-are annotated by a type, indicated by the <code class="docutils literal"><span class="pre">::T</span></code> (where <code class="docutils literal"><span class="pre">T</span></code> might
-be <code class="xref jl jl-obj docutils literal"><span class="pre">Float64</span></code>, for example). The most important characteristic of
-<code class="xref jl jl-obj docutils literal"><span class="pre">&#64;code_warntype</span></code> is that non-concrete types are displayed in red; in
+are annotated by a type, indicated by the <tt class="docutils literal"><span class="pre">::T</span></tt> (where <tt class="docutils literal"><span class="pre">T</span></tt> might
+be <tt class="xref jl jl-obj docutils literal"><span class="pre">Float64</span></tt>, for example). The most important characteristic of
+<tt class="xref jl jl-obj docutils literal"><span class="pre">&#64;code_warntype</span></tt> is that non-concrete types are displayed in red; in
 the above example, such output is shown in all-caps.</p>
 <p>The top part of the output summarizes the type information for the different
-variables internal to the function. You can see that <code class="docutils literal"><span class="pre">y</span></code>, one of the
-variables you created, is a <code class="docutils literal"><span class="pre">Union{Int64,Float64}</span></code>, due to the
-type-instability of <code class="docutils literal"><span class="pre">pos</span></code>.  There is another variable, <code class="docutils literal"><span class="pre">_var4</span></code>, which you
+variables internal to the function. You can see that <tt class="docutils literal"><span class="pre">y</span></tt>, one of the
+variables you created, is a <tt class="docutils literal"><span class="pre">Union{Int64,Float64}</span></tt>, due to the
+type-instability of <tt class="docutils literal"><span class="pre">pos</span></tt>.  There is another variable, <tt class="docutils literal"><span class="pre">_var4</span></tt>, which you
 can see also has the same type.</p>
-<p>The next lines represent the body of <code class="docutils literal"><span class="pre">f</span></code>. The lines starting with a
-number followed by a colon (<code class="docutils literal"><span class="pre">1:</span></code>, <code class="docutils literal"><span class="pre">2:</span></code>) are labels, and represent
-targets for jumps (via <code class="docutils literal"><span class="pre">goto</span></code>) in your code.  Looking at the body,
-you can see that <code class="docutils literal"><span class="pre">pos</span></code> has been <em>inlined</em> into <code class="docutils literal"><span class="pre">f</span></code>&#8212;everything
-before <code class="docutils literal"><span class="pre">2:</span></code> comes from code defined in <code class="docutils literal"><span class="pre">pos</span></code>.</p>
-<p>Starting at <code class="docutils literal"><span class="pre">2:</span></code>, the variable <code class="docutils literal"><span class="pre">y</span></code> is defined, and again annotated
-as a <code class="xref jl jl-obj docutils literal"><span class="pre">Union</span></code> type.  Next, we see that the compiler created the
-temporary variable <code class="docutils literal"><span class="pre">_var1</span></code> to hold the result of <code class="docutils literal"><span class="pre">y*x</span></code>. Because
-a <code class="xref jl jl-obj docutils literal"><span class="pre">Float64</span></code> times <em>either</em> an <code class="xref jl jl-obj docutils literal"><span class="pre">Int64</span></code> or <code class="xref jl jl-obj docutils literal"><span class="pre">Float64</span></code> yields a
-<code class="xref jl jl-obj docutils literal"><span class="pre">Float64</span></code>, all type-instability ends here. The net result is that
-<code class="docutils literal"><span class="pre">f(x::Float64)</span></code> will not be type-unstable in its output, even if some of the
+<p>The next lines represent the body of <tt class="docutils literal"><span class="pre">f</span></tt>. The lines starting with a
+number followed by a colon (<tt class="docutils literal"><span class="pre">1:</span></tt>, <tt class="docutils literal"><span class="pre">2:</span></tt>) are labels, and represent
+targets for jumps (via <tt class="docutils literal"><span class="pre">goto</span></tt>) in your code.  Looking at the body,
+you can see that <tt class="docutils literal"><span class="pre">pos</span></tt> has been <em>inlined</em> into <tt class="docutils literal"><span class="pre">f</span></tt>&#8212;everything
+before <tt class="docutils literal"><span class="pre">2:</span></tt> comes from code defined in <tt class="docutils literal"><span class="pre">pos</span></tt>.</p>
+<p>Starting at <tt class="docutils literal"><span class="pre">2:</span></tt>, the variable <tt class="docutils literal"><span class="pre">y</span></tt> is defined, and again annotated
+as a <tt class="xref jl jl-obj docutils literal"><span class="pre">Union</span></tt> type.  Next, we see that the compiler created the
+temporary variable <tt class="docutils literal"><span class="pre">_var1</span></tt> to hold the result of <tt class="docutils literal"><span class="pre">y*x</span></tt>. Because
+a <tt class="xref jl jl-obj docutils literal"><span class="pre">Float64</span></tt> times <em>either</em> an <tt class="xref jl jl-obj docutils literal"><span class="pre">Int64</span></tt> or <tt class="xref jl jl-obj docutils literal"><span class="pre">Float64</span></tt> yields a
+<tt class="xref jl jl-obj docutils literal"><span class="pre">Float64</span></tt>, all type-instability ends here. The net result is that
+<tt class="docutils literal"><span class="pre">f(x::Float64)</span></tt> will not be type-unstable in its output, even if some of the
 intermediate computations are type-unstable.</p>
 <p>How you use this information is up to you. Obviously, it would be far
-and away best to fix <code class="docutils literal"><span class="pre">pos</span></code> to be type-stable: if you did so, all of
-the variables in <code class="docutils literal"><span class="pre">f</span></code> would be concrete, and its performance would be
+and away best to fix <tt class="docutils literal"><span class="pre">pos</span></tt> to be type-stable: if you did so, all of
+the variables in <tt class="docutils literal"><span class="pre">f</span></tt> would be concrete, and its performance would be
 optimal.  However, there are circumstances where this kind of
 <em>ephemeral</em> type instability might not matter too much: for example,
-if <code class="docutils literal"><span class="pre">pos</span></code> is never used in isolation, the fact that <code class="docutils literal"><span class="pre">f</span></code>&#8216;s output
-is type-stable (for <code class="xref jl jl-obj docutils literal"><span class="pre">Float64</span></code> inputs) will shield later code from
+if <tt class="docutils literal"><span class="pre">pos</span></tt> is never used in isolation, the fact that <tt class="docutils literal"><span class="pre">f</span></tt>&#8216;s output
+is type-stable (for <tt class="xref jl jl-obj docutils literal"><span class="pre">Float64</span></tt> inputs) will shield later code from
 the propagating effects of type instability.  This is particularly
 relevant in cases where fixing the type instability is difficult or
 impossible: for example, currently it&#8217;s not possible to infer the
@@ -1544,24 +1553,24 @@ best tools to contain the &#8220;damage&#8221; from type instability.</p>
 <p>The following examples may help you interpret expressions marked as
 containing non-leaf types:</p>
 <ul class="simple">
-<li>Function body ending in <code class="docutils literal"><span class="pre">end::Union{T1,T2})</span></code><ul>
+<li>Function body ending in <tt class="docutils literal"><span class="pre">end::Union{T1,T2})</span></tt><ul>
 <li>Interpretation: function with unstable return type</li>
 <li>Suggestion: make the return value type-stable, even if you have to annotate it</li>
 </ul>
 </li>
-<li><code class="docutils literal"><span class="pre">f(x::T)::Union{T1,T2}</span></code><ul>
+<li><tt class="docutils literal"><span class="pre">f(x::T)::Union{T1,T2}</span></tt><ul>
 <li>Interpretation: call to a type-unstable function</li>
 <li>Suggestion: fix the function, or if necessary annotate the return value</li>
 </ul>
 </li>
-<li><code class="docutils literal"><span class="pre">(top(arrayref))(A::Array{Any,1},1)::Any</span></code><ul>
+<li><tt class="docutils literal"><span class="pre">(top(arrayref))(A::Array{Any,1},1)::Any</span></tt><ul>
 <li>Interpretation: accessing elements of poorly-typed arrays</li>
 <li>Suggestion: use arrays with better-defined types, or if necessary annotate the type of individual element accesses</li>
 </ul>
 </li>
-<li><code class="docutils literal"><span class="pre">(top(getfield))(A::ArrayContainer{Float64},:data)::Array{Float64,N}</span></code><ul>
-<li>Interpretation: getting a field that is of non-leaf type. In this case, <code class="docutils literal"><span class="pre">ArrayContainer</span></code> had a field <code class="docutils literal"><span class="pre">data::Array{T}</span></code>. But <code class="docutils literal"><span class="pre">Array</span></code> needs the dimension <code class="docutils literal"><span class="pre">N</span></code>, too, to be a concrete type.</li>
-<li>Suggestion: use concrete types like <code class="docutils literal"><span class="pre">Array{T,3}</span></code> or <code class="docutils literal"><span class="pre">Array{T,N}</span></code>, where <code class="docutils literal"><span class="pre">N</span></code> is now a parameter of <code class="docutils literal"><span class="pre">ArrayContainer</span></code></li>
+<li><tt class="docutils literal"><span class="pre">(top(getfield))(A::ArrayContainer{Float64},:data)::Array{Float64,N}</span></tt><ul>
+<li>Interpretation: getting a field that is of non-leaf type. In this case, <tt class="docutils literal"><span class="pre">ArrayContainer</span></tt> had a field <tt class="docutils literal"><span class="pre">data::Array{T}</span></tt>. But <tt class="docutils literal"><span class="pre">Array</span></tt> needs the dimension <tt class="docutils literal"><span class="pre">N</span></tt>, too, to be a concrete type.</li>
+<li>Suggestion: use concrete types like <tt class="docutils literal"><span class="pre">Array{T,3}</span></tt> or <tt class="docutils literal"><span class="pre">Array{T,N}</span></tt>, where <tt class="docutils literal"><span class="pre">N</span></tt> is now a parameter of <tt class="docutils literal"><span class="pre">ArrayContainer</span></tt></li>
 </ul>
 </li>
 </ul>
@@ -1586,7 +1595,7 @@ containing non-leaf types:</p>
 
   <div role="contentinfo">
     <p>
-      Last updated on Feb 11, 2016.
+      Last updated on Apr 07, 2016.
     </p>
   </div>
 
@@ -1642,7 +1651,7 @@ containing non-leaf types:</p>
       <script type="text/javascript" src="../_static/jquery.js"></script>
       <script type="text/javascript" src="../_static/underscore.js"></script>
       <script type="text/javascript" src="../_static/doctools.js"></script>
-      <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+      <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
 
   
 

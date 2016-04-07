@@ -13,6 +13,7 @@
  Manual
 ########
 
+.. NOTE: keep this list in sync with manual/index.rst
 .. toctree::
    :maxdepth: 1
 
@@ -41,6 +42,7 @@
    manual/dates
    manual/running-external-programs
    manual/calling-c-and-fortran-code
+   manual/handling-operating-system-variation
    manual/interacting-with-julia
    manual/embedding
    manual/packages
@@ -59,6 +61,7 @@
  Standard Library
 ##################
 
+.. NOTE: keep this list in sync with stdlib/index.rst
 .. toctree::
    :maxdepth: 1
 
@@ -79,6 +82,8 @@
    stdlib/dates
    stdlib/test
    stdlib/c
+   stdlib/libc
+   stdlib/libdl
    stdlib/profile
    stdlib/stacktraces
 
@@ -94,3 +99,23 @@ Developer Documentation
    devdocs/reflection
    devdocs/julia
    devdocs/C
+
+.. _phdthesis:
+
+##################################
+Abstraction in Technical Computing
+##################################
+
+.. toctree::
+   :maxdepth: 2
+
+   phdthesis/cover
+   phdthesis/abstract
+   phdthesis/contents
+   phdthesis/chap1
+   phdthesis/chap2
+   phdthesis/chap3
+   phdthesis/chap4
+   phdthesis/chap5
+   phdthesis/chap6
+   phdthesis/proposal/proposal
