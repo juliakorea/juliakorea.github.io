@@ -6,10 +6,8 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta property="fb:app_id" content="685509058259607" />
-
   
-  <title>gdb debugging tips</title>
+  <title>gdb debugging tips &mdash; Julia Language X.Y.Z-unknown documentation</title>
   
 
   
@@ -32,13 +30,14 @@
   
     <link rel="stylesheet" href="../_static/julia.css" type="text/css" />
   
-    <link rel="top" title="None" href="../index.html"/>
+    <link rel="top" title="Julia Language X.Y.Z-unknown documentation" href="../index.html"/>
         <link rel="up" title="Developing/debugging Julia’s C code" href="C.html"/>
         <link rel="next" title="Using Valgrind with Julia" href="valgrind.html"/>
         <link rel="prev" title="Reporting and analyzing crashes (segfaults)" href="backtraces.html"/> 
 
   
   <script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.6.2/modernizr.min.js"></script>
+
 </head>
 
 <body class="wy-body-for-nav" role="document">
@@ -52,9 +51,8 @@
         <!--
         <a href="../index.html" class="fa fa-home"> Julia Language</a>
         -->
-        
-<div role="search">
-  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+        <div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../search.html" method="get">
     <input type="text" name="q" placeholder="Search docs" />
     <input type="hidden" name="check_keywords" value="yes" />
     <input type="hidden" name="area" value="default" />
@@ -111,19 +109,20 @@
 <li class="toctree-l2"><a class="reference internal" href="../manual/strings.html#version-number-literals">Version Number Literals</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="../manual/functions.html">Functions</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="../manual/functions.html#argument-passing-behavior">Argument Passing Behavior</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../manual/functions.html#the-return-keyword">The <tt class="docutils literal"><span class="pre">return</span></tt> Keyword</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../manual/functions.html#operators-are-functions">Operators Are Functions</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../manual/functions.html#operators-with-special-names">Operators With Special Names</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../manual/functions.html#anonymous-functions">Anonymous Functions</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../manual/functions.html#multiple-return-values">Multiple Return Values</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../manual/functions.html#varargs-functions">Varargs Functions</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../manual/functions.html#optional-arguments">Optional Arguments</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../manual/functions.html#keyword-arguments">Keyword Arguments</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../manual/functions.html#evaluation-scope-of-default-values">Evaluation Scope of Default Values</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../manual/functions.html#do-block-syntax-for-function-arguments">Do-Block Syntax for Function Arguments</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../manual/functions.html#further-reading">Further Reading</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../manual/functions.html">함수</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../manual/functions.html#id2">매개변수 전달 매커니즘</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../manual/functions.html#return"><code class="docutils literal"><span class="pre">return</span></code> 키워드</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../manual/functions.html#id3">연산자 또한 함수</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../manual/functions.html#id4">특별한 이름을 지니고 있는 연산자</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../manual/functions.html#man-anonymous-functions">익명 함수</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../manual/functions.html#id6">다수의 리턴값</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../manual/functions.html#man-varargs-functions">가변인자 함수</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../manual/functions.html#id8">선택적 매개변수</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../manual/functions.html#id9">키워드 매개변수</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../manual/functions.html#scope">디폴트 값의 계산 스코프(scope)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../manual/functions.html#do-block">함수 매개변수의 Do-Block 문법</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../manual/functions.html#dot">함수의 벡터화를 위한 Dot 문법</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../manual/functions.html#id10">더 읽을거리</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../manual/control-flow.html">Control Flow</a><ul>
@@ -160,6 +159,7 @@
 <li class="toctree-l2"><a class="reference internal" href="../manual/methods.html#defining-methods">Defining Methods</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../manual/methods.html#method-ambiguities">Method Ambiguities</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../manual/methods.html#parametric-methods">Parametric Methods</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../manual/methods.html#parametrically-constrained-varargs-methods">Parametrically-constrained Varargs methods</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../manual/methods.html#note-on-optional-and-keyword-arguments">Note on Optional and keyword Arguments</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../manual/methods.html#function-like-objects">Function-like objects</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../manual/methods.html#empty-generic-functions">Empty generic functions</a></li>
@@ -236,8 +236,11 @@
 <li class="toctree-l2"><a class="reference internal" href="../manual/parallel-computing.html#remote-references-and-abstractchannels">Remote references and AbstractChannels</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../manual/parallel-computing.html#remote-references-and-distributed-garbage-collection">Remote References and Distributed Garbage Collection</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../manual/parallel-computing.html#id2">Shared Arrays</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../manual/parallel-computing.html#shared-arrays-and-distributed-garbage-collection">Shared Arrays and Distributed Garbage Collection</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../manual/parallel-computing.html#clustermanagers">ClusterManagers</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../manual/parallel-computing.html#cluster-managers-with-custom-transports">Cluster Managers with custom transports</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../manual/parallel-computing.html#network-requirements-for-localmanager-and-sshmanager">Network requirements for LocalManager and SSHManager</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../manual/parallel-computing.html#cluster-cookie">Cluster cookie</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../manual/parallel-computing.html#specifying-network-topology-experimental">Specifying network topology (Experimental)</a></li>
 </ul>
 </li>
@@ -271,9 +274,9 @@
 <li class="toctree-l2"><a class="reference internal" href="../manual/calling-c-and-fortran-code.html#thread-safety">Thread-safety</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../manual/calling-c-and-fortran-code.html#more-about-callbacks">More About Callbacks</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../manual/calling-c-and-fortran-code.html#c">C++</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../manual/calling-c-and-fortran-code.html#handling-operating-system-variation">Handling Operating System Variation</a></li>
 </ul>
 </li>
+<li class="toctree-l1"><a class="reference internal" href="../manual/handling-operating-system-variation.html">Handling Operating System Variation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../manual/interacting-with-julia.html">Interacting With Julia</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="../manual/interacting-with-julia.html#the-different-prompt-modes">The different prompt modes</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../manual/interacting-with-julia.html#key-bindings">Key bindings</a></li>
@@ -319,19 +322,21 @@
 <li class="toctree-l2"><a class="reference internal" href="../manual/stacktraces.html#viewing-a-stack-trace">Viewing a stack trace</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../manual/stacktraces.html#extracting-useful-information">Extracting useful information</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../manual/stacktraces.html#error-handling">Error handling</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../manual/stacktraces.html#comparison-with-backtrace">Comparison with <tt class="docutils literal"><span class="pre">backtrace()</span></tt></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../manual/stacktraces.html#comparison-with-backtrace">Comparison with <code class="docutils literal"><span class="pre">backtrace()</span></code></a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../manual/performance-tips.html">Performance Tips</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="../manual/performance-tips.html#avoid-global-variables">Avoid global variables</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../manual/performance-tips.html#measure-performance-with-time-and-pay-attention-to-memory-allocation">Measure performance with <tt class="docutils literal"><span class="pre">&#64;time</span></tt> and pay attention to memory allocation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../manual/performance-tips.html#measure-performance-with-time-and-pay-attention-to-memory-allocation">Measure performance with <code class="docutils literal"><span class="pre">&#64;time</span></code> and pay attention to memory allocation</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../manual/performance-tips.html#tools">Tools</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../manual/performance-tips.html#avoid-containers-with-abstract-type-parameters">Avoid containers with abstract type parameters</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../manual/performance-tips.html#type-declarations">Type declarations</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../manual/performance-tips.html#break-functions-into-multiple-definitions">Break functions into multiple definitions</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../manual/performance-tips.html#write-type-stable-functions">Write &#8220;type-stable&#8221; functions</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../manual/performance-tips.html#avoid-changing-the-type-of-a-variable">Avoid changing the type of a variable</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../manual/performance-tips.html#separate-kernel-functions">Separate kernel functions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../manual/performance-tips.html#separate-kernel-functions-aka-function-barriers">Separate kernel functions (aka, function barriers)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../manual/performance-tips.html#types-with-values-as-parameters">Types with values-as-parameters</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../manual/performance-tips.html#the-dangers-of-abusing-multiple-dispatch-aka-more-on-types-with-values-as-parameters">The dangers of abusing multiple dispatch (aka, more on types with values-as-parameters)</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../manual/performance-tips.html#access-arrays-in-memory-order-along-columns">Access arrays in memory order, along columns</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../manual/performance-tips.html#pre-allocating-outputs">Pre-allocating outputs</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../manual/performance-tips.html#avoid-string-interpolation-for-i-o">Avoid string interpolation for I/O</a></li>
@@ -340,7 +345,7 @@
 <li class="toctree-l2"><a class="reference internal" href="../manual/performance-tips.html#tweaks">Tweaks</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../manual/performance-tips.html#performance-annotations">Performance Annotations</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../manual/performance-tips.html#treat-subnormal-numbers-as-zeros">Treat Subnormal Numbers as Zeros</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../manual/performance-tips.html#code-warntype"><tt class="docutils literal"><span class="pre">&#64;code_warntype</span></tt></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../manual/performance-tips.html#code-warntype"><code class="docutils literal"><span class="pre">&#64;code_warntype</span></code></a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../manual/workflow-tips.html">Workflow Tips</a><ul>
@@ -352,11 +357,11 @@
 <li class="toctree-l2"><a class="reference internal" href="../manual/style-guide.html#write-functions-not-just-scripts">Write functions, not just scripts</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../manual/style-guide.html#avoid-writing-overly-specific-types">Avoid writing overly-specific types</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../manual/style-guide.html#handle-excess-argument-diversity-in-the-caller">Handle excess argument diversity in the caller</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../manual/style-guide.html#append-to-names-of-functions-that-modify-their-arguments">Append <tt class="docutils literal"><span class="pre">!</span></tt> to names of functions that modify their arguments</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../manual/style-guide.html#append-to-names-of-functions-that-modify-their-arguments">Append <code class="docutils literal"><span class="pre">!</span></code> to names of functions that modify their arguments</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../manual/style-guide.html#avoid-strange-type-unions">Avoid strange type Unions</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../manual/style-guide.html#avoid-type-unions-in-fields">Avoid type Unions in fields</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../manual/style-guide.html#avoid-elaborate-container-types">Avoid elaborate container types</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../manual/style-guide.html#use-naming-conventions-consistent-with-julia-s-base">Use naming conventions consistent with Julia&#8217;s <tt class="docutils literal"><span class="pre">base/</span></tt></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../manual/style-guide.html#use-naming-conventions-consistent-with-julia-s-base">Use naming conventions consistent with Julia&#8217;s <code class="docutils literal"><span class="pre">base/</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="../manual/style-guide.html#don-t-overuse-try-catch">Don&#8217;t overuse try-catch</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../manual/style-guide.html#don-t-parenthesize-conditions">Don&#8217;t parenthesize conditions</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../manual/style-guide.html#don-t-overuse">Don&#8217;t overuse ...</a></li>
@@ -366,7 +371,7 @@
 <li class="toctree-l2"><a class="reference internal" href="../manual/style-guide.html#don-t-expose-unsafe-operations-at-the-interface-level">Don&#8217;t expose unsafe operations at the interface level</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../manual/style-guide.html#don-t-overload-methods-of-base-container-types">Don&#8217;t overload methods of base container types</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../manual/style-guide.html#be-careful-with-type-equality">Be careful with type equality</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../manual/style-guide.html#do-not-write-x-f-x">Do not write <tt class="docutils literal"><span class="pre">x-&gt;f(x)</span></tt></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../manual/style-guide.html#do-not-write-x-f-x">Do not write <code class="docutils literal"><span class="pre">x-&gt;f(x)</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="../manual/style-guide.html#avoid-using-floats-for-numeric-literals-in-generic-code-when-possible">Avoid using floats for numeric literals in generic code when possible</a></li>
 </ul>
 </li>
@@ -390,7 +395,114 @@
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../manual/unicode-input.html">Unicode Input</a></li>
 </ul>
-<ul class="simple">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../stdlib/base.html">Essentials</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../stdlib/base.html#introduction">Introduction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../stdlib/base.html#getting-around">Getting Around</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../stdlib/base.html#all-objects">All Objects</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../stdlib/base.html#types">Types</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../stdlib/base.html#generic-functions">Generic Functions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../stdlib/base.html#syntax">Syntax</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../stdlib/base.html#nullables">Nullables</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../stdlib/base.html#system">System</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../stdlib/base.html#errors">Errors</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../stdlib/base.html#events">Events</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../stdlib/base.html#reflection">Reflection</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../stdlib/base.html#internals">Internals</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../stdlib/collections.html">Collections and Data Structures</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../stdlib/collections.html#iteration">Iteration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../stdlib/collections.html#general-collections">General Collections</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../stdlib/collections.html#iterable-collections">Iterable Collections</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../stdlib/collections.html#indexable-collections">Indexable Collections</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../stdlib/collections.html#associative-collections">Associative Collections</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../stdlib/collections.html#set-like-collections">Set-Like Collections</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../stdlib/collections.html#dequeues">Dequeues</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../stdlib/collections.html#priorityqueue">PriorityQueue</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../stdlib/collections.html#heap-functions">Heap Functions</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../stdlib/math.html">Mathematics</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../stdlib/math.html#mathematical-operators">Mathematical Operators</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../stdlib/math.html#mathematical-functions">Mathematical Functions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../stdlib/math.html#statistics">Statistics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../stdlib/math.html#signal-processing">Signal Processing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../stdlib/math.html#numerical-integration">Numerical Integration</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../stdlib/numbers.html">Numbers</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../stdlib/numbers.html#standard-numeric-types">Standard Numeric Types</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../stdlib/numbers.html#data-formats">Data Formats</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../stdlib/numbers.html#general-number-functions-and-constants">General Number Functions and Constants</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../stdlib/numbers.html#bigfloats">BigFloats</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../stdlib/numbers.html#random-numbers">Random Numbers</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../stdlib/strings.html">Strings</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../stdlib/arrays.html">Arrays</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../stdlib/arrays.html#basic-functions">Basic functions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../stdlib/arrays.html#constructors">Constructors</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../stdlib/arrays.html#mathematical-operators-and-functions">Mathematical operators and functions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../stdlib/arrays.html#indexing-assignment-and-concatenation">Indexing, Assignment, and Concatenation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../stdlib/arrays.html#array-functions">Array functions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../stdlib/arrays.html#combinatorics">Combinatorics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../stdlib/arrays.html#bitarrays">BitArrays</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../stdlib/arrays.html#sparse-vectors-and-matrices">Sparse Vectors and Matrices</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../stdlib/parallel.html">Tasks and Parallel Computing</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../stdlib/parallel.html#tasks">Tasks</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../stdlib/parallel.html#general-parallel-computing-support">General Parallel Computing Support</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../stdlib/parallel.html#shared-arrays">Shared Arrays</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../stdlib/parallel.html#multi-threading">Multi-Threading</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../stdlib/parallel.html#cluster-manager-interface">Cluster Manager Interface</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../stdlib/linalg.html">Linear Algebra</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../stdlib/linalg.html#module-Base.LinAlg">Standard Functions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../stdlib/linalg.html#module-Base.LinAlg.BLAS">BLAS Functions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../stdlib/linalg.html#module-Base.LinAlg.LAPACK">LAPACK Functions</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../stdlib/constants.html">Constants</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../stdlib/file.html">Filesystem</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../stdlib/io-network.html">I/O and Network</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../stdlib/io-network.html#general-i-o">General I/O</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../stdlib/io-network.html#text-i-o">Text I/O</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../stdlib/io-network.html#multimedia-i-o">Multimedia I/O</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../stdlib/io-network.html#memory-mapped-i-o">Memory-mapped I/O</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../stdlib/io-network.html#network-i-o">Network I/O</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../stdlib/punctuation.html">Punctuation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../stdlib/sort.html">Sorting and Related Functions</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../stdlib/sort.html#sorting-functions">Sorting Functions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../stdlib/sort.html#order-related-functions">Order-Related Functions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../stdlib/sort.html#sorting-algorithms">Sorting Algorithms</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../stdlib/pkg.html">Package Manager Functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../stdlib/dates.html">Dates and Time</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../stdlib/dates.html#dates-and-time-types">Dates and Time Types</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../stdlib/dates.html#dates-functions">Dates Functions</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../stdlib/test.html">Unit Testing</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../stdlib/test.html#testing-base-julia">Testing Base Julia</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../stdlib/test.html#basic-unit-tests">Basic Unit Tests</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../stdlib/test.html#working-with-test-sets">Working with Test Sets</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../stdlib/test.html#other-test-macros">Other Test Macros</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../stdlib/test.html#creating-custom-abstracttestset-types">Creating Custom <code class="docutils literal"><span class="pre">AbstractTestSet</span></code> Types</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../stdlib/c.html">C Interface</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../stdlib/c.html#llvm-interface">LLVM Interface</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../stdlib/libc.html">C Standard Library</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../stdlib/libdl.html">Dynamic Linker</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../stdlib/profile.html">Profiling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../stdlib/stacktraces.html">StackTraces</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../stdlib/simd-types.html">SIMD Support</a></li>
 </ul>
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="reflection.html">Reflection and introspection</a></li>
@@ -403,7 +515,7 @@
 <li class="toctree-l2"><a class="reference internal" href="functions.html">Julia Functions</a></li>
 <li class="toctree-l2"><a class="reference internal" href="callconv.html">Calling Conventions</a></li>
 <li class="toctree-l2"><a class="reference internal" href="cartesian.html">Base.Cartesian</a></li>
-<li class="toctree-l2"><a class="reference internal" href="meta.html">Talking to the compiler (the <tt class="docutils literal"><span class="pre">:meta</span></tt> mechanism)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="meta.html">Talking to the compiler (the <code class="docutils literal"><span class="pre">:meta</span></code> mechanism)</a></li>
 <li class="toctree-l2"><a class="reference internal" href="subarrays.html">SubArrays</a></li>
 <li class="toctree-l2"><a class="reference internal" href="sysimg.html">System Image Building</a></li>
 <li class="toctree-l2"><a class="reference internal" href="llvm.html">Working with LLVM</a></li>
@@ -416,14 +528,6 @@
 <li class="toctree-l2"><a class="reference internal" href="backtraces.html">Reporting and analyzing crashes (segfaults)</a></li>
 <li class="toctree-l2 current"><a class="current reference internal" href="">gdb debugging tips</a></li>
 <li class="toctree-l2"><a class="reference internal" href="valgrind.html">Using Valgrind with Julia</a></li>
-</ul>
-</li>
-</ul>
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="../phdthesis/chap6.html">결론</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="../phdthesis/chap6.html#id2">성능</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../phdthesis/chap6.html#id3">앞으로 할 작업들</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../phdthesis/chap6.html#id4">프로젝트 상황</a></li>
 </ul>
 </li>
 </ul>
@@ -442,7 +546,6 @@
       </nav>
 
 
-
       
       <div class="wy-nav-content">
         <div class="rst-content">
@@ -455,11 +558,7 @@
     <li>gdb debugging tips</li>
       <li class="wy-breadcrumbs-aside">
         
-          
-            
-              <a href="#" onclick="blame('devdocs/debuggingtips')" rel="nofollow"> 원문 보기</a>
-            
-          
+          <a href="../_sources/devdocs/debuggingtips.txt" rel="nofollow"> View page source</a>
         
       </li>
   </ul>
@@ -471,62 +570,62 @@
 <span id="devdocs-gdb"></span><h1>gdb debugging tips<a class="headerlink" href="#gdb-debugging-tips" title="Permalink to this headline">¶</a></h1>
 <div class="section" id="displaying-julia-variables">
 <h2>Displaying Julia variables<a class="headerlink" href="#displaying-julia-variables" title="Permalink to this headline">¶</a></h2>
-<p>Within <tt class="docutils literal"><span class="pre">gdb</span></tt>, any <tt class="docutils literal"><span class="pre">jl_value_t*</span></tt> object <tt class="docutils literal"><span class="pre">obj</span></tt> can be displayed using</p>
-<div class="highlight-julia"><div class="highlight"><pre><span class="p">(</span><span class="n">gdb</span><span class="p">)</span> <span class="n">call</span> <span class="n">jl_</span><span class="p">(</span><span class="n">obj</span><span class="p">)</span>
+<p>Within <code class="docutils literal"><span class="pre">gdb</span></code>, any <code class="docutils literal"><span class="pre">jl_value_t*</span></code> object <code class="docutils literal"><span class="pre">obj</span></code> can be displayed using</p>
+<div class="highlight-julia"><div class="highlight"><pre><span></span><span class="p">(</span><span class="n">gdb</span><span class="p">)</span> <span class="n">call</span> <span class="n">jl_</span><span class="p">(</span><span class="n">obj</span><span class="p">)</span>
 </pre></div>
 </div>
 <p>The object will be displayed in the julia session, not in the gdb session.
 This is a useful way to discover the types and values of objects being
 manipulated by Julia&#8217;s C code.</p>
 <p>Similarly, if you&#8217;re debugging some of julia&#8217;s internals (e.g.,
-<tt class="docutils literal"><span class="pre">inference.jl</span></tt>), you can print <tt class="docutils literal"><span class="pre">obj</span></tt> using</p>
-<div class="highlight-julia"><div class="highlight"><pre><span class="k">ccall</span><span class="p">(:</span><span class="n">jl_</span><span class="p">,</span> <span class="n">Void</span><span class="p">,</span> <span class="p">(</span><span class="kt">Any</span><span class="p">,),</span> <span class="n">obj</span><span class="p">)</span>
+<code class="docutils literal"><span class="pre">inference.jl</span></code>), you can print <code class="docutils literal"><span class="pre">obj</span></code> using</p>
+<div class="highlight-julia"><div class="highlight"><pre><span></span><span class="k">ccall</span><span class="p">(:</span><span class="n">jl_</span><span class="p">,</span> <span class="n">Void</span><span class="p">,</span> <span class="p">(</span><span class="kt">Any</span><span class="p">,),</span> <span class="n">obj</span><span class="p">)</span>
 </pre></div>
 </div>
 <p>This is a good way to circumvent problems that arise from the order in which julia&#8217;s output streams are initialized.</p>
-<p>Julia&#8217;s flisp interpreter uses <tt class="docutils literal"><span class="pre">value_t</span></tt> objects; these can be displayed
-with <tt class="docutils literal"><span class="pre">call</span> <span class="pre">fl_print(fl_ctx,</span> <span class="pre">ios_stdout,</span> <span class="pre">obj)</span></tt>.</p>
+<p>Julia&#8217;s flisp interpreter uses <code class="docutils literal"><span class="pre">value_t</span></code> objects; these can be displayed
+with <code class="docutils literal"><span class="pre">call</span> <span class="pre">fl_print(fl_ctx,</span> <span class="pre">ios_stdout,</span> <span class="pre">obj)</span></code>.</p>
 </div>
 <div class="section" id="useful-julia-variables-for-inspecting">
 <h2>Useful Julia variables for Inspecting<a class="headerlink" href="#useful-julia-variables-for-inspecting" title="Permalink to this headline">¶</a></h2>
 <p>While the addresses of many variables, like singletons, can be be useful to print for many failures,
 there are a number of additional variables (see julia.h for a complete list) that are even more useful.</p>
 <ul class="simple">
-<li>(when in <tt class="docutils literal"><span class="pre">jl_apply_generic</span></tt>) <tt class="docutils literal"><span class="pre">f-&gt;linfo</span></tt> and <tt class="docutils literal"><span class="pre">jl_uncompress_ast(f-&gt;linfo,</span> <span class="pre">f-&gt;linfo-&gt;ast)</span></tt> :: for figuring out a bit about the call-stack</li>
-<li><tt class="docutils literal"><span class="pre">jl_lineno</span></tt> and <tt class="docutils literal"><span class="pre">jl_filename</span></tt> :: for figuring out what line in a test to go start debugging from (or figure out how far into a file has been parsed)</li>
-<li><tt class="docutils literal"><span class="pre">$1</span></tt> :: not really a variable, but still a useful shorthand for referring to the result of the last gdb command (such as <tt class="docutils literal"><span class="pre">print</span></tt>)</li>
-<li><tt class="docutils literal"><span class="pre">jl_options</span></tt> :: sometimes useful, since it lists all of the command line options that were successfully parsed</li>
-<li><tt class="docutils literal"><span class="pre">jl_uv_stderr</span></tt> :: because who doesn&#8217;t like to be able to interact with stdio</li>
+<li>(when in <code class="docutils literal"><span class="pre">jl_apply_generic</span></code>) <code class="docutils literal"><span class="pre">f-&gt;linfo</span></code> and <code class="docutils literal"><span class="pre">jl_uncompress_ast(f-&gt;linfo,</span> <span class="pre">f-&gt;linfo-&gt;ast)</span></code> :: for figuring out a bit about the call-stack</li>
+<li><code class="docutils literal"><span class="pre">jl_lineno</span></code> and <code class="docutils literal"><span class="pre">jl_filename</span></code> :: for figuring out what line in a test to go start debugging from (or figure out how far into a file has been parsed)</li>
+<li><code class="docutils literal"><span class="pre">$1</span></code> :: not really a variable, but still a useful shorthand for referring to the result of the last gdb command (such as <code class="docutils literal"><span class="pre">print</span></code>)</li>
+<li><code class="docutils literal"><span class="pre">jl_options</span></code> :: sometimes useful, since it lists all of the command line options that were successfully parsed</li>
+<li><code class="docutils literal"><span class="pre">jl_uv_stderr</span></code> :: because who doesn&#8217;t like to be able to interact with stdio</li>
 </ul>
 </div>
 <div class="section" id="useful-julia-functions-for-inspecting-those-variables">
 <h2>Useful Julia functions for Inspecting those variables<a class="headerlink" href="#useful-julia-functions-for-inspecting-those-variables" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
-<li><tt class="docutils literal"><span class="pre">jl_gdblookup($rip)</span></tt> :: For looking up the current function and line. (use <tt class="docutils literal"><span class="pre">$eip</span></tt> on i686 platforms)</li>
-<li><tt class="docutils literal"><span class="pre">jlbacktrace()</span></tt> :: For dumping the current julia backtrace stack to stderr. Only usable after <tt class="docutils literal"><span class="pre">record_backtrace()</span></tt> has been called.</li>
-<li><tt class="docutils literal"><span class="pre">jl_dump_llvm_value(Value*)</span></tt> :: For invoking <tt class="docutils literal"><span class="pre">Value-&gt;dump()</span></tt> in gdb, where it doesn&#8217;t work natively. For example, <tt class="docutils literal"><span class="pre">f-&gt;linfo-&gt;functionObject</span></tt>, <tt class="docutils literal"><span class="pre">f-&gt;linfo-&gt;specFunctionObject</span></tt>, and <tt class="docutils literal"><span class="pre">to_function(f-&gt;linfo)</span></tt>.</li>
-<li><tt class="docutils literal"><span class="pre">Type-&gt;dump()</span></tt> :: only works in lldb. Note: add something like <tt class="docutils literal"><span class="pre">;1</span></tt> to prevent lldb from printing its prompt over the output</li>
-<li><tt class="docutils literal"><span class="pre">jl_eval_string(&quot;expr&quot;)</span></tt> :: for invoking side-effects to modify the current state or to lookup symbols</li>
-<li><tt class="docutils literal"><span class="pre">jl_typeof(jl_value_t*)</span></tt> :: for extracting the type tag of a julia value (in gdb, call <tt class="docutils literal"><span class="pre">macro</span> <span class="pre">define</span> <span class="pre">jl_typeof</span> <span class="pre">jl_typeof</span></tt> first, or pick something short like <tt class="docutils literal"><span class="pre">ty</span></tt> for the first arg to define a shorthand)</li>
+<li><code class="docutils literal"><span class="pre">jl_gdblookup($rip)</span></code> :: For looking up the current function and line. (use <code class="docutils literal"><span class="pre">$eip</span></code> on i686 platforms)</li>
+<li><code class="docutils literal"><span class="pre">jlbacktrace()</span></code> :: For dumping the current julia backtrace stack to stderr. Only usable after <code class="docutils literal"><span class="pre">record_backtrace()</span></code> has been called.</li>
+<li><code class="docutils literal"><span class="pre">jl_dump_llvm_value(Value*)</span></code> :: For invoking <code class="docutils literal"><span class="pre">Value-&gt;dump()</span></code> in gdb, where it doesn&#8217;t work natively. For example, <code class="docutils literal"><span class="pre">f-&gt;linfo-&gt;functionObject</span></code>, <code class="docutils literal"><span class="pre">f-&gt;linfo-&gt;specFunctionObject</span></code>, and <code class="docutils literal"><span class="pre">to_function(f-&gt;linfo)</span></code>.</li>
+<li><code class="docutils literal"><span class="pre">Type-&gt;dump()</span></code> :: only works in lldb. Note: add something like <code class="docutils literal"><span class="pre">;1</span></code> to prevent lldb from printing its prompt over the output</li>
+<li><code class="docutils literal"><span class="pre">jl_eval_string(&quot;expr&quot;)</span></code> :: for invoking side-effects to modify the current state or to lookup symbols</li>
+<li><code class="docutils literal"><span class="pre">jl_typeof(jl_value_t*)</span></code> :: for extracting the type tag of a julia value (in gdb, call <code class="docutils literal"><span class="pre">macro</span> <span class="pre">define</span> <span class="pre">jl_typeof</span> <span class="pre">jl_typeof</span></code> first, or pick something short like <code class="docutils literal"><span class="pre">ty</span></code> for the first arg to define a shorthand)</li>
 </ul>
 </div>
 <div class="section" id="inserting-breakpoints-for-inspection-from-gdb">
 <h2>Inserting breakpoints for inspection from gdb<a class="headerlink" href="#inserting-breakpoints-for-inspection-from-gdb" title="Permalink to this headline">¶</a></h2>
-<p>In your <tt class="docutils literal"><span class="pre">gdb</span></tt> session, set a breakpoint in <tt class="docutils literal"><span class="pre">jl_breakpoint</span></tt> like so:</p>
-<div class="highlight-julia"><div class="highlight"><pre><span class="p">(</span><span class="n">gdb</span><span class="p">)</span> <span class="k">break</span> <span class="n">jl_breakpoint</span>
+<p>In your <code class="docutils literal"><span class="pre">gdb</span></code> session, set a breakpoint in <code class="docutils literal"><span class="pre">jl_breakpoint</span></code> like so:</p>
+<div class="highlight-julia"><div class="highlight"><pre><span></span><span class="p">(</span><span class="n">gdb</span><span class="p">)</span> <span class="k">break</span> <span class="n">jl_breakpoint</span>
 </pre></div>
 </div>
-<p>Then within your Julia code, insert a call to <tt class="docutils literal"><span class="pre">jl_breakpoint</span></tt> by adding</p>
-<div class="highlight-julia"><div class="highlight"><pre><span class="k">ccall</span><span class="p">(:</span><span class="n">jl_breakpoint</span><span class="p">,</span> <span class="n">Void</span><span class="p">,</span> <span class="p">(</span><span class="kt">Any</span><span class="p">,),</span> <span class="n">obj</span><span class="p">)</span>
+<p>Then within your Julia code, insert a call to <code class="docutils literal"><span class="pre">jl_breakpoint</span></code> by adding</p>
+<div class="highlight-julia"><div class="highlight"><pre><span></span><span class="k">ccall</span><span class="p">(:</span><span class="n">jl_breakpoint</span><span class="p">,</span> <span class="n">Void</span><span class="p">,</span> <span class="p">(</span><span class="kt">Any</span><span class="p">,),</span> <span class="n">obj</span><span class="p">)</span>
 </pre></div>
 </div>
-<p>where <tt class="docutils literal"><span class="pre">obj</span></tt> can be any variable or tuple you want to be accessible in the breakpoint.</p>
-<p>It&#8217;s particularly helpful to back up to the <tt class="docutils literal"><span class="pre">jl_apply</span></tt> frame, from which you can display the arguments to a function using, e.g.,</p>
-<div class="highlight-julia"><div class="highlight"><pre><span class="p">(</span><span class="n">gdb</span><span class="p">)</span> <span class="n">call</span> <span class="n">jl_</span><span class="p">(</span><span class="n">args</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+<p>where <code class="docutils literal"><span class="pre">obj</span></code> can be any variable or tuple you want to be accessible in the breakpoint.</p>
+<p>It&#8217;s particularly helpful to back up to the <code class="docutils literal"><span class="pre">jl_apply</span></code> frame, from which you can display the arguments to a function using, e.g.,</p>
+<div class="highlight-julia"><div class="highlight"><pre><span></span><span class="p">(</span><span class="n">gdb</span><span class="p">)</span> <span class="n">call</span> <span class="n">jl_</span><span class="p">(</span><span class="n">args</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
 </pre></div>
 </div>
-<p>Another useful frame is <tt class="docutils literal"><span class="pre">to_function(jl_lambda_info_t</span> <span class="pre">*li,</span> <span class="pre">bool</span> <span class="pre">cstyle)</span></tt>. The <tt class="docutils literal"><span class="pre">jl_lambda_info_t*</span></tt> argument is a struct with a reference to the final AST sent into the compiler. However, the AST at this point will usually be compressed; to view the AST, call <tt class="docutils literal"><span class="pre">jl_uncompress_ast</span></tt> and then pass the result to <tt class="docutils literal"><span class="pre">jl_</span></tt>:</p>
-<div class="highlight-julia"><div class="highlight"><pre><span class="c">#2  0x00007ffff7928bf7 in to_function (li=0x2812060, cstyle=false) at codegen.cpp:584</span>
+<p>Another useful frame is <code class="docutils literal"><span class="pre">to_function(jl_lambda_info_t</span> <span class="pre">*li,</span> <span class="pre">bool</span> <span class="pre">cstyle)</span></code>. The <code class="docutils literal"><span class="pre">jl_lambda_info_t*</span></code> argument is a struct with a reference to the final AST sent into the compiler. However, the AST at this point will usually be compressed; to view the AST, call <code class="docutils literal"><span class="pre">jl_uncompress_ast</span></code> and then pass the result to <code class="docutils literal"><span class="pre">jl_</span></code>:</p>
+<div class="highlight-julia"><div class="highlight"><pre><span></span><span class="c">#2  0x00007ffff7928bf7 in to_function (li=0x2812060, cstyle=false) at codegen.cpp:584</span>
 <span class="mi">584</span>          <span class="n">abort</span><span class="p">();</span>
 <span class="p">(</span><span class="n">gdb</span><span class="p">)</span> <span class="n">p</span> <span class="n">jl_</span><span class="p">(</span><span class="n">jl_uncompress_ast</span><span class="p">(</span><span class="n">li</span><span class="p">,</span> <span class="n">li</span><span class="o">-&gt;</span><span class="n">ast</span><span class="p">))</span>
 </pre></div>
@@ -536,14 +635,14 @@ there are a number of additional variables (see julia.h for a complete list) tha
 <h2>Inserting breakpoints upon certain conditions<a class="headerlink" href="#inserting-breakpoints-upon-certain-conditions" title="Permalink to this headline">¶</a></h2>
 <div class="section" id="loading-a-particular-file">
 <h3>Loading a particular file<a class="headerlink" href="#loading-a-particular-file" title="Permalink to this headline">¶</a></h3>
-<p>Let&#8217;s say the file is <tt class="docutils literal"><span class="pre">sysimg.jl</span></tt>:</p>
-<div class="highlight-julia"><div class="highlight"><pre><span class="p">(</span><span class="n">gdb</span><span class="p">)</span> <span class="k">break</span> <span class="n">jl_load</span> <span class="k">if</span> <span class="n">strcmp</span><span class="p">(</span><span class="n">fname</span><span class="p">,</span> <span class="s">&quot;sysimg.jl&quot;</span><span class="p">)</span><span class="o">==</span><span class="mi">0</span>
+<p>Let&#8217;s say the file is <code class="docutils literal"><span class="pre">sysimg.jl</span></code>:</p>
+<div class="highlight-julia"><div class="highlight"><pre><span></span><span class="p">(</span><span class="n">gdb</span><span class="p">)</span> <span class="k">break</span> <span class="n">jl_load</span> <span class="k">if</span> <span class="n">strcmp</span><span class="p">(</span><span class="n">fname</span><span class="p">,</span> <span class="s">&quot;sysimg.jl&quot;</span><span class="p">)</span><span class="o">==</span><span class="mi">0</span>
 </pre></div>
 </div>
 </div>
 <div class="section" id="calling-a-particular-method">
 <h3>Calling a particular method<a class="headerlink" href="#calling-a-particular-method" title="Permalink to this headline">¶</a></h3>
-<div class="highlight-julia"><div class="highlight"><pre><span class="p">(</span><span class="n">gdb</span><span class="p">)</span> <span class="k">break</span> <span class="n">jl_apply_generic</span> <span class="k">if</span> <span class="n">strcmp</span><span class="p">((</span><span class="n">char</span><span class="o">*</span><span class="p">)(</span><span class="n">jl_symbol_name</span><span class="p">)(</span><span class="n">jl_gf_mtable</span><span class="p">(</span><span class="n">F</span><span class="p">)</span><span class="o">-&gt;</span><span class="n">name</span><span class="p">),</span> <span class="s">&quot;method_to_break&quot;</span><span class="p">)</span><span class="o">==</span><span class="mi">0</span>
+<div class="highlight-julia"><div class="highlight"><pre><span></span><span class="p">(</span><span class="n">gdb</span><span class="p">)</span> <span class="k">break</span> <span class="n">jl_apply_generic</span> <span class="k">if</span> <span class="n">strcmp</span><span class="p">((</span><span class="n">char</span><span class="o">*</span><span class="p">)(</span><span class="n">jl_symbol_name</span><span class="p">)(</span><span class="n">jl_gf_mtable</span><span class="p">(</span><span class="n">F</span><span class="p">)</span><span class="o">-&gt;</span><span class="n">name</span><span class="p">),</span> <span class="s">&quot;method_to_break&quot;</span><span class="p">)</span><span class="o">==</span><span class="mi">0</span>
 </pre></div>
 </div>
 <p>Since this function is used for every call, you will make everything 1000x slower if you do this.</p>
@@ -551,44 +650,44 @@ there are a number of additional variables (see julia.h for a complete list) tha
 </div>
 <div class="section" id="dealing-with-signals">
 <h2>Dealing with signals<a class="headerlink" href="#dealing-with-signals" title="Permalink to this headline">¶</a></h2>
-<p>Julia requires a few signal to function property. The profiler uses <tt class="docutils literal"><span class="pre">SIGUSR2</span></tt>
-for sampling and the garbage collector uses <tt class="docutils literal"><span class="pre">SIGSEGV</span></tt> for threads
+<p>Julia requires a few signal to function property. The profiler uses <code class="docutils literal"><span class="pre">SIGUSR2</span></code>
+for sampling and the garbage collector uses <code class="docutils literal"><span class="pre">SIGSEGV</span></code> for threads
 synchronization. If you are debugging some code that uses the profiler or
 multiple julia threads, you may want to let the debugger ignore these signals
 since they can be triggered very often during normal operations. The command to
-do this in GDB is (replace <tt class="docutils literal"><span class="pre">SIGSEGV</span></tt> with <tt class="docutils literal"><span class="pre">SIGUSRS</span></tt> or other signals you
+do this in GDB is (replace <code class="docutils literal"><span class="pre">SIGSEGV</span></code> with <code class="docutils literal"><span class="pre">SIGUSRS</span></code> or other signals you
 want to ignore):</p>
-<div class="highlight-julia"><div class="highlight"><pre><span class="p">(</span><span class="n">gdb</span><span class="p">)</span> <span class="n">handle</span> <span class="n">SIGSEGV</span> <span class="n">noprint</span> <span class="n">nostop</span> <span class="n">pass</span>
+<div class="highlight-julia"><div class="highlight"><pre><span></span><span class="p">(</span><span class="n">gdb</span><span class="p">)</span> <span class="n">handle</span> <span class="n">SIGSEGV</span> <span class="n">noprint</span> <span class="n">nostop</span> <span class="n">pass</span>
 </pre></div>
 </div>
 <p>The corresponding LLDB command is (after the process is started):</p>
-<div class="highlight-julia"><div class="highlight"><pre><span class="p">(</span><span class="n">lldb</span><span class="p">)</span> <span class="n">pro</span> <span class="n">hand</span> <span class="o">-</span><span class="n">p</span> <span class="n">true</span> <span class="o">-</span><span class="n">s</span> <span class="n">false</span> <span class="o">-</span><span class="n">n</span> <span class="n">false</span> <span class="n">SIGSEGV</span>
+<div class="highlight-julia"><div class="highlight"><pre><span></span><span class="p">(</span><span class="n">lldb</span><span class="p">)</span> <span class="n">pro</span> <span class="n">hand</span> <span class="o">-</span><span class="n">p</span> <span class="n">true</span> <span class="o">-</span><span class="n">s</span> <span class="n">false</span> <span class="o">-</span><span class="n">n</span> <span class="n">false</span> <span class="n">SIGSEGV</span>
 </pre></div>
 </div>
 <p>If you are debugging a segfault with threaded code, you can set a breakpoint on
-<tt class="docutils literal"><span class="pre">jl_critical_error</span></tt> (<tt class="docutils literal"><span class="pre">sigdie_handler</span></tt> should also work on Linux and BSD) in
+<code class="docutils literal"><span class="pre">jl_critical_error</span></code> (<code class="docutils literal"><span class="pre">sigdie_handler</span></code> should also work on Linux and BSD) in
 order to only catch the actual segfault rather than the GC synchronization points.</p>
 </div>
 <div class="section" id="debugging-during-julia-s-build-process-bootstrap">
 <h2>Debugging during julia&#8217;s build process (bootstrap)<a class="headerlink" href="#debugging-during-julia-s-build-process-bootstrap" title="Permalink to this headline">¶</a></h2>
-<p>Errors that occur during <tt class="docutils literal"><span class="pre">make</span></tt> need special handling. Julia is built in two stages, constructing
-<tt class="docutils literal"><span class="pre">sys0</span></tt> and <tt class="docutils literal"><span class="pre">sys.ji</span></tt>. To see what commands are running at the time of failure, use <tt class="docutils literal"><span class="pre">make</span> <span class="pre">VERBOSE=1</span></tt>.</p>
-<p>At the time of this writing, you can debug build errors during the <tt class="docutils literal"><span class="pre">sys0</span></tt> phase from the <tt class="docutils literal"><span class="pre">base</span></tt>
+<p>Errors that occur during <code class="docutils literal"><span class="pre">make</span></code> need special handling. Julia is built in two stages, constructing
+<code class="docutils literal"><span class="pre">sys0</span></code> and <code class="docutils literal"><span class="pre">sys.ji</span></code>. To see what commands are running at the time of failure, use <code class="docutils literal"><span class="pre">make</span> <span class="pre">VERBOSE=1</span></code>.</p>
+<p>At the time of this writing, you can debug build errors during the <code class="docutils literal"><span class="pre">sys0</span></code> phase from the <code class="docutils literal"><span class="pre">base</span></code>
 directory using:</p>
-<div class="highlight-julia"><div class="highlight"><pre><span class="n">julia</span><span class="o">/</span><span class="n">base</span><span class="o">$</span> <span class="n">gdb</span> <span class="o">--</span><span class="n">args</span> <span class="o">../</span><span class="n">usr</span><span class="o">/</span><span class="n">bin</span><span class="o">/</span><span class="n">julia</span><span class="o">-</span><span class="n">debug</span> <span class="o">-</span><span class="n">C</span> <span class="n">native</span> <span class="o">--</span><span class="n">build</span> <span class="o">../</span><span class="n">usr</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">julia</span><span class="o">/</span><span class="n">sys0</span> <span class="n">sysimg</span><span class="o">.</span><span class="n">jl</span>
+<div class="highlight-julia"><div class="highlight"><pre><span></span><span class="n">julia</span><span class="o">/</span><span class="n">base</span><span class="o">$</span> <span class="n">gdb</span> <span class="o">--</span><span class="n">args</span> <span class="o">../</span><span class="n">usr</span><span class="o">/</span><span class="n">bin</span><span class="o">/</span><span class="n">julia</span><span class="o">-</span><span class="n">debug</span> <span class="o">-</span><span class="n">C</span> <span class="n">native</span> <span class="o">--</span><span class="n">build</span> <span class="o">../</span><span class="n">usr</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">julia</span><span class="o">/</span><span class="n">sys0</span> <span class="n">sysimg</span><span class="o">.</span><span class="n">jl</span>
 </pre></div>
 </div>
-<p>You might need to delete all the files in <tt class="docutils literal"><span class="pre">usr/lib/julia/</span></tt> to get this to work.</p>
-<p>You can debug the <tt class="docutils literal"><span class="pre">sys.ji</span></tt> phase using:</p>
-<div class="highlight-julia"><div class="highlight"><pre><span class="n">julia</span><span class="o">/</span><span class="n">base</span><span class="o">$</span> <span class="n">gdb</span> <span class="o">--</span><span class="n">args</span> <span class="o">../</span><span class="n">usr</span><span class="o">/</span><span class="n">bin</span><span class="o">/</span><span class="n">julia</span><span class="o">-</span><span class="n">debug</span> <span class="o">-</span><span class="n">C</span> <span class="n">native</span> <span class="o">--</span><span class="n">build</span> <span class="o">../</span><span class="n">usr</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">julia</span><span class="o">/</span><span class="n">sys</span> <span class="o">-</span><span class="n">J</span> <span class="o">../</span><span class="n">usr</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">julia</span><span class="o">/</span><span class="n">sys0</span><span class="o">.</span><span class="n">ji</span> <span class="n">sysimg</span><span class="o">.</span><span class="n">jl</span>
+<p>You might need to delete all the files in <code class="docutils literal"><span class="pre">usr/lib/julia/</span></code> to get this to work.</p>
+<p>You can debug the <code class="docutils literal"><span class="pre">sys.ji</span></code> phase using:</p>
+<div class="highlight-julia"><div class="highlight"><pre><span></span><span class="n">julia</span><span class="o">/</span><span class="n">base</span><span class="o">$</span> <span class="n">gdb</span> <span class="o">--</span><span class="n">args</span> <span class="o">../</span><span class="n">usr</span><span class="o">/</span><span class="n">bin</span><span class="o">/</span><span class="n">julia</span><span class="o">-</span><span class="n">debug</span> <span class="o">-</span><span class="n">C</span> <span class="n">native</span> <span class="o">--</span><span class="n">build</span> <span class="o">../</span><span class="n">usr</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">julia</span><span class="o">/</span><span class="n">sys</span> <span class="o">-</span><span class="n">J</span> <span class="o">../</span><span class="n">usr</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">julia</span><span class="o">/</span><span class="n">sys0</span><span class="o">.</span><span class="n">ji</span> <span class="n">sysimg</span><span class="o">.</span><span class="n">jl</span>
 </pre></div>
 </div>
 <p>By default, any errors will cause Julia to exit, even under gdb. To catch an error &#8220;in the act&#8221;, set a breakpoint
-in <tt class="docutils literal"><span class="pre">jl_error</span></tt> (there are several other useful spots, for specific kinds of failures, including: <tt class="docutils literal"><span class="pre">jl_too_few_args</span></tt>,
-<tt class="docutils literal"><span class="pre">jl_too_many_args</span></tt>, and <tt class="docutils literal"><span class="pre">jl_throw</span></tt>).</p>
+in <code class="docutils literal"><span class="pre">jl_error</span></code> (there are several other useful spots, for specific kinds of failures, including: <code class="docutils literal"><span class="pre">jl_too_few_args</span></code>,
+<code class="docutils literal"><span class="pre">jl_too_many_args</span></code>, and <code class="docutils literal"><span class="pre">jl_throw</span></code>).</p>
 <p>Once an error is caught, a useful technique is to walk up the stack and examine the function by inspecting
-the related call to <tt class="docutils literal"><span class="pre">jl_apply</span></tt>. To take a real-world example:</p>
-<div class="highlight-julia"><div class="highlight"><pre><span class="n">Breakpoint</span> <span class="mi">1</span><span class="p">,</span> <span class="n">jl_throw</span> <span class="p">(</span><span class="n">e</span><span class="o">=</span><span class="mh">0x7ffdf42de400</span><span class="p">)</span> <span class="n">at</span> <span class="n">task</span><span class="o">.</span><span class="n">c</span><span class="p">:</span><span class="mi">802</span>
+the related call to <code class="docutils literal"><span class="pre">jl_apply</span></code>. To take a real-world example:</p>
+<div class="highlight-julia"><div class="highlight"><pre><span></span><span class="n">Breakpoint</span> <span class="mi">1</span><span class="p">,</span> <span class="n">jl_throw</span> <span class="p">(</span><span class="n">e</span><span class="o">=</span><span class="mh">0x7ffdf42de400</span><span class="p">)</span> <span class="n">at</span> <span class="n">task</span><span class="o">.</span><span class="n">c</span><span class="p">:</span><span class="mi">802</span>
 <span class="mi">802</span> <span class="p">{</span>
 <span class="p">(</span><span class="n">gdb</span><span class="p">)</span> <span class="n">p</span> <span class="n">jl_</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
 <span class="n">ErrorException</span><span class="p">(</span><span class="s">&quot;auto_unbox: unable to determine argument type&quot;</span><span class="p">)</span>
@@ -603,10 +702,10 @@ the related call to <tt class="docutils literal"><span class="pre">jl_apply</spa
 <span class="s">...</span>
 </pre></div>
 </div>
-<p>The most recent <tt class="docutils literal"><span class="pre">jl_apply</span></tt> is at frame #3, so we can go back there and look at the AST for the function
-<tt class="docutils literal"><span class="pre">julia_convert_16886</span></tt>. This is the uniqued name for some method of <tt class="docutils literal"><span class="pre">convert</span></tt>. <tt class="docutils literal"><span class="pre">f</span></tt> in this frame is a
-<tt class="docutils literal"><span class="pre">jl_function_t*</span></tt>, so we can look at the type signature, if any, from the <tt class="docutils literal"><span class="pre">specTypes</span></tt> field:</p>
-<div class="highlight-julia"><div class="highlight"><pre><span class="p">(</span><span class="n">gdb</span><span class="p">)</span> <span class="n">f</span> <span class="mi">3</span>
+<p>The most recent <code class="docutils literal"><span class="pre">jl_apply</span></code> is at frame #3, so we can go back there and look at the AST for the function
+<code class="docutils literal"><span class="pre">julia_convert_16886</span></code>. This is the uniqued name for some method of <code class="docutils literal"><span class="pre">convert</span></code>. <code class="docutils literal"><span class="pre">f</span></code> in this frame is a
+<code class="docutils literal"><span class="pre">jl_function_t*</span></code>, so we can look at the type signature, if any, from the <code class="docutils literal"><span class="pre">specTypes</span></code> field:</p>
+<div class="highlight-julia"><div class="highlight"><pre><span></span><span class="p">(</span><span class="n">gdb</span><span class="p">)</span> <span class="n">f</span> <span class="mi">3</span>
 <span class="c">#3  0x00007ffff6541154 in jl_apply (f=0x7ffdf367f630, args=0x7fffffffc2b0, nargs=2) at julia.h:1281</span>
 <span class="mi">1281</span>            <span class="k">return</span> <span class="n">f</span><span class="o">-&gt;</span><span class="n">fptr</span><span class="p">((</span><span class="n">jl_value_t</span><span class="o">*</span><span class="p">)</span><span class="n">f</span><span class="p">,</span> <span class="n">args</span><span class="p">,</span> <span class="n">nargs</span><span class="p">);</span>
 <span class="p">(</span><span class="n">gdb</span><span class="p">)</span> <span class="n">p</span> <span class="n">f</span><span class="o">-&gt;</span><span class="n">linfo</span><span class="o">-&gt;</span><span class="n">specTypes</span>
@@ -616,25 +715,42 @@ the related call to <tt class="docutils literal"><span class="pre">jl_apply</spa
 </pre></div>
 </div>
 <p>Then, we can look at the AST for this function:</p>
-<div class="highlight-julia"><div class="highlight"><pre><span class="p">(</span><span class="n">gdb</span><span class="p">)</span> <span class="n">p</span> <span class="n">jl_</span><span class="p">(</span> <span class="n">jl_uncompress_ast</span><span class="p">(</span><span class="n">f</span><span class="o">-&gt;</span><span class="n">linfo</span><span class="p">,</span> <span class="n">f</span><span class="o">-&gt;</span><span class="n">linfo</span><span class="o">-&gt;</span><span class="n">ast</span><span class="p">)</span> <span class="p">)</span>
+<div class="highlight-julia"><div class="highlight"><pre><span></span><span class="p">(</span><span class="n">gdb</span><span class="p">)</span> <span class="n">p</span> <span class="n">jl_</span><span class="p">(</span> <span class="n">jl_uncompress_ast</span><span class="p">(</span><span class="n">f</span><span class="o">-&gt;</span><span class="n">linfo</span><span class="p">,</span> <span class="n">f</span><span class="o">-&gt;</span><span class="n">linfo</span><span class="o">-&gt;</span><span class="n">ast</span><span class="p">)</span> <span class="p">)</span>
 <span class="n">Expr</span><span class="p">(:</span><span class="n">lambda</span><span class="p">,</span> <span class="n">Array</span><span class="p">{</span><span class="kt">Any</span><span class="p">,</span> <span class="mi">1</span><span class="p">}[:</span><span class="c">#s29, :x], Array{Any, 1}[Array{Any, 1}[], Array{Any, 1}[Array{Any, 1}[:#s29, :Any, 0], Array{Any, 1}[:x, :Any, 0]], Array{Any, 1}[], 0], Expr(:body,</span>
 <span class="n">Expr</span><span class="p">(:</span><span class="n">line</span><span class="p">,</span> <span class="mi">90</span><span class="p">,</span> <span class="p">:</span><span class="n">float</span><span class="o">.</span><span class="n">jl</span><span class="p">)::</span><span class="kt">Any</span><span class="p">,</span>
 <span class="n">Expr</span><span class="p">(:</span><span class="k">return</span><span class="p">,</span> <span class="n">Expr</span><span class="p">(:</span><span class="n">call</span><span class="p">,</span> <span class="p">:</span><span class="n">box</span><span class="p">,</span> <span class="p">:</span><span class="kt">Float32</span><span class="p">,</span> <span class="n">Expr</span><span class="p">(:</span><span class="n">call</span><span class="p">,</span> <span class="p">:</span><span class="n">fptrunc</span><span class="p">,</span> <span class="p">:</span><span class="kt">Float32</span><span class="p">,</span> <span class="p">:</span><span class="n">x</span><span class="p">)::</span><span class="kt">Any</span><span class="p">)::</span><span class="kt">Any</span><span class="p">)::</span><span class="kt">Any</span><span class="p">)::</span><span class="kt">Any</span><span class="p">)::</span><span class="kt">Any</span>
 </pre></div>
 </div>
 <p>Finally, and perhaps most usefully, we can force the function to be recompiled in order to step through the
-codegen process. To do this, clear the cached <tt class="docutils literal"><span class="pre">functionObject</span></tt> from the <tt class="docutils literal"><span class="pre">jl_lamdbda_info_t*</span></tt>:</p>
-<div class="highlight-julia"><div class="highlight"><pre><span class="p">(</span><span class="n">gdb</span><span class="p">)</span> <span class="n">p</span> <span class="n">f</span><span class="o">-&gt;</span><span class="n">linfo</span><span class="o">-&gt;</span><span class="n">functionObject</span>
+codegen process. To do this, clear the cached <code class="docutils literal"><span class="pre">functionObject</span></code> from the <code class="docutils literal"><span class="pre">jl_lamdbda_info_t*</span></code>:</p>
+<div class="highlight-julia"><div class="highlight"><pre><span></span><span class="p">(</span><span class="n">gdb</span><span class="p">)</span> <span class="n">p</span> <span class="n">f</span><span class="o">-&gt;</span><span class="n">linfo</span><span class="o">-&gt;</span><span class="n">functionObject</span>
 <span class="o">$</span><span class="mi">8</span> <span class="o">=</span> <span class="p">(</span><span class="n">void</span> <span class="o">*</span><span class="p">)</span> <span class="mh">0x1289d070</span>
 <span class="p">(</span><span class="n">gdb</span><span class="p">)</span> <span class="n">set</span> <span class="n">f</span><span class="o">-&gt;</span><span class="n">linfo</span><span class="o">-&gt;</span><span class="n">functionObject</span> <span class="o">=</span> <span class="n">NULL</span>
 </pre></div>
 </div>
-<p>Then, set a breakpoint somewhere useful (e.g. <tt class="docutils literal"><span class="pre">emit_function</span></tt>, <tt class="docutils literal"><span class="pre">emit_expr</span></tt>, <tt class="docutils literal"><span class="pre">emit_call</span></tt>, etc.), and run
+<p>Then, set a breakpoint somewhere useful (e.g. <code class="docutils literal"><span class="pre">emit_function</span></code>, <code class="docutils literal"><span class="pre">emit_expr</span></code>, <code class="docutils literal"><span class="pre">emit_call</span></code>, etc.), and run
 codegen:</p>
-<div class="highlight-julia"><div class="highlight"><pre><span class="p">(</span><span class="n">gdb</span><span class="p">)</span> <span class="n">p</span> <span class="n">jl_compile</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
+<div class="highlight-julia"><div class="highlight"><pre><span></span><span class="p">(</span><span class="n">gdb</span><span class="p">)</span> <span class="n">p</span> <span class="n">jl_compile</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
 <span class="o">...</span> <span class="c"># your breakpoint here</span>
 </pre></div>
 </div>
+</div>
+<div class="section" id="debugging-precompilation-errors">
+<h2>Debugging precompilation errors<a class="headerlink" href="#debugging-precompilation-errors" title="Permalink to this headline">¶</a></h2>
+<p>Module precompilation spawns a separate Julia process to precompile each module. Setting a breakpoint
+or catching failures in a precompile worker requires attaching a debugger to the worker. The easiest
+approach is to set the debugger watch for new process launches matching a given name. For example:</p>
+<div class="highlight-julia"><div class="highlight"><pre><span></span><span class="p">(</span><span class="n">gdb</span><span class="p">)</span> <span class="n">attach</span> <span class="o">-</span><span class="n">w</span> <span class="o">-</span><span class="n">n</span> <span class="n">julia</span><span class="o">-</span><span class="n">debug</span>
+</pre></div>
+</div>
+<p>or:</p>
+<div class="highlight-julia"><div class="highlight"><pre><span></span><span class="p">(</span><span class="n">lldb</span><span class="p">)</span> <span class="n">process</span> <span class="n">attach</span> <span class="o">-</span><span class="n">w</span> <span class="o">-</span><span class="n">n</span> <span class="n">julia</span><span class="o">-</span><span class="n">debug</span>
+</pre></div>
+</div>
+<p>Then run a script/command to start precompilation. As described earlier, use conditional breakpoints
+in the parent process to catch specific file-loading events and narrow the debugging window.
+(some operating systems may require alternative approaches, such as following each <code class="docutils literal"><span class="pre">fork</span></code> from the
+parent process)</p>
 </div>
 <div class="section" id="mozilla-s-record-and-replay-framework-rr">
 <h2>Mozilla&#8217;s Record and Replay Framework (rr)<a class="headerlink" href="#mozilla-s-record-and-replay-framework-rr" title="Permalink to this headline">¶</a></h2>
@@ -642,7 +758,7 @@ codegen:</p>
 deterministic debugging framework from Mozilla. This allows you to replay the trace of an execution
 deterministically.  The replayed execution&#8217;s address spaces, register contents, syscall data etc
 are exactly the same in every run.</p>
-<p>A recent version of <tt class="docutils literal"><span class="pre">rr</span></tt> (3.1.0 or higher) is required.</p>
+<p>A recent version of <code class="docutils literal"><span class="pre">rr</span></code> (3.1.0 or higher) is required.</p>
 </div>
 </div>
 
@@ -652,10 +768,10 @@ are exactly the same in every run.</p>
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="valgrind.html" class="btn btn-neutral float-right" title="Using Valgrind with Julia" accesskey="n"> 다음 <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="valgrind.html" class="btn btn-neutral float-right" title="Using Valgrind with Julia">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="backtraces.html" class="btn btn-neutral" title="Reporting and analyzing crashes (segfaults)" accesskey="p"><span class="fa fa-arrow-circle-left"></span> 이전 </a>
+        <a href="backtraces.html" class="btn btn-neutral" title="Reporting and analyzing crashes (segfaults)"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   
@@ -664,40 +780,11 @@ are exactly the same in every run.</p>
 
   <div role="contentinfo">
     <p>
-      Last updated on Apr 07, 2016.
     </p>
   </div>
 
+  <a href="https://github.com/snide/sphinx_rtd_theme">Sphinx theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>
 </footer>
-
-
-<div
-  class="fb-like"
-  data-share="true"
-  data-width="450"
-  data-show-faces="true">
-</div>
-
-<script>
-  window.fbAsyncInit = function() {
-    FB.init({
-      appId      : '685509058259607',
-      xfbml      : true,
-      version    : 'v2.3'
-    });
-  };
-
-  (function(d, s, id){
-     var js, fjs = d.getElementsByTagName(s)[0];
-     if (d.getElementById(id)) {return;}
-     js = d.createElement(s); js.id = id;
-     js.src = "https://connect.facebook.net/ko_KR/sdk.js";
-     fjs.parentNode.insertBefore(js, fjs);
-   }(document, 'script', 'facebook-jssdk'));
-</script>
-
-<div class="fb-comments" data-width="100%" data-version="v2.3"></div>
-
         </div>
       </div>
 
@@ -720,7 +807,7 @@ are exactly the same in every run.</p>
       <script type="text/javascript" src="../_static/jquery.js"></script>
       <script type="text/javascript" src="../_static/underscore.js"></script>
       <script type="text/javascript" src="../_static/doctools.js"></script>
-      <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+      <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
 
   
 
@@ -737,16 +824,6 @@ are exactly the same in every run.</p>
       });
   </script>
    
-
-
-<script type="text/javascript" src="../_static/jquery.word-break-keep-all.min.js"></script>
-<script type="text/javascript">
-$(document).ready(function(){
-  $('p').wordBreakKeepAll();
-});
-</script>
-
-<script type="text/javascript" src="../_static/blame.js"></script>
 
 </body>
 </html>

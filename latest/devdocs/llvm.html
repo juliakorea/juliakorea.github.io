@@ -6,10 +6,8 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta property="fb:app_id" content="685509058259607" />
-
   
-  <title>Working with LLVM</title>
+  <title>Working with LLVM &mdash; Julia Language X.Y.Z-unknown documentation</title>
   
 
   
@@ -32,13 +30,14 @@
   
     <link rel="stylesheet" href="../_static/julia.css" type="text/css" />
   
-    <link rel="top" title="None" href="../index.html"/>
+    <link rel="top" title="Julia Language X.Y.Z-unknown documentation" href="../index.html"/>
         <link rel="up" title="Documentation of Julia’s Internals" href="julia.html"/>
         <link rel="next" title="printf() and stdio in the Julia runtime" href="stdio.html"/>
         <link rel="prev" title="System Image Building" href="sysimg.html"/> 
 
   
   <script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.6.2/modernizr.min.js"></script>
+
 </head>
 
 <body class="wy-body-for-nav" role="document">
@@ -52,9 +51,8 @@
         <!--
         <a href="../index.html" class="fa fa-home"> Julia Language</a>
         -->
-        
-<div role="search">
-  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+        <div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../search.html" method="get">
     <input type="text" name="q" placeholder="Search docs" />
     <input type="hidden" name="check_keywords" value="yes" />
     <input type="hidden" name="area" value="default" />
@@ -111,19 +109,20 @@
 <li class="toctree-l2"><a class="reference internal" href="../manual/strings.html#version-number-literals">Version Number Literals</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="../manual/functions.html">Functions</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="../manual/functions.html#argument-passing-behavior">Argument Passing Behavior</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../manual/functions.html#the-return-keyword">The <tt class="docutils literal"><span class="pre">return</span></tt> Keyword</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../manual/functions.html#operators-are-functions">Operators Are Functions</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../manual/functions.html#operators-with-special-names">Operators With Special Names</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../manual/functions.html#anonymous-functions">Anonymous Functions</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../manual/functions.html#multiple-return-values">Multiple Return Values</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../manual/functions.html#varargs-functions">Varargs Functions</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../manual/functions.html#optional-arguments">Optional Arguments</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../manual/functions.html#keyword-arguments">Keyword Arguments</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../manual/functions.html#evaluation-scope-of-default-values">Evaluation Scope of Default Values</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../manual/functions.html#do-block-syntax-for-function-arguments">Do-Block Syntax for Function Arguments</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../manual/functions.html#further-reading">Further Reading</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../manual/functions.html">함수</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../manual/functions.html#id2">매개변수 전달 매커니즘</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../manual/functions.html#return"><code class="docutils literal"><span class="pre">return</span></code> 키워드</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../manual/functions.html#id3">연산자 또한 함수</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../manual/functions.html#id4">특별한 이름을 지니고 있는 연산자</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../manual/functions.html#man-anonymous-functions">익명 함수</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../manual/functions.html#id6">다수의 리턴값</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../manual/functions.html#man-varargs-functions">가변인자 함수</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../manual/functions.html#id8">선택적 매개변수</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../manual/functions.html#id9">키워드 매개변수</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../manual/functions.html#scope">디폴트 값의 계산 스코프(scope)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../manual/functions.html#do-block">함수 매개변수의 Do-Block 문법</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../manual/functions.html#dot">함수의 벡터화를 위한 Dot 문법</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../manual/functions.html#id10">더 읽을거리</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../manual/control-flow.html">Control Flow</a><ul>
@@ -160,6 +159,7 @@
 <li class="toctree-l2"><a class="reference internal" href="../manual/methods.html#defining-methods">Defining Methods</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../manual/methods.html#method-ambiguities">Method Ambiguities</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../manual/methods.html#parametric-methods">Parametric Methods</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../manual/methods.html#parametrically-constrained-varargs-methods">Parametrically-constrained Varargs methods</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../manual/methods.html#note-on-optional-and-keyword-arguments">Note on Optional and keyword Arguments</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../manual/methods.html#function-like-objects">Function-like objects</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../manual/methods.html#empty-generic-functions">Empty generic functions</a></li>
@@ -236,8 +236,11 @@
 <li class="toctree-l2"><a class="reference internal" href="../manual/parallel-computing.html#remote-references-and-abstractchannels">Remote references and AbstractChannels</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../manual/parallel-computing.html#remote-references-and-distributed-garbage-collection">Remote References and Distributed Garbage Collection</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../manual/parallel-computing.html#id2">Shared Arrays</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../manual/parallel-computing.html#shared-arrays-and-distributed-garbage-collection">Shared Arrays and Distributed Garbage Collection</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../manual/parallel-computing.html#clustermanagers">ClusterManagers</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../manual/parallel-computing.html#cluster-managers-with-custom-transports">Cluster Managers with custom transports</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../manual/parallel-computing.html#network-requirements-for-localmanager-and-sshmanager">Network requirements for LocalManager and SSHManager</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../manual/parallel-computing.html#cluster-cookie">Cluster cookie</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../manual/parallel-computing.html#specifying-network-topology-experimental">Specifying network topology (Experimental)</a></li>
 </ul>
 </li>
@@ -271,9 +274,9 @@
 <li class="toctree-l2"><a class="reference internal" href="../manual/calling-c-and-fortran-code.html#thread-safety">Thread-safety</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../manual/calling-c-and-fortran-code.html#more-about-callbacks">More About Callbacks</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../manual/calling-c-and-fortran-code.html#c">C++</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../manual/calling-c-and-fortran-code.html#handling-operating-system-variation">Handling Operating System Variation</a></li>
 </ul>
 </li>
+<li class="toctree-l1"><a class="reference internal" href="../manual/handling-operating-system-variation.html">Handling Operating System Variation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../manual/interacting-with-julia.html">Interacting With Julia</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="../manual/interacting-with-julia.html#the-different-prompt-modes">The different prompt modes</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../manual/interacting-with-julia.html#key-bindings">Key bindings</a></li>
@@ -319,19 +322,21 @@
 <li class="toctree-l2"><a class="reference internal" href="../manual/stacktraces.html#viewing-a-stack-trace">Viewing a stack trace</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../manual/stacktraces.html#extracting-useful-information">Extracting useful information</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../manual/stacktraces.html#error-handling">Error handling</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../manual/stacktraces.html#comparison-with-backtrace">Comparison with <tt class="docutils literal"><span class="pre">backtrace()</span></tt></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../manual/stacktraces.html#comparison-with-backtrace">Comparison with <code class="docutils literal"><span class="pre">backtrace()</span></code></a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../manual/performance-tips.html">Performance Tips</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="../manual/performance-tips.html#avoid-global-variables">Avoid global variables</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../manual/performance-tips.html#measure-performance-with-time-and-pay-attention-to-memory-allocation">Measure performance with <tt class="docutils literal"><span class="pre">&#64;time</span></tt> and pay attention to memory allocation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../manual/performance-tips.html#measure-performance-with-time-and-pay-attention-to-memory-allocation">Measure performance with <code class="docutils literal"><span class="pre">&#64;time</span></code> and pay attention to memory allocation</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../manual/performance-tips.html#tools">Tools</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../manual/performance-tips.html#avoid-containers-with-abstract-type-parameters">Avoid containers with abstract type parameters</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../manual/performance-tips.html#type-declarations">Type declarations</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../manual/performance-tips.html#break-functions-into-multiple-definitions">Break functions into multiple definitions</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../manual/performance-tips.html#write-type-stable-functions">Write &#8220;type-stable&#8221; functions</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../manual/performance-tips.html#avoid-changing-the-type-of-a-variable">Avoid changing the type of a variable</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../manual/performance-tips.html#separate-kernel-functions">Separate kernel functions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../manual/performance-tips.html#separate-kernel-functions-aka-function-barriers">Separate kernel functions (aka, function barriers)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../manual/performance-tips.html#types-with-values-as-parameters">Types with values-as-parameters</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../manual/performance-tips.html#the-dangers-of-abusing-multiple-dispatch-aka-more-on-types-with-values-as-parameters">The dangers of abusing multiple dispatch (aka, more on types with values-as-parameters)</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../manual/performance-tips.html#access-arrays-in-memory-order-along-columns">Access arrays in memory order, along columns</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../manual/performance-tips.html#pre-allocating-outputs">Pre-allocating outputs</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../manual/performance-tips.html#avoid-string-interpolation-for-i-o">Avoid string interpolation for I/O</a></li>
@@ -340,7 +345,7 @@
 <li class="toctree-l2"><a class="reference internal" href="../manual/performance-tips.html#tweaks">Tweaks</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../manual/performance-tips.html#performance-annotations">Performance Annotations</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../manual/performance-tips.html#treat-subnormal-numbers-as-zeros">Treat Subnormal Numbers as Zeros</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../manual/performance-tips.html#code-warntype"><tt class="docutils literal"><span class="pre">&#64;code_warntype</span></tt></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../manual/performance-tips.html#code-warntype"><code class="docutils literal"><span class="pre">&#64;code_warntype</span></code></a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../manual/workflow-tips.html">Workflow Tips</a><ul>
@@ -352,11 +357,11 @@
 <li class="toctree-l2"><a class="reference internal" href="../manual/style-guide.html#write-functions-not-just-scripts">Write functions, not just scripts</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../manual/style-guide.html#avoid-writing-overly-specific-types">Avoid writing overly-specific types</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../manual/style-guide.html#handle-excess-argument-diversity-in-the-caller">Handle excess argument diversity in the caller</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../manual/style-guide.html#append-to-names-of-functions-that-modify-their-arguments">Append <tt class="docutils literal"><span class="pre">!</span></tt> to names of functions that modify their arguments</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../manual/style-guide.html#append-to-names-of-functions-that-modify-their-arguments">Append <code class="docutils literal"><span class="pre">!</span></code> to names of functions that modify their arguments</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../manual/style-guide.html#avoid-strange-type-unions">Avoid strange type Unions</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../manual/style-guide.html#avoid-type-unions-in-fields">Avoid type Unions in fields</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../manual/style-guide.html#avoid-elaborate-container-types">Avoid elaborate container types</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../manual/style-guide.html#use-naming-conventions-consistent-with-julia-s-base">Use naming conventions consistent with Julia&#8217;s <tt class="docutils literal"><span class="pre">base/</span></tt></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../manual/style-guide.html#use-naming-conventions-consistent-with-julia-s-base">Use naming conventions consistent with Julia&#8217;s <code class="docutils literal"><span class="pre">base/</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="../manual/style-guide.html#don-t-overuse-try-catch">Don&#8217;t overuse try-catch</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../manual/style-guide.html#don-t-parenthesize-conditions">Don&#8217;t parenthesize conditions</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../manual/style-guide.html#don-t-overuse">Don&#8217;t overuse ...</a></li>
@@ -366,7 +371,7 @@
 <li class="toctree-l2"><a class="reference internal" href="../manual/style-guide.html#don-t-expose-unsafe-operations-at-the-interface-level">Don&#8217;t expose unsafe operations at the interface level</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../manual/style-guide.html#don-t-overload-methods-of-base-container-types">Don&#8217;t overload methods of base container types</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../manual/style-guide.html#be-careful-with-type-equality">Be careful with type equality</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../manual/style-guide.html#do-not-write-x-f-x">Do not write <tt class="docutils literal"><span class="pre">x-&gt;f(x)</span></tt></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../manual/style-guide.html#do-not-write-x-f-x">Do not write <code class="docutils literal"><span class="pre">x-&gt;f(x)</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="../manual/style-guide.html#avoid-using-floats-for-numeric-literals-in-generic-code-when-possible">Avoid using floats for numeric literals in generic code when possible</a></li>
 </ul>
 </li>
@@ -390,7 +395,114 @@
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../manual/unicode-input.html">Unicode Input</a></li>
 </ul>
-<ul class="simple">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../stdlib/base.html">Essentials</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../stdlib/base.html#introduction">Introduction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../stdlib/base.html#getting-around">Getting Around</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../stdlib/base.html#all-objects">All Objects</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../stdlib/base.html#types">Types</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../stdlib/base.html#generic-functions">Generic Functions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../stdlib/base.html#syntax">Syntax</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../stdlib/base.html#nullables">Nullables</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../stdlib/base.html#system">System</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../stdlib/base.html#errors">Errors</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../stdlib/base.html#events">Events</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../stdlib/base.html#reflection">Reflection</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../stdlib/base.html#internals">Internals</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../stdlib/collections.html">Collections and Data Structures</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../stdlib/collections.html#iteration">Iteration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../stdlib/collections.html#general-collections">General Collections</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../stdlib/collections.html#iterable-collections">Iterable Collections</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../stdlib/collections.html#indexable-collections">Indexable Collections</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../stdlib/collections.html#associative-collections">Associative Collections</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../stdlib/collections.html#set-like-collections">Set-Like Collections</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../stdlib/collections.html#dequeues">Dequeues</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../stdlib/collections.html#priorityqueue">PriorityQueue</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../stdlib/collections.html#heap-functions">Heap Functions</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../stdlib/math.html">Mathematics</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../stdlib/math.html#mathematical-operators">Mathematical Operators</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../stdlib/math.html#mathematical-functions">Mathematical Functions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../stdlib/math.html#statistics">Statistics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../stdlib/math.html#signal-processing">Signal Processing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../stdlib/math.html#numerical-integration">Numerical Integration</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../stdlib/numbers.html">Numbers</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../stdlib/numbers.html#standard-numeric-types">Standard Numeric Types</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../stdlib/numbers.html#data-formats">Data Formats</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../stdlib/numbers.html#general-number-functions-and-constants">General Number Functions and Constants</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../stdlib/numbers.html#bigfloats">BigFloats</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../stdlib/numbers.html#random-numbers">Random Numbers</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../stdlib/strings.html">Strings</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../stdlib/arrays.html">Arrays</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../stdlib/arrays.html#basic-functions">Basic functions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../stdlib/arrays.html#constructors">Constructors</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../stdlib/arrays.html#mathematical-operators-and-functions">Mathematical operators and functions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../stdlib/arrays.html#indexing-assignment-and-concatenation">Indexing, Assignment, and Concatenation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../stdlib/arrays.html#array-functions">Array functions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../stdlib/arrays.html#combinatorics">Combinatorics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../stdlib/arrays.html#bitarrays">BitArrays</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../stdlib/arrays.html#sparse-vectors-and-matrices">Sparse Vectors and Matrices</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../stdlib/parallel.html">Tasks and Parallel Computing</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../stdlib/parallel.html#tasks">Tasks</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../stdlib/parallel.html#general-parallel-computing-support">General Parallel Computing Support</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../stdlib/parallel.html#shared-arrays">Shared Arrays</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../stdlib/parallel.html#multi-threading">Multi-Threading</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../stdlib/parallel.html#cluster-manager-interface">Cluster Manager Interface</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../stdlib/linalg.html">Linear Algebra</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../stdlib/linalg.html#module-Base.LinAlg">Standard Functions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../stdlib/linalg.html#module-Base.LinAlg.BLAS">BLAS Functions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../stdlib/linalg.html#module-Base.LinAlg.LAPACK">LAPACK Functions</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../stdlib/constants.html">Constants</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../stdlib/file.html">Filesystem</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../stdlib/io-network.html">I/O and Network</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../stdlib/io-network.html#general-i-o">General I/O</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../stdlib/io-network.html#text-i-o">Text I/O</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../stdlib/io-network.html#multimedia-i-o">Multimedia I/O</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../stdlib/io-network.html#memory-mapped-i-o">Memory-mapped I/O</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../stdlib/io-network.html#network-i-o">Network I/O</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../stdlib/punctuation.html">Punctuation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../stdlib/sort.html">Sorting and Related Functions</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../stdlib/sort.html#sorting-functions">Sorting Functions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../stdlib/sort.html#order-related-functions">Order-Related Functions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../stdlib/sort.html#sorting-algorithms">Sorting Algorithms</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../stdlib/pkg.html">Package Manager Functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../stdlib/dates.html">Dates and Time</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../stdlib/dates.html#dates-and-time-types">Dates and Time Types</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../stdlib/dates.html#dates-functions">Dates Functions</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../stdlib/test.html">Unit Testing</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../stdlib/test.html#testing-base-julia">Testing Base Julia</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../stdlib/test.html#basic-unit-tests">Basic Unit Tests</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../stdlib/test.html#working-with-test-sets">Working with Test Sets</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../stdlib/test.html#other-test-macros">Other Test Macros</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../stdlib/test.html#creating-custom-abstracttestset-types">Creating Custom <code class="docutils literal"><span class="pre">AbstractTestSet</span></code> Types</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../stdlib/c.html">C Interface</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../stdlib/c.html#llvm-interface">LLVM Interface</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../stdlib/libc.html">C Standard Library</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../stdlib/libdl.html">Dynamic Linker</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../stdlib/profile.html">Profiling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../stdlib/stacktraces.html">StackTraces</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../stdlib/simd-types.html">SIMD Support</a></li>
 </ul>
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="reflection.html">Reflection and introspection</a></li>
@@ -403,7 +515,7 @@
 <li class="toctree-l2"><a class="reference internal" href="functions.html">Julia Functions</a></li>
 <li class="toctree-l2"><a class="reference internal" href="callconv.html">Calling Conventions</a></li>
 <li class="toctree-l2"><a class="reference internal" href="cartesian.html">Base.Cartesian</a></li>
-<li class="toctree-l2"><a class="reference internal" href="meta.html">Talking to the compiler (the <tt class="docutils literal"><span class="pre">:meta</span></tt> mechanism)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="meta.html">Talking to the compiler (the <code class="docutils literal"><span class="pre">:meta</span></code> mechanism)</a></li>
 <li class="toctree-l2"><a class="reference internal" href="subarrays.html">SubArrays</a></li>
 <li class="toctree-l2"><a class="reference internal" href="sysimg.html">System Image Building</a></li>
 <li class="toctree-l2 current"><a class="current reference internal" href="">Working with LLVM</a></li>
@@ -416,14 +528,6 @@
 <li class="toctree-l2"><a class="reference internal" href="backtraces.html">Reporting and analyzing crashes (segfaults)</a></li>
 <li class="toctree-l2"><a class="reference internal" href="debuggingtips.html">gdb debugging tips</a></li>
 <li class="toctree-l2"><a class="reference internal" href="valgrind.html">Using Valgrind with Julia</a></li>
-</ul>
-</li>
-</ul>
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="../phdthesis/chap6.html">결론</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="../phdthesis/chap6.html#id2">성능</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../phdthesis/chap6.html#id3">앞으로 할 작업들</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../phdthesis/chap6.html#id4">프로젝트 상황</a></li>
 </ul>
 </li>
 </ul>
@@ -442,7 +546,6 @@
       </nav>
 
 
-
       
       <div class="wy-nav-content">
         <div class="rst-content">
@@ -455,11 +558,7 @@
     <li>Working with LLVM</li>
       <li class="wy-breadcrumbs-aside">
         
-          
-            
-              <a href="#" onclick="blame('devdocs/llvm')" rel="nofollow"> 원문 보기</a>
-            
-          
+          <a href="../_sources/devdocs/llvm.txt" rel="nofollow"> View page source</a>
         
       </li>
   </ul>
@@ -474,83 +573,83 @@ of tips for working on LLVM for Julia.</p>
 <div class="section" id="overview-of-julia-to-llvm-interface">
 <h2>Overview of Julia to LLVM Interface<a class="headerlink" href="#overview-of-julia-to-llvm-interface" title="Permalink to this headline">¶</a></h2>
 <p>Julia statically links in LLVM by default.
-Build with <tt class="docutils literal"><span class="pre">USE_LLVM_SHLIB=1</span></tt> to link dynamically.</p>
+Build with <code class="docutils literal"><span class="pre">USE_LLVM_SHLIB=1</span></code> to link dynamically.</p>
 <p>The code for lowering Julia AST to LLVM IR or interpreting it directly is in
-directory <tt class="docutils literal"><span class="pre">src/</span></tt>.</p>
+directory <code class="docutils literal"><span class="pre">src/</span></code>.</p>
 <table border="1" class="docutils">
 <colgroup>
 <col width="26%" />
 <col width="74%" />
 </colgroup>
 <tbody valign="top">
-<tr class="row-odd"><td><tt class="docutils literal"><span class="pre">builtins.c</span></tt></td>
+<tr class="row-odd"><td><code class="docutils literal"><span class="pre">builtins.c</span></code></td>
 <td>Builtin functions</td>
 </tr>
-<tr class="row-even"><td><tt class="docutils literal"><span class="pre">ccall.cpp</span></tt></td>
-<td>Lowering <tt class="docutils literal"><span class="pre">ccall</span></tt></td>
+<tr class="row-even"><td><code class="docutils literal"><span class="pre">ccall.cpp</span></code></td>
+<td>Lowering <code class="docutils literal"><span class="pre">ccall</span></code></td>
 </tr>
-<tr class="row-odd"><td><tt class="docutils literal"><span class="pre">cgutils.cpp</span></tt></td>
+<tr class="row-odd"><td><code class="docutils literal"><span class="pre">cgutils.cpp</span></code></td>
 <td>Lowering utilities, notably for array and tuple accesses</td>
 </tr>
-<tr class="row-even"><td><tt class="docutils literal"><span class="pre">codegen.cpp</span></tt></td>
+<tr class="row-even"><td><code class="docutils literal"><span class="pre">codegen.cpp</span></code></td>
 <td>Top-level of code generation, pass list, lowering builtins</td>
 </tr>
-<tr class="row-odd"><td><tt class="docutils literal"><span class="pre">debuginfo.cpp</span></tt></td>
+<tr class="row-odd"><td><code class="docutils literal"><span class="pre">debuginfo.cpp</span></code></td>
 <td>Tracks debug information for JIT code</td>
 </tr>
-<tr class="row-even"><td><tt class="docutils literal"><span class="pre">disasm.cpp</span></tt></td>
+<tr class="row-even"><td><code class="docutils literal"><span class="pre">disasm.cpp</span></code></td>
 <td>Handles native object file and JIT code diassembly</td>
 </tr>
-<tr class="row-odd"><td><tt class="docutils literal"><span class="pre">gf.c</span></tt></td>
+<tr class="row-odd"><td><code class="docutils literal"><span class="pre">gf.c</span></code></td>
 <td>Generic functions</td>
 </tr>
-<tr class="row-even"><td><tt class="docutils literal"><span class="pre">intrinsics.cpp</span></tt></td>
+<tr class="row-even"><td><code class="docutils literal"><span class="pre">intrinsics.cpp</span></code></td>
 <td>Lowering intrinsics</td>
 </tr>
-<tr class="row-odd"><td><tt class="docutils literal"><span class="pre">llvm-simdloop.cpp</span></tt></td>
-<td>Custom LLVM pass for <tt class="docutils literal"><span class="pre">&#64;simd</span></tt></td>
+<tr class="row-odd"><td><code class="docutils literal"><span class="pre">llvm-simdloop.cpp</span></code></td>
+<td>Custom LLVM pass for <code class="docutils literal"><span class="pre">&#64;simd</span></code></td>
 </tr>
-<tr class="row-even"><td><tt class="docutils literal"><span class="pre">sys.c</span></tt></td>
+<tr class="row-even"><td><code class="docutils literal"><span class="pre">sys.c</span></code></td>
 <td>I/O and operating system utility functions</td>
 </tr>
 </tbody>
 </table>
-<p>Some of the <tt class="docutils literal"><span class="pre">.cpp</span></tt> files form a group that compile to a single object.</p>
+<p>Some of the <code class="docutils literal"><span class="pre">.cpp</span></code> files form a group that compile to a single object.</p>
 <p>The difference between an intrinsic and a builtin is that a builtin is a first class
 function that can be used like any other Julia function.  An intrinsic can operate
 only on unboxed data, and therefore its arguments must be statically typed.</p>
 <div class="section" id="alias-analysis">
 <h3>Alias Analysis<a class="headerlink" href="#alias-analysis" title="Permalink to this headline">¶</a></h3>
 <p>Julia currently uses LLVM&#8217;s <a class="reference external" href="http://llvm.org/docs/LangRef.html#tbaa-metadata">Type Based Alias Analysis</a>.
-To find the comments that document the inclusion relationships, look for <tt class="docutils literal"><span class="pre">static</span> <span class="pre">MDNode*</span></tt>
-in <tt class="docutils literal"><span class="pre">src/codegen.cpp</span></tt>.</p>
-<p>The <tt class="docutils literal"><span class="pre">-O</span></tt> option enables LLVM&#8217;s <a class="reference external" href="http://llvm.org/docs/AliasAnalysis.html#the-basicaa-pass">Basic Alias Analysis</a>.</p>
+To find the comments that document the inclusion relationships, look for <code class="docutils literal"><span class="pre">static</span> <span class="pre">MDNode*</span></code>
+in <code class="docutils literal"><span class="pre">src/codegen.cpp</span></code>.</p>
+<p>The <code class="docutils literal"><span class="pre">-O</span></code> option enables LLVM&#8217;s <a class="reference external" href="http://llvm.org/docs/AliasAnalysis.html#the-basicaa-pass">Basic Alias Analysis</a>.</p>
 </div>
 </div>
 <div class="section" id="building-julia-with-a-different-version-of-llvm">
 <h2>Building Julia with a different version of LLVM<a class="headerlink" href="#building-julia-with-a-different-version-of-llvm" title="Permalink to this headline">¶</a></h2>
-<p>The default version of LLVM is specified in <tt class="docutils literal"><span class="pre">deps/Versions.make</span></tt>.
-You can override it by creating a file called <tt class="docutils literal"><span class="pre">Make.user</span></tt> in the top-level directory and adding a line to it such as:</p>
-<div class="highlight-make"><div class="highlight"><pre><span class="nv">LLVM_VER</span> <span class="o">=</span> 3.5.0
+<p>The default version of LLVM is specified in <code class="docutils literal"><span class="pre">deps/Versions.make</span></code>.
+You can override it by creating a file called <code class="docutils literal"><span class="pre">Make.user</span></code> in the top-level directory and adding a line to it such as:</p>
+<div class="highlight-make"><div class="highlight"><pre><span></span><span class="nv">LLVM_VER</span> <span class="o">=</span> 3.5.0
 </pre></div>
 </div>
 <p>Besides the LLVM release numerals, you can
-also use <tt class="docutils literal"><span class="pre">LLVM_VER</span> <span class="pre">=</span> <span class="pre">svn</span></tt> to bulid against the latest development version
+also use <code class="docutils literal"><span class="pre">LLVM_VER</span> <span class="pre">=</span> <span class="pre">svn</span></code> to bulid against the latest development version
 of LLVM.</p>
 </div>
 <div class="section" id="passing-options-to-llvm">
 <h2>Passing options to LLVM<a class="headerlink" href="#passing-options-to-llvm" title="Permalink to this headline">¶</a></h2>
 <p>You can pass options to LLVM using <em>debug</em> builds of Julia.  To create a debug
-build, run <tt class="docutils literal"><span class="pre">make</span> <span class="pre">debug</span></tt>.  The resulting executable is <tt class="docutils literal"><span class="pre">usr/bin/julia-debug</span></tt>.
-You can pass LLVM options to this executable via the environment variable <tt class="docutils literal"><span class="pre">JULIA_LLVM_ARGS</span></tt>.
-Here are example settings using <tt class="docutils literal"><span class="pre">bash</span></tt> syntax:</p>
+build, run <code class="docutils literal"><span class="pre">make</span> <span class="pre">debug</span></code>.  The resulting executable is <code class="docutils literal"><span class="pre">usr/bin/julia-debug</span></code>.
+You can pass LLVM options to this executable via the environment variable <code class="docutils literal"><span class="pre">JULIA_LLVM_ARGS</span></code>.
+Here are example settings using <code class="docutils literal"><span class="pre">bash</span></code> syntax:</p>
 <ul class="simple">
-<li><tt class="docutils literal"><span class="pre">export</span> <span class="pre">JULIA_LLVM_ARGS</span> <span class="pre">=</span> <span class="pre">-print-after-all</span></tt> dumps IR after each pass.</li>
-<li><tt class="docutils literal"><span class="pre">export</span> <span class="pre">JULIA_LLVM_ARGS</span> <span class="pre">=</span> <span class="pre">-debug-only=loop-vectorize</span></tt> dumps LLVM <tt class="docutils literal"><span class="pre">DEBUG(...)</span></tt>
-diagnostics for loop vectorizer <em>if</em> you built Julia with <tt class="docutils literal"><span class="pre">LLVM_ASSERTIONS=1</span></tt>.
+<li><code class="docutils literal"><span class="pre">export</span> <span class="pre">JULIA_LLVM_ARGS</span> <span class="pre">=</span> <span class="pre">-print-after-all</span></code> dumps IR after each pass.</li>
+<li><code class="docutils literal"><span class="pre">export</span> <span class="pre">JULIA_LLVM_ARGS</span> <span class="pre">=</span> <span class="pre">-debug-only=loop-vectorize</span></code> dumps LLVM <code class="docutils literal"><span class="pre">DEBUG(...)</span></code>
+diagnostics for loop vectorizer <em>if</em> you built Julia with <code class="docutils literal"><span class="pre">LLVM_ASSERTIONS=1</span></code>.
 Otherwise you will get warnings about &#8220;Unknown command line argument&#8221;.
-Counter-intuitively, building Julia with <tt class="docutils literal"><span class="pre">LLVM_DEBUG=1</span></tt> is <em>not</em> enough to
-dump <tt class="docutils literal"><span class="pre">DEBUG</span></tt> diagnostics from a pass.</li>
+Counter-intuitively, building Julia with <code class="docutils literal"><span class="pre">LLVM_DEBUG=1</span></code> is <em>not</em> enough to
+dump <code class="docutils literal"><span class="pre">DEBUG</span></code> diagnostics from a pass.</li>
 </ul>
 </div>
 <div class="section" id="improving-llvm-optimizations-for-julia">
@@ -560,10 +659,10 @@ to be more friendly to LLVM&#8217;s passes, or improving a pass.</p>
 <p>If you are planning to improve a pass, be sure to read the
 <a class="reference external" href="http://llvm.org/docs/DeveloperPolicy.html">LLVM developer policy</a>.
 The best strategy is to create a code example in a form where you can use LLVM&#8217;s
-<tt class="docutils literal"><span class="pre">opt</span></tt> tool to study it and the pass of interest in isolation.</p>
+<code class="docutils literal"><span class="pre">opt</span></code> tool to study it and the pass of interest in isolation.</p>
 <ol class="arabic simple">
 <li>Create an example Julia code of interest.</li>
-<li>Use <tt class="docutils literal"><span class="pre">JULIA_LLVM_ARGS</span> <span class="pre">=</span> <span class="pre">-print-after-all</span></tt> to dump the IR.</li>
+<li>Use <code class="docutils literal"><span class="pre">JULIA_LLVM_ARGS</span> <span class="pre">=</span> <span class="pre">-print-after-all</span></code> to dump the IR.</li>
 <li>Pick out the IR at the point just before the pass of interest runs.</li>
 <li>Strip the debug metadata and fix up the TBAA metadata by hand.</li>
 </ol>
@@ -577,10 +676,10 @@ The best strategy is to create a code example in a form where you can use LLVM&#
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="stdio.html" class="btn btn-neutral float-right" title="printf() and stdio in the Julia runtime" accesskey="n"> 다음 <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="stdio.html" class="btn btn-neutral float-right" title="printf() and stdio in the Julia runtime">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="sysimg.html" class="btn btn-neutral" title="System Image Building" accesskey="p"><span class="fa fa-arrow-circle-left"></span> 이전 </a>
+        <a href="sysimg.html" class="btn btn-neutral" title="System Image Building"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   
@@ -589,40 +688,11 @@ The best strategy is to create a code example in a form where you can use LLVM&#
 
   <div role="contentinfo">
     <p>
-      Last updated on Apr 07, 2016.
     </p>
   </div>
 
+  <a href="https://github.com/snide/sphinx_rtd_theme">Sphinx theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>
 </footer>
-
-
-<div
-  class="fb-like"
-  data-share="true"
-  data-width="450"
-  data-show-faces="true">
-</div>
-
-<script>
-  window.fbAsyncInit = function() {
-    FB.init({
-      appId      : '685509058259607',
-      xfbml      : true,
-      version    : 'v2.3'
-    });
-  };
-
-  (function(d, s, id){
-     var js, fjs = d.getElementsByTagName(s)[0];
-     if (d.getElementById(id)) {return;}
-     js = d.createElement(s); js.id = id;
-     js.src = "https://connect.facebook.net/ko_KR/sdk.js";
-     fjs.parentNode.insertBefore(js, fjs);
-   }(document, 'script', 'facebook-jssdk'));
-</script>
-
-<div class="fb-comments" data-width="100%" data-version="v2.3"></div>
-
         </div>
       </div>
 
@@ -645,7 +715,7 @@ The best strategy is to create a code example in a form where you can use LLVM&#
       <script type="text/javascript" src="../_static/jquery.js"></script>
       <script type="text/javascript" src="../_static/underscore.js"></script>
       <script type="text/javascript" src="../_static/doctools.js"></script>
-      <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+      <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
 
   
 
@@ -662,16 +732,6 @@ The best strategy is to create a code example in a form where you can use LLVM&#
       });
   </script>
    
-
-
-<script type="text/javascript" src="../_static/jquery.word-break-keep-all.min.js"></script>
-<script type="text/javascript">
-$(document).ready(function(){
-  $('p').wordBreakKeepAll();
-});
-</script>
-
-<script type="text/javascript" src="../_static/blame.js"></script>
 
 </body>
 </html>

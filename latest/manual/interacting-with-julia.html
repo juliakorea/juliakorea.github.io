@@ -6,10 +6,8 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta property="fb:app_id" content="685509058259607" />
-
   
-  <title>Interacting With Julia</title>
+  <title>Interacting With Julia &mdash; Julia Language X.Y.Z-unknown documentation</title>
   
 
   
@@ -32,12 +30,13 @@
   
     <link rel="stylesheet" href="../_static/julia.css" type="text/css" />
   
-    <link rel="top" title="None" href="../index.html"/>
+    <link rel="top" title="Julia Language X.Y.Z-unknown documentation" href="../index.html"/>
         <link rel="next" title="Embedding Julia" href="embedding.html"/>
-        <link rel="prev" title="Calling C and Fortran Code" href="calling-c-and-fortran-code.html"/> 
+        <link rel="prev" title="Handling Operating System Variation" href="handling-operating-system-variation.html"/> 
 
   
   <script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.6.2/modernizr.min.js"></script>
+
 </head>
 
 <body class="wy-body-for-nav" role="document">
@@ -51,9 +50,8 @@
         <!--
         <a href="../index.html" class="fa fa-home"> Julia Language</a>
         -->
-        
-<div role="search">
-  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+        <div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../search.html" method="get">
     <input type="text" name="q" placeholder="Search docs" />
     <input type="hidden" name="check_keywords" value="yes" />
     <input type="hidden" name="area" value="default" />
@@ -110,19 +108,20 @@
 <li class="toctree-l2"><a class="reference internal" href="strings.html#version-number-literals">Version Number Literals</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="functions.html">Functions</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="functions.html#argument-passing-behavior">Argument Passing Behavior</a></li>
-<li class="toctree-l2"><a class="reference internal" href="functions.html#the-return-keyword">The <tt class="docutils literal"><span class="pre">return</span></tt> Keyword</a></li>
-<li class="toctree-l2"><a class="reference internal" href="functions.html#operators-are-functions">Operators Are Functions</a></li>
-<li class="toctree-l2"><a class="reference internal" href="functions.html#operators-with-special-names">Operators With Special Names</a></li>
-<li class="toctree-l2"><a class="reference internal" href="functions.html#anonymous-functions">Anonymous Functions</a></li>
-<li class="toctree-l2"><a class="reference internal" href="functions.html#multiple-return-values">Multiple Return Values</a></li>
-<li class="toctree-l2"><a class="reference internal" href="functions.html#varargs-functions">Varargs Functions</a></li>
-<li class="toctree-l2"><a class="reference internal" href="functions.html#optional-arguments">Optional Arguments</a></li>
-<li class="toctree-l2"><a class="reference internal" href="functions.html#keyword-arguments">Keyword Arguments</a></li>
-<li class="toctree-l2"><a class="reference internal" href="functions.html#evaluation-scope-of-default-values">Evaluation Scope of Default Values</a></li>
-<li class="toctree-l2"><a class="reference internal" href="functions.html#do-block-syntax-for-function-arguments">Do-Block Syntax for Function Arguments</a></li>
-<li class="toctree-l2"><a class="reference internal" href="functions.html#further-reading">Further Reading</a></li>
+<li class="toctree-l1"><a class="reference internal" href="functions.html">함수</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="functions.html#id2">매개변수 전달 매커니즘</a></li>
+<li class="toctree-l2"><a class="reference internal" href="functions.html#return"><code class="docutils literal"><span class="pre">return</span></code> 키워드</a></li>
+<li class="toctree-l2"><a class="reference internal" href="functions.html#id3">연산자 또한 함수</a></li>
+<li class="toctree-l2"><a class="reference internal" href="functions.html#id4">특별한 이름을 지니고 있는 연산자</a></li>
+<li class="toctree-l2"><a class="reference internal" href="functions.html#man-anonymous-functions">익명 함수</a></li>
+<li class="toctree-l2"><a class="reference internal" href="functions.html#id6">다수의 리턴값</a></li>
+<li class="toctree-l2"><a class="reference internal" href="functions.html#man-varargs-functions">가변인자 함수</a></li>
+<li class="toctree-l2"><a class="reference internal" href="functions.html#id8">선택적 매개변수</a></li>
+<li class="toctree-l2"><a class="reference internal" href="functions.html#id9">키워드 매개변수</a></li>
+<li class="toctree-l2"><a class="reference internal" href="functions.html#scope">디폴트 값의 계산 스코프(scope)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="functions.html#do-block">함수 매개변수의 Do-Block 문법</a></li>
+<li class="toctree-l2"><a class="reference internal" href="functions.html#dot">함수의 벡터화를 위한 Dot 문법</a></li>
+<li class="toctree-l2"><a class="reference internal" href="functions.html#id10">더 읽을거리</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="control-flow.html">Control Flow</a><ul>
@@ -159,6 +158,7 @@
 <li class="toctree-l2"><a class="reference internal" href="methods.html#defining-methods">Defining Methods</a></li>
 <li class="toctree-l2"><a class="reference internal" href="methods.html#method-ambiguities">Method Ambiguities</a></li>
 <li class="toctree-l2"><a class="reference internal" href="methods.html#parametric-methods">Parametric Methods</a></li>
+<li class="toctree-l2"><a class="reference internal" href="methods.html#parametrically-constrained-varargs-methods">Parametrically-constrained Varargs methods</a></li>
 <li class="toctree-l2"><a class="reference internal" href="methods.html#note-on-optional-and-keyword-arguments">Note on Optional and keyword Arguments</a></li>
 <li class="toctree-l2"><a class="reference internal" href="methods.html#function-like-objects">Function-like objects</a></li>
 <li class="toctree-l2"><a class="reference internal" href="methods.html#empty-generic-functions">Empty generic functions</a></li>
@@ -235,8 +235,11 @@
 <li class="toctree-l2"><a class="reference internal" href="parallel-computing.html#remote-references-and-abstractchannels">Remote references and AbstractChannels</a></li>
 <li class="toctree-l2"><a class="reference internal" href="parallel-computing.html#remote-references-and-distributed-garbage-collection">Remote References and Distributed Garbage Collection</a></li>
 <li class="toctree-l2"><a class="reference internal" href="parallel-computing.html#id2">Shared Arrays</a></li>
+<li class="toctree-l2"><a class="reference internal" href="parallel-computing.html#shared-arrays-and-distributed-garbage-collection">Shared Arrays and Distributed Garbage Collection</a></li>
 <li class="toctree-l2"><a class="reference internal" href="parallel-computing.html#clustermanagers">ClusterManagers</a></li>
 <li class="toctree-l2"><a class="reference internal" href="parallel-computing.html#cluster-managers-with-custom-transports">Cluster Managers with custom transports</a></li>
+<li class="toctree-l2"><a class="reference internal" href="parallel-computing.html#network-requirements-for-localmanager-and-sshmanager">Network requirements for LocalManager and SSHManager</a></li>
+<li class="toctree-l2"><a class="reference internal" href="parallel-computing.html#cluster-cookie">Cluster cookie</a></li>
 <li class="toctree-l2"><a class="reference internal" href="parallel-computing.html#specifying-network-topology-experimental">Specifying network topology (Experimental)</a></li>
 </ul>
 </li>
@@ -270,9 +273,9 @@
 <li class="toctree-l2"><a class="reference internal" href="calling-c-and-fortran-code.html#thread-safety">Thread-safety</a></li>
 <li class="toctree-l2"><a class="reference internal" href="calling-c-and-fortran-code.html#more-about-callbacks">More About Callbacks</a></li>
 <li class="toctree-l2"><a class="reference internal" href="calling-c-and-fortran-code.html#c">C++</a></li>
-<li class="toctree-l2"><a class="reference internal" href="calling-c-and-fortran-code.html#handling-operating-system-variation">Handling Operating System Variation</a></li>
 </ul>
 </li>
+<li class="toctree-l1"><a class="reference internal" href="handling-operating-system-variation.html">Handling Operating System Variation</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="">Interacting With Julia</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#the-different-prompt-modes">The different prompt modes</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#key-bindings">Key bindings</a></li>
@@ -318,19 +321,21 @@
 <li class="toctree-l2"><a class="reference internal" href="stacktraces.html#viewing-a-stack-trace">Viewing a stack trace</a></li>
 <li class="toctree-l2"><a class="reference internal" href="stacktraces.html#extracting-useful-information">Extracting useful information</a></li>
 <li class="toctree-l2"><a class="reference internal" href="stacktraces.html#error-handling">Error handling</a></li>
-<li class="toctree-l2"><a class="reference internal" href="stacktraces.html#comparison-with-backtrace">Comparison with <tt class="docutils literal"><span class="pre">backtrace()</span></tt></a></li>
+<li class="toctree-l2"><a class="reference internal" href="stacktraces.html#comparison-with-backtrace">Comparison with <code class="docutils literal"><span class="pre">backtrace()</span></code></a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="performance-tips.html">Performance Tips</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="performance-tips.html#avoid-global-variables">Avoid global variables</a></li>
-<li class="toctree-l2"><a class="reference internal" href="performance-tips.html#measure-performance-with-time-and-pay-attention-to-memory-allocation">Measure performance with <tt class="docutils literal"><span class="pre">&#64;time</span></tt> and pay attention to memory allocation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="performance-tips.html#measure-performance-with-time-and-pay-attention-to-memory-allocation">Measure performance with <code class="docutils literal"><span class="pre">&#64;time</span></code> and pay attention to memory allocation</a></li>
 <li class="toctree-l2"><a class="reference internal" href="performance-tips.html#tools">Tools</a></li>
 <li class="toctree-l2"><a class="reference internal" href="performance-tips.html#avoid-containers-with-abstract-type-parameters">Avoid containers with abstract type parameters</a></li>
 <li class="toctree-l2"><a class="reference internal" href="performance-tips.html#type-declarations">Type declarations</a></li>
 <li class="toctree-l2"><a class="reference internal" href="performance-tips.html#break-functions-into-multiple-definitions">Break functions into multiple definitions</a></li>
 <li class="toctree-l2"><a class="reference internal" href="performance-tips.html#write-type-stable-functions">Write &#8220;type-stable&#8221; functions</a></li>
 <li class="toctree-l2"><a class="reference internal" href="performance-tips.html#avoid-changing-the-type-of-a-variable">Avoid changing the type of a variable</a></li>
-<li class="toctree-l2"><a class="reference internal" href="performance-tips.html#separate-kernel-functions">Separate kernel functions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="performance-tips.html#separate-kernel-functions-aka-function-barriers">Separate kernel functions (aka, function barriers)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="performance-tips.html#types-with-values-as-parameters">Types with values-as-parameters</a></li>
+<li class="toctree-l2"><a class="reference internal" href="performance-tips.html#the-dangers-of-abusing-multiple-dispatch-aka-more-on-types-with-values-as-parameters">The dangers of abusing multiple dispatch (aka, more on types with values-as-parameters)</a></li>
 <li class="toctree-l2"><a class="reference internal" href="performance-tips.html#access-arrays-in-memory-order-along-columns">Access arrays in memory order, along columns</a></li>
 <li class="toctree-l2"><a class="reference internal" href="performance-tips.html#pre-allocating-outputs">Pre-allocating outputs</a></li>
 <li class="toctree-l2"><a class="reference internal" href="performance-tips.html#avoid-string-interpolation-for-i-o">Avoid string interpolation for I/O</a></li>
@@ -339,7 +344,7 @@
 <li class="toctree-l2"><a class="reference internal" href="performance-tips.html#tweaks">Tweaks</a></li>
 <li class="toctree-l2"><a class="reference internal" href="performance-tips.html#performance-annotations">Performance Annotations</a></li>
 <li class="toctree-l2"><a class="reference internal" href="performance-tips.html#treat-subnormal-numbers-as-zeros">Treat Subnormal Numbers as Zeros</a></li>
-<li class="toctree-l2"><a class="reference internal" href="performance-tips.html#code-warntype"><tt class="docutils literal"><span class="pre">&#64;code_warntype</span></tt></a></li>
+<li class="toctree-l2"><a class="reference internal" href="performance-tips.html#code-warntype"><code class="docutils literal"><span class="pre">&#64;code_warntype</span></code></a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="workflow-tips.html">Workflow Tips</a><ul>
@@ -351,11 +356,11 @@
 <li class="toctree-l2"><a class="reference internal" href="style-guide.html#write-functions-not-just-scripts">Write functions, not just scripts</a></li>
 <li class="toctree-l2"><a class="reference internal" href="style-guide.html#avoid-writing-overly-specific-types">Avoid writing overly-specific types</a></li>
 <li class="toctree-l2"><a class="reference internal" href="style-guide.html#handle-excess-argument-diversity-in-the-caller">Handle excess argument diversity in the caller</a></li>
-<li class="toctree-l2"><a class="reference internal" href="style-guide.html#append-to-names-of-functions-that-modify-their-arguments">Append <tt class="docutils literal"><span class="pre">!</span></tt> to names of functions that modify their arguments</a></li>
+<li class="toctree-l2"><a class="reference internal" href="style-guide.html#append-to-names-of-functions-that-modify-their-arguments">Append <code class="docutils literal"><span class="pre">!</span></code> to names of functions that modify their arguments</a></li>
 <li class="toctree-l2"><a class="reference internal" href="style-guide.html#avoid-strange-type-unions">Avoid strange type Unions</a></li>
 <li class="toctree-l2"><a class="reference internal" href="style-guide.html#avoid-type-unions-in-fields">Avoid type Unions in fields</a></li>
 <li class="toctree-l2"><a class="reference internal" href="style-guide.html#avoid-elaborate-container-types">Avoid elaborate container types</a></li>
-<li class="toctree-l2"><a class="reference internal" href="style-guide.html#use-naming-conventions-consistent-with-julia-s-base">Use naming conventions consistent with Julia&#8217;s <tt class="docutils literal"><span class="pre">base/</span></tt></a></li>
+<li class="toctree-l2"><a class="reference internal" href="style-guide.html#use-naming-conventions-consistent-with-julia-s-base">Use naming conventions consistent with Julia&#8217;s <code class="docutils literal"><span class="pre">base/</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="style-guide.html#don-t-overuse-try-catch">Don&#8217;t overuse try-catch</a></li>
 <li class="toctree-l2"><a class="reference internal" href="style-guide.html#don-t-parenthesize-conditions">Don&#8217;t parenthesize conditions</a></li>
 <li class="toctree-l2"><a class="reference internal" href="style-guide.html#don-t-overuse">Don&#8217;t overuse ...</a></li>
@@ -365,7 +370,7 @@
 <li class="toctree-l2"><a class="reference internal" href="style-guide.html#don-t-expose-unsafe-operations-at-the-interface-level">Don&#8217;t expose unsafe operations at the interface level</a></li>
 <li class="toctree-l2"><a class="reference internal" href="style-guide.html#don-t-overload-methods-of-base-container-types">Don&#8217;t overload methods of base container types</a></li>
 <li class="toctree-l2"><a class="reference internal" href="style-guide.html#be-careful-with-type-equality">Be careful with type equality</a></li>
-<li class="toctree-l2"><a class="reference internal" href="style-guide.html#do-not-write-x-f-x">Do not write <tt class="docutils literal"><span class="pre">x-&gt;f(x)</span></tt></a></li>
+<li class="toctree-l2"><a class="reference internal" href="style-guide.html#do-not-write-x-f-x">Do not write <code class="docutils literal"><span class="pre">x-&gt;f(x)</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="style-guide.html#avoid-using-floats-for-numeric-literals-in-generic-code-when-possible">Avoid using floats for numeric literals in generic code when possible</a></li>
 </ul>
 </li>
@@ -389,7 +394,114 @@
 </li>
 <li class="toctree-l1"><a class="reference internal" href="unicode-input.html">Unicode Input</a></li>
 </ul>
-<ul class="simple">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../stdlib/base.html">Essentials</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../stdlib/base.html#introduction">Introduction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../stdlib/base.html#getting-around">Getting Around</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../stdlib/base.html#all-objects">All Objects</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../stdlib/base.html#types">Types</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../stdlib/base.html#generic-functions">Generic Functions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../stdlib/base.html#syntax">Syntax</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../stdlib/base.html#nullables">Nullables</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../stdlib/base.html#system">System</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../stdlib/base.html#errors">Errors</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../stdlib/base.html#events">Events</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../stdlib/base.html#reflection">Reflection</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../stdlib/base.html#internals">Internals</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../stdlib/collections.html">Collections and Data Structures</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../stdlib/collections.html#iteration">Iteration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../stdlib/collections.html#general-collections">General Collections</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../stdlib/collections.html#iterable-collections">Iterable Collections</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../stdlib/collections.html#indexable-collections">Indexable Collections</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../stdlib/collections.html#associative-collections">Associative Collections</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../stdlib/collections.html#set-like-collections">Set-Like Collections</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../stdlib/collections.html#dequeues">Dequeues</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../stdlib/collections.html#priorityqueue">PriorityQueue</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../stdlib/collections.html#heap-functions">Heap Functions</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../stdlib/math.html">Mathematics</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../stdlib/math.html#mathematical-operators">Mathematical Operators</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../stdlib/math.html#mathematical-functions">Mathematical Functions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../stdlib/math.html#statistics">Statistics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../stdlib/math.html#signal-processing">Signal Processing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../stdlib/math.html#numerical-integration">Numerical Integration</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../stdlib/numbers.html">Numbers</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../stdlib/numbers.html#standard-numeric-types">Standard Numeric Types</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../stdlib/numbers.html#data-formats">Data Formats</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../stdlib/numbers.html#general-number-functions-and-constants">General Number Functions and Constants</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../stdlib/numbers.html#bigfloats">BigFloats</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../stdlib/numbers.html#random-numbers">Random Numbers</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../stdlib/strings.html">Strings</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../stdlib/arrays.html">Arrays</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../stdlib/arrays.html#basic-functions">Basic functions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../stdlib/arrays.html#constructors">Constructors</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../stdlib/arrays.html#mathematical-operators-and-functions">Mathematical operators and functions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../stdlib/arrays.html#indexing-assignment-and-concatenation">Indexing, Assignment, and Concatenation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../stdlib/arrays.html#array-functions">Array functions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../stdlib/arrays.html#combinatorics">Combinatorics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../stdlib/arrays.html#bitarrays">BitArrays</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../stdlib/arrays.html#sparse-vectors-and-matrices">Sparse Vectors and Matrices</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../stdlib/parallel.html">Tasks and Parallel Computing</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../stdlib/parallel.html#tasks">Tasks</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../stdlib/parallel.html#general-parallel-computing-support">General Parallel Computing Support</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../stdlib/parallel.html#shared-arrays">Shared Arrays</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../stdlib/parallel.html#multi-threading">Multi-Threading</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../stdlib/parallel.html#cluster-manager-interface">Cluster Manager Interface</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../stdlib/linalg.html">Linear Algebra</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../stdlib/linalg.html#module-Base.LinAlg">Standard Functions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../stdlib/linalg.html#module-Base.LinAlg.BLAS">BLAS Functions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../stdlib/linalg.html#module-Base.LinAlg.LAPACK">LAPACK Functions</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../stdlib/constants.html">Constants</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../stdlib/file.html">Filesystem</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../stdlib/io-network.html">I/O and Network</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../stdlib/io-network.html#general-i-o">General I/O</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../stdlib/io-network.html#text-i-o">Text I/O</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../stdlib/io-network.html#multimedia-i-o">Multimedia I/O</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../stdlib/io-network.html#memory-mapped-i-o">Memory-mapped I/O</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../stdlib/io-network.html#network-i-o">Network I/O</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../stdlib/punctuation.html">Punctuation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../stdlib/sort.html">Sorting and Related Functions</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../stdlib/sort.html#sorting-functions">Sorting Functions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../stdlib/sort.html#order-related-functions">Order-Related Functions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../stdlib/sort.html#sorting-algorithms">Sorting Algorithms</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../stdlib/pkg.html">Package Manager Functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../stdlib/dates.html">Dates and Time</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../stdlib/dates.html#dates-and-time-types">Dates and Time Types</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../stdlib/dates.html#dates-functions">Dates Functions</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../stdlib/test.html">Unit Testing</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../stdlib/test.html#testing-base-julia">Testing Base Julia</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../stdlib/test.html#basic-unit-tests">Basic Unit Tests</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../stdlib/test.html#working-with-test-sets">Working with Test Sets</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../stdlib/test.html#other-test-macros">Other Test Macros</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../stdlib/test.html#creating-custom-abstracttestset-types">Creating Custom <code class="docutils literal"><span class="pre">AbstractTestSet</span></code> Types</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../stdlib/c.html">C Interface</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../stdlib/c.html#llvm-interface">LLVM Interface</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../stdlib/libc.html">C Standard Library</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../stdlib/libdl.html">Dynamic Linker</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../stdlib/profile.html">Profiling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../stdlib/stacktraces.html">StackTraces</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../stdlib/simd-types.html">SIMD Support</a></li>
 </ul>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../devdocs/reflection.html">Reflection and introspection</a></li>
@@ -402,7 +514,7 @@
 <li class="toctree-l2"><a class="reference internal" href="../devdocs/functions.html">Julia Functions</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../devdocs/callconv.html">Calling Conventions</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../devdocs/cartesian.html">Base.Cartesian</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../devdocs/meta.html">Talking to the compiler (the <tt class="docutils literal"><span class="pre">:meta</span></tt> mechanism)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../devdocs/meta.html">Talking to the compiler (the <code class="docutils literal"><span class="pre">:meta</span></code> mechanism)</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../devdocs/subarrays.html">SubArrays</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../devdocs/sysimg.html">System Image Building</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../devdocs/llvm.html">Working with LLVM</a></li>
@@ -415,14 +527,6 @@
 <li class="toctree-l2"><a class="reference internal" href="../devdocs/backtraces.html">Reporting and analyzing crashes (segfaults)</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../devdocs/debuggingtips.html">gdb debugging tips</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../devdocs/valgrind.html">Using Valgrind with Julia</a></li>
-</ul>
-</li>
-</ul>
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="../phdthesis/chap6.html">결론</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="../phdthesis/chap6.html#id2">성능</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../phdthesis/chap6.html#id3">앞으로 할 작업들</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../phdthesis/chap6.html#id4">프로젝트 상황</a></li>
 </ul>
 </li>
 </ul>
@@ -441,7 +545,6 @@
       </nav>
 
 
-
       
       <div class="wy-nav-content">
         <div class="rst-content">
@@ -452,11 +555,7 @@
     <li>Interacting With Julia</li>
       <li class="wy-breadcrumbs-aside">
         
-          
-            
-              <a href="#" onclick="blame('manual/interacting-with-julia')" rel="nofollow"> 원문 보기</a>
-            
-          
+          <a href="../_sources/manual/interacting-with-julia.txt" rel="nofollow"> View page source</a>
         
       </li>
   </ul>
@@ -466,8 +565,8 @@
             
   <div class="section" id="interacting-with-julia">
 <span id="man-interacting-with-julia"></span><h1>Interacting With Julia<a class="headerlink" href="#interacting-with-julia" title="Permalink to this headline">¶</a></h1>
-<p>Julia comes with a full-featured interactive command-line REPL (read-eval-print loop) built into the <tt class="docutils literal"><span class="pre">julia</span></tt> executable.  In addition to allowing quick and easy evaluation of Julia statements, it has a searchable history, tab-completion, many helpful keybindings, and dedicated help and shell modes.  The REPL can be started by simply calling julia with no arguments or double-clicking on the executable:</p>
-<div class="highlight-julia"><div class="highlight"><pre>$ julia
+<p>Julia comes with a full-featured interactive command-line REPL (read-eval-print loop) built into the <code class="docutils literal"><span class="pre">julia</span></code> executable.  In addition to allowing quick and easy evaluation of Julia statements, it has a searchable history, tab-completion, many helpful keybindings, and dedicated help and shell modes.  The REPL can be started by simply calling julia with no arguments or double-clicking on the executable:</p>
+<div class="highlight-julia"><div class="highlight"><pre><span></span>$ julia
                _
    _       _ _(_)_     |  A fresh approach to technical computing
   (_)     | (_) (_)    |  Documentation: http://docs.julialang.org
@@ -480,18 +579,18 @@
 julia&gt;
 </pre></div>
 </div>
-<p>To exit the interactive session, type <tt class="docutils literal"><span class="pre">^D</span></tt> — the control key together with the <tt class="docutils literal"><span class="pre">d</span></tt> key on a blank line — or type <tt class="docutils literal"><span class="pre">quit()</span></tt> followed by the return or enter key. The REPL greets you with a banner and a <tt class="docutils literal"><span class="pre">julia&gt;</span></tt> prompt.</p>
+<p>To exit the interactive session, type <code class="docutils literal"><span class="pre">^D</span></code> — the control key together with the <code class="docutils literal"><span class="pre">d</span></code> key on a blank line — or type <code class="docutils literal"><span class="pre">quit()</span></code> followed by the return or enter key. The REPL greets you with a banner and a <code class="docutils literal"><span class="pre">julia&gt;</span></code> prompt.</p>
 <div class="section" id="the-different-prompt-modes">
 <h2>The different prompt modes<a class="headerlink" href="#the-different-prompt-modes" title="Permalink to this headline">¶</a></h2>
 <div class="section" id="the-julian-mode">
 <h3>The Julian mode<a class="headerlink" href="#the-julian-mode" title="Permalink to this headline">¶</a></h3>
-<p>The REPL has four main modes of operation.  The first and most common is the Julian prompt.  It is the default mode of operation; each new line initially starts with <tt class="docutils literal"><span class="pre">julia&gt;</span></tt>.  It is here that you can enter Julia expressions.  Hitting return or enter after a complete expression has been entered will evaluate the entry and show the result of the last expression.</p>
-<div class="highlight-julia"><div class="highlight"><pre><span class="n">julia</span><span class="o">&gt;</span> <span class="n">string</span><span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="mi">2</span><span class="p">)</span>
+<p>The REPL has four main modes of operation.  The first and most common is the Julian prompt.  It is the default mode of operation; each new line initially starts with <code class="docutils literal"><span class="pre">julia&gt;</span></code>.  It is here that you can enter Julia expressions.  Hitting return or enter after a complete expression has been entered will evaluate the entry and show the result of the last expression.</p>
+<div class="highlight-julia"><div class="highlight"><pre><span></span><span class="n">julia</span><span class="o">&gt;</span> <span class="n">string</span><span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="mi">2</span><span class="p">)</span>
 <span class="s">&quot;3&quot;</span>
 </pre></div>
 </div>
-<p>There are a number useful features unique to interactive work. In addition to showing the result, the REPL also binds the result to the variable <tt class="docutils literal"><span class="pre">ans</span></tt>.  A trailing semicolon on the line can be used as a flag to suppress showing the result.</p>
-<div class="highlight-julia"><div class="highlight"><pre><span class="n">julia</span><span class="o">&gt;</span> <span class="n">string</span><span class="p">(</span><span class="mi">3</span> <span class="o">*</span> <span class="mi">4</span><span class="p">);</span>
+<p>There are a number useful features unique to interactive work. In addition to showing the result, the REPL also binds the result to the variable <code class="docutils literal"><span class="pre">ans</span></code>.  A trailing semicolon on the line can be used as a flag to suppress showing the result.</p>
+<div class="highlight-julia"><div class="highlight"><pre><span></span><span class="n">julia</span><span class="o">&gt;</span> <span class="n">string</span><span class="p">(</span><span class="mi">3</span> <span class="o">*</span> <span class="mi">4</span><span class="p">);</span>
 
 <span class="n">julia</span><span class="o">&gt;</span> <span class="n">ans</span>
 <span class="s">&quot;12&quot;</span>
@@ -500,8 +599,8 @@ julia&gt;
 </div>
 <div class="section" id="help-mode">
 <h3>Help mode<a class="headerlink" href="#help-mode" title="Permalink to this headline">¶</a></h3>
-<p>When the cursor is at the beginning of the line, the prompt can be changed to a help mode by typing <tt class="docutils literal"><span class="pre">?</span></tt>.  Julia will attempt to print help or documentation for anything entered in help mode:</p>
-<div class="highlight-julia"><div class="highlight"><pre><span class="n">julia</span><span class="o">&gt;</span> <span class="o">?</span> <span class="c"># upon typing ?, the prompt changes (in place) to: help&gt;</span>
+<p>When the cursor is at the beginning of the line, the prompt can be changed to a help mode by typing <code class="docutils literal"><span class="pre">?</span></code>.  Julia will attempt to print help or documentation for anything entered in help mode:</p>
+<div class="highlight-julia"><div class="highlight"><pre><span></span><span class="n">julia</span><span class="o">&gt;</span> <span class="o">?</span> <span class="c"># upon typing ?, the prompt changes (in place) to: help&gt;</span>
 
 <span class="n">help</span><span class="o">&gt;</span> <span class="n">string</span>
 <span class="n">Base</span><span class="o">.</span><span class="n">string</span><span class="p">(</span><span class="n">xs</span><span class="o">...</span><span class="p">)</span>
@@ -510,11 +609,11 @@ julia&gt;
 </pre></div>
 </div>
 <p>In addition to function names, complete function calls may be entered to see which method is called for the given argument(s).  Macros, types and variables can also be queried:</p>
-<div class="highlight-julia"><div class="highlight"><pre><span class="n">help</span><span class="o">&gt;</span> <span class="n">string</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+<div class="highlight-julia"><div class="highlight"><pre><span></span><span class="n">help</span><span class="o">&gt;</span> <span class="n">string</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
 <span class="n">string</span><span class="p">(</span><span class="n">x</span><span class="p">::</span><span class="n">Union</span><span class="p">{</span><span class="kt">Int16</span><span class="p">,</span><span class="n">Int128</span><span class="p">,</span><span class="kt">Int8</span><span class="p">,</span><span class="kt">Int32</span><span class="p">,</span><span class="kt">Int64</span><span class="p">})</span> <span class="n">at</span> <span class="n">string</span><span class="o">.</span><span class="n">jl</span><span class="p">:</span><span class="mi">1553</span>
 
 <span class="n">help</span><span class="o">&gt;</span> <span class="p">@</span><span class="n">printf</span>
-<span class="n">Base</span><span class="o">.</span><span class="p">@</span><span class="n">printf</span><span class="p">([</span><span class="n">io</span><span class="p">::</span><span class="n">IOStream</span><span class="p">],</span> <span class="s">&quot;%Fmt&quot;</span><span class="p">,</span> <span class="n">args</span><span class="o">...</span><span class="p">)</span>
+<span class="n">Base</span><span class="o">.</span><span class="p">@</span><span class="n">printf</span><span class="p">([</span><span class="n">io</span><span class="p">::</span><span class="n">IOStream</span><span class="p">],</span> <span class="s">&quot;</span><span class="si">%F</span><span class="s">mt&quot;</span><span class="p">,</span> <span class="n">args</span><span class="o">...</span><span class="p">)</span>
 
    <span class="n">Print</span> <span class="n">arg</span><span class="p">(</span><span class="n">s</span><span class="p">)</span> <span class="k">using</span> <span class="n">C</span> <span class="s">&quot;printf()&quot;</span> <span class="n">style</span> <span class="n">format</span> <span class="n">specification</span>
    <span class="n">string</span><span class="o">.</span> <span class="n">Optionally</span><span class="p">,</span> <span class="n">an</span> <span class="n">IOStream</span> <span class="n">may</span> <span class="n">be</span> <span class="n">passed</span> <span class="n">as</span> <span class="n">the</span> <span class="n">first</span> <span class="n">argument</span>
@@ -523,15 +622,15 @@ julia&gt;
 <span class="n">help</span><span class="o">&gt;</span> <span class="n">AbstractString</span>
 <span class="n">DataType</span>   <span class="p">:</span> <span class="n">AbstractString</span>
   <span class="n">supertype</span><span class="p">:</span> <span class="kt">Any</span>
-  <span class="n">subtypes</span> <span class="p">:</span> <span class="kt">Any</span><span class="p">[</span><span class="n">DirectIndexString</span><span class="p">,</span><span class="n">RepString</span><span class="p">,</span><span class="n">RevString</span><span class="p">{</span><span class="n">T</span><span class="o">&lt;:</span><span class="n">AbstractString</span><span class="p">},</span><span class="n">RopeString</span><span class="p">,</span><span class="n">SubString</span><span class="p">{</span><span class="n">T</span><span class="o">&lt;:</span><span class="n">AbstractString</span><span class="p">},</span><span class="n">UTF16String</span><span class="p">,</span><span class="n">UTF8String</span><span class="p">]</span>
+  <span class="n">subtypes</span> <span class="p">:</span> <span class="kt">Any</span><span class="p">[</span><span class="n">DirectIndexString</span><span class="p">,</span><span class="n">RepString</span><span class="p">,</span><span class="n">RevString</span><span class="p">{</span><span class="n">T</span><span class="o">&lt;:</span><span class="n">AbstractString</span><span class="p">},</span><span class="n">SubString</span><span class="p">{</span><span class="n">T</span><span class="o">&lt;:</span><span class="n">AbstractString</span><span class="p">},</span><span class="n">String</span><span class="p">]</span>
 </pre></div>
 </div>
 <p>Help mode can be exited by pressing backspace at the beginning of the line.</p>
 </div>
 <div class="section" id="shell-mode">
 <span id="man-shell-mode"></span><h3>Shell mode<a class="headerlink" href="#shell-mode" title="Permalink to this headline">¶</a></h3>
-<p>Just as help mode is useful for quick access to documentation, another common task is to use the system shell to execute system commands.  Just as <tt class="docutils literal"><span class="pre">?</span></tt> entered help mode when at the beginning of the line, a semicolon (<tt class="docutils literal"><span class="pre">;</span></tt>) will enter the shell mode.  And it can be exited by pressing backspace at the beginning of the line.</p>
-<div class="highlight-julia"><div class="highlight"><pre><span class="n">julia</span><span class="o">&gt;</span> <span class="p">;</span> <span class="c"># upon typing ;, the prompt changes (in place) to: shell&gt;</span>
+<p>Just as help mode is useful for quick access to documentation, another common task is to use the system shell to execute system commands.  Just as <code class="docutils literal"><span class="pre">?</span></code> entered help mode when at the beginning of the line, a semicolon (<code class="docutils literal"><span class="pre">;</span></code>) will enter the shell mode.  And it can be exited by pressing backspace at the beginning of the line.</p>
+<div class="highlight-julia"><div class="highlight"><pre><span></span><span class="n">julia</span><span class="o">&gt;</span> <span class="p">;</span> <span class="c"># upon typing ;, the prompt changes (in place) to: shell&gt;</span>
 
 <span class="n">shell</span><span class="o">&gt;</span> <span class="n">echo</span> <span class="n">hello</span>
 <span class="n">hello</span>
@@ -540,13 +639,13 @@ julia&gt;
 </div>
 <div class="section" id="search-modes">
 <h3>Search modes<a class="headerlink" href="#search-modes" title="Permalink to this headline">¶</a></h3>
-<p>In all of the above modes, the executed lines get saved to a history file, which can be searched.  To initiate an incremental search through the previous history, type <tt class="docutils literal"><span class="pre">^R</span></tt> — the control key together with the <tt class="docutils literal"><span class="pre">r</span></tt> key.  The prompt will change to <tt class="docutils literal"><span class="pre">(reverse-i-search)`':</span></tt>, and as you type the search query will appear in the quotes.  The most recent result that matches the query will dynamically update to the right of the colon as more is typed.  To find an older result using the same query, simply type <tt class="docutils literal"><span class="pre">^R</span></tt> again.</p>
-<p>Just as <tt class="docutils literal"><span class="pre">^R</span></tt> is a reverse search, <tt class="docutils literal"><span class="pre">^S</span></tt> is a forward search, with the prompt <tt class="docutils literal"><span class="pre">(i-search)`':</span></tt>.  The two may be used in conjunction with each other to move through the previous or next matching results, respectively.</p>
+<p>In all of the above modes, the executed lines get saved to a history file, which can be searched.  To initiate an incremental search through the previous history, type <code class="docutils literal"><span class="pre">^R</span></code> — the control key together with the <code class="docutils literal"><span class="pre">r</span></code> key.  The prompt will change to <code class="docutils literal"><span class="pre">(reverse-i-search)`':</span></code>, and as you type the search query will appear in the quotes.  The most recent result that matches the query will dynamically update to the right of the colon as more is typed.  To find an older result using the same query, simply type <code class="docutils literal"><span class="pre">^R</span></code> again.</p>
+<p>Just as <code class="docutils literal"><span class="pre">^R</span></code> is a reverse search, <code class="docutils literal"><span class="pre">^S</span></code> is a forward search, with the prompt <code class="docutils literal"><span class="pre">(i-search)`':</span></code>.  The two may be used in conjunction with each other to move through the previous or next matching results, respectively.</p>
 </div>
 </div>
 <div class="section" id="key-bindings">
 <h2>Key bindings<a class="headerlink" href="#key-bindings" title="Permalink to this headline">¶</a></h2>
-<p>The Julia REPL makes great use of key bindings.  Several control-key bindings were already introduced above (<tt class="docutils literal"><span class="pre">^D</span></tt> to exit, <tt class="docutils literal"><span class="pre">^R</span></tt> and <tt class="docutils literal"><span class="pre">^S</span></tt> for searching), but there are many more.  In addition to the control-key, there are also meta-key bindings.  These vary more by platform, but most terminals  default to using alt- or option- held down with a key to send the meta-key (or can be configured to do so).</p>
+<p>The Julia REPL makes great use of key bindings.  Several control-key bindings were already introduced above (<code class="docutils literal"><span class="pre">^D</span></code> to exit, <code class="docutils literal"><span class="pre">^R</span></code> and <code class="docutils literal"><span class="pre">^S</span></code> for searching), but there are many more.  In addition to the control-key, there are also meta-key bindings.  These vary more by platform, but most terminals  default to using alt- or option- held down with a key to send the meta-key (or can be configured to do so).</p>
 <table border="1" class="docutils">
 <colgroup>
 <col width="32%" />
@@ -555,45 +654,45 @@ julia&gt;
 <tbody valign="top">
 <tr class="row-odd"><td colspan="2"><strong>Program control</strong></td>
 </tr>
-<tr class="row-even"><td><tt class="docutils literal"><span class="pre">^D</span></tt></td>
+<tr class="row-even"><td><code class="docutils literal"><span class="pre">^D</span></code></td>
 <td>Exit (when buffer is empty)</td>
 </tr>
-<tr class="row-odd"><td><tt class="docutils literal"><span class="pre">^C</span></tt></td>
+<tr class="row-odd"><td><code class="docutils literal"><span class="pre">^C</span></code></td>
 <td>Interrupt or cancel</td>
 </tr>
-<tr class="row-even"><td><tt class="docutils literal"><span class="pre">^L</span></tt></td>
+<tr class="row-even"><td><code class="docutils literal"><span class="pre">^L</span></code></td>
 <td>Clear console screen</td>
 </tr>
-<tr class="row-odd"><td>Return/Enter, <tt class="docutils literal"><span class="pre">^J</span></tt></td>
+<tr class="row-odd"><td>Return/Enter, <code class="docutils literal"><span class="pre">^J</span></code></td>
 <td>New line, executing if it is complete</td>
 </tr>
 <tr class="row-even"><td>meta-Return/Enter</td>
 <td>Insert new line without executing it</td>
 </tr>
-<tr class="row-odd"><td><tt class="docutils literal"><span class="pre">?</span></tt> or <tt class="docutils literal"><span class="pre">;</span></tt></td>
+<tr class="row-odd"><td><code class="docutils literal"><span class="pre">?</span></code> or <code class="docutils literal"><span class="pre">;</span></code></td>
 <td>Enter help or shell mode (when at start of a line)</td>
 </tr>
-<tr class="row-even"><td><tt class="docutils literal"><span class="pre">^R</span></tt>, <tt class="docutils literal"><span class="pre">^S</span></tt></td>
+<tr class="row-even"><td><code class="docutils literal"><span class="pre">^R</span></code>, <code class="docutils literal"><span class="pre">^S</span></code></td>
 <td>Incremental history search, described above</td>
 </tr>
 <tr class="row-odd"><td colspan="2"><strong>Cursor movement</strong></td>
 </tr>
-<tr class="row-even"><td>Right arrow, <tt class="docutils literal"><span class="pre">^F</span></tt></td>
+<tr class="row-even"><td>Right arrow, <code class="docutils literal"><span class="pre">^F</span></code></td>
 <td>Move right one character</td>
 </tr>
-<tr class="row-odd"><td>Left arrow, <tt class="docutils literal"><span class="pre">^B</span></tt></td>
+<tr class="row-odd"><td>Left arrow, <code class="docutils literal"><span class="pre">^B</span></code></td>
 <td>Move left one character</td>
 </tr>
-<tr class="row-even"><td>Home, <tt class="docutils literal"><span class="pre">^A</span></tt></td>
+<tr class="row-even"><td>Home, <code class="docutils literal"><span class="pre">^A</span></code></td>
 <td>Move to beginning of line</td>
 </tr>
-<tr class="row-odd"><td>End, <tt class="docutils literal"><span class="pre">^E</span></tt></td>
+<tr class="row-odd"><td>End, <code class="docutils literal"><span class="pre">^E</span></code></td>
 <td>Move to end of line</td>
 </tr>
-<tr class="row-even"><td><tt class="docutils literal"><span class="pre">^P</span></tt></td>
+<tr class="row-even"><td><code class="docutils literal"><span class="pre">^P</span></code></td>
 <td>Change to the previous or next history entry</td>
 </tr>
-<tr class="row-odd"><td><tt class="docutils literal"><span class="pre">^N</span></tt></td>
+<tr class="row-odd"><td><code class="docutils literal"><span class="pre">^N</span></code></td>
 <td>Change to the next history entry</td>
 </tr>
 <tr class="row-even"><td>Up arrow</td>
@@ -610,44 +709,44 @@ the text before the cursor</td>
 <td>Change to the next history entry that matches the
 text before the cursor</td>
 </tr>
-<tr class="row-even"><td><tt class="docutils literal"><span class="pre">meta-F</span></tt></td>
+<tr class="row-even"><td><code class="docutils literal"><span class="pre">meta-F</span></code></td>
 <td>Move right one word</td>
 </tr>
-<tr class="row-odd"><td><tt class="docutils literal"><span class="pre">meta-B</span></tt></td>
+<tr class="row-odd"><td><code class="docutils literal"><span class="pre">meta-B</span></code></td>
 <td>Move left one word</td>
 </tr>
 <tr class="row-even"><td colspan="2"><strong>Editing</strong></td>
 </tr>
-<tr class="row-odd"><td>Backspace, <tt class="docutils literal"><span class="pre">^H</span></tt></td>
+<tr class="row-odd"><td>Backspace, <code class="docutils literal"><span class="pre">^H</span></code></td>
 <td>Delete the previous character</td>
 </tr>
-<tr class="row-even"><td>Delete, <tt class="docutils literal"><span class="pre">^D</span></tt></td>
+<tr class="row-even"><td>Delete, <code class="docutils literal"><span class="pre">^D</span></code></td>
 <td>Forward delete one character (when buffer has text)</td>
 </tr>
 <tr class="row-odd"><td>meta-Backspace</td>
 <td>Delete the previous word</td>
 </tr>
-<tr class="row-even"><td><tt class="docutils literal"><span class="pre">meta-D</span></tt></td>
+<tr class="row-even"><td><code class="docutils literal"><span class="pre">meta-D</span></code></td>
 <td>Forward delete the next word</td>
 </tr>
-<tr class="row-odd"><td><tt class="docutils literal"><span class="pre">^W</span></tt></td>
+<tr class="row-odd"><td><code class="docutils literal"><span class="pre">^W</span></code></td>
 <td>Delete previous text up to the nearest whitespace</td>
 </tr>
-<tr class="row-even"><td><tt class="docutils literal"><span class="pre">^K</span></tt></td>
+<tr class="row-even"><td><code class="docutils literal"><span class="pre">^K</span></code></td>
 <td>&#8220;Kill&#8221; to end of line, placing the text in a buffer</td>
 </tr>
-<tr class="row-odd"><td><tt class="docutils literal"><span class="pre">^Y</span></tt></td>
+<tr class="row-odd"><td><code class="docutils literal"><span class="pre">^Y</span></code></td>
 <td>&#8220;Yank&#8221; insert the text from the kill buffer</td>
 </tr>
-<tr class="row-even"><td><tt class="docutils literal"><span class="pre">^T</span></tt></td>
+<tr class="row-even"><td><code class="docutils literal"><span class="pre">^T</span></code></td>
 <td>Transpose the characters about the cursor</td>
 </tr>
 </tbody>
 </table>
 <div class="section" id="customizing-keybindings">
 <h3>Customizing keybindings<a class="headerlink" href="#customizing-keybindings" title="Permalink to this headline">¶</a></h3>
-<p>Julia&#8217;s REPL keybindings may be fully customized to a user&#8217;s preferences by passing a dictionary to <tt class="docutils literal"><span class="pre">REPL.setup_interface()</span></tt>. The keys of this dictionary may be characters or strings. The key <tt class="docutils literal"><span class="pre">'*'</span></tt> refers to the default action. Control plus character <tt class="docutils literal"><span class="pre">x</span></tt> bindings are indicated with <tt class="docutils literal"><span class="pre">&quot;^x&quot;</span></tt>. Meta plus <tt class="docutils literal"><span class="pre">x</span></tt> can be written <tt class="docutils literal"><span class="pre">&quot;\\Mx&quot;</span></tt>. The values of the custom keymap must be <tt class="docutils literal"><span class="pre">nothing</span></tt> (indicating that the input should be ignored) or functions that accept the signature <tt class="docutils literal"><span class="pre">(PromptState,</span> <span class="pre">AbstractREPL,</span> <span class="pre">Char)</span></tt>. The <tt class="docutils literal"><span class="pre">REPL.setup_interface()</span></tt> function must be called before the REPL is initialized, by registering the operation with <tt class="docutils literal"><span class="pre">atreplinit()</span></tt>. For example, to bind the up and down arrow keys to move through history without prefix search, one could put the following code in <tt class="docutils literal"><span class="pre">.juliarc.jl</span></tt>:</p>
-<div class="highlight-julia"><div class="highlight"><pre><span class="k">import</span> <span class="n">Base</span><span class="p">:</span> <span class="n">LineEdit</span><span class="p">,</span> <span class="n">REPL</span>
+<p>Julia&#8217;s REPL keybindings may be fully customized to a user&#8217;s preferences by passing a dictionary to <code class="docutils literal"><span class="pre">REPL.setup_interface()</span></code>. The keys of this dictionary may be characters or strings. The key <code class="docutils literal"><span class="pre">'*'</span></code> refers to the default action. Control plus character <code class="docutils literal"><span class="pre">x</span></code> bindings are indicated with <code class="docutils literal"><span class="pre">&quot;^x&quot;</span></code>. Meta plus <code class="docutils literal"><span class="pre">x</span></code> can be written <code class="docutils literal"><span class="pre">&quot;\\Mx&quot;</span></code>. The values of the custom keymap must be <code class="docutils literal"><span class="pre">nothing</span></code> (indicating that the input should be ignored) or functions that accept the signature <code class="docutils literal"><span class="pre">(PromptState,</span> <span class="pre">AbstractREPL,</span> <span class="pre">Char)</span></code>. The <code class="docutils literal"><span class="pre">REPL.setup_interface()</span></code> function must be called before the REPL is initialized, by registering the operation with <code class="docutils literal"><span class="pre">atreplinit()</span></code>. For example, to bind the up and down arrow keys to move through history without prefix search, one could put the following code in <code class="docutils literal"><span class="pre">.juliarc.jl</span></code>:</p>
+<div class="highlight-julia"><div class="highlight"><pre><span></span><span class="k">import</span> <span class="n">Base</span><span class="p">:</span> <span class="n">LineEdit</span><span class="p">,</span> <span class="n">REPL</span>
 
 <span class="kd">const</span> <span class="n">mykeys</span> <span class="o">=</span> <span class="n">Dict</span><span class="p">{</span><span class="kt">Any</span><span class="p">,</span><span class="kt">Any</span><span class="p">}(</span>
   <span class="c"># Up Arrow</span>
@@ -663,13 +762,13 @@ text before the cursor</td>
 <span class="n">atreplinit</span><span class="p">(</span><span class="n">customize_keys</span><span class="p">)</span>
 </pre></div>
 </div>
-<p>Users should refer to <tt class="docutils literal"><span class="pre">base/LineEdit.jl</span></tt> to discover the available actions on key input.</p>
+<p>Users should refer to <code class="docutils literal"><span class="pre">base/LineEdit.jl</span></code> to discover the available actions on key input.</p>
 </div>
 </div>
 <div class="section" id="tab-completion">
 <h2>Tab completion<a class="headerlink" href="#tab-completion" title="Permalink to this headline">¶</a></h2>
 <p>In both the Julian and help modes of the REPL, one can enter the first few characters of a function or type and then press the tab key to get a list all matches:</p>
-<div class="highlight-julia"><div class="highlight"><pre><span class="n">julia</span><span class="o">&gt;</span> <span class="n">stri</span>
+<div class="highlight-julia"><div class="highlight"><pre><span></span><span class="n">julia</span><span class="o">&gt;</span> <span class="n">stri</span>
 <span class="n">stride</span>     <span class="n">strides</span>     <span class="n">string</span>      <span class="n">stringmime</span>  <span class="n">strip</span>
 
 <span class="n">julia</span><span class="o">&gt;</span> <span class="n">Stri</span>
@@ -679,7 +778,7 @@ text before the cursor</td>
 </div>
 <p>The tab key can also be used to substitute LaTeX math symbols with their Unicode equivalents,
 and get a list of LaTeX matches as well:</p>
-<div class="highlight-julia"><div class="highlight"><pre><span class="n">julia</span><span class="o">&gt;</span> \<span class="nb">pi</span><span class="p">[</span><span class="n">TAB</span><span class="p">]</span>
+<div class="highlight-julia"><div class="highlight"><pre><span></span><span class="n">julia</span><span class="o">&gt;</span> \<span class="nb">pi</span><span class="p">[</span><span class="n">TAB</span><span class="p">]</span>
 <span class="n">julia</span><span class="o">&gt;</span> <span class="n">π</span>
 <span class="n">π</span> <span class="o">=</span> <span class="mf">3.1415926535897</span><span class="o">...</span>
 
@@ -691,7 +790,7 @@ and get a list of LaTeX matches as well:</p>
 
 <span class="n">julia</span><span class="o">&gt;</span> <span class="n">e</span>\<span class="o">^</span><span class="mi">1</span><span class="p">[</span><span class="n">TAB</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span> <span class="mi">0</span><span class="p">]</span>
 <span class="n">julia</span><span class="o">&gt;</span> <span class="n">e¹</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span> <span class="mi">0</span><span class="p">]</span>
-<span class="mi">1</span><span class="n">x2</span> <span class="n">Array</span><span class="p">{</span><span class="kt">Int64</span><span class="p">,</span><span class="mi">2</span><span class="p">}:</span>
+<span class="mi">1</span><span class="n">×2</span> <span class="n">Array</span><span class="p">{</span><span class="kt">Int64</span><span class="p">,</span><span class="mi">2</span><span class="p">}:</span>
  <span class="mi">1</span>  <span class="mi">0</span>
 
 <span class="n">julia</span><span class="o">&gt;</span> \<span class="n">sqrt</span><span class="p">[</span><span class="n">TAB</span><span class="p">]</span><span class="mi">2</span>     <span class="c"># √ is equivalent to the sqrt() function</span>
@@ -707,24 +806,24 @@ and get a list of LaTeX matches as well:</p>
 \<span class="n">hbar</span>             \<span class="n">hermitconjmatrix</span>  \<span class="n">hkswarow</span>          \<span class="n">hookrightarrow</span>    \<span class="n">hspace</span>
 </pre></div>
 </div>
-<p>A full list of tab-completions can be found in the <a class="reference internal" href="unicode-input.html#man-unicode-input"><em>Unicode Input</em></a> section of the manual.</p>
+<p>A full list of tab-completions can be found in the <a class="reference internal" href="unicode-input.html#man-unicode-input"><span>Unicode Input</span></a> section of the manual.</p>
 <div class="section" id="customizing-colors">
 <h3>Customizing Colors<a class="headerlink" href="#customizing-colors" title="Permalink to this headline">¶</a></h3>
 <p>The colors used by Julia and the REPL can be customized, as well. To change the color of the Julia
-prompt you can add something like the following to your <tt class="docutils literal"><span class="pre">juliarc.jl</span></tt> file:</p>
-<div class="highlight-julia"><div class="highlight"><pre><span class="n">Base</span><span class="o">.</span><span class="n">active_repl</span><span class="o">.</span><span class="n">prompt_color</span> <span class="o">=</span> <span class="n">Base</span><span class="o">.</span><span class="n">text_colors</span><span class="p">[:</span><span class="n">cyan</span><span class="p">]</span>
+prompt you can add something like the following to your <code class="docutils literal"><span class="pre">juliarc.jl</span></code> file:</p>
+<div class="highlight-julia"><div class="highlight"><pre><span></span><span class="n">Base</span><span class="o">.</span><span class="n">active_repl</span><span class="o">.</span><span class="n">prompt_color</span> <span class="o">=</span> <span class="n">Base</span><span class="o">.</span><span class="n">text_colors</span><span class="p">[:</span><span class="n">cyan</span><span class="p">]</span>
 </pre></div>
 </div>
-<p>The available color keys in <tt class="docutils literal"><span class="pre">Base.text_colors</span></tt> are <tt class="docutils literal"><span class="pre">:black</span></tt>, <tt class="docutils literal"><span class="pre">:red</span></tt>, <tt class="docutils literal"><span class="pre">:green</span></tt>, <tt class="docutils literal"><span class="pre">:yellow</span></tt>,
-<tt class="docutils literal"><span class="pre">:blue</span></tt>, <tt class="docutils literal"><span class="pre">:magenta</span></tt>, <tt class="docutils literal"><span class="pre">:cyan</span></tt>, <tt class="docutils literal"><span class="pre">:white</span></tt>, <tt class="docutils literal"><span class="pre">:normal</span></tt>, and <tt class="docutils literal"><span class="pre">:bold</span></tt>. Similarly, you can
+<p>The available color keys in <code class="docutils literal"><span class="pre">Base.text_colors</span></code> are <code class="docutils literal"><span class="pre">:black</span></code>, <code class="docutils literal"><span class="pre">:red</span></code>, <code class="docutils literal"><span class="pre">:green</span></code>, <code class="docutils literal"><span class="pre">:yellow</span></code>,
+<code class="docutils literal"><span class="pre">:blue</span></code>, <code class="docutils literal"><span class="pre">:magenta</span></code>, <code class="docutils literal"><span class="pre">:cyan</span></code>, <code class="docutils literal"><span class="pre">:white</span></code>, <code class="docutils literal"><span class="pre">:normal</span></code>, and <code class="docutils literal"><span class="pre">:bold</span></code>. Similarly, you can
 change the colors for the help and shell prompts and input and answer text by setting the
-appropriate member of <tt class="docutils literal"><span class="pre">Base.active_repl</span></tt> (respectively, <tt class="docutils literal"><span class="pre">help_color</span></tt>, <tt class="docutils literal"><span class="pre">shell_color</span></tt>,
-<tt class="docutils literal"><span class="pre">input_color</span></tt>, and <tt class="docutils literal"><span class="pre">answer_color</span></tt>). For the latter two, be sure that the <tt class="docutils literal"><span class="pre">envcolors</span></tt> member
+appropriate member of <code class="docutils literal"><span class="pre">Base.active_repl</span></code> (respectively, <code class="docutils literal"><span class="pre">help_color</span></code>, <code class="docutils literal"><span class="pre">shell_color</span></code>,
+<code class="docutils literal"><span class="pre">input_color</span></code>, and <code class="docutils literal"><span class="pre">answer_color</span></code>). For the latter two, be sure that the <code class="docutils literal"><span class="pre">envcolors</span></code> member
 is also set to false.</p>
 <p>You can also customize the color used to render warning and informational messages by
 setting the appropriate environment variable. For instance, to render warning messages in yellow and
-informational messages in cyan you can add the following to your <tt class="docutils literal"><span class="pre">juliarc.jl</span></tt> file:</p>
-<div class="highlight-julia"><div class="highlight"><pre><span class="n">ENV</span><span class="p">[</span><span class="s">&quot;JULIA_WARN_COLOR&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">:</span><span class="n">yellow</span>
+informational messages in cyan you can add the following to your <code class="docutils literal"><span class="pre">juliarc.jl</span></code> file:</p>
+<div class="highlight-julia"><div class="highlight"><pre><span></span><span class="n">ENV</span><span class="p">[</span><span class="s">&quot;JULIA_WARN_COLOR&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">:</span><span class="n">yellow</span>
 <span class="n">ENV</span><span class="p">[</span><span class="s">&quot;JULIA_INFO_COLOR&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">:</span><span class="n">cyan</span>
 </pre></div>
 </div>
@@ -738,10 +837,10 @@ informational messages in cyan you can add the following to your <tt class="docu
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="embedding.html" class="btn btn-neutral float-right" title="Embedding Julia" accesskey="n"> 다음 <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="embedding.html" class="btn btn-neutral float-right" title="Embedding Julia">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="calling-c-and-fortran-code.html" class="btn btn-neutral" title="Calling C and Fortran Code" accesskey="p"><span class="fa fa-arrow-circle-left"></span> 이전 </a>
+        <a href="handling-operating-system-variation.html" class="btn btn-neutral" title="Handling Operating System Variation"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   
@@ -750,40 +849,11 @@ informational messages in cyan you can add the following to your <tt class="docu
 
   <div role="contentinfo">
     <p>
-      Last updated on Apr 07, 2016.
     </p>
   </div>
 
+  <a href="https://github.com/snide/sphinx_rtd_theme">Sphinx theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>
 </footer>
-
-
-<div
-  class="fb-like"
-  data-share="true"
-  data-width="450"
-  data-show-faces="true">
-</div>
-
-<script>
-  window.fbAsyncInit = function() {
-    FB.init({
-      appId      : '685509058259607',
-      xfbml      : true,
-      version    : 'v2.3'
-    });
-  };
-
-  (function(d, s, id){
-     var js, fjs = d.getElementsByTagName(s)[0];
-     if (d.getElementById(id)) {return;}
-     js = d.createElement(s); js.id = id;
-     js.src = "https://connect.facebook.net/ko_KR/sdk.js";
-     fjs.parentNode.insertBefore(js, fjs);
-   }(document, 'script', 'facebook-jssdk'));
-</script>
-
-<div class="fb-comments" data-width="100%" data-version="v2.3"></div>
-
         </div>
       </div>
 
@@ -806,7 +876,7 @@ informational messages in cyan you can add the following to your <tt class="docu
       <script type="text/javascript" src="../_static/jquery.js"></script>
       <script type="text/javascript" src="../_static/underscore.js"></script>
       <script type="text/javascript" src="../_static/doctools.js"></script>
-      <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+      <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
 
   
 
@@ -823,16 +893,6 @@ informational messages in cyan you can add the following to your <tt class="docu
       });
   </script>
    
-
-
-<script type="text/javascript" src="../_static/jquery.word-break-keep-all.min.js"></script>
-<script type="text/javascript">
-$(document).ready(function(){
-  $('p').wordBreakKeepAll();
-});
-</script>
-
-<script type="text/javascript" src="../_static/blame.js"></script>
 
 </body>
 </html>

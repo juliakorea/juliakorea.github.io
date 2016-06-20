@@ -6,10 +6,8 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta property="fb:app_id" content="685509058259607" />
-
   
-  <title>SubArrays</title>
+  <title>SubArrays &mdash; Julia Language X.Y.Z-unknown documentation</title>
   
 
   
@@ -32,13 +30,14 @@
   
     <link rel="stylesheet" href="../_static/julia.css" type="text/css" />
   
-    <link rel="top" title="None" href="../index.html"/>
+    <link rel="top" title="Julia Language X.Y.Z-unknown documentation" href="../index.html"/>
         <link rel="up" title="Documentation of Julia’s Internals" href="julia.html"/>
         <link rel="next" title="System Image Building" href="sysimg.html"/>
         <link rel="prev" title="Talking to the compiler (the :meta mechanism)" href="meta.html"/> 
 
   
   <script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.6.2/modernizr.min.js"></script>
+
 </head>
 
 <body class="wy-body-for-nav" role="document">
@@ -52,9 +51,8 @@
         <!--
         <a href="../index.html" class="fa fa-home"> Julia Language</a>
         -->
-        
-<div role="search">
-  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+        <div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../search.html" method="get">
     <input type="text" name="q" placeholder="Search docs" />
     <input type="hidden" name="check_keywords" value="yes" />
     <input type="hidden" name="area" value="default" />
@@ -111,19 +109,20 @@
 <li class="toctree-l2"><a class="reference internal" href="../manual/strings.html#version-number-literals">Version Number Literals</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="../manual/functions.html">Functions</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="../manual/functions.html#argument-passing-behavior">Argument Passing Behavior</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../manual/functions.html#the-return-keyword">The <tt class="docutils literal"><span class="pre">return</span></tt> Keyword</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../manual/functions.html#operators-are-functions">Operators Are Functions</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../manual/functions.html#operators-with-special-names">Operators With Special Names</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../manual/functions.html#anonymous-functions">Anonymous Functions</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../manual/functions.html#multiple-return-values">Multiple Return Values</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../manual/functions.html#varargs-functions">Varargs Functions</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../manual/functions.html#optional-arguments">Optional Arguments</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../manual/functions.html#keyword-arguments">Keyword Arguments</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../manual/functions.html#evaluation-scope-of-default-values">Evaluation Scope of Default Values</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../manual/functions.html#do-block-syntax-for-function-arguments">Do-Block Syntax for Function Arguments</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../manual/functions.html#further-reading">Further Reading</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../manual/functions.html">함수</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../manual/functions.html#id2">매개변수 전달 매커니즘</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../manual/functions.html#return"><code class="docutils literal"><span class="pre">return</span></code> 키워드</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../manual/functions.html#id3">연산자 또한 함수</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../manual/functions.html#id4">특별한 이름을 지니고 있는 연산자</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../manual/functions.html#man-anonymous-functions">익명 함수</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../manual/functions.html#id6">다수의 리턴값</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../manual/functions.html#man-varargs-functions">가변인자 함수</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../manual/functions.html#id8">선택적 매개변수</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../manual/functions.html#id9">키워드 매개변수</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../manual/functions.html#scope">디폴트 값의 계산 스코프(scope)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../manual/functions.html#do-block">함수 매개변수의 Do-Block 문법</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../manual/functions.html#dot">함수의 벡터화를 위한 Dot 문법</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../manual/functions.html#id10">더 읽을거리</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../manual/control-flow.html">Control Flow</a><ul>
@@ -160,6 +159,7 @@
 <li class="toctree-l2"><a class="reference internal" href="../manual/methods.html#defining-methods">Defining Methods</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../manual/methods.html#method-ambiguities">Method Ambiguities</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../manual/methods.html#parametric-methods">Parametric Methods</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../manual/methods.html#parametrically-constrained-varargs-methods">Parametrically-constrained Varargs methods</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../manual/methods.html#note-on-optional-and-keyword-arguments">Note on Optional and keyword Arguments</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../manual/methods.html#function-like-objects">Function-like objects</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../manual/methods.html#empty-generic-functions">Empty generic functions</a></li>
@@ -236,8 +236,11 @@
 <li class="toctree-l2"><a class="reference internal" href="../manual/parallel-computing.html#remote-references-and-abstractchannels">Remote references and AbstractChannels</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../manual/parallel-computing.html#remote-references-and-distributed-garbage-collection">Remote References and Distributed Garbage Collection</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../manual/parallel-computing.html#id2">Shared Arrays</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../manual/parallel-computing.html#shared-arrays-and-distributed-garbage-collection">Shared Arrays and Distributed Garbage Collection</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../manual/parallel-computing.html#clustermanagers">ClusterManagers</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../manual/parallel-computing.html#cluster-managers-with-custom-transports">Cluster Managers with custom transports</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../manual/parallel-computing.html#network-requirements-for-localmanager-and-sshmanager">Network requirements for LocalManager and SSHManager</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../manual/parallel-computing.html#cluster-cookie">Cluster cookie</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../manual/parallel-computing.html#specifying-network-topology-experimental">Specifying network topology (Experimental)</a></li>
 </ul>
 </li>
@@ -271,9 +274,9 @@
 <li class="toctree-l2"><a class="reference internal" href="../manual/calling-c-and-fortran-code.html#thread-safety">Thread-safety</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../manual/calling-c-and-fortran-code.html#more-about-callbacks">More About Callbacks</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../manual/calling-c-and-fortran-code.html#c">C++</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../manual/calling-c-and-fortran-code.html#handling-operating-system-variation">Handling Operating System Variation</a></li>
 </ul>
 </li>
+<li class="toctree-l1"><a class="reference internal" href="../manual/handling-operating-system-variation.html">Handling Operating System Variation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../manual/interacting-with-julia.html">Interacting With Julia</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="../manual/interacting-with-julia.html#the-different-prompt-modes">The different prompt modes</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../manual/interacting-with-julia.html#key-bindings">Key bindings</a></li>
@@ -319,19 +322,21 @@
 <li class="toctree-l2"><a class="reference internal" href="../manual/stacktraces.html#viewing-a-stack-trace">Viewing a stack trace</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../manual/stacktraces.html#extracting-useful-information">Extracting useful information</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../manual/stacktraces.html#error-handling">Error handling</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../manual/stacktraces.html#comparison-with-backtrace">Comparison with <tt class="docutils literal"><span class="pre">backtrace()</span></tt></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../manual/stacktraces.html#comparison-with-backtrace">Comparison with <code class="docutils literal"><span class="pre">backtrace()</span></code></a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../manual/performance-tips.html">Performance Tips</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="../manual/performance-tips.html#avoid-global-variables">Avoid global variables</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../manual/performance-tips.html#measure-performance-with-time-and-pay-attention-to-memory-allocation">Measure performance with <tt class="docutils literal"><span class="pre">&#64;time</span></tt> and pay attention to memory allocation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../manual/performance-tips.html#measure-performance-with-time-and-pay-attention-to-memory-allocation">Measure performance with <code class="docutils literal"><span class="pre">&#64;time</span></code> and pay attention to memory allocation</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../manual/performance-tips.html#tools">Tools</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../manual/performance-tips.html#avoid-containers-with-abstract-type-parameters">Avoid containers with abstract type parameters</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../manual/performance-tips.html#type-declarations">Type declarations</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../manual/performance-tips.html#break-functions-into-multiple-definitions">Break functions into multiple definitions</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../manual/performance-tips.html#write-type-stable-functions">Write &#8220;type-stable&#8221; functions</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../manual/performance-tips.html#avoid-changing-the-type-of-a-variable">Avoid changing the type of a variable</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../manual/performance-tips.html#separate-kernel-functions">Separate kernel functions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../manual/performance-tips.html#separate-kernel-functions-aka-function-barriers">Separate kernel functions (aka, function barriers)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../manual/performance-tips.html#types-with-values-as-parameters">Types with values-as-parameters</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../manual/performance-tips.html#the-dangers-of-abusing-multiple-dispatch-aka-more-on-types-with-values-as-parameters">The dangers of abusing multiple dispatch (aka, more on types with values-as-parameters)</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../manual/performance-tips.html#access-arrays-in-memory-order-along-columns">Access arrays in memory order, along columns</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../manual/performance-tips.html#pre-allocating-outputs">Pre-allocating outputs</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../manual/performance-tips.html#avoid-string-interpolation-for-i-o">Avoid string interpolation for I/O</a></li>
@@ -340,7 +345,7 @@
 <li class="toctree-l2"><a class="reference internal" href="../manual/performance-tips.html#tweaks">Tweaks</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../manual/performance-tips.html#performance-annotations">Performance Annotations</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../manual/performance-tips.html#treat-subnormal-numbers-as-zeros">Treat Subnormal Numbers as Zeros</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../manual/performance-tips.html#code-warntype"><tt class="docutils literal"><span class="pre">&#64;code_warntype</span></tt></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../manual/performance-tips.html#code-warntype"><code class="docutils literal"><span class="pre">&#64;code_warntype</span></code></a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../manual/workflow-tips.html">Workflow Tips</a><ul>
@@ -352,11 +357,11 @@
 <li class="toctree-l2"><a class="reference internal" href="../manual/style-guide.html#write-functions-not-just-scripts">Write functions, not just scripts</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../manual/style-guide.html#avoid-writing-overly-specific-types">Avoid writing overly-specific types</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../manual/style-guide.html#handle-excess-argument-diversity-in-the-caller">Handle excess argument diversity in the caller</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../manual/style-guide.html#append-to-names-of-functions-that-modify-their-arguments">Append <tt class="docutils literal"><span class="pre">!</span></tt> to names of functions that modify their arguments</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../manual/style-guide.html#append-to-names-of-functions-that-modify-their-arguments">Append <code class="docutils literal"><span class="pre">!</span></code> to names of functions that modify their arguments</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../manual/style-guide.html#avoid-strange-type-unions">Avoid strange type Unions</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../manual/style-guide.html#avoid-type-unions-in-fields">Avoid type Unions in fields</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../manual/style-guide.html#avoid-elaborate-container-types">Avoid elaborate container types</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../manual/style-guide.html#use-naming-conventions-consistent-with-julia-s-base">Use naming conventions consistent with Julia&#8217;s <tt class="docutils literal"><span class="pre">base/</span></tt></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../manual/style-guide.html#use-naming-conventions-consistent-with-julia-s-base">Use naming conventions consistent with Julia&#8217;s <code class="docutils literal"><span class="pre">base/</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="../manual/style-guide.html#don-t-overuse-try-catch">Don&#8217;t overuse try-catch</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../manual/style-guide.html#don-t-parenthesize-conditions">Don&#8217;t parenthesize conditions</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../manual/style-guide.html#don-t-overuse">Don&#8217;t overuse ...</a></li>
@@ -366,7 +371,7 @@
 <li class="toctree-l2"><a class="reference internal" href="../manual/style-guide.html#don-t-expose-unsafe-operations-at-the-interface-level">Don&#8217;t expose unsafe operations at the interface level</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../manual/style-guide.html#don-t-overload-methods-of-base-container-types">Don&#8217;t overload methods of base container types</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../manual/style-guide.html#be-careful-with-type-equality">Be careful with type equality</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../manual/style-guide.html#do-not-write-x-f-x">Do not write <tt class="docutils literal"><span class="pre">x-&gt;f(x)</span></tt></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../manual/style-guide.html#do-not-write-x-f-x">Do not write <code class="docutils literal"><span class="pre">x-&gt;f(x)</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="../manual/style-guide.html#avoid-using-floats-for-numeric-literals-in-generic-code-when-possible">Avoid using floats for numeric literals in generic code when possible</a></li>
 </ul>
 </li>
@@ -390,7 +395,114 @@
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../manual/unicode-input.html">Unicode Input</a></li>
 </ul>
-<ul class="simple">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../stdlib/base.html">Essentials</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../stdlib/base.html#introduction">Introduction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../stdlib/base.html#getting-around">Getting Around</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../stdlib/base.html#all-objects">All Objects</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../stdlib/base.html#types">Types</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../stdlib/base.html#generic-functions">Generic Functions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../stdlib/base.html#syntax">Syntax</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../stdlib/base.html#nullables">Nullables</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../stdlib/base.html#system">System</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../stdlib/base.html#errors">Errors</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../stdlib/base.html#events">Events</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../stdlib/base.html#reflection">Reflection</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../stdlib/base.html#internals">Internals</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../stdlib/collections.html">Collections and Data Structures</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../stdlib/collections.html#iteration">Iteration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../stdlib/collections.html#general-collections">General Collections</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../stdlib/collections.html#iterable-collections">Iterable Collections</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../stdlib/collections.html#indexable-collections">Indexable Collections</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../stdlib/collections.html#associative-collections">Associative Collections</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../stdlib/collections.html#set-like-collections">Set-Like Collections</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../stdlib/collections.html#dequeues">Dequeues</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../stdlib/collections.html#priorityqueue">PriorityQueue</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../stdlib/collections.html#heap-functions">Heap Functions</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../stdlib/math.html">Mathematics</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../stdlib/math.html#mathematical-operators">Mathematical Operators</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../stdlib/math.html#mathematical-functions">Mathematical Functions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../stdlib/math.html#statistics">Statistics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../stdlib/math.html#signal-processing">Signal Processing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../stdlib/math.html#numerical-integration">Numerical Integration</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../stdlib/numbers.html">Numbers</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../stdlib/numbers.html#standard-numeric-types">Standard Numeric Types</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../stdlib/numbers.html#data-formats">Data Formats</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../stdlib/numbers.html#general-number-functions-and-constants">General Number Functions and Constants</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../stdlib/numbers.html#bigfloats">BigFloats</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../stdlib/numbers.html#random-numbers">Random Numbers</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../stdlib/strings.html">Strings</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../stdlib/arrays.html">Arrays</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../stdlib/arrays.html#basic-functions">Basic functions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../stdlib/arrays.html#constructors">Constructors</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../stdlib/arrays.html#mathematical-operators-and-functions">Mathematical operators and functions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../stdlib/arrays.html#indexing-assignment-and-concatenation">Indexing, Assignment, and Concatenation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../stdlib/arrays.html#array-functions">Array functions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../stdlib/arrays.html#combinatorics">Combinatorics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../stdlib/arrays.html#bitarrays">BitArrays</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../stdlib/arrays.html#sparse-vectors-and-matrices">Sparse Vectors and Matrices</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../stdlib/parallel.html">Tasks and Parallel Computing</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../stdlib/parallel.html#tasks">Tasks</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../stdlib/parallel.html#general-parallel-computing-support">General Parallel Computing Support</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../stdlib/parallel.html#shared-arrays">Shared Arrays</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../stdlib/parallel.html#multi-threading">Multi-Threading</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../stdlib/parallel.html#cluster-manager-interface">Cluster Manager Interface</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../stdlib/linalg.html">Linear Algebra</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../stdlib/linalg.html#module-Base.LinAlg">Standard Functions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../stdlib/linalg.html#module-Base.LinAlg.BLAS">BLAS Functions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../stdlib/linalg.html#module-Base.LinAlg.LAPACK">LAPACK Functions</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../stdlib/constants.html">Constants</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../stdlib/file.html">Filesystem</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../stdlib/io-network.html">I/O and Network</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../stdlib/io-network.html#general-i-o">General I/O</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../stdlib/io-network.html#text-i-o">Text I/O</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../stdlib/io-network.html#multimedia-i-o">Multimedia I/O</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../stdlib/io-network.html#memory-mapped-i-o">Memory-mapped I/O</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../stdlib/io-network.html#network-i-o">Network I/O</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../stdlib/punctuation.html">Punctuation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../stdlib/sort.html">Sorting and Related Functions</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../stdlib/sort.html#sorting-functions">Sorting Functions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../stdlib/sort.html#order-related-functions">Order-Related Functions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../stdlib/sort.html#sorting-algorithms">Sorting Algorithms</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../stdlib/pkg.html">Package Manager Functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../stdlib/dates.html">Dates and Time</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../stdlib/dates.html#dates-and-time-types">Dates and Time Types</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../stdlib/dates.html#dates-functions">Dates Functions</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../stdlib/test.html">Unit Testing</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../stdlib/test.html#testing-base-julia">Testing Base Julia</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../stdlib/test.html#basic-unit-tests">Basic Unit Tests</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../stdlib/test.html#working-with-test-sets">Working with Test Sets</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../stdlib/test.html#other-test-macros">Other Test Macros</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../stdlib/test.html#creating-custom-abstracttestset-types">Creating Custom <code class="docutils literal"><span class="pre">AbstractTestSet</span></code> Types</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../stdlib/c.html">C Interface</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../stdlib/c.html#llvm-interface">LLVM Interface</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../stdlib/libc.html">C Standard Library</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../stdlib/libdl.html">Dynamic Linker</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../stdlib/profile.html">Profiling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../stdlib/stacktraces.html">StackTraces</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../stdlib/simd-types.html">SIMD Support</a></li>
 </ul>
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="reflection.html">Reflection and introspection</a></li>
@@ -403,7 +515,7 @@
 <li class="toctree-l2"><a class="reference internal" href="functions.html">Julia Functions</a></li>
 <li class="toctree-l2"><a class="reference internal" href="callconv.html">Calling Conventions</a></li>
 <li class="toctree-l2"><a class="reference internal" href="cartesian.html">Base.Cartesian</a></li>
-<li class="toctree-l2"><a class="reference internal" href="meta.html">Talking to the compiler (the <tt class="docutils literal"><span class="pre">:meta</span></tt> mechanism)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="meta.html">Talking to the compiler (the <code class="docutils literal"><span class="pre">:meta</span></code> mechanism)</a></li>
 <li class="toctree-l2 current"><a class="current reference internal" href="">SubArrays</a></li>
 <li class="toctree-l2"><a class="reference internal" href="sysimg.html">System Image Building</a></li>
 <li class="toctree-l2"><a class="reference internal" href="llvm.html">Working with LLVM</a></li>
@@ -416,14 +528,6 @@
 <li class="toctree-l2"><a class="reference internal" href="backtraces.html">Reporting and analyzing crashes (segfaults)</a></li>
 <li class="toctree-l2"><a class="reference internal" href="debuggingtips.html">gdb debugging tips</a></li>
 <li class="toctree-l2"><a class="reference internal" href="valgrind.html">Using Valgrind with Julia</a></li>
-</ul>
-</li>
-</ul>
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="../phdthesis/chap6.html">결론</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="../phdthesis/chap6.html#id2">성능</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../phdthesis/chap6.html#id3">앞으로 할 작업들</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../phdthesis/chap6.html#id4">프로젝트 상황</a></li>
 </ul>
 </li>
 </ul>
@@ -442,7 +546,6 @@
       </nav>
 
 
-
       
       <div class="wy-nav-content">
         <div class="rst-content">
@@ -455,11 +558,7 @@
     <li>SubArrays</li>
       <li class="wy-breadcrumbs-aside">
         
-          
-            
-              <a href="#" onclick="blame('devdocs/subarrays')" rel="nofollow"> 원문 보기</a>
-            
-          
+          <a href="../_sources/devdocs/subarrays.txt" rel="nofollow"> View page source</a>
         
       </li>
   </ul>
@@ -469,56 +568,56 @@
             
   <div class="section" id="subarrays">
 <span id="devdocs-subarrays"></span><h1>SubArrays<a class="headerlink" href="#subarrays" title="Permalink to this headline">¶</a></h1>
-<p>Julia&#8217;s <tt class="docutils literal"><span class="pre">SubArray</span></tt> type is a container encoding a &#8220;view&#8221; of a parent
-<tt class="docutils literal"><span class="pre">AbstractArray</span></tt>.  This page documents some of the design principles
-and implementation of <tt class="docutils literal"><span class="pre">SubArray</span></tt>s.</p>
+<p>Julia&#8217;s <code class="docutils literal"><span class="pre">SubArray</span></code> type is a container encoding a &#8220;view&#8221; of a parent
+<code class="docutils literal"><span class="pre">AbstractArray</span></code>.  This page documents some of the design principles
+and implementation of <code class="docutils literal"><span class="pre">SubArray</span></code>s.</p>
 <div class="section" id="indexing-cartesian-vs-linear-indexing">
 <h2>Indexing: cartesian vs. linear indexing<a class="headerlink" href="#indexing-cartesian-vs-linear-indexing" title="Permalink to this headline">¶</a></h2>
 <p>Broadly speaking, there are two main ways to access data in an array.
-The first, often called cartesian indexing, uses <tt class="docutils literal"><span class="pre">N</span></tt> indexes for an
-<tt class="docutils literal"><span class="pre">N</span></tt> -dimensional <tt class="docutils literal"><span class="pre">AbstractArray</span></tt>.  For example, a matrix <tt class="docutils literal"><span class="pre">A</span></tt>
-(2-dimensional) can be indexed in cartesian style as <tt class="docutils literal"><span class="pre">A[i,j]</span></tt>.  The
+The first, often called cartesian indexing, uses <code class="docutils literal"><span class="pre">N</span></code> indexes for an
+<code class="docutils literal"><span class="pre">N</span></code> -dimensional <code class="docutils literal"><span class="pre">AbstractArray</span></code>.  For example, a matrix <code class="docutils literal"><span class="pre">A</span></code>
+(2-dimensional) can be indexed in cartesian style as <code class="docutils literal"><span class="pre">A[i,j]</span></code>.  The
 second indexing method, referred to as linear indexing, uses a single
-index even for higher-dimensional objects.  For example, if <tt class="docutils literal"><span class="pre">A</span> <span class="pre">=</span>
-<span class="pre">reshape(1:12,</span> <span class="pre">3,</span> <span class="pre">4)</span></tt>, then the expression <tt class="docutils literal"><span class="pre">A[5]</span></tt> returns the
+index even for higher-dimensional objects.  For example, if <code class="docutils literal"><span class="pre">A</span> <span class="pre">=</span>
+<span class="pre">reshape(1:12,</span> <span class="pre">3,</span> <span class="pre">4)</span></code>, then the expression <code class="docutils literal"><span class="pre">A[5]</span></code> returns the
 value 5.  Julia allows you to combine these styles of indexing: for
-example, a 3d array <tt class="docutils literal"><span class="pre">A3</span></tt> can be indexed as <tt class="docutils literal"><span class="pre">A3[i,j]</span></tt>, in which
-case <tt class="docutils literal"><span class="pre">i</span></tt> is interpreted as a cartesian index for the first
-dimension, and <tt class="docutils literal"><span class="pre">j</span></tt> is a linear index over dimensions 2 and 3.</p>
-<p>For <tt class="docutils literal"><span class="pre">Array</span></tt>s, linear indexing appeals to the underlying storage
+example, a 3d array <code class="docutils literal"><span class="pre">A3</span></code> can be indexed as <code class="docutils literal"><span class="pre">A3[i,j]</span></code>, in which
+case <code class="docutils literal"><span class="pre">i</span></code> is interpreted as a cartesian index for the first
+dimension, and <code class="docutils literal"><span class="pre">j</span></code> is a linear index over dimensions 2 and 3.</p>
+<p>For <code class="docutils literal"><span class="pre">Array</span></code>s, linear indexing appeals to the underlying storage
 format: an array is laid out as a contiguous block of memory, and
 hence the linear index is just the offset (+1) of the corresponding
 entry relative to the beginning of the array.  However, this is not
-true for many other <tt class="docutils literal"><span class="pre">AbstractArray</span></tt> types: examples include
-<tt class="docutils literal"><span class="pre">SparseMatrixCSC</span></tt>, arrays that require some kind of computation
+true for many other <code class="docutils literal"><span class="pre">AbstractArray</span></code> types: examples include
+<code class="docutils literal"><span class="pre">SparseMatrixCSC</span></code>, arrays that require some kind of computation
 (such as interpolation), and the type under discussion here,
-<tt class="docutils literal"><span class="pre">SubArray</span></tt>.  For these types, the underlying information is more
+<code class="docutils literal"><span class="pre">SubArray</span></code>.  For these types, the underlying information is more
 naturally described in terms of cartesian indexes.</p>
 <p>You can manually convert from a cartesian index to a linear index with
-<tt class="docutils literal"><span class="pre">sub2ind</span></tt>, and vice versa using <tt class="docutils literal"><span class="pre">ind2sub</span></tt>.  <tt class="docutils literal"><span class="pre">getindex</span></tt> and
-<tt class="docutils literal"><span class="pre">setindex!</span></tt> functions for <tt class="docutils literal"><span class="pre">AbstractArray</span></tt> types may include
+<code class="docutils literal"><span class="pre">sub2ind</span></code>, and vice versa using <code class="docutils literal"><span class="pre">ind2sub</span></code>.  <code class="docutils literal"><span class="pre">getindex</span></code> and
+<code class="docutils literal"><span class="pre">setindex!</span></code> functions for <code class="docutils literal"><span class="pre">AbstractArray</span></code> types may include
 similar operations.</p>
 <p>While converting from a cartesian index to a linear index is fast
 (it&#8217;s just multiplication and addition), converting from a linear
-index to a cartesian index is very slow: it relies on the <tt class="docutils literal"><span class="pre">div</span></tt>
+index to a cartesian index is very slow: it relies on the <code class="docutils literal"><span class="pre">div</span></code>
 operation, which is one of the slowest low-level operations you can
 perform with a CPU.  For this reason, any code that deals with
-<tt class="docutils literal"><span class="pre">AbstractArray</span></tt> types is best designed in terms of cartesian, rather than
+<code class="docutils literal"><span class="pre">AbstractArray</span></code> types is best designed in terms of cartesian, rather than
 linear, indexing.</p>
 </div>
 <div class="section" id="index-replacement">
 <h2>Index replacement<a class="headerlink" href="#index-replacement" title="Permalink to this headline">¶</a></h2>
 <p>Consider making 2d slices of a 3d array:</p>
-<div class="highlight-julia"><div class="highlight"><pre><span class="n">S1</span> <span class="o">=</span> <span class="n">slice</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="p">:,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">2</span><span class="p">:</span><span class="mi">6</span><span class="p">)</span>
+<div class="highlight-julia"><div class="highlight"><pre><span></span><span class="n">S1</span> <span class="o">=</span> <span class="n">slice</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="p">:,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">2</span><span class="p">:</span><span class="mi">6</span><span class="p">)</span>
 <span class="n">S2</span> <span class="o">=</span> <span class="n">slice</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="p">:,</span> <span class="mi">2</span><span class="p">:</span><span class="mi">6</span><span class="p">)</span>
 </pre></div>
 </div>
-<p><tt class="docutils literal"><span class="pre">slice</span></tt> drops &#8220;singleton&#8221; dimensions (ones that are specified by an
-<tt class="docutils literal"><span class="pre">Int</span></tt>), so both <tt class="docutils literal"><span class="pre">S1</span></tt> and <tt class="docutils literal"><span class="pre">S2</span></tt> are two-dimensional <tt class="docutils literal"><span class="pre">SubArray</span></tt>s.
-Consequently, the natural way to index these is with <tt class="docutils literal"><span class="pre">S1[i,j]</span></tt>.  To
-extract the value from the parent array <tt class="docutils literal"><span class="pre">A</span></tt>, the natural approach is
-to replace <tt class="docutils literal"><span class="pre">S1[i,j]</span></tt> with <tt class="docutils literal"><span class="pre">A[i,5,(2:6)[j]]</span></tt> and <tt class="docutils literal"><span class="pre">S2[i,j]</span></tt> with
-<tt class="docutils literal"><span class="pre">A[5,i,(2:6)[j]]</span></tt>.</p>
+<p><code class="docutils literal"><span class="pre">slice</span></code> drops &#8220;singleton&#8221; dimensions (ones that are specified by an
+<code class="docutils literal"><span class="pre">Int</span></code>), so both <code class="docutils literal"><span class="pre">S1</span></code> and <code class="docutils literal"><span class="pre">S2</span></code> are two-dimensional <code class="docutils literal"><span class="pre">SubArray</span></code>s.
+Consequently, the natural way to index these is with <code class="docutils literal"><span class="pre">S1[i,j]</span></code>.  To
+extract the value from the parent array <code class="docutils literal"><span class="pre">A</span></code>, the natural approach is
+to replace <code class="docutils literal"><span class="pre">S1[i,j]</span></code> with <code class="docutils literal"><span class="pre">A[i,5,(2:6)[j]]</span></code> and <code class="docutils literal"><span class="pre">S2[i,j]</span></code> with
+<code class="docutils literal"><span class="pre">A[5,i,(2:6)[j]]</span></code>.</p>
 <p>The key feature of the design of SubArrays is that this index
 replacement can be performed without any runtime overhead.</p>
 </div>
@@ -528,7 +627,7 @@ replacement can be performed without any runtime overhead.</p>
 <h3>Type parameters and fields<a class="headerlink" href="#type-parameters-and-fields" title="Permalink to this headline">¶</a></h3>
 <p>The strategy adopted is first and foremost expressed in the definition
 of the type:</p>
-<div class="highlight-julia"><div class="highlight"><pre><span class="k">type</span><span class="nc"> SubArray</span><span class="p">{</span><span class="n">T</span><span class="p">,</span><span class="n">N</span><span class="p">,</span><span class="n">P</span><span class="o">&lt;:</span><span class="n">AbstractArray</span><span class="p">,</span><span class="n">I</span><span class="o">&lt;:</span><span class="p">(</span><span class="n">ViewIndex</span><span class="o">...</span><span class="p">),</span><span class="n">LD</span><span class="p">}</span> <span class="o">&lt;:</span> <span class="n">AbstractArray</span><span class="p">{</span><span class="n">T</span><span class="p">,</span><span class="n">N</span><span class="p">}</span>
+<div class="highlight-julia"><div class="highlight"><pre><span></span><span class="k">type</span><span class="nc"> SubArray</span><span class="p">{</span><span class="n">T</span><span class="p">,</span><span class="n">N</span><span class="p">,</span><span class="n">P</span><span class="o">&lt;:</span><span class="n">AbstractArray</span><span class="p">,</span><span class="n">I</span><span class="o">&lt;:</span><span class="p">(</span><span class="n">ViewIndex</span><span class="o">...</span><span class="p">),</span><span class="n">LD</span><span class="p">}</span> <span class="o">&lt;:</span> <span class="n">AbstractArray</span><span class="p">{</span><span class="n">T</span><span class="p">,</span><span class="n">N</span><span class="p">}</span>
     <span class="n">parent</span><span class="p">::</span><span class="n">P</span>
     <span class="n">indexes</span><span class="p">::</span><span class="n">I</span>
     <span class="n">dims</span><span class="p">::</span><span class="n">NTuple</span><span class="p">{</span><span class="n">N</span><span class="p">,</span><span class="kt">Int</span><span class="p">}</span>
@@ -537,45 +636,45 @@ of the type:</p>
 <span class="k">end</span>
 </pre></div>
 </div>
-<p><tt class="docutils literal"><span class="pre">SubArray</span></tt> has 5 type parameters.  The first two are the
+<p><code class="docutils literal"><span class="pre">SubArray</span></code> has 5 type parameters.  The first two are the
 standard element type and dimensionality.  The next is the type of the
-parent <tt class="docutils literal"><span class="pre">AbstractArray</span></tt>.  The most heavily-used is the fourth
-parameter, a <tt class="docutils literal"><span class="pre">tuple</span></tt> of the types of the indexes for each dimension.
-The final one, <tt class="docutils literal"><span class="pre">LD</span></tt>, is used only in special circumstances, to
+parent <code class="docutils literal"><span class="pre">AbstractArray</span></code>.  The most heavily-used is the fourth
+parameter, a <code class="docutils literal"><span class="pre">tuple</span></code> of the types of the indexes for each dimension.
+The final one, <code class="docutils literal"><span class="pre">LD</span></code>, is used only in special circumstances, to
 implement efficient linear indexing for those types that can support
 it.</p>
-<p>If in our example above <tt class="docutils literal"><span class="pre">A</span></tt> is a <tt class="docutils literal"><span class="pre">Array{Float64,</span> <span class="pre">3}</span></tt>, our <tt class="docutils literal"><span class="pre">S1</span></tt>
+<p>If in our example above <code class="docutils literal"><span class="pre">A</span></code> is a <code class="docutils literal"><span class="pre">Array{Float64,</span> <span class="pre">3}</span></code>, our <code class="docutils literal"><span class="pre">S1</span></code>
 case above would be a
-<tt class="docutils literal"><span class="pre">SubArray{Float64,2,Array{Float64,3},(Colon,Int64,UnitRange{Int64}),2}</span></tt>.
+<code class="docutils literal"><span class="pre">SubArray{Float64,2,Array{Float64,3},(Colon,Int64,UnitRange{Int64}),2}</span></code>.
 Note in particular the tuple parameter, which stores the types of
-the indexes used to create <tt class="docutils literal"><span class="pre">S1</span></tt>.  Likewise,</p>
-<div class="highlight-julia"><div class="highlight"><pre><span class="n">julia</span><span class="o">&gt;</span> <span class="n">S1</span><span class="o">.</span><span class="n">indexes</span>
+the indexes used to create <code class="docutils literal"><span class="pre">S1</span></code>.  Likewise,</p>
+<div class="highlight-julia"><div class="highlight"><pre><span></span><span class="n">julia</span><span class="o">&gt;</span> <span class="n">S1</span><span class="o">.</span><span class="n">indexes</span>
 <span class="p">(</span><span class="n">Colon</span><span class="p">(),</span><span class="mi">5</span><span class="p">,</span><span class="mi">2</span><span class="p">:</span><span class="mi">6</span><span class="p">)</span>
 </pre></div>
 </div>
 <p>Storing these values allows index replacement, and having the types
 encoded as parameters allows one to dispatch to efficient algorithms.</p>
-<p>An <tt class="docutils literal"><span class="pre">Int</span></tt> index is used to represent a parent dimension that should
-be dropped.  The distinction between the <tt class="docutils literal"><span class="pre">sub</span></tt> and <tt class="docutils literal"><span class="pre">slice</span></tt>
-commands is that <tt class="docutils literal"><span class="pre">sub</span></tt> converts <em>interior</em> <tt class="docutils literal"><span class="pre">Int</span></tt> indices into
+<p>An <code class="docutils literal"><span class="pre">Int</span></code> index is used to represent a parent dimension that should
+be dropped.  The distinction between the <code class="docutils literal"><span class="pre">sub</span></code> and <code class="docutils literal"><span class="pre">slice</span></code>
+commands is that <code class="docutils literal"><span class="pre">sub</span></code> converts <em>interior</em> <code class="docutils literal"><span class="pre">Int</span></code> indices into
 ranges at the time of construction.  For example:</p>
-<div class="highlight-julia"><div class="highlight"><pre><span class="n">S3</span> <span class="o">=</span> <span class="n">sub</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="p">:,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">2</span><span class="p">:</span><span class="mi">6</span><span class="p">)</span>
+<div class="highlight-julia"><div class="highlight"><pre><span></span><span class="n">S3</span> <span class="o">=</span> <span class="n">sub</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="p">:,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">2</span><span class="p">:</span><span class="mi">6</span><span class="p">)</span>
 
 <span class="n">julia</span><span class="o">&gt;</span> <span class="n">S3</span><span class="o">.</span><span class="n">indexes</span>
 <span class="p">(</span><span class="n">Colon</span><span class="p">(),</span><span class="mi">5</span><span class="p">:</span><span class="mi">5</span><span class="p">,</span><span class="mi">2</span><span class="p">:</span><span class="mi">6</span><span class="p">)</span>
 </pre></div>
 </div>
-<p>Because of this conversion, <tt class="docutils literal"><span class="pre">S3</span></tt> is three-dimensional.</p>
+<p>Because of this conversion, <code class="docutils literal"><span class="pre">S3</span></code> is three-dimensional.</p>
 </div>
 <div class="section" id="getindex-and-setindex-index-translation">
-<h3><tt class="docutils literal"><span class="pre">getindex</span></tt> and <tt class="docutils literal"><span class="pre">setindex!</span></tt> (index translation)<a class="headerlink" href="#getindex-and-setindex-index-translation" title="Permalink to this headline">¶</a></h3>
+<h3><code class="docutils literal"><span class="pre">getindex</span></code> and <code class="docutils literal"><span class="pre">setindex!</span></code> (index translation)<a class="headerlink" href="#getindex-and-setindex-index-translation" title="Permalink to this headline">¶</a></h3>
 <p>Performing index translation requires that you do different things for
-different concrete <tt class="docutils literal"><span class="pre">SubArray</span></tt> types.  For example, for <tt class="docutils literal"><span class="pre">S1</span></tt>, one needs
-to apply the <tt class="docutils literal"><span class="pre">i,j</span></tt> indexes to the first and third dimensions of the
-parent array, whereas for <tt class="docutils literal"><span class="pre">S2</span></tt> one needs to apply them to the
+different concrete <code class="docutils literal"><span class="pre">SubArray</span></code> types.  For example, for <code class="docutils literal"><span class="pre">S1</span></code>, one needs
+to apply the <code class="docutils literal"><span class="pre">i,j</span></code> indexes to the first and third dimensions of the
+parent array, whereas for <code class="docutils literal"><span class="pre">S2</span></code> one needs to apply them to the
 second and third.  The simplest approach to indexing would be to do
 the type-analysis at runtime:</p>
-<div class="highlight-julia"><div class="highlight"><pre><span class="n">parentindexes</span> <span class="o">=</span> <span class="n">Array</span><span class="p">(</span><span class="kt">Any</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+<div class="highlight-julia"><div class="highlight"><pre><span></span><span class="n">parentindexes</span> <span class="o">=</span> <span class="n">Array</span><span class="p">{</span><span class="kt">Any</span><span class="p">}(</span><span class="mi">0</span><span class="p">)</span>
 <span class="k">for</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">1</span><span class="p">:</span><span class="n">ndims</span><span class="p">(</span><span class="n">S</span><span class="o">.</span><span class="n">parent</span><span class="p">)</span>
     <span class="o">...</span>
     <span class="k">if</span> <span class="nb">isa</span><span class="p">(</span><span class="n">thisindex</span><span class="p">,</span> <span class="kt">Int</span><span class="p">)</span>
@@ -597,13 +696,13 @@ lot of poorly-typed code.</p>
 type of input.  Note, however, that the number of distinct methods
 needed grows exponentially in the number of dimensions, and since
 Julia supports arrays of any dimension the number of methods required
-is in fact infinite.  Fortunately, <tt class="docutils literal"><span class="pre">&#64;generated</span> <span class="pre">function</span></tt>s allow one to
+is in fact infinite.  Fortunately, <code class="docutils literal"><span class="pre">&#64;generated</span> <span class="pre">function</span></code>s allow one to
 generate the necessary methods quite straightforwardly.  The resulting
 code looks quite a lot like the runtime approach above, but all of the
 type analysis is performed at the time of method instantiation.  For a
-<tt class="docutils literal"><span class="pre">SubArray</span></tt> of the type of <tt class="docutils literal"><span class="pre">S1</span></tt>, the method executed at runtime is
+<code class="docutils literal"><span class="pre">SubArray</span></code> of the type of <code class="docutils literal"><span class="pre">S1</span></code>, the method executed at runtime is
 literally</p>
-<div class="highlight-julia"><div class="highlight"><pre><span class="n">getindex</span><span class="p">(</span><span class="n">S</span><span class="p">::</span><span class="o">&lt;</span><span class="k">type</span><span class="nc"> of</span> <span class="n">S1</span><span class="o">&gt;</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">)</span> <span class="o">=</span> <span class="n">S</span><span class="o">.</span><span class="n">parent</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">S</span><span class="o">.</span><span class="n">indexes</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="n">S</span><span class="o">.</span><span class="n">indexes</span><span class="p">[</span><span class="mi">3</span><span class="p">][</span><span class="n">j</span><span class="p">]]</span>
+<div class="highlight-julia"><div class="highlight"><pre><span></span><span class="n">getindex</span><span class="p">(</span><span class="n">S</span><span class="p">::</span><span class="o">&lt;</span><span class="k">type</span><span class="nc"> of</span> <span class="n">S1</span><span class="o">&gt;</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">)</span> <span class="o">=</span> <span class="n">S</span><span class="o">.</span><span class="n">parent</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">S</span><span class="o">.</span><span class="n">indexes</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="n">S</span><span class="o">.</span><span class="n">indexes</span><span class="p">[</span><span class="mi">3</span><span class="p">][</span><span class="n">j</span><span class="p">]]</span>
 </pre></div>
 </div>
 </div>
@@ -611,12 +710,12 @@ literally</p>
 <h3>Linear indexing<a class="headerlink" href="#linear-indexing" title="Permalink to this headline">¶</a></h3>
 <p>Linear indexing can be implemented efficiently when the entire array
 has a single stride that separates successive elements.  For
-<tt class="docutils literal"><span class="pre">SubArray</span></tt> types, the availability of efficient linear indexing is based
+<code class="docutils literal"><span class="pre">SubArray</span></code> types, the availability of efficient linear indexing is based
 purely on the types of the indexes, and does not depend on values like
 the size of the array.  It therefore can miss some cases in which the
 stride happens to be uniform:</p>
-<div class="highlight-julia"><div class="highlight"><pre><span class="n">julia</span><span class="o">&gt;</span> <span class="n">A</span> <span class="o">=</span> <span class="n">reshape</span><span class="p">(</span><span class="mi">1</span><span class="p">:</span><span class="mi">4</span><span class="o">*</span><span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
-<span class="mi">4</span><span class="n">x2</span> <span class="n">Array</span><span class="p">{</span><span class="kt">Int64</span><span class="p">,</span><span class="mi">2</span><span class="p">}:</span>
+<div class="highlight-julia"><div class="highlight"><pre><span></span><span class="n">julia</span><span class="o">&gt;</span> <span class="n">A</span> <span class="o">=</span> <span class="n">reshape</span><span class="p">(</span><span class="mi">1</span><span class="p">:</span><span class="mi">4</span><span class="o">*</span><span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+<span class="mi">4</span><span class="n">×2</span> <span class="n">Array</span><span class="p">{</span><span class="kt">Int64</span><span class="p">,</span><span class="mi">2</span><span class="p">}:</span>
  <span class="mi">1</span>  <span class="mi">5</span>
  <span class="mi">2</span>  <span class="mi">6</span>
  <span class="mi">3</span>  <span class="mi">7</span>
@@ -629,12 +728,12 @@ stride happens to be uniform:</p>
  <span class="mi">2</span>
 </pre></div>
 </div>
-<p>A view constructed as <tt class="docutils literal"><span class="pre">sub(A,</span> <span class="pre">2:2:4,</span> <span class="pre">:)</span></tt> happens to have uniform
+<p>A view constructed as <code class="docutils literal"><span class="pre">sub(A,</span> <span class="pre">2:2:4,</span> <span class="pre">:)</span></code> happens to have uniform
 stride, and therefore linear indexing indeed could be performed
 efficiently.  However, success in this case depends on the size of the
 array: if the first dimension instead were odd,</p>
-<div class="highlight-julia"><div class="highlight"><pre><span class="n">julia</span><span class="o">&gt;</span> <span class="n">A</span> <span class="o">=</span> <span class="n">reshape</span><span class="p">(</span><span class="mi">1</span><span class="p">:</span><span class="mi">5</span><span class="o">*</span><span class="mi">2</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
-<span class="mi">5</span><span class="n">x2</span> <span class="n">Array</span><span class="p">{</span><span class="kt">Int64</span><span class="p">,</span><span class="mi">2</span><span class="p">}:</span>
+<div class="highlight-julia"><div class="highlight"><pre><span></span><span class="n">julia</span><span class="o">&gt;</span> <span class="n">A</span> <span class="o">=</span> <span class="n">reshape</span><span class="p">(</span><span class="mi">1</span><span class="p">:</span><span class="mi">5</span><span class="o">*</span><span class="mi">2</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+<span class="mi">5</span><span class="n">×2</span> <span class="n">Array</span><span class="p">{</span><span class="kt">Int64</span><span class="p">,</span><span class="mi">2</span><span class="p">}:</span>
  <span class="mi">1</span>   <span class="mi">6</span>
  <span class="mi">2</span>   <span class="mi">7</span>
  <span class="mi">3</span>   <span class="mi">8</span>
@@ -648,73 +747,73 @@ array: if the first dimension instead were odd,</p>
  <span class="mi">2</span>
 </pre></div>
 </div>
-<p>then <tt class="docutils literal"><span class="pre">A[2:2:4,:]</span></tt> does not have uniform stride, so we cannot
+<p>then <code class="docutils literal"><span class="pre">A[2:2:4,:]</span></code> does not have uniform stride, so we cannot
 guarantee efficient linear indexing.  Since we have to base this
 decision based purely on types encoded in the parameters of the
-<tt class="docutils literal"><span class="pre">SubArray</span></tt>, <tt class="docutils literal"><span class="pre">S</span> <span class="pre">=</span> <span class="pre">sub(A,</span> <span class="pre">2:2:4,</span> <span class="pre">:)</span></tt> cannot implement efficient
+<code class="docutils literal"><span class="pre">SubArray</span></code>, <code class="docutils literal"><span class="pre">S</span> <span class="pre">=</span> <span class="pre">sub(A,</span> <span class="pre">2:2:4,</span> <span class="pre">:)</span></code> cannot implement efficient
 linear indexing.</p>
-<p>The last parameter of <tt class="docutils literal"><span class="pre">SubArray</span></tt>, <tt class="docutils literal"><span class="pre">LD</span></tt>, encodes the highest
+<p>The last parameter of <code class="docutils literal"><span class="pre">SubArray</span></code>, <code class="docutils literal"><span class="pre">LD</span></code>, encodes the highest
 dimension up to which elements are guaranteed to have uniform stride.
-When <tt class="docutils literal"><span class="pre">LD</span> <span class="pre">==</span> <span class="pre">length(I)</span></tt>, the length of the <tt class="docutils literal"><span class="pre">indexes</span></tt> tuple,
+When <code class="docutils literal"><span class="pre">LD</span> <span class="pre">==</span> <span class="pre">length(I)</span></code>, the length of the <code class="docutils literal"><span class="pre">indexes</span></code> tuple,
 efficient linear indexing becomes possible.</p>
 <p>An example might help clarify what this means:</p>
 <ul class="simple">
-<li>For <tt class="docutils literal"><span class="pre">S1</span></tt> above, the <tt class="docutils literal"><span class="pre">Colon</span></tt> along the first dimension is
+<li>For <code class="docutils literal"><span class="pre">S1</span></code> above, the <code class="docutils literal"><span class="pre">Colon</span></code> along the first dimension is
 uniformly spaced (all elements are displaced by 1 from the previous
 value), so this dimension does not &#8220;break&#8221; linear indexing.
-Consequently <tt class="docutils literal"><span class="pre">LD</span></tt> has a value of at least 1.</li>
-<li>The second dimension of the parent, sliced out as <tt class="docutils literal"><span class="pre">5</span></tt>, does not
+Consequently <code class="docutils literal"><span class="pre">LD</span></code> has a value of at least 1.</li>
+<li>The second dimension of the parent, sliced out as <code class="docutils literal"><span class="pre">5</span></code>, does not
 not by itself break linear indexing:  if all of the remaining
-indexes were <tt class="docutils literal"><span class="pre">Int</span></tt>, the entire <tt class="docutils literal"><span class="pre">SubArray</span></tt> would have efficient
-linear indexing.  Consequently, <tt class="docutils literal"><span class="pre">LD</span></tt> is at least 2.</li>
-<li>The last dimension is a <tt class="docutils literal"><span class="pre">Range</span></tt>.  This would by itself break
-linear indexing (even though it is a <tt class="docutils literal"><span class="pre">UnitRange</span></tt>, the fact that it
+indexes were <code class="docutils literal"><span class="pre">Int</span></code>, the entire <code class="docutils literal"><span class="pre">SubArray</span></code> would have efficient
+linear indexing.  Consequently, <code class="docutils literal"><span class="pre">LD</span></code> is at least 2.</li>
+<li>The last dimension is a <code class="docutils literal"><span class="pre">Range</span></code>.  This would by itself break
+linear indexing (even though it is a <code class="docutils literal"><span class="pre">UnitRange</span></code>, the fact that it
 might not start at 1 means that there might be gaps).  Additionally,
-given the preceding indexes any choice other than <tt class="docutils literal"><span class="pre">Int</span></tt> would
-also have truncated <tt class="docutils literal"><span class="pre">LD</span></tt> at 2.</li>
+given the preceding indexes any choice other than <code class="docutils literal"><span class="pre">Int</span></code> would
+also have truncated <code class="docutils literal"><span class="pre">LD</span></code> at 2.</li>
 </ul>
-<p>Consequently, as a whole <tt class="docutils literal"><span class="pre">S1</span></tt> does not have efficient linear
+<p>Consequently, as a whole <code class="docutils literal"><span class="pre">S1</span></code> does not have efficient linear
 indexing.</p>
-<p>However, if we were to later say <tt class="docutils literal"><span class="pre">S1a</span> <span class="pre">=</span> <span class="pre">slice(S1,</span> <span class="pre">2:2:7,</span> <span class="pre">3)</span></tt>,
-<tt class="docutils literal"><span class="pre">S1a</span></tt> would have an <tt class="docutils literal"><span class="pre">LD</span></tt> of 3 (its indexes tuple has type
-<tt class="docutils literal"><span class="pre">(Colon,</span> <span class="pre">Int,</span> <span class="pre">Int)</span></tt>) and would have efficient linear indexing.  This
-ability to re-slice is the main motivation to use an integer <tt class="docutils literal"><span class="pre">LD</span></tt>
+<p>However, if we were to later say <code class="docutils literal"><span class="pre">S1a</span> <span class="pre">=</span> <span class="pre">slice(S1,</span> <span class="pre">2:2:7,</span> <span class="pre">3)</span></code>,
+<code class="docutils literal"><span class="pre">S1a</span></code> would have an <code class="docutils literal"><span class="pre">LD</span></code> of 3 (its indexes tuple has type
+<code class="docutils literal"><span class="pre">(Colon,</span> <span class="pre">Int,</span> <span class="pre">Int)</span></code>) and would have efficient linear indexing.  This
+ability to re-slice is the main motivation to use an integer <code class="docutils literal"><span class="pre">LD</span></code>
 rather than a boolean flag to encode the applicability of linear
 indexing.</p>
-<p>The main reason <tt class="docutils literal"><span class="pre">LD</span></tt> cannot always be inferred from the <tt class="docutils literal"><span class="pre">indexes</span></tt> tuple
-is because <tt class="docutils literal"><span class="pre">sub</span></tt> converts internal <tt class="docutils literal"><span class="pre">Int</span></tt> indexes into
-<tt class="docutils literal"><span class="pre">UnitRange</span></tt>s.  Consequently it is important to encode &#8220;safe&#8221;
-dimensions of size 1 prior to conversion.  Up to the <tt class="docutils literal"><span class="pre">LD</span></tt>th entry,
-we can be sure that any <tt class="docutils literal"><span class="pre">UnitRange</span></tt> was, in fact, an <tt class="docutils literal"><span class="pre">Integer</span></tt>
+<p>The main reason <code class="docutils literal"><span class="pre">LD</span></code> cannot always be inferred from the <code class="docutils literal"><span class="pre">indexes</span></code> tuple
+is because <code class="docutils literal"><span class="pre">sub</span></code> converts internal <code class="docutils literal"><span class="pre">Int</span></code> indexes into
+<code class="docutils literal"><span class="pre">UnitRange</span></code>s.  Consequently it is important to encode &#8220;safe&#8221;
+dimensions of size 1 prior to conversion.  Up to the <code class="docutils literal"><span class="pre">LD</span></code>th entry,
+we can be sure that any <code class="docutils literal"><span class="pre">UnitRange</span></code> was, in fact, an <code class="docutils literal"><span class="pre">Integer</span></code>
 prior to conversion.</p>
 </div>
 <div class="section" id="a-few-details">
 <h3>A few details<a class="headerlink" href="#a-few-details" title="Permalink to this headline">¶</a></h3>
 <ul>
 <li><p class="first">Hopefully by now it&#8217;s fairly clear that supporting slices means that
-the dimensionality, given by the parameter <tt class="docutils literal"><span class="pre">N</span></tt>, is not necessarily
+the dimensionality, given by the parameter <code class="docutils literal"><span class="pre">N</span></code>, is not necessarily
 equal to the dimensionality of the parent array or the length of the
-<tt class="docutils literal"><span class="pre">indexes</span></tt> tuple.  Neither do user-supplied indexes necessarily
-line up with entries in the <tt class="docutils literal"><span class="pre">indexes</span></tt> tuple (e.g., the second
+<code class="docutils literal"><span class="pre">indexes</span></code> tuple.  Neither do user-supplied indexes necessarily
+line up with entries in the <code class="docutils literal"><span class="pre">indexes</span></code> tuple (e.g., the second
 user-supplied index might correspond to the third dimension of the
-parent array, and the third element in the <tt class="docutils literal"><span class="pre">indexes</span></tt> tuple).</p>
+parent array, and the third element in the <code class="docutils literal"><span class="pre">indexes</span></code> tuple).</p>
 <p>What might be less obvious is that the dimensionality of the parent
-array may not be equal to the length of the <tt class="docutils literal"><span class="pre">indexes</span></tt> tuple.  Some
+array may not be equal to the length of the <code class="docutils literal"><span class="pre">indexes</span></code> tuple.  Some
 examples:</p>
-<div class="highlight-julia"><div class="highlight"><pre><span class="n">A</span> <span class="o">=</span> <span class="n">reshape</span><span class="p">(</span><span class="mi">1</span><span class="p">:</span><span class="mi">35</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">7</span><span class="p">)</span> <span class="c"># A 2d parent Array</span>
+<div class="highlight-julia"><div class="highlight"><pre><span></span><span class="n">A</span> <span class="o">=</span> <span class="n">reshape</span><span class="p">(</span><span class="mi">1</span><span class="p">:</span><span class="mi">35</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">7</span><span class="p">)</span> <span class="c"># A 2d parent Array</span>
 <span class="n">S</span> <span class="o">=</span> <span class="n">sub</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="mi">2</span><span class="p">:</span><span class="mi">7</span><span class="p">)</span>         <span class="c"># A 1d view created by linear indexing</span>
 <span class="n">S</span> <span class="o">=</span> <span class="n">sub</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="p">:,</span> <span class="p">:,</span> <span class="mi">1</span><span class="p">)</span>     <span class="c"># Appending extra indexes is supported</span>
 <span class="n">S</span> <span class="o">=</span> <span class="n">sub</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="p">:,</span> <span class="p">:,</span> <span class="mi">1</span><span class="p">:</span><span class="mi">1</span><span class="p">)</span>
 </pre></div>
 </div>
-<p>Consequently, internal <tt class="docutils literal"><span class="pre">SubArray</span></tt> code needs to be fairly careful
+<p>Consequently, internal <code class="docutils literal"><span class="pre">SubArray</span></code> code needs to be fairly careful
 about which of these three notions of dimensionality is relevant in
 each circumstance.</p>
 </li>
-<li><p class="first">Because the processing needed to implement all of the <tt class="docutils literal"><span class="pre">&#64;generated</span></tt>
-expressions isn&#8217;t readily available at the time <tt class="docutils literal"><span class="pre">subarray.jl</span></tt>
-appears in the bootstrap process, <tt class="docutils literal"><span class="pre">SubArray</span></tt> functionality is
-split into two files, the second being <tt class="docutils literal"><span class="pre">subarray2.jl</span></tt>.</p>
+<li><p class="first">Because the processing needed to implement all of the <code class="docutils literal"><span class="pre">&#64;generated</span></code>
+expressions isn&#8217;t readily available at the time <code class="docutils literal"><span class="pre">subarray.jl</span></code>
+appears in the bootstrap process, <code class="docutils literal"><span class="pre">SubArray</span></code> functionality is
+split into two files, the second being <code class="docutils literal"><span class="pre">subarray2.jl</span></code>.</p>
 </li>
 <li><p class="first">Bounds-checking has currently not been tackled. There are two
 relevant notions of bounds-checking, one at construction time and
@@ -731,10 +830,10 @@ one during element access.  This is an important outstanding issue.</p>
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="sysimg.html" class="btn btn-neutral float-right" title="System Image Building" accesskey="n"> 다음 <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="sysimg.html" class="btn btn-neutral float-right" title="System Image Building">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="meta.html" class="btn btn-neutral" title="Talking to the compiler (the :meta mechanism)" accesskey="p"><span class="fa fa-arrow-circle-left"></span> 이전 </a>
+        <a href="meta.html" class="btn btn-neutral" title="Talking to the compiler (the :meta mechanism)"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   
@@ -743,40 +842,11 @@ one during element access.  This is an important outstanding issue.</p>
 
   <div role="contentinfo">
     <p>
-      Last updated on Apr 07, 2016.
     </p>
   </div>
 
+  <a href="https://github.com/snide/sphinx_rtd_theme">Sphinx theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>
 </footer>
-
-
-<div
-  class="fb-like"
-  data-share="true"
-  data-width="450"
-  data-show-faces="true">
-</div>
-
-<script>
-  window.fbAsyncInit = function() {
-    FB.init({
-      appId      : '685509058259607',
-      xfbml      : true,
-      version    : 'v2.3'
-    });
-  };
-
-  (function(d, s, id){
-     var js, fjs = d.getElementsByTagName(s)[0];
-     if (d.getElementById(id)) {return;}
-     js = d.createElement(s); js.id = id;
-     js.src = "https://connect.facebook.net/ko_KR/sdk.js";
-     fjs.parentNode.insertBefore(js, fjs);
-   }(document, 'script', 'facebook-jssdk'));
-</script>
-
-<div class="fb-comments" data-width="100%" data-version="v2.3"></div>
-
         </div>
       </div>
 
@@ -799,7 +869,7 @@ one during element access.  This is an important outstanding issue.</p>
       <script type="text/javascript" src="../_static/jquery.js"></script>
       <script type="text/javascript" src="../_static/underscore.js"></script>
       <script type="text/javascript" src="../_static/doctools.js"></script>
-      <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+      <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
 
   
 
@@ -816,16 +886,6 @@ one during element access.  This is an important outstanding issue.</p>
       });
   </script>
    
-
-
-<script type="text/javascript" src="../_static/jquery.word-break-keep-all.min.js"></script>
-<script type="text/javascript">
-$(document).ready(function(){
-  $('p').wordBreakKeepAll();
-});
-</script>
-
-<script type="text/javascript" src="../_static/blame.js"></script>
 
 </body>
 </html>

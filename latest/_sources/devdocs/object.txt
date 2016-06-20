@@ -140,7 +140,6 @@ Functions and LambdaInfo::
 
     jl_function_t *jl_new_generic_function(jl_sym_t *name);
     jl_lambda_info_t *jl_new_lambda_info(jl_value_t *ast, jl_tuple_t *sparams);
-    jl_function_t *jl_new_closure(jl_fptr_t proc, jl_value_t *env, jl_lambda_info_t *li);
 
 Arrays::
 
@@ -149,7 +148,7 @@ Arrays::
     jl_array_t *jl_alloc_array_1d(jl_value_t *atype, size_t nr);
     jl_array_t *jl_alloc_array_2d(jl_value_t *atype, size_t nr, size_t nc);
     jl_array_t *jl_alloc_array_3d(jl_value_t *atype, size_t nr, size_t nc, size_t z);
-    jl_array_t *jl_alloc_cell_1d(size_t n);
+    jl_array_t *jl_alloc_vec_any(size_t n);
 
 Note that many of these have alternative allocation functions for various special-purposes.
 The list here reflects the more common usages, but a more complete list can be found by reading the `julia.h header file

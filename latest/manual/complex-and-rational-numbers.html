@@ -6,10 +6,8 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta property="fb:app_id" content="685509058259607" />
-
   
-  <title>복소수와 유리수</title>
+  <title>복소수와 유리수 &mdash; Julia Language X.Y.Z-unknown documentation</title>
   
 
   
@@ -32,12 +30,13 @@
   
     <link rel="stylesheet" href="../_static/julia.css" type="text/css" />
   
-    <link rel="top" title="None" href="../index.html"/>
+    <link rel="top" title="Julia Language X.Y.Z-unknown documentation" href="../index.html"/>
         <link rel="next" title="Strings" href="strings.html"/>
         <link rel="prev" title="수학 연산들과 기본적인 함수들" href="mathematical-operations.html"/> 
 
   
   <script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.6.2/modernizr.min.js"></script>
+
 </head>
 
 <body class="wy-body-for-nav" role="document">
@@ -51,9 +50,8 @@
         <!--
         <a href="../index.html" class="fa fa-home"> Julia Language</a>
         -->
-        
-<div role="search">
-  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+        <div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../search.html" method="get">
     <input type="text" name="q" placeholder="Search docs" />
     <input type="hidden" name="check_keywords" value="yes" />
     <input type="hidden" name="area" value="default" />
@@ -110,19 +108,20 @@
 <li class="toctree-l2"><a class="reference internal" href="strings.html#version-number-literals">Version Number Literals</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="functions.html">Functions</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="functions.html#argument-passing-behavior">Argument Passing Behavior</a></li>
-<li class="toctree-l2"><a class="reference internal" href="functions.html#the-return-keyword">The <tt class="docutils literal"><span class="pre">return</span></tt> Keyword</a></li>
-<li class="toctree-l2"><a class="reference internal" href="functions.html#operators-are-functions">Operators Are Functions</a></li>
-<li class="toctree-l2"><a class="reference internal" href="functions.html#operators-with-special-names">Operators With Special Names</a></li>
-<li class="toctree-l2"><a class="reference internal" href="functions.html#anonymous-functions">Anonymous Functions</a></li>
-<li class="toctree-l2"><a class="reference internal" href="functions.html#multiple-return-values">Multiple Return Values</a></li>
-<li class="toctree-l2"><a class="reference internal" href="functions.html#varargs-functions">Varargs Functions</a></li>
-<li class="toctree-l2"><a class="reference internal" href="functions.html#optional-arguments">Optional Arguments</a></li>
-<li class="toctree-l2"><a class="reference internal" href="functions.html#keyword-arguments">Keyword Arguments</a></li>
-<li class="toctree-l2"><a class="reference internal" href="functions.html#evaluation-scope-of-default-values">Evaluation Scope of Default Values</a></li>
-<li class="toctree-l2"><a class="reference internal" href="functions.html#do-block-syntax-for-function-arguments">Do-Block Syntax for Function Arguments</a></li>
-<li class="toctree-l2"><a class="reference internal" href="functions.html#further-reading">Further Reading</a></li>
+<li class="toctree-l1"><a class="reference internal" href="functions.html">함수</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="functions.html#id2">매개변수 전달 매커니즘</a></li>
+<li class="toctree-l2"><a class="reference internal" href="functions.html#return"><code class="docutils literal"><span class="pre">return</span></code> 키워드</a></li>
+<li class="toctree-l2"><a class="reference internal" href="functions.html#id3">연산자 또한 함수</a></li>
+<li class="toctree-l2"><a class="reference internal" href="functions.html#id4">특별한 이름을 지니고 있는 연산자</a></li>
+<li class="toctree-l2"><a class="reference internal" href="functions.html#man-anonymous-functions">익명 함수</a></li>
+<li class="toctree-l2"><a class="reference internal" href="functions.html#id6">다수의 리턴값</a></li>
+<li class="toctree-l2"><a class="reference internal" href="functions.html#man-varargs-functions">가변인자 함수</a></li>
+<li class="toctree-l2"><a class="reference internal" href="functions.html#id8">선택적 매개변수</a></li>
+<li class="toctree-l2"><a class="reference internal" href="functions.html#id9">키워드 매개변수</a></li>
+<li class="toctree-l2"><a class="reference internal" href="functions.html#scope">디폴트 값의 계산 스코프(scope)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="functions.html#do-block">함수 매개변수의 Do-Block 문법</a></li>
+<li class="toctree-l2"><a class="reference internal" href="functions.html#dot">함수의 벡터화를 위한 Dot 문법</a></li>
+<li class="toctree-l2"><a class="reference internal" href="functions.html#id10">더 읽을거리</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="control-flow.html">Control Flow</a><ul>
@@ -159,6 +158,7 @@
 <li class="toctree-l2"><a class="reference internal" href="methods.html#defining-methods">Defining Methods</a></li>
 <li class="toctree-l2"><a class="reference internal" href="methods.html#method-ambiguities">Method Ambiguities</a></li>
 <li class="toctree-l2"><a class="reference internal" href="methods.html#parametric-methods">Parametric Methods</a></li>
+<li class="toctree-l2"><a class="reference internal" href="methods.html#parametrically-constrained-varargs-methods">Parametrically-constrained Varargs methods</a></li>
 <li class="toctree-l2"><a class="reference internal" href="methods.html#note-on-optional-and-keyword-arguments">Note on Optional and keyword Arguments</a></li>
 <li class="toctree-l2"><a class="reference internal" href="methods.html#function-like-objects">Function-like objects</a></li>
 <li class="toctree-l2"><a class="reference internal" href="methods.html#empty-generic-functions">Empty generic functions</a></li>
@@ -235,8 +235,11 @@
 <li class="toctree-l2"><a class="reference internal" href="parallel-computing.html#remote-references-and-abstractchannels">Remote references and AbstractChannels</a></li>
 <li class="toctree-l2"><a class="reference internal" href="parallel-computing.html#remote-references-and-distributed-garbage-collection">Remote References and Distributed Garbage Collection</a></li>
 <li class="toctree-l2"><a class="reference internal" href="parallel-computing.html#id2">Shared Arrays</a></li>
+<li class="toctree-l2"><a class="reference internal" href="parallel-computing.html#shared-arrays-and-distributed-garbage-collection">Shared Arrays and Distributed Garbage Collection</a></li>
 <li class="toctree-l2"><a class="reference internal" href="parallel-computing.html#clustermanagers">ClusterManagers</a></li>
 <li class="toctree-l2"><a class="reference internal" href="parallel-computing.html#cluster-managers-with-custom-transports">Cluster Managers with custom transports</a></li>
+<li class="toctree-l2"><a class="reference internal" href="parallel-computing.html#network-requirements-for-localmanager-and-sshmanager">Network requirements for LocalManager and SSHManager</a></li>
+<li class="toctree-l2"><a class="reference internal" href="parallel-computing.html#cluster-cookie">Cluster cookie</a></li>
 <li class="toctree-l2"><a class="reference internal" href="parallel-computing.html#specifying-network-topology-experimental">Specifying network topology (Experimental)</a></li>
 </ul>
 </li>
@@ -270,9 +273,9 @@
 <li class="toctree-l2"><a class="reference internal" href="calling-c-and-fortran-code.html#thread-safety">Thread-safety</a></li>
 <li class="toctree-l2"><a class="reference internal" href="calling-c-and-fortran-code.html#more-about-callbacks">More About Callbacks</a></li>
 <li class="toctree-l2"><a class="reference internal" href="calling-c-and-fortran-code.html#c">C++</a></li>
-<li class="toctree-l2"><a class="reference internal" href="calling-c-and-fortran-code.html#handling-operating-system-variation">Handling Operating System Variation</a></li>
 </ul>
 </li>
+<li class="toctree-l1"><a class="reference internal" href="handling-operating-system-variation.html">Handling Operating System Variation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="interacting-with-julia.html">Interacting With Julia</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="interacting-with-julia.html#the-different-prompt-modes">The different prompt modes</a></li>
 <li class="toctree-l2"><a class="reference internal" href="interacting-with-julia.html#key-bindings">Key bindings</a></li>
@@ -318,19 +321,21 @@
 <li class="toctree-l2"><a class="reference internal" href="stacktraces.html#viewing-a-stack-trace">Viewing a stack trace</a></li>
 <li class="toctree-l2"><a class="reference internal" href="stacktraces.html#extracting-useful-information">Extracting useful information</a></li>
 <li class="toctree-l2"><a class="reference internal" href="stacktraces.html#error-handling">Error handling</a></li>
-<li class="toctree-l2"><a class="reference internal" href="stacktraces.html#comparison-with-backtrace">Comparison with <tt class="docutils literal"><span class="pre">backtrace()</span></tt></a></li>
+<li class="toctree-l2"><a class="reference internal" href="stacktraces.html#comparison-with-backtrace">Comparison with <code class="docutils literal"><span class="pre">backtrace()</span></code></a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="performance-tips.html">Performance Tips</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="performance-tips.html#avoid-global-variables">Avoid global variables</a></li>
-<li class="toctree-l2"><a class="reference internal" href="performance-tips.html#measure-performance-with-time-and-pay-attention-to-memory-allocation">Measure performance with <tt class="docutils literal"><span class="pre">&#64;time</span></tt> and pay attention to memory allocation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="performance-tips.html#measure-performance-with-time-and-pay-attention-to-memory-allocation">Measure performance with <code class="docutils literal"><span class="pre">&#64;time</span></code> and pay attention to memory allocation</a></li>
 <li class="toctree-l2"><a class="reference internal" href="performance-tips.html#tools">Tools</a></li>
 <li class="toctree-l2"><a class="reference internal" href="performance-tips.html#avoid-containers-with-abstract-type-parameters">Avoid containers with abstract type parameters</a></li>
 <li class="toctree-l2"><a class="reference internal" href="performance-tips.html#type-declarations">Type declarations</a></li>
 <li class="toctree-l2"><a class="reference internal" href="performance-tips.html#break-functions-into-multiple-definitions">Break functions into multiple definitions</a></li>
 <li class="toctree-l2"><a class="reference internal" href="performance-tips.html#write-type-stable-functions">Write &#8220;type-stable&#8221; functions</a></li>
 <li class="toctree-l2"><a class="reference internal" href="performance-tips.html#avoid-changing-the-type-of-a-variable">Avoid changing the type of a variable</a></li>
-<li class="toctree-l2"><a class="reference internal" href="performance-tips.html#separate-kernel-functions">Separate kernel functions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="performance-tips.html#separate-kernel-functions-aka-function-barriers">Separate kernel functions (aka, function barriers)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="performance-tips.html#types-with-values-as-parameters">Types with values-as-parameters</a></li>
+<li class="toctree-l2"><a class="reference internal" href="performance-tips.html#the-dangers-of-abusing-multiple-dispatch-aka-more-on-types-with-values-as-parameters">The dangers of abusing multiple dispatch (aka, more on types with values-as-parameters)</a></li>
 <li class="toctree-l2"><a class="reference internal" href="performance-tips.html#access-arrays-in-memory-order-along-columns">Access arrays in memory order, along columns</a></li>
 <li class="toctree-l2"><a class="reference internal" href="performance-tips.html#pre-allocating-outputs">Pre-allocating outputs</a></li>
 <li class="toctree-l2"><a class="reference internal" href="performance-tips.html#avoid-string-interpolation-for-i-o">Avoid string interpolation for I/O</a></li>
@@ -339,7 +344,7 @@
 <li class="toctree-l2"><a class="reference internal" href="performance-tips.html#tweaks">Tweaks</a></li>
 <li class="toctree-l2"><a class="reference internal" href="performance-tips.html#performance-annotations">Performance Annotations</a></li>
 <li class="toctree-l2"><a class="reference internal" href="performance-tips.html#treat-subnormal-numbers-as-zeros">Treat Subnormal Numbers as Zeros</a></li>
-<li class="toctree-l2"><a class="reference internal" href="performance-tips.html#code-warntype"><tt class="docutils literal"><span class="pre">&#64;code_warntype</span></tt></a></li>
+<li class="toctree-l2"><a class="reference internal" href="performance-tips.html#code-warntype"><code class="docutils literal"><span class="pre">&#64;code_warntype</span></code></a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="workflow-tips.html">Workflow Tips</a><ul>
@@ -351,11 +356,11 @@
 <li class="toctree-l2"><a class="reference internal" href="style-guide.html#write-functions-not-just-scripts">Write functions, not just scripts</a></li>
 <li class="toctree-l2"><a class="reference internal" href="style-guide.html#avoid-writing-overly-specific-types">Avoid writing overly-specific types</a></li>
 <li class="toctree-l2"><a class="reference internal" href="style-guide.html#handle-excess-argument-diversity-in-the-caller">Handle excess argument diversity in the caller</a></li>
-<li class="toctree-l2"><a class="reference internal" href="style-guide.html#append-to-names-of-functions-that-modify-their-arguments">Append <tt class="docutils literal"><span class="pre">!</span></tt> to names of functions that modify their arguments</a></li>
+<li class="toctree-l2"><a class="reference internal" href="style-guide.html#append-to-names-of-functions-that-modify-their-arguments">Append <code class="docutils literal"><span class="pre">!</span></code> to names of functions that modify their arguments</a></li>
 <li class="toctree-l2"><a class="reference internal" href="style-guide.html#avoid-strange-type-unions">Avoid strange type Unions</a></li>
 <li class="toctree-l2"><a class="reference internal" href="style-guide.html#avoid-type-unions-in-fields">Avoid type Unions in fields</a></li>
 <li class="toctree-l2"><a class="reference internal" href="style-guide.html#avoid-elaborate-container-types">Avoid elaborate container types</a></li>
-<li class="toctree-l2"><a class="reference internal" href="style-guide.html#use-naming-conventions-consistent-with-julia-s-base">Use naming conventions consistent with Julia&#8217;s <tt class="docutils literal"><span class="pre">base/</span></tt></a></li>
+<li class="toctree-l2"><a class="reference internal" href="style-guide.html#use-naming-conventions-consistent-with-julia-s-base">Use naming conventions consistent with Julia&#8217;s <code class="docutils literal"><span class="pre">base/</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="style-guide.html#don-t-overuse-try-catch">Don&#8217;t overuse try-catch</a></li>
 <li class="toctree-l2"><a class="reference internal" href="style-guide.html#don-t-parenthesize-conditions">Don&#8217;t parenthesize conditions</a></li>
 <li class="toctree-l2"><a class="reference internal" href="style-guide.html#don-t-overuse">Don&#8217;t overuse ...</a></li>
@@ -365,7 +370,7 @@
 <li class="toctree-l2"><a class="reference internal" href="style-guide.html#don-t-expose-unsafe-operations-at-the-interface-level">Don&#8217;t expose unsafe operations at the interface level</a></li>
 <li class="toctree-l2"><a class="reference internal" href="style-guide.html#don-t-overload-methods-of-base-container-types">Don&#8217;t overload methods of base container types</a></li>
 <li class="toctree-l2"><a class="reference internal" href="style-guide.html#be-careful-with-type-equality">Be careful with type equality</a></li>
-<li class="toctree-l2"><a class="reference internal" href="style-guide.html#do-not-write-x-f-x">Do not write <tt class="docutils literal"><span class="pre">x-&gt;f(x)</span></tt></a></li>
+<li class="toctree-l2"><a class="reference internal" href="style-guide.html#do-not-write-x-f-x">Do not write <code class="docutils literal"><span class="pre">x-&gt;f(x)</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="style-guide.html#avoid-using-floats-for-numeric-literals-in-generic-code-when-possible">Avoid using floats for numeric literals in generic code when possible</a></li>
 </ul>
 </li>
@@ -389,7 +394,114 @@
 </li>
 <li class="toctree-l1"><a class="reference internal" href="unicode-input.html">Unicode Input</a></li>
 </ul>
-<ul class="simple">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../stdlib/base.html">Essentials</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../stdlib/base.html#introduction">Introduction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../stdlib/base.html#getting-around">Getting Around</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../stdlib/base.html#all-objects">All Objects</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../stdlib/base.html#types">Types</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../stdlib/base.html#generic-functions">Generic Functions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../stdlib/base.html#syntax">Syntax</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../stdlib/base.html#nullables">Nullables</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../stdlib/base.html#system">System</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../stdlib/base.html#errors">Errors</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../stdlib/base.html#events">Events</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../stdlib/base.html#reflection">Reflection</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../stdlib/base.html#internals">Internals</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../stdlib/collections.html">Collections and Data Structures</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../stdlib/collections.html#iteration">Iteration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../stdlib/collections.html#general-collections">General Collections</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../stdlib/collections.html#iterable-collections">Iterable Collections</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../stdlib/collections.html#indexable-collections">Indexable Collections</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../stdlib/collections.html#associative-collections">Associative Collections</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../stdlib/collections.html#set-like-collections">Set-Like Collections</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../stdlib/collections.html#dequeues">Dequeues</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../stdlib/collections.html#priorityqueue">PriorityQueue</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../stdlib/collections.html#heap-functions">Heap Functions</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../stdlib/math.html">Mathematics</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../stdlib/math.html#mathematical-operators">Mathematical Operators</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../stdlib/math.html#mathematical-functions">Mathematical Functions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../stdlib/math.html#statistics">Statistics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../stdlib/math.html#signal-processing">Signal Processing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../stdlib/math.html#numerical-integration">Numerical Integration</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../stdlib/numbers.html">Numbers</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../stdlib/numbers.html#standard-numeric-types">Standard Numeric Types</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../stdlib/numbers.html#data-formats">Data Formats</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../stdlib/numbers.html#general-number-functions-and-constants">General Number Functions and Constants</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../stdlib/numbers.html#bigfloats">BigFloats</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../stdlib/numbers.html#random-numbers">Random Numbers</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../stdlib/strings.html">Strings</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../stdlib/arrays.html">Arrays</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../stdlib/arrays.html#basic-functions">Basic functions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../stdlib/arrays.html#constructors">Constructors</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../stdlib/arrays.html#mathematical-operators-and-functions">Mathematical operators and functions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../stdlib/arrays.html#indexing-assignment-and-concatenation">Indexing, Assignment, and Concatenation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../stdlib/arrays.html#array-functions">Array functions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../stdlib/arrays.html#combinatorics">Combinatorics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../stdlib/arrays.html#bitarrays">BitArrays</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../stdlib/arrays.html#sparse-vectors-and-matrices">Sparse Vectors and Matrices</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../stdlib/parallel.html">Tasks and Parallel Computing</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../stdlib/parallel.html#tasks">Tasks</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../stdlib/parallel.html#general-parallel-computing-support">General Parallel Computing Support</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../stdlib/parallel.html#shared-arrays">Shared Arrays</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../stdlib/parallel.html#multi-threading">Multi-Threading</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../stdlib/parallel.html#cluster-manager-interface">Cluster Manager Interface</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../stdlib/linalg.html">Linear Algebra</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../stdlib/linalg.html#module-Base.LinAlg">Standard Functions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../stdlib/linalg.html#module-Base.LinAlg.BLAS">BLAS Functions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../stdlib/linalg.html#module-Base.LinAlg.LAPACK">LAPACK Functions</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../stdlib/constants.html">Constants</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../stdlib/file.html">Filesystem</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../stdlib/io-network.html">I/O and Network</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../stdlib/io-network.html#general-i-o">General I/O</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../stdlib/io-network.html#text-i-o">Text I/O</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../stdlib/io-network.html#multimedia-i-o">Multimedia I/O</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../stdlib/io-network.html#memory-mapped-i-o">Memory-mapped I/O</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../stdlib/io-network.html#network-i-o">Network I/O</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../stdlib/punctuation.html">Punctuation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../stdlib/sort.html">Sorting and Related Functions</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../stdlib/sort.html#sorting-functions">Sorting Functions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../stdlib/sort.html#order-related-functions">Order-Related Functions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../stdlib/sort.html#sorting-algorithms">Sorting Algorithms</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../stdlib/pkg.html">Package Manager Functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../stdlib/dates.html">Dates and Time</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../stdlib/dates.html#dates-and-time-types">Dates and Time Types</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../stdlib/dates.html#dates-functions">Dates Functions</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../stdlib/test.html">Unit Testing</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../stdlib/test.html#testing-base-julia">Testing Base Julia</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../stdlib/test.html#basic-unit-tests">Basic Unit Tests</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../stdlib/test.html#working-with-test-sets">Working with Test Sets</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../stdlib/test.html#other-test-macros">Other Test Macros</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../stdlib/test.html#creating-custom-abstracttestset-types">Creating Custom <code class="docutils literal"><span class="pre">AbstractTestSet</span></code> Types</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../stdlib/c.html">C Interface</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../stdlib/c.html#llvm-interface">LLVM Interface</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../stdlib/libc.html">C Standard Library</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../stdlib/libdl.html">Dynamic Linker</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../stdlib/profile.html">Profiling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../stdlib/stacktraces.html">StackTraces</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../stdlib/simd-types.html">SIMD Support</a></li>
 </ul>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../devdocs/reflection.html">Reflection and introspection</a></li>
@@ -402,7 +514,7 @@
 <li class="toctree-l2"><a class="reference internal" href="../devdocs/functions.html">Julia Functions</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../devdocs/callconv.html">Calling Conventions</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../devdocs/cartesian.html">Base.Cartesian</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../devdocs/meta.html">Talking to the compiler (the <tt class="docutils literal"><span class="pre">:meta</span></tt> mechanism)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../devdocs/meta.html">Talking to the compiler (the <code class="docutils literal"><span class="pre">:meta</span></code> mechanism)</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../devdocs/subarrays.html">SubArrays</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../devdocs/sysimg.html">System Image Building</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../devdocs/llvm.html">Working with LLVM</a></li>
@@ -415,14 +527,6 @@
 <li class="toctree-l2"><a class="reference internal" href="../devdocs/backtraces.html">Reporting and analyzing crashes (segfaults)</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../devdocs/debuggingtips.html">gdb debugging tips</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../devdocs/valgrind.html">Using Valgrind with Julia</a></li>
-</ul>
-</li>
-</ul>
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="../phdthesis/chap6.html">결론</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="../phdthesis/chap6.html#id2">성능</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../phdthesis/chap6.html#id3">앞으로 할 작업들</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../phdthesis/chap6.html#id4">프로젝트 상황</a></li>
 </ul>
 </li>
 </ul>
@@ -441,7 +545,6 @@
       </nav>
 
 
-
       
       <div class="wy-nav-content">
         <div class="rst-content">
@@ -452,11 +555,7 @@
     <li>복소수와 유리수</li>
       <li class="wy-breadcrumbs-aside">
         
-          
-            
-              <a href="#" onclick="blame('manual/complex-and-rational-numbers')" rel="nofollow"> 원문 보기</a>
-            
-          
+          <a href="../_sources/manual/complex-and-rational-numbers.txt" rel="nofollow"> View page source</a>
         
       </li>
   </ul>
@@ -467,22 +566,22 @@
   <div class="section" id="man-complex-and-rational-numbers">
 <span id="id1"></span><h1>복소수와 유리수<a class="headerlink" href="#man-complex-and-rational-numbers" title="Permalink to this headline">¶</a></h1>
 <p>Julia는 복소수와 유리수에 대한 타입을 사전 정의된 타입의 형태로 지니고 있으며,
-이 타입들은 <a class="reference internal" href="mathematical-operations.html#man-mathematical-operations"><em>표준 수학 연산</em></a>을 지원한다.
+이 타입들은 <a class="reference internal" href="mathematical-operations.html#man-mathematical-operations"><span>표준 수학 연산</span></a>을 지원한다.
 또한 원시 타입이든 복합 타입든간에 이들 타입에 대해서 어떤 조합으로 이루어져도
-<a class="reference internal" href="conversion-and-promotion.html#man-conversion-and-promotion"><em>Conversion and Promotion</em></a>을 지원하고 있다.</p>
+<a class="reference internal" href="conversion-and-promotion.html#man-conversion-and-promotion"><span>Conversion and Promotion</span></a>을 지원하고 있다.</p>
 <div class="section" id="man-complex-numbers">
 <span id="id2"></span><h2>복소수<a class="headerlink" href="#man-complex-numbers" title="Permalink to this headline">¶</a></h2>
-<p>전역 상수 <tt class="xref jl jl-const docutils literal"><span class="pre">im</span></tt> 은 -1의 양의 제곱근인 복소수 <em>i</em>를 뜻한다.
-하지만 <tt class="docutils literal"><span class="pre">i</span></tt>는 인덱스 변수 이름으로써 널리 쓰이기 때문에 이를
+<p>전역 상수 <a class="reference internal" href="../stdlib/numbers.html#Base.im" title="Base.im"><code class="xref jl jl-const docutils literal"><span class="pre">im</span></code></a> 은 -1의 양의 제곱근인 복소수 <em>i</em>를 뜻한다.
+하지만 <code class="docutils literal"><span class="pre">i</span></code>는 인덱스 변수 이름으로써 널리 쓰이기 때문에 이를
 전역 상수로 쓰는 것은 굉장히 위험할 수 있다.
-Julia에서는 <a class="reference internal" href="integers-and-floating-point-numbers.html#man-numeric-literal-coefficients"><em>상수를 변수와 병치</em></a>하는 것을 허용하기 때문에,
+Julia에서는 <a class="reference internal" href="integers-and-floating-point-numbers.html#man-numeric-literal-coefficients"><span>상수를 변수와 병치</span></a>하는 것을 허용하기 때문에,
 기존에 수학에서 쓰던 표기법과 비슷하게 복소수에서 비슷한 문법을 쓸 수 있다:</p>
-<div class="highlight-julia"><div class="highlight"><pre><span class="n">julia</span><span class="o">&gt;</span> <span class="mi">1</span> <span class="o">+</span> <span class="mi">2</span><span class="nb">im</span>
+<div class="highlight-julia"><div class="highlight"><pre><span></span><span class="n">julia</span><span class="o">&gt;</span> <span class="mi">1</span> <span class="o">+</span> <span class="mi">2</span><span class="nb">im</span>
 <span class="mi">1</span> <span class="o">+</span> <span class="mi">2</span><span class="nb">im</span>
 </pre></div>
 </div>
 <p>또한 표준 수치 연산을 복소수에 대해서도 모두 동일하게 적용할 수 있다:</p>
-<div class="highlight-julia"><div class="highlight"><pre><span class="n">julia</span><span class="o">&gt;</span> <span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="mi">2</span><span class="nb">im</span><span class="p">)</span><span class="o">*</span><span class="p">(</span><span class="mi">2</span> <span class="o">-</span> <span class="mi">3</span><span class="nb">im</span><span class="p">)</span>
+<div class="highlight-julia"><div class="highlight"><pre><span></span><span class="n">julia</span><span class="o">&gt;</span> <span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="mi">2</span><span class="nb">im</span><span class="p">)</span><span class="o">*</span><span class="p">(</span><span class="mi">2</span> <span class="o">-</span> <span class="mi">3</span><span class="nb">im</span><span class="p">)</span>
 <span class="mi">8</span> <span class="o">+</span> <span class="mi">1</span><span class="nb">im</span>
 
 <span class="n">julia</span><span class="o">&gt;</span> <span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="mi">2</span><span class="nb">im</span><span class="p">)</span><span class="o">/</span><span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="mi">2</span><span class="nb">im</span><span class="p">)</span>
@@ -515,7 +614,7 @@ Julia에서는 <a class="reference internal" href="integers-and-floating-point-n
 </div>
 <p>프로모션 시스템은 서로 다른 타입의 피연산자끼리의 조합도
 간단하게 바로 적용가능하도록 만들어준다:</p>
-<div class="highlight-julia"><div class="highlight"><pre><span class="n">julia</span><span class="o">&gt;</span> <span class="mi">2</span><span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="mi">1</span><span class="nb">im</span><span class="p">)</span>
+<div class="highlight-julia"><div class="highlight"><pre><span></span><span class="n">julia</span><span class="o">&gt;</span> <span class="mi">2</span><span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="mi">1</span><span class="nb">im</span><span class="p">)</span>
 <span class="mi">2</span> <span class="o">-</span> <span class="mi">2</span><span class="nb">im</span>
 
 <span class="n">julia</span><span class="o">&gt;</span> <span class="p">(</span><span class="mi">2</span> <span class="o">+</span> <span class="mi">3</span><span class="nb">im</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span>
@@ -544,10 +643,10 @@ Julia에서는 <a class="reference internal" href="integers-and-floating-point-n
 </pre></div>
 </div>
 <p>리터럴 계수는 나눗셈보다 우선순위가 높기 때문에
-<tt class="docutils literal"><span class="pre">3/4im</span> <span class="pre">==</span> <span class="pre">3/(4*im)</span> <span class="pre">==</span> <span class="pre">-(3/4*im)</span></tt>가 된다는 것을
+<code class="docutils literal"><span class="pre">3/4im</span> <span class="pre">==</span> <span class="pre">3/(4*im)</span> <span class="pre">==</span> <span class="pre">-(3/4*im)</span></code>가 된다는 것을
 알아둘 필요가 있다.</p>
 <p>복소수를 다루는 표준 함수들은 다음과 같다:</p>
-<div class="highlight-julia"><div class="highlight"><pre><span class="n">julia</span><span class="o">&gt;</span> <span class="n">real</span><span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="mi">2</span><span class="nb">im</span><span class="p">)</span>
+<div class="highlight-julia"><div class="highlight"><pre><span></span><span class="n">julia</span><span class="o">&gt;</span> <span class="n">real</span><span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="mi">2</span><span class="nb">im</span><span class="p">)</span>
 <span class="mi">1</span>
 
 <span class="n">julia</span><span class="o">&gt;</span> <span class="n">imag</span><span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="mi">2</span><span class="nb">im</span><span class="p">)</span>
@@ -566,13 +665,13 @@ Julia에서는 <a class="reference internal" href="integers-and-floating-point-n
 <span class="mf">1.1071487177940904</span>
 </pre></div>
 </div>
-<p>일반적으로, 복소수의 절대값(<tt class="xref jl jl-func docutils literal"><span class="pre">abs()</span></tt>)은 그 복소수와 0과의 거리를 나타낸다.
-<tt class="xref jl jl-func docutils literal"><span class="pre">abs2()</span></tt>는 절대값의 제곱을 구할 때 쓰는 함수이며,
+<p>일반적으로, 복소수의 절대값(<a class="reference internal" href="../stdlib/math.html#Base.abs" title="Base.abs"><code class="xref jl jl-func docutils literal"><span class="pre">abs()</span></code></a>)은 그 복소수와 0과의 거리를 나타낸다.
+<a class="reference internal" href="../stdlib/math.html#Base.abs2" title="Base.abs2"><code class="xref jl jl-func docutils literal"><span class="pre">abs2()</span></code></a>는 절대값의 제곱을 구할 때 쓰는 함수이며,
 복소수에서의 이 함수의 특별한 사용 용도는 제곱근을 구하기 어려울 때 쓴다.
-<tt class="xref jl jl-func docutils literal"><span class="pre">angle()</span></tt>은 위상각을 함수의 <em>매개변수</em>로 많이 쓰이는
+<a class="reference internal" href="../stdlib/math.html#Base.angle" title="Base.angle"><code class="xref jl jl-func docutils literal"><span class="pre">angle()</span></code></a>은 위상각을 함수의 <em>매개변수</em>로 많이 쓰이는
 라디안으로 리턴하는 함수이다.
-다른 모든 <a class="reference internal" href="mathematical-operations.html#man-elementary-functions"><em>기초 함수</em></a>들도 복소수에 대해 정의되어 있다.</p>
-<div class="highlight-julia"><div class="highlight"><pre><span class="n">julia</span><span class="o">&gt;</span> <span class="n">sqrt</span><span class="p">(</span><span class="mi">1</span><span class="nb">im</span><span class="p">)</span>
+다른 모든 <a class="reference internal" href="mathematical-operations.html#man-elementary-functions"><span>기초 함수</span></a>들도 복소수에 대해 정의되어 있다.</p>
+<div class="highlight-julia"><div class="highlight"><pre><span></span><span class="n">julia</span><span class="o">&gt;</span> <span class="n">sqrt</span><span class="p">(</span><span class="mi">1</span><span class="nb">im</span><span class="p">)</span>
 <span class="mf">0.7071067811865476</span> <span class="o">+</span> <span class="mf">0.7071067811865475</span><span class="nb">im</span>
 
 <span class="n">julia</span><span class="o">&gt;</span> <span class="n">sqrt</span><span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="mi">2</span><span class="nb">im</span><span class="p">)</span>
@@ -590,9 +689,9 @@ Julia에서는 <a class="reference internal" href="integers-and-floating-point-n
 </div>
 <p>일반적으로 수학 관련 함수들은 실수에 적용되었을 때는 실수를,
 복소수에 적용되었을 때는 복소수를 리턴한다.
-예를 들어, <tt class="xref jl jl-func docutils literal"><span class="pre">sqrt()</span></tt>가 <tt class="docutils literal"><span class="pre">-1</span> <span class="pre">==</span> <span class="pre">-1</span> <span class="pre">+</span> <span class="pre">0im</span></tt>임에도 불구하고,
-<tt class="docutils literal"><span class="pre">-1</span></tt>에 적용되었을 때와 <tt class="docutils literal"><span class="pre">-1</span> <span class="pre">+</span> <span class="pre">0im</span></tt>에 적용되었을 때 다르게 작동한다.</p>
-<div class="highlight-julia"><div class="highlight"><pre><span class="n">julia</span><span class="o">&gt;</span> <span class="n">sqrt</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+예를 들어, <a class="reference internal" href="../stdlib/math.html#Base.sqrt" title="Base.sqrt"><code class="xref jl jl-func docutils literal"><span class="pre">sqrt()</span></code></a>가 <code class="docutils literal"><span class="pre">-1</span> <span class="pre">==</span> <span class="pre">-1</span> <span class="pre">+</span> <span class="pre">0im</span></code>임에도 불구하고,
+<code class="docutils literal"><span class="pre">-1</span></code>에 적용되었을 때와 <code class="docutils literal"><span class="pre">-1</span> <span class="pre">+</span> <span class="pre">0im</span></code>에 적용되었을 때 다르게 작동한다.</p>
+<div class="highlight-julia"><div class="highlight"><pre><span></span><span class="n">julia</span><span class="o">&gt;</span> <span class="n">sqrt</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
 <span class="n">ERROR</span><span class="p">:</span> <span class="n">DomainError</span><span class="p">:</span>
 <span class="n">sqrt</span> <span class="n">will</span> <span class="n">only</span> <span class="k">return</span> <span class="n">a</span> <span class="n">complex</span> <span class="n">result</span> <span class="k">if</span> <span class="n">called</span> <span class="n">with</span> <span class="n">a</span> <span class="n">complex</span> <span class="n">argument</span><span class="o">.</span> <span class="n">Try</span> <span class="n">sqrt</span><span class="p">(</span><span class="n">complex</span><span class="p">(</span><span class="n">x</span><span class="p">))</span><span class="o">.</span>
  <span class="k">in</span> <span class="n">sqrt</span> <span class="n">at</span> <span class="n">math</span><span class="o">.</span><span class="n">jl</span><span class="p">:</span><span class="mi">146</span>
@@ -601,23 +700,23 @@ Julia에서는 <a class="reference internal" href="integers-and-floating-point-n
 <span class="mf">0.0</span> <span class="o">+</span> <span class="mf">1.0</span><span class="nb">im</span>
 </pre></div>
 </div>
-<p><a class="reference internal" href="integers-and-floating-point-numbers.html#man-numeric-literal-coefficients"><em>literal numeric coefficient notation</em></a>는
+<p><a class="reference internal" href="integers-and-floating-point-numbers.html#man-numeric-literal-coefficients"><span>literal numeric coefficient notation</span></a>는
 변수로부터 복소수를 만들 때는 작동하지 않는다. 대신에, 이 때는 곱셈 기호가 명시적으로
 표시되어야 한다.</p>
-<div class="highlight-julia"><div class="highlight"><pre><span class="n">julia</span><span class="o">&gt;</span> <span class="n">a</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span> <span class="n">b</span> <span class="o">=</span> <span class="mi">2</span><span class="p">;</span> <span class="n">a</span> <span class="o">+</span> <span class="n">b</span><span class="o">*</span><span class="nb">im</span>
+<div class="highlight-julia"><div class="highlight"><pre><span></span><span class="n">julia</span><span class="o">&gt;</span> <span class="n">a</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span> <span class="n">b</span> <span class="o">=</span> <span class="mi">2</span><span class="p">;</span> <span class="n">a</span> <span class="o">+</span> <span class="n">b</span><span class="o">*</span><span class="nb">im</span>
 <span class="mi">1</span> <span class="o">+</span> <span class="mi">2</span><span class="nb">im</span>
 </pre></div>
 </div>
-<p>하지만, 위 방법은 <em>추천하지 않는다</em>; 대신에 <tt class="xref jl jl-func docutils literal"><span class="pre">complex()</span></tt>를 써서
+<p>하지만, 위 방법은 <em>추천하지 않는다</em>; 대신에 <a class="reference internal" href="../stdlib/numbers.html#Base.complex" title="Base.complex"><code class="xref jl jl-func docutils literal"><span class="pre">complex()</span></code></a>를 써서
 실수부와 허수부를 직접 받아 복소수를 형성하는 것이 좋다:</p>
-<div class="highlight-julia"><div class="highlight"><pre><span class="n">julia</span><span class="o">&gt;</span> <span class="n">complex</span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="n">b</span><span class="p">)</span>
+<div class="highlight-julia"><div class="highlight"><pre><span></span><span class="n">julia</span><span class="o">&gt;</span> <span class="n">complex</span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="n">b</span><span class="p">)</span>
 <span class="mi">1</span> <span class="o">+</span> <span class="mi">2</span><span class="nb">im</span>
 </pre></div>
 </div>
 <p>위의 복소수 형성방법은 곱셈과 덧셈 연산을 하지 않아도 된다.</p>
-<p><tt class="xref jl jl-const docutils literal"><span class="pre">Inf</span></tt>와 <tt class="xref jl jl-const docutils literal"><span class="pre">NaN</span></tt>를 복소수의 실수부 혹은 허수부에 적용하는 것은
-<a class="reference internal" href="integers-and-floating-point-numbers.html#man-special-floats"><em>특별한 부동소수점 값들</em></a> 섹션에서 설명하고 있다:</p>
-<div class="highlight-julia"><div class="highlight"><pre><span class="n">julia</span><span class="o">&gt;</span> <span class="mi">1</span> <span class="o">+</span> <span class="nb">Inf</span><span class="o">*</span><span class="nb">im</span>
+<p><a class="reference internal" href="../stdlib/numbers.html#Base.Inf" title="Base.Inf"><code class="xref jl jl-const docutils literal"><span class="pre">Inf</span></code></a>와 <a class="reference internal" href="../stdlib/numbers.html#Base.NaN" title="Base.NaN"><code class="xref jl jl-const docutils literal"><span class="pre">NaN</span></code></a>를 복소수의 실수부 혹은 허수부에 적용하는 것은
+<a class="reference internal" href="integers-and-floating-point-numbers.html#man-special-floats"><span>특별한 부동소수점 값들</span></a> 섹션에서 설명하고 있다:</p>
+<div class="highlight-julia"><div class="highlight"><pre><span></span><span class="n">julia</span><span class="o">&gt;</span> <span class="mi">1</span> <span class="o">+</span> <span class="nb">Inf</span><span class="o">*</span><span class="nb">im</span>
 <span class="mf">1.0</span> <span class="o">+</span> <span class="nb">Inf</span><span class="o">*</span><span class="nb">im</span>
 
 <span class="n">julia</span><span class="o">&gt;</span> <span class="mi">1</span> <span class="o">+</span> <span class="n">NaN</span><span class="o">*</span><span class="nb">im</span>
@@ -628,14 +727,14 @@ Julia에서는 <a class="reference internal" href="integers-and-floating-point-n
 <div class="section" id="man-rational-numbers">
 <span id="id3"></span><h2>유리수<a class="headerlink" href="#man-rational-numbers" title="Permalink to this headline">¶</a></h2>
 <p>Julia는 정수들 간의 비를 정확히 표현하기 위해 유리수 타입이 존재한다.
-유리수는 <tt class="xref jl jl-obj docutils literal"><span class="pre">//</span></tt> 연산자를 이용하여 표현할 수 있다:</p>
-<div class="highlight-julia"><div class="highlight"><pre><span class="n">julia</span><span class="o">&gt;</span> <span class="mi">2</span><span class="o">//</span><span class="mi">3</span>
+유리수는 <a class="reference internal" href="../stdlib/math.html#Base.//" title="Base.//"><code class="xref jl jl-obj docutils literal"><span class="pre">//</span></code></a> 연산자를 이용하여 표현할 수 있다:</p>
+<div class="highlight-julia"><div class="highlight"><pre><span></span><span class="n">julia</span><span class="o">&gt;</span> <span class="mi">2</span><span class="o">//</span><span class="mi">3</span>
 <span class="mi">2</span><span class="o">//</span><span class="mi">3</span>
 </pre></div>
 </div>
 <p>만약 유리수타입에서 분모와 분자에 공통 인수가 있다면,
 분모에 음수가 들어가지 않는 방향으로 약분한 형태로 저장한다;</p>
-<div class="highlight-julia"><div class="highlight"><pre><span class="n">julia</span><span class="o">&gt;</span> <span class="mi">6</span><span class="o">//</span><span class="mi">9</span>
+<div class="highlight-julia"><div class="highlight"><pre><span></span><span class="n">julia</span><span class="o">&gt;</span> <span class="mi">6</span><span class="o">//</span><span class="mi">9</span>
 <span class="mi">2</span><span class="o">//</span><span class="mi">3</span>
 
 <span class="n">julia</span><span class="o">&gt;</span> <span class="o">-</span><span class="mi">4</span><span class="o">//</span><span class="mi">8</span>
@@ -651,8 +750,8 @@ Julia에서는 <a class="reference internal" href="integers-and-floating-point-n
 <p>위에서 언급한 약분된 형태의 유리수는 유일하기 때문에, 유리수 타입의 동등 비교는
 분모와 분자의 동등비교로 이루어 질 수 있다.
 이 표준형 유리수의 분모와 분자는
-<tt class="xref jl jl-func docutils literal"><span class="pre">num()</span></tt> 함수와 <tt class="xref jl jl-func docutils literal"><span class="pre">den()</span></tt> 함수를 이용하여 추출할 수 있다.</p>
-<div class="highlight-julia"><div class="highlight"><pre><span class="n">julia</span><span class="o">&gt;</span> <span class="n">num</span><span class="p">(</span><span class="mi">2</span><span class="o">//</span><span class="mi">3</span><span class="p">)</span>
+<a class="reference internal" href="../stdlib/math.html#Base.num" title="Base.num"><code class="xref jl jl-func docutils literal"><span class="pre">num()</span></code></a> 함수와 <a class="reference internal" href="../stdlib/math.html#Base.den" title="Base.den"><code class="xref jl jl-func docutils literal"><span class="pre">den()</span></code></a> 함수를 이용하여 추출할 수 있다.</p>
+<div class="highlight-julia"><div class="highlight"><pre><span></span><span class="n">julia</span><span class="o">&gt;</span> <span class="n">num</span><span class="p">(</span><span class="mi">2</span><span class="o">//</span><span class="mi">3</span><span class="p">)</span>
 <span class="mi">2</span>
 
 <span class="n">julia</span><span class="o">&gt;</span> <span class="n">den</span><span class="p">(</span><span class="mi">2</span><span class="o">//</span><span class="mi">3</span><span class="p">)</span>
@@ -661,7 +760,7 @@ Julia에서는 <a class="reference internal" href="integers-and-floating-point-n
 </div>
 <p>일반적으로는 분모와 분자의 직접 비교는 필요하지 않은데,
 그 이유는 유리수에 대해 표준 산술 연산과 비교 연산이 정의되어 있기 때문이다.</p>
-<div class="highlight-julia"><div class="highlight"><pre><span class="n">julia</span><span class="o">&gt;</span> <span class="mi">2</span><span class="o">//</span><span class="mi">3</span> <span class="o">==</span> <span class="mi">6</span><span class="o">//</span><span class="mi">9</span>
+<div class="highlight-julia"><div class="highlight"><pre><span></span><span class="n">julia</span><span class="o">&gt;</span> <span class="mi">2</span><span class="o">//</span><span class="mi">3</span> <span class="o">==</span> <span class="mi">6</span><span class="o">//</span><span class="mi">9</span>
 <span class="n">true</span>
 
 <span class="n">julia</span><span class="o">&gt;</span> <span class="mi">2</span><span class="o">//</span><span class="mi">3</span> <span class="o">==</span> <span class="mi">9</span><span class="o">//</span><span class="mi">27</span>
@@ -687,20 +786,20 @@ Julia에서는 <a class="reference internal" href="integers-and-floating-point-n
 </pre></div>
 </div>
 <p>유리수는 쉽게 부동소수점 실수로 변환할 수 있다.</p>
-<div class="highlight-julia"><div class="highlight"><pre><span class="n">julia</span><span class="o">&gt;</span> <span class="n">float</span><span class="p">(</span><span class="mi">3</span><span class="o">//</span><span class="mi">4</span><span class="p">)</span>
+<div class="highlight-julia"><div class="highlight"><pre><span></span><span class="n">julia</span><span class="o">&gt;</span> <span class="n">float</span><span class="p">(</span><span class="mi">3</span><span class="o">//</span><span class="mi">4</span><span class="p">)</span>
 <span class="mf">0.75</span>
 </pre></div>
 </div>
 <p>유리수와 부동소수점 실수 간의 변환이 있어도 다음과 같이
-<tt class="docutils literal"><span class="pre">a</span> <span class="pre">==</span> <span class="pre">0</span></tt> 이면서 <tt class="docutils literal"><span class="pre">b</span> <span class="pre">==</span> <span class="pre">0</span></tt>인 경우를 제외한
-임의의 정수 <tt class="docutils literal"><span class="pre">a</span></tt>와 <tt class="docutils literal"><span class="pre">b</span></tt> 에 대해서
+<code class="docutils literal"><span class="pre">a</span> <span class="pre">==</span> <span class="pre">0</span></code> 이면서 <code class="docutils literal"><span class="pre">b</span> <span class="pre">==</span> <span class="pre">0</span></code>인 경우를 제외한
+임의의 정수 <code class="docutils literal"><span class="pre">a</span></code>와 <code class="docutils literal"><span class="pre">b</span></code> 에 대해서
 유리수와 부동소수점 실수 간의 동등 비교가 성립한다.</p>
-<div class="highlight-julia"><div class="highlight"><pre><span class="n">julia</span><span class="o">&gt;</span> <span class="nb">isequal</span><span class="p">(</span><span class="n">float</span><span class="p">(</span><span class="n">a</span><span class="o">//</span><span class="n">b</span><span class="p">),</span> <span class="n">a</span><span class="o">/</span><span class="n">b</span><span class="p">)</span>
+<div class="highlight-julia"><div class="highlight"><pre><span></span><span class="n">julia</span><span class="o">&gt;</span> <span class="nb">isequal</span><span class="p">(</span><span class="n">float</span><span class="p">(</span><span class="n">a</span><span class="o">//</span><span class="n">b</span><span class="p">),</span> <span class="n">a</span><span class="o">/</span><span class="n">b</span><span class="p">)</span>
 <span class="n">true</span>
 </pre></div>
 </div>
 <p>무한대 유리수 또한 생성할 수 있다:</p>
-<div class="highlight-julia"><div class="highlight"><pre><span class="n">julia</span><span class="o">&gt;</span> <span class="mi">5</span><span class="o">//</span><span class="mi">0</span>
+<div class="highlight-julia"><div class="highlight"><pre><span></span><span class="n">julia</span><span class="o">&gt;</span> <span class="mi">5</span><span class="o">//</span><span class="mi">0</span>
 <span class="mi">1</span><span class="o">//</span><span class="mi">0</span>
 
 <span class="n">julia</span><span class="o">&gt;</span> <span class="o">-</span><span class="mi">3</span><span class="o">//</span><span class="mi">0</span>
@@ -710,16 +809,16 @@ Julia에서는 <a class="reference internal" href="integers-and-floating-point-n
 <span class="n">Rational</span><span class="p">{</span><span class="kt">Int64</span><span class="p">}</span>
 </pre></div>
 </div>
-<p>그러나, <tt class="xref jl jl-const docutils literal"><span class="pre">NaN</span></tt> 유리수는 생성할 수 없다:</p>
-<div class="highlight-julia"><div class="highlight"><pre><span class="n">julia</span><span class="o">&gt;</span> <span class="mi">0</span><span class="o">//</span><span class="mi">0</span>
+<p>그러나, <a class="reference internal" href="../stdlib/numbers.html#Base.NaN" title="Base.NaN"><code class="xref jl jl-const docutils literal"><span class="pre">NaN</span></code></a> 유리수는 생성할 수 없다:</p>
+<div class="highlight-julia"><div class="highlight"><pre><span></span><span class="n">julia</span><span class="o">&gt;</span> <span class="mi">0</span><span class="o">//</span><span class="mi">0</span>
 <span class="n">ERROR</span><span class="p">:</span> <span class="n">ArgumentError</span><span class="p">:</span> <span class="n">invalid</span> <span class="n">rational</span><span class="p">:</span> <span class="n">zero</span><span class="p">(</span><span class="kt">Int64</span><span class="p">)</span><span class="o">//</span><span class="n">zero</span><span class="p">(</span><span class="kt">Int64</span><span class="p">)</span>
- <span class="k">in</span> <span class="n">call</span> <span class="n">at</span> <span class="n">rational</span><span class="o">.</span><span class="n">jl</span><span class="p">:</span><span class="mi">8</span>
- <span class="k">in</span> <span class="o">//</span> <span class="n">at</span> <span class="n">rational</span><span class="o">.</span><span class="n">jl</span><span class="p">:</span><span class="mi">22</span>
+ <span class="k">in</span> <span class="n">Rational</span><span class="p">{</span><span class="kt">Int64</span><span class="p">}(::</span><span class="kt">Int64</span><span class="p">,</span> <span class="p">::</span><span class="kt">Int64</span><span class="p">)</span> <span class="n">at</span> <span class="o">./</span><span class="n">rational</span><span class="o">.</span><span class="n">jl</span><span class="p">:</span><span class="mi">8</span>
+ <span class="k">in</span> <span class="o">//</span><span class="p">(::</span><span class="kt">Int64</span><span class="p">,</span> <span class="p">::</span><span class="kt">Int64</span><span class="p">)</span> <span class="n">at</span> <span class="o">./</span><span class="n">rational</span><span class="o">.</span><span class="n">jl</span><span class="p">:</span><span class="mi">22</span>
 </pre></div>
 </div>
 <p>다른 타입과 마찬가지로, 프로모션 시스템은
 유리수와 다른 타입들 간의 상호작용을 어려움 없이 할 수 있도록 해준다:</p>
-<div class="highlight-julia"><div class="highlight"><pre><span class="n">julia</span><span class="o">&gt;</span> <span class="mi">3</span><span class="o">//</span><span class="mi">5</span> <span class="o">+</span> <span class="mi">1</span>
+<div class="highlight-julia"><div class="highlight"><pre><span></span><span class="n">julia</span><span class="o">&gt;</span> <span class="mi">3</span><span class="o">//</span><span class="mi">5</span> <span class="o">+</span> <span class="mi">1</span>
 <span class="mi">8</span><span class="o">//</span><span class="mi">5</span>
 
 <span class="n">julia</span><span class="o">&gt;</span> <span class="mi">3</span><span class="o">//</span><span class="mi">5</span> <span class="o">-</span> <span class="mf">0.5</span>
@@ -762,10 +861,10 @@ Julia에서는 <a class="reference internal" href="integers-and-floating-point-n
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="strings.html" class="btn btn-neutral float-right" title="Strings" accesskey="n"> 다음 <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="strings.html" class="btn btn-neutral float-right" title="Strings">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="mathematical-operations.html" class="btn btn-neutral" title="수학 연산들과 기본적인 함수들" accesskey="p"><span class="fa fa-arrow-circle-left"></span> 이전 </a>
+        <a href="mathematical-operations.html" class="btn btn-neutral" title="수학 연산들과 기본적인 함수들"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   
@@ -774,40 +873,11 @@ Julia에서는 <a class="reference internal" href="integers-and-floating-point-n
 
   <div role="contentinfo">
     <p>
-      Last updated on Apr 07, 2016.
     </p>
   </div>
 
+  <a href="https://github.com/snide/sphinx_rtd_theme">Sphinx theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>
 </footer>
-
-
-<div
-  class="fb-like"
-  data-share="true"
-  data-width="450"
-  data-show-faces="true">
-</div>
-
-<script>
-  window.fbAsyncInit = function() {
-    FB.init({
-      appId      : '685509058259607',
-      xfbml      : true,
-      version    : 'v2.3'
-    });
-  };
-
-  (function(d, s, id){
-     var js, fjs = d.getElementsByTagName(s)[0];
-     if (d.getElementById(id)) {return;}
-     js = d.createElement(s); js.id = id;
-     js.src = "https://connect.facebook.net/ko_KR/sdk.js";
-     fjs.parentNode.insertBefore(js, fjs);
-   }(document, 'script', 'facebook-jssdk'));
-</script>
-
-<div class="fb-comments" data-width="100%" data-version="v2.3"></div>
-
         </div>
       </div>
 
@@ -830,7 +900,7 @@ Julia에서는 <a class="reference internal" href="integers-and-floating-point-n
       <script type="text/javascript" src="../_static/jquery.js"></script>
       <script type="text/javascript" src="../_static/underscore.js"></script>
       <script type="text/javascript" src="../_static/doctools.js"></script>
-      <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+      <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
 
   
 
@@ -847,16 +917,6 @@ Julia에서는 <a class="reference internal" href="integers-and-floating-point-n
       });
   </script>
    
-
-
-<script type="text/javascript" src="../_static/jquery.word-break-keep-all.min.js"></script>
-<script type="text/javascript">
-$(document).ready(function(){
-  $('p').wordBreakKeepAll();
-});
-</script>
-
-<script type="text/javascript" src="../_static/blame.js"></script>
 
 </body>
 </html>
