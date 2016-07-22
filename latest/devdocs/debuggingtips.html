@@ -88,7 +88,6 @@
 <li class="toctree-l2"><a class="reference internal" href="../manual/mathematical-operations.html#id4">갱신 연산자</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../manual/mathematical-operations.html#man-numeric-comparisons">수치 비교</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../manual/mathematical-operations.html#man-numerical-conversions">수치 변환</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../manual/mathematical-operations.html#man-elementary-functions">기초 함수</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../manual/complex-and-rational-numbers.html">복소수와 유리수</a><ul>
@@ -105,7 +104,7 @@
 <li class="toctree-l2"><a class="reference internal" href="../manual/strings.html#common-operations">Common Operations</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../manual/strings.html#non-standard-string-literals">Non-Standard String Literals</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../manual/strings.html#regular-expressions">Regular Expressions</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../manual/strings.html#id3">Byte Array Literals</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../manual/strings.html#id2">Byte Array Literals</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../manual/strings.html#version-number-literals">Version Number Literals</a></li>
 </ul>
 </li>
@@ -252,6 +251,7 @@
 <li class="toctree-l2"><a class="reference internal" href="../manual/dates.html#timetype-period-arithmetic">TimeType-Period Arithmetic</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../manual/dates.html#adjuster-functions">Adjuster Functions</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../manual/dates.html#period-types">Period Types</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../manual/dates.html#rounding">Rounding</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../manual/running-external-programs.html">Running External Programs</a><ul>
@@ -461,6 +461,7 @@
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../stdlib/linalg.html">Linear Algebra</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="../stdlib/linalg.html#module-Base.LinAlg">Standard Functions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../stdlib/linalg.html#low-level-matrix-operations">Low-level matrix operations</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../stdlib/linalg.html#module-Base.LinAlg.BLAS">BLAS Functions</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../stdlib/linalg.html#module-Base.LinAlg.LAPACK">LAPACK Functions</a></li>
 </ul>
@@ -493,6 +494,7 @@
 <li class="toctree-l2"><a class="reference internal" href="../stdlib/test.html#basic-unit-tests">Basic Unit Tests</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../stdlib/test.html#working-with-test-sets">Working with Test Sets</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../stdlib/test.html#other-test-macros">Other Test Macros</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../stdlib/test.html#broken-tests">Broken Tests</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../stdlib/test.html#creating-custom-abstracttestset-types">Creating Custom <code class="docutils literal"><span class="pre">AbstractTestSet</span></code> Types</a></li>
 </ul>
 </li>
@@ -522,6 +524,8 @@
 <li class="toctree-l2"><a class="reference internal" href="stdio.html">printf() and stdio in the Julia runtime</a></li>
 <li class="toctree-l2"><a class="reference internal" href="promote-op.html">Operator-sensitive promotion</a></li>
 <li class="toctree-l2"><a class="reference internal" href="boundscheck.html">Bounds checking</a></li>
+<li class="toctree-l2"><a class="reference internal" href="locks.html">Proper maintenance and care of multi-threading locks</a></li>
+<li class="toctree-l2"><a class="reference internal" href="offset-arrays.html">Arrays with custom indices</a></li>
 </ul>
 </li>
 <li class="toctree-l1 current"><a class="reference internal" href="C.html">Developing/debugging Julia&#8217;s C code</a><ul class="current">
@@ -574,10 +578,10 @@
 <div class="highlight-julia"><div class="highlight"><pre><span></span><span class="p">(</span><span class="n">gdb</span><span class="p">)</span> <span class="n">call</span> <span class="n">jl_</span><span class="p">(</span><span class="n">obj</span><span class="p">)</span>
 </pre></div>
 </div>
-<p>The object will be displayed in the julia session, not in the gdb session.
+<p>The object will be displayed in the <code class="docutils literal"><span class="pre">julia</span></code> session, not in the gdb session.
 This is a useful way to discover the types and values of objects being
 manipulated by Julia&#8217;s C code.</p>
-<p>Similarly, if you&#8217;re debugging some of julia&#8217;s internals (e.g.,
+<p>Similarly, if you&#8217;re debugging some of Julia&#8217;s internals (e.g.,
 <code class="docutils literal"><span class="pre">inference.jl</span></code>), you can print <code class="docutils literal"><span class="pre">obj</span></code> using</p>
 <div class="highlight-julia"><div class="highlight"><pre><span></span><span class="k">ccall</span><span class="p">(:</span><span class="n">jl_</span><span class="p">,</span> <span class="n">Void</span><span class="p">,</span> <span class="p">(</span><span class="kt">Any</span><span class="p">,),</span> <span class="n">obj</span><span class="p">)</span>
 </pre></div>
@@ -602,11 +606,11 @@ there are a number of additional variables (see julia.h for a complete list) tha
 <h2>Useful Julia functions for Inspecting those variables<a class="headerlink" href="#useful-julia-functions-for-inspecting-those-variables" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
 <li><code class="docutils literal"><span class="pre">jl_gdblookup($rip)</span></code> :: For looking up the current function and line. (use <code class="docutils literal"><span class="pre">$eip</span></code> on i686 platforms)</li>
-<li><code class="docutils literal"><span class="pre">jlbacktrace()</span></code> :: For dumping the current julia backtrace stack to stderr. Only usable after <code class="docutils literal"><span class="pre">record_backtrace()</span></code> has been called.</li>
+<li><code class="docutils literal"><span class="pre">jlbacktrace()</span></code> :: For dumping the current Julia backtrace stack to stderr. Only usable after <code class="docutils literal"><span class="pre">record_backtrace()</span></code> has been called.</li>
 <li><code class="docutils literal"><span class="pre">jl_dump_llvm_value(Value*)</span></code> :: For invoking <code class="docutils literal"><span class="pre">Value-&gt;dump()</span></code> in gdb, where it doesn&#8217;t work natively. For example, <code class="docutils literal"><span class="pre">f-&gt;linfo-&gt;functionObject</span></code>, <code class="docutils literal"><span class="pre">f-&gt;linfo-&gt;specFunctionObject</span></code>, and <code class="docutils literal"><span class="pre">to_function(f-&gt;linfo)</span></code>.</li>
 <li><code class="docutils literal"><span class="pre">Type-&gt;dump()</span></code> :: only works in lldb. Note: add something like <code class="docutils literal"><span class="pre">;1</span></code> to prevent lldb from printing its prompt over the output</li>
 <li><code class="docutils literal"><span class="pre">jl_eval_string(&quot;expr&quot;)</span></code> :: for invoking side-effects to modify the current state or to lookup symbols</li>
-<li><code class="docutils literal"><span class="pre">jl_typeof(jl_value_t*)</span></code> :: for extracting the type tag of a julia value (in gdb, call <code class="docutils literal"><span class="pre">macro</span> <span class="pre">define</span> <span class="pre">jl_typeof</span> <span class="pre">jl_typeof</span></code> first, or pick something short like <code class="docutils literal"><span class="pre">ty</span></code> for the first arg to define a shorthand)</li>
+<li><code class="docutils literal"><span class="pre">jl_typeof(jl_value_t*)</span></code> :: for extracting the type tag of a Julia value (in gdb, call <code class="docutils literal"><span class="pre">macro</span> <span class="pre">define</span> <span class="pre">jl_typeof</span> <span class="pre">jl_typeof</span></code> first, or pick something short like <code class="docutils literal"><span class="pre">ty</span></code> for the first arg to define a shorthand)</li>
 </ul>
 </div>
 <div class="section" id="inserting-breakpoints-for-inspection-from-gdb">
@@ -653,7 +657,7 @@ there are a number of additional variables (see julia.h for a complete list) tha
 <p>Julia requires a few signal to function property. The profiler uses <code class="docutils literal"><span class="pre">SIGUSR2</span></code>
 for sampling and the garbage collector uses <code class="docutils literal"><span class="pre">SIGSEGV</span></code> for threads
 synchronization. If you are debugging some code that uses the profiler or
-multiple julia threads, you may want to let the debugger ignore these signals
+multiple threads, you may want to let the debugger ignore these signals
 since they can be triggered very often during normal operations. The command to
 do this in GDB is (replace <code class="docutils literal"><span class="pre">SIGSEGV</span></code> with <code class="docutils literal"><span class="pre">SIGUSRS</span></code> or other signals you
 want to ignore):</p>
@@ -669,7 +673,7 @@ want to ignore):</p>
 order to only catch the actual segfault rather than the GC synchronization points.</p>
 </div>
 <div class="section" id="debugging-during-julia-s-build-process-bootstrap">
-<h2>Debugging during julia&#8217;s build process (bootstrap)<a class="headerlink" href="#debugging-during-julia-s-build-process-bootstrap" title="Permalink to this headline">¶</a></h2>
+<h2>Debugging during Julia&#8217;s build process (bootstrap)<a class="headerlink" href="#debugging-during-julia-s-build-process-bootstrap" title="Permalink to this headline">¶</a></h2>
 <p>Errors that occur during <code class="docutils literal"><span class="pre">make</span></code> need special handling. Julia is built in two stages, constructing
 <code class="docutils literal"><span class="pre">sys0</span></code> and <code class="docutils literal"><span class="pre">sys.ji</span></code>. To see what commands are running at the time of failure, use <code class="docutils literal"><span class="pre">make</span> <span class="pre">VERBOSE=1</span></code>.</p>
 <p>At the time of this writing, you can debug build errors during the <code class="docutils literal"><span class="pre">sys0</span></code> phase from the <code class="docutils literal"><span class="pre">base</span></code>

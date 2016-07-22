@@ -87,7 +87,6 @@
 <li class="toctree-l2"><a class="reference internal" href="mathematical-operations.html#id4">갱신 연산자</a></li>
 <li class="toctree-l2"><a class="reference internal" href="mathematical-operations.html#man-numeric-comparisons">수치 비교</a></li>
 <li class="toctree-l2"><a class="reference internal" href="mathematical-operations.html#man-numerical-conversions">수치 변환</a></li>
-<li class="toctree-l2"><a class="reference internal" href="mathematical-operations.html#man-elementary-functions">기초 함수</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="complex-and-rational-numbers.html">복소수와 유리수</a><ul>
@@ -104,7 +103,7 @@
 <li class="toctree-l2"><a class="reference internal" href="strings.html#common-operations">Common Operations</a></li>
 <li class="toctree-l2"><a class="reference internal" href="strings.html#non-standard-string-literals">Non-Standard String Literals</a></li>
 <li class="toctree-l2"><a class="reference internal" href="strings.html#regular-expressions">Regular Expressions</a></li>
-<li class="toctree-l2"><a class="reference internal" href="strings.html#id3">Byte Array Literals</a></li>
+<li class="toctree-l2"><a class="reference internal" href="strings.html#id2">Byte Array Literals</a></li>
 <li class="toctree-l2"><a class="reference internal" href="strings.html#version-number-literals">Version Number Literals</a></li>
 </ul>
 </li>
@@ -251,6 +250,7 @@
 <li class="toctree-l2"><a class="reference internal" href="dates.html#timetype-period-arithmetic">TimeType-Period Arithmetic</a></li>
 <li class="toctree-l2"><a class="reference internal" href="dates.html#adjuster-functions">Adjuster Functions</a></li>
 <li class="toctree-l2"><a class="reference internal" href="dates.html#period-types">Period Types</a></li>
+<li class="toctree-l2"><a class="reference internal" href="dates.html#rounding">Rounding</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="running-external-programs.html">Running External Programs</a><ul>
@@ -460,6 +460,7 @@
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../stdlib/linalg.html">Linear Algebra</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="../stdlib/linalg.html#module-Base.LinAlg">Standard Functions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../stdlib/linalg.html#low-level-matrix-operations">Low-level matrix operations</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../stdlib/linalg.html#module-Base.LinAlg.BLAS">BLAS Functions</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../stdlib/linalg.html#module-Base.LinAlg.LAPACK">LAPACK Functions</a></li>
 </ul>
@@ -492,6 +493,7 @@
 <li class="toctree-l2"><a class="reference internal" href="../stdlib/test.html#basic-unit-tests">Basic Unit Tests</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../stdlib/test.html#working-with-test-sets">Working with Test Sets</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../stdlib/test.html#other-test-macros">Other Test Macros</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../stdlib/test.html#broken-tests">Broken Tests</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../stdlib/test.html#creating-custom-abstracttestset-types">Creating Custom <code class="docutils literal"><span class="pre">AbstractTestSet</span></code> Types</a></li>
 </ul>
 </li>
@@ -521,6 +523,8 @@
 <li class="toctree-l2"><a class="reference internal" href="../devdocs/stdio.html">printf() and stdio in the Julia runtime</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../devdocs/promote-op.html">Operator-sensitive promotion</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../devdocs/boundscheck.html">Bounds checking</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../devdocs/locks.html">Proper maintenance and care of multi-threading locks</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../devdocs/offset-arrays.html">Arrays with custom indices</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../devdocs/C.html">Developing/debugging Julia&#8217;s C code</a><ul>
@@ -570,9 +574,9 @@
 <span id="man-interfaces-iteration"></span><h2>Iteration<a class="headerlink" href="#iteration" title="Permalink to this headline">¶</a></h2>
 <table border="1" class="docutils">
 <colgroup>
-<col width="33%" />
-<col width="24%" />
-<col width="43%" />
+<col width="31%" />
+<col width="15%" />
+<col width="53%" />
 </colgroup>
 <thead valign="bottom">
 <tr class="row-odd"><th class="head">Required methods</th>
@@ -597,6 +601,14 @@
 <td><strong>Default definition</strong></td>
 <td><strong>Brief description</strong></td>
 </tr>
+<tr class="row-even"><td><code class="xref jl jl-func docutils literal"><span class="pre">iteratorsize(IterType)</span></code></td>
+<td><code class="docutils literal"><span class="pre">HasLength()</span></code></td>
+<td>One of <cite>HasLength()</cite>, <cite>HasShape()</cite>, <cite>IsInfinite()</cite>, or <cite>SizeUnknown()</cite> as appropriate</td>
+</tr>
+<tr class="row-odd"><td><code class="xref jl jl-func docutils literal"><span class="pre">iteratoreltype(IterType)</span></code></td>
+<td><code class="docutils literal"><span class="pre">HasEltype()</span></code></td>
+<td>Either <cite>EltypeUnknown()</cite> or <cite>HasEltype()</cite> as appropriate</td>
+</tr>
 <tr class="row-even"><td><code class="xref jl jl-func docutils literal"><span class="pre">eltype(IterType)</span></code></td>
 <td><code class="docutils literal"><span class="pre">Any</span></code></td>
 <td>The type the items returned by <code class="xref jl jl-func docutils literal"><span class="pre">next()</span></code></td>
@@ -604,6 +616,54 @@
 <tr class="row-odd"><td><code class="xref jl jl-func docutils literal"><span class="pre">length(iter)</span></code></td>
 <td>(<em>undefined</em>)</td>
 <td>The number of items, if known</td>
+</tr>
+<tr class="row-even"><td><code class="xref jl jl-func docutils literal"><span class="pre">size(iter,</span> <span class="pre">[dim...])</span></code></td>
+<td>(<em>undefined</em>)</td>
+<td>The number of items in each dimension, if known</td>
+</tr>
+</tbody>
+</table>
+<table border="1" class="docutils">
+<colgroup>
+<col width="48%" />
+<col width="52%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Value returned by <code class="xref jl jl-func docutils literal"><span class="pre">iteratorsize(IterType)</span></code></th>
+<th class="head">Required Methods</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td><cite>HasLength()</cite></td>
+<td><code class="xref jl jl-func docutils literal"><span class="pre">length(iter)</span></code></td>
+</tr>
+<tr class="row-odd"><td><cite>HasShape()</cite></td>
+<td><code class="xref jl jl-func docutils literal"><span class="pre">length(iter)</span></code>  and <code class="xref jl jl-func docutils literal"><span class="pre">size(iter,</span> <span class="pre">[dim...])</span></code></td>
+</tr>
+<tr class="row-even"><td><cite>IsInfinite()</cite></td>
+<td>(<em>none</em>)</td>
+</tr>
+<tr class="row-odd"><td><cite>SizeUnknown()</cite></td>
+<td>(<em>none</em>)</td>
+</tr>
+</tbody>
+</table>
+<table border="1" class="docutils">
+<colgroup>
+<col width="67%" />
+<col width="33%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Value returned by <code class="xref jl jl-func docutils literal"><span class="pre">iteratoreltype(IterType)</span></code></th>
+<th class="head">Required Methods</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td><cite>HasEltype()</cite></td>
+<td><code class="xref jl jl-func docutils literal"><span class="pre">eltype(IterType)</span></code></td>
+</tr>
+<tr class="row-odd"><td><cite>EltypeUnknown()</cite></td>
+<td>(<em>none</em>)</td>
 </tr>
 </tbody>
 </table>
@@ -724,9 +784,9 @@
 <span id="man-interfaces-abstractarray"></span><h2>Abstract Arrays<a class="headerlink" href="#abstract-arrays" title="Permalink to this headline">¶</a></h2>
 <table border="1" class="docutils">
 <colgroup>
-<col width="33%" />
-<col width="21%" />
-<col width="46%" />
+<col width="34%" />
+<col width="22%" />
+<col width="44%" />
 </colgroup>
 <thead valign="bottom">
 <tr class="row-odd"><th class="head">Methods to implement</th>
@@ -799,17 +859,17 @@
 <td><strong>Default definition</strong></td>
 <td><strong>Brief description</strong></td>
 </tr>
-<tr class="row-even"><td><code class="xref jl jl-func docutils literal"><span class="pre">Base.indicesbehavior(::Type)</span></code></td>
-<td><code class="docutils literal"><span class="pre">Base.IndicesStartAt1()</span></code></td>
-<td>Trait with values <code class="docutils literal"><span class="pre">IndicesStartAt1()</span></code>, <code class="docutils literal"><span class="pre">IndicesUnitRange()</span></code>, <code class="docutils literal"><span class="pre">IndicesList()</span></code></td>
+<tr class="row-even"><td><code class="xref jl jl-func docutils literal"><span class="pre">indices(A)</span></code></td>
+<td><code class="docutils literal"><span class="pre">map(OneTo,</span> <span class="pre">size(A))</span></code></td>
+<td>Return the <code class="docutils literal"><span class="pre">AbstractUnitRange</span></code> of valid indices</td>
 </tr>
-<tr class="row-odd"><td><code class="xref jl jl-func docutils literal"><span class="pre">indices(A,</span> <span class="pre">d)</span></code></td>
-<td><code class="docutils literal"><span class="pre">1:size(A,</span> <span class="pre">d)</span></code></td>
-<td>Return the range of valid indices along dimension <code class="docutils literal"><span class="pre">d</span></code></td>
+<tr class="row-odd"><td><code class="xref jl jl-func docutils literal"><span class="pre">Base.similar(A,</span> <span class="pre">::Type{S},</span> <span class="pre">inds::NTuple{Ind})</span></code></td>
+<td><code class="docutils literal"><span class="pre">similar(A,</span> <span class="pre">S,</span> <span class="pre">Base.to_shape(inds))</span></code></td>
+<td>Return a mutable array with the specified indices <code class="docutils literal"><span class="pre">inds</span></code> (see below)</td>
 </tr>
-<tr class="row-even"><td><code class="xref jl jl-func docutils literal"><span class="pre">Base.similar(A,</span> <span class="pre">::Type{S},</span> <span class="pre">inds::NTuple{Ind})</span></code></td>
-<td><code class="docutils literal"><span class="pre">similar(A,</span> <span class="pre">S,</span> <span class="pre">map(Base.dimlength,</span> <span class="pre">inds))</span></code></td>
-<td>Return a mutable array with the specified indices <code class="docutils literal"><span class="pre">inds</span></code> (see below for discussion of <code class="docutils literal"><span class="pre">Ind</span></code>)</td>
+<tr class="row-even"><td><code class="xref jl jl-func docutils literal"><span class="pre">Base.similar(T::Union{Type,Function},</span> <span class="pre">inds)</span></code></td>
+<td><code class="docutils literal"><span class="pre">T(Base.to_shape(inds))</span></code></td>
+<td>Return an array similar to <code class="docutils literal"><span class="pre">T</span></code> with the specified indices <code class="docutils literal"><span class="pre">inds</span></code> (see below)</td>
 </tr>
 </tbody>
 </table>
@@ -911,12 +971,10 @@
 </div>
 <p>If you are defining an array type that allows non-traditional indexing
 (indices that start at something other than 1), you should specialize
-<code class="docutils literal"><span class="pre">indices</span></code> and <code class="docutils literal"><span class="pre">indicesbehavior</span></code>.  You should also specialize
-<code class="docutils literal"><span class="pre">similar</span></code> so that the <code class="docutils literal"><span class="pre">dims</span></code> argument (ordinarily a <code class="docutils literal"><span class="pre">Dims</span></code>
-size-tuple) can be a mixture of <code class="docutils literal"><span class="pre">Integer</span></code> and <code class="docutils literal"><span class="pre">UnitRange</span></code> objects;
-the <code class="docutils literal"><span class="pre">Integer</span></code> entries imply that the indexing starts from 1, whereas
-the dimensions encoded with <code class="docutils literal"><span class="pre">UnitRange</span></code> may have arbitrary starting
-index.</p>
+<code class="docutils literal"><span class="pre">indices</span></code>.  You should also specialize <code class="docutils literal"><span class="pre">similar</span></code> so that the
+<code class="docutils literal"><span class="pre">dims</span></code> argument (ordinarily a <code class="docutils literal"><span class="pre">Dims</span></code> size-tuple) can accept
+<code class="docutils literal"><span class="pre">AbstractUnitRange</span></code> objects, perhaps range-types <code class="docutils literal"><span class="pre">Ind</span></code> of your own
+design.  For more information, see <a class="reference internal" href="../devdocs/offset-arrays.html#devdocs-offsetarrays"><span>Arrays with custom indices</span></a>.</p>
 </div>
 </div>
 

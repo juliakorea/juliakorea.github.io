@@ -87,7 +87,6 @@
 <li class="toctree-l2"><a class="reference internal" href="mathematical-operations.html#id4">갱신 연산자</a></li>
 <li class="toctree-l2"><a class="reference internal" href="mathematical-operations.html#man-numeric-comparisons">수치 비교</a></li>
 <li class="toctree-l2"><a class="reference internal" href="mathematical-operations.html#man-numerical-conversions">수치 변환</a></li>
-<li class="toctree-l2"><a class="reference internal" href="mathematical-operations.html#man-elementary-functions">기초 함수</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="complex-and-rational-numbers.html">복소수와 유리수</a><ul>
@@ -104,7 +103,7 @@
 <li class="toctree-l2"><a class="reference internal" href="strings.html#common-operations">Common Operations</a></li>
 <li class="toctree-l2"><a class="reference internal" href="strings.html#non-standard-string-literals">Non-Standard String Literals</a></li>
 <li class="toctree-l2"><a class="reference internal" href="strings.html#regular-expressions">Regular Expressions</a></li>
-<li class="toctree-l2"><a class="reference internal" href="strings.html#id3">Byte Array Literals</a></li>
+<li class="toctree-l2"><a class="reference internal" href="strings.html#id2">Byte Array Literals</a></li>
 <li class="toctree-l2"><a class="reference internal" href="strings.html#version-number-literals">Version Number Literals</a></li>
 </ul>
 </li>
@@ -251,6 +250,7 @@
 <li class="toctree-l2"><a class="reference internal" href="dates.html#timetype-period-arithmetic">TimeType-Period Arithmetic</a></li>
 <li class="toctree-l2"><a class="reference internal" href="dates.html#adjuster-functions">Adjuster Functions</a></li>
 <li class="toctree-l2"><a class="reference internal" href="dates.html#period-types">Period Types</a></li>
+<li class="toctree-l2"><a class="reference internal" href="dates.html#rounding">Rounding</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="running-external-programs.html">Running External Programs</a><ul>
@@ -460,6 +460,7 @@
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../stdlib/linalg.html">Linear Algebra</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="../stdlib/linalg.html#module-Base.LinAlg">Standard Functions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../stdlib/linalg.html#low-level-matrix-operations">Low-level matrix operations</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../stdlib/linalg.html#module-Base.LinAlg.BLAS">BLAS Functions</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../stdlib/linalg.html#module-Base.LinAlg.LAPACK">LAPACK Functions</a></li>
 </ul>
@@ -492,6 +493,7 @@
 <li class="toctree-l2"><a class="reference internal" href="../stdlib/test.html#basic-unit-tests">Basic Unit Tests</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../stdlib/test.html#working-with-test-sets">Working with Test Sets</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../stdlib/test.html#other-test-macros">Other Test Macros</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../stdlib/test.html#broken-tests">Broken Tests</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../stdlib/test.html#creating-custom-abstracttestset-types">Creating Custom <code class="docutils literal"><span class="pre">AbstractTestSet</span></code> Types</a></li>
 </ul>
 </li>
@@ -521,6 +523,8 @@
 <li class="toctree-l2"><a class="reference internal" href="../devdocs/stdio.html">printf() and stdio in the Julia runtime</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../devdocs/promote-op.html">Operator-sensitive promotion</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../devdocs/boundscheck.html">Bounds checking</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../devdocs/locks.html">Proper maintenance and care of multi-threading locks</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../devdocs/offset-arrays.html">Arrays with custom indices</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../devdocs/C.html">Developing/debugging Julia&#8217;s C code</a><ul>
@@ -656,7 +660,17 @@ last expression issued in an interactive session. In Julia, unlike MATLAB,
 <li>Julia&#8217;s <code class="docutils literal"><span class="pre">type</span></code>s do not support dynamically adding fields at runtime,
 unlike MATLAB&#8217;s <code class="docutils literal"><span class="pre">class</span></code>es. Instead, use a <a class="reference internal" href="../stdlib/collections.html#Base.Dict" title="Base.Dict"><code class="xref jl jl-obj docutils literal"><span class="pre">Dict</span></code></a>.</li>
 <li>In Julia each module has its own global scope/namespace, whereas in
-Matlab there is just one global scope.</li>
+MATLAB there is just one global scope.</li>
+<li>In MATLAB, an idiomatic way to remove unwanted values is to use logical
+indexing, like in the expression <code class="docutils literal"><span class="pre">x(x&gt;3)</span></code> or in the statement
+<code class="docutils literal"><span class="pre">x(x&gt;3)</span> <span class="pre">=</span> <span class="pre">[]</span></code> to modify <code class="docutils literal"><span class="pre">x</span></code> in-place. In contrast, Julia provides the
+higher order functions <a class="reference internal" href="../stdlib/collections.html#Base.filter" title="Base.filter"><code class="xref jl jl-func docutils literal"><span class="pre">filter()</span></code></a> and <a class="reference internal" href="../stdlib/collections.html#Base.filter!" title="Base.filter!"><code class="xref jl jl-func docutils literal"><span class="pre">filter!()</span></code></a>, allowing users
+to write <code class="docutils literal"><span class="pre">filter(z-&gt;z&gt;3,</span> <span class="pre">x)</span></code> and <code class="docutils literal"><span class="pre">filter!(z-&gt;z&gt;3,</span> <span class="pre">x)</span></code> as alternatives to
+the corresponding transliterations <code class="docutils literal"><span class="pre">x[x.&gt;3]</span></code> and <code class="docutils literal"><span class="pre">x</span> <span class="pre">=</span> <span class="pre">x[x.&gt;3]</span></code>. Using
+<a class="reference internal" href="../stdlib/collections.html#Base.filter!" title="Base.filter!"><code class="xref jl jl-func docutils literal"><span class="pre">filter!()</span></code></a> reduces the use of temporary arrays.</li>
+<li>The analogue of extracting (or &#8220;dereferencing&#8221;) all elements of a cell array,
+e.g. in <code class="docutils literal"><span class="pre">vertcat(A{:})</span></code> in MATLAB, is written using the splat operator in
+Julia, e.g. as <code class="docutils literal"><span class="pre">vcat(A...)</span></code>.</li>
 </ul>
 </div>
 <div class="section" id="noteworthy-differences-from-r">
@@ -704,7 +718,7 @@ If <code class="docutils literal"><span class="pre">A</span></code> and <code cl
 multiplication in Julia, equivalent to R&#8217;s <code class="docutils literal"><span class="pre">A</span> <span class="pre">%*%</span> <span class="pre">B</span></code>. In R, this same
 notation would perform an element-wise (Hadamard) product. To get the
 element-wise multiplication operation, you need to write <code class="docutils literal"><span class="pre">A</span> <span class="pre">.*</span> <span class="pre">B</span></code> in Julia.</li>
-<li>Julia performs matrix transposition using the <code class="xref jl jl-obj docutils literal"><span class="pre">'</span></code> operator and conjugated
+<li>Julia performs matrix transposition using the <code class="xref jl jl-obj docutils literal"><span class="pre">.'</span></code> operator and conjugated
 transposition using the <code class="xref jl jl-obj docutils literal"><span class="pre">'</span></code> operator. Julia&#8217;s <code class="docutils literal"><span class="pre">A.'</span></code> is therefore
 equivalent to R&#8217;s <code class="docutils literal"><span class="pre">t(A)</span></code>.</li>
 <li>Julia does not require parentheses when writing <code class="docutils literal"><span class="pre">if</span></code> statements or
@@ -776,6 +790,13 @@ names.</li>
 <li>Julia does not support the <code class="docutils literal"><span class="pre">NULL</span></code> type.</li>
 <li>Julia lacks the equivalent of R&#8217;s <code class="docutils literal"><span class="pre">assign</span></code> or <code class="docutils literal"><span class="pre">get</span></code>.</li>
 <li>In Julia, <code class="docutils literal"><span class="pre">return</span></code> does not require parentheses.</li>
+<li>In R, an idiomatic way to remove unwanted values is to use logical indexing,
+like in the expression <code class="docutils literal"><span class="pre">x[x&gt;3]</span></code> or in the statement <code class="docutils literal"><span class="pre">x</span> <span class="pre">=</span> <span class="pre">x[x&gt;3]</span></code> to
+modify <code class="docutils literal"><span class="pre">x</span></code> in-place. In contrast, Julia provides the higher order functions
+<a class="reference internal" href="../stdlib/collections.html#Base.filter" title="Base.filter"><code class="xref jl jl-func docutils literal"><span class="pre">filter()</span></code></a> and <a class="reference internal" href="../stdlib/collections.html#Base.filter!" title="Base.filter!"><code class="xref jl jl-func docutils literal"><span class="pre">filter!()</span></code></a>, allowing users to write
+<code class="docutils literal"><span class="pre">filter(z-&gt;z&gt;3,</span> <span class="pre">x)</span></code> and <code class="docutils literal"><span class="pre">filter!(z-&gt;z&gt;3,</span> <span class="pre">x)</span></code> as alternatives to the
+corresponding transliterations <code class="docutils literal"><span class="pre">x[x.&gt;3]</span></code> and <code class="docutils literal"><span class="pre">x</span> <span class="pre">=</span> <span class="pre">x[x.&gt;3]</span></code>. Using
+<a class="reference internal" href="../stdlib/collections.html#Base.filter!" title="Base.filter!"><code class="xref jl jl-func docutils literal"><span class="pre">filter!()</span></code></a> reduces the use of temporary arrays.</li>
 </ul>
 </div>
 <div class="section" id="noteworthy-differences-from-python">

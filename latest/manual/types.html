@@ -87,7 +87,6 @@
 <li class="toctree-l2"><a class="reference internal" href="mathematical-operations.html#id4">갱신 연산자</a></li>
 <li class="toctree-l2"><a class="reference internal" href="mathematical-operations.html#man-numeric-comparisons">수치 비교</a></li>
 <li class="toctree-l2"><a class="reference internal" href="mathematical-operations.html#man-numerical-conversions">수치 변환</a></li>
-<li class="toctree-l2"><a class="reference internal" href="mathematical-operations.html#man-elementary-functions">기초 함수</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="complex-and-rational-numbers.html">복소수와 유리수</a><ul>
@@ -104,7 +103,7 @@
 <li class="toctree-l2"><a class="reference internal" href="strings.html#common-operations">Common Operations</a></li>
 <li class="toctree-l2"><a class="reference internal" href="strings.html#non-standard-string-literals">Non-Standard String Literals</a></li>
 <li class="toctree-l2"><a class="reference internal" href="strings.html#regular-expressions">Regular Expressions</a></li>
-<li class="toctree-l2"><a class="reference internal" href="strings.html#id3">Byte Array Literals</a></li>
+<li class="toctree-l2"><a class="reference internal" href="strings.html#id2">Byte Array Literals</a></li>
 <li class="toctree-l2"><a class="reference internal" href="strings.html#version-number-literals">Version Number Literals</a></li>
 </ul>
 </li>
@@ -251,6 +250,7 @@
 <li class="toctree-l2"><a class="reference internal" href="dates.html#timetype-period-arithmetic">TimeType-Period Arithmetic</a></li>
 <li class="toctree-l2"><a class="reference internal" href="dates.html#adjuster-functions">Adjuster Functions</a></li>
 <li class="toctree-l2"><a class="reference internal" href="dates.html#period-types">Period Types</a></li>
+<li class="toctree-l2"><a class="reference internal" href="dates.html#rounding">Rounding</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="running-external-programs.html">Running External Programs</a><ul>
@@ -460,6 +460,7 @@
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../stdlib/linalg.html">Linear Algebra</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="../stdlib/linalg.html#module-Base.LinAlg">Standard Functions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../stdlib/linalg.html#low-level-matrix-operations">Low-level matrix operations</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../stdlib/linalg.html#module-Base.LinAlg.BLAS">BLAS Functions</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../stdlib/linalg.html#module-Base.LinAlg.LAPACK">LAPACK Functions</a></li>
 </ul>
@@ -492,6 +493,7 @@
 <li class="toctree-l2"><a class="reference internal" href="../stdlib/test.html#basic-unit-tests">Basic Unit Tests</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../stdlib/test.html#working-with-test-sets">Working with Test Sets</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../stdlib/test.html#other-test-macros">Other Test Macros</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../stdlib/test.html#broken-tests">Broken Tests</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../stdlib/test.html#creating-custom-abstracttestset-types">Creating Custom <code class="docutils literal"><span class="pre">AbstractTestSet</span></code> Types</a></li>
 </ul>
 </li>
@@ -521,6 +523,8 @@
 <li class="toctree-l2"><a class="reference internal" href="../devdocs/stdio.html">printf() and stdio in the Julia runtime</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../devdocs/promote-op.html">Operator-sensitive promotion</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../devdocs/boundscheck.html">Bounds checking</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../devdocs/locks.html">Proper maintenance and care of multi-threading locks</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../devdocs/offset-arrays.html">Arrays with custom indices</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../devdocs/C.html">Developing/debugging Julia&#8217;s C code</a><ul>
@@ -641,7 +645,7 @@ expect,</li>
 <li>To provide extra type information to the compiler, which can then
 improve performance in some cases</li>
 </ol>
-<p>When appended to an expression computing a <em>value</em>, the <code class="docutils literal"><span class="pre">::</span></code>
+<p>When appended to an expression computing a value, the <code class="docutils literal"><span class="pre">::</span></code>
 operator is read as &#8220;is an instance of&#8221;. It can be used
 anywhere to assert that the value of the expression on the left is an
 instance of the type on the right. When the type on the right is
@@ -653,18 +657,17 @@ subtype of the abstract type. If the type assertion is not true, an
 exception is thrown, otherwise, the left-hand value is returned:</p>
 <div class="highlight-julia"><div class="highlight"><pre><span></span><span class="n">julia</span><span class="o">&gt;</span> <span class="p">(</span><span class="mi">1</span><span class="o">+</span><span class="mi">2</span><span class="p">)::</span><span class="n">AbstractFloat</span>
 <span class="n">ERROR</span><span class="p">:</span> <span class="n">TypeError</span><span class="p">:</span> <span class="n">typeassert</span><span class="p">:</span> <span class="n">expected</span> <span class="n">AbstractFloat</span><span class="p">,</span> <span class="n">got</span> <span class="kt">Int64</span>
+ <span class="o">...</span>
 
 <span class="n">julia</span><span class="o">&gt;</span> <span class="p">(</span><span class="mi">1</span><span class="o">+</span><span class="mi">2</span><span class="p">)::</span><span class="kt">Int</span>
 <span class="mi">3</span>
 </pre></div>
 </div>
 <p>This allows a type assertion to be attached to any expression
-in-place. The most common usage of <code class="docutils literal"><span class="pre">::</span></code> as an assertion is in
-function/methods signatures, such as <code class="docutils literal"><span class="pre">f(x::Int8)</span> <span class="pre">=</span> <span class="pre">...</span></code> (see
-<a class="reference internal" href="methods.html#man-methods"><span>Methods</span></a>).</p>
-<p>When appended to a <em>variable</em> in a statement context, the <code class="docutils literal"><span class="pre">::</span></code>
-operator means something a bit
-different: it declares the variable to always have the specified type,
+in-place.</p>
+<p>When appended to a variable on the left-hand side of an assignment,
+or as part of a <code class="docutils literal"><span class="pre">local</span></code> declaration, the <code class="docutils literal"><span class="pre">::</span></code> operator means something
+a bit different: it declares the variable to always have the specified type,
 like a type declaration in a statically-typed language such as C. Every
 value assigned to the variable will be converted to the declared type
 using <a class="reference internal" href="../stdlib/base.html#Base.convert" title="Base.convert"><code class="xref jl jl-func docutils literal"><span class="pre">convert()</span></code></a>:</p>
@@ -684,9 +687,8 @@ using <a class="reference internal" href="../stdlib/base.html#Base.convert" titl
 <p>This feature is useful for avoiding performance &#8220;gotchas&#8221; that could
 occur if one of the assignments to a variable changed its type
 unexpectedly.</p>
-<p>The &#8220;declaration&#8221; behavior only occurs in specific contexts:</p>
-<div class="highlight-julia"><div class="highlight"><pre><span></span><span class="n">x</span><span class="p">::</span><span class="kt">Int8</span>        <span class="c"># a variable by itself</span>
-<span class="kd">local</span> <span class="n">x</span><span class="p">::</span><span class="kt">Int8</span>  <span class="c"># in a local declaration</span>
+<p>This &#8220;declaration&#8221; behavior only occurs in specific contexts:</p>
+<div class="highlight-julia"><div class="highlight"><pre><span></span><span class="kd">local</span> <span class="n">x</span><span class="p">::</span><span class="kt">Int8</span>  <span class="c"># in a local declaration</span>
 <span class="n">x</span><span class="p">::</span><span class="kt">Int8</span> <span class="o">=</span> <span class="mi">10</span>   <span class="c"># as the left-hand side of an assignment</span>
 </pre></div>
 </div>
@@ -926,7 +928,8 @@ replacing a default constructor.</p>
 However, the value for <code class="docutils literal"><span class="pre">baz</span></code> must be convertible to <code class="xref jl jl-class docutils literal"><span class="pre">Int</span></code>:</p>
 <div class="highlight-julia"><div class="highlight"><pre><span></span><span class="n">julia</span><span class="o">&gt;</span> <span class="n">Foo</span><span class="p">((),</span> <span class="mf">23.5</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
 <span class="n">ERROR</span><span class="p">:</span> <span class="n">InexactError</span><span class="p">()</span>
- <span class="k">in</span> <span class="n">call</span> <span class="n">at</span> <span class="n">none</span><span class="p">:</span><span class="mi">2</span>
+ <span class="k">in</span> <span class="n">Foo</span><span class="p">(::</span><span class="n">Tuple</span><span class="p">{},</span> <span class="p">::</span><span class="kt">Float64</span><span class="p">,</span> <span class="p">::</span><span class="kt">Int64</span><span class="p">)</span> <span class="n">at</span> <span class="o">./</span><span class="n">none</span><span class="p">:</span><span class="mi">2</span>
+ <span class="o">...</span>
 </pre></div>
 </div>
 <p>You may find a list of field names using the <code class="docutils literal"><span class="pre">fieldnames</span></code> function.</p>
@@ -951,7 +954,7 @@ traditional <code class="docutils literal"><span class="pre">foo.bar</span></cod
 </div>
 <p>You can also change the values as one would expect:</p>
 <div class="highlight-julia"><div class="highlight"><pre><span></span><span class="n">julia</span><span class="o">&gt;</span> <span class="n">foo</span><span class="o">.</span><span class="n">qux</span> <span class="o">=</span> <span class="mi">2</span>
-<span class="mf">2.0</span>
+<span class="mi">2</span>
 
 <span class="n">julia</span><span class="o">&gt;</span> <span class="n">foo</span><span class="o">.</span><span class="n">bar</span> <span class="o">=</span> <span class="mi">1</span><span class="o">//</span><span class="mi">2</span>
 <span class="mi">1</span><span class="o">//</span><span class="mi">2</span>
@@ -1229,9 +1232,15 @@ each field:</p>
 <span class="n">ERROR</span><span class="p">:</span> <span class="n">MethodError</span><span class="p">:</span> <span class="n">Cannot</span> <span class="sb">`convert`</span> <span class="n">an</span> <span class="n">object</span> <span class="n">of</span> <span class="k">type</span><span class="nc"> Float64</span> <span class="n">to</span> <span class="n">an</span> <span class="n">object</span> <span class="n">of</span> <span class="k">type</span><span class="nc"> Point</span><span class="p">{</span><span class="kt">Float64</span><span class="p">}</span>
 <span class="n">This</span> <span class="n">may</span> <span class="n">have</span> <span class="n">arisen</span> <span class="n">from</span> <span class="n">a</span> <span class="n">call</span> <span class="n">to</span> <span class="n">the</span> <span class="n">constructor</span> <span class="n">Point</span><span class="p">{</span><span class="kt">Float64</span><span class="p">}(</span><span class="o">...</span><span class="p">),</span>
 <span class="n">since</span> <span class="k">type</span><span class="nc"> constructors</span> <span class="n">fall</span> <span class="n">back</span> <span class="n">to</span> <span class="nb">convert</span> <span class="n">methods</span><span class="o">.</span>
+ <span class="k">in</span> <span class="n">Point</span><span class="p">{</span><span class="kt">Float64</span><span class="p">}(::</span><span class="kt">Float64</span><span class="p">)</span> <span class="n">at</span> <span class="o">./</span><span class="n">sysimg</span><span class="o">.</span><span class="n">jl</span><span class="p">:</span><span class="mi">53</span>
+ <span class="o">...</span>
 
 <span class="n">julia</span><span class="o">&gt;</span> <span class="n">Point</span><span class="p">{</span><span class="kt">Float64</span><span class="p">}(</span><span class="mf">1.0</span><span class="p">,</span><span class="mf">2.0</span><span class="p">,</span><span class="mf">3.0</span><span class="p">)</span>
 <span class="n">ERROR</span><span class="p">:</span> <span class="n">MethodError</span><span class="p">:</span> <span class="n">no</span> <span class="n">method</span> <span class="n">matching</span> <span class="n">Point</span><span class="p">{</span><span class="kt">Float64</span><span class="p">}(::</span><span class="kt">Float64</span><span class="p">,</span> <span class="p">::</span><span class="kt">Float64</span><span class="p">,</span> <span class="p">::</span><span class="kt">Float64</span><span class="p">)</span>
+<span class="n">Closest</span> <span class="n">candidates</span> <span class="n">are</span><span class="p">:</span>
+  <span class="n">Point</span><span class="p">{</span><span class="kt">Float64</span><span class="p">}{</span><span class="n">T</span><span class="p">}(::</span><span class="kt">Any</span><span class="p">,</span> <span class="p">::</span><span class="kt">Any</span><span class="p">)</span>
+  <span class="n">Point</span><span class="p">{</span><span class="kt">Float64</span><span class="p">}{</span><span class="n">T</span><span class="p">}(::</span><span class="kt">Any</span><span class="p">)</span>
+ <span class="o">...</span>
 </pre></div>
 </div>
 <p>Only one default constructor is generated for parametric types, since
@@ -1260,6 +1269,7 @@ and only if the two arguments to <code class="docutils literal"><span class="pre
 isn&#8217;t the case, the constructor will fail with a <a class="reference internal" href="../stdlib/base.html#Base.MethodError" title="Base.MethodError"><code class="xref jl jl-exc docutils literal"><span class="pre">MethodError</span></code></a>:</p>
 <div class="highlight-julia"><div class="highlight"><pre><span></span><span class="n">julia</span><span class="o">&gt;</span> <span class="n">Point</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mf">2.5</span><span class="p">)</span>
 <span class="n">ERROR</span><span class="p">:</span> <span class="n">MethodError</span><span class="p">:</span> <span class="n">no</span> <span class="n">method</span> <span class="n">matching</span> <span class="n">Point</span><span class="p">{</span><span class="n">T</span><span class="p">}(::</span><span class="kt">Int64</span><span class="p">,</span> <span class="p">::</span><span class="kt">Float64</span><span class="p">)</span>
+<span class="o">...</span>
 </pre></div>
 </div>
 <p>Constructor methods to appropriately handle such mixed cases can be
@@ -1352,9 +1362,11 @@ subtypes of <code class="xref jl jl-obj docutils literal"><span class="pre">Real
 
 <span class="n">julia</span><span class="o">&gt;</span> <span class="n">Pointy</span><span class="p">{</span><span class="n">AbstractString</span><span class="p">}</span>
 <span class="n">ERROR</span><span class="p">:</span> <span class="n">TypeError</span><span class="p">:</span> <span class="n">Pointy</span><span class="p">:</span> <span class="k">in</span> <span class="n">T</span><span class="p">,</span> <span class="n">expected</span> <span class="n">T</span><span class="o">&lt;:</span><span class="n">Real</span><span class="p">,</span> <span class="n">got</span> <span class="n">Type</span><span class="p">{</span><span class="n">AbstractString</span><span class="p">}</span>
+ <span class="o">...</span>
 
 <span class="n">julia</span><span class="o">&gt;</span> <span class="n">Pointy</span><span class="p">{</span><span class="mi">1</span><span class="p">}</span>
 <span class="n">ERROR</span><span class="p">:</span> <span class="n">TypeError</span><span class="p">:</span> <span class="n">Pointy</span><span class="p">:</span> <span class="k">in</span> <span class="n">T</span><span class="p">,</span> <span class="n">expected</span> <span class="n">T</span><span class="o">&lt;:</span><span class="n">Real</span><span class="p">,</span> <span class="n">got</span> <span class="kt">Int64</span>
+ <span class="o">...</span>
 </pre></div>
 </div>
 <p>Type parameters for parametric composite types can be restricted in the
@@ -1682,11 +1694,11 @@ example:</p>
 <div class="highlight-julia"><div class="highlight"><pre><span></span><span class="n">firstlast</span><span class="p">(::</span><span class="n">Type</span><span class="p">{</span><span class="n">Val</span><span class="p">{</span><span class="n">true</span><span class="p">}})</span> <span class="o">=</span> <span class="s">&quot;First&quot;</span>
 <span class="n">firstlast</span><span class="p">(::</span><span class="n">Type</span><span class="p">{</span><span class="n">Val</span><span class="p">{</span><span class="n">false</span><span class="p">}})</span> <span class="o">=</span> <span class="s">&quot;Last&quot;</span>
 
-<span class="n">julia</span><span class="o">&gt;</span> <span class="n">println</span><span class="p">(</span><span class="n">firstlast</span><span class="p">(</span><span class="n">Val</span><span class="p">{</span><span class="n">true</span><span class="p">}))</span>
-<span class="n">First</span>
+<span class="n">julia</span><span class="o">&gt;</span> <span class="n">firstlast</span><span class="p">(</span><span class="n">Val</span><span class="p">{</span><span class="n">true</span><span class="p">})</span>
+<span class="s">&quot;First&quot;</span>
 
-<span class="n">julia</span><span class="o">&gt;</span> <span class="n">println</span><span class="p">(</span><span class="n">firstlast</span><span class="p">(</span><span class="n">Val</span><span class="p">{</span><span class="n">false</span><span class="p">}))</span>
-<span class="n">Last</span>
+<span class="n">julia</span><span class="o">&gt;</span> <span class="n">firstlast</span><span class="p">(</span><span class="n">Val</span><span class="p">{</span><span class="n">false</span><span class="p">})</span>
+<span class="s">&quot;Last&quot;</span>
 </pre></div>
 </div>
 <p>For consistency across Julia, the call site should always pass a
@@ -1733,13 +1745,13 @@ value of type <code class="docutils literal"><span class="pre">T</span></code> w
 <p>To construct an object representing a non-missing value of type <code class="docutils literal"><span class="pre">T</span></code>, use the
 <code class="docutils literal"><span class="pre">Nullable(x::T)</span></code> function:</p>
 <div class="highlight-julia"><div class="highlight"><pre><span></span><span class="n">julia</span><span class="o">&gt;</span> <span class="n">x1</span> <span class="o">=</span> <span class="n">Nullable</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
-<span class="n">Nullable</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">Nullable</span><span class="p">{</span><span class="kt">Int64</span><span class="p">}(</span><span class="mi">1</span><span class="p">)</span>
 
 <span class="n">julia</span><span class="o">&gt;</span> <span class="n">x2</span> <span class="o">=</span> <span class="n">Nullable</span><span class="p">(</span><span class="mf">1.0</span><span class="p">)</span>
-<span class="n">Nullable</span><span class="p">(</span><span class="mf">1.0</span><span class="p">)</span>
+<span class="n">Nullable</span><span class="p">{</span><span class="kt">Float64</span><span class="p">}(</span><span class="mf">1.0</span><span class="p">)</span>
 
 <span class="n">julia</span><span class="o">&gt;</span> <span class="n">x3</span> <span class="o">=</span> <span class="n">Nullable</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">])</span>
-<span class="n">Nullable</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">])</span>
+<span class="n">Nullable</span><span class="p">{</span><span class="n">Array</span><span class="p">{</span><span class="kt">Int64</span><span class="p">,</span><span class="mi">1</span><span class="p">}}([</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">])</span>
 </pre></div>
 </div>
 <p>Note the core distinction between these two ways of constructing a <a class="reference internal" href="../stdlib/base.html#Base.Nullable" title="Base.Nullable"><code class="xref jl jl-obj docutils literal"><span class="pre">Nullable</span></code></a>
@@ -1762,7 +1774,8 @@ the other style, you provide a single value of type <code class="docutils litera
 <p>You can safely access the value of a <a class="reference internal" href="../stdlib/base.html#Base.Nullable" title="Base.Nullable"><code class="xref jl jl-obj docutils literal"><span class="pre">Nullable</span></code></a> object using <a class="reference internal" href="../stdlib/collections.html#Base.get" title="Base.get"><code class="xref jl jl-func docutils literal"><span class="pre">get()</span></code></a>:</p>
 <div class="highlight-julia"><div class="highlight"><pre><span></span><span class="n">julia</span><span class="o">&gt;</span> <span class="n">get</span><span class="p">(</span><span class="n">Nullable</span><span class="p">{</span><span class="kt">Float64</span><span class="p">}())</span>
 <span class="n">ERROR</span><span class="p">:</span> <span class="n">NullException</span><span class="p">()</span>
- <span class="k">in</span> <span class="n">get</span><span class="p">(::</span><span class="n">Nullable</span><span class="p">{</span><span class="kt">Float64</span><span class="p">})</span> <span class="n">at</span> <span class="o">./</span><span class="n">nullable</span><span class="o">.</span><span class="n">jl</span><span class="p">:</span><span class="mi">45</span>
+ <span class="k">in</span> <span class="n">get</span><span class="p">(::</span><span class="n">Nullable</span><span class="p">{</span><span class="kt">Float64</span><span class="p">})</span> <span class="n">at</span> <span class="o">./</span><span class="n">nullable</span><span class="o">.</span><span class="n">jl</span><span class="p">:</span><span class="mi">62</span>
+ <span class="o">...</span>
 
 <span class="n">julia</span><span class="o">&gt;</span> <span class="n">get</span><span class="p">(</span><span class="n">Nullable</span><span class="p">(</span><span class="mf">1.0</span><span class="p">))</span>
 <span class="mf">1.0</span>
@@ -1775,10 +1788,10 @@ fails.</p>
 <p>In cases for which a reasonable default value exists that could be used
 when a <a class="reference internal" href="../stdlib/base.html#Base.Nullable" title="Base.Nullable"><code class="xref jl jl-obj docutils literal"><span class="pre">Nullable</span></code></a> object&#8217;s value turns out to be missing, you can provide this
 default value as a second argument to <a class="reference internal" href="../stdlib/collections.html#Base.get" title="Base.get"><code class="xref jl jl-func docutils literal"><span class="pre">get()</span></code></a>:</p>
-<div class="highlight-julia"><div class="highlight"><pre><span></span><span class="n">julia</span><span class="o">&gt;</span> <span class="n">get</span><span class="p">(</span><span class="n">Nullable</span><span class="p">{</span><span class="kt">Float64</span><span class="p">}(),</span> <span class="mi">0</span><span class="p">)</span>
+<div class="highlight-julia"><div class="highlight"><pre><span></span><span class="n">julia</span><span class="o">&gt;</span> <span class="n">get</span><span class="p">(</span><span class="n">Nullable</span><span class="p">{</span><span class="kt">Float64</span><span class="p">}(),</span> <span class="mf">0.0</span><span class="p">)</span>
 <span class="mf">0.0</span>
 
-<span class="n">julia</span><span class="o">&gt;</span> <span class="n">get</span><span class="p">(</span><span class="n">Nullable</span><span class="p">(</span><span class="mf">1.0</span><span class="p">),</span> <span class="mi">0</span><span class="p">)</span>
+<span class="n">julia</span><span class="o">&gt;</span> <span class="n">get</span><span class="p">(</span><span class="n">Nullable</span><span class="p">(</span><span class="mf">1.0</span><span class="p">),</span> <span class="mf">0.0</span><span class="p">)</span>
 <span class="mf">1.0</span>
 </pre></div>
 </div>

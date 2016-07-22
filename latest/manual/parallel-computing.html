@@ -87,7 +87,6 @@
 <li class="toctree-l2"><a class="reference internal" href="mathematical-operations.html#id4">갱신 연산자</a></li>
 <li class="toctree-l2"><a class="reference internal" href="mathematical-operations.html#man-numeric-comparisons">수치 비교</a></li>
 <li class="toctree-l2"><a class="reference internal" href="mathematical-operations.html#man-numerical-conversions">수치 변환</a></li>
-<li class="toctree-l2"><a class="reference internal" href="mathematical-operations.html#man-elementary-functions">기초 함수</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="complex-and-rational-numbers.html">복소수와 유리수</a><ul>
@@ -104,7 +103,7 @@
 <li class="toctree-l2"><a class="reference internal" href="strings.html#common-operations">Common Operations</a></li>
 <li class="toctree-l2"><a class="reference internal" href="strings.html#non-standard-string-literals">Non-Standard String Literals</a></li>
 <li class="toctree-l2"><a class="reference internal" href="strings.html#regular-expressions">Regular Expressions</a></li>
-<li class="toctree-l2"><a class="reference internal" href="strings.html#id3">Byte Array Literals</a></li>
+<li class="toctree-l2"><a class="reference internal" href="strings.html#id2">Byte Array Literals</a></li>
 <li class="toctree-l2"><a class="reference internal" href="strings.html#version-number-literals">Version Number Literals</a></li>
 </ul>
 </li>
@@ -251,6 +250,7 @@
 <li class="toctree-l2"><a class="reference internal" href="dates.html#timetype-period-arithmetic">TimeType-Period Arithmetic</a></li>
 <li class="toctree-l2"><a class="reference internal" href="dates.html#adjuster-functions">Adjuster Functions</a></li>
 <li class="toctree-l2"><a class="reference internal" href="dates.html#period-types">Period Types</a></li>
+<li class="toctree-l2"><a class="reference internal" href="dates.html#rounding">Rounding</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="running-external-programs.html">Running External Programs</a><ul>
@@ -460,6 +460,7 @@
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../stdlib/linalg.html">Linear Algebra</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="../stdlib/linalg.html#module-Base.LinAlg">Standard Functions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../stdlib/linalg.html#low-level-matrix-operations">Low-level matrix operations</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../stdlib/linalg.html#module-Base.LinAlg.BLAS">BLAS Functions</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../stdlib/linalg.html#module-Base.LinAlg.LAPACK">LAPACK Functions</a></li>
 </ul>
@@ -492,6 +493,7 @@
 <li class="toctree-l2"><a class="reference internal" href="../stdlib/test.html#basic-unit-tests">Basic Unit Tests</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../stdlib/test.html#working-with-test-sets">Working with Test Sets</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../stdlib/test.html#other-test-macros">Other Test Macros</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../stdlib/test.html#broken-tests">Broken Tests</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../stdlib/test.html#creating-custom-abstracttestset-types">Creating Custom <code class="docutils literal"><span class="pre">AbstractTestSet</span></code> Types</a></li>
 </ul>
 </li>
@@ -521,6 +523,8 @@
 <li class="toctree-l2"><a class="reference internal" href="../devdocs/stdio.html">printf() and stdio in the Julia runtime</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../devdocs/promote-op.html">Operator-sensitive promotion</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../devdocs/boundscheck.html">Bounds checking</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../devdocs/locks.html">Proper maintenance and care of multi-threading locks</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../devdocs/offset-arrays.html">Arrays with custom indices</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../devdocs/C.html">Developing/debugging Julia&#8217;s C code</a><ul>
@@ -704,7 +708,7 @@ the following code:</p>
 <span class="k">end</span>
 </pre></div>
 </div>
-<p>Starting julia with <code class="docutils literal"><span class="pre">julia</span> <span class="pre">-p</span> <span class="pre">2</span></code>, you can use this to verify the following:</p>
+<p>Starting Julia with <code class="docutils literal"><span class="pre">julia</span> <span class="pre">-p</span> <span class="pre">2</span></code>, you can use this to verify the following:</p>
 <ul>
 <li><p class="first"><a class="reference internal" href="../stdlib/base.html#Base.include" title="Base.include"><code class="xref jl jl-func docutils literal"><span class="pre">include(&quot;DummyModule.jl&quot;)</span></code></a> loads the file on just a single process (whichever one executes the statement).</p>
 </li>
@@ -740,7 +744,7 @@ considered to be all processes other than process 1.</p>
 <ul class="simple">
 <li>A local cluster specified with the <code class="docutils literal"><span class="pre">-p</span></code> option as shown above.</li>
 <li>A cluster spanning machines using the <code class="docutils literal"><span class="pre">--machinefile</span></code> option. This uses a passwordless
-<code class="docutils literal"><span class="pre">ssh</span></code> login to start julia worker processes (from the same path as the current host)
+<code class="docutils literal"><span class="pre">ssh</span></code> login to start Julia worker processes (from the same path as the current host)
 on the specified machines.</li>
 </ul>
 <p>Functions <a class="reference internal" href="../stdlib/parallel.html#Base.addprocs" title="Base.addprocs"><code class="xref jl jl-func docutils literal"><span class="pre">addprocs()</span></code></a>, <a class="reference internal" href="../stdlib/parallel.html#Base.rmprocs" title="Base.rmprocs"><code class="xref jl jl-func docutils literal"><span class="pre">rmprocs()</span></code></a>, <a class="reference internal" href="../stdlib/parallel.html#Base.workers" title="Base.workers"><code class="xref jl jl-func docutils literal"><span class="pre">workers()</span></code></a>, and others are available as a programmatic means of
@@ -813,7 +817,7 @@ following function in <code class="docutils literal"><span class="pre">count_hea
 <p>The function <code class="docutils literal"><span class="pre">count_heads</span></code> simply adds together <code class="docutils literal"><span class="pre">n</span></code> random bits.
 Here is how we can perform some trials on two machines, and add together the
 results:</p>
-<div class="highlight-julia"><div class="highlight"><pre><span></span><span class="n">require</span><span class="p">(</span><span class="s">&quot;count_heads&quot;</span><span class="p">)</span>
+<div class="highlight-julia"><div class="highlight"><pre><span></span><span class="p">@</span><span class="n">everywhere</span> <span class="n">include</span><span class="p">(</span><span class="s">&quot;count_heads.jl&quot;</span><span class="p">)</span>
 
 <span class="n">a</span> <span class="o">=</span> <span class="p">@</span><span class="n">spawn</span> <span class="n">count_heads</span><span class="p">(</span><span class="mi">100000000</span><span class="p">)</span>
 <span class="n">b</span> <span class="o">=</span> <span class="p">@</span><span class="n">spawn</span> <span class="n">count_heads</span><span class="p">(</span><span class="mi">100000000</span><span class="p">)</span>
@@ -1216,15 +1220,15 @@ handles mapping the shared segment being released sooner.</p>
 </div>
 <div class="section" id="clustermanagers">
 <span id="man-clustermanagers"></span><h2>ClusterManagers<a class="headerlink" href="#clustermanagers" title="Permalink to this headline">¶</a></h2>
-<p>The launching, management and networking of julia processes into a logical
+<p>The launching, management and networking of Julia processes into a logical
 cluster is done via cluster managers. A <code class="xref jl jl-obj docutils literal"><span class="pre">ClusterManager</span></code> is responsible for</p>
 <ul class="simple">
 <li>launching worker processes in a cluster environment</li>
 <li>managing events during the lifetime of each worker</li>
 <li>optionally, a cluster manager can also provide data transport</li>
 </ul>
-<p>A julia cluster has the following characteristics:
-- The initial julia process, also called the <code class="docutils literal"><span class="pre">master</span></code> is special and has a julia id of 1.
+<p>A Julia cluster has the following characteristics:
+- The initial Julia process, also called the <code class="docutils literal"><span class="pre">master</span></code> is special and has a id of 1.
 - Only the <code class="docutils literal"><span class="pre">master</span></code> process can add or remove worker processes.
 - All processes can directly communicate with each other.</p>
 <p>Connections between workers (using the in-built TCP/IP transport) is established in the following manner:</p>
@@ -1236,10 +1240,10 @@ required number of worker processes on appropriate machines</li>
 <li>The cluster manager captures the stdout&#8217;s of each worker and makes it available to the master process</li>
 <li>The master process parses this information and sets up TCP/IP connections to each worker</li>
 <li>Every worker is also notified of other workers in the cluster</li>
-<li>Each worker connects to all workers whose julia id is less than its own id</li>
+<li>Each worker connects to all workers whose id is less than its own id</li>
 <li>In this way a mesh network is established, wherein every worker is directly connected with every other worker</li>
 </ul>
-<p>While the default transport layer uses plain TCP sockets, it is possible for a julia cluster to provide
+<p>While the default transport layer uses plain TCP sockets, it is possible for a Julia cluster to provide
 its own transport.</p>
 <p>Julia provides two in-built cluster managers:</p>
 <ul class="simple">
@@ -1337,7 +1341,7 @@ to be configured manually.</p>
 For example, a cluster manager may launch a single worker per node, and use that to launch
 additional workers. <code class="docutils literal"><span class="pre">count</span></code> with an integer value <code class="docutils literal"><span class="pre">n</span></code> will launch a total of <code class="docutils literal"><span class="pre">n</span></code> workers,
 while a value of <code class="docutils literal"><span class="pre">:auto</span></code> will launch as many workers as cores on that machine.
-<code class="docutils literal"><span class="pre">exename</span></code> is the name of the julia executable including the full path.
+<code class="docutils literal"><span class="pre">exename</span></code> is the name of the <code class="docutils literal"><span class="pre">julia</span></code> executable including the full path.
 <code class="docutils literal"><span class="pre">exeflags</span></code> should be set to the required command line arguments for new workers.</p>
 <p><code class="docutils literal"><span class="pre">tunnel</span></code>, <code class="docutils literal"><span class="pre">bind_addr</span></code>, <code class="docutils literal"><span class="pre">sshflags</span></code> and <code class="docutils literal"><span class="pre">max_parallel</span></code> are used when a ssh tunnel is
 required to connect to the workers from the master process.</p>
@@ -1356,14 +1360,14 @@ interrupt signal.</li>
 <div class="section" id="cluster-managers-with-custom-transports">
 <h2>Cluster Managers with custom transports<a class="headerlink" href="#cluster-managers-with-custom-transports" title="Permalink to this headline">¶</a></h2>
 <p>Replacing the default TCP/IP all-to-all socket connections with a custom transport layer is a little more involved.
-Each julia process has as many communication tasks as the workers it is connected to. For example, consider a julia cluster of
+Each Julia process has as many communication tasks as the workers it is connected to. For example, consider a Julia cluster of
 32 processes in a all-to-all mesh network:</p>
 <ul class="simple">
-<li>Each julia process thus has 31 communication tasks</li>
+<li>Each Julia process thus has 31 communication tasks</li>
 <li>Each task handles all incoming messages from a single remote worker in a message processing loop</li>
 <li>The message processing loop waits on an <code class="docutils literal"><span class="pre">AsyncStream</span></code> object - for example, a TCP socket in the default implementation, reads an entire
 message, processes it and waits for the next one</li>
-<li>Sending messages to a process is done directly from any julia task - not just communication tasks - again, via the appropriate
+<li>Sending messages to a process is done directly from any Julia task - not just communication tasks - again, via the appropriate
 <code class="docutils literal"><span class="pre">AsyncStream</span></code> object</li>
 </ul>
 <p>Replacing the default transport involves the new implementation to setup connections to remote workers, and to provide appropriate
@@ -1375,14 +1379,14 @@ message, processes it and waits for the next one</li>
 <p>The default implementation (which uses TCP/IP sockets) is implemented as <code class="docutils literal"><span class="pre">connect(manager::ClusterManager,</span> <span class="pre">pid::Integer,</span> <span class="pre">config::WorkerConfig)</span></code>.</p>
 <p><code class="docutils literal"><span class="pre">connect</span></code> should return a pair of <code class="docutils literal"><span class="pre">AsyncStream</span></code> objects, one for reading data sent from worker <code class="docutils literal"><span class="pre">pid</span></code>,
 and the other to write data that needs to be sent to worker <code class="docutils literal"><span class="pre">pid</span></code>. Custom cluster managers can use an in-memory <code class="docutils literal"><span class="pre">BufferStream</span></code>
-as the plumbing to proxy data between the custom, possibly non-AsyncStream transport and julia&#8217;s in-built parallel infrastructure.</p>
+as the plumbing to proxy data between the custom, possibly non-AsyncStream transport and Julia&#8217;s in-built parallel infrastructure.</p>
 <p>A <code class="docutils literal"><span class="pre">BufferStream</span></code> is an in-memory <code class="docutils literal"><span class="pre">IOBuffer</span></code> which behaves like an <code class="docutils literal"><span class="pre">AsyncStream</span></code>.</p>
-<p>Folder <code class="docutils literal"><span class="pre">examples/clustermanager/0mq</span></code> is an example of using ZeroMQ is connect julia workers in a star network with a 0MQ broker in the middle.
-Note: The julia processes are still all <em>logically</em> connected to each other - any worker can message any other worker directly without any
+<p>Folder <code class="docutils literal"><span class="pre">examples/clustermanager/0mq</span></code> is an example of using ZeroMQ is connect Julia workers in a star network with a 0MQ broker in the middle.
+Note: The Julia processes are still all <em>logically</em> connected to each other - any worker can message any other worker directly without any
 awareness of 0MQ being used as the transport layer.</p>
 <p>When using custom transports:</p>
 <ul class="simple">
-<li>julia workers must NOT be started with <code class="docutils literal"><span class="pre">--worker</span></code>. Starting with <code class="docutils literal"><span class="pre">--worker</span></code> will result in the newly launched
+<li>Julia workers must NOT be started with <code class="docutils literal"><span class="pre">--worker</span></code>. Starting with <code class="docutils literal"><span class="pre">--worker</span></code> will result in the newly launched
 workers defaulting to the TCP/IP socket transport implementation</li>
 <li>For every incoming logical connection with a worker, <code class="docutils literal"><span class="pre">Base.process_messages(rd::AsyncStream,</span> <span class="pre">wr::AsyncStream)</span></code> must be called.
 This launches a new task that handles reading and writing of messages from/to the worker represented by the <code class="docutils literal"><span class="pre">AsyncStream</span></code> objects</li>

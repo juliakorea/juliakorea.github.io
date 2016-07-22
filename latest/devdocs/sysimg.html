@@ -88,7 +88,6 @@
 <li class="toctree-l2"><a class="reference internal" href="../manual/mathematical-operations.html#id4">갱신 연산자</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../manual/mathematical-operations.html#man-numeric-comparisons">수치 비교</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../manual/mathematical-operations.html#man-numerical-conversions">수치 변환</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../manual/mathematical-operations.html#man-elementary-functions">기초 함수</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../manual/complex-and-rational-numbers.html">복소수와 유리수</a><ul>
@@ -105,7 +104,7 @@
 <li class="toctree-l2"><a class="reference internal" href="../manual/strings.html#common-operations">Common Operations</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../manual/strings.html#non-standard-string-literals">Non-Standard String Literals</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../manual/strings.html#regular-expressions">Regular Expressions</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../manual/strings.html#id3">Byte Array Literals</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../manual/strings.html#id2">Byte Array Literals</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../manual/strings.html#version-number-literals">Version Number Literals</a></li>
 </ul>
 </li>
@@ -252,6 +251,7 @@
 <li class="toctree-l2"><a class="reference internal" href="../manual/dates.html#timetype-period-arithmetic">TimeType-Period Arithmetic</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../manual/dates.html#adjuster-functions">Adjuster Functions</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../manual/dates.html#period-types">Period Types</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../manual/dates.html#rounding">Rounding</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../manual/running-external-programs.html">Running External Programs</a><ul>
@@ -461,6 +461,7 @@
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../stdlib/linalg.html">Linear Algebra</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="../stdlib/linalg.html#module-Base.LinAlg">Standard Functions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../stdlib/linalg.html#low-level-matrix-operations">Low-level matrix operations</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../stdlib/linalg.html#module-Base.LinAlg.BLAS">BLAS Functions</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../stdlib/linalg.html#module-Base.LinAlg.LAPACK">LAPACK Functions</a></li>
 </ul>
@@ -493,6 +494,7 @@
 <li class="toctree-l2"><a class="reference internal" href="../stdlib/test.html#basic-unit-tests">Basic Unit Tests</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../stdlib/test.html#working-with-test-sets">Working with Test Sets</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../stdlib/test.html#other-test-macros">Other Test Macros</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../stdlib/test.html#broken-tests">Broken Tests</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../stdlib/test.html#creating-custom-abstracttestset-types">Creating Custom <code class="docutils literal"><span class="pre">AbstractTestSet</span></code> Types</a></li>
 </ul>
 </li>
@@ -522,6 +524,8 @@
 <li class="toctree-l2"><a class="reference internal" href="stdio.html">printf() and stdio in the Julia runtime</a></li>
 <li class="toctree-l2"><a class="reference internal" href="promote-op.html">Operator-sensitive promotion</a></li>
 <li class="toctree-l2"><a class="reference internal" href="boundscheck.html">Bounds checking</a></li>
+<li class="toctree-l2"><a class="reference internal" href="locks.html">Proper maintenance and care of multi-threading locks</a></li>
+<li class="toctree-l2"><a class="reference internal" href="offset-arrays.html">Arrays with custom indices</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="C.html">Developing/debugging Julia&#8217;s C code</a><ul>
@@ -585,10 +589,7 @@
 <dl class="function">
 <dt id="build_sysimg">
 <code class="descname">build_sysimg</code><span class="sig-paren">(</span><em>sysimg_path=default_sysimg_path</em>, <em>cpu_target=&quot;native&quot;</em>, <em>userimg_path=nothing; force=false</em><span class="sig-paren">)</span><a class="headerlink" href="#build_sysimg" title="Permalink to this definition">¶</a></dt>
-<dd><p>Rebuild the system image. Store it in <code class="docutils literal"><span class="pre">sysimg_path</span></code>, which defaults to a file named <code class="docutils literal"><span class="pre">sys.ji</span></code> that sits in the same folder as <code class="docutils literal"><span class="pre">libjulia.{so,dylib}</span></code>, except on Windows where it defaults to <code class="docutils literal"><span class="pre">JULIA_HOME/../lib/julia/sys.ji</span></code>.
-Use the cpu instruction set given by <code class="docutils literal"><span class="pre">cpu_target</span></code>.  Valid CPU targets are the same as for the <code class="docutils literal"><span class="pre">-C</span></code> option to <code class="docutils literal"><span class="pre">julia</span></code>, or the <code class="docutils literal"><span class="pre">-march</span></code> option to <code class="docutils literal"><span class="pre">gcc</span></code>.  Defaults to <code class="docutils literal"><span class="pre">native</span></code>, which means to use all CPU instructions available on the current processor.
-Include the user image file given by <code class="docutils literal"><span class="pre">userimg_path</span></code>, which should contain directives such as <code class="docutils literal"><span class="pre">using</span> <span class="pre">MyPackage</span></code> to include that package in the new system image.
-New system image will not replace an older image unless <code class="docutils literal"><span class="pre">force</span></code> is set to true.</p>
+<dd><p>Rebuild the system image. Store it in <code class="docutils literal"><span class="pre">sysimg_path</span></code>, which defaults to a file named <code class="docutils literal"><span class="pre">sys.ji</span></code> that sits in the same folder as <code class="docutils literal"><span class="pre">libjulia.{so,dylib}</span></code>, except on Windows where it defaults to <code class="docutils literal"><span class="pre">JULIA_HOME/../lib/julia/sys.ji</span></code>.  Use the cpu instruction set given by <code class="docutils literal"><span class="pre">cpu_target</span></code>. Valid CPU targets are the same as for the <code class="docutils literal"><span class="pre">-C</span></code> option to <code class="docutils literal"><span class="pre">julia</span></code>, or the <code class="docutils literal"><span class="pre">-march</span></code> option to <code class="docutils literal"><span class="pre">gcc</span></code>.  Defaults to <code class="docutils literal"><span class="pre">native</span></code>, which means to use all CPU instructions available on the current processor. Include the user image file given by <code class="docutils literal"><span class="pre">userimg_path</span></code>, which should contain directives such as <code class="docutils literal"><span class="pre">using</span> <span class="pre">MyPackage</span></code> to include that package in the new system image. New system image will not replace an older image unless <code class="docutils literal"><span class="pre">force</span></code> is set to true.</p>
 </dd></dl>
 
 <p>Note that this file can also be run as a script itself, with command line arguments taking the place of arguments passed to the <code class="docutils literal"><span class="pre">build_sysimg</span></code> function.  For example, to build a system image in <code class="docutils literal"><span class="pre">/tmp/sys.{so,dll,dylib}</span></code>, with the <code class="docutils literal"><span class="pre">core2</span></code> CPU instruction set, a user image of <code class="docutils literal"><span class="pre">~/userimg.jl</span></code> and <code class="docutils literal"><span class="pre">force</span></code> set to <code class="docutils literal"><span class="pre">true</span></code>, one would execute:</p>

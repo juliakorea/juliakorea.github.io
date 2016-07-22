@@ -88,7 +88,6 @@
 <li class="toctree-l2"><a class="reference internal" href="../manual/mathematical-operations.html#id4">갱신 연산자</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../manual/mathematical-operations.html#man-numeric-comparisons">수치 비교</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../manual/mathematical-operations.html#man-numerical-conversions">수치 변환</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../manual/mathematical-operations.html#man-elementary-functions">기초 함수</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../manual/complex-and-rational-numbers.html">복소수와 유리수</a><ul>
@@ -105,7 +104,7 @@
 <li class="toctree-l2"><a class="reference internal" href="../manual/strings.html#common-operations">Common Operations</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../manual/strings.html#non-standard-string-literals">Non-Standard String Literals</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../manual/strings.html#regular-expressions">Regular Expressions</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../manual/strings.html#id3">Byte Array Literals</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../manual/strings.html#id2">Byte Array Literals</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../manual/strings.html#version-number-literals">Version Number Literals</a></li>
 </ul>
 </li>
@@ -252,6 +251,7 @@
 <li class="toctree-l2"><a class="reference internal" href="../manual/dates.html#timetype-period-arithmetic">TimeType-Period Arithmetic</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../manual/dates.html#adjuster-functions">Adjuster Functions</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../manual/dates.html#period-types">Period Types</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../manual/dates.html#rounding">Rounding</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../manual/running-external-programs.html">Running External Programs</a><ul>
@@ -461,6 +461,7 @@
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../stdlib/linalg.html">Linear Algebra</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="../stdlib/linalg.html#module-Base.LinAlg">Standard Functions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../stdlib/linalg.html#low-level-matrix-operations">Low-level matrix operations</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../stdlib/linalg.html#module-Base.LinAlg.BLAS">BLAS Functions</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../stdlib/linalg.html#module-Base.LinAlg.LAPACK">LAPACK Functions</a></li>
 </ul>
@@ -493,6 +494,7 @@
 <li class="toctree-l2"><a class="reference internal" href="../stdlib/test.html#basic-unit-tests">Basic Unit Tests</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../stdlib/test.html#working-with-test-sets">Working with Test Sets</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../stdlib/test.html#other-test-macros">Other Test Macros</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../stdlib/test.html#broken-tests">Broken Tests</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../stdlib/test.html#creating-custom-abstracttestset-types">Creating Custom <code class="docutils literal"><span class="pre">AbstractTestSet</span></code> Types</a></li>
 </ul>
 </li>
@@ -522,6 +524,8 @@
 <li class="toctree-l2"><a class="reference internal" href="stdio.html">printf() and stdio in the Julia runtime</a></li>
 <li class="toctree-l2"><a class="reference internal" href="promote-op.html">Operator-sensitive promotion</a></li>
 <li class="toctree-l2"><a class="reference internal" href="boundscheck.html">Bounds checking</a></li>
+<li class="toctree-l2"><a class="reference internal" href="locks.html">Proper maintenance and care of multi-threading locks</a></li>
+<li class="toctree-l2"><a class="reference internal" href="offset-arrays.html">Arrays with custom indices</a></li>
 </ul>
 </li>
 <li class="toctree-l1 current"><a class="reference internal" href="C.html">Developing/debugging Julia&#8217;s C code</a><ul class="current">
@@ -573,11 +577,11 @@
 <ul class="simple">
 <li><a class="reference internal" href="#segfaults-during-bootstrap-sysimg-jl">Segfaults during bootstrap (sysimg.jl)</a></li>
 <li><a class="reference internal" href="#segfaults-when-running-a-script">Segfaults when running a script</a></li>
-<li><a class="reference internal" href="#errors-during-julia-startup">Errors during julia startup</a></li>
+<li><a class="reference internal" href="#errors-during-julia-startup">Errors during Julia startup</a></li>
 </ul>
 <div class="section" id="version-environment-info">
 <span id="version-info"></span><h2>Version/Environment info<a class="headerlink" href="#version-environment-info" title="Permalink to this headline">¶</a></h2>
-<p>No matter the error, we will always need to know what version of julia you are running. When julia first starts up, a header is printed out with a version number and date.  If your version is <code class="docutils literal"><span class="pre">0.2.0</span></code> or higher, please include the output of <code class="docutils literal"><span class="pre">versioninfo()</span></code> in any report you create:</p>
+<p>No matter the error, we will always need to know what version of Julia you are running. When Julia first starts up, a header is printed out with a version number and date.  If your version is <code class="docutils literal"><span class="pre">0.2.0</span></code> or higher, please include the output of <code class="docutils literal"><span class="pre">versioninfo()</span></code> in any report you create:</p>
 <div class="highlight-julia"><div class="highlight"><pre><span></span><span class="n">julia</span><span class="o">&gt;</span> <span class="n">versioninfo</span><span class="p">()</span>
 <span class="n">Julia</span> <span class="n">Version</span> <span class="mf">0.3</span><span class="o">.</span><span class="mi">3</span><span class="o">-</span><span class="n">pre</span><span class="o">+</span><span class="mi">25</span>
 <span class="n">Commit</span> <span class="mi">417</span><span class="n">b50a</span><span class="o">*</span> <span class="p">(</span><span class="mi">2014</span><span class="o">-</span><span class="mi">11</span><span class="o">-</span><span class="mi">03</span> <span class="mi">11</span><span class="p">:</span><span class="mi">32</span> <span class="n">UTC</span><span class="p">)</span>
@@ -594,8 +598,8 @@
 </div>
 <div class="section" id="segfaults-during-bootstrap-sysimg-jl">
 <span id="id1"></span><h2>Segfaults during bootstrap (sysimg.jl)<a class="headerlink" href="#segfaults-during-bootstrap-sysimg-jl" title="Permalink to this headline">¶</a></h2>
-<p>Segfaults toward the end of the <code class="docutils literal"><span class="pre">make</span></code> process of building julia are a common symptom of something going wrong while julia is preparsing the corpus of code in the <code class="docutils literal"><span class="pre">base/</span></code> folder.  Many factors can contribute toward this process dying unexpectedly, however it is as often as not due to an error in the C-code portion of julia, and as such must typically be debugged with a debug build inside of <code class="docutils literal"><span class="pre">gdb</span></code>.  Explicitly:</p>
-<p>Create a debug build of julia:</p>
+<p>Segfaults toward the end of the <code class="docutils literal"><span class="pre">make</span></code> process of building Julia are a common symptom of something going wrong while Julia is preparsing the corpus of code in the <code class="docutils literal"><span class="pre">base/</span></code> folder.  Many factors can contribute toward this process dying unexpectedly, however it is as often as not due to an error in the C-code portion of Julia, and as such must typically be debugged with a debug build inside of <code class="docutils literal"><span class="pre">gdb</span></code>.  Explicitly:</p>
+<p>Create a debug build of Julia:</p>
 <div class="highlight-julia"><div class="highlight"><pre><span></span><span class="o">$</span> <span class="n">cd</span> <span class="o">&lt;</span><span class="n">julia_root</span><span class="o">&gt;</span>
 <span class="o">$</span> <span class="n">make</span> <span class="n">debug</span>
 </pre></div>
@@ -605,11 +609,11 @@
 <span class="o">$</span> <span class="n">gdb</span> <span class="o">-</span><span class="n">x</span> <span class="o">../</span><span class="n">contrib</span><span class="o">/</span><span class="n">debug_bootstrap</span><span class="o">.</span><span class="n">gdb</span>
 </pre></div>
 </div>
-<p>This will start <code class="docutils literal"><span class="pre">gdb</span></code>, attempt to run the bootstrap process using the debug build of julia, and print out a backtrace if (when) it segfaults.  You may need to hit <code class="docutils literal"><span class="pre">&lt;enter&gt;</span></code> a few times to get the full backtrace.  Create a <a class="reference external" href="https://gist.github.com">gist</a> with the backtrace, the <a class="reference internal" href="#version-info">version info</a>, and any other pertinent information you can think of and open a new <a class="reference external" href="https://github.com/JuliaLang/julia/issues?state=open">issue</a> on Github with a link to the gist.</p>
+<p>This will start <code class="docutils literal"><span class="pre">gdb</span></code>, attempt to run the bootstrap process using the debug build of Julia, and print out a backtrace if (when) it segfaults.  You may need to hit <code class="docutils literal"><span class="pre">&lt;enter&gt;</span></code> a few times to get the full backtrace.  Create a <a class="reference external" href="https://gist.github.com">gist</a> with the backtrace, the <a class="reference internal" href="#version-info">version info</a>, and any other pertinent information you can think of and open a new <a class="reference external" href="https://github.com/JuliaLang/julia/issues?state=open">issue</a> on Github with a link to the gist.</p>
 </div>
 <div class="section" id="segfaults-when-running-a-script">
 <span id="id2"></span><h2>Segfaults when running a script<a class="headerlink" href="#segfaults-when-running-a-script" title="Permalink to this headline">¶</a></h2>
-<p>The procedure is very similar to <a class="reference internal" href="#segfaults-during-bootstrap-sysimg-jl">Segfaults during bootstrap (sysimg.jl)</a>.  Create a debug build of Julia, and run your script inside of a debugged julia process:</p>
+<p>The procedure is very similar to <a class="reference internal" href="#segfaults-during-bootstrap-sysimg-jl">Segfaults during bootstrap (sysimg.jl)</a>.  Create a debug build of Julia, and run your script inside of a debugged Julia process:</p>
 <div class="highlight-julia"><div class="highlight"><pre><span></span><span class="o">$</span> <span class="n">cd</span> <span class="o">&lt;</span><span class="n">julia_root</span><span class="o">&gt;</span>
 <span class="o">$</span> <span class="n">make</span> <span class="n">debug</span>
 <span class="o">$</span> <span class="n">gdb</span> <span class="o">--</span><span class="n">args</span> <span class="n">usr</span><span class="o">/</span><span class="n">bin</span><span class="o">/</span><span class="n">julia</span><span class="o">-</span><span class="n">debug</span> <span class="o">&lt;</span><span class="n">path_to_your_script</span><span class="o">&gt;</span>
@@ -625,8 +629,8 @@
 <p>Create a <a class="reference external" href="https://gist.github.com">gist</a> with the backtrace, the <a class="reference internal" href="#version-info">version info</a>, and any other pertinent information you can think of and open a new <a class="reference external" href="https://github.com/JuliaLang/julia/issues?state=open">issue</a> on Github with a link to the gist.</p>
 </div>
 <div class="section" id="errors-during-julia-startup">
-<span id="id3"></span><h2>Errors during julia startup<a class="headerlink" href="#errors-during-julia-startup" title="Permalink to this headline">¶</a></h2>
-<p>Occasionally errors occur during julia&#8217;s startup process (especially when using binary distributions, as opposed to compiling from source) such as the following:</p>
+<span id="id3"></span><h2>Errors during Julia startup<a class="headerlink" href="#errors-during-julia-startup" title="Permalink to this headline">¶</a></h2>
+<p>Occasionally errors occur during Julia&#8217;s startup process (especially when using binary distributions, as opposed to compiling from source) such as the following:</p>
 <div class="highlight-julia"><div class="highlight"><pre><span></span><span class="o">$</span> <span class="n">julia</span>
 <span class="n">exec</span><span class="p">:</span> <span class="nb">error</span> <span class="o">-</span><span class="mi">5</span>
 </pre></div>
@@ -650,7 +654,7 @@
 <h2>Glossary<a class="headerlink" href="#glossary" title="Permalink to this headline">¶</a></h2>
 <p>A few terms have been used as shorthand in this guide:</p>
 <ul class="simple">
-<li><code class="docutils literal"><span class="pre">&lt;julia_root&gt;</span></code> refers to the root directory of the julia source tree; e.g. it should contain folders such as <code class="docutils literal"><span class="pre">base</span></code>, <code class="docutils literal"><span class="pre">deps</span></code>, <code class="docutils literal"><span class="pre">src</span></code>, <code class="docutils literal"><span class="pre">test</span></code>, etc.....</li>
+<li><code class="docutils literal"><span class="pre">&lt;julia_root&gt;</span></code> refers to the root directory of the Julia source tree; e.g. it should contain folders such as <code class="docutils literal"><span class="pre">base</span></code>, <code class="docutils literal"><span class="pre">deps</span></code>, <code class="docutils literal"><span class="pre">src</span></code>, <code class="docutils literal"><span class="pre">test</span></code>, etc.....</li>
 </ul>
 </div>
 </div>

@@ -87,7 +87,6 @@
 <li class="toctree-l2"><a class="reference internal" href="mathematical-operations.html#id4">갱신 연산자</a></li>
 <li class="toctree-l2"><a class="reference internal" href="mathematical-operations.html#man-numeric-comparisons">수치 비교</a></li>
 <li class="toctree-l2"><a class="reference internal" href="mathematical-operations.html#man-numerical-conversions">수치 변환</a></li>
-<li class="toctree-l2"><a class="reference internal" href="mathematical-operations.html#man-elementary-functions">기초 함수</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="complex-and-rational-numbers.html">복소수와 유리수</a><ul>
@@ -104,7 +103,7 @@
 <li class="toctree-l2"><a class="reference internal" href="strings.html#common-operations">Common Operations</a></li>
 <li class="toctree-l2"><a class="reference internal" href="strings.html#non-standard-string-literals">Non-Standard String Literals</a></li>
 <li class="toctree-l2"><a class="reference internal" href="strings.html#regular-expressions">Regular Expressions</a></li>
-<li class="toctree-l2"><a class="reference internal" href="strings.html#id3">Byte Array Literals</a></li>
+<li class="toctree-l2"><a class="reference internal" href="strings.html#id2">Byte Array Literals</a></li>
 <li class="toctree-l2"><a class="reference internal" href="strings.html#version-number-literals">Version Number Literals</a></li>
 </ul>
 </li>
@@ -251,6 +250,7 @@
 <li class="toctree-l2"><a class="reference internal" href="dates.html#timetype-period-arithmetic">TimeType-Period Arithmetic</a></li>
 <li class="toctree-l2"><a class="reference internal" href="dates.html#adjuster-functions">Adjuster Functions</a></li>
 <li class="toctree-l2"><a class="reference internal" href="dates.html#period-types">Period Types</a></li>
+<li class="toctree-l2"><a class="reference internal" href="dates.html#rounding">Rounding</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="running-external-programs.html">Running External Programs</a><ul>
@@ -460,6 +460,7 @@
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../stdlib/linalg.html">Linear Algebra</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="../stdlib/linalg.html#module-Base.LinAlg">Standard Functions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../stdlib/linalg.html#low-level-matrix-operations">Low-level matrix operations</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../stdlib/linalg.html#module-Base.LinAlg.BLAS">BLAS Functions</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../stdlib/linalg.html#module-Base.LinAlg.LAPACK">LAPACK Functions</a></li>
 </ul>
@@ -492,6 +493,7 @@
 <li class="toctree-l2"><a class="reference internal" href="../stdlib/test.html#basic-unit-tests">Basic Unit Tests</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../stdlib/test.html#working-with-test-sets">Working with Test Sets</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../stdlib/test.html#other-test-macros">Other Test Macros</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../stdlib/test.html#broken-tests">Broken Tests</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../stdlib/test.html#creating-custom-abstracttestset-types">Creating Custom <code class="docutils literal"><span class="pre">AbstractTestSet</span></code> Types</a></li>
 </ul>
 </li>
@@ -521,6 +523,8 @@
 <li class="toctree-l2"><a class="reference internal" href="../devdocs/stdio.html">printf() and stdio in the Julia runtime</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../devdocs/promote-op.html">Operator-sensitive promotion</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../devdocs/boundscheck.html">Bounds checking</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../devdocs/locks.html">Proper maintenance and care of multi-threading locks</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../devdocs/offset-arrays.html">Arrays with custom indices</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../devdocs/C.html">Developing/debugging Julia&#8217;s C code</a><ul>
@@ -829,7 +833,7 @@ ranges <code class="docutils literal"><span class="pre">rx</span></code>, <code 
 scalar.</p>
 <p>The following example computes a weighted average of the current element
 and its left and right neighbor along a 1-d grid. :</p>
-<div class="highlight-julia"><div class="highlight"><pre><span></span><span class="n">julia</span><span class="o">&gt;</span> <span class="kd">const</span> <span class="n">x</span> <span class="o">=</span> <span class="n">rand</span><span class="p">(</span><span class="mi">8</span><span class="p">)</span>
+<div class="highlight-julia"><div class="highlight"><pre><span></span><span class="n">julia</span><span class="o">&gt;</span> <span class="n">x</span> <span class="o">=</span> <span class="n">rand</span><span class="p">(</span><span class="mi">8</span><span class="p">)</span>
 <span class="mi">8</span><span class="o">-</span><span class="n">element</span> <span class="n">Array</span><span class="p">{</span><span class="kt">Float64</span><span class="p">,</span><span class="mi">1</span><span class="p">}:</span>
  <span class="mf">0.843025</span>
  <span class="mf">0.869052</span>
@@ -850,17 +854,10 @@ and its left and right neighbor along a 1-d grid. :</p>
  <span class="mf">0.656511</span>
 </pre></div>
 </div>
-<div class="admonition note">
-<p class="first admonition-title">Note</p>
-<p class="last">In the above example, <code class="docutils literal"><span class="pre">x</span></code> is declared as constant because type
-inference in Julia does not work as well on non-constant global
-variables.</p>
-</div>
-<p>The resulting array type is inferred from the expression; in order to control
-the type explicitly, the type can be prepended to the comprehension. For example,
-in the above example we could have avoided declaring <code class="docutils literal"><span class="pre">x</span></code> as constant, and ensured
-that the result is of type <code class="docutils literal"><span class="pre">Float64</span></code> by writing:</p>
-<div class="highlight-julia"><div class="highlight"><pre><span></span><span class="kt">Float64</span><span class="p">[</span> <span class="mf">0.25</span><span class="o">*</span><span class="n">x</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="mf">0.5</span><span class="o">*</span><span class="n">x</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">+</span> <span class="mf">0.25</span><span class="o">*</span><span class="n">x</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span> <span class="k">for</span> <span class="n">i</span><span class="o">=</span><span class="mi">2</span><span class="p">:</span><span class="n">length</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="o">-</span><span class="mi">1</span> <span class="p">]</span>
+<p>The resulting array type depends on the types of the computed elements.
+In order to control the type explicitly, a type can be prepended to the comprehension.
+For example, we could have requested the result in single precision by writing:</p>
+<div class="highlight-julia"><div class="highlight"><pre><span></span><span class="kt">Float32</span><span class="p">[</span> <span class="mf">0.25</span><span class="o">*</span><span class="n">x</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="mf">0.5</span><span class="o">*</span><span class="n">x</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">+</span> <span class="mf">0.25</span><span class="o">*</span><span class="n">x</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span> <span class="k">for</span> <span class="n">i</span><span class="o">=</span><span class="mi">2</span><span class="p">:</span><span class="n">length</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="o">-</span><span class="mi">1</span> <span class="p">]</span>
 </pre></div>
 </div>
 </div>
@@ -887,6 +884,26 @@ parentheses lets us add a third argument to <code class="docutils literal"><span
 <span class="mi">2</span><span class="n">×2</span> <span class="n">Array</span><span class="p">{</span><span class="n">Tuple</span><span class="p">{</span><span class="kt">Float64</span><span class="p">,</span><span class="kt">Int64</span><span class="p">},</span><span class="mi">2</span><span class="p">}:</span>
  <span class="p">(</span><span class="mf">0.5</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span>       <span class="p">(</span><span class="mf">0.333333</span><span class="p">,</span><span class="mi">3</span><span class="p">)</span>
  <span class="p">(</span><span class="mf">0.333333</span><span class="p">,</span><span class="mi">2</span><span class="p">)</span>  <span class="p">(</span><span class="mf">0.25</span><span class="p">,</span><span class="mi">4</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Ranges in generators and comprehensions can depend on previous ranges by writing
+multiple <code class="docutils literal"><span class="pre">for</span></code> keywords:</p>
+<div class="highlight-julia"><div class="highlight"><pre><span></span><span class="n">julia</span><span class="o">&gt;</span> <span class="p">[(</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span><span class="o">=</span><span class="mi">1</span><span class="p">:</span><span class="mi">3</span> <span class="k">for</span> <span class="n">j</span><span class="o">=</span><span class="mi">1</span><span class="p">:</span><span class="n">i</span><span class="p">]</span>
+<span class="mi">6</span><span class="o">-</span><span class="n">element</span> <span class="n">Array</span><span class="p">{</span><span class="n">Tuple</span><span class="p">{</span><span class="kt">Int64</span><span class="p">,</span><span class="kt">Int64</span><span class="p">},</span><span class="mi">1</span><span class="p">}:</span>
+ <span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span>
+ <span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span>
+ <span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">)</span>
+ <span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span>
+ <span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="mi">2</span><span class="p">)</span>
+ <span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="mi">3</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>In such cases, the result is always 1-d.</p>
+<p>Generated values can be filtered using the <code class="docutils literal"><span class="pre">if</span></code> keyword:</p>
+<div class="highlight-julia"><div class="highlight"><pre><span></span><span class="n">julia</span><span class="o">&gt;</span> <span class="p">[(</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span><span class="o">=</span><span class="mi">1</span><span class="p">:</span><span class="mi">3</span> <span class="k">for</span> <span class="n">j</span><span class="o">=</span><span class="mi">1</span><span class="p">:</span><span class="n">i</span> <span class="k">if</span> <span class="n">i</span><span class="o">+</span><span class="n">j</span> <span class="o">==</span> <span class="mi">4</span><span class="p">]</span>
+<span class="mi">2</span><span class="o">-</span><span class="n">element</span> <span class="n">Array</span><span class="p">{</span><span class="n">Tuple</span><span class="p">{</span><span class="kt">Int64</span><span class="p">,</span><span class="kt">Int64</span><span class="p">},</span><span class="mi">1</span><span class="p">}:</span>
+ <span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">)</span>
+ <span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -939,7 +956,7 @@ the size of the innermost array being indexed. Indexing syntax without the
 </div>
 <p>Example:</p>
 <div class="highlight-julia"><div class="highlight"><pre><span></span><span class="n">julia</span><span class="o">&gt;</span> <span class="n">x</span> <span class="o">=</span> <span class="n">reshape</span><span class="p">(</span><span class="mi">1</span><span class="p">:</span><span class="mi">16</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span>
-<span class="mi">4</span><span class="n">×4</span> <span class="n">Array</span><span class="p">{</span><span class="kt">Int64</span><span class="p">,</span><span class="mi">2</span><span class="p">}:</span>
+<span class="mi">4</span><span class="n">×4</span> <span class="n">Base</span><span class="o">.</span><span class="n">ReshapedArray</span><span class="p">{</span><span class="kt">Int64</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="n">UnitRange</span><span class="p">{</span><span class="kt">Int64</span><span class="p">},</span><span class="n">Tuple</span><span class="p">{}}:</span>
  <span class="mi">1</span>  <span class="mi">5</span>   <span class="mi">9</span>  <span class="mi">13</span>
  <span class="mi">2</span>  <span class="mi">6</span>  <span class="mi">10</span>  <span class="mi">14</span>
  <span class="mi">3</span>  <span class="mi">7</span>  <span class="mi">11</span>  <span class="mi">15</span>
@@ -959,7 +976,7 @@ the size of the innermost array being indexed. Indexing syntax without the
  <span class="mi">16</span>
 
 <span class="n">julia</span><span class="o">&gt;</span> <span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="p">[</span><span class="mi">2</span> <span class="mi">3</span><span class="p">;</span> <span class="mi">4</span> <span class="mi">1</span><span class="p">]]</span>
-<span class="mi">2</span><span class="n">x2</span> <span class="n">Array</span><span class="p">{</span><span class="kt">Int64</span><span class="p">,</span><span class="mi">2</span><span class="p">}:</span>
+<span class="mi">2</span><span class="n">×2</span> <span class="n">Array</span><span class="p">{</span><span class="kt">Int64</span><span class="p">,</span><span class="mi">2</span><span class="p">}:</span>
   <span class="mi">5</span>  <span class="mi">9</span>
  <span class="mi">13</span>  <span class="mi">1</span>
 </pre></div>
@@ -1002,7 +1019,7 @@ though it is first transformed with <a class="reference internal" href="../stdli
 </pre></div>
 </div>
 <p>Example:</p>
-<div class="highlight-julia"><div class="highlight"><pre><span></span><span class="n">julia</span><span class="o">&gt;</span> <span class="n">x</span> <span class="o">=</span> <span class="n">reshape</span><span class="p">(</span><span class="mi">1</span><span class="p">:</span><span class="mi">9</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
+<div class="highlight-julia"><div class="highlight"><pre><span></span><span class="n">julia</span><span class="o">&gt;</span> <span class="n">x</span> <span class="o">=</span> <span class="n">collect</span><span class="p">(</span><span class="n">reshape</span><span class="p">(</span><span class="mi">1</span><span class="p">:</span><span class="mi">9</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">))</span>
 <span class="mi">3</span><span class="n">×3</span> <span class="n">Array</span><span class="p">{</span><span class="kt">Int64</span><span class="p">,</span><span class="mi">2</span><span class="p">}:</span>
  <span class="mi">1</span>  <span class="mi">4</span>  <span class="mi">7</span>
  <span class="mi">2</span>  <span class="mi">5</span>  <span class="mi">8</span>
@@ -1034,7 +1051,7 @@ though it is first transformed with <a class="reference internal" href="../stdli
 <p>The first construct is used when you need the value, but not index, of each element.  In the second construct, <code class="docutils literal"><span class="pre">i</span></code> will be an <code class="docutils literal"><span class="pre">Int</span></code> if <code class="docutils literal"><span class="pre">A</span></code> is an array
 type with fast linear indexing; otherwise, it will be a <code class="docutils literal"><span class="pre">CartesianIndex</span></code>:</p>
 <div class="highlight-julia"><div class="highlight"><pre><span></span><span class="n">A</span> <span class="o">=</span> <span class="n">rand</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span><span class="mi">3</span><span class="p">)</span>
-<span class="n">B</span> <span class="o">=</span> <span class="n">sub</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="mi">1</span><span class="p">:</span><span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">:</span><span class="mi">3</span><span class="p">)</span>
+<span class="n">B</span> <span class="o">=</span> <span class="n">view</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="mi">1</span><span class="p">:</span><span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">:</span><span class="mi">3</span><span class="p">)</span>
 <span class="n">julia</span><span class="o">&gt;</span> <span class="k">for</span> <span class="n">i</span> <span class="k">in</span> <span class="n">eachindex</span><span class="p">(</span><span class="n">B</span><span class="p">)</span>
            <span class="p">@</span><span class="n">show</span> <span class="n">i</span>
        <span class="k">end</span>
@@ -1108,13 +1125,11 @@ the name of the function to vectorize. Here is a simple example:</p>
 <span class="n">square</span> <span class="p">(</span><span class="n">generic</span> <span class="k">function</span><span class="nf"> with</span> <span class="mi">1</span> <span class="n">method</span><span class="p">)</span>
 
 <span class="n">julia</span><span class="o">&gt;</span> <span class="p">@</span><span class="n">vectorize_1arg</span> <span class="n">Number</span> <span class="n">square</span>
-<span class="n">square</span> <span class="p">(</span><span class="n">generic</span> <span class="k">function</span><span class="nf"> with</span> <span class="mi">4</span> <span class="n">methods</span><span class="p">)</span>
+<span class="n">square</span> <span class="p">(</span><span class="n">generic</span> <span class="k">function</span><span class="nf"> with</span> <span class="mi">2</span> <span class="n">methods</span><span class="p">)</span>
 
 <span class="n">julia</span><span class="o">&gt;</span> <span class="n">methods</span><span class="p">(</span><span class="n">square</span><span class="p">)</span>
-<span class="c"># 4 methods for generic function &quot;square&quot;:</span>
-<span class="n">square</span><span class="p">{</span><span class="n">T</span><span class="o">&lt;:</span><span class="n">Number</span><span class="p">}(::</span><span class="n">AbstractArray</span><span class="p">{</span><span class="n">T</span><span class="o">&lt;:</span><span class="n">Number</span><span class="p">,</span><span class="mi">1</span><span class="p">})</span> <span class="n">at</span> <span class="n">operators</span><span class="o">.</span><span class="n">jl</span><span class="p">:</span><span class="mi">374</span>
-<span class="n">square</span><span class="p">{</span><span class="n">T</span><span class="o">&lt;:</span><span class="n">Number</span><span class="p">}(::</span><span class="n">AbstractArray</span><span class="p">{</span><span class="n">T</span><span class="o">&lt;:</span><span class="n">Number</span><span class="p">,</span><span class="mi">2</span><span class="p">})</span> <span class="n">at</span> <span class="n">operators</span><span class="o">.</span><span class="n">jl</span><span class="p">:</span><span class="mi">375</span>
-<span class="n">square</span><span class="p">{</span><span class="n">T</span><span class="o">&lt;:</span><span class="n">Number</span><span class="p">}(::</span><span class="n">AbstractArray</span><span class="p">{</span><span class="n">T</span><span class="o">&lt;:</span><span class="n">Number</span><span class="p">,</span><span class="n">N</span><span class="p">})</span> <span class="n">at</span> <span class="n">operators</span><span class="o">.</span><span class="n">jl</span><span class="p">:</span><span class="mi">377</span>
+<span class="c"># 2 methods for generic function &quot;square&quot;:</span>
+<span class="n">square</span><span class="p">{</span><span class="n">T</span><span class="o">&lt;:</span><span class="n">Number</span><span class="p">}(</span><span class="n">x</span><span class="p">::</span><span class="n">AbstractArray</span><span class="p">{</span><span class="n">T</span><span class="p">,</span><span class="n">N</span><span class="o">&lt;:</span><span class="kt">Any</span><span class="p">})</span> <span class="n">at</span> <span class="n">operators</span><span class="o">.</span><span class="n">jl</span><span class="p">:</span><span class="mi">540</span>
 <span class="n">square</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="n">at</span> <span class="n">none</span><span class="p">:</span><span class="mi">1</span>
 
 <span class="n">julia</span><span class="o">&gt;</span> <span class="n">square</span><span class="p">([</span><span class="mi">1</span> <span class="mi">2</span> <span class="mi">4</span><span class="p">;</span> <span class="mi">5</span> <span class="mi">6</span> <span class="mi">7</span><span class="p">])</span>
@@ -1158,7 +1173,7 @@ function elementwise:</p>
  <span class="mf">1.73659</span>  <span class="mf">0.873631</span>
 </pre></div>
 </div>
-<p>Elementwise operators such as <code class="docutils literal"><span class="pre">.+</span></code> and <code class="docutils literal"><span class="pre">.*</span></code> perform broadcasting if necessary. There is also a <a class="reference internal" href="../stdlib/arrays.html#Base.broadcast!" title="Base.broadcast!"><code class="xref jl jl-func docutils literal"><span class="pre">broadcast!()</span></code></a> function to specify an explicit destination, and <a class="reference internal" href="../stdlib/arrays.html#Base.broadcast_getindex" title="Base.broadcast_getindex"><code class="xref jl jl-func docutils literal"><span class="pre">broadcast_getindex()</span></code></a> and <a class="reference internal" href="../stdlib/arrays.html#Base.broadcast_setindex!" title="Base.broadcast_setindex!"><code class="xref jl jl-func docutils literal"><span class="pre">broadcast_setindex!()</span></code></a> that broadcast the indices before indexing.   Moreover, <code class="docutils literal"><span class="pre">f.(args...)</span></code> is equivalent to <code class="docutils literal"><span class="pre">broadcast(f,</span> <span class="pre">args...)</span></code>, providing a convenient syntax to broadcast any function (<a class="reference internal" href="functions.html#man-dot-vectorizing"><span>함수의 벡터화를 위한 Dot 문법</span></a>:.).</p>
+<p>Elementwise operators such as <code class="docutils literal"><span class="pre">.+</span></code> and <code class="docutils literal"><span class="pre">.*</span></code> perform broadcasting if necessary. There is also a <a class="reference internal" href="../stdlib/arrays.html#Base.broadcast!" title="Base.broadcast!"><code class="xref jl jl-func docutils literal"><span class="pre">broadcast!()</span></code></a> function to specify an explicit destination, and <a class="reference internal" href="../stdlib/arrays.html#Base.broadcast_getindex" title="Base.broadcast_getindex"><code class="xref jl jl-func docutils literal"><span class="pre">broadcast_getindex()</span></code></a> and <a class="reference internal" href="../stdlib/arrays.html#Base.broadcast_setindex!" title="Base.broadcast_setindex!"><code class="xref jl jl-func docutils literal"><span class="pre">broadcast_setindex!()</span></code></a> that broadcast the indices before indexing.   Moreover, <code class="docutils literal"><span class="pre">f.(args...)</span></code> is equivalent to <code class="docutils literal"><span class="pre">broadcast(f,</span> <span class="pre">args...)</span></code>, providing a convenient syntax to broadcast any function (<a class="reference internal" href="functions.html#man-dot-vectorizing"><span>함수의 벡터화를 위한 Dot 문법</span></a>:).</p>
 </div>
 <div class="section" id="implementation">
 <h3>Implementation<a class="headerlink" href="#implementation" title="Permalink to this headline">¶</a></h3>
@@ -1204,10 +1219,10 @@ that have to be implemented for <a class="reference internal" href="../stdlib/ar
 library can be implemented in a generic manner.</p>
 <p><code class="xref jl jl-obj docutils literal"><span class="pre">SubArray</span></code> is a specialization of <code class="xref jl jl-obj docutils literal"><span class="pre">AbstractArray</span></code> that performs
 indexing by reference rather than by copying. A <code class="xref jl jl-obj docutils literal"><span class="pre">SubArray</span></code> is created
-with the <code class="xref jl jl-func docutils literal"><span class="pre">sub()</span></code> function, which is called the same way as <a class="reference internal" href="../stdlib/collections.html#Base.getindex" title="Base.getindex"><code class="xref jl jl-func docutils literal"><span class="pre">getindex()</span></code></a> (with
-an array and a series of index arguments). The result of <code class="xref jl jl-func docutils literal"><span class="pre">sub()</span></code> looks
+with the <a class="reference internal" href="../stdlib/arrays.html#Base.view" title="Base.view"><code class="xref jl jl-func docutils literal"><span class="pre">view()</span></code></a> function, which is called the same way as <a class="reference internal" href="../stdlib/collections.html#Base.getindex" title="Base.getindex"><code class="xref jl jl-func docutils literal"><span class="pre">getindex()</span></code></a>
+(with an array and a series of index arguments). The result of <a class="reference internal" href="../stdlib/arrays.html#Base.view" title="Base.view"><code class="xref jl jl-func docutils literal"><span class="pre">view()</span></code></a> looks
 the same as the result of <a class="reference internal" href="../stdlib/collections.html#Base.getindex" title="Base.getindex"><code class="xref jl jl-func docutils literal"><span class="pre">getindex()</span></code></a>, except the data is left in place.
-<code class="xref jl jl-func docutils literal"><span class="pre">sub()</span></code> stores the input index vectors in a <code class="xref jl jl-obj docutils literal"><span class="pre">SubArray</span></code> object, which
+<a class="reference internal" href="../stdlib/arrays.html#Base.view" title="Base.view"><code class="xref jl jl-func docutils literal"><span class="pre">view()</span></code></a> stores the input index vectors in a <code class="xref jl jl-obj docutils literal"><span class="pre">SubArray</span></code> object, which
 can later be used to index the original array indirectly.</p>
 <p><code class="xref jl jl-obj docutils literal"><span class="pre">StridedVector</span></code> and <code class="xref jl jl-obj docutils literal"><span class="pre">StridedMatrix</span></code> are convenient aliases defined
 to make it possible for Julia to call a wider range of BLAS and LAPACK
@@ -1230,8 +1245,8 @@ stride parameters.</p>
  <span class="mf">0.890947</span>   <span class="mf">0.168877</span>   <span class="mf">0.32002</span>   <span class="mf">0.486136</span>      <span class="mf">0.096078</span>  <span class="mf">0.172048</span>   <span class="mf">0.77672</span>
  <span class="mf">0.507762</span>   <span class="mf">0.573567</span>   <span class="mf">0.220124</span>  <span class="mf">0.165816</span>      <span class="mf">0.211049</span>  <span class="mf">0.433277</span>   <span class="mf">0.539476</span>
 
-<span class="n">julia</span><span class="o">&gt;</span> <span class="n">b</span> <span class="o">=</span> <span class="n">sub</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="mi">2</span><span class="p">:</span><span class="mi">2</span><span class="p">:</span><span class="mi">8</span><span class="p">,</span><span class="mi">2</span><span class="p">:</span><span class="mi">2</span><span class="p">:</span><span class="mi">4</span><span class="p">)</span>
-<span class="mi">4</span><span class="n">×2</span> <span class="n">SubArray</span><span class="p">{</span><span class="kt">Float64</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="n">Array</span><span class="p">{</span><span class="kt">Float64</span><span class="p">,</span><span class="mi">2</span><span class="p">},</span><span class="n">Tuple</span><span class="p">{</span><span class="n">StepRange</span><span class="p">{</span><span class="kt">Int64</span><span class="p">,</span><span class="kt">Int64</span><span class="p">},</span><span class="n">StepRange</span><span class="p">{</span><span class="kt">Int64</span><span class="p">,</span><span class="kt">Int64</span><span class="p">}},</span><span class="mi">1</span><span class="p">}:</span>
+<span class="n">julia</span><span class="o">&gt;</span> <span class="n">b</span> <span class="o">=</span> <span class="n">view</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="mi">2</span><span class="p">:</span><span class="mi">2</span><span class="p">:</span><span class="mi">8</span><span class="p">,</span><span class="mi">2</span><span class="p">:</span><span class="mi">2</span><span class="p">:</span><span class="mi">4</span><span class="p">)</span>
+<span class="mi">4</span><span class="n">×2</span> <span class="n">SubArray</span><span class="p">{</span><span class="kt">Float64</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="n">Array</span><span class="p">{</span><span class="kt">Float64</span><span class="p">,</span><span class="mi">2</span><span class="p">},</span><span class="n">Tuple</span><span class="p">{</span><span class="n">StepRange</span><span class="p">{</span><span class="kt">Int64</span><span class="p">,</span><span class="kt">Int64</span><span class="p">},</span><span class="n">StepRange</span><span class="p">{</span><span class="kt">Int64</span><span class="p">,</span><span class="kt">Int64</span><span class="p">}},</span><span class="n">false</span><span class="p">}:</span>
  <span class="mf">0.537192</span>  <span class="mf">0.996234</span>
  <span class="mf">0.736979</span>  <span class="mf">0.228787</span>
  <span class="mf">0.991511</span>  <span class="mf">0.74485</span>
@@ -1308,7 +1323,7 @@ equivalent to the <a class="reference internal" href="../stdlib/arrays.html#Base
 for working with dense matrices. To produce sparse matrices instead,
 you can use the same names with an <code class="docutils literal"><span class="pre">sp</span></code> prefix:</p>
 <div class="highlight-julia"><div class="highlight"><pre><span></span><span class="n">julia</span><span class="o">&gt;</span> <span class="n">spzeros</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="mi">5</span><span class="p">)</span>
-<span class="mi">3</span><span class="n">×5</span> <span class="n">sparse</span> <span class="n">matrix</span> <span class="n">with</span> <span class="mi">0</span> <span class="kt">Float64</span> <span class="n">nonzero</span> <span class="n">entries</span><span class="p">:</span>
+<span class="mi">3</span><span class="n">×5</span> <span class="n">sparse</span> <span class="n">matrix</span> <span class="n">with</span> <span class="mi">0</span> <span class="kt">Float64</span> <span class="n">nonzero</span> <span class="n">entries</span>
 
 <span class="n">julia</span><span class="o">&gt;</span> <span class="n">speye</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="mi">5</span><span class="p">)</span>
 <span class="mi">3</span><span class="n">×5</span> <span class="n">sparse</span> <span class="n">matrix</span> <span class="n">with</span> <span class="mi">3</span> <span class="kt">Float64</span> <span class="n">nonzero</span> <span class="n">entries</span><span class="p">:</span>
@@ -1408,7 +1423,7 @@ has the same sparsity pattern as <em>S</em>.</td>
 <td><a class="reference internal" href="../stdlib/arrays.html#Base.eye" title="Base.eye"><code class="xref jl jl-func docutils literal"><span class="pre">eye(n)</span></code></a></td>
 <td>Creates a <em>n</em>-by-<em>n</em> identity matrix.</td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="../stdlib/linalg.html#Base.full" title="Base.full"><code class="xref jl jl-func docutils literal"><span class="pre">full(S)</span></code></a></td>
+<tr class="row-odd"><td><a class="reference internal" href="../stdlib/base.html#Base.convert" title="Base.convert"><code class="xref jl jl-func docutils literal"><span class="pre">convert(Array,</span> <span class="pre">S)</span></code></a></td>
 <td><a class="reference internal" href="../stdlib/arrays.html#Base.sparse" title="Base.sparse"><code class="xref jl jl-func docutils literal"><span class="pre">sparse(A)</span></code></a></td>
 <td>Interconverts between dense
 and sparse formats.</td>

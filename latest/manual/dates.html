@@ -87,7 +87,6 @@
 <li class="toctree-l2"><a class="reference internal" href="mathematical-operations.html#id4">갱신 연산자</a></li>
 <li class="toctree-l2"><a class="reference internal" href="mathematical-operations.html#man-numeric-comparisons">수치 비교</a></li>
 <li class="toctree-l2"><a class="reference internal" href="mathematical-operations.html#man-numerical-conversions">수치 변환</a></li>
-<li class="toctree-l2"><a class="reference internal" href="mathematical-operations.html#man-elementary-functions">기초 함수</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="complex-and-rational-numbers.html">복소수와 유리수</a><ul>
@@ -104,7 +103,7 @@
 <li class="toctree-l2"><a class="reference internal" href="strings.html#common-operations">Common Operations</a></li>
 <li class="toctree-l2"><a class="reference internal" href="strings.html#non-standard-string-literals">Non-Standard String Literals</a></li>
 <li class="toctree-l2"><a class="reference internal" href="strings.html#regular-expressions">Regular Expressions</a></li>
-<li class="toctree-l2"><a class="reference internal" href="strings.html#id3">Byte Array Literals</a></li>
+<li class="toctree-l2"><a class="reference internal" href="strings.html#id2">Byte Array Literals</a></li>
 <li class="toctree-l2"><a class="reference internal" href="strings.html#version-number-literals">Version Number Literals</a></li>
 </ul>
 </li>
@@ -251,6 +250,7 @@
 <li class="toctree-l2"><a class="reference internal" href="#timetype-period-arithmetic">TimeType-Period Arithmetic</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#adjuster-functions">Adjuster Functions</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#period-types">Period Types</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#rounding">Rounding</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="running-external-programs.html">Running External Programs</a><ul>
@@ -460,6 +460,7 @@
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../stdlib/linalg.html">Linear Algebra</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="../stdlib/linalg.html#module-Base.LinAlg">Standard Functions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../stdlib/linalg.html#low-level-matrix-operations">Low-level matrix operations</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../stdlib/linalg.html#module-Base.LinAlg.BLAS">BLAS Functions</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../stdlib/linalg.html#module-Base.LinAlg.LAPACK">LAPACK Functions</a></li>
 </ul>
@@ -492,6 +493,7 @@
 <li class="toctree-l2"><a class="reference internal" href="../stdlib/test.html#basic-unit-tests">Basic Unit Tests</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../stdlib/test.html#working-with-test-sets">Working with Test Sets</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../stdlib/test.html#other-test-macros">Other Test Macros</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../stdlib/test.html#broken-tests">Broken Tests</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../stdlib/test.html#creating-custom-abstracttestset-types">Creating Custom <code class="docutils literal"><span class="pre">AbstractTestSet</span></code> Types</a></li>
 </ul>
 </li>
@@ -521,6 +523,8 @@
 <li class="toctree-l2"><a class="reference internal" href="../devdocs/stdio.html">printf() and stdio in the Julia runtime</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../devdocs/promote-op.html">Operator-sensitive promotion</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../devdocs/boundscheck.html">Bounds checking</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../devdocs/locks.html">Proper maintenance and care of multi-threading locks</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../devdocs/offset-arrays.html">Arrays with custom indices</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../devdocs/C.html">Developing/debugging Julia&#8217;s C code</a><ul>
@@ -903,7 +907,82 @@ For example:</p>
 <span class="mi">3</span> <span class="n">years</span>
 </pre></div>
 </div>
+</div>
+<div class="section" id="rounding">
+<h2>Rounding<a class="headerlink" href="#rounding" title="Permalink to this headline">¶</a></h2>
+<p><a class="reference internal" href="../stdlib/dates.html#Dates.Date" title="Dates.Date"><code class="xref jl jl-class docutils literal"><span class="pre">Date</span></code></a> and <a class="reference internal" href="../stdlib/dates.html#Dates.DateTime" title="Dates.DateTime"><code class="xref jl jl-class docutils literal"><span class="pre">DateTime</span></code></a> values can be rounded to a specified resolution (e.g.,
+1 month or 15 minutes) with <a class="reference internal" href="../stdlib/dates.html#Dates.floor" title="Dates.floor"><code class="xref jl jl-func docutils literal"><span class="pre">floor()</span></code></a>, <a class="reference internal" href="../stdlib/dates.html#Dates.ceil" title="Dates.ceil"><code class="xref jl jl-func docutils literal"><span class="pre">ceil()</span></code></a>, or <a class="reference internal" href="../stdlib/dates.html#Dates.round" title="Dates.round"><code class="xref jl jl-func docutils literal"><span class="pre">round()</span></code></a>:</p>
+<div class="highlight-julia"><div class="highlight"><pre><span></span><span class="n">julia</span><span class="o">&gt;</span> <span class="n">floor</span><span class="p">(</span><span class="n">Date</span><span class="p">(</span><span class="mi">1985</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">16</span><span class="p">),</span> <span class="n">Dates</span><span class="o">.</span><span class="n">Month</span><span class="p">)</span>
+<span class="mi">1985</span><span class="o">-</span><span class="mi">08</span><span class="o">-</span><span class="mi">01</span>
+
+<span class="n">julia</span><span class="o">&gt;</span> <span class="n">ceil</span><span class="p">(</span><span class="n">DateTime</span><span class="p">(</span><span class="mi">2013</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">13</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">31</span><span class="p">,</span> <span class="mi">20</span><span class="p">),</span> <span class="n">Dates</span><span class="o">.</span><span class="n">Minute</span><span class="p">(</span><span class="mi">15</span><span class="p">))</span>
+<span class="mi">2013</span><span class="o">-</span><span class="mi">02</span><span class="o">-</span><span class="mi">13</span><span class="n">T00</span><span class="p">:</span><span class="mi">45</span><span class="p">:</span><span class="mi">00</span>
+
+<span class="n">julia</span><span class="o">&gt;</span> <span class="n">round</span><span class="p">(</span><span class="n">DateTime</span><span class="p">(</span><span class="mi">2016</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">15</span><span class="p">),</span> <span class="n">Dates</span><span class="o">.</span><span class="n">Day</span><span class="p">)</span>
+<span class="mi">2016</span><span class="o">-</span><span class="mi">08</span><span class="o">-</span><span class="mi">07</span><span class="n">T00</span><span class="p">:</span><span class="mi">00</span><span class="p">:</span><span class="mi">00</span>
+</pre></div>
+</div>
+<p>Unlike the numeric <a class="reference internal" href="../stdlib/dates.html#Dates.round" title="Dates.round"><code class="xref jl jl-func docutils literal"><span class="pre">round()</span></code></a> method, which breaks ties toward the even number by
+default, the <a class="reference internal" href="../stdlib/dates.html#Dates.TimeType" title="Dates.TimeType"><code class="xref jl jl-class docutils literal"><span class="pre">TimeType</span></code></a> <a class="reference internal" href="../stdlib/dates.html#Dates.round" title="Dates.round"><code class="xref jl jl-func docutils literal"><span class="pre">round()</span></code></a> method uses the <code class="docutils literal"><span class="pre">RoundNearestTiesUp</span></code>
+rounding mode. (It&#8217;s difficult to guess what breaking ties to nearest &#8220;even&#8221;
+<a class="reference internal" href="../stdlib/dates.html#Dates.TimeType" title="Dates.TimeType"><code class="xref jl jl-class docutils literal"><span class="pre">TimeType</span></code></a> would entail.) Further details on the available <code class="docutils literal"><span class="pre">RoundingMode</span></code> s can
+be found in the
+<a class="reference external" href="http://docs.julialang.org/en/latest/stdlib/dates/">API reference</a>.</p>
+<p>Rounding should generally behave as expected, but there are a few cases in which the
+expected behaviour is not obvious.</p>
+<div class="section" id="rounding-epoch">
+<h3>Rounding Epoch<a class="headerlink" href="#rounding-epoch" title="Permalink to this headline">¶</a></h3>
+<p>In many cases, the resolution specified for rounding (e.g., <code class="docutils literal"><span class="pre">Dates.Second(30)</span></code>) divides
+evenly into the next largest period (in this case, <code class="docutils literal"><span class="pre">Dates.Minute(1)</span></code>). But rounding
+behaviour in cases in which this is not true may lead to confusion. What is the expected
+result of rounding a <a class="reference internal" href="../stdlib/dates.html#Dates.DateTime" title="Dates.DateTime"><code class="xref jl jl-class docutils literal"><span class="pre">DateTime</span></code></a> to the nearest 10 hours?</p>
+<div class="highlight-julia"><div class="highlight"><pre><span></span><span class="n">julia</span><span class="o">&gt;</span> <span class="n">round</span><span class="p">(</span><span class="n">DateTime</span><span class="p">(</span><span class="mi">2016</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">17</span><span class="p">,</span> <span class="mi">11</span><span class="p">,</span> <span class="mi">55</span><span class="p">),</span> <span class="n">Dates</span><span class="o">.</span><span class="n">Hour</span><span class="p">(</span><span class="mi">10</span><span class="p">))</span>
+<span class="mi">2016</span><span class="o">-</span><span class="mi">07</span><span class="o">-</span><span class="mi">17</span><span class="n">T12</span><span class="p">:</span><span class="mi">00</span><span class="p">:</span><span class="mi">00</span>
+</pre></div>
+</div>
+<p>That may seem confusing, given that the hour (12) is not divisible by 10. The reason that
+<code class="docutils literal"><span class="pre">2016-07-17T12:00:00</span></code> was chosen is that it is 17,676,660 hours after
+<code class="docutils literal"><span class="pre">0000-01-01T00:00:00</span></code>, and 17,676,660 is divisible by 10.</p>
+<p>As Julia <a class="reference internal" href="../stdlib/dates.html#Dates.Date" title="Dates.Date"><code class="xref jl jl-class docutils literal"><span class="pre">Date</span></code></a> and <a class="reference internal" href="../stdlib/dates.html#Dates.DateTime" title="Dates.DateTime"><code class="xref jl jl-class docutils literal"><span class="pre">DateTime</span></code></a> values are represented according to the ISO
+8601 standard, <code class="docutils literal"><span class="pre">0000-01-01T00:00:00</span></code> was chosen as base (or &#8220;rounding epoch&#8221;) from
+which to begin the count of days (and milliseconds) used in rounding calculations. (Note
+that this differs slightly from Julia&#8217;s internal representation of <a class="reference internal" href="../stdlib/dates.html#Dates.Date" title="Dates.Date"><code class="xref jl jl-class docutils literal"><span class="pre">Date</span></code></a> s using
+Rata Die notation; but since the ISO 8601 standard is most visible to the end user,
+<code class="docutils literal"><span class="pre">0000-01-01T00:00:00</span></code> was chosen as the rounding epoch instead of the
+<code class="docutils literal"><span class="pre">0000-12-31T00:00:00</span></code> used internally to minimize confusion.)</p>
+<p>The only exception to the use of <code class="docutils literal"><span class="pre">0000-01-01T00:00:00</span></code> as the rounding epoch is when
+rounding to weeks. Rounding to the nearest week will always return a Monday (the first day
+of the week as specified by ISO 8601). For this reason, we use <code class="docutils literal"><span class="pre">0000-01-03T00:00:00</span></code>
+(the first day of the first week of year 0000, as defined by ISO 8601) as the base when
+rounding to a number of weeks.</p>
+<p>Here is a related case in which the expected behaviour is not necessarily obvious: What
+happens when we round to the nearest <code class="docutils literal"><span class="pre">P(2)</span></code>, where <code class="docutils literal"><span class="pre">P</span></code> is a <a class="reference internal" href="../stdlib/dates.html#Dates.Period" title="Dates.Period"><code class="xref jl jl-class docutils literal"><span class="pre">Period</span></code></a> type? In
+some cases (specifically, when <code class="docutils literal"><span class="pre">P</span> <span class="pre">&lt;:</span> <span class="pre">Dates.TimePeriod</span></code>) the answer is clear:</p>
+<div class="highlight-julia"><div class="highlight"><pre><span></span><span class="n">julia</span><span class="o">&gt;</span> <span class="n">round</span><span class="p">(</span><span class="n">DateTime</span><span class="p">(</span><span class="mi">2016</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">17</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">55</span><span class="p">,</span> <span class="mi">30</span><span class="p">),</span> <span class="n">Dates</span><span class="o">.</span><span class="n">Hour</span><span class="p">(</span><span class="mi">2</span><span class="p">))</span>
+<span class="mi">2016</span><span class="o">-</span><span class="mi">07</span><span class="o">-</span><span class="mi">17</span><span class="n">T08</span><span class="p">:</span><span class="mi">00</span><span class="p">:</span><span class="mi">00</span>
+
+<span class="n">julia</span><span class="o">&gt;</span> <span class="n">round</span><span class="p">(</span><span class="n">DateTime</span><span class="p">(</span><span class="mi">2016</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">17</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">55</span><span class="p">,</span> <span class="mi">30</span><span class="p">),</span> <span class="n">Dates</span><span class="o">.</span><span class="n">Minute</span><span class="p">(</span><span class="mi">2</span><span class="p">))</span>
+<span class="mi">2016</span><span class="o">-</span><span class="mi">07</span><span class="o">-</span><span class="mi">17</span><span class="n">T08</span><span class="p">:</span><span class="mi">56</span><span class="p">:</span><span class="mi">00</span>
+</pre></div>
+</div>
+<p>This seems obvious, because two of each of these periods still divides evenly into the
+next larger order period. But in the case of two months (which still divides evenly into
+one year), the answer may be surprising:</p>
+<div class="highlight-julia"><div class="highlight"><pre><span></span><span class="n">julia</span><span class="o">&gt;</span> <span class="n">round</span><span class="p">(</span><span class="n">DateTime</span><span class="p">(</span><span class="mi">2016</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">17</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">55</span><span class="p">,</span> <span class="mi">30</span><span class="p">),</span> <span class="n">Dates</span><span class="o">.</span><span class="n">Month</span><span class="p">(</span><span class="mi">2</span><span class="p">))</span>
+<span class="mi">2016</span><span class="o">-</span><span class="mi">07</span><span class="o">-</span><span class="mi">01</span><span class="n">T00</span><span class="p">:</span><span class="mi">00</span><span class="p">:</span><span class="mi">00</span>
+</pre></div>
+</div>
+<p>Why round to the first day in July, even though it is month 7 (an odd number)? The key is
+that months are 1-indexed (the first month is assigned 1), unlike hours, minutes, seconds,
+and milliseconds (the first of which are assigned 0).</p>
+<p>This means that rounding a <a class="reference internal" href="../stdlib/dates.html#Dates.DateTime" title="Dates.DateTime"><code class="xref jl jl-class docutils literal"><span class="pre">DateTime</span></code></a> to an even multiple of seconds, minutes,
+hours, or years (because the ISO 8601 specification includes a year zero) will result in
+a <a class="reference internal" href="../stdlib/dates.html#Dates.DateTime" title="Dates.DateTime"><code class="xref jl jl-class docutils literal"><span class="pre">DateTime</span></code></a> with an even value in that field, while rounding a <a class="reference internal" href="../stdlib/dates.html#Dates.DateTime" title="Dates.DateTime"><code class="xref jl jl-class docutils literal"><span class="pre">DateTime</span></code></a>
+to an even multiple of months will result in the months field having an odd value. Because
+both months and years may contain an irregular number of days, whether rounding to an even
+number of days will result in an even value in the days field is uncertain.</p>
 <p>See the <a class="reference external" href="http://docs.julialang.org/en/latest/stdlib/dates/">API reference</a> for additional information on methods exported from the <a class="reference internal" href="../stdlib/dates.html#module-Dates" title="Dates"><code class="xref jl jl-mod docutils literal"><span class="pre">Dates</span></code></a> module.</p>
+</div>
 </div>
 </div>
 

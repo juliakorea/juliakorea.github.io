@@ -87,7 +87,6 @@
 <li class="toctree-l2"><a class="reference internal" href="mathematical-operations.html#id4">갱신 연산자</a></li>
 <li class="toctree-l2"><a class="reference internal" href="mathematical-operations.html#man-numeric-comparisons">수치 비교</a></li>
 <li class="toctree-l2"><a class="reference internal" href="mathematical-operations.html#man-numerical-conversions">수치 변환</a></li>
-<li class="toctree-l2"><a class="reference internal" href="mathematical-operations.html#man-elementary-functions">기초 함수</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="complex-and-rational-numbers.html">복소수와 유리수</a><ul>
@@ -104,7 +103,7 @@
 <li class="toctree-l2"><a class="reference internal" href="strings.html#common-operations">Common Operations</a></li>
 <li class="toctree-l2"><a class="reference internal" href="strings.html#non-standard-string-literals">Non-Standard String Literals</a></li>
 <li class="toctree-l2"><a class="reference internal" href="strings.html#regular-expressions">Regular Expressions</a></li>
-<li class="toctree-l2"><a class="reference internal" href="strings.html#id3">Byte Array Literals</a></li>
+<li class="toctree-l2"><a class="reference internal" href="strings.html#id2">Byte Array Literals</a></li>
 <li class="toctree-l2"><a class="reference internal" href="strings.html#version-number-literals">Version Number Literals</a></li>
 </ul>
 </li>
@@ -251,6 +250,7 @@
 <li class="toctree-l2"><a class="reference internal" href="dates.html#timetype-period-arithmetic">TimeType-Period Arithmetic</a></li>
 <li class="toctree-l2"><a class="reference internal" href="dates.html#adjuster-functions">Adjuster Functions</a></li>
 <li class="toctree-l2"><a class="reference internal" href="dates.html#period-types">Period Types</a></li>
+<li class="toctree-l2"><a class="reference internal" href="dates.html#rounding">Rounding</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="running-external-programs.html">Running External Programs</a><ul>
@@ -460,6 +460,7 @@
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../stdlib/linalg.html">Linear Algebra</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="../stdlib/linalg.html#module-Base.LinAlg">Standard Functions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../stdlib/linalg.html#low-level-matrix-operations">Low-level matrix operations</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../stdlib/linalg.html#module-Base.LinAlg.BLAS">BLAS Functions</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../stdlib/linalg.html#module-Base.LinAlg.LAPACK">LAPACK Functions</a></li>
 </ul>
@@ -492,6 +493,7 @@
 <li class="toctree-l2"><a class="reference internal" href="../stdlib/test.html#basic-unit-tests">Basic Unit Tests</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../stdlib/test.html#working-with-test-sets">Working with Test Sets</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../stdlib/test.html#other-test-macros">Other Test Macros</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../stdlib/test.html#broken-tests">Broken Tests</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../stdlib/test.html#creating-custom-abstracttestset-types">Creating Custom <code class="docutils literal"><span class="pre">AbstractTestSet</span></code> Types</a></li>
 </ul>
 </li>
@@ -521,6 +523,8 @@
 <li class="toctree-l2"><a class="reference internal" href="../devdocs/stdio.html">printf() and stdio in the Julia runtime</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../devdocs/promote-op.html">Operator-sensitive promotion</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../devdocs/boundscheck.html">Bounds checking</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../devdocs/locks.html">Proper maintenance and care of multi-threading locks</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../devdocs/offset-arrays.html">Arrays with custom indices</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../devdocs/C.html">Developing/debugging Julia&#8217;s C code</a><ul>
@@ -776,12 +780,13 @@ indicated by the <code class="docutils literal"><span class="pre">$</span></code
 cause a compile-time error:</p>
 <div class="highlight-julia"><div class="highlight"><pre><span></span><span class="n">julia</span><span class="o">&gt;</span> <span class="o">$</span><span class="n">a</span> <span class="o">+</span> <span class="n">b</span>
 <span class="n">ERROR</span><span class="p">:</span> <span class="n">unsupported</span> <span class="n">or</span> <span class="n">misplaced</span> <span class="n">expression</span> <span class="o">$</span>
+ <span class="o">...</span>
 </pre></div>
 </div>
 <p>In this example, the tuple <code class="docutils literal"><span class="pre">(1,2,3)</span></code> is interpolated as an
 expression into a conditional test:</p>
 <div class="highlight-julia"><div class="highlight"><pre><span></span><span class="n">julia</span><span class="o">&gt;</span> <span class="n">ex</span> <span class="o">=</span> <span class="p">:(</span><span class="n">a</span> <span class="k">in</span> <span class="o">$</span><span class="p">:((</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">))</span> <span class="p">)</span>
-<span class="p">:(</span><span class="o">$</span><span class="p">(</span><span class="n">Expr</span><span class="p">(:</span><span class="k">in</span><span class="p">,</span> <span class="p">:</span><span class="n">a</span><span class="p">,</span> <span class="p">:((</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">)))))</span>
+<span class="p">:(</span><span class="n">a</span> <span class="k">in</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">))</span>
 </pre></div>
 </div>
 <p>Interpolating symbols into a nested expression requires enclosing each
@@ -811,6 +816,7 @@ at global scope using <a class="reference internal" href="../stdlib/base.html#Ba
 
 <span class="n">julia</span><span class="o">&gt;</span> <span class="n">eval</span><span class="p">(</span><span class="n">ex</span><span class="p">)</span>
 <span class="n">ERROR</span><span class="p">:</span> <span class="n">UndefVarError</span><span class="p">:</span> <span class="n">b</span> <span class="n">not</span> <span class="n">defined</span>
+ <span class="o">...</span>
 
 <span class="n">julia</span><span class="o">&gt;</span> <span class="n">a</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span> <span class="n">b</span> <span class="o">=</span> <span class="mi">2</span><span class="p">;</span>
 
@@ -828,6 +834,7 @@ module&#8217;s environment:</p>
 
 <span class="n">julia</span><span class="o">&gt;</span> <span class="n">x</span>
 <span class="n">ERROR</span><span class="p">:</span> <span class="n">UndefVarError</span><span class="p">:</span> <span class="n">x</span> <span class="n">not</span> <span class="n">defined</span>
+ <span class="o">...</span>
 
 <span class="n">julia</span><span class="o">&gt;</span> <span class="n">eval</span><span class="p">(</span><span class="n">ex</span><span class="p">)</span>
 <span class="mi">1</span>
@@ -921,9 +928,9 @@ expressions, literal values, and symbols.</p>
 <div class="section" id="basics">
 <h3>Basics<a class="headerlink" href="#basics" title="Permalink to this headline">¶</a></h3>
 <p>Here is an extraordinarily simple macro:</p>
-<div class="highlight-julia"><div class="highlight"><pre><span></span><span class="n">julia</span><span class="o">&gt;</span> <span class="k">macro</span> <span class="n">sayhello</span><span class="p">()</span>
-           <span class="k">return</span> <span class="p">:(</span> <span class="n">println</span><span class="p">(</span><span class="s">&quot;Hello, world!&quot;</span><span class="p">)</span> <span class="p">)</span>
-       <span class="k">end</span>
+<div class="highlight-julia"><div class="highlight"><pre><span></span><span class="k">macro</span> <span class="n">sayhello</span><span class="p">()</span>
+    <span class="k">return</span> <span class="p">:(</span> <span class="n">println</span><span class="p">(</span><span class="s">&quot;Hello, world!&quot;</span><span class="p">)</span> <span class="p">)</span>
+<span class="k">end</span>
 </pre></div>
 </div>
 <p>Macros have a dedicated character in Julia&#8217;s syntax: the <code class="docutils literal"><span class="pre">&#64;</span></code> (at-sign),
@@ -1045,6 +1052,7 @@ is to call the <a class="reference internal" href="../stdlib/io-network.html#Bas
 
 <span class="n">julia</span><span class="o">&gt;</span> <span class="p">@</span><span class="nb">assert</span> <span class="mi">1</span><span class="o">==</span><span class="mi">0</span>
 <span class="n">ERROR</span><span class="p">:</span> <span class="n">AssertionError</span><span class="p">:</span> <span class="mi">1</span> <span class="o">==</span> <span class="mi">0</span>
+ <span class="o">...</span>
 </pre></div>
 </div>
 <p>In place of the written syntax, the macro call is expanded at parse time to
@@ -1086,14 +1094,14 @@ function:</p>
 <span class="p">:(</span><span class="k">if</span> <span class="n">a</span> <span class="o">==</span> <span class="n">b</span>
         <span class="n">nothing</span>
     <span class="k">else</span>
-        <span class="n">Base</span><span class="o">.</span><span class="nb">throw</span><span class="p">(</span><span class="n">Base</span><span class="o">.</span><span class="n">Main</span><span class="o">.</span><span class="n">Base</span><span class="o">.</span><span class="n">AssertionError</span><span class="p">(</span><span class="s">&quot;a == b&quot;</span><span class="p">))</span>
+        <span class="p">(</span><span class="n">Base</span><span class="o">.</span><span class="nb">throw</span><span class="p">)(</span><span class="n">Base</span><span class="o">.</span><span class="n">Main</span><span class="o">.</span><span class="n">Base</span><span class="o">.</span><span class="n">AssertionError</span><span class="p">(</span><span class="s">&quot;a == b&quot;</span><span class="p">))</span>
     <span class="k">end</span><span class="p">)</span>
 
 <span class="n">julia</span><span class="o">&gt;</span> <span class="n">macroexpand</span><span class="p">(:(@</span><span class="nb">assert</span> <span class="n">a</span><span class="o">==</span><span class="n">b</span> <span class="s">&quot;a should equal b!&quot;</span><span class="p">))</span>
 <span class="p">:(</span><span class="k">if</span> <span class="n">a</span> <span class="o">==</span> <span class="n">b</span>
         <span class="n">nothing</span>
     <span class="k">else</span>
-        <span class="n">Base</span><span class="o">.</span><span class="nb">throw</span><span class="p">(</span><span class="n">Base</span><span class="o">.</span><span class="n">Main</span><span class="o">.</span><span class="n">Base</span><span class="o">.</span><span class="n">AssertionError</span><span class="p">(</span><span class="s">&quot;a should equal b!&quot;</span><span class="p">))</span>
+        <span class="p">(</span><span class="n">Base</span><span class="o">.</span><span class="nb">throw</span><span class="p">)(</span><span class="n">Base</span><span class="o">.</span><span class="n">Main</span><span class="o">.</span><span class="n">Base</span><span class="o">.</span><span class="n">AssertionError</span><span class="p">(</span><span class="s">&quot;a should equal b!&quot;</span><span class="p">))</span>
     <span class="k">end</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -1115,11 +1123,14 @@ Compare:</p>
 <span class="n">Expr</span>
   <span class="n">head</span><span class="p">:</span> <span class="n">Symbol</span> <span class="n">string</span>
   <span class="n">args</span><span class="p">:</span> <span class="n">Array</span><span class="p">{</span><span class="kt">Any</span><span class="p">}((</span><span class="mi">5</span><span class="p">,))</span>
-    <span class="mi">1</span><span class="p">:</span> <span class="n">String</span> <span class="s">&quot;a (&quot;</span>
+    <span class="mi">1</span><span class="p">:</span> <span class="n">String</span>
+      <span class="n">data</span><span class="p">:</span> <span class="n">Array</span><span class="p">{</span><span class="n">UInt8</span><span class="p">}((</span><span class="mi">3</span><span class="p">,))</span> <span class="n">UInt8</span><span class="p">[</span><span class="mh">0x61</span><span class="p">,</span><span class="mh">0x20</span><span class="p">,</span><span class="mh">0x28</span><span class="p">]</span>
     <span class="mi">2</span><span class="p">:</span> <span class="n">Symbol</span> <span class="n">a</span>
-    <span class="mi">3</span><span class="p">:</span> <span class="n">String</span> <span class="s">&quot;) should equal b (&quot;</span>
+    <span class="mi">3</span><span class="p">:</span> <span class="n">String</span>
+      <span class="n">data</span><span class="p">:</span> <span class="n">Array</span><span class="p">{</span><span class="n">UInt8</span><span class="p">}((</span><span class="mi">18</span><span class="p">,))</span> <span class="n">UInt8</span><span class="p">[</span><span class="mh">0x29</span><span class="p">,</span><span class="mh">0x20</span><span class="p">,</span><span class="mh">0x73</span><span class="p">,</span><span class="mh">0x68</span><span class="p">,</span><span class="mh">0x6f</span><span class="p">,</span><span class="mh">0x75</span><span class="p">,</span><span class="mh">0x6c</span><span class="p">,</span><span class="mh">0x64</span><span class="p">,</span><span class="mh">0x20</span><span class="p">,</span><span class="mh">0x65</span><span class="p">,</span><span class="mh">0x71</span><span class="p">,</span><span class="mh">0x75</span><span class="p">,</span><span class="mh">0x61</span><span class="p">,</span><span class="mh">0x6c</span><span class="p">,</span><span class="mh">0x20</span><span class="p">,</span><span class="mh">0x62</span><span class="p">,</span><span class="mh">0x20</span><span class="p">,</span><span class="mh">0x28</span><span class="p">]</span>
     <span class="mi">4</span><span class="p">:</span> <span class="n">Symbol</span> <span class="n">b</span>
-    <span class="mi">5</span><span class="p">:</span> <span class="n">String</span> <span class="s">&quot;)!&quot;</span>
+    <span class="mi">5</span><span class="p">:</span> <span class="n">String</span>
+      <span class="n">data</span><span class="p">:</span> <span class="n">Array</span><span class="p">{</span><span class="n">UInt8</span><span class="p">}((</span><span class="mi">2</span><span class="p">,))</span> <span class="n">UInt8</span><span class="p">[</span><span class="mh">0x29</span><span class="p">,</span><span class="mh">0x21</span><span class="p">]</span>
   <span class="n">typ</span><span class="p">:</span> <span class="kt">Any</span>
 </pre></div>
 </div>

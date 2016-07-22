@@ -86,7 +86,6 @@
 <li class="toctree-l2"><a class="reference internal" href="manual/mathematical-operations.html#id4">갱신 연산자</a></li>
 <li class="toctree-l2"><a class="reference internal" href="manual/mathematical-operations.html#man-numeric-comparisons">수치 비교</a></li>
 <li class="toctree-l2"><a class="reference internal" href="manual/mathematical-operations.html#man-numerical-conversions">수치 변환</a></li>
-<li class="toctree-l2"><a class="reference internal" href="manual/mathematical-operations.html#man-elementary-functions">기초 함수</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="manual/complex-and-rational-numbers.html">복소수와 유리수</a><ul>
@@ -103,7 +102,7 @@
 <li class="toctree-l2"><a class="reference internal" href="manual/strings.html#common-operations">Common Operations</a></li>
 <li class="toctree-l2"><a class="reference internal" href="manual/strings.html#non-standard-string-literals">Non-Standard String Literals</a></li>
 <li class="toctree-l2"><a class="reference internal" href="manual/strings.html#regular-expressions">Regular Expressions</a></li>
-<li class="toctree-l2"><a class="reference internal" href="manual/strings.html#id3">Byte Array Literals</a></li>
+<li class="toctree-l2"><a class="reference internal" href="manual/strings.html#id2">Byte Array Literals</a></li>
 <li class="toctree-l2"><a class="reference internal" href="manual/strings.html#version-number-literals">Version Number Literals</a></li>
 </ul>
 </li>
@@ -250,6 +249,7 @@
 <li class="toctree-l2"><a class="reference internal" href="manual/dates.html#timetype-period-arithmetic">TimeType-Period Arithmetic</a></li>
 <li class="toctree-l2"><a class="reference internal" href="manual/dates.html#adjuster-functions">Adjuster Functions</a></li>
 <li class="toctree-l2"><a class="reference internal" href="manual/dates.html#period-types">Period Types</a></li>
+<li class="toctree-l2"><a class="reference internal" href="manual/dates.html#rounding">Rounding</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="manual/running-external-programs.html">Running External Programs</a><ul>
@@ -459,6 +459,7 @@
 </li>
 <li class="toctree-l1"><a class="reference internal" href="stdlib/linalg.html">Linear Algebra</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="stdlib/linalg.html#module-Base.LinAlg">Standard Functions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="stdlib/linalg.html#low-level-matrix-operations">Low-level matrix operations</a></li>
 <li class="toctree-l2"><a class="reference internal" href="stdlib/linalg.html#module-Base.LinAlg.BLAS">BLAS Functions</a></li>
 <li class="toctree-l2"><a class="reference internal" href="stdlib/linalg.html#module-Base.LinAlg.LAPACK">LAPACK Functions</a></li>
 </ul>
@@ -491,6 +492,7 @@
 <li class="toctree-l2"><a class="reference internal" href="stdlib/test.html#basic-unit-tests">Basic Unit Tests</a></li>
 <li class="toctree-l2"><a class="reference internal" href="stdlib/test.html#working-with-test-sets">Working with Test Sets</a></li>
 <li class="toctree-l2"><a class="reference internal" href="stdlib/test.html#other-test-macros">Other Test Macros</a></li>
+<li class="toctree-l2"><a class="reference internal" href="stdlib/test.html#broken-tests">Broken Tests</a></li>
 <li class="toctree-l2"><a class="reference internal" href="stdlib/test.html#creating-custom-abstracttestset-types">Creating Custom <code class="docutils literal"><span class="pre">AbstractTestSet</span></code> Types</a></li>
 </ul>
 </li>
@@ -520,6 +522,8 @@
 <li class="toctree-l2"><a class="reference internal" href="devdocs/stdio.html">printf() and stdio in the Julia runtime</a></li>
 <li class="toctree-l2"><a class="reference internal" href="devdocs/promote-op.html">Operator-sensitive promotion</a></li>
 <li class="toctree-l2"><a class="reference internal" href="devdocs/boundscheck.html">Bounds checking</a></li>
+<li class="toctree-l2"><a class="reference internal" href="devdocs/locks.html">Proper maintenance and care of multi-threading locks</a></li>
+<li class="toctree-l2"><a class="reference internal" href="devdocs/offset-arrays.html">Arrays with custom indices</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="devdocs/C.html">Developing/debugging Julia&#8217;s C code</a><ul>
@@ -949,31 +953,35 @@
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%" valign="top"><dl>
       
-  <dt><a href="stdlib/math.html#Base.A_ldiv_Bc">A_ldiv_Bc() (in module Base)</a>
+  <dt><a href="stdlib/linalg.html#Base.A_ldiv_B!">A_ldiv_B!() (in module Base)</a>
   </dt>
 
       
-  <dt><a href="stdlib/math.html#Base.A_ldiv_Bt">A_ldiv_Bt() (in module Base)</a>
+  <dt><a href="stdlib/linalg.html#Base.A_ldiv_Bc">A_ldiv_Bc() (in module Base)</a>
   </dt>
 
       
-  <dt><a href="stdlib/math.html#Base.A_mul_B!">A_mul_B!() (in module Base)</a>
+  <dt><a href="stdlib/linalg.html#Base.A_ldiv_Bt">A_ldiv_Bt() (in module Base)</a>
   </dt>
 
       
-  <dt><a href="stdlib/math.html#Base.A_mul_Bc">A_mul_Bc() (in module Base)</a>
+  <dt><a href="stdlib/linalg.html#Base.A_mul_B!">A_mul_B!() (in module Base)</a>
   </dt>
 
       
-  <dt><a href="stdlib/math.html#Base.A_mul_Bt">A_mul_Bt() (in module Base)</a>
+  <dt><a href="stdlib/linalg.html#Base.A_mul_Bc">A_mul_Bc() (in module Base)</a>
   </dt>
 
       
-  <dt><a href="stdlib/math.html#Base.A_rdiv_Bc">A_rdiv_Bc() (in module Base)</a>
+  <dt><a href="stdlib/linalg.html#Base.A_mul_Bt">A_mul_Bt() (in module Base)</a>
   </dt>
 
       
-  <dt><a href="stdlib/math.html#Base.A_rdiv_Bt">A_rdiv_Bt() (in module Base)</a>
+  <dt><a href="stdlib/linalg.html#Base.A_rdiv_Bc">A_rdiv_Bc() (in module Base)</a>
+  </dt>
+
+      
+  <dt><a href="stdlib/linalg.html#Base.A_rdiv_Bt">A_rdiv_Bt() (in module Base)</a>
   </dt>
 
       
@@ -989,27 +997,31 @@
   </dt>
 
       
-  <dt><a href="stdlib/math.html#Base.Ac_ldiv_B">Ac_ldiv_B() (in module Base)</a>
+  <dt><a href="stdlib/linalg.html#Base.Ac_ldiv_B!">Ac_ldiv_B!() (in module Base)</a>
   </dt>
 
       
-  <dt><a href="stdlib/math.html#Base.Ac_ldiv_Bc">Ac_ldiv_Bc() (in module Base)</a>
+  <dt><a href="stdlib/linalg.html#Base.Ac_ldiv_B">Ac_ldiv_B() (in module Base)</a>
   </dt>
 
       
-  <dt><a href="stdlib/math.html#Base.Ac_mul_B">Ac_mul_B() (in module Base)</a>
+  <dt><a href="stdlib/linalg.html#Base.Ac_ldiv_Bc">Ac_ldiv_Bc() (in module Base)</a>
   </dt>
 
       
-  <dt><a href="stdlib/math.html#Base.Ac_mul_Bc">Ac_mul_Bc() (in module Base)</a>
+  <dt><a href="stdlib/linalg.html#Base.Ac_mul_B">Ac_mul_B() (in module Base)</a>
   </dt>
 
       
-  <dt><a href="stdlib/math.html#Base.Ac_rdiv_B">Ac_rdiv_B() (in module Base)</a>
+  <dt><a href="stdlib/linalg.html#Base.Ac_mul_Bc">Ac_mul_Bc() (in module Base)</a>
   </dt>
 
       
-  <dt><a href="stdlib/math.html#Base.Ac_rdiv_Bc">Ac_rdiv_Bc() (in module Base)</a>
+  <dt><a href="stdlib/linalg.html#Base.Ac_rdiv_B">Ac_rdiv_B() (in module Base)</a>
+  </dt>
+
+      
+  <dt><a href="stdlib/linalg.html#Base.Ac_rdiv_Bc">Ac_rdiv_Bc() (in module Base)</a>
   </dt>
 
       
@@ -1099,10 +1111,6 @@
   </dl></td>
   <td style="width: 33%" valign="top"><dl>
       
-  <dt><a href="stdlib/arrays.html#Base.allocate_for">allocate_for() (in module Base)</a>
-  </dt>
-
-      
   <dt><a href="stdlib/collections.html#Base.allunique">allunique() (in module Base)</a>
   </dt>
 
@@ -1112,6 +1120,10 @@
 
       
   <dt><a href="stdlib/base.html#Base.ans">ans (in module Base)</a>
+  </dt>
+
+      
+  <dt><a href="stdlib/constants.html#Base.ANY">ANY (in module Base)</a>
   </dt>
 
       
@@ -1132,6 +1144,10 @@
 
       
   <dt><a href="stdlib/base.html#Base.apropos">apropos() (in module Base)</a>
+  </dt>
+
+      
+  <dt><a href="stdlib/constants.html#Base.ARGS">ARGS (in module Base)</a>
   </dt>
 
       
@@ -1191,27 +1207,31 @@
   </dt>
 
       
-  <dt><a href="stdlib/math.html#Base.At_ldiv_B">At_ldiv_B() (in module Base)</a>
+  <dt><a href="stdlib/linalg.html#Base.At_ldiv_B!">At_ldiv_B!() (in module Base)</a>
   </dt>
 
       
-  <dt><a href="stdlib/math.html#Base.At_ldiv_Bt">At_ldiv_Bt() (in module Base)</a>
+  <dt><a href="stdlib/linalg.html#Base.At_ldiv_B">At_ldiv_B() (in module Base)</a>
   </dt>
 
       
-  <dt><a href="stdlib/math.html#Base.At_mul_B">At_mul_B() (in module Base)</a>
+  <dt><a href="stdlib/linalg.html#Base.At_ldiv_Bt">At_ldiv_Bt() (in module Base)</a>
   </dt>
 
       
-  <dt><a href="stdlib/math.html#Base.At_mul_Bt">At_mul_Bt() (in module Base)</a>
+  <dt><a href="stdlib/linalg.html#Base.At_mul_B">At_mul_B() (in module Base)</a>
   </dt>
 
       
-  <dt><a href="stdlib/math.html#Base.At_rdiv_B">At_rdiv_B() (in module Base)</a>
+  <dt><a href="stdlib/linalg.html#Base.At_mul_Bt">At_mul_Bt() (in module Base)</a>
   </dt>
 
       
-  <dt><a href="stdlib/math.html#Base.At_rdiv_Bt">At_rdiv_Bt() (in module Base)</a>
+  <dt><a href="stdlib/linalg.html#Base.At_rdiv_B">At_rdiv_B() (in module Base)</a>
+  </dt>
+
+      
+  <dt><a href="stdlib/linalg.html#Base.At_rdiv_Bt">At_rdiv_Bt() (in module Base)</a>
   </dt>
 
       
@@ -1459,7 +1479,7 @@
   </dt>
 
       
-  <dt><a href="stdlib/linalg.html#Base.Bidiagonal">Bidiagonal() (in module Base)</a>, <a href="stdlib/linalg.html#Base.Bidiagonal">[1]</a>, <a href="stdlib/linalg.html#Base.Bidiagonal">[2]</a>, <a href="stdlib/linalg.html#Base.Bidiagonal">[3]</a>
+  <dt><a href="stdlib/linalg.html#Base.Bidiagonal">Bidiagonal() (in module Base)</a>, <a href="stdlib/linalg.html#Base.Bidiagonal">[1]</a>, <a href="stdlib/linalg.html#Base.Bidiagonal">[2]</a>
   </dt>
 
       
@@ -1561,6 +1581,14 @@
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%" valign="top"><dl>
       
+  <dt><a href="stdlib/constants.html#Base.C_NULL">C_NULL (in module Base)</a>
+  </dt>
+
+      
+  <dt><a href="stdlib/parallel.html#Base.CachingPool">CachingPool() (in module Base)</a>
+  </dt>
+
+      
   <dt><a href="stdlib/profile.html#Base.Profile.callers">callers() (in module Base.Profile)</a>
   </dt>
 
@@ -1612,6 +1640,12 @@
   <dt><a href="stdlib/math.html#Base.ceil">ceil() (in module Base)</a>
   </dt>
 
+      <dd><dl>
+        
+  <dt><a href="stdlib/dates.html#Dates.ceil">(in module Dates)</a>
+  </dt>
+
+      </dl></dd>
       
   <dt><a href="stdlib/c.html#Base.Cfloat">Cfloat (in module Base)</a>
   </dt>
@@ -1701,6 +1735,10 @@
   </dt>
 
       
+  <dt><a href="stdlib/parallel.html#Base.clear!">clear!() (in module Base)</a>
+  </dt>
+
+      
   <dt><a href="stdlib/profile.html#Base.Profile.clear">clear() (in module Base.Profile)</a>
   </dt>
 
@@ -1776,6 +1814,8 @@
   <dt><a href="stdlib/parallel.html#Base.Condition">Condition() (in module Base)</a>
   </dt>
 
+  </dl></td>
+  <td style="width: 33%" valign="top"><dl>
       
   <dt><a href="stdlib/linalg.html#Base.condskeel">condskeel() (in module Base)</a>
   </dt>
@@ -1784,8 +1824,6 @@
   <dt><a href="stdlib/arrays.html#Base.conj!">conj!() (in module Base)</a>
   </dt>
 
-  </dl></td>
-  <td style="width: 33%" valign="top"><dl>
       
   <dt><a href="stdlib/math.html#Base.conj">conj() (in module Base)</a>
   </dt>
@@ -2021,6 +2059,10 @@
   </dt>
 
       
+  <dt><a href="stdlib/dates.html#Dates.date2epochdays">date2epochdays() (in module Dates)</a>
+  </dt>
+
+      
   <dt><a href="stdlib/dates.html#Dates.DateFormat">DateFormat() (in module Dates)</a>
   </dt>
 
@@ -2034,6 +2076,10 @@
 
       
   <dt><a href="stdlib/dates.html#Dates.DateTime">DateTime() (in module Dates)</a>, <a href="stdlib/dates.html#Dates.DateTime">[1]</a>, <a href="stdlib/dates.html#Dates.DateTime">[2]</a>, <a href="stdlib/dates.html#Dates.DateTime">[3]</a>, <a href="stdlib/dates.html#Dates.DateTime">[4]</a>, <a href="stdlib/dates.html#Dates.DateTime">[5]</a>
+  </dt>
+
+      
+  <dt><a href="stdlib/dates.html#Dates.datetime2epochms">datetime2epochms() (in module Dates)</a>
   </dt>
 
       
@@ -2149,6 +2195,10 @@
   </dt>
 
       
+  <dt><a href="stdlib/pkg.html#Base.Pkg.dependents">dependents() (in module Base.Pkg)</a>
+  </dt>
+
+      
   <dt><a href="stdlib/collections.html#Base.Collections.dequeue!">dequeue!() (in module Base.Collections)</a>
   </dt>
 
@@ -2156,12 +2206,12 @@
   <dt><a href="stdlib/io-network.html#Base.deserialize">deserialize() (in module Base)</a>
   </dt>
 
+  </dl></td>
+  <td style="width: 33%" valign="top"><dl>
       
   <dt><a href="stdlib/linalg.html#Base.det">det() (in module Base)</a>
   </dt>
 
-  </dl></td>
-  <td style="width: 33%" valign="top"><dl>
       
   <dt><a href="stdlib/base.html#Base.detach">detach() (in module Base)</a>
   </dt>
@@ -2244,6 +2294,10 @@
 
       
   <dt><a href="stdlib/math.html#Base.divrem">divrem() (in module Base)</a>
+  </dt>
+
+      
+  <dt><a href="stdlib/libdl.html#Base.Libdl.DL_LOAD_PATH">DL_LOAD_PATH (in module Base.Libdl)</a>
   </dt>
 
       
@@ -2393,6 +2447,10 @@
   </dt>
 
       
+  <dt><a href="stdlib/io-network.html#Base.ENDIAN_BOM">ENDIAN_BOM (in module Base)</a>
+  </dt>
+
+      
   <dt><a href="stdlib/collections.html#Base.endof">endof() (in module Base)</a>
   </dt>
 
@@ -2409,6 +2467,10 @@
   </dt>
 
       
+  <dt><a href="stdlib/base.html#Base.ENV">ENV (in module Base)</a>
+  </dt>
+
+      
   <dt><a href="stdlib/base.html#Base.EnvHash">EnvHash() (in module Base)</a>
   </dt>
 
@@ -2421,6 +2483,14 @@
   </dt>
 
       
+  <dt><a href="stdlib/dates.html#Dates.epochdays2date">epochdays2date() (in module Dates)</a>
+  </dt>
+
+      
+  <dt><a href="stdlib/dates.html#Dates.epochms2datetime">epochms2datetime() (in module Dates)</a>
+  </dt>
+
+      
   <dt><a href="stdlib/base.html#Base.eps">eps() (in module Base)</a>, <a href="stdlib/base.html#Base.eps">[1]</a>, <a href="stdlib/base.html#Base.eps">[2]</a>
   </dt>
 
@@ -2430,6 +2500,8 @@
   </dt>
 
       </dl></dd>
+  </dl></td>
+  <td style="width: 33%" valign="top"><dl>
       
   <dt><a href="stdlib/math.html#Base.erf">erf() (in module Base)</a>
   </dt>
@@ -2442,8 +2514,6 @@
   <dt><a href="stdlib/math.html#Base.erfcinv">erfcinv() (in module Base)</a>
   </dt>
 
-  </dl></td>
-  <td style="width: 33%" valign="top"><dl>
       
   <dt><a href="stdlib/math.html#Base.erfcx">erfcx() (in module Base)</a>
   </dt>
@@ -2478,10 +2548,6 @@
 
       
   <dt><a href="stdlib/math.html#Base.eta">eta() (in module Base)</a>
-  </dt>
-
-      
-  <dt><a href="stdlib/arrays.html#Base.etree">etree() (in module Base)</a>
   </dt>
 
       
@@ -2555,7 +2621,7 @@
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%" valign="top"><dl>
       
-  <dt><a href="stdlib/math.html#Base.factorial">factorial() (in module Base)</a>, <a href="stdlib/math.html#Base.factorial">[1]</a>
+  <dt><a href="stdlib/math.html#Base.factorial">factorial() (in module Base)</a>
   </dt>
 
       
@@ -2772,6 +2838,16 @@
 
       
   <dt><a href="stdlib/math.html#Base.floor">floor() (in module Base)</a>
+  </dt>
+
+      <dd><dl>
+        
+  <dt><a href="stdlib/dates.html#Dates.floor">(in module Dates)</a>
+  </dt>
+
+      </dl></dd>
+      
+  <dt><a href="stdlib/dates.html#Dates.floorceil">floorceil() (in module Dates)</a>
   </dt>
 
       
@@ -3544,12 +3620,12 @@
   <dt><a href="stdlib/file.html#Base.isblockdev">isblockdev() (in module Base)</a>
   </dt>
 
-  </dl></td>
-  <td style="width: 33%" valign="top"><dl>
       
   <dt><a href="stdlib/file.html#Base.ischardev">ischardev() (in module Base)</a>
   </dt>
 
+  </dl></td>
+  <td style="width: 33%" valign="top"><dl>
       
   <dt><a href="stdlib/strings.html#Base.iscntrl">iscntrl() (in module Base)</a>
   </dt>
@@ -3810,6 +3886,14 @@
   <dt><a href="stdlib/strings.html#Base.isxdigit">isxdigit() (in module Base)</a>
   </dt>
 
+      
+  <dt><a href="stdlib/collections.html#Base.iteratoreltype">iteratoreltype() (in module Base)</a>
+  </dt>
+
+      
+  <dt><a href="stdlib/collections.html#Base.iteratorsize">iteratorsize() (in module Base)</a>
+  </dt>
+
   </dl></td>
 </tr></table>
 
@@ -3826,6 +3910,10 @@
 
   </dl></td>
   <td style="width: 33%" valign="top"><dl>
+      
+  <dt><a href="stdlib/constants.html#Base.JULIA_HOME">JULIA_HOME (in module Base)</a>
+  </dt>
+
       
   <dt><a href="stdlib/dates.html#Dates.julian2datetime">julian2datetime() (in module Dates)</a>
   </dt>
@@ -3976,8 +4064,6 @@
   <dt><a href="stdlib/arrays.html#Base.linspace">linspace() (in module Base)</a>
   </dt>
 
-  </dl></td>
-  <td style="width: 33%" valign="top"><dl>
       
   <dt><a href="stdlib/io-network.html#Base.listen">listen() (in module Base)</a>, <a href="stdlib/io-network.html#Base.listen">[1]</a>
   </dt>
@@ -3986,8 +4072,14 @@
   <dt><a href="stdlib/io-network.html#Base.listenany">listenany() (in module Base)</a>
   </dt>
 
+  </dl></td>
+  <td style="width: 33%" valign="top"><dl>
       
   <dt><a href="stdlib/c.html#Base.llvmcall">llvmcall() (in module Base)</a>
+  </dt>
+
+      
+  <dt><a href="stdlib/constants.html#Base.LOAD_PATH">LOAD_PATH (in module Base)</a>
   </dt>
 
       
@@ -4060,6 +4152,18 @@
 
       
   <dt><a href="stdlib/strings.html#Base.lpad">lpad() (in module Base)</a>
+  </dt>
+
+      
+  <dt><a href="stdlib/linalg.html#Base.lq">lq() (in module Base)</a>
+  </dt>
+
+      
+  <dt><a href="stdlib/linalg.html#Base.lqfact!">lqfact!() (in module Base)</a>
+  </dt>
+
+      
+  <dt><a href="stdlib/linalg.html#Base.lqfact">lqfact() (in module Base)</a>
   </dt>
 
       
@@ -4448,12 +4552,12 @@
   <dt><a href="stdlib/linalg.html#Base.norm">norm() (in module Base)</a>
   </dt>
 
-  </dl></td>
-  <td style="width: 33%" valign="top"><dl>
       
   <dt><a href="stdlib/linalg.html#Base.normalize!">normalize!() (in module Base)</a>
   </dt>
 
+  </dl></td>
+  <td style="width: 33%" valign="top"><dl>
       
   <dt><a href="stdlib/linalg.html#Base.normalize">normalize() (in module Base)</a>
   </dt>
@@ -4464,6 +4568,10 @@
 
       
   <dt><a href="stdlib/file.html#Base.normpath">normpath() (in module Base)</a>
+  </dt>
+
+      
+  <dt><a href="stdlib/constants.html#Base.nothing">nothing (in module Base)</a>
   </dt>
 
       
@@ -4881,6 +4989,10 @@
   </dt>
 
       
+  <dt><a href="stdlib/constants.html#Base.PROGRAM_FILE">PROGRAM_FILE (in module Base)</a>
+  </dt>
+
+      
   <dt><a href="stdlib/base.html#Base.promote">promote() (in module Base)</a>
   </dt>
 
@@ -4938,6 +5050,10 @@
 <h2 id="Q">Q</h2>
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%" valign="top"><dl>
+      
+  <dt><a href="stdlib/arrays.html#Base.q::AbstractVector{Tq})">q::AbstractVector{Tq})() (in module Base)</a>
+  </dt>
+
       
   <dt><a href="stdlib/linalg.html#Base.qr">qr() (in module Base)</a>, <a href="stdlib/linalg.html#Base.qr">[1]</a>
   </dt>
@@ -5198,8 +5314,6 @@
   <dt><a href="stdlib/arrays.html#Base.reinterpret">reinterpret() (in module Base)</a>
   </dt>
 
-  </dl></td>
-  <td style="width: 33%" valign="top"><dl>
       
   <dt><a href="stdlib/base.html#Base.reload">reload() (in module Base)</a>
   </dt>
@@ -5212,12 +5326,14 @@
   <dt><a href="stdlib/math.html#Base.rem">rem() (in module Base)</a>
   </dt>
 
+  </dl></td>
+  <td style="width: 33%" valign="top"><dl>
       
   <dt><a href="stdlib/parallel.html#Base.remote">remote() (in module Base)</a>
   </dt>
 
       
-  <dt><a href="stdlib/parallel.html#Base.remotecall">remotecall() (in module Base)</a>
+  <dt><a href="stdlib/parallel.html#Base.remotecall">remotecall() (in module Base)</a>, <a href="stdlib/parallel.html#Base.remotecall">[1]</a>
   </dt>
 
       
@@ -5225,7 +5341,7 @@
   </dt>
 
       
-  <dt><a href="stdlib/parallel.html#Base.remotecall_wait">remotecall_wait() (in module Base)</a>
+  <dt><a href="stdlib/parallel.html#Base.remotecall_wait">remotecall_wait() (in module Base)</a>, <a href="stdlib/parallel.html#Base.remotecall_wait">[1]</a>
   </dt>
 
       
@@ -5358,16 +5474,18 @@
   <dt><a href="stdlib/math.html#Base.round">round() (in module Base)</a>, <a href="stdlib/math.html#Base.round">[1]</a>
   </dt>
 
+      <dd><dl>
+        
+  <dt><a href="stdlib/dates.html#Dates.round">(in module Dates)</a>
+  </dt>
+
+      </dl></dd>
       
   <dt><a href="stdlib/math.html#Base.RoundDown">RoundDown (in module Base)</a>
   </dt>
 
       
   <dt><a href="stdlib/numbers.html#Base.rounding">rounding() (in module Base)</a>
-  </dt>
-
-      
-  <dt><a href="stdlib/math.html#Base.RoundingMode">RoundingMode (in module Base)</a>
   </dt>
 
       
@@ -5412,6 +5530,38 @@
 
       
   <dt><a href="stdlib/strings.html#Base.rstrip">rstrip() (in module Base)</a>
+  </dt>
+
+      
+  <dt><a href="stdlib/libdl.html#Base.Libdl.RTLD_DEEPBIND">RTLD_DEEPBIND (in module Base.Libdl)</a>
+  </dt>
+
+      
+  <dt><a href="stdlib/libdl.html#Base.Libdl.RTLD_FIRST">RTLD_FIRST (in module Base.Libdl)</a>
+  </dt>
+
+      
+  <dt><a href="stdlib/libdl.html#Base.Libdl.RTLD_GLOBAL">RTLD_GLOBAL (in module Base.Libdl)</a>
+  </dt>
+
+      
+  <dt><a href="stdlib/libdl.html#Base.Libdl.RTLD_LAZY">RTLD_LAZY (in module Base.Libdl)</a>
+  </dt>
+
+      
+  <dt><a href="stdlib/libdl.html#Base.Libdl.RTLD_LOCAL">RTLD_LOCAL (in module Base.Libdl)</a>
+  </dt>
+
+      
+  <dt><a href="stdlib/libdl.html#Base.Libdl.RTLD_NODELETE">RTLD_NODELETE (in module Base.Libdl)</a>
+  </dt>
+
+      
+  <dt><a href="stdlib/libdl.html#Base.Libdl.RTLD_NOLOAD">RTLD_NOLOAD (in module Base.Libdl)</a>
+  </dt>
+
+      
+  <dt><a href="stdlib/libdl.html#Base.Libdl.RTLD_NOW">RTLD_NOW (in module Base.Libdl)</a>
   </dt>
 
       
@@ -5597,10 +5747,6 @@
   </dt>
 
       
-  <dt><a href="stdlib/arrays.html#Base.shape">shape() (in module Base)</a>, <a href="stdlib/arrays.html#Base.shape">[1]</a>
-  </dt>
-
-      
   <dt><a href="stdlib/parallel.html#Base.SharedArray">SharedArray() (in module Base)</a>, <a href="stdlib/parallel.html#Base.SharedArray">[1]</a>
   </dt>
 
@@ -5653,7 +5799,7 @@
   </dt>
 
       
-  <dt><a href="stdlib/arrays.html#Base.similar">similar() (in module Base)</a>
+  <dt><a href="stdlib/arrays.html#Base.similar">similar() (in module Base)</a>, <a href="stdlib/arrays.html#Base.similar">[1]</a>
   </dt>
 
       
@@ -5760,8 +5906,6 @@
   <dt><a href="stdlib/file.html#Base.splitdir">splitdir() (in module Base)</a>
   </dt>
 
-  </dl></td>
-  <td style="width: 33%" valign="top"><dl>
       
   <dt><a href="stdlib/file.html#Base.splitdrive">splitdrive() (in module Base)</a>
   </dt>
@@ -5778,6 +5922,8 @@
   <dt><a href="stdlib/arrays.html#Base.sprand">sprand() (in module Base)</a>
   </dt>
 
+  </dl></td>
+  <td style="width: 33%" valign="top"><dl>
       
   <dt><a href="stdlib/arrays.html#Base.sprandn">sprandn() (in module Base)</a>
   </dt>
@@ -5839,7 +5985,7 @@
   </dt>
 
       
-  <dt><a href="stdlib/pkg.html#Base.Pkg.status">status() (in module Base.Pkg)</a>
+  <dt><a href="stdlib/pkg.html#Base.Pkg.status">status() (in module Base.Pkg)</a>, <a href="stdlib/pkg.html#Base.Pkg.status">[1]</a>
   </dt>
 
       
@@ -5847,7 +5993,19 @@
   </dt>
 
       
+  <dt><a href="stdlib/io-network.html#Base.STDERR">STDERR (in module Base)</a>
+  </dt>
+
+      
+  <dt><a href="stdlib/io-network.html#Base.STDIN">STDIN (in module Base)</a>
+  </dt>
+
+      
   <dt><a href="stdlib/math.html#Base.stdm">stdm() (in module Base)</a>
+  </dt>
+
+      
+  <dt><a href="stdlib/io-network.html#Base.STDOUT">STDOUT (in module Base)</a>
   </dt>
 
       
@@ -6031,10 +6189,6 @@
   </dt>
 
       
-  <dt><a href="stdlib/arrays.html#Base.symperm">symperm() (in module Base)</a>
-  </dt>
-
-      
   <dt><a href="stdlib/linalg.html#Base.SymTridiagonal">SymTridiagonal() (in module Base)</a>
   </dt>
 
@@ -6059,11 +6213,31 @@
   </dt>
 
       
+  <dt><a href="stdlib/constants.html#Base.Sys.ARCH">Sys.ARCH (in module Base)</a>
+  </dt>
+
+      
+  <dt><a href="stdlib/constants.html#Base.Sys.CPU_CORES">Sys.CPU_CORES (in module Base)</a>
+  </dt>
+
+      
   <dt><a href="stdlib/base.html#Base.Sys.get_process_title">Sys.get_process_title() (in module Base)</a>
   </dt>
 
       
+  <dt><a href="stdlib/constants.html#Base.Sys.KERNEL">Sys.KERNEL (in module Base)</a>
+  </dt>
+
+      
+  <dt><a href="stdlib/constants.html#Base.Sys.MACHINE">Sys.MACHINE (in module Base)</a>
+  </dt>
+
+      
   <dt><a href="stdlib/base.html#Base.Sys.set_process_title">Sys.set_process_title() (in module Base)</a>
+  </dt>
+
+      
+  <dt><a href="stdlib/constants.html#Base.Sys.WORD_SIZE">Sys.WORD_SIZE (in module Base)</a>
   </dt>
 
       
@@ -6285,6 +6459,10 @@
   </dt>
 
       
+  <dt><a href="stdlib/strings.html#Base.transcode">transcode() (in module Base)</a>
+  </dt>
+
+      
   <dt><a href="stdlib/linalg.html#Base.transpose!">transpose!() (in module Base)</a>
   </dt>
 
@@ -6496,12 +6674,12 @@
   <dt><a href="stdlib/c.html#Base.unsafe_pointer_to_objref">unsafe_pointer_to_objref() (in module Base)</a>
   </dt>
 
+  </dl></td>
+  <td style="width: 33%" valign="top"><dl>
       
   <dt><a href="stdlib/io-network.html#Base.unsafe_read">unsafe_read() (in module Base)</a>
   </dt>
 
-  </dl></td>
-  <td style="width: 33%" valign="top"><dl>
       
   <dt><a href="stdlib/c.html#Base.unsafe_store!">unsafe_store!() (in module Base)</a>
   </dt>
@@ -6544,14 +6722,6 @@
 
       
   <dt><a href="manual/modules.html#index-0">using</a>
-  </dt>
-
-      
-  <dt><a href="stdlib/strings.html#Base.utf16">utf16() (in module Base)</a>, <a href="stdlib/strings.html#Base.utf16">[1]</a>
-  </dt>
-
-      
-  <dt><a href="stdlib/strings.html#Base.utf32">utf32() (in module Base)</a>, <a href="stdlib/strings.html#Base.utf32">[1]</a>
   </dt>
 
       
@@ -6600,6 +6770,10 @@
 
       
   <dt><a href="stdlib/linalg.html#Base.vecnorm">vecnorm() (in module Base)</a>
+  </dt>
+
+      
+  <dt><a href="stdlib/constants.html#Base.VERSION">VERSION (in module Base)</a>
   </dt>
 
       

@@ -87,7 +87,6 @@
 <li class="toctree-l2"><a class="reference internal" href="mathematical-operations.html#id4">갱신 연산자</a></li>
 <li class="toctree-l2"><a class="reference internal" href="mathematical-operations.html#man-numeric-comparisons">수치 비교</a></li>
 <li class="toctree-l2"><a class="reference internal" href="mathematical-operations.html#man-numerical-conversions">수치 변환</a></li>
-<li class="toctree-l2"><a class="reference internal" href="mathematical-operations.html#man-elementary-functions">기초 함수</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="complex-and-rational-numbers.html">복소수와 유리수</a><ul>
@@ -104,7 +103,7 @@
 <li class="toctree-l2"><a class="reference internal" href="#common-operations">Common Operations</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#non-standard-string-literals">Non-Standard String Literals</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#regular-expressions">Regular Expressions</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#id3">Byte Array Literals</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id2">Byte Array Literals</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#version-number-literals">Version Number Literals</a></li>
 </ul>
 </li>
@@ -251,6 +250,7 @@
 <li class="toctree-l2"><a class="reference internal" href="dates.html#timetype-period-arithmetic">TimeType-Period Arithmetic</a></li>
 <li class="toctree-l2"><a class="reference internal" href="dates.html#adjuster-functions">Adjuster Functions</a></li>
 <li class="toctree-l2"><a class="reference internal" href="dates.html#period-types">Period Types</a></li>
+<li class="toctree-l2"><a class="reference internal" href="dates.html#rounding">Rounding</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="running-external-programs.html">Running External Programs</a><ul>
@@ -460,6 +460,7 @@
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../stdlib/linalg.html">Linear Algebra</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="../stdlib/linalg.html#module-Base.LinAlg">Standard Functions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../stdlib/linalg.html#low-level-matrix-operations">Low-level matrix operations</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../stdlib/linalg.html#module-Base.LinAlg.BLAS">BLAS Functions</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../stdlib/linalg.html#module-Base.LinAlg.LAPACK">LAPACK Functions</a></li>
 </ul>
@@ -492,6 +493,7 @@
 <li class="toctree-l2"><a class="reference internal" href="../stdlib/test.html#basic-unit-tests">Basic Unit Tests</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../stdlib/test.html#working-with-test-sets">Working with Test Sets</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../stdlib/test.html#other-test-macros">Other Test Macros</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../stdlib/test.html#broken-tests">Broken Tests</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../stdlib/test.html#creating-custom-abstracttestset-types">Creating Custom <code class="docutils literal"><span class="pre">AbstractTestSet</span></code> Types</a></li>
 </ul>
 </li>
@@ -521,6 +523,8 @@
 <li class="toctree-l2"><a class="reference internal" href="../devdocs/stdio.html">printf() and stdio in the Julia runtime</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../devdocs/promote-op.html">Operator-sensitive promotion</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../devdocs/boundscheck.html">Bounds checking</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../devdocs/locks.html">Proper maintenance and care of multi-threading locks</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../devdocs/offset-arrays.html">Arrays with custom indices</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../devdocs/C.html">Developing/debugging Julia&#8217;s C code</a><ul>
@@ -612,9 +616,8 @@ efficiently and simply for variable-width encodings of Unicode
 strings.</li>
 <li>Julia supports the full range of
 <a class="reference external" href="https://en.wikipedia.org/wiki/Unicode">Unicode</a> characters: literal
-strings are always <a class="reference external" href="https://en.wikipedia.org/wiki/ASCII">ASCII</a> or
-<a class="reference external" href="https://en.wikipedia.org/wiki/UTF-8">UTF-8</a> but other encodings for
-strings from external sources can be supported.</li>
+strings are always <a class="reference external" href="https://en.wikipedia.org/wiki/UTF-8">UTF-8</a> but
+other encodings for strings from external sources can be supported.</li>
 </ul>
 <div class="section" id="characters">
 <span id="man-characters"></span><h2>Characters<a class="headerlink" href="#characters" title="Permalink to this headline">¶</a></h2>
@@ -798,8 +801,8 @@ string literals:</p>
 </div>
 <p>Whether these Unicode characters are displayed as escapes or shown as
 special characters depends on your terminal&#8217;s locale settings and its
-support for Unicode. Non-ASCII string literals are encoded using the
-UTF-8 encoding. UTF-8 is a variable-width encoding, meaning that not all
+support for Unicode. String literals are encoded using the UTF-8
+encoding. UTF-8 is a variable-width encoding, meaning that not all
 characters are encoded in the same number of bytes. In UTF-8, ASCII
 characters — i.e. those with code points less than 0x80 (128) — are
 encoded as they are in ASCII, using a single byte, while code points
@@ -812,13 +815,17 @@ such an invalid byte index, an error is thrown:</p>
 
 <span class="n">julia</span><span class="o">&gt;</span> <span class="n">s</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span>
 <span class="n">ERROR</span><span class="p">:</span> <span class="n">UnicodeError</span><span class="p">:</span> <span class="n">invalid</span> <span class="n">character</span> <span class="n">index</span>
- <span class="k">in</span> <span class="n">next</span> <span class="n">at</span> <span class="o">./</span><span class="n">unicode</span><span class="o">/</span><span class="n">utf8</span><span class="o">.</span><span class="n">jl</span><span class="p">:</span><span class="mi">65</span>
- <span class="k">in</span> <span class="n">getindex</span> <span class="n">at</span> <span class="n">strings</span><span class="o">/</span><span class="n">basic</span><span class="o">.</span><span class="n">jl</span><span class="p">:</span><span class="mi">37</span>
+ <span class="k">in</span> <span class="n">slow_utf8_next</span><span class="p">(::</span><span class="n">Array</span><span class="p">{</span><span class="n">UInt8</span><span class="p">,</span><span class="mi">1</span><span class="p">},</span> <span class="p">::</span><span class="n">UInt8</span><span class="p">,</span> <span class="p">::</span><span class="kt">Int64</span><span class="p">)</span> <span class="n">at</span> <span class="o">./</span><span class="n">strings</span><span class="o">/</span><span class="n">string</span><span class="o">.</span><span class="n">jl</span><span class="p">:</span><span class="mi">67</span>
+ <span class="k">in</span> <span class="n">next</span> <span class="n">at</span> <span class="o">./</span><span class="n">strings</span><span class="o">/</span><span class="n">string</span><span class="o">.</span><span class="n">jl</span><span class="p">:</span><span class="mi">92</span> <span class="p">[</span><span class="n">inlined</span><span class="p">]</span>
+ <span class="k">in</span> <span class="n">getindex</span><span class="p">(::</span><span class="n">String</span><span class="p">,</span> <span class="p">::</span><span class="kt">Int64</span><span class="p">)</span> <span class="n">at</span> <span class="o">./</span><span class="n">strings</span><span class="o">/</span><span class="n">basic</span><span class="o">.</span><span class="n">jl</span><span class="p">:</span><span class="mi">70</span>
+ <span class="o">...</span>
 
 <span class="n">julia</span><span class="o">&gt;</span> <span class="n">s</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span>
 <span class="n">ERROR</span><span class="p">:</span> <span class="n">UnicodeError</span><span class="p">:</span> <span class="n">invalid</span> <span class="n">character</span> <span class="n">index</span>
- <span class="k">in</span> <span class="n">next</span> <span class="n">at</span> <span class="o">./</span><span class="n">unicode</span><span class="o">/</span><span class="n">utf8</span><span class="o">.</span><span class="n">jl</span><span class="p">:</span><span class="mi">65</span>
- <span class="k">in</span> <span class="n">getindex</span> <span class="n">at</span> <span class="n">strings</span><span class="o">/</span><span class="n">basic</span><span class="o">.</span><span class="n">jl</span><span class="p">:</span><span class="mi">37</span>
+ <span class="k">in</span> <span class="n">slow_utf8_next</span><span class="p">(::</span><span class="n">Array</span><span class="p">{</span><span class="n">UInt8</span><span class="p">,</span><span class="mi">1</span><span class="p">},</span> <span class="p">::</span><span class="n">UInt8</span><span class="p">,</span> <span class="p">::</span><span class="kt">Int64</span><span class="p">)</span> <span class="n">at</span> <span class="o">./</span><span class="n">strings</span><span class="o">/</span><span class="n">string</span><span class="o">.</span><span class="n">jl</span><span class="p">:</span><span class="mi">67</span>
+ <span class="k">in</span> <span class="n">next</span> <span class="n">at</span> <span class="o">./</span><span class="n">strings</span><span class="o">/</span><span class="n">string</span><span class="o">.</span><span class="n">jl</span><span class="p">:</span><span class="mi">92</span> <span class="p">[</span><span class="n">inlined</span><span class="p">]</span>
+ <span class="k">in</span> <span class="n">getindex</span><span class="p">(::</span><span class="n">String</span><span class="p">,</span> <span class="p">::</span><span class="kt">Int64</span><span class="p">)</span> <span class="n">at</span> <span class="o">./</span><span class="n">strings</span><span class="o">/</span><span class="n">basic</span><span class="o">.</span><span class="n">jl</span><span class="p">:</span><span class="mi">70</span>
+ <span class="o">...</span>
 
 <span class="n">julia</span><span class="o">&gt;</span> <span class="n">s</span><span class="p">[</span><span class="mi">4</span><span class="p">]</span>
 <span class="sc">&#39; &#39;</span>
@@ -837,11 +844,11 @@ Thus we have the identity that <code class="docutils literal"><span class="pre">
 character in a string must have its own index. The following is an
 inefficient and verbose way to iterate through the characters of <code class="docutils literal"><span class="pre">s</span></code>:</p>
 <div class="highlight-julia"><div class="highlight"><pre><span></span><span class="n">julia</span><span class="o">&gt;</span> <span class="k">for</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">1</span><span class="p">:</span><span class="n">endof</span><span class="p">(</span><span class="n">s</span><span class="p">)</span>
-         <span class="k">try</span>
-           <span class="n">println</span><span class="p">(</span><span class="n">s</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
-         <span class="k">catch</span>
-           <span class="c"># ignore the index error</span>
-         <span class="k">end</span>
+           <span class="k">try</span>
+               <span class="n">println</span><span class="p">(</span><span class="n">s</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+           <span class="k">catch</span>
+               <span class="c"># ignore the index error</span>
+           <span class="k">end</span>
        <span class="k">end</span>
 <span class="n">∀</span>
 
@@ -857,7 +864,7 @@ awkward idiom is unnecessary for iterating through the characters in a
 string, since you can just use the string as an iterable object, no
 exception handling required:</p>
 <div class="highlight-julia"><div class="highlight"><pre><span></span><span class="n">julia</span><span class="o">&gt;</span> <span class="k">for</span> <span class="n">c</span> <span class="k">in</span> <span class="n">s</span>
-         <span class="n">println</span><span class="p">(</span><span class="n">c</span><span class="p">)</span>
+           <span class="n">println</span><span class="p">(</span><span class="n">c</span><span class="p">)</span>
        <span class="k">end</span>
 <span class="n">∀</span>
 
@@ -868,15 +875,15 @@ exception handling required:</p>
 <span class="n">y</span>
 </pre></div>
 </div>
-<p>UTF-8 is not the only encoding that Julia supports, and adding support
-for new encodings is quite easy.  In particular, Julia also provides
-<code class="xref jl jl-obj docutils literal"><span class="pre">UTF16String</span></code> and <code class="xref jl jl-obj docutils literal"><span class="pre">UTF32String</span></code> types, constructed by
-<a class="reference internal" href="../stdlib/strings.html#Base.utf16" title="Base.utf16"><code class="xref jl jl-func docutils literal"><span class="pre">utf16()</span></code></a> and <a class="reference internal" href="../stdlib/strings.html#Base.utf32" title="Base.utf32"><code class="xref jl jl-func docutils literal"><span class="pre">utf32()</span></code></a> respectively, for UTF-16 and
-UTF-32 encodings. Additional discussion of other encodings and how to
-implement support for them is beyond the scope of this document for
-the time being. For further discussion of UTF-8 encoding issues, see
-the section below on <a class="reference external" href="#Byte+Array+Literals">byte array literals</a>,
-which goes into some greater detail.</p>
+<p>Julia uses the UTF-8 encoding by default, and support for new encodings can
+be added by packages. For example, the <a class="reference external" href="https://github.com/JuliaArchive/LegacyStrings.jl">LegacyStrings.jl</a> package implements
+<code class="docutils literal"><span class="pre">UTF16String</span></code> and <code class="docutils literal"><span class="pre">UTF32String</span></code> types. Additional discussion of other
+encodings and how to implement support for them is beyond the scope of this
+document for the time being. For further discussion of UTF-8 encoding issues,
+see the section below on <a class="reference external" href="#Byte+Array+Literals">byte array literals</a>.
+The <a class="reference internal" href="../stdlib/strings.html#Base.transcode" title="Base.transcode"><code class="xref jl jl-func docutils literal"><span class="pre">transcode()</span></code></a> function is provided to convert data between
+the various UTF-xx encodings, primarily for working with external
+data and libraries.</p>
 </div>
 <div class="section" id="interpolation">
 <span id="man-string-interpolation"></span><h2>Interpolation<a class="headerlink" href="#interpolation" title="Permalink to this headline">¶</a></h2>
@@ -1031,10 +1038,11 @@ contained in a string:</p>
 <span class="n">false</span>
 
 <span class="n">julia</span><span class="o">&gt;</span> <span class="n">contains</span><span class="p">(</span><span class="s">&quot;Xylophon&quot;</span><span class="p">,</span> <span class="sc">&#39;o&#39;</span><span class="p">)</span>
-<span class="n">ERROR</span><span class="p">:</span> <span class="n">MethodError</span><span class="p">:</span> <span class="sb">`contains`</span> <span class="n">has</span> <span class="n">no</span> <span class="n">method</span> <span class="n">matching</span> <span class="n">contains</span><span class="p">(::</span><span class="n">String</span><span class="p">,</span> <span class="p">::</span><span class="n">Char</span><span class="p">)</span>
+<span class="n">ERROR</span><span class="p">:</span> <span class="n">MethodError</span><span class="p">:</span> <span class="n">no</span> <span class="n">method</span> <span class="n">matching</span> <span class="n">contains</span><span class="p">(::</span><span class="n">String</span><span class="p">,</span> <span class="p">::</span><span class="n">Char</span><span class="p">)</span>
 <span class="n">Closest</span> <span class="n">candidates</span> <span class="n">are</span><span class="p">:</span>
   <span class="n">contains</span><span class="p">(</span><span class="o">!</span><span class="n">Matched</span><span class="p">::</span><span class="n">Function</span><span class="p">,</span> <span class="p">::</span><span class="kt">Any</span><span class="p">,</span> <span class="o">!</span><span class="n">Matched</span><span class="p">::</span><span class="kt">Any</span><span class="p">)</span>
   <span class="n">contains</span><span class="p">(::</span><span class="n">AbstractString</span><span class="p">,</span> <span class="o">!</span><span class="n">Matched</span><span class="p">::</span><span class="n">AbstractString</span><span class="p">)</span>
+ <span class="o">...</span>
 </pre></div>
 </div>
 <p>The last error is because <code class="docutils literal"><span class="pre">'o'</span></code> is a character literal, and <a class="reference internal" href="../stdlib/strings.html#Base.contains" title="Base.contains"><code class="xref jl jl-func docutils literal"><span class="pre">contains()</span></code></a>
@@ -1073,7 +1081,10 @@ quite what is needed. For these kinds of situations, Julia provides
 <a class="reference internal" href="metaprogramming.html#man-non-standard-string-literals2"><span>non-standard string literals</span></a>.
 A non-standard string literal looks like
 a regular double-quoted string literal, but is immediately prefixed by
-an identifier, and doesn&#8217;t behave quite like a normal string literal. Regular
+an identifier, and doesn&#8217;t behave quite like a normal string literal. The
+convention is that non-standard literals with uppercase prefixes produce
+actual string objects, while those with lowercase prefixes produce
+non-string objects like byte arrays or compiled regular expressions. Regular
 expressions, byte array literals and version number literals, as described
 below, are some examples of non-standard string literals. Other examples are
 given in the <a class="reference internal" href="metaprogramming.html#man-non-standard-string-literals2"><span>metaprogramming</span></a>
@@ -1282,15 +1293,12 @@ manpage</a>:</p>
 supported (and may be convenient for regular expressions containing
 quotation marks or newlines).</p>
 </div>
-<div class="section" id="id3">
-<h2>Byte Array Literals<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="id2">
+<h2>Byte Array Literals<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h2>
 <p>Another useful non-standard string literal is the byte-array string
 literal: <code class="docutils literal"><span class="pre">b&quot;...&quot;</span></code>. This form lets you use string notation to express
-literal byte arrays — i.e. arrays of <code class="docutils literal"><span class="pre">UInt8</span></code> values. The convention is
-that non-standard literals with uppercase prefixes produce actual string
-objects, while those with lowercase prefixes produce non-string objects
-like byte arrays or compiled regular expressions. The rules for byte
-array literals are the following:</p>
+literal byte arrays — i.e. arrays of <code class="docutils literal"><span class="pre">UInt8</span></code> values. The rules for
+byte array literals are the following:</p>
 <ul class="simple">
 <li>ASCII characters and ASCII escapes produce a single byte.</li>
 <li><code class="docutils literal"><span class="pre">\x</span></code> and octal escape sequences produce the <em>byte</em> corresponding to
@@ -1324,6 +1332,7 @@ you try to use this as a regular string literal, you will get a syntax
 error:</p>
 <div class="highlight-julia"><div class="highlight"><pre><span></span><span class="n">julia</span><span class="o">&gt;</span> <span class="s">&quot;DATA</span><span class="se">\xff\u2200</span><span class="s">&quot;</span>
 <span class="n">ERROR</span><span class="p">:</span> <span class="n">syntax</span><span class="p">:</span> <span class="n">invalid</span> <span class="n">UTF</span><span class="o">-</span><span class="mi">8</span> <span class="n">sequence</span>
+ <span class="o">...</span>
 </pre></div>
 </div>
 <p>Also observe the significant distinction between <code class="docutils literal"><span class="pre">\xff</span></code> and <code class="docutils literal"><span class="pre">\uff</span></code>:
@@ -1356,10 +1365,9 @@ latter escapes all represent Unicode code points with two-byte
 encodings.</p>
 <p>If this is all extremely confusing, try reading <a class="reference external" href="http://www.joelonsoftware.com/articles/Unicode.html">&#8220;The Absolute Minimum
 Every Software Developer Absolutely, Positively Must Know About Unicode
-and Character
-Sets&#8221;</a>. It&#8217;s an
-excellent introduction to Unicode and UTF-8, and may help alleviate some
-confusion regarding the matter.</p>
+and Character Sets&#8221;</a>.
+It&#8217;s an excellent introduction to Unicode and UTF-8, and may help alleviate
+some confusion regarding the matter.</p>
 </div>
 <div class="section" id="version-number-literals">
 <span id="man-version-number-literals"></span><h2>Version Number Literals<a class="headerlink" href="#version-number-literals" title="Permalink to this headline">¶</a></h2>
@@ -1393,7 +1401,7 @@ would only run with stable <code class="docutils literal"><span class="pre">0.2<
 <span class="pre">&lt;=</span> <span class="pre">VERSION</span></code>.</p>
 <p>Another non-standard version specification extension allows one to use a trailing
 <code class="docutils literal"><span class="pre">+</span></code> to express an upper limit on build versions, e.g.  <code class="docutils literal"><span class="pre">VERSION</span> <span class="pre">&gt;</span>
-<span class="pre">&quot;v&quot;0.2-rc1+&quot;</span></code> can be used to mean any version above <code class="docutils literal"><span class="pre">0.2-rc1</span></code> and any of its
+<span class="pre">v&quot;0.2-rc1+&quot;</span></code> can be used to mean any version above <code class="docutils literal"><span class="pre">0.2-rc1</span></code> and any of its
 builds: it will return <code class="docutils literal"><span class="pre">false</span></code> for version <code class="docutils literal"><span class="pre">v&quot;0.2-rc1+win64&quot;</span></code> and <code class="docutils literal"><span class="pre">true</span></code>
 for <code class="docutils literal"><span class="pre">v&quot;0.2-rc2&quot;</span></code>.</p>
 <p>It is good practice to use such special versions in comparisons (particularly,

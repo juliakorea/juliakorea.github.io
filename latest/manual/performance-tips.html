@@ -87,7 +87,6 @@
 <li class="toctree-l2"><a class="reference internal" href="mathematical-operations.html#id4">갱신 연산자</a></li>
 <li class="toctree-l2"><a class="reference internal" href="mathematical-operations.html#man-numeric-comparisons">수치 비교</a></li>
 <li class="toctree-l2"><a class="reference internal" href="mathematical-operations.html#man-numerical-conversions">수치 변환</a></li>
-<li class="toctree-l2"><a class="reference internal" href="mathematical-operations.html#man-elementary-functions">기초 함수</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="complex-and-rational-numbers.html">복소수와 유리수</a><ul>
@@ -104,7 +103,7 @@
 <li class="toctree-l2"><a class="reference internal" href="strings.html#common-operations">Common Operations</a></li>
 <li class="toctree-l2"><a class="reference internal" href="strings.html#non-standard-string-literals">Non-Standard String Literals</a></li>
 <li class="toctree-l2"><a class="reference internal" href="strings.html#regular-expressions">Regular Expressions</a></li>
-<li class="toctree-l2"><a class="reference internal" href="strings.html#id3">Byte Array Literals</a></li>
+<li class="toctree-l2"><a class="reference internal" href="strings.html#id2">Byte Array Literals</a></li>
 <li class="toctree-l2"><a class="reference internal" href="strings.html#version-number-literals">Version Number Literals</a></li>
 </ul>
 </li>
@@ -251,6 +250,7 @@
 <li class="toctree-l2"><a class="reference internal" href="dates.html#timetype-period-arithmetic">TimeType-Period Arithmetic</a></li>
 <li class="toctree-l2"><a class="reference internal" href="dates.html#adjuster-functions">Adjuster Functions</a></li>
 <li class="toctree-l2"><a class="reference internal" href="dates.html#period-types">Period Types</a></li>
+<li class="toctree-l2"><a class="reference internal" href="dates.html#rounding">Rounding</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="running-external-programs.html">Running External Programs</a><ul>
@@ -460,6 +460,7 @@
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../stdlib/linalg.html">Linear Algebra</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="../stdlib/linalg.html#module-Base.LinAlg">Standard Functions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../stdlib/linalg.html#low-level-matrix-operations">Low-level matrix operations</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../stdlib/linalg.html#module-Base.LinAlg.BLAS">BLAS Functions</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../stdlib/linalg.html#module-Base.LinAlg.LAPACK">LAPACK Functions</a></li>
 </ul>
@@ -492,6 +493,7 @@
 <li class="toctree-l2"><a class="reference internal" href="../stdlib/test.html#basic-unit-tests">Basic Unit Tests</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../stdlib/test.html#working-with-test-sets">Working with Test Sets</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../stdlib/test.html#other-test-macros">Other Test Macros</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../stdlib/test.html#broken-tests">Broken Tests</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../stdlib/test.html#creating-custom-abstracttestset-types">Creating Custom <code class="docutils literal"><span class="pre">AbstractTestSet</span></code> Types</a></li>
 </ul>
 </li>
@@ -521,6 +523,8 @@
 <li class="toctree-l2"><a class="reference internal" href="../devdocs/stdio.html">printf() and stdio in the Julia runtime</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../devdocs/promote-op.html">Operator-sensitive promotion</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../devdocs/boundscheck.html">Bounds checking</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../devdocs/locks.html">Proper maintenance and care of multi-threading locks</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../devdocs/offset-arrays.html">Arrays with custom indices</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../devdocs/C.html">Developing/debugging Julia&#8217;s C code</a><ul>
@@ -789,7 +793,7 @@ to change the type of field <code class="docutils literal"><span class="pre">a</
 <p>In contrast, once <code class="docutils literal"><span class="pre">m</span></code> is constructed, the type of <code class="docutils literal"><span class="pre">m.a</span></code> cannot
 change:</p>
 <div class="highlight-julia"><div class="highlight"><pre><span></span><span class="n">julia</span><span class="o">&gt;</span> <span class="n">m</span><span class="o">.</span><span class="n">a</span> <span class="o">=</span> <span class="mf">4.5f0</span>
-<span class="mf">4.5</span>
+<span class="mf">4.5f0</span>
 
 <span class="n">julia</span><span class="o">&gt;</span> <span class="nb">typeof</span><span class="p">(</span><span class="n">m</span><span class="o">.</span><span class="n">a</span><span class="p">)</span>
 <span class="kt">Float64</span>
@@ -1212,15 +1216,15 @@ process, so that you can store them all in an
 <code class="docutils literal"><span class="pre">Array{Car{:Honda,:Accord},N}</span></code>.</li>
 </ul>
 <p>When the latter holds, a function processing such a homogenous array
-can be productively specialized: julia knows the type of each element
+can be productively specialized: Julia knows the type of each element
 in advance (all objects in the container have the same concrete type),
-so julia can &#8220;look up&#8221; the correct method calls when the function is
+so Julia can &#8220;look up&#8221; the correct method calls when the function is
 being compiled (obviating the need to check at run-time) and thereby
 emit efficient code for processing the whole list.</p>
 <p>When these do not hold, then it&#8217;s likely that you&#8217;ll get no benefit;
 worse, the resulting &#8220;combinatorial explosion of types&#8221; will be
 counterproductive.  If <code class="docutils literal"><span class="pre">items[i+1]</span></code> has a different type than
-<code class="docutils literal"><span class="pre">item[i]</span></code>, julia has to look up the type at run-time, search for the
+<code class="docutils literal"><span class="pre">item[i]</span></code>, Julia has to look up the type at run-time, search for the
 appropriate method in method tables, decide (via type intersection)
 which one matches, determine whether it has been JIT-compiled yet (and
 do so if not), and then make the call. In essence, you&#8217;re asking the
@@ -1230,7 +1234,7 @@ code.</p>
 <p>Some run-time benchmarks comparing (1) type dispatch, (2) dictionary
 lookup, and (3) a &#8220;switch&#8221; statement can be found <a class="reference external" href="https://groups.google.com/d/msg/julia-users/jUMu9A3QKQQ/qjgVWr7vAwAJ">on the mailing list</a>.</p>
 <p>Perhaps even worse than the run-time impact is the compile-time
-impact: julia will compile specialized functions for each different
+impact: Julia will compile specialized functions for each different
 <code class="docutils literal"><span class="pre">Car{Make,</span> <span class="pre">Model}</span></code>; if you have hundreds or thousands of such types,
 then every function that accepts such an object as a parameter (from a
 custom <code class="docutils literal"><span class="pre">get_year</span></code> function you might write yourself, to the generic
@@ -1389,7 +1393,10 @@ caller to control the &#8220;output&#8221; type from an algorithm.  In the examp
 above, we could have passed a <code class="xref jl jl-class docutils literal"><span class="pre">SubArray</span></code> rather than an <a class="reference internal" href="../stdlib/arrays.html#Base.Array" title="Base.Array"><code class="xref jl jl-class docutils literal"><span class="pre">Array</span></code></a>,
 had we so desired.</p>
 <p>Taken to its extreme, pre-allocation can make your code uglier, so
-performance measurements and some judgment may be required.</p>
+performance measurements and some judgment may be required.   However,
+for &#8220;vectorized&#8221; (element-wise) functions, the convenient syntax
+<code class="docutils literal"><span class="pre">x</span> <span class="pre">.=</span> <span class="pre">f.(y)</span></code> can be used for in-place operations with fused loops
+and no temporary arrays (<span class="xref std std-ref">dot-vectorizing</span>).</p>
 </div>
 <div class="section" id="avoid-string-interpolation-for-i-o">
 <h2>Avoid string interpolation for I/O<a class="headerlink" href="#avoid-string-interpolation-for-i-o" title="Permalink to this headline">¶</a></h2>

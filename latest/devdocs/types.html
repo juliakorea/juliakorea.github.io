@@ -88,7 +88,6 @@
 <li class="toctree-l2"><a class="reference internal" href="../manual/mathematical-operations.html#id4">갱신 연산자</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../manual/mathematical-operations.html#man-numeric-comparisons">수치 비교</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../manual/mathematical-operations.html#man-numerical-conversions">수치 변환</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../manual/mathematical-operations.html#man-elementary-functions">기초 함수</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../manual/complex-and-rational-numbers.html">복소수와 유리수</a><ul>
@@ -105,7 +104,7 @@
 <li class="toctree-l2"><a class="reference internal" href="../manual/strings.html#common-operations">Common Operations</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../manual/strings.html#non-standard-string-literals">Non-Standard String Literals</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../manual/strings.html#regular-expressions">Regular Expressions</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../manual/strings.html#id3">Byte Array Literals</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../manual/strings.html#id2">Byte Array Literals</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../manual/strings.html#version-number-literals">Version Number Literals</a></li>
 </ul>
 </li>
@@ -252,6 +251,7 @@
 <li class="toctree-l2"><a class="reference internal" href="../manual/dates.html#timetype-period-arithmetic">TimeType-Period Arithmetic</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../manual/dates.html#adjuster-functions">Adjuster Functions</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../manual/dates.html#period-types">Period Types</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../manual/dates.html#rounding">Rounding</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../manual/running-external-programs.html">Running External Programs</a><ul>
@@ -461,6 +461,7 @@
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../stdlib/linalg.html">Linear Algebra</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="../stdlib/linalg.html#module-Base.LinAlg">Standard Functions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../stdlib/linalg.html#low-level-matrix-operations">Low-level matrix operations</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../stdlib/linalg.html#module-Base.LinAlg.BLAS">BLAS Functions</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../stdlib/linalg.html#module-Base.LinAlg.LAPACK">LAPACK Functions</a></li>
 </ul>
@@ -493,6 +494,7 @@
 <li class="toctree-l2"><a class="reference internal" href="../stdlib/test.html#basic-unit-tests">Basic Unit Tests</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../stdlib/test.html#working-with-test-sets">Working with Test Sets</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../stdlib/test.html#other-test-macros">Other Test Macros</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../stdlib/test.html#broken-tests">Broken Tests</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../stdlib/test.html#creating-custom-abstracttestset-types">Creating Custom <code class="docutils literal"><span class="pre">AbstractTestSet</span></code> Types</a></li>
 </ul>
 </li>
@@ -522,6 +524,8 @@
 <li class="toctree-l2"><a class="reference internal" href="stdio.html">printf() and stdio in the Julia runtime</a></li>
 <li class="toctree-l2"><a class="reference internal" href="promote-op.html">Operator-sensitive promotion</a></li>
 <li class="toctree-l2"><a class="reference internal" href="boundscheck.html">Bounds checking</a></li>
+<li class="toctree-l2"><a class="reference internal" href="locks.html">Proper maintenance and care of multi-threading locks</a></li>
+<li class="toctree-l2"><a class="reference internal" href="offset-arrays.html">Arrays with custom indices</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="C.html">Developing/debugging Julia&#8217;s C code</a><ul>
@@ -622,7 +626,7 @@ tuple-type describing the types of the arguments, and <code class="docutils lite
 tuple-type specifying the types in the function&#8217;s signature.)  For
 this algorithm to work, it&#8217;s important that methods be sorted by their
 specificity, and that the search begins with the most specific
-methods.  Consequently, julia also implements a partial order on
+methods.  Consequently, Julia also implements a partial order on
 types; this is achieved by functionality that is similar to <code class="docutils literal"><span class="pre">&lt;:</span></code>,
 but with differences that will be discussed below.</p>
 </div>
@@ -645,7 +649,7 @@ called with <code class="docutils literal"><span class="pre">b</span> <span clas
 <span class="n">Array</span><span class="p">{</span><span class="n">T</span><span class="p">,</span><span class="n">N</span><span class="p">}</span>
 
 <span class="n">julia</span><span class="o">&gt;</span> <span class="n">dump</span><span class="p">(</span><span class="n">Array</span><span class="p">)</span>
-<span class="n">Array</span><span class="p">{</span><span class="n">T</span><span class="p">,</span><span class="n">N</span><span class="p">}::</span><span class="n">DataType</span>  <span class="o">&lt;:</span> <span class="n">DenseArray</span><span class="p">{</span><span class="n">T</span><span class="p">,</span><span class="n">N</span><span class="p">}</span>
+<span class="n">Array</span><span class="p">{</span><span class="n">T</span><span class="p">,</span><span class="n">N</span><span class="p">}</span> <span class="o">&lt;:</span> <span class="n">DenseArray</span><span class="p">{</span><span class="n">T</span><span class="p">,</span><span class="n">N</span><span class="p">}</span>
 </pre></div>
 </div>
 <p>This indicates that <a class="reference internal" href="../stdlib/arrays.html#Base.Array" title="Base.Array"><code class="xref jl jl-obj docutils literal"><span class="pre">Array</span></code></a> is a shorthand for <code class="docutils literal"><span class="pre">Array{T,N}</span></code>.  If
@@ -660,7 +664,7 @@ parameters:</p>
 <span class="n">TypeVar</span>
   <span class="n">name</span><span class="p">:</span> <span class="n">Symbol</span> <span class="n">T</span>
   <span class="n">lb</span><span class="p">:</span> <span class="n">Union</span><span class="p">{}</span>
-  <span class="n">ub</span><span class="p">:</span> <span class="kt">Any</span><span class="p">::</span><span class="n">DataType</span>  <span class="o">&lt;:</span> <span class="kt">Any</span>
+  <span class="n">ub</span><span class="p">:</span> <span class="kt">Any</span>
   <span class="n">bound</span><span class="p">:</span> <span class="kt">Bool</span> <span class="n">false</span>
 </pre></div>
 </div>
@@ -679,16 +683,16 @@ upper bound is <code class="docutils literal"><span class="pre">Any</span></code
 </div>
 <p>one can extract the underlying <code class="xref jl jl-obj docutils literal"><span class="pre">TypeVar</span></code>:</p>
 <div class="highlight-julia"><div class="highlight"><pre><span></span><span class="n">g</span><span class="p">{</span><span class="n">S</span><span class="o">&lt;:</span><span class="n">Integer</span><span class="p">}(</span><span class="n">x</span><span class="p">::</span><span class="n">S</span><span class="p">)</span> <span class="o">=</span> <span class="mi">0</span>
-<span class="n">m</span> <span class="o">=</span> <span class="n">start</span><span class="p">(</span><span class="n">methods</span><span class="p">(</span><span class="n">g</span><span class="p">))</span>
+<span class="n">m</span> <span class="o">=</span> <span class="n">first</span><span class="p">(</span><span class="n">methods</span><span class="p">(</span><span class="n">g</span><span class="p">))</span>
 <span class="n">p</span> <span class="o">=</span> <span class="n">m</span><span class="o">.</span><span class="n">sig</span><span class="o">.</span><span class="n">parameters</span>
-<span class="n">tv</span> <span class="o">=</span> <span class="n">p</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+<span class="n">tv</span> <span class="o">=</span> <span class="n">p</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span>
 <span class="n">dump</span><span class="p">(</span><span class="n">tv</span><span class="p">)</span>
 </pre></div>
 </div>
 <div class="highlight-none"><div class="highlight"><pre><span></span>TypeVar
   name: Symbol S
   lb: Union{}
-  ub: Integer::DataType  &lt;: Real
+  ub: Integer &lt;: Real
   bound: Bool true
 </pre></div>
 </div>
@@ -705,27 +709,27 @@ parameters. For example:</p>
 <span class="n">julia</span><span class="o">&gt;</span> <span class="n">h3</span><span class="p">{</span><span class="n">T</span><span class="o">&lt;:</span><span class="n">Real</span><span class="p">}(</span><span class="n">A</span><span class="p">::</span><span class="n">Array</span><span class="p">{</span><span class="n">T</span><span class="p">},</span> <span class="n">b</span><span class="p">::</span><span class="n">T</span><span class="p">)</span> <span class="o">=</span> <span class="mi">1</span>
 <span class="n">h3</span> <span class="p">(</span><span class="n">generic</span> <span class="k">function</span><span class="nf"> with</span> <span class="mi">1</span> <span class="n">method</span><span class="p">)</span>
 
-<span class="n">julia</span><span class="o">&gt;</span> <span class="n">p1</span> <span class="o">=</span> <span class="n">start</span><span class="p">(</span><span class="n">methods</span><span class="p">(</span><span class="n">h1</span><span class="p">))</span><span class="o">.</span><span class="n">sig</span><span class="o">.</span><span class="n">parameters</span>
-<span class="n">svec</span><span class="p">(</span><span class="n">Array</span><span class="p">{</span><span class="n">T</span><span class="p">,</span><span class="n">N</span><span class="p">},</span><span class="n">Real</span><span class="p">)</span>
+<span class="n">julia</span><span class="o">&gt;</span> <span class="n">p1</span> <span class="o">=</span> <span class="n">first</span><span class="p">(</span><span class="n">methods</span><span class="p">(</span><span class="n">h1</span><span class="p">))</span><span class="o">.</span><span class="n">sig</span><span class="o">.</span><span class="n">parameters</span>
+<span class="n">svec</span><span class="p">(</span><span class="c">#h1,Array{T,N},Real)</span>
 
-<span class="n">julia</span><span class="o">&gt;</span> <span class="n">p2</span> <span class="o">=</span> <span class="n">start</span><span class="p">(</span><span class="n">methods</span><span class="p">(</span><span class="n">h2</span><span class="p">))</span><span class="o">.</span><span class="n">sig</span><span class="o">.</span><span class="n">parameters</span>
-<span class="n">svec</span><span class="p">(</span><span class="n">Array</span><span class="p">{</span><span class="n">T</span><span class="p">,</span><span class="n">N</span><span class="p">},</span><span class="n">T</span><span class="o">&lt;:</span><span class="n">Real</span><span class="p">)</span>
+<span class="n">julia</span><span class="o">&gt;</span> <span class="n">p2</span> <span class="o">=</span> <span class="n">first</span><span class="p">(</span><span class="n">methods</span><span class="p">(</span><span class="n">h2</span><span class="p">))</span><span class="o">.</span><span class="n">sig</span><span class="o">.</span><span class="n">parameters</span>
+<span class="n">svec</span><span class="p">(</span><span class="c">#h2,Array{T,N},T&lt;:Real)</span>
 
-<span class="n">julia</span><span class="o">&gt;</span> <span class="n">p3</span> <span class="o">=</span> <span class="n">start</span><span class="p">(</span><span class="n">methods</span><span class="p">(</span><span class="n">h3</span><span class="p">))</span><span class="o">.</span><span class="n">sig</span><span class="o">.</span><span class="n">parameters</span>
-<span class="n">svec</span><span class="p">(</span><span class="n">Array</span><span class="p">{</span><span class="n">T</span><span class="o">&lt;:</span><span class="n">Real</span><span class="p">,</span><span class="n">N</span><span class="p">},</span><span class="n">T</span><span class="o">&lt;:</span><span class="n">Real</span><span class="p">)</span>
+<span class="n">julia</span><span class="o">&gt;</span> <span class="n">p3</span> <span class="o">=</span> <span class="n">first</span><span class="p">(</span><span class="n">methods</span><span class="p">(</span><span class="n">h3</span><span class="p">))</span><span class="o">.</span><span class="n">sig</span><span class="o">.</span><span class="n">parameters</span>
+<span class="n">svec</span><span class="p">(</span><span class="c">#h3,Array{T&lt;:Real,N},T&lt;:Real)</span>
 
-<span class="n">julia</span><span class="o">&gt;</span> <span class="n">dump</span><span class="p">(</span><span class="n">p1</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">parameters</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+<span class="n">julia</span><span class="o">&gt;</span> <span class="n">dump</span><span class="p">(</span><span class="n">p1</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">parameters</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
 <span class="n">TypeVar</span>
   <span class="n">name</span><span class="p">:</span> <span class="n">Symbol</span> <span class="n">T</span>
   <span class="n">lb</span><span class="p">:</span> <span class="n">Union</span><span class="p">{}</span>
-  <span class="n">ub</span><span class="p">:</span> <span class="kt">Any</span><span class="p">::</span><span class="n">DataType</span>  <span class="o">&lt;:</span> <span class="kt">Any</span>
+  <span class="n">ub</span><span class="p">:</span> <span class="kt">Any</span>
   <span class="n">bound</span><span class="p">:</span> <span class="kt">Bool</span> <span class="n">false</span>
 
-<span class="n">julia</span><span class="o">&gt;</span> <span class="n">dump</span><span class="p">(</span><span class="n">p3</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">parameters</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+<span class="n">julia</span><span class="o">&gt;</span> <span class="n">dump</span><span class="p">(</span><span class="n">p3</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">parameters</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
 <span class="n">TypeVar</span>
   <span class="n">name</span><span class="p">:</span> <span class="n">Symbol</span> <span class="n">T</span>
   <span class="n">lb</span><span class="p">:</span> <span class="n">Union</span><span class="p">{}</span>
-  <span class="n">ub</span><span class="p">:</span> <span class="n">Real</span><span class="p">::</span><span class="n">DataType</span>  <span class="o">&lt;:</span> <span class="n">Number</span>
+  <span class="n">ub</span><span class="p">:</span> <span class="n">Real</span> <span class="o">&lt;:</span> <span class="n">Number</span>
   <span class="n">bound</span><span class="p">:</span> <span class="kt">Bool</span> <span class="n">true</span>
 </pre></div>
 </div>
@@ -754,18 +758,19 @@ a lot about how Julia does dispatch:</p>
 
 <span class="n">julia</span><span class="o">&gt;</span> <span class="n">methods</span><span class="p">(</span><span class="n">candid</span><span class="p">)</span>
 <span class="c"># 1 method for generic function &quot;candid&quot;:</span>
-<span class="n">candid</span><span class="p">{</span><span class="n">T</span><span class="p">}(</span><span class="n">A</span><span class="p">::</span><span class="n">Array</span><span class="p">{</span><span class="n">T</span><span class="p">,</span><span class="n">N</span><span class="p">},</span> <span class="n">x</span><span class="p">::</span><span class="n">T</span><span class="p">)</span> <span class="n">at</span> <span class="n">none</span><span class="p">:</span><span class="mi">1</span>
+<span class="n">candid</span><span class="p">{</span><span class="n">T</span><span class="p">}(</span><span class="n">A</span><span class="p">::</span><span class="n">Array</span><span class="p">{</span><span class="n">T</span><span class="p">,</span><span class="n">N</span><span class="o">&lt;:</span><span class="kt">Any</span><span class="p">},</span> <span class="n">x</span><span class="p">::</span><span class="n">T</span><span class="p">)</span> <span class="n">at</span> <span class="n">none</span><span class="p">:</span><span class="mi">1</span>
 
 <span class="n">julia</span><span class="o">&gt;</span> <span class="n">methods</span><span class="p">(</span><span class="n">sneaky</span><span class="p">)</span>
 <span class="c"># 1 method for generic function &quot;sneaky&quot;:</span>
-<span class="n">sneaky</span><span class="p">{</span><span class="n">T</span><span class="p">}(</span><span class="n">A</span><span class="p">::</span><span class="n">Array</span><span class="p">{</span><span class="n">T</span><span class="p">,</span><span class="n">N</span><span class="p">},</span> <span class="n">x</span><span class="p">::</span><span class="n">T</span><span class="p">)</span> <span class="n">at</span> <span class="n">none</span><span class="p">:</span><span class="mi">1</span>
+<span class="n">sneaky</span><span class="p">{</span><span class="n">T</span><span class="p">}(</span><span class="n">A</span><span class="p">::</span><span class="n">Array</span><span class="p">{</span><span class="n">T</span><span class="p">,</span><span class="n">N</span><span class="o">&lt;:</span><span class="kt">Any</span><span class="p">},</span> <span class="n">x</span><span class="p">::</span><span class="n">T</span><span class="o">&lt;:</span><span class="kt">Any</span><span class="p">)</span> <span class="n">at</span> <span class="n">none</span><span class="p">:</span><span class="mi">1</span>
 </pre></div>
 </div>
 <p>These therefore print identically, but they have very different behavior:</p>
 <div class="highlight-julia"><div class="highlight"><pre><span></span><span class="n">julia</span><span class="o">&gt;</span> <span class="n">candid</span><span class="p">([</span><span class="mi">1</span><span class="p">],</span><span class="mf">3.2</span><span class="p">)</span>
-<span class="n">ERROR</span><span class="p">:</span> <span class="n">MethodError</span><span class="p">:</span> <span class="sb">`candid`</span> <span class="n">has</span> <span class="n">no</span> <span class="n">method</span> <span class="n">matching</span> <span class="n">candid</span><span class="p">(::</span><span class="n">Array</span><span class="p">{</span><span class="kt">Int64</span><span class="p">,</span><span class="mi">1</span><span class="p">},</span> <span class="p">::</span><span class="kt">Float64</span><span class="p">)</span>
+<span class="n">ERROR</span><span class="p">:</span> <span class="n">MethodError</span><span class="p">:</span> <span class="n">no</span> <span class="n">method</span> <span class="n">matching</span> <span class="n">candid</span><span class="p">(::</span><span class="n">Array</span><span class="p">{</span><span class="kt">Int64</span><span class="p">,</span><span class="mi">1</span><span class="p">},</span> <span class="p">::</span><span class="kt">Float64</span><span class="p">)</span>
 <span class="n">Closest</span> <span class="n">candidates</span> <span class="n">are</span><span class="p">:</span>
   <span class="n">candid</span><span class="p">{</span><span class="n">T</span><span class="p">}(::</span><span class="n">Array</span><span class="p">{</span><span class="n">T</span><span class="p">,</span><span class="n">N</span><span class="p">},</span> <span class="o">!</span><span class="n">Matched</span><span class="p">::</span><span class="n">T</span><span class="p">)</span>
+ <span class="o">...</span>
 
 <span class="n">julia</span><span class="o">&gt;</span> <span class="n">sneaky</span><span class="p">([</span><span class="mi">1</span><span class="p">],</span><span class="mf">3.2</span><span class="p">)</span>
 <span class="mi">1</span>
@@ -778,11 +783,11 @@ bound <code class="xref jl jl-obj docutils literal"><span class="pre">TypeVar</s
 <span class="n">jl_</span> <span class="p">(</span><span class="n">generic</span> <span class="k">function</span><span class="nf"> with</span> <span class="mi">1</span> <span class="n">method</span><span class="p">)</span>
 </pre></div>
 </div>
-<div class="highlight-julia"><div class="highlight"><pre><span></span><span class="n">julia</span><span class="o">&gt;</span> <span class="n">jl_</span><span class="p">(</span><span class="n">start</span><span class="p">(</span><span class="n">methods</span><span class="p">(</span><span class="n">candid</span><span class="p">)))</span>
-<span class="n">Method</span><span class="p">(</span><span class="n">sig</span><span class="o">=</span><span class="n">Tuple</span><span class="p">{</span><span class="n">Array</span><span class="p">{</span><span class="c">#T&lt;:Any, N&lt;:Any}, #T&lt;:Any}, va=false, isstaged=false, tvars=#T&lt;:Any, func=#&lt;function&gt;, invokes=nothing, next=nothing)</span>
+<div class="highlight-julia"><div class="highlight"><pre><span></span><span class="n">julia</span><span class="o">&gt;</span> <span class="n">jl_</span><span class="p">(</span><span class="n">first</span><span class="p">(</span><span class="n">methods</span><span class="p">(</span><span class="n">candid</span><span class="p">)))</span>
+<span class="n">Method</span><span class="p">(</span><span class="n">sig</span><span class="o">=</span><span class="n">Tuple</span><span class="p">{</span><span class="n">Main</span><span class="o">.</span><span class="c">#candid, Array{#T&lt;:Any, N&lt;:Any}, #T&lt;:Any}, va=false, isstaged=false, tvars=#T&lt;:Any, func=Main.candid(?), invokes=nothing, next=nothing)</span>
 
-<span class="n">julia</span><span class="o">&gt;</span> <span class="n">jl_</span><span class="p">(</span><span class="n">start</span><span class="p">(</span><span class="n">methods</span><span class="p">(</span><span class="n">sneaky</span><span class="p">)))</span>
-<span class="n">Method</span><span class="p">(</span><span class="n">sig</span><span class="o">=</span><span class="n">Tuple</span><span class="p">{</span><span class="n">Array</span><span class="p">{</span><span class="c">#T&lt;:Any, N&lt;:Any}, T&lt;:Any}, va=false, isstaged=false, tvars=#T&lt;:Any, func=#&lt;function&gt;, invokes=nothing, next=nothing)</span>
+<span class="n">julia</span><span class="o">&gt;</span> <span class="n">jl_</span><span class="p">(</span><span class="n">first</span><span class="p">(</span><span class="n">methods</span><span class="p">(</span><span class="n">sneaky</span><span class="p">)))</span>
+<span class="n">Method</span><span class="p">(</span><span class="n">sig</span><span class="o">=</span><span class="n">Tuple</span><span class="p">{</span><span class="n">Main</span><span class="o">.</span><span class="c">#sneaky, Array{#T&lt;:Any, N&lt;:Any}, T&lt;:Any}, va=false, isstaged=false, tvars=#T&lt;:Any, func=Main.sneaky(?), invokes=nothing, next=nothing)</span>
 </pre></div>
 </div>
 <p>Even though both print as <code class="docutils literal"><span class="pre">T</span></code>, in <code class="docutils literal"><span class="pre">sneaky</span></code> the second <code class="docutils literal"><span class="pre">T</span></code> is
@@ -839,14 +844,22 @@ the type, which is an object of type <code class="xref jl jl-obj docutils litera
 <span class="n">TypeName</span>
   <span class="n">name</span><span class="p">:</span> <span class="n">Symbol</span> <span class="n">Array</span>
   <span class="k">module</span><span class="p">:</span> <span class="n">Module</span> <span class="n">Core</span>
-  <span class="n">names</span><span class="p">:</span> <span class="n">SimpleVector</span>
-    <span class="n">length</span><span class="p">:</span> <span class="kt">Int64</span> <span class="mi">0</span>
-  <span class="n">primary</span><span class="p">:</span> <span class="n">Array</span><span class="p">{</span><span class="n">T</span><span class="p">,</span><span class="n">N</span><span class="p">}::</span><span class="n">DataType</span>  <span class="o">&lt;:</span> <span class="n">DenseArray</span><span class="p">{</span><span class="n">T</span><span class="p">,</span><span class="n">N</span><span class="p">}</span>
+  <span class="n">names</span><span class="p">:</span> <span class="n">empty</span> <span class="n">SimpleVector</span>
+  <span class="n">primary</span><span class="p">:</span> <span class="n">Array</span><span class="p">{</span><span class="n">T</span><span class="p">,</span><span class="n">N</span><span class="p">}</span> <span class="o">&lt;:</span> <span class="n">DenseArray</span><span class="p">{</span><span class="n">T</span><span class="p">,</span><span class="n">N</span><span class="p">}</span>
   <span class="n">cache</span><span class="p">:</span> <span class="n">SimpleVector</span>
-    <span class="n">length</span><span class="p">:</span> <span class="kt">Int64</span> <span class="mi">135</span>
+    <span class="o">...</span>
   <span class="n">linearcache</span><span class="p">:</span> <span class="n">SimpleVector</span>
-    <span class="n">length</span><span class="p">:</span> <span class="kt">Int64</span> <span class="mi">18</span>
-  <span class="nb">uid</span><span class="p">:</span> <span class="kt">Int64</span> <span class="mi">37</span>
+    <span class="o">...</span>
+  <span class="nb">uid</span><span class="p">:</span> <span class="kt">Int64</span> <span class="mi">47</span>
+  <span class="n">mt</span><span class="p">:</span> <span class="n">MethodTable</span>
+    <span class="n">name</span><span class="p">:</span> <span class="n">Symbol</span> <span class="n">Array</span>
+    <span class="n">defs</span><span class="p">:</span> <span class="n">Void</span> <span class="n">nothing</span>
+    <span class="n">cache</span><span class="p">:</span> <span class="n">Void</span> <span class="n">nothing</span>
+    <span class="n">max_args</span><span class="p">:</span> <span class="kt">Int64</span> <span class="mi">0</span>
+    <span class="n">kwsorter</span><span class="p">:</span> <span class="c">#undef</span>
+    <span class="k">module</span><span class="p">:</span> <span class="n">Module</span> <span class="n">Core</span>
+    <span class="p">:</span> <span class="kt">Int64</span> <span class="mi">0</span>
+    <span class="p">:</span> <span class="kt">Int64</span> <span class="mi">0</span>
 </pre></div>
 </div>
 <p>In this case, the relevant field is <code class="docutils literal"><span class="pre">primary</span></code>, which holds a
@@ -879,21 +892,11 @@ type:</p>
 <span class="n">MyType</span><span class="p">{</span><span class="kt">Float32</span><span class="p">,</span><span class="mi">5</span><span class="p">}</span>
 
 <span class="n">julia</span><span class="o">&gt;</span> <span class="n">MyType</span><span class="o">.</span><span class="n">name</span><span class="o">.</span><span class="n">cache</span>
-<span class="n">svec</span><span class="p">(</span><span class="n">MyType</span><span class="p">{</span><span class="kt">Float32</span><span class="p">,</span><span class="mi">5</span><span class="p">},</span><span class="n">MyType</span><span class="p">{</span><span class="kt">Int64</span><span class="p">,</span><span class="mi">2</span><span class="p">},</span><span class="n">Evaluation</span> <span class="n">succeeded</span><span class="p">,</span> <span class="n">but</span> <span class="n">an</span> <span class="nb">error</span> <span class="n">occurred</span> <span class="k">while</span> <span class="n">showing</span> <span class="n">value</span> <span class="n">of</span> <span class="k">type</span><span class="nc"> SimpleVector</span><span class="p">:</span>
-<span class="n">ERROR</span><span class="p">:</span> <span class="n">UndefRefError</span><span class="p">:</span> <span class="n">access</span> <span class="n">to</span> <span class="n">undefined</span> <span class="n">reference</span>
- <span class="k">in</span> <span class="n">getindex</span> <span class="n">at</span> <span class="o">./</span><span class="n">essentials</span><span class="o">.</span><span class="n">jl</span><span class="p">:</span><span class="mi">211</span>
- <span class="k">in</span> <span class="n">show_delim_array</span> <span class="n">at</span> <span class="n">show</span><span class="o">.</span><span class="n">jl</span><span class="p">:</span><span class="mi">229</span>
- <span class="k">in</span> <span class="n">show</span> <span class="n">at</span> <span class="n">show</span><span class="o">.</span><span class="n">jl</span><span class="p">:</span><span class="mi">257</span>
- <span class="k">in</span> <span class="n">anonymous</span> <span class="n">at</span> <span class="n">show</span><span class="o">.</span><span class="n">jl</span><span class="p">:</span><span class="mi">1278</span>
- <span class="k">in</span> <span class="n">with_output_limit</span> <span class="n">at</span> <span class="o">./</span><span class="n">show</span><span class="o">.</span><span class="n">jl</span><span class="p">:</span><span class="mi">1255</span>
- <span class="k">in</span> <span class="n">showlimited</span> <span class="n">at</span> <span class="n">show</span><span class="o">.</span><span class="n">jl</span><span class="p">:</span><span class="mi">1277</span>
- <span class="k">in</span> <span class="n">display</span> <span class="n">at</span> <span class="n">multimedia</span><span class="o">.</span><span class="n">jl</span><span class="p">:</span><span class="mi">120</span>
- <span class="p">[</span><span class="n">inlined</span> <span class="n">code</span><span class="p">]</span> <span class="n">from</span> <span class="n">multimedia</span><span class="o">.</span><span class="n">jl</span><span class="p">:</span><span class="mi">151</span>
- <span class="k">in</span> <span class="n">display</span> <span class="n">at</span> <span class="n">multimedia</span><span class="o">.</span><span class="n">jl</span><span class="p">:</span><span class="mi">162</span>
+<span class="n">svec</span><span class="p">(</span><span class="n">MyType</span><span class="p">{</span><span class="kt">Float32</span><span class="p">,</span><span class="mi">5</span><span class="p">},</span><span class="n">MyType</span><span class="p">{</span><span class="kt">Int64</span><span class="p">,</span><span class="mi">2</span><span class="p">},</span><span class="c">#undef,#undef,#undef,#undef,#undef,#undef)</span>
 </pre></div>
 </div>
-<p>(The error is triggered because the cache is pre-allocated to have
-length 8, but only the first two entries are populated.)
+<p>(The cache is pre-allocated to have length 8, but only the first two entries
+are populated.)
 Consequently, when you instantiate a parametric type, each concrete
 type gets saved in a type-cache.  However, instances with <code class="xref jl jl-obj docutils literal"><span class="pre">TypeVar</span></code>
 parameters are not cached.</p>
@@ -907,13 +910,13 @@ able to accommodate any tuple.  Let&#8217;s check the parameters:</p>
 <span class="n">Tuple</span>
 
 <span class="n">julia</span><span class="o">&gt;</span> <span class="n">Tuple</span><span class="o">.</span><span class="n">parameters</span>
-<span class="n">svec</span><span class="p">(</span><span class="n">Vararg</span><span class="p">{</span><span class="kt">Any</span><span class="p">})</span>
+<span class="n">svec</span><span class="p">(</span><span class="n">Vararg</span><span class="p">{</span><span class="kt">Any</span><span class="p">,</span><span class="n">N</span><span class="p">})</span>
 </pre></div>
 </div>
 <p>It&#8217;s worth noting that the parameter is a type, <code class="docutils literal"><span class="pre">Any</span></code>, rather than a
 <code class="docutils literal"><span class="pre">TypeVar</span> <span class="pre">T&lt;:Any</span></code>: compare</p>
 <div class="highlight-julia"><div class="highlight"><pre><span></span><span class="n">julia</span><span class="o">&gt;</span> <span class="n">jl_</span><span class="p">(</span><span class="n">Tuple</span><span class="o">.</span><span class="n">parameters</span><span class="p">)</span>
-<span class="n">svec</span><span class="p">(</span><span class="n">Vararg</span><span class="p">{</span><span class="kt">Any</span><span class="p">})</span>
+<span class="n">svec</span><span class="p">(</span><span class="n">Vararg</span><span class="p">{</span><span class="kt">Any</span><span class="p">,</span> <span class="n">N</span><span class="o">&lt;:</span><span class="kt">Any</span><span class="p">})</span>
 
 <span class="n">julia</span><span class="o">&gt;</span> <span class="n">jl_</span><span class="p">(</span><span class="n">Array</span><span class="o">.</span><span class="n">parameters</span><span class="p">)</span>
 <span class="n">svec</span><span class="p">(</span><span class="n">T</span><span class="o">&lt;:</span><span class="kt">Any</span><span class="p">,</span> <span class="n">N</span><span class="o">&lt;:</span><span class="kt">Any</span><span class="p">)</span>

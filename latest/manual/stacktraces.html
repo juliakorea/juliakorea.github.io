@@ -87,7 +87,6 @@
 <li class="toctree-l2"><a class="reference internal" href="mathematical-operations.html#id4">갱신 연산자</a></li>
 <li class="toctree-l2"><a class="reference internal" href="mathematical-operations.html#man-numeric-comparisons">수치 비교</a></li>
 <li class="toctree-l2"><a class="reference internal" href="mathematical-operations.html#man-numerical-conversions">수치 변환</a></li>
-<li class="toctree-l2"><a class="reference internal" href="mathematical-operations.html#man-elementary-functions">기초 함수</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="complex-and-rational-numbers.html">복소수와 유리수</a><ul>
@@ -104,7 +103,7 @@
 <li class="toctree-l2"><a class="reference internal" href="strings.html#common-operations">Common Operations</a></li>
 <li class="toctree-l2"><a class="reference internal" href="strings.html#non-standard-string-literals">Non-Standard String Literals</a></li>
 <li class="toctree-l2"><a class="reference internal" href="strings.html#regular-expressions">Regular Expressions</a></li>
-<li class="toctree-l2"><a class="reference internal" href="strings.html#id3">Byte Array Literals</a></li>
+<li class="toctree-l2"><a class="reference internal" href="strings.html#id2">Byte Array Literals</a></li>
 <li class="toctree-l2"><a class="reference internal" href="strings.html#version-number-literals">Version Number Literals</a></li>
 </ul>
 </li>
@@ -251,6 +250,7 @@
 <li class="toctree-l2"><a class="reference internal" href="dates.html#timetype-period-arithmetic">TimeType-Period Arithmetic</a></li>
 <li class="toctree-l2"><a class="reference internal" href="dates.html#adjuster-functions">Adjuster Functions</a></li>
 <li class="toctree-l2"><a class="reference internal" href="dates.html#period-types">Period Types</a></li>
+<li class="toctree-l2"><a class="reference internal" href="dates.html#rounding">Rounding</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="running-external-programs.html">Running External Programs</a><ul>
@@ -460,6 +460,7 @@
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../stdlib/linalg.html">Linear Algebra</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="../stdlib/linalg.html#module-Base.LinAlg">Standard Functions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../stdlib/linalg.html#low-level-matrix-operations">Low-level matrix operations</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../stdlib/linalg.html#module-Base.LinAlg.BLAS">BLAS Functions</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../stdlib/linalg.html#module-Base.LinAlg.LAPACK">LAPACK Functions</a></li>
 </ul>
@@ -492,6 +493,7 @@
 <li class="toctree-l2"><a class="reference internal" href="../stdlib/test.html#basic-unit-tests">Basic Unit Tests</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../stdlib/test.html#working-with-test-sets">Working with Test Sets</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../stdlib/test.html#other-test-macros">Other Test Macros</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../stdlib/test.html#broken-tests">Broken Tests</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../stdlib/test.html#creating-custom-abstracttestset-types">Creating Custom <code class="docutils literal"><span class="pre">AbstractTestSet</span></code> Types</a></li>
 </ul>
 </li>
@@ -521,6 +523,8 @@
 <li class="toctree-l2"><a class="reference internal" href="../devdocs/stdio.html">printf() and stdio in the Julia runtime</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../devdocs/promote-op.html">Operator-sensitive promotion</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../devdocs/boundscheck.html">Bounds checking</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../devdocs/locks.html">Proper maintenance and care of multi-threading locks</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../devdocs/offset-arrays.html">Arrays with custom indices</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../devdocs/C.html">Developing/debugging Julia&#8217;s C code</a><ul>
@@ -584,10 +588,13 @@ alias <a class="reference internal" href="../stdlib/stacktraces.html#Base.StackT
 <span class="n">example</span> <span class="p">(</span><span class="n">generic</span> <span class="k">function</span><span class="nf"> with</span> <span class="mi">1</span> <span class="n">method</span><span class="p">)</span>
 
 <span class="n">julia</span><span class="o">&gt;</span> <span class="n">example</span><span class="p">()</span>
-<span class="o">...-</span><span class="n">element</span> <span class="n">Array</span><span class="p">{</span><span class="n">StackFrame</span><span class="p">,</span><span class="mi">1</span><span class="p">}:</span>
- <span class="n">example</span> <span class="n">at</span> <span class="n">none</span><span class="p">:</span><span class="mi">1</span>
- <span class="n">eval</span> <span class="n">at</span> <span class="n">boot</span><span class="o">.</span><span class="n">jl</span><span class="p">:</span><span class="mi">265</span>
- <span class="o">...</span>
+<span class="mi">6</span><span class="o">-</span><span class="n">element</span> <span class="n">Array</span><span class="p">{</span><span class="n">StackFrame</span><span class="p">,</span><span class="mi">1</span><span class="p">}:</span>
+  <span class="k">in</span> <span class="n">example</span><span class="p">()</span> <span class="n">at</span> <span class="n">none</span><span class="p">:</span><span class="mi">1</span>
+  <span class="k">in</span> <span class="n">eval</span><span class="p">(::</span><span class="n">Module</span><span class="p">,</span> <span class="p">::</span><span class="kt">Any</span><span class="p">)</span> <span class="n">at</span> <span class="n">boot</span><span class="o">.</span><span class="n">jl</span><span class="p">:</span><span class="mi">234</span>
+  <span class="k">in</span> <span class="n">eval_user_input</span><span class="p">(::</span><span class="kt">Any</span><span class="p">,</span> <span class="p">::</span><span class="kt">Bool</span><span class="p">)</span> <span class="n">at</span> <span class="n">client</span><span class="o">.</span><span class="n">jl</span><span class="p">:</span><span class="mi">117</span>
+  <span class="k">in</span> <span class="n">eval</span><span class="p">(::</span><span class="n">Module</span><span class="p">,</span> <span class="p">::</span><span class="kt">Any</span><span class="p">)</span> <span class="n">at</span> <span class="n">boot</span><span class="o">.</span><span class="n">jl</span><span class="p">:</span><span class="mi">234</span>
+  <span class="k">in</span> <span class="n">eval_user_input</span><span class="p">(::</span><span class="kt">Any</span><span class="p">,</span> <span class="p">::</span><span class="kt">Bool</span><span class="p">)</span> <span class="n">at</span> <span class="n">client</span><span class="o">.</span><span class="n">jl</span><span class="p">:</span><span class="mi">117</span>
+  <span class="k">in</span> <span class="n">_start</span><span class="p">()</span> <span class="n">at</span> <span class="n">client</span><span class="o">.</span><span class="n">jl</span><span class="p">:</span><span class="mi">355</span>
 
 <span class="n">julia</span><span class="o">&gt;</span> <span class="p">@</span><span class="n">noinline</span> <span class="n">child</span><span class="p">()</span> <span class="o">=</span> <span class="n">stacktrace</span><span class="p">()</span>
 <span class="n">child</span> <span class="p">(</span><span class="n">generic</span> <span class="k">function</span><span class="nf"> with</span> <span class="mi">1</span> <span class="n">method</span><span class="p">)</span>
@@ -599,37 +606,34 @@ alias <a class="reference internal" href="../stdlib/stacktraces.html#Base.StackT
 <span class="n">grandparent</span> <span class="p">(</span><span class="n">generic</span> <span class="k">function</span><span class="nf"> with</span> <span class="mi">1</span> <span class="n">method</span><span class="p">)</span>
 
 <span class="n">julia</span><span class="o">&gt;</span> <span class="n">grandparent</span><span class="p">()</span>
-<span class="o">...-</span><span class="n">element</span> <span class="n">Array</span><span class="p">{</span><span class="n">StackFrame</span><span class="p">,</span><span class="mi">1</span><span class="p">}:</span>
- <span class="n">child</span> <span class="n">at</span> <span class="n">none</span><span class="p">:</span><span class="mi">1</span>
- <span class="n">parent</span> <span class="n">at</span> <span class="n">none</span><span class="p">:</span><span class="mi">1</span>
- <span class="n">grandparent</span> <span class="n">at</span> <span class="n">none</span><span class="p">:</span><span class="mi">1</span>
- <span class="n">eval</span> <span class="n">at</span> <span class="n">boot</span><span class="o">.</span><span class="n">jl</span><span class="p">:</span><span class="mi">265</span>
- <span class="o">...</span>
+<span class="mi">8</span><span class="o">-</span><span class="n">element</span> <span class="n">Array</span><span class="p">{</span><span class="n">StackFrame</span><span class="p">,</span><span class="mi">1</span><span class="p">}:</span>
+  <span class="k">in</span> <span class="n">child</span><span class="p">()</span> <span class="n">at</span> <span class="n">none</span><span class="p">:</span><span class="mi">1</span>
+  <span class="k">in</span> <span class="n">parent</span><span class="p">()</span> <span class="n">at</span> <span class="n">none</span><span class="p">:</span><span class="mi">1</span>
+  <span class="k">in</span> <span class="n">grandparent</span><span class="p">()</span> <span class="n">at</span> <span class="n">none</span><span class="p">:</span><span class="mi">1</span>
+  <span class="o">...</span>
 </pre></div>
 </div>
 <p>Note that when calling <a class="reference internal" href="../stdlib/stacktraces.html#Base.stacktrace" title="Base.stacktrace"><code class="xref jl jl-func docutils literal"><span class="pre">stacktrace()</span></code></a> you&#8217;ll typically see a frame with
-<code class="docutils literal"><span class="pre">eval</span> <span class="pre">at</span> <span class="pre">boot.jl</span></code>. When calling <a class="reference internal" href="../stdlib/stacktraces.html#Base.stacktrace" title="Base.stacktrace"><code class="xref jl jl-func docutils literal"><span class="pre">stacktrace()</span></code></a> from the REPL you&#8217;ll also have a few
+<code class="docutils literal"><span class="pre">eval(...)</span> <span class="pre">at</span> <span class="pre">boot.jl</span></code>. When calling <a class="reference internal" href="../stdlib/stacktraces.html#Base.stacktrace" title="Base.stacktrace"><code class="xref jl jl-func docutils literal"><span class="pre">stacktrace()</span></code></a> from the REPL you&#8217;ll also have a few
 extra frames in the stack from <code class="docutils literal"><span class="pre">REPL.jl</span></code>, usually looking something like this:</p>
 <div class="highlight-julia"><div class="highlight"><pre><span></span><span class="n">julia</span><span class="o">&gt;</span> <span class="n">example</span><span class="p">()</span> <span class="o">=</span> <span class="n">stacktrace</span><span class="p">()</span>
 <span class="n">example</span> <span class="p">(</span><span class="n">generic</span> <span class="k">function</span><span class="nf"> with</span> <span class="mi">1</span> <span class="n">method</span><span class="p">)</span>
 
 <span class="n">julia</span><span class="o">&gt;</span> <span class="n">example</span><span class="p">()</span>
-<span class="mi">4</span><span class="o">-</span><span class="n">element</span> <span class="n">Array</span><span class="p">{</span><span class="n">StackFrame</span><span class="p">,</span><span class="mi">1</span><span class="p">}:</span>
- <span class="n">example</span> <span class="n">at</span> <span class="n">none</span><span class="p">:</span><span class="mi">1</span>
- <span class="n">eval</span> <span class="n">at</span> <span class="n">boot</span><span class="o">.</span><span class="n">jl</span><span class="p">:</span><span class="mi">265</span>
- <span class="p">[</span><span class="n">inlined</span> <span class="n">code</span> <span class="n">from</span> <span class="n">REPL</span><span class="o">.</span><span class="n">jl</span><span class="p">:</span><span class="mi">3</span><span class="p">]</span> <span class="n">eval_user_input</span> <span class="n">at</span> <span class="n">REPL</span><span class="o">.</span><span class="n">jl</span><span class="p">:</span><span class="mi">62</span>
- <span class="p">[</span><span class="n">inlined</span> <span class="n">code</span> <span class="n">from</span> <span class="n">REPL</span><span class="o">.</span><span class="n">jl</span><span class="p">:</span><span class="mi">92</span><span class="p">]</span> <span class="n">anonymous</span> <span class="n">at</span> <span class="n">task</span><span class="o">.</span><span class="n">jl</span><span class="p">:</span><span class="mi">63</span>
+<span class="mi">5</span><span class="o">-</span><span class="n">element</span> <span class="n">Array</span><span class="p">{</span><span class="n">StackFrame</span><span class="p">,</span><span class="mi">1</span><span class="p">}:</span>
+  <span class="k">in</span> <span class="n">example</span><span class="p">()</span> <span class="n">at</span> <span class="n">REPL</span><span class="p">[</span><span class="mi">1</span><span class="p">]:</span><span class="mi">1</span>
+  <span class="k">in</span> <span class="n">eval</span><span class="p">(::</span><span class="n">Module</span><span class="p">,</span> <span class="p">::</span><span class="kt">Any</span><span class="p">)</span> <span class="n">at</span> <span class="n">boot</span><span class="o">.</span><span class="n">jl</span><span class="p">:</span><span class="mi">234</span>
+  <span class="k">in</span> <span class="n">eval_user_input</span><span class="p">(::</span><span class="kt">Any</span><span class="p">,</span> <span class="p">::</span><span class="n">Base</span><span class="o">.</span><span class="n">REPL</span><span class="o">.</span><span class="n">REPLBackend</span><span class="p">)</span> <span class="n">at</span> <span class="n">REPL</span><span class="o">.</span><span class="n">jl</span><span class="p">:</span><span class="mi">62</span>
+  <span class="k">in</span> <span class="k">macro</span> <span class="n">expansion</span> <span class="n">at</span> <span class="n">REPL</span><span class="o">.</span><span class="n">jl</span><span class="p">:</span><span class="mi">92</span> <span class="p">[</span><span class="n">inlined</span><span class="p">]</span>
+  <span class="k">in</span> <span class="p">(::</span><span class="n">Base</span><span class="o">.</span><span class="n">REPL</span><span class="o">.</span><span class="c">##1#2{Base.REPL.REPLBackend})() at event.jl:46</span>
 </pre></div>
 </div>
 </div>
 <div class="section" id="extracting-useful-information">
 <h2>Extracting useful information<a class="headerlink" href="#extracting-useful-information" title="Permalink to this headline">¶</a></h2>
-<p>Each <a class="reference internal" href="../stdlib/stacktraces.html#Base.StackFrame" title="Base.StackFrame"><code class="xref jl jl-obj docutils literal"><span class="pre">StackFrame</span></code></a> contains the function name, file name, line number, file and line
-information for inlined functions, a flag indicating whether it is a C function (by default
-C functions do not appear in the stack trace), and an integer representation of the pointer
-returned by <a class="reference internal" href="../stdlib/base.html#Base.backtrace" title="Base.backtrace"><code class="xref jl jl-func docutils literal"><span class="pre">backtrace()</span></code></a>:</p>
+<p>Each <a class="reference internal" href="../stdlib/stacktraces.html#Base.StackFrame" title="Base.StackFrame"><code class="xref jl jl-obj docutils literal"><span class="pre">StackFrame</span></code></a> contains the function name, file name, line number, lambda info, a flag indicating whether the frame has been inlined, a flag indicating whether it is a C function (by default C functions do not appear in the stack trace), and an integer representation of the pointer returned by <a class="reference internal" href="../stdlib/base.html#Base.backtrace" title="Base.backtrace"><code class="xref jl jl-func docutils literal"><span class="pre">backtrace()</span></code></a>:</p>
 <div class="highlight-julia"><div class="highlight"><pre><span></span><span class="n">julia</span><span class="o">&gt;</span> <span class="n">top_frame</span> <span class="o">=</span> <span class="n">stacktrace</span><span class="p">()[</span><span class="mi">1</span><span class="p">]</span>
-<span class="n">eval</span> <span class="n">at</span> <span class="n">boot</span><span class="o">.</span><span class="n">jl</span><span class="p">:</span><span class="mi">265</span>
+ <span class="k">in</span> <span class="n">eval</span><span class="p">(::</span><span class="n">Module</span><span class="p">,</span> <span class="p">::</span><span class="kt">Any</span><span class="p">)</span> <span class="n">at</span> <span class="n">boot</span><span class="o">.</span><span class="n">jl</span><span class="p">:</span><span class="mi">234</span>
 
 <span class="n">julia</span><span class="o">&gt;</span> <span class="n">top_frame</span><span class="o">.</span><span class="n">func</span>
 <span class="p">:</span><span class="n">eval</span>
@@ -638,13 +642,14 @@ returned by <a class="reference internal" href="../stdlib/base.html#Base.backtra
 <span class="n">Symbol</span><span class="p">(</span><span class="s">&quot;./boot.jl&quot;</span><span class="p">)</span>
 
 <span class="n">julia</span><span class="o">&gt;</span> <span class="n">top_frame</span><span class="o">.</span><span class="n">line</span>
-<span class="mi">265</span>
+<span class="mi">234</span>
 
-<span class="n">julia</span><span class="o">&gt;</span> <span class="n">top_frame</span><span class="o">.</span><span class="n">inlined_file</span>
-<span class="n">Symbol</span><span class="p">(</span><span class="s">&quot;&quot;</span><span class="p">)</span>
+<span class="n">julia</span><span class="o">&gt;</span> <span class="n">top_frame</span><span class="o">.</span><span class="n">linfo</span>
+<span class="n">Nullable</span><span class="p">{</span><span class="n">LambdaInfo</span><span class="p">}(</span><span class="n">LambdaInfo</span> <span class="k">for</span> <span class="n">eval</span><span class="p">(::</span><span class="n">Module</span><span class="p">,</span> <span class="p">::</span><span class="kt">Any</span><span class="p">)</span>
+<span class="o">...</span>
 
-<span class="n">julia</span><span class="o">&gt;</span> <span class="n">top_frame</span><span class="o">.</span><span class="n">inlined_line</span>
-<span class="o">-</span><span class="mi">1</span>
+<span class="n">julia</span><span class="o">&gt;</span> <span class="n">top_frame</span><span class="o">.</span><span class="n">inlined</span>
+<span class="n">false</span>
 
 <span class="n">julia</span><span class="o">&gt;</span> <span class="n">top_frame</span><span class="o">.</span><span class="n">from_c</span>
 <span class="n">false</span>
@@ -672,10 +677,10 @@ helpful in many places, the most obvious application is in error handling and de
 <span class="n">example</span> <span class="p">(</span><span class="n">generic</span> <span class="k">function</span><span class="nf"> with</span> <span class="mi">1</span> <span class="n">method</span><span class="p">)</span>
 
 <span class="n">julia</span><span class="o">&gt;</span> <span class="n">example</span><span class="p">()</span>
-<span class="o">...-</span><span class="n">element</span> <span class="n">Array</span><span class="p">{</span><span class="n">StackFrame</span><span class="p">,</span><span class="mi">1</span><span class="p">}:</span>
- <span class="n">example</span> <span class="n">at</span> <span class="n">none</span><span class="p">:</span><span class="mi">4</span>
- <span class="n">eval</span> <span class="n">at</span> <span class="n">boot</span><span class="o">.</span><span class="n">jl</span><span class="p">:</span><span class="mi">265</span>
- <span class="o">...</span>
+<span class="mi">6</span><span class="o">-</span><span class="n">element</span> <span class="n">Array</span><span class="p">{</span><span class="n">StackFrame</span><span class="p">,</span><span class="mi">1</span><span class="p">}:</span>
+  <span class="k">in</span> <span class="n">example</span><span class="p">()</span> <span class="n">at</span> <span class="n">none</span><span class="p">:</span><span class="mi">4</span>
+  <span class="k">in</span> <span class="n">eval</span><span class="p">(::</span><span class="n">Module</span><span class="p">,</span> <span class="p">::</span><span class="kt">Any</span><span class="p">)</span> <span class="n">at</span> <span class="n">boot</span><span class="o">.</span><span class="n">jl</span><span class="p">:</span><span class="mi">234</span>
+  <span class="o">...</span>
 </pre></div>
 </div>
 <p>You may notice that in the example above the first stack frame points points at line 4,
@@ -698,11 +703,10 @@ returns stack information for the context of the most recent exception:</p>
 <span class="n">example</span> <span class="p">(</span><span class="n">generic</span> <span class="k">function</span><span class="nf"> with</span> <span class="mi">1</span> <span class="n">method</span><span class="p">)</span>
 
 <span class="n">julia</span><span class="o">&gt;</span> <span class="n">example</span><span class="p">()</span>
-<span class="o">...-</span><span class="n">element</span> <span class="n">Array</span><span class="p">{</span><span class="n">StackFrame</span><span class="p">,</span><span class="mi">1</span><span class="p">}:</span>
- <span class="n">bad_function</span> <span class="n">at</span> <span class="n">none</span><span class="p">:</span><span class="mi">1</span>
- <span class="n">example</span> <span class="n">at</span> <span class="n">none</span><span class="p">:</span><span class="mi">2</span>
- <span class="n">eval</span> <span class="n">at</span> <span class="n">boot</span><span class="o">.</span><span class="n">jl</span><span class="p">:</span><span class="mi">265</span>
- <span class="o">...</span>
+<span class="mi">7</span><span class="o">-</span><span class="n">element</span> <span class="n">Array</span><span class="p">{</span><span class="n">StackFrame</span><span class="p">,</span><span class="mi">1</span><span class="p">}:</span>
+  <span class="k">in</span> <span class="n">bad_function</span><span class="p">()</span> <span class="n">at</span> <span class="n">none</span><span class="p">:</span><span class="mi">1</span>
+  <span class="k">in</span> <span class="n">example</span><span class="p">()</span> <span class="n">at</span> <span class="n">none</span><span class="p">:</span><span class="mi">2</span>
+  <span class="o">...</span>
 </pre></div>
 </div>
 <p>Notice that the stack trace now indicates the appropriate line number and the missing frame.</p>
@@ -724,12 +728,11 @@ returns stack information for the context of the most recent exception:</p>
 
 <span class="n">julia</span><span class="o">&gt;</span> <span class="n">grandparent</span><span class="p">()</span>
 <span class="n">ERROR</span><span class="p">:</span> <span class="n">Whoops!</span>
-<span class="o">...-</span><span class="n">element</span> <span class="n">Array</span><span class="p">{</span><span class="n">StackFrame</span><span class="p">,</span><span class="mi">1</span><span class="p">}:</span>
- <span class="n">child</span> <span class="n">at</span> <span class="n">none</span><span class="p">:</span><span class="mi">1</span>
- <span class="n">parent</span> <span class="n">at</span> <span class="n">none</span><span class="p">:</span><span class="mi">1</span>
- <span class="n">grandparent</span> <span class="n">at</span> <span class="n">none</span><span class="p">:</span><span class="mi">3</span>
- <span class="n">eval</span> <span class="n">at</span> <span class="n">boot</span><span class="o">.</span><span class="n">jl</span><span class="p">:</span><span class="mi">265</span>
- <span class="o">...</span>
+<span class="mi">8</span><span class="o">-</span><span class="n">element</span> <span class="n">Array</span><span class="p">{</span><span class="n">StackFrame</span><span class="p">,</span><span class="mi">1</span><span class="p">}:</span>
+  <span class="k">in</span> <span class="n">child</span><span class="p">()</span> <span class="n">at</span> <span class="n">none</span><span class="p">:</span><span class="mi">1</span>
+  <span class="k">in</span> <span class="n">parent</span><span class="p">()</span> <span class="n">at</span> <span class="n">none</span><span class="p">:</span><span class="mi">1</span>
+  <span class="k">in</span> <span class="n">grandparent</span><span class="p">()</span> <span class="n">at</span> <span class="n">none</span><span class="p">:</span><span class="mi">3</span>
+  <span class="o">...</span>
 </pre></div>
 </div>
 </div>
@@ -738,61 +741,78 @@ returns stack information for the context of the most recent exception:</p>
 <p>A call to <a class="reference internal" href="../stdlib/base.html#Base.backtrace" title="Base.backtrace"><code class="xref jl jl-func docutils literal"><span class="pre">backtrace()</span></code></a> returns a vector of <code class="docutils literal"><span class="pre">Ptr{Void}</span></code>, which may then be passed into
 <a class="reference internal" href="../stdlib/stacktraces.html#Base.stacktrace" title="Base.stacktrace"><code class="xref jl jl-func docutils literal"><span class="pre">stacktrace()</span></code></a> for translation:</p>
 <div class="highlight-julia"><div class="highlight"><pre><span></span><span class="n">julia</span><span class="o">&gt;</span> <span class="n">trace</span> <span class="o">=</span> <span class="n">backtrace</span><span class="p">()</span>
-<span class="mi">15</span><span class="o">-</span><span class="n">element</span> <span class="n">Array</span><span class="p">{</span><span class="n">Ptr</span><span class="p">{</span><span class="n">Void</span><span class="p">},</span><span class="mi">1</span><span class="p">}:</span>
- <span class="n">Ptr</span><span class="p">{</span><span class="n">Void</span><span class="p">}</span> <span class="p">@</span><span class="mh">0x000000010527895e</span>
- <span class="n">Ptr</span><span class="p">{</span><span class="n">Void</span><span class="p">}</span> <span class="p">@</span><span class="mh">0x0000000309bf6220</span>
- <span class="n">Ptr</span><span class="p">{</span><span class="n">Void</span><span class="p">}</span> <span class="p">@</span><span class="mh">0x0000000309bf61a0</span>
- <span class="n">Ptr</span><span class="p">{</span><span class="n">Void</span><span class="p">}</span> <span class="p">@</span><span class="mh">0x00000001052733b4</span>
- <span class="n">Ptr</span><span class="p">{</span><span class="n">Void</span><span class="p">}</span> <span class="p">@</span><span class="mh">0x0000000105271a0e</span>
- <span class="n">Ptr</span><span class="p">{</span><span class="n">Void</span><span class="p">}</span> <span class="p">@</span><span class="mh">0x000000010527189d</span>
- <span class="n">Ptr</span><span class="p">{</span><span class="n">Void</span><span class="p">}</span> <span class="p">@</span><span class="mh">0x0000000105272e6d</span>
- <span class="n">Ptr</span><span class="p">{</span><span class="n">Void</span><span class="p">}</span> <span class="p">@</span><span class="mh">0x0000000105272cef</span>
- <span class="n">Ptr</span><span class="p">{</span><span class="n">Void</span><span class="p">}</span> <span class="p">@</span><span class="mh">0x0000000105285b88</span>
- <span class="n">Ptr</span><span class="p">{</span><span class="n">Void</span><span class="p">}</span> <span class="p">@</span><span class="mh">0x000000010526b50e</span>
- <span class="n">Ptr</span><span class="p">{</span><span class="n">Void</span><span class="p">}</span> <span class="p">@</span><span class="mh">0x000000010663cc28</span>
- <span class="n">Ptr</span><span class="p">{</span><span class="n">Void</span><span class="p">}</span> <span class="p">@</span><span class="mh">0x0000000309bbc20f</span>
- <span class="n">Ptr</span><span class="p">{</span><span class="n">Void</span><span class="p">}</span> <span class="p">@</span><span class="mh">0x0000000309bbbde7</span>
- <span class="n">Ptr</span><span class="p">{</span><span class="n">Void</span><span class="p">}</span> <span class="p">@</span><span class="mh">0x0000000309bb0262</span>
- <span class="n">Ptr</span><span class="p">{</span><span class="n">Void</span><span class="p">}</span> <span class="p">@</span><span class="mh">0x000000010527980e</span>
+<span class="mi">20</span><span class="o">-</span><span class="n">element</span> <span class="n">Array</span><span class="p">{</span><span class="n">Ptr</span><span class="p">{</span><span class="n">Void</span><span class="p">},</span><span class="mi">1</span><span class="p">}:</span>
+ <span class="n">Ptr</span><span class="p">{</span><span class="n">Void</span><span class="p">}</span> <span class="p">@</span><span class="mh">0x0000000100a26fc2</span>
+ <span class="n">Ptr</span><span class="p">{</span><span class="n">Void</span><span class="p">}</span> <span class="p">@</span><span class="mh">0x00000001029435df</span>
+ <span class="n">Ptr</span><span class="p">{</span><span class="n">Void</span><span class="p">}</span> <span class="p">@</span><span class="mh">0x0000000102943635</span>
+ <span class="n">Ptr</span><span class="p">{</span><span class="n">Void</span><span class="p">}</span> <span class="p">@</span><span class="mh">0x00000001009e9620</span>
+ <span class="n">Ptr</span><span class="p">{</span><span class="n">Void</span><span class="p">}</span> <span class="p">@</span><span class="mh">0x00000001009fe1e8</span>
+ <span class="n">Ptr</span><span class="p">{</span><span class="n">Void</span><span class="p">}</span> <span class="p">@</span><span class="mh">0x00000001009fc7b6</span>
+ <span class="n">Ptr</span><span class="p">{</span><span class="n">Void</span><span class="p">}</span> <span class="p">@</span><span class="mh">0x00000001009fdae3</span>
+ <span class="n">Ptr</span><span class="p">{</span><span class="n">Void</span><span class="p">}</span> <span class="p">@</span><span class="mh">0x00000001009fe0d2</span>
+ <span class="n">Ptr</span><span class="p">{</span><span class="n">Void</span><span class="p">}</span> <span class="p">@</span><span class="mh">0x0000000100a1321b</span>
+ <span class="n">Ptr</span><span class="p">{</span><span class="n">Void</span><span class="p">}</span> <span class="p">@</span><span class="mh">0x00000001009f64e7</span>
+ <span class="n">Ptr</span><span class="p">{</span><span class="n">Void</span><span class="p">}</span> <span class="p">@</span><span class="mh">0x000000010265ac5d</span>
+ <span class="n">Ptr</span><span class="p">{</span><span class="n">Void</span><span class="p">}</span> <span class="p">@</span><span class="mh">0x000000010265acc1</span>
+ <span class="n">Ptr</span><span class="p">{</span><span class="n">Void</span><span class="p">}</span> <span class="p">@</span><span class="mh">0x00000001009e9620</span>
+ <span class="n">Ptr</span><span class="p">{</span><span class="n">Void</span><span class="p">}</span> <span class="p">@</span><span class="mh">0x000000031007744b</span>
+ <span class="n">Ptr</span><span class="p">{</span><span class="n">Void</span><span class="p">}</span> <span class="p">@</span><span class="mh">0x0000000310077537</span>
+ <span class="n">Ptr</span><span class="p">{</span><span class="n">Void</span><span class="p">}</span> <span class="p">@</span><span class="mh">0x00000001009e9620</span>
+ <span class="n">Ptr</span><span class="p">{</span><span class="n">Void</span><span class="p">}</span> <span class="p">@</span><span class="mh">0x000000031006feec</span>
+ <span class="n">Ptr</span><span class="p">{</span><span class="n">Void</span><span class="p">}</span> <span class="p">@</span><span class="mh">0x00000003100701b0</span>
+ <span class="n">Ptr</span><span class="p">{</span><span class="n">Void</span><span class="p">}</span> <span class="p">@</span><span class="mh">0x00000001009e9635</span>
+ <span class="n">Ptr</span><span class="p">{</span><span class="n">Void</span><span class="p">}</span> <span class="p">@</span><span class="mh">0x0000000100a06418</span>
 
 <span class="n">julia</span><span class="o">&gt;</span> <span class="n">stacktrace</span><span class="p">(</span><span class="n">trace</span><span class="p">)</span>
-<span class="mi">4</span><span class="o">-</span><span class="n">element</span> <span class="n">Array</span><span class="p">{</span><span class="n">StackFrame</span><span class="p">,</span><span class="mi">1</span><span class="p">}:</span>
- <span class="n">backtrace</span> <span class="n">at</span> <span class="nb">error</span><span class="o">.</span><span class="n">jl</span><span class="p">:</span><span class="mi">26</span>
- <span class="n">eval</span> <span class="n">at</span> <span class="n">boot</span><span class="o">.</span><span class="n">jl</span><span class="p">:</span><span class="mi">265</span>
- <span class="p">[</span><span class="n">inlined</span> <span class="n">code</span> <span class="n">from</span> <span class="n">REPL</span><span class="o">.</span><span class="n">jl</span><span class="p">:</span><span class="mi">3</span><span class="p">]</span> <span class="n">eval_user_input</span> <span class="n">at</span> <span class="n">REPL</span><span class="o">.</span><span class="n">jl</span><span class="p">:</span><span class="mi">62</span>
- <span class="p">[</span><span class="n">inlined</span> <span class="n">code</span> <span class="n">from</span> <span class="n">REPL</span><span class="o">.</span><span class="n">jl</span><span class="p">:</span><span class="mi">92</span><span class="p">]</span> <span class="n">anonymous</span> <span class="n">at</span> <span class="n">task</span><span class="o">.</span><span class="n">jl</span><span class="p">:</span><span class="mi">63</span>
+<span class="mi">5</span><span class="o">-</span><span class="n">element</span> <span class="n">Array</span><span class="p">{</span><span class="n">StackFrame</span><span class="p">,</span><span class="mi">1</span><span class="p">}:</span>
+  <span class="k">in</span> <span class="n">backtrace</span><span class="p">()</span> <span class="n">at</span> <span class="nb">error</span><span class="o">.</span><span class="n">jl</span><span class="p">:</span><span class="mi">26</span>
+  <span class="k">in</span> <span class="n">eval</span><span class="p">(::</span><span class="n">Module</span><span class="p">,</span> <span class="p">::</span><span class="kt">Any</span><span class="p">)</span> <span class="n">at</span> <span class="n">boot</span><span class="o">.</span><span class="n">jl</span><span class="p">:</span><span class="mi">231</span>
+  <span class="k">in</span> <span class="n">eval_user_input</span><span class="p">(::</span><span class="kt">Any</span><span class="p">,</span> <span class="p">::</span><span class="n">Base</span><span class="o">.</span><span class="n">REPL</span><span class="o">.</span><span class="n">REPLBackend</span><span class="p">)</span> <span class="n">at</span> <span class="n">REPL</span><span class="o">.</span><span class="n">jl</span><span class="p">:</span><span class="mi">62</span>
+  <span class="k">in</span> <span class="k">macro</span> <span class="n">expansion</span> <span class="n">at</span> <span class="n">REPL</span><span class="o">.</span><span class="n">jl</span><span class="p">:</span><span class="mi">92</span> <span class="p">[</span><span class="n">inlined</span><span class="p">]</span>
+  <span class="k">in</span> <span class="p">(::</span><span class="n">Base</span><span class="o">.</span><span class="n">REPL</span><span class="o">.</span><span class="c">##1#2{Base.REPL.REPLBackend})() at event.jl:46</span>
 </pre></div>
 </div>
 <p>Notice that the vector returned by <a class="reference internal" href="../stdlib/base.html#Base.backtrace" title="Base.backtrace"><code class="xref jl jl-func docutils literal"><span class="pre">backtrace()</span></code></a> had 15 pointers, while the vector returned by <a class="reference internal" href="../stdlib/stacktraces.html#Base.stacktrace" title="Base.stacktrace"><code class="xref jl jl-func docutils literal"><span class="pre">stacktrace()</span></code></a> only has 4. This is because, by default, <a class="reference internal" href="../stdlib/stacktraces.html#Base.stacktrace" title="Base.stacktrace"><code class="xref jl jl-func docutils literal"><span class="pre">stacktrace()</span></code></a> removes any lower-level C functions from the stack. If you want to include stack frames from C calls, you can do it like this:</p>
-<div class="highlight-julia"><div class="highlight"><pre><span></span><span class="n">julia</span><span class="o">&gt;</span> <span class="n">stacktrace</span><span class="p">(</span><span class="n">stack</span><span class="p">,</span> <span class="n">true</span><span class="p">)</span>
-<span class="mi">15</span><span class="o">-</span><span class="n">element</span> <span class="n">Array</span><span class="p">{</span><span class="n">StackFrame</span><span class="p">,</span><span class="mi">1</span><span class="p">}:</span>
- <span class="p">[</span><span class="n">inlined</span> <span class="n">code</span> <span class="n">from</span> <span class="n">task</span><span class="o">.</span><span class="n">c</span><span class="p">:</span><span class="mi">651</span><span class="p">]</span> <span class="n">rec_backtrace</span> <span class="n">at</span> <span class="n">task</span><span class="o">.</span><span class="n">c</span><span class="p">:</span><span class="mi">711</span>
- <span class="n">backtrace</span> <span class="n">at</span> <span class="nb">error</span><span class="o">.</span><span class="n">jl</span><span class="p">:</span><span class="mi">26</span>
- <span class="n">jlcall_backtrace_23146</span> <span class="n">at</span> <span class="p">:</span><span class="o">-</span><span class="mi">1</span>
- <span class="p">[</span><span class="n">inlined</span> <span class="n">code</span> <span class="n">from</span> <span class="n">interpreter</span><span class="o">.</span><span class="n">c</span><span class="p">:</span><span class="mi">55</span><span class="p">]</span> <span class="n">jl_apply</span> <span class="n">at</span> <span class="n">interpreter</span><span class="o">.</span><span class="n">c</span><span class="p">:</span><span class="mi">65</span>
- <span class="n">eval</span> <span class="n">at</span> <span class="n">interpreter</span><span class="o">.</span><span class="n">c</span><span class="p">:</span><span class="mi">214</span>
- <span class="n">eval</span> <span class="n">at</span> <span class="n">interpreter</span><span class="o">.</span><span class="n">c</span><span class="p">:</span><span class="mi">220</span>
- <span class="n">eval_body</span> <span class="n">at</span> <span class="n">interpreter</span><span class="o">.</span><span class="n">c</span><span class="p">:</span><span class="mi">601</span>
- <span class="n">jl_toplevel_eval_body</span> <span class="n">at</span> <span class="n">interpreter</span><span class="o">.</span><span class="n">c</span><span class="p">:</span><span class="mi">534</span>
- <span class="n">jl_toplevel_eval_flex</span> <span class="n">at</span> <span class="n">toplevel</span><span class="o">.</span><span class="n">c</span><span class="p">:</span><span class="mi">525</span>
- <span class="n">jl_toplevel_eval_in_warn</span> <span class="n">at</span> <span class="n">builtins</span><span class="o">.</span><span class="n">c</span><span class="p">:</span><span class="mi">590</span>
- <span class="n">eval</span> <span class="n">at</span> <span class="n">boot</span><span class="o">.</span><span class="n">jl</span><span class="p">:</span><span class="mi">265</span>
- <span class="p">[</span><span class="n">inlined</span> <span class="n">code</span> <span class="n">from</span> <span class="n">REPL</span><span class="o">.</span><span class="n">jl</span><span class="p">:</span><span class="mi">3</span><span class="p">]</span> <span class="n">eval_user_input</span> <span class="n">at</span> <span class="n">REPL</span><span class="o">.</span><span class="n">jl</span><span class="p">:</span><span class="mi">62</span>
- <span class="n">jlcall_eval_user_input_22658</span> <span class="n">at</span> <span class="p">:</span><span class="o">-</span><span class="mi">1</span>
- <span class="p">[</span><span class="n">inlined</span> <span class="n">code</span> <span class="n">from</span> <span class="n">REPL</span><span class="o">.</span><span class="n">jl</span><span class="p">:</span><span class="mi">92</span><span class="p">]</span> <span class="n">anonymous</span> <span class="n">at</span> <span class="n">task</span><span class="o">.</span><span class="n">jl</span><span class="p">:</span><span class="mi">63</span>
- <span class="p">[</span><span class="n">inlined</span> <span class="n">code</span> <span class="n">from</span> <span class="n">julia</span><span class="o">.</span><span class="n">h</span><span class="p">:</span><span class="mi">1352</span><span class="p">]</span> <span class="n">jl_apply</span> <span class="n">at</span> <span class="n">task</span><span class="o">.</span><span class="n">c</span><span class="p">:</span><span class="mi">246</span>
+<div class="highlight-julia"><div class="highlight"><pre><span></span><span class="n">julia</span><span class="o">&gt;</span> <span class="n">stacktrace</span><span class="p">(</span><span class="n">trace</span><span class="p">,</span> <span class="n">true</span><span class="p">)</span>
+<span class="mi">26</span><span class="o">-</span><span class="n">element</span> <span class="n">Array</span><span class="p">{</span><span class="n">StackFrame</span><span class="p">,</span><span class="mi">1</span><span class="p">}:</span>
+  <span class="k">in</span> <span class="n">jl_backtrace_from_here</span> <span class="n">at</span> <span class="n">stackwalk</span><span class="o">.</span><span class="n">c</span><span class="p">:</span><span class="mi">104</span>
+  <span class="k">in</span> <span class="n">backtrace</span><span class="p">()</span> <span class="n">at</span> <span class="nb">error</span><span class="o">.</span><span class="n">jl</span><span class="p">:</span><span class="mi">26</span>
+  <span class="k">in</span> <span class="n">ip</span><span class="p">:</span><span class="mh">0x102943635</span>
+  <span class="k">in</span> <span class="n">jl_call_method_internal</span> <span class="n">at</span> <span class="n">julia_internal</span><span class="o">.</span><span class="n">h</span><span class="p">:</span><span class="mi">86</span> <span class="p">[</span><span class="n">inlined</span><span class="p">]</span>
+  <span class="k">in</span> <span class="n">jl_apply_generic</span> <span class="n">at</span> <span class="n">gf</span><span class="o">.</span><span class="n">c</span><span class="p">:</span><span class="mi">1805</span>
+  <span class="k">in</span> <span class="n">do_call</span> <span class="n">at</span> <span class="n">interpreter</span><span class="o">.</span><span class="n">c</span><span class="p">:</span><span class="mi">65</span>
+  <span class="k">in</span> <span class="n">eval</span> <span class="n">at</span> <span class="n">interpreter</span><span class="o">.</span><span class="n">c</span><span class="p">:</span><span class="mi">188</span>
+  <span class="k">in</span> <span class="n">eval_body</span> <span class="n">at</span> <span class="n">interpreter</span><span class="o">.</span><span class="n">c</span><span class="p">:</span><span class="mi">469</span>
+  <span class="k">in</span> <span class="n">jl_interpret_call</span> <span class="n">at</span> <span class="n">interpreter</span><span class="o">.</span><span class="n">c</span><span class="p">:</span><span class="mi">573</span>
+  <span class="k">in</span> <span class="n">jl_toplevel_eval_flex</span> <span class="n">at</span> <span class="n">toplevel</span><span class="o">.</span><span class="n">c</span><span class="p">:</span><span class="mi">543</span>
+  <span class="k">in</span> <span class="n">jl_toplevel_eval_in_warn</span> <span class="n">at</span> <span class="n">builtins</span><span class="o">.</span><span class="n">c</span><span class="p">:</span><span class="mi">571</span>
+  <span class="k">in</span> <span class="n">eval</span><span class="p">(::</span><span class="n">Module</span><span class="p">,</span> <span class="p">::</span><span class="kt">Any</span><span class="p">)</span> <span class="n">at</span> <span class="n">boot</span><span class="o">.</span><span class="n">jl</span><span class="p">:</span><span class="mi">231</span>
+  <span class="k">in</span> <span class="n">ip</span><span class="p">:</span><span class="mh">0x10265acc1</span>
+  <span class="k">in</span> <span class="n">jl_call_method_internal</span> <span class="n">at</span> <span class="n">julia_internal</span><span class="o">.</span><span class="n">h</span><span class="p">:</span><span class="mi">86</span> <span class="p">[</span><span class="n">inlined</span><span class="p">]</span>
+  <span class="k">in</span> <span class="n">jl_apply_generic</span> <span class="n">at</span> <span class="n">gf</span><span class="o">.</span><span class="n">c</span><span class="p">:</span><span class="mi">1805</span>
+  <span class="k">in</span> <span class="n">eval_user_input</span><span class="p">(::</span><span class="kt">Any</span><span class="p">,</span> <span class="p">::</span><span class="n">Base</span><span class="o">.</span><span class="n">REPL</span><span class="o">.</span><span class="n">REPLBackend</span><span class="p">)</span> <span class="n">at</span> <span class="n">REPL</span><span class="o">.</span><span class="n">jl</span><span class="p">:</span><span class="mi">62</span>
+  <span class="k">in</span> <span class="n">ip</span><span class="p">:</span><span class="mh">0x310077537</span>
+  <span class="k">in</span> <span class="n">jl_call_method_internal</span> <span class="n">at</span> <span class="n">julia_internal</span><span class="o">.</span><span class="n">h</span><span class="p">:</span><span class="mi">86</span> <span class="p">[</span><span class="n">inlined</span><span class="p">]</span>
+  <span class="k">in</span> <span class="n">jl_apply_generic</span> <span class="n">at</span> <span class="n">gf</span><span class="o">.</span><span class="n">c</span><span class="p">:</span><span class="mi">1805</span>
+  <span class="k">in</span> <span class="k">macro</span> <span class="n">expansion</span> <span class="n">at</span> <span class="n">REPL</span><span class="o">.</span><span class="n">jl</span><span class="p">:</span><span class="mi">92</span> <span class="p">[</span><span class="n">inlined</span><span class="p">]</span>
+  <span class="k">in</span> <span class="p">(::</span><span class="n">Base</span><span class="o">.</span><span class="n">REPL</span><span class="o">.</span><span class="c">##1#2{Base.REPL.REPLBackend})() at event.jl:46</span>
+  <span class="k">in</span> <span class="n">ip</span><span class="p">:</span><span class="mh">0x3100701b0</span>
+  <span class="k">in</span> <span class="n">jl_call_method_internal</span> <span class="n">at</span> <span class="n">julia_internal</span><span class="o">.</span><span class="n">h</span><span class="p">:</span><span class="mi">86</span> <span class="p">[</span><span class="n">inlined</span><span class="p">]</span>
+  <span class="k">in</span> <span class="n">jl_apply_generic</span> <span class="n">at</span> <span class="n">gf</span><span class="o">.</span><span class="n">c</span><span class="p">:</span><span class="mi">1795</span>
+  <span class="k">in</span> <span class="n">jl_apply</span> <span class="n">at</span> <span class="n">julia</span><span class="o">.</span><span class="n">h</span><span class="p">:</span><span class="mi">1388</span> <span class="p">[</span><span class="n">inlined</span><span class="p">]</span>
+  <span class="k">in</span> <span class="n">start_task</span> <span class="n">at</span> <span class="n">task</span><span class="o">.</span><span class="n">c</span><span class="p">:</span><span class="mi">247</span>
 </pre></div>
 </div>
 <p>Individual pointers returned by <a class="reference internal" href="../stdlib/base.html#Base.backtrace" title="Base.backtrace"><code class="xref jl jl-func docutils literal"><span class="pre">backtrace()</span></code></a> can be translated into <a class="reference internal" href="../stdlib/stacktraces.html#Base.StackFrame" title="Base.StackFrame"><code class="xref jl jl-obj docutils literal"><span class="pre">StackFrame</span></code></a> s
 by passing them into <a class="reference internal" href="../stdlib/stacktraces.html#Base.StackTraces.lookup" title="Base.StackTraces.lookup"><code class="xref jl jl-func docutils literal"><span class="pre">StackTraces.lookup()</span></code></a>:</p>
-<div class="highlight-julia"><div class="highlight"><pre><span></span><span class="n">julia</span><span class="o">&gt;</span> <span class="n">pointer</span> <span class="o">=</span> <span class="n">backtrace</span><span class="p">()[</span><span class="mi">1</span><span class="p">]</span>
-<span class="n">Ptr</span><span class="p">{</span><span class="n">Void</span><span class="p">}</span> <span class="p">@</span><span class="mi">0</span><span class="n">x</span><span class="o">...</span>
+<div class="highlight-julia"><div class="highlight"><pre><span></span><span class="n">julia</span><span class="o">&gt;</span> <span class="n">pointer</span> <span class="o">=</span> <span class="n">backtrace</span><span class="p">()[</span><span class="mi">1</span><span class="p">];</span>
 
 <span class="n">julia</span><span class="o">&gt;</span> <span class="n">frame</span> <span class="o">=</span> <span class="n">StackTraces</span><span class="o">.</span><span class="n">lookup</span><span class="p">(</span><span class="n">pointer</span><span class="p">)</span>
-<span class="p">[</span><span class="n">inlined</span> <span class="n">code</span> <span class="n">from</span> <span class="n">task</span><span class="o">.</span><span class="n">c</span><span class="p">:</span><span class="mi">663</span><span class="p">]</span> <span class="n">rec_backtrace</span> <span class="n">at</span> <span class="n">task</span><span class="o">.</span><span class="n">c</span><span class="p">:</span><span class="mi">723</span>
+<span class="mi">1</span><span class="o">-</span><span class="n">element</span> <span class="n">Array</span><span class="p">{</span><span class="n">StackFrame</span><span class="p">,</span><span class="mi">1</span><span class="p">}:</span>
+  <span class="k">in</span> <span class="n">jl_backtrace_from_here</span> <span class="n">at</span> <span class="n">stackwalk</span><span class="o">.</span><span class="n">c</span><span class="p">:</span><span class="mi">105</span>
 
-<span class="n">julia</span><span class="o">&gt;</span> <span class="n">println</span><span class="p">(</span><span class="s">&quot;The top frame is from </span><span class="si">$(frame.func)</span><span class="s">!&quot;</span><span class="p">)</span>
-<span class="n">The</span> <span class="n">top</span> <span class="n">frame</span> <span class="nb">is</span> <span class="n">from</span> <span class="n">rec_backtrace!</span>
+<span class="n">julia</span><span class="o">&gt;</span> <span class="n">println</span><span class="p">(</span><span class="s">&quot;The top frame is from </span><span class="si">$(frame[1].func)</span><span class="s">!&quot;</span><span class="p">)</span>
+<span class="n">The</span> <span class="n">top</span> <span class="n">frame</span> <span class="nb">is</span> <span class="n">from</span> <span class="n">jl_backtrace_from_here!</span>
 </pre></div>
 </div>
 </div>
