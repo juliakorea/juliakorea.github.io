@@ -193,7 +193,8 @@
 <li class="toctree-l2"><a class="reference internal" href="../manual/documentation.html#functions-methods">Functions &amp; Methods</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../manual/documentation.html#advanced-usage">Advanced Usage</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../manual/documentation.html#syntax-guide">Syntax Guide</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../manual/documentation.html#markdown-syntax-notes">Markdown Syntax Notes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../manual/documentation.html#markdown-syntax">Markdown syntax</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../manual/documentation.html#markdown-syntax-extensions">Markdown Syntax Extensions</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../manual/metaprogramming.html">Metaprogramming</a><ul>
@@ -240,6 +241,8 @@
 <li class="toctree-l2"><a class="reference internal" href="../manual/parallel-computing.html#network-requirements-for-localmanager-and-sshmanager">Network requirements for LocalManager and SSHManager</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../manual/parallel-computing.html#cluster-cookie">Cluster cookie</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../manual/parallel-computing.html#specifying-network-topology-experimental">Specifying network topology (Experimental)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../manual/parallel-computing.html#multi-threading-experimental">Multi-threading (Experimental)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../manual/parallel-computing.html#threadcall-experimental">&#64;threadcall (Experimental)</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../manual/dates.html">Date and DateTime</a><ul>
@@ -280,6 +283,7 @@
 <li class="toctree-l2"><a class="reference internal" href="../manual/interacting-with-julia.html#the-different-prompt-modes">The different prompt modes</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../manual/interacting-with-julia.html#key-bindings">Key bindings</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../manual/interacting-with-julia.html#tab-completion">Tab completion</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../manual/interacting-with-julia.html#customizing-colors">Customizing Colors</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../manual/embedding.html">Embedding Julia</a><ul>
@@ -455,6 +459,8 @@
 <li class="toctree-l2"><a class="reference internal" href="parallel.html#general-parallel-computing-support">General Parallel Computing Support</a></li>
 <li class="toctree-l2"><a class="reference internal" href="parallel.html#shared-arrays">Shared Arrays</a></li>
 <li class="toctree-l2"><a class="reference internal" href="parallel.html#multi-threading">Multi-Threading</a></li>
+<li class="toctree-l2"><a class="reference internal" href="parallel.html#ccall-using-a-threadpool-experimental">ccall using a threadpool (Experimental)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="parallel.html#synchronization-primitives">Synchronization Primitives</a></li>
 <li class="toctree-l2"><a class="reference internal" href="parallel.html#cluster-manager-interface">Cluster Manager Interface</a></li>
 </ul>
 </li>
@@ -521,7 +527,6 @@
 <li class="toctree-l2"><a class="reference internal" href="../devdocs/sysimg.html">System Image Building</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../devdocs/llvm.html">Working with LLVM</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../devdocs/stdio.html">printf() and stdio in the Julia runtime</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../devdocs/promote-op.html">Operator-sensitive promotion</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../devdocs/boundscheck.html">Bounds checking</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../devdocs/locks.html">Proper maintenance and care of multi-threading locks</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../devdocs/offset-arrays.html">Arrays with custom indices</a></li>
@@ -531,6 +536,7 @@
 <li class="toctree-l2"><a class="reference internal" href="../devdocs/backtraces.html">Reporting and analyzing crashes (segfaults)</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../devdocs/debuggingtips.html">gdb debugging tips</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../devdocs/valgrind.html">Using Valgrind with Julia</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../devdocs/sanitizers.html">Sanitizer support</a></li>
 </ul>
 </li>
 </ul>
@@ -864,6 +870,12 @@
 </dd></dl>
 
 <dl class="function">
+<dt id="Base.isimag">
+<code class="descname">isimag</code><span class="sig-paren">(</span><em>z</em><span class="sig-paren">)</span> &rarr; Bool<a class="headerlink" href="#Base.isimag" title="Permalink to this definition">¶</a></dt>
+<dd><p>Test whether <code class="docutils literal"><span class="pre">z</span></code> is purely imaginary, i.e. has a real part equal to 0.</p>
+</dd></dl>
+
+<dl class="function">
 <dt id="Base.Float32">
 <code class="descname">Float32</code><span class="sig-paren">(</span><em>x</em><span class="optional">[</span>, <em>mode::RoundingMode</em><span class="optional">]</span><span class="sig-paren">)</span><a class="headerlink" href="#Base.Float32" title="Permalink to this definition">¶</a></dt>
 <dd><p>Create a Float32 from <code class="docutils literal"><span class="pre">x</span></code>. If <code class="docutils literal"><span class="pre">x</span></code> is not exactly representable then <code class="docutils literal"><span class="pre">mode</span></code> determines how <code class="docutils literal"><span class="pre">x</span></code> is rounded.</p>
@@ -922,8 +934,12 @@
 <dl class="function">
 <dt id="Base.setrounding">
 <code class="descname">setrounding</code><span class="sig-paren">(</span><em>T</em>, <em>mode</em><span class="sig-paren">)</span><a class="headerlink" href="#Base.setrounding" title="Permalink to this definition">¶</a></dt>
-<dd><p>Set the rounding mode of floating point type <code class="docutils literal"><span class="pre">T</span></code>, controlling the rounding of basic arithmetic functions (<a class="reference internal" href="math.html#Base.+" title="Base.+"><code class="xref jl jl-func docutils literal"><span class="pre">+()</span></code></a>, <a class="reference internal" href="math.html#Base.-" title="Base.-"><code class="xref jl jl-func docutils literal"><span class="pre">-()</span></code></a>, <a class="reference internal" href="strings.html#Base.*" title="Base.*"><code class="xref jl jl-func docutils literal"><span class="pre">*()</span></code></a>, <a class="reference internal" href="math.html#Base./" title="Base./"><code class="xref jl jl-func docutils literal"><span class="pre">/()</span></code></a> and <a class="reference internal" href="math.html#Base.sqrt" title="Base.sqrt"><code class="xref jl jl-func docutils literal"><span class="pre">sqrt()</span></code></a>) and type conversion.</p>
+<dd><p>Set the rounding mode of floating point type <code class="docutils literal"><span class="pre">T</span></code>, controlling the rounding of basic arithmetic functions (<a class="reference internal" href="math.html#Base.+" title="Base.+"><code class="xref jl jl-func docutils literal"><span class="pre">+()</span></code></a>, <a class="reference internal" href="math.html#Base.-" title="Base.-"><code class="xref jl jl-func docutils literal"><span class="pre">-()</span></code></a>, <a class="reference internal" href="strings.html#Base.*" title="Base.*"><code class="xref jl jl-func docutils literal"><span class="pre">*()</span></code></a>, <a class="reference internal" href="math.html#Base./" title="Base./"><code class="xref jl jl-func docutils literal"><span class="pre">/()</span></code></a> and <a class="reference internal" href="math.html#Base.sqrt" title="Base.sqrt"><code class="xref jl jl-func docutils literal"><span class="pre">sqrt()</span></code></a>) and type conversion. Other numerical functions may give incorrect or invalid values when using rounding modes other than the default <code class="docutils literal"><span class="pre">RoundNearest</span></code>.</p>
 <p>Note that this may affect other types, for instance changing the rounding mode of <code class="docutils literal"><span class="pre">Float64</span></code> will change the rounding mode of <code class="docutils literal"><span class="pre">Float32</span></code>. See <a class="reference internal" href="math.html#Base.RoundingMode" title="Base.RoundingMode"><code class="xref jl jl-obj docutils literal"><span class="pre">RoundingMode</span></code></a> for available modes.</p>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last">This feature is still experimental, and may give unexpected or incorrect values.</p>
+</div>
 </dd></dl>
 
 <dl class="function">
@@ -937,6 +953,25 @@
 </pre></div>
 </div>
 <p>See <a class="reference internal" href="math.html#Base.RoundingMode" title="Base.RoundingMode"><code class="xref jl jl-obj docutils literal"><span class="pre">RoundingMode</span></code></a> for available rounding modes.</p>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p>This feature is still experimental, and may give unexpected or incorrect values. A known problem is the interaction with compiler optimisations, e.g.</p>
+<div class="highlight-julia"><div class="highlight"><pre><span></span><span class="n">julia</span><span class="o">&gt;</span> <span class="n">setrounding</span><span class="p">(</span><span class="kt">Float64</span><span class="p">,</span><span class="n">RoundDown</span><span class="p">)</span> <span class="k">do</span>
+    <span class="mf">1.1</span> <span class="o">+</span> <span class="mf">0.1</span>
+<span class="k">end</span>
+<span class="mf">1.2000000000000002</span>
+</pre></div>
+</div>
+<p>Here the compiler is <em>constant folding</em>, that is evaluating a known constant expression at compile time, however the rounding mode is only changed at runtime, so this is not reflected in the function result. This can be avoided by moving constants outside the expression, e.g.</p>
+<div class="last highlight-julia"><div class="highlight"><pre><span></span><span class="n">julia</span><span class="o">&gt;</span> <span class="n">x</span> <span class="o">=</span> <span class="mf">1.1</span><span class="p">;</span> <span class="n">y</span> <span class="o">=</span> <span class="mf">0.1</span><span class="p">;</span>
+
+<span class="n">julia</span><span class="o">&gt;</span> <span class="n">setrounding</span><span class="p">(</span><span class="kt">Float64</span><span class="p">,</span><span class="n">RoundDown</span><span class="p">)</span> <span class="k">do</span>
+    <span class="n">x</span> <span class="o">+</span> <span class="n">y</span>
+<span class="k">end</span>
+<span class="mf">1.2</span>
+</pre></div>
+</div>
+</div>
 </dd></dl>
 
 <dl class="function">
@@ -1133,25 +1168,25 @@ As <code class="docutils literal"><span class="pre">BigInt</span></code> represe
 
 <dl class="function">
 <dt id="Base.randn">
-<code class="descname">randn</code><span class="sig-paren">(</span><span class="optional">[</span><em>rng</em><span class="optional">]</span><span class="optional">[</span>, <em>dims...</em><span class="optional">]</span><span class="sig-paren">)</span><a class="headerlink" href="#Base.randn" title="Permalink to this definition">¶</a></dt>
-<dd><p>Generate a normally-distributed random number with mean 0 and standard deviation 1. Optionally generate an array of normally-distributed random numbers.</p>
+<code class="descname">randn</code><span class="sig-paren">(</span><span class="optional">[</span><em>rng</em><span class="optional">]</span><span class="optional">[</span>, <em>T=Float64</em><span class="optional">]</span><span class="optional">[</span>, <em>dims...</em><span class="optional">]</span><span class="sig-paren">)</span><a class="headerlink" href="#Base.randn" title="Permalink to this definition">¶</a></dt>
+<dd><p>Generate a normally-distributed random number of type <code class="docutils literal"><span class="pre">T</span></code> with mean 0 and standard deviation 1. Optionally generate an array of normally-distributed random numbers. The <code class="docutils literal"><span class="pre">Base</span></code> module currently provides an implementation for the types <code class="docutils literal"><span class="pre">Float16</span></code>, <code class="docutils literal"><span class="pre">Float32</span></code>, and <code class="docutils literal"><span class="pre">Float64</span></code> (the default).</p>
 </dd></dl>
 
 <dl class="function">
 <dt id="Base.randn!">
-<code class="descname">randn!</code><span class="sig-paren">(</span><span class="optional">[</span><em>rng</em>, <span class="optional">]</span><em>A::Array{Float64</em>, <em>N}</em><span class="sig-paren">)</span><a class="headerlink" href="#Base.randn!" title="Permalink to this definition">¶</a></dt>
-<dd><p>Fill the array <code class="docutils literal"><span class="pre">A</span></code> with normally-distributed (mean 0, standard deviation 1) random numbers. Also see the rand function.</p>
+<code class="descname">randn!</code><span class="sig-paren">(</span><span class="optional">[</span><em>rng</em>, <span class="optional">]</span><em>A::AbstractArray</em><span class="sig-paren">)</span> &rarr; A<a class="headerlink" href="#Base.randn!" title="Permalink to this definition">¶</a></dt>
+<dd><p>Fill the array <code class="docutils literal"><span class="pre">A</span></code> with normally-distributed (mean 0, standard deviation 1) random numbers. Also see the <code class="docutils literal"><span class="pre">rand</span></code> function.</p>
 </dd></dl>
 
 <dl class="function">
 <dt id="Base.randexp">
-<code class="descname">randexp</code><span class="sig-paren">(</span><span class="optional">[</span><em>rng</em><span class="optional">]</span><span class="optional">[</span>, <em>dims...</em><span class="optional">]</span><span class="sig-paren">)</span><a class="headerlink" href="#Base.randexp" title="Permalink to this definition">¶</a></dt>
-<dd><p>Generate a random number according to the exponential distribution with scale 1. Optionally generate an array of such random numbers.</p>
+<code class="descname">randexp</code><span class="sig-paren">(</span><span class="optional">[</span><em>rng</em><span class="optional">]</span><span class="optional">[</span>, <em>T=Float64</em><span class="optional">]</span><span class="optional">[</span>, <em>dims...</em><span class="optional">]</span><span class="sig-paren">)</span><a class="headerlink" href="#Base.randexp" title="Permalink to this definition">¶</a></dt>
+<dd><p>Generate a random number of type <code class="docutils literal"><span class="pre">T</span></code> according to the exponential distribution with scale 1. Optionally generate an array of such random numbers. The <code class="docutils literal"><span class="pre">Base</span></code> module currently provides an implementation for the types <code class="docutils literal"><span class="pre">Float16</span></code>, <code class="docutils literal"><span class="pre">Float32</span></code>, and <code class="docutils literal"><span class="pre">Float64</span></code> (the default).</p>
 </dd></dl>
 
 <dl class="function">
 <dt id="Base.randexp!">
-<code class="descname">randexp!</code><span class="sig-paren">(</span><span class="optional">[</span><em>rng</em>, <span class="optional">]</span><em>A::Array{Float64</em>, <em>N}</em><span class="sig-paren">)</span><a class="headerlink" href="#Base.randexp!" title="Permalink to this definition">¶</a></dt>
+<code class="descname">randexp!</code><span class="sig-paren">(</span><span class="optional">[</span><em>rng</em>, <span class="optional">]</span><em>A::AbstractArray</em><span class="sig-paren">)</span> &rarr; A<a class="headerlink" href="#Base.randexp!" title="Permalink to this definition">¶</a></dt>
 <dd><p>Fill the array <code class="docutils literal"><span class="pre">A</span></code> with random numbers following the exponential distribution (with scale 1).</p>
 </dd></dl>
 

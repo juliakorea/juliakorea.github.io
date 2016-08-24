@@ -7,7 +7,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Calling Conventions &mdash; Julia Language X.Y.Z-unknown documentation</title>
+  <title>Sanitizer support &mdash; Julia Language X.Y.Z-unknown documentation</title>
   
 
   
@@ -31,9 +31,8 @@
     <link rel="stylesheet" href="../_static/julia.css" type="text/css" />
   
     <link rel="top" title="Julia Language X.Y.Z-unknown documentation" href="../index.html"/>
-        <link rel="up" title="Documentation of Julia’s Internals" href="julia.html"/>
-        <link rel="next" title="Base.Cartesian" href="cartesian.html"/>
-        <link rel="prev" title="Julia Functions" href="functions.html"/> 
+        <link rel="up" title="Developing/debugging Julia’s C code" href="C.html"/>
+        <link rel="prev" title="Using Valgrind with Julia" href="valgrind.html"/> 
 
   
   <script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.6.2/modernizr.min.js"></script>
@@ -514,14 +513,14 @@
 </ul>
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="reflection.html">Reflection and introspection</a></li>
-<li class="toctree-l1 current"><a class="reference internal" href="julia.html">Documentation of Julia&#8217;s Internals</a><ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="julia.html">Documentation of Julia&#8217;s Internals</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="init.html">Initialization of the Julia runtime</a></li>
 <li class="toctree-l2"><a class="reference internal" href="eval.html">Eval of Julia code</a></li>
 <li class="toctree-l2"><a class="reference internal" href="ast.html">Julia ASTs</a></li>
 <li class="toctree-l2"><a class="reference internal" href="types.html">More about types</a></li>
 <li class="toctree-l2"><a class="reference internal" href="object.html">Memory layout of Julia Objects</a></li>
 <li class="toctree-l2"><a class="reference internal" href="functions.html">Julia Functions</a></li>
-<li class="toctree-l2 current"><a class="current reference internal" href="">Calling Conventions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="callconv.html">Calling Conventions</a></li>
 <li class="toctree-l2"><a class="reference internal" href="cartesian.html">Base.Cartesian</a></li>
 <li class="toctree-l2"><a class="reference internal" href="meta.html">Talking to the compiler (the <code class="docutils literal"><span class="pre">:meta</span></code> mechanism)</a></li>
 <li class="toctree-l2"><a class="reference internal" href="subarrays.html">SubArrays</a></li>
@@ -533,11 +532,11 @@
 <li class="toctree-l2"><a class="reference internal" href="offset-arrays.html">Arrays with custom indices</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="C.html">Developing/debugging Julia&#8217;s C code</a><ul>
+<li class="toctree-l1 current"><a class="reference internal" href="C.html">Developing/debugging Julia&#8217;s C code</a><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="backtraces.html">Reporting and analyzing crashes (segfaults)</a></li>
 <li class="toctree-l2"><a class="reference internal" href="debuggingtips.html">gdb debugging tips</a></li>
 <li class="toctree-l2"><a class="reference internal" href="valgrind.html">Using Valgrind with Julia</a></li>
-<li class="toctree-l2"><a class="reference internal" href="sanitizers.html">Sanitizer support</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="">Sanitizer support</a></li>
 </ul>
 </li>
 </ul>
@@ -563,12 +562,12 @@
   <ul class="wy-breadcrumbs">
     <li><a href="../index.html">Docs</a> &raquo;</li>
       
-          <li><a href="julia.html">Documentation of Julia&#8217;s Internals</a> &raquo;</li>
+          <li><a href="C.html">Developing/debugging Julia&#8217;s C code</a> &raquo;</li>
       
-    <li>Calling Conventions</li>
+    <li>Sanitizer support</li>
       <li class="wy-breadcrumbs-aside">
         
-          <a href="../_sources/devdocs/callconv.txt" rel="nofollow"> View page source</a>
+          <a href="../_sources/devdocs/sanitizers.txt" rel="nofollow"> View page source</a>
         
       </li>
   </ul>
@@ -576,71 +575,39 @@
 </div>
           <div role="main" class="document">
             
-  <div class="section" id="calling-conventions">
-<span id="devdocs-callconv"></span><h1>Calling Conventions<a class="headerlink" href="#calling-conventions" title="Permalink to this headline">¶</a></h1>
-<p>Julia uses three calling conventions for four distinct purposes:</p>
-<table border="1" class="docutils">
-<colgroup>
-<col width="13%" />
-<col width="25%" />
-<col width="62%" />
-</colgroup>
-<thead valign="bottom">
-<tr class="row-odd"><th class="head">Name</th>
-<th class="head">Prefix</th>
-<th class="head">Purpose</th>
-</tr>
-</thead>
-<tbody valign="top">
-<tr class="row-even"><td>Native</td>
-<td><code class="docutils literal"><span class="pre">julia_</span></code></td>
-<td>Speed via specialized signatures</td>
-</tr>
-<tr class="row-odd"><td rowspan="2">JL Call</td>
-<td><code class="docutils literal"><span class="pre">jlcall_</span></code></td>
-<td>Wrapper for generic calls</td>
-</tr>
-<tr class="row-even"><td><code class="docutils literal"><span class="pre">jl_</span></code></td>
-<td>Builtins</td>
-</tr>
-<tr class="row-odd"><td>C ABI</td>
-<td><code class="docutils literal"><span class="pre">jlcapi_</span></code></td>
-<td>Wrapper callable from C</td>
-</tr>
-</tbody>
-</table>
-<div class="section" id="julia-native-calling-convention">
-<h2>Julia Native Calling Convention<a class="headerlink" href="#julia-native-calling-convention" title="Permalink to this headline">¶</a></h2>
-<p>The native calling convention is designed for fast non-generic calls.
-It usually uses a specialized signature.</p>
-<ul class="simple">
-<li>LLVM ghosts (zero-length types) are omitted.</li>
-<li>LLVM scalars and vectors are passed by value.</li>
-<li>LLVM aggregates (arrays and structs) are passed by reference.</li>
-</ul>
-<p>A small return values is returned as LLVM return values.
-A large return values is returned via the &#8220;structure return&#8221; (<code class="docutils literal"><span class="pre">sret</span></code>)
-convention, where the caller provides a pointer to a return slot.</p>
-<p>An argument or return values thta is a homogeneous tuple is
-sometimes represented as an LLVM vector instead of an LLVM array.</p>
+  <div class="section" id="sanitizer-support">
+<h1>Sanitizer support<a class="headerlink" href="#sanitizer-support" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="general-considerations">
+<h2>General considerations<a class="headerlink" href="#general-considerations" title="Permalink to this headline">¶</a></h2>
+<p>Using Clang&#8217;s sanitizers obviously require you to use Clang (<code class="docutils literal"><span class="pre">USECLANG=1</span></code>), but there&#8217;s
+another catch: most sanitizers require a run-time library, provided by the host compiler,
+while the instrumented code generated by Julia&#8217;s JIT relies on functionality from that
+library. This implies that the LLVM version of your host compiler matches that of the LLVM
+library used within Julia.</p>
+<p>An easy solution is to have an dedicated build folder for providing a matching toolchain, by
+building with <code class="docutils literal"><span class="pre">BUILD_LLVM_CLANG=1</span></code> and overriding <code class="docutils literal"><span class="pre">LLVM_USE_CMAKE=1</span></code> (Autotool-based
+builds are incompatible with ASAN). You can then refer to this toolchain from another build
+folder by specifying <code class="docutils literal"><span class="pre">USECLANG=1</span></code> while overriding the <code class="docutils literal"><span class="pre">CC</span></code> and <code class="docutils literal"><span class="pre">CXX</span></code> variables.</p>
 </div>
-<div class="section" id="jl-call-convention">
-<h2>JL Call Convention<a class="headerlink" href="#jl-call-convention" title="Permalink to this headline">¶</a></h2>
-<p>The JL Call convention is for builtins and generic dispatch.
-Hand-written functions using this convention are declared via the macro <code class="docutils literal"><span class="pre">JL_CALLABLE</span></code>.
-The convention uses exactly 3 parameters:</p>
-<ul class="simple">
-<li><code class="docutils literal"><span class="pre">F</span></code>  - Julia representation of function that is being applied</li>
-<li><code class="docutils literal"><span class="pre">args</span></code> - pointer to array of pointers to boxes</li>
-<li><code class="docutils literal"><span class="pre">nargs</span></code> - length of the array</li>
-</ul>
-<p>The return value is a pointer to a box.</p>
+<div class="section" id="address-sanitizer-asan">
+<h2>Address Sanitizer (ASAN)<a class="headerlink" href="#address-sanitizer-asan" title="Permalink to this headline">¶</a></h2>
+<p>For detecting or debugging memory bugs, you can use Clang&#8217;s <a class="reference external" href="http://clang.llvm.org/docs/AddressSanitizer.html">address sanitizer (ASAN)</a>. By compiling with
+<code class="docutils literal"><span class="pre">SANITIZE=1</span></code> you enable ASAN for the Julia compiler and its generated code. In addition,
+you can specify <code class="docutils literal"><span class="pre">LLVM_SANITIZE=1</span></code> to sanitize the LLVM library as well. Note that these
+options incur a high performance and memory cost. For example, using ASAN for Julia and LLVM
+makes <code class="docutils literal"><span class="pre">testall1</span></code> takes 8-10 times as long while using 20 times as much memory (this can
+be reduced to respectively a factor of 3 and 4 by using the options described below).</p>
+<p>By default, Julia sets the <code class="docutils literal"><span class="pre">allow_user_segv_handler=1</span></code> ASAN flag, which is required for
+signal delivery to work properly. You can define other options using the <code class="docutils literal"><span class="pre">ASAN_OPTIONS</span></code>
+environment flag, in which case you&#8217;ll need to repeat the default option mentioned before.
+For example, memory usage can be reduced by specifying <code class="docutils literal"><span class="pre">fast_unwind_on_malloc=0</span></code> and
+<code class="docutils literal"><span class="pre">malloc_context_size=2</span></code>, at the cost of backtrace accuracy. For now, Julia also sets
+<code class="docutils literal"><span class="pre">detect_leaks=0</span></code>, but this should be removed in the future.</p>
 </div>
-<div class="section" id="c-abi">
-<h2>C ABI<a class="headerlink" href="#c-abi" title="Permalink to this headline">¶</a></h2>
-<p>C ABI wrappers enable calling Julia from C.
-The wrapper calls a function using the native calling convention.</p>
-<p>Tuples are always represented as C arrays.</p>
+<div class="section" id="memory-sanitizer-msan">
+<h2>Memory Sanitizer (MSAN)<a class="headerlink" href="#memory-sanitizer-msan" title="Permalink to this headline">¶</a></h2>
+<p>For detecting use of uninitialized memory, you can use Clang&#8217;s <a class="reference external" href="http://clang.llvm.org/docs/MemorySanitizer.html">memory sanitizer (MSAN)</a> by compiling with
+<code class="docutils literal"><span class="pre">SANITIZE_MEMORY=1</span></code>.</p>
 </div>
 </div>
 
@@ -650,10 +617,8 @@ The wrapper calls a function using the native calling convention.</p>
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="cartesian.html" class="btn btn-neutral float-right" title="Base.Cartesian">Next <span class="fa fa-arrow-circle-right"></span></a>
       
-      
-        <a href="functions.html" class="btn btn-neutral" title="Julia Functions"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="valgrind.html" class="btn btn-neutral" title="Using Valgrind with Julia"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   

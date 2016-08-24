@@ -193,7 +193,8 @@
 <li class="toctree-l2"><a class="reference internal" href="documentation.html#functions-methods">Functions &amp; Methods</a></li>
 <li class="toctree-l2"><a class="reference internal" href="documentation.html#advanced-usage">Advanced Usage</a></li>
 <li class="toctree-l2"><a class="reference internal" href="documentation.html#syntax-guide">Syntax Guide</a></li>
-<li class="toctree-l2"><a class="reference internal" href="documentation.html#markdown-syntax-notes">Markdown Syntax Notes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="documentation.html#markdown-syntax">Markdown syntax</a></li>
+<li class="toctree-l2"><a class="reference internal" href="documentation.html#markdown-syntax-extensions">Markdown Syntax Extensions</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="metaprogramming.html">Metaprogramming</a><ul>
@@ -240,6 +241,8 @@
 <li class="toctree-l2"><a class="reference internal" href="parallel-computing.html#network-requirements-for-localmanager-and-sshmanager">Network requirements for LocalManager and SSHManager</a></li>
 <li class="toctree-l2"><a class="reference internal" href="parallel-computing.html#cluster-cookie">Cluster cookie</a></li>
 <li class="toctree-l2"><a class="reference internal" href="parallel-computing.html#specifying-network-topology-experimental">Specifying network topology (Experimental)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="parallel-computing.html#multi-threading-experimental">Multi-threading (Experimental)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="parallel-computing.html#threadcall-experimental">&#64;threadcall (Experimental)</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="dates.html">Date and DateTime</a><ul>
@@ -280,6 +283,7 @@
 <li class="toctree-l2"><a class="reference internal" href="interacting-with-julia.html#the-different-prompt-modes">The different prompt modes</a></li>
 <li class="toctree-l2"><a class="reference internal" href="interacting-with-julia.html#key-bindings">Key bindings</a></li>
 <li class="toctree-l2"><a class="reference internal" href="interacting-with-julia.html#tab-completion">Tab completion</a></li>
+<li class="toctree-l2"><a class="reference internal" href="interacting-with-julia.html#customizing-colors">Customizing Colors</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="embedding.html">Embedding Julia</a><ul>
@@ -455,6 +459,8 @@
 <li class="toctree-l2"><a class="reference internal" href="../stdlib/parallel.html#general-parallel-computing-support">General Parallel Computing Support</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../stdlib/parallel.html#shared-arrays">Shared Arrays</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../stdlib/parallel.html#multi-threading">Multi-Threading</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../stdlib/parallel.html#ccall-using-a-threadpool-experimental">ccall using a threadpool (Experimental)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../stdlib/parallel.html#synchronization-primitives">Synchronization Primitives</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../stdlib/parallel.html#cluster-manager-interface">Cluster Manager Interface</a></li>
 </ul>
 </li>
@@ -521,7 +527,6 @@
 <li class="toctree-l2"><a class="reference internal" href="../devdocs/sysimg.html">System Image Building</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../devdocs/llvm.html">Working with LLVM</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../devdocs/stdio.html">printf() and stdio in the Julia runtime</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../devdocs/promote-op.html">Operator-sensitive promotion</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../devdocs/boundscheck.html">Bounds checking</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../devdocs/locks.html">Proper maintenance and care of multi-threading locks</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../devdocs/offset-arrays.html">Arrays with custom indices</a></li>
@@ -531,6 +536,7 @@
 <li class="toctree-l2"><a class="reference internal" href="../devdocs/backtraces.html">Reporting and analyzing crashes (segfaults)</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../devdocs/debuggingtips.html">gdb debugging tips</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../devdocs/valgrind.html">Using Valgrind with Julia</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../devdocs/sanitizers.html">Sanitizer support</a></li>
 </ul>
 </li>
 </ul>
@@ -740,9 +746,6 @@
 <tr class="row-odd"><td><code class="docutils literal"><span class="pre">A[i]=x</span></code></td>
 <td><a class="reference internal" href="../stdlib/collections.html#Base.setindex!" title="Base.setindex!"><code class="xref jl jl-func docutils literal"><span class="pre">setindex!()</span></code></a></td>
 </tr>
-<tr class="row-even"><td><code class="docutils literal"><span class="pre">A(x)</span></code></td>
-<td><code class="xref jl jl-func docutils literal"><span class="pre">call()</span></code></td>
-</tr>
 </tbody>
 </table>
 <p>이 함수들은 연산자같지 않은 이름을 지니고 있지만,
@@ -926,7 +929,7 @@ Julia에서 가변인자 함수를 정의하기 위해서는 마지막 매개변
 <span class="n">julia</span><span class="o">&gt;</span> <span class="n">baz</span><span class="p">(</span><span class="n">args</span><span class="o">...</span><span class="p">)</span>
 <span class="n">ERROR</span><span class="p">:</span> <span class="n">MethodError</span><span class="p">:</span> <span class="n">no</span> <span class="n">method</span> <span class="n">matching</span> <span class="n">baz</span><span class="p">(::</span><span class="kt">Int64</span><span class="p">,</span> <span class="p">::</span><span class="kt">Int64</span><span class="p">,</span> <span class="p">::</span><span class="kt">Int64</span><span class="p">)</span>
 <span class="n">Closest</span> <span class="n">candidates</span> <span class="n">are</span><span class="p">:</span>
-  <span class="n">baz</span><span class="p">(::</span><span class="kt">Any</span><span class="p">,</span> <span class="p">::</span><span class="kt">Any</span><span class="p">)</span>
+  <span class="n">baz</span><span class="p">(::</span><span class="kt">Any</span><span class="p">,</span> <span class="p">::</span><span class="kt">Any</span><span class="p">)</span> <span class="n">at</span> <span class="n">none</span><span class="p">:</span><span class="mi">1</span>
 <span class="o">...</span>
 </pre></div>
 </div>
@@ -1018,6 +1021,11 @@ Julia에서 가변인자 함수를 정의하기 위해서는 마지막 매개변
 예를 들어, <code class="docutils literal"><span class="pre">plot(x,</span> <span class="pre">y;</span> <span class="pre">(:width,2))</span></code>와 <code class="docutils literal"><span class="pre">plot(x,</span> <span class="pre">y;</span> <span class="pre">:width</span> <span class="pre">=&gt;</span> <span class="pre">2)</span></code>는
 <code class="docutils literal"><span class="pre">plot(x,</span> <span class="pre">y,</span> <span class="pre">width=2)</span></code>와 동등한 표현이다. 이것은 실해중에 키워드 이름이
 결정되는 경우 유용하다.</p>
+<p>키워드 매개변수의 속성때분에 한 매개변수를 여러번 표시할 수 있다.
+예를 들어, <code class="docutils literal"><span class="pre">plot(x,</span> <span class="pre">y;</span> <span class="pre">options...,</span> <span class="pre">width=2)</span></code>와 같은 함수 호출에서
+<code class="docutils literal"><span class="pre">options</span></code>라는 구조체 내부에 <code class="docutils literal"><span class="pre">width</span></code>라는 값을 포함할 수 있다.
+이런 경우에는 오른쪽에 있는 매개변수가 우선순위를 가진다;
+이번 예제에서는 <code class="docutils literal"><span class="pre">width</span></code>에는 <code class="docutils literal"><span class="pre">2</span></code>라는 정수가 들어간다.</p>
 </div>
 <div class="section" id="scope">
 <span id="man-evaluation-scope-default-values"></span><h2>디폴트 값의 계산 스코프(scope)<a class="headerlink" href="#scope" title="Permalink to this headline">¶</a></h2>
@@ -1136,31 +1144,33 @@ Julia로 쓰여진 아무 함수 <code class="docutils literal"><span class="pre
 <code class="docutils literal"><span class="pre">f.(vector1,vector2)</span></code>는 각각의 인덱스 <code class="docutils literal"><span class="pre">i</span></code>에 대해
 <code class="docutils literal"><span class="pre">f(vector1[i],vector2[i])</span></code>로 구성된 새 벡터를 리턴할 것이다.
 (물론 두 벡터가 다른 길이면 예외를 발생시킬 것이다)</p>
-<p>(TODO: 아래 번역)
-Moreover, <em>nested</em> <code class="docutils literal"><span class="pre">f.(args...)</span></code> calls are <em>fused</em> into a single <code class="docutils literal"><span class="pre">broadcast</span></code>
-loop.  For example, <code class="docutils literal"><span class="pre">sin.(cos.(X))</span></code> is equivalent to <code class="docutils literal"><span class="pre">broadcast(x</span> <span class="pre">-&gt;</span> <span class="pre">sin(cos(x)),</span> <span class="pre">X)</span></code>,
-similar to <code class="docutils literal"><span class="pre">[sin(cos(x))</span> <span class="pre">for</span> <span class="pre">x</span> <span class="pre">in</span> <span class="pre">X]</span></code>: there is only a single loop over <code class="docutils literal"><span class="pre">X</span></code>,
-and a single array is allocated for the result.   [In contrast, <code class="docutils literal"><span class="pre">sin(cos(X))</span></code>
-in a typical &#8220;vectorized&#8221; language would first allocate one temporary array for <code class="docutils literal"><span class="pre">tmp=cos(X)</span></code>,
-and then compute <code class="docutils literal"><span class="pre">sin(tmp)</span></code> in a separate loop, allocating a second array.]
-This loop fusion is not a compiler optimization that may or may not occur, it
-is a <em>syntactic guarantee</em> whenever nested <code class="docutils literal"><span class="pre">f.(args...)</span></code> calls are encountered.  Technically,
-the fusion stops as soon as a &#8220;non-dot&#8221; function is encountered; for example,
-in <code class="docutils literal"><span class="pre">sin.(sort(cos.(X)))</span></code> the <code class="docutils literal"><span class="pre">sin</span></code> and <code class="docutils literal"><span class="pre">cos</span></code> loops cannot be merged
-because of the intervening <code class="docutils literal"><span class="pre">sort</span></code> function.</p>
-<p>Finally, the maximum efficiency is typically achieved when the output
-array of a vectorized operation is <em>pre-allocated</em>, so that repeated
-calls do not allocate new arrays over and over again for the results
-(<a class="reference internal" href="performance-tips.html#man-preallocation"><span>Pre-allocating outputs</span></a>:).   A convenient syntax for this is
-<code class="docutils literal"><span class="pre">X</span> <span class="pre">.=</span> <span class="pre">...</span></code>, which is equivalent to <code class="docutils literal"><span class="pre">broadcast!(identity,</span> <span class="pre">X,</span> <span class="pre">...)</span></code>
-except that, as above, the <code class="docutils literal"><span class="pre">broadcast!</span></code> loop is fused with any nested
-&#8220;dot&#8221; calls.  For example, <code class="docutils literal"><span class="pre">X</span> <span class="pre">.=</span> <span class="pre">sin.(Y)</span></code> is equivalent to
-<code class="docutils literal"><span class="pre">broadcast!(sin,</span> <span class="pre">X,</span> <span class="pre">Y)</span></code>, overwriting <code class="docutils literal"><span class="pre">X</span></code> with <code class="docutils literal"><span class="pre">sin.(Y)</span></code> in-place.</p>
-<p>(In future versions of Julia, operators like <code class="docutils literal"><span class="pre">.*</span></code> will also be handled with
-the same mechanism: they will be equivalent to <code class="docutils literal"><span class="pre">broadcast</span></code> calls and
-will be fused with other nested &#8220;dot&#8221; calls.  <code class="docutils literal"><span class="pre">x</span> <span class="pre">.+=</span> <span class="pre">y</span></code> is equivalent
-to <code class="docutils literal"><span class="pre">x</span> <span class="pre">.=</span> <span class="pre">x</span> <span class="pre">.+</span> <span class="pre">y</span></code> and will eventually result in a fused in-place assignment.
-Similarly for <code class="docutils literal"><span class="pre">.*=</span></code> etcetera.)</p>
+<p>게다가, <em>중첩된</em> <code class="docutils literal"><span class="pre">f.(args...)</span></code> 호출은 하나의 <code class="docutils literal"><span class="pre">broadcast</span></code> 반복문으으로
+녹아들어갈 수 있다.
+예를 들어, <code class="docutils literal"><span class="pre">sin.(cos.(X))</span></code>는 <code class="docutils literal"><span class="pre">broadcast(x</span> <span class="pre">-&gt;</span> <span class="pre">sin(cos(x)),</span> <span class="pre">X)</span></code>와 같고,
+이는 <code class="docutils literal"><span class="pre">[sin(cos(x))</span> <span class="pre">for</span> <span class="pre">x</span> <span class="pre">in</span> <span class="pre">X]</span></code>와 같은 결과를 나타낸다.
+[반대로, 벡터화를 지원하는 일반적인 언어에서는 <code class="docutils literal"><span class="pre">sin(cos(X))</span></code>를 호출할 때
+<code class="docutils literal"><span class="pre">tmp=cos(X)</span></code>를 위한 임시적인 배열을 할당하고, <code class="docutils literal"><span class="pre">sin(tmp)</span></code>를 또 다른 배열을 호출하면서
+별도의 반복문에서 처리한다.]
+이런 반복문의 결합은 컴파일러의 최적화에 따라 일어날 가능성을 주는 것이 아니라,
+<code class="docutils literal"><span class="pre">f.(args...)</span></code> 호출이 일어날 때마다 <em>문법상으로 100% 발생</em>한다고 보증한다.
+기술적으로 이런 결합은 &#8220;점이 아닌, 즉 벡터화가 적용되지 않는(non-dot)&#8221; 함수들이 나타나는 순간
+멈추게 되어있다. 예를 들어, <code class="docutils literal"><span class="pre">sin.(sort(cos.(X)))</span></code>에서 <code class="docutils literal"><span class="pre">sin</span></code>과 <code class="docutils literal"><span class="pre">cos</span></code> 반복문은
+결합될 수가 없는 것이, 중간에 <code class="docutils literal"><span class="pre">sort</span></code> 함수가 끼어들어갔기 때문이다.</p>
+<p>결론적으로, 벡터화된 연산을 가장 효율적으로 활용하기 위해서
+출력용 배열이 <em>미리 할당</em>되어 있어야한다. 왜냐하면, 그렇지 않다면
+호출이 일어날 때마다 새 배열을 계속 할당할 것이기 때문이다. (<a class="reference internal" href="performance-tips.html#man-preallocation"><span>Pre-allocating outputs</span></a>:)
+이를 위한 편리한 문법은  <code class="docutils literal"><span class="pre">broadcast!(identity,</span> <span class="pre">X,</span> <span class="pre">...)</span></code>와 같은 의미의
+<code class="docutils literal"><span class="pre">X</span> <span class="pre">.=</span> <span class="pre">...</span></code>가 있다. 이를 제외하고는 <code class="docutils literal"><span class="pre">broadcast!</span></code> 반복문은 어떠한
+&#8220;점&#8221; 호출(&#8220;dot&#8221; calls)과도 융합할 수 있다.
+예를 들어, <code class="docutils literal"><span class="pre">X</span> <span class="pre">.=</span> <span class="pre">sin.(Y)</span></code>는 <code class="docutils literal"><span class="pre">broadcast!(sin,</span> <span class="pre">X,</span> <span class="pre">Y)</span></code>와 같은 식인데, 이 경우
+<code class="docutils literal"><span class="pre">X</span></code>를 <code class="docutils literal"><span class="pre">sin.(Y)</span></code>로 덮어쓴다.
+만약 좌변이 <code class="docutils literal"><span class="pre">X[2:end]</span> <span class="pre">.=</span> <span class="pre">sin.(Y)</span></code>와 같이 배열의 인덱스와 관련된 표현식인 경우,
+좌변의 값을 변경하기 위해, <code class="docutils literal"><span class="pre">broadcast!(sin,</span> <span class="pre">view(X,</span> <span class="pre">2:endof(X)),</span> <span class="pre">Y)</span></code>와 같이
+<code class="docutils literal"><span class="pre">뷰(view)</span></code> 관점에서 <code class="docutils literal"><span class="pre">broadcast!</span></code>로 본래의 식을  변환한다.</p>
+<p>(미래의 Julia에서는, <code class="docutils literal"><span class="pre">.*</span></code>와 같은 연산자들은 같은 메커니즘으로 처리될 것이다:
+이들은 <code class="docutils literal"><span class="pre">broadcast</span></code> 호출과 같아질 것이며, 다른 중첩된 &#8220;점&#8221; 호출처럼 융합할 수 있을 것이다.
+<code class="docutils literal"><span class="pre">X</span> <span class="pre">.+=</span> <span class="pre">Y</span></code>는 덮어씌워지며 융합된 결과로 <code class="docutils literal"><span class="pre">X</span> <span class="pre">.=</span> <span class="pre">X</span> <span class="pre">.+</span> <span class="pre">Y</span></code>와 같은 값을 지니게 될 것이다.
+`` .*= `` 등에서도 같은 일이 벌어질 것이다.)</p>
 </div>
 <div class="section" id="id10">
 <h2>더 읽을거리<a class="headerlink" href="#id10" title="Permalink to this headline">¶</a></h2>

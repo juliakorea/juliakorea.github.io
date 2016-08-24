@@ -193,7 +193,8 @@
 <li class="toctree-l2"><a class="reference internal" href="../manual/documentation.html#functions-methods">Functions &amp; Methods</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../manual/documentation.html#advanced-usage">Advanced Usage</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../manual/documentation.html#syntax-guide">Syntax Guide</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../manual/documentation.html#markdown-syntax-notes">Markdown Syntax Notes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../manual/documentation.html#markdown-syntax">Markdown syntax</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../manual/documentation.html#markdown-syntax-extensions">Markdown Syntax Extensions</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../manual/metaprogramming.html">Metaprogramming</a><ul>
@@ -240,6 +241,8 @@
 <li class="toctree-l2"><a class="reference internal" href="../manual/parallel-computing.html#network-requirements-for-localmanager-and-sshmanager">Network requirements for LocalManager and SSHManager</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../manual/parallel-computing.html#cluster-cookie">Cluster cookie</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../manual/parallel-computing.html#specifying-network-topology-experimental">Specifying network topology (Experimental)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../manual/parallel-computing.html#multi-threading-experimental">Multi-threading (Experimental)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../manual/parallel-computing.html#threadcall-experimental">&#64;threadcall (Experimental)</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../manual/dates.html">Date and DateTime</a><ul>
@@ -280,6 +283,7 @@
 <li class="toctree-l2"><a class="reference internal" href="../manual/interacting-with-julia.html#the-different-prompt-modes">The different prompt modes</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../manual/interacting-with-julia.html#key-bindings">Key bindings</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../manual/interacting-with-julia.html#tab-completion">Tab completion</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../manual/interacting-with-julia.html#customizing-colors">Customizing Colors</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../manual/embedding.html">Embedding Julia</a><ul>
@@ -455,6 +459,8 @@
 <li class="toctree-l2"><a class="reference internal" href="parallel.html#general-parallel-computing-support">General Parallel Computing Support</a></li>
 <li class="toctree-l2"><a class="reference internal" href="parallel.html#shared-arrays">Shared Arrays</a></li>
 <li class="toctree-l2"><a class="reference internal" href="parallel.html#multi-threading">Multi-Threading</a></li>
+<li class="toctree-l2"><a class="reference internal" href="parallel.html#ccall-using-a-threadpool-experimental">ccall using a threadpool (Experimental)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="parallel.html#synchronization-primitives">Synchronization Primitives</a></li>
 <li class="toctree-l2"><a class="reference internal" href="parallel.html#cluster-manager-interface">Cluster Manager Interface</a></li>
 </ul>
 </li>
@@ -521,7 +527,6 @@
 <li class="toctree-l2"><a class="reference internal" href="../devdocs/sysimg.html">System Image Building</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../devdocs/llvm.html">Working with LLVM</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../devdocs/stdio.html">printf() and stdio in the Julia runtime</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../devdocs/promote-op.html">Operator-sensitive promotion</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../devdocs/boundscheck.html">Bounds checking</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../devdocs/locks.html">Proper maintenance and care of multi-threading locks</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../devdocs/offset-arrays.html">Arrays with custom indices</a></li>
@@ -531,6 +536,7 @@
 <li class="toctree-l2"><a class="reference internal" href="../devdocs/backtraces.html">Reporting and analyzing crashes (segfaults)</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../devdocs/debuggingtips.html">gdb debugging tips</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../devdocs/valgrind.html">Using Valgrind with Julia</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../devdocs/sanitizers.html">Sanitizer support</a></li>
 </ul>
 </li>
 </ul>
@@ -756,8 +762,9 @@
 <dl class="function">
 <dt id="Base.methodswith">
 <code class="descname">methodswith</code><span class="sig-paren">(</span><em>typ[, module or function][, showparents]</em><span class="sig-paren">)</span><a class="headerlink" href="#Base.methodswith" title="Permalink to this definition">¶</a></dt>
-<dd><p>Return an array of methods with an argument of type <code class="docutils literal"><span class="pre">typ</span></code>. If optional <code class="docutils literal"><span class="pre">showparents</span></code> is <code class="docutils literal"><span class="pre">true</span></code>, also return arguments with a parent type of <code class="docutils literal"><span class="pre">typ</span></code>, excluding type <code class="docutils literal"><span class="pre">Any</span></code>.</p>
-<p>The optional second argument restricts the search to a particular module or function.</p>
+<dd><p>Return an array of methods with an argument of type <code class="docutils literal"><span class="pre">typ</span></code>.</p>
+<p>The optional second argument restricts the search to a particular module or function (the default is all modules, starting from Main).</p>
+<p>If optional <code class="docutils literal"><span class="pre">showparents</span></code> is <code class="docutils literal"><span class="pre">true</span></code>, also return arguments with a parent type of <code class="docutils literal"><span class="pre">typ</span></code>, excluding type <code class="docutils literal"><span class="pre">Any</span></code>.</p>
 </dd></dl>
 
 <dl class="function">
@@ -858,7 +865,7 @@
 <dl class="function">
 <dt id="Base.object_id">
 <code class="descname">object_id</code><span class="sig-paren">(</span><em>x</em><span class="sig-paren">)</span><a class="headerlink" href="#Base.object_id" title="Permalink to this definition">¶</a></dt>
-<dd><p>Get a unique integer id for <code class="docutils literal"><span class="pre">x</span></code>. <code class="docutils literal"><span class="pre">object_id(x)==object_id(y)</span></code> if and only if <code class="docutils literal"><span class="pre">is(x,y)</span></code>.</p>
+<dd><p>Get a hash value for <code class="docutils literal"><span class="pre">x</span></code> based on object identity. <code class="docutils literal"><span class="pre">object_id(x)==object_id(y)</span></code> if <code class="docutils literal"><span class="pre">x</span> <span class="pre">===</span> <span class="pre">y</span></code>.</p>
 </dd></dl>
 
 <dl class="function">
@@ -930,6 +937,35 @@
 
 <span class="n">julia</span><span class="o">&gt;</span> <span class="nb">convert</span><span class="p">(</span><span class="n">Rational</span><span class="p">{</span><span class="kt">Int64</span><span class="p">},</span> <span class="n">x</span><span class="p">)</span>
 <span class="mi">6004799503160661</span><span class="o">//</span><span class="mi">18014398509481984</span>
+</pre></div>
+</div>
+<p>If <code class="docutils literal"><span class="pre">T</span></code> is a collection type and <code class="docutils literal"><span class="pre">x</span></code> a collection, the result of <code class="docutils literal"><span class="pre">convert(T,</span> <span class="pre">x)</span></code> may alias <code class="docutils literal"><span class="pre">x</span></code>.</p>
+<div class="highlight-julia"><div class="highlight"><pre><span></span><span class="n">julia</span><span class="o">&gt;</span> <span class="n">x</span> <span class="o">=</span> <span class="kt">Int</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">];</span>
+
+<span class="n">julia</span><span class="o">&gt;</span> <span class="n">y</span> <span class="o">=</span> <span class="nb">convert</span><span class="p">(</span><span class="n">Vector</span><span class="p">{</span><span class="kt">Int</span><span class="p">},</span> <span class="n">x</span><span class="p">);</span>
+
+<span class="n">julia</span><span class="o">&gt;</span> <span class="n">y</span> <span class="o">===</span> <span class="n">x</span>
+<span class="n">true</span>
+</pre></div>
+</div>
+<p>Similarly, if <code class="docutils literal"><span class="pre">T</span></code> is a composite type and <code class="docutils literal"><span class="pre">x</span></code> a related instance, the result of <code class="docutils literal"><span class="pre">convert(T,</span> <span class="pre">x)</span></code> may alias part or all of <code class="docutils literal"><span class="pre">x</span></code>.</p>
+<div class="highlight-julia"><div class="highlight"><pre><span></span><span class="n">julia</span><span class="o">&gt;</span> <span class="n">x</span> <span class="o">=</span> <span class="n">speye</span><span class="p">(</span><span class="mi">5</span><span class="p">);</span>
+
+<span class="n">julia</span><span class="o">&gt;</span> <span class="nb">typeof</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+<span class="n">SparseMatrixCSC</span><span class="p">{</span><span class="kt">Float64</span><span class="p">,</span><span class="kt">Int64</span><span class="p">}</span>
+
+<span class="n">julia</span><span class="o">&gt;</span> <span class="n">y</span> <span class="o">=</span> <span class="nb">convert</span><span class="p">(</span><span class="n">SparseMatrixCSC</span><span class="p">{</span><span class="kt">Float64</span><span class="p">,</span><span class="kt">Int64</span><span class="p">},</span> <span class="n">x</span><span class="p">);</span>
+
+<span class="n">julia</span><span class="o">&gt;</span> <span class="n">z</span> <span class="o">=</span> <span class="nb">convert</span><span class="p">(</span><span class="n">SparseMatrixCSC</span><span class="p">{</span><span class="kt">Float32</span><span class="p">,</span><span class="kt">Int64</span><span class="p">},</span> <span class="n">y</span><span class="p">);</span>
+
+<span class="n">julia</span><span class="o">&gt;</span> <span class="n">y</span> <span class="o">===</span> <span class="n">x</span>
+<span class="n">true</span>
+
+<span class="n">julia</span><span class="o">&gt;</span> <span class="n">z</span> <span class="o">===</span> <span class="n">x</span>
+<span class="n">false</span>
+
+<span class="n">julia</span><span class="o">&gt;</span> <span class="n">z</span><span class="o">.</span><span class="n">colptr</span> <span class="o">===</span> <span class="n">x</span><span class="o">.</span><span class="n">colptr</span>
+<span class="n">true</span>
 </pre></div>
 </div>
 </dd></dl>
@@ -1455,43 +1491,48 @@
 <dl class="function">
 <dt id="Base.toc">
 <code class="descname">toc</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#Base.toc" title="Permalink to this definition">¶</a></dt>
-<dd><p>Print and return the time elapsed since the last <a class="reference internal" href="#Base.tic" title="Base.tic"><code class="xref jl jl-func docutils literal"><span class="pre">tic()</span></code></a>.</p>
+<dd><p>Print and return the time elapsed since the last <a class="reference internal" href="#Base.tic" title="Base.tic"><code class="xref jl jl-func docutils literal"><span class="pre">tic()</span></code></a>. The macro call <code class="docutils literal"><span class="pre">&#64;time</span> <span class="pre">expr</span></code> can also be used to time evaluation.</p>
 </dd></dl>
 
 <dl class="function">
 <dt id="Base.toq">
 <code class="descname">toq</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#Base.toq" title="Permalink to this definition">¶</a></dt>
-<dd><p>Return, but do not print, the time elapsed since the last <a class="reference internal" href="#Base.tic" title="Base.tic"><code class="xref jl jl-func docutils literal"><span class="pre">tic()</span></code></a>.</p>
+<dd><p>Return, but do not print, the time elapsed since the last <a class="reference internal" href="#Base.tic" title="Base.tic"><code class="xref jl jl-func docutils literal"><span class="pre">tic()</span></code></a>. The macro calls <code class="docutils literal"><span class="pre">&#64;timed</span> <span class="pre">expr</span></code> and <code class="docutils literal"><span class="pre">&#64;elapsed</span> <span class="pre">expr</span></code> also return evaluation time.</p>
 </dd></dl>
 
 <dl class="function">
 <dt id="Base.&#64;time">
 <code class="descname">&#64;time</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#Base.@time" title="Permalink to this definition">¶</a></dt>
 <dd><p>A macro to execute an expression, printing the time it took to execute, the number of allocations, and the total number of bytes its execution caused to be allocated, before returning the value of the expression.</p>
+<p>See also <a class="reference internal" href="#Base.&#64;timev" title="Base.&#64;timev"><code class="xref jl jl-func docutils literal"><span class="pre">&#64;timev()</span></code></a>, <a class="reference internal" href="#Base.&#64;timed" title="Base.&#64;timed"><code class="xref jl jl-func docutils literal"><span class="pre">&#64;timed()</span></code></a>, <a class="reference internal" href="#Base.&#64;elapsed" title="Base.&#64;elapsed"><code class="xref jl jl-func docutils literal"><span class="pre">&#64;elapsed()</span></code></a>, and <a class="reference internal" href="#Base.&#64;allocated" title="Base.&#64;allocated"><code class="xref jl jl-func docutils literal"><span class="pre">&#64;allocated()</span></code></a>.</p>
 </dd></dl>
 
 <dl class="function">
 <dt id="Base.&#64;timev">
 <code class="descname">&#64;timev</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#Base.@timev" title="Permalink to this definition">¶</a></dt>
 <dd><p>This is a verbose version of the <code class="docutils literal"><span class="pre">&#64;time</span></code> macro. It first prints the same information as <code class="docutils literal"><span class="pre">&#64;time</span></code>, then any non-zero memory allocation counters, and then returns the value of the expression.</p>
+<p>See also <a class="reference internal" href="#Base.&#64;time" title="Base.&#64;time"><code class="xref jl jl-func docutils literal"><span class="pre">&#64;time()</span></code></a>, <a class="reference internal" href="#Base.&#64;timed" title="Base.&#64;timed"><code class="xref jl jl-func docutils literal"><span class="pre">&#64;timed()</span></code></a>, <a class="reference internal" href="#Base.&#64;elapsed" title="Base.&#64;elapsed"><code class="xref jl jl-func docutils literal"><span class="pre">&#64;elapsed()</span></code></a>, and <a class="reference internal" href="#Base.&#64;allocated" title="Base.&#64;allocated"><code class="xref jl jl-func docutils literal"><span class="pre">&#64;allocated()</span></code></a>.</p>
 </dd></dl>
 
 <dl class="function">
 <dt id="Base.&#64;timed">
 <code class="descname">&#64;timed</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#Base.@timed" title="Permalink to this definition">¶</a></dt>
 <dd><p>A macro to execute an expression, and return the value of the expression, elapsed time, total bytes allocated, garbage collection time, and an object with various memory allocation counters.</p>
+<p>See also <a class="reference internal" href="#Base.&#64;time" title="Base.&#64;time"><code class="xref jl jl-func docutils literal"><span class="pre">&#64;time()</span></code></a>, <a class="reference internal" href="#Base.&#64;timev" title="Base.&#64;timev"><code class="xref jl jl-func docutils literal"><span class="pre">&#64;timev()</span></code></a>, <a class="reference internal" href="#Base.&#64;elapsed" title="Base.&#64;elapsed"><code class="xref jl jl-func docutils literal"><span class="pre">&#64;elapsed()</span></code></a>, and <a class="reference internal" href="#Base.&#64;allocated" title="Base.&#64;allocated"><code class="xref jl jl-func docutils literal"><span class="pre">&#64;allocated()</span></code></a>.</p>
 </dd></dl>
 
 <dl class="function">
 <dt id="Base.&#64;elapsed">
 <code class="descname">&#64;elapsed</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#Base.@elapsed" title="Permalink to this definition">¶</a></dt>
 <dd><p>A macro to evaluate an expression, discarding the resulting value, instead returning the number of seconds it took to execute as a floating-point number.</p>
+<p>See also <a class="reference internal" href="#Base.&#64;time" title="Base.&#64;time"><code class="xref jl jl-func docutils literal"><span class="pre">&#64;time()</span></code></a>, <a class="reference internal" href="#Base.&#64;timev" title="Base.&#64;timev"><code class="xref jl jl-func docutils literal"><span class="pre">&#64;timev()</span></code></a>, <a class="reference internal" href="#Base.&#64;timed" title="Base.&#64;timed"><code class="xref jl jl-func docutils literal"><span class="pre">&#64;timed()</span></code></a>, and <a class="reference internal" href="#Base.&#64;allocated" title="Base.&#64;allocated"><code class="xref jl jl-func docutils literal"><span class="pre">&#64;allocated()</span></code></a>.</p>
 </dd></dl>
 
 <dl class="function">
 <dt id="Base.&#64;allocated">
 <code class="descname">&#64;allocated</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#Base.@allocated" title="Permalink to this definition">¶</a></dt>
 <dd><p>A macro to evaluate an expression, discarding the resulting value, instead returning the total number of bytes allocated during evaluation of the expression. Note: the expression is evaluated inside a local function, instead of the current context, in order to eliminate the effects of compilation, however, there still may be some allocations due to JIT compilation. This also makes the results inconsistent with the <code class="docutils literal"><span class="pre">&#64;time</span></code> macros, which do not try to adjust for the effects of compilation.</p>
+<p>See also <a class="reference internal" href="#Base.&#64;time" title="Base.&#64;time"><code class="xref jl jl-func docutils literal"><span class="pre">&#64;time()</span></code></a>, <a class="reference internal" href="#Base.&#64;timev" title="Base.&#64;timev"><code class="xref jl jl-func docutils literal"><span class="pre">&#64;timev()</span></code></a>, <a class="reference internal" href="#Base.&#64;timed" title="Base.&#64;timed"><code class="xref jl jl-func docutils literal"><span class="pre">&#64;timed()</span></code></a>, and <a class="reference internal" href="#Base.&#64;elapsed" title="Base.&#64;elapsed"><code class="xref jl jl-func docutils literal"><span class="pre">&#64;elapsed()</span></code></a>.</p>
 </dd></dl>
 
 <dl class="function">
@@ -1748,7 +1789,7 @@
 <dt id="Base.retry">
 <code class="descname">retry</code><span class="sig-paren">(</span><em>f, [retry_on]; n=1, max_delay=10.0</em><span class="sig-paren">)</span> &rarr; Function<a class="headerlink" href="#Base.retry" title="Permalink to this definition">¶</a></dt>
 <dd><p>Returns a lambda that retries function <code class="docutils literal"><span class="pre">f</span></code> up to <code class="docutils literal"><span class="pre">n</span></code> times in the event of an exception. If <code class="docutils literal"><span class="pre">retry_on</span></code> is a <code class="docutils literal"><span class="pre">Type</span></code> then retry only for exceptions of that type. If <code class="docutils literal"><span class="pre">retry_on</span></code> is a function <code class="docutils literal"><span class="pre">test_error(::Exception)</span> <span class="pre">-&gt;</span> <span class="pre">Bool</span></code> then retry only if it is true.</p>
-<p>The first retry happens after a gap of 50 milliseconds or <code class="docutils literal"><span class="pre">max_delay</span></code>, whichever is lower. Subsequently, the delays between retries are exponentially increased with a random factor upto <code class="docutils literal"><span class="pre">max_delay</span></code>.</p>
+<p>The first retry happens after a gap of 50 milliseconds or <code class="docutils literal"><span class="pre">max_delay</span></code>, whichever is lower. Subsequently, the delays between retries are exponentially increased with a random factor up to <code class="docutils literal"><span class="pre">max_delay</span></code>.</p>
 <p><strong>Examples</strong></p>
 <div class="highlight-julia"><div class="highlight"><pre><span></span><span class="n">retry</span><span class="p">(</span><span class="n">http_get</span><span class="p">,</span> <span class="n">e</span> <span class="o">-&gt;</span> <span class="n">e</span><span class="o">.</span><span class="n">status</span> <span class="o">==</span> <span class="s">&quot;503&quot;</span><span class="p">)(</span><span class="n">url</span><span class="p">)</span>
 <span class="n">retry</span><span class="p">(</span><span class="n">read</span><span class="p">,</span> <span class="n">UVError</span><span class="p">)(</span><span class="n">io</span><span class="p">)</span>
@@ -1835,20 +1876,38 @@
 </dd></dl>
 
 <dl class="function">
+<dt id="Base.Base.datatype_module">
+<code class="descclassname">Base.</code><code class="descname">datatype_module</code><span class="sig-paren">(</span><em>t::DataType</em><span class="sig-paren">)</span> &rarr; Module<a class="headerlink" href="#Base.Base.datatype_module" title="Permalink to this definition">¶</a></dt>
+<dd><p>Determine the module containing the definition of a <code class="docutils literal"><span class="pre">DataType</span></code>.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="Base.Base.datatype_name">
+<code class="descclassname">Base.</code><code class="descname">datatype_name</code><span class="sig-paren">(</span><em>t::DataType</em><span class="sig-paren">)</span> &rarr; Symbol<a class="headerlink" href="#Base.Base.datatype_name" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the name of a <code class="docutils literal"><span class="pre">DataType</span></code> (without its parent module) as a symbol.</p>
+</dd></dl>
+
+<dl class="function">
 <dt id="Base.isconst">
 <code class="descname">isconst</code><span class="sig-paren">(</span><span class="optional">[</span><em>m::Module</em>, <span class="optional">]</span><em>s::Symbol</em><span class="sig-paren">)</span> &rarr; Bool<a class="headerlink" href="#Base.isconst" title="Permalink to this definition">¶</a></dt>
 <dd><p>Determine whether a global is declared <code class="docutils literal"><span class="pre">const</span></code> in a given <code class="docutils literal"><span class="pre">Module</span></code>. The default <code class="docutils literal"><span class="pre">Module</span></code> argument is <code class="docutils literal"><span class="pre">current_module()</span></code>.</p>
 </dd></dl>
 
 <dl class="function">
-<dt id="Base.function_name">
-<code class="descname">function_name</code><span class="sig-paren">(</span><em>f::Function</em><span class="sig-paren">)</span> &rarr; Symbol<a class="headerlink" href="#Base.function_name" title="Permalink to this definition">¶</a></dt>
+<dt id="Base.Base.function_name">
+<code class="descclassname">Base.</code><code class="descname">function_name</code><span class="sig-paren">(</span><em>f::Function</em><span class="sig-paren">)</span> &rarr; Symbol<a class="headerlink" href="#Base.Base.function_name" title="Permalink to this definition">¶</a></dt>
 <dd><p>Get the name of a generic <code class="docutils literal"><span class="pre">Function</span></code> as a symbol, or <code class="docutils literal"><span class="pre">:anonymous</span></code>.</p>
 </dd></dl>
 
 <dl class="function">
-<dt id="Base.function_module">
-<code class="descname">function_module</code><span class="sig-paren">(</span><em>f::Function</em>, <em>types</em><span class="sig-paren">)</span> &rarr; Module<a class="headerlink" href="#Base.function_module" title="Permalink to this definition">¶</a></dt>
+<dt id="Base.Base.function_module">
+<code class="descclassname">Base.</code><code class="descname">function_module</code><span class="sig-paren">(</span><em>f::Function</em><span class="sig-paren">)</span> &rarr; Module<a class="headerlink" href="#Base.Base.function_module" title="Permalink to this definition">¶</a></dt>
+<dd><p>Determine the module containing the (first) definition of a generic function.</p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<code class="descclassname">Base.</code><code class="descname">function_module</code><span class="sig-paren">(</span><em>f::Function</em>, <em>types</em><span class="sig-paren">)</span> &rarr; Module</dt>
 <dd><p>Determine the module containing a given definition of a generic function.</p>
 </dd></dl>
 
@@ -1923,8 +1982,8 @@
 
 <dl class="function">
 <dt id="Base.code_warntype">
-<code class="descname">code_warntype</code><span class="sig-paren">(</span><em>f</em>, <em>types</em><span class="sig-paren">)</span><a class="headerlink" href="#Base.code_warntype" title="Permalink to this definition">¶</a></dt>
-<dd><p>Displays lowered and type-inferred ASTs for the methods matching the given generic function and type signature. The ASTs are annotated in such a way as to cause &#8220;non-leaf&#8221; types to be emphasized (if color is available, displayed in red). This serves as a warning of potential type instability. Not all non-leaf types are particularly problematic for performance, so the results need to be used judiciously. See <a class="reference internal" href="../manual/performance-tips.html#man-code-warntype"><span>&#64;code_warntype</span></a> for more information.</p>
+<code class="descname">code_warntype</code><span class="sig-paren">(</span><span class="optional">[</span><em>io</em>, <span class="optional">]</span><em>f</em>, <em>types</em><span class="sig-paren">)</span><a class="headerlink" href="#Base.code_warntype" title="Permalink to this definition">¶</a></dt>
+<dd><p>Prints lowered and type-inferred ASTs for the methods matching the given generic function and type signature to <code class="docutils literal"><span class="pre">io</span></code> which defaults to <code class="docutils literal"><span class="pre">STDOUT</span></code>. The ASTs are annotated in such a way as to cause &#8220;non-leaf&#8221; types to be emphasized (if color is available, displayed in red). This serves as a warning of potential type instability. Not all non-leaf types are particularly problematic for performance, so the results need to be used judiciously. See <a class="reference internal" href="../manual/performance-tips.html#man-code-warntype"><span>&#64;code_warntype</span></a> for more information.</p>
 </dd></dl>
 
 <dl class="function">
@@ -1935,8 +1994,8 @@
 
 <dl class="function">
 <dt id="Base.code_llvm">
-<code class="descname">code_llvm</code><span class="sig-paren">(</span><em>f</em>, <em>types</em><span class="sig-paren">)</span><a class="headerlink" href="#Base.code_llvm" title="Permalink to this definition">¶</a></dt>
-<dd><p>Prints the LLVM bitcodes generated for running the method matching the given generic function and type signature to <a class="reference internal" href="io-network.html#Base.STDOUT" title="Base.STDOUT"><code class="xref jl jl-const docutils literal"><span class="pre">STDOUT</span></code></a>.</p>
+<code class="descname">code_llvm</code><span class="sig-paren">(</span><span class="optional">[</span><em>io</em>, <span class="optional">]</span><em>f</em>, <em>types</em><span class="sig-paren">)</span><a class="headerlink" href="#Base.code_llvm" title="Permalink to this definition">¶</a></dt>
+<dd><p>Prints the LLVM bitcodes generated for running the method matching the given generic function and type signature to <code class="docutils literal"><span class="pre">io</span></code> which defaults to <code class="docutils literal"><span class="pre">STDOUT</span></code>.</p>
 <p>All metadata and dbg.* calls are removed from the printed bitcode. Use code_llvm_raw for the full IR.</p>
 </dd></dl>
 
@@ -1948,8 +2007,8 @@
 
 <dl class="function">
 <dt id="Base.code_native">
-<code class="descname">code_native</code><span class="sig-paren">(</span><em>f</em>, <em>types</em><span class="sig-paren">)</span><a class="headerlink" href="#Base.code_native" title="Permalink to this definition">¶</a></dt>
-<dd><p>Prints the native assembly instructions generated for running the method matching the given generic function and type signature to <code class="docutils literal"><span class="pre">STDOUT</span></code>.</p>
+<code class="descname">code_native</code><span class="sig-paren">(</span><span class="optional">[</span><em>io</em>, <span class="optional">]</span><em>f</em>, <em>types</em><span class="sig-paren">)</span><a class="headerlink" href="#Base.code_native" title="Permalink to this definition">¶</a></dt>
+<dd><p>Prints the native assembly instructions generated for running the method matching the given generic function and type signature to <code class="docutils literal"><span class="pre">io</span></code> which defaults to <code class="docutils literal"><span class="pre">STDOUT</span></code>.</p>
 </dd></dl>
 
 <dl class="function">

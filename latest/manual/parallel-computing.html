@@ -193,7 +193,8 @@
 <li class="toctree-l2"><a class="reference internal" href="documentation.html#functions-methods">Functions &amp; Methods</a></li>
 <li class="toctree-l2"><a class="reference internal" href="documentation.html#advanced-usage">Advanced Usage</a></li>
 <li class="toctree-l2"><a class="reference internal" href="documentation.html#syntax-guide">Syntax Guide</a></li>
-<li class="toctree-l2"><a class="reference internal" href="documentation.html#markdown-syntax-notes">Markdown Syntax Notes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="documentation.html#markdown-syntax">Markdown syntax</a></li>
+<li class="toctree-l2"><a class="reference internal" href="documentation.html#markdown-syntax-extensions">Markdown Syntax Extensions</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="metaprogramming.html">Metaprogramming</a><ul>
@@ -240,6 +241,8 @@
 <li class="toctree-l2"><a class="reference internal" href="#network-requirements-for-localmanager-and-sshmanager">Network requirements for LocalManager and SSHManager</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#cluster-cookie">Cluster cookie</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#specifying-network-topology-experimental">Specifying network topology (Experimental)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#multi-threading-experimental">Multi-threading (Experimental)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#threadcall-experimental">&#64;threadcall (Experimental)</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="dates.html">Date and DateTime</a><ul>
@@ -280,6 +283,7 @@
 <li class="toctree-l2"><a class="reference internal" href="interacting-with-julia.html#the-different-prompt-modes">The different prompt modes</a></li>
 <li class="toctree-l2"><a class="reference internal" href="interacting-with-julia.html#key-bindings">Key bindings</a></li>
 <li class="toctree-l2"><a class="reference internal" href="interacting-with-julia.html#tab-completion">Tab completion</a></li>
+<li class="toctree-l2"><a class="reference internal" href="interacting-with-julia.html#customizing-colors">Customizing Colors</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="embedding.html">Embedding Julia</a><ul>
@@ -455,6 +459,8 @@
 <li class="toctree-l2"><a class="reference internal" href="../stdlib/parallel.html#general-parallel-computing-support">General Parallel Computing Support</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../stdlib/parallel.html#shared-arrays">Shared Arrays</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../stdlib/parallel.html#multi-threading">Multi-Threading</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../stdlib/parallel.html#ccall-using-a-threadpool-experimental">ccall using a threadpool (Experimental)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../stdlib/parallel.html#synchronization-primitives">Synchronization Primitives</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../stdlib/parallel.html#cluster-manager-interface">Cluster Manager Interface</a></li>
 </ul>
 </li>
@@ -521,7 +527,6 @@
 <li class="toctree-l2"><a class="reference internal" href="../devdocs/sysimg.html">System Image Building</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../devdocs/llvm.html">Working with LLVM</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../devdocs/stdio.html">printf() and stdio in the Julia runtime</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../devdocs/promote-op.html">Operator-sensitive promotion</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../devdocs/boundscheck.html">Bounds checking</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../devdocs/locks.html">Proper maintenance and care of multi-threading locks</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../devdocs/offset-arrays.html">Arrays with custom indices</a></li>
@@ -531,6 +536,7 @@
 <li class="toctree-l2"><a class="reference internal" href="../devdocs/backtraces.html">Reporting and analyzing crashes (segfaults)</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../devdocs/debuggingtips.html">gdb debugging tips</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../devdocs/valgrind.html">Using Valgrind with Julia</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../devdocs/sanitizers.html">Sanitizer support</a></li>
 </ul>
 </li>
 </ul>
@@ -578,7 +584,7 @@ it&#8217;s fairly obvious that a given CPU will have fastest access to the RAM
 within the same computer (node). Perhaps more surprisingly, similar
 issues are relevant on a typical multicore laptop, due to
 differences in the speed of main memory and the
-<a class="reference external" href="http://www.akkadia.org/drepper/cpumemory.pdf">cache</a>. Consequently, a
+<a class="reference external" href="https://www.akkadia.org/drepper/cpumemory.pdf">cache</a>. Consequently, a
 good multiprocessing environment should allow control over the
 &#8220;ownership&#8221; of a chunk of memory by a particular CPU. Julia provides a
 multiprocessing environment based on message passing to allow programs
@@ -595,15 +601,15 @@ references</em> and <em>remote calls</em>. A remote reference is an object that 
 be used from any process to refer to an object stored on a particular
 process. A remote call is a request by one process to call a certain
 function on certain arguments on another (possibly the same) process.</p>
-<p>Remote references come in two flavors -<code class="docutils literal"><span class="pre">Future</span></code> and <code class="docutils literal"><span class="pre">RemoteChannel</span></code>.</p>
-<p>A remote call returns a <code class="docutils literal"><span class="pre">Future</span></code> to its result. Remote calls
+<p>Remote references come in two flavors - <a class="reference internal" href="../stdlib/parallel.html#Base.Future" title="Base.Future"><code class="xref jl jl-class docutils literal"><span class="pre">Future</span></code></a> and <a class="reference internal" href="../stdlib/parallel.html#Base.RemoteChannel" title="Base.RemoteChannel"><code class="xref jl jl-class docutils literal"><span class="pre">RemoteChannel</span></code></a>.</p>
+<p>A remote call returns a <a class="reference internal" href="../stdlib/parallel.html#Base.Future" title="Base.Future"><code class="xref jl jl-class docutils literal"><span class="pre">Future</span></code></a> to its result. Remote calls
 return immediately; the process that made the call proceeds to its
 next operation while the remote call happens somewhere else. You can
 wait for a remote call to finish by calling <a class="reference internal" href="../stdlib/parallel.html#Base.wait" title="Base.wait"><code class="xref jl jl-func docutils literal"><span class="pre">wait()</span></code></a> on the returned
-<cite>Future</cite>, and you can obtain the full value of the result using
+<a class="reference internal" href="../stdlib/parallel.html#Base.Future" title="Base.Future"><code class="xref jl jl-class docutils literal"><span class="pre">Future</span></code></a>, and you can obtain the full value of the result using
 <a class="reference internal" href="../stdlib/parallel.html#Base.fetch" title="Base.fetch"><code class="xref jl jl-func docutils literal"><span class="pre">fetch()</span></code></a>.</p>
-<p>On the other hand <code class="docutils literal"><span class="pre">RemoteChannel</span></code> s are rewritable. For example, multiple processes
-can co-ordinate their processing by referencing the same remote <code class="docutils literal"><span class="pre">Channel</span></code>.</p>
+<p>On the other hand <a class="reference internal" href="../stdlib/parallel.html#Base.RemoteChannel" title="Base.RemoteChannel"><code class="xref jl jl-class docutils literal"><span class="pre">RemoteChannel</span></code></a> s are rewritable. For example, multiple processes
+can co-ordinate their processing by referencing the same remote <code class="xref jl jl-class docutils literal"><span class="pre">Channel</span></code>.</p>
 <p>Let&#8217;s try this out. Starting with <code class="docutils literal"><span class="pre">julia</span> <span class="pre">-p</span> <span class="pre">n</span></code> provides <code class="docutils literal"><span class="pre">n</span></code> worker
 processes on the local machine. Generally it makes sense for <code class="docutils literal"><span class="pre">n</span></code> to
 equal the number of CPU cores on the machine.</p>
@@ -663,13 +669,13 @@ a function, and picks where to do the operation for you:</p>
 do not know where the code will run, so in general a <a class="reference internal" href="../stdlib/parallel.html#Base.fetch" title="Base.fetch"><code class="xref jl jl-func docutils literal"><span class="pre">fetch()</span></code></a> might be
 required to move <code class="docutils literal"><span class="pre">r</span></code> to the process doing the addition. In this
 case, <a class="reference internal" href="../stdlib/parallel.html#Base.&#64;spawn" title="Base.&#64;spawn"><code class="xref jl jl-obj docutils literal"><span class="pre">&#64;spawn</span></code></a> is smart enough to perform the computation on the
-process that owns <code class="docutils literal"><span class="pre">r</span></code>, so the <a class="reference internal" href="../stdlib/parallel.html#Base.fetch" title="Base.fetch"><code class="xref jl jl-func docutils literal"><span class="pre">fetch()</span></code></a> will be a no-op.</p>
+process that owns <code class="docutils literal"><span class="pre">r</span></code>, so the <a class="reference internal" href="../stdlib/parallel.html#Base.fetch" title="Base.fetch"><code class="xref jl jl-func docutils literal"><span class="pre">fetch()</span></code></a> will be a no-op (no work is done).</p>
 <p>(It is worth noting that <a class="reference internal" href="../stdlib/parallel.html#Base.&#64;spawn" title="Base.&#64;spawn"><code class="xref jl jl-obj docutils literal"><span class="pre">&#64;spawn</span></code></a> is not built-in but defined in Julia
 as a <a class="reference internal" href="metaprogramming.html#man-macros"><span>macro</span></a>. It is possible to define your
 own such constructs.)</p>
-<p>An important thing to remember is that, once fetched, a <code class="docutils literal"><span class="pre">Future</span></code> will cache its value
-locally. Further <code class="docutils literal"><span class="pre">fetch</span></code> calls do not entail a network hop. Once all referencing Futures
-have fetched, the remote stored value is deleted.</p>
+<p>An important thing to remember is that, once fetched, a <a class="reference internal" href="../stdlib/parallel.html#Base.Future" title="Base.Future"><code class="xref jl jl-class docutils literal"><span class="pre">Future</span></code></a> will cache its value
+locally. Further <a class="reference internal" href="../stdlib/parallel.html#Base.fetch" title="Base.fetch"><code class="xref jl jl-func docutils literal"><span class="pre">fetch()</span></code></a> calls do not entail a network hop. Once all referencing
+<a class="reference internal" href="../stdlib/parallel.html#Base.Future" title="Base.Future"><code class="xref jl jl-class docutils literal"><span class="pre">Future</span></code></a>s have fetched, the remote stored value is deleted.</p>
 <div class="section" id="code-availability-and-loading-packages">
 <span id="man-parallel-computing-code-availability"></span><h2>Code Availability and Loading Packages<a class="headerlink" href="#code-availability-and-loading-packages" title="Permalink to this headline">¶</a></h2>
 <p>Your code must be available on any process that runs it. For example,
@@ -735,7 +741,7 @@ For example, <a class="reference internal" href="../stdlib/parallel.html#Base.&#
 </pre></div>
 </div>
 <p>Each process has an associated identifier. The process providing the interactive Julia prompt
-always has an id equal to 1, as would the Julia process running the driver script in the
+always has an <code class="docutils literal"><span class="pre">id</span></code> equal to 1, as would the Julia process running the driver script in the
 example above.
 The processes used by default for parallel operations are referred to as &#8220;workers&#8221;.
 When there is only one process, process 1 is considered a worker. Otherwise, workers are
@@ -793,7 +799,7 @@ process needs matrix <code class="docutils literal"><span class="pre">A</span></
 if computing <code class="docutils literal"><span class="pre">A</span></code> is expensive and only the current process has it,
 then moving it to another process might be unavoidable. Or, if the
 current process has very little to do between the <a class="reference internal" href="../stdlib/parallel.html#Base.&#64;spawn" title="Base.&#64;spawn"><code class="xref jl jl-obj docutils literal"><span class="pre">&#64;spawn</span></code></a> and
-<code class="docutils literal"><span class="pre">fetch(Bref)</span></code> then it might be better to eliminate the parallelism
+<code class="docutils literal"><span class="pre">fetch(Bref)</span></code>, it might be better to eliminate the parallelism
 altogether. Or imagine <code class="docutils literal"><span class="pre">rand(1000,1000)</span></code> is replaced with a more
 expensive operation. Then it might make sense to add another <a class="reference internal" href="../stdlib/parallel.html#Base.&#64;spawn" title="Base.&#64;spawn"><code class="xref jl jl-obj docutils literal"><span class="pre">&#64;spawn</span></code></a>
 statement just for this step.</p>
@@ -980,35 +986,35 @@ points: in this case, when <a class="reference internal" href="../stdlib/paralle
 <h2>Channels<a class="headerlink" href="#channels" title="Permalink to this headline">¶</a></h2>
 <p>Channels provide for a fast means of inter-task communication. A
 <code class="docutils literal"><span class="pre">Channel{T}(n::Int)</span></code> is a shared queue of maximum length <code class="docutils literal"><span class="pre">n</span></code>
-holding objects of type <code class="docutils literal"><span class="pre">T</span></code>. Multiple readers can read off the channel
-via <code class="docutils literal"><span class="pre">fetch</span></code> and <code class="docutils literal"><span class="pre">take!</span></code>. Multiple writers can add to the channel via
-<code class="docutils literal"><span class="pre">put!</span></code>. <code class="docutils literal"><span class="pre">isready</span></code> tests for the presence of any object in
-the channel, while <code class="docutils literal"><span class="pre">wait</span></code> waits for an object to become available.
-<code class="docutils literal"><span class="pre">close</span></code> closes a Channel. On a closed channel, <code class="docutils literal"><span class="pre">put!</span></code> will fail,
-while <code class="docutils literal"><span class="pre">take!</span></code> and <code class="docutils literal"><span class="pre">fetch</span></code> successfully return any existing values
+holding objects of type <code class="docutils literal"><span class="pre">T</span></code>. Multiple readers can read off the <code class="xref jl jl-class docutils literal"><span class="pre">Channel</span></code>
+via <a class="reference internal" href="../stdlib/parallel.html#Base.fetch" title="Base.fetch"><code class="xref jl jl-func docutils literal"><span class="pre">fetch()</span></code></a> and <a class="reference internal" href="../stdlib/parallel.html#Base.take!" title="Base.take!"><code class="xref jl jl-func docutils literal"><span class="pre">take!()</span></code></a>. Multiple writers can add to the <code class="xref jl jl-class docutils literal"><span class="pre">Channel</span></code> via
+<a class="reference internal" href="../stdlib/parallel.html#Base.put!" title="Base.put!"><code class="xref jl jl-func docutils literal"><span class="pre">put!()</span></code></a>. <a class="reference internal" href="../stdlib/parallel.html#Base.isready" title="Base.isready"><code class="xref jl jl-func docutils literal"><span class="pre">isready()</span></code></a> tests for the presence of any object in
+the channel, while <a class="reference internal" href="../stdlib/parallel.html#Base.wait" title="Base.wait"><code class="xref jl jl-func docutils literal"><span class="pre">wait()</span></code></a> waits for an object to become available.
+<a class="reference internal" href="../stdlib/parallel.html#Base.close" title="Base.close"><code class="xref jl jl-func docutils literal"><span class="pre">close()</span></code></a> closes a <code class="xref jl jl-class docutils literal"><span class="pre">Channel</span></code>. On a closed <code class="xref jl jl-class docutils literal"><span class="pre">Channel</span></code>, <a class="reference internal" href="../stdlib/parallel.html#Base.put!" title="Base.put!"><code class="xref jl jl-func docutils literal"><span class="pre">put!()</span></code></a> will fail,
+while <a class="reference internal" href="../stdlib/parallel.html#Base.take!" title="Base.take!"><code class="xref jl jl-func docutils literal"><span class="pre">take!()</span></code></a> and <a class="reference internal" href="../stdlib/parallel.html#Base.fetch" title="Base.fetch"><code class="xref jl jl-func docutils literal"><span class="pre">fetch()</span></code></a> successfully return any existing values
 till it is emptied.</p>
-<p>A Channel can be used as an iterable object in a <code class="docutils literal"><span class="pre">for</span></code> loop, in which
-case the loop runs as long as the channel has data or is open. The loop
-variable takes on all values added to the channel. An empty, closed channel
+<p>A <code class="xref jl jl-class docutils literal"><span class="pre">Channel</span></code> can be used as an iterable object in a <code class="docutils literal"><span class="pre">for</span></code> loop, in which
+case the loop runs as long as the <code class="xref jl jl-class docutils literal"><span class="pre">Channel</span></code> has data or is open. The loop
+variable takes on all values added to the <code class="xref jl jl-class docutils literal"><span class="pre">Channel</span></code>. An empty, closed <code class="xref jl jl-class docutils literal"><span class="pre">Channel</span></code>
 causes the <code class="docutils literal"><span class="pre">for</span></code> loop to terminate.</p>
 </div>
 <div class="section" id="remote-references-and-abstractchannels">
 <h2>Remote references and AbstractChannels<a class="headerlink" href="#remote-references-and-abstractchannels" title="Permalink to this headline">¶</a></h2>
-<p>Remote references always refer to an implementation of an <code class="docutils literal"><span class="pre">AbstractChannel</span></code></p>
-<p>A concrete implementation of an <code class="docutils literal"><span class="pre">AbstractChannel</span></code> (like <code class="docutils literal"><span class="pre">Channel</span></code>), is required
-to implement <code class="docutils literal"><span class="pre">put!</span></code>, <code class="docutils literal"><span class="pre">take!</span></code>, <code class="docutils literal"><span class="pre">fetch</span></code>, <code class="docutils literal"><span class="pre">isready</span></code> and <code class="docutils literal"><span class="pre">wait</span></code>. The remote object
-referred to by a <code class="docutils literal"><span class="pre">Future</span></code> is stored in a <code class="docutils literal"><span class="pre">Channel{Any}(1)</span></code>, i.e., a channel of size 1
-capable of holding objects of <code class="docutils literal"><span class="pre">Any</span></code> type.</p>
-<p><code class="docutils literal"><span class="pre">RemoteChannel</span></code>, which is rewritable, can point to any type and size of channels, or any other
-implementation of an <code class="docutils literal"><span class="pre">AbstractChannel</span></code>.</p>
-<p>The constructor <code class="docutils literal"><span class="pre">RemoteChannel(f::Function,</span> <span class="pre">pid)</span></code> allows us to construct references to channels holding
+<p>Remote references always refer to an implementation of an <code class="xref jl jl-class docutils literal"><span class="pre">AbstractChannel</span></code>.</p>
+<p>A concrete implementation of an <code class="xref jl jl-class docutils literal"><span class="pre">AbstractChannel</span></code> (like <code class="xref jl jl-class docutils literal"><span class="pre">Channel</span></code>), is required
+to implement <a class="reference internal" href="../stdlib/parallel.html#Base.put!" title="Base.put!"><code class="xref jl jl-func docutils literal"><span class="pre">put!()</span></code></a>, <a class="reference internal" href="../stdlib/parallel.html#Base.take!" title="Base.take!"><code class="xref jl jl-func docutils literal"><span class="pre">take!()</span></code></a>, <a class="reference internal" href="../stdlib/parallel.html#Base.fetch" title="Base.fetch"><code class="xref jl jl-func docutils literal"><span class="pre">fetch()</span></code></a>, <a class="reference internal" href="../stdlib/parallel.html#Base.isready" title="Base.isready"><code class="xref jl jl-func docutils literal"><span class="pre">isready()</span></code></a> and <a class="reference internal" href="../stdlib/parallel.html#Base.wait" title="Base.wait"><code class="xref jl jl-func docutils literal"><span class="pre">wait()</span></code></a>.
+The remote object referred to by a <a class="reference internal" href="../stdlib/parallel.html#Base.Future" title="Base.Future"><code class="xref jl jl-class docutils literal"><span class="pre">Future</span></code></a> is stored in a <code class="docutils literal"><span class="pre">Channel{Any}(1)</span></code>,
+i.e., a <code class="xref jl jl-class docutils literal"><span class="pre">Channel</span></code> of size 1 capable of holding objects of <code class="docutils literal"><span class="pre">Any</span></code> type.</p>
+<p><a class="reference internal" href="../stdlib/parallel.html#Base.RemoteChannel" title="Base.RemoteChannel"><code class="xref jl jl-class docutils literal"><span class="pre">RemoteChannel</span></code></a>, which is rewritable, can point to any type and size of channels, or any other
+implementation of an <code class="xref jl jl-class docutils literal"><span class="pre">AbstractChannel</span></code>.</p>
+<p>The constructor <code class="xref jl jl-func docutils literal"><span class="pre">RemoteChannel(f::Function,</span> <span class="pre">pid)()</span></code> allows us to construct references to channels holding
 more than one value of a specific type. <code class="docutils literal"><span class="pre">f()</span></code> is a function executed on <code class="docutils literal"><span class="pre">pid</span></code> and it must return
-an <code class="docutils literal"><span class="pre">AbstractChannel</span></code>.</p>
+an <code class="xref jl jl-class docutils literal"><span class="pre">AbstractChannel</span></code>.</p>
 <p>For example, <code class="docutils literal"><span class="pre">RemoteChannel(()-&gt;Channel{Int}(10),</span> <span class="pre">pid)</span></code>, will return a reference to a channel of type <code class="docutils literal"><span class="pre">Int</span></code>
 and size 10. The channel exists on worker <code class="docutils literal"><span class="pre">pid</span></code>.</p>
-<p>Methods <code class="docutils literal"><span class="pre">put!</span></code>, <code class="docutils literal"><span class="pre">take!</span></code>, <code class="docutils literal"><span class="pre">fetch</span></code>, <code class="docutils literal"><span class="pre">isready</span></code> and <code class="docutils literal"><span class="pre">wait</span></code> on a <code class="docutils literal"><span class="pre">RemoteChannel</span></code> are proxied onto
+<p>Methods <a class="reference internal" href="../stdlib/parallel.html#Base.put!" title="Base.put!"><code class="xref jl jl-func docutils literal"><span class="pre">put!()</span></code></a>, <a class="reference internal" href="../stdlib/parallel.html#Base.take!" title="Base.take!"><code class="xref jl jl-func docutils literal"><span class="pre">take!()</span></code></a>, <a class="reference internal" href="../stdlib/parallel.html#Base.fetch" title="Base.fetch"><code class="xref jl jl-func docutils literal"><span class="pre">fetch()</span></code></a>, <a class="reference internal" href="../stdlib/parallel.html#Base.isready" title="Base.isready"><code class="xref jl jl-func docutils literal"><span class="pre">isready()</span></code></a> and <a class="reference internal" href="../stdlib/parallel.html#Base.wait" title="Base.wait"><code class="xref jl jl-func docutils literal"><span class="pre">wait()</span></code></a> on a <a class="reference internal" href="../stdlib/parallel.html#Base.RemoteChannel" title="Base.RemoteChannel"><code class="xref jl jl-class docutils literal"><span class="pre">RemoteChannel</span></code></a> are proxied onto
 the backing store on the remote process.</p>
-<p><code class="docutils literal"><span class="pre">RemoteChannel</span></code> can thus be used to refer to user implemented <code class="docutils literal"><span class="pre">AbstractChannel</span></code> objects. A simple
+<p><a class="reference internal" href="../stdlib/parallel.html#Base.RemoteChannel" title="Base.RemoteChannel"><code class="xref jl jl-class docutils literal"><span class="pre">RemoteChannel</span></code></a> can thus be used to refer to user implemented <code class="xref jl jl-class docutils literal"><span class="pre">AbstractChannel</span></code> objects. A simple
 example of this is provided in <code class="docutils literal"><span class="pre">examples/dictchannel.jl</span></code> which uses a dictionary as its remote store.</p>
 </div>
 <div class="section" id="remote-references-and-distributed-garbage-collection">
@@ -1016,24 +1022,24 @@ example of this is provided in <code class="docutils literal"><span class="pre">
 <p>Objects referred to by remote references can be freed only when <em>all</em> held references in the cluster
 are deleted.</p>
 <p>The node where the value is stored keeps track of which of the workers have a reference to it.
-Every time a <code class="docutils literal"><span class="pre">RemoteChannel</span></code> or a (unfetched) <code class="docutils literal"><span class="pre">Future</span></code> is serialized to a worker, the node pointed
-to by the reference is notified. And every time a <code class="docutils literal"><span class="pre">RemoteChannel</span></code> or a (unfetched) <code class="docutils literal"><span class="pre">Future</span></code>
+Every time a <a class="reference internal" href="../stdlib/parallel.html#Base.RemoteChannel" title="Base.RemoteChannel"><code class="xref jl jl-class docutils literal"><span class="pre">RemoteChannel</span></code></a> or a (unfetched) <a class="reference internal" href="../stdlib/parallel.html#Base.Future" title="Base.Future"><code class="xref jl jl-class docutils literal"><span class="pre">Future</span></code></a> is serialized to a worker, the node pointed
+to by the reference is notified. And every time a <a class="reference internal" href="../stdlib/parallel.html#Base.RemoteChannel" title="Base.RemoteChannel"><code class="xref jl jl-class docutils literal"><span class="pre">RemoteChannel</span></code></a> or a (unfetched) <a class="reference internal" href="../stdlib/parallel.html#Base.Future" title="Base.Future"><code class="xref jl jl-class docutils literal"><span class="pre">Future</span></code></a>
 is garbage collected locally, the node owning the value is again notified.</p>
 <p>The notifications are done via sending of &#8220;tracking&#8221; messages - an &#8220;add reference&#8221; message when
 a reference is serialized to a different process and a &#8220;delete reference&#8221; message when a reference
 is locally garbage collected.</p>
-<p>Since <code class="docutils literal"><span class="pre">Future</span></code>s are write-once and cached locally, the act of <code class="docutils literal"><span class="pre">fetch</span></code>ing a <code class="docutils literal"><span class="pre">Future</span></code> also updates
+<p>Since <a class="reference internal" href="../stdlib/parallel.html#Base.Future" title="Base.Future"><code class="xref jl jl-class docutils literal"><span class="pre">Future</span></code></a>s are write-once and cached locally, the act of <a class="reference internal" href="../stdlib/parallel.html#Base.fetch" title="Base.fetch"><code class="xref jl jl-func docutils literal"><span class="pre">fetch()</span></code></a>ing a <a class="reference internal" href="../stdlib/parallel.html#Base.Future" title="Base.Future"><code class="xref jl jl-class docutils literal"><span class="pre">Future</span></code></a> also updates
 reference tracking information on the node owning the value.</p>
 <p>The node which owns the value frees it once all references to it are cleared.</p>
-<p>With <code class="docutils literal"><span class="pre">Future</span></code>s, serializing an already fetched <code class="docutils literal"><span class="pre">Future</span></code> to a different node also sends the value
+<p>With <a class="reference internal" href="../stdlib/parallel.html#Base.Future" title="Base.Future"><code class="xref jl jl-class docutils literal"><span class="pre">Future</span></code></a>s, serializing an already fetched <a class="reference internal" href="../stdlib/parallel.html#Base.Future" title="Base.Future"><code class="xref jl jl-class docutils literal"><span class="pre">Future</span></code></a> to a different node also sends the value
 since the original remote store may have collected the value by this time.</p>
 <p>It is important to note that <em>when</em> an object is locally garbage collected depends
 on the size of the object and the current memory pressure in the system.</p>
 <p>In case of remote references, the size of the local reference object is quite small, while the value
 stored on the remote node may be quite large. Since the local object may not be collected immediately, it is
-a good practice to explicitly call <code class="docutils literal"><span class="pre">finalize</span></code> on local instances of a <code class="docutils literal"><span class="pre">RemoteChannel</span></code>, or on unfetched
-<code class="docutils literal"><span class="pre">Future</span></code>s. Since calling <code class="docutils literal"><span class="pre">fetch</span></code> on a <code class="docutils literal"><span class="pre">Future</span></code> also removes its reference from the remote store, this
-is not required on fetched <code class="docutils literal"><span class="pre">Future</span></code>s. Explicitly calling <code class="docutils literal"><span class="pre">finalize</span></code> results in an immediate message sent to
+a good practice to explicitly call <a class="reference internal" href="../stdlib/base.html#Base.finalize" title="Base.finalize"><code class="xref jl jl-func docutils literal"><span class="pre">finalize()</span></code></a> on local instances of a <a class="reference internal" href="../stdlib/parallel.html#Base.RemoteChannel" title="Base.RemoteChannel"><code class="xref jl jl-class docutils literal"><span class="pre">RemoteChannel</span></code></a>, or on unfetched
+<a class="reference internal" href="../stdlib/parallel.html#Base.Future" title="Base.Future"><code class="xref jl jl-class docutils literal"><span class="pre">Future</span></code></a>s. Since calling <a class="reference internal" href="../stdlib/parallel.html#Base.fetch" title="Base.fetch"><code class="xref jl jl-func docutils literal"><span class="pre">fetch()</span></code></a> on a <a class="reference internal" href="../stdlib/parallel.html#Base.Future" title="Base.Future"><code class="xref jl jl-class docutils literal"><span class="pre">Future</span></code></a> also removes its reference from the remote store, this
+is not required on fetched <a class="reference internal" href="../stdlib/parallel.html#Base.Future" title="Base.Future"><code class="xref jl jl-class docutils literal"><span class="pre">Future</span></code></a>s. Explicitly calling <a class="reference internal" href="../stdlib/base.html#Base.finalize" title="Base.finalize"><code class="xref jl jl-func docutils literal"><span class="pre">finalize()</span></code></a> results in an immediate message sent to
 the remote node to go ahead and remove its reference to the value.</p>
 <p>Once finalized, a reference becomes invalid and cannot be used in any further calls.</p>
 </div>
@@ -1053,20 +1059,20 @@ is available to the local process.  Therefore, most algorithms work
 naturally on <a class="reference internal" href="../stdlib/parallel.html#Base.SharedArray" title="Base.SharedArray"><code class="xref jl jl-class docutils literal"><span class="pre">SharedArray</span></code></a>s, albeit in single-process mode.  In
 cases where an algorithm insists on an <a class="reference internal" href="../stdlib/arrays.html#Base.Array" title="Base.Array"><code class="xref jl jl-class docutils literal"><span class="pre">Array</span></code></a> input, the underlying
 array can be retrieved from a <a class="reference internal" href="../stdlib/parallel.html#Base.SharedArray" title="Base.SharedArray"><code class="xref jl jl-class docutils literal"><span class="pre">SharedArray</span></code></a> by calling <a class="reference internal" href="../stdlib/parallel.html#Base.sdata" title="Base.sdata"><code class="xref jl jl-func docutils literal"><span class="pre">sdata()</span></code></a>.
-For other <code class="xref jl jl-class docutils literal"><span class="pre">AbstractArray</span></code> types, <code class="docutils literal"><span class="pre">sdata</span></code> just returns the object
-itself, so it&#8217;s safe to use <a class="reference internal" href="../stdlib/parallel.html#Base.sdata" title="Base.sdata"><code class="xref jl jl-func docutils literal"><span class="pre">sdata()</span></code></a> on any Array-type object.</p>
+For other <code class="xref jl jl-class docutils literal"><span class="pre">AbstractArray</span></code> types, <a class="reference internal" href="../stdlib/parallel.html#Base.sdata" title="Base.sdata"><code class="xref jl jl-func docutils literal"><span class="pre">sdata()</span></code></a> just returns the object
+itself, so it&#8217;s safe to use <a class="reference internal" href="../stdlib/parallel.html#Base.sdata" title="Base.sdata"><code class="xref jl jl-func docutils literal"><span class="pre">sdata()</span></code></a> on any <code class="docutils literal"><span class="pre">Array</span></code>-type object.</p>
 <p>The constructor for a shared array is of the form:</p>
 <div class="highlight-julia"><div class="highlight"><pre><span></span><span class="n">SharedArray</span><span class="p">(</span><span class="n">T</span><span class="p">::</span><span class="n">Type</span><span class="p">,</span> <span class="n">dims</span><span class="p">::</span><span class="n">NTuple</span><span class="p">;</span> <span class="n">init</span><span class="o">=</span><span class="n">false</span><span class="p">,</span> <span class="n">pids</span><span class="o">=</span><span class="kt">Int</span><span class="p">[])</span>
 </pre></div>
 </div>
-<p>which creates a shared array of a bitstype <code class="docutils literal"><span class="pre">T</span></code> and size <code class="docutils literal"><span class="pre">dims</span></code>
+<p>which creates a shared array of a bits type <code class="docutils literal"><span class="pre">T</span></code> and size <code class="docutils literal"><span class="pre">dims</span></code>
 across the processes specified by <code class="docutils literal"><span class="pre">pids</span></code>.  Unlike distributed
 arrays, a shared array is accessible only from those participating
 workers specified by the <code class="docutils literal"><span class="pre">pids</span></code> named argument (and the creating
 process too, if it is on the same host).</p>
 <p>If an <code class="docutils literal"><span class="pre">init</span></code> function, of signature <code class="docutils literal"><span class="pre">initfn(S::SharedArray)</span></code>, is
 specified, it is called on all the participating workers.  You can
-arrange it so that each worker runs the <code class="docutils literal"><span class="pre">init</span></code> function on a
+specify that each worker runs the <code class="docutils literal"><span class="pre">init</span></code> function on a
 distinct portion of the array, thereby parallelizing initialization.</p>
 <p>Here&#8217;s a brief example:</p>
 <div class="highlight-julia"><div class="highlight"><pre><span></span><span class="n">julia</span><span class="o">&gt;</span> <span class="n">addprocs</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
@@ -1112,7 +1118,7 @@ be careful not to set up conflicts.  For example:</p>
 <span class="k">end</span>
 </pre></div>
 </div>
-<p>would result in undefined behavior: because each process fills the
+<p>would result in undefined behavior. Because each process fills the
 <em>entire</em> array with its own <code class="docutils literal"><span class="pre">pid</span></code>, whichever process is the last to
 execute (for any particular element of <code class="docutils literal"><span class="pre">S</span></code>) will have its <code class="docutils literal"><span class="pre">pid</span></code>
 retained.</p>
@@ -1221,34 +1227,36 @@ handles mapping the shared segment being released sooner.</p>
 <div class="section" id="clustermanagers">
 <span id="man-clustermanagers"></span><h2>ClusterManagers<a class="headerlink" href="#clustermanagers" title="Permalink to this headline">¶</a></h2>
 <p>The launching, management and networking of Julia processes into a logical
-cluster is done via cluster managers. A <code class="xref jl jl-obj docutils literal"><span class="pre">ClusterManager</span></code> is responsible for</p>
+cluster is done via cluster managers. A <code class="xref jl jl-class docutils literal"><span class="pre">ClusterManager</span></code> is responsible for</p>
 <ul class="simple">
 <li>launching worker processes in a cluster environment</li>
 <li>managing events during the lifetime of each worker</li>
-<li>optionally, a cluster manager can also provide data transport</li>
+<li>optionally, providing data transport</li>
 </ul>
-<p>A Julia cluster has the following characteristics:
-- The initial Julia process, also called the <code class="docutils literal"><span class="pre">master</span></code> is special and has a id of 1.
-- Only the <code class="docutils literal"><span class="pre">master</span></code> process can add or remove worker processes.
-- All processes can directly communicate with each other.</p>
+<p>A Julia cluster has the following characteristics:</p>
+<ul class="simple">
+<li>The initial Julia process, also called the <code class="docutils literal"><span class="pre">master</span></code>, is special and has an <code class="docutils literal"><span class="pre">id</span></code> of 1.</li>
+<li>Only the <code class="docutils literal"><span class="pre">master</span></code> process can add or remove worker processes.</li>
+<li>All processes can directly communicate with each other.</li>
+</ul>
 <p>Connections between workers (using the in-built TCP/IP transport) is established in the following manner:</p>
 <ul class="simple">
-<li><a class="reference internal" href="../stdlib/parallel.html#Base.addprocs" title="Base.addprocs"><code class="xref jl jl-func docutils literal"><span class="pre">addprocs()</span></code></a> is called on the master process with a <code class="xref jl jl-obj docutils literal"><span class="pre">ClusterManager</span></code> object</li>
+<li><a class="reference internal" href="../stdlib/parallel.html#Base.addprocs" title="Base.addprocs"><code class="xref jl jl-func docutils literal"><span class="pre">addprocs()</span></code></a> is called on the master process with a <code class="xref jl jl-class docutils literal"><span class="pre">ClusterManager</span></code> object</li>
 <li><a class="reference internal" href="../stdlib/parallel.html#Base.addprocs" title="Base.addprocs"><code class="xref jl jl-func docutils literal"><span class="pre">addprocs()</span></code></a> calls the appropriate <a class="reference internal" href="../stdlib/parallel.html#Base.launch" title="Base.launch"><code class="xref jl jl-func docutils literal"><span class="pre">launch()</span></code></a> method which spawns
 required number of worker processes on appropriate machines</li>
-<li>Each worker starts listening on a free port and writes out its host, port information to <a class="reference internal" href="../stdlib/io-network.html#Base.STDOUT" title="Base.STDOUT"><code class="xref jl jl-const docutils literal"><span class="pre">STDOUT</span></code></a></li>
-<li>The cluster manager captures the stdout&#8217;s of each worker and makes it available to the master process</li>
+<li>Each worker starts listening on a free port and writes out its host and port information to <a class="reference internal" href="../stdlib/io-network.html#Base.STDOUT" title="Base.STDOUT"><code class="xref jl jl-const docutils literal"><span class="pre">STDOUT</span></code></a></li>
+<li>The cluster manager captures the <a class="reference internal" href="../stdlib/io-network.html#Base.STDOUT" title="Base.STDOUT"><code class="xref jl jl-const docutils literal"><span class="pre">STDOUT</span></code></a> of each worker and makes it available to the master process</li>
 <li>The master process parses this information and sets up TCP/IP connections to each worker</li>
 <li>Every worker is also notified of other workers in the cluster</li>
-<li>Each worker connects to all workers whose id is less than its own id</li>
+<li>Each worker connects to all workers whose <code class="docutils literal"><span class="pre">id</span></code> is less than the worker&#8217;s own <code class="docutils literal"><span class="pre">id</span></code></li>
 <li>In this way a mesh network is established, wherein every worker is directly connected with every other worker</li>
 </ul>
-<p>While the default transport layer uses plain TCP sockets, it is possible for a Julia cluster to provide
+<p>While the default transport layer uses plain <code class="xref jl jl-class docutils literal"><span class="pre">TCPSocket</span></code>, it is possible for a Julia cluster to provide
 its own transport.</p>
 <p>Julia provides two in-built cluster managers:</p>
 <ul class="simple">
-<li><code class="docutils literal"><span class="pre">LocalManager</span></code>, used when <a class="reference internal" href="../stdlib/parallel.html#Base.addprocs" title="Base.addprocs"><code class="xref jl jl-func docutils literal"><span class="pre">addprocs()</span></code></a> or <a class="reference internal" href="../stdlib/parallel.html#Base.addprocs" title="Base.addprocs"><code class="xref jl jl-func docutils literal"><span class="pre">addprocs(np::Integer)</span></code></a> are called</li>
-<li><code class="docutils literal"><span class="pre">SSHManager</span></code>, used when <a class="reference internal" href="../stdlib/parallel.html#Base.addprocs" title="Base.addprocs"><code class="xref jl jl-func docutils literal"><span class="pre">addprocs(hostnames::Array)</span></code></a> is called with a list of hostnames</li>
+<li><code class="xref jl jl-class docutils literal"><span class="pre">LocalManager</span></code>, used when <a class="reference internal" href="../stdlib/parallel.html#Base.addprocs" title="Base.addprocs"><code class="xref jl jl-func docutils literal"><span class="pre">addprocs()</span></code></a> or <a class="reference internal" href="../stdlib/parallel.html#Base.addprocs" title="Base.addprocs"><code class="xref jl jl-func docutils literal"><span class="pre">addprocs(np::Integer)</span></code></a> are called</li>
+<li><code class="xref jl jl-class docutils literal"><span class="pre">SSHManager</span></code>, used when <a class="reference internal" href="../stdlib/parallel.html#Base.addprocs" title="Base.addprocs"><code class="xref jl jl-func docutils literal"><span class="pre">addprocs(hostnames::Array)</span></code></a> is called with a list of hostnames</li>
 </ul>
 <p><code class="xref jl jl-class docutils literal"><span class="pre">LocalManager</span></code> is used to launch additional workers on the same host, thereby leveraging multi-core
 and multi-processor hardware.</p>
@@ -1256,7 +1264,7 @@ and multi-processor hardware.</p>
 <ul class="simple">
 <li>be a subtype of the abstract <code class="xref jl jl-class docutils literal"><span class="pre">ClusterManager</span></code></li>
 <li>implement <a class="reference internal" href="../stdlib/parallel.html#Base.launch" title="Base.launch"><code class="xref jl jl-func docutils literal"><span class="pre">launch()</span></code></a>, a method responsible for launching new workers</li>
-<li>implement <a class="reference internal" href="../stdlib/parallel.html#Base.manage" title="Base.manage"><code class="xref jl jl-func docutils literal"><span class="pre">manage()</span></code></a>, which is called at various events during a worker&#8217;s lifetime</li>
+<li>implement <a class="reference internal" href="../stdlib/parallel.html#Base.manage" title="Base.manage"><code class="xref jl jl-func docutils literal"><span class="pre">manage()</span></code></a>, which is called at various events during a worker&#8217;s lifetime (for example, sending an interrupt signal)</li>
 </ul>
 <p><a class="reference internal" href="../stdlib/parallel.html#Base.addprocs" title="Base.addprocs"><code class="xref jl jl-func docutils literal"><span class="pre">addprocs(manager::FooManager)</span></code></a> requires <code class="docutils literal"><span class="pre">FooManager</span></code> to implement:</p>
 <div class="highlight-julia"><div class="highlight"><pre><span></span><span class="k">function</span><span class="nf"> launch</span><span class="p">(</span><span class="n">manager</span><span class="p">::</span><span class="n">FooManager</span><span class="p">,</span> <span class="n">params</span><span class="p">::</span><span class="n">Dict</span><span class="p">,</span> <span class="n">launched</span><span class="p">::</span><span class="n">Array</span><span class="p">,</span> <span class="n">c</span><span class="p">::</span><span class="n">Condition</span><span class="p">)</span>
@@ -1294,12 +1302,12 @@ starting workers on the same host, is implemented:</p>
 signals that all requested workers have been launched. Hence the <a class="reference internal" href="../stdlib/parallel.html#Base.launch" title="Base.launch"><code class="xref jl jl-func docutils literal"><span class="pre">launch()</span></code></a> function MUST exit as soon
 as all the requested workers have been launched.</p>
 <p>Newly launched workers are connected to each other, and the master process, in a all-to-all manner.
-Specifying command argument, <code class="docutils literal"><span class="pre">--worker</span> <span class="pre">&lt;cookie&gt;</span></code> results in the launched processes initializing themselves
-as workers and connections being setup via TCP/IP sockets. Optionally <code class="docutils literal"><span class="pre">--bind-to</span> <span class="pre">bind_addr[:port]</span></code>
+Specifying the command argument <code class="docutils literal"><span class="pre">--worker</span> <span class="pre">&lt;cookie&gt;</span></code> results in the launched processes initializing themselves
+as workers and connections being setup via TCP/IP sockets. Optionally, <code class="docutils literal"><span class="pre">--bind-to</span> <span class="pre">bind_addr[:port]</span></code>
 may also be specified to enable other workers to connect to it at the specified <code class="docutils literal"><span class="pre">bind_addr</span></code> and <code class="docutils literal"><span class="pre">port</span></code>.
 This is useful for multi-homed hosts.</p>
-<p>For non-TCP/IP transports, for example, an implementation may choose to use MPI as the transport,
-<code class="docutils literal"><span class="pre">--worker</span></code> must NOT be specified. Instead newly launched workers should call <code class="docutils literal"><span class="pre">init_worker(cookie)</span></code>
+<p>As an example of a non-TCP/IP transport, an implementation may choose to use MPI, in which case
+<code class="docutils literal"><span class="pre">--worker</span></code> must NOT be specified. Instead, newly launched workers should call <code class="docutils literal"><span class="pre">init_worker(cookie)</span></code>
 before using any of the parallel constructs.</p>
 <p>For every worker launched, the <a class="reference internal" href="../stdlib/parallel.html#Base.launch" title="Base.launch"><code class="xref jl jl-func docutils literal"><span class="pre">launch()</span></code></a> method must add a <code class="xref jl jl-class docutils literal"><span class="pre">WorkerConfig</span></code>
 object (with appropriate fields initialized) to <code class="docutils literal"><span class="pre">launched</span></code></p>
@@ -1332,20 +1340,25 @@ object (with appropriate fields initialized) to <code class="docutils literal"><
 </div>
 <p>Most of the fields in <code class="xref jl jl-class docutils literal"><span class="pre">WorkerConfig</span></code> are used by the inbuilt managers.
 Custom cluster managers would typically specify only <code class="docutils literal"><span class="pre">io</span></code> or <code class="docutils literal"><span class="pre">host</span></code> / <code class="docutils literal"><span class="pre">port</span></code>:</p>
-<p>If <code class="docutils literal"><span class="pre">io</span></code> is specified, it is used to read host/port information. A Julia
+<ul class="simple">
+<li>If <code class="docutils literal"><span class="pre">io</span></code> is specified, it is used to read host/port information. A Julia
 worker prints out its bind address and port at startup. This allows Julia
 workers to listen on any free port available instead of requiring worker ports
-to be configured manually.</p>
-<p>If <code class="docutils literal"><span class="pre">io</span></code> is not specified, <code class="docutils literal"><span class="pre">host</span></code> and <code class="docutils literal"><span class="pre">port</span></code> are used to connect.</p>
-<p><code class="docutils literal"><span class="pre">count</span></code>, <code class="docutils literal"><span class="pre">exename</span></code> and <code class="docutils literal"><span class="pre">exeflags</span></code> are relevant for launching additional workers from a worker.
+to be configured manually.</li>
+<li>If <code class="docutils literal"><span class="pre">io</span></code> is not specified, <code class="docutils literal"><span class="pre">host</span></code> and <code class="docutils literal"><span class="pre">port</span></code> are used to connect.</li>
+<li><code class="docutils literal"><span class="pre">count</span></code>, <code class="docutils literal"><span class="pre">exename</span></code> and <code class="docutils literal"><span class="pre">exeflags</span></code> are relevant for launching additional workers from a worker.
 For example, a cluster manager may launch a single worker per node, and use that to launch
-additional workers. <code class="docutils literal"><span class="pre">count</span></code> with an integer value <code class="docutils literal"><span class="pre">n</span></code> will launch a total of <code class="docutils literal"><span class="pre">n</span></code> workers,
-while a value of <code class="docutils literal"><span class="pre">:auto</span></code> will launch as many workers as cores on that machine.
-<code class="docutils literal"><span class="pre">exename</span></code> is the name of the <code class="docutils literal"><span class="pre">julia</span></code> executable including the full path.
-<code class="docutils literal"><span class="pre">exeflags</span></code> should be set to the required command line arguments for new workers.</p>
-<p><code class="docutils literal"><span class="pre">tunnel</span></code>, <code class="docutils literal"><span class="pre">bind_addr</span></code>, <code class="docutils literal"><span class="pre">sshflags</span></code> and <code class="docutils literal"><span class="pre">max_parallel</span></code> are used when a ssh tunnel is
-required to connect to the workers from the master process.</p>
-<p><code class="docutils literal"><span class="pre">userdata</span></code> is provided for custom cluster managers to store their own worker specific information.</p>
+additional workers.<ul>
+<li><code class="docutils literal"><span class="pre">count</span></code> with an integer value <code class="docutils literal"><span class="pre">n</span></code> will launch a total of <code class="docutils literal"><span class="pre">n</span></code> workers.</li>
+<li><code class="docutils literal"><span class="pre">count</span></code> with a value of <code class="docutils literal"><span class="pre">:auto</span></code> will launch as many workers as the number of cores on that machine.</li>
+<li><code class="docutils literal"><span class="pre">exename</span></code> is the name of the <code class="docutils literal"><span class="pre">julia</span></code> executable including the full path.</li>
+<li><code class="docutils literal"><span class="pre">exeflags</span></code> should be set to the required command line arguments for new workers.</li>
+</ul>
+</li>
+<li><code class="docutils literal"><span class="pre">tunnel</span></code>, <code class="docutils literal"><span class="pre">bind_addr</span></code>, <code class="docutils literal"><span class="pre">sshflags</span></code> and <code class="docutils literal"><span class="pre">max_parallel</span></code> are used when a ssh tunnel is
+required to connect to the workers from the master process.</li>
+<li><code class="docutils literal"><span class="pre">userdata</span></code> is provided for custom cluster managers to store their own worker specific information.</li>
+</ul>
 <p><code class="docutils literal"><span class="pre">manage(manager::FooManager,</span> <span class="pre">id::Integer,</span> <span class="pre">config::WorkerConfig,</span> <span class="pre">op::Symbol)</span></code> is called at different
 times during the worker&#8217;s lifetime with appropriate <code class="docutils literal"><span class="pre">op</span></code> values:</p>
 <ul class="simple">
@@ -1365,59 +1378,59 @@ Each Julia process has as many communication tasks as the workers it is connecte
 <ul class="simple">
 <li>Each Julia process thus has 31 communication tasks</li>
 <li>Each task handles all incoming messages from a single remote worker in a message processing loop</li>
-<li>The message processing loop waits on an <code class="docutils literal"><span class="pre">AsyncStream</span></code> object - for example, a TCP socket in the default implementation, reads an entire
+<li>The message processing loop waits on an <code class="xref jl jl-class docutils literal"><span class="pre">IO</span></code> object (for example, a <code class="xref jl jl-class docutils literal"><span class="pre">TCPSocket</span></code> in the default implementation), reads an entire
 message, processes it and waits for the next one</li>
 <li>Sending messages to a process is done directly from any Julia task - not just communication tasks - again, via the appropriate
-<code class="docutils literal"><span class="pre">AsyncStream</span></code> object</li>
+<code class="xref jl jl-class docutils literal"><span class="pre">IO</span></code> object</li>
 </ul>
 <p>Replacing the default transport involves the new implementation to setup connections to remote workers, and to provide appropriate
-<code class="docutils literal"><span class="pre">AsyncStream</span></code> objects that the message processing loops can wait on. The manager specific callbacks to be implemented are:</p>
+<code class="xref jl jl-class docutils literal"><span class="pre">IO</span></code> objects that the message processing loops can wait on. The manager specific callbacks to be implemented are:</p>
 <div class="highlight-julia"><div class="highlight"><pre><span></span><span class="n">connect</span><span class="p">(</span><span class="n">manager</span><span class="p">::</span><span class="n">FooManager</span><span class="p">,</span> <span class="n">pid</span><span class="p">::</span><span class="n">Integer</span><span class="p">,</span> <span class="n">config</span><span class="p">::</span><span class="n">WorkerConfig</span><span class="p">)</span>
 <span class="n">kill</span><span class="p">(</span><span class="n">manager</span><span class="p">::</span><span class="n">FooManager</span><span class="p">,</span> <span class="n">pid</span><span class="p">::</span><span class="kt">Int</span><span class="p">,</span> <span class="n">config</span><span class="p">::</span><span class="n">WorkerConfig</span><span class="p">)</span>
 </pre></div>
 </div>
 <p>The default implementation (which uses TCP/IP sockets) is implemented as <code class="docutils literal"><span class="pre">connect(manager::ClusterManager,</span> <span class="pre">pid::Integer,</span> <span class="pre">config::WorkerConfig)</span></code>.</p>
-<p><code class="docutils literal"><span class="pre">connect</span></code> should return a pair of <code class="docutils literal"><span class="pre">AsyncStream</span></code> objects, one for reading data sent from worker <code class="docutils literal"><span class="pre">pid</span></code>,
-and the other to write data that needs to be sent to worker <code class="docutils literal"><span class="pre">pid</span></code>. Custom cluster managers can use an in-memory <code class="docutils literal"><span class="pre">BufferStream</span></code>
-as the plumbing to proxy data between the custom, possibly non-AsyncStream transport and Julia&#8217;s in-built parallel infrastructure.</p>
-<p>A <code class="docutils literal"><span class="pre">BufferStream</span></code> is an in-memory <code class="docutils literal"><span class="pre">IOBuffer</span></code> which behaves like an <code class="docutils literal"><span class="pre">AsyncStream</span></code>.</p>
-<p>Folder <code class="docutils literal"><span class="pre">examples/clustermanager/0mq</span></code> is an example of using ZeroMQ is connect Julia workers in a star network with a 0MQ broker in the middle.
+<p><code class="docutils literal"><span class="pre">connect</span></code> should return a pair of <code class="xref jl jl-class docutils literal"><span class="pre">IO</span></code> objects, one for reading data sent from worker <code class="docutils literal"><span class="pre">pid</span></code>,
+and the other to write data that needs to be sent to worker <code class="docutils literal"><span class="pre">pid</span></code>. Custom cluster managers can use an in-memory <code class="xref jl jl-class docutils literal"><span class="pre">BufferStream</span></code>
+as the plumbing to proxy data between the custom, possibly non-<code class="xref jl jl-class docutils literal"><span class="pre">IO</span></code> transport and Julia&#8217;s in-built parallel infrastructure.</p>
+<p>A <code class="xref jl jl-class docutils literal"><span class="pre">BufferStream</span></code> is an in-memory <code class="docutils literal"><span class="pre">IOBuffer</span></code> which behaves like an <code class="xref jl jl-class docutils literal"><span class="pre">IO</span></code> - it is a stream which can be handled asynchronously.</p>
+<p>Folder <code class="docutils literal"><span class="pre">examples/clustermanager/0mq</span></code> contains an example of using ZeroMQ to connect Julia workers in a star topology with a 0MQ broker in the middle.
 Note: The Julia processes are still all <em>logically</em> connected to each other - any worker can message any other worker directly without any
 awareness of 0MQ being used as the transport layer.</p>
 <p>When using custom transports:</p>
 <ul class="simple">
 <li>Julia workers must NOT be started with <code class="docutils literal"><span class="pre">--worker</span></code>. Starting with <code class="docutils literal"><span class="pre">--worker</span></code> will result in the newly launched
 workers defaulting to the TCP/IP socket transport implementation</li>
-<li>For every incoming logical connection with a worker, <code class="docutils literal"><span class="pre">Base.process_messages(rd::AsyncStream,</span> <span class="pre">wr::AsyncStream)</span></code> must be called.
-This launches a new task that handles reading and writing of messages from/to the worker represented by the <code class="docutils literal"><span class="pre">AsyncStream</span></code> objects</li>
-<li><code class="docutils literal"><span class="pre">init_worker(cookie,</span> <span class="pre">manager::FooManager)</span></code> MUST be called as part of worker process initializaton</li>
-<li>Field <code class="docutils literal"><span class="pre">connect_at::Any</span></code> in <code class="xref jl jl-class docutils literal"><span class="pre">WorkerConfig</span></code> can be set by the cluster manager when <code class="docutils literal"><span class="pre">launch</span></code> is called. The value of
-this field is passed in in all <code class="docutils literal"><span class="pre">connect</span></code> callbacks. Typically, it carries information on <em>how to connect</em> to a worker. For example,
+<li>For every incoming logical connection with a worker, <code class="xref jl jl-func docutils literal"><span class="pre">Base.process_messages(rd::IO,</span> <span class="pre">wr::IO)()</span></code> must be called.
+This launches a new task that handles reading and writing of messages from/to the worker represented by the <code class="xref jl jl-class docutils literal"><span class="pre">IO</span></code> objects</li>
+<li><code class="docutils literal"><span class="pre">init_worker(cookie,</span> <span class="pre">manager::FooManager)</span></code> MUST be called as part of worker process initialization</li>
+<li>Field <code class="docutils literal"><span class="pre">connect_at::Any</span></code> in <code class="xref jl jl-class docutils literal"><span class="pre">WorkerConfig</span></code> can be set by the cluster manager when <a class="reference internal" href="../stdlib/parallel.html#Base.launch" title="Base.launch"><code class="xref jl jl-func docutils literal"><span class="pre">launch()</span></code></a> is called. The value of
+this field is passed in in all <a class="reference internal" href="../stdlib/parallel.html#Base.connect" title="Base.connect"><code class="xref jl jl-func docutils literal"><span class="pre">connect()</span></code></a> callbacks. Typically, it carries information on <em>how to connect</em> to a worker. For example,
 the TCP/IP socket transport uses this field to specify the <code class="docutils literal"><span class="pre">(host,</span> <span class="pre">port)</span></code> tuple at which to connect to a worker</li>
 </ul>
 <p><code class="docutils literal"><span class="pre">kill(manager,</span> <span class="pre">pid,</span> <span class="pre">config)</span></code> is called to remove a worker from the cluster.
-On the master process, the corresponding <code class="docutils literal"><span class="pre">AsyncStream</span></code> objects must be closed by the implementation to ensure proper cleanup. The default
-implementation simply executes an <code class="docutils literal"><span class="pre">exit()</span></code> call on the specified remote worker.</p>
-<p><code class="docutils literal"><span class="pre">examples/clustermanager/simple</span></code> is an example that shows a simple implementation using unix domain sockets for cluster setup</p>
+On the master process, the corresponding <code class="xref jl jl-class docutils literal"><span class="pre">IO</span></code> objects must be closed by the implementation to ensure proper cleanup.
+The default implementation simply executes an <code class="docutils literal"><span class="pre">exit()</span></code> call on the specified remote worker.</p>
+<p><code class="docutils literal"><span class="pre">examples/clustermanager/simple</span></code> is an example that shows a simple implementation using UNIX domain sockets for cluster setup.</p>
 </div>
 <div class="section" id="network-requirements-for-localmanager-and-sshmanager">
 <h2>Network requirements for LocalManager and SSHManager<a class="headerlink" href="#network-requirements-for-localmanager-and-sshmanager" title="Permalink to this headline">¶</a></h2>
-<p>Julia clusters are designed to be executed on already secured environments on infrastructure ranging from local laptops,
-to departmental clusters or even on the cloud. This section covers network security requirements for the inbuilt <code class="docutils literal"><span class="pre">LocalManager</span></code>
-and <code class="docutils literal"><span class="pre">SSHManager</span></code>:</p>
+<p>Julia clusters are designed to be executed on already secured environments on infrastructure such as local laptops,
+departmental clusters, or even on the cloud. This section covers network security requirements for the inbuilt <code class="xref jl jl-class docutils literal"><span class="pre">LocalManager</span></code>
+and <code class="xref jl jl-class docutils literal"><span class="pre">SSHManager</span></code>:</p>
 <ul>
 <li><p class="first">The master process does not listen on any port. It only connects out to the workers.</p>
 </li>
-<li><p class="first">Each worker binds to only one of the local interfaces and listens on the first free port starting from 9009.</p>
+<li><p class="first">Each worker binds to only one of the local interfaces and listens on the first free port starting from <code class="docutils literal"><span class="pre">9009</span></code>.</p>
 </li>
-<li><p class="first"><code class="docutils literal"><span class="pre">LocalManager</span></code>, i.e. <code class="docutils literal"><span class="pre">addprocs(N)</span></code>, by default binds only to the loopback interface.
+<li><p class="first"><code class="xref jl jl-class docutils literal"><span class="pre">LocalManager</span></code>, i.e. <code class="docutils literal"><span class="pre">addprocs(N)</span></code>, by default binds only to the loopback interface.
 This means that workers consequently started on remote hosts, or anyone with malicious intentions
 is unable to connect to the cluster. A <code class="docutils literal"><span class="pre">addprocs(4)</span></code> followed by a <code class="docutils literal"><span class="pre">addprocs([&quot;remote_host&quot;])</span></code>
 will fail. Some users may need to create a cluster comprised of their local system and a few remote systems.
-This can be done by explicitly requesting <code class="docutils literal"><span class="pre">LocalManager</span></code> to bind to an external network interface via the
+This can be done by explicitly requesting <code class="xref jl jl-class docutils literal"><span class="pre">LocalManager</span></code> to bind to an external network interface via the
 <code class="docutils literal"><span class="pre">restrict</span></code> keyword argument. For example, <code class="docutils literal"><span class="pre">addprocs(4;</span> <span class="pre">restrict=false)</span></code>.</p>
 </li>
-<li><p class="first"><code class="docutils literal"><span class="pre">SSHManager</span></code>, i.e. <code class="docutils literal"><span class="pre">addprocs(list_of_remote_hosts)</span></code> launches workers on remote hosts via SSH.
+<li><p class="first"><code class="xref jl jl-class docutils literal"><span class="pre">SSHManager</span></code>, i.e. <code class="docutils literal"><span class="pre">addprocs(list_of_remote_hosts)</span></code> launches workers on remote hosts via SSH.
 It is to be noted that by default SSH is only used to launch Julia workers.
 Subsequent master-worker and worker-worker connections use plain, unencrypted TCP/IP sockets. The remote hosts
 must have passwordless login enabled. Additional SSH flags or credentials may be specified via keyword
@@ -1426,7 +1439,7 @@ argument <code class="docutils literal"><span class="pre">sshflags</span></code>
 <li><p class="first"><code class="docutils literal"><span class="pre">addprocs(list_of_remote_hosts;</span> <span class="pre">tunnel=true,</span> <span class="pre">sshflags=&lt;ssh</span> <span class="pre">keys</span> <span class="pre">and</span> <span class="pre">other</span> <span class="pre">flags&gt;)</span></code> is useful when we wish to use
 SSH connections for master-worker too. A typical scenario for this is a local laptop running the Julia REPL (i.e., the master)
 with the rest of the cluster on the cloud, say on Amazon EC2. In this case only port 22 needs to be
-opened at the remote cluster coupled with SSH client authenticated via PKI.
+opened at the remote cluster coupled with SSH client authenticated via public key infrastructure (PKI).
 Authentication credentials can be supplied via <code class="docutils literal"><span class="pre">sshflags</span></code>, for example <code class="docutils literal"><span class="pre">sshflags=`-e</span> <span class="pre">&lt;keyfile&gt;`</span></code>.</p>
 <p>Note that worker-worker connections are still plain TCP and the local security policy on the remote cluster
 must allow for free connections between worker nodes, at least for ports 9009 and above.</p>
@@ -1439,30 +1452,127 @@ a custom ClusterManager.</p>
 <h2>Cluster cookie<a class="headerlink" href="#cluster-cookie" title="Permalink to this headline">¶</a></h2>
 <p>All processes in a cluster share the same cookie which, by default, is a randomly generated string on the master process:</p>
 <ul class="simple">
-<li><code class="docutils literal"><span class="pre">Base.cluster_cookie()</span></code> returns the cookie, <code class="docutils literal"><span class="pre">Base.cluster_cookie(cookie)</span></code> sets it.</li>
+<li><a class="reference internal" href="../stdlib/parallel.html#Base.Base.cluster_cookie" title="Base.Base.cluster_cookie"><code class="xref jl jl-func docutils literal"><span class="pre">Base.cluster_cookie()</span></code></a> returns the cookie, while <code class="xref jl jl-func docutils literal"><span class="pre">Base.cluster_cookie(cookie)()</span></code> sets it and returns the new cookie.</li>
 <li>All connections are authenticated on both sides to ensure that only workers started by the master are allowed
 to connect to each other.</li>
 <li>The cookie must be passed to the workers at startup via argument <code class="docutils literal"><span class="pre">--worker</span> <span class="pre">&lt;cookie&gt;</span></code>.
 Custom ClusterManagers can retrieve the cookie on the master by calling
-<code class="docutils literal"><span class="pre">Base.cluster_cookie()</span></code>. Cluster managers not using the default TCP/IP transport (and hence not specifying <code class="docutils literal"><span class="pre">--worker</span></code>)
+<a class="reference internal" href="../stdlib/parallel.html#Base.Base.cluster_cookie" title="Base.Base.cluster_cookie"><code class="xref jl jl-func docutils literal"><span class="pre">Base.cluster_cookie()</span></code></a>. Cluster managers not using the default TCP/IP transport (and hence not specifying <code class="docutils literal"><span class="pre">--worker</span></code>)
 must call <code class="docutils literal"><span class="pre">init_worker(cookie,</span> <span class="pre">manager)</span></code> with the same cookie as on the master.</li>
 </ul>
-<p>It is to be noted that environments requiring higher levels of security (for example, cookies can be pre-shared and hence not
-specified as a startup arg) can implement this via a custom ClusterManager.</p>
+<p>Note that environments requiring higher levels of security can implement this via a custom <code class="xref jl jl-class docutils literal"><span class="pre">ClusterManager</span></code>.
+For example, cookies can be pre-shared and hence not specified as a startup argument.</p>
 </div>
 <div class="section" id="specifying-network-topology-experimental">
 <h2>Specifying network topology (Experimental)<a class="headerlink" href="#specifying-network-topology-experimental" title="Permalink to this headline">¶</a></h2>
 <p>Keyword argument <code class="docutils literal"><span class="pre">topology</span></code> to <code class="docutils literal"><span class="pre">addprocs</span></code> is used to specify how the workers must be connected to each other:</p>
 <ul class="simple">
 <li><code class="docutils literal"><span class="pre">:all_to_all</span></code> : is the default, where all workers are connected to each other.</li>
-<li><code class="docutils literal"><span class="pre">:master_slave</span></code> : only the driver process, i.e. pid 1 has connections to the workers.</li>
-<li><code class="docutils literal"><span class="pre">:custom</span></code> : the <code class="docutils literal"><span class="pre">launch</span></code> method of the cluster manager specifes the connection topology.
+<li><code class="docutils literal"><span class="pre">:master_slave</span></code> : only the driver process, i.e. <code class="docutils literal"><span class="pre">pid</span></code> 1 has connections to the workers.</li>
+<li><code class="docutils literal"><span class="pre">:custom</span></code> : the <code class="docutils literal"><span class="pre">launch</span></code> method of the cluster manager specifies the connection topology.
 Fields <code class="docutils literal"><span class="pre">ident</span></code> and <code class="docutils literal"><span class="pre">connect_idents</span></code> in <code class="docutils literal"><span class="pre">WorkerConfig</span></code> are used to specify the  same.
-<code class="docutils literal"><span class="pre">connect_idents</span></code> is a list of <code class="docutils literal"><span class="pre">ClusterManager</span></code> provided identifiers to workers that worker
+<code class="docutils literal"><span class="pre">connect_idents</span></code> is a list of <code class="xref jl jl-class docutils literal"><span class="pre">ClusterManager</span></code> provided identifiers to workers that worker
 with identified by <code class="docutils literal"><span class="pre">ident</span></code> must connect to.</li>
 </ul>
-<p>Currently sending a message between unconnected workers results in an error. This behaviour, as also the
-functionality and interface should be considered experimental in nature and may change in future releases.</p>
+<p>Currently, sending a message between unconnected workers results in an error. This behaviour, as with the
+functionality and interface, should be considered experimental in nature and may change in future releases.</p>
+</div>
+<div class="section" id="multi-threading-experimental">
+<h2>Multi-threading (Experimental)<a class="headerlink" href="#multi-threading-experimental" title="Permalink to this headline">¶</a></h2>
+<p>In addition to tasks, remote calls, and remote references, Julia from <code class="docutils literal"><span class="pre">v0.5</span></code> forwards will natively support
+multi-threading. Note that this section is experimental and the interfaces may change in the
+future.</p>
+<div class="section" id="setup">
+<h3>Setup<a class="headerlink" href="#setup" title="Permalink to this headline">¶</a></h3>
+<p>By default, Julia starts up with a single thread of execution. This can be verified by
+using the command <a class="reference internal" href="../stdlib/parallel.html#Base.Threads.nthreads" title="Base.Threads.nthreads"><code class="xref jl jl-obj docutils literal"><span class="pre">Threads.nthreads()</span></code></a>:</p>
+<div class="highlight-julia"><div class="highlight"><pre><span></span><span class="n">julia</span><span class="o">&gt;</span> <span class="n">Threads</span><span class="o">.</span><span class="n">nthreads</span><span class="p">()</span>
+<span class="mi">1</span>
+</pre></div>
+</div>
+<p>The number of threads Julia starts up with is controlled by an environment variable
+called <code class="docutils literal"><span class="pre">JULIA_NUM_THREADS</span></code>. Now, let&#8217;s start up Julia with 4 threads:</p>
+<div class="highlight-julia"><div class="highlight"><pre><span></span><span class="k">export</span> <span class="n">JULIA_NUM_THREADS</span><span class="o">=</span><span class="mi">4</span>
+</pre></div>
+</div>
+<p>(The above command works on bourne shells on Linux and OSX. Note that if you&#8217;re using
+a C shell on these platforms, you should use the keyword <code class="docutils literal"><span class="pre">set</span></code> instead of <code class="docutils literal"><span class="pre">export</span></code>.
+If you&#8217;re on Windows, start up the command line in the location of <code class="docutils literal"><span class="pre">julia.exe</span></code> and
+use <code class="docutils literal"><span class="pre">set</span></code> instead of <code class="docutils literal"><span class="pre">export</span></code>.)</p>
+<p>Let&#8217;s verify there are 4 threads at our disposal.</p>
+<div class="highlight-julia"><div class="highlight"><pre><span></span><span class="n">julia</span><span class="o">&gt;</span> <span class="n">Threads</span><span class="o">.</span><span class="n">nthreads</span><span class="p">()</span>
+<span class="mi">4</span>
+</pre></div>
+</div>
+<p>But we are currently on the master thread. To check, we use the command <a class="reference internal" href="../stdlib/parallel.html#Base.Threads.threadid" title="Base.Threads.threadid"><code class="xref jl jl-obj docutils literal"><span class="pre">Threads.threadid()</span></code></a></p>
+<div class="highlight-julia"><div class="highlight"><pre><span></span><span class="n">julia</span><span class="o">&gt;</span> <span class="n">Threads</span><span class="o">.</span><span class="n">threadid</span><span class="p">()</span>
+<span class="mi">1</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="the-threads-macro">
+<h3>The <code class="docutils literal"><span class="pre">&#64;threads</span></code> Macro<a class="headerlink" href="#the-threads-macro" title="Permalink to this headline">¶</a></h3>
+<p>Let&#8217;s work a simple example using our native threads. Let us create an array of zeros:</p>
+<div class="highlight-julia"><div class="highlight"><pre><span></span><span class="n">julia</span><span class="o">&gt;</span> <span class="n">a</span> <span class="o">=</span> <span class="n">zeros</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
+<span class="mi">10</span><span class="o">-</span><span class="n">element</span> <span class="n">Array</span><span class="p">{</span><span class="kt">Float64</span><span class="p">,</span><span class="mi">1</span><span class="p">}:</span>
+ <span class="mf">0.0</span>
+ <span class="mf">0.0</span>
+ <span class="mf">0.0</span>
+ <span class="mf">0.0</span>
+ <span class="mf">0.0</span>
+ <span class="mf">0.0</span>
+ <span class="mf">0.0</span>
+ <span class="mf">0.0</span>
+ <span class="mf">0.0</span>
+ <span class="mf">0.0</span>
+</pre></div>
+</div>
+<p>Let us operate on this array simultaneously using 4 threads. We&#8217;ll have each thread write
+its thread ID into each location.</p>
+<p>Julia supports parallel loops using the <a class="reference internal" href="../stdlib/parallel.html#Base.Threads.&#64;threads" title="Base.Threads.&#64;threads"><code class="xref jl jl-obj docutils literal"><span class="pre">Threads.&#64;threads</span></code></a> macro. This macro is affixed in front
+of a <code class="docutils literal"><span class="pre">for</span></code> loop to indicate to Julia that the loop is a multi-threaded region.</p>
+<div class="highlight-julia"><div class="highlight"><pre><span></span><span class="n">Threads</span><span class="o">.</span><span class="p">@</span><span class="n">threads</span> <span class="k">for</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">1</span><span class="p">:</span><span class="mi">10</span>
+    <span class="n">a</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">threadid</span><span class="p">()</span>
+<span class="k">end</span>
+</pre></div>
+</div>
+<p>The iteration space is split amongst the threads, after which each thread writes its thread ID to its assigned locations.:</p>
+<div class="highlight-julia"><div class="highlight"><pre><span></span><span class="n">julia</span><span class="o">&gt;</span> <span class="n">a</span>
+<span class="mi">10</span><span class="o">-</span><span class="n">element</span> <span class="n">Array</span><span class="p">{</span><span class="kt">Float64</span><span class="p">,</span><span class="mi">1</span><span class="p">}:</span>
+ <span class="mf">1.0</span>
+ <span class="mf">1.0</span>
+ <span class="mf">1.0</span>
+ <span class="mf">2.0</span>
+ <span class="mf">2.0</span>
+ <span class="mf">2.0</span>
+ <span class="mf">3.0</span>
+ <span class="mf">3.0</span>
+ <span class="mf">4.0</span>
+ <span class="mf">4.0</span>
+</pre></div>
+</div>
+<p>Note that <a class="reference internal" href="../stdlib/parallel.html#Base.Threads.&#64;threads" title="Base.Threads.&#64;threads"><code class="xref jl jl-obj docutils literal"><span class="pre">Threads.&#64;threads</span></code></a> does not have an optional reduction parameter like <a class="reference internal" href="../stdlib/parallel.html#Base.&#64;parallel" title="Base.&#64;parallel"><code class="xref jl jl-obj docutils literal"><span class="pre">&#64;parallel</span></code></a>.</p>
+</div>
+</div>
+<div class="section" id="threadcall-experimental">
+<h2>&#64;threadcall (Experimental)<a class="headerlink" href="#threadcall-experimental" title="Permalink to this headline">¶</a></h2>
+<p>All I/O tasks, timers, REPL commands, etc are multiplexed onto a single OS thread via an event loop.
+A patched version of libuv (<a class="reference external" href="http://docs.libuv.org/en/v1.x/">http://docs.libuv.org/en/v1.x/</a>) provides this functionality. Yield points provide
+for co-operatively scheduling multiple tasks onto the same OS thread. I/O tasks and timers yield implicitly while
+waiting for the event to occur. Calling <code class="docutils literal"><span class="pre">yield()</span></code> explicitly allows for other tasks to be scheduled.</p>
+<p>Thus, a task executing a <code class="docutils literal"><span class="pre">ccall</span></code> effectively prevents the Julia scheduler from executing any other
+tasks till the call returns. This is true for all calls into external libraries. Exceptions are calls into
+custom C code that call back into Julia (which may then yield) or C code that calls <code class="docutils literal"><span class="pre">jl_yield()</span></code> (C equivalent of <code class="docutils literal"><span class="pre">yield()</span></code>).</p>
+<p>Note that while Julia code runs on a single thread (by default), libraries used by Julia may launch their own internal
+threads. For example, the BLAS library may start as many threads as there are cores on a machine.</p>
+<p>The <code class="docutils literal"><span class="pre">&#64;threadcall</span></code> macro addresses scenarios where we do not want a <code class="docutils literal"><span class="pre">ccall</span></code> to block the main Julia event loop.
+It schedules a C function for execution in a separate thread. A threadpool with a default size of 4 is used for this.
+The size of the threadpool is controlled via environment variable <code class="docutils literal"><span class="pre">UV_THREADPOOL_SIZE</span></code>. While waiting for a free thread,
+and during function execution once a thread is available, the requesting task (on the main Julia event loop)
+yields to other tasks. Note that <code class="docutils literal"><span class="pre">&#64;threadcall</span></code> does not return till the execution is complete. From a user point of
+view, it is therefore a blocking call like other Julia APIs.</p>
+<p>It is very important that the called function does not call back into Julia.</p>
+<p><code class="docutils literal"><span class="pre">&#64;threadcall</span></code> may be removed/changed in future versions of Julia.</p>
 <p class="rubric">Footnotes</p>
 <table class="docutils footnote" frame="void" id="mpi2rma" rules="none">
 <colgroup><col class="label" /><col /></colgroup>

@@ -193,7 +193,8 @@
 <li class="toctree-l2"><a class="reference internal" href="../manual/documentation.html#functions-methods">Functions &amp; Methods</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../manual/documentation.html#advanced-usage">Advanced Usage</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../manual/documentation.html#syntax-guide">Syntax Guide</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../manual/documentation.html#markdown-syntax-notes">Markdown Syntax Notes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../manual/documentation.html#markdown-syntax">Markdown syntax</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../manual/documentation.html#markdown-syntax-extensions">Markdown Syntax Extensions</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../manual/metaprogramming.html">Metaprogramming</a><ul>
@@ -240,6 +241,8 @@
 <li class="toctree-l2"><a class="reference internal" href="../manual/parallel-computing.html#network-requirements-for-localmanager-and-sshmanager">Network requirements for LocalManager and SSHManager</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../manual/parallel-computing.html#cluster-cookie">Cluster cookie</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../manual/parallel-computing.html#specifying-network-topology-experimental">Specifying network topology (Experimental)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../manual/parallel-computing.html#multi-threading-experimental">Multi-threading (Experimental)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../manual/parallel-computing.html#threadcall-experimental">&#64;threadcall (Experimental)</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../manual/dates.html">Date and DateTime</a><ul>
@@ -280,6 +283,7 @@
 <li class="toctree-l2"><a class="reference internal" href="../manual/interacting-with-julia.html#the-different-prompt-modes">The different prompt modes</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../manual/interacting-with-julia.html#key-bindings">Key bindings</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../manual/interacting-with-julia.html#tab-completion">Tab completion</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../manual/interacting-with-julia.html#customizing-colors">Customizing Colors</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../manual/embedding.html">Embedding Julia</a><ul>
@@ -455,6 +459,8 @@
 <li class="toctree-l2"><a class="reference internal" href="parallel.html#general-parallel-computing-support">General Parallel Computing Support</a></li>
 <li class="toctree-l2"><a class="reference internal" href="parallel.html#shared-arrays">Shared Arrays</a></li>
 <li class="toctree-l2"><a class="reference internal" href="parallel.html#multi-threading">Multi-Threading</a></li>
+<li class="toctree-l2"><a class="reference internal" href="parallel.html#ccall-using-a-threadpool-experimental">ccall using a threadpool (Experimental)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="parallel.html#synchronization-primitives">Synchronization Primitives</a></li>
 <li class="toctree-l2"><a class="reference internal" href="parallel.html#cluster-manager-interface">Cluster Manager Interface</a></li>
 </ul>
 </li>
@@ -521,7 +527,6 @@
 <li class="toctree-l2"><a class="reference internal" href="../devdocs/sysimg.html">System Image Building</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../devdocs/llvm.html">Working with LLVM</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../devdocs/stdio.html">printf() and stdio in the Julia runtime</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../devdocs/promote-op.html">Operator-sensitive promotion</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../devdocs/boundscheck.html">Bounds checking</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../devdocs/locks.html">Proper maintenance and care of multi-threading locks</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../devdocs/offset-arrays.html">Arrays with custom indices</a></li>
@@ -531,6 +536,7 @@
 <li class="toctree-l2"><a class="reference internal" href="../devdocs/backtraces.html">Reporting and analyzing crashes (segfaults)</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../devdocs/debuggingtips.html">gdb debugging tips</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../devdocs/valgrind.html">Using Valgrind with Julia</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../devdocs/sanitizers.html">Sanitizer support</a></li>
 </ul>
 </li>
 </ul>
@@ -750,8 +756,18 @@
 
 <dl class="function">
 <dt id="Base.rationalize">
-<code class="descname">rationalize</code><span class="sig-paren">(</span><span class="optional">[</span><em>Type=Int</em>, <span class="optional">]</span><em>x; tol=eps(x)</em><span class="sig-paren">)</span><a class="headerlink" href="#Base.rationalize" title="Permalink to this definition">¶</a></dt>
-<dd><p>Approximate floating point number <code class="docutils literal"><span class="pre">x</span></code> as a Rational number with components of the given integer type. The result will differ from <code class="docutils literal"><span class="pre">x</span></code> by no more than <code class="docutils literal"><span class="pre">tol</span></code>.</p>
+<code class="descname">rationalize</code><span class="sig-paren">(</span><span class="optional">[</span><em>T&lt;:Integer=Int</em>, <span class="optional">]</span><em>x; tol::Real=eps(x)</em><span class="sig-paren">)</span><a class="headerlink" href="#Base.rationalize" title="Permalink to this definition">¶</a></dt>
+<dd><p>Approximate floating point number <code class="docutils literal"><span class="pre">x</span></code> as a <code class="docutils literal"><span class="pre">Rational</span></code> number with components of the given integer type. The result will differ from <code class="docutils literal"><span class="pre">x</span></code> by no more than <code class="docutils literal"><span class="pre">tol</span></code>. If <code class="docutils literal"><span class="pre">T</span></code> is not provided, it defaults to <code class="docutils literal"><span class="pre">Int</span></code>.</p>
+<div class="highlight-julia"><div class="highlight"><pre><span></span><span class="n">julia</span><span class="o">&gt;</span> <span class="n">rationalize</span><span class="p">(</span><span class="mf">5.6</span><span class="p">)</span>
+<span class="mi">28</span><span class="o">//</span><span class="mi">5</span>
+
+<span class="n">julia</span><span class="o">&gt;</span> <span class="n">a</span> <span class="o">=</span> <span class="n">rationalize</span><span class="p">(</span><span class="n">BigInt</span><span class="p">,</span> <span class="mf">10.3</span><span class="p">)</span>
+<span class="mi">103</span><span class="o">//</span><span class="mi">10</span>
+
+<span class="n">julia</span><span class="o">&gt;</span> <span class="nb">typeof</span><span class="p">(</span><span class="n">num</span><span class="p">(</span><span class="n">a</span><span class="p">))</span>
+<span class="n">BigInt</span>
+</pre></div>
+</div>
 </dd></dl>
 
 <dl class="function">
@@ -812,8 +828,8 @@
 <span class="target" id="id17"></span><dl class="function">
 <dt id="Base.&gt;&gt;&gt;">
 <code class="descname">&gt;&gt;&gt;</code><span class="sig-paren">(</span><em>x</em>, <em>n</em><span class="sig-paren">)</span><a class="headerlink" href="#Base.>>>" title="Permalink to this definition">¶</a></dt>
-<dd><p>Unsigned right bit shift operator, <code class="docutils literal"><span class="pre">x</span> <span class="pre">&gt;&gt;&gt;</span> <span class="pre">n</span></code>. For <code class="docutils literal"><span class="pre">n</span> <span class="pre">&gt;=</span> <span class="pre">0</span></code>, the result is <code class="docutils literal"><span class="pre">x</span></code> shifted right by <code class="docutils literal"><span class="pre">n</span></code> bits, where <code class="docutils literal"><span class="pre">n</span> <span class="pre">&gt;=</span> <span class="pre">0</span></code>, filling with <code class="docutils literal"><span class="pre">0</span></code>s. For <code class="docutils literal"><span class="pre">n</span> <span class="pre">&lt;</span> <span class="pre">0</span></code>, this is equivalent to <code class="docutils literal"><span class="pre">x</span> <span class="pre">[&lt;&lt;](:func:</span></code>&lt;&lt;<code class="docutils literal"><span class="pre">)</span> <span class="pre">-n</span></code>].</p>
-<p>For <code class="docutils literal"><span class="pre">Unsigned</span></code> integer types, this is eqivalent to <a class="reference internal" href="#Base.&gt;&gt;" title="Base.&gt;&gt;"><code class="xref jl jl-func docutils literal"><span class="pre">&gt;&gt;()</span></code></a>. For <code class="docutils literal"><span class="pre">Signed</span></code> integer types, this is equivalent to <code class="docutils literal"><span class="pre">signed(unsigned(x)</span> <span class="pre">&gt;&gt;</span> <span class="pre">n)</span></code>.</p>
+<dd><p>Unsigned right bit shift operator, <code class="docutils literal"><span class="pre">x</span> <span class="pre">&gt;&gt;&gt;</span> <span class="pre">n</span></code>. For <code class="docutils literal"><span class="pre">n</span> <span class="pre">&gt;=</span> <span class="pre">0</span></code>, the result is <code class="docutils literal"><span class="pre">x</span></code> shifted right by <code class="docutils literal"><span class="pre">n</span></code> bits, where <code class="docutils literal"><span class="pre">n</span> <span class="pre">&gt;=</span> <span class="pre">0</span></code>, filling with <code class="docutils literal"><span class="pre">0</span></code>s. For <code class="docutils literal"><span class="pre">n</span> <span class="pre">&lt;</span> <span class="pre">0</span></code>, this is equivalent to <code class="docutils literal"><span class="pre">x</span> <span class="pre">&lt;&lt;</span> <span class="pre">-n</span></code>.</p>
+<p>For <code class="docutils literal"><span class="pre">Unsigned</span></code> integer types, this is equivalent to <a class="reference internal" href="#Base.&gt;&gt;" title="Base.&gt;&gt;"><code class="xref jl jl-func docutils literal"><span class="pre">&gt;&gt;()</span></code></a>. For <code class="docutils literal"><span class="pre">Signed</span></code> integer types, this is equivalent to <code class="docutils literal"><span class="pre">signed(unsigned(x)</span> <span class="pre">&gt;&gt;</span> <span class="pre">n)</span></code>.</p>
 <div class="highlight-julia"><div class="highlight"><pre><span></span><span class="n">julia</span><span class="o">&gt;</span> <span class="kt">Int8</span><span class="p">(</span><span class="o">-</span><span class="mi">14</span><span class="p">)</span> <span class="o">&gt;&gt;&gt;</span> <span class="mi">2</span>
 <span class="mi">60</span>
 
@@ -844,6 +860,12 @@
 <dt id="Base.range">
 <code class="descname">range</code><span class="sig-paren">(</span><em>start</em>, <span class="optional">[</span><em>step</em>, <span class="optional">]</span><em>length</em><span class="sig-paren">)</span><a class="headerlink" href="#Base.range" title="Permalink to this definition">¶</a></dt>
 <dd><p>Construct a range by length, given a starting value and optional step (defaults to 1).</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="Base.Base.OneTo">
+<code class="descclassname">Base.</code><code class="descname">OneTo</code><span class="sig-paren">(</span><em>n</em><span class="sig-paren">)</span><a class="headerlink" href="#Base.Base.OneTo" title="Permalink to this definition">¶</a></dt>
+<dd><p>Define an <code class="docutils literal"><span class="pre">AbstractUnitRange</span></code> that behaves like <code class="docutils literal"><span class="pre">1:n</span></code>, with the added distinction that the lower limit is guaranteed (by the type system) to be 1.</p>
 </dd></dl>
 
 <span class="target" id="id19"></span><dl class="function">
@@ -1005,7 +1027,7 @@
 <code class="descname">isapprox</code><span class="sig-paren">(</span><em>x</em>, <em>y; rtol::Real=sqrt(eps)</em>, <em>atol::Real=0</em><span class="sig-paren">)</span><a class="headerlink" href="#Base.isapprox" title="Permalink to this definition">¶</a></dt>
 <dd><p>Inexact equality comparison: <code class="docutils literal"><span class="pre">true</span></code> if <code class="docutils literal"><span class="pre">norm(x-y)</span> <span class="pre">&lt;=</span> <span class="pre">atol</span> <span class="pre">+</span> <span class="pre">rtol*max(norm(x),</span> <span class="pre">norm(y))</span></code>. The default <code class="docutils literal"><span class="pre">atol</span></code> is zero and the default <code class="docutils literal"><span class="pre">rtol</span></code> depends on the types of <code class="docutils literal"><span class="pre">x</span></code> and <code class="docutils literal"><span class="pre">y</span></code>.</p>
 <p>For real or complex floating-point values, <code class="docutils literal"><span class="pre">rtol</span></code> defaults to <code class="docutils literal"><span class="pre">sqrt(eps(typeof(real(x-y))))</span></code>. This corresponds to requiring equality of about half of the significand digits. For other types, <code class="docutils literal"><span class="pre">rtol</span></code> defaults to zero.</p>
-<p><code class="docutils literal"><span class="pre">x</span></code> and <code class="docutils literal"><span class="pre">y</span></code> may also be arrays of numbers, in which case <code class="docutils literal"><span class="pre">norm</span></code> defaults to <code class="docutils literal"><span class="pre">vecnorm</span></code> but may be changed by passing a <code class="docutils literal"><span class="pre">norm::Function</span></code> keyword argument. (For numbers, <code class="docutils literal"><span class="pre">norm</span></code> is the same thing as <code class="docutils literal"><span class="pre">abs</span></code>.)</p>
+<p><code class="docutils literal"><span class="pre">x</span></code> and <code class="docutils literal"><span class="pre">y</span></code> may also be arrays of numbers, in which case <code class="docutils literal"><span class="pre">norm</span></code> defaults to <code class="docutils literal"><span class="pre">vecnorm</span></code> but may be changed by passing a <code class="docutils literal"><span class="pre">norm::Function</span></code> keyword argument. (For numbers, <code class="docutils literal"><span class="pre">norm</span></code> is the same thing as <code class="docutils literal"><span class="pre">abs</span></code>.) When <code class="docutils literal"><span class="pre">x</span></code> and <code class="docutils literal"><span class="pre">y</span></code> are arrays, if <code class="docutils literal"><span class="pre">norm(x-y)</span></code> is not finite (i.e. <code class="docutils literal"><span class="pre">±Inf</span></code> or <code class="docutils literal"><span class="pre">NaN</span></code>), the comparison falls back to checking whether all elements of <code class="docutils literal"><span class="pre">x</span></code> and <code class="docutils literal"><span class="pre">y</span></code> are approximately equal component-wise.</p>
 <p>The binary operator <code class="docutils literal"><span class="pre">≈</span></code> is equivalent to <code class="docutils literal"><span class="pre">isapprox</span></code> with the default arguments, and <code class="docutils literal"><span class="pre">x</span> <span class="pre">≉</span> <span class="pre">y</span></code> is equivalent to <code class="docutils literal"><span class="pre">!isapprox(x,y)</span></code>.</p>
 </dd></dl>
 
@@ -1162,7 +1184,7 @@
 <dl class="function">
 <dt id="Base.acsc">
 <code class="descname">acsc</code><span class="sig-paren">(</span><em>x</em><span class="sig-paren">)</span><a class="headerlink" href="#Base.acsc" title="Permalink to this definition">¶</a></dt>
-<dd><p>Compute the inverse cosecant of <code class="docutils literal"><span class="pre">x</span></code>, where the output is in radians</p>
+<dd><p>Compute the inverse cosecant of <code class="docutils literal"><span class="pre">x</span></code>, where the output is in radians.</p>
 </dd></dl>
 
 <dl class="function">
@@ -1506,12 +1528,29 @@
 <dt id="Base.minmax">
 <code class="descname">minmax</code><span class="sig-paren">(</span><em>x</em>, <em>y</em><span class="sig-paren">)</span><a class="headerlink" href="#Base.minmax" title="Permalink to this definition">¶</a></dt>
 <dd><p>Return <code class="docutils literal"><span class="pre">(min(x,y),</span> <span class="pre">max(x,y))</span></code>. See also: <a class="reference internal" href="collections.html#Base.extrema" title="Base.extrema"><code class="xref jl jl-func docutils literal"><span class="pre">extrema()</span></code></a> that returns <code class="docutils literal"><span class="pre">(minimum(x),</span> <span class="pre">maximum(x))</span></code>.</p>
+<div class="highlight-julia"><div class="highlight"><pre><span></span><span class="n">julia</span><span class="o">&gt;</span> <span class="n">minmax</span><span class="p">(</span><span class="sc">&#39;c&#39;</span><span class="p">,</span><span class="sc">&#39;b&#39;</span><span class="p">)</span>
+<span class="p">(</span><span class="sc">&#39;b&#39;</span><span class="p">,</span><span class="sc">&#39;c&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
 </dd></dl>
 
 <dl class="function">
 <dt id="Base.clamp">
 <code class="descname">clamp</code><span class="sig-paren">(</span><em>x</em>, <em>lo</em>, <em>hi</em><span class="sig-paren">)</span><a class="headerlink" href="#Base.clamp" title="Permalink to this definition">¶</a></dt>
-<dd><p>Return <code class="docutils literal"><span class="pre">x</span></code> if <code class="docutils literal"><span class="pre">lo</span> <span class="pre">&lt;=</span> <span class="pre">x</span> <span class="pre">&lt;=</span> <span class="pre">hi</span></code>. If <code class="docutils literal"><span class="pre">x</span> <span class="pre">&lt;</span> <span class="pre">lo</span></code>, return <code class="docutils literal"><span class="pre">lo</span></code>. If <code class="docutils literal"><span class="pre">x</span> <span class="pre">&gt;</span> <span class="pre">hi</span></code>, return <code class="docutils literal"><span class="pre">hi</span></code>. Arguments are promoted to a common type. Operates elementwise over <code class="docutils literal"><span class="pre">x</span></code> if it is an array.</p>
+<dd><p>Return <code class="docutils literal"><span class="pre">x</span></code> if <code class="docutils literal"><span class="pre">lo</span> <span class="pre">&lt;=</span> <span class="pre">x</span> <span class="pre">&lt;=</span> <span class="pre">hi</span></code>. If <code class="docutils literal"><span class="pre">x</span> <span class="pre">&lt;</span> <span class="pre">lo</span></code>, return <code class="docutils literal"><span class="pre">lo</span></code>. If <code class="docutils literal"><span class="pre">x</span> <span class="pre">&gt;</span> <span class="pre">hi</span></code>, return <code class="docutils literal"><span class="pre">hi</span></code>. Arguments are promoted to a common type. Operates elementwise over <code class="docutils literal"><span class="pre">x</span></code> if <code class="docutils literal"><span class="pre">x</span></code> is an array.</p>
+<div class="highlight-julia"><div class="highlight"><pre><span></span><span class="n">julia</span><span class="o">&gt;</span> <span class="n">clamp</span><span class="p">([</span><span class="nb">pi</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="n">big</span><span class="p">(</span><span class="mf">10.</span><span class="p">)],</span> <span class="mf">2.</span><span class="p">,</span> <span class="mf">9.</span><span class="p">)</span>
+<span class="mi">3</span><span class="o">-</span><span class="n">element</span> <span class="n">Array</span><span class="p">{</span><span class="n">BigFloat</span><span class="p">,</span><span class="mi">1</span><span class="p">}:</span>
+ <span class="mf">3.141592653589793238462643383279502884197169399375105820974944592307816406286198</span>
+ <span class="mf">2.000000000000000000000000000000000000000000000000000000000000000000000000000000</span>
+ <span class="mf">9.000000000000000000000000000000000000000000000000000000000000000000000000000000</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="Base.clamp!">
+<code class="descname">clamp!</code><span class="sig-paren">(</span><em>array::AbstractArray</em>, <em>lo</em>, <em>hi</em><span class="sig-paren">)</span><a class="headerlink" href="#Base.clamp!" title="Permalink to this definition">¶</a></dt>
+<dd><p>Restrict values in <code class="docutils literal"><span class="pre">array</span></code> to the specified range, in-place. See also <a class="reference internal" href="#Base.clamp" title="Base.clamp"><code class="xref jl jl-func docutils literal"><span class="pre">clamp()</span></code></a>.</p>
 </dd></dl>
 
 <dl class="function">
@@ -1744,7 +1783,7 @@
 <dl class="function">
 <dt id="Base.gcdx">
 <code class="descname">gcdx</code><span class="sig-paren">(</span><em>x</em>, <em>y</em><span class="sig-paren">)</span><a class="headerlink" href="#Base.gcdx" title="Permalink to this definition">¶</a></dt>
-<dd><p>Computes the greatest common (positive) divisor of <code class="docutils literal"><span class="pre">x</span></code> and <code class="docutils literal"><span class="pre">y</span></code> and their Bézout coefficients, i.e. the integer coefficients <code class="docutils literal"><span class="pre">u</span></code> and <code class="docutils literal"><span class="pre">v</span></code> that satisfy <span class="math">\(ux+vy = d = gcd(x,y)\)</span>.</p>
+<dd><p>Computes the greatest common (positive) divisor of <code class="docutils literal"><span class="pre">x</span></code> and <code class="docutils literal"><span class="pre">y</span></code> and their Bézout coefficients, i.e. the integer coefficients <code class="docutils literal"><span class="pre">u</span></code> and <code class="docutils literal"><span class="pre">v</span></code> that satisfy <span class="math">\(ux+vy = d = gcd(x,y)\)</span>. <span class="math">\(gcdx(x,y)\)</span> returns <span class="math">\((d,u,v)\)</span>.</p>
 <div class="highlight-julia"><div class="highlight"><pre><span></span><span class="n">julia</span><span class="o">&gt;</span> <span class="n">gcdx</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">42</span><span class="p">)</span>
 <span class="p">(</span><span class="mi">6</span><span class="p">,</span><span class="o">-</span><span class="mi">3</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span>
 </pre></div>
@@ -1755,7 +1794,7 @@
 </div>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
-<p class="last">Bézout coefficients are <em>not</em> uniquely defined. <code class="docutils literal"><span class="pre">gcdx</span></code> returns the minimal Bézout coefficients that are computed by the extended Euclid algorithm. (Ref: D. Knuth, TAoCP, 2/e, p. 325, Algorithm X.) These coefficients <code class="docutils literal"><span class="pre">u</span></code> and <code class="docutils literal"><span class="pre">v</span></code> are minimal in the sense that <span class="math">\(|u| &lt; |\frac y d|\)</span> and <span class="math">\(|v| &lt; |\frac x d|\)</span>. Furthermore, the signs of <code class="docutils literal"><span class="pre">u</span></code> and <code class="docutils literal"><span class="pre">v</span></code> are chosen so that <code class="docutils literal"><span class="pre">d</span></code> is positive.</p>
+<p class="last">Bézout coefficients are <em>not</em> uniquely defined. <code class="docutils literal"><span class="pre">gcdx</span></code> returns the minimal Bézout coefficients that are computed by the extended Euclidean algorithm. (Ref: D. Knuth, TAoCP, 2/e, p. 325, Algorithm X.) For signed integers, these coefficients <code class="docutils literal"><span class="pre">u</span></code> and <code class="docutils literal"><span class="pre">v</span></code> are minimal in the sense that <span class="math">\(|u| &lt; |y/d|\)</span> and <span class="math">\(|v| &lt; |x/d|\)</span>. Furthermore, the signs of <code class="docutils literal"><span class="pre">u</span></code> and <code class="docutils literal"><span class="pre">v</span></code> are chosen so that <code class="docutils literal"><span class="pre">d</span></code> is positive. For unsigned integers, the coefficients <code class="docutils literal"><span class="pre">u</span></code> and <code class="docutils literal"><span class="pre">v</span></code> might be near their <code class="docutils literal"><span class="pre">typemax</span></code>, and the identity then holds only via the unsigned integers&#8217; modulo arithmetic.</p>
 </div>
 </dd></dl>
 
@@ -1798,7 +1837,7 @@
 <dl class="function">
 <dt id="Base.invmod">
 <code class="descname">invmod</code><span class="sig-paren">(</span><em>x</em>, <em>m</em><span class="sig-paren">)</span><a class="headerlink" href="#Base.invmod" title="Permalink to this definition">¶</a></dt>
-<dd><p>Take the inverse of <code class="docutils literal"><span class="pre">x</span></code> modulo <code class="docutils literal"><span class="pre">m</span></code>: <code class="docutils literal"><span class="pre">y</span></code> such that <span class="math">\(xy = 1 \pmod m\)</span>.</p>
+<dd><p>Take the inverse of <code class="docutils literal"><span class="pre">x</span></code> modulo <code class="docutils literal"><span class="pre">m</span></code>: <code class="docutils literal"><span class="pre">y</span></code> such that <span class="math">\(x y = 1 \pmod m\)</span>, with <span class="math">\(div(x,y) = 0\)</span>. This is undefined for <span class="math">\(m = 0\)</span>, or if <span class="math">\(gcd(x,m) \neq 1\)</span>.</p>
 </dd></dl>
 
 <dl class="function">
@@ -1965,8 +2004,15 @@
 
 <dl class="function">
 <dt id="Base.besselh">
-<code class="descname">besselh</code><span class="sig-paren">(</span><em>nu</em>, <em>k</em>, <em>x</em><span class="sig-paren">)</span><a class="headerlink" href="#Base.besselh" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bessel function of the third kind of order <code class="docutils literal"><span class="pre">nu</span></code> (Hankel function). <code class="docutils literal"><span class="pre">k</span></code> is either 1 or 2, selecting <code class="docutils literal"><span class="pre">hankelh1</span></code> or <code class="docutils literal"><span class="pre">hankelh2</span></code>, respectively.</p>
+<code class="descname">besselh</code><span class="sig-paren">(</span><em>nu</em>, <span class="optional">[</span><em>k=1</em>, <span class="optional">]</span><em>x</em><span class="sig-paren">)</span><a class="headerlink" href="#Base.besselh" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bessel function of the third kind of order <code class="docutils literal"><span class="pre">nu</span></code> (the Hankel function). <code class="docutils literal"><span class="pre">k</span></code> is either 1 or 2, selecting <a class="reference internal" href="#Base.hankelh1" title="Base.hankelh1"><code class="xref jl jl-func docutils literal"><span class="pre">hankelh1()</span></code></a> or <a class="reference internal" href="#Base.hankelh2" title="Base.hankelh2"><code class="xref jl jl-func docutils literal"><span class="pre">hankelh2()</span></code></a>, respectively. <code class="docutils literal"><span class="pre">k</span></code> defaults to 1 if it is omitted. (See also <a class="reference internal" href="#Base.besselhx" title="Base.besselhx"><code class="xref jl jl-func docutils literal"><span class="pre">besselhx()</span></code></a> for an exponentially scaled variant.)</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="Base.besselhx">
+<code class="descname">besselhx</code><span class="sig-paren">(</span><em>nu</em>, <span class="optional">[</span><em>k=1</em>, <span class="optional">]</span><em>z</em><span class="sig-paren">)</span><a class="headerlink" href="#Base.besselhx" title="Permalink to this definition">¶</a></dt>
+<dd><p>Compute the scaled Hankel function <span class="math">\(\exp(∓iz) H_ν^{(k)}(z)\)</span>, where <span class="math">\(k\)</span> is 1 or 2, <span class="math">\(H_ν^{(k)}(z)\)</span> is <code class="docutils literal"><span class="pre">besselh(nu,</span> <span class="pre">k,</span> <span class="pre">z)</span></code>, and <span class="math">\(∓\)</span> is <span class="math">\(-\)</span> for <span class="math">\(k=1\)</span> and <span class="math">\(+\)</span> for <span class="math">\(k=2\)</span>.  <code class="docutils literal"><span class="pre">k</span></code> defaults to 1 if it is omitted.</p>
+<p>The reason for this function is that <span class="math">\(H_ν^{(k)}(z)\)</span> is asymptotically proportional to <span class="math">\(\exp(∓iz)/\sqrt{z}\)</span> for large <span class="math">\(|z|\)</span>, and so the <a class="reference internal" href="#Base.besselh" title="Base.besselh"><code class="xref jl jl-func docutils literal"><span class="pre">besselh()</span></code></a> function is susceptible to overflow or underflow when <code class="docutils literal"><span class="pre">z</span></code> has a large imaginary part.  The <code class="docutils literal"><span class="pre">besselhx</span></code> function cancels this exponential factor (analytically), so it avoids these problems.</p>
 </dd></dl>
 
 <dl class="function">
@@ -2047,7 +2093,11 @@
 <dl class="function">
 <dt id="Base.mean">
 <code class="descname">mean</code><span class="sig-paren">(</span><em>v</em><span class="optional">[</span>, <em>region</em><span class="optional">]</span><span class="sig-paren">)</span><a class="headerlink" href="#Base.mean" title="Permalink to this definition">¶</a></dt>
-<dd><p>Compute the mean of whole array <code class="docutils literal"><span class="pre">v</span></code>, or optionally along the dimensions in <code class="docutils literal"><span class="pre">region</span></code>. Note: Julia does not ignore <code class="docutils literal"><span class="pre">NaN</span></code> values in the computation. For applications requiring the handling of missing data, the <code class="docutils literal"><span class="pre">DataArray</span></code> package is recommended.</p>
+<dd><p>Compute the mean of whole array <code class="docutils literal"><span class="pre">v</span></code>, or optionally along the dimensions in <code class="docutils literal"><span class="pre">region</span></code>.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Julia does not ignore <code class="docutils literal"><span class="pre">NaN</span></code> values in the computation. For applications requiring the handling of missing data, the <code class="docutils literal"><span class="pre">DataArrays.jl</span></code> package is recommended.</p>
+</div>
 </dd></dl>
 
 <dl class="function">
@@ -2064,14 +2114,22 @@
 
 <dl class="function">
 <dt id="Base.std">
-<code class="descname">std</code><span class="sig-paren">(</span><em>v</em><span class="optional">[</span>, <em>region</em><span class="optional">]</span><span class="sig-paren">)</span><a class="headerlink" href="#Base.std" title="Permalink to this definition">¶</a></dt>
-<dd><p>Compute the sample standard deviation of a vector or array <code class="docutils literal"><span class="pre">v</span></code>, optionally along dimensions in <code class="docutils literal"><span class="pre">region</span></code>. The algorithm returns an estimator of the generative distribution&#8217;s standard deviation under the assumption that each entry of <code class="docutils literal"><span class="pre">v</span></code> is an IID drawn from that generative distribution. This computation is equivalent to calculating <code class="docutils literal"><span class="pre">sqrt(sum((v</span> <span class="pre">-</span> <span class="pre">mean(v)).^2)</span> <span class="pre">/</span> <span class="pre">(length(v)</span> <span class="pre">-</span> <span class="pre">1))</span></code>. Note: Julia does not ignore <code class="docutils literal"><span class="pre">NaN</span></code> values in the computation. For applications requiring the handling of missing data, the <code class="docutils literal"><span class="pre">DataArray</span></code> package is recommended.</p>
+<code class="descname">std</code><span class="sig-paren">(</span><em>v[, region]; corrected::Bool=true, mean=nothing</em><span class="sig-paren">)</span><a class="headerlink" href="#Base.std" title="Permalink to this definition">¶</a></dt>
+<dd><p>Compute the sample standard deviation of a vector or array <code class="docutils literal"><span class="pre">v</span></code>, optionally along dimensions in <code class="docutils literal"><span class="pre">region</span></code>. The algorithm returns an estimator of the generative distribution&#8217;s standard deviation under the assumption that each entry of <code class="docutils literal"><span class="pre">v</span></code> is an IID drawn from that generative distribution. This computation is equivalent to calculating <code class="docutils literal"><span class="pre">sqrt(sum((v</span> <span class="pre">-</span> <span class="pre">mean(v)).^2)</span> <span class="pre">/</span> <span class="pre">(length(v)</span> <span class="pre">-</span> <span class="pre">1))</span></code>. A pre-computed <code class="docutils literal"><span class="pre">mean</span></code> may be provided. If <code class="docutils literal"><span class="pre">corrected</span></code> is <code class="docutils literal"><span class="pre">true</span></code>, then the sum is scaled with <code class="docutils literal"><span class="pre">n-1</span></code>, whereas the sum is scaled with <code class="docutils literal"><span class="pre">n</span></code> if <code class="docutils literal"><span class="pre">corrected</span></code> is <code class="docutils literal"><span class="pre">false</span></code> where <code class="docutils literal"><span class="pre">n</span> <span class="pre">=</span> <span class="pre">length(x)</span></code>.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Julia does not ignore <code class="docutils literal"><span class="pre">NaN</span></code> values in the computation. For applications requiring the handling of missing data, the <code class="docutils literal"><span class="pre">DataArrays.jl</span></code> package is recommended.</p>
+</div>
 </dd></dl>
 
 <dl class="function">
 <dt id="Base.stdm">
-<code class="descname">stdm</code><span class="sig-paren">(</span><em>v</em>, <em>m</em><span class="sig-paren">)</span><a class="headerlink" href="#Base.stdm" title="Permalink to this definition">¶</a></dt>
-<dd><p>Compute the sample standard deviation of a vector <code class="docutils literal"><span class="pre">v</span></code> with known mean <code class="docutils literal"><span class="pre">m</span></code>. Note: Julia does not ignore <code class="docutils literal"><span class="pre">NaN</span></code> values in the computation.</p>
+<code class="descname">stdm</code><span class="sig-paren">(</span><em>v</em>, <em>m::Number; corrected::Bool=true</em><span class="sig-paren">)</span><a class="headerlink" href="#Base.stdm" title="Permalink to this definition">¶</a></dt>
+<dd><p>Compute the sample standard deviation of a vector <code class="docutils literal"><span class="pre">v</span></code> with known mean <code class="docutils literal"><span class="pre">m</span></code>. If <code class="docutils literal"><span class="pre">corrected</span></code> is <code class="docutils literal"><span class="pre">true</span></code>, then the sum is scaled with <code class="docutils literal"><span class="pre">n-1</span></code>, whereas the sum is scaled with <code class="docutils literal"><span class="pre">n</span></code> if <code class="docutils literal"><span class="pre">corrected</span></code> is <code class="docutils literal"><span class="pre">false</span></code> where <code class="docutils literal"><span class="pre">n</span> <span class="pre">=</span> <span class="pre">length(x)</span></code>.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Julia does not ignore <code class="docutils literal"><span class="pre">NaN</span></code> values in the computation. For applications requiring the handling of missing data, the <code class="docutils literal"><span class="pre">DataArrays.jl</span></code> package is recommended.</p>
+</div>
 </dd></dl>
 
 <dl class="function">
@@ -2082,8 +2140,12 @@
 
 <dl class="function">
 <dt id="Base.varm">
-<code class="descname">varm</code><span class="sig-paren">(</span><em>v</em>, <em>m</em><span class="sig-paren">)</span><a class="headerlink" href="#Base.varm" title="Permalink to this definition">¶</a></dt>
-<dd><p>Compute the sample variance of a vector <code class="docutils literal"><span class="pre">v</span></code> with known mean <code class="docutils literal"><span class="pre">m</span></code>. Note: Julia does not ignore <code class="docutils literal"><span class="pre">NaN</span></code> values in the computation.</p>
+<code class="descname">varm</code><span class="sig-paren">(</span><em>v, m[, region]; corrected::Bool=true</em><span class="sig-paren">)</span><a class="headerlink" href="#Base.varm" title="Permalink to this definition">¶</a></dt>
+<dd><p>Compute the sample variance of a collection <code class="docutils literal"><span class="pre">v</span></code> with known mean(s) <code class="docutils literal"><span class="pre">m</span></code>, optionally over <code class="docutils literal"><span class="pre">region</span></code>. <code class="docutils literal"><span class="pre">m</span></code> may contain means for each dimension of <code class="docutils literal"><span class="pre">v</span></code>. If <code class="docutils literal"><span class="pre">corrected</span></code> is <code class="docutils literal"><span class="pre">true</span></code>, then the sum is scaled with <code class="docutils literal"><span class="pre">n-1</span></code>, whereas the sum is scaled with <code class="docutils literal"><span class="pre">n</span></code> if <code class="docutils literal"><span class="pre">corrected</span></code> is <code class="docutils literal"><span class="pre">false</span></code> where <code class="docutils literal"><span class="pre">n</span> <span class="pre">=</span> <span class="pre">length(x)</span></code>.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Julia does not ignore <code class="docutils literal"><span class="pre">NaN</span></code> values in the computation. For applications requiring the handling of missing data, the <code class="docutils literal"><span class="pre">DataArrays.jl</span></code> package is recommended.</p>
+</div>
 </dd></dl>
 
 <dl class="function">
@@ -2101,19 +2163,38 @@
 <dl class="function">
 <dt>
 <code class="descname">middle</code><span class="sig-paren">(</span><em>range</em><span class="sig-paren">)</span></dt>
-<dd><p>Compute the middle of a range, which consists in computing the mean of its extrema. Since a range is sorted, the mean is performed with the first and last element.</p>
+<dd><p>Compute the middle of a range, which consists of computing the mean of its extrema. Since a range is sorted, the mean is performed with the first and last element.</p>
+<div class="highlight-julia"><div class="highlight"><pre><span></span><span class="n">julia</span><span class="o">&gt;</span> <span class="n">middle</span><span class="p">(</span><span class="mi">1</span><span class="p">:</span><span class="mi">10</span><span class="p">)</span>
+<span class="mf">5.5</span>
+</pre></div>
+</div>
 </dd></dl>
 
 <dl class="function">
 <dt>
-<code class="descname">middle</code><span class="sig-paren">(</span><em>array</em><span class="sig-paren">)</span></dt>
-<dd><p>Compute the middle of an array, which consists in finding its extrema and then computing their mean.</p>
+<code class="descname">middle</code><span class="sig-paren">(</span><em>a</em><span class="sig-paren">)</span></dt>
+<dd><p>Compute the middle of an array <code class="docutils literal"><span class="pre">a</span></code>, which consists of finding its extrema and then computing their mean.</p>
+<div class="highlight-julia"><div class="highlight"><pre><span></span><span class="n">julia</span><span class="o">&gt;</span> <span class="n">a</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mf">3.6</span><span class="p">,</span><span class="mf">10.9</span><span class="p">]</span>
+<span class="mi">4</span><span class="o">-</span><span class="n">element</span> <span class="n">Array</span><span class="p">{</span><span class="kt">Float64</span><span class="p">,</span><span class="mi">1</span><span class="p">}:</span>
+  <span class="mf">1.0</span>
+  <span class="mf">2.0</span>
+  <span class="mf">3.6</span>
+ <span class="mf">10.9</span>
+
+<span class="n">julia</span><span class="o">&gt;</span> <span class="n">middle</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+<span class="mf">5.95</span>
+</pre></div>
+</div>
 </dd></dl>
 
 <dl class="function">
 <dt id="Base.median">
 <code class="descname">median</code><span class="sig-paren">(</span><em>v</em><span class="optional">[</span>, <em>region</em><span class="optional">]</span><span class="sig-paren">)</span><a class="headerlink" href="#Base.median" title="Permalink to this definition">¶</a></dt>
-<dd><p>Compute the median of whole array <code class="docutils literal"><span class="pre">v</span></code>, or optionally along the dimensions in <code class="docutils literal"><span class="pre">region</span></code>. For even number of elements no exact median element exists, so the result is equivalent to calculating mean of two median elements. <code class="docutils literal"><span class="pre">NaN</span></code> is returned if the data contains any <code class="docutils literal"><span class="pre">NaN</span></code> values. For applications requiring the handling of missing data, the <code class="docutils literal"><span class="pre">DataArrays</span></code> package is recommended.</p>
+<dd><p>Compute the median of an entire array <code class="docutils literal"><span class="pre">v</span></code>, or, optionally, along the dimensions in <code class="docutils literal"><span class="pre">region</span></code>. For an even number of elements no exact median element exists, so the result is equivalent to calculating mean of two median elements.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Julia does not ignore <code class="docutils literal"><span class="pre">NaN</span></code> values in the computation. For applications requiring the handling of missing data, the <code class="docutils literal"><span class="pre">DataArrays.jl</span></code> package is recommended.</p>
+</div>
 </dd></dl>
 
 <dl class="function">
@@ -2134,6 +2215,10 @@
 <dd><p>Compute the quantile(s) of a vector <code class="docutils literal"><span class="pre">v</span></code> at a specified probability or vector <code class="docutils literal"><span class="pre">p</span></code>. The keyword argument <code class="docutils literal"><span class="pre">sorted</span></code> indicates whether <code class="docutils literal"><span class="pre">v</span></code> can be assumed to be sorted.</p>
 <p>The <code class="docutils literal"><span class="pre">p</span></code> should be on the interval [0,1], and <code class="docutils literal"><span class="pre">v</span></code> should not have any <code class="docutils literal"><span class="pre">NaN</span></code> values.</p>
 <p>Quantiles are computed via linear interpolation between the points <code class="docutils literal"><span class="pre">((k-1)/(n-1),</span> <span class="pre">v[k])</span></code>, for <code class="docutils literal"><span class="pre">k</span> <span class="pre">=</span> <span class="pre">1:n</span></code> where <code class="docutils literal"><span class="pre">n</span> <span class="pre">=</span> <span class="pre">length(v)</span></code>. This corresponds to Definition 7 of Hyndman and Fan (1996), and is the same as the R default.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Julia does not ignore <code class="docutils literal"><span class="pre">NaN</span></code> values in the computation. For applications requiring the handling of missing data, the <code class="docutils literal"><span class="pre">DataArrays.jl</span></code> package is recommended. <code class="docutils literal"><span class="pre">quantile</span></code> will throw an <code class="docutils literal"><span class="pre">ArgumentError</span></code> in the presence of <code class="docutils literal"><span class="pre">NaN</span></code> values in the data array.</p>
+</div>
 <ul class="simple">
 <li>Hyndman, R.J and Fan, Y. (1996) &#8220;Sample Quantiles in Statistical Packages&#8221;, <em>The American Statistician</em>, Vol. 50, No. 4, pp. 361-365</li>
 </ul>
@@ -2145,6 +2230,10 @@
 <dd><p>Compute the quantile(s) of a vector <code class="docutils literal"><span class="pre">v</span></code> at the probabilities <code class="docutils literal"><span class="pre">p</span></code>, with optional output into array <code class="docutils literal"><span class="pre">q</span></code> (if not provided, a new output array is created). The keyword argument <code class="docutils literal"><span class="pre">sorted</span></code> indicates whether <code class="docutils literal"><span class="pre">v</span></code> can be assumed to be sorted; if <code class="docutils literal"><span class="pre">false</span></code> (the default), then the elements of <code class="docutils literal"><span class="pre">v</span></code> may be partially sorted.</p>
 <p>The elements of <code class="docutils literal"><span class="pre">p</span></code> should be on the interval [0,1], and <code class="docutils literal"><span class="pre">v</span></code> should not have any <code class="docutils literal"><span class="pre">NaN</span></code> values.</p>
 <p>Quantiles are computed via linear interpolation between the points <code class="docutils literal"><span class="pre">((k-1)/(n-1),</span> <span class="pre">v[k])</span></code>, for <code class="docutils literal"><span class="pre">k</span> <span class="pre">=</span> <span class="pre">1:n</span></code> where <code class="docutils literal"><span class="pre">n</span> <span class="pre">=</span> <span class="pre">length(v)</span></code>. This corresponds to Definition 7 of Hyndman and Fan (1996), and is the same as the R default.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Julia does not ignore <code class="docutils literal"><span class="pre">NaN</span></code> values in the computation. For applications requiring the handling of missing data, the <code class="docutils literal"><span class="pre">DataArrays.jl</span></code> package is recommended. <code class="docutils literal"><span class="pre">quantile!</span></code> will throw an <code class="docutils literal"><span class="pre">ArgumentError</span></code> in the presence of <code class="docutils literal"><span class="pre">NaN</span></code> values in the data array.</p>
+</div>
 <ul class="simple">
 <li>Hyndman, R.J and Fan, Y. (1996) &#8220;Sample Quantiles in Statistical Packages&#8221;, <em>The American Statistician</em>, Vol. 50, No. 4, pp. 361-365</li>
 </ul>
@@ -2153,25 +2242,25 @@
 <dl class="function">
 <dt id="Base.cov">
 <code class="descname">cov</code><span class="sig-paren">(</span><em>x</em><span class="optional">[</span>, <em>corrected=true</em><span class="optional">]</span><span class="sig-paren">)</span><a class="headerlink" href="#Base.cov" title="Permalink to this definition">¶</a></dt>
-<dd><p>Compute the variance of the vector <code class="docutils literal"><span class="pre">x</span></code>. If <code class="docutils literal"><span class="pre">corrected</span></code> is <code class="docutils literal"><span class="pre">true</span></code> (the default) then the sum is scaled with <code class="docutils literal"><span class="pre">n-1</span></code> wheares the sum is scaled with <code class="docutils literal"><span class="pre">n</span></code> if <code class="docutils literal"><span class="pre">corrected</span></code> is <code class="docutils literal"><span class="pre">false</span></code> where <code class="docutils literal"><span class="pre">n</span> <span class="pre">=</span> <span class="pre">length(x)</span></code>.</p>
+<dd><p>Compute the variance of the vector <code class="docutils literal"><span class="pre">x</span></code>. If <code class="docutils literal"><span class="pre">corrected</span></code> is <code class="docutils literal"><span class="pre">true</span></code> (the default) then the sum is scaled with <code class="docutils literal"><span class="pre">n-1</span></code>, whereas the sum is scaled with <code class="docutils literal"><span class="pre">n</span></code> if <code class="docutils literal"><span class="pre">corrected</span></code> is <code class="docutils literal"><span class="pre">false</span></code> where <code class="docutils literal"><span class="pre">n</span> <span class="pre">=</span> <span class="pre">length(x)</span></code>.</p>
 </dd></dl>
 
 <dl class="function">
 <dt>
 <code class="descname">cov</code><span class="sig-paren">(</span><em>X</em><span class="optional">[</span>, <em>vardim=1</em>, <em>corrected=true</em><span class="optional">]</span><span class="sig-paren">)</span></dt>
-<dd><p>Compute the covariance matrix of the matrix <code class="docutils literal"><span class="pre">X</span></code> along the dimension <code class="docutils literal"><span class="pre">vardim</span></code>. If <code class="docutils literal"><span class="pre">corrected</span></code> is <code class="docutils literal"><span class="pre">true</span></code> (the default) then the sum is scaled with <code class="docutils literal"><span class="pre">n-1</span></code> wheares the sum is scaled with <code class="docutils literal"><span class="pre">n</span></code> if <code class="docutils literal"><span class="pre">corrected</span></code> is <code class="docutils literal"><span class="pre">false</span></code> where <code class="docutils literal"><span class="pre">n</span> <span class="pre">=</span> <span class="pre">size(X,</span> <span class="pre">vardim)</span></code>.</p>
+<dd><p>Compute the covariance matrix of the matrix <code class="docutils literal"><span class="pre">X</span></code> along the dimension <code class="docutils literal"><span class="pre">vardim</span></code>. If <code class="docutils literal"><span class="pre">corrected</span></code> is <code class="docutils literal"><span class="pre">true</span></code> (the default) then the sum is scaled with <code class="docutils literal"><span class="pre">n-1</span></code>, whereas the sum is scaled with <code class="docutils literal"><span class="pre">n</span></code> if <code class="docutils literal"><span class="pre">corrected</span></code> is <code class="docutils literal"><span class="pre">false</span></code> where <code class="docutils literal"><span class="pre">n</span> <span class="pre">=</span> <span class="pre">size(X,</span> <span class="pre">vardim)</span></code>.</p>
 </dd></dl>
 
 <dl class="function">
 <dt>
 <code class="descname">cov</code><span class="sig-paren">(</span><em>x</em>, <em>y</em><span class="optional">[</span>, <em>corrected=true</em><span class="optional">]</span><span class="sig-paren">)</span></dt>
-<dd><p>Compute the covariance between the vectors <code class="docutils literal"><span class="pre">x</span></code> and <code class="docutils literal"><span class="pre">y</span></code>. If <code class="docutils literal"><span class="pre">corrected</span></code> is <code class="docutils literal"><span class="pre">true</span></code> (the default) then the sum is scaled with <code class="docutils literal"><span class="pre">n-1</span></code> wheares the sum is scaled with <code class="docutils literal"><span class="pre">n</span></code> if <code class="docutils literal"><span class="pre">corrected</span></code> is <code class="docutils literal"><span class="pre">false</span></code> where <code class="docutils literal"><span class="pre">n</span> <span class="pre">=</span> <span class="pre">length(x)</span> <span class="pre">=</span> <span class="pre">length(y)</span></code>.</p>
+<dd><p>Compute the covariance between the vectors <code class="docutils literal"><span class="pre">x</span></code> and <code class="docutils literal"><span class="pre">y</span></code>. If <code class="docutils literal"><span class="pre">corrected</span></code> is <code class="docutils literal"><span class="pre">true</span></code> (the default) then the sum is scaled with <code class="docutils literal"><span class="pre">n-1</span></code>, whereas the sum is scaled with <code class="docutils literal"><span class="pre">n</span></code> if <code class="docutils literal"><span class="pre">corrected</span></code> is <code class="docutils literal"><span class="pre">false</span></code> where <code class="docutils literal"><span class="pre">n</span> <span class="pre">=</span> <span class="pre">length(x)</span> <span class="pre">=</span> <span class="pre">length(y)</span></code>.</p>
 </dd></dl>
 
 <dl class="function">
 <dt>
 <code class="descname">cov</code><span class="sig-paren">(</span><em>X</em>, <em>Y</em><span class="optional">[</span>, <em>vardim=1</em>, <em>corrected=true</em><span class="optional">]</span><span class="sig-paren">)</span></dt>
-<dd><p>Compute the covariance between the vectors or matrices <code class="docutils literal"><span class="pre">X</span></code> and <code class="docutils literal"><span class="pre">Y</span></code> along the dimension <code class="docutils literal"><span class="pre">vardim</span></code>. If <code class="docutils literal"><span class="pre">corrected</span></code> is <code class="docutils literal"><span class="pre">true</span></code> (the default) then the sum is scaled with <code class="docutils literal"><span class="pre">n-1</span></code> wheares the sum is scaled with <code class="docutils literal"><span class="pre">n</span></code> if <code class="docutils literal"><span class="pre">corrected</span></code> is <code class="docutils literal"><span class="pre">false</span></code> where <code class="docutils literal"><span class="pre">n</span> <span class="pre">=</span> <span class="pre">size(X,</span> <span class="pre">vardim)</span> <span class="pre">=</span> <span class="pre">size(Y,</span> <span class="pre">vardim)</span></code>.</p>
+<dd><p>Compute the covariance between the vectors or matrices <code class="docutils literal"><span class="pre">X</span></code> and <code class="docutils literal"><span class="pre">Y</span></code> along the dimension <code class="docutils literal"><span class="pre">vardim</span></code>. If <code class="docutils literal"><span class="pre">corrected</span></code> is <code class="docutils literal"><span class="pre">true</span></code> (the default) then the sum is scaled with <code class="docutils literal"><span class="pre">n-1</span></code>, whereas the sum is scaled with <code class="docutils literal"><span class="pre">n</span></code> if <code class="docutils literal"><span class="pre">corrected</span></code> is <code class="docutils literal"><span class="pre">false</span></code> where <code class="docutils literal"><span class="pre">n</span> <span class="pre">=</span> <span class="pre">size(X,</span> <span class="pre">vardim)</span> <span class="pre">=</span> <span class="pre">size(Y,</span> <span class="pre">vardim)</span></code>.</p>
 </dd></dl>
 
 <dl class="function">
@@ -2202,9 +2291,7 @@
 <div class="section" id="signal-processing">
 <h2>Signal Processing<a class="headerlink" href="#signal-processing" title="Permalink to this headline">¶</a></h2>
 <p>Fast Fourier transform (FFT) functions in Julia are
-implemented by calling functions from <a class="reference external" href="http://www.fftw.org">FFTW</a>. By default, Julia does not use multi-threaded
-FFTW. Higher performance may be obtained by experimenting with
-multi-threading. Use <code class="docutils literal"><span class="pre">FFTW.set_num_threads(np)</span></code> to use <code class="docutils literal"><span class="pre">np</span></code> threads.</p>
+implemented by calling functions from <a class="reference external" href="http://www.fftw.org">FFTW</a>.</p>
 <dl class="function">
 <dt id="Base.fft">
 <code class="descname">fft</code><span class="sig-paren">(</span><em>A</em><span class="optional">[</span>, <em>dims</em><span class="optional">]</span><span class="sig-paren">)</span><a class="headerlink" href="#Base.fft" title="Permalink to this definition">¶</a></dt>
@@ -2216,7 +2303,13 @@ multi-threading. Use <code class="docutils literal"><span class="pre">FFTW.set_n
   \exp\left(-i\frac{2\pi
   (n-1)(k-1)}{\operatorname{length}(A)} \right) A[n].\]</div>
 <p>A multidimensional FFT simply performs this operation along each transformed dimension of <code class="docutils literal"><span class="pre">A</span></code>.</p>
-<p>Higher performance is usually possible with multi-threading. Use <code class="docutils literal"><span class="pre">FFTW.set_num_threads(np)</span></code> to use <code class="docutils literal"><span class="pre">np</span></code> threads, if you have <code class="docutils literal"><span class="pre">np</span></code> processors.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<ul class="last simple">
+<li>Julia starts FFTW up with 1 thread by default. Higher performance is usually possible by increasing number of threads. Use <code class="docutils literal"><span class="pre">FFTW.set_num_threads(Sys.CPU_CORES)</span></code> to use as many threads as cores on your system.</li>
+<li>This performs a multidimensional FFT by default. FFT libraries in other languages such as Python and Octave perform a one-dimensional FFT along the first non-singleton dimension of the array. This is worth noting while performing comparisons. For more details, refer to the <a class="reference internal" href="../manual/noteworthy-differences.html#man-noteworthy-differences"><span>Noteworthy Differences from other Languages</span></a> section of the manual.</li>
+</ul>
+</div>
 </dd></dl>
 
 <dl class="function">
@@ -2480,9 +2573,17 @@ some built-in integration support in Julia.</p>
 <code class="descname">quadgk</code><span class="sig-paren">(</span><em>f</em>, <em>a</em>, <em>b</em>, <em>c...; reltol=sqrt(eps)</em>, <em>abstol=0</em>, <em>maxevals=10^7</em>, <em>order=7</em>, <em>norm=vecnorm</em><span class="sig-paren">)</span><a class="headerlink" href="#Base.quadgk" title="Permalink to this definition">¶</a></dt>
 <dd><p>Numerically integrate the function <code class="docutils literal"><span class="pre">f(x)</span></code> from <code class="docutils literal"><span class="pre">a</span></code> to <code class="docutils literal"><span class="pre">b</span></code>, and optionally over additional intervals <code class="docutils literal"><span class="pre">b</span></code> to <code class="docutils literal"><span class="pre">c</span></code> and so on. Keyword options include a relative error tolerance <code class="docutils literal"><span class="pre">reltol</span></code> (defaults to <code class="docutils literal"><span class="pre">sqrt(eps)</span></code> in the precision of the endpoints), an absolute error tolerance <code class="docutils literal"><span class="pre">abstol</span></code> (defaults to 0), a maximum number of function evaluations <code class="docutils literal"><span class="pre">maxevals</span></code> (defaults to <code class="docutils literal"><span class="pre">10^7</span></code>), and the <code class="docutils literal"><span class="pre">order</span></code> of the integration rule (defaults to 7).</p>
 <p>Returns a pair <code class="docutils literal"><span class="pre">(I,E)</span></code> of the estimated integral <code class="docutils literal"><span class="pre">I</span></code> and an estimated upper bound on the absolute error <code class="docutils literal"><span class="pre">E</span></code>. If <code class="docutils literal"><span class="pre">maxevals</span></code> is not exceeded then <code class="docutils literal"><span class="pre">E</span> <span class="pre">&lt;=</span> <span class="pre">max(abstol,</span> <span class="pre">reltol*norm(I))</span></code> will hold. (Note that it is useful to specify a positive <code class="docutils literal"><span class="pre">abstol</span></code> in cases where <code class="docutils literal"><span class="pre">norm(I)</span></code> may be zero.)</p>
-<p>The endpoints <code class="docutils literal"><span class="pre">a</span></code> etcetera can also be complex (in which case the integral is performed over straight-line segments in the complex plane). If the endpoints are <code class="docutils literal"><span class="pre">BigFloat</span></code>, then the integration will be performed in <code class="docutils literal"><span class="pre">BigFloat</span></code> precision as well (note: it is advisable to increase the integration <code class="docutils literal"><span class="pre">order</span></code> in rough proportion to the precision, for smooth integrands). More generally, the precision is set by the precision of the integration endpoints (promoted to floating-point types).</p>
+<p>The endpoints <code class="docutils literal"><span class="pre">a</span></code> et cetera can also be complex (in which case the integral is performed over straight-line segments in the complex plane). If the endpoints are <code class="docutils literal"><span class="pre">BigFloat</span></code>, then the integration will be performed in <code class="docutils literal"><span class="pre">BigFloat</span></code> precision as well.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">It is advisable to increase the integration <code class="docutils literal"><span class="pre">order</span></code> in rough proportion to the precision, for smooth integrands.</p>
+</div>
+<p>More generally, the precision is set by the precision of the integration endpoints (promoted to floating-point types).</p>
 <p>The integrand <code class="docutils literal"><span class="pre">f(x)</span></code> can return any numeric scalar, vector, or matrix type, or in fact any type supporting <code class="docutils literal"><span class="pre">+</span></code>, <code class="docutils literal"><span class="pre">-</span></code>, multiplication by real values, and a <code class="docutils literal"><span class="pre">norm</span></code> (i.e., any normed vector space). Alternatively, a different norm can be specified by passing a <code class="docutils literal"><span class="pre">norm</span></code>-like function as the <code class="docutils literal"><span class="pre">norm</span></code> keyword argument (which defaults to <code class="docutils literal"><span class="pre">vecnorm</span></code>).</p>
-<p>[Only one-dimensional integrals are provided by this function. For multi-dimensional integration (cubature), there are many different algorithms (often much better than simple nested 1d integrals) and the optimal choice tends to be very problem-dependent. See the Julia external-package listing for available algorithms for multidimensional integration or other specialized tasks (such as integrals of highly oscillatory or singular functions).]</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Only one-dimensional integrals are provided by this function. For multi-dimensional integration (cubature), there are many different algorithms (often much better than simple nested 1d integrals) and the optimal choice tends to be very problem-dependent. See the Julia external-package listing for available algorithms for multidimensional integration or other specialized tasks (such as integrals of highly oscillatory or singular functions).</p>
+</div>
 <p>The algorithm is an adaptive Gauss-Kronrod integration technique: the integral in each interval is estimated using a Kronrod rule (<code class="docutils literal"><span class="pre">2*order+1</span></code> points) and the error is estimated using an embedded Gauss rule (<code class="docutils literal"><span class="pre">order</span></code> points). The interval with the largest error is then subdivided into two intervals and the process is repeated until the desired error tolerance is achieved.</p>
 <p>These quadrature rules work best for smooth functions within each interval, so if your function has a known discontinuity or other singularity, it is best to subdivide your interval to put the singularity at an endpoint. For example, if <code class="docutils literal"><span class="pre">f</span></code> has a discontinuity at <code class="docutils literal"><span class="pre">x=0.7</span></code> and you want to integrate from 0 to 1, you should use <code class="docutils literal"><span class="pre">quadgk(f,</span> <span class="pre">0,0.7,1)</span></code> to subdivide the interval at the point of discontinuity. The integrand is never evaluated exactly at the endpoints of the intervals, so it is possible to integrate functions that diverge at the endpoints as long as the singularity is integrable (for example, a <code class="docutils literal"><span class="pre">log(x)</span></code> or <code class="docutils literal"><span class="pre">1/sqrt(x)</span></code> singularity).</p>
 <p>For real-valued endpoints, the starting and/or ending points may be infinite. (A coordinate transformation is performed internally to map the infinite interval to a finite one.)</p>

@@ -194,7 +194,8 @@
 <li class="toctree-l2"><a class="reference internal" href="../manual/documentation.html#functions-methods">Functions &amp; Methods</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../manual/documentation.html#advanced-usage">Advanced Usage</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../manual/documentation.html#syntax-guide">Syntax Guide</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../manual/documentation.html#markdown-syntax-notes">Markdown Syntax Notes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../manual/documentation.html#markdown-syntax">Markdown syntax</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../manual/documentation.html#markdown-syntax-extensions">Markdown Syntax Extensions</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../manual/metaprogramming.html">Metaprogramming</a><ul>
@@ -241,6 +242,8 @@
 <li class="toctree-l2"><a class="reference internal" href="../manual/parallel-computing.html#network-requirements-for-localmanager-and-sshmanager">Network requirements for LocalManager and SSHManager</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../manual/parallel-computing.html#cluster-cookie">Cluster cookie</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../manual/parallel-computing.html#specifying-network-topology-experimental">Specifying network topology (Experimental)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../manual/parallel-computing.html#multi-threading-experimental">Multi-threading (Experimental)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../manual/parallel-computing.html#threadcall-experimental">&#64;threadcall (Experimental)</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../manual/dates.html">Date and DateTime</a><ul>
@@ -281,6 +284,7 @@
 <li class="toctree-l2"><a class="reference internal" href="../manual/interacting-with-julia.html#the-different-prompt-modes">The different prompt modes</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../manual/interacting-with-julia.html#key-bindings">Key bindings</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../manual/interacting-with-julia.html#tab-completion">Tab completion</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../manual/interacting-with-julia.html#customizing-colors">Customizing Colors</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../manual/embedding.html">Embedding Julia</a><ul>
@@ -456,6 +460,8 @@
 <li class="toctree-l2"><a class="reference internal" href="../stdlib/parallel.html#general-parallel-computing-support">General Parallel Computing Support</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../stdlib/parallel.html#shared-arrays">Shared Arrays</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../stdlib/parallel.html#multi-threading">Multi-Threading</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../stdlib/parallel.html#ccall-using-a-threadpool-experimental">ccall using a threadpool (Experimental)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../stdlib/parallel.html#synchronization-primitives">Synchronization Primitives</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../stdlib/parallel.html#cluster-manager-interface">Cluster Manager Interface</a></li>
 </ul>
 </li>
@@ -522,7 +528,6 @@
 <li class="toctree-l2"><a class="reference internal" href="sysimg.html">System Image Building</a></li>
 <li class="toctree-l2"><a class="reference internal" href="llvm.html">Working with LLVM</a></li>
 <li class="toctree-l2"><a class="reference internal" href="stdio.html">printf() and stdio in the Julia runtime</a></li>
-<li class="toctree-l2"><a class="reference internal" href="promote-op.html">Operator-sensitive promotion</a></li>
 <li class="toctree-l2"><a class="reference internal" href="boundscheck.html">Bounds checking</a></li>
 <li class="toctree-l2"><a class="reference internal" href="locks.html">Proper maintenance and care of multi-threading locks</a></li>
 <li class="toctree-l2"><a class="reference internal" href="offset-arrays.html">Arrays with custom indices</a></li>
@@ -532,6 +537,7 @@
 <li class="toctree-l2"><a class="reference internal" href="backtraces.html">Reporting and analyzing crashes (segfaults)</a></li>
 <li class="toctree-l2"><a class="reference internal" href="debuggingtips.html">gdb debugging tips</a></li>
 <li class="toctree-l2"><a class="reference internal" href="valgrind.html">Using Valgrind with Julia</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sanitizers.html">Sanitizer support</a></li>
 </ul>
 </li>
 </ul>
@@ -766,21 +772,21 @@ For example <code class="docutils literal"><span class="pre">(call</span> <span 
 </tr>
 </thead>
 <tbody valign="top">
-<tr class="row-even"><td>f(x)</td>
-<td>(call f x)</td>
+<tr class="row-even"><td><code class="docutils literal"><span class="pre">f(x)</span></code></td>
+<td><code class="docutils literal"><span class="pre">(call</span> <span class="pre">f</span> <span class="pre">x)</span></code></td>
 </tr>
-<tr class="row-odd"><td>f(x, y=1, z=2)</td>
-<td>(call f x (kw y 1) (kw z 2))</td>
+<tr class="row-odd"><td><code class="docutils literal"><span class="pre">f(x,</span> <span class="pre">y=1,</span> <span class="pre">z=2)</span></code></td>
+<td><code class="docutils literal"><span class="pre">(call</span> <span class="pre">f</span> <span class="pre">x</span> <span class="pre">(kw</span> <span class="pre">y</span> <span class="pre">1)</span> <span class="pre">(kw</span> <span class="pre">z</span> <span class="pre">2))</span></code></td>
 </tr>
-<tr class="row-even"><td>f(x; y=1)</td>
-<td>(call f (parameters (kw y 1)) x)</td>
+<tr class="row-even"><td><code class="docutils literal"><span class="pre">f(x;</span> <span class="pre">y=1)</span></code></td>
+<td><code class="docutils literal"><span class="pre">(call</span> <span class="pre">f</span> <span class="pre">(parameters</span> <span class="pre">(kw</span> <span class="pre">y</span> <span class="pre">1))</span> <span class="pre">x)</span></code></td>
 </tr>
-<tr class="row-odd"><td>f(x...)</td>
-<td>(call f (... x))</td>
+<tr class="row-odd"><td><code class="docutils literal"><span class="pre">f(x...)</span></code></td>
+<td><code class="docutils literal"><span class="pre">(call</span> <span class="pre">f</span> <span class="pre">(...</span> <span class="pre">x))</span></code></td>
 </tr>
 </tbody>
 </table>
-<p><code class="docutils literal"><span class="pre">Do</span></code> syntax:</p>
+<p><code class="docutils literal"><span class="pre">do</span></code> syntax:</p>
 <div class="highlight-julia"><div class="highlight"><pre><span></span><span class="n">f</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="k">do</span> <span class="n">a</span><span class="p">,</span><span class="n">b</span>
     <span class="n">body</span>
 <span class="k">end</span>
@@ -809,44 +815,44 @@ Finally, chains of comparisons have their own special expression structure.</p>
 </tr>
 </thead>
 <tbody valign="top">
-<tr class="row-even"><td>x+y</td>
-<td>(call + x y)</td>
+<tr class="row-even"><td><code class="docutils literal"><span class="pre">x+y</span></code></td>
+<td><code class="docutils literal"><span class="pre">(call</span> <span class="pre">+</span> <span class="pre">x</span> <span class="pre">y)</span></code></td>
 </tr>
-<tr class="row-odd"><td>a+b+c+d</td>
-<td>(call + a b c d)</td>
+<tr class="row-odd"><td><code class="docutils literal"><span class="pre">a+b+c+d</span></code></td>
+<td><code class="docutils literal"><span class="pre">(call</span> <span class="pre">+</span> <span class="pre">a</span> <span class="pre">b</span> <span class="pre">c</span> <span class="pre">d)</span></code></td>
 </tr>
-<tr class="row-even"><td>2x</td>
-<td>(call * 2 x)</td>
+<tr class="row-even"><td><code class="docutils literal"><span class="pre">2x</span></code></td>
+<td><code class="docutils literal"><span class="pre">(call</span> <span class="pre">*</span> <span class="pre">2</span> <span class="pre">x)</span></code></td>
 </tr>
-<tr class="row-odd"><td>a&amp;&amp;b</td>
-<td>(&amp;&amp; a b)</td>
+<tr class="row-odd"><td><code class="docutils literal"><span class="pre">a&amp;&amp;b</span></code></td>
+<td><code class="docutils literal"><span class="pre">(&amp;&amp;</span> <span class="pre">a</span> <span class="pre">b)</span></code></td>
 </tr>
-<tr class="row-even"><td>x += 1</td>
-<td>(+= x 1)</td>
+<tr class="row-even"><td><code class="docutils literal"><span class="pre">x</span> <span class="pre">+=</span> <span class="pre">1</span></code></td>
+<td><code class="docutils literal"><span class="pre">(+=</span> <span class="pre">x</span> <span class="pre">1)</span></code></td>
 </tr>
-<tr class="row-odd"><td>a ? 1 : 2</td>
-<td>(if a 1 2)</td>
+<tr class="row-odd"><td><code class="docutils literal"><span class="pre">a</span> <span class="pre">?</span> <span class="pre">1</span> <span class="pre">:</span> <span class="pre">2</span></code></td>
+<td><code class="docutils literal"><span class="pre">(if</span> <span class="pre">a</span> <span class="pre">1</span> <span class="pre">2)</span></code></td>
 </tr>
-<tr class="row-even"><td>a:b</td>
-<td>(: a b)</td>
+<tr class="row-even"><td><code class="docutils literal"><span class="pre">a:b</span></code></td>
+<td><code class="docutils literal"><span class="pre">(:</span> <span class="pre">a</span> <span class="pre">b)</span></code></td>
 </tr>
-<tr class="row-odd"><td>a:b:c</td>
-<td>(: a b c)</td>
+<tr class="row-odd"><td><code class="docutils literal"><span class="pre">a:b:c</span></code></td>
+<td><code class="docutils literal"><span class="pre">(:</span> <span class="pre">a</span> <span class="pre">b</span> <span class="pre">c)</span></code></td>
 </tr>
-<tr class="row-even"><td>a,b</td>
-<td>(tuple a b)</td>
+<tr class="row-even"><td><code class="docutils literal"><span class="pre">a,b</span></code></td>
+<td><code class="docutils literal"><span class="pre">(tuple</span> <span class="pre">a</span> <span class="pre">b)</span></code></td>
 </tr>
-<tr class="row-odd"><td>a==b</td>
-<td>(comparison a == b)</td>
+<tr class="row-odd"><td><code class="docutils literal"><span class="pre">a==b</span></code></td>
+<td><code class="docutils literal"><span class="pre">(call</span> <span class="pre">==</span> <span class="pre">a</span> <span class="pre">b)</span></code></td>
 </tr>
-<tr class="row-even"><td>1&lt;i&lt;=n</td>
-<td>(comparison 1 &lt; i &lt;= n)</td>
+<tr class="row-even"><td><code class="docutils literal"><span class="pre">1&lt;i&lt;=n</span></code></td>
+<td><code class="docutils literal"><span class="pre">(comparison</span> <span class="pre">1</span> <span class="pre">&lt;</span> <span class="pre">i</span> <span class="pre">&lt;=</span> <span class="pre">n)</span></code></td>
 </tr>
-<tr class="row-odd"><td>a.b</td>
-<td>(. a (quote b))</td>
+<tr class="row-odd"><td><code class="docutils literal"><span class="pre">a.b</span></code></td>
+<td><code class="docutils literal"><span class="pre">(.</span> <span class="pre">a</span> <span class="pre">(quote</span> <span class="pre">b))</span></code></td>
 </tr>
-<tr class="row-even"><td>a.(b)</td>
-<td>(. a b)</td>
+<tr class="row-even"><td><code class="docutils literal"><span class="pre">a.(b)</span></code></td>
+<td><code class="docutils literal"><span class="pre">(.</span> <span class="pre">a</span> <span class="pre">b)</span></code></td>
 </tr>
 </tbody>
 </table>
@@ -855,8 +861,8 @@ Finally, chains of comparisons have their own special expression structure.</p>
 <h3>Bracketed forms<a class="headerlink" href="#bracketed-forms" title="Permalink to this headline">¶</a></h3>
 <table border="1" class="docutils">
 <colgroup>
-<col width="39%" />
-<col width="61%" />
+<col width="41%" />
+<col width="59%" />
 </colgroup>
 <thead valign="bottom">
 <tr class="row-odd"><th class="head">Input</th>
@@ -864,50 +870,50 @@ Finally, chains of comparisons have their own special expression structure.</p>
 </tr>
 </thead>
 <tbody valign="top">
-<tr class="row-even"><td>a[i]</td>
-<td>(ref a i)</td>
+<tr class="row-even"><td><code class="docutils literal"><span class="pre">a[i]</span></code></td>
+<td><code class="docutils literal"><span class="pre">(ref</span> <span class="pre">a</span> <span class="pre">i)</span></code></td>
 </tr>
-<tr class="row-odd"><td>t[i;j]</td>
-<td>(typed_vcat t i j)</td>
+<tr class="row-odd"><td><code class="docutils literal"><span class="pre">t[i;j]</span></code></td>
+<td><code class="docutils literal"><span class="pre">(typed_vcat</span> <span class="pre">t</span> <span class="pre">i</span> <span class="pre">j)</span></code></td>
 </tr>
-<tr class="row-even"><td>t[i j]</td>
-<td>(typed_hcat t i j)</td>
+<tr class="row-even"><td><code class="docutils literal"><span class="pre">t[i</span> <span class="pre">j]</span></code></td>
+<td><code class="docutils literal"><span class="pre">(typed_hcat</span> <span class="pre">t</span> <span class="pre">i</span> <span class="pre">j)</span></code></td>
 </tr>
-<tr class="row-odd"><td>t[a b; c d]</td>
-<td>(typed_vcat t (row a b) (row c d))</td>
+<tr class="row-odd"><td><code class="docutils literal"><span class="pre">t[a</span> <span class="pre">b;</span> <span class="pre">c</span> <span class="pre">d]</span></code></td>
+<td><code class="docutils literal"><span class="pre">(typed_vcat</span> <span class="pre">t</span> <span class="pre">(row</span> <span class="pre">a</span> <span class="pre">b)</span> <span class="pre">(row</span> <span class="pre">c</span> <span class="pre">d))</span></code></td>
 </tr>
-<tr class="row-even"><td>a{b}</td>
-<td>(curly a b)</td>
+<tr class="row-even"><td><code class="docutils literal"><span class="pre">a{b}</span></code></td>
+<td><code class="docutils literal"><span class="pre">(curly</span> <span class="pre">a</span> <span class="pre">b)</span></code></td>
 </tr>
-<tr class="row-odd"><td>a{b;c}</td>
-<td>(curly a (parameters c) b)</td>
+<tr class="row-odd"><td><code class="docutils literal"><span class="pre">a{b;c}</span></code></td>
+<td><code class="docutils literal"><span class="pre">(curly</span> <span class="pre">a</span> <span class="pre">(parameters</span> <span class="pre">c)</span> <span class="pre">b)</span></code></td>
 </tr>
-<tr class="row-even"><td>[x]</td>
-<td>(vect x)</td>
+<tr class="row-even"><td><code class="docutils literal"><span class="pre">[x]</span></code></td>
+<td><code class="docutils literal"><span class="pre">(vect</span> <span class="pre">x)</span></code></td>
 </tr>
-<tr class="row-odd"><td>[x,y]</td>
-<td>(vect x y)</td>
+<tr class="row-odd"><td><code class="docutils literal"><span class="pre">[x,y]</span></code></td>
+<td><code class="docutils literal"><span class="pre">(vect</span> <span class="pre">x</span> <span class="pre">y)</span></code></td>
 </tr>
-<tr class="row-even"><td>[x;y]</td>
-<td>(vcat x y)</td>
+<tr class="row-even"><td><code class="docutils literal"><span class="pre">[x;y]</span></code></td>
+<td><code class="docutils literal"><span class="pre">(vcat</span> <span class="pre">x</span> <span class="pre">y)</span></code></td>
 </tr>
-<tr class="row-odd"><td>[x y]</td>
-<td>(hcat x y)</td>
+<tr class="row-odd"><td><code class="docutils literal"><span class="pre">[x</span> <span class="pre">y]</span></code></td>
+<td><code class="docutils literal"><span class="pre">(hcat</span> <span class="pre">x</span> <span class="pre">y)</span></code></td>
 </tr>
-<tr class="row-even"><td>[x y; z t]</td>
-<td>(vcat (row x y) (row z t))</td>
+<tr class="row-even"><td><code class="docutils literal"><span class="pre">[x</span> <span class="pre">y;</span> <span class="pre">z</span> <span class="pre">t]</span></code></td>
+<td><code class="docutils literal"><span class="pre">(vcat</span> <span class="pre">(row</span> <span class="pre">x</span> <span class="pre">y)</span> <span class="pre">(row</span> <span class="pre">z</span> <span class="pre">t))</span></code></td>
 </tr>
-<tr class="row-odd"><td>[x for y in z, a in b]</td>
-<td>(comprehension x (= y z) (= a b))</td>
+<tr class="row-odd"><td><code class="docutils literal"><span class="pre">[x</span> <span class="pre">for</span> <span class="pre">y</span> <span class="pre">in</span> <span class="pre">z,</span> <span class="pre">a</span> <span class="pre">in</span> <span class="pre">b]</span></code></td>
+<td><code class="docutils literal"><span class="pre">(comprehension</span> <span class="pre">x</span> <span class="pre">(=</span> <span class="pre">y</span> <span class="pre">z)</span> <span class="pre">(=</span> <span class="pre">a</span> <span class="pre">b))</span></code></td>
 </tr>
-<tr class="row-even"><td>T[x for y in z]</td>
-<td>(typed_comprehension T x (= y z))</td>
+<tr class="row-even"><td><code class="docutils literal"><span class="pre">T[x</span> <span class="pre">for</span> <span class="pre">y</span> <span class="pre">in</span> <span class="pre">z]</span></code></td>
+<td><code class="docutils literal"><span class="pre">(typed_comprehension</span> <span class="pre">T</span> <span class="pre">x</span> <span class="pre">(=</span> <span class="pre">y</span> <span class="pre">z))</span></code></td>
 </tr>
-<tr class="row-odd"><td>(a, b, c)</td>
-<td>(tuple a b c)</td>
+<tr class="row-odd"><td><code class="docutils literal"><span class="pre">(a,</span> <span class="pre">b,</span> <span class="pre">c)</span></code></td>
+<td><code class="docutils literal"><span class="pre">(tuple</span> <span class="pre">a</span> <span class="pre">b</span> <span class="pre">c)</span></code></td>
 </tr>
-<tr class="row-even"><td>(a; b; c)</td>
-<td>(block a (block b c))</td>
+<tr class="row-even"><td><code class="docutils literal"><span class="pre">(a;</span> <span class="pre">b;</span> <span class="pre">c)</span></code></td>
+<td><code class="docutils literal"><span class="pre">(block</span> <span class="pre">a</span> <span class="pre">(block</span> <span class="pre">b</span> <span class="pre">c))</span></code></td>
 </tr>
 </tbody>
 </table>
@@ -916,8 +922,8 @@ Finally, chains of comparisons have their own special expression structure.</p>
 <h3>Macros<a class="headerlink" href="#macros" title="Permalink to this headline">¶</a></h3>
 <table border="1" class="docutils">
 <colgroup>
-<col width="39%" />
-<col width="61%" />
+<col width="37%" />
+<col width="63%" />
 </colgroup>
 <thead valign="bottom">
 <tr class="row-odd"><th class="head">Input</th>
@@ -925,14 +931,14 @@ Finally, chains of comparisons have their own special expression structure.</p>
 </tr>
 </thead>
 <tbody valign="top">
-<tr class="row-even"><td>&#64;m x y</td>
-<td>(macrocall &#64;m x y)</td>
+<tr class="row-even"><td><code class="docutils literal"><span class="pre">&#64;m</span> <span class="pre">x</span> <span class="pre">y</span></code></td>
+<td><code class="docutils literal"><span class="pre">(macrocall</span> <span class="pre">&#64;m</span> <span class="pre">x</span> <span class="pre">y)</span></code></td>
 </tr>
-<tr class="row-odd"><td>Base.&#64;m x y</td>
-<td>(macrocall (. Base (quote &#64;m)) x y)</td>
+<tr class="row-odd"><td><code class="docutils literal"><span class="pre">Base.&#64;m</span> <span class="pre">x</span> <span class="pre">y</span></code></td>
+<td><code class="docutils literal"><span class="pre">(macrocall</span> <span class="pre">(.</span> <span class="pre">Base</span> <span class="pre">(quote</span> <span class="pre">&#64;m))</span> <span class="pre">x</span> <span class="pre">y)</span></code></td>
 </tr>
-<tr class="row-even"><td>&#64;Base.m x y</td>
-<td>(macrocall (. Base (quote &#64;m)) x y)</td>
+<tr class="row-even"><td><code class="docutils literal"><span class="pre">&#64;Base.m</span> <span class="pre">x</span> <span class="pre">y</span></code></td>
+<td><code class="docutils literal"><span class="pre">(macrocall</span> <span class="pre">(.</span> <span class="pre">Base</span> <span class="pre">(quote</span> <span class="pre">&#64;m))</span> <span class="pre">x</span> <span class="pre">y)</span></code></td>
 </tr>
 </tbody>
 </table>
@@ -950,23 +956,23 @@ Finally, chains of comparisons have their own special expression structure.</p>
 </tr>
 </thead>
 <tbody valign="top">
-<tr class="row-even"><td>&#8220;a&#8221;</td>
-<td>&#8220;a&#8221;</td>
+<tr class="row-even"><td><code class="docutils literal"><span class="pre">&quot;a&quot;</span></code></td>
+<td><code class="docutils literal"><span class="pre">&quot;a&quot;</span></code></td>
 </tr>
-<tr class="row-odd"><td>x&#8221;y&#8221;</td>
-<td>(macrocall &#64;x_str &#8220;y&#8221;)</td>
+<tr class="row-odd"><td><code class="docutils literal"><span class="pre">x&quot;y&quot;</span></code></td>
+<td><code class="docutils literal"><span class="pre">(macrocall</span> <span class="pre">&#64;x_str</span> <span class="pre">&quot;y&quot;)</span></code></td>
 </tr>
-<tr class="row-even"><td>x&#8221;y&#8221;z</td>
-<td>(macrocall &#64;x_str &#8220;y&#8221; &#8220;z&#8221;)</td>
+<tr class="row-even"><td><code class="docutils literal"><span class="pre">x&quot;y&quot;z</span></code></td>
+<td><code class="docutils literal"><span class="pre">(macrocall</span> <span class="pre">&#64;x_str</span> <span class="pre">&quot;y&quot;</span> <span class="pre">&quot;z&quot;)</span></code></td>
 </tr>
-<tr class="row-odd"><td>&#8220;x = $x&#8221;</td>
-<td>(string &#8220;x = &#8221; x)</td>
+<tr class="row-odd"><td><code class="docutils literal"><span class="pre">&quot;x</span> <span class="pre">=</span> <span class="pre">$x&quot;</span></code></td>
+<td><code class="docutils literal"><span class="pre">(string</span> <span class="pre">&quot;x</span> <span class="pre">=</span> <span class="pre">&quot;</span> <span class="pre">x)</span></code></td>
 </tr>
-<tr class="row-even"><td>`a b c`</td>
-<td>(macrocall &#64;cmd &#8220;a b c&#8221;)</td>
+<tr class="row-even"><td><code class="docutils literal"><span class="pre">`a</span> <span class="pre">b</span> <span class="pre">c`</span></code></td>
+<td><code class="docutils literal"><span class="pre">(macrocall</span> <span class="pre">&#64;cmd</span> <span class="pre">&quot;a</span> <span class="pre">b</span> <span class="pre">c&quot;)</span></code></td>
 </tr>
-<tr class="row-odd"><td>x ~ distr</td>
-<td>(macrocall &#64;~ x distr)</td>
+<tr class="row-odd"><td><code class="docutils literal"><span class="pre">x</span> <span class="pre">~</span> <span class="pre">distr</span></code></td>
+<td><code class="docutils literal"><span class="pre">(macrocall</span> <span class="pre">&#64;~</span> <span class="pre">x</span> <span class="pre">distr)</span></code></td>
 </tr>
 </tbody>
 </table>
@@ -975,14 +981,14 @@ Finally, chains of comparisons have their own special expression structure.</p>
 <span class="n">f</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="o">=</span> <span class="n">x</span>
 </pre></div>
 </div>
-<p>parses as <code class="docutils literal"><span class="pre">(macrocall</span> <span class="pre">(|.|</span> <span class="pre">Base</span> <span class="pre">'&#64;doc)</span> <span class="pre">&quot;some</span> <span class="pre">docs&quot;</span> <span class="pre">(=</span> <span class="pre">(call</span> <span class="pre">f</span> <span class="pre">x)</span> <span class="pre">(block</span> <span class="pre">x)))</span></code></p>
+<p>parses as <code class="docutils literal"><span class="pre">(macrocall</span> <span class="pre">(|.|</span> <span class="pre">Core</span> <span class="pre">'&#64;doc)</span> <span class="pre">&quot;some</span> <span class="pre">docs&quot;</span> <span class="pre">(=</span> <span class="pre">(call</span> <span class="pre">f</span> <span class="pre">x)</span> <span class="pre">(block</span> <span class="pre">x)))</span></code>.</p>
 </div>
 <div class="section" id="imports-and-such">
 <h3>Imports and such<a class="headerlink" href="#imports-and-such" title="Permalink to this headline">¶</a></h3>
 <table border="1" class="docutils">
 <colgroup>
-<col width="35%" />
-<col width="65%" />
+<col width="33%" />
+<col width="67%" />
 </colgroup>
 <thead valign="bottom">
 <tr class="row-odd"><th class="head">Input</th>
@@ -990,26 +996,26 @@ Finally, chains of comparisons have their own special expression structure.</p>
 </tr>
 </thead>
 <tbody valign="top">
-<tr class="row-even"><td>import a</td>
-<td>(import a)</td>
+<tr class="row-even"><td><code class="docutils literal"><span class="pre">import</span> <span class="pre">a</span></code></td>
+<td><code class="docutils literal"><span class="pre">(import</span> <span class="pre">a)</span></code></td>
 </tr>
-<tr class="row-odd"><td>import a.b.c</td>
-<td>(import a b c)</td>
+<tr class="row-odd"><td><code class="docutils literal"><span class="pre">import</span> <span class="pre">a.b.c</span></code></td>
+<td><code class="docutils literal"><span class="pre">(import</span> <span class="pre">a</span> <span class="pre">b</span> <span class="pre">c)</span></code></td>
 </tr>
-<tr class="row-even"><td>import ...a</td>
-<td>(import . . . a)</td>
+<tr class="row-even"><td><code class="docutils literal"><span class="pre">import</span> <span class="pre">...a</span></code></td>
+<td><code class="docutils literal"><span class="pre">(import</span> <span class="pre">.</span> <span class="pre">.</span> <span class="pre">.</span> <span class="pre">a)</span></code></td>
 </tr>
-<tr class="row-odd"><td>import a.b, c.d</td>
-<td>(toplevel (import a b) (import c d))</td>
+<tr class="row-odd"><td><code class="docutils literal"><span class="pre">import</span> <span class="pre">a.b,</span> <span class="pre">c.d</span></code></td>
+<td><code class="docutils literal"><span class="pre">(toplevel</span> <span class="pre">(import</span> <span class="pre">a</span> <span class="pre">b)</span> <span class="pre">(import</span> <span class="pre">c</span> <span class="pre">d))</span></code></td>
 </tr>
-<tr class="row-even"><td>import Base: x</td>
-<td>(import Base x)</td>
+<tr class="row-even"><td><code class="docutils literal"><span class="pre">import</span> <span class="pre">Base:</span> <span class="pre">x</span></code></td>
+<td><code class="docutils literal"><span class="pre">(import</span> <span class="pre">Base</span> <span class="pre">x)</span></code></td>
 </tr>
-<tr class="row-odd"><td>import Base: x, y</td>
-<td>(toplevel (import Base x) (import Base y))</td>
+<tr class="row-odd"><td><code class="docutils literal"><span class="pre">import</span> <span class="pre">Base:</span> <span class="pre">x,</span> <span class="pre">y</span></code></td>
+<td><code class="docutils literal"><span class="pre">(toplevel</span> <span class="pre">(import</span> <span class="pre">Base</span> <span class="pre">x)</span> <span class="pre">(import</span> <span class="pre">Base</span> <span class="pre">y))</span></code></td>
 </tr>
-<tr class="row-even"><td>export a, b</td>
-<td>(export a b)</td>
+<tr class="row-even"><td><code class="docutils literal"><span class="pre">export</span> <span class="pre">a,</span> <span class="pre">b</span></code></td>
+<td><code class="docutils literal"><span class="pre">(export</span> <span class="pre">a</span> <span class="pre">b)</span></code></td>
 </tr>
 </tbody>
 </table>
@@ -1029,14 +1035,14 @@ so not all numbers are represented directly as scheme numbers in the AST.</p>
 </tr>
 </thead>
 <tbody valign="top">
-<tr class="row-even"><td>11111111111111111111</td>
-<td>(macrocall &#64;int128_str &#8220;11111111111111111111&#8221;)</td>
+<tr class="row-even"><td><code class="docutils literal"><span class="pre">11111111111111111111</span></code></td>
+<td><code class="docutils literal"><span class="pre">(macrocall</span> <span class="pre">&#64;int128_str</span> <span class="pre">&quot;11111111111111111111&quot;)</span></code></td>
 </tr>
-<tr class="row-odd"><td>0xfffffffffffffffff</td>
-<td>(macrocall &#64;uint128_str &#8220;0xfffffffffffffffff&#8221;)</td>
+<tr class="row-odd"><td><code class="docutils literal"><span class="pre">0xfffffffffffffffff</span></code></td>
+<td><code class="docutils literal"><span class="pre">(macrocall</span> <span class="pre">&#64;uint128_str</span> <span class="pre">&quot;0xfffffffffffffffff&quot;)</span></code></td>
 </tr>
-<tr class="row-even"><td>1111...many digits...</td>
-<td>(macrocall &#64;big_str &#8220;1111....&#8221;)</td>
+<tr class="row-even"><td><code class="docutils literal"><span class="pre">1111...many</span> <span class="pre">digits...</span></code></td>
+<td><code class="docutils literal"><span class="pre">(macrocall</span> <span class="pre">&#64;big_str</span> <span class="pre">&quot;1111....&quot;)</span></code></td>
 </tr>
 </tbody>
 </table>

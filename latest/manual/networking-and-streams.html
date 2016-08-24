@@ -193,7 +193,8 @@
 <li class="toctree-l2"><a class="reference internal" href="documentation.html#functions-methods">Functions &amp; Methods</a></li>
 <li class="toctree-l2"><a class="reference internal" href="documentation.html#advanced-usage">Advanced Usage</a></li>
 <li class="toctree-l2"><a class="reference internal" href="documentation.html#syntax-guide">Syntax Guide</a></li>
-<li class="toctree-l2"><a class="reference internal" href="documentation.html#markdown-syntax-notes">Markdown Syntax Notes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="documentation.html#markdown-syntax">Markdown syntax</a></li>
+<li class="toctree-l2"><a class="reference internal" href="documentation.html#markdown-syntax-extensions">Markdown Syntax Extensions</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="metaprogramming.html">Metaprogramming</a><ul>
@@ -240,6 +241,8 @@
 <li class="toctree-l2"><a class="reference internal" href="parallel-computing.html#network-requirements-for-localmanager-and-sshmanager">Network requirements for LocalManager and SSHManager</a></li>
 <li class="toctree-l2"><a class="reference internal" href="parallel-computing.html#cluster-cookie">Cluster cookie</a></li>
 <li class="toctree-l2"><a class="reference internal" href="parallel-computing.html#specifying-network-topology-experimental">Specifying network topology (Experimental)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="parallel-computing.html#multi-threading-experimental">Multi-threading (Experimental)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="parallel-computing.html#threadcall-experimental">&#64;threadcall (Experimental)</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="dates.html">Date and DateTime</a><ul>
@@ -280,6 +283,7 @@
 <li class="toctree-l2"><a class="reference internal" href="interacting-with-julia.html#the-different-prompt-modes">The different prompt modes</a></li>
 <li class="toctree-l2"><a class="reference internal" href="interacting-with-julia.html#key-bindings">Key bindings</a></li>
 <li class="toctree-l2"><a class="reference internal" href="interacting-with-julia.html#tab-completion">Tab completion</a></li>
+<li class="toctree-l2"><a class="reference internal" href="interacting-with-julia.html#customizing-colors">Customizing Colors</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="embedding.html">Embedding Julia</a><ul>
@@ -455,6 +459,8 @@
 <li class="toctree-l2"><a class="reference internal" href="../stdlib/parallel.html#general-parallel-computing-support">General Parallel Computing Support</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../stdlib/parallel.html#shared-arrays">Shared Arrays</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../stdlib/parallel.html#multi-threading">Multi-Threading</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../stdlib/parallel.html#ccall-using-a-threadpool-experimental">ccall using a threadpool (Experimental)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../stdlib/parallel.html#synchronization-primitives">Synchronization Primitives</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../stdlib/parallel.html#cluster-manager-interface">Cluster Manager Interface</a></li>
 </ul>
 </li>
@@ -521,7 +527,6 @@
 <li class="toctree-l2"><a class="reference internal" href="../devdocs/sysimg.html">System Image Building</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../devdocs/llvm.html">Working with LLVM</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../devdocs/stdio.html">printf() and stdio in the Julia runtime</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../devdocs/promote-op.html">Operator-sensitive promotion</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../devdocs/boundscheck.html">Bounds checking</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../devdocs/locks.html">Proper maintenance and care of multi-threading locks</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../devdocs/offset-arrays.html">Arrays with custom indices</a></li>
@@ -531,6 +536,7 @@
 <li class="toctree-l2"><a class="reference internal" href="../devdocs/backtraces.html">Reporting and analyzing crashes (segfaults)</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../devdocs/debuggingtips.html">gdb debugging tips</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../devdocs/valgrind.html">Using Valgrind with Julia</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../devdocs/sanitizers.html">Sanitizer support</a></li>
 </ul>
 </li>
 </ul>
@@ -749,14 +755,14 @@ create various other kinds of servers:</p>
 <span class="n">julia</span><span class="o">&gt;</span> <span class="n">listen</span><span class="p">(</span><span class="n">IPv6</span><span class="p">(</span><span class="mi">0</span><span class="p">),</span><span class="mi">2001</span><span class="p">)</span> <span class="c"># Listens on port 2001 on all IPv6 interfaces</span>
 <span class="n">TCPServer</span><span class="p">(</span><span class="n">active</span><span class="p">)</span>
 
-<span class="n">julia</span><span class="o">&gt;</span> <span class="n">listen</span><span class="p">(</span><span class="s">&quot;testsocket&quot;</span><span class="p">)</span> <span class="c"># Listens on a domain socket/named pipe</span>
+<span class="n">julia</span><span class="o">&gt;</span> <span class="n">listen</span><span class="p">(</span><span class="s">&quot;testsocket&quot;</span><span class="p">)</span> <span class="c"># Listens on a UNIX domain socket/named pipe</span>
 <span class="n">PipeServer</span><span class="p">(</span><span class="n">active</span><span class="p">)</span>
 </pre></div>
 </div>
 <p>Note that the return type of the last invocation is different. This is because
 this server does not listen on TCP, but rather on a named pipe (Windows)
-or domain socket (UNIX). The difference
-is subtle and has to do with the <a class="reference internal" href="../stdlib/io-network.html#Base.accept" title="Base.accept"><code class="xref jl jl-func docutils literal"><span class="pre">accept()</span></code></a> and <a class="reference internal" href="../stdlib/parallel.html#Base.connect" title="Base.connect"><code class="xref jl jl-func docutils literal"><span class="pre">connect()</span></code></a> methods. The <a class="reference internal" href="../stdlib/io-network.html#Base.accept" title="Base.accept"><code class="xref jl jl-func docutils literal"><span class="pre">accept()</span></code></a>
+or UNIX domain socket. The difference is subtle and has to do with the
+<a class="reference internal" href="../stdlib/io-network.html#Base.accept" title="Base.accept"><code class="xref jl jl-func docutils literal"><span class="pre">accept()</span></code></a> and <a class="reference internal" href="../stdlib/parallel.html#Base.connect" title="Base.connect"><code class="xref jl jl-func docutils literal"><span class="pre">connect()</span></code></a> methods. The <a class="reference internal" href="../stdlib/io-network.html#Base.accept" title="Base.accept"><code class="xref jl jl-func docutils literal"><span class="pre">accept()</span></code></a>
 method retrieves a connection to the client that is connecting on the server we
 just created, while the <a class="reference internal" href="../stdlib/parallel.html#Base.connect" title="Base.connect"><code class="xref jl jl-func docutils literal"><span class="pre">connect()</span></code></a> function connects to a server using the
 specified method. The <a class="reference internal" href="../stdlib/parallel.html#Base.connect" title="Base.connect"><code class="xref jl jl-func docutils literal"><span class="pre">connect()</span></code></a> function takes the same arguments as
@@ -810,7 +816,7 @@ allows you to do things like:</p>
 </div>
 <p>At the base of this functionality is <a class="reference internal" href="../stdlib/io-network.html#Base.getaddrinfo" title="Base.getaddrinfo"><code class="xref jl jl-func docutils literal"><span class="pre">getaddrinfo()</span></code></a>, which will do the appropriate address resolution:</p>
 <div class="highlight-julia"><div class="highlight"><pre><span></span><span class="n">julia</span><span class="o">&gt;</span> <span class="n">getaddrinfo</span><span class="p">(</span><span class="s">&quot;google.com&quot;</span><span class="p">)</span>
-<span class="n">IPv4</span><span class="p">(</span><span class="mf">74.125</span><span class="o">.</span><span class="mf">226.225</span><span class="p">)</span>
+<span class="n">ip</span><span class="s">&quot;74.125.226.225&quot;</span>
 </pre></div>
 </div>
 </div>

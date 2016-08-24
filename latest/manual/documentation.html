@@ -193,7 +193,8 @@
 <li class="toctree-l2"><a class="reference internal" href="#functions-methods">Functions &amp; Methods</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#advanced-usage">Advanced Usage</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#syntax-guide">Syntax Guide</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#markdown-syntax-notes">Markdown Syntax Notes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#markdown-syntax">Markdown syntax</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#markdown-syntax-extensions">Markdown Syntax Extensions</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="metaprogramming.html">Metaprogramming</a><ul>
@@ -240,6 +241,8 @@
 <li class="toctree-l2"><a class="reference internal" href="parallel-computing.html#network-requirements-for-localmanager-and-sshmanager">Network requirements for LocalManager and SSHManager</a></li>
 <li class="toctree-l2"><a class="reference internal" href="parallel-computing.html#cluster-cookie">Cluster cookie</a></li>
 <li class="toctree-l2"><a class="reference internal" href="parallel-computing.html#specifying-network-topology-experimental">Specifying network topology (Experimental)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="parallel-computing.html#multi-threading-experimental">Multi-threading (Experimental)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="parallel-computing.html#threadcall-experimental">&#64;threadcall (Experimental)</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="dates.html">Date and DateTime</a><ul>
@@ -280,6 +283,7 @@
 <li class="toctree-l2"><a class="reference internal" href="interacting-with-julia.html#the-different-prompt-modes">The different prompt modes</a></li>
 <li class="toctree-l2"><a class="reference internal" href="interacting-with-julia.html#key-bindings">Key bindings</a></li>
 <li class="toctree-l2"><a class="reference internal" href="interacting-with-julia.html#tab-completion">Tab completion</a></li>
+<li class="toctree-l2"><a class="reference internal" href="interacting-with-julia.html#customizing-colors">Customizing Colors</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="embedding.html">Embedding Julia</a><ul>
@@ -455,6 +459,8 @@
 <li class="toctree-l2"><a class="reference internal" href="../stdlib/parallel.html#general-parallel-computing-support">General Parallel Computing Support</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../stdlib/parallel.html#shared-arrays">Shared Arrays</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../stdlib/parallel.html#multi-threading">Multi-Threading</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../stdlib/parallel.html#ccall-using-a-threadpool-experimental">ccall using a threadpool (Experimental)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../stdlib/parallel.html#synchronization-primitives">Synchronization Primitives</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../stdlib/parallel.html#cluster-manager-interface">Cluster Manager Interface</a></li>
 </ul>
 </li>
@@ -521,7 +527,6 @@
 <li class="toctree-l2"><a class="reference internal" href="../devdocs/sysimg.html">System Image Building</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../devdocs/llvm.html">Working with LLVM</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../devdocs/stdio.html">printf() and stdio in the Julia runtime</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../devdocs/promote-op.html">Operator-sensitive promotion</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../devdocs/boundscheck.html">Bounds checking</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../devdocs/locks.html">Proper maintenance and care of multi-threading locks</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../devdocs/offset-arrays.html">Arrays with custom indices</a></li>
@@ -531,6 +536,7 @@
 <li class="toctree-l2"><a class="reference internal" href="../devdocs/backtraces.html">Reporting and analyzing crashes (segfaults)</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../devdocs/debuggingtips.html">gdb debugging tips</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../devdocs/valgrind.html">Using Valgrind with Julia</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../devdocs/sanitizers.html">Sanitizer support</a></li>
 </ul>
 </li>
 </ul>
@@ -607,10 +613,10 @@ macros and pass them to the <code class="docutils literal"><span class="pre">&#6
 </div>
 <p>As in the example above, we recommend following some simple conventions when writing
 documentation:</p>
-<p>1. Always show the signature of a function at the top of the documentation,
+<ol class="arabic">
+<li><p class="first">Always show the signature of a function at the top of the documentation,
 with a four-space indent so that it is printed as Julia code.</p>
-<blockquote>
-<div>This can be identical to the signature present in the Julia code
+<p>This can be identical to the signature present in the Julia code
 (like <code class="docutils literal"><span class="pre">mean(x::AbstractArray)</span></code>), or a simplified form.
 Optional arguments should be represented with their default values (i.e. <code class="docutils literal"><span class="pre">f(x,</span> <span class="pre">y=1)</span></code>)
 when possible, following the actual Julia syntax. Optional arguments which
@@ -620,29 +626,25 @@ optional arguments, the other(s) with them. This solution can also be used to do
 several related methods of a given function. When a function accepts many keyword
 arguments, only include a <code class="docutils literal"><span class="pre">&lt;keyword</span> <span class="pre">arguments&gt;</span></code> placeholder in the signature (i.e.
 <code class="docutils literal"><span class="pre">f(x;</span> <span class="pre">&lt;keyword</span> <span class="pre">arguments&gt;)</span></code>), and give the complete list under an <code class="docutils literal"><span class="pre">#</span> <span class="pre">Arguments</span></code>
-section (see point 4 below).</div></blockquote>
-<p>2. Include a single one-line sentence describing what the function does or what the
+section (see point 4 below).</p>
+</li>
+<li><p class="first">Include a single one-line sentence describing what the function does or what the
 object represents after the simplified signature block. If needed, provide more details
 in a second paragraph, after a blank line.</p>
-<blockquote>
-<div>The one-line sentence should use the imperative form (&#8220;Do this&#8221;, &#8220;Return that&#8221;) instead
+<p>The one-line sentence should use the imperative form (&#8220;Do this&#8221;, &#8220;Return that&#8221;) instead
 of the third person (do not write &#8220;Returns the length...&#8221;) when documenting functions.
 It should end with a period. If the meaning of a function cannot be summarized easily,
 splitting it into separate composable parts could be beneficial (this should not be
-taken as an absolute requirement for every single case though).</div></blockquote>
-<ol class="arabic simple" start="3">
-<li>Do not repeat yourself.</li>
-</ol>
-<blockquote>
-<div>Since the function name is given by the signature, there is no need to
+taken as an absolute requirement for every single case though).</p>
+</li>
+<li><p class="first">Do not repeat yourself.</p>
+<p>Since the function name is given by the signature, there is no need to
 start the documentation with &#8220;The function <code class="docutils literal"><span class="pre">bar</span></code>...&#8221;: go straight to the point.
 Similarly, if the signature specifies the types of the arguments, mentioning them
-in the description is redundant.</div></blockquote>
-<ol class="arabic simple" start="4">
-<li>Only provide an argument list when really necessary.</li>
-</ol>
-<blockquote>
-<div><p>For simple functions, it is often clearer to mention the role of the arguments directly
+in the description is redundant.</p>
+</li>
+<li><p class="first">Only provide an argument list when really necessary.</p>
+<p>For simple functions, it is often clearer to mention the role of the arguments directly
 in the description of the function&#8217;s purpose. An argument list would only repeat
 information already provided elsewhere. However, providing an argument list can be a good
 idea for complex functions with many arguments (in particular keyword arguments).
@@ -658,28 +660,38 @@ mention the types and default values (if any) of the arguments:</p>
 <span class="s">&quot;&quot;&quot;</span>
 </pre></div>
 </div>
-</div></blockquote>
-<p>5. Group examples under an <code class="docutils literal"><span class="pre">#</span> <span class="pre">Examples</span></code> section and use <code class="docutils literal"><span class="pre">``julia</span></code> blocks instead of
+</li>
+<li><p class="first">Group examples under an <code class="docutils literal"><span class="pre">#</span> <span class="pre">Examples</span></code> section and use <code class="docutils literal"><span class="pre">```julia</span></code> blocks instead of
 standard text.</p>
-<blockquote>
-<div>Examples should consist of verbatim copies of the Julia REPL, including the <code class="docutils literal"><span class="pre">julia&gt;</span></code>
-prompt (see example above). This will be used in the future to allow running examples
-automatically and checking that their actual output is consistent with that presented
-in the documentation (a feature called <em>doctests</em>). This way, the code will be tested and
-examples won&#8217;t get out of date without notice.</div></blockquote>
-<ol class="arabic simple" start="6">
-<li>Use backticks to identify code and equations.</li>
-</ol>
-<blockquote>
-<div>Julia identifiers and code excerpts should always appear between backticks <code class="docutils literal"><span class="pre">`</span></code>
+<p>Examples should consist of verbatim copies of the Julia REPL, including the <code class="docutils literal"><span class="pre">julia&gt;</span></code>
+prompt (see example above). This is used to allow running examples automatically and
+checking that their actual output is consistent with that presented in the
+documentation (a feature called <em>doctests</em>). This way, the code will be tested and
+examples won&#8217;t get out of date without notice. An example:</p>
+<div class="highlight-julia"><div class="highlight"><pre><span></span><span class="s">&quot;&quot;&quot;</span>
+<span class="s">Some nice documentation here.</span>
+
+<span class="s">```jldoctest</span>
+<span class="s">julia&gt; a = [1 2; 3 4]</span>
+<span class="s">2×2 Array{Int64,2}:</span>
+<span class="s"> 1  2</span>
+<span class="s"> 3  4</span>
+<span class="s">```</span>
+<span class="s">&quot;&quot;&quot;</span>
+</pre></div>
+</div>
+<p>You can then run <code class="docutils literal"><span class="pre">make</span> <span class="pre">-C</span> <span class="pre">doc</span> <span class="pre">doctest</span></code> to run all the doctests, which will ensure
+that your example works. Note that whitespace in your doctest is significant! The
+doctest will fail if you misalign the output of pretty-printing an array, for example.</p>
+</li>
+<li><p class="first">Use backticks to identify code and equations.</p>
+<p>Julia identifiers and code excerpts should always appear between backticks <code class="docutils literal"><span class="pre">`</span></code>
 to enable highlighting. Equations in the LaTeX syntax can be inserted between
 double backticks <code class="docutils literal"><span class="pre">``</span></code>. Use Unicode characters rather than their LaTeX escape sequence,
-i.e. <code class="docutils literal"><span class="pre">``α</span> <span class="pre">=</span> <span class="pre">1``</span></code> rather than <code class="samp docutils literal"><span class="pre">``\\alpha</span> <span class="pre">=</span> <span class="pre">1``</span></code>.</div></blockquote>
-<ol class="arabic simple" start="7">
-<li>Place the starting and ending <code class="docutils literal"><span class="pre">&quot;&quot;&quot;</span></code> characters on lines by themselves.</li>
-</ol>
-<blockquote>
-<div><p>That is, write:</p>
+i.e. <code class="docutils literal"><span class="pre">``α</span> <span class="pre">=</span> <span class="pre">1``</span></code> rather than <code class="samp docutils literal"><span class="pre">``\\alpha</span> <span class="pre">=</span> <span class="pre">1``</span></code>.</p>
+</li>
+<li><p class="first">Place the starting and ending <code class="docutils literal"><span class="pre">&quot;&quot;&quot;</span></code> characters on lines by themselves.</p>
+<p>That is, write:</p>
 <div class="highlight-julia"><div class="highlight"><pre><span></span><span class="s">&quot;&quot;&quot;</span>
 <span class="s">...</span>
 
@@ -696,13 +708,12 @@ i.e. <code class="docutils literal"><span class="pre">``α</span> <span class="p
 </pre></div>
 </div>
 <p>This makes it more clear where docstrings start and end.</p>
-</div></blockquote>
-<ol class="arabic simple" start="8">
-<li>Respect the line length limit used in the surrounding code.</li>
+</li>
+<li><p class="first">Respect the line length limit used in the surrounding code.</p>
+<p>Docstrings are edited using the same tools as code. Therefore, the same conventions
+should apply. It it advised to add line breaks after 92 characters.</p>
+</li>
 </ol>
-<blockquote>
-<div>Docstrings are edited using the same tools as code. Therefore, the same conventions
-should apply. It it advised to add line breaks after 92 characters.</div></blockquote>
 <div class="section" id="accessing-documentation">
 <h2>Accessing Documentation<a class="headerlink" href="#accessing-documentation" title="Permalink to this headline">¶</a></h2>
 <p>Documentation can be accessed at the REPL or in IJulia by typing <code class="docutils literal"><span class="pre">?</span></code>
@@ -1003,13 +1014,285 @@ Examining it&#8217;s definition should serve as an example of how to use <code c
 
 </div>
 </div>
-<div class="section" id="markdown-syntax-notes">
-<h2>Markdown Syntax Notes<a class="headerlink" href="#markdown-syntax-notes" title="Permalink to this headline">¶</a></h2>
-<p>Julia&#8217;s Markdown parser supports most of the basic Markdown elements,
-including paragraphs, code blocks, bulleted lists and basic links. It&#8217;s
-also a work in progress, however, and support for more advanced things
-like tables is in the works.</p>
-<p>Markdown.jl supports interpolation in a very similar way to basic string
+<div class="section" id="markdown-syntax">
+<h2>Markdown syntax<a class="headerlink" href="#markdown-syntax" title="Permalink to this headline">¶</a></h2>
+<p>The following markdown syntax is supported in Julia.</p>
+<div class="section" id="inline-elements">
+<h3>Inline elements<a class="headerlink" href="#inline-elements" title="Permalink to this headline">¶</a></h3>
+<p>Here &#8220;inline&#8221; refers to elements that can be found within blocks of text, i.e. paragraphs. These include the following elements.</p>
+<div class="section" id="bold">
+<h4>Bold<a class="headerlink" href="#bold" title="Permalink to this headline">¶</a></h4>
+<p>Surround words with two asterisks, <code class="docutils literal"><span class="pre">**</span></code>, to display the enclosed text in boldface.</p>
+<div class="highlight-text"><div class="highlight"><pre><span></span>A paragraph containing a **bold** word.
+</pre></div>
+</div>
+</div>
+<div class="section" id="italics">
+<h4>Italics<a class="headerlink" href="#italics" title="Permalink to this headline">¶</a></h4>
+<p>Surround words with one asterisk, <code class="docutils literal"><span class="pre">*</span></code>, to display the enclosed text in italics.</p>
+<div class="highlight-text"><div class="highlight"><pre><span></span>A paragraph containing an *emphasised* word.
+</pre></div>
+</div>
+</div>
+<div class="section" id="literals">
+<h4>Literals<a class="headerlink" href="#literals" title="Permalink to this headline">¶</a></h4>
+<p>Surround text that should be displayed exactly as written with single backticks, <code class="docutils literal"><span class="pre">`</span></code> .</p>
+<div class="highlight-text"><div class="highlight"><pre><span></span>A paragraph containing a `literal` word.
+</pre></div>
+</div>
+<p>Literals should be used when writing text that refers to names of variables, functions, or other parts of a Julia program.</p>
+<div class="admonition tip">
+<p class="first admonition-title">Tip</p>
+<p>To include a backtick character within literal text use three backticks rather than one to enclose the text.</p>
+<div class="highlight-text"><div class="highlight"><pre><span></span>A paragraph containing a ``` `backtick` character ```.
+</pre></div>
+</div>
+<p class="last">By extension any odd number of backticks may be used to enclose a lesser number of backticks.</p>
+</div>
+</div>
+<div class="section" id="id1">
+<h4><span class="math">\(\LaTeX\)</span><a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h4>
+<p>Surround text that should be displayed as mathematics using <span class="math">\(\LaTeX\)</span> syntax with double backticks, <code class="docutils literal"><span class="pre">``</span></code> .</p>
+<div class="highlight-text"><div class="highlight"><pre><span></span>A paragraph containing some ``\LaTeX`` markup.
+</pre></div>
+</div>
+<div class="admonition tip">
+<p class="first admonition-title">Tip</p>
+<p class="last">As with literals in the previous section, if literal backticks need to be written within double backticks use an even number greater than two. Note that if a single literal backtick needs to be included within <span class="math">\(\LaTeX\)</span> markup then two enclosing backticks is sufficient.</p>
+</div>
+</div>
+<div class="section" id="links">
+<h4>Links<a class="headerlink" href="#links" title="Permalink to this headline">¶</a></h4>
+<p>Links to either external or internal addresses can be written using the following syntax, where the text enclosed in square brackets, <code class="docutils literal"><span class="pre">[</span> <span class="pre">]</span></code>, is the name of the link and the text enclosed in parentheses, <code class="docutils literal"><span class="pre">(</span> <span class="pre">)</span></code>, is the URL.</p>
+<div class="highlight-text"><div class="highlight"><pre><span></span>A paragraph containing a link to [Julia](http://www.julialang.org).
+</pre></div>
+</div>
+</div>
+<div class="section" id="footnote-references">
+<h4>Footnote references<a class="headerlink" href="#footnote-references" title="Permalink to this headline">¶</a></h4>
+<p>Named and numbered footnote references can be written using the following syntax. A footnote name must be a single alphanumeric word containing no punctuation.</p>
+<div class="highlight-text"><div class="highlight"><pre><span></span>A paragraph containing a numbered footnote [^1] and a named one [^named].
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">The text associated with a footnote can be written anywhere within the same page as the footnote reference. The syntax used to define the footnote text is discussed in the <a class="reference internal" href="#footnotes">Footnotes</a> section below.</p>
+</div>
+</div>
+</div>
+<div class="section" id="toplevel-elements">
+<h3>Toplevel elements<a class="headerlink" href="#toplevel-elements" title="Permalink to this headline">¶</a></h3>
+<p>The following elements can be written either at the &#8220;toplevel&#8221; of a document or within another &#8220;toplevel&#8221; element.</p>
+<div class="section" id="paragraphs">
+<h4>Paragraphs<a class="headerlink" href="#paragraphs" title="Permalink to this headline">¶</a></h4>
+<p>A paragraph is a block of plain text, possibly containing any number of inline elements defined in the <a class="reference internal" href="#inline-elements">Inline elements</a> section above, with one or more blank lines above and below it.</p>
+<div class="highlight-text"><div class="highlight"><pre><span></span>This is a paragraph.
+
+And this is *another* one containing some emphasised text.
+A new line, but still part of the same paragraph.
+</pre></div>
+</div>
+</div>
+<div class="section" id="headers">
+<h4>Headers<a class="headerlink" href="#headers" title="Permalink to this headline">¶</a></h4>
+<p>A document can be split up into different sections using headers. Headers use the following syntax:</p>
+<div class="highlight-text"><div class="highlight"><pre><span></span># Level One
+## Level Two
+### Level Three
+#### Level Four
+##### Level Five
+###### Level Six
+</pre></div>
+</div>
+<p>A header line can contain any inline syntax in the same way as a paragraph can.</p>
+<div class="admonition tip">
+<p class="first admonition-title">Tip</p>
+<p class="last">Try to avoid using too many levels of header within a single document. A heavily nested document may be indicative of a need to restructure it or split it into several pages covering separate topics.</p>
+</div>
+</div>
+<div class="section" id="code-blocks">
+<h4>Code blocks<a class="headerlink" href="#code-blocks" title="Permalink to this headline">¶</a></h4>
+<p>Source code can be displayed as a literal block using an indent of four spaces as shown in the following example.</p>
+<div class="highlight-text"><div class="highlight"><pre><span></span>This is a paragraph.
+
+    function func(x)
+        # ...
+    end
+
+Another paragraph.
+</pre></div>
+</div>
+<p>Additionally, code blocks can be enclosed using triple backticks with an optional &#8220;language&#8221; to specify how a block of code should be highlighted.</p>
+<div class="highlight-text"><div class="highlight"><pre><span></span>A code block without a &quot;language&quot;:
+
+```
+function func(x)
+    # ...
+end
+```
+
+and another one with the &quot;language&quot; specified as `julia`:
+
+```julia
+function func(x)
+    # ...
+end
+```
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">&#8220;Fenced&#8221; code blocks, as shown in the last example, should be prefered over indented code blocks since there is no way to specify what language an indented code block is written in.</p>
+</div>
+</div>
+<div class="section" id="block-quotes">
+<h4>Block quotes<a class="headerlink" href="#block-quotes" title="Permalink to this headline">¶</a></h4>
+<p>Text from external sources, such as quotations from books or websites, can be quoted using <code class="docutils literal"><span class="pre">&gt;</span></code> characters prepended to each line of the quote as follows.</p>
+<div class="highlight-text"><div class="highlight"><pre><span></span>Here&#39;s a quote:
+
+&gt; Julia is a high-level, high-performance dynamic programming language for
+&gt; technical computing, with syntax that is familiar to users of other
+&gt; technical computing environments.
+</pre></div>
+</div>
+<p>Note that a single space must appear after the <code class="docutils literal"><span class="pre">&gt;</span></code> character on each line. Quoted blocks may themselves contain other toplevel or inline elements.</p>
+</div>
+<div class="section" id="images">
+<h4>Images<a class="headerlink" href="#images" title="Permalink to this headline">¶</a></h4>
+<p>The syntax for images is similar to the link syntax mentioned above. Prepending a <code class="docutils literal"><span class="pre">!</span></code> character to a link will display an image from the specified URL rather than a link to it.</p>
+<div class="highlight-text"><div class="highlight"><pre><span></span>![alternative text](link/to/image.png)
+</pre></div>
+</div>
+</div>
+<div class="section" id="lists">
+<h4>Lists<a class="headerlink" href="#lists" title="Permalink to this headline">¶</a></h4>
+<p>Unordered lists can be written by prepending each item in a list with either <code class="docutils literal"><span class="pre">*</span></code>, <code class="docutils literal"><span class="pre">+</span></code>, or <code class="docutils literal"><span class="pre">-</span></code>.</p>
+<div class="highlight-text"><div class="highlight"><pre><span></span>A list of items:
+
+  * item one
+  * item two
+  * item three
+</pre></div>
+</div>
+<p>Note the two spaces before each <code class="docutils literal"><span class="pre">*</span></code> and the single space after each one.</p>
+<p>Lists can contain other nested toplevel elements such as lists, code blocks, or quoteblocks. A blank line should be left between each list item when including any toplevel elements within a list.</p>
+<div class="highlight-text"><div class="highlight"><pre><span></span>Another list:
+
+  * item one
+
+  * item two
+
+    ```
+    f(x) = x
+    ```
+
+  * And a sublist:
+
+      + sub-item one
+      + sub-item two
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">The contents of each item in the list must line up with the first line of the item. In the above example the fenced code block must be indented by four spaces to align with the <code class="docutils literal"><span class="pre">i</span></code> in <code class="docutils literal"><span class="pre">item</span> <span class="pre">two</span></code>.</p>
+</div>
+<p>Ordered lists are written by replacing the &#8220;bullet&#8221; character, either <code class="docutils literal"><span class="pre">*</span></code>, <code class="docutils literal"><span class="pre">+</span></code>, or <code class="docutils literal"><span class="pre">-</span></code>, with a positive integer followed by either <code class="docutils literal"><span class="pre">.</span></code> or <code class="docutils literal"><span class="pre">)</span></code>.</p>
+<div class="highlight-text"><div class="highlight"><pre><span></span>Two ordered lists:
+
+ 1. item one
+ 2. item two
+ 3. item three
+
+
+ 5) item five
+ 6) item six
+ 7) item seven
+</pre></div>
+</div>
+<p>An ordered list may start from a number other than one, as in the second list of the above example, where it is numbered from five. As with unordered lists, ordered lists can contain nested toplevel elements.</p>
+</div>
+<div class="section" id="display-equations">
+<h4>Display equations<a class="headerlink" href="#display-equations" title="Permalink to this headline">¶</a></h4>
+<p>Large <span class="math">\(\LaTeX\)</span> equations that do not fit inline within a paragraph may be written as display equations using a fenced code block with the &#8220;language&#8221; <code class="docutils literal"><span class="pre">math</span></code> as in the example below.</p>
+<div class="highlight-text"><div class="highlight"><pre><span></span>```math
+f(a) = \frac{1}{2\pi}\int_{0}^{2\pi} (\alpha+R\cos(\theta))d\theta
+```
+</pre></div>
+</div>
+</div>
+<div class="section" id="footnotes">
+<h4>Footnotes<a class="headerlink" href="#footnotes" title="Permalink to this headline">¶</a></h4>
+<p>This syntax is paired with the inline syntax for <a class="reference internal" href="#footnote-references">Footnote references</a>. Make sure to read that section as well.</p>
+<p>Footnote text is defined using the following syntax, which is similar to footnote reference syntax, aside from the <code class="docutils literal"><span class="pre">:</span></code> character that is appended to the footnote label.</p>
+<div class="highlight-text"><div class="highlight"><pre><span></span>[^1]: Numbered footnote text.
+
+[^note]:
+
+    Named footnote text containing several toplevel elements.
+
+      * item one
+      * item two
+      * item three
+
+    ```julia
+    function func(x)
+        # ...
+    end
+    ```
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">No checks are done during parsing to make sure that all footnote references have matching footnotes.</p>
+</div>
+</div>
+<div class="section" id="horizontal-rules">
+<h4>Horizontal rules<a class="headerlink" href="#horizontal-rules" title="Permalink to this headline">¶</a></h4>
+<p>The equivalent of an <code class="docutils literal"><span class="pre">&lt;hr&gt;</span></code> HTML tag can be written using the following syntax:</p>
+<div class="highlight-text"><div class="highlight"><pre><span></span>Text above the line.
+
+---
+
+And text below the line.
+</pre></div>
+</div>
+</div>
+<div class="section" id="tables">
+<h4>Tables<a class="headerlink" href="#tables" title="Permalink to this headline">¶</a></h4>
+<p>Basic tables can be written using the syntax described below. Note that markdown tables have limited features and cannot contain nested toplevel elements unlike other elements discussed above &#8211; only inline elements are allowed. Tables must always contain a header row with column names. Cells cannot span multiple rows or columns of the table.</p>
+<div class="highlight-text"><div class="highlight"><pre><span></span>| Column One | Column Two | Column Three |
+|:---------- | ---------- |:------------:|
+| Row `1`    | Column `2` |              |
+| *Row* 2    | **Row** 2  | Column ``3`` |
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p>As illustrated in the above example each column of <code class="docutils literal"><span class="pre">|</span></code> characters must be aligned vertically.</p>
+<p class="last">A <code class="docutils literal"><span class="pre">:</span></code> character on either end of a column&#8217;s header separator (the row containing <code class="docutils literal"><span class="pre">-</span></code> characters) specifies whether the row is left-aligned, right-aligned, or (when <code class="docutils literal"><span class="pre">:</span></code> appears on both ends) center-aligned. Providing no <code class="docutils literal"><span class="pre">:</span></code> characters will default to right-aligning the column.</p>
+</div>
+</div>
+<div class="section" id="admonitions">
+<h4>Admonitions<a class="headerlink" href="#admonitions" title="Permalink to this headline">¶</a></h4>
+<p>Specially formatted blocks with titles such as &#8220;Notes&#8221;, &#8220;Warning&#8221;, or &#8220;Tips&#8221; are known as admonitions and are used when some part of a document needs special attention. They can be defined using the following <code class="docutils literal"><span class="pre">!!!</span></code> syntax:</p>
+<div class="highlight-text"><div class="highlight"><pre><span></span>!!! note
+
+    This is the content of the note.
+
+!!! warning &quot;Beware!&quot;
+
+    And this is another one.
+
+    This warning admonition has a custom title: `&quot;Beware!&quot;`.
+</pre></div>
+</div>
+<p>Admonitions, like most other toplevel elements, can contain other toplevel elements. When no title text, specified after the admonition type in double quotes, is included then the title used will be the type of the block, i.e. <code class="docutils literal"><span class="pre">&quot;Note&quot;</span></code> in the case of the <code class="docutils literal"><span class="pre">note</span></code> admonition.</p>
+</div>
+</div>
+</div>
+<div class="section" id="markdown-syntax-extensions">
+<h2>Markdown Syntax Extensions<a class="headerlink" href="#markdown-syntax-extensions" title="Permalink to this headline">¶</a></h2>
+<p>Julia&#8217;s markdown supports interpolation in a very similar way to basic string
 literals, with the difference that it will store the object itself in
 the Markdown tree (as opposed to converting it to a string). When the
 Markdown content is rendered the usual <code class="docutils literal"><span class="pre">show</span></code> methods will be

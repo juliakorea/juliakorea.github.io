@@ -193,7 +193,8 @@
 <li class="toctree-l2"><a class="reference internal" href="../manual/documentation.html#functions-methods">Functions &amp; Methods</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../manual/documentation.html#advanced-usage">Advanced Usage</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../manual/documentation.html#syntax-guide">Syntax Guide</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../manual/documentation.html#markdown-syntax-notes">Markdown Syntax Notes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../manual/documentation.html#markdown-syntax">Markdown syntax</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../manual/documentation.html#markdown-syntax-extensions">Markdown Syntax Extensions</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../manual/metaprogramming.html">Metaprogramming</a><ul>
@@ -240,6 +241,8 @@
 <li class="toctree-l2"><a class="reference internal" href="../manual/parallel-computing.html#network-requirements-for-localmanager-and-sshmanager">Network requirements for LocalManager and SSHManager</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../manual/parallel-computing.html#cluster-cookie">Cluster cookie</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../manual/parallel-computing.html#specifying-network-topology-experimental">Specifying network topology (Experimental)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../manual/parallel-computing.html#multi-threading-experimental">Multi-threading (Experimental)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../manual/parallel-computing.html#threadcall-experimental">&#64;threadcall (Experimental)</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../manual/dates.html">Date and DateTime</a><ul>
@@ -280,6 +283,7 @@
 <li class="toctree-l2"><a class="reference internal" href="../manual/interacting-with-julia.html#the-different-prompt-modes">The different prompt modes</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../manual/interacting-with-julia.html#key-bindings">Key bindings</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../manual/interacting-with-julia.html#tab-completion">Tab completion</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../manual/interacting-with-julia.html#customizing-colors">Customizing Colors</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../manual/embedding.html">Embedding Julia</a><ul>
@@ -455,6 +459,8 @@
 <li class="toctree-l2"><a class="reference internal" href="#general-parallel-computing-support">General Parallel Computing Support</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#shared-arrays">Shared Arrays</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#multi-threading">Multi-Threading</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#ccall-using-a-threadpool-experimental">ccall using a threadpool (Experimental)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#synchronization-primitives">Synchronization Primitives</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#cluster-manager-interface">Cluster Manager Interface</a></li>
 </ul>
 </li>
@@ -521,7 +527,6 @@
 <li class="toctree-l2"><a class="reference internal" href="../devdocs/sysimg.html">System Image Building</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../devdocs/llvm.html">Working with LLVM</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../devdocs/stdio.html">printf() and stdio in the Julia runtime</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../devdocs/promote-op.html">Operator-sensitive promotion</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../devdocs/boundscheck.html">Bounds checking</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../devdocs/locks.html">Proper maintenance and care of multi-threading locks</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../devdocs/offset-arrays.html">Arrays with custom indices</a></li>
@@ -531,6 +536,7 @@
 <li class="toctree-l2"><a class="reference internal" href="../devdocs/backtraces.html">Reporting and analyzing crashes (segfaults)</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../devdocs/debuggingtips.html">gdb debugging tips</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../devdocs/valgrind.html">Using Valgrind with Julia</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../devdocs/sanitizers.html">Sanitizer support</a></li>
 </ul>
 </li>
 </ul>
@@ -574,7 +580,7 @@
 <dl class="function">
 <dt id="Base.Task">
 <code class="descname">Task</code><span class="sig-paren">(</span><em>func</em><span class="sig-paren">)</span><a class="headerlink" href="#Base.Task" title="Permalink to this definition">¶</a></dt>
-<dd><p>Create a <code class="docutils literal"><span class="pre">Task</span></code> (i.e. thread, or coroutine) to execute the given function (which must be callable with no arguments). The task exits when this function returns.</p>
+<dd><p>Create a <code class="docutils literal"><span class="pre">Task</span></code> (i.e. coroutine) to execute the given function (which must be callable with no arguments). The task exits when this function returns.</p>
 </dd></dl>
 
 <dl class="function">
@@ -586,19 +592,19 @@
 <dl class="function">
 <dt id="Base.current_task">
 <code class="descname">current_task</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#Base.current_task" title="Permalink to this definition">¶</a></dt>
-<dd><p>Get the currently running <code class="docutils literal"><span class="pre">Task</span></code>.</p>
+<dd><p>Get the currently running <a class="reference internal" href="#Base.Task" title="Base.Task"><code class="xref jl jl-class docutils literal"><span class="pre">Task</span></code></a>.</p>
 </dd></dl>
 
 <dl class="function">
 <dt id="Base.istaskdone">
 <code class="descname">istaskdone</code><span class="sig-paren">(</span><em>task</em><span class="sig-paren">)</span> &rarr; Bool<a class="headerlink" href="#Base.istaskdone" title="Permalink to this definition">¶</a></dt>
-<dd><p>Tell whether a task has exited.</p>
+<dd><p>Determine whether a task has exited.</p>
 </dd></dl>
 
 <dl class="function">
 <dt id="Base.istaskstarted">
 <code class="descname">istaskstarted</code><span class="sig-paren">(</span><em>task</em><span class="sig-paren">)</span> &rarr; Bool<a class="headerlink" href="#Base.istaskstarted" title="Permalink to this definition">¶</a></dt>
-<dd><p>Tell whether a task has started executing.</p>
+<dd><p>Determine whether a task has started executing.</p>
 </dd></dl>
 
 <dl class="function">
@@ -621,26 +627,26 @@
 
 <dl class="function">
 <dt id="Base.task_local_storage">
-<code class="descname">task_local_storage</code><span class="sig-paren">(</span><em>symbol</em><span class="sig-paren">)</span><a class="headerlink" href="#Base.task_local_storage" title="Permalink to this definition">¶</a></dt>
-<dd><p>Look up the value of a symbol in the current task&#8217;s task-local storage.</p>
+<code class="descname">task_local_storage</code><span class="sig-paren">(</span><em>key</em><span class="sig-paren">)</span><a class="headerlink" href="#Base.task_local_storage" title="Permalink to this definition">¶</a></dt>
+<dd><p>Look up the value of a key in the current task&#8217;s task-local storage.</p>
 </dd></dl>
 
 <dl class="function">
 <dt>
-<code class="descname">task_local_storage</code><span class="sig-paren">(</span><em>symbol</em>, <em>value</em><span class="sig-paren">)</span></dt>
-<dd><p>Assign a value to a symbol in the current task&#8217;s task-local storage.</p>
+<code class="descname">task_local_storage</code><span class="sig-paren">(</span><em>key</em>, <em>value</em><span class="sig-paren">)</span></dt>
+<dd><p>Assign a value to a key in the current task&#8217;s task-local storage.</p>
 </dd></dl>
 
 <dl class="function">
 <dt>
-<code class="descname">task_local_storage</code><span class="sig-paren">(</span><em>body</em>, <em>symbol</em>, <em>value</em><span class="sig-paren">)</span></dt>
-<dd><p>Call the function <code class="docutils literal"><span class="pre">body</span></code> with a modified task-local storage, in which <code class="docutils literal"><span class="pre">value</span></code> is assigned to <code class="docutils literal"><span class="pre">symbol</span></code>; the previous value of <code class="docutils literal"><span class="pre">symbol</span></code>, or lack thereof, is restored afterwards. Useful for emulating dynamic scoping.</p>
+<code class="descname">task_local_storage</code><span class="sig-paren">(</span><em>body</em>, <em>key</em>, <em>value</em><span class="sig-paren">)</span></dt>
+<dd><p>Call the function <code class="docutils literal"><span class="pre">body</span></code> with a modified task-local storage, in which <code class="docutils literal"><span class="pre">value</span></code> is assigned to <code class="docutils literal"><span class="pre">key</span></code>; the previous value of <code class="docutils literal"><span class="pre">key</span></code>, or lack thereof, is restored afterwards. Useful for emulating dynamic scoping.</p>
 </dd></dl>
 
 <dl class="function">
 <dt id="Base.Condition">
 <code class="descname">Condition</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#Base.Condition" title="Permalink to this definition">¶</a></dt>
-<dd><p>Create an edge-triggered event source that tasks can wait for. Tasks that call <code class="docutils literal"><span class="pre">wait</span></code> on a <code class="docutils literal"><span class="pre">Condition</span></code> are suspended and queued. Tasks are woken up when <code class="docutils literal"><span class="pre">notify</span></code> is later called on the <code class="docutils literal"><span class="pre">Condition</span></code>. Edge triggering means that only tasks waiting at the time <code class="docutils literal"><span class="pre">notify</span></code> is called can be woken up. For level-triggered notifications, you must keep extra state to keep track of whether a notification has happened. The <code class="docutils literal"><span class="pre">Channel</span></code> type does this, and so can be used for level-triggered events.</p>
+<dd><p>Create an edge-triggered event source that tasks can wait for. Tasks that call <code class="docutils literal"><span class="pre">wait</span></code> on a <code class="docutils literal"><span class="pre">Condition</span></code> are suspended and queued. Tasks are woken up when <code class="docutils literal"><span class="pre">notify</span></code> is later called on the <code class="docutils literal"><span class="pre">Condition</span></code>. Edge triggering means that only tasks waiting at the time <code class="docutils literal"><span class="pre">notify</span></code> is called can be woken up. For level-triggered notifications, you must keep extra state to keep track of whether a notification has happened. The <code class="xref jl jl-class docutils literal"><span class="pre">Channel</span></code> type does this, and so can be used for level-triggered events.</p>
 </dd></dl>
 
 <dl class="function">
@@ -653,7 +659,7 @@
 <dt id="Base.schedule">
 <code class="descname">schedule</code><span class="sig-paren">(</span><em>t::Task, [val]; error=false</em><span class="sig-paren">)</span><a class="headerlink" href="#Base.schedule" title="Permalink to this definition">¶</a></dt>
 <dd><p>Add a task to the scheduler&#8217;s queue. This causes the task to run constantly when the system is otherwise idle, unless the task performs a blocking operation such as <code class="docutils literal"><span class="pre">wait</span></code>.</p>
-<p>If a second argument is provided, it will be passed to the task (via the return value of <code class="docutils literal"><span class="pre">yieldto</span></code>) when it runs again. If <code class="docutils literal"><span class="pre">error</span></code> is <code class="docutils literal"><span class="pre">true</span></code>, the value is raised as an exception in the woken task.</p>
+<p>If a second argument <code class="docutils literal"><span class="pre">val</span></code> is provided, it will be passed to the task (via the return value of <code class="docutils literal"><span class="pre">yieldto</span></code>) when it runs again. If <code class="docutils literal"><span class="pre">error</span></code> is <code class="docutils literal"><span class="pre">true</span></code>, the value is raised as an exception in the woken task.</p>
 </dd></dl>
 
 <dl class="function">
@@ -665,31 +671,13 @@
 <dl class="function">
 <dt id="Base.&#64;task">
 <code class="descname">&#64;task</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#Base.@task" title="Permalink to this definition">¶</a></dt>
-<dd><p>Wrap an expression in a <code class="docutils literal"><span class="pre">Task</span></code> without executing it, and return the <code class="docutils literal"><span class="pre">Task</span></code>. This only creates a task, and does not run it.</p>
+<dd><p>Wrap an expression in a <a class="reference internal" href="#Base.Task" title="Base.Task"><code class="xref jl jl-class docutils literal"><span class="pre">Task</span></code></a> without executing it, and return the <a class="reference internal" href="#Base.Task" title="Base.Task"><code class="xref jl jl-class docutils literal"><span class="pre">Task</span></code></a>. This only creates a task, and does not run it.</p>
 </dd></dl>
 
 <dl class="function">
 <dt id="Base.sleep">
 <code class="descname">sleep</code><span class="sig-paren">(</span><em>seconds</em><span class="sig-paren">)</span><a class="headerlink" href="#Base.sleep" title="Permalink to this definition">¶</a></dt>
 <dd><p>Block the current task for a specified number of seconds. The minimum sleep time is 1 millisecond or input of <code class="docutils literal"><span class="pre">0.001</span></code>.</p>
-</dd></dl>
-
-<dl class="function">
-<dt id="Base.ReentrantLock">
-<code class="descname">ReentrantLock</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#Base.ReentrantLock" title="Permalink to this definition">¶</a></dt>
-<dd><p>Creates a reentrant lock. The same task can acquire the lock as many times as required. Each lock must be matched with an unlock.</p>
-</dd></dl>
-
-<dl class="function">
-<dt id="Base.lock">
-<code class="descname">lock</code><span class="sig-paren">(</span><em>l::ReentrantLock</em><span class="sig-paren">)</span><a class="headerlink" href="#Base.lock" title="Permalink to this definition">¶</a></dt>
-<dd><p>Associates <code class="docutils literal"><span class="pre">l</span></code> with the current task. If <code class="docutils literal"><span class="pre">l</span></code> is already locked by a different task, waits for it to become available. The same task can acquire the lock multiple times. Each &#8220;lock&#8221; must be matched by an &#8220;unlock&#8221;</p>
-</dd></dl>
-
-<dl class="function">
-<dt id="Base.unlock">
-<code class="descname">unlock</code><span class="sig-paren">(</span><em>l::ReentrantLock</em><span class="sig-paren">)</span><a class="headerlink" href="#Base.unlock" title="Permalink to this definition">¶</a></dt>
-<dd><p>Releases ownership of the lock by the current task. If the lock had been acquired before, it just decrements an internal counter and returns immediately.</p>
 </dd></dl>
 
 <dl class="function">
@@ -708,59 +696,49 @@
 <h2>General Parallel Computing Support<a class="headerlink" href="#general-parallel-computing-support" title="Permalink to this headline">¶</a></h2>
 <dl class="function">
 <dt id="Base.addprocs">
-<code class="descname">addprocs</code><span class="sig-paren">(</span><em>n::Integer; exeflags=``</em><span class="sig-paren">)</span> &rarr; List of process identifiers<a class="headerlink" href="#Base.addprocs" title="Permalink to this definition">¶</a></dt>
-<dd><p>Launches workers using the in-built <code class="docutils literal"><span class="pre">LocalManager</span></code> which only launches workers on the local host. This can be used to take advantage of multiple cores. <code class="docutils literal"><span class="pre">addprocs(4)</span></code> will add 4 processes on the local machine.</p>
+<code class="descname">addprocs</code><span class="sig-paren">(</span><em>np::Integer; restrict=true</em>, <em>kwargs...</em><span class="sig-paren">)</span> &rarr; List of process identifiers<a class="headerlink" href="#Base.addprocs" title="Permalink to this definition">¶</a></dt>
+<dd><p>Launches workers using the in-built <code class="docutils literal"><span class="pre">LocalManager</span></code> which only launches workers on the local host. This can be used to take advantage of multiple cores. <code class="docutils literal"><span class="pre">addprocs(4)</span></code> will add 4 processes on the local machine. If <code class="docutils literal"><span class="pre">restrict</span></code> is <code class="docutils literal"><span class="pre">true</span></code>, binding is restricted to <code class="docutils literal"><span class="pre">127.0.0.1</span></code>.</p>
 </dd></dl>
 
 <dl class="function">
 <dt>
-<code class="descname">addprocs</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &rarr; List of process identifiers</dt>
-<dd><p>Equivalent to <code class="docutils literal"><span class="pre">addprocs(Sys.CPU_CORES)</span></code></p>
+<code class="descname">addprocs</code><span class="sig-paren">(</span><em>; kwargs...</em><span class="sig-paren">)</span> &rarr; List of process identifiers</dt>
+<dd><p>Equivalent to <code class="docutils literal"><span class="pre">addprocs(Sys.CPU_CORES;</span> <span class="pre">kwargs...)</span></code></p>
 <p>Note that workers do not run a <code class="docutils literal"><span class="pre">.juliarc.jl</span></code> startup script, nor do they synchronize their global state (such as global variables, new method definitions, and loaded modules) with any of the other running processes.</p>
 </dd></dl>
 
 <dl class="function">
 <dt>
-<code class="descname">addprocs</code><span class="sig-paren">(</span><em>machines; keyword_args...</em><span class="sig-paren">)</span> &rarr; List of process identifiers</dt>
+<code class="descname">addprocs</code><span class="sig-paren">(</span><em>machines; tunnel=false</em>, <em>sshflags=``</em>, <em>max_parallel=10</em>, <em>kwargs...</em><span class="sig-paren">)</span> &rarr; List of process identifiers</dt>
 <dd><p>Add processes on remote machines via SSH. Requires <code class="docutils literal"><span class="pre">julia</span></code> to be installed in the same location on each node, or to be available via a shared file system.</p>
-<p><code class="docutils literal"><span class="pre">machines</span></code> is a vector of machine specifications.  Worker are started for each specification.</p>
+<p><code class="docutils literal"><span class="pre">machines</span></code> is a vector of machine specifications. Workers are started for each specification.</p>
 <p>A machine specification is either a string <code class="docutils literal"><span class="pre">machine_spec</span></code> or a tuple - <code class="docutils literal"><span class="pre">(machine_spec,</span> <span class="pre">count)</span></code>.</p>
 <p><code class="docutils literal"><span class="pre">machine_spec</span></code> is a string of the form <code class="docutils literal"><span class="pre">[user&#64;]host[:port]</span> <span class="pre">[bind_addr[:port]]</span></code>. <code class="docutils literal"><span class="pre">user</span></code> defaults to current user, <code class="docutils literal"><span class="pre">port</span></code> to the standard ssh port. If <code class="docutils literal"><span class="pre">[bind_addr[:port]]</span></code> is specified, other workers will connect to this worker at the specified <code class="docutils literal"><span class="pre">bind_addr</span></code> and <code class="docutils literal"><span class="pre">port</span></code>.</p>
 <p><code class="docutils literal"><span class="pre">count</span></code> is the number of workers to be launched on the specified host. If specified as <code class="docutils literal"><span class="pre">:auto</span></code> it will launch as many workers as the number of cores on the specific host.</p>
 <p>Keyword arguments:</p>
-<ul>
-<li><p class="first"><code class="docutils literal"><span class="pre">tunnel</span></code>: if <code class="docutils literal"><span class="pre">true</span></code> then SSH tunneling will be used to connect to the worker from the           master process. Default is <code class="docutils literal"><span class="pre">false</span></code>.</p>
-</li>
-<li><p class="first"><code class="docutils literal"><span class="pre">sshflags</span></code>: specifies additional ssh options, e.g.</p>
-<div class="highlight-julia"><div class="highlight"><pre><span></span><span class="n">sshflags</span><span class="o">=</span><span class="sb">`-i /home/foo/bar.pem`</span>
-</pre></div>
-</div>
-</li>
-<li><p class="first"><code class="docutils literal"><span class="pre">max_parallel</span></code>: specifies the maximum number of workers connected to in parallel at a host.                 Defaults to 10.</p>
-</li>
-<li><p class="first"><code class="docutils literal"><span class="pre">dir</span></code>: specifies the working directory on the workers. Defaults to the host&#8217;s current        directory (as found by <code class="docutils literal"><span class="pre">pwd()</span></code>)</p>
-</li>
-<li><p class="first"><code class="docutils literal"><span class="pre">exename</span></code>: name of the <code class="docutils literal"><span class="pre">julia</span></code> executable. Defaults to <code class="docutils literal"><span class="pre">&quot;$JULIA_HOME/julia&quot;</span></code> or            <code class="docutils literal"><span class="pre">&quot;$JULIA_HOME/julia-debug&quot;</span></code> as the case may be.</p>
-</li>
-<li><p class="first"><code class="docutils literal"><span class="pre">exeflags</span></code>: additional flags passed to the worker processes.</p>
-</li>
-<li><p class="first"><code class="docutils literal"><span class="pre">topology</span></code>: Specifies how the workers connect to each other. Sending a message           between unconnected workers results in an error.</p>
 <ul class="simple">
+<li><code class="docutils literal"><span class="pre">tunnel</span></code>: if <code class="docutils literal"><span class="pre">true</span></code> then SSH tunneling will be used to connect to the worker from the           master process. Default is <code class="docutils literal"><span class="pre">false</span></code>.</li>
+<li><code class="docutils literal"><span class="pre">sshflags</span></code>: specifies additional ssh options, e.g. <code class="docutils literal"><span class="pre">sshflags=`-i</span> <span class="pre">/home/foo/bar.pem`</span></code></li>
+<li><code class="docutils literal"><span class="pre">max_parallel</span></code>: specifies the maximum number of workers connected to in parallel at a host.                 Defaults to 10.</li>
+<li><code class="docutils literal"><span class="pre">dir</span></code>: specifies the working directory on the workers. Defaults to the host&#8217;s current        directory (as found by <code class="docutils literal"><span class="pre">pwd()</span></code>)</li>
+<li><code class="docutils literal"><span class="pre">exename</span></code>: name of the <code class="docutils literal"><span class="pre">julia</span></code> executable. Defaults to <code class="docutils literal"><span class="pre">&quot;$JULIA_HOME/julia&quot;</span></code> or            <code class="docutils literal"><span class="pre">&quot;$JULIA_HOME/julia-debug&quot;</span></code> as the case may be.</li>
+<li><code class="docutils literal"><span class="pre">exeflags</span></code>: additional flags passed to the worker processes.</li>
+<li><code class="docutils literal"><span class="pre">topology</span></code>: Specifies how the workers connect to each other. Sending a message           between unconnected workers results in an error.<ul>
 <li><code class="docutils literal"><span class="pre">topology=:all_to_all</span></code>  :  All processes are connected to each other.                   This is the default.</li>
-<li><code class="docutils literal"><span class="pre">topology=:master_slave</span></code>  :  Only the driver process, i.e. pid 1 connects to the                     workers. The workers do not connect to each other.</li>
-<li><code class="docutils literal"><span class="pre">topology=:custom</span></code>  :  The <code class="docutils literal"><span class="pre">launch</span></code> method of the cluster manager specifes the               connection topology via fields <code class="docutils literal"><span class="pre">ident</span></code> and <code class="docutils literal"><span class="pre">connect_idents</span></code> in               <code class="docutils literal"><span class="pre">WorkerConfig</span></code>. A worker with a cluster manager identity <code class="docutils literal"><span class="pre">ident</span></code>               will connect to all workers specified in <code class="docutils literal"><span class="pre">connect_idents</span></code>.</li>
+<li><code class="docutils literal"><span class="pre">topology=:master_slave</span></code>  :  Only the driver process, i.e. <code class="docutils literal"><span class="pre">pid</span></code> 1 connects to the                     workers. The workers do not connect to each other.</li>
+<li><code class="docutils literal"><span class="pre">topology=:custom</span></code>  :  The <code class="docutils literal"><span class="pre">launch</span></code> method of the cluster manager specifies the               connection topology via fields <code class="docutils literal"><span class="pre">ident</span></code> and <code class="docutils literal"><span class="pre">connect_idents</span></code> in               <code class="docutils literal"><span class="pre">WorkerConfig</span></code>. A worker with a cluster manager identity <code class="docutils literal"><span class="pre">ident</span></code>               will connect to all workers specified in <code class="docutils literal"><span class="pre">connect_idents</span></code>.</li>
 </ul>
 </li>
 </ul>
 <p>Environment variables :</p>
-<p>If the master process fails to establish a connection with a newly launched worker within 60.0 seconds, the worker treats it a fatal situation and terminates. This timeout can be controlled via environment variable <code class="docutils literal"><span class="pre">JULIA_WORKER_TIMEOUT</span></code>. The value of <code class="docutils literal"><span class="pre">JULIA_WORKER_TIMEOUT</span></code> on the master process, specifies the number of seconds a newly launched worker waits for connection establishment.</p>
+<p>If the master process fails to establish a connection with a newly launched worker within 60.0 seconds, the worker treats it as a fatal situation and terminates. This timeout can be controlled via environment variable <code class="docutils literal"><span class="pre">JULIA_WORKER_TIMEOUT</span></code>. The value of <code class="docutils literal"><span class="pre">JULIA_WORKER_TIMEOUT</span></code> on the master process specifies the number of seconds a newly launched worker waits for connection establishment.</p>
 </dd></dl>
 
 <dl class="function">
 <dt>
 <code class="descname">addprocs</code><span class="sig-paren">(</span><em>manager::ClusterManager; kwargs...</em><span class="sig-paren">)</span> &rarr; List of process identifiers</dt>
 <dd><p>Launches worker processes via the specified cluster manager.</p>
-<p>For example Beowulf clusters are  supported via a custom cluster manager implemented in package <code class="docutils literal"><span class="pre">ClusterManagers</span></code>.</p>
+<p>For example Beowulf clusters are  supported via a custom cluster manager implemented in the package <code class="docutils literal"><span class="pre">ClusterManagers.jl</span></code>.</p>
 <p>The number of seconds a newly launched worker waits for connection establishment from the master can be specified via variable <code class="docutils literal"><span class="pre">JULIA_WORKER_TIMEOUT</span></code> in the worker process&#8217;s environment. Relevant only when using TCP/IP as transport.</p>
 </dd></dl>
 
@@ -783,6 +761,12 @@
 </dd></dl>
 
 <dl class="function">
+<dt>
+<code class="descname">procs</code><span class="sig-paren">(</span><em>pid::Integer</em><span class="sig-paren">)</span></dt>
+<dd><p>Returns a list of all process identifiers on the same physical node. Specifically all workers bound to the same ip-address as <code class="docutils literal"><span class="pre">pid</span></code> are returned.</p>
+</dd></dl>
+
+<dl class="function">
 <dt id="Base.workers">
 <code class="descname">workers</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#Base.workers" title="Permalink to this definition">¶</a></dt>
 <dd><p>Returns a list of all worker process identifiers.</p>
@@ -790,13 +774,19 @@
 
 <dl class="function">
 <dt id="Base.rmprocs">
-<code class="descname">rmprocs</code><span class="sig-paren">(</span><em>pids...</em><span class="sig-paren">)</span><a class="headerlink" href="#Base.rmprocs" title="Permalink to this definition">¶</a></dt>
-<dd><p>Removes the specified workers.</p>
+<code class="descname">rmprocs</code><span class="sig-paren">(</span><em>pids...; waitfor=0.0</em><span class="sig-paren">)</span><a class="headerlink" href="#Base.rmprocs" title="Permalink to this definition">¶</a></dt>
+<dd><p>Removes the specified workers. Note that only process 1 can add or remove workers - if another worker tries to call <code class="docutils literal"><span class="pre">rmprocs</span></code>, an error will be thrown. The optional argument <code class="docutils literal"><span class="pre">waitfor</span></code> determines how long the first process will wait for the workers to shut down.</p>
 </dd></dl>
 
 <dl class="function">
 <dt id="Base.interrupt">
-<code class="descname">interrupt</code><span class="sig-paren">(</span><span class="optional">[</span><em>pids...</em><span class="optional">]</span><span class="sig-paren">)</span><a class="headerlink" href="#Base.interrupt" title="Permalink to this definition">¶</a></dt>
+<code class="descname">interrupt</code><span class="sig-paren">(</span><em>pids::AbstractVector=workers()</em><span class="sig-paren">)</span><a class="headerlink" href="#Base.interrupt" title="Permalink to this definition">¶</a></dt>
+<dd><p>Interrupt the current executing task on the specified workers. This is equivalent to pressing Ctrl-C on the local machine. If no arguments are given, all workers are interrupted.</p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<code class="descname">interrupt</code><span class="sig-paren">(</span><em>pids::Integer...</em><span class="sig-paren">)</span></dt>
 <dd><p>Interrupt the current executing task on the specified workers. This is equivalent to pressing Ctrl-C on the local machine. If no arguments are given, all workers are interrupted.</p>
 </dd></dl>
 
@@ -834,39 +824,40 @@
 
 <dl class="function">
 <dt id="Base.remotecall">
-<code class="descname">remotecall</code><span class="sig-paren">(</span><em>func</em>, <em>id</em>, <em>args...; kwargs...</em><span class="sig-paren">)</span><a class="headerlink" href="#Base.remotecall" title="Permalink to this definition">¶</a></dt>
-<dd><p>Call a function asynchronously on the given arguments on the specified process. Returns a <code class="docutils literal"><span class="pre">Future</span></code>. Keyword arguments, if any, are passed through to <code class="docutils literal"><span class="pre">func</span></code>.</p>
+<code class="descname">remotecall</code><span class="sig-paren">(</span><em>f</em>, <em>id::Integer</em>, <em>args...; kwargs...</em><span class="sig-paren">)</span> &rarr; Future<a class="headerlink" href="#Base.remotecall" title="Permalink to this definition">¶</a></dt>
+<dd><p>Call a function <code class="docutils literal"><span class="pre">f</span></code> asynchronously on the given arguments on the specified process. Returns a <code class="docutils literal"><span class="pre">Future</span></code>. Keyword arguments, if any, are passed through to <code class="docutils literal"><span class="pre">f</span></code>.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="Base.Base.process_messages">
+<code class="descclassname">Base.</code><code class="descname">process_messages</code><span class="sig-paren">(</span><em>r_stream::IO</em>, <em>w_stream::IO</em>, <em>incoming::Bool=true</em><span class="sig-paren">)</span><a class="headerlink" href="#Base.Base.process_messages" title="Permalink to this definition">¶</a></dt>
+<dd><p>Called by cluster managers using custom transports. It should be called when the custom transport implementation receives the first message from a remote worker. The custom transport must manage a logical connection to the remote worker and provide two <code class="docutils literal"><span class="pre">IO</span></code> objects, one for incoming messages and the other for messages addressed to the remote worker. If <code class="docutils literal"><span class="pre">incoming</span></code> is <code class="docutils literal"><span class="pre">true</span></code>, the remote peer initiated the connection. Whichever of the pair initiates the connection sends the cluster cookie and its Julia version number to perform the authentication handshake.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="Base.RemoteException">
+<code class="descname">RemoteException</code><span class="sig-paren">(</span><em>captured</em><span class="sig-paren">)</span><a class="headerlink" href="#Base.RemoteException" title="Permalink to this definition">¶</a></dt>
+<dd><p>Exceptions  on remote computations are captured and rethrown locally.  A <code class="docutils literal"><span class="pre">RemoteException</span></code> wraps the pid of the worker and a captured exception. A <code class="docutils literal"><span class="pre">CapturedException</span></code> captures the remote exception and a serializable form of the call stack when the exception was raised.</p>
 </dd></dl>
 
 <dl class="function">
 <dt id="Base.Future">
-<code class="descname">Future</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#Base.Future" title="Permalink to this definition">¶</a></dt>
-<dd><p>Create a <code class="docutils literal"><span class="pre">Future</span></code> on the local machine.</p>
-</dd></dl>
-
-<dl class="function">
-<dt>
-<code class="descname">Future</code><span class="sig-paren">(</span><em>n</em><span class="sig-paren">)</span></dt>
-<dd><p>Create a <code class="docutils literal"><span class="pre">Future</span></code> on process <code class="docutils literal"><span class="pre">n</span></code>.</p>
+<code class="descname">Future</code><span class="sig-paren">(</span><em>pid::Integer=myid()</em><span class="sig-paren">)</span><a class="headerlink" href="#Base.Future" title="Permalink to this definition">¶</a></dt>
+<dd><p>Create a <code class="docutils literal"><span class="pre">Future</span></code> on process <code class="docutils literal"><span class="pre">pid</span></code>. The default <code class="docutils literal"><span class="pre">pid</span></code> is the current process.</p>
 </dd></dl>
 
 <dl class="function">
 <dt id="Base.RemoteChannel">
-<code class="descname">RemoteChannel</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#Base.RemoteChannel" title="Permalink to this definition">¶</a></dt>
-<dd><p>Make an reference to a <code class="docutils literal"><span class="pre">Channel{Any}(1)</span></code> on the local machine.</p>
+<code class="descname">RemoteChannel</code><span class="sig-paren">(</span><em>pid::Integer=myid()</em><span class="sig-paren">)</span><a class="headerlink" href="#Base.RemoteChannel" title="Permalink to this definition">¶</a></dt>
+<dd><p>Make a reference to a <code class="docutils literal"><span class="pre">Channel{Any}(1)</span></code> on process <code class="docutils literal"><span class="pre">pid</span></code>. The default <code class="docutils literal"><span class="pre">pid</span></code> is the current process.</p>
 </dd></dl>
 
 <dl class="function">
 <dt>
-<code class="descname">RemoteChannel</code><span class="sig-paren">(</span><em>n</em><span class="sig-paren">)</span></dt>
-<dd><p>Make an reference to a <code class="docutils literal"><span class="pre">Channel{Any}(1)</span></code> on process <code class="docutils literal"><span class="pre">n</span></code>.</p>
-</dd></dl>
-
-<dl class="function">
-<dt>
-<code class="descname">RemoteChannel</code><span class="sig-paren">(</span><em>f::Function</em>, <em>pid</em><span class="sig-paren">)</span></dt>
+<code class="descname">RemoteChannel</code><span class="sig-paren">(</span><em>f::Function</em>, <em>pid::Integer=myid()</em><span class="sig-paren">)</span></dt>
 <dd><p>Create references to remote channels of a specific size and type. <code class="docutils literal"><span class="pre">f()</span></code> is a function that when executed on <code class="docutils literal"><span class="pre">pid</span></code> must return an implementation of an <code class="docutils literal"><span class="pre">AbstractChannel</span></code>.</p>
 <p>For example, <code class="docutils literal"><span class="pre">RemoteChannel(()-&gt;Channel{Int}(10),</span> <span class="pre">pid)</span></code>, will return a reference to a channel of type <code class="docutils literal"><span class="pre">Int</span></code> and size 10 on <code class="docutils literal"><span class="pre">pid</span></code>.</p>
+<p>The default <code class="docutils literal"><span class="pre">pid</span></code> is the current process.</p>
 </dd></dl>
 
 <dl class="function">
@@ -899,57 +890,63 @@
 
 <dl class="function">
 <dt id="Base.remotecall_wait">
-<code class="descname">remotecall_wait</code><span class="sig-paren">(</span><em>func</em>, <em>id</em>, <em>args...; kwargs...</em><span class="sig-paren">)</span><a class="headerlink" href="#Base.remotecall_wait" title="Permalink to this definition">¶</a></dt>
-<dd><p>Perform <code class="docutils literal"><span class="pre">wait(remotecall(...))</span></code> in one message. Keyword arguments, if any, are passed through to <code class="docutils literal"><span class="pre">func</span></code>.</p>
+<code class="descname">remotecall_wait</code><span class="sig-paren">(</span><em>f</em>, <em>id::Integer</em>, <em>args...; kwargs...</em><span class="sig-paren">)</span><a class="headerlink" href="#Base.remotecall_wait" title="Permalink to this definition">¶</a></dt>
+<dd><p>Perform a faster <code class="docutils literal"><span class="pre">wait(remotecall(...))</span></code> in one message on the <code class="docutils literal"><span class="pre">Worker</span></code> specified by worker id <code class="docutils literal"><span class="pre">id</span></code>. Keyword arguments, if any, are passed through to <code class="docutils literal"><span class="pre">f</span></code>.</p>
 </dd></dl>
 
 <dl class="function">
 <dt id="Base.remotecall_fetch">
-<code class="descname">remotecall_fetch</code><span class="sig-paren">(</span><em>func</em>, <em>id</em>, <em>args...; kwargs...</em><span class="sig-paren">)</span><a class="headerlink" href="#Base.remotecall_fetch" title="Permalink to this definition">¶</a></dt>
-<dd><p>Perform <code class="docutils literal"><span class="pre">fetch(remotecall(...))</span></code> in one message.  Keyword arguments, if any, are passed through to <code class="docutils literal"><span class="pre">func</span></code>. Any remote exceptions are captured in a <code class="docutils literal"><span class="pre">RemoteException</span></code> and thrown.</p>
+<code class="descname">remotecall_fetch</code><span class="sig-paren">(</span><em>f</em>, <em>id::Integer</em>, <em>args...; kwargs...</em><span class="sig-paren">)</span><a class="headerlink" href="#Base.remotecall_fetch" title="Permalink to this definition">¶</a></dt>
+<dd><p>Perform <code class="docutils literal"><span class="pre">fetch(remotecall(...))</span></code> in one message. Keyword arguments, if any, are passed through to <code class="docutils literal"><span class="pre">f</span></code>. Any remote exceptions are captured in a <code class="docutils literal"><span class="pre">RemoteException</span></code> and thrown.</p>
 </dd></dl>
 
 <dl class="function">
 <dt id="Base.put!">
-<code class="descname">put!</code><span class="sig-paren">(</span><em>RemoteChannel</em>, <em>value</em><span class="sig-paren">)</span><a class="headerlink" href="#Base.put!" title="Permalink to this definition">¶</a></dt>
-<dd><p>Store a value to the remote channel. If the channel is full, blocks until space is available. Returns its first argument.</p>
+<code class="descname">put!</code><span class="sig-paren">(</span><em>rr::RemoteChannel</em>, <em>args...</em><span class="sig-paren">)</span><a class="headerlink" href="#Base.put!" title="Permalink to this definition">¶</a></dt>
+<dd><p>Store a set of values to the <code class="docutils literal"><span class="pre">RemoteChannel</span></code>. If the channel is full, blocks until space is available. Returns its first argument.</p>
 </dd></dl>
 
 <dl class="function">
 <dt>
-<code class="descname">put!</code><span class="sig-paren">(</span><em>Future</em>, <em>value</em><span class="sig-paren">)</span></dt>
-<dd><p>Store a value to a future. Future&#8217;s are write-once remote references. A <code class="docutils literal"><span class="pre">put!</span></code> on an already set <code class="docutils literal"><span class="pre">Future</span></code> throws an Exception. All asynchronous remote calls return <code class="docutils literal"><span class="pre">Future</span></code>s and set the value to the return value of the call upon completion.</p>
+<code class="descname">put!</code><span class="sig-paren">(</span><em>rr::Future</em>, <em>v</em><span class="sig-paren">)</span></dt>
+<dd><p>Store a value to a <code class="docutils literal"><span class="pre">Future</span></code> <code class="docutils literal"><span class="pre">rr</span></code>. <code class="docutils literal"><span class="pre">Future</span></code>s are write-once remote references. A <code class="docutils literal"><span class="pre">put!</span></code> on an already set <code class="docutils literal"><span class="pre">Future</span></code> throws an <code class="docutils literal"><span class="pre">Exception</span></code>. All asynchronous remote calls return <code class="docutils literal"><span class="pre">Future</span></code>s and set the value to the return value of the call upon completion.</p>
 </dd></dl>
 
 <dl class="function">
 <dt>
-<code class="descname">put!</code><span class="sig-paren">(</span><em>Channel</em>, <em>value</em><span class="sig-paren">)</span></dt>
-<dd><p>Appends an item to the channel. Blocks if the channel is full.</p>
+<code class="descname">put!</code><span class="sig-paren">(</span><em>c::Channel</em>, <em>v</em><span class="sig-paren">)</span></dt>
+<dd><p>Appends an item <code class="docutils literal"><span class="pre">v</span></code> to the channel <code class="docutils literal"><span class="pre">c</span></code>. Blocks if the channel is full.</p>
 </dd></dl>
 
 <dl class="function">
 <dt id="Base.take!">
-<code class="descname">take!</code><span class="sig-paren">(</span><em>RemoteChannel</em><span class="sig-paren">)</span><a class="headerlink" href="#Base.take!" title="Permalink to this definition">¶</a></dt>
-<dd><p>Fetch a value from a remote channel, also removing it in the processs.</p>
+<code class="descname">take!</code><span class="sig-paren">(</span><em>rr::RemoteChannel</em>, <em>args...</em><span class="sig-paren">)</span><a class="headerlink" href="#Base.take!" title="Permalink to this definition">¶</a></dt>
+<dd><p>Fetch value(s) from a remote channel, removing the value(s) in the processs.</p>
 </dd></dl>
 
 <dl class="function">
 <dt>
-<code class="descname">take!</code><span class="sig-paren">(</span><em>Channel</em><span class="sig-paren">)</span></dt>
+<code class="descname">take!</code><span class="sig-paren">(</span><em>c::Channel</em><span class="sig-paren">)</span></dt>
 <dd><p>Removes and returns a value from a <code class="docutils literal"><span class="pre">Channel</span></code>. Blocks till data is available.</p>
 </dd></dl>
 
 <dl class="function">
 <dt id="Base.isready">
-<code class="descname">isready</code><span class="sig-paren">(</span><em>r::RemoteChannel</em><span class="sig-paren">)</span><a class="headerlink" href="#Base.isready" title="Permalink to this definition">¶</a></dt>
+<code class="descname">isready</code><span class="sig-paren">(</span><em>c::Channel</em><span class="sig-paren">)</span><a class="headerlink" href="#Base.isready" title="Permalink to this definition">¶</a></dt>
+<dd><p>Determine whether a <code class="docutils literal"><span class="pre">Channel</span></code> has a value stored to it. <code class="docutils literal"><span class="pre">isready</span></code> on <code class="docutils literal"><span class="pre">Channel</span></code>s is non-blocking.</p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<code class="descname">isready</code><span class="sig-paren">(</span><em>rr::RemoteChannel</em>, <em>args...</em><span class="sig-paren">)</span></dt>
 <dd><p>Determine whether a <code class="docutils literal"><span class="pre">RemoteChannel</span></code> has a value stored to it. Note that this function can cause race conditions, since by the time you receive its result it may no longer be true. However, it can be safely used on a <code class="docutils literal"><span class="pre">Future</span></code> since they are assigned only once.</p>
 </dd></dl>
 
 <dl class="function">
 <dt>
-<code class="descname">isready</code><span class="sig-paren">(</span><em>r::Future</em><span class="sig-paren">)</span></dt>
+<code class="descname">isready</code><span class="sig-paren">(</span><em>rr::Future</em><span class="sig-paren">)</span></dt>
 <dd><p>Determine whether a <code class="docutils literal"><span class="pre">Future</span></code> has a value stored to it.</p>
-<p>If the argument <code class="docutils literal"><span class="pre">Future</span></code> is owned by a different node, this call will block to wait for the answer. It is recommended to wait for <code class="docutils literal"><span class="pre">r</span></code> in a separate task instead, or to use a local <code class="docutils literal"><span class="pre">Channel</span></code> as a proxy:</p>
+<p>If the argument <code class="docutils literal"><span class="pre">Future</span></code> is owned by a different node, this call will block to wait for the answer. It is recommended to wait for <code class="docutils literal"><span class="pre">rr</span></code> in a separate task instead or to use a local <code class="docutils literal"><span class="pre">Channel</span></code> as a proxy:</p>
 <div class="highlight-julia"><div class="highlight"><pre><span></span><span class="n">c</span> <span class="o">=</span> <span class="n">Channel</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
 <span class="p">@</span><span class="n">async</span> <span class="n">put!</span><span class="p">(</span><span class="n">c</span><span class="p">,</span> <span class="n">remotecall_fetch</span><span class="p">(</span><span class="n">long_computation</span><span class="p">,</span> <span class="n">p</span><span class="p">))</span>
 <span class="n">isready</span><span class="p">(</span><span class="n">c</span><span class="p">)</span>  <span class="c"># will not block</span>
@@ -959,7 +956,7 @@
 
 <dl class="function">
 <dt id="Base.close">
-<code class="descname">close</code><span class="sig-paren">(</span><em>Channel</em><span class="sig-paren">)</span><a class="headerlink" href="#Base.close" title="Permalink to this definition">¶</a></dt>
+<code class="descname">close</code><span class="sig-paren">(</span><em>c::Channel</em><span class="sig-paren">)</span><a class="headerlink" href="#Base.close" title="Permalink to this definition">¶</a></dt>
 <dd><p>Closes a channel. An exception is thrown by:</p>
 <ul class="simple">
 <li><code class="docutils literal"><span class="pre">put!</span></code> on a closed channel.</li>
@@ -1103,26 +1100,37 @@
 
 <dl class="function">
 <dt id="Base.Base.remoteref_id">
-<code class="descclassname">Base.</code><code class="descname">remoteref_id</code><span class="sig-paren">(</span><em>r::AbstractRemoteRef</em><span class="sig-paren">)</span> &rarr; (whence, id)<a class="headerlink" href="#Base.Base.remoteref_id" title="Permalink to this definition">¶</a></dt>
-<dd><p>A low-level API which returns the unique identifying tuple for a remote reference. A reference id is a tuple of two elements - pid where the reference was created from and a one-up number from that node.</p>
+<code class="descclassname">Base.</code><code class="descname">remoteref_id</code><span class="sig-paren">(</span><em>r::AbstractRemoteRef</em><span class="sig-paren">)</span> &rarr; RRID<a class="headerlink" href="#Base.Base.remoteref_id" title="Permalink to this definition">¶</a></dt>
+<dd><p><code class="docutils literal"><span class="pre">Future</span></code>s and <code class="docutils literal"><span class="pre">RemoteChannel</span></code>s are identified by fields:</p>
+<p><code class="docutils literal"><span class="pre">where</span></code> - refers to the node where the underlying object/storage referred to by the reference actually exists.</p>
+<p><code class="docutils literal"><span class="pre">whence</span></code> - refers to the node the remote reference was created from.  Note that this is different from the node where the underlying object  referred to actually exists. For example calling <code class="docutils literal"><span class="pre">RemoteChannel(2)</span></code>  from the master process would result in a <code class="docutils literal"><span class="pre">where</span></code> value of 2 and  a <code class="docutils literal"><span class="pre">whence</span></code> value of 1.</p>
+<p><code class="docutils literal"><span class="pre">id</span></code> is unique across all references created from the worker specified by <code class="docutils literal"><span class="pre">whence</span></code>.</p>
+<p>Taken together,  <code class="docutils literal"><span class="pre">whence</span></code> and <code class="docutils literal"><span class="pre">id</span></code> uniquely identify a reference across all workers.</p>
+<p><code class="docutils literal"><span class="pre">Base.remoteref_id</span></code> is a low-level API which returns a <code class="docutils literal"><span class="pre">Base.RRID</span></code>  object that wraps <code class="docutils literal"><span class="pre">whence</span></code> and <code class="docutils literal"><span class="pre">id</span></code> values of a remote reference.</p>
 </dd></dl>
 
 <dl class="function">
 <dt id="Base.Base.channel_from_id">
-<code class="descclassname">Base.</code><code class="descname">channel_from_id</code><span class="sig-paren">(</span><em>refid</em><span class="sig-paren">)</span> &rarr; c<a class="headerlink" href="#Base.Base.channel_from_id" title="Permalink to this definition">¶</a></dt>
-<dd><p>A low-level API which returns the backing AbstractChannel for an id returned by <code class="docutils literal"><span class="pre">remoteref_id</span></code>. The call is valid only on the node where the backing channel exists.</p>
+<code class="descclassname">Base.</code><code class="descname">channel_from_id</code><span class="sig-paren">(</span><em>id</em><span class="sig-paren">)</span> &rarr; c<a class="headerlink" href="#Base.Base.channel_from_id" title="Permalink to this definition">¶</a></dt>
+<dd><p>A low-level API which returns the backing <code class="docutils literal"><span class="pre">AbstractChannel</span></code> for an <code class="docutils literal"><span class="pre">id</span></code> returned by <a class="reference internal" href="#Base.Base.remoteref_id" title="Base.Base.remoteref_id"><code class="xref jl jl-func docutils literal"><span class="pre">Base.remoteref_id()</span></code></a>. The call is valid only on the node where the backing channel exists.</p>
 </dd></dl>
 
 <dl class="function">
 <dt id="Base.Base.worker_id_from_socket">
-<code class="descclassname">Base.</code><code class="descname">worker_id_from_socket</code><span class="sig-paren">(</span><em>s::IO</em><span class="sig-paren">)</span> &rarr; pid<a class="headerlink" href="#Base.Base.worker_id_from_socket" title="Permalink to this definition">¶</a></dt>
-<dd><p>A low-level API which given a <code class="docutils literal"><span class="pre">IO</span></code> connection, returns the pid of the worker it is connected to. This is useful when writing custom <code class="docutils literal"><span class="pre">serialize</span></code> methods for a type, which optimizes the data written out depending on the receiving process id.</p>
+<code class="descclassname">Base.</code><code class="descname">worker_id_from_socket</code><span class="sig-paren">(</span><em>s</em><span class="sig-paren">)</span> &rarr; pid<a class="headerlink" href="#Base.Base.worker_id_from_socket" title="Permalink to this definition">¶</a></dt>
+<dd><p>A low-level API which given a <code class="docutils literal"><span class="pre">IO</span></code> connection or a <code class="docutils literal"><span class="pre">Worker</span></code>, returns the <code class="docutils literal"><span class="pre">pid</span></code> of the worker it is connected to. This is useful when writing custom <code class="docutils literal"><span class="pre">serialize</span></code> methods for a type, which optimizes the data written out depending on the receiving process id.</p>
 </dd></dl>
 
 <dl class="function">
 <dt id="Base.Base.cluster_cookie">
-<code class="descclassname">Base.</code><code class="descname">cluster_cookie</code><span class="sig-paren">(</span><span class="optional">[</span><em>cookie</em><span class="optional">]</span><span class="sig-paren">)</span> &rarr; cookie<a class="headerlink" href="#Base.Base.cluster_cookie" title="Permalink to this definition">¶</a></dt>
-<dd><p>Returns the cluster cookie. If a cookie is passed, also sets it as the cluster cookie.</p>
+<code class="descclassname">Base.</code><code class="descname">cluster_cookie</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &rarr; cookie<a class="headerlink" href="#Base.Base.cluster_cookie" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the cluster cookie.</p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<code class="descclassname">Base.</code><code class="descname">cluster_cookie</code><span class="sig-paren">(</span><em>cookie</em><span class="sig-paren">)</span> &rarr; cookie</dt>
+<dd><p>Sets the passed cookie as the cluster cookie, then returns it.</p>
 </dd></dl>
 
 </div>
@@ -1180,6 +1188,24 @@
 <p>This experimental interface supports Julia&#8217;s multi-threading
 capabilities. Types and function described here might (and likely
 will) change in the future.</p>
+<dl class="function">
+<dt id="Base.Threads.threadid">
+<code class="descclassname">Threads.</code><code class="descname">threadid</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#Base.Threads.threadid" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the ID number of the current thread of execution. The master thread has ID <code class="docutils literal"><span class="pre">1</span></code>.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="Base.Threads.nthreads">
+<code class="descclassname">Threads.</code><code class="descname">nthreads</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#Base.Threads.nthreads" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the number of threads available to the Julia process. This is the inclusive upper bound on <code class="docutils literal"><span class="pre">threadid()</span></code>.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="Base.Threads.&#64;threads">
+<code class="descclassname">Threads.</code><code class="descname">&#64;threads</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#Base.Threads.@threads" title="Permalink to this definition">¶</a></dt>
+<dd><p>A macro to parallelize a for-loop to run with multiple threads. This spawns <code class="docutils literal"><span class="pre">nthreads()</span></code> number of threads, splits the iteration space amongst them, and iterates in parallel. A barrier is placed at the end of the loop which waits for all the threads to finish execution, and the loop returns.</p>
+</dd></dl>
+
 <dl class="function">
 <dt id="Base.Threads.Atomic{T}">
 <code class="descclassname">Threads.</code><code class="descname">Atomic{T}</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#Base.Threads.Atomic{T}" title="Permalink to this definition">¶</a></dt>
@@ -1286,6 +1312,103 @@ will) change in the future.</p>
 </dd></dl>
 
 </div>
+<div class="section" id="ccall-using-a-threadpool-experimental">
+<h2>ccall using a threadpool (Experimental)<a class="headerlink" href="#ccall-using-a-threadpool-experimental" title="Permalink to this headline">¶</a></h2>
+<dl class="function">
+<dt id="Base.&#64;threadcall">
+<code class="descname">&#64;threadcall</code><span class="sig-paren">(</span><em>(cfunc</em>, <em>clib)</em>, <em>rettype</em>, <em>(argtypes...)</em>, <em>argvals...</em><span class="sig-paren">)</span><a class="headerlink" href="#Base.@threadcall" title="Permalink to this definition">¶</a></dt>
+<dd><p>The <code class="docutils literal"><span class="pre">&#64;threadcall</span></code> macro is called in the same way as <code class="docutils literal"><span class="pre">ccall</span></code> but does the work in a different thread. This is useful when you want to call a blocking C function without causing the main <code class="docutils literal"><span class="pre">julia</span></code> thread to become blocked. Concurrency is limited by size of the libuv thread pool, which defaults to 4 threads but can be increased by setting the <code class="docutils literal"><span class="pre">UV_THREADPOOL_SIZE</span></code> environment variable and restarting the <code class="docutils literal"><span class="pre">julia</span></code> process.</p>
+<p>Note that the called function should never call back into Julia.</p>
+</dd></dl>
+
+</div>
+<div class="section" id="synchronization-primitives">
+<h2>Synchronization Primitives<a class="headerlink" href="#synchronization-primitives" title="Permalink to this headline">¶</a></h2>
+<dl class="data">
+<dt id="Base.AbstractLock">
+<code class="descname">AbstractLock</code><a class="headerlink" href="#Base.AbstractLock" title="Permalink to this definition">¶</a></dt>
+<dd><p>Abstract supertype describing types that implement the thread-safe synchronization primitives: <code class="docutils literal"><span class="pre">lock</span></code>, <code class="docutils literal"><span class="pre">trylock</span></code>, <code class="docutils literal"><span class="pre">unlock</span></code>, and <code class="docutils literal"><span class="pre">islocked</span></code></p>
+</dd></dl>
+
+<dl class="function">
+<dt id="Base.lock">
+<code class="descname">lock</code><span class="sig-paren">(</span><em>the_lock</em><span class="sig-paren">)</span><a class="headerlink" href="#Base.lock" title="Permalink to this definition">¶</a></dt>
+<dd><p>Acquires the lock when it becomes available. If the lock is already locked by a different task/thread, it waits for it to become available.</p>
+<p>Each <code class="docutils literal"><span class="pre">lock</span></code> must be matched by an <code class="docutils literal"><span class="pre">unlock</span></code>.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="Base.unlock">
+<code class="descname">unlock</code><span class="sig-paren">(</span><em>the_lock</em><span class="sig-paren">)</span><a class="headerlink" href="#Base.unlock" title="Permalink to this definition">¶</a></dt>
+<dd><p>Releases ownership of the lock.</p>
+<p>If this is a recursive lock which has been acquired before, it just decrements an internal counter and returns immediately.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="Base.trylock">
+<code class="descname">trylock</code><span class="sig-paren">(</span><em>the_lock</em><span class="sig-paren">)</span> &rarr; Success (Boolean)<a class="headerlink" href="#Base.trylock" title="Permalink to this definition">¶</a></dt>
+<dd><p>Acquires the lock if it is available, returning <code class="docutils literal"><span class="pre">true</span></code> if successful. If the lock is already locked by a different task/thread, returns <code class="docutils literal"><span class="pre">false</span></code>.</p>
+<p>Each successful <code class="docutils literal"><span class="pre">trylock</span></code> must be matched by an <code class="docutils literal"><span class="pre">unlock</span></code>.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="Base.islocked">
+<code class="descname">islocked</code><span class="sig-paren">(</span><em>the_lock</em><span class="sig-paren">)</span> &rarr; Status (Boolean)<a class="headerlink" href="#Base.islocked" title="Permalink to this definition">¶</a></dt>
+<dd><p>Check whether the lock is held by any task/thread. This should not be used for synchronization (see instead <code class="docutils literal"><span class="pre">trylock</span></code>).</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="Base.ReentrantLock">
+<code class="descname">ReentrantLock</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#Base.ReentrantLock" title="Permalink to this definition">¶</a></dt>
+<dd><p>Creates a reentrant lock for synchronizing Tasks. The same task can acquire the lock as many times as required. Each <code class="docutils literal"><span class="pre">lock</span></code> must be matched with an <code class="docutils literal"><span class="pre">unlock</span></code>.</p>
+<p>This lock is NOT threadsafe. See <code class="docutils literal"><span class="pre">Threads.Mutex</span></code> for a threadsafe lock.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="Base.Mutex">
+<code class="descname">Mutex</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#Base.Mutex" title="Permalink to this definition">¶</a></dt>
+<dd><p>These are standard system mutexes for locking critical sections of logic.</p>
+<p>On Windows, this is a critical section object, on pthreads, this is a <code class="docutils literal"><span class="pre">pthread_mutex_t</span></code>.</p>
+<p>See also SpinLock for a lighter-weight lock.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="Base.SpinLock">
+<code class="descname">SpinLock</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#Base.SpinLock" title="Permalink to this definition">¶</a></dt>
+<dd><p>Creates a non-reentrant lock. Recursive use will result in a deadlock. Each <code class="docutils literal"><span class="pre">lock</span></code> must be matched with an <code class="docutils literal"><span class="pre">unlock</span></code>.</p>
+<p>Test-and-test-and-set spin locks are quickest up to about 30ish contending threads. If you have more contention than that, perhaps a lock is the wrong way to synchronize.</p>
+<p>See also RecursiveSpinLock for a version that permits recursion.</p>
+<p>See also Mutex for a more efficient version on one core or if the lock may be held for a considerable length of time.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="Base.RecursiveSpinLock">
+<code class="descname">RecursiveSpinLock</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#Base.RecursiveSpinLock" title="Permalink to this definition">¶</a></dt>
+<dd><p>Creates a reentrant lock. The same thread can acquire the lock as many times as required. Each <code class="docutils literal"><span class="pre">lock</span></code> must be matched with an <code class="docutils literal"><span class="pre">unlock</span></code>.</p>
+<p>See also SpinLock for a slightly faster version.</p>
+<p>See also Mutex for a more efficient version on one core or if the lock may be held for a considerable length of time.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="Base.Semaphore">
+<code class="descname">Semaphore</code><span class="sig-paren">(</span><em>sem_size</em><span class="sig-paren">)</span><a class="headerlink" href="#Base.Semaphore" title="Permalink to this definition">¶</a></dt>
+<dd><p>Creates a counting semaphore that allows at most <code class="docutils literal"><span class="pre">sem_size</span></code> acquires to be in use at any time. Each acquire must be mached with a release.</p>
+<p>This construct is NOT threadsafe.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="Base.acquire">
+<code class="descname">acquire</code><span class="sig-paren">(</span><em>s::Semaphore</em><span class="sig-paren">)</span><a class="headerlink" href="#Base.acquire" title="Permalink to this definition">¶</a></dt>
+<dd><p>Wait for one of the <code class="docutils literal"><span class="pre">sem_size</span></code> permits to be available, blocking until one can be acquired.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="Base.release">
+<code class="descname">release</code><span class="sig-paren">(</span><em>s::Semaphore</em><span class="sig-paren">)</span><a class="headerlink" href="#Base.release" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return one permit to the pool, possibly allowing another task to acquire it and resume execution.</p>
+</dd></dl>
+
+</div>
 <div class="section" id="cluster-manager-interface">
 <h2>Cluster Manager Interface<a class="headerlink" href="#cluster-manager-interface" title="Permalink to this headline">¶</a></h2>
 <p>This interface provides a mechanism to launch and manage Julia workers on different cluster environments.
@@ -1294,13 +1417,13 @@ hosts via ssh are present in Base. TCP/IP sockets are used to connect and transp
 between processes. It is possible for Cluster Managers to provide a different transport.</p>
 <dl class="function">
 <dt id="Base.launch">
-<code class="descname">launch</code><span class="sig-paren">(</span><em>manager::FooManager</em>, <em>params::Dict</em>, <em>launched::Vector{WorkerConfig}</em>, <em>launch_ntfy::Condition</em><span class="sig-paren">)</span><a class="headerlink" href="#Base.launch" title="Permalink to this definition">¶</a></dt>
+<code class="descname">launch</code><span class="sig-paren">(</span><em>manager::ClusterManager</em>, <em>params::Dict</em>, <em>launched::Array</em>, <em>launch_ntfy::Condition</em><span class="sig-paren">)</span><a class="headerlink" href="#Base.launch" title="Permalink to this definition">¶</a></dt>
 <dd><p>Implemented by cluster managers. For every Julia worker launched by this function, it should append a <code class="docutils literal"><span class="pre">WorkerConfig</span></code> entry to <code class="docutils literal"><span class="pre">launched</span></code> and notify <code class="docutils literal"><span class="pre">launch_ntfy</span></code>. The function MUST exit once all workers, requested by <code class="docutils literal"><span class="pre">manager</span></code> have been launched. <code class="docutils literal"><span class="pre">params</span></code> is a dictionary of all keyword arguments <code class="docutils literal"><span class="pre">addprocs</span></code> was called with.</p>
 </dd></dl>
 
 <dl class="function">
 <dt id="Base.manage">
-<code class="descname">manage</code><span class="sig-paren">(</span><em>manager::FooManager</em>, <em>pid::Int</em>, <em>config::WorkerConfig. op::Symbol</em><span class="sig-paren">)</span><a class="headerlink" href="#Base.manage" title="Permalink to this definition">¶</a></dt>
+<code class="descname">manage</code><span class="sig-paren">(</span><em>manager::ClusterManager</em>, <em>id::Integer</em>, <em>config::WorkerConfig. op::Symbol</em><span class="sig-paren">)</span><a class="headerlink" href="#Base.manage" title="Permalink to this definition">¶</a></dt>
 <dd><p>Implemented by cluster managers. It is called on the master process, during a worker&#8217;s lifetime, with appropriate <code class="docutils literal"><span class="pre">op</span></code> values:</p>
 <ul class="simple">
 <li>with <code class="docutils literal"><span class="pre">:register</span></code>/<code class="docutils literal"><span class="pre">:deregister</span></code> when a worker is added / removed from the Julia worker pool.</li>
@@ -1311,26 +1434,20 @@ between processes. It is possible for Cluster Managers to provide a different tr
 
 <dl class="function">
 <dt id="Base.kill">
-<code class="descname">kill</code><span class="sig-paren">(</span><em>manager::FooManager</em>, <em>pid::Int</em>, <em>config::WorkerConfig</em><span class="sig-paren">)</span><a class="headerlink" href="#Base.kill" title="Permalink to this definition">¶</a></dt>
+<code class="descname">kill</code><span class="sig-paren">(</span><em>manager::ClusterManager</em>, <em>pid::Int</em>, <em>config::WorkerConfig</em><span class="sig-paren">)</span><a class="headerlink" href="#Base.kill" title="Permalink to this definition">¶</a></dt>
 <dd><p>Implemented by cluster managers. It is called on the master process, by <code class="docutils literal"><span class="pre">rmprocs</span></code>. It should cause the remote worker specified by <code class="docutils literal"><span class="pre">pid</span></code> to exit. <code class="docutils literal"><span class="pre">Base.kill(manager::ClusterManager.....)</span></code> executes a remote <code class="docutils literal"><span class="pre">exit()</span></code> on <code class="docutils literal"><span class="pre">pid</span></code></p>
 </dd></dl>
 
 <dl class="function">
 <dt id="Base.init_worker">
-<code class="descname">init_worker</code><span class="sig-paren">(</span><em>manager::FooManager</em><span class="sig-paren">)</span><a class="headerlink" href="#Base.init_worker" title="Permalink to this definition">¶</a></dt>
-<dd><p>Called by cluster managers implementing custom transports. It initializes a newly launched process as a worker. Command line argument <code class="docutils literal"><span class="pre">--worker</span></code> has the effect of initializing a process as a worker using TCP/IP sockets for transport.</p>
+<code class="descname">init_worker</code><span class="sig-paren">(</span><em>cookie::AbstractString</em>, <em>manager::ClusterManager=DefaultClusterManager()</em><span class="sig-paren">)</span><a class="headerlink" href="#Base.init_worker" title="Permalink to this definition">¶</a></dt>
+<dd><p>Called by cluster managers implementing custom transports. It initializes a newly launched process as a worker. Command line argument <code class="docutils literal"><span class="pre">--worker</span></code> has the effect of initializing a process as a worker using TCP/IP sockets for transport. <code class="docutils literal"><span class="pre">cookie</span></code> is a <code class="xref jl jl-func docutils literal"><span class="pre">cluster_cookie()</span></code>.</p>
 </dd></dl>
 
 <dl class="function">
 <dt id="Base.connect">
-<code class="descname">connect</code><span class="sig-paren">(</span><em>manager::FooManager</em>, <em>pid::Int</em>, <em>config::WorkerConfig</em><span class="sig-paren">)</span> &rarr; (instrm::AsyncStream, outstrm::AsyncStream)<a class="headerlink" href="#Base.connect" title="Permalink to this definition">¶</a></dt>
-<dd><p>Implemented by cluster managers using custom transports. It should establish a logical connection to worker with id <code class="docutils literal"><span class="pre">pid</span></code>, specified by <code class="docutils literal"><span class="pre">config</span></code> and return a pair of <code class="docutils literal"><span class="pre">AsyncStream</span></code> objects. Messages from <code class="docutils literal"><span class="pre">pid</span></code> to current process will be read off <code class="docutils literal"><span class="pre">instrm</span></code>, while messages to be sent to <code class="docutils literal"><span class="pre">pid</span></code> will be written to <code class="docutils literal"><span class="pre">outstrm</span></code>. The custom transport implementation must ensure that messages are delivered and received completely and in order. <code class="docutils literal"><span class="pre">Base.connect(manager::ClusterManager.....)</span></code> sets up TCP/IP socket connections in-between workers.</p>
-</dd></dl>
-
-<dl class="function">
-<dt id="Base.Base.process_messages">
-<code class="descclassname">Base.</code><code class="descname">process_messages</code><span class="sig-paren">(</span><em>instrm::AsyncStream</em>, <em>outstrm::AsyncStream</em><span class="sig-paren">)</span><a class="headerlink" href="#Base.Base.process_messages" title="Permalink to this definition">¶</a></dt>
-<dd><p>Called by cluster managers using custom transports. It should be called when the custom transport implementation receives the first message from a remote worker. The custom transport must manage a logical connection to the remote worker and provide two <code class="docutils literal"><span class="pre">AsyncStream</span></code> objects, one for incoming messages and the other for messages addressed to the remote worker.</p>
+<code class="descname">connect</code><span class="sig-paren">(</span><em>manager::ClusterManager</em>, <em>pid::Int</em>, <em>config::WorkerConfig</em><span class="sig-paren">)</span> &rarr; (instrm::IO, outstrm::IO)<a class="headerlink" href="#Base.connect" title="Permalink to this definition">¶</a></dt>
+<dd><p>Implemented by cluster managers using custom transports. It should establish a logical connection to worker with id <code class="docutils literal"><span class="pre">pid</span></code>, specified by <code class="docutils literal"><span class="pre">config</span></code> and return a pair of <code class="docutils literal"><span class="pre">IO</span></code> objects. Messages from <code class="docutils literal"><span class="pre">pid</span></code> to current process will be read off <code class="docutils literal"><span class="pre">instrm</span></code>, while messages to be sent to <code class="docutils literal"><span class="pre">pid</span></code> will be written to <code class="docutils literal"><span class="pre">outstrm</span></code>. The custom transport implementation must ensure that messages are delivered and received completely and in order. <code class="docutils literal"><span class="pre">Base.connect(manager::ClusterManager.....)</span></code> sets up TCP/IP socket connections in-between workers.</p>
 </dd></dl>
 
 </div>

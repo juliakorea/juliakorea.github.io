@@ -192,7 +192,8 @@
 <li class="toctree-l2"><a class="reference internal" href="manual/documentation.html#functions-methods">Functions &amp; Methods</a></li>
 <li class="toctree-l2"><a class="reference internal" href="manual/documentation.html#advanced-usage">Advanced Usage</a></li>
 <li class="toctree-l2"><a class="reference internal" href="manual/documentation.html#syntax-guide">Syntax Guide</a></li>
-<li class="toctree-l2"><a class="reference internal" href="manual/documentation.html#markdown-syntax-notes">Markdown Syntax Notes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="manual/documentation.html#markdown-syntax">Markdown syntax</a></li>
+<li class="toctree-l2"><a class="reference internal" href="manual/documentation.html#markdown-syntax-extensions">Markdown Syntax Extensions</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="manual/metaprogramming.html">Metaprogramming</a><ul>
@@ -239,6 +240,8 @@
 <li class="toctree-l2"><a class="reference internal" href="manual/parallel-computing.html#network-requirements-for-localmanager-and-sshmanager">Network requirements for LocalManager and SSHManager</a></li>
 <li class="toctree-l2"><a class="reference internal" href="manual/parallel-computing.html#cluster-cookie">Cluster cookie</a></li>
 <li class="toctree-l2"><a class="reference internal" href="manual/parallel-computing.html#specifying-network-topology-experimental">Specifying network topology (Experimental)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="manual/parallel-computing.html#multi-threading-experimental">Multi-threading (Experimental)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="manual/parallel-computing.html#threadcall-experimental">&#64;threadcall (Experimental)</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="manual/dates.html">Date and DateTime</a><ul>
@@ -279,6 +282,7 @@
 <li class="toctree-l2"><a class="reference internal" href="manual/interacting-with-julia.html#the-different-prompt-modes">The different prompt modes</a></li>
 <li class="toctree-l2"><a class="reference internal" href="manual/interacting-with-julia.html#key-bindings">Key bindings</a></li>
 <li class="toctree-l2"><a class="reference internal" href="manual/interacting-with-julia.html#tab-completion">Tab completion</a></li>
+<li class="toctree-l2"><a class="reference internal" href="manual/interacting-with-julia.html#customizing-colors">Customizing Colors</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="manual/embedding.html">Embedding Julia</a><ul>
@@ -454,6 +458,8 @@
 <li class="toctree-l2"><a class="reference internal" href="stdlib/parallel.html#general-parallel-computing-support">General Parallel Computing Support</a></li>
 <li class="toctree-l2"><a class="reference internal" href="stdlib/parallel.html#shared-arrays">Shared Arrays</a></li>
 <li class="toctree-l2"><a class="reference internal" href="stdlib/parallel.html#multi-threading">Multi-Threading</a></li>
+<li class="toctree-l2"><a class="reference internal" href="stdlib/parallel.html#ccall-using-a-threadpool-experimental">ccall using a threadpool (Experimental)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="stdlib/parallel.html#synchronization-primitives">Synchronization Primitives</a></li>
 <li class="toctree-l2"><a class="reference internal" href="stdlib/parallel.html#cluster-manager-interface">Cluster Manager Interface</a></li>
 </ul>
 </li>
@@ -520,7 +526,6 @@
 <li class="toctree-l2"><a class="reference internal" href="devdocs/sysimg.html">System Image Building</a></li>
 <li class="toctree-l2"><a class="reference internal" href="devdocs/llvm.html">Working with LLVM</a></li>
 <li class="toctree-l2"><a class="reference internal" href="devdocs/stdio.html">printf() and stdio in the Julia runtime</a></li>
-<li class="toctree-l2"><a class="reference internal" href="devdocs/promote-op.html">Operator-sensitive promotion</a></li>
 <li class="toctree-l2"><a class="reference internal" href="devdocs/boundscheck.html">Bounds checking</a></li>
 <li class="toctree-l2"><a class="reference internal" href="devdocs/locks.html">Proper maintenance and care of multi-threading locks</a></li>
 <li class="toctree-l2"><a class="reference internal" href="devdocs/offset-arrays.html">Arrays with custom indices</a></li>
@@ -530,6 +535,7 @@
 <li class="toctree-l2"><a class="reference internal" href="devdocs/backtraces.html">Reporting and analyzing crashes (segfaults)</a></li>
 <li class="toctree-l2"><a class="reference internal" href="devdocs/debuggingtips.html">gdb debugging tips</a></li>
 <li class="toctree-l2"><a class="reference internal" href="devdocs/valgrind.html">Using Valgrind with Julia</a></li>
+<li class="toctree-l2"><a class="reference internal" href="devdocs/sanitizers.html">Sanitizer support</a></li>
 </ul>
 </li>
 </ul>
@@ -901,6 +907,10 @@
   </dt>
 
       
+  <dt><a href="stdlib/parallel.html#Base.@threadcall">@threadcall() (in module Base)</a>
+  </dt>
+
+      
   <dt><a href="stdlib/base.html#Base.@time">@time() (in module Base)</a>
   </dt>
 
@@ -997,6 +1007,10 @@
   </dt>
 
       
+  <dt><a href="stdlib/parallel.html#Base.AbstractLock">AbstractLock (in module Base)</a>
+  </dt>
+
+      
   <dt><a href="stdlib/linalg.html#Base.Ac_ldiv_B!">Ac_ldiv_B!() (in module Base)</a>
   </dt>
 
@@ -1053,6 +1067,10 @@
   </dt>
 
       
+  <dt><a href="stdlib/parallel.html#Base.acquire">acquire() (in module Base)</a>
+  </dt>
+
+      
   <dt><a href="stdlib/math.html#Base.acsc">acsc() (in module Base)</a>
   </dt>
 
@@ -1104,12 +1122,12 @@
   <dt><a href="stdlib/collections.html#Base.all!">all!() (in module Base)</a>
   </dt>
 
+  </dl></td>
+  <td style="width: 33%" valign="top"><dl>
       
   <dt><a href="stdlib/collections.html#Base.all">all() (in module Base)</a>, <a href="stdlib/collections.html#Base.all">[1]</a>, <a href="stdlib/collections.html#Base.all">[2]</a>
   </dt>
 
-  </dl></td>
-  <td style="width: 33%" valign="top"><dl>
       
   <dt><a href="stdlib/collections.html#Base.allunique">allunique() (in module Base)</a>
   </dt>
@@ -1333,7 +1351,7 @@
   </dt>
 
       
-  <dt><a href="stdlib/parallel.html#Base.Base.cluster_cookie">Base.cluster_cookie() (in module Base)</a>
+  <dt><a href="stdlib/parallel.html#Base.Base.cluster_cookie">Base.cluster_cookie() (in module Base)</a>, <a href="stdlib/parallel.html#Base.Base.cluster_cookie">[1]</a>
   </dt>
 
       
@@ -1342,6 +1360,22 @@
 
       
   <dt><a href="stdlib/base.html#Base.Base.compilecache">Base.compilecache() (in module Base)</a>
+  </dt>
+
+      
+  <dt><a href="stdlib/base.html#Base.Base.datatype_module">Base.datatype_module() (in module Base)</a>
+  </dt>
+
+      
+  <dt><a href="stdlib/base.html#Base.Base.datatype_name">Base.datatype_name() (in module Base)</a>
+  </dt>
+
+      
+  <dt><a href="stdlib/base.html#Base.Base.function_module">Base.function_module() (in module Base)</a>, <a href="stdlib/base.html#Base.Base.function_module">[1]</a>
+  </dt>
+
+      
+  <dt><a href="stdlib/base.html#Base.Base.function_name">Base.function_name() (in module Base)</a>
   </dt>
 
       
@@ -1358,6 +1392,10 @@
 
       
   <dt><a href="stdlib/arrays.html#Base.Base.linearindexing">Base.linearindexing() (in module Base)</a>
+  </dt>
+
+      
+  <dt><a href="stdlib/math.html#Base.Base.OneTo">Base.OneTo() (in module Base)</a>
   </dt>
 
       
@@ -1416,6 +1454,12 @@
   <dt><a href="stdlib/math.html#Base.besselh">besselh() (in module Base)</a>
   </dt>
 
+  </dl></td>
+  <td style="width: 33%" valign="top"><dl>
+      
+  <dt><a href="stdlib/math.html#Base.besselhx">besselhx() (in module Base)</a>
+  </dt>
+
       
   <dt><a href="stdlib/math.html#Base.besseli">besseli() (in module Base)</a>
   </dt>
@@ -1424,8 +1468,6 @@
   <dt><a href="stdlib/math.html#Base.besselix">besselix() (in module Base)</a>
   </dt>
 
-  </dl></td>
-  <td style="width: 33%" valign="top"><dl>
       
   <dt><a href="stdlib/math.html#Base.besselj">besselj() (in module Base)</a>
   </dt>
@@ -1719,11 +1761,23 @@
   </dt>
 
       
+  <dt><a href="stdlib/arrays.html#Base.circcopy!">circcopy!() (in module Base)</a>
+  </dt>
+
+      
+  <dt><a href="stdlib/arrays.html#Base.circshift!">circshift!() (in module Base)</a>
+  </dt>
+
+      
   <dt><a href="stdlib/arrays.html#Base.circshift">circshift() (in module Base)</a>
   </dt>
 
       
   <dt><a href="stdlib/math.html#Base.cis">cis() (in module Base)</a>
+  </dt>
+
+      
+  <dt><a href="stdlib/math.html#Base.clamp!">clamp!() (in module Base)</a>
   </dt>
 
       
@@ -1810,12 +1864,12 @@
   <dt><a href="stdlib/linalg.html#Base.cond">cond() (in module Base)</a>
   </dt>
 
+  </dl></td>
+  <td style="width: 33%" valign="top"><dl>
       
   <dt><a href="stdlib/parallel.html#Base.Condition">Condition() (in module Base)</a>
   </dt>
 
-  </dl></td>
-  <td style="width: 33%" valign="top"><dl>
       
   <dt><a href="stdlib/linalg.html#Base.condskeel">condskeel() (in module Base)</a>
   </dt>
@@ -2762,12 +2816,12 @@
   <dt><a href="stdlib/arrays.html#Base.findnext">findnext() (in module Base)</a>, <a href="stdlib/arrays.html#Base.findnext">[1]</a>, <a href="stdlib/arrays.html#Base.findnext">[2]</a>
   </dt>
 
+  </dl></td>
+  <td style="width: 33%" valign="top"><dl>
       
   <dt><a href="stdlib/arrays.html#Base.findnz">findnz() (in module Base)</a>
   </dt>
 
-  </dl></td>
-  <td style="width: 33%" valign="top"><dl>
       
   <dt><a href="stdlib/arrays.html#Base.findprev">findprev() (in module Base)</a>, <a href="stdlib/arrays.html#Base.findprev">[1]</a>, <a href="stdlib/arrays.html#Base.findprev">[2]</a>
   </dt>
@@ -2905,19 +2959,11 @@
   </dt>
 
       
-  <dt><a href="stdlib/base.html#Base.function_module">function_module() (in module Base)</a>
-  </dt>
-
-      
-  <dt><a href="stdlib/base.html#Base.function_name">function_name() (in module Base)</a>
-  </dt>
-
-      
   <dt><a href="stdlib/base.html#Base.functionloc">functionloc() (in module Base)</a>, <a href="stdlib/base.html#Base.functionloc">[1]</a>
   </dt>
 
       
-  <dt><a href="stdlib/parallel.html#Base.Future">Future() (in module Base)</a>, <a href="stdlib/parallel.html#Base.Future">[1]</a>
+  <dt><a href="stdlib/parallel.html#Base.Future">Future() (in module Base)</a>
   </dt>
 
   </dl></td>
@@ -3497,7 +3543,7 @@
   </dt>
 
       
-  <dt><a href="stdlib/parallel.html#Base.interrupt">interrupt() (in module Base)</a>
+  <dt><a href="stdlib/parallel.html#Base.interrupt">interrupt() (in module Base)</a>, <a href="stdlib/parallel.html#Base.interrupt">[1]</a>
   </dt>
 
       
@@ -3538,6 +3584,10 @@
 
       
   <dt><a href="stdlib/io-network.html#Base.IOBuffer">IOBuffer() (in module Base)</a>, <a href="stdlib/io-network.html#Base.IOBuffer">[1]</a>, <a href="stdlib/io-network.html#Base.IOBuffer">[2]</a>, <a href="stdlib/io-network.html#Base.IOBuffer">[3]</a>
+  </dt>
+
+      
+  <dt><a href="stdlib/io-network.html#Base.IOContext">IOContext() (in module Base)</a>, <a href="stdlib/io-network.html#Base.IOContext">[1]</a>, <a href="stdlib/io-network.html#Base.IOContext">[2]</a>
   </dt>
 
       
@@ -3610,6 +3660,10 @@
 
       
   <dt><a href="stdlib/strings.html#Base.isascii">isascii() (in module Base)</a>
+  </dt>
+
+      
+  <dt><a href="stdlib/arrays.html#Base.isassigned">isassigned() (in module Base)</a>
   </dt>
 
       
@@ -3691,6 +3745,10 @@
   </dt>
 
       
+  <dt><a href="stdlib/numbers.html#Base.isimag">isimag() (in module Base)</a>
+  </dt>
+
+      
   <dt><a href="stdlib/base.html#Base.isimmutable">isimmutable() (in module Base)</a>
   </dt>
 
@@ -3720,6 +3778,10 @@
 
       
   <dt><a href="stdlib/file.html#Base.islink">islink() (in module Base)</a>
+  </dt>
+
+      
+  <dt><a href="stdlib/parallel.html#Base.islocked">islocked() (in module Base)</a>
   </dt>
 
       
@@ -3799,7 +3861,7 @@
   </dt>
 
       
-  <dt><a href="stdlib/parallel.html#Base.isready">isready() (in module Base)</a>, <a href="stdlib/parallel.html#Base.isready">[1]</a>
+  <dt><a href="stdlib/parallel.html#Base.isready">isready() (in module Base)</a>, <a href="stdlib/parallel.html#Base.isready">[1]</a>, <a href="stdlib/parallel.html#Base.isready">[2]</a>
   </dt>
 
       
@@ -4471,6 +4533,10 @@
   </dt>
 
       
+  <dt><a href="stdlib/parallel.html#Base.Mutex">Mutex() (in module Base)</a>
+  </dt>
+
+      
   <dt><a href="stdlib/file.html#Base.mv">mv() (in module Base)</a>
   </dt>
 
@@ -4741,6 +4807,10 @@
   </dt>
 
       
+  <dt><a href="src/sphinx-rtd-theme/demo_docs/source/index.html#payments.dotpay.DotpayProvider">payments.dotpay.DotpayProvider (built-in class)</a>
+  </dt>
+
+      
   <dt><a href="stdlib/linalg.html#Base.peakflops">peakflops() (in module Base)</a>
   </dt>
 
@@ -4969,7 +5039,7 @@
   </dt>
 
       
-  <dt><a href="stdlib/parallel.html#Base.procs">procs() (in module Base)</a>, <a href="stdlib/parallel.html#Base.procs">[1]</a>
+  <dt><a href="stdlib/parallel.html#Base.procs">procs() (in module Base)</a>, <a href="stdlib/parallel.html#Base.procs">[1]</a>, <a href="stdlib/parallel.html#Base.procs">[2]</a>
   </dt>
 
       
@@ -5044,6 +5114,17 @@
   <dt><a href="stdlib/file.html#Base.pwd">pwd() (in module Base)</a>
   </dt>
 
+      
+  <dt>
+    Python Enhancement Proposals
+  </dt>
+
+      <dd><dl>
+        
+  <dt><a href="src/sphinx-rtd-theme/demo_docs/source/demo.html#index-0">PEP 287</a>
+  </dt>
+
+      </dl></dd>
   </dl></td>
 </tr></table>
 
@@ -5179,7 +5260,7 @@
   </dt>
 
       
-  <dt><a href="stdlib/io-network.html#Base.read">read() (in module Base)</a>, <a href="stdlib/io-network.html#Base.read">[1]</a>, <a href="stdlib/io-network.html#Base.read">[2]</a>, <a href="stdlib/io-network.html#Base.read">[3]</a>
+  <dt><a href="stdlib/io-network.html#Base.read">read() (in module Base)</a>, <a href="stdlib/io-network.html#Base.read">[1]</a>, <a href="stdlib/io-network.html#Base.read">[2]</a>, <a href="stdlib/io-network.html#Base.read">[3]</a>, <a href="stdlib/io-network.html#Base.read">[4]</a>
   </dt>
 
       
@@ -5259,6 +5340,10 @@
   </dt>
 
       
+  <dt><a href="stdlib/parallel.html#Base.RecursiveSpinLock">RecursiveSpinLock() (in module Base)</a>
+  </dt>
+
+      
   <dt><a href="stdlib/dates.html#Dates.recur{T<:TimeType}">recur{T&lt;:TimeType}() (in module Dates)</a>
   </dt>
 
@@ -5315,6 +5400,10 @@
   </dt>
 
       
+  <dt><a href="stdlib/parallel.html#Base.release">release() (in module Base)</a>
+  </dt>
+
+      
   <dt><a href="stdlib/base.html#Base.reload">reload() (in module Base)</a>
   </dt>
 
@@ -5345,7 +5434,11 @@
   </dt>
 
       
-  <dt><a href="stdlib/parallel.html#Base.RemoteChannel">RemoteChannel() (in module Base)</a>, <a href="stdlib/parallel.html#Base.RemoteChannel">[1]</a>, <a href="stdlib/parallel.html#Base.RemoteChannel">[2]</a>
+  <dt><a href="stdlib/parallel.html#Base.RemoteChannel">RemoteChannel() (in module Base)</a>, <a href="stdlib/parallel.html#Base.RemoteChannel">[1]</a>
+  </dt>
+
+      
+  <dt><a href="stdlib/parallel.html#Base.RemoteException">RemoteException() (in module Base)</a>
   </dt>
 
       
@@ -5424,6 +5517,17 @@
   <dt><a href="stdlib/arrays.html#Base.reverseind">reverseind() (in module Base)</a>
   </dt>
 
+      
+  <dt>
+    RFC
+  </dt>
+
+      <dd><dl>
+        
+  <dt><a href="src/sphinx-rtd-theme/demo_docs/source/demo.html#index-1">RFC 2822</a>
+  </dt>
+
+      </dl></dd>
       
   <dt><a href="stdlib/math.html#Base.rfft">rfft() (in module Base)</a>
   </dt>
@@ -5691,6 +5795,10 @@
   </dt>
 
       
+  <dt><a href="stdlib/parallel.html#Base.Semaphore">Semaphore() (in module Base)</a>
+  </dt>
+
+      
   <dt><a href="stdlib/io-network.html#Base.send">send() (in module Base)</a>
   </dt>
 
@@ -5895,6 +6003,10 @@
   </dt>
 
       
+  <dt><a href="stdlib/parallel.html#Base.SpinLock">SpinLock() (in module Base)</a>
+  </dt>
+
+      
   <dt><a href="stdlib/collections.html#Base.splice!">splice!() (in module Base)</a>, <a href="stdlib/collections.html#Base.splice!">[1]</a>
   </dt>
 
@@ -5918,12 +6030,12 @@
   <dt><a href="stdlib/arrays.html#Base.spones">spones() (in module Base)</a>
   </dt>
 
+  </dl></td>
+  <td style="width: 33%" valign="top"><dl>
       
   <dt><a href="stdlib/arrays.html#Base.sprand">sprand() (in module Base)</a>
   </dt>
 
-  </dl></td>
-  <td style="width: 33%" valign="top"><dl>
       
   <dt><a href="stdlib/arrays.html#Base.sprandn">sprandn() (in module Base)</a>
   </dt>
@@ -6327,6 +6439,10 @@
   </dt>
 
       
+  <dt><a href="stdlib/parallel.html#Base.Threads.@threads">Threads.@threads() (in module Base)</a>
+  </dt>
+
+      
   <dt><a href="stdlib/parallel.html#Base.Threads.atomic_add!{T}">Threads.atomic_add!{T}() (in module Base)</a>
   </dt>
 
@@ -6372,6 +6488,14 @@
 
       
   <dt><a href="stdlib/parallel.html#Base.Threads.Atomic{T}">Threads.Atomic{T}() (in module Base)</a>
+  </dt>
+
+      
+  <dt><a href="stdlib/parallel.html#Base.Threads.nthreads">Threads.nthreads() (in module Base)</a>
+  </dt>
+
+      
+  <dt><a href="stdlib/parallel.html#Base.Threads.threadid">Threads.threadid() (in module Base)</a>
   </dt>
 
       
@@ -6436,12 +6560,12 @@
   <dt><a href="stdlib/dates.html#Dates.toprev">toprev() (in module Dates)</a>, <a href="stdlib/dates.html#Dates.toprev">[1]</a>
   </dt>
 
+  </dl></td>
+  <td style="width: 33%" valign="top"><dl>
       
   <dt><a href="stdlib/base.html#Base.toq">toq() (in module Base)</a>
   </dt>
 
-  </dl></td>
-  <td style="width: 33%" valign="top"><dl>
       
   <dt><a href="stdlib/file.html#Base.touch">touch() (in module Base)</a>
   </dt>
@@ -6574,6 +6698,10 @@
       </dl></dd>
       
   <dt><a href="stdlib/io-network.html#Base.truncate">truncate() (in module Base)</a>
+  </dt>
+
+      
+  <dt><a href="stdlib/parallel.html#Base.trylock">trylock() (in module Base)</a>
   </dt>
 
       

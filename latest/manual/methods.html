@@ -193,7 +193,8 @@
 <li class="toctree-l2"><a class="reference internal" href="documentation.html#functions-methods">Functions &amp; Methods</a></li>
 <li class="toctree-l2"><a class="reference internal" href="documentation.html#advanced-usage">Advanced Usage</a></li>
 <li class="toctree-l2"><a class="reference internal" href="documentation.html#syntax-guide">Syntax Guide</a></li>
-<li class="toctree-l2"><a class="reference internal" href="documentation.html#markdown-syntax-notes">Markdown Syntax Notes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="documentation.html#markdown-syntax">Markdown syntax</a></li>
+<li class="toctree-l2"><a class="reference internal" href="documentation.html#markdown-syntax-extensions">Markdown Syntax Extensions</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="metaprogramming.html">Metaprogramming</a><ul>
@@ -240,6 +241,8 @@
 <li class="toctree-l2"><a class="reference internal" href="parallel-computing.html#network-requirements-for-localmanager-and-sshmanager">Network requirements for LocalManager and SSHManager</a></li>
 <li class="toctree-l2"><a class="reference internal" href="parallel-computing.html#cluster-cookie">Cluster cookie</a></li>
 <li class="toctree-l2"><a class="reference internal" href="parallel-computing.html#specifying-network-topology-experimental">Specifying network topology (Experimental)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="parallel-computing.html#multi-threading-experimental">Multi-threading (Experimental)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="parallel-computing.html#threadcall-experimental">&#64;threadcall (Experimental)</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="dates.html">Date and DateTime</a><ul>
@@ -280,6 +283,7 @@
 <li class="toctree-l2"><a class="reference internal" href="interacting-with-julia.html#the-different-prompt-modes">The different prompt modes</a></li>
 <li class="toctree-l2"><a class="reference internal" href="interacting-with-julia.html#key-bindings">Key bindings</a></li>
 <li class="toctree-l2"><a class="reference internal" href="interacting-with-julia.html#tab-completion">Tab completion</a></li>
+<li class="toctree-l2"><a class="reference internal" href="interacting-with-julia.html#customizing-colors">Customizing Colors</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="embedding.html">Embedding Julia</a><ul>
@@ -455,6 +459,8 @@
 <li class="toctree-l2"><a class="reference internal" href="../stdlib/parallel.html#general-parallel-computing-support">General Parallel Computing Support</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../stdlib/parallel.html#shared-arrays">Shared Arrays</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../stdlib/parallel.html#multi-threading">Multi-Threading</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../stdlib/parallel.html#ccall-using-a-threadpool-experimental">ccall using a threadpool (Experimental)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../stdlib/parallel.html#synchronization-primitives">Synchronization Primitives</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../stdlib/parallel.html#cluster-manager-interface">Cluster Manager Interface</a></li>
 </ul>
 </li>
@@ -521,7 +527,6 @@
 <li class="toctree-l2"><a class="reference internal" href="../devdocs/sysimg.html">System Image Building</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../devdocs/llvm.html">Working with LLVM</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../devdocs/stdio.html">printf() and stdio in the Julia runtime</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../devdocs/promote-op.html">Operator-sensitive promotion</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../devdocs/boundscheck.html">Bounds checking</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../devdocs/locks.html">Proper maintenance and care of multi-threading locks</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../devdocs/offset-arrays.html">Arrays with custom indices</a></li>
@@ -531,6 +536,7 @@
 <li class="toctree-l2"><a class="reference internal" href="../devdocs/backtraces.html">Reporting and analyzing crashes (segfaults)</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../devdocs/debuggingtips.html">gdb debugging tips</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../devdocs/valgrind.html">Using Valgrind with Julia</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../devdocs/sanitizers.html">Sanitizer support</a></li>
 </ul>
 </li>
 </ul>
@@ -650,24 +656,24 @@ both values of type <code class="xref jl jl-obj docutils literal"><span class="p
 <div class="highlight-julia"><div class="highlight"><pre><span></span><span class="n">julia</span><span class="o">&gt;</span> <span class="n">f</span><span class="p">(</span><span class="mf">2.0</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
 <span class="n">ERROR</span><span class="p">:</span> <span class="n">MethodError</span><span class="p">:</span> <span class="n">no</span> <span class="n">method</span> <span class="n">matching</span> <span class="n">f</span><span class="p">(::</span><span class="kt">Float64</span><span class="p">,</span> <span class="p">::</span><span class="kt">Int64</span><span class="p">)</span>
 <span class="n">Closest</span> <span class="n">candidates</span> <span class="n">are</span><span class="p">:</span>
-  <span class="n">f</span><span class="p">(::</span><span class="kt">Float64</span><span class="p">,</span> <span class="o">!</span><span class="n">Matched</span><span class="p">::</span><span class="kt">Float64</span><span class="p">)</span>
- <span class="o">...</span>
+  <span class="n">f</span><span class="p">(::</span><span class="kt">Float64</span><span class="p">,</span> <span class="o">!</span><span class="n">Matched</span><span class="p">::</span><span class="kt">Float64</span><span class="p">)</span> <span class="n">at</span> <span class="n">none</span><span class="p">:</span><span class="mi">1</span>
+<span class="o">...</span>
 
 <span class="n">julia</span><span class="o">&gt;</span> <span class="n">f</span><span class="p">(</span><span class="kt">Float32</span><span class="p">(</span><span class="mf">2.0</span><span class="p">),</span> <span class="mf">3.0</span><span class="p">)</span>
 <span class="n">ERROR</span><span class="p">:</span> <span class="n">MethodError</span><span class="p">:</span> <span class="n">no</span> <span class="n">method</span> <span class="n">matching</span> <span class="n">f</span><span class="p">(::</span><span class="kt">Float32</span><span class="p">,</span> <span class="p">::</span><span class="kt">Float64</span><span class="p">)</span>
 <span class="n">Closest</span> <span class="n">candidates</span> <span class="n">are</span><span class="p">:</span>
-  <span class="n">f</span><span class="p">(</span><span class="o">!</span><span class="n">Matched</span><span class="p">::</span><span class="kt">Float64</span><span class="p">,</span> <span class="p">::</span><span class="kt">Float64</span><span class="p">)</span>
- <span class="o">...</span>
+  <span class="n">f</span><span class="p">(</span><span class="o">!</span><span class="n">Matched</span><span class="p">::</span><span class="kt">Float64</span><span class="p">,</span> <span class="p">::</span><span class="kt">Float64</span><span class="p">)</span> <span class="n">at</span> <span class="n">none</span><span class="p">:</span><span class="mi">1</span>
+<span class="o">...</span>
 
 <span class="n">julia</span><span class="o">&gt;</span> <span class="n">f</span><span class="p">(</span><span class="mf">2.0</span><span class="p">,</span> <span class="s">&quot;3.0&quot;</span><span class="p">)</span>
 <span class="n">ERROR</span><span class="p">:</span> <span class="n">MethodError</span><span class="p">:</span> <span class="n">no</span> <span class="n">method</span> <span class="n">matching</span> <span class="n">f</span><span class="p">(::</span><span class="kt">Float64</span><span class="p">,</span> <span class="p">::</span><span class="n">String</span><span class="p">)</span>
 <span class="n">Closest</span> <span class="n">candidates</span> <span class="n">are</span><span class="p">:</span>
-  <span class="n">f</span><span class="p">(::</span><span class="kt">Float64</span><span class="p">,</span> <span class="o">!</span><span class="n">Matched</span><span class="p">::</span><span class="kt">Float64</span><span class="p">)</span>
- <span class="o">...</span>
+  <span class="n">f</span><span class="p">(::</span><span class="kt">Float64</span><span class="p">,</span> <span class="o">!</span><span class="n">Matched</span><span class="p">::</span><span class="kt">Float64</span><span class="p">)</span> <span class="n">at</span> <span class="n">none</span><span class="p">:</span><span class="mi">1</span>
+<span class="o">...</span>
 
 <span class="n">julia</span><span class="o">&gt;</span> <span class="n">f</span><span class="p">(</span><span class="s">&quot;2.0&quot;</span><span class="p">,</span> <span class="s">&quot;3.0&quot;</span><span class="p">)</span>
 <span class="n">ERROR</span><span class="p">:</span> <span class="n">MethodError</span><span class="p">:</span> <span class="n">no</span> <span class="n">method</span> <span class="n">matching</span> <span class="n">f</span><span class="p">(::</span><span class="n">String</span><span class="p">,</span> <span class="p">::</span><span class="n">String</span><span class="p">)</span>
- <span class="o">...</span>
+<span class="o">...</span>
 </pre></div>
 </div>
 <p>As you can see, the arguments must be precisely of type <code class="xref jl jl-obj docutils literal"><span class="pre">Float64</span></code>.
@@ -726,15 +732,15 @@ function <code class="docutils literal"><span class="pre">f</span></code> remain
 <div class="highlight-julia"><div class="highlight"><pre><span></span><span class="n">julia</span><span class="o">&gt;</span> <span class="n">f</span><span class="p">(</span><span class="s">&quot;foo&quot;</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
 <span class="n">ERROR</span><span class="p">:</span> <span class="n">MethodError</span><span class="p">:</span> <span class="n">no</span> <span class="n">method</span> <span class="n">matching</span> <span class="n">f</span><span class="p">(::</span><span class="n">String</span><span class="p">,</span> <span class="p">::</span><span class="kt">Int64</span><span class="p">)</span>
 <span class="n">Closest</span> <span class="n">candidates</span> <span class="n">are</span><span class="p">:</span>
-  <span class="n">f</span><span class="p">(</span><span class="o">!</span><span class="n">Matched</span><span class="p">::</span><span class="n">Number</span><span class="p">,</span> <span class="p">::</span><span class="n">Number</span><span class="p">)</span>
- <span class="o">...</span>
+  <span class="n">f</span><span class="p">(</span><span class="o">!</span><span class="n">Matched</span><span class="p">::</span><span class="n">Number</span><span class="p">,</span> <span class="p">::</span><span class="n">Number</span><span class="p">)</span> <span class="n">at</span> <span class="n">none</span><span class="p">:</span><span class="mi">1</span>
+<span class="o">...</span>
 
 <span class="n">julia</span><span class="o">&gt;</span> <span class="n">f</span><span class="p">()</span>
 <span class="n">ERROR</span><span class="p">:</span> <span class="n">MethodError</span><span class="p">:</span> <span class="n">no</span> <span class="n">method</span> <span class="n">matching</span> <span class="n">f</span><span class="p">()</span>
 <span class="n">Closest</span> <span class="n">candidates</span> <span class="n">are</span><span class="p">:</span>
-  <span class="n">f</span><span class="p">(</span><span class="o">!</span><span class="n">Matched</span><span class="p">::</span><span class="kt">Float64</span><span class="p">,</span> <span class="o">!</span><span class="n">Matched</span><span class="p">::</span><span class="kt">Float64</span><span class="p">)</span>
-  <span class="n">f</span><span class="p">(</span><span class="o">!</span><span class="n">Matched</span><span class="p">::</span><span class="n">Number</span><span class="p">,</span> <span class="o">!</span><span class="n">Matched</span><span class="p">::</span><span class="n">Number</span><span class="p">)</span>
- <span class="o">...</span>
+  <span class="n">f</span><span class="p">(</span><span class="o">!</span><span class="n">Matched</span><span class="p">::</span><span class="kt">Float64</span><span class="p">,</span> <span class="o">!</span><span class="n">Matched</span><span class="p">::</span><span class="kt">Float64</span><span class="p">)</span> <span class="n">at</span> <span class="n">none</span><span class="p">:</span><span class="mi">1</span>
+  <span class="n">f</span><span class="p">(</span><span class="o">!</span><span class="n">Matched</span><span class="p">::</span><span class="n">Number</span><span class="p">,</span> <span class="o">!</span><span class="n">Matched</span><span class="p">::</span><span class="n">Number</span><span class="p">)</span> <span class="n">at</span> <span class="n">none</span><span class="p">:</span><span class="mi">1</span>
+<span class="o">...</span>
 </pre></div>
 </div>
 <p>You can easily see which methods exist for a function by entering the
@@ -901,8 +907,8 @@ signature:</p>
 <span class="n">julia</span><span class="o">&gt;</span> <span class="n">myappend</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">],</span><span class="mf">2.5</span><span class="p">)</span>
 <span class="n">ERROR</span><span class="p">:</span> <span class="n">MethodError</span><span class="p">:</span> <span class="n">no</span> <span class="n">method</span> <span class="n">matching</span> <span class="n">myappend</span><span class="p">(::</span><span class="n">Array</span><span class="p">{</span><span class="kt">Int64</span><span class="p">,</span><span class="mi">1</span><span class="p">},</span> <span class="p">::</span><span class="kt">Float64</span><span class="p">)</span>
 <span class="n">Closest</span> <span class="n">candidates</span> <span class="n">are</span><span class="p">:</span>
-  <span class="n">myappend</span><span class="p">{</span><span class="n">T</span><span class="p">}(::</span><span class="n">Array</span><span class="p">{</span><span class="n">T</span><span class="p">,</span><span class="mi">1</span><span class="p">},</span> <span class="o">!</span><span class="n">Matched</span><span class="p">::</span><span class="n">T</span><span class="p">)</span>
- <span class="o">...</span>
+  <span class="n">myappend</span><span class="p">{</span><span class="n">T</span><span class="p">}(::</span><span class="n">Array</span><span class="p">{</span><span class="n">T</span><span class="p">,</span><span class="mi">1</span><span class="p">},</span> <span class="o">!</span><span class="n">Matched</span><span class="p">::</span><span class="n">T</span><span class="p">)</span> <span class="n">at</span> <span class="n">none</span><span class="p">:</span><span class="mi">1</span>
+<span class="o">...</span>
 
 <span class="n">julia</span><span class="o">&gt;</span> <span class="n">myappend</span><span class="p">([</span><span class="mf">1.0</span><span class="p">,</span><span class="mf">2.0</span><span class="p">,</span><span class="mf">3.0</span><span class="p">],</span><span class="mf">4.0</span><span class="p">)</span>
 <span class="mi">4</span><span class="o">-</span><span class="n">element</span> <span class="n">Array</span><span class="p">{</span><span class="kt">Float64</span><span class="p">,</span><span class="mi">1</span><span class="p">}:</span>
@@ -914,8 +920,8 @@ signature:</p>
 <span class="n">julia</span><span class="o">&gt;</span> <span class="n">myappend</span><span class="p">([</span><span class="mf">1.0</span><span class="p">,</span><span class="mf">2.0</span><span class="p">,</span><span class="mf">3.0</span><span class="p">],</span><span class="mi">4</span><span class="p">)</span>
 <span class="n">ERROR</span><span class="p">:</span> <span class="n">MethodError</span><span class="p">:</span> <span class="n">no</span> <span class="n">method</span> <span class="n">matching</span> <span class="n">myappend</span><span class="p">(::</span><span class="n">Array</span><span class="p">{</span><span class="kt">Float64</span><span class="p">,</span><span class="mi">1</span><span class="p">},</span> <span class="p">::</span><span class="kt">Int64</span><span class="p">)</span>
 <span class="n">Closest</span> <span class="n">candidates</span> <span class="n">are</span><span class="p">:</span>
-  <span class="n">myappend</span><span class="p">{</span><span class="n">T</span><span class="p">}(::</span><span class="n">Array</span><span class="p">{</span><span class="n">T</span><span class="p">,</span><span class="mi">1</span><span class="p">},</span> <span class="o">!</span><span class="n">Matched</span><span class="p">::</span><span class="n">T</span><span class="p">)</span>
- <span class="o">...</span>
+  <span class="n">myappend</span><span class="p">{</span><span class="n">T</span><span class="p">}(::</span><span class="n">Array</span><span class="p">{</span><span class="n">T</span><span class="p">,</span><span class="mi">1</span><span class="p">},</span> <span class="o">!</span><span class="n">Matched</span><span class="p">::</span><span class="n">T</span><span class="p">)</span> <span class="n">at</span> <span class="n">none</span><span class="p">:</span><span class="mi">1</span>
+<span class="o">...</span>
 </pre></div>
 </div>
 <p>As you can see, the type of the appended element must match the element

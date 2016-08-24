@@ -13,8 +13,6 @@
 Read the Docs Sphinx Theme
 **************************
 
-.. contents:: 
-
 View a working demo_ over on readthedocs.org_.
 
 This is a mobile-friendly sphinx_ theme I made for readthedocs.org_. It's
@@ -26,7 +24,6 @@ the SASS files here, rather than the .css files on RTD.
 
 .. image:: screen_mobile.png
     :width: 100%
-
 Installation
 ============
 
@@ -61,35 +58,6 @@ conf.py file:
     html_theme = "sphinx_rtd_theme"
     html_theme_path = ["_themes", ]
 
-Changelog
-=========
-
-v0.1.9
-------
-
-* Intermittent scrollbar visibility bug fixed. This change introduces a
-  backwards incompatible change to the theme's layout HTML. This should only be
-  a problem for derivative themes that have overridden styling of nav elements
-  using direct decendant selectors. See `#215`_ for more information.
-* Safari overscroll bug fixed
-* Version added to the nav header
-* Revision id was added to the documentation footer if you are using RTD
-* An extra block, ``extrafooter`` was added to allow extra content in the
-  document footer block
-* Fixed modernizr URL
-* Small display style changes on code blocks, figure captions, and nav elements
-
-.. _#215: https://github.com/snide/sphinx_rtd_theme/pull/215
-
-v0.1.8
-------
-
-* Start keeping changelog :)
-* Support for third and fourth level headers in the sidebar
-* Add support for Sphinx 1.3
-* Add sidebar headers for :caption: in Sphinx toctree
-* Clean up sidebar scrolling behavior so it never scrolls out of view
-
 How the Table of Contents builds
 ================================
 
@@ -106,15 +74,15 @@ to set a hidden toc in your index file with the hidden_ property that will allow
 to build a toc without it rendering in your index.
 
 By default, the navigation will "stick" to the screen as you scroll. However if your toc
-is vertically too large, it will revert to static positioning. To disable the sticky nav
-altogether change the setting in ``conf.py``.
+is vertically too large, it revert to static positioning. To disable the sticky nav
+alltogether change the setting in ``conf.py``.
 
 Contributing or modifying the theme
 ===================================
 
 The sphinx_rtd_theme is primarily a sass_ project that requires a few other sass libraries. I'm
 using bower_ to manage these dependencies and sass_ to build the css. The good news is
-I have a very nice set of grunt_ operations that will not only load these dependencies, but watch
+I have a very nice set of grunt_ operations that will not only load these dependecies, but watch
 for changes, rebuild the sphinx demo docs and build a distributable version of the theme.
 The bad news is this means you'll need to set up your environment similar to that
 of a front-end developer (vs. that of a python developer). That means installing node and ruby.
@@ -205,3 +173,4 @@ you can add something like this to your config. Thanks to Daniel Oaks for this.
 TODO
 ====
 * Separate some sass variables at the theme level so you can overwrite some basic colors.
+

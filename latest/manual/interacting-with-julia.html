@@ -193,7 +193,8 @@
 <li class="toctree-l2"><a class="reference internal" href="documentation.html#functions-methods">Functions &amp; Methods</a></li>
 <li class="toctree-l2"><a class="reference internal" href="documentation.html#advanced-usage">Advanced Usage</a></li>
 <li class="toctree-l2"><a class="reference internal" href="documentation.html#syntax-guide">Syntax Guide</a></li>
-<li class="toctree-l2"><a class="reference internal" href="documentation.html#markdown-syntax-notes">Markdown Syntax Notes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="documentation.html#markdown-syntax">Markdown syntax</a></li>
+<li class="toctree-l2"><a class="reference internal" href="documentation.html#markdown-syntax-extensions">Markdown Syntax Extensions</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="metaprogramming.html">Metaprogramming</a><ul>
@@ -240,6 +241,8 @@
 <li class="toctree-l2"><a class="reference internal" href="parallel-computing.html#network-requirements-for-localmanager-and-sshmanager">Network requirements for LocalManager and SSHManager</a></li>
 <li class="toctree-l2"><a class="reference internal" href="parallel-computing.html#cluster-cookie">Cluster cookie</a></li>
 <li class="toctree-l2"><a class="reference internal" href="parallel-computing.html#specifying-network-topology-experimental">Specifying network topology (Experimental)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="parallel-computing.html#multi-threading-experimental">Multi-threading (Experimental)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="parallel-computing.html#threadcall-experimental">&#64;threadcall (Experimental)</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="dates.html">Date and DateTime</a><ul>
@@ -280,6 +283,7 @@
 <li class="toctree-l2"><a class="reference internal" href="#the-different-prompt-modes">The different prompt modes</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#key-bindings">Key bindings</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#tab-completion">Tab completion</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#customizing-colors">Customizing Colors</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="embedding.html">Embedding Julia</a><ul>
@@ -455,6 +459,8 @@
 <li class="toctree-l2"><a class="reference internal" href="../stdlib/parallel.html#general-parallel-computing-support">General Parallel Computing Support</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../stdlib/parallel.html#shared-arrays">Shared Arrays</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../stdlib/parallel.html#multi-threading">Multi-Threading</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../stdlib/parallel.html#ccall-using-a-threadpool-experimental">ccall using a threadpool (Experimental)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../stdlib/parallel.html#synchronization-primitives">Synchronization Primitives</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../stdlib/parallel.html#cluster-manager-interface">Cluster Manager Interface</a></li>
 </ul>
 </li>
@@ -521,7 +527,6 @@
 <li class="toctree-l2"><a class="reference internal" href="../devdocs/sysimg.html">System Image Building</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../devdocs/llvm.html">Working with LLVM</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../devdocs/stdio.html">printf() and stdio in the Julia runtime</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../devdocs/promote-op.html">Operator-sensitive promotion</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../devdocs/boundscheck.html">Bounds checking</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../devdocs/locks.html">Proper maintenance and care of multi-threading locks</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../devdocs/offset-arrays.html">Arrays with custom indices</a></li>
@@ -531,6 +536,7 @@
 <li class="toctree-l2"><a class="reference internal" href="../devdocs/backtraces.html">Reporting and analyzing crashes (segfaults)</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../devdocs/debuggingtips.html">gdb debugging tips</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../devdocs/valgrind.html">Using Valgrind with Julia</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../devdocs/sanitizers.html">Sanitizer support</a></li>
 </ul>
 </li>
 </ul>
@@ -600,6 +606,12 @@ julia&gt;
 <span class="s">&quot;12&quot;</span>
 </pre></div>
 </div>
+<p>In Julia mode, the REPL supports something called <em>prompt pasting</em>. This activates when pasting text that starts with <code class="docutils literal"><span class="pre">julia&gt; </span></code> into the REPL.
+In that case, only expressions starting with <code class="docutils literal"><span class="pre">julia&gt; </span></code> are parsed, others are removed.
+This makes it is possible to paste a chunk of code that has been copied from a REPL session without having to scrub away prompts and outputs.
+This feature is enabled by default but can be disabled or enabled at will with <code class="docutils literal"><span class="pre">Base.REPL.enable_promptpaste(::Bool)</span></code>.
+If it is enabled, you can try it out by pasting the code block above this paragraph straight into the REPL.
+This feature does not work on the standard Windows command prompt due to its limitation at detecting when a paste occurs.</p>
 </div>
 <div class="section" id="help-mode">
 <h3>Help mode<a class="headerlink" href="#help-mode" title="Permalink to this headline">¶</a></h3>
@@ -808,11 +820,56 @@ and get a list of LaTeX matches as well:</p>
 <span class="n">julia</span><span class="o">&gt;</span> \<span class="n">h</span><span class="p">[</span><span class="n">TAB</span><span class="p">]</span>
 \<span class="n">hat</span>              \<span class="n">heartsuit</span>         \<span class="n">hksearow</span>          \<span class="n">hookleftarrow</span>     \<span class="n">hslash</span>
 \<span class="n">hbar</span>             \<span class="n">hermitconjmatrix</span>  \<span class="n">hkswarow</span>          \<span class="n">hookrightarrow</span>    \<span class="n">hspace</span>
+
+<span class="n">julia</span><span class="o">&gt;</span> <span class="n">α</span><span class="o">=</span><span class="s">&quot;</span><span class="se">\a</span><span class="s">lpha[TAB]&quot;</span>   <span class="c"># LaTeX completion also works in strings</span>
+<span class="n">julia</span><span class="o">&gt;</span> <span class="n">α</span><span class="o">=</span><span class="s">&quot;α&quot;</span>
 </pre></div>
 </div>
 <p>A full list of tab-completions can be found in the <a class="reference internal" href="unicode-input.html#man-unicode-input"><span>Unicode Input</span></a> section of the manual.</p>
+<p>Completion of paths works for strings and julia&#8217;s shell mode:</p>
+<div class="highlight-julia"><div class="highlight"><pre><span></span><span class="n">julia</span><span class="o">&gt;</span> <span class="n">path</span><span class="o">=</span><span class="s">&quot;/[TAB]&quot;</span>
+<span class="o">.</span><span class="n">dockerenv</span>  <span class="o">.</span><span class="n">juliabox</span><span class="o">/</span>   <span class="n">boot</span><span class="o">/</span>        <span class="n">etc</span><span class="o">/</span>         <span class="n">lib</span><span class="o">/</span>         <span class="n">media</span><span class="o">/</span>       <span class="n">opt</span><span class="o">/</span>         <span class="n">root</span><span class="o">/</span>        <span class="n">sbin</span><span class="o">/</span>        <span class="n">sys</span><span class="o">/</span>         <span class="n">usr</span><span class="o">/</span>
+<span class="o">.</span><span class="n">dockerinit</span> <span class="n">bin</span><span class="o">/</span>         <span class="n">dev</span><span class="o">/</span>         <span class="n">home</span><span class="o">/</span>        <span class="n">lib64</span><span class="o">/</span>       <span class="n">mnt</span><span class="o">/</span>         <span class="n">proc</span><span class="o">/</span>        <span class="n">run</span><span class="o">/</span>         <span class="n">srv</span><span class="o">/</span>         <span class="n">tmp</span><span class="o">/</span>         <span class="n">var</span><span class="o">/</span>
+<span class="n">shell</span><span class="o">&gt;</span> <span class="o">/</span><span class="p">[</span><span class="n">TAB</span><span class="p">]</span>
+<span class="o">.</span><span class="n">dockerenv</span>  <span class="o">.</span><span class="n">juliabox</span><span class="o">/</span>   <span class="n">boot</span><span class="o">/</span>        <span class="n">etc</span><span class="o">/</span>         <span class="n">lib</span><span class="o">/</span>         <span class="n">media</span><span class="o">/</span>       <span class="n">opt</span><span class="o">/</span>         <span class="n">root</span><span class="o">/</span>        <span class="n">sbin</span><span class="o">/</span>        <span class="n">sys</span><span class="o">/</span>         <span class="n">usr</span><span class="o">/</span>
+<span class="o">.</span><span class="n">dockerinit</span> <span class="n">bin</span><span class="o">/</span>         <span class="n">dev</span><span class="o">/</span>         <span class="n">home</span><span class="o">/</span>        <span class="n">lib64</span><span class="o">/</span>       <span class="n">mnt</span><span class="o">/</span>         <span class="n">proc</span><span class="o">/</span>        <span class="n">run</span><span class="o">/</span>         <span class="n">srv</span><span class="o">/</span>         <span class="n">tmp</span><span class="o">/</span>         <span class="n">var</span><span class="o">/</span>
+</pre></div>
+</div>
+<p>Tab completion can help with investigation of the available methods matching the input arguments:</p>
+<div class="highlight-julia"><div class="highlight"><pre><span></span><span class="n">julia</span><span class="o">&gt;</span> <span class="n">max</span><span class="p">([</span><span class="n">TAB</span><span class="p">]</span> <span class="c"># All methods are displayed, not shown here due to size of the list</span>
+
+<span class="n">julia</span><span class="o">&gt;</span> <span class="n">max</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">],[</span><span class="n">TAB</span><span class="p">]</span> <span class="c"># All methods where `Vector{Int}` matches as first argument</span>
+<span class="n">max</span><span class="p">{</span><span class="n">T1</span><span class="o">&lt;:</span><span class="n">Real</span><span class="p">,</span><span class="n">T2</span><span class="o">&lt;:</span><span class="n">Real</span><span class="p">}(</span><span class="n">x</span><span class="p">::</span><span class="n">AbstractArray</span><span class="p">{</span><span class="n">T1</span><span class="p">,</span><span class="n">N</span><span class="o">&lt;:</span><span class="kt">Any</span><span class="p">},</span> <span class="n">y</span><span class="p">::</span><span class="n">T2</span><span class="p">)</span> <span class="n">at</span> <span class="n">operators</span><span class="o">.</span><span class="n">jl</span><span class="p">:</span><span class="mi">544</span>
+<span class="n">max</span><span class="p">{</span><span class="n">Tx</span><span class="o">&lt;:</span><span class="n">Real</span><span class="p">,</span><span class="n">Ty</span><span class="o">&lt;:</span><span class="n">Real</span><span class="p">}(</span><span class="n">x</span><span class="p">::</span><span class="n">Union</span><span class="p">{</span><span class="n">Base</span><span class="o">.</span><span class="n">ReshapedArray</span><span class="p">{</span><span class="n">Tx</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="n">A</span><span class="o">&lt;:</span><span class="n">DenseArray</span><span class="p">,</span><span class="n">MI</span><span class="o">&lt;:</span><span class="n">Tuple</span><span class="p">{</span><span class="n">Vararg</span><span class="p">{</span><span class="n">Base</span><span class="o">.</span><span class="n">MultiplicativeInverses</span><span class="o">.</span><span class="n">SignedMultiplicativeInverse</span><span class="p">{</span><span class="kt">Int64</span><span class="p">},</span><span class="n">N</span><span class="o">&lt;:</span><span class="kt">Any</span><span class="p">}}},</span><span class="n">DenseArray</span><span class="p">{</span><span class="n">Tx</span><span class="p">,</span><span class="mi">1</span><span class="p">},</span><span class="n">SubArray</span><span class="p">{</span><span class="n">Tx</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="n">A</span><span class="o">&lt;:</span><span class="n">Union</span><span class="p">{</span><span class="n">Base</span><span class="o">.</span><span class="n">ReshapedArray</span><span class="p">{</span><span class="n">T</span><span class="o">&lt;:</span><span class="kt">Any</span><span class="p">,</span><span class="n">N</span><span class="o">&lt;:</span><span class="kt">Any</span><span class="p">,</span><span class="n">A</span><span class="o">&lt;:</span><span class="n">DenseArray</span><span class="p">,</span><span class="n">MI</span><span class="o">&lt;:</span><span class="n">Tuple</span><span class="p">{</span><span class="n">Vararg</span><span class="p">{</span><span class="n">Base</span><span class="o">.</span><span class="n">MultiplicativeInverses</span><span class="o">.</span><span class="n">SignedMultiplicativeInverse</span><span class="p">{</span><span class="kt">Int64</span><span class="p">},</span><span class="n">N</span><span class="o">&lt;:</span><span class="kt">Any</span><span class="p">}}},</span><span class="n">DenseArray</span><span class="p">},</span><span class="n">I</span><span class="o">&lt;:</span><span class="n">Tuple</span><span class="p">{</span><span class="n">Vararg</span><span class="p">{</span><span class="n">Union</span><span class="p">{</span><span class="n">Base</span><span class="o">.</span><span class="n">AbstractCartesianIndex</span><span class="p">,</span><span class="n">Colon</span><span class="p">,</span><span class="kt">Int64</span><span class="p">,</span><span class="n">Range</span><span class="p">{</span><span class="kt">Int64</span><span class="p">}},</span><span class="n">N</span><span class="o">&lt;:</span><span class="kt">Any</span><span class="p">}},</span><span class="n">L</span><span class="o">&lt;:</span><span class="kt">Any</span><span class="p">}},</span> <span class="n">y</span><span class="p">::</span><span class="n">AbstractSparseArray</span><span class="p">{</span><span class="n">Ty</span><span class="p">,</span><span class="n">Ti</span><span class="o">&lt;:</span><span class="kt">Any</span><span class="p">,</span><span class="mi">1</span><span class="p">})</span> <span class="n">at</span> <span class="n">sparse</span>\<span class="n">sparsevector</span><span class="o">.</span><span class="n">jl</span><span class="p">:</span><span class="mi">1127</span>
+<span class="n">max</span><span class="p">{</span><span class="n">T1</span><span class="o">&lt;:</span><span class="n">Real</span><span class="p">,</span><span class="n">T2</span><span class="o">&lt;:</span><span class="n">Real</span><span class="p">}(</span><span class="n">x</span><span class="p">::</span><span class="n">AbstractArray</span><span class="p">{</span><span class="n">T1</span><span class="p">,</span><span class="n">N</span><span class="o">&lt;:</span><span class="kt">Any</span><span class="p">},</span> <span class="n">y</span><span class="p">::</span><span class="n">AbstractArray</span><span class="p">{</span><span class="n">T2</span><span class="p">,</span><span class="n">N</span><span class="o">&lt;:</span><span class="kt">Any</span><span class="p">})</span> <span class="n">at</span> <span class="n">operators</span><span class="o">.</span><span class="n">jl</span><span class="p">:</span><span class="mi">548</span>
+<span class="n">max</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span> <span class="n">at</span> <span class="n">operators</span><span class="o">.</span><span class="n">jl</span><span class="p">:</span><span class="mi">78</span>
+<span class="n">max</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">c</span><span class="p">,</span> <span class="n">xs</span><span class="o">...</span><span class="p">)</span> <span class="n">at</span> <span class="n">operators</span><span class="o">.</span><span class="n">jl</span><span class="p">:</span><span class="mi">119</span>
+
+<span class="n">julia</span><span class="o">&gt;</span> <span class="n">max</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">],</span> <span class="n">max</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">),[</span><span class="n">TAB</span><span class="p">]</span> <span class="c"># All methods matching the arguments.</span>
+<span class="n">max</span><span class="p">{</span><span class="n">T1</span><span class="o">&lt;:</span><span class="n">Real</span><span class="p">,</span><span class="n">T2</span><span class="o">&lt;:</span><span class="n">Real</span><span class="p">}(</span><span class="n">x</span><span class="p">::</span><span class="n">AbstractArray</span><span class="p">{</span><span class="n">T1</span><span class="p">,</span><span class="n">N</span><span class="o">&lt;:</span><span class="kt">Any</span><span class="p">},</span> <span class="n">y</span><span class="p">::</span><span class="n">T2</span><span class="p">)</span> <span class="n">at</span> <span class="n">operators</span><span class="o">.</span><span class="n">jl</span><span class="p">:</span><span class="mi">544</span>
+<span class="n">max</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span> <span class="n">at</span> <span class="n">operators</span><span class="o">.</span><span class="n">jl</span><span class="p">:</span><span class="mi">78</span>
+<span class="n">max</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">c</span><span class="p">,</span> <span class="n">xs</span><span class="o">...</span><span class="p">)</span> <span class="n">at</span> <span class="n">operators</span><span class="o">.</span><span class="n">jl</span><span class="p">:</span><span class="mi">119</span>
+
+<span class="n">julia</span><span class="o">&gt;</span> <span class="n">split</span><span class="p">(</span><span class="s">&quot;1 1 1&quot;</span><span class="p">,</span> <span class="c"># Keywords are also displayed in the suggested methods, see second line after `;` where `limit` and `keep` are keyword arguments</span>
+<span class="n">split</span><span class="p">(</span><span class="n">str</span><span class="p">::</span><span class="n">AbstractString</span><span class="p">)</span> <span class="n">at</span> <span class="n">strings</span><span class="o">/</span><span class="n">util</span><span class="o">.</span><span class="n">jl</span><span class="p">:</span><span class="mi">151</span>
+<span class="n">split</span><span class="p">{</span><span class="n">T</span><span class="o">&lt;:</span><span class="n">AbstractString</span><span class="p">}(</span><span class="n">str</span><span class="p">::</span><span class="n">T</span><span class="p">,</span> <span class="n">splitter</span><span class="p">;</span> <span class="n">limit</span><span class="p">,</span> <span class="n">keep</span><span class="p">)</span> <span class="n">at</span> <span class="n">strings</span><span class="o">/</span><span class="n">util</span><span class="o">.</span><span class="n">jl</span><span class="p">:</span><span class="mi">127</span>
+</pre></div>
+</div>
+<p>The completion of the methods uses type inference and can therefore see if the arguments match even if the arguments are output from functions. The function needs to be type stable for the completion to be able to remove non-matching methods.</p>
+<p>Tab completion can also help completing fields:</p>
+<div class="highlight-julia"><div class="highlight"><pre><span></span><span class="n">julia</span><span class="o">&gt;</span> <span class="n">Pkg</span><span class="o">.</span><span class="n">a</span>
+<span class="n">add</span>       <span class="n">available</span>
+</pre></div>
+</div>
+<p>Fields for output from functions can also be completed:</p>
+<div class="highlight-julia"><div class="highlight"><pre><span></span><span class="n">julia</span><span class="o">&gt;</span> <span class="n">split</span><span class="p">(</span><span class="s">&quot;&quot;</span><span class="p">,</span><span class="s">&quot;&quot;</span><span class="p">)[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="p">[</span><span class="n">TAB</span><span class="p">]</span>
+<span class="n">endof</span>  <span class="n">offset</span>  <span class="n">string</span>
+</pre></div>
+</div>
+<p>The completion of fields for output from functions uses type inference, and it can only suggest fields if the function is type stable.</p>
+</div>
 <div class="section" id="customizing-colors">
-<h3>Customizing Colors<a class="headerlink" href="#customizing-colors" title="Permalink to this headline">¶</a></h3>
+<h2>Customizing Colors<a class="headerlink" href="#customizing-colors" title="Permalink to this headline">¶</a></h2>
 <p>The colors used by Julia and the REPL can be customized, as well. To change the color of the Julia
 prompt you can add something like the following to your <code class="docutils literal"><span class="pre">juliarc.jl</span></code> file:</p>
 <div class="highlight-julia"><div class="highlight"><pre><span></span><span class="n">Base</span><span class="o">.</span><span class="n">active_repl</span><span class="o">.</span><span class="n">prompt_color</span> <span class="o">=</span> <span class="n">Base</span><span class="o">.</span><span class="n">text_colors</span><span class="p">[:</span><span class="n">cyan</span><span class="p">]</span>
@@ -830,7 +887,6 @@ informational messages in cyan you can add the following to your <code class="do
 <div class="highlight-julia"><div class="highlight"><pre><span></span><span class="n">ENV</span><span class="p">[</span><span class="s">&quot;JULIA_WARN_COLOR&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">:</span><span class="n">yellow</span>
 <span class="n">ENV</span><span class="p">[</span><span class="s">&quot;JULIA_INFO_COLOR&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">:</span><span class="n">cyan</span>
 </pre></div>
-</div>
 </div>
 </div>
 </div>

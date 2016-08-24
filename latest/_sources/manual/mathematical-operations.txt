@@ -419,7 +419,7 @@ Julia는 부정확한 변환에 있어서 서로 차이가 발생하는 총 세 
 
     julia> round(Int8,127.6)
     ERROR: InexactError()
-     in trunc(::Type{Int8}, ::Float64) at ./float.jl:456
+     in trunc(::Type{Int8}, ::Float64) at ./float.jl:458
      in round(::Type{Int8}, ::Float64) at ./float.jl:211
      ...
 

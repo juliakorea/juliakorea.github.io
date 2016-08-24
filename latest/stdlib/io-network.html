@@ -193,7 +193,8 @@
 <li class="toctree-l2"><a class="reference internal" href="../manual/documentation.html#functions-methods">Functions &amp; Methods</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../manual/documentation.html#advanced-usage">Advanced Usage</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../manual/documentation.html#syntax-guide">Syntax Guide</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../manual/documentation.html#markdown-syntax-notes">Markdown Syntax Notes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../manual/documentation.html#markdown-syntax">Markdown syntax</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../manual/documentation.html#markdown-syntax-extensions">Markdown Syntax Extensions</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../manual/metaprogramming.html">Metaprogramming</a><ul>
@@ -240,6 +241,8 @@
 <li class="toctree-l2"><a class="reference internal" href="../manual/parallel-computing.html#network-requirements-for-localmanager-and-sshmanager">Network requirements for LocalManager and SSHManager</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../manual/parallel-computing.html#cluster-cookie">Cluster cookie</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../manual/parallel-computing.html#specifying-network-topology-experimental">Specifying network topology (Experimental)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../manual/parallel-computing.html#multi-threading-experimental">Multi-threading (Experimental)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../manual/parallel-computing.html#threadcall-experimental">&#64;threadcall (Experimental)</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../manual/dates.html">Date and DateTime</a><ul>
@@ -280,6 +283,7 @@
 <li class="toctree-l2"><a class="reference internal" href="../manual/interacting-with-julia.html#the-different-prompt-modes">The different prompt modes</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../manual/interacting-with-julia.html#key-bindings">Key bindings</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../manual/interacting-with-julia.html#tab-completion">Tab completion</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../manual/interacting-with-julia.html#customizing-colors">Customizing Colors</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../manual/embedding.html">Embedding Julia</a><ul>
@@ -455,6 +459,8 @@
 <li class="toctree-l2"><a class="reference internal" href="parallel.html#general-parallel-computing-support">General Parallel Computing Support</a></li>
 <li class="toctree-l2"><a class="reference internal" href="parallel.html#shared-arrays">Shared Arrays</a></li>
 <li class="toctree-l2"><a class="reference internal" href="parallel.html#multi-threading">Multi-Threading</a></li>
+<li class="toctree-l2"><a class="reference internal" href="parallel.html#ccall-using-a-threadpool-experimental">ccall using a threadpool (Experimental)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="parallel.html#synchronization-primitives">Synchronization Primitives</a></li>
 <li class="toctree-l2"><a class="reference internal" href="parallel.html#cluster-manager-interface">Cluster Manager Interface</a></li>
 </ul>
 </li>
@@ -521,7 +527,6 @@
 <li class="toctree-l2"><a class="reference internal" href="../devdocs/sysimg.html">System Image Building</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../devdocs/llvm.html">Working with LLVM</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../devdocs/stdio.html">printf() and stdio in the Julia runtime</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../devdocs/promote-op.html">Operator-sensitive promotion</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../devdocs/boundscheck.html">Bounds checking</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../devdocs/locks.html">Proper maintenance and care of multi-threading locks</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../devdocs/offset-arrays.html">Arrays with custom indices</a></li>
@@ -531,6 +536,7 @@
 <li class="toctree-l2"><a class="reference internal" href="../devdocs/backtraces.html">Reporting and analyzing crashes (segfaults)</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../devdocs/debuggingtips.html">gdb debugging tips</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../devdocs/valgrind.html">Using Valgrind with Julia</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../devdocs/sanitizers.html">Sanitizer support</a></li>
 </ul>
 </li>
 </ul>
@@ -711,7 +717,7 @@
 <dt>
 <code class="descname">write</code><span class="sig-paren">(</span><em>filename::AbstractString</em>, <em>x</em><span class="sig-paren">)</span></dt>
 <dd><p>Write the canonical binary representation of a value to the given I/O stream or file. Returns the number of bytes written into the stream.</p>
-<p>You can write multiple values with the same :func:<code class="docutils literal"><span class="pre">write</span></code> call. i.e. the following are equivalent:</p>
+<p>You can write multiple values with the same <code class="docutils literal"><span class="pre">write</span></code> call. i.e. the following are equivalent:</p>
 <div class="highlight-julia"><div class="highlight"><pre><span></span><span class="n">write</span><span class="p">(</span><span class="n">stream</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="o">...</span><span class="p">)</span>
 <span class="n">write</span><span class="p">(</span><span class="n">stream</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span> <span class="o">+</span> <span class="n">write</span><span class="p">(</span><span class="n">stream</span><span class="p">,</span> <span class="n">y</span><span class="o">...</span><span class="p">)</span>
 </pre></div>
@@ -747,8 +753,14 @@
 
 <dl class="function">
 <dt>
-<code class="descname">read</code><span class="sig-paren">(</span><em>stream::IO</em>, <em>nb=typemax(Int); all=true</em><span class="sig-paren">)</span></dt>
-<dd><p>Read at most <code class="docutils literal"><span class="pre">nb</span></code> bytes from <code class="docutils literal"><span class="pre">stream</span></code>, returning a <code class="docutils literal"><span class="pre">Vector{UInt8}</span></code> of the bytes read.</p>
+<code class="descname">read</code><span class="sig-paren">(</span><em>s::IO</em>, <em>nb=typemax(Int)</em><span class="sig-paren">)</span></dt>
+<dd><p>Read at most <code class="docutils literal"><span class="pre">nb</span></code> bytes from <code class="docutils literal"><span class="pre">s</span></code>, returning a <code class="docutils literal"><span class="pre">Vector{UInt8}</span></code> of the bytes read.</p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<code class="descname">read</code><span class="sig-paren">(</span><em>s::IOStream</em>, <em>nb::Integer; all=true</em><span class="sig-paren">)</span></dt>
+<dd><p>Read at most <code class="docutils literal"><span class="pre">nb</span></code> bytes from <code class="docutils literal"><span class="pre">s</span></code>, returning a <code class="docutils literal"><span class="pre">Vector{UInt8}</span></code> of the bytes read.</p>
 <p>If <code class="docutils literal"><span class="pre">all</span></code> is <code class="docutils literal"><span class="pre">true</span></code> (the default), this function will block repeatedly trying to read all requested bytes, until an error or end-of-file occurs. If <code class="docutils literal"><span class="pre">all</span></code> is <code class="docutils literal"><span class="pre">false</span></code>, at most one <code class="docutils literal"><span class="pre">read</span></code> call is performed, and the amount of data returned is device-dependent. Note that not all stream types support the <code class="docutils literal"><span class="pre">all</span></code> option.</p>
 </dd></dl>
 
@@ -968,23 +980,39 @@
 <dd><p>Read all available data on the stream, blocking the task only if no data is available. The result is a <code class="docutils literal"><span class="pre">Vector{UInt8,1}</span></code>.</p>
 </dd></dl>
 
+<dl class="type">
+<dt id="Base.IOContext">
+<code class="descname">IOContext</code><a class="headerlink" href="#Base.IOContext" title="Permalink to this definition">¶</a></dt>
+<dd><p>IOContext provides a mechanism for passing output configuration settings among <code class="docutils literal"><span class="pre">show</span></code> methods.</p>
+<p>In short, it is an immutable dictionary that is a subclass of <code class="docutils literal"><span class="pre">IO</span></code>. It supports standard dictionary operations such as <code class="docutils literal"><span class="pre">getindex</span></code>, and can also be used as an I/O stream.</p>
+</dd></dl>
+
 <dl class="function">
 <dt>
-<code class="descname">IOContext{&lt;:IO} &lt;: IO</code></dt>
-<dd><p>IOContext provides a mechanism for passing output-configuration keyword arguments through arbitrary show methods.</p>
-<p>In short, it is an immutable Dictionary that is a subclass of IO.</p>
-<div class="highlight-julia"><div class="highlight"><pre><span></span><span class="n">IOContext</span><span class="p">(</span><span class="n">io</span><span class="p">::</span><span class="n">IO</span><span class="p">,</span> <span class="n">KV</span><span class="p">::</span><span class="n">Pair</span><span class="p">)</span>
-</pre></div>
-</div>
-<p>Create a new entry in the IO Dictionary for the key =&gt; value pair</p>
+<code class="descname">IOContext</code><span class="sig-paren">(</span><em>io::IO</em>, <em>KV::Pair</em><span class="sig-paren">)</span></dt>
+<dd><p>Create an <code class="docutils literal"><span class="pre">IOContext</span></code> that wraps a given stream, adding the specified <code class="docutils literal"><span class="pre">key=&gt;value</span></code> pair to the properties of that stream (note that <code class="docutils literal"><span class="pre">io</span></code> can itself be an <code class="docutils literal"><span class="pre">IOContext</span></code>).</p>
 <ul class="simple">
 <li>use <code class="docutils literal"><span class="pre">(key</span> <span class="pre">=&gt;</span> <span class="pre">value)</span> <span class="pre">in</span> <span class="pre">dict</span></code> to see if this particular combination is in the properties set</li>
 <li>use <code class="docutils literal"><span class="pre">get(dict,</span> <span class="pre">key,</span> <span class="pre">default)</span></code> to retrieve the most recent value for a particular key</li>
 </ul>
-<div class="highlight-julia"><div class="highlight"><pre><span></span><span class="n">IOContext</span><span class="p">(</span><span class="n">io</span><span class="p">::</span><span class="n">IO</span><span class="p">,</span> <span class="n">context</span><span class="p">::</span><span class="n">IOContext</span><span class="p">)</span>
-</pre></div>
-</div>
-<p>Create a IOContext that wraps an alternate IO but inherits the keyword arguments from the context</p>
+<p>The following properties are in common use:</p>
+<ul class="simple">
+<li><code class="docutils literal"><span class="pre">:compact</span></code>: Boolean specifying that small values should be printed more compactly, e.g. that numbers should be printed with fewer digits. This is set when printing array elements.</li>
+<li><code class="docutils literal"><span class="pre">:limit</span></code>: Boolean specifying that containers should be truncated, e.g. showing <code class="docutils literal"><span class="pre">…</span></code> in place of most elements.</li>
+<li><code class="docutils literal"><span class="pre">:displaysize</span></code>: A <code class="docutils literal"><span class="pre">Tuple{Int,Int}</span></code> giving the size in rows and columns to use for text output. This can be used to override the display size for called functions, but to get the size of the screen use the <code class="docutils literal"><span class="pre">displaysize</span></code> function.</li>
+</ul>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<code class="descname">IOContext</code><span class="sig-paren">(</span><em>io::IO</em>, <em>context::IOContext</em><span class="sig-paren">)</span></dt>
+<dd><p>Create an <code class="docutils literal"><span class="pre">IOContext</span></code> that wraps an alternate <code class="docutils literal"><span class="pre">IO</span></code> but inherits the properties of <code class="docutils literal"><span class="pre">context</span></code>.</p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<code class="descname">IOContext</code><span class="sig-paren">(</span><em>io::IO; properties...</em><span class="sig-paren">)</span></dt>
+<dd><p>The same as <code class="docutils literal"><span class="pre">IOContext(io::IO,</span> <span class="pre">KV::Pair)</span></code>, but accepting properties as keyword arguments.</p>
 </dd></dl>
 
 </div>
@@ -1168,8 +1196,8 @@
 
 <dl class="function">
 <dt id="Base.writedlm">
-<code class="descname">writedlm</code><span class="sig-paren">(</span><em>f</em>, <em>A</em>, <em>delim='\t'</em><span class="sig-paren">)</span><a class="headerlink" href="#Base.writedlm" title="Permalink to this definition">¶</a></dt>
-<dd><p>Write <code class="docutils literal"><span class="pre">A</span></code> (a vector, matrix or an iterable collection of iterable rows) as text to <code class="docutils literal"><span class="pre">f</span></code> (either a filename string or an <code class="docutils literal"><span class="pre">IO</span></code> stream) using the given delimiter <code class="docutils literal"><span class="pre">delim</span></code> (which defaults to tab, but can be any printable Julia object, typically a <code class="docutils literal"><span class="pre">Char</span></code> or <code class="docutils literal"><span class="pre">AbstractString</span></code>).</p>
+<code class="descname">writedlm</code><span class="sig-paren">(</span><em>f</em>, <em>A</em>, <em>delim='\t'; opts</em><span class="sig-paren">)</span><a class="headerlink" href="#Base.writedlm" title="Permalink to this definition">¶</a></dt>
+<dd><p>Write <code class="docutils literal"><span class="pre">A</span></code> (a vector, matrix, or an iterable collection of iterable rows) as text to <code class="docutils literal"><span class="pre">f</span></code> (either a filename string or an <code class="xref jl jl-class docutils literal"><span class="pre">IO</span></code> stream) using the given delimiter <code class="docutils literal"><span class="pre">delim</span></code> (which defaults to tab, but can be any printable Julia object, typically a <code class="docutils literal"><span class="pre">Char</span></code> or <code class="docutils literal"><span class="pre">AbstractString</span></code>).</p>
 <p>For example, two vectors <code class="docutils literal"><span class="pre">x</span></code> and <code class="docutils literal"><span class="pre">y</span></code> of the same length can be written as two columns of tab-delimited text to <code class="docutils literal"><span class="pre">f</span></code> by either <code class="docutils literal"><span class="pre">writedlm(f,</span> <span class="pre">[x</span> <span class="pre">y])</span></code> or by <code class="docutils literal"><span class="pre">writedlm(f,</span> <span class="pre">zip(x,</span> <span class="pre">y))</span></code>.</p>
 </dd></dl>
 
@@ -1181,8 +1209,8 @@
 
 <dl class="function">
 <dt id="Base.writecsv">
-<code class="descname">writecsv</code><span class="sig-paren">(</span><em>filename</em>, <em>A</em><span class="sig-paren">)</span><a class="headerlink" href="#Base.writecsv" title="Permalink to this definition">¶</a></dt>
-<dd><p>Equivalent to <code class="docutils literal"><span class="pre">writedlm</span></code> with <code class="docutils literal"><span class="pre">delim</span></code> set to comma.</p>
+<code class="descname">writecsv</code><span class="sig-paren">(</span><em>filename</em>, <em>A; opts</em><span class="sig-paren">)</span><a class="headerlink" href="#Base.writecsv" title="Permalink to this definition">¶</a></dt>
+<dd><p>Equivalent to <a class="reference internal" href="#Base.writedlm" title="Base.writedlm"><code class="xref jl jl-func docutils literal"><span class="pre">writedlm()</span></code></a> with <code class="docutils literal"><span class="pre">delim</span></code> set to comma.</p>
 </dd></dl>
 
 <dl class="function">
@@ -1277,6 +1305,7 @@ Julia environments (such as the IPython-based IJulia notebook).</p>
 <p>For example, if you define a <code class="docutils literal"><span class="pre">MyImage</span></code> type and know how to write it to a PNG file, you could define a function <code class="docutils literal"><span class="pre">show(stream,</span> <span class="pre">::MIME&quot;image/png&quot;,</span> <span class="pre">x::MyImage)</span> <span class="pre">=</span> <span class="pre">...</span></code> to allow your images to be displayed on any PNG-capable <code class="docutils literal"><span class="pre">Display</span></code> (such as IJulia). As usual, be sure to <code class="docutils literal"><span class="pre">import</span> <span class="pre">Base.show</span></code> in order to add new methods to the built-in Julia function <code class="docutils literal"><span class="pre">show</span></code>.</p>
 <p>The default MIME type is <code class="docutils literal"><span class="pre">MIME&quot;text/plain&quot;</span></code>. There is a fallback definition for <code class="docutils literal"><span class="pre">text/plain</span></code> output that calls <code class="docutils literal"><span class="pre">show</span></code> with 2 arguments. Therefore, this case should be handled by defining a 2-argument <code class="docutils literal"><span class="pre">show(stream::IO,</span> <span class="pre">x::MyType)</span></code> method.</p>
 <p>Technically, the <code class="docutils literal"><span class="pre">MIME&quot;mime&quot;</span></code> macro defines a singleton type for the given <code class="docutils literal"><span class="pre">mime</span></code> string, which allows us to exploit Julia&#8217;s dispatch mechanisms in determining how to display objects of any given type.</p>
+<p>The first argument to <code class="docutils literal"><span class="pre">show</span></code> can be an <code class="docutils literal"><span class="pre">IOContext</span></code> specifying output format properties. See <code class="docutils literal"><span class="pre">IOContext</span></code> for details.</p>
 </dd></dl>
 
 <dl class="function">
@@ -1419,7 +1448,7 @@ stack with:</p>
 <dl class="function">
 <dt>
 <code class="descname">connect</code><span class="sig-paren">(</span><em>path</em><span class="sig-paren">)</span> &rarr; PipeEndpoint</dt>
-<dd><p>Connect to the Named Pipe / Domain Socket at <code class="docutils literal"><span class="pre">path</span></code>.</p>
+<dd><p>Connect to the named pipe / UNIX domain socket at <code class="docutils literal"><span class="pre">path</span></code>.</p>
 </dd></dl>
 
 <dl class="function">
@@ -1431,7 +1460,7 @@ stack with:</p>
 <dl class="function">
 <dt>
 <code class="descname">listen</code><span class="sig-paren">(</span><em>path</em><span class="sig-paren">)</span> &rarr; PipeServer</dt>
-<dd><p>Create and listen on a Named Pipe / Domain Socket.</p>
+<dd><p>Create and listen on a named pipe / UNIX domain socket.</p>
 </dd></dl>
 
 <dl class="function">

@@ -194,7 +194,8 @@
 <li class="toctree-l2"><a class="reference internal" href="../manual/documentation.html#functions-methods">Functions &amp; Methods</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../manual/documentation.html#advanced-usage">Advanced Usage</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../manual/documentation.html#syntax-guide">Syntax Guide</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../manual/documentation.html#markdown-syntax-notes">Markdown Syntax Notes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../manual/documentation.html#markdown-syntax">Markdown syntax</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../manual/documentation.html#markdown-syntax-extensions">Markdown Syntax Extensions</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../manual/metaprogramming.html">Metaprogramming</a><ul>
@@ -241,6 +242,8 @@
 <li class="toctree-l2"><a class="reference internal" href="../manual/parallel-computing.html#network-requirements-for-localmanager-and-sshmanager">Network requirements for LocalManager and SSHManager</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../manual/parallel-computing.html#cluster-cookie">Cluster cookie</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../manual/parallel-computing.html#specifying-network-topology-experimental">Specifying network topology (Experimental)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../manual/parallel-computing.html#multi-threading-experimental">Multi-threading (Experimental)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../manual/parallel-computing.html#threadcall-experimental">&#64;threadcall (Experimental)</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../manual/dates.html">Date and DateTime</a><ul>
@@ -281,6 +284,7 @@
 <li class="toctree-l2"><a class="reference internal" href="../manual/interacting-with-julia.html#the-different-prompt-modes">The different prompt modes</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../manual/interacting-with-julia.html#key-bindings">Key bindings</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../manual/interacting-with-julia.html#tab-completion">Tab completion</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../manual/interacting-with-julia.html#customizing-colors">Customizing Colors</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../manual/embedding.html">Embedding Julia</a><ul>
@@ -456,6 +460,8 @@
 <li class="toctree-l2"><a class="reference internal" href="../stdlib/parallel.html#general-parallel-computing-support">General Parallel Computing Support</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../stdlib/parallel.html#shared-arrays">Shared Arrays</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../stdlib/parallel.html#multi-threading">Multi-Threading</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../stdlib/parallel.html#ccall-using-a-threadpool-experimental">ccall using a threadpool (Experimental)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../stdlib/parallel.html#synchronization-primitives">Synchronization Primitives</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../stdlib/parallel.html#cluster-manager-interface">Cluster Manager Interface</a></li>
 </ul>
 </li>
@@ -522,7 +528,6 @@
 <li class="toctree-l2"><a class="reference internal" href="sysimg.html">System Image Building</a></li>
 <li class="toctree-l2"><a class="reference internal" href="llvm.html">Working with LLVM</a></li>
 <li class="toctree-l2"><a class="reference internal" href="stdio.html">printf() and stdio in the Julia runtime</a></li>
-<li class="toctree-l2"><a class="reference internal" href="promote-op.html">Operator-sensitive promotion</a></li>
 <li class="toctree-l2"><a class="reference internal" href="boundscheck.html">Bounds checking</a></li>
 <li class="toctree-l2 current"><a class="current reference internal" href="">Proper maintenance and care of multi-threading locks</a></li>
 <li class="toctree-l2"><a class="reference internal" href="offset-arrays.html">Arrays with custom indices</a></li>
@@ -532,6 +537,7 @@
 <li class="toctree-l2"><a class="reference internal" href="backtraces.html">Reporting and analyzing crashes (segfaults)</a></li>
 <li class="toctree-l2"><a class="reference internal" href="debuggingtips.html">gdb debugging tips</a></li>
 <li class="toctree-l2"><a class="reference internal" href="valgrind.html">Using Valgrind with Julia</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sanitizers.html">Sanitizer support</a></li>
 </ul>
 </li>
 </ul>
@@ -581,6 +587,8 @@
 <li>avoid constructs that expect to need unrestricted recursion</li>
 </ol>
 </div></blockquote>
+<div class="section" id="locks">
+<h2>Locks<a class="headerlink" href="#locks" title="Permalink to this headline">¶</a></h2>
 <p>Below are all of the locks that exist in the system and the mechanisms
 for using them that avoid the potential for deadlocks (no Ostrich algorithm allowed here):</p>
 <p>The following are definitely leaf locks (level 1), and must not try to acquire any other lock:</p>
@@ -613,11 +621,10 @@ entering / restoring exception frames, and taking / releasing locks.</p>
 <p>The following is a leaf lock (level 2), and only acquires level 1 locks (safepoint) internally:</p>
 <blockquote>
 <div><ul class="simple">
-<li>dump (this lock may be possible to eliminate by storing the state on the stack)</li>
 <li>typecache</li>
 </ul>
 </div></blockquote>
-<p>The following are level 3 locks, which can only acquire level 1 or level 2 locks internally:</p>
+<p>The following is a level 3 lock, which can only acquire level 1 or level 2 locks internally:</p>
 <blockquote>
 <div><ul>
 <li><p class="first">Method-&gt;writelock</p>
@@ -674,8 +681,10 @@ so it may require all threads to get to a safepoint first</p>
 </li>
 </ul>
 </div></blockquote>
-<div class="section" id="the-following-locks-are-broken">
-<h2>The following locks are broken:<a class="headerlink" href="#the-following-locks-are-broken" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="broken-locks">
+<h2>Broken Locks<a class="headerlink" href="#broken-locks" title="Permalink to this headline">¶</a></h2>
+<p>The following locks are broken:</p>
 <ul>
 <li><p class="first">toplevel</p>
 <blockquote>
@@ -704,19 +713,27 @@ by ensuring that no staging functions can run in parallel allow this level 5 loc
 <p>fix: create it</p>
 </div></blockquote>
 </li>
-<li><p class="first">typecache</p>
-<blockquote>
-<div><p>this only protects cache lookup and insertion but it doesn&#8217;t make the lookup-and-construct atomic</p>
-<p>fix: lock for <code class="docutils literal"><span class="pre">apply_type</span></code> / global (level 2?)</p>
-</div></blockquote>
-</li>
-<li><p class="first">dump</p>
-<blockquote>
-<div><p>may be able to eliminate this by making the state thread-local</p>
-<p>might also need to ensure that incremental deserialize has a toplevel expression lock</p>
-</div></blockquote>
-</li>
 </ul>
+</div>
+<div class="section" id="shared-global-data-structures">
+<h2>Shared Global Data Structures<a class="headerlink" href="#shared-global-data-structures" title="Permalink to this headline">¶</a></h2>
+<p>These data structures each need locks due to being shared mutable global state.
+It is the inverse list for the above lock priority list.
+This list does not include level 1 leaf resources due to their simplicity.</p>
+<p>MethodTable modifications (def, cache, kwsorter type) : MethodTable-&gt;writelock</p>
+<p>Type declarations : toplevel lock</p>
+<p>Type application : typecache lock</p>
+<p>Module serializer : toplevel lock</p>
+<p>JIT : codegen lock</p>
+<p>LLVMContext : codegen lock</p>
+<dl class="docutils">
+<dt>Method <span class="classifier-delimiter">:</span> <span class="classifier">Method-&gt;writelock</span></dt>
+<dd><ul class="first last simple">
+<li>roots array (serializer and codegen)</li>
+<li>invoke / specializations / tfunc modifications</li>
+</ul>
+</dd>
+</dl>
 </div>
 </div>
 
