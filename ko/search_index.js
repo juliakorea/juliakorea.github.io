@@ -2509,7 +2509,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Date and DateTime",
     "title": "Date and DateTime",
     "category": "section",
-    "text": "CurrentModule = Base.DatesThe Dates module provides two types for working with dates: Date and DateTime, representing day and millisecond precision, respectively; both are subtypes of the abstract TimeType. The motivation for distinct types is simple: some operations are much simpler, both in terms of code and mental reasoning, when the complexities of greater precision don't have to be dealt with. For example, since the Date type only resolves to the precision of a single date (i.e. no hours, minutes, or seconds), normal considerations for time zones, daylight savings/summer time, and leap seconds are unnecessary and avoided.Both Date and DateTime are basically immutable Int64 wrappers. The single instant field of either type is actually a UTInstant{P} type, which represents a continuously increasing machine timeline based on the UT second [1]. The DateTime type is not aware of time zones (naive, in Python parlance), analogous to a LocalDateTime in Java 8. Additional time zone functionality can be added through the TimeZones.jl package, which compiles the IANA time zone database. Both Date and DateTime are based on the ISO 8601 standard, which follows the proleptic Gregorian calendar. One note is that the ISO 8601 standard is particular about BC/BCE dates. In general, the last day of the BC/BCE era, 1-12-31 BC/BCE, was followed by 1-1-1 AD/CE, thus no year zero exists. The ISO standard, however, states that 1 BC/BCE is year zero, so 0000-12-31 is the day before 0001-01-01, and year -0001 (yes, negative one for the year) is 2 BC/BCE, year -0002 is 3 BC/BCE, etc.[1]: The notion of the UT second is actually quite fundamental. There are basically two different notions of time generally accepted, one based on the physical rotation of the earth (one full rotation = 1 day), the other based on the SI second (a fixed, constant value). These are radically different! Think about it, a \"UT second\", as defined relative to the rotation of the earth, may have a different absolute length depending on the day! Anyway, the fact that Date and DateTime are based on UT seconds is a simplifying, yet honest assumption so that things like leap seconds and all their complexity can be avoided. This basis of time is formally called UT or UT1. Basing types on the UT second basically means that every minute has 60 seconds and every day has 24 hours and leads to more natural calculations when working with calendar dates."
+    "text": "CurrentModule = DatesThe Dates module provides two types for working with dates: Date and DateTime, representing day and millisecond precision, respectively; both are subtypes of the abstract TimeType. The motivation for distinct types is simple: some operations are much simpler, both in terms of code and mental reasoning, when the complexities of greater precision don't have to be dealt with. For example, since the Date type only resolves to the precision of a single date (i.e. no hours, minutes, or seconds), normal considerations for time zones, daylight savings/summer time, and leap seconds are unnecessary and avoided.Both Date and DateTime are basically immutable Int64 wrappers. The single instant field of either type is actually a UTInstant{P} type, which represents a continuously increasing machine timeline based on the UT second [1]. The DateTime type is not aware of time zones (naive, in Python parlance), analogous to a LocalDateTime in Java 8. Additional time zone functionality can be added through the TimeZones.jl package, which compiles the IANA time zone database. Both Date and DateTime are based on the ISO 8601 standard, which follows the proleptic Gregorian calendar. One note is that the ISO 8601 standard is particular about BC/BCE dates. In general, the last day of the BC/BCE era, 1-12-31 BC/BCE, was followed by 1-1-1 AD/CE, thus no year zero exists. The ISO standard, however, states that 1 BC/BCE is year zero, so 0000-12-31 is the day before 0001-01-01, and year -0001 (yes, negative one for the year) is 2 BC/BCE, year -0002 is 3 BC/BCE, etc.[1]: The notion of the UT second is actually quite fundamental. There are basically two different notions of time generally accepted, one based on the physical rotation of the earth (one full rotation = 1 day), the other based on the SI second (a fixed, constant value). These are radically different! Think about it, a \"UT second\", as defined relative to the rotation of the earth, may have a different absolute length depending on the day! Anyway, the fact that Date and DateTime are based on UT seconds is a simplifying, yet honest assumption so that things like leap seconds and all their complexity can be avoided. This basis of time is formally called UT or UT1. Basing types on the UT second basically means that every minute has 60 seconds and every day has 24 hours and leads to more natural calculations when working with calendar dates."
 },
 
 {
@@ -2525,7 +2525,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Date and DateTime",
     "title": "Durations/Comparisons",
     "category": "section",
-    "text": "Finding the length of time between two Date or DateTime is straightforward given their underlying representation as UTInstant{Day} and UTInstant{Millisecond}, respectively. The difference between Date is returned in the number of Day, and DateTime in the number of Millisecond. Similarly, comparing TimeType is a simple matter of comparing the underlying machine instants (which in turn compares the internal Int64 values).julia> dt = Date(2012,2,29)\n2012-02-29\n\njulia> dt2 = Date(2000,2,1)\n2000-02-01\n\njulia> dump(dt)\nDate\n  instant: Base.Dates.UTInstant{Base.Dates.Day}\n    periods: Base.Dates.Day\n      value: Int64 734562\n\njulia> dump(dt2)\nDate\n  instant: Base.Dates.UTInstant{Base.Dates.Day}\n    periods: Base.Dates.Day\n      value: Int64 730151\n\njulia> dt > dt2\ntrue\n\njulia> dt != dt2\ntrue\n\njulia> dt + dt2\nERROR: MethodError: no method matching +(::Date, ::Date)\n[...]\n\njulia> dt * dt2\nERROR: MethodError: no method matching *(::Date, ::Date)\n[...]\n\njulia> dt / dt2\nERROR: MethodError: no method matching /(::Date, ::Date)\n[...]\n\njulia> dt - dt2\n4411 days\n\njulia> dt2 - dt\n-4411 days\n\njulia> dt = DateTime(2012,2,29)\n2012-02-29T00:00:00\n\njulia> dt2 = DateTime(2000,2,1)\n2000-02-01T00:00:00\n\njulia> dt - dt2\n381110400000 milliseconds"
+    "text": "Finding the length of time between two Date or DateTime is straightforward given their underlying representation as UTInstant{Day} and UTInstant{Millisecond}, respectively. The difference between Date is returned in the number of Day, and DateTime in the number of Millisecond. Similarly, comparing TimeType is a simple matter of comparing the underlying machine instants (which in turn compares the internal Int64 values).julia> dt = Date(2012,2,29)\n2012-02-29\n\njulia> dt2 = Date(2000,2,1)\n2000-02-01\n\njulia> dump(dt)\nDate\n  instant: Dates.UTInstant{Dates.Day}\n    periods: Dates.Day\n      value: Int64 734562\n\njulia> dump(dt2)\nDate\n  instant: Dates.UTInstant{Dates.Day}\n    periods: Dates.Day\n      value: Int64 730151\n\njulia> dt > dt2\ntrue\n\njulia> dt != dt2\ntrue\n\njulia> dt + dt2\nERROR: MethodError: no method matching +(::Date, ::Date)\n[...]\n\njulia> dt * dt2\nERROR: MethodError: no method matching *(::Date, ::Date)\n[...]\n\njulia> dt / dt2\nERROR: MethodError: no method matching /(::Date, ::Date)\n[...]\n\njulia> dt - dt2\n4411 days\n\njulia> dt2 - dt\n-4411 days\n\njulia> dt = DateTime(2012,2,29)\n2012-02-29T00:00:00\n\njulia> dt2 = DateTime(2000,2,1)\n2000-02-01T00:00:00\n\njulia> dt - dt2\n381110400000 milliseconds"
 },
 
 {
@@ -2533,7 +2533,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Date and DateTime",
     "title": "Accessor Functions",
     "category": "section",
-    "text": "Because the Date and DateTime types are stored as single Int64 values, date parts or fields can be retrieved through accessor functions. The lowercase accessors return the field as an integer:julia> t = Date(2014, 1, 31)\n2014-01-31\n\njulia> Dates.year(t)\n2014\n\njulia> Dates.month(t)\n1\n\njulia> Dates.week(t)\n5\n\njulia> Dates.day(t)\n31While propercase return the same value in the corresponding Period type:julia> Dates.Year(t)\n2014 years\n\njulia> Dates.Day(t)\n31 daysCompound methods are provided, as they provide a measure of efficiency if multiple fields are needed at the same time:julia> Dates.yearmonth(t)\n(2014, 1)\n\njulia> Dates.monthday(t)\n(1, 31)\n\njulia> Dates.yearmonthday(t)\n(2014, 1, 31)One may also access the underlying UTInstant or integer value:julia> dump(t)\nDate\n  instant: Base.Dates.UTInstant{Base.Dates.Day}\n    periods: Base.Dates.Day\n      value: Int64 735264\n\njulia> t.instant\nBase.Dates.UTInstant{Base.Dates.Day}(735264 days)\n\njulia> Dates.value(t)\n735264"
+    "text": "Because the Date and DateTime types are stored as single Int64 values, date parts or fields can be retrieved through accessor functions. The lowercase accessors return the field as an integer:julia> t = Date(2014, 1, 31)\n2014-01-31\n\njulia> Dates.year(t)\n2014\n\njulia> Dates.month(t)\n1\n\njulia> Dates.week(t)\n5\n\njulia> Dates.day(t)\n31While propercase return the same value in the corresponding Period type:julia> Dates.Year(t)\n2014 years\n\njulia> Dates.Day(t)\n31 daysCompound methods are provided, as they provide a measure of efficiency if multiple fields are needed at the same time:julia> Dates.yearmonth(t)\n(2014, 1)\n\njulia> Dates.monthday(t)\n(1, 31)\n\njulia> Dates.yearmonthday(t)\n(2014, 1, 31)One may also access the underlying UTInstant or integer value:julia> dump(t)\nDate\n  instant: Dates.UTInstant{Dates.Day}\n    periods: Dates.Day\n      value: Int64 735264\n\njulia> t.instant\nDates.UTInstant{Dates.Day}(735264 days)\n\njulia> Dates.value(t)\n735264"
 },
 
 {
@@ -4437,7 +4437,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Unicode Input",
     "title": "Unicode Input",
     "category": "section",
-    "text": "The following table lists Unicode characters that can be entered via tab completion of LaTeX-like abbreviations in the Julia REPL (and in various other editing environments).  You can also get information on how to type a symbol by entering it in the REPL help, i.e. by typing ? and then entering the symbol in the REPL (e.g., by copy-paste from somewhere you saw the symbol).warning: Warning\nThis table may appear to contain missing characters in the second column, or even show characters that are inconsistent with the characters as they are rendered in the Julia REPL. In these cases, users are strongly advised to check their choice of fonts in their browser and REPL environment, as there are known issues with glyphs in many fonts.#\n# Generate a table containing all LaTeX and Emoji tab completions available in the REPL.\n#\n\nconst NBSP = '\\u00A0'\n\nfunction tab_completions(symbols...)\n    completions = Dict{String, Vector{String}}()\n    for each in symbols, (k, v) in each\n        completions[v] = push!(get!(completions, v, String[]), k)\n    end\n    return completions\nend\n\nfunction unicode_data()\n    file = normpath(JULIA_HOME, \"..\", \"..\", \"doc\", \"UnicodeData.txt\")\n    names = Dict{UInt32, String}()\n    open(file) do unidata\n        for line in readlines(unidata)\n            id, name, desc = split(line, \";\")[[1, 2, 11]]\n            codepoint = parse(UInt32, \"0x$id\")\n            names[codepoint] = titlecase(lowercase(name == \"\" ? desc : desc == \"\" ? name : \"$name / $desc\"))\n        end\n    end\n    return names\nend\n\n# Surround combining characters with no-break spaces (i.e '\\u00A0'). Follows the same format\n# for how unicode is displayed on the unicode.org website:\n# http://unicode.org/cldr/utility/character.jsp?a=0300\nfunction fix_combining_chars(char)\n    cat = Base.UTF8proc.category_code(char)\n    return cat == 6 || cat == 8 ? \"$NBSP$char$NBSP\" : \"$char\"\nend\n\n\nfunction table_entries(completions, unicode_dict)\n    entries = [[\n        \"Code point(s)\", \"Character(s)\",\n        \"Tab completion sequence(s)\", \"Unicode name(s)\"\n    ]]\n    for (chars, inputs) in sort!(collect(completions), by = first)\n        code_points, unicode_names, characters = String[], String[], String[]\n        for char in chars\n            push!(code_points, \"U+$(uppercase(hex(char, 5)))\")\n            push!(unicode_names, get(unicode_dict, UInt32(char), \"(No Unicode name)\"))\n            push!(characters, isempty(characters) ? fix_combining_chars(char) : \"$char\")\n        end\n        push!(entries, [\n            join(code_points, \" + \"), join(characters),\n            join(inputs, \", \"), join(unicode_names, \" + \")\n        ])\n    end\n    return Markdown.Table(entries, [:l, :l, :l, :l])\nend\n\ntable_entries(\n    tab_completions(\n        Base.REPLCompletions.latex_symbols,\n        Base.REPLCompletions.emoji_symbols\n    ),\n    unicode_data()\n)"
+    "text": "The following table lists Unicode characters that can be entered via tab completion of LaTeX-like abbreviations in the Julia REPL (and in various other editing environments).  You can also get information on how to type a symbol by entering it in the REPL help, i.e. by typing ? and then entering the symbol in the REPL (e.g., by copy-paste from somewhere you saw the symbol).warning: Warning\nThis table may appear to contain missing characters in the second column, or even show characters that are inconsistent with the characters as they are rendered in the Julia REPL. In these cases, users are strongly advised to check their choice of fonts in their browser and REPL environment, as there are known issues with glyphs in many fonts.#\n# Generate a table containing all LaTeX and Emoji tab completions available in the REPL.\n#\n\nconst NBSP = '\\u00A0'\n\nfunction tab_completions(symbols...)\n    completions = Dict{String, Vector{String}}()\n    for each in symbols, (k, v) in each\n        completions[v] = push!(get!(completions, v, String[]), k)\n    end\n    return completions\nend\n\nfunction unicode_data()\n    file = normpath(@__DIR__, \"..\", \"..\", \"..\", \"..\", \"UnicodeData.txt\")\n    names = Dict{UInt32, String}()\n    open(file) do unidata\n        for line in readlines(unidata)\n            id, name, desc = split(line, \";\")[[1, 2, 11]]\n            codepoint = parse(UInt32, \"0x$id\")\n            names[codepoint] = titlecase(lowercase(name == \"\" ? desc : desc == \"\" ? name : \"$name / $desc\"))\n        end\n    end\n    return names\nend\n\n# Surround combining characters with no-break spaces (i.e '\\u00A0'). Follows the same format\n# for how unicode is displayed on the unicode.org website:\n# http://unicode.org/cldr/utility/character.jsp?a=0300\nfunction fix_combining_chars(char)\n    cat = Base.UTF8proc.category_code(char)\n    return cat == 6 || cat == 8 ? \"$NBSP$char$NBSP\" : \"$char\"\nend\n\n\nfunction table_entries(completions, unicode_dict)\n    entries = [[\n        \"Code point(s)\", \"Character(s)\",\n        \"Tab completion sequence(s)\", \"Unicode name(s)\"\n    ]]\n    for (chars, inputs) in sort!(collect(completions), by = first)\n        code_points, unicode_names, characters = String[], String[], String[]\n        for char in chars\n            push!(code_points, \"U+$(uppercase(hex(char, 5)))\")\n            push!(unicode_names, get(unicode_dict, UInt32(char), \"(No Unicode name)\"))\n            push!(characters, isempty(characters) ? fix_combining_chars(char) : \"$char\")\n        end\n        push!(entries, [\n            join(code_points, \" + \"), join(characters),\n            join(inputs, \", \"), join(unicode_names, \" + \")\n        ])\n    end\n    return Markdown.Table(entries, [:l, :l, :l, :l])\nend\n\ntable_entries(\n    tab_completions(\n        Base.REPLCompletions.latex_symbols,\n        Base.REPLCompletions.emoji_symbols\n    ),\n    unicode_data()\n)"
 },
 
 {
@@ -4462,262 +4462,6 @@ var documenterSearchIndex = {"docs": [
     "title": "Introduction",
     "category": "section",
     "text": "The Julia standard library contains a range of functions and macros appropriate for performing scientific and numerical computing, but is also as broad as those of many general purpose programming languages.  Additional functionality is available from a growing collection of available packages. Functions are grouped by topic below.Some general notes:To use module functions, use import Module to import the module, and Module.fn(x) to use the functions.\nAlternatively, using Module will import all exported Module functions into the current namespace.\nBy convention, function names ending with an exclamation point (!) modify their arguments. Some functions have both modifying (e.g., sort!) and non-modifying (sort) versions."
-},
-
-{
-    "location": "stdlib/base.html#Base.exit",
-    "page": "Essentials",
-    "title": "Base.exit",
-    "category": "Function",
-    "text": "exit(code=0)\n\nQuit the program with an exit code. The default exit code is zero, indicating that the program completed successfully (see also quit). In an interactive session, exit() can be called with the keyboard shorcut ^D.\n\n\n\n"
-},
-
-{
-    "location": "stdlib/base.html#Base.quit",
-    "page": "Essentials",
-    "title": "Base.quit",
-    "category": "Function",
-    "text": "quit()\n\nQuit the program indicating successful completion. This function is equivalent to exit(0) (see exit). In an interactive session, quit() can be called with the keyboard shorcut ^D.\n\n\n\n"
-},
-
-{
-    "location": "stdlib/base.html#Base.atexit",
-    "page": "Essentials",
-    "title": "Base.atexit",
-    "category": "Function",
-    "text": "atexit(f)\n\nRegister a zero-argument function f() to be called at process exit. atexit() hooks are called in last in first out (LIFO) order and run before object finalizers.\n\n\n\n"
-},
-
-{
-    "location": "stdlib/base.html#Base.atreplinit",
-    "page": "Essentials",
-    "title": "Base.atreplinit",
-    "category": "Function",
-    "text": "atreplinit(f)\n\nRegister a one-argument function to be called before the REPL interface is initialized in interactive sessions; this is useful to customize the interface. The argument of f is the REPL object. This function should be called from within the .juliarc.jl initialization file.\n\n\n\n"
-},
-
-{
-    "location": "stdlib/base.html#Base.isinteractive",
-    "page": "Essentials",
-    "title": "Base.isinteractive",
-    "category": "Function",
-    "text": "isinteractive() -> Bool\n\nDetermine whether Julia is running an interactive session.\n\n\n\n"
-},
-
-{
-    "location": "stdlib/base.html#Base.whos",
-    "page": "Essentials",
-    "title": "Base.whos",
-    "category": "Function",
-    "text": "whos(io::IO=STDOUT, m::Module=Main, pattern::Regex=r\"\")\n\nPrint information about exported global variables in a module, optionally restricted to those matching pattern.\n\nThe memory consumption estimate is an approximate lower bound on the size of the internal structure of the object.\n\n\n\n"
-},
-
-{
-    "location": "stdlib/base.html#Base.summarysize",
-    "page": "Essentials",
-    "title": "Base.summarysize",
-    "category": "Function",
-    "text": "Base.summarysize(obj; exclude=Union{...}, chargeall=Union{...}) -> Int\n\nCompute the amount of memory used by all unique objects reachable from the argument.\n\nKeyword Arguments\n\nexclude: specifies the types of objects to exclude from the traversal.\nchargeall: specifies the types of objects to always charge the size of all of their fields, even if those fields would normally be excluded.\n\n\n\n"
-},
-
-{
-    "location": "stdlib/base.html#Base.edit-Tuple{AbstractString,Integer}",
-    "page": "Essentials",
-    "title": "Base.edit",
-    "category": "Method",
-    "text": "edit(path::AbstractString, line::Integer=0)\n\nEdit a file or directory optionally providing a line number to edit the file at. Returns to the julia prompt when you quit the editor. The editor can be changed by setting JULIA_EDITOR, VISUAL or EDITOR as an environment variable.\n\n\n\n"
-},
-
-{
-    "location": "stdlib/base.html#Base.edit-Tuple{Any}",
-    "page": "Essentials",
-    "title": "Base.edit",
-    "category": "Method",
-    "text": "edit(function, [types])\n\nEdit the definition of a function, optionally specifying a tuple of types to indicate which method to edit. The editor can be changed by setting JULIA_EDITOR, VISUAL or EDITOR as an environment variable.\n\n\n\n"
-},
-
-{
-    "location": "stdlib/base.html#Base.@edit",
-    "page": "Essentials",
-    "title": "Base.@edit",
-    "category": "Macro",
-    "text": "@edit\n\nEvaluates the arguments to the function or macro call, determines their types, and calls the edit function on the resulting expression.\n\n\n\n"
-},
-
-{
-    "location": "stdlib/base.html#Base.less-Tuple{AbstractString}",
-    "page": "Essentials",
-    "title": "Base.less",
-    "category": "Method",
-    "text": "less(file::AbstractString, [line::Integer])\n\nShow a file using the default pager, optionally providing a starting line number. Returns to the julia prompt when you quit the pager.\n\n\n\n"
-},
-
-{
-    "location": "stdlib/base.html#Base.less-Tuple{Any}",
-    "page": "Essentials",
-    "title": "Base.less",
-    "category": "Method",
-    "text": "less(function, [types])\n\nShow the definition of a function using the default pager, optionally specifying a tuple of types to indicate which method to see.\n\n\n\n"
-},
-
-{
-    "location": "stdlib/base.html#Base.@less",
-    "page": "Essentials",
-    "title": "Base.@less",
-    "category": "Macro",
-    "text": "@less\n\nEvaluates the arguments to the function or macro call, determines their types, and calls the less function on the resulting expression.\n\n\n\n"
-},
-
-{
-    "location": "stdlib/base.html#Base.clipboard-Tuple{Any}",
-    "page": "Essentials",
-    "title": "Base.clipboard",
-    "category": "Method",
-    "text": "clipboard(x)\n\nSend a printed form of x to the operating system clipboard (\"copy\").\n\n\n\n"
-},
-
-{
-    "location": "stdlib/base.html#Base.clipboard-Tuple{}",
-    "page": "Essentials",
-    "title": "Base.clipboard",
-    "category": "Method",
-    "text": "clipboard() -> AbstractString\n\nReturn a string with the contents of the operating system clipboard (\"paste\").\n\n\n\n"
-},
-
-{
-    "location": "stdlib/base.html#Base.reload",
-    "page": "Essentials",
-    "title": "Base.reload",
-    "category": "Function",
-    "text": "reload(name::AbstractString)\n\nForce reloading of a package, even if it has been loaded before. This is intended for use during package development as code is modified.\n\n\n\n"
-},
-
-{
-    "location": "stdlib/base.html#Base.require",
-    "page": "Essentials",
-    "title": "Base.require",
-    "category": "Function",
-    "text": "require(module::Symbol)\n\nThis function is part of the implementation of using / import, if a module is not already defined in Main. It can also be called directly to force reloading a module, regardless of whether it has been loaded before (for example, when interactively developing libraries).\n\nLoads a source file, in the context of the Main module, on every active node, searching standard locations for files. require is considered a top-level operation, so it sets the current include path but does not use it to search for files (see help for include). This function is typically used to load library code, and is implicitly called by using to load packages.\n\nWhen searching for files, require first looks for package code under Pkg.dir(), then tries paths in the global array LOAD_PATH. require is case-sensitive on all platforms, including those with case-insensitive filesystems like macOS and Windows.\n\n\n\n"
-},
-
-{
-    "location": "stdlib/base.html#Base.compilecache",
-    "page": "Essentials",
-    "title": "Base.compilecache",
-    "category": "Function",
-    "text": "Base.compilecache(module::String)\n\nCreates a precompiled cache file for a module and all of its dependencies. This can be used to reduce package load times. Cache files are stored in LOAD_CACHE_PATH[1], which defaults to ~/.julia/lib/VERSION. See Module initialization and precompilation for important notes.\n\n\n\n"
-},
-
-{
-    "location": "stdlib/base.html#Base.__precompile__",
-    "page": "Essentials",
-    "title": "Base.__precompile__",
-    "category": "Function",
-    "text": "__precompile__(isprecompilable::Bool=true)\n\nSpecify whether the file calling this function is precompilable. If isprecompilable is true, then __precompile__ throws an exception when the file is loaded by using/import/require unless the file is being precompiled, and in a module file it causes the module to be automatically precompiled when it is imported. Typically, __precompile__() should occur before the module declaration in the file.\n\nIf a module or file is not safely precompilable, it should call __precompile__(false) in order to throw an error if Julia attempts to precompile it.\n\n__precompile__() should not be used in a module unless all of its dependencies are also using __precompile__(). Failure to do so can result in a runtime error when loading the module.\n\n\n\n"
-},
-
-{
-    "location": "stdlib/base.html#Base.include",
-    "page": "Essentials",
-    "title": "Base.include",
-    "category": "Function",
-    "text": "include(m::Module, path::AbstractString)\n\nEvaluate the contents of the input source file into module m. Returns the result of the last evaluated expression of the input file. During including, a task-local include path is set to the directory containing the file. Nested calls to include will search relative to that path. This function is typically used to load source interactively, or to combine files in packages that are broken into multiple source files.\n\n\n\n"
-},
-
-{
-    "location": "stdlib/base.html#Base.include_string",
-    "page": "Essentials",
-    "title": "Base.include_string",
-    "category": "Function",
-    "text": "include_string(m::Module, code::AbstractString, filename::AbstractString=\"string\")\n\nLike include, except reads code from the given string rather than from a file.\n\n\n\n"
-},
-
-{
-    "location": "stdlib/base.html#Base.include_dependency",
-    "page": "Essentials",
-    "title": "Base.include_dependency",
-    "category": "Function",
-    "text": "include_dependency(path::AbstractString)\n\nIn a module, declare that the file specified by path (relative or absolute) is a dependency for precompilation; that is, the module will need to be recompiled if this file changes.\n\nThis is only needed if your module depends on a file that is not used via include. It has no effect outside of compilation.\n\n\n\n"
-},
-
-{
-    "location": "stdlib/base.html#Base.Docs.apropos",
-    "page": "Essentials",
-    "title": "Base.Docs.apropos",
-    "category": "Function",
-    "text": "apropos(string)\n\nSearch through all documentation for a string, ignoring case.\n\n\n\n"
-},
-
-{
-    "location": "stdlib/base.html#Base.which-Tuple{Any,Any}",
-    "page": "Essentials",
-    "title": "Base.which",
-    "category": "Method",
-    "text": "which(f, types)\n\nReturns the method of f (a Method object) that would be called for arguments of the given types.\n\nIf types is an abstract type, then the method that would be called by invoke is returned.\n\n\n\n"
-},
-
-{
-    "location": "stdlib/base.html#Base.which-Tuple{Symbol}",
-    "page": "Essentials",
-    "title": "Base.which",
-    "category": "Method",
-    "text": "which(symbol)\n\nReturn the module in which the binding for the variable referenced by symbol in module Main was created.\n\n\n\n"
-},
-
-{
-    "location": "stdlib/base.html#Base.@which",
-    "page": "Essentials",
-    "title": "Base.@which",
-    "category": "Macro",
-    "text": "@which\n\nApplied to a function or macro call, it evaluates the arguments to the specified call, and returns the Method object for the method that would be called for those arguments. Applied to a variable, it returns the module in which the variable was bound. It calls out to the which function.\n\n\n\n"
-},
-
-{
-    "location": "stdlib/base.html#Base.methods",
-    "page": "Essentials",
-    "title": "Base.methods",
-    "category": "Function",
-    "text": "methods(f, [types])\n\nReturns the method table for f.\n\nIf types is specified, returns an array of methods whose types match.\n\n\n\n"
-},
-
-{
-    "location": "stdlib/base.html#Base.methodswith",
-    "page": "Essentials",
-    "title": "Base.methodswith",
-    "category": "Function",
-    "text": "methodswith(typ[, module or function][, showparents::Bool=false])\n\nReturn an array of methods with an argument of type typ.\n\nThe optional second argument restricts the search to a particular module or function (the default is all top-level modules).\n\nIf optional showparents is true, also return arguments with a parent type of typ, excluding type Any.\n\n\n\n"
-},
-
-{
-    "location": "stdlib/base.html#Base.@show",
-    "page": "Essentials",
-    "title": "Base.@show",
-    "category": "Macro",
-    "text": "@show\n\nShow an expression and result, returning the result.\n\n\n\n"
-},
-
-{
-    "location": "stdlib/base.html#Base.versioninfo",
-    "page": "Essentials",
-    "title": "Base.versioninfo",
-    "category": "Function",
-    "text": "versioninfo(io::IO=STDOUT; verbose::Bool=false, packages::Bool=false)\n\nPrint information about the version of Julia in use. The output is controlled with boolean keyword arguments:\n\npackages: print information about installed packages\nverbose: print all additional information\n\n\n\n"
-},
-
-{
-    "location": "stdlib/base.html#Base.workspace",
-    "page": "Essentials",
-    "title": "Base.workspace",
-    "category": "Function",
-    "text": "workspace()\n\nReplace the top-level module (Main) with a new one, providing a clean workspace. The previous Main module is made available as LastMain.\n\nIf Package was previously loaded, using Package in the new Main will re-use the loaded copy. Run reload(\"Package\") first to load a fresh copy.\n\nThis function should only be used interactively.\n\n\n\n"
-},
-
-{
-    "location": "stdlib/base.html#ans",
-    "page": "Essentials",
-    "title": "ans",
-    "category": "Keyword",
-    "text": "ans\n\nA variable referring to the last computed value, automatically set at the interactive prompt.\n\n\n\n"
 },
 
 {
@@ -4969,150 +4713,6 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/base.html#Base.LinAlg.BLAS",
-    "page": "Essentials",
-    "title": "Base.LinAlg.BLAS",
-    "category": "Module",
-    "text": "Interface to BLAS subroutines.\n\n\n\n"
-},
-
-{
-    "location": "stdlib/base.html#Base.Dates",
-    "page": "Essentials",
-    "title": "Base.Dates",
-    "category": "Module",
-    "text": "Dates\n\nThe Dates module provides Date, DateTime, Time types, and related functions.\n\nThe types are not aware of time zones, based on UT seconds (86400 seconds a day, avoiding leap seconds), and use the proleptic Gregorian calendar, as specified in ISO 8601. For time zone functionality, see the TimeZones.jl package.\n\njulia> dt = DateTime(2017,12,31,23,59,59,999)\n2017-12-31T23:59:59.999\n\njulia> d1 = Date(Dates.Month(12), Dates.Year(2017))\n2017-12-01\n\njulia> d2 = Date(\"2017-12-31\", Dates.DateFormat(\"y-m-d\"))\n2017-12-31\n\njulia> Dates.yearmonthday(d2)\n(2017, 12, 31)\n\njulia> d2-d1\n30 days\n\nPlease see the manual section on Date and DateTime for more information.\n\n\n\n"
-},
-
-{
-    "location": "stdlib/base.html#Base.Distributed",
-    "page": "Essentials",
-    "title": "Base.Distributed",
-    "category": "Module",
-    "text": "Tools for distributed parallel processing.\n\n\n\n"
-},
-
-{
-    "location": "stdlib/base.html#Base.Docs",
-    "page": "Essentials",
-    "title": "Base.Docs",
-    "category": "Module",
-    "text": "Docs\n\nThe Docs module provides the @doc macro which can be used to set and retrieve documentation metadata for Julia objects.\n\nPlease see the manual section on documentation for more information.\n\n\n\n"
-},
-
-{
-    "location": "stdlib/base.html#Base.Iterators",
-    "page": "Essentials",
-    "title": "Base.Iterators",
-    "category": "Module",
-    "text": "Methods for working with Iterators.\n\n\n\n"
-},
-
-{
-    "location": "stdlib/base.html#Base.LinAlg.LAPACK",
-    "page": "Essentials",
-    "title": "Base.LinAlg.LAPACK",
-    "category": "Module",
-    "text": "Interfaces to LAPACK subroutines.\n\n\n\n"
-},
-
-{
-    "location": "stdlib/base.html#Base.LibGit2",
-    "page": "Essentials",
-    "title": "Base.LibGit2",
-    "category": "Module",
-    "text": "Interface to libgit2.\n\n\n\n"
-},
-
-{
-    "location": "stdlib/base.html#Base.Libc",
-    "page": "Essentials",
-    "title": "Base.Libc",
-    "category": "Module",
-    "text": "Interface to libc, the C standard library.\n\n\n\n"
-},
-
-{
-    "location": "stdlib/base.html#Base.Libdl",
-    "page": "Essentials",
-    "title": "Base.Libdl",
-    "category": "Module",
-    "text": "Interface to libdl. Provides dynamic linking support.\n\n\n\n"
-},
-
-{
-    "location": "stdlib/base.html#Base.LinAlg",
-    "page": "Essentials",
-    "title": "Base.LinAlg",
-    "category": "Module",
-    "text": "Linear algebra module. Provides array arithmetic, matrix factorizations and other linear algebra related functionality.\n\n\n\n"
-},
-
-{
-    "location": "stdlib/base.html#Base.Markdown",
-    "page": "Essentials",
-    "title": "Base.Markdown",
-    "category": "Module",
-    "text": "Tools for working with the Markdown file format. Mainly for documentation.\n\n\n\n"
-},
-
-{
-    "location": "stdlib/base.html#Base.Meta",
-    "page": "Essentials",
-    "title": "Base.Meta",
-    "category": "Module",
-    "text": "Convenience functions for metaprogramming.\n\n\n\n"
-},
-
-{
-    "location": "stdlib/base.html#Base.Pkg",
-    "page": "Essentials",
-    "title": "Base.Pkg",
-    "category": "Module",
-    "text": "Pkg\n\nThe Pkg module provides package management for Julia. Use Pkg.status() for a list of installed packages, Pkg.add(\"<pkg name>\") to add a package, Pkg.update() to update the installed packages.\n\nPlease see the manual section on packages for more information.\n\n\n\n"
-},
-
-{
-    "location": "stdlib/base.html#Base.Serializer",
-    "page": "Essentials",
-    "title": "Base.Serializer",
-    "category": "Module",
-    "text": "Provide serialization of Julia code via the functions\n\nserialize\ndeserialize\n\n\n\n"
-},
-
-{
-    "location": "stdlib/base.html#Base.SparseArrays",
-    "page": "Essentials",
-    "title": "Base.SparseArrays",
-    "category": "Module",
-    "text": "Support for sparse arrays. Provides AbstractSparseArray and subtypes.\n\n\n\n"
-},
-
-{
-    "location": "stdlib/base.html#Base.StackTraces",
-    "page": "Essentials",
-    "title": "Base.StackTraces",
-    "category": "Module",
-    "text": "Tools for collecting and manipulating stack traces. Mainly used for building errors.\n\n\n\n"
-},
-
-{
-    "location": "stdlib/base.html#Base.Sys",
-    "page": "Essentials",
-    "title": "Base.Sys",
-    "category": "Module",
-    "text": "Provide methods for retrieving information about hardware and the operating system.\n\n\n\n"
-},
-
-{
-    "location": "stdlib/base.html#Base.Threads",
-    "page": "Essentials",
-    "title": "Base.Threads",
-    "category": "Module",
-    "text": "Experimental multithreading support.\n\n\n\n"
-},
-
-{
     "location": "stdlib/base.html#Base-Modules-1",
     "page": "Essentials",
     "title": "Base Modules",
@@ -5133,7 +4733,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Essentials",
     "title": "Core.isa",
     "category": "Function",
-    "text": "isa(x, type) -> Bool\n\nDetermine whether x is of the given type. Can also be used as an infix operator, e.g. x isa type.\n\n\n\n"
+    "text": "isa(x, type) -> Bool\n\nDetermine whether x is of the given type. Can also be used as an infix operator, e.g. x isa type.\n\nExamples\n\njulia> isa(1, Int)\ntrue\n\njulia> isa(1, Matrix)\nfalse\n\njulia> isa(1, Char)\nfalse\n\njulia> isa(1, Number)\ntrue\n\njulia> 1 isa Number\ntrue\n\n\n\n"
 },
 
 {
@@ -5229,7 +4829,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Essentials",
     "title": "Base.finalizer",
     "category": "Function",
-    "text": "finalizer(x, f)\n\nRegister a function f(x) to be called when there are no program-accessible references to x. The type of x must be a mutable struct, otherwise the behavior of this function is unpredictable.\n\n\n\n"
+    "text": "finalizer(f, x)\n\nRegister a function f(x) to be called when there are no program-accessible references to x, and return x. The type of x must be a mutable struct, otherwise the behavior of this function is unpredictable.\n\n\n\n"
 },
 
 {
@@ -5401,7 +5001,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/base.html#Base.eps-Tuple{Type{#s57} where #s57<:AbstractFloat}",
+    "location": "stdlib/base.html#Base.eps-Tuple{Type{#s65} where #s65<:AbstractFloat}",
     "page": "Essentials",
     "title": "Base.eps",
     "category": "Method",
@@ -5437,7 +5037,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Essentials",
     "title": "Core.getfield",
     "category": "Function",
-    "text": "getfield(value, name::Symbol)\n\nExtract a named field from a value of composite type. The syntax a.b calls getfield(a, :b).\n\nExamples\n\njulia> a = 1//2\n1//2\n\njulia> getfield(a, :num)\n1\n\n\n\n"
+    "text": "getfield(value, name::Symbol)\n\nExtract a named field from a value of composite type. The syntax a.b calls getfield(a, :b).\n\nExamples\n\njulia> a = 1//2\n1//2\n\njulia> getfield(a, :num)\n1\n\njulia> a.num\n1\n\n\n\n"
 },
 
 {
@@ -5445,7 +5045,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Essentials",
     "title": "Core.setfield!",
     "category": "Function",
-    "text": "setfield!(value, name::Symbol, x)\n\nAssign x to a named field in value of composite type. The syntax a.b = c calls setfield!(a, :b, c).\n\n\n\n"
+    "text": "setfield!(value, name::Symbol, x)\n\nAssign x to a named field in value of composite type. The syntax a.b = c calls setfield!(a, :b, c). value must be mutable.\n\nExamples\n\njulia> mutable struct MyMutableStruct\n           field::Int\n       end\n\njulia> a = MyMutableStruct(1);\n\njulia> setfield!(a, :field, 2);\n\njulia> getfield(a, :field)\n2\n\njulia> a = 1//2\n1//2\n\njulia> setfield!(a, :num, 3);\nERROR: type Rational is immutable\n\n\n\n"
 },
 
 {
@@ -7189,7 +6789,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Collections and Data Structures",
     "title": "Base.count",
     "category": "Function",
-    "text": "count(p, itr) -> Integer\ncount(itr) -> Integer\n\nCount the number of elements in itr for which predicate p returns true. If p is omitted, counts the number of true elements in itr (which should be a collection of boolean values).\n\njulia> count(i->(4<=i<=6), [2,3,4,5,6])\n3\n\njulia> count([true, false, true, true])\n3\n\n\n\nLibGit2.count(f::Function, walker::GitRevWalker; oid::GitHash=GitHash(), by::Cint=Consts.SORT_NONE, rev::Bool=false)\n\nUsing the GitRevWalker walker to \"walk\" over every commit in the repository's history, find the number of commits which return true when f is applied to them. The keyword arguments are:     * oid: The GitHash of the commit to begin the walk from. The default is to use       push_head! and therefore the HEAD commit and all its ancestors.     * by: The sorting method. The default is not to sort. Other options are to sort by       topology (LibGit2.Consts.SORT_TOPOLOGICAL), to sort forwards in time       (LibGit2.Consts.SORT_TIME, most ancient first) or to sort backwards in time       (LibGit2.Consts.SORT_REVERSE, most recent first).     * rev: Whether to reverse the sorted order (for instance, if topological sorting is used).\n\nExamples\n\ncnt = LibGit2.with(LibGit2.GitRevWalker(repo)) do walker\n    count((oid, repo)->(oid == commit_oid1), walker, oid=commit_oid1, by=LibGit2.Consts.SORT_TIME)\nend\n\ncount finds the number of commits along the walk with a certain GitHash commit_oid1, starting the walk from that commit and moving forwards in time from it. Since the GitHash is unique to a commit, cnt will be 1.\n\n\n\n"
+    "text": "LibGit2.count(f::Function, walker::GitRevWalker; oid::GitHash=GitHash(), by::Cint=Consts.SORT_NONE, rev::Bool=false)\n\nUsing the GitRevWalker walker to \"walk\" over every commit in the repository's history, find the number of commits which return true when f is applied to them. The keyword arguments are:     * oid: The GitHash of the commit to begin the walk from. The default is to use       push_head! and therefore the HEAD commit and all its ancestors.     * by: The sorting method. The default is not to sort. Other options are to sort by       topology (LibGit2.Consts.SORT_TOPOLOGICAL), to sort forwards in time       (LibGit2.Consts.SORT_TIME, most ancient first) or to sort backwards in time       (LibGit2.Consts.SORT_REVERSE, most recent first).     * rev: Whether to reverse the sorted order (for instance, if topological sorting is used).\n\nExamples\n\ncnt = LibGit2.with(LibGit2.GitRevWalker(repo)) do walker\n    count((oid, repo)->(oid == commit_oid1), walker, oid=commit_oid1, by=LibGit2.Consts.SORT_TIME)\nend\n\ncount finds the number of commits along the walk with a certain GitHash commit_oid1, starting the walk from that commit and moving forwards in time from it. Since the GitHash is unique to a commit, cnt will be 1.\n\n\n\ncount(p, itr) -> Integer\ncount(itr) -> Integer\n\nCount the number of elements in itr for which predicate p returns true. If p is omitted, counts the number of true elements in itr (which should be a collection of boolean values).\n\njulia> count(i->(4<=i<=6), [2,3,4,5,6])\n3\n\njulia> count([true, false, true, true])\n3\n\n\n\n"
 },
 
 {
@@ -7221,7 +6821,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Collections and Data Structures",
     "title": "Base.map",
     "category": "Function",
-    "text": "map(f, c...) -> collection\n\nTransform collection c by applying f to each element. For multiple collection arguments, apply f elementwise.\n\nSee also: mapslices\n\nExamples\n\njulia> map(x -> x * 2, [1, 2, 3])\n3-element Array{Int64,1}:\n 2\n 4\n 6\n\njulia> map(+, [1, 2, 3], [10, 20, 30])\n3-element Array{Int64,1}:\n 11\n 22\n 33\n\n\n\nmap(f, x::Nullable)\n\nReturn f applied to the value of x if it has one, as a Nullable. If x is null, then return a null value of type Nullable{S}. S is guaranteed to be either Union{} or a concrete type. Whichever of these is chosen is an implementation detail, but typically the choice that maximizes performance would be used. If x has a value, then the return type is guaranteed to be of type Nullable{typeof(f(x))}.\n\nExamples\n\njulia> map(isodd, Nullable(1))\nNullable{Bool}(true)\n\njulia> map(isodd, Nullable(2))\nNullable{Bool}(false)\n\njulia> map(isodd, Nullable{Int}())\nNullable{Bool}()\n\n\n\nLibGit2.map(f::Function, walker::GitRevWalker; oid::GitHash=GitHash(), range::AbstractString=\"\", by::Cint=Consts.SORT_NONE, rev::Bool=false)\n\nUsing the GitRevWalker walker to \"walk\" over every commit in the repository's history, apply f to each commit in the walk. The keyword arguments are:     * oid: The GitHash of the commit to begin the walk from. The default is to use       push_head! and therefore the HEAD commit and all its ancestors.     * range: A range of GitHashs in the format oid1..oid2. f will be       applied to all commits between the two.     * by: The sorting method. The default is not to sort. Other options are to sort by       topology (LibGit2.Consts.SORT_TOPOLOGICAL), to sort forwards in time       (LibGit2.Consts.SORT_TIME, most ancient first) or to sort backwards in time       (LibGit2.Consts.SORT_REVERSE, most recent first).     * rev: Whether to reverse the sorted order (for instance, if topological sorting is used).\n\nExamples\n\noids = LibGit2.with(LibGit2.GitRevWalker(repo)) do walker\n    LibGit2.map((oid, repo)->string(oid), walker, by=LibGit2.Consts.SORT_TIME)\nend\n\nHere, map visits each commit using the GitRevWalker and finds its GitHash.\n\n\n\n"
+    "text": "LibGit2.map(f::Function, walker::GitRevWalker; oid::GitHash=GitHash(), range::AbstractString=\"\", by::Cint=Consts.SORT_NONE, rev::Bool=false)\n\nUsing the GitRevWalker walker to \"walk\" over every commit in the repository's history, apply f to each commit in the walk. The keyword arguments are:     * oid: The GitHash of the commit to begin the walk from. The default is to use       push_head! and therefore the HEAD commit and all its ancestors.     * range: A range of GitHashs in the format oid1..oid2. f will be       applied to all commits between the two.     * by: The sorting method. The default is not to sort. Other options are to sort by       topology (LibGit2.Consts.SORT_TOPOLOGICAL), to sort forwards in time       (LibGit2.Consts.SORT_TIME, most ancient first) or to sort backwards in time       (LibGit2.Consts.SORT_REVERSE, most recent first).     * rev: Whether to reverse the sorted order (for instance, if topological sorting is used).\n\nExamples\n\noids = LibGit2.with(LibGit2.GitRevWalker(repo)) do walker\n    LibGit2.map((oid, repo)->string(oid), walker, by=LibGit2.Consts.SORT_TIME)\nend\n\nHere, map visits each commit using the GitRevWalker and finds its GitHash.\n\n\n\nmap(f, c...) -> collection\n\nTransform collection c by applying f to each element. For multiple collection arguments, apply f elementwise.\n\nSee also: mapslices\n\nExamples\n\njulia> map(x -> x * 2, [1, 2, 3])\n3-element Array{Int64,1}:\n 2\n 4\n 6\n\njulia> map(+, [1, 2, 3], [10, 20, 30])\n3-element Array{Int64,1}:\n 11\n 22\n 33\n\n\n\nmap(f, x::Nullable)\n\nReturn f applied to the value of x if it has one, as a Nullable. If x is null, then return a null value of type Nullable{S}. S is guaranteed to be either Union{} or a concrete type. Whichever of these is chosen is an implementation detail, but typically the choice that maximizes performance would be used. If x has a value, then the return type is guaranteed to be of type Nullable{typeof(f(x))}.\n\nExamples\n\njulia> map(isodd, Nullable(1))\nNullable{Bool}(true)\n\njulia> map(isodd, Nullable(2))\nNullable{Bool}(false)\n\njulia> map(isodd, Nullable{Int}())\nNullable{Bool}()\n\n\n\n"
 },
 
 {
@@ -7493,7 +7093,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Collections and Data Structures",
     "title": "Base.pairs",
     "category": "Function",
-    "text": "pairs(IndexLinear(), A)\npairs(IndexCartesian(), A)\npairs(IndexStyle(A), A)\n\nAn iterator that accesses each element of the array A, returning i => x, where i is the index for the element and x = A[i]. Identical to pairs(A), except that the style of index can be selected. Also similar to enumerate(A), except i will be a valid index for A, while enumerate always counts from 1 regardless of the indices of A.\n\nSpecifying IndexLinear() ensures that i will be an integer; specifying IndexCartesian() ensures that i will be a CartesianIndex; specifying IndexStyle(A) chooses whichever has been defined as the native indexing style for array A.\n\nExamples\n\njulia> A = [\"a\" \"d\"; \"b\" \"e\"; \"c\" \"f\"];\n\njulia> for (index, value) in pairs(IndexStyle(A), A)\n           println(\"$index $value\")\n       end\n1 a\n2 b\n3 c\n4 d\n5 e\n6 f\n\njulia> S = view(A, 1:2, :);\n\njulia> for (index, value) in pairs(IndexStyle(S), S)\n           println(\"$index $value\")\n       end\nCartesianIndex(1, 1) a\nCartesianIndex(2, 1) b\nCartesianIndex(1, 2) d\nCartesianIndex(2, 2) e\n\nSee also: IndexStyle, indices.\n\n\n\npairs(collection)\n\nReturn an iterator over key => value pairs for any collection that maps a set of keys to a set of values. This includes arrays, where the keys are the array indices.\n\n\n\n"
+    "text": "pairs(collection)\n\nReturn an iterator over key => value pairs for any collection that maps a set of keys to a set of values. This includes arrays, where the keys are the array indices.\n\n\n\npairs(IndexLinear(), A)\npairs(IndexCartesian(), A)\npairs(IndexStyle(A), A)\n\nAn iterator that accesses each element of the array A, returning i => x, where i is the index for the element and x = A[i]. Identical to pairs(A), except that the style of index can be selected. Also similar to enumerate(A), except i will be a valid index for A, while enumerate always counts from 1 regardless of the indices of A.\n\nSpecifying IndexLinear() ensures that i will be an integer; specifying IndexCartesian() ensures that i will be a CartesianIndex; specifying IndexStyle(A) chooses whichever has been defined as the native indexing style for array A.\n\nExamples\n\njulia> A = [\"a\" \"d\"; \"b\" \"e\"; \"c\" \"f\"];\n\njulia> for (index, value) in pairs(IndexStyle(A), A)\n           println(\"$index $value\")\n       end\n1 a\n2 b\n3 c\n4 d\n5 e\n6 f\n\njulia> S = view(A, 1:2, :);\n\njulia> for (index, value) in pairs(IndexStyle(S), S)\n           println(\"$index $value\")\n       end\nCartesianIndex(1, 1) a\nCartesianIndex(2, 1) b\nCartesianIndex(1, 2) d\nCartesianIndex(2, 2) e\n\nSee also: IndexStyle, indices.\n\n\n\n"
 },
 
 {
@@ -7789,7 +7389,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Mathematics",
     "title": "Base.:-",
     "category": "Method",
-    "text": "-(x)\n\nUnary minus operator.\n\n\n\n"
+    "text": "-(x)\n\nUnary minus operator.\n\nExamples\n\njulia> -1\n-1\n\njulia> -(2)\n-2\n\njulia> -[1 2; 3 4]\n2×2 Array{Int64,2}:\n -1  -2\n -3  -4\n\n\n\n"
 },
 
 {
@@ -7797,7 +7397,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Mathematics",
     "title": "Base.:+",
     "category": "Function",
-    "text": "dt::Date + t::Time -> DateTime\n\nThe addition of a Date with a Time produces a DateTime. The hour, minute, second, and millisecond parts of the Time are used along with the year, month, and day of the Date to create the new DateTime. Non-zero microseconds or nanoseconds in the Time type will result in an InexactError being thrown.\n\n\n\n+(x, y...)\n\nAddition operator. x+y+z+... calls this function with all arguments, i.e. +(x, y, z, ...).\n\n\n\n"
+    "text": "+(x, y...)\n\nAddition operator. x+y+z+... calls this function with all arguments, i.e. +(x, y, z, ...).\n\nExamples\n\njulia> 1 + 20 + 4\n25\n\njulia> +(1, 20, 4)\n25\n\n\n\ndt::Date + t::Time -> DateTime\n\nThe addition of a Date with a Time produces a DateTime. The hour, minute, second, and millisecond parts of the Time are used along with the year, month, and day of the Date to create the new DateTime. Non-zero microseconds or nanoseconds in the Time type will result in an InexactError being thrown.\n\n\n\n"
 },
 
 {
@@ -7805,7 +7405,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Mathematics",
     "title": "Base.:-",
     "category": "Method",
-    "text": "-(x, y)\n\nSubtraction operator.\n\n\n\n"
+    "text": "-(x, y)\n\nSubtraction operator.\n\nExamples\n\njulia> 2 - 3\n-1\n\njulia> -(2, 4.5)\n-2.5\n\n\n\n"
 },
 
 {
@@ -7813,7 +7413,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Mathematics",
     "title": "Base.:*",
     "category": "Method",
-    "text": "*(x, y...)\n\nMultiplication operator. x*y*z*... calls this function with all arguments, i.e. *(x, y, z, ...).\n\n\n\n"
+    "text": "*(x, y...)\n\nMultiplication operator. x*y*z*... calls this function with all arguments, i.e. *(x, y, z, ...).\n\nExamples\n\njulia> 2 * 7 * 8\n112\n\njulia> *(2, 7, 8)\n112\n\n\n\n"
 },
 
 {
@@ -7821,7 +7421,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Mathematics",
     "title": "Base.:/",
     "category": "Function",
-    "text": "/(x, y)\n\nRight division operator: multiplication of x by the inverse of y on the right. Gives floating-point results for integer arguments.\n\n\n\n"
+    "text": "/(x, y)\n\nRight division operator: multiplication of x by the inverse of y on the right. Gives floating-point results for integer arguments.\n\nExamples\n\njulia> 1/2\n0.5\n\njulia> 4/2\n2.0\n\njulia> 4.5/2\n2.25\n\n\n\n"
 },
 
 {
@@ -8997,7 +8597,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Mathematics",
     "title": "Base.conj",
     "category": "Function",
-    "text": "conj(z)\n\nCompute the complex conjugate of a complex number z.\n\nExamples\n\njulia> conj(1 + 3im)\n1 - 3im\n\n\n\nconj(v::RowVector)\n\nReturns a ConjArray lazy view of the input, where each element is conjugated.\n\nExamples\n\njulia> v = [1+im, 1-im].'\n1×2 RowVector{Complex{Int64},Array{Complex{Int64},1}}:\n 1+1im  1-1im\n\njulia> conj(v)\n1×2 RowVector{Complex{Int64},ConjArray{Complex{Int64},1,Array{Complex{Int64},1}}}:\n 1-1im  1+1im\n\n\n\n"
+    "text": "conj(v::RowVector)\n\nReturns a ConjArray lazy view of the input, where each element is conjugated.\n\nExamples\n\njulia> v = [1+im, 1-im].'\n1×2 RowVector{Complex{Int64},Array{Complex{Int64},1}}:\n 1+1im  1-1im\n\njulia> conj(v)\n1×2 RowVector{Complex{Int64},ConjArray{Complex{Int64},1,Array{Complex{Int64},1}}}:\n 1-1im  1+1im\n\n\n\nconj(z)\n\nCompute the complex conjugate of a complex number z.\n\nExamples\n\njulia> conj(1 + 3im)\n1 - 3im\n\n\n\n"
 },
 
 {
@@ -9741,7 +9341,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Numbers",
     "title": "Base.one",
     "category": "Function",
-    "text": "one(x)\none(T::type)\n\nReturn a multiplicative identity for x: a value such that one(x)*x == x*one(x) == x.  Alternatively one(T) can take a type T, in which case one returns a multiplicative identity for any x of type T.\n\nIf possible, one(x) returns a value of the same type as x, and one(T) returns a value of type T.  However, this may not be the case for types representing dimensionful quantities (e.g. time in days), since the multiplicative identity must be dimensionless.  In that case, one(x) should return an identity value of the same precision (and shape, for matrices) as x.\n\nIf you want a quantity that is of the same type as x, or of type T, even if x is dimensionful, use oneunit instead.\n\njulia> one(3.7)\n1.0\n\njulia> one(Int)\n1\n\njulia> one(Dates.Day(1))\n1\n\n\n\n"
+    "text": "one(x)\none(T::type)\n\nReturn a multiplicative identity for x: a value such that one(x)*x == x*one(x) == x.  Alternatively one(T) can take a type T, in which case one returns a multiplicative identity for any x of type T.\n\nIf possible, one(x) returns a value of the same type as x, and one(T) returns a value of type T.  However, this may not be the case for types representing dimensionful quantities (e.g. time in days), since the multiplicative identity must be dimensionless.  In that case, one(x) should return an identity value of the same precision (and shape, for matrices) as x.\n\nIf you want a quantity that is of the same type as x, or of type T, even if x is dimensionful, use oneunit instead.\n\njulia> one(3.7)\n1.0\n\njulia> one(Int)\n1\n\njulia> import Dates; one(Dates.Day(1))\n1\n\n\n\n"
 },
 
 {
@@ -9749,7 +9349,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Numbers",
     "title": "Base.oneunit",
     "category": "Function",
-    "text": "oneunit(x::T)\noneunit(T::Type)\n\nReturns T(one(x)), where T is either the type of the argument or (if a type is passed) the argument.  This differs from one for dimensionful quantities: one is dimensionless (a multiplicative identity) while oneunit is dimensionful (of the same type as x, or of type T).\n\njulia> oneunit(3.7)\n1.0\n\njulia> oneunit(Dates.Day)\n1 day\n\n\n\n"
+    "text": "oneunit(x::T)\noneunit(T::Type)\n\nReturns T(one(x)), where T is either the type of the argument or (if a type is passed) the argument.  This differs from one for dimensionful quantities: one is dimensionless (a multiplicative identity) while oneunit is dimensionful (of the same type as x, or of type T).\n\njulia> oneunit(3.7)\n1.0\n\njulia> import Dates; oneunit(Dates.Day)\n1 day\n\n\n\n"
 },
 
 {
@@ -10581,7 +10181,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Strings",
     "title": "Base.split",
     "category": "Function",
-    "text": "split(s::AbstractString, [chars]; limit::Integer=0, keep::Bool=true)\n\nReturn an array of substrings by splitting the given string on occurrences of the given character delimiters, which may be specified in any of the formats allowed by search's second argument (i.e. a single character, collection of characters, string, or regular expression). If chars is omitted, it defaults to the set of all space characters, and keep is taken to be false. The two keyword arguments are optional: they are a maximum size for the result and a flag determining whether empty fields should be kept in the result.\n\nExamples\n\njulia> a = \"Ma.rch\"\n\"Ma.rch\"\n\njulia> split(a,\".\")\n2-element Array{SubString{String},1}:\n \"Ma\"\n \"rch\"\n\n\n\nsplit(ce::LibGit2.ConfigEntry) -> Tuple{String,String,String,String}\n\nBreak the ConfigEntry up to the following pieces: section, subsection, name, and value.\n\nExamples\n\nGiven the git configuration file containing:\n\n[credential \"https://example.com\"]\n    username = me\n\nThe ConfigEntry would look like the following:\n\njulia> entry\nConfigEntry(\"credential.https://example.com.username\", \"me\")\n\njulia> split(entry)\n(\"credential\", \"https://example.com\", \"username\", \"me\")\n\nRefer to the git config syntax documenation for more details.\n\n\n\n"
+    "text": "split(ce::LibGit2.ConfigEntry) -> Tuple{String,String,String,String}\n\nBreak the ConfigEntry up to the following pieces: section, subsection, name, and value.\n\nExamples\n\nGiven the git configuration file containing:\n\n[credential \"https://example.com\"]\n    username = me\n\nThe ConfigEntry would look like the following:\n\njulia> entry\nConfigEntry(\"credential.https://example.com.username\", \"me\")\n\njulia> split(entry)\n(\"credential\", \"https://example.com\", \"username\", \"me\")\n\nRefer to the git config syntax documenation for more details.\n\n\n\nsplit(s::AbstractString, [chars]; limit::Integer=0, keep::Bool=true)\n\nReturn an array of substrings by splitting the given string on occurrences of the given character delimiters, which may be specified in any of the formats allowed by search's second argument (i.e. a single character, collection of characters, string, or regular expression). If chars is omitted, it defaults to the set of all space characters, and keep is taken to be false. The two keyword arguments are optional: they are a maximum size for the result and a flag determining whether empty fields should be kept in the result.\n\nExamples\n\njulia> a = \"Ma.rch\"\n\"Ma.rch\"\n\njulia> split(a,\".\")\n2-element Array{SubString{String},1}:\n \"Ma\"\n \"rch\"\n\n\n\n"
 },
 
 {
@@ -10741,7 +10341,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Strings",
     "title": "Base.prevind",
     "category": "Function",
-    "text": "prevind(str::AbstractString, i::Integer, nchar::Integer=1)\n\nGet the previous valid string index before i. Returns a value less than 1 at the beginning of the string. If the nchar argument is given the function goes back nchar characters.\n\nExamples\n\njulia> prevind(\"αβγdef\", 3)\n1\n\njulia> prevind(\"αβγdef\", 1)\n0\n\njulia> prevind(\"αβγdef\", 3, 2)\n0\n\n\n\n\n"
+    "text": "prevind(str::AbstractString, i::Integer, nchar::Integer=1)\n\nGet the previous valid string index before i. Returns a value less than 1 at the beginning of the string. If the nchar argument is given the function goes back nchar characters.\n\nExamples\n\njulia> prevind(\"αβγdef\", 3)\n1\n\njulia> prevind(\"αβγdef\", 1)\n0\n\njulia> prevind(\"αβγdef\", 3, 2)\n0\n\n\n\n"
 },
 
 {
@@ -10869,7 +10469,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Strings",
     "title": "Core.Symbol",
     "category": "Type",
-    "text": "Symbol(x...) -> Symbol\n\nCreate a Symbol by concatenating the string representations of the arguments together.\n\n\n\n"
+    "text": "Symbol(x...) -> Symbol\n\nCreate a Symbol by concatenating the string representations of the arguments together.\n\nExamples\n\njulia> Symbol(\"my\", \"name\")\n:myname\n\njulia> Symbol(\"day\", 4)\n:day4\n\n\n\n"
 },
 
 {
@@ -10950,6 +10550,22 @@ var documenterSearchIndex = {"docs": [
     "title": "Core.Array",
     "category": "Method",
     "text": "Array{T}(dims)\nArray{T,N}(dims)\n\nConstruct an uninitialized N-dimensional Array containing elements of type T. N can either be supplied explicitly, as in Array{T,N}(dims), or be determined by the length or number of dims. dims may be a tuple or a series of integer arguments corresponding to the lengths in each dimension. If the rank N is supplied explicitly, then it must match the length or number of dims.\n\nExamples\n\njulia> A = Array{Float64,2}(2, 3) # N given explicitly\n2×3 Array{Float64,2}:\n 6.90198e-310  6.90198e-310  6.90198e-310\n 6.90198e-310  6.90198e-310  0.0\n\njulia> B = Array{Float64}(2) # N determined by the input\n2-element Array{Float64,1}:\n 1.87103e-320\n 0.0\n\n\n\n"
+},
+
+{
+    "location": "stdlib/arrays.html#Core.Uninitialized",
+    "page": "Arrays",
+    "title": "Core.Uninitialized",
+    "category": "Type",
+    "text": "Uninitialized\n\nSingleton type used in array initialization, indicating the array-constructor-caller would like an uninitialized array. See also uninitialized, an alias for Uninitialized().\n\nExamples\n\njulia> Array{Float64,1}(Uninitialized(), 3)\n3-element Array{Float64,1}:\n 2.2752528595e-314\n 2.202942107e-314\n 2.275252907e-314\n\n\n\n"
+},
+
+{
+    "location": "stdlib/arrays.html#Core.uninitialized",
+    "page": "Arrays",
+    "title": "Core.uninitialized",
+    "category": "Constant",
+    "text": "uninitialized\n\nAlias for Uninitialized(), which constructs an instance of the singleton type Uninitialized, used in array initialization to indicate the array-constructor-caller would like an uninitialized array.\n\nExamples\n\njulia> Array{Float64,1}(uninitialized, 3)\n3-element Array{Float64,1}:\n 2.2752528595e-314\n 2.202942107e-314\n 2.275252907e-314\n\n\n\n"
 },
 
 {
@@ -11117,7 +10733,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Arrays",
     "title": "Constructors and Types",
     "category": "section",
-    "text": "Core.AbstractArray\nBase.AbstractVector\nBase.AbstractMatrix\nCore.Array\nCore.Array(::Any)\nBase.Vector\nBase.Vector(::Any)\nBase.Matrix\nBase.Matrix(::Any, ::Any)\nBase.getindex(::Type, ::Any...)\nBase.zeros\nBase.ones\nBase.BitArray\nBase.BitArray(::Integer...)\nBase.BitArray(::Any)\nBase.trues\nBase.falses\nBase.fill\nBase.fill!\nBase.similar(::AbstractArray)\nBase.similar(::Any, ::Tuple)\nBase.linspace\nBase.logspace\nBase.Random.randsubseq\nBase.Random.randsubseq!"
+    "text": "Core.AbstractArray\nBase.AbstractVector\nBase.AbstractMatrix\nCore.Array\nCore.Array(::Any)\nCore.Uninitialized\nCore.uninitialized\nBase.Vector\nBase.Vector(::Any)\nBase.Matrix\nBase.Matrix(::Any, ::Any)\nBase.getindex(::Type, ::Any...)\nBase.zeros\nBase.ones\nBase.BitArray\nBase.BitArray(::Integer...)\nBase.BitArray(::Any)\nBase.trues\nBase.falses\nBase.fill\nBase.fill!\nBase.similar(::AbstractArray)\nBase.similar(::Any, ::Tuple)\nBase.linspace\nBase.logspace\nBase.Random.randsubseq\nBase.Random.randsubseq!"
 },
 
 {
@@ -12117,7 +11733,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Tasks and Parallel Computing",
     "title": "Core.Task",
     "category": "Type",
-    "text": "Task(func)\n\nCreate a Task (i.e. coroutine) to execute the given function (which must be callable with no arguments). The task exits when this function returns.\n\nExamples\n\njulia> a() = det(rand(1000, 1000));\n\njulia> b = Task(a);\n\nIn this example, b is a runnable Task that hasn't started yet.\n\n\n\n"
+    "text": "Task(func)\n\nCreate a Task (i.e. coroutine) to execute the given function func (which must be callable with no arguments). The task exits when this function returns.\n\nExamples\n\njulia> a() = det(rand(1000, 1000));\n\njulia> b = Task(a);\n\nIn this example, b is a runnable Task that hasn't started yet.\n\n\n\n"
 },
 
 {
@@ -13045,7 +12661,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Linear Algebra",
     "title": "Base.:*",
     "category": "Method",
-    "text": "*(A::AbstractMatrix, B::AbstractMatrix)\n\nMatrix multiplication.\n\nExamples\n\njulia> [1 1; 0 1] * [1 0; 1 1]\n2×2 Array{Int64,2}:\n 2  1\n 1  1\n\n\n\n*(x, y...)\n\nMultiplication operator. x*y*z*... calls this function with all arguments, i.e. *(x, y, z, ...).\n\n\n\n"
+    "text": "*(A::AbstractMatrix, B::AbstractMatrix)\n\nMatrix multiplication.\n\nExamples\n\njulia> [1 1; 0 1] * [1 0; 1 1]\n2×2 Array{Int64,2}:\n 2  1\n 1  1\n\n\n\n*(x, y...)\n\nMultiplication operator. x*y*z*... calls this function with all arguments, i.e. *(x, y, z, ...).\n\nExamples\n\njulia> 2 * 7 * 8\n112\n\njulia> *(2, 7, 8)\n112\n\n\n\n"
 },
 
 {
@@ -13173,7 +12789,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Linear Algebra",
     "title": "Base.LinAlg.lufact",
     "category": "Function",
-    "text": "lufact(A::SparseMatrixCSC) -> F::UmfpackLU\n\nCompute the LU factorization of a sparse matrix A.\n\nFor sparse A with real or complex element type, the return type of F is UmfpackLU{Tv, Ti}, with Tv = Float64 or Complex128 respectively and Ti is an integer type (Int32 or Int64).\n\nThe individual components of the factorization F can be accessed by indexing:\n\nComponent Description\nF[:L] L (lower triangular) part of LU\nF[:U] U (upper triangular) part of LU\nF[:p] right permutation Vector\nF[:q] left permutation Vector\nF[:Rs] Vector of scaling factors\nF[:(:)] (L,U,p,q,Rs) components\n\nThe relation between F and A is\n\nF[:L]*F[:U] == (F[:Rs] .* A)[F[:p], F[:q]]\n\nF further supports the following functions:\n\n\\\ncond\ndet\n\nnote: Note\nlufact(A::SparseMatrixCSC) uses the UMFPACK library that is part of SuiteSparse. As this library only supports sparse matrices with Float64 or Complex128 elements, lufact converts A into a copy that is of type SparseMatrixCSC{Float64} or SparseMatrixCSC{Complex128} as appropriate.\n\n\n\nlufact(A, pivot=Val(true)) -> F::LU\n\nCompute the LU factorization of A.\n\nIn most cases, if A is a subtype S of AbstractMatrix{T} with an element type T supporting +, -, * and /, the return type is LU{T,S{T}}. If pivoting is chosen (default) the element type should also support abs and <.\n\nThe individual components of the factorization F can be accessed by indexing:\n\nComponent Description\nF[:L] L (lower triangular) part of LU\nF[:U] U (upper triangular) part of LU\nF[:p] (right) permutation Vector\nF[:P] (right) permutation Matrix\n\nThe relationship between F and A is\n\nF[:L]*F[:U] == A[F[:p], :]\n\nF further supports the following functions:\n\nSupported function LU LU{T,Tridiagonal{T}}\n/ ✓ \n\\ ✓ ✓\ninv ✓ ✓\ndet ✓ ✓\nlogdet ✓ ✓\nlogabsdet ✓ ✓\nsize ✓ ✓\n\nExamples\n\njulia> A = [4 3; 6 3]\n2×2 Array{Int64,2}:\n 4  3\n 6  3\n\njulia> F = lufact(A)\nBase.LinAlg.LU{Float64,Array{Float64,2}} with factors L and U:\n[1.0 0.0; 1.5 1.0]\n[4.0 3.0; 0.0 -1.5]\n\njulia> F[:L] * F[:U] == A[F[:p], :]\ntrue\n\n\n\n"
+    "text": "lufact(A, pivot=Val(true)) -> F::LU\n\nCompute the LU factorization of A.\n\nIn most cases, if A is a subtype S of AbstractMatrix{T} with an element type T supporting +, -, * and /, the return type is LU{T,S{T}}. If pivoting is chosen (default) the element type should also support abs and <.\n\nThe individual components of the factorization F can be accessed by indexing:\n\nComponent Description\nF[:L] L (lower triangular) part of LU\nF[:U] U (upper triangular) part of LU\nF[:p] (right) permutation Vector\nF[:P] (right) permutation Matrix\n\nThe relationship between F and A is\n\nF[:L]*F[:U] == A[F[:p], :]\n\nF further supports the following functions:\n\nSupported function LU LU{T,Tridiagonal{T}}\n/ ✓ \n\\ ✓ ✓\ninv ✓ ✓\ndet ✓ ✓\nlogdet ✓ ✓\nlogabsdet ✓ ✓\nsize ✓ ✓\n\nExamples\n\njulia> A = [4 3; 6 3]\n2×2 Array{Int64,2}:\n 4  3\n 6  3\n\njulia> F = lufact(A)\nBase.LinAlg.LU{Float64,Array{Float64,2}}\nL factor:\n2×2 Array{Float64,2}:\n 1.0  0.0\n 1.5  1.0\nU factor:\n2×2 Array{Float64,2}:\n 4.0   3.0\n 0.0  -1.5\n\njulia> F[:L] * F[:U] == A[F[:p], :]\ntrue\n\n\n\nlufact(A::SparseMatrixCSC) -> F::UmfpackLU\n\nCompute the LU factorization of a sparse matrix A.\n\nFor sparse A with real or complex element type, the return type of F is UmfpackLU{Tv, Ti}, with Tv = Float64 or Complex128 respectively and Ti is an integer type (Int32 or Int64).\n\nThe individual components of the factorization F can be accessed by indexing:\n\nComponent Description\nF[:L] L (lower triangular) part of LU\nF[:U] U (upper triangular) part of LU\nF[:p] right permutation Vector\nF[:q] left permutation Vector\nF[:Rs] Vector of scaling factors\nF[:(:)] (L,U,p,q,Rs) components\n\nThe relation between F and A is\n\nF[:L]*F[:U] == (F[:Rs] .* A)[F[:p], F[:q]]\n\nF further supports the following functions:\n\n\\\ncond\ndet\n\nnote: Note\nlufact(A::SparseMatrixCSC) uses the UMFPACK library that is part of SuiteSparse. As this library only supports sparse matrices with Float64 or Complex128 elements, lufact converts A into a copy that is of type SparseMatrixCSC{Float64} or SparseMatrixCSC{Complex128} as appropriate.\n\n\n\n"
 },
 
 {
@@ -13197,7 +12813,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Linear Algebra",
     "title": "Base.LinAlg.cholfact",
     "category": "Function",
-    "text": "cholfact(A, Val(false)) -> Cholesky\n\nCompute the Cholesky factorization of a dense symmetric positive definite matrix A and return a Cholesky factorization. The matrix A can either be a Symmetric or Hermitian StridedMatrix or a perfectly symmetric or Hermitian StridedMatrix. The triangular Cholesky factor can be obtained from the factorization F with: F[:L] and F[:U]. The following functions are available for Cholesky objects: size, \\, inv, det, logdet and isposdef.\n\nExamples\n\njulia> A = [4. 12. -16.; 12. 37. -43.; -16. -43. 98.]\n3×3 Array{Float64,2}:\n   4.0   12.0  -16.0\n  12.0   37.0  -43.0\n -16.0  -43.0   98.0\n\njulia> C = cholfact(A)\nBase.LinAlg.Cholesky{Float64,Array{Float64,2}} with factor:\n[2.0 6.0 -8.0; 0.0 1.0 5.0; 0.0 0.0 3.0]\n\njulia> C[:U]\n3×3 UpperTriangular{Float64,Array{Float64,2}}:\n 2.0  6.0  -8.0\n  ⋅   1.0   5.0\n  ⋅    ⋅    3.0\n\njulia> C[:L]\n3×3 LowerTriangular{Float64,Array{Float64,2}}:\n  2.0   ⋅    ⋅\n  6.0  1.0   ⋅\n -8.0  5.0  3.0\n\njulia> C[:L] * C[:U] == A\ntrue\n\n\n\ncholfact(A, Val(true); tol = 0.0) -> CholeskyPivoted\n\nCompute the pivoted Cholesky factorization of a dense symmetric positive semi-definite matrix A and return a CholeskyPivoted factorization. The matrix A can either be a Symmetric or Hermitian StridedMatrix or a perfectly symmetric or Hermitian StridedMatrix. The triangular Cholesky factor can be obtained from the factorization F with: F[:L] and F[:U]. The following functions are available for PivotedCholesky objects: size, \\, inv, det, and rank. The argument tol determines the tolerance for determining the rank. For negative values, the tolerance is the machine precision.\n\n\n\ncholfact(A; shift = 0.0, perm = Int[]) -> CHOLMOD.Factor\n\nCompute the Cholesky factorization of a sparse positive definite matrix A. A must be a SparseMatrixCSC or a Symmetric/Hermitian view of a SparseMatrixCSC. Note that even if A doesn't have the type tag, it must still be symmetric or Hermitian. A fill-reducing permutation is used. F = cholfact(A) is most frequently used to solve systems of equations with F\\b, but also the methods diag, det, and logdet are defined for F. You can also extract individual factors from F, using F[:L]. However, since pivoting is on by default, the factorization is internally represented as A == P'*L*L'*P with a permutation matrix P; using just L without accounting for P will give incorrect answers. To include the effects of permutation, it's typically preferable to extract \"combined\" factors like PtL = F[:PtL] (the equivalent of P'*L) and LtP = F[:UP] (the equivalent of L'*P).\n\nSetting the optional shift keyword argument computes the factorization of A+shift*I instead of A. If the perm argument is nonempty, it should be a permutation of 1:size(A,1) giving the ordering to use (instead of CHOLMOD's default AMD ordering).\n\nnote: Note\nThis method uses the CHOLMOD library from SuiteSparse, which only supports doubles or complex doubles. Input matrices not of those element types will be converted to SparseMatrixCSC{Float64} or SparseMatrixCSC{Complex128} as appropriate.Many other functions from CHOLMOD are wrapped but not exported from the Base.SparseArrays.CHOLMOD module.\n\n\n\n"
+    "text": "cholfact(A, Val(false)) -> Cholesky\n\nCompute the Cholesky factorization of a dense symmetric positive definite matrix A and return a Cholesky factorization. The matrix A can either be a Symmetric or Hermitian StridedMatrix or a perfectly symmetric or Hermitian StridedMatrix. The triangular Cholesky factor can be obtained from the factorization F with: F[:L] and F[:U]. The following functions are available for Cholesky objects: size, \\, inv, det, logdet and isposdef.\n\nExamples\n\njulia> A = [4. 12. -16.; 12. 37. -43.; -16. -43. 98.]\n3×3 Array{Float64,2}:\n   4.0   12.0  -16.0\n  12.0   37.0  -43.0\n -16.0  -43.0   98.0\n\njulia> C = cholfact(A)\nBase.LinAlg.Cholesky{Float64,Array{Float64,2}}\nU factor:\n3×3 UpperTriangular{Float64,Array{Float64,2}}:\n 2.0  6.0  -8.0\n  ⋅   1.0   5.0\n  ⋅    ⋅    3.0\n\njulia> C[:U]\n3×3 UpperTriangular{Float64,Array{Float64,2}}:\n 2.0  6.0  -8.0\n  ⋅   1.0   5.0\n  ⋅    ⋅    3.0\n\njulia> C[:L]\n3×3 LowerTriangular{Float64,Array{Float64,2}}:\n  2.0   ⋅    ⋅\n  6.0  1.0   ⋅\n -8.0  5.0  3.0\n\njulia> C[:L] * C[:U] == A\ntrue\n\n\n\ncholfact(A, Val(true); tol = 0.0) -> CholeskyPivoted\n\nCompute the pivoted Cholesky factorization of a dense symmetric positive semi-definite matrix A and return a CholeskyPivoted factorization. The matrix A can either be a Symmetric or Hermitian StridedMatrix or a perfectly symmetric or Hermitian StridedMatrix. The triangular Cholesky factor can be obtained from the factorization F with: F[:L] and F[:U]. The following functions are available for PivotedCholesky objects: size, \\, inv, det, and rank. The argument tol determines the tolerance for determining the rank. For negative values, the tolerance is the machine precision.\n\n\n\ncholfact(A; shift = 0.0, perm = Int[]) -> CHOLMOD.Factor\n\nCompute the Cholesky factorization of a sparse positive definite matrix A. A must be a SparseMatrixCSC or a Symmetric/Hermitian view of a SparseMatrixCSC. Note that even if A doesn't have the type tag, it must still be symmetric or Hermitian. A fill-reducing permutation is used. F = cholfact(A) is most frequently used to solve systems of equations with F\\b, but also the methods diag, det, and logdet are defined for F. You can also extract individual factors from F, using F[:L]. However, since pivoting is on by default, the factorization is internally represented as A == P'*L*L'*P with a permutation matrix P; using just L without accounting for P will give incorrect answers. To include the effects of permutation, it's typically preferable to extract \"combined\" factors like PtL = F[:PtL] (the equivalent of P'*L) and LtP = F[:UP] (the equivalent of L'*P).\n\nSetting the optional shift keyword argument computes the factorization of A+shift*I instead of A. If the perm argument is nonempty, it should be a permutation of 1:size(A,1) giving the ordering to use (instead of CHOLMOD's default AMD ordering).\n\nnote: Note\nThis method uses the CHOLMOD library from SuiteSparse, which only supports doubles or complex doubles. Input matrices not of those element types will be converted to SparseMatrixCSC{Float64} or SparseMatrixCSC{Complex128} as appropriate.Many other functions from CHOLMOD are wrapped but not exported from the Base.SparseArrays.CHOLMOD module.\n\n\n\n"
 },
 
 {
@@ -13277,7 +12893,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Linear Algebra",
     "title": "Base.LinAlg.qrfact",
     "category": "Function",
-    "text": "qrfact(A) -> QRSparse\n\nCompute the QR factorization of a sparse matrix A. Fill-reducing row and column permutations are used such that F[:R] = F[:Q]'*A[F[:prow],F[:pcol]]. The main application of this type is to solve least squares or underdetermined problems with \\. The function calls the C library SPQR.\n\nExamples\n\njulia> A = sparse([1,2,3,4], [1,1,2,2], ones(4))\n4×2 SparseMatrixCSC{Float64,Int64} with 4 stored entries:\n  [1, 1]  =  1.0\n  [2, 1]  =  1.0\n  [3, 2]  =  1.0\n  [4, 2]  =  1.0\n\njulia> qrfact(A)\nBase.SparseArrays.SPQR.QRSparse{Float64,Int64}\nQ factor:\n4×4 Base.SparseArrays.SPQR.QRSparseQ{Float64,Int64}:\n -0.707107   0.0        0.0       -0.707107\n  0.0       -0.707107  -0.707107   0.0\n  0.0       -0.707107   0.707107   0.0\n -0.707107   0.0        0.0        0.707107\nR factor:\n2×2 SparseMatrixCSC{Float64,Int64} with 2 stored entries:\n  [1, 1]  =  -1.41421\n  [2, 2]  =  -1.41421\nRow permutation:\n4-element Array{Int64,1}:\n 1\n 3\n 4\n 2\nColumn permutation:\n2-element Array{Int64,1}:\n 1\n 2\n\n\n\nqrfact(A, pivot=Val(false)) -> F\n\nCompute the QR factorization of the matrix A: an orthogonal (or unitary if A is complex-valued) matrix Q, and an upper triangular matrix R such that\n\nA = Q R\n\nThe returned object F stores the factorization in a packed format:\n\nif pivot == Val(true) then F is a QRPivoted object,\notherwise if the element type of A is a BLAS type (Float32, Float64, Complex64 or Complex128), then F is a QRCompactWY object,\notherwise F is a QR object.\n\nThe individual components of the factorization F can be accessed by indexing with a symbol:\n\nF[:Q]: the orthogonal/unitary matrix Q\nF[:R]: the upper triangular matrix R\nF[:p]: the permutation vector of the pivot (QRPivoted only)\nF[:P]: the permutation matrix of the pivot (QRPivoted only)\n\nThe following functions are available for the QR objects: inv, size, and \\. When A is rectangular, \\ will return a least squares solution and if the solution is not unique, the one with smallest norm is returned.\n\nMultiplication with respect to either full/square or non-full/square Q is allowed, i.e. both F[:Q]*F[:R] and F[:Q]*A are supported. A Q matrix can be converted into a regular matrix with Matrix.\n\nExamples\n\njulia> A = [3.0 -6.0; 4.0 -8.0; 0.0 1.0]\n3×2 Array{Float64,2}:\n 3.0  -6.0\n 4.0  -8.0\n 0.0   1.0\n\njulia> F = qrfact(A)\nBase.LinAlg.QRCompactWY{Float64,Array{Float64,2}} with factors Q and R:\n[-0.6 0.0 0.8; -0.8 0.0 -0.6; 0.0 -1.0 0.0]\n[-5.0 10.0; 0.0 -1.0]\n\njulia> F[:Q] * F[:R] == A\ntrue\n\nnote: Note\nqrfact returns multiple types because LAPACK uses several representations that minimize the memory storage requirements of products of Householder elementary reflectors, so that the Q and R matrices can be stored compactly rather as two separate dense matrices.\n\n\n\n"
+    "text": "qrfact(A, pivot=Val(false)) -> F\n\nCompute the QR factorization of the matrix A: an orthogonal (or unitary if A is complex-valued) matrix Q, and an upper triangular matrix R such that\n\nA = Q R\n\nThe returned object F stores the factorization in a packed format:\n\nif pivot == Val(true) then F is a QRPivoted object,\notherwise if the element type of A is a BLAS type (Float32, Float64, Complex64 or Complex128), then F is a QRCompactWY object,\notherwise F is a QR object.\n\nThe individual components of the factorization F can be accessed by indexing with a symbol:\n\nF[:Q]: the orthogonal/unitary matrix Q\nF[:R]: the upper triangular matrix R\nF[:p]: the permutation vector of the pivot (QRPivoted only)\nF[:P]: the permutation matrix of the pivot (QRPivoted only)\n\nThe following functions are available for the QR objects: inv, size, and \\. When A is rectangular, \\ will return a least squares solution and if the solution is not unique, the one with smallest norm is returned.\n\nMultiplication with respect to either full/square or non-full/square Q is allowed, i.e. both F[:Q]*F[:R] and F[:Q]*A are supported. A Q matrix can be converted into a regular matrix with Matrix.\n\nExamples\n\njulia> A = [3.0 -6.0; 4.0 -8.0; 0.0 1.0]\n3×2 Array{Float64,2}:\n 3.0  -6.0\n 4.0  -8.0\n 0.0   1.0\n\njulia> F = qrfact(A)\nBase.LinAlg.QRCompactWY{Float64,Array{Float64,2}} with factors Q and R:\n[-0.6 0.0 0.8; -0.8 0.0 -0.6; 0.0 -1.0 0.0]\n[-5.0 10.0; 0.0 -1.0]\n\njulia> F[:Q] * F[:R] == A\ntrue\n\nnote: Note\nqrfact returns multiple types because LAPACK uses several representations that minimize the memory storage requirements of products of Householder elementary reflectors, so that the Q and R matrices can be stored compactly rather as two separate dense matrices.\n\n\n\nqrfact(A) -> QRSparse\n\nCompute the QR factorization of a sparse matrix A. Fill-reducing row and column permutations are used such that F[:R] = F[:Q]'*A[F[:prow],F[:pcol]]. The main application of this type is to solve least squares or underdetermined problems with \\. The function calls the C library SPQR.\n\nExamples\n\njulia> A = sparse([1,2,3,4], [1,1,2,2], ones(4))\n4×2 SparseMatrixCSC{Float64,Int64} with 4 stored entries:\n  [1, 1]  =  1.0\n  [2, 1]  =  1.0\n  [3, 2]  =  1.0\n  [4, 2]  =  1.0\n\njulia> qrfact(A)\nBase.SparseArrays.SPQR.QRSparse{Float64,Int64}\nQ factor:\n4×4 Base.SparseArrays.SPQR.QRSparseQ{Float64,Int64}:\n -0.707107   0.0        0.0       -0.707107\n  0.0       -0.707107  -0.707107   0.0\n  0.0       -0.707107   0.707107   0.0\n -0.707107   0.0        0.0        0.707107\nR factor:\n2×2 SparseMatrixCSC{Float64,Int64} with 2 stored entries:\n  [1, 1]  =  -1.41421\n  [2, 2]  =  -1.41421\nRow permutation:\n4-element Array{Int64,1}:\n 1\n 3\n 4\n 2\nColumn permutation:\n2-element Array{Int64,1}:\n 1\n 2\n\n\n\n"
 },
 
 {
@@ -13729,7 +13345,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/linalg.html#Base.exp-Tuple{Union{DenseArray{#s57,2}, Base.ReinterpretArray{#s57,2,S,A} where S, Base.ReshapedArray{#s57,2,A,MI} where MI<:Tuple{Vararg{Base.MultiplicativeInverses.SignedMultiplicativeInverse{Int64},N} where N} where A<:Union{SubArray{T,N,P,I,true} where I<:Tuple{Union{Base.Slice, UnitRange},Vararg{Any,N} where N} where P where N where T, DenseArray}, SubArray{#s57,2,A,I,L} where L} where I<:Tuple{Vararg{Union{Int64, AbstractRange{Int64}, Base.AbstractCartesianIndex},N} where N} where A<:Union{Base.ReshapedArray{T,N,A,MI} where MI<:Tuple{Vararg{Base.MultiplicativeInverses.SignedMultiplicativeInverse{Int64},N} where N} where A<:Union{SubArray{T,N,P,I,true} where I<:Tuple{Union{Base.Slice, UnitRange},Vararg{Any,N} where N} where P where N where T, DenseArray} where N where T, DenseArray} where #s57<:Union{Complex{Float32}, Complex{Float64}, Float32, Float64}}",
+    "location": "stdlib/linalg.html#Base.exp-Tuple{Union{DenseArray{#s65,2}, Base.ReinterpretArray{#s65,2,S,A} where S, Base.ReshapedArray{#s65,2,A,MI} where MI<:Tuple{Vararg{Base.MultiplicativeInverses.SignedMultiplicativeInverse{Int64},N} where N} where A<:Union{SubArray{T,N,P,I,true} where I<:Tuple{Union{Base.Slice, UnitRange},Vararg{Any,N} where N} where P where N where T, DenseArray}, SubArray{#s65,2,A,I,L} where L} where I<:Tuple{Vararg{Union{Int64, AbstractRange{Int64}, Base.AbstractCartesianIndex},N} where N} where A<:Union{Base.ReshapedArray{T,N,A,MI} where MI<:Tuple{Vararg{Base.MultiplicativeInverses.SignedMultiplicativeInverse{Int64},N} where N} where A<:Union{SubArray{T,N,P,I,true} where I<:Tuple{Union{Base.Slice, UnitRange},Vararg{Any,N} where N} where P where N where T, DenseArray} where N where T, DenseArray} where #s65<:Union{Complex{Float32}, Complex{Float64}, Float32, Float64}}",
     "page": "Linear Algebra",
     "title": "Base.exp",
     "category": "Method",
@@ -13745,7 +13361,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/linalg.html#Base.sqrt-Tuple{Union{DenseArray{#s57,2}, Base.ReinterpretArray{#s57,2,S,A} where S, Base.ReshapedArray{#s57,2,A,MI} where MI<:Tuple{Vararg{Base.MultiplicativeInverses.SignedMultiplicativeInverse{Int64},N} where N} where A<:Union{SubArray{T,N,P,I,true} where I<:Tuple{Union{Base.Slice, UnitRange},Vararg{Any,N} where N} where P where N where T, DenseArray}, SubArray{#s57,2,A,I,L} where L} where I<:Tuple{Vararg{Union{Int64, AbstractRange{Int64}, Base.AbstractCartesianIndex},N} where N} where A<:Union{Base.ReshapedArray{T,N,A,MI} where MI<:Tuple{Vararg{Base.MultiplicativeInverses.SignedMultiplicativeInverse{Int64},N} where N} where A<:Union{SubArray{T,N,P,I,true} where I<:Tuple{Union{Base.Slice, UnitRange},Vararg{Any,N} where N} where P where N where T, DenseArray} where N where T, DenseArray} where #s57<:Real}",
+    "location": "stdlib/linalg.html#Base.sqrt-Tuple{Union{DenseArray{#s65,2}, Base.ReinterpretArray{#s65,2,S,A} where S, Base.ReshapedArray{#s65,2,A,MI} where MI<:Tuple{Vararg{Base.MultiplicativeInverses.SignedMultiplicativeInverse{Int64},N} where N} where A<:Union{SubArray{T,N,P,I,true} where I<:Tuple{Union{Base.Slice, UnitRange},Vararg{Any,N} where N} where P where N where T, DenseArray}, SubArray{#s65,2,A,I,L} where L} where I<:Tuple{Vararg{Union{Int64, AbstractRange{Int64}, Base.AbstractCartesianIndex},N} where N} where A<:Union{Base.ReshapedArray{T,N,A,MI} where MI<:Tuple{Vararg{Base.MultiplicativeInverses.SignedMultiplicativeInverse{Int64},N} where N} where A<:Union{SubArray{T,N,P,I,true} where I<:Tuple{Union{Base.Slice, UnitRange},Vararg{Any,N} where N} where P where N where T, DenseArray} where N where T, DenseArray} where #s65<:Real}",
     "page": "Linear Algebra",
     "title": "Base.sqrt",
     "category": "Method",
@@ -13753,7 +13369,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/linalg.html#Base.cos-Tuple{Union{DenseArray{#s57,2}, Base.ReinterpretArray{#s57,2,S,A} where S, Base.ReshapedArray{#s57,2,A,MI} where MI<:Tuple{Vararg{Base.MultiplicativeInverses.SignedMultiplicativeInverse{Int64},N} where N} where A<:Union{SubArray{T,N,P,I,true} where I<:Tuple{Union{Base.Slice, UnitRange},Vararg{Any,N} where N} where P where N where T, DenseArray}, SubArray{#s57,2,A,I,L} where L} where I<:Tuple{Vararg{Union{Int64, AbstractRange{Int64}, Base.AbstractCartesianIndex},N} where N} where A<:Union{Base.ReshapedArray{T,N,A,MI} where MI<:Tuple{Vararg{Base.MultiplicativeInverses.SignedMultiplicativeInverse{Int64},N} where N} where A<:Union{SubArray{T,N,P,I,true} where I<:Tuple{Union{Base.Slice, UnitRange},Vararg{Any,N} where N} where P where N where T, DenseArray} where N where T, DenseArray} where #s57<:Real}",
+    "location": "stdlib/linalg.html#Base.cos-Tuple{Union{DenseArray{#s65,2}, Base.ReinterpretArray{#s65,2,S,A} where S, Base.ReshapedArray{#s65,2,A,MI} where MI<:Tuple{Vararg{Base.MultiplicativeInverses.SignedMultiplicativeInverse{Int64},N} where N} where A<:Union{SubArray{T,N,P,I,true} where I<:Tuple{Union{Base.Slice, UnitRange},Vararg{Any,N} where N} where P where N where T, DenseArray}, SubArray{#s65,2,A,I,L} where L} where I<:Tuple{Vararg{Union{Int64, AbstractRange{Int64}, Base.AbstractCartesianIndex},N} where N} where A<:Union{Base.ReshapedArray{T,N,A,MI} where MI<:Tuple{Vararg{Base.MultiplicativeInverses.SignedMultiplicativeInverse{Int64},N} where N} where A<:Union{SubArray{T,N,P,I,true} where I<:Tuple{Union{Base.Slice, UnitRange},Vararg{Any,N} where N} where P where N where T, DenseArray} where N where T, DenseArray} where #s65<:Real}",
     "page": "Linear Algebra",
     "title": "Base.cos",
     "category": "Method",
@@ -13761,7 +13377,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/linalg.html#Base.sin-Tuple{Union{DenseArray{#s57,2}, Base.ReinterpretArray{#s57,2,S,A} where S, Base.ReshapedArray{#s57,2,A,MI} where MI<:Tuple{Vararg{Base.MultiplicativeInverses.SignedMultiplicativeInverse{Int64},N} where N} where A<:Union{SubArray{T,N,P,I,true} where I<:Tuple{Union{Base.Slice, UnitRange},Vararg{Any,N} where N} where P where N where T, DenseArray}, SubArray{#s57,2,A,I,L} where L} where I<:Tuple{Vararg{Union{Int64, AbstractRange{Int64}, Base.AbstractCartesianIndex},N} where N} where A<:Union{Base.ReshapedArray{T,N,A,MI} where MI<:Tuple{Vararg{Base.MultiplicativeInverses.SignedMultiplicativeInverse{Int64},N} where N} where A<:Union{SubArray{T,N,P,I,true} where I<:Tuple{Union{Base.Slice, UnitRange},Vararg{Any,N} where N} where P where N where T, DenseArray} where N where T, DenseArray} where #s57<:Real}",
+    "location": "stdlib/linalg.html#Base.sin-Tuple{Union{DenseArray{#s65,2}, Base.ReinterpretArray{#s65,2,S,A} where S, Base.ReshapedArray{#s65,2,A,MI} where MI<:Tuple{Vararg{Base.MultiplicativeInverses.SignedMultiplicativeInverse{Int64},N} where N} where A<:Union{SubArray{T,N,P,I,true} where I<:Tuple{Union{Base.Slice, UnitRange},Vararg{Any,N} where N} where P where N where T, DenseArray}, SubArray{#s65,2,A,I,L} where L} where I<:Tuple{Vararg{Union{Int64, AbstractRange{Int64}, Base.AbstractCartesianIndex},N} where N} where A<:Union{Base.ReshapedArray{T,N,A,MI} where MI<:Tuple{Vararg{Base.MultiplicativeInverses.SignedMultiplicativeInverse{Int64},N} where N} where A<:Union{SubArray{T,N,P,I,true} where I<:Tuple{Union{Base.Slice, UnitRange},Vararg{Any,N} where N} where P where N where T, DenseArray} where N where T, DenseArray} where #s65<:Real}",
     "page": "Linear Algebra",
     "title": "Base.sin",
     "category": "Method",
@@ -13769,7 +13385,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/linalg.html#Base.Math.sincos-Tuple{Union{DenseArray{#s57,2}, Base.ReinterpretArray{#s57,2,S,A} where S, Base.ReshapedArray{#s57,2,A,MI} where MI<:Tuple{Vararg{Base.MultiplicativeInverses.SignedMultiplicativeInverse{Int64},N} where N} where A<:Union{SubArray{T,N,P,I,true} where I<:Tuple{Union{Base.Slice, UnitRange},Vararg{Any,N} where N} where P where N where T, DenseArray}, SubArray{#s57,2,A,I,L} where L} where I<:Tuple{Vararg{Union{Int64, AbstractRange{Int64}, Base.AbstractCartesianIndex},N} where N} where A<:Union{Base.ReshapedArray{T,N,A,MI} where MI<:Tuple{Vararg{Base.MultiplicativeInverses.SignedMultiplicativeInverse{Int64},N} where N} where A<:Union{SubArray{T,N,P,I,true} where I<:Tuple{Union{Base.Slice, UnitRange},Vararg{Any,N} where N} where P where N where T, DenseArray} where N where T, DenseArray} where #s57<:Real}",
+    "location": "stdlib/linalg.html#Base.Math.sincos-Tuple{Union{DenseArray{#s65,2}, Base.ReinterpretArray{#s65,2,S,A} where S, Base.ReshapedArray{#s65,2,A,MI} where MI<:Tuple{Vararg{Base.MultiplicativeInverses.SignedMultiplicativeInverse{Int64},N} where N} where A<:Union{SubArray{T,N,P,I,true} where I<:Tuple{Union{Base.Slice, UnitRange},Vararg{Any,N} where N} where P where N where T, DenseArray}, SubArray{#s65,2,A,I,L} where L} where I<:Tuple{Vararg{Union{Int64, AbstractRange{Int64}, Base.AbstractCartesianIndex},N} where N} where A<:Union{Base.ReshapedArray{T,N,A,MI} where MI<:Tuple{Vararg{Base.MultiplicativeInverses.SignedMultiplicativeInverse{Int64},N} where N} where A<:Union{SubArray{T,N,P,I,true} where I<:Tuple{Union{Base.Slice, UnitRange},Vararg{Any,N} where N} where P where N where T, DenseArray} where N where T, DenseArray} where #s65<:Real}",
     "page": "Linear Algebra",
     "title": "Base.Math.sincos",
     "category": "Method",
@@ -13777,7 +13393,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/linalg.html#Base.tan-Tuple{Union{DenseArray{#s57,2}, Base.ReinterpretArray{#s57,2,S,A} where S, Base.ReshapedArray{#s57,2,A,MI} where MI<:Tuple{Vararg{Base.MultiplicativeInverses.SignedMultiplicativeInverse{Int64},N} where N} where A<:Union{SubArray{T,N,P,I,true} where I<:Tuple{Union{Base.Slice, UnitRange},Vararg{Any,N} where N} where P where N where T, DenseArray}, SubArray{#s57,2,A,I,L} where L} where I<:Tuple{Vararg{Union{Int64, AbstractRange{Int64}, Base.AbstractCartesianIndex},N} where N} where A<:Union{Base.ReshapedArray{T,N,A,MI} where MI<:Tuple{Vararg{Base.MultiplicativeInverses.SignedMultiplicativeInverse{Int64},N} where N} where A<:Union{SubArray{T,N,P,I,true} where I<:Tuple{Union{Base.Slice, UnitRange},Vararg{Any,N} where N} where P where N where T, DenseArray} where N where T, DenseArray} where #s57<:Real}",
+    "location": "stdlib/linalg.html#Base.tan-Tuple{Union{DenseArray{#s65,2}, Base.ReinterpretArray{#s65,2,S,A} where S, Base.ReshapedArray{#s65,2,A,MI} where MI<:Tuple{Vararg{Base.MultiplicativeInverses.SignedMultiplicativeInverse{Int64},N} where N} where A<:Union{SubArray{T,N,P,I,true} where I<:Tuple{Union{Base.Slice, UnitRange},Vararg{Any,N} where N} where P where N where T, DenseArray}, SubArray{#s65,2,A,I,L} where L} where I<:Tuple{Vararg{Union{Int64, AbstractRange{Int64}, Base.AbstractCartesianIndex},N} where N} where A<:Union{Base.ReshapedArray{T,N,A,MI} where MI<:Tuple{Vararg{Base.MultiplicativeInverses.SignedMultiplicativeInverse{Int64},N} where N} where A<:Union{SubArray{T,N,P,I,true} where I<:Tuple{Union{Base.Slice, UnitRange},Vararg{Any,N} where N} where P where N where T, DenseArray} where N where T, DenseArray} where #s65<:Real}",
     "page": "Linear Algebra",
     "title": "Base.tan",
     "category": "Method",
@@ -17261,69 +16877,69 @@ var documenterSearchIndex = {"docs": [
     "page": "Dates and Time",
     "title": "Dates and Time",
     "category": "section",
-    "text": ""
+    "text": "Functionality to handle time and dates are defined in the standard library module Dates. You'll need to import the module using import Dates and prefix each function call with an explicit Dates., e.g. Dates.dayofweek(dt). Alternatively, You can write using Dates to bring all exported functions into Main to be used without the Dates. prefix."
 },
 
 {
-    "location": "stdlib/dates.html#Base.Dates.Period",
+    "location": "stdlib/dates.html#Dates.Period",
     "page": "Dates and Time",
-    "title": "Base.Dates.Period",
+    "title": "Dates.Period",
     "category": "Type",
     "text": "Period\nYear\nMonth\nWeek\nDay\nHour\nMinute\nSecond\nMillisecond\nMicrosecond\nNanosecond\n\nPeriod types represent discrete, human representations of time.\n\n\n\n"
 },
 
 {
-    "location": "stdlib/dates.html#Base.Dates.CompoundPeriod",
+    "location": "stdlib/dates.html#Dates.CompoundPeriod",
     "page": "Dates and Time",
-    "title": "Base.Dates.CompoundPeriod",
+    "title": "Dates.CompoundPeriod",
     "category": "Type",
     "text": "CompoundPeriod\n\nA CompoundPeriod is useful for expressing time periods that are not a fixed multiple of smaller periods. For example, \"a year and a  day\" is not a fixed number of days, but can be expressed using a CompoundPeriod. In fact, a CompoundPeriod is automatically generated by addition of different period types, e.g. Year(1) + Day(1) produces a CompoundPeriod result.\n\n\n\n"
 },
 
 {
-    "location": "stdlib/dates.html#Base.Dates.Instant",
+    "location": "stdlib/dates.html#Dates.Instant",
     "page": "Dates and Time",
-    "title": "Base.Dates.Instant",
+    "title": "Dates.Instant",
     "category": "Type",
     "text": "Instant\n\nInstant types represent integer-based, machine representations of time as continuous timelines starting from an epoch.\n\n\n\n"
 },
 
 {
-    "location": "stdlib/dates.html#Base.Dates.UTInstant",
+    "location": "stdlib/dates.html#Dates.UTInstant",
     "page": "Dates and Time",
-    "title": "Base.Dates.UTInstant",
+    "title": "Dates.UTInstant",
     "category": "Type",
     "text": "UTInstant{T}\n\nThe UTInstant represents a machine timeline based on UT time (1 day = one revolution of the earth). The T is a Period parameter that indicates the resolution or precision of the instant.\n\n\n\n"
 },
 
 {
-    "location": "stdlib/dates.html#Base.Dates.TimeType",
+    "location": "stdlib/dates.html#Dates.TimeType",
     "page": "Dates and Time",
-    "title": "Base.Dates.TimeType",
+    "title": "Dates.TimeType",
     "category": "Type",
     "text": "TimeType\n\nTimeType types wrap Instant machine instances to provide human representations of the machine instant. Time, DateTime and Date are subtypes of TimeType.\n\n\n\n"
 },
 
 {
-    "location": "stdlib/dates.html#Base.Dates.DateTime",
+    "location": "stdlib/dates.html#Dates.DateTime",
     "page": "Dates and Time",
-    "title": "Base.Dates.DateTime",
+    "title": "Dates.DateTime",
     "category": "Type",
     "text": "DateTime\n\nDateTime wraps a UTInstant{Millisecond} and interprets it according to the proleptic Gregorian calendar.\n\n\n\n"
 },
 
 {
-    "location": "stdlib/dates.html#Base.Dates.Date",
+    "location": "stdlib/dates.html#Dates.Date",
     "page": "Dates and Time",
-    "title": "Base.Dates.Date",
+    "title": "Dates.Date",
     "category": "Type",
     "text": "Date\n\nDate wraps a UTInstant{Day} and interprets it according to the proleptic Gregorian calendar.\n\n\n\n"
 },
 
 {
-    "location": "stdlib/dates.html#Base.Dates.Time",
+    "location": "stdlib/dates.html#Dates.Time",
     "page": "Dates and Time",
-    "title": "Base.Dates.Time",
+    "title": "Dates.Time",
     "category": "Type",
     "text": "Time\n\nTime wraps a Nanosecond and represents a specific moment in a 24-hour day.\n\n\n\n"
 },
@@ -17333,173 +16949,173 @@ var documenterSearchIndex = {"docs": [
     "page": "Dates and Time",
     "title": "Dates and Time Types",
     "category": "section",
-    "text": "Base.Dates.Period\nBase.Dates.CompoundPeriod\nBase.Dates.Instant\nBase.Dates.UTInstant\nBase.Dates.TimeType\nBase.Dates.DateTime\nBase.Dates.Date\nBase.Dates.Time"
+    "text": "Dates.Period\nDates.CompoundPeriod\nDates.Instant\nDates.UTInstant\nDates.TimeType\nDates.DateTime\nDates.Date\nDates.Time"
 },
 
 {
-    "location": "stdlib/dates.html#Base.Dates.DateTime-NTuple{7,Int64}",
+    "location": "stdlib/dates.html#Dates.DateTime-NTuple{7,Int64}",
     "page": "Dates and Time",
-    "title": "Base.Dates.DateTime",
+    "title": "Dates.DateTime",
     "category": "Method",
     "text": "DateTime(y, [m, d, h, mi, s, ms]) -> DateTime\n\nConstruct a DateTime type by parts. Arguments must be convertible to Int64.\n\n\n\n"
 },
 
 {
-    "location": "stdlib/dates.html#Base.Dates.DateTime-Tuple{Vararg{Base.Dates.Period,N} where N}",
+    "location": "stdlib/dates.html#Dates.DateTime-Tuple{Vararg{Dates.Period,N} where N}",
     "page": "Dates and Time",
-    "title": "Base.Dates.DateTime",
+    "title": "Dates.DateTime",
     "category": "Method",
     "text": "DateTime(periods::Period...) -> DateTime\n\nConstruct a DateTime type by Period type parts. Arguments may be in any order. DateTime parts not provided will default to the value of Dates.default(period).\n\n\n\n"
 },
 
 {
-    "location": "stdlib/dates.html#Base.Dates.DateTime-Tuple{Function,Vararg{Any,N} where N}",
+    "location": "stdlib/dates.html#Dates.DateTime-Tuple{Function,Vararg{Any,N} where N}",
     "page": "Dates and Time",
-    "title": "Base.Dates.DateTime",
+    "title": "Dates.DateTime",
     "category": "Method",
     "text": "DateTime(f::Function, y[, m, d, h, mi, s]; step=Day(1), limit=10000) -> DateTime\n\nCreate a DateTime through the adjuster API. The starting point will be constructed from the provided y, m, d... arguments, and will be adjusted until f::Function returns true. The step size in adjusting can be provided manually through the step keyword. limit provides a limit to the max number of iterations the adjustment API will pursue before throwing an error (in the case that f::Function is never satisfied).\n\nExamples\n\njulia> DateTime(dt -> Dates.second(dt) == 40, 2010, 10, 20, 10; step = Dates.Second(1))\n2010-10-20T10:00:40\n\njulia> DateTime(dt -> Dates.hour(dt) == 20, 2010, 10, 20, 10; step = Dates.Hour(1), limit = 5)\nERROR: ArgumentError: Adjustment limit reached: 5 iterations\nStacktrace:\n[...]\n\n\n\n"
 },
 
 {
-    "location": "stdlib/dates.html#Base.Dates.DateTime-Tuple{Base.Dates.TimeType}",
+    "location": "stdlib/dates.html#Dates.DateTime-Tuple{Dates.TimeType}",
     "page": "Dates and Time",
-    "title": "Base.Dates.DateTime",
+    "title": "Dates.DateTime",
     "category": "Method",
     "text": "DateTime(dt::Date) -> DateTime\n\nConverts a Date to a DateTime. The hour, minute, second, and millisecond parts of the new DateTime are assumed to be zero.\n\n\n\n"
 },
 
 {
-    "location": "stdlib/dates.html#Base.Dates.DateTime-Tuple{AbstractString,AbstractString}",
+    "location": "stdlib/dates.html#Dates.DateTime-Tuple{AbstractString,AbstractString}",
     "page": "Dates and Time",
-    "title": "Base.Dates.DateTime",
+    "title": "Dates.DateTime",
     "category": "Method",
     "text": "DateTime(dt::AbstractString, format::AbstractString; locale=\"english\") -> DateTime\n\nConstruct a DateTime by parsing the dt date time string following the pattern given in the format string.\n\nThis method creates a DateFormat object each time it is called. If you are parsing many date time strings of the same format, consider creating a DateFormat object once and using that as the second argument instead.\n\n\n\n"
 },
 
 {
-    "location": "stdlib/dates.html#Base.Dates.format-Tuple{Base.Dates.TimeType,AbstractString}",
+    "location": "stdlib/dates.html#Dates.format",
     "page": "Dates and Time",
-    "title": "Base.Dates.format",
-    "category": "Method",
-    "text": "format(dt::TimeType, format::AbstractString; locale=\"english\") -> AbstractString\n\nConstruct a string by using a TimeType object and applying the provided format. The following character codes can be used to construct the format string:\n\nCode Examples Comment\ny 6 Numeric year with a fixed width\nY 1996 Numeric year with a minimum width\nm 1, 12 Numeric month with a minimum width\nu Jan Month name shortened to 3-chars according to the locale\nU January Full month name according to the locale keyword\nd 1, 31 Day of the month with a minimum width\nH 0, 23 Hour (24-hour clock) with a minimum width\nM 0, 59 Minute with a minimum width\nS 0, 59 Second with a minimum width\ns 000, 500 Millisecond with a minimum width of 3\ne Mon, Tue Abbreviated days of the week\nE Monday Full day of week name\n\nThe number of sequential code characters indicate the width of the code. A format of yyyy-mm specifies that the code y should have a width of four while m a width of two. Codes that yield numeric digits have an associated mode: fixed-width or minimum-width. The fixed-width mode left-pads the value with zeros when it is shorter than the specified width and truncates the value when longer. Minimum-width mode works the same as fixed-width except that it does not truncate values longer than the width.\n\nWhen creating a format you can use any non-code characters as a separator. For example to generate the string \"1996-01-15T00:00:00\" you could use format: \"yyyy-mm-ddTHH:MM:SS\". Note that if you need to use a code character as a literal you can use the escape character backslash. The string \"1996y01m\" can be produced with the format \"yyyy\\ymm\\m\".\n\n\n\n"
+    "title": "Dates.format",
+    "category": "Function",
+    "text": "format(io::IO, tok::AbstractDateToken, dt::TimeType, locale)\n\nFormat the tok token from dt and write it to io. The formatting can be based on locale.\n\nAll subtypes of AbstractDateToken must define this method in order to be able to print a Date / DateTime object according to a DateFormat containing that token.\n\n\n\n"
 },
 
 {
-    "location": "stdlib/dates.html#Base.Dates.DateFormat",
+    "location": "stdlib/dates.html#Dates.DateFormat",
     "page": "Dates and Time",
-    "title": "Base.Dates.DateFormat",
+    "title": "Dates.DateFormat",
     "category": "Type",
     "text": "DateFormat(format::AbstractString, locale=\"english\") -> DateFormat\n\nConstruct a date formatting object that can be used for parsing date strings or formatting a date object as a string. The following character codes can be used to construct the format string:\n\nCode Matches Comment\ny 1996, 96 Returns year of 1996, 0096\nY 1996, 96 Returns year of 1996, 0096. Equivalent to y\nm 1, 01 Matches 1 or 2-digit months\nu Jan Matches abbreviated months according to the locale keyword\nU January Matches full month names according to the locale keyword\nd 1, 01 Matches 1 or 2-digit days\nH 00 Matches hours\nM 00 Matches minutes\nS 00 Matches seconds\ns .500 Matches milliseconds\ne Mon, Tues Matches abbreviated days of the week\nE Monday Matches full name days of the week\nyyyymmdd 19960101 Matches fixed-width year, month, and day\n\nCharacters not listed above are normally treated as delimiters between date and time slots. For example a dt string of \"1996-01-15T00:00:00.0\" would have a format string like \"y-m-dTH:M:S.s\". If you need to use a code character as a delimiter you can escape it using backslash. The date \"1995y01m\" would have the format \"y\\ym\\m\".\n\nCreating a DateFormat object is expensive. Whenever possible, create it once and use it many times or try the dateformat\"\" string macro. Using this macro creates the DateFormat object once at macro expansion time and reuses it later. see @dateformat_str.\n\nSee DateTime and format for how to use a DateFormat object to parse and write Date strings respectively.\n\n\n\n"
 },
 
 {
-    "location": "stdlib/dates.html#Base.Dates.@dateformat_str",
+    "location": "stdlib/dates.html#Dates.@dateformat_str",
     "page": "Dates and Time",
-    "title": "Base.Dates.@dateformat_str",
+    "title": "Dates.@dateformat_str",
     "category": "Macro",
     "text": "dateformat\"Y-m-d H:M:S\"\n\nCreate a DateFormat object. Similar to DateFormat(\"Y-m-d H:M:S\") but creates the DateFormat object once during macro expansion.\n\nSee DateFormat for details about format specifiers.\n\n\n\n"
 },
 
 {
-    "location": "stdlib/dates.html#Base.Dates.DateTime-Tuple{AbstractString,DateFormat}",
+    "location": "stdlib/dates.html#Dates.DateTime-Tuple{AbstractString,Dates.DateFormat}",
     "page": "Dates and Time",
-    "title": "Base.Dates.DateTime",
+    "title": "Dates.DateTime",
     "category": "Method",
     "text": "DateTime(dt::AbstractString, df::DateFormat) -> DateTime\n\nConstruct a DateTime by parsing the dt date time string following the pattern given in the DateFormat object. Similar to DateTime(::AbstractString, ::AbstractString) but more efficient when repeatedly parsing similarly formatted date time strings with a pre-created DateFormat object.\n\n\n\n"
 },
 
 {
-    "location": "stdlib/dates.html#Base.Dates.Date-Tuple{Int64,Int64,Int64}",
+    "location": "stdlib/dates.html#Dates.Date-Tuple{Int64,Int64,Int64}",
     "page": "Dates and Time",
-    "title": "Base.Dates.Date",
+    "title": "Dates.Date",
     "category": "Method",
     "text": "Date(y, [m, d]) -> Date\n\nConstruct a Date type by parts. Arguments must be convertible to Int64.\n\n\n\n"
 },
 
 {
-    "location": "stdlib/dates.html#Base.Dates.Date-Tuple{Vararg{Base.Dates.Period,N} where N}",
+    "location": "stdlib/dates.html#Dates.Date-Tuple{Vararg{Dates.Period,N} where N}",
     "page": "Dates and Time",
-    "title": "Base.Dates.Date",
+    "title": "Dates.Date",
     "category": "Method",
     "text": "Date(period::Period...) -> Date\n\nConstruct a Date type by Period type parts. Arguments may be in any order. Date parts not provided will default to the value of Dates.default(period).\n\n\n\n"
 },
 
 {
-    "location": "stdlib/dates.html#Base.Dates.Date-Tuple{Function,Any,Any,Any}",
+    "location": "stdlib/dates.html#Dates.Date-Tuple{Function,Any,Any,Any}",
     "page": "Dates and Time",
-    "title": "Base.Dates.Date",
+    "title": "Dates.Date",
     "category": "Method",
     "text": "Date(f::Function, y[, m, d]; step=Day(1), limit=10000) -> Date\n\nCreate a Date through the adjuster API. The starting point will be constructed from the provided y, m, d arguments, and will be adjusted until f::Function returns true. The step size in adjusting can be provided manually through the step keyword. limit provides a limit to the max number of iterations the adjustment API will pursue before throwing an error (given that f::Function is never satisfied).\n\nExamples\n\njulia> Date(date -> Dates.week(date) == 20, 2010, 01, 01)\n2010-05-17\n\njulia> Date(date -> Dates.year(date) == 2010, 2000, 01, 01)\n2010-01-01\n\njulia> Date(date -> Dates.month(date) == 10, 2000, 01, 01; limit = 5)\nERROR: ArgumentError: Adjustment limit reached: 5 iterations\nStacktrace:\n[...]\n\n\n\n"
 },
 
 {
-    "location": "stdlib/dates.html#Base.Dates.Date-Tuple{Base.Dates.TimeType}",
+    "location": "stdlib/dates.html#Dates.Date-Tuple{Dates.TimeType}",
     "page": "Dates and Time",
-    "title": "Base.Dates.Date",
+    "title": "Dates.Date",
     "category": "Method",
     "text": "Date(dt::DateTime) -> Date\n\nConverts a DateTime to a Date. The hour, minute, second, and millisecond parts of the DateTime are truncated, so only the year, month and day parts are used in construction.\n\n\n\n"
 },
 
 {
-    "location": "stdlib/dates.html#Base.Dates.Date-Tuple{AbstractString,AbstractString}",
+    "location": "stdlib/dates.html#Dates.Date-Tuple{AbstractString,AbstractString}",
     "page": "Dates and Time",
-    "title": "Base.Dates.Date",
+    "title": "Dates.Date",
     "category": "Method",
     "text": "Date(d::AbstractString, format::AbstractString; locale=\"english\") -> Date\n\nConstruct a Date by parsing the d date string following the pattern given in the format string.\n\nThis method creates a DateFormat object each time it is called. If you are parsing many date strings of the same format, consider creating a DateFormat object once and using that as the second argument instead.\n\n\n\n"
 },
 
 {
-    "location": "stdlib/dates.html#Base.Dates.Date-Tuple{AbstractString,DateFormat}",
+    "location": "stdlib/dates.html#Dates.Date-Tuple{AbstractString,Dates.DateFormat}",
     "page": "Dates and Time",
-    "title": "Base.Dates.Date",
+    "title": "Dates.Date",
     "category": "Method",
     "text": "Date(d::AbstractString, df::DateFormat) -> Date\n\nParse a date from a date string d using a DateFormat object df.\n\n\n\n"
 },
 
 {
-    "location": "stdlib/dates.html#Base.Dates.Time-NTuple{5,Int64}",
+    "location": "stdlib/dates.html#Dates.Time-NTuple{5,Int64}",
     "page": "Dates and Time",
-    "title": "Base.Dates.Time",
+    "title": "Dates.Time",
     "category": "Method",
     "text": "Time(h, [mi, s, ms, us, ns]) -> Time\n\nConstruct a Time type by parts. Arguments must be convertible to Int64.\n\n\n\n"
 },
 
 {
-    "location": "stdlib/dates.html#Base.Dates.Time-Tuple{Vararg{Base.Dates.TimePeriod,N} where N}",
+    "location": "stdlib/dates.html#Dates.Time-Tuple{Vararg{Dates.TimePeriod,N} where N}",
     "page": "Dates and Time",
-    "title": "Base.Dates.Time",
+    "title": "Dates.Time",
     "category": "Method",
     "text": "Time(period::TimePeriod...) -> Time\n\nConstruct a Time type by Period type parts. Arguments may be in any order. Time parts not provided will default to the value of Dates.default(period).\n\n\n\n"
 },
 
 {
-    "location": "stdlib/dates.html#Base.Dates.Time-Tuple{Function,Vararg{Any,N} where N}",
+    "location": "stdlib/dates.html#Dates.Time-Tuple{Function,Vararg{Any,N} where N}",
     "page": "Dates and Time",
-    "title": "Base.Dates.Time",
+    "title": "Dates.Time",
     "category": "Method",
     "text": "Time(f::Function, h, mi=0; step::Period=Second(1), limit::Int=10000)\nTime(f::Function, h, mi, s; step::Period=Millisecond(1), limit::Int=10000)\nTime(f::Function, h, mi, s, ms; step::Period=Microsecond(1), limit::Int=10000)\nTime(f::Function, h, mi, s, ms, us; step::Period=Nanosecond(1), limit::Int=10000)\n\nCreate a Time through the adjuster API. The starting point will be constructed from the provided h, mi, s, ms, us arguments, and will be adjusted until f::Function returns true. The step size in adjusting can be provided manually through the step keyword. limit provides a limit to the max number of iterations the adjustment API will pursue before throwing an error (in the case that f::Function is never satisfied). Note that the default step will adjust to allow for greater precision for the given arguments; i.e. if hour, minute, and second arguments are provided, the default step will be Millisecond(1) instead of Second(1).\n\nExamples\n\njulia> Dates.Time(t -> Dates.minute(t) == 30, 20)\n20:30:00\n\njulia> Dates.Time(t -> Dates.minute(t) == 0, 20)\n20:00:00\n\njulia> Dates.Time(t -> Dates.hour(t) == 10, 3; limit = 5)\nERROR: ArgumentError: Adjustment limit reached: 5 iterations\nStacktrace:\n[...]\n\n\n\n"
 },
 
 {
-    "location": "stdlib/dates.html#Base.Dates.Time-Tuple{DateTime}",
+    "location": "stdlib/dates.html#Dates.Time-Tuple{Dates.DateTime}",
     "page": "Dates and Time",
-    "title": "Base.Dates.Time",
+    "title": "Dates.Time",
     "category": "Method",
     "text": "Time(dt::DateTime) -> Time\n\nConverts a DateTime to a Time. The hour, minute, second, and millisecond parts of the DateTime are used to create the new Time. Microsecond and nanoseconds are zero by default.\n\n\n\n"
 },
 
 {
-    "location": "stdlib/dates.html#Base.Dates.now-Tuple{}",
+    "location": "stdlib/dates.html#Dates.now-Tuple{}",
     "page": "Dates and Time",
-    "title": "Base.Dates.now",
+    "title": "Dates.now",
     "category": "Method",
     "text": "now() -> DateTime\n\nReturns a DateTime corresponding to the user's system time including the system timezone locale.\n\n\n\n"
 },
 
 {
-    "location": "stdlib/dates.html#Base.Dates.now-Tuple{Type{Base.Dates.UTC}}",
+    "location": "stdlib/dates.html#Dates.now-Tuple{Type{Dates.UTC}}",
     "page": "Dates and Time",
-    "title": "Base.Dates.now",
+    "title": "Dates.now",
     "category": "Method",
     "text": "now(::Type{UTC}) -> DateTime\n\nReturns a DateTime corresponding to the user's system time as UTC/GMT.\n\n\n\n"
 },
@@ -17517,189 +17133,189 @@ var documenterSearchIndex = {"docs": [
     "page": "Dates and Time",
     "title": "Dates Functions",
     "category": "section",
-    "text": "All Dates functions are defined in the Dates module; note that only the Date, DateTime, and now functions are exported; to use all other Dates functions, you'll need to prefix each function call with an explicit Dates., e.g. Dates.dayofweek(dt). Alternatively, you can write using Base.Dates to bring all exported functions into Main to be used without the Dates. prefix.Base.Dates.DateTime(::Int64, ::Int64, ::Int64, ::Int64, ::Int64, ::Int64, ::Int64)\nBase.Dates.DateTime(::Base.Dates.Period...)\nBase.Dates.DateTime(::Function, ::Any...)\nBase.Dates.DateTime(::Base.Dates.TimeType)\nBase.Dates.DateTime(::AbstractString, ::AbstractString)\nBase.Dates.format(::Base.Dates.TimeType, ::AbstractString)\nBase.Dates.DateFormat\nBase.Dates.@dateformat_str\nBase.Dates.DateTime(::AbstractString, ::Base.Dates.DateFormat)\nBase.Dates.Date(::Int64, ::Int64, ::Int64)\nBase.Dates.Date(::Base.Dates.Period...)\nBase.Dates.Date(::Function, ::Any, ::Any, ::Any)\nBase.Dates.Date(::Base.Dates.TimeType)\nBase.Dates.Date(::AbstractString, ::AbstractString)\nBase.Dates.Date(::AbstractString, ::Base.Dates.DateFormat)\nBase.Dates.Time(::Int64::Int64, ::Int64, ::Int64, ::Int64, ::Int64)\nBase.Dates.Time(::Base.Dates.TimePeriod...)\nBase.Dates.Time(::Function, ::Any...)\nBase.Dates.Time(::Base.Dates.DateTime)\nBase.Dates.now()\nBase.Dates.now(::Type{Base.Dates.UTC})\nBase.eps"
+    "text": "Dates.DateTime(::Int64, ::Int64, ::Int64, ::Int64, ::Int64, ::Int64, ::Int64)\nDates.DateTime(::Dates.Period...)\nDates.DateTime(::Function, ::Any...)\nDates.DateTime(::Dates.TimeType)\nDates.DateTime(::AbstractString, ::AbstractString)\nDates.format\nDates.DateFormat\nDates.@dateformat_str\nDates.DateTime(::AbstractString, ::Dates.DateFormat)\nDates.Date(::Int64, ::Int64, ::Int64)\nDates.Date(::Dates.Period...)\nDates.Date(::Function, ::Any, ::Any, ::Any)\nDates.Date(::Dates.TimeType)\nDates.Date(::AbstractString, ::AbstractString)\nDates.Date(::AbstractString, ::Dates.DateFormat)\nDates.Time(::Int64::Int64, ::Int64, ::Int64, ::Int64, ::Int64)\nDates.Time(::Dates.TimePeriod...)\nDates.Time(::Function, ::Any...)\nDates.Time(::Dates.DateTime)\nDates.now()\nDates.now(::Type{Dates.UTC})\nBase.eps"
 },
 
 {
-    "location": "stdlib/dates.html#Base.Dates.year",
+    "location": "stdlib/dates.html#Dates.year",
     "page": "Dates and Time",
-    "title": "Base.Dates.year",
+    "title": "Dates.year",
     "category": "Function",
     "text": "year(dt::TimeType) -> Int64\n\nThe year of a Date or DateTime as an Int64.\n\n\n\n"
 },
 
 {
-    "location": "stdlib/dates.html#Base.Dates.month",
+    "location": "stdlib/dates.html#Dates.month",
     "page": "Dates and Time",
-    "title": "Base.Dates.month",
+    "title": "Dates.month",
     "category": "Function",
     "text": "month(dt::TimeType) -> Int64\n\nThe month of a Date or DateTime as an Int64.\n\n\n\n"
 },
 
 {
-    "location": "stdlib/dates.html#Base.Dates.week",
+    "location": "stdlib/dates.html#Dates.week",
     "page": "Dates and Time",
-    "title": "Base.Dates.week",
+    "title": "Dates.week",
     "category": "Function",
     "text": "week(dt::TimeType) -> Int64\n\nReturn the ISO week date of a Date or DateTime as an Int64. Note that the first week of a year is the week that contains the first Thursday of the year, which can result in dates prior to January 4th being in the last week of the previous year. For example, week(Date(2005, 1, 1)) is the 53rd week of 2004.\n\nExamples\n\njulia> Dates.week(Date(1989, 6, 22))\n25\n\njulia> Dates.week(Date(2005, 1, 1))\n53\n\njulia> Dates.week(Date(2004, 12, 31))\n53\n\n\n\n"
 },
 
 {
-    "location": "stdlib/dates.html#Base.Dates.day",
+    "location": "stdlib/dates.html#Dates.day",
     "page": "Dates and Time",
-    "title": "Base.Dates.day",
+    "title": "Dates.day",
     "category": "Function",
     "text": "day(dt::TimeType) -> Int64\n\nThe day of month of a Date or DateTime as an Int64.\n\n\n\n"
 },
 
 {
-    "location": "stdlib/dates.html#Base.Dates.hour",
+    "location": "stdlib/dates.html#Dates.hour",
     "page": "Dates and Time",
-    "title": "Base.Dates.hour",
+    "title": "Dates.hour",
     "category": "Function",
     "text": "hour(dt::DateTime) -> Int64\n\nThe hour of day of a DateTime as an Int64.\n\n\n\nhour(t::Time) -> Int64\n\nThe hour of a Time as an Int64.\n\n\n\n"
 },
 
 {
-    "location": "stdlib/dates.html#Base.Dates.minute",
+    "location": "stdlib/dates.html#Dates.minute",
     "page": "Dates and Time",
-    "title": "Base.Dates.minute",
+    "title": "Dates.minute",
     "category": "Function",
     "text": "minute(dt::DateTime) -> Int64\n\nThe minute of a DateTime as an Int64.\n\n\n\nminute(t::Time) -> Int64\n\nThe minute of a Time as an Int64.\n\n\n\n"
 },
 
 {
-    "location": "stdlib/dates.html#Base.Dates.second",
+    "location": "stdlib/dates.html#Dates.second",
     "page": "Dates and Time",
-    "title": "Base.Dates.second",
+    "title": "Dates.second",
     "category": "Function",
     "text": "second(dt::DateTime) -> Int64\n\nThe second of a DateTime as an Int64.\n\n\n\nsecond(t::Time) -> Int64\n\nThe second of a Time as an Int64.\n\n\n\n"
 },
 
 {
-    "location": "stdlib/dates.html#Base.Dates.millisecond",
+    "location": "stdlib/dates.html#Dates.millisecond",
     "page": "Dates and Time",
-    "title": "Base.Dates.millisecond",
+    "title": "Dates.millisecond",
     "category": "Function",
     "text": "millisecond(dt::DateTime) -> Int64\n\nThe millisecond of a DateTime as an Int64.\n\n\n\nmillisecond(t::Time) -> Int64\n\nThe millisecond of a Time as an Int64.\n\n\n\n"
 },
 
 {
-    "location": "stdlib/dates.html#Base.Dates.microsecond",
+    "location": "stdlib/dates.html#Dates.microsecond",
     "page": "Dates and Time",
-    "title": "Base.Dates.microsecond",
+    "title": "Dates.microsecond",
     "category": "Function",
     "text": "microsecond(t::Time) -> Int64\n\nThe microsecond of a Time as an Int64.\n\n\n\n"
 },
 
 {
-    "location": "stdlib/dates.html#Base.Dates.nanosecond",
+    "location": "stdlib/dates.html#Dates.nanosecond",
     "page": "Dates and Time",
-    "title": "Base.Dates.nanosecond",
+    "title": "Dates.nanosecond",
     "category": "Function",
     "text": "nanosecond(t::Time) -> Int64\n\nThe nanosecond of a Time as an Int64.\n\n\n\n"
 },
 
 {
-    "location": "stdlib/dates.html#Base.Dates.Year-Tuple{Base.Dates.TimeType}",
+    "location": "stdlib/dates.html#Dates.Year-Tuple{Dates.TimeType}",
     "page": "Dates and Time",
-    "title": "Base.Dates.Year",
+    "title": "Dates.Year",
     "category": "Method",
     "text": "Year(v)\n\nConstruct a Year object with the given v value. Input must be losslessly convertible to an Int64.\n\n\n\n"
 },
 
 {
-    "location": "stdlib/dates.html#Base.Dates.Month-Tuple{Base.Dates.TimeType}",
+    "location": "stdlib/dates.html#Dates.Month-Tuple{Dates.TimeType}",
     "page": "Dates and Time",
-    "title": "Base.Dates.Month",
+    "title": "Dates.Month",
     "category": "Method",
     "text": "Month(v)\n\nConstruct a Month object with the given v value. Input must be losslessly convertible to an Int64.\n\n\n\n"
 },
 
 {
-    "location": "stdlib/dates.html#Base.Dates.Week-Tuple{Base.Dates.TimeType}",
+    "location": "stdlib/dates.html#Dates.Week-Tuple{Dates.TimeType}",
     "page": "Dates and Time",
-    "title": "Base.Dates.Week",
+    "title": "Dates.Week",
     "category": "Method",
     "text": "Week(v)\n\nConstruct a Week object with the given v value. Input must be losslessly convertible to an Int64.\n\n\n\n"
 },
 
 {
-    "location": "stdlib/dates.html#Base.Dates.Day-Tuple{Base.Dates.TimeType}",
+    "location": "stdlib/dates.html#Dates.Day-Tuple{Dates.TimeType}",
     "page": "Dates and Time",
-    "title": "Base.Dates.Day",
+    "title": "Dates.Day",
     "category": "Method",
     "text": "Day(v)\n\nConstruct a Day object with the given v value. Input must be losslessly convertible to an Int64.\n\n\n\n"
 },
 
 {
-    "location": "stdlib/dates.html#Base.Dates.Hour-Tuple{DateTime}",
+    "location": "stdlib/dates.html#Dates.Hour-Tuple{Dates.DateTime}",
     "page": "Dates and Time",
-    "title": "Base.Dates.Hour",
+    "title": "Dates.Hour",
     "category": "Method",
     "text": "Hour(dt::DateTime) -> Hour\n\nThe hour part of a DateTime as a Hour.\n\n\n\n"
 },
 
 {
-    "location": "stdlib/dates.html#Base.Dates.Minute-Tuple{DateTime}",
+    "location": "stdlib/dates.html#Dates.Minute-Tuple{Dates.DateTime}",
     "page": "Dates and Time",
-    "title": "Base.Dates.Minute",
+    "title": "Dates.Minute",
     "category": "Method",
     "text": "Minute(dt::DateTime) -> Minute\n\nThe minute part of a DateTime as a Minute.\n\n\n\n"
 },
 
 {
-    "location": "stdlib/dates.html#Base.Dates.Second-Tuple{DateTime}",
+    "location": "stdlib/dates.html#Dates.Second-Tuple{Dates.DateTime}",
     "page": "Dates and Time",
-    "title": "Base.Dates.Second",
+    "title": "Dates.Second",
     "category": "Method",
     "text": "Second(dt::DateTime) -> Second\n\nThe second part of a DateTime as a Second.\n\n\n\n"
 },
 
 {
-    "location": "stdlib/dates.html#Base.Dates.Millisecond-Tuple{DateTime}",
+    "location": "stdlib/dates.html#Dates.Millisecond-Tuple{Dates.DateTime}",
     "page": "Dates and Time",
-    "title": "Base.Dates.Millisecond",
+    "title": "Dates.Millisecond",
     "category": "Method",
     "text": "Millisecond(dt::DateTime) -> Millisecond\n\nThe millisecond part of a DateTime as a Millisecond.\n\n\n\n"
 },
 
 {
-    "location": "stdlib/dates.html#Base.Dates.Microsecond-Tuple{Base.Dates.Time}",
+    "location": "stdlib/dates.html#Dates.Microsecond-Tuple{Dates.Time}",
     "page": "Dates and Time",
-    "title": "Base.Dates.Microsecond",
+    "title": "Dates.Microsecond",
     "category": "Method",
     "text": "Microsecond(dt::Time) -> Microsecond\n\nThe microsecond part of a Time as a Microsecond.\n\n\n\n"
 },
 
 {
-    "location": "stdlib/dates.html#Base.Dates.Nanosecond-Tuple{Base.Dates.Time}",
+    "location": "stdlib/dates.html#Dates.Nanosecond-Tuple{Dates.Time}",
     "page": "Dates and Time",
-    "title": "Base.Dates.Nanosecond",
+    "title": "Dates.Nanosecond",
     "category": "Method",
     "text": "Nanosecond(dt::Time) -> Nanosecond\n\nThe nanosecond part of a Time as a Nanosecond.\n\n\n\n"
 },
 
 {
-    "location": "stdlib/dates.html#Base.Dates.yearmonth",
+    "location": "stdlib/dates.html#Dates.yearmonth",
     "page": "Dates and Time",
-    "title": "Base.Dates.yearmonth",
+    "title": "Dates.yearmonth",
     "category": "Function",
     "text": "yearmonth(dt::TimeType) -> (Int64, Int64)\n\nSimultaneously return the year and month parts of a Date or DateTime.\n\n\n\n"
 },
 
 {
-    "location": "stdlib/dates.html#Base.Dates.monthday",
+    "location": "stdlib/dates.html#Dates.monthday",
     "page": "Dates and Time",
-    "title": "Base.Dates.monthday",
+    "title": "Dates.monthday",
     "category": "Function",
     "text": "monthday(dt::TimeType) -> (Int64, Int64)\n\nSimultaneously return the month and day parts of a Date or DateTime.\n\n\n\n"
 },
 
 {
-    "location": "stdlib/dates.html#Base.Dates.yearmonthday",
+    "location": "stdlib/dates.html#Dates.yearmonthday",
     "page": "Dates and Time",
-    "title": "Base.Dates.yearmonthday",
+    "title": "Dates.yearmonthday",
     "category": "Function",
     "text": "yearmonthday(dt::TimeType) -> (Int64, Int64, Int64)\n\nSimultaneously return the year, month and day parts of a Date or DateTime.\n\n\n\n"
 },
@@ -17709,117 +17325,117 @@ var documenterSearchIndex = {"docs": [
     "page": "Dates and Time",
     "title": "Accessor Functions",
     "category": "section",
-    "text": "Base.Dates.year\nBase.Dates.month\nBase.Dates.week\nBase.Dates.day\nBase.Dates.hour\nBase.Dates.minute\nBase.Dates.second\nBase.Dates.millisecond\nBase.Dates.microsecond\nBase.Dates.nanosecond\nBase.Dates.Year(::Base.Dates.TimeType)\nBase.Dates.Month(::Base.Dates.TimeType)\nBase.Dates.Week(::Base.Dates.TimeType)\nBase.Dates.Day(::Base.Dates.TimeType)\nBase.Dates.Hour(::DateTime)\nBase.Dates.Minute(::DateTime)\nBase.Dates.Second(::DateTime)\nBase.Dates.Millisecond(::DateTime)\nBase.Dates.Microsecond(::Dates.Time)\nBase.Dates.Nanosecond(::Dates.Time)\nBase.Dates.yearmonth\nBase.Dates.monthday\nBase.Dates.yearmonthday"
+    "text": "Dates.year\nDates.month\nDates.week\nDates.day\nDates.hour\nDates.minute\nDates.second\nDates.millisecond\nDates.microsecond\nDates.nanosecond\nDates.Year(::Dates.TimeType)\nDates.Month(::Dates.TimeType)\nDates.Week(::Dates.TimeType)\nDates.Day(::Dates.TimeType)\nDates.Hour(::DateTime)\nDates.Minute(::DateTime)\nDates.Second(::DateTime)\nDates.Millisecond(::DateTime)\nDates.Microsecond(::Dates.Time)\nDates.Nanosecond(::Dates.Time)\nDates.yearmonth\nDates.monthday\nDates.yearmonthday"
 },
 
 {
-    "location": "stdlib/dates.html#Base.Dates.dayname",
+    "location": "stdlib/dates.html#Dates.dayname",
     "page": "Dates and Time",
-    "title": "Base.Dates.dayname",
+    "title": "Dates.dayname",
     "category": "Function",
     "text": "dayname(dt::TimeType; locale=\"english\") -> String\n\nReturn the full day name corresponding to the day of the week of the Date or DateTime in the given locale.\n\nExamples\n\njulia> Dates.dayname(Date(\"2000-01-01\"))\n\"Saturday\"\n\n\n\n"
 },
 
 {
-    "location": "stdlib/dates.html#Base.Dates.dayabbr",
+    "location": "stdlib/dates.html#Dates.dayabbr",
     "page": "Dates and Time",
-    "title": "Base.Dates.dayabbr",
+    "title": "Dates.dayabbr",
     "category": "Function",
     "text": "dayabbr(dt::TimeType; locale=\"english\") -> String\n\nReturn the abbreviated name corresponding to the day of the week of the Date or DateTime in the given locale.\n\nExamples\n\njulia> Dates.dayabbr(Date(\"2000-01-01\"))\n\"Sat\"\n\n\n\n"
 },
 
 {
-    "location": "stdlib/dates.html#Base.Dates.dayofweek",
+    "location": "stdlib/dates.html#Dates.dayofweek",
     "page": "Dates and Time",
-    "title": "Base.Dates.dayofweek",
+    "title": "Dates.dayofweek",
     "category": "Function",
     "text": "dayofweek(dt::TimeType) -> Int64\n\nReturns the day of the week as an Int64 with 1 = Monday, 2 = Tuesday, etc..\n\nExamples\n\njulia> Dates.dayofweek(Date(\"2000-01-01\"))\n6\n\n\n\n"
 },
 
 {
-    "location": "stdlib/dates.html#Base.Dates.dayofmonth",
+    "location": "stdlib/dates.html#Dates.dayofmonth",
     "page": "Dates and Time",
-    "title": "Base.Dates.dayofmonth",
+    "title": "Dates.dayofmonth",
     "category": "Function",
     "text": "dayofmonth(dt::TimeType) -> Int64\n\nThe day of month of a Date or DateTime as an Int64.\n\n\n\n"
 },
 
 {
-    "location": "stdlib/dates.html#Base.Dates.dayofweekofmonth",
+    "location": "stdlib/dates.html#Dates.dayofweekofmonth",
     "page": "Dates and Time",
-    "title": "Base.Dates.dayofweekofmonth",
+    "title": "Dates.dayofweekofmonth",
     "category": "Function",
     "text": "dayofweekofmonth(dt::TimeType) -> Int\n\nFor the day of week of dt, returns which number it is in dt's month. So if the day of the week of dt is Monday, then 1 = First Monday of the month, 2 = Second Monday of the month, etc. In the range 1:5.\n\nExamples\n\n```jldoctest julia> Dates.dayofweekofmonth(Date(\"2000-02-01\")) 1\n\njulia> Dates.dayofweekofmonth(Date(\"2000-02-08\")) 2\n\njulia> Dates.dayofweekofmonth(Date(\"2000-02-15\")) 3 ````\n\n\n\n"
 },
 
 {
-    "location": "stdlib/dates.html#Base.Dates.daysofweekinmonth",
+    "location": "stdlib/dates.html#Dates.daysofweekinmonth",
     "page": "Dates and Time",
-    "title": "Base.Dates.daysofweekinmonth",
+    "title": "Dates.daysofweekinmonth",
     "category": "Function",
     "text": "daysofweekinmonth(dt::TimeType) -> Int\n\nFor the day of week of dt, returns the total number of that day of the week in dt's month. Returns 4 or 5. Useful in temporal expressions for specifying the last day of a week in a month by including dayofweekofmonth(dt) == daysofweekinmonth(dt) in the adjuster function.\n\nExamples\n\njulia> Dates.daysofweekinmonth(Date(\"2005-01-01\"))\n5\n\njulia> Dates.daysofweekinmonth(Date(\"2005-01-04\"))\n4\n\n\n\n"
 },
 
 {
-    "location": "stdlib/dates.html#Base.Dates.monthname",
+    "location": "stdlib/dates.html#Dates.monthname",
     "page": "Dates and Time",
-    "title": "Base.Dates.monthname",
+    "title": "Dates.monthname",
     "category": "Function",
     "text": "monthname(dt::TimeType; locale=\"english\") -> String\n\nReturn the full name of the month of the Date or DateTime in the given locale.\n\nExamples\n\njulia> Dates.monthname(Date(\"2005-01-04\"))\n\"January\"\n\n\n\n"
 },
 
 {
-    "location": "stdlib/dates.html#Base.Dates.monthabbr",
+    "location": "stdlib/dates.html#Dates.monthabbr",
     "page": "Dates and Time",
-    "title": "Base.Dates.monthabbr",
+    "title": "Dates.monthabbr",
     "category": "Function",
     "text": "monthabbr(dt::TimeType; locale=\"english\") -> String\n\nReturn the abbreviated month name of the Date or DateTime in the given locale.\n\nExamples\n\njulia> Dates.monthabbr(Date(\"2005-01-04\"))\n\"Jan\"\n\n\n\n"
 },
 
 {
-    "location": "stdlib/dates.html#Base.Dates.daysinmonth",
+    "location": "stdlib/dates.html#Dates.daysinmonth",
     "page": "Dates and Time",
-    "title": "Base.Dates.daysinmonth",
+    "title": "Dates.daysinmonth",
     "category": "Function",
     "text": "daysinmonth(dt::TimeType) -> Int\n\nReturns the number of days in the month of dt. Value will be 28, 29, 30, or 31.\n\nExamples\n\njulia> Dates.daysinmonth(Date(\"2000-01\"))\n31\n\njulia> Dates.daysinmonth(Date(\"2001-02\"))\n28\n\njulia> Dates.daysinmonth(Date(\"2000-02\"))\n29\n\n\n\n"
 },
 
 {
-    "location": "stdlib/dates.html#Base.Dates.isleapyear",
+    "location": "stdlib/dates.html#Dates.isleapyear",
     "page": "Dates and Time",
-    "title": "Base.Dates.isleapyear",
+    "title": "Dates.isleapyear",
     "category": "Function",
     "text": "isleapyear(dt::TimeType) -> Bool\n\nReturns true if the year of dt is a leap year.\n\nExamples\n\njulia> Dates.isleapyear(Date(\"2004\"))\ntrue\n\njulia> Dates.isleapyear(Date(\"2005\"))\nfalse\n\n\n\n"
 },
 
 {
-    "location": "stdlib/dates.html#Base.Dates.dayofyear",
+    "location": "stdlib/dates.html#Dates.dayofyear",
     "page": "Dates and Time",
-    "title": "Base.Dates.dayofyear",
+    "title": "Dates.dayofyear",
     "category": "Function",
     "text": "dayofyear(dt::TimeType) -> Int\n\nReturns the day of the year for dt with January 1st being day 1.\n\n\n\n"
 },
 
 {
-    "location": "stdlib/dates.html#Base.Dates.daysinyear",
+    "location": "stdlib/dates.html#Dates.daysinyear",
     "page": "Dates and Time",
-    "title": "Base.Dates.daysinyear",
+    "title": "Dates.daysinyear",
     "category": "Function",
     "text": "daysinyear(dt::TimeType) -> Int\n\nReturns 366 if the year of dt is a leap year, otherwise returns 365.\n\nExamples\n\njulia> Dates.daysinyear(1999)\n365\n\njulia> Dates.daysinyear(2000)\n366\n\n\n\n"
 },
 
 {
-    "location": "stdlib/dates.html#Base.Dates.quarterofyear",
+    "location": "stdlib/dates.html#Dates.quarterofyear",
     "page": "Dates and Time",
-    "title": "Base.Dates.quarterofyear",
+    "title": "Dates.quarterofyear",
     "category": "Function",
     "text": "quarterofyear(dt::TimeType) -> Int\n\nReturns the quarter that dt resides in. Range of value is 1:4.\n\n\n\n"
 },
 
 {
-    "location": "stdlib/dates.html#Base.Dates.dayofquarter",
+    "location": "stdlib/dates.html#Dates.dayofquarter",
     "page": "Dates and Time",
-    "title": "Base.Dates.dayofquarter",
+    "title": "Dates.dayofquarter",
     "category": "Function",
     "text": "dayofquarter(dt::TimeType) -> Int\n\nReturns the day of the current quarter of dt. Range of value is 1:92.\n\n\n\n"
 },
@@ -17829,11 +17445,11 @@ var documenterSearchIndex = {"docs": [
     "page": "Dates and Time",
     "title": "Query Functions",
     "category": "section",
-    "text": "Base.Dates.dayname\nBase.Dates.dayabbr\nBase.Dates.dayofweek\nBase.Dates.dayofmonth\nBase.Dates.dayofweekofmonth\nBase.Dates.daysofweekinmonth\nBase.Dates.monthname\nBase.Dates.monthabbr\nBase.Dates.daysinmonth\nBase.Dates.isleapyear\nBase.Dates.dayofyear\nBase.Dates.daysinyear\nBase.Dates.quarterofyear\nBase.Dates.dayofquarter"
+    "text": "Dates.dayname\nDates.dayabbr\nDates.dayofweek\nDates.dayofmonth\nDates.dayofweekofmonth\nDates.daysofweekinmonth\nDates.monthname\nDates.monthabbr\nDates.daysinmonth\nDates.isleapyear\nDates.dayofyear\nDates.daysinyear\nDates.quarterofyear\nDates.dayofquarter"
 },
 
 {
-    "location": "stdlib/dates.html#Base.trunc-Tuple{Base.Dates.TimeType,Type{Base.Dates.Period}}",
+    "location": "stdlib/dates.html#Base.trunc-Tuple{Dates.TimeType,Type{Dates.Period}}",
     "page": "Dates and Time",
     "title": "Base.trunc",
     "category": "Method",
@@ -17841,113 +17457,113 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/dates.html#Base.Dates.firstdayofweek",
+    "location": "stdlib/dates.html#Dates.firstdayofweek",
     "page": "Dates and Time",
-    "title": "Base.Dates.firstdayofweek",
+    "title": "Dates.firstdayofweek",
     "category": "Function",
     "text": "firstdayofweek(dt::TimeType) -> TimeType\n\nAdjusts dt to the Monday of its week.\n\nExamples\n\njulia> Dates.firstdayofweek(DateTime(\"1996-01-05T12:30:00\"))\n1996-01-01T00:00:00\n\n\n\n"
 },
 
 {
-    "location": "stdlib/dates.html#Base.Dates.lastdayofweek",
+    "location": "stdlib/dates.html#Dates.lastdayofweek",
     "page": "Dates and Time",
-    "title": "Base.Dates.lastdayofweek",
+    "title": "Dates.lastdayofweek",
     "category": "Function",
     "text": "lastdayofweek(dt::TimeType) -> TimeType\n\nAdjusts dt to the Sunday of its week.\n\nExamples\n\njulia> Dates.lastdayofweek(DateTime(\"1996-01-05T12:30:00\"))\n1996-01-07T00:00:00\n\n\n\n"
 },
 
 {
-    "location": "stdlib/dates.html#Base.Dates.firstdayofmonth",
+    "location": "stdlib/dates.html#Dates.firstdayofmonth",
     "page": "Dates and Time",
-    "title": "Base.Dates.firstdayofmonth",
+    "title": "Dates.firstdayofmonth",
     "category": "Function",
     "text": "firstdayofmonth(dt::TimeType) -> TimeType\n\nAdjusts dt to the first day of its month.\n\nExamples\n\njulia> Dates.firstdayofmonth(DateTime(\"1996-05-20\"))\n1996-05-01T00:00:00\n\n\n\n"
 },
 
 {
-    "location": "stdlib/dates.html#Base.Dates.lastdayofmonth",
+    "location": "stdlib/dates.html#Dates.lastdayofmonth",
     "page": "Dates and Time",
-    "title": "Base.Dates.lastdayofmonth",
+    "title": "Dates.lastdayofmonth",
     "category": "Function",
     "text": "lastdayofmonth(dt::TimeType) -> TimeType\n\nAdjusts dt to the last day of its month.\n\nExamples\n\njulia> Dates.lastdayofmonth(DateTime(\"1996-05-20\"))\n1996-05-31T00:00:00\n\n\n\n"
 },
 
 {
-    "location": "stdlib/dates.html#Base.Dates.firstdayofyear",
+    "location": "stdlib/dates.html#Dates.firstdayofyear",
     "page": "Dates and Time",
-    "title": "Base.Dates.firstdayofyear",
+    "title": "Dates.firstdayofyear",
     "category": "Function",
     "text": "firstdayofyear(dt::TimeType) -> TimeType\n\nAdjusts dt to the first day of its year.\n\nExamples\n\njulia> Dates.firstdayofyear(DateTime(\"1996-05-20\"))\n1996-01-01T00:00:00\n\n\n\n"
 },
 
 {
-    "location": "stdlib/dates.html#Base.Dates.lastdayofyear",
+    "location": "stdlib/dates.html#Dates.lastdayofyear",
     "page": "Dates and Time",
-    "title": "Base.Dates.lastdayofyear",
+    "title": "Dates.lastdayofyear",
     "category": "Function",
     "text": "lastdayofyear(dt::TimeType) -> TimeType\n\nAdjusts dt to the last day of its year.\n\nExamples\n\njulia> Dates.lastdayofyear(DateTime(\"1996-05-20\"))\n1996-12-31T00:00:00\n\n\n\n"
 },
 
 {
-    "location": "stdlib/dates.html#Base.Dates.firstdayofquarter",
+    "location": "stdlib/dates.html#Dates.firstdayofquarter",
     "page": "Dates and Time",
-    "title": "Base.Dates.firstdayofquarter",
+    "title": "Dates.firstdayofquarter",
     "category": "Function",
     "text": "firstdayofquarter(dt::TimeType) -> TimeType\n\nAdjusts dt to the first day of its quarter.\n\nExamples\n\njulia> Dates.firstdayofquarter(DateTime(\"1996-05-20\"))\n1996-04-01T00:00:00\n\njulia> Dates.firstdayofquarter(DateTime(\"1996-08-20\"))\n1996-07-01T00:00:00\n\n\n\n"
 },
 
 {
-    "location": "stdlib/dates.html#Base.Dates.lastdayofquarter",
+    "location": "stdlib/dates.html#Dates.lastdayofquarter",
     "page": "Dates and Time",
-    "title": "Base.Dates.lastdayofquarter",
+    "title": "Dates.lastdayofquarter",
     "category": "Function",
     "text": "lastdayofquarter(dt::TimeType) -> TimeType\n\nAdjusts dt to the last day of its quarter.\n\nExamples\n\njulia> Dates.lastdayofquarter(DateTime(\"1996-05-20\"))\n1996-06-30T00:00:00\n\njulia> Dates.lastdayofquarter(DateTime(\"1996-08-20\"))\n1996-09-30T00:00:00\n\n\n\n"
 },
 
 {
-    "location": "stdlib/dates.html#Base.Dates.tonext-Tuple{Base.Dates.TimeType,Int64}",
+    "location": "stdlib/dates.html#Dates.tonext-Tuple{Dates.TimeType,Int64}",
     "page": "Dates and Time",
-    "title": "Base.Dates.tonext",
+    "title": "Dates.tonext",
     "category": "Method",
     "text": "tonext(dt::TimeType, dow::Int; same::Bool=false) -> TimeType\n\nAdjusts dt to the next day of week corresponding to dow with 1 = Monday, 2 = Tuesday, etc. Setting same=true allows the current dt to be considered as the next dow, allowing for no adjustment to occur.\n\n\n\n"
 },
 
 {
-    "location": "stdlib/dates.html#Base.Dates.toprev-Tuple{Base.Dates.TimeType,Int64}",
+    "location": "stdlib/dates.html#Dates.toprev-Tuple{Dates.TimeType,Int64}",
     "page": "Dates and Time",
-    "title": "Base.Dates.toprev",
+    "title": "Dates.toprev",
     "category": "Method",
     "text": "toprev(dt::TimeType, dow::Int; same::Bool=false) -> TimeType\n\nAdjusts dt to the previous day of week corresponding to dow with 1 = Monday, 2 = Tuesday, etc. Setting same=true allows the current dt to be considered as the previous dow, allowing for no adjustment to occur.\n\n\n\n"
 },
 
 {
-    "location": "stdlib/dates.html#Base.Dates.tofirst",
+    "location": "stdlib/dates.html#Dates.tofirst",
     "page": "Dates and Time",
-    "title": "Base.Dates.tofirst",
+    "title": "Dates.tofirst",
     "category": "Function",
     "text": "tofirst(dt::TimeType, dow::Int; of=Month) -> TimeType\n\nAdjusts dt to the first dow of its month. Alternatively, of=Year will adjust to the first dow of the year.\n\n\n\n"
 },
 
 {
-    "location": "stdlib/dates.html#Base.Dates.tolast",
+    "location": "stdlib/dates.html#Dates.tolast",
     "page": "Dates and Time",
-    "title": "Base.Dates.tolast",
+    "title": "Dates.tolast",
     "category": "Function",
     "text": "tolast(dt::TimeType, dow::Int; of=Month) -> TimeType\n\nAdjusts dt to the last dow of its month. Alternatively, of=Year will adjust to the last dow of the year.\n\n\n\n"
 },
 
 {
-    "location": "stdlib/dates.html#Base.Dates.tonext-Tuple{Function,Base.Dates.TimeType}",
+    "location": "stdlib/dates.html#Dates.tonext-Tuple{Function,Dates.TimeType}",
     "page": "Dates and Time",
-    "title": "Base.Dates.tonext",
+    "title": "Dates.tonext",
     "category": "Method",
     "text": "tonext(func::Function, dt::TimeType; step=Day(1), limit=10000, same=false) -> TimeType\n\nAdjusts dt by iterating at most limit iterations by step increments until func returns true. func must take a single TimeType argument and return a Bool. same allows dt to be considered in satisfying func.\n\n\n\n"
 },
 
 {
-    "location": "stdlib/dates.html#Base.Dates.toprev-Tuple{Function,Base.Dates.TimeType}",
+    "location": "stdlib/dates.html#Dates.toprev-Tuple{Function,Dates.TimeType}",
     "page": "Dates and Time",
-    "title": "Base.Dates.toprev",
+    "title": "Dates.toprev",
     "category": "Method",
     "text": "toprev(func::Function, dt::TimeType; step=Day(-1), limit=10000, same=false) -> TimeType\n\nAdjusts dt by iterating at most limit iterations by step increments until func returns true. func must take a single TimeType argument and return a Bool. same allows dt to be considered in satisfying func.\n\n\n\n"
 },
@@ -17957,29 +17573,29 @@ var documenterSearchIndex = {"docs": [
     "page": "Dates and Time",
     "title": "Adjuster Functions",
     "category": "section",
-    "text": "Base.trunc(::Base.Dates.TimeType, ::Type{Base.Dates.Period})\nBase.Dates.firstdayofweek\nBase.Dates.lastdayofweek\nBase.Dates.firstdayofmonth\nBase.Dates.lastdayofmonth\nBase.Dates.firstdayofyear\nBase.Dates.lastdayofyear\nBase.Dates.firstdayofquarter\nBase.Dates.lastdayofquarter\nBase.Dates.tonext(::Base.Dates.TimeType, ::Int)\nBase.Dates.toprev(::Base.Dates.TimeType, ::Int)\nBase.Dates.tofirst\nBase.Dates.tolast\nBase.Dates.tonext(::Function, ::Base.Dates.TimeType)\nBase.Dates.toprev(::Function, ::Base.Dates.TimeType)"
+    "text": "Base.trunc(::Dates.TimeType, ::Type{Dates.Period})\nDates.firstdayofweek\nDates.lastdayofweek\nDates.firstdayofmonth\nDates.lastdayofmonth\nDates.firstdayofyear\nDates.lastdayofyear\nDates.firstdayofquarter\nDates.lastdayofquarter\nDates.tonext(::Dates.TimeType, ::Int)\nDates.toprev(::Dates.TimeType, ::Int)\nDates.tofirst\nDates.tolast\nDates.tonext(::Function, ::Dates.TimeType)\nDates.toprev(::Function, ::Dates.TimeType)"
 },
 
 {
-    "location": "stdlib/dates.html#Base.Dates.Period-Tuple{Any}",
+    "location": "stdlib/dates.html#Dates.Period-Tuple{Any}",
     "page": "Dates and Time",
-    "title": "Base.Dates.Period",
+    "title": "Dates.Period",
     "category": "Method",
     "text": "Year(v)\nMonth(v)\nWeek(v)\nDay(v)\nHour(v)\nMinute(v)\nSecond(v)\nMillisecond(v)\nMicrosecond(v)\nNanosecond(v)\n\nConstruct a Period type with the given v value. Input must be losslessly convertible to an Int64.\n\n\n\n"
 },
 
 {
-    "location": "stdlib/dates.html#Base.Dates.CompoundPeriod-Tuple{Array{#s57,1} where #s57<:Base.Dates.Period}",
+    "location": "stdlib/dates.html#Dates.CompoundPeriod-Tuple{Array{#s65,1} where #s65<:Dates.Period}",
     "page": "Dates and Time",
-    "title": "Base.Dates.CompoundPeriod",
+    "title": "Dates.CompoundPeriod",
     "category": "Method",
     "text": "CompoundPeriod(periods) -> CompoundPeriod\n\nConstruct a CompoundPeriod from a Vector of Periods. All Periods of the same type will be added together.\n\nExamples\n\njulia> Dates.CompoundPeriod(Dates.Hour(12), Dates.Hour(13))\n25 hours\n\njulia> Dates.CompoundPeriod(Dates.Hour(-1), Dates.Minute(1))\n-1 hour, 1 minute\n\njulia> Dates.CompoundPeriod(Dates.Month(1), Dates.Week(-2))\n1 month, -2 weeks\n\njulia> Dates.CompoundPeriod(Dates.Minute(50000))\n50000 minutes\n\n\n\n"
 },
 
 {
-    "location": "stdlib/dates.html#Base.Dates.default",
+    "location": "stdlib/dates.html#Dates.default",
     "page": "Dates and Time",
-    "title": "Base.Dates.default",
+    "title": "Dates.default",
     "category": "Function",
     "text": "default(p::Period) -> Period\n\nReturns a sensible \"default\" value for the input Period by returning T(1) for Year, Month, and Day, and T(0) for Hour, Minute, Second, and Millisecond.\n\n\n\n"
 },
@@ -17989,11 +17605,11 @@ var documenterSearchIndex = {"docs": [
     "page": "Dates and Time",
     "title": "Periods",
     "category": "section",
-    "text": "Base.Dates.Period(::Any)\nBase.Dates.CompoundPeriod(::Vector{<:Base.Dates.Period})\nBase.Dates.default"
+    "text": "Dates.Period(::Any)\nDates.CompoundPeriod(::Vector{<:Dates.Period})\nDates.default"
 },
 
 {
-    "location": "stdlib/dates.html#Base.floor-Tuple{Base.Dates.TimeType,Base.Dates.Period}",
+    "location": "stdlib/dates.html#Base.floor-Tuple{Dates.TimeType,Dates.Period}",
     "page": "Dates and Time",
     "title": "Base.floor",
     "category": "Method",
@@ -18001,7 +17617,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/dates.html#Base.ceil-Tuple{Base.Dates.TimeType,Base.Dates.Period}",
+    "location": "stdlib/dates.html#Base.ceil-Tuple{Dates.TimeType,Dates.Period}",
     "page": "Dates and Time",
     "title": "Base.ceil",
     "category": "Method",
@@ -18009,7 +17625,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/dates.html#Base.round-Tuple{Base.Dates.TimeType,Base.Dates.Period,RoundingMode{:NearestTiesUp}}",
+    "location": "stdlib/dates.html#Base.round-Tuple{Dates.TimeType,Dates.Period,RoundingMode{:NearestTiesUp}}",
     "page": "Dates and Time",
     "title": "Base.round",
     "category": "Method",
@@ -18017,7 +17633,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/dates.html#Base.floor-Union{Tuple{T}, Tuple{Union{Base.Dates.Day, Base.Dates.Week, Base.Dates.TimePeriod},T}} where T<:Union{Base.Dates.Day, Base.Dates.Week, Base.Dates.TimePeriod}",
+    "location": "stdlib/dates.html#Base.floor-Union{Tuple{T}, Tuple{Union{Dates.Day, Dates.Week, Dates.TimePeriod},T}} where T<:Union{Dates.Day, Dates.Week, Dates.TimePeriod}",
     "page": "Dates and Time",
     "title": "Base.floor",
     "category": "Method",
@@ -18025,7 +17641,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/dates.html#Base.ceil-Tuple{Union{Base.Dates.Day, Base.Dates.Week, Base.Dates.TimePeriod},Union{Base.Dates.Day, Base.Dates.Week, Base.Dates.TimePeriod}}",
+    "location": "stdlib/dates.html#Base.ceil-Tuple{Union{Dates.Day, Dates.Week, Dates.TimePeriod},Union{Dates.Day, Dates.Week, Dates.TimePeriod}}",
     "page": "Dates and Time",
     "title": "Base.ceil",
     "category": "Method",
@@ -18033,7 +17649,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/dates.html#Base.round-Tuple{Union{Base.Dates.Day, Base.Dates.Week, Base.Dates.TimePeriod},Union{Base.Dates.Day, Base.Dates.Week, Base.Dates.TimePeriod},RoundingMode{:NearestTiesUp}}",
+    "location": "stdlib/dates.html#Base.round-Tuple{Union{Dates.Day, Dates.Week, Dates.TimePeriod},Union{Dates.Day, Dates.Week, Dates.TimePeriod},RoundingMode{:NearestTiesUp}}",
     "page": "Dates and Time",
     "title": "Base.round",
     "category": "Method",
@@ -18041,41 +17657,41 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/dates.html#Base.Dates.floorceil",
+    "location": "stdlib/dates.html#Dates.floorceil",
     "page": "Dates and Time",
-    "title": "Base.Dates.floorceil",
+    "title": "Dates.floorceil",
     "category": "Function",
     "text": "floorceil(dt::TimeType, p::Period) -> (TimeType, TimeType)\n\nSimultaneously return the floor and ceil of a Date or DateTime at resolution p. More efficient than calling both floor and ceil individually.\n\n\n\nfloorceil(x::Period, precision::T) where T <: Union{TimePeriod, Week, Day} -> (T, T)\n\nSimultaneously return the floor and ceil of Period at resolution p.  More efficient than calling both floor and ceil individually.\n\n\n\n"
 },
 
 {
-    "location": "stdlib/dates.html#Base.Dates.epochdays2date",
+    "location": "stdlib/dates.html#Dates.epochdays2date",
     "page": "Dates and Time",
-    "title": "Base.Dates.epochdays2date",
+    "title": "Dates.epochdays2date",
     "category": "Function",
     "text": "epochdays2date(days) -> Date\n\nTakes the number of days since the rounding epoch (0000-01-01T00:00:00) and returns the corresponding Date.\n\n\n\n"
 },
 
 {
-    "location": "stdlib/dates.html#Base.Dates.epochms2datetime",
+    "location": "stdlib/dates.html#Dates.epochms2datetime",
     "page": "Dates and Time",
-    "title": "Base.Dates.epochms2datetime",
+    "title": "Dates.epochms2datetime",
     "category": "Function",
     "text": "epochms2datetime(milliseconds) -> DateTime\n\nTakes the number of milliseconds since the rounding epoch (0000-01-01T00:00:00) and returns the corresponding DateTime.\n\n\n\n"
 },
 
 {
-    "location": "stdlib/dates.html#Base.Dates.date2epochdays",
+    "location": "stdlib/dates.html#Dates.date2epochdays",
     "page": "Dates and Time",
-    "title": "Base.Dates.date2epochdays",
+    "title": "Dates.date2epochdays",
     "category": "Function",
     "text": "date2epochdays(dt::Date) -> Int64\n\nTakes the given Date and returns the number of days since the rounding epoch (0000-01-01T00:00:00) as an Int64.\n\n\n\n"
 },
 
 {
-    "location": "stdlib/dates.html#Base.Dates.datetime2epochms",
+    "location": "stdlib/dates.html#Dates.datetime2epochms",
     "page": "Dates and Time",
-    "title": "Base.Dates.datetime2epochms",
+    "title": "Dates.datetime2epochms",
     "category": "Function",
     "text": "datetime2epochms(dt::DateTime) -> Int64\n\nTakes the given DateTime and returns the number of milliseconds since the rounding epoch (0000-01-01T00:00:00) as an Int64.\n\n\n\n"
 },
@@ -18085,61 +17701,61 @@ var documenterSearchIndex = {"docs": [
     "page": "Dates and Time",
     "title": "Rounding Functions",
     "category": "section",
-    "text": "Date and DateTime values can be rounded to a specified resolution (e.g., 1 month or 15 minutes) with floor, ceil, or round.Base.floor(::Base.Dates.TimeType, ::Base.Dates.Period)\nBase.ceil(::Base.Dates.TimeType, ::Base.Dates.Period)\nBase.round(::Base.Dates.TimeType, ::Base.Dates.Period, ::RoundingMode{:NearestTiesUp})Most Period values can also be rounded to a specified resolution:Base.floor(::Base.Dates.ConvertiblePeriod, ::T) where T <: Base.Dates.ConvertiblePeriod\nBase.ceil(::Base.Dates.ConvertiblePeriod, ::Base.Dates.ConvertiblePeriod)\nBase.round(::Base.Dates.ConvertiblePeriod, ::Base.Dates.ConvertiblePeriod, ::RoundingMode{:NearestTiesUp})The following functions are not exported:Base.Dates.floorceil\nBase.Dates.epochdays2date\nBase.Dates.epochms2datetime\nBase.Dates.date2epochdays\nBase.Dates.datetime2epochms"
+    "text": "Date and DateTime values can be rounded to a specified resolution (e.g., 1 month or 15 minutes) with floor, ceil, or round.Base.floor(::Dates.TimeType, ::Dates.Period)\nBase.ceil(::Dates.TimeType, ::Dates.Period)\nBase.round(::Dates.TimeType, ::Dates.Period, ::RoundingMode{:NearestTiesUp})Most Period values can also be rounded to a specified resolution:Base.floor(::Dates.ConvertiblePeriod, ::T) where T <: Dates.ConvertiblePeriod\nBase.ceil(::Dates.ConvertiblePeriod, ::Dates.ConvertiblePeriod)\nBase.round(::Dates.ConvertiblePeriod, ::Dates.ConvertiblePeriod, ::RoundingMode{:NearestTiesUp})The following functions are not exported:Dates.floorceil\nDates.epochdays2date\nDates.epochms2datetime\nDates.date2epochdays\nDates.datetime2epochms"
 },
 
 {
-    "location": "stdlib/dates.html#Base.Dates.today",
+    "location": "stdlib/dates.html#Dates.today",
     "page": "Dates and Time",
-    "title": "Base.Dates.today",
+    "title": "Dates.today",
     "category": "Function",
     "text": "today() -> Date\n\nReturns the date portion of now().\n\n\n\n"
 },
 
 {
-    "location": "stdlib/dates.html#Base.Dates.unix2datetime",
+    "location": "stdlib/dates.html#Dates.unix2datetime",
     "page": "Dates and Time",
-    "title": "Base.Dates.unix2datetime",
+    "title": "Dates.unix2datetime",
     "category": "Function",
     "text": "unix2datetime(x) -> DateTime\n\nTakes the number of seconds since unix epoch 1970-01-01T00:00:00 and converts to the corresponding DateTime.\n\n\n\n"
 },
 
 {
-    "location": "stdlib/dates.html#Base.Dates.datetime2unix",
+    "location": "stdlib/dates.html#Dates.datetime2unix",
     "page": "Dates and Time",
-    "title": "Base.Dates.datetime2unix",
+    "title": "Dates.datetime2unix",
     "category": "Function",
     "text": "datetime2unix(dt::DateTime) -> Float64\n\nTakes the given DateTime and returns the number of seconds since the unix epoch 1970-01-01T00:00:00 as a Float64.\n\n\n\n"
 },
 
 {
-    "location": "stdlib/dates.html#Base.Dates.julian2datetime",
+    "location": "stdlib/dates.html#Dates.julian2datetime",
     "page": "Dates and Time",
-    "title": "Base.Dates.julian2datetime",
+    "title": "Dates.julian2datetime",
     "category": "Function",
     "text": "julian2datetime(julian_days) -> DateTime\n\nTakes the number of Julian calendar days since epoch -4713-11-24T12:00:00 and returns the corresponding DateTime.\n\n\n\n"
 },
 
 {
-    "location": "stdlib/dates.html#Base.Dates.datetime2julian",
+    "location": "stdlib/dates.html#Dates.datetime2julian",
     "page": "Dates and Time",
-    "title": "Base.Dates.datetime2julian",
+    "title": "Dates.datetime2julian",
     "category": "Function",
     "text": "datetime2julian(dt::DateTime) -> Float64\n\nTakes the given DateTime and returns the number of Julian calendar days since the julian epoch -4713-11-24T12:00:00 as a Float64.\n\n\n\n"
 },
 
 {
-    "location": "stdlib/dates.html#Base.Dates.rata2datetime",
+    "location": "stdlib/dates.html#Dates.rata2datetime",
     "page": "Dates and Time",
-    "title": "Base.Dates.rata2datetime",
+    "title": "Dates.rata2datetime",
     "category": "Function",
     "text": "rata2datetime(days) -> DateTime\n\nTakes the number of Rata Die days since epoch 0000-12-31T00:00:00 and returns the corresponding DateTime.\n\n\n\n"
 },
 
 {
-    "location": "stdlib/dates.html#Base.Dates.datetime2rata",
+    "location": "stdlib/dates.html#Dates.datetime2rata",
     "page": "Dates and Time",
-    "title": "Base.Dates.datetime2rata",
+    "title": "Dates.datetime2rata",
     "category": "Function",
     "text": "datetime2rata(dt::TimeType) -> Int64\n\nReturns the number of Rata Die days since epoch from the given Date or DateTime.\n\n\n\n"
 },
@@ -18149,7 +17765,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Dates and Time",
     "title": "Conversion Functions",
     "category": "section",
-    "text": "Base.Dates.today\nBase.Dates.unix2datetime\nBase.Dates.datetime2unix\nBase.Dates.julian2datetime\nBase.Dates.datetime2julian\nBase.Dates.rata2datetime\nBase.Dates.datetime2rata"
+    "text": "Dates.today\nDates.unix2datetime\nDates.datetime2unix\nDates.julian2datetime\nDates.datetime2julian\nDates.rata2datetime\nDates.datetime2rata"
 },
 
 {
