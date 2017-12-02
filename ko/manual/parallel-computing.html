@@ -123,16 +123,14 @@ julia&gt; pmap(svd, M);</code></pre><p>If one process handles both 800×800 matr
     i = 1
     # function to produce the next work item from the queue.
     # in this case it&#39;s just an index.
-    nextidx() = (idx=i; i+=1; idx)
+    nextidx() = (global i; idx=i; i+=1; idx)
     @sync begin
         for p=1:np
             if p != myid() || np == 1
                 @async begin
                     while true
                         idx = nextidx()
-                        if idx &gt; n
-                            break
-                        end
+                        idx &gt; n &amp;&amp; break
                         results[idx] = remotecall_fetch(f, p, lst[idx])
                     end
                 end
