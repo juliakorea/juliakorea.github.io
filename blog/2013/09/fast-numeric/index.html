@@ -1,0 +1,681 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en-us" lang="en-us">
+<head>
+  <meta name="viewport" content="width=device-width; initial-scale=1.0;">
+  <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+  <title>Fast Numeric Computation in Julia</title>
+  <meta name="author" content="Jeff Bezanson, Stefan Karpinski, Viral Shah, Alan Edelman, et al." />
+  <link rel="stylesheet" href="/css/syntax.css" type="text/css" />
+  <link rel="stylesheet" href="/css/screen.css" type="text/css" media="screen, projection" />
+  <script type="text/javascript" src="/js/jquery-1.8.3.min.js"></script>
+  <script type="text/javascript" src="/js/jquery.word-break-keep-all.min.js"></script>
+  <script type="text/javascript">
+    $(document).ready(function() {
+      $('p').wordBreakKeepAll();
+    });
+  </script>
+</head>
+<body>
+<div id="site" class="site">
+<div class="title"><a href="/">
+<svg version="1.1" id="Layer_1"
+	 xmlns="http://www.w3.org/2000/svg"
+	 xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 width="210px" height="142px" viewBox="0 0 310 216" enable-background="new 0 0 310 216"
+	 xml:space="preserve">
+
+<!-- blue dot -->
+<circle fill="#6b85dd" stroke="#4266d5" stroke-width="3" cx="50.5" cy="60" r="16.5"/>
+<!-- red dot -->
+<circle fill="#d66661" stroke="#c93d39" stroke-width="3" cx="212.459" cy="60" r="16.5"/>
+<!-- green dot -->
+<circle fill="#6bab5b" stroke="#3b972e" stroke-width="3" cx="233.834" cy="23.874" r="16.5"/>
+<!-- purple dot -->
+<circle fill="#aa7dc0" stroke="#945bb0" stroke-width="3" cx="255.209" cy="60" r="16.5"/>
+
+<!-- "j" -->
+<path fill="#252525" d="M37.216,138.427c0-15.839,0.006-31.679-0.018-47.517c-0.001-0.827,0.169-1.234,1.043-1.47
+	c7.876-2.127,15.739-4.308,23.606-6.47c1.33-0.366,1.333-0.36,1.333,1.019c0,25.758,0.015,51.517-0.012,77.274
+	c-0.006,5.514,0.245,11.032-0.272,16.543c-0.628,6.69-2.15,13.092-6.438,18.506c-3.781,4.771-8.898,7.25-14.767,8.338
+	c-6.599,1.222-13.251,1.552-19.934,0.938c-4.616-0.423-9.045-1.486-12.844-4.363c-2.863-2.168-4.454-4.935-3.745-8.603
+	c0.736-3.806,3.348-5.978,6.861-7.127c2.262-0.74,4.628-0.872,6.994-0.53c1.823,0.264,3.42,1.023,4.779,2.288
+	c1.38,1.284,2.641,2.674,3.778,4.177c0.872,1.15,1.793,2.256,2.991,3.086c2.055,1.426,4,0.965,5.213-1.216
+	c0.819-1.473,0.997-3.106,1.173-4.731c0.255-2.348,0.255-4.707,0.256-7.062C37.218,167.145,37.216,152.786,37.216,138.427z"/>
+
+<!-- "u" -->
+<path fill="#252525" d="M125.536,162.479c-2.908,2.385-5.783,4.312-8.88,5.904c-10.348,5.323-20.514,4.521-30.324-1.253
+	c-6.71-3.95-11.012-9.849-12.52-17.606c-0.236-1.213-0.363-2.438-0.363-3.688c0.01-19.797,0.017-39.593-0.02-59.39
+	c-0.002-1.102,0.285-1.357,1.363-1.351c7.798,0.049,15.597,0.044,23.396,0.003c0.95-0.005,1.177,0.25,1.175,1.183
+	c-0.027,19.356-0.025,38.713-0.018,58.07c0.002,6.34,3.599,10.934,9.672,12.42c2.13,0.521,4.19,0.396,6.173-0.6
+	c4.26-2.139,7.457-5.427,10.116-9.307c0.333-0.487,0.224-1,0.224-1.51c0.007-19.635,0.016-39.271-0.02-58.904
+	c-0.002-1.083,0.255-1.369,1.353-1.361c7.838,0.052,15.677,0.045,23.515,0.004c0.916-0.005,1.103,0.244,1.102,1.124
+	c-0.025,27.677-0.026,55.353,0.002,83.024c0.001,0.938-0.278,1.099-1.139,1.095c-7.918-0.028-15.837-0.028-23.756-0.001
+	c-0.815,0.003-1.1-0.166-1.073-1.037C125.581,167.117,125.536,164.928,125.536,162.479z"/>
+
+<!-- "l" -->
+<path fill="#252525" d="M187.423,107.08c0,20.637-0.011,41.273,0.026,61.91c0.003,1.119-0.309,1.361-1.381,1.355
+	c-7.799-0.052-15.598-0.047-23.396-0.008c-0.898,0.008-1.117-0.222-1.115-1.115c0.021-39.074,0.021-78.147,0-117.226
+	c0-0.811,0.189-1.169,1.006-1.392c7.871-2.149,15.73-4.327,23.584-6.545c1.045-0.295,1.308-0.17,1.306,0.985
+	C187.412,65.727,187.423,86.403,187.423,107.08z"/>
+
+<!-- "i" -->
+<path fill="#252525" d="M223.46,126.477c0,14.155-0.011,28.312,0.021,42.467c0.002,1.027-0.164,1.418-1.332,1.408
+	c-7.838-0.061-15.676-0.047-23.516-0.01c-0.881,0.004-1.121-0.189-1.119-1.104c0.026-26.153,0.025-52.307,0-78.458
+	c0-0.776,0.203-1.101,0.941-1.302c7.984-2.172,15.972-4.35,23.938-6.596c1.049-0.296,1.08,0.031,1.078,0.886
+	C223.454,98.004,223.46,112.239,223.46,126.477z"/>
+
+<!-- "a" -->
+<path fill="#252525" d="M277.695,163.6c-0.786,0.646-1.404,1.125-2,1.635c-4.375,3.746-9.42,5.898-15.16,6.42
+	c-5.792,0.527-11.479,0.244-16.934-2.047c-12.08-5.071-15.554-17.188-11.938-27.448c1.799-5.111,5.472-8.868,9.831-11.94
+	c5.681-4.003,12.009-6.732,18.504-9.074c5.576-2.014,11.186-3.939,16.955-5.347c0.445-0.104,0.773-0.243,0.757-0.854
+	c-0.136-4.389,0.261-8.79-0.479-13.165c-1.225-7.209-6.617-10.013-12.895-9.348c-0.516,0.055-1.029,0.129-1.536,0.241
+	c-4.877,1.081-7.312,4.413-7.374,10.127c-0.02,1.729-0.229,3.418-0.693,5.084c-0.906,3.229-2.969,5.354-6.168,6.266
+	c-3.422,0.979-6.893,0.998-10.23-0.305c-6.529-2.543-8.877-10.164-5.12-16.512c2.249-3.799,5.606-6.4,9.461-8.405
+	c6.238-3.246,12.914-4.974,19.896-5.537c7.565-0.61,15.096-0.366,22.49,1.507c4.285,1.085,8.312,2.776,11.744,5.657
+	c4.473,3.749,6.776,8.647,6.812,14.374c0.139,21.477,0.096,42.951,0.143,64.428c0.002,0.799-0.248,0.983-1.021,0.98
+	c-8.035-0.025-16.074-0.023-24.113-0.001c-0.716,0.002-0.973-0.146-0.941-0.915C277.736,167.562,277.695,165.698,277.695,163.6z
+	 M277.695,126.393c-4.793,2.104-9.25,4.373-13.287,7.408c-2.151,1.618-4.033,3.483-5.732,5.581
+	c-4.229,5.226-1.988,13.343,1.693,16.599c1.592,1.406,3.359,1.906,5.419,1.521c1.621-0.307,3.149-0.857,4.549-1.734
+	c1.521-0.951,2.949-2.072,4.539-2.887c2.31-1.18,2.97-2.861,2.894-5.445C277.561,140.484,277.695,133.527,277.695,126.393z"/>
+
+</svg>
+
+</a></div>
+
+<ul class="links">
+  
+      
+      
+      
+      
+      
+      <li><a href="/" class="">홈</a></li>
+  
+      
+      
+      
+      
+      
+        
+      
+      <li><a href="https://github.com/JuliaLang/julia" class="">소스코드</a></li>
+  
+      
+      
+      
+      
+      
+      <li><a href="/downloads/" class="">다운로드</a></li>
+  
+      
+      
+      
+      
+      
+      <li><a href="/ko/" class="">문서</a></li>
+  
+      
+      
+      
+      
+      
+        
+      
+      <li><a href="http://pkg.julialang.org/" class="">패키지</a></li>
+  
+      
+      
+          
+      
+      
+      
+      
+      <li><a href="/blog/" class="active">블로그</a></li>
+  
+      
+      
+      
+      
+      
+      <li><a href="/community/" class="">커뮤니티</a></li>
+  
+      
+      
+      
+      
+      
+      <li><a href="/ecosystems" class="">생태계</a></li>
+  
+      
+      
+      
+      
+      
+      <li><a href="/learning/" class="">배우기</a></li>
+  
+      
+      
+      
+      
+      
+      <li><a href="/teaching/" class="">강의</a></li>
+  
+      
+      
+      
+      
+      
+      <li><a href="/publications/" class="">논문</a></li>
+  
+      
+      
+      
+      
+      
+      <li><a href="/soc/ideas-page.html" class="">GSoC</a></li>
+  
+      
+      
+      
+      
+      
+        
+      
+      <li><a href="http://juliacon.org" class="">줄리아콘</a></li>
+  
+</ul>
+
+<!--
+
+<style>
+.banner-box .header {
+  font-size: 1.5em;
+}
+@media (min-width: 830px) {
+  .banner-box {
+    float:left;
+    width:50%;
+  }
+}
+</style>
+
+<div style="text-align:center">
+
+<div class="banner-box">
+<div class="header">JuliaCon 2016</div>
+<p>
+  Held on June 21<sup>st</sup> - 25<sup>th</sup> at MIT<br>
+  <a href="http://juliacon.org">talks</a> |
+  <a href="https://www.youtube.com/playlist?list=PLP8iPy9hna6SQPwZUDtAM59-wPzCPyD_S">videos</a>
+</p>
+</div>
+
+<div class="banner-box">
+<div class="header">Google Summer of Code</div>
+<p>
+  Julia gets 12 slots in the Google Summer of Code!<br />
+  <a href="https://summerofcode.withgoogle.com/organizations/6453977159827456/">projects</a> |
+  <a href="/soc/ideas-page.html">ideas list</a>
+</p>
+</div>
+
+<div style="clear:both; border-top: 1px solid #ddd; margin-bottom:30px;"></div>
+
+
+</div>
+-->
+
+
+<div id="blogpost">
+  <h1>Fast Numeric Computation in Julia</h1>
+
+  <p class="metadata">
+    <span class="timestamp">04 Sep 2013</span>
+    
+    &nbsp;|&nbsp;
+    <span class="author"><a href="http://dahua.me">Dahua Lin</a></span>
+    
+  </p>
+
+  <p>Working on numerical problems daily, I have always dreamt of a language that provides an elegant interface while allowing me to write codes that run blazingly fast on large data sets. Julia is a language that turns this dream into a reality. 
+With Julia, you can focus on your problem, keep your codes clean, and more importantly, write fast codes without diving into lower level languages such as C or Fortran even when performance is critical.</p>
+
+<p>However, you should not take this potential speed for granted. To get your codes fast, you should keep performance in mind and follow general best practice guidelines. Here, I would like to share with you my experience in writing efficient codes for numerical computation.</p>
+
+<h2 id="first-make-it-correct">First, make it correct</h2>
+
+<p>As in any language, the foremost goal when you implement your algorithm is to <em>make it correct</em>.
+An algorithm that doesn’t work correctly is useless no matter how fast it runs. One can always optimize the codes afterwards when necessary.
+When there are different approaches to a problem, you should choose the one that is <em>asymptotically more efficient</em>.
+For example, an unoptimized quick-sort implementation can easily beat a carefully optimized bubble-sort when sorting even moderately large arrays.
+Given a particular choice of algorithm, however, implementing it carefully and observing common performance guidelines can still make a big difference in performance – I will focus on this in the remaining part.</p>
+
+<h2 id="devectorize-expressions">Devectorize expressions</h2>
+
+<p>Users of other high level languages such as MATLAB<sup>®</sup> or Python are often advised to <em>vectorize</em> their codes as much as possible to get performance, because loops are slow in those languages. In Julia, on the other hand, loops can run as fast as those written in C and you no longer have to count on vectorization for speed. Actually, turning vectorized expressions into loops, which we call <em>devectorization</em>, often results in even higher performance.</p>
+
+<p>Consider the following:</p>
+
+<pre><code>r = exp(-abs(x-y))
+</code></pre>
+
+<p>Very simple expression, right?
+Behind the scenes, however, it takes a lot of steps and temporary arrays to get you the results of this expression.
+The following sequence of temporary array constructions is what is done to compute the above expression:</p>
+
+<pre><code>n = length(x)
+
+tmp1 = Array(Float64, n)
+for i = 1:n
+    tmp1[i] = x[i]-y[i]
+end
+
+tmp2 = Array(Float64, n)
+for i = 1:n
+    tmp2[i] = abs(tmp1[i])
+end
+
+tmp3 = Array(Float64, n)
+for i = 1:n
+    tmp3[i] = -tmp2[i]
+end
+
+r = Array(Float64, n)
+for i = 1:n
+    r[i] = exp(tmp3[i])
+end
+</code></pre>
+
+<p>We can see that this procedure creates three temporary arrays and it takes four passes to complete the computation.
+This introduces significant overhead:</p>
+
+<ul>
+  <li>It takes time to allocate memory for the temporary arrays;</li>
+  <li>It takes time to reclaim the memory of these arrays during garbage collection;</li>
+  <li>It takes time to traverse the memory – generally, fewer passes means higher efficiency.</li>
+</ul>
+
+<p>Such overhead is significant in practice, often leading to 2x to 3x slow down. To get optimal performance, one should <em>devectorize</em> this code like so:</p>
+
+<pre><code>r = similar(x) 
+for i = 1:length(x)
+    r[i] = exp(-abs(x[i]-y[i]))
+end
+</code></pre>
+
+<p>This version finishes the computation in one pass, without introducing any temporary arrays. Moreover, if <code>r</code> is pre-allocated, one can even omit the statment that creates <code>r</code>. The <a href="https://github.com/lindahua/Devectorize.jl"><em>Devectorize.jl</em></a> package provides a macro <code>@devec</code> that can automatically translate vectorized expressions into loops:</p>
+
+<pre><code>using Devectorize
+
+@devec r = exp(-abs(x-y))
+</code></pre>
+
+<p>The comprehension syntax also provides a concise syntax for devectorized computation:</p>
+
+<pre><code>r = [exp(-abs(x[i]-y[i])) for i = 1:length(x)]
+</code></pre>
+
+<p>Note that comprehension always creates new arrays to store the results. Hence, to write results to pre-allocated arrays, you still have to devectorize the computation manually or use the <code>@devec</code> macro.</p>
+
+<h2 id="merge-computations-into-a-single-loop">Merge computations into a single loop</h2>
+
+<p>Traversing arrays, especially large ones, may incur cache misses or even page faults, both of which can cause significant latency.
+Thus, it is desirable to minimize the number of round trips to memory as much as possible.
+For example, you may compute multiple maps with one loop:</p>
+
+<pre><code>for i = 1:length(x)
+    a[i] = x[i] + y[i]
+    b[i] = x[i] - y[i]
+end
+</code></pre>
+
+<p>This is usually faster than writing <code>a = x + y; b = x - y</code>.</p>
+
+<p>The following example shows how you can compute multiple statistics (e.g. sum, max, and min) over a dataset efficiently.</p>
+
+<pre><code>n = length(x)
+rsum = rmax = rmin = x[1]
+for i = 2:n
+    xi = x[i]
+    rsum += xi
+    if xi &gt; rmax
+        rmax = xi
+    elseif xi &lt; rmin
+        rmin = xi
+    end
+end
+</code></pre>
+
+<h2 id="write-cache-friendly-codes">Write cache-friendly codes</h2>
+
+<p>Modern computer systems have a complicated heterogeneous memory structure that combines registers, multiple levels of caches, and RAM. Data are accessed through the cache hierarchy – a smaller and much faster memory that stores copies of frequently used data.</p>
+
+<p>Most systems do not provide ways to directly control the cache system. However, you can take steps to make it much easier for the automated cache management system to help you if you write <em>cache-friendly</em> codes. In general, you don’t have to understand every detail about how a cache system works. It is often sufficient to observe the simple rule below:</p>
+
+<blockquote>
+  <p>Access data in a pattern similar to how the data resides in memory – don’t jump around between non-contiguous locations in memory.</p>
+</blockquote>
+
+<p>This is sometimes referred to as the <em>principle of locality</em>. For example, if <code>x</code> is a contiguous array, then after reading <code>x[i]</code>, it is much more likely that <code>x[i+1]</code> is already in the cache than it is that <code>x[i+1000000]</code> is, in which case it will be <em>much</em> faster to access <code>x[i+1]</code> than <code>x[i+1000000]</code>.</p>
+
+<p>Julia arrays are stored in column-major order, which means that the rows of a column are contiguous, but the columns of a row are generally not. It is therefore generally more efficient to access data column-by-column than row-by-row. 
+Consider the problem of computing the sum of each row in a matrix. It is natural to implement this as follows:</p>
+
+<pre><code>m, n = size(a)
+r = Array(Float64, m)
+
+for i = 1:m
+    s = 0.
+    for j = 1:n
+        s += a[i,j]
+    end
+    r[i] = s
+end
+</code></pre>
+
+<p>The loop here accesses the elements row-by-row, as <code>a[i,1], a[i,2], ..., a[i,n]</code>. The interval between these elements is <code>m</code>. Intuitively, it jumps at the stride of length <code>m</code> from the begining of each row to the end in each inner loop, and then jumps back to the begining of next row. This is not very efficient, especially when <code>m</code> is large.</p>
+
+<p>This procedure can be made much more cache-friendly by changing the order of computation:</p>
+
+<pre><code>for i = 1:m
+    r[i] = a[i,1]
+end
+
+for j = 2:n, i = 1:m
+    r[i] += a[i,j]
+end
+</code></pre>
+
+<p>Some benchmarking shows that this version can be <em>5-10 times</em> faster than the one above for large matrices.</p>
+
+<h2 id="avoid-creating-arrays-in-loops">Avoid creating arrays in loops</h2>
+
+<p>Creating arrays requires memory allocation and adds to the workload of the garbage collector. Reusing the same array is a good way to reduce the cost of memory management.</p>
+
+<p>It is not uncommon that you want to update arrays in an iterative algorithm. For example, in K-means, you may want to update both the cluster means and distances in each iteration. A straightforward way to do this might look like:</p>
+
+<pre><code>while !converged &amp;&amp; t &lt; maxiter
+    means = compute_means(x, labels)
+    dists = compute_distances(x, means)
+    labels = assign_labels(dists)
+    ...
+end
+</code></pre>
+
+<p>In this implementation of K-means, the arrays <code>means</code>, <code>dists</code>, and <code>labels</code> are recreated at each iteration. This reallocation of memory on each step is unnecessary. The sizes of these arrays are fixed, and their storage can be reused across iterations. The following alternative code is a more efficient way to implement the same algorithm:</p>
+
+<pre><code>d, n = size(x)
+
+# pre-allocate storage
+means = Array(Float64, d, K)
+dists = Array(Float64, K, n)
+labels = Array(Int, n)
+
+while !converged &amp;&amp; t &lt; maxiter
+    update_means!(means, x, labels)
+    update_distances!(dists, x, means)
+    update_labels!(labels, dists)
+    ...
+end
+</code></pre>
+
+<p>In this version, the functions invoked in the loop updates pre-allocated arrays in-place.</p>
+
+<p>If you are writing a package, it is recommended that you provide two versions for each function that outputs arrays: one that performs the update in-place, and another that returns a new array. The former can usually be implemented as a light-weight wrapper of the latter that copies the input array before modifying it.
+A good example is the <a href="https://github.com/JuliaStats/Distributions.jl"><em>Distributions.jl</em></a> package, which provides both <code>logpdf</code> and <code>logpdf!</code>, so that one can write <code>lp = logpdf(d,x)</code> when a new array is needed, or <code>logpdf!(lp,d,x)</code> when <code>lp</code> has been pre-allocated.</p>
+
+<h2 id="identify-opportunities-to-use-blas">Identify opportunities to use BLAS</h2>
+
+<p>Julia wraps a large number of <a href="http://en.wikipedia.org/wiki/Basic_Linear_Algebra_Subprograms">BLAS</a> routines for linear algebraic computation. These routines are the result of decades of research and optimization by many of the world’s top experts in fast numerical computation. As a result, using them where possible can provide performance boosts that seem almost magical – BLAS routines are often orders of magnitude faster than the simple loop implementations they replace.</p>
+
+<p>For example, consider accumulating weighted versions of vectors as follows:</p>
+
+<pre><code>r = zeros(size(x,1))
+for j = 1:size(x,2)
+    r += x[:,j] * w[j]
+end
+</code></pre>
+
+<p>You can replace the statement <code>r += x[:,j] * w[j]</code> with a call to the BLAS <code>axpy!</code> function to get better performance:</p>
+
+<pre><code>for j = 1:size(x,2)
+    axpy!(w[j], x[:,j], r)
+end
+</code></pre>
+
+<p>This, however, is still far from being optimal. If you are familiar with linear algebra, you may have probably found that this is just matrix-vector multiplication, and can be written as <code>r = x * w</code>, which is not only shorter, simpler and clearer than either of the above loops – it also runs much faster than either versions.</p>
+
+<p>Our next example is a subtler application of BLAS routines to computing pairwise Euclidean distances between columns in two matrices. Below is a straightforward implementation that directly computes pairwise distances:</p>
+
+<pre><code>m, n = size(a)
+r = Array(Float64, m, n)
+
+for j = 1:n, i = 1:m
+    r[i,j] = sqrt(sum(abs2(a[:,i] - b[:,j])))
+end
+</code></pre>
+
+<p>This is clearly suboptimal – a lot of temporary arrays are created in evaluating the expression in the inner loop. To speed this up, we can devectorize the inner expression:</p>
+
+<pre><code>d, m = size(a)
+n = size(b,2)
+r = Array(Float64, m, n)
+
+for j = 1:n, i = 1:m
+        s = 0.
+        for k = 1:d
+            s += abs2(a[k,i] - b[k,j])
+        end
+        r[i,j] = sqrt(s)
+    end
+end
+</code></pre>
+
+<p>This version is much more performant than the vectorized form. But is it the best we can do? By employing an alternative strategy, we can write a even faster algorithm for computing pairwise distances. The trick is that the squared Euclidean distance between two vectors can be expanded as:</p>
+
+<pre><code>sum(abs2(x-y)) == sum(abs2(x)) + sum(abs2(y)) - 2*dot(x,y)
+</code></pre>
+
+<p>If we evaluate these three terms separately, the computation can be mapped to BLAS routines perfectly. Below, we have a new implementation of pairwise distances written using only BLAS routines, including the norm calls that are wrapped by the <a href="https://github.com/lindahua/NumericExtensions.jl"><em>NumericExtensions.jl</em></a> package:</p>
+
+<pre><code>using NumericExtensions   # for sqsum
+using Base.LinAlg.BLAS    # for gemm!
+
+m, n = size(a)
+
+sa = sqsum(a, 1)   # sum(abs2(x)) for each column in a
+sb = sqsum(b, 1)   # sum(abs2(y)) for each column in b
+
+r = sa .+ reshape(sb, 1, n)          # first two terms
+gemm!('T', 'N', -2.0, a, b, 1.0, r)  # add (-2.0) * a' * b to r
+
+for i = 1:length(r)
+    r[i] = sqrt(r[i])
+end
+</code></pre>
+
+<p>This version is over <em>100 times</em> faster than our original implementation — the <code>gemm</code> function in BLAS has been optimized to the extreme by many talented developers and engineers over the past few decades.</p>
+
+<p>We should mention that you don’t have to implement this yourself if you really want to compute pairwise distances: the <a href="https://github.com/lindahua/Distance.jl"><em>Distance.jl</em></a> package provides optimized implementations of a broad variety of distance metrics, including this one. We presented this optimization trick as an example to illustrate the substantial performance gains that can be achieved by writing code that uses BLAS routines wherever possible.</p>
+
+<h2 id="explore-available-packages">Explore available packages</h2>
+
+<p>Julia has a very active open source ecosystem. A variety of packages have been developed that provide optimized algorithms for high performance computation.
+Look for a package that does what you need before you decide to roll your own – and if you don’t find what you need, consider contributing it!
+Here are a couple of packages that might be useful for those interested in high performance computation:</p>
+
+<ul>
+  <li>
+    <p><a href="https://github.com/lindahua/NumericExtensions.jl">NumericExtensions.jl</a> – extensions to Julia’s base functionality for high-performance support for a variety of common computations (many of these will gradually get moved into base Julia).</p>
+  </li>
+  <li>
+    <p><a href="https://github.com/lindahua/Devectorize.jl">Devectorize.jl</a> – macros and functions to de-vectorize vector expressions. With this package, users can write computations in high-level vectorized way while enjoying the high run-time performance of hand-coded de-vectorized loops.</p>
+  </li>
+</ul>
+
+<p>Check out the <a href="http://pkg.julialang.org/">Julia package list</a> for many more packages. Julia also ships with a <a href="http://docs.julialang.org/en/latest/stdlib/profile">sampling profiler</a> to measure where your code is spending most of its time. When in doubt, measure don’t guess!</p>
+
+
+</div>
+
+
+
+<div class="footer">
+Julia is a <a href="https://numfocus.org/projects/index.html">NumFocus project</a>.
+We thank <a href="https://fastly.com">Fastly</a> for their generous infrastructural support.
+<a href="https://github.com/JuliaLang/julialang.github.com/edit/master/blog/_posts/2013-09-04-fast-numeric.md">Edit this page on GitHub.</a>
+</div>
+
+<!--Flipcause Integration v3.0// Flipcause Integration Instructions:
+    Install the following code block once in the website Header (after <head> tag) -->
+
+<style>
+
+  .fc-black_overlay{
+  display:none; position: fixed; z-index:1000001; top: 0%;left: 0%;width: 100%;height: 100%;
+  background-color: black; filter: alpha(opacity=50); cursor:pointer; opacity:0.5;
+  }
+
+  .fc-white_content {
+  opacity:1; display:none; margin-top: -320px; margin-left: -485px; width:970px; height:640px;
+  position:fixed; top:50%; left:50%; border: none;z-index:1000002;overflow: auto;
+  }
+
+  .fc-main-box{
+  opacity:1; display:none; margin:15px auto 0 auto; width:930px; position:relative; z-index:1000003;
+  }
+
+  .fc-widget_close{
+  opacity:1; content:url(http://i1338.photobucket.com/albums/o691/WeCause/X_zpse4a7e538.png);
+  position:absolute; z-index=1000004; right:-16px; top:-16px; display:block; cursor:pointer;
+  }
+
+  .floating_button{
+  display: block; margin-top: 0px; margin-left: 0px; width:auto ; height: auto;
+  position:fixed; z-index:999999; overflow: auto;
+  }
+
+  @keyframes backfadesin {
+  from { opacity:0; }
+  to {opacity:.5;}
+  }
+
+  @-moz-keyframes backfadesin {
+  from { opacity:0; }
+  to {opacity:.5;}
+  }
+
+  @-webkit-keyframes backfadesin {
+  from { opacity:0; }
+  to {opacity:.5;}
+  }
+
+  @-o-keyframes backfadesin {
+  from { opacity:0; }
+  to {opacity:.5;}
+  }
+
+
+  @-ms-keyframes backfadesin {
+  from { opacity:0; }
+  to {opacity:.5;}
+  }
+
+  @keyframes fadesin {
+  0%{ opacity:0; }
+  50%{ opacity:0; }
+  75% {opacity: 0; transform: translateY(20px);}
+  100% {opacity: 1; transform: translateY(0);}
+  }
+
+  @-moz-keyframes fadesin {
+  0%{ opacity:0; }
+  50%{ opacity:0; }
+  75% {opacity: 0; -moz-transform: translateY(20px);}
+  100% {opacity: 1; -moz-transform: translateY(0);}
+  }
+
+  @-webkit-keyframes fadesin {
+  0%{ opacity:0; }
+  50%{ opacity:0; }
+  75% {opacity: 0; -webkit-transform: translateY(20px);}
+  100% {opacity: 1; -webkit-transform: translateY(0);}
+  }
+
+  @-o-keyframes fadesin {
+  0%{ opacity:0; }
+  50%{ opacity:0; }
+  75% {opacity: 0; -o-transform: translateY(20px);}
+  100% {opacity: 1; -o-transform: translateY(0);}
+  }
+
+  @-ms-keyframes fadesin {
+  0%{ opacity:0; }
+  50%{ opacity:0; }
+  75% {opacity: 0; -ms-transform: translateY(20px);}
+  100% {opacity: 1; -ms-transform: translateY(0);}
+  }
+
+</style>
+
+<script>
+
+  function open_window(cause_id) {
+  var  protocol=String(document.location.protocol);
+  var new_url;
+  if( /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)){
+  new_url="https://www.flipcause.com/widget/"+cause_id
+  window.open(new_url);
+  }
+
+  else {
+  document.getElementById("fc-fade").style.display = "block";
+  document.getElementById("fc-fade").style.webkitAnimation = "backfadesin 1s";
+  document.getElementById("fc-fade").style.animation = "backfadesin 1s";
+  document.getElementById("fc-fade").style.mozAnimation = "backfadesin 1s";
+  document.getElementById("fc-light").style.display = "block";
+  document.getElementById("fc-light").style.webkitAnimation = "fadesin 1.5s";
+  document.getElementById("fc-light").style.animation = "fadesin 1.5s";
+  document.getElementById("fc-light").style.mozAnimation = "fadesin 1.5s";
+  document.getElementById("fc-main").style.display = "block";
+  document.getElementById("fc-main").style.webkitAnimation = "fadesin 1.5s";
+  document.getElementById("fc-main").style.animation = "fadesin 1.5s";
+  document.getElementById("fc-main").style.mozAnimation = "fadesin 1.5s";
+  document.getElementById("fc-close").style.display = "block";
+  document.getElementById("fc-close").style.webkitAnimation = "fadesin 1.5s";
+  document.getElementById("fc-close").style.animation = "fadesin 1.5s";
+  document.getElementById("fc-close").style.mozAnimation = "fadesin 1.5s";
+  document.getElementById("fc-myFrame").style.display = "block";
+  document.getElementById("fc-myFrame").style.webkitAnimation = "fadesin 1.5s";
+  document.getElementById("fc-myFrame").style.animation = "fadesin 1.5s";
+  document.getElementById("fc-myFrame").style.mozAnimation = "fadesin 1.5s";
+  document.getElementById("fc-myFrame").src="https://www.flipcause.com/widget/"+cause_id;
+  }
+  }
+
+
+  function close_window() {
+  document.getElementById("fc-fade").style.display="none";
+  document.getElementById("fc-light").style.display="none";
+  document.getElementById("fc-main").style.display="none";
+  document.getElementById("fc-close").style.display="none";
+  document.getElementById("fc-myFrame").style.display="none";
+  }
+
+</script>
+
+<div id="fc-fade" class="fc-black_overlay" onclick="close_window()"></div>
+<div id="fc-light" class="fc-white_content">
+  <div id="fc-main" class="fc-main-box">
+    <div id="fc-close" class="fc-widget_close" onclick="close_window()">
+      </div><iframe id="fc-myFrame" iframe height="580" width="925" style="border: 0;
+                                                                           border-radius:5px 5px 5px 5px; box-shadow:0 0 8px rgba(0, 0, 0, 0.5);" scrolling="no" src=""></iframe></div>
+</div>
+
+<!--END Flipcause Main Integration Code-->
+
+<div style="background:#ccc; border-radius:0px 0px 0px 0px;font-weight:normal; font-family:Arial, Helvetica, sans-serif;border:none;box-shadow:none;left: 50%; margin-left:-72.5px;clear: both;display: block; width:145px;height:45px; line-height:2.8; position:relative; font-size:16px;text-align:center; cursor:pointer;color:#fff;text-decoration: none; z-index:1" onclick="open_window('MjI1Nw==')">Donate Now</div>
+</div>
+
+</body>
+</html>
