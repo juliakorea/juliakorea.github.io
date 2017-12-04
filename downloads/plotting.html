@@ -96,13 +96,9 @@
       
       
       
-        
-      
       <li><a href="https://github.com/JuliaLang/julia" class="">소스코드</a></li>
   
       
-      
-          
       
       
       
@@ -120,8 +116,6 @@
       
       
       
-      
-        
       
       <li><a href="http://pkg.julialang.org/" class="">패키지</a></li>
   
@@ -179,8 +173,6 @@
       
       
       
-        
-      
       <li><a href="http://juliacon.org" class="">줄리아콘</a></li>
   
 </ul>
@@ -236,13 +228,13 @@
 brings many different plotting packages under a single API, making it easy to swap
 between plotting “backends”. Installation and example usage is as follows:</p>
 
-<div class="highlight"><pre><code class="language-julia" data-lang="julia"><span class="n">Pkg</span><span class="o">.</span><span class="n">add</span><span class="x">(</span><span class="s">"Plots"</span><span class="x">)</span>
+<figure class="highlight"><pre><code class="language-julia" data-lang="julia"><span class="n">Pkg</span><span class="o">.</span><span class="n">add</span><span class="x">(</span><span class="s">"Plots"</span><span class="x">)</span>
 <span class="n">using</span> <span class="n">Plots</span>
 <span class="n">plotly</span><span class="x">()</span> <span class="c"># Choose the Plotly.jl backend for web interactivity</span>
 <span class="n">plot</span><span class="x">(</span><span class="n">rand</span><span class="x">(</span><span class="mi">5</span><span class="x">,</span><span class="mi">5</span><span class="x">),</span><span class="n">linewidth</span><span class="o">=</span><span class="mi">2</span><span class="x">,</span><span class="n">title</span><span class="o">=</span><span class="s">"My Plot"</span><span class="x">)</span>
 <span class="n">Pkg</span><span class="o">.</span><span class="n">add</span><span class="x">(</span><span class="s">"PyPlot"</span><span class="x">)</span> <span class="c"># Install a different backend</span>
 <span class="n">pyplot</span><span class="x">()</span> <span class="c"># Switch to using the PyPlot.jl backend</span>
-<span class="n">plot</span><span class="x">(</span><span class="n">rand</span><span class="x">(</span><span class="mi">5</span><span class="x">,</span><span class="mi">5</span><span class="x">),</span><span class="n">linewidth</span><span class="o">=</span><span class="mi">2</span><span class="x">,</span><span class="n">title</span><span class="o">=</span><span class="s">"My Plot"</span><span class="x">)</span> <span class="c"># The same plotting command works</span></code></pre></div>
+<span class="n">plot</span><span class="x">(</span><span class="n">rand</span><span class="x">(</span><span class="mi">5</span><span class="x">,</span><span class="mi">5</span><span class="x">),</span><span class="n">linewidth</span><span class="o">=</span><span class="mi">2</span><span class="x">,</span><span class="n">title</span><span class="o">=</span><span class="s">"My Plot"</span><span class="x">)</span> <span class="c"># The same plotting command works</span></code></pre></figure>
 
 <p>A guide to the available backends can be found <a href="http://docs.juliaplots.org/latest/backends/">in the manual</a>.
 Additionally, many Julia packages add plotting functionality through its <a href="http://docs.juliaplots.org/latest/recipes/">recipe system</a>.
@@ -259,10 +251,10 @@ no overhead (arrays are passed without making a copy). Make sure that
 Python and MatPlotlib are correctly installed. Installation of
 PyPlot.jl and example usage are as follows:</p>
 
-<div class="highlight"><pre><code class="language-julia" data-lang="julia"><span class="n">Pkg</span><span class="o">.</span><span class="n">add</span><span class="x">(</span><span class="s">"PyPlot"</span><span class="x">)</span>
+<figure class="highlight"><pre><code class="language-julia" data-lang="julia"><span class="n">Pkg</span><span class="o">.</span><span class="n">add</span><span class="x">(</span><span class="s">"PyPlot"</span><span class="x">)</span>
 <span class="n">using</span> <span class="n">PyPlot</span>
 <span class="n">x</span> <span class="o">=</span> <span class="n">linspace</span><span class="x">(</span><span class="mi">0</span><span class="x">,</span><span class="mi">2</span><span class="o">*</span><span class="nb">pi</span><span class="x">,</span><span class="mi">1000</span><span class="x">);</span> <span class="n">y</span> <span class="o">=</span> <span class="n">sin</span><span class="o">.</span><span class="x">(</span><span class="mi">3</span><span class="o">*</span><span class="n">x</span> <span class="o">+</span> <span class="mi">4</span><span class="o">*</span><span class="n">cos</span><span class="o">.</span><span class="x">(</span><span class="mi">2</span><span class="o">*</span><span class="n">x</span><span class="x">))</span>
-<span class="n">plot</span><span class="x">(</span><span class="n">x</span><span class="x">,</span> <span class="n">y</span><span class="x">,</span> <span class="n">color</span><span class="o">=</span><span class="s">"red"</span><span class="x">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mf">2.0</span><span class="x">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s">"--"</span><span class="x">)</span></code></pre></div>
+<span class="n">plot</span><span class="x">(</span><span class="n">x</span><span class="x">,</span> <span class="n">y</span><span class="x">,</span> <span class="n">color</span><span class="o">=</span><span class="s">"red"</span><span class="x">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mf">2.0</span><span class="x">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s">"--"</span><span class="x">)</span></code></pre></figure>
 
 <h2 id="gadfly">Gadfly</h2>
 
@@ -271,9 +263,9 @@ PyPlot.jl and example usage are as follows:</p>
 style grammar of graphics in Julia. Add the Gadfly package to your
 Julia installation with the following command on the Julia prompt:</p>
 
-<div class="highlight"><pre><code class="language-julia" data-lang="julia"><span class="n">Pkg</span><span class="o">.</span><span class="n">add</span><span class="x">(</span><span class="s">"Gadfly"</span><span class="x">)</span>
+<figure class="highlight"><pre><code class="language-julia" data-lang="julia"><span class="n">Pkg</span><span class="o">.</span><span class="n">add</span><span class="x">(</span><span class="s">"Gadfly"</span><span class="x">)</span>
 <span class="n">using</span> <span class="n">Gadfly</span>
-<span class="n">draw</span><span class="x">(</span><span class="n">SVG</span><span class="x">(</span><span class="s">"output.svg"</span><span class="x">,</span> <span class="mi">6</span><span class="n">inch</span><span class="x">,</span> <span class="mi">3</span><span class="n">inch</span><span class="x">),</span> <span class="n">plot</span><span class="x">([</span><span class="n">sin</span><span class="x">,</span> <span class="n">cos</span><span class="x">],</span> <span class="mi">0</span><span class="x">,</span> <span class="mi">25</span><span class="x">))</span></code></pre></div>
+<span class="n">draw</span><span class="x">(</span><span class="n">SVG</span><span class="x">(</span><span class="s">"output.svg"</span><span class="x">,</span> <span class="mi">6</span><span class="n">inch</span><span class="x">,</span> <span class="mi">3</span><span class="n">inch</span><span class="x">),</span> <span class="n">plot</span><span class="x">([</span><span class="n">sin</span><span class="x">,</span> <span class="n">cos</span><span class="x">],</span> <span class="mi">0</span><span class="x">,</span> <span class="mi">25</span><span class="x">))</span></code></pre></figure>
 
 <p>Gadfly’s interface will be familiar to users of R’s
 <a href="http://ggplot2.org">ggplot2</a> package. See

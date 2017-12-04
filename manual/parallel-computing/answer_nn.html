@@ -19,7 +19,7 @@
 <div id="site" class="site">
 <p>First, the “inner” function that gets spawned.  Note we provide the outputs as arguments, to pass information about the indices that should be processed.</p>
 
-<pre><code>function nearestneighbor_darray{T}(X::Matrix{T},inn::DArray{Int,1,1},d2nn::DArray{T,1,1})
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>function nearestneighbor_darray{T}(X::Matrix{T},inn::DArray{Int,1,1},d2nn::DArray{T,1,1})
     indx = myindexes(inn)  # get "basepoint indices" assigned to this processor
     for iblock = 1:length(indx) # loop over blocks of contiguous indices
         thisblock = indx[iblock]
@@ -28,11 +28,11 @@
         end
     end
 end
-</code></pre>
+</code></pre></div></div>
 
 <p>We also define a little utility that helps us avoid launching any long computations on the current processor until we’ve gotten all the others started:</p>
 
-<pre><code>function permute_to_last{T}(v::Vector{T},val::T)
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>function permute_to_last{T}(v::Vector{T},val::T)
     iother = Int[]
     iindx = Int[]
     for i = 1:length(v)
@@ -44,11 +44,11 @@ end
     end
     [iother,iindx]
 end
-</code></pre>
+</code></pre></div></div>
 
 <p>Now, the “outer” function, the one called by the user:</p>
 
-<pre><code>function nearestneighbor{T}(X::Matrix{T})
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>function nearestneighbor{T}(X::Matrix{T})
     d, N = size(X)
     inn = dzeros(Int,(N))  # allocate the storage for the results
     d2nn = dzeros(T,(N))
@@ -64,7 +64,7 @@ end
     d2nn_ret = convert(Array,d2nn)
     inn_ret, d2nn_ret
 end
-</code></pre>
+</code></pre></div></div>
 
 <div class="footer">
 Julia is a <a href="https://numfocus.org/projects/index.html">NumFocus project</a>.

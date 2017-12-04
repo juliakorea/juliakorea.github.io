@@ -1,0 +1,664 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en-us" lang="en-us">
+<head>
+  <meta name="viewport" content="width=device-width; initial-scale=1.0;">
+  <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+  <title>GSoC 2017 Project: Hamiltonian Indirect Inference</title>
+  <meta name="author" content="Jeff Bezanson, Stefan Karpinski, Viral Shah, Alan Edelman, et al." />
+  <link rel="stylesheet" href="/css/syntax.css" type="text/css" />
+  <link rel="stylesheet" href="/css/screen.css" type="text/css" media="screen, projection" />
+  <script type="text/javascript" src="/js/jquery-1.8.3.min.js"></script>
+  <script type="text/javascript" src="/js/jquery.word-break-keep-all.min.js"></script>
+  <script type="text/javascript">
+    $(document).ready(function() {
+      $('p').wordBreakKeepAll();
+    });
+  </script>
+</head>
+<body>
+<div id="site" class="site">
+<div class="title"><a href="/">
+<svg version="1.1" id="Layer_1"
+	 xmlns="http://www.w3.org/2000/svg"
+	 xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 width="210px" height="142px" viewBox="0 0 310 216" enable-background="new 0 0 310 216"
+	 xml:space="preserve">
+
+<!-- blue dot -->
+<circle fill="#6b85dd" stroke="#4266d5" stroke-width="3" cx="50.5" cy="60" r="16.5"/>
+<!-- red dot -->
+<circle fill="#d66661" stroke="#c93d39" stroke-width="3" cx="212.459" cy="60" r="16.5"/>
+<!-- green dot -->
+<circle fill="#6bab5b" stroke="#3b972e" stroke-width="3" cx="233.834" cy="23.874" r="16.5"/>
+<!-- purple dot -->
+<circle fill="#aa7dc0" stroke="#945bb0" stroke-width="3" cx="255.209" cy="60" r="16.5"/>
+
+<!-- "j" -->
+<path fill="#252525" d="M37.216,138.427c0-15.839,0.006-31.679-0.018-47.517c-0.001-0.827,0.169-1.234,1.043-1.47
+	c7.876-2.127,15.739-4.308,23.606-6.47c1.33-0.366,1.333-0.36,1.333,1.019c0,25.758,0.015,51.517-0.012,77.274
+	c-0.006,5.514,0.245,11.032-0.272,16.543c-0.628,6.69-2.15,13.092-6.438,18.506c-3.781,4.771-8.898,7.25-14.767,8.338
+	c-6.599,1.222-13.251,1.552-19.934,0.938c-4.616-0.423-9.045-1.486-12.844-4.363c-2.863-2.168-4.454-4.935-3.745-8.603
+	c0.736-3.806,3.348-5.978,6.861-7.127c2.262-0.74,4.628-0.872,6.994-0.53c1.823,0.264,3.42,1.023,4.779,2.288
+	c1.38,1.284,2.641,2.674,3.778,4.177c0.872,1.15,1.793,2.256,2.991,3.086c2.055,1.426,4,0.965,5.213-1.216
+	c0.819-1.473,0.997-3.106,1.173-4.731c0.255-2.348,0.255-4.707,0.256-7.062C37.218,167.145,37.216,152.786,37.216,138.427z"/>
+
+<!-- "u" -->
+<path fill="#252525" d="M125.536,162.479c-2.908,2.385-5.783,4.312-8.88,5.904c-10.348,5.323-20.514,4.521-30.324-1.253
+	c-6.71-3.95-11.012-9.849-12.52-17.606c-0.236-1.213-0.363-2.438-0.363-3.688c0.01-19.797,0.017-39.593-0.02-59.39
+	c-0.002-1.102,0.285-1.357,1.363-1.351c7.798,0.049,15.597,0.044,23.396,0.003c0.95-0.005,1.177,0.25,1.175,1.183
+	c-0.027,19.356-0.025,38.713-0.018,58.07c0.002,6.34,3.599,10.934,9.672,12.42c2.13,0.521,4.19,0.396,6.173-0.6
+	c4.26-2.139,7.457-5.427,10.116-9.307c0.333-0.487,0.224-1,0.224-1.51c0.007-19.635,0.016-39.271-0.02-58.904
+	c-0.002-1.083,0.255-1.369,1.353-1.361c7.838,0.052,15.677,0.045,23.515,0.004c0.916-0.005,1.103,0.244,1.102,1.124
+	c-0.025,27.677-0.026,55.353,0.002,83.024c0.001,0.938-0.278,1.099-1.139,1.095c-7.918-0.028-15.837-0.028-23.756-0.001
+	c-0.815,0.003-1.1-0.166-1.073-1.037C125.581,167.117,125.536,164.928,125.536,162.479z"/>
+
+<!-- "l" -->
+<path fill="#252525" d="M187.423,107.08c0,20.637-0.011,41.273,0.026,61.91c0.003,1.119-0.309,1.361-1.381,1.355
+	c-7.799-0.052-15.598-0.047-23.396-0.008c-0.898,0.008-1.117-0.222-1.115-1.115c0.021-39.074,0.021-78.147,0-117.226
+	c0-0.811,0.189-1.169,1.006-1.392c7.871-2.149,15.73-4.327,23.584-6.545c1.045-0.295,1.308-0.17,1.306,0.985
+	C187.412,65.727,187.423,86.403,187.423,107.08z"/>
+
+<!-- "i" -->
+<path fill="#252525" d="M223.46,126.477c0,14.155-0.011,28.312,0.021,42.467c0.002,1.027-0.164,1.418-1.332,1.408
+	c-7.838-0.061-15.676-0.047-23.516-0.01c-0.881,0.004-1.121-0.189-1.119-1.104c0.026-26.153,0.025-52.307,0-78.458
+	c0-0.776,0.203-1.101,0.941-1.302c7.984-2.172,15.972-4.35,23.938-6.596c1.049-0.296,1.08,0.031,1.078,0.886
+	C223.454,98.004,223.46,112.239,223.46,126.477z"/>
+
+<!-- "a" -->
+<path fill="#252525" d="M277.695,163.6c-0.786,0.646-1.404,1.125-2,1.635c-4.375,3.746-9.42,5.898-15.16,6.42
+	c-5.792,0.527-11.479,0.244-16.934-2.047c-12.08-5.071-15.554-17.188-11.938-27.448c1.799-5.111,5.472-8.868,9.831-11.94
+	c5.681-4.003,12.009-6.732,18.504-9.074c5.576-2.014,11.186-3.939,16.955-5.347c0.445-0.104,0.773-0.243,0.757-0.854
+	c-0.136-4.389,0.261-8.79-0.479-13.165c-1.225-7.209-6.617-10.013-12.895-9.348c-0.516,0.055-1.029,0.129-1.536,0.241
+	c-4.877,1.081-7.312,4.413-7.374,10.127c-0.02,1.729-0.229,3.418-0.693,5.084c-0.906,3.229-2.969,5.354-6.168,6.266
+	c-3.422,0.979-6.893,0.998-10.23-0.305c-6.529-2.543-8.877-10.164-5.12-16.512c2.249-3.799,5.606-6.4,9.461-8.405
+	c6.238-3.246,12.914-4.974,19.896-5.537c7.565-0.61,15.096-0.366,22.49,1.507c4.285,1.085,8.312,2.776,11.744,5.657
+	c4.473,3.749,6.776,8.647,6.812,14.374c0.139,21.477,0.096,42.951,0.143,64.428c0.002,0.799-0.248,0.983-1.021,0.98
+	c-8.035-0.025-16.074-0.023-24.113-0.001c-0.716,0.002-0.973-0.146-0.941-0.915C277.736,167.562,277.695,165.698,277.695,163.6z
+	 M277.695,126.393c-4.793,2.104-9.25,4.373-13.287,7.408c-2.151,1.618-4.033,3.483-5.732,5.581
+	c-4.229,5.226-1.988,13.343,1.693,16.599c1.592,1.406,3.359,1.906,5.419,1.521c1.621-0.307,3.149-0.857,4.549-1.734
+	c1.521-0.951,2.949-2.072,4.539-2.887c2.31-1.18,2.97-2.861,2.894-5.445C277.561,140.484,277.695,133.527,277.695,126.393z"/>
+
+</svg>
+
+</a></div>
+
+<ul class="links">
+  
+      
+      
+      
+      
+      
+      <li><a href="/" class="">홈</a></li>
+  
+      
+      
+      
+      
+      
+      <li><a href="https://github.com/JuliaLang/julia" class="">소스코드</a></li>
+  
+      
+      
+      
+      
+      
+      <li><a href="/downloads/" class="">다운로드</a></li>
+  
+      
+      
+      
+      
+      
+      <li><a href="/ko/" class="">문서</a></li>
+  
+      
+      
+      
+      
+      
+      <li><a href="http://pkg.julialang.org/" class="">패키지</a></li>
+  
+      
+      
+      
+      
+      
+      <li><a href="/blog/" class="active">블로그</a></li>
+  
+      
+      
+      
+      
+      
+      <li><a href="/community/" class="">커뮤니티</a></li>
+  
+      
+      
+      
+      
+      
+      <li><a href="/ecosystems" class="">생태계</a></li>
+  
+      
+      
+      
+      
+      
+      <li><a href="/learning/" class="">배우기</a></li>
+  
+      
+      
+      
+      
+      
+      <li><a href="/teaching/" class="">강의</a></li>
+  
+      
+      
+      
+      
+      
+      <li><a href="/publications/" class="">논문</a></li>
+  
+      
+      
+      
+      
+      
+      <li><a href="/soc/ideas-page.html" class="">GSoC</a></li>
+  
+      
+      
+      
+      
+      
+      <li><a href="http://juliacon.org" class="">줄리아콘</a></li>
+  
+</ul>
+
+<!--
+
+<style>
+.banner-box .header {
+  font-size: 1.5em;
+}
+@media (min-width: 830px) {
+  .banner-box {
+    float:left;
+    width:50%;
+  }
+}
+</style>
+
+<div style="text-align:center">
+
+<div class="banner-box">
+<div class="header">JuliaCon 2016</div>
+<p>
+  Held on June 21<sup>st</sup> - 25<sup>th</sup> at MIT<br>
+  <a href="http://juliacon.org">talks</a> |
+  <a href="https://www.youtube.com/playlist?list=PLP8iPy9hna6SQPwZUDtAM59-wPzCPyD_S">videos</a>
+</p>
+</div>
+
+<div class="banner-box">
+<div class="header">Google Summer of Code</div>
+<p>
+  Julia gets 12 slots in the Google Summer of Code!<br />
+  <a href="https://summerofcode.withgoogle.com/organizations/6453977159827456/">projects</a> |
+  <a href="/soc/ideas-page.html">ideas list</a>
+</p>
+</div>
+
+<div style="clear:both; border-top: 1px solid #ddd; margin-bottom:30px;"></div>
+
+
+</div>
+-->
+
+
+<div id="blogpost">
+  <h1>GSoC 2017 Project: Hamiltonian Indirect Inference</h1>
+
+  <p class="metadata">
+    <span class="timestamp">19 Sep 2017</span>
+    
+    &nbsp;|&nbsp;
+    <span class="author">Dorisz Albrecht</span>
+    
+  </p>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS_HTML"></script>
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+tex2jax: {
+inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+displayMath: [ ['$$','$$'], ["\\[","\\]"] ],
+processEscapes: true,
+processEnvironments: true
+},
+// Center justify equations in code and markdown cells. Elsewhere
+// we use CSS to left justify single line equations in code cells.
+displayAlign: 'center',
+"HTML-CSS": {
+styles: {'.MathJax_Display': {"margin": 0}},
+linebreaks: { automatic: true }
+}
+});
+</script>
+
+<h1 id="bayesian_examplesjl">Bayesian_Examples.jl</h1>
+<p>This is a writeup of my project for the Google Summer of Code 2017. The
+associated repository contains examples of estimating various models. In
+addition to this repository, I have collaborated in <a href="https://github.com/tpapp/HamiltonianABC.jl/">HamiltonianABC</a> and its branches as part of the GSOC 2017.</p>
+
+<h1 id="gsoc-2017-project-hamiltonian-monte-carlo-and-pseudo-bayesian-indirect-likelihood">GSOC 2017 project: Hamiltonian Monte Carlo and pseudo-Bayesian Indirect Likelihood</h1>
+
+<p>This summer I have had the opportunity to participate in the Google Summer of Code program. My project was in the Julia language and the main goal was to implement Indirect Inference (A. A. Smith 1993; A. Smith 2008) to overcome the typically arising issues (such as intractable or costly to compute likelihoods) when estimating models using likelihood-based methods. Hamiltonian Monte Carlo was expected to result in a more efficient sampling process.</p>
+
+<p>Under the mentorship of Tamás K. Papp, I completed a major revision of Bayesian estimation methods using Indirect Inference (II) and Hamiltonian Monte Carlo. I also got familiar with using git, opening issues, creating a repository among others.</p>
+
+<p>Here I introduce the methods with a bit of context, and dicuss an example more extensively.</p>
+
+<h1 id="parametric-bayesian-indirect-likelihood-for-the-full-data">Parametric Bayesian Indirect Likelihood for the Full Data</h1>
+
+<p>Usually when we face an intractable likelihood or a likelihood that would be extremely costly to calculate, we have the option to use an alternative auxiliary model to extract and estimate the parameters of interest. These alternative models should be easier to deal with. Drovandi et al. reviews a collection of parametric Bayesian Indirect Inference (pBII) methods, I focused on the parametric Bayesian Indirect Likelihood for the Full Data (pdBIL) method proposed by Gallant and McCulloch (2009). The pdBIL uses the likelihood of the auxiliary model as a substitute for the intractable likelihood. The pdBIL does not compare summary statistics, instead works in the following way:</p>
+
+<p>First the data is generated, once we have the data, we can estimate the parameters of the auxiliary model. Then, the estimated parameters are put into the auxiliary likelihood with the observed/generated data. Afterwards we can use this likelihood in our chosen Bayesian method i.e. MCMC.</p>
+
+<p>To summarize the method, first we have the parameter vector $\theta$ and the observed data y. We would like to calculate the likelihood of $\ell(\theta|y)$, but it is intractable or costly to compute. In this case, with pdBIL we have to find an auxiliary model (A) that we use to approximate the true likelihood in the following way:</p>
+<ul>
+  <li>First we have to generate points, denote with <strong>x*</strong> from the data generating process with the previously proposed parameters $\theta$.</li>
+  <li>
+    <p>Then we compute the MLE of the auxiliary likelihood under <strong>x</strong> to get the parameters denoted by $\phi$. \
+<script type="math/tex">\phi(x^{\star}) = argmax_{\phi} (x^{\star}|\phi)</script></p>
+  </li>
+  <li>Under these parameters \phi, we can now compute the likelihood of $\ell_{A}(y|\phi). It is desirable to have the auxiliary likelihood as close to the true likelihood as possible, in the sense of capturing relevant aspects of the model and the
+generated data.</li>
+</ul>
+
+<h1 id="first-stage-of-my-project">First stage of my project</h1>
+
+<p>In the first stage of my project I coded two models from Drovandi et al. using pdBIL. After calculating the likelihood of the auxiliary model, I used a Random Walk Metropolis-Hastings MCMC to sample from the target distribution, resulting in <a href="https://github.com/tpapp/HamiltonianABC.jl/tree/dorisz-toy-models">Toy models</a>. In this stage of the project, the methods I used were well-known.
+The purpose of the replication of the toy models from Drovandi et al. was to find out what issues we might face later on and to come up with a usable interface.
+This stage resulted in <a href="https://github.com/tpapp/HamiltonianABC.jl/">HamiltonianABC</a> (collaboration with Tamás K. Papp).</p>
+
+<h1 id="second-stage-of-my-project">Second stage of my project</h1>
+
+<p>After the first stage, I worked through Betancourt (2017) and did a code revision for Tamás K. Papp’s <a href="https://github.com/tpapp/DynamicHMC.jl">DynamicHMC.jl</a> which consisted of checking the code and its comparison with the paper. In addition to using the Hamiltonian Monte Carlo method, the usage of the forward mode automatic differentiation of the ForwardDiff package was the other main factor of this stage.
+The novelty of this project was to find a way to fit every component together in a way to get an efficient estimation out of it. The biggest issue was to define type-stable functions such that to accelerate the sampling process.</p>
+
+<h1 id="stochastic-volatility-model">Stochastic Volatility model</h1>
+
+<p>After the second stage, I coded economic models for the <a href="https://github.com/tpapp/DynamicHMC.jl">DynamicHMC.jl</a>. The Stochastic Volatility model is one of them. In the following section, I will go through the set up.</p>
+
+<p>The continuous-time version of the Ornstein-Ulenbeck Stochastic - volatiltiy model describes how the return at time t has mean zero and its volatility is governed by a continuous-time Ornstein-Ulenbeck process of its variance. The big fluctuation of the value of a financial product imply a varying volatility process. That is why we need stochastic elements in the model. As we can access data only in discrete time, it is natural to take the discretization of the model.</p>
+
+<p>The discrete-time version of the Ornstein-Ulenbeck Stochastic - volatility model:</p>
+
+<script type="math/tex; mode=display">y_{t} = x_{t} + \epsilon_{t} where \epsilon_{t} ∼ \Chi^{2}(1)</script>
+
+<script type="math/tex; mode=display">x_{t} = \rho * x_{t-1} + \sigma * \nu_{t}  where \nu_{t} ∼ N(0, 1)</script>
+
+<p>The discrete-time version was used as the data-generating process. Where yₜ denotes the logarithm of return, $x_{t}$ is the logarithm of variance, while $\epsilon_{t}$ and $\nu_{t}$ are unobserved noise terms.</p>
+
+<p>For the auxiliary model, we used two regressions. The first regression was an AR(2) process on the first differences, the second was also an AR(2) process on the original variables in order to capture the levels.</p>
+
+<div class="language-julia highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="s">"""
+    lag_matrix(xs, ns, K = maximum(ns))
+
+Matrix with differently lagged xs.
+"""</span>
+<span class="k">function</span><span class="nf"> lag_matrix</span><span class="x">(</span><span class="n">xs</span><span class="x">,</span> <span class="n">ns</span><span class="x">,</span> <span class="n">K</span> <span class="o">=</span> <span class="n">maximum</span><span class="x">(</span><span class="n">ns</span><span class="x">))</span>
+    <span class="n">M</span> <span class="o">=</span> <span class="n">Matrix</span><span class="x">{</span><span class="n">eltype</span><span class="x">(</span><span class="n">xs</span><span class="x">)}(</span><span class="n">length</span><span class="x">(</span><span class="n">xs</span><span class="x">)</span><span class="o">-</span><span class="n">K</span><span class="x">,</span> <span class="n">maximum</span><span class="x">(</span><span class="n">ns</span><span class="x">))</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="n">∈</span> <span class="n">ns</span>
+        <span class="n">M</span><span class="x">[:,</span> <span class="n">i</span><span class="x">]</span> <span class="o">=</span> <span class="n">lag</span><span class="x">(</span><span class="n">xs</span><span class="x">,</span> <span class="n">i</span><span class="x">,</span> <span class="n">K</span><span class="x">)</span>
+    <span class="k">end</span>
+    <span class="n">M</span>
+<span class="k">end</span>
+
+<span class="s">"first auxiliary regression y, X, meant to capture first differences"</span>
+<span class="k">function</span><span class="nf"> yX1</span><span class="x">(</span><span class="n">zs</span><span class="x">,</span> <span class="n">K</span><span class="x">)</span>
+    <span class="n">Δs</span> <span class="o">=</span> <span class="n">diff</span><span class="x">(</span><span class="n">zs</span><span class="x">)</span>
+    <span class="n">lag</span><span class="x">(</span><span class="n">Δs</span><span class="x">,</span> <span class="mi">0</span><span class="x">,</span> <span class="n">K</span><span class="x">),</span> <span class="n">hcat</span><span class="x">(</span><span class="n">lag_matrix</span><span class="x">(</span><span class="n">Δs</span><span class="x">,</span> <span class="mi">1</span><span class="x">:</span><span class="n">K</span><span class="x">,</span> <span class="n">K</span><span class="x">),</span> <span class="n">ones</span><span class="x">(</span><span class="n">eltype</span><span class="x">(</span><span class="n">zs</span><span class="x">),</span> <span class="n">length</span><span class="x">(</span><span class="n">Δs</span><span class="x">)</span><span class="o">-</span><span class="n">K</span><span class="x">),</span> <span class="n">lag</span><span class="x">(</span><span class="n">zs</span><span class="x">,</span> <span class="mi">1</span><span class="x">,</span> <span class="n">K</span><span class="o">+</span><span class="mi">1</span><span class="x">))</span>
+<span class="k">end</span>
+
+<span class="s">"second auxiliary regression y, X, meant to capture levels"</span>
+<span class="k">function</span><span class="nf"> yX2</span><span class="x">(</span><span class="n">zs</span><span class="x">,</span> <span class="n">K</span><span class="x">)</span>
+    <span class="n">lag</span><span class="x">(</span><span class="n">zs</span><span class="x">,</span> <span class="mi">0</span><span class="x">,</span> <span class="n">K</span><span class="x">),</span> <span class="n">hcat</span><span class="x">(</span><span class="n">ones</span><span class="x">(</span><span class="n">eltype</span><span class="x">(</span><span class="n">zs</span><span class="x">),</span> <span class="n">length</span><span class="x">(</span><span class="n">zs</span><span class="x">)</span><span class="o">-</span><span class="n">K</span><span class="x">),</span> <span class="n">lag_matrix</span><span class="x">(</span><span class="n">zs</span><span class="x">,</span> <span class="mi">1</span><span class="x">:</span><span class="n">K</span><span class="x">,</span> <span class="n">K</span><span class="x">))</span>
+<span class="k">end</span>
+</code></pre></div></div>
+<p>The AR(2) process of the first differences can be summarized by: \
+Given a series Y, it is the first difference of the first difference. The so called “change in the change” of Y at time t. The second difference of a discrete function can be interpreted as the second derivative of a continuous function, which is the “acceleration” of the function at a point in time t. In this model, we want to capture the “acceleration” of the logarithm of return.</p>
+
+<p>The AR(2) process of the original variables is needed to capture the effect of $\rho$. It turned out that the impact of ρ was rather weak in the AR(2) process of the first differences . That is why we need a second auxiliary model.</p>
+
+<p>I will now describe the required steps for the estimation of the parameters of interest in the stochastic volatility model with the Dynamic Hamiltonian Monte Carlo method. First we need a callable Julia object which gives back the logdensity and the gradient in DiffResult type. After that, we write a function that computes the density, then we calculate its gradient using the ForwardDiff package in a wrapper function.</p>
+
+<p>Required packages for the StochasticVolatility model:</p>
+<div class="language-julia highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+<span class="n">using</span> <span class="n">ArgCheck</span>
+<span class="n">using</span> <span class="n">Distributions</span>
+<span class="n">using</span> <span class="n">Parameters</span>
+<span class="n">using</span> <span class="n">DynamicHMC</span>
+<span class="n">using</span> <span class="n">StatsBase</span>
+<span class="n">using</span> <span class="n">Base</span><span class="o">.</span><span class="n">Test</span>
+<span class="n">using</span> <span class="n">ContinuousTransformations</span>
+<span class="n">using</span> <span class="n">DiffWrappers</span>
+<span class="k">import</span> <span class="n">Distributions</span><span class="x">:</span> <span class="n">Uniform</span><span class="x">,</span> <span class="n">InverseGamma</span>
+</code></pre></div></div>
+
+<ul>
+  <li>First, we define a structure. This structure should contain the observed data, the priors, the shocks and the transformation performed on the parameters, but the components may vary depending on the estimated model.</li>
+</ul>
+
+<div class="language-julia highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">struct</span> <span class="n">StochasticVolatility</span><span class="x">{</span><span class="n">T</span><span class="x">,</span> <span class="n">Prior_ρ</span><span class="x">,</span> <span class="n">Prior_σ</span><span class="x">,</span> <span class="n">Ttrans</span><span class="x">}</span>
+    <span class="s">"observed data"</span>
+    <span class="n">ys</span><span class="o">::</span><span class="n">Vector</span><span class="x">{</span><span class="n">T</span><span class="x">}</span>
+    <span class="s">"prior for ρ (persistence)"</span>
+    <span class="n">prior_ρ</span><span class="o">::</span><span class="n">Prior_ρ</span>
+    <span class="s">"prior for σ_v (volatility of volatility)"</span>
+    <span class="n">prior_σ</span><span class="o">::</span><span class="n">Prior_σ</span>
+    <span class="s">"χ^2 draws for simulation"</span>
+    <span class="n">ϵ</span><span class="o">::</span><span class="n">Vector</span><span class="x">{</span><span class="n">T</span><span class="x">}</span>
+    <span class="s">"Normal(0,1) draws for simulation"</span>
+    <span class="n">ν</span><span class="o">::</span><span class="n">Vector</span><span class="x">{</span><span class="n">T</span><span class="x">}</span>
+    <span class="s">"Transformations cached"</span>
+    <span class="n">transformation</span><span class="o">::</span><span class="n">Ttrans</span>
+<span class="k">end</span>
+
+</code></pre></div></div>
+<p>After specifying the data generating function and a couple of facilitator and additional functions for the particular model (whole module can be found in <em>src</em> folder), we can make the model structure callable, returning the log density. The logjac is needed because of the transformation we make on the parameters.</p>
+
+<div class="language-julia highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">function</span><span class="nf"> </span><span class="o">(</span><span class="n">pp</span><span class="o">::</span><span class="n">StochasticVolatility</span><span class="x">)(</span><span class="n">θ</span><span class="x">)</span>
+    <span class="nd">@unpack</span> <span class="n">ys</span><span class="x">,</span> <span class="n">prior_ρ</span><span class="x">,</span> <span class="n">prior_σ</span><span class="x">,</span> <span class="n">ν</span><span class="x">,</span> <span class="n">ϵ</span><span class="x">,</span> <span class="n">transformation</span> <span class="o">=</span> <span class="n">pp</span>
+    <span class="n">ρ</span><span class="x">,</span> <span class="n">σ</span> <span class="o">=</span> <span class="n">transformation</span><span class="x">(</span><span class="n">θ</span><span class="x">)</span>
+    <span class="n">logprior</span> <span class="o">=</span> <span class="n">logpdf</span><span class="x">(</span><span class="n">prior_ρ</span><span class="x">,</span> <span class="n">ρ</span><span class="x">)</span> <span class="o">+</span> <span class="n">logpdf</span><span class="x">(</span><span class="n">prior_σ</span><span class="x">,</span> <span class="n">σ</span><span class="x">)</span>
+    <span class="n">N</span> <span class="o">=</span> <span class="n">length</span><span class="x">(</span><span class="n">ϵ</span><span class="x">)</span>
+
+    <span class="c"># Generating xs, which is the latent volatility process</span>
+
+    <span class="n">xs</span> <span class="o">=</span> <span class="n">simulate_stochastic</span><span class="x">(</span><span class="n">ρ</span><span class="x">,</span> <span class="n">σ</span><span class="x">,</span> <span class="n">ϵ</span><span class="x">,</span> <span class="n">ν</span><span class="x">)</span>
+    <span class="n">Y_1</span><span class="x">,</span> <span class="n">X_1</span> <span class="o">=</span> <span class="n">yX1</span><span class="x">(</span><span class="n">xs</span><span class="x">,</span> <span class="mi">2</span><span class="x">)</span>
+    <span class="n">β₁</span> <span class="o">=</span> <span class="n">qrfact</span><span class="x">(</span><span class="n">X_1</span><span class="x">,</span> <span class="n">Val</span><span class="x">{</span><span class="n">true</span><span class="x">})</span> <span class="o">\</span> <span class="n">Y_1</span>
+    <span class="n">v₁</span> <span class="o">=</span> <span class="n">mean</span><span class="x">(</span><span class="n">abs2</span><span class="x">,</span>  <span class="n">Y_1</span> <span class="o">-</span> <span class="n">X_1</span><span class="o">*</span><span class="n">β₁</span><span class="x">)</span>
+    <span class="n">Y_2</span><span class="x">,</span> <span class="n">X_2</span> <span class="o">=</span> <span class="n">yX2</span><span class="x">(</span><span class="n">xs</span><span class="x">,</span> <span class="mi">2</span><span class="x">)</span>
+    <span class="n">β₂</span> <span class="o">=</span> <span class="n">qrfact</span><span class="x">(</span><span class="n">X_2</span><span class="x">,</span> <span class="n">Val</span><span class="x">{</span><span class="n">true</span><span class="x">})</span> <span class="o">\</span> <span class="n">Y_2</span>
+    <span class="n">v₂</span> <span class="o">=</span> <span class="n">mean</span><span class="x">(</span><span class="n">abs2</span><span class="x">,</span>  <span class="n">Y_2</span> <span class="o">-</span> <span class="n">X_2</span><span class="o">*</span><span class="n">β₂</span><span class="x">)</span>
+    <span class="c"># We work with first differences</span>
+    <span class="n">y₁</span><span class="x">,</span> <span class="n">X₁</span> <span class="o">=</span> <span class="n">yX1</span><span class="x">(</span><span class="n">ys</span><span class="x">,</span> <span class="mi">2</span><span class="x">)</span>
+    <span class="n">log_likelihood1</span> <span class="o">=</span> <span class="n">sum</span><span class="x">(</span><span class="n">logpdf</span><span class="o">.</span><span class="x">(</span><span class="n">Normal</span><span class="x">(</span><span class="mi">0</span><span class="x">,</span> <span class="n">√v₁</span><span class="x">),</span> <span class="n">y₁</span> <span class="o">-</span> <span class="n">X₁</span> <span class="o">*</span> <span class="n">β₁</span><span class="x">))</span>
+    <span class="n">y₂</span><span class="x">,</span> <span class="n">X₂</span> <span class="o">=</span> <span class="n">yX2</span><span class="x">(</span><span class="n">ys</span><span class="x">,</span> <span class="mi">2</span><span class="x">)</span>
+    <span class="n">log_likelihood2</span> <span class="o">=</span> <span class="n">sum</span><span class="x">(</span><span class="n">logpdf</span><span class="o">.</span><span class="x">(</span><span class="n">Normal</span><span class="x">(</span><span class="mi">0</span><span class="x">,</span> <span class="n">√v₂</span><span class="x">),</span> <span class="n">y₂</span> <span class="o">-</span> <span class="n">X₂</span> <span class="o">*</span> <span class="n">β₂</span><span class="x">))</span>
+    <span class="n">logprior</span> <span class="o">+</span> <span class="n">log_likelihood1</span> <span class="o">+</span> <span class="n">log_likelihood2</span> <span class="o">+</span> <span class="n">logjac</span><span class="x">(</span><span class="n">transformation</span><span class="x">,</span> <span class="n">θ</span><span class="x">)</span>
+<span class="k">end</span>
+</code></pre></div></div>
+<p>We need the transformations because the parameters are in the proper subset of $\Re^{n}$, but we want to use $\Re^{n}$. The ContinuousTransformation package is used for the transformations. We save the transformations such that the callable object stays type-stable which makes the process faster.</p>
+
+<p>$\nu$ and $\epsilon$ are random variables which we use after the transformation to simulate observation points. This way the simulated variables are continuous in the parameters and the posterior is differentiable.</p>
+
+<p>Given the defined functions, we can now start the estimation and sampling process:</p>
+
+<div class="language-julia highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">RNG</span> <span class="o">=</span> <span class="n">Base</span><span class="o">.</span><span class="n">Random</span><span class="o">.</span><span class="n">GLOBAL_RNG</span>
+<span class="c"># true parameters and observed data</span>
+<span class="n">ρ</span> <span class="o">=</span> <span class="mf">0.8</span>
+<span class="n">σ</span> <span class="o">=</span> <span class="mf">0.6</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">simulate_stochastic</span><span class="x">(</span><span class="n">ρ</span><span class="x">,</span> <span class="n">σ</span><span class="x">,</span> <span class="mi">10000</span><span class="x">)</span>
+<span class="c"># setting up the model</span>
+<span class="n">model</span> <span class="o">=</span> <span class="n">StochasticVolatility</span><span class="x">(</span><span class="n">y</span><span class="x">,</span> <span class="n">Uniform</span><span class="x">(</span><span class="o">-</span><span class="mi">1</span><span class="x">,</span> <span class="mi">1</span><span class="x">),</span> <span class="n">InverseGamma</span><span class="x">(</span><span class="mi">1</span><span class="x">,</span> <span class="mi">1</span><span class="x">),</span> <span class="mi">10000</span><span class="x">)</span>
+<span class="c"># we start the estimation process from the true values</span>
+<span class="n">θ₀</span> <span class="o">=</span> <span class="n">inverse</span><span class="x">(</span><span class="n">model</span><span class="o">.</span><span class="n">transformation</span><span class="x">,</span> <span class="x">(</span><span class="n">ρ</span><span class="x">,</span> <span class="n">σ</span><span class="x">))</span>
+<span class="c"># wrap for gradient calculations</span>
+<span class="n">fgw</span> <span class="o">=</span> <span class="n">ForwardGradientWrapper</span><span class="x">(</span><span class="n">model</span><span class="x">,</span> <span class="n">θ₀</span><span class="x">)</span>
+<span class="c"># sampling</span>
+<span class="n">sample</span><span class="x">,</span> <span class="n">tuned_sampler</span> <span class="o">=</span> <span class="n">NUTS_tune_and_mcmc</span><span class="x">(</span><span class="n">RNG</span><span class="x">,</span> <span class="n">fgw</span><span class="x">,</span> <span class="mi">5000</span><span class="x">;</span> <span class="n">q</span> <span class="o">=</span> <span class="n">θ₀</span><span class="x">)</span>
+</code></pre></div></div>
+
+<p>The following graphs show the results for the parameters:</p>
+
+<p><img src="/images/blog/2017-09-19-Hamiltonian-Indirect-Inference/rho_plot.png" alt="rho_plot" /></p>
+
+<p><img src="/images/blog/2017-09-19-Hamiltonian-Indirect-Inference/sigma_plot.png" alt="sigma_plot" /></p>
+
+<p>Analysing the graphs above, we can say that the posterior values are in rather close to the true values. Also worth mentioning that the priors do not affect the posterior values.</p>
+
+<h1 id="problems-that-i-have-faced-during-gsoc">Problems that I have faced during GSOC</h1>
+
+<p>1) <strong>Difficult auxiliary model</strong></p>
+
+<ul>
+  <li>The true model was the g-and-k quantile function described by Rayner and MacGillivray (2002).</li>
+  <li>The auxiliary model was a three component normal mixture model.</li>
+</ul>
+
+<p>We faced serious problems with this model. \
+First of all, I coded the MLE of the finite component normal mixture model, which computes the means, variances and weights of the normals given the observed data and the desired number of mixtures.
+With the g-and-k quantile function, I experienced the so called “isolation”, which means that one observation point is an outlier getting weight 1, the other observed points get weight $\theta$, which results in variance equal to $\theta$. There are ways to disentangle the problem of isolation, but the parameters of interests still did not converge to the true values. There is work to be done with this model.</p>
+
+<p>2) <strong>Type-stability issues</strong></p>
+
+<p>To use the automatic differentiation method efficiently, I had to code the functions to be type-stable, otherwise the sampling functions would have taken hours to run. See the following example:</p>
+
+<ul>
+  <li>This is not type-stable
+    <div class="language-julia highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="k">function</span><span class="nf"> simulate_stochastic</span><span class="x">(</span><span class="n">ρ</span><span class="x">,</span> <span class="n">σ</span><span class="x">,</span> <span class="n">ϵs</span><span class="x">,</span> <span class="n">νs</span><span class="x">)</span>
+<span class="n">N</span> <span class="o">=</span> <span class="n">length</span><span class="x">(</span><span class="n">ϵs</span><span class="x">)</span>
+<span class="nd">@argcheck</span> <span class="n">N</span> <span class="o">==</span> <span class="n">length</span><span class="x">(</span><span class="n">νs</span><span class="x">)</span>
+<span class="n">xs</span> <span class="o">=</span> <span class="n">Vector</span><span class="x">(</span><span class="n">N</span><span class="x">)</span>
+<span class="k">for</span> <span class="n">i</span> <span class="k">in</span> <span class="mi">1</span><span class="x">:</span><span class="n">N</span>
+    <span class="n">xs</span><span class="x">[</span><span class="n">i</span><span class="x">]</span> <span class="o">=</span> <span class="x">(</span><span class="n">i</span> <span class="o">==</span> <span class="mi">1</span><span class="x">)</span> <span class="o">?</span> <span class="n">νs</span><span class="x">[</span><span class="mi">1</span><span class="x">]</span><span class="o">*</span><span class="n">σ</span><span class="o">*</span><span class="x">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">ρ</span><span class="o">^</span><span class="mi">2</span><span class="x">)</span><span class="o">^</span><span class="x">(</span><span class="o">-</span><span class="mf">0.5</span><span class="x">)</span> <span class="x">:</span> <span class="x">(</span><span class="n">ρ</span><span class="o">*</span><span class="n">xs</span><span class="x">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="x">]</span> <span class="o">+</span> <span class="n">σ</span><span class="o">*</span><span class="n">νs</span><span class="x">[</span><span class="n">i</span><span class="x">])</span>
+<span class="k">end</span>
+<span class="n">xs</span> <span class="o">+</span> <span class="n">log</span><span class="o">.</span><span class="x">(</span><span class="n">ϵs</span><span class="x">)</span> <span class="o">+</span> <span class="mf">1.27</span>
+<span class="k">end</span>
+</code></pre></div>    </div>
+  </li>
+  <li>This is type-stable
+    <div class="language-julia highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">function</span><span class="nf"> simulate_stochastic</span><span class="x">(</span><span class="n">ρ</span><span class="x">,</span> <span class="n">σ</span><span class="x">,</span> <span class="n">ϵs</span><span class="x">,</span> <span class="n">νs</span><span class="x">)</span>
+  <span class="n">N</span> <span class="o">=</span> <span class="n">length</span><span class="x">(</span><span class="n">ϵs</span><span class="x">)</span>
+  <span class="nd">@argcheck</span> <span class="n">N</span> <span class="o">==</span> <span class="n">length</span><span class="x">(</span><span class="n">νs</span><span class="x">)</span>
+  <span class="n">x₀</span> <span class="o">=</span> <span class="n">νs</span><span class="x">[</span><span class="mi">1</span><span class="x">]</span><span class="o">*</span><span class="n">σ</span><span class="o">*</span><span class="x">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">ρ</span><span class="o">^</span><span class="mi">2</span><span class="x">)</span><span class="o">^</span><span class="x">(</span><span class="o">-</span><span class="mf">0.5</span><span class="x">)</span>
+<span class="err"> </span> <span class="err"> </span> <span class="n">xs</span> <span class="o">=</span> <span class="n">Vector</span><span class="x">{</span><span class="nb">typeof</span><span class="x">(</span><span class="n">x₀</span><span class="x">)}(</span><span class="n">N</span><span class="x">)</span>
+<span class="err"> </span> <span class="err"> </span> <span class="k">for</span> <span class="n">i</span> <span class="k">in</span> <span class="mi">1</span><span class="x">:</span><span class="n">N</span>
+<span class="err"> </span> <span class="err"> </span> <span class="err"> </span> <span class="err"> </span> <span class="n">xs</span><span class="x">[</span><span class="n">i</span><span class="x">]</span> <span class="o">=</span> <span class="x">(</span><span class="n">i</span> <span class="o">==</span> <span class="mi">1</span><span class="x">)</span> <span class="o">?</span> <span class="n">x₀</span> <span class="x">:</span> <span class="x">(</span><span class="n">ρ</span><span class="o">*</span><span class="n">xs</span><span class="x">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="x">]</span> <span class="o">+</span> <span class="n">σ</span><span class="o">*</span><span class="n">νs</span><span class="x">[</span><span class="n">i</span><span class="x">])</span>
+<span class="err"> </span> <span class="err"> </span> <span class="k">end</span>
+  <span class="n">xs</span> <span class="o">+</span> <span class="n">log</span><span class="o">.</span><span class="x">(</span><span class="n">ϵs</span><span class="x">)</span> <span class="o">+</span> <span class="mf">1.27</span>
+<span class="k">end</span>
+</code></pre></div>    </div>
+  </li>
+</ul>
+
+<h1 id="future-work">Future work</h1>
+
+<ul>
+  <li>
+    <p>More involved models</p>
+  </li>
+  <li>
+    <p>Solving isolation in the three component normal mixture model</p>
+  </li>
+  <li>
+    <p>Updating shocks in every iteration</p>
+  </li>
+  <li>
+    <p>Optimization</p>
+  </li>
+</ul>
+
+<h1 id="references">References</h1>
+<ul>
+  <li>Betancourt, M. (2017). A Conceptual Introduction to Hamiltonian Monte Carlo.</li>
+  <li>Drovandi, C. C., Pettitt, A. N., &amp; Lee, A. (2015). Bayesian indirect inference using a parametric auxiliary model.</li>
+  <li>Gallant, A. R. and McCulloch, R. E. (2009). On the Determination of General Scientific Models With Application to Asset Pricing</li>
+  <li>Martin, G. M., McCabe, B. P. M., Frazier, D. T., Maneesoonthorn, W. and Robert, C. P. (2016). Auxiliary Likelihood-Based Approximate Bayesian Computation in State Space Models</li>
+  <li>Rayner, G. D. and MacGillivray, H. L. (2002). Numerical maximum likelihood estimation for the g-and-k and generalized g-and-h distributions. In: Statistical Computation 12 57–75.</li>
+  <li>Smith, A. A. (2008). “Indirect inference”. In: New Palgrave Dictionary of Economics, 2nd Edition (forthcoming).</li>
+  <li>Smith, A. A. (1993). “Estimating nonlinear time-series models using simulated vector autoregressions”. In:
+Journal of Applied Econometrics 8.S1.</li>
+</ul>
+
+
+</div>
+
+
+
+<div class="footer">
+Julia is a <a href="https://numfocus.org/projects/index.html">NumFocus project</a>.
+We thank <a href="https://fastly.com">Fastly</a> for their generous infrastructural support.
+<a href="https://github.com/JuliaLang/julialang.github.com/edit/master/blog/_posts/2017-09-19-Hamiltonian-Indirect-Inference.md">Edit this page on GitHub.</a>
+</div>
+
+<!--Flipcause Integration v3.0// Flipcause Integration Instructions:
+    Install the following code block once in the website Header (after <head> tag) -->
+
+<style>
+
+  .fc-black_overlay{
+  display:none; position: fixed; z-index:1000001; top: 0%;left: 0%;width: 100%;height: 100%;
+  background-color: black; filter: alpha(opacity=50); cursor:pointer; opacity:0.5;
+  }
+
+  .fc-white_content {
+  opacity:1; display:none; margin-top: -320px; margin-left: -485px; width:970px; height:640px;
+  position:fixed; top:50%; left:50%; border: none;z-index:1000002;overflow: auto;
+  }
+
+  .fc-main-box{
+  opacity:1; display:none; margin:15px auto 0 auto; width:930px; position:relative; z-index:1000003;
+  }
+
+  .fc-widget_close{
+  opacity:1; content:url(http://i1338.photobucket.com/albums/o691/WeCause/X_zpse4a7e538.png);
+  position:absolute; z-index=1000004; right:-16px; top:-16px; display:block; cursor:pointer;
+  }
+
+  .floating_button{
+  display: block; margin-top: 0px; margin-left: 0px; width:auto ; height: auto;
+  position:fixed; z-index:999999; overflow: auto;
+  }
+
+  @keyframes backfadesin {
+  from { opacity:0; }
+  to {opacity:.5;}
+  }
+
+  @-moz-keyframes backfadesin {
+  from { opacity:0; }
+  to {opacity:.5;}
+  }
+
+  @-webkit-keyframes backfadesin {
+  from { opacity:0; }
+  to {opacity:.5;}
+  }
+
+  @-o-keyframes backfadesin {
+  from { opacity:0; }
+  to {opacity:.5;}
+  }
+
+
+  @-ms-keyframes backfadesin {
+  from { opacity:0; }
+  to {opacity:.5;}
+  }
+
+  @keyframes fadesin {
+  0%{ opacity:0; }
+  50%{ opacity:0; }
+  75% {opacity: 0; transform: translateY(20px);}
+  100% {opacity: 1; transform: translateY(0);}
+  }
+
+  @-moz-keyframes fadesin {
+  0%{ opacity:0; }
+  50%{ opacity:0; }
+  75% {opacity: 0; -moz-transform: translateY(20px);}
+  100% {opacity: 1; -moz-transform: translateY(0);}
+  }
+
+  @-webkit-keyframes fadesin {
+  0%{ opacity:0; }
+  50%{ opacity:0; }
+  75% {opacity: 0; -webkit-transform: translateY(20px);}
+  100% {opacity: 1; -webkit-transform: translateY(0);}
+  }
+
+  @-o-keyframes fadesin {
+  0%{ opacity:0; }
+  50%{ opacity:0; }
+  75% {opacity: 0; -o-transform: translateY(20px);}
+  100% {opacity: 1; -o-transform: translateY(0);}
+  }
+
+  @-ms-keyframes fadesin {
+  0%{ opacity:0; }
+  50%{ opacity:0; }
+  75% {opacity: 0; -ms-transform: translateY(20px);}
+  100% {opacity: 1; -ms-transform: translateY(0);}
+  }
+
+</style>
+
+<script>
+
+  function open_window(cause_id) {
+  var  protocol=String(document.location.protocol);
+  var new_url;
+  if( /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)){
+  new_url="https://www.flipcause.com/widget/"+cause_id
+  window.open(new_url);
+  }
+
+  else {
+  document.getElementById("fc-fade").style.display = "block";
+  document.getElementById("fc-fade").style.webkitAnimation = "backfadesin 1s";
+  document.getElementById("fc-fade").style.animation = "backfadesin 1s";
+  document.getElementById("fc-fade").style.mozAnimation = "backfadesin 1s";
+  document.getElementById("fc-light").style.display = "block";
+  document.getElementById("fc-light").style.webkitAnimation = "fadesin 1.5s";
+  document.getElementById("fc-light").style.animation = "fadesin 1.5s";
+  document.getElementById("fc-light").style.mozAnimation = "fadesin 1.5s";
+  document.getElementById("fc-main").style.display = "block";
+  document.getElementById("fc-main").style.webkitAnimation = "fadesin 1.5s";
+  document.getElementById("fc-main").style.animation = "fadesin 1.5s";
+  document.getElementById("fc-main").style.mozAnimation = "fadesin 1.5s";
+  document.getElementById("fc-close").style.display = "block";
+  document.getElementById("fc-close").style.webkitAnimation = "fadesin 1.5s";
+  document.getElementById("fc-close").style.animation = "fadesin 1.5s";
+  document.getElementById("fc-close").style.mozAnimation = "fadesin 1.5s";
+  document.getElementById("fc-myFrame").style.display = "block";
+  document.getElementById("fc-myFrame").style.webkitAnimation = "fadesin 1.5s";
+  document.getElementById("fc-myFrame").style.animation = "fadesin 1.5s";
+  document.getElementById("fc-myFrame").style.mozAnimation = "fadesin 1.5s";
+  document.getElementById("fc-myFrame").src="https://www.flipcause.com/widget/"+cause_id;
+  }
+  }
+
+
+  function close_window() {
+  document.getElementById("fc-fade").style.display="none";
+  document.getElementById("fc-light").style.display="none";
+  document.getElementById("fc-main").style.display="none";
+  document.getElementById("fc-close").style.display="none";
+  document.getElementById("fc-myFrame").style.display="none";
+  }
+
+</script>
+
+<div id="fc-fade" class="fc-black_overlay" onclick="close_window()"></div>
+<div id="fc-light" class="fc-white_content">
+  <div id="fc-main" class="fc-main-box">
+    <div id="fc-close" class="fc-widget_close" onclick="close_window()">
+      </div><iframe id="fc-myFrame" iframe height="580" width="925" style="border: 0;
+                                                                           border-radius:5px 5px 5px 5px; box-shadow:0 0 8px rgba(0, 0, 0, 0.5);" scrolling="no" src=""></iframe></div>
+</div>
+
+<!--END Flipcause Main Integration Code-->
+
+<div style="background:#ccc; border-radius:0px 0px 0px 0px;font-weight:normal; font-family:Arial, Helvetica, sans-serif;border:none;box-shadow:none;left: 50%; margin-left:-72.5px;clear: both;display: block; width:145px;height:45px; line-height:2.8; position:relative; font-size:16px;text-align:center; cursor:pointer;color:#fff;text-decoration: none; z-index:1" onclick="open_window('MjI1Nw==')">Donate Now</div>
+</div>
+
+</body>
+</html>

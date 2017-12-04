@@ -19,22 +19,22 @@
 <div id="site" class="site">
 <p>Define the following function:</p>
 
-<pre><code>function sumrange_par(r::Range1{Int})
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>function sumrange_par(r::Range1{Int})
     c::Int64 = 0
     c = @parallel (+) for i = r
         convert(Int64,i)
     end
     c
 end
-</code></pre>
+</code></pre></div></div>
 
 <p>Then from the command line execute</p>
 
-<pre><code>julia&gt; sumrange_par(1:1000000)
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>julia&gt; sumrange_par(1:1000000)
 500000500000
-</code></pre>
+</code></pre></div></div>
 
-<p>The <code>convert</code> step is necessary only on a 32-bit machine.</p>
+<p>The <code class="highlighter-rouge">convert</code> step is necessary only on a 32-bit machine.</p>
 
 <div class="footer">
 Julia is a <a href="https://numfocus.org/projects/index.html">NumFocus project</a>.

@@ -96,8 +96,6 @@
       
       
       
-        
-      
       <li><a href="https://github.com/JuliaLang/julia" class="">소스코드</a></li>
   
       
@@ -118,8 +116,6 @@
       
       
       
-      
-        
       
       <li><a href="http://pkg.julialang.org/" class="">패키지</a></li>
   
@@ -176,8 +172,6 @@
       
       
       
-      
-        
       
       <li><a href="http://juliacon.org" class="">줄리아콘</a></li>
   
@@ -316,7 +310,7 @@ moment, many of these are implemented in external libraries such as
 implementing these functions in native Julia (possibly utilising the work in
 <a href="https://github.com/nolta/SpecialFunctions.jl">SpecialFunctions.jl</a>),
 seeking out opportunties for possible improvements along the way, such as supporting
-<code>Float32</code> and <code>BigFloat</code>, exploiting fused multiply-add operations, and improving errors
+<code class="highlighter-rouge">Float32</code> and <code class="highlighter-rouge">BigFloat</code>, exploiting fused multiply-add operations, and improving errors
 and boundary cases.</p>
 
 <p><strong>Recommended Skills</strong>: A strong understanding of calculus.</p>
@@ -342,7 +336,7 @@ and boundary cases.</p>
 <h2 id="a-standards-compliant-interval-arithmetic-library">A standards-compliant interval arithmetic library</h2>
 
 <p>Interval arithmetic provides a way to perform computations with floating-point numbers that are guaranteed to be correct, by
-wrapping each operand in an interval. <a href="https://github.com/dpsanders/ValidatedNumerics.jl"><code>ValidatedNumerics.jl</code></a> is a native Julia package providing interval functions that has a significant amount of functionality.</p>
+wrapping each operand in an interval. <a href="https://github.com/dpsanders/ValidatedNumerics.jl"><code class="highlighter-rouge">ValidatedNumerics.jl</code></a> is a native Julia package providing interval functions that has a significant amount of functionality.</p>
 
 <p>This project proposes to achieve compliance of this package with the <a href="https://standards.ieee.org/findstds/standard/1788-2015.html">IEEE 1788-2015 Standard</a>, which specifies how interval arithmetic packages should behave. This would make the package one of the first few packages to be fully compliant with the standard. It would involve adding some functions, writing documentation, improving the test suite, writing a compliance document, and overhauling and simplifying the code that already exists. The goal is to make this package a reference for interval arithmetic implementations.</p>
 
@@ -350,15 +344,15 @@ wrapping each operand in an interval. <a href="https://github.com/dpsanders/Vali
 
 <p><strong>Expected results</strong>: A library that fulfills the IEEE 1788-2015 standard.</p>
 
-<p><strong>Mentors:</strong> <a href="https://github.com/dpsanders">David P. Sanders</a>, <a href="https://github.com/lbenet">Luis Benet</a>
-## Inverse (or “backward”) functions and contractors for interval constraint propagation</p>
+<p><strong>Mentors:</strong> <a href="https://github.com/dpsanders">David P. Sanders</a>, <a href="https://github.com/lbenet">Luis Benet</a></p>
+<h2 id="inverse-or-backward-functions-and-contractors-for-interval-constraint-propagation">Inverse (or “backward”) functions and contractors for interval constraint propagation</h2>
 
 <p>One important application of interval arithmetic is to the characterization of sets that satisfy certain inequalities (“set inversion”), as used, for example, in optimization, robotics, and the proof of mathematical theorems via rigorous numerical calculation. The state-of-the-art technique for this is interval constraint propagation, in particular the concept of “contractors”.
-The package <a href="https://github.com/dpsanders/IntervalConstraintProgramming.jl"><code>IntervalConstraintProgramming.jl</code></a> contains basic interval constraint propagation tools for polynomials.</p>
+The package <a href="https://github.com/dpsanders/IntervalConstraintProgramming.jl"><code class="highlighter-rouge">IntervalConstraintProgramming.jl</code></a> contains basic interval constraint propagation tools for polynomials.</p>
 
-<p>This project will develop a package <code>IntervalContractors.jl</code> to refactor out the part of the package dealing with contractors and inverse functions, which will enable the inversion of functions involving transcendental functions such as <code>sin</code> and <code>exp</code>.</p>
+<p>This project will develop a package <code class="highlighter-rouge">IntervalContractors.jl</code> to refactor out the part of the package dealing with contractors and inverse functions, which will enable the inversion of functions involving transcendental functions such as <code class="highlighter-rouge">sin</code> and <code class="highlighter-rouge">exp</code>.</p>
 
-<p>To do so, it will be necessary to implement inverse functions for the standard functions, such as <code>sin</code>, <code>exp</code>, etc, as well as the corresponding contractors. These inverse functions return sets, expressed as intervals, that contain the inverse image of a given set. Two versions of these functions will be produced: one that returns an interval, and the other that may return the union of several disjoint intervals.</p>
+<p>To do so, it will be necessary to implement inverse functions for the standard functions, such as <code class="highlighter-rouge">sin</code>, <code class="highlighter-rouge">exp</code>, etc, as well as the corresponding contractors. These inverse functions return sets, expressed as intervals, that contain the inverse image of a given set. Two versions of these functions will be produced: one that returns an interval, and the other that may return the union of several disjoint intervals.</p>
 
 <p><strong>Recommended Skills</strong>: Mathematical background including basic set theory.</p>
 

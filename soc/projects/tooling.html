@@ -96,8 +96,6 @@
       
       
       
-        
-      
       <li><a href="https://github.com/JuliaLang/julia" class="">소스코드</a></li>
   
       
@@ -118,8 +116,6 @@
       
       
       
-      
-        
       
       <li><a href="http://pkg.julialang.org/" class="">패키지</a></li>
   
@@ -176,8 +172,6 @@
       
       
       
-      
-        
       
       <li><a href="http://juliacon.org" class="">줄리아콘</a></li>
   
@@ -257,11 +251,11 @@ ready(function () {
 <ul>
   <li>Automatically reducing its own overhead, to avoid slowing down tight loops significantly,</li>
   <li>Supporting cancellation so that long-running computations can be safely interrupted,</li>
-  <li>Supporting nested loops like <code>for i = 1:10, j = 1:10</code>,</li>
+  <li>Supporting nested loops like <code class="highlighter-rouge">for i = 1:10, j = 1:10</code>,</li>
   <li>and having a real fallback in the console, rather than simply falling through.</li>
 </ul>
 
-<p>These issues prevent package authors from using <code>@progress</code> over loops without modification, in many cases. This project would therefore involve improving on the above fronts (roughly in that order of priority).</p>
+<p>These issues prevent package authors from using <code class="highlighter-rouge">@progress</code> over loops without modification, in many cases. This project would therefore involve improving on the above fronts (roughly in that order of priority).</p>
 
 <p><strong>Expected Results</strong>: Patches to Juno.jl implementing the above improvements.</p>
 
@@ -271,7 +265,7 @@ ready(function () {
 
 <h2 id="package-installation-ui">Package installation UI</h2>
 
-<p>Juno could provide a simple way to browse available packages and view what’s installed on their system. To start with, this project could simply provide a GUI that reads in package data from <code>~/.julia</code>, including available packages and installed versions, and buttons which call the relevant <code>Pkg.*</code> methods.</p>
+<p>Juno could provide a simple way to browse available packages and view what’s installed on their system. To start with, this project could simply provide a GUI that reads in package data from <code class="highlighter-rouge">~/.julia</code>, including available packages and installed versions, and buttons which call the relevant <code class="highlighter-rouge">Pkg.*</code> methods.</p>
 
 <p>This could also be extended by having metadata about the package, such as a readme, github stars, activity and so on. To support this we probably need a <a href="http://pkg.julialang.org">pkg.julialang.org</a> style API which provides the info in JSON format.</p>
 
@@ -285,7 +279,7 @@ ready(function () {
 
 <p>The foundation for tools like refactoring, linting or autoformatting is a powerful framework for reading and writing Julia code while preserving various features of the source code; comments, original formatting, and perhaps even syntax errors. This could build on the work in <a href="https://github.com/JuliaLang/JuliaParser.jl">JuliaParser.jl</a>.</p>
 
-<p>Related would be various tools for doing static or dynamic analysis of Julia code in order to find errors. A simple example would be linting indentation; combined with information from the parser, this could be a powerful way to reduce beginner frustration over <code>unexpected )</code> style error messages.</p>
+<p>Related would be various tools for doing static or dynamic analysis of Julia code in order to find errors. A simple example would be linting indentation; combined with information from the parser, this could be a powerful way to reduce beginner frustration over <code class="highlighter-rouge">unexpected )</code> style error messages.</p>
 
 <p><strong>Expected Results</strong>: Tools for source-to-source transformations of Julia code, preserving comments and whitespace.</p>
 
@@ -297,7 +291,7 @@ ready(function () {
 
 <p>Concepts relevant to Julia code’s performance, like ‘type-stability’, are often implicit in written code, making it hard for new users in particular to catch slow code early on. However, this also represents a challenge for static analysis, since in general concrete type information won’t be available until runtime.</p>
 
-<p>A potential solution to this is to hook into function calls (users will most likely call a function with test inputs after writing it) and then use dynamically-available information, such as the output of <code>code_typed</code>, to find performance issues such as non-concrete types, use of global variables etc, and present these as lint warnings in the IDE.</p>
+<p>A potential solution to this is to hook into function calls (users will most likely call a function with test inputs after writing it) and then use dynamically-available information, such as the output of <code class="highlighter-rouge">code_typed</code>, to find performance issues such as non-concrete types, use of global variables etc, and present these as lint warnings in the IDE.</p>
 
 <p>While static analysis has long been used as a tool for understanding and finding problems in code, the use of dynamically available information is unexplored (with the exception of tracing JIT compilers, which demonstrate the power of the concept). This project has plenty of interesting extensions and could have the most interesting long-term implications.</p>
 

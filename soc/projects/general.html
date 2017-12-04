@@ -96,8 +96,6 @@
       
       
       
-        
-      
       <li><a href="https://github.com/JuliaLang/julia" class="">소스코드</a></li>
   
       
@@ -118,8 +116,6 @@
       
       
       
-      
-        
       
       <li><a href="http://pkg.julialang.org/" class="">패키지</a></li>
   
@@ -176,8 +172,6 @@
       
       
       
-      
-        
       
       <li><a href="http://juliacon.org" class="">줄리아콘</a></li>
   
@@ -250,7 +244,7 @@ ready(function () {
 
 <p>Julia’s functions for getting and setting the clipboard are currently limited to text; it would be useful to extend them to allow the transfer of other data (for example, spreadsheet data or images).</p>
 
-<p><strong>Expected Results</strong>: Extensible <code>clipboard()</code> and <code>clipboard(x)</code> functions to get and set the richest possible representation of the system clipboard data, as well as methods for specific types.</p>
+<p><strong>Expected Results</strong>: Extensible <code class="highlighter-rouge">clipboard()</code> and <code class="highlighter-rouge">clipboard(x)</code> functions to get and set the richest possible representation of the system clipboard data, as well as methods for specific types.</p>
 
 <p><strong>Recommended skills</strong>: Interfacing with C from Julia, clipboard APIs for different platforms. Familiarity with FileIO.jl.</p>
 
@@ -304,7 +298,7 @@ ready(function () {
 
 <h2 id="expanding-the-reach-of-interactjl-with-webiojl">Expanding the reach of Interact.jl with WebIO.jl</h2>
 
-<p><a href="https://github.com/JuliaGizmos/Interact.jl">Interact.jl</a>, host of the popular <code>@manipulate</code> macro, is a package for interacting with Julia code using UI widgets. It currently has a couple of serious limitations:</p>
+<p><a href="https://github.com/JuliaGizmos/Interact.jl">Interact.jl</a>, host of the popular <code class="highlighter-rouge">@manipulate</code> macro, is a package for interacting with Julia code using UI widgets. It currently has a couple of serious limitations:</p>
 
 <ol>
   <li>It only works inside IJulia.</li>
@@ -315,11 +309,11 @@ ready(function () {
 
 <p>This project involves rewriting Interact.jl using <a href="https://github.com/shashi/WebIO.jl">WebIO.jl</a> to make it available on more front-ends than just IJulia.</p>
 
-<p>It is a great opportunity to rethink what a package for manipulating interactive output could do. For example: can one interactively play with output from a package like Compose.jl using <code>@manipulate</code> or a similar construct (e.g. move a circle or draw a rectangle)? What would Compose.jl minimally have to do to support such interactions? How can Interact.jl help? Another scenario: can PlotlyJS use Interact.jl/WebIO.jl to support <a href="http://www.highcharts.com/demo/column-drilldown">drill down</a> charts so that data can be loaded lazily from Julia as and when the user requests it? Can the state of the spreadsheet from DataFrames.jl be synced with a PlotlyJS plot?…</p>
+<p>It is a great opportunity to rethink what a package for manipulating interactive output could do. For example: can one interactively play with output from a package like Compose.jl using <code class="highlighter-rouge">@manipulate</code> or a similar construct (e.g. move a circle or draw a rectangle)? What would Compose.jl minimally have to do to support such interactions? How can Interact.jl help? Another scenario: can PlotlyJS use Interact.jl/WebIO.jl to support <a href="http://www.highcharts.com/demo/column-drilldown">drill down</a> charts so that data can be loaded lazily from Julia as and when the user requests it? Can the state of the spreadsheet from DataFrames.jl be synced with a PlotlyJS plot?…</p>
 
-<p>While these are all interesting questions to consider, the scope of this package is only to provide basic widgets (such as those in Interact.jl) and re-implement the <code>@manipulate</code> macro on top of them.</p>
+<p>While these are all interesting questions to consider, the scope of this package is only to provide basic widgets (such as those in Interact.jl) and re-implement the <code class="highlighter-rouge">@manipulate</code> macro on top of them.</p>
 
-<p><strong>Expected Results</strong>: A package with basic UI widgets built on top of WebIO.jl, <code>@manipulate</code> macro with at least the same features as it does now.</p>
+<p><strong>Expected Results</strong>: A package with basic UI widgets built on top of WebIO.jl, <code class="highlighter-rouge">@manipulate</code> macro with at least the same features as it does now.</p>
 
 <p><strong>Recommended Skills</strong>: writing generic Julia code and modular JavaScript code, writing asynchronous programs in Julia. Good aesthetic sense with UIs is a bonus!</p>
 

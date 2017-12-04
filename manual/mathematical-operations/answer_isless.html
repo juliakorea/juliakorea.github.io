@@ -17,14 +17,14 @@
 </head>
 <body>
 <div id="site" class="site">
-<p><code>isless(x,y)</code> uses the following rules:</p>
+<p><code class="highlighter-rouge">isless(x,y)</code> uses the following rules:</p>
 
 <ul>
-  <li>If both <code>x</code> and <code>y</code> are non-<code>NaN</code>, <code>isless(x,y)</code> is equivalent to <code>x &lt; y</code> (exception: <code>isless</code> distinguishes <code>-0.0</code> from <code>+0.0</code>)</li>
-  <li><code>NaN</code> comes after all other numbers, including <code>Inf</code></li>
+  <li>If both <code class="highlighter-rouge">x</code> and <code class="highlighter-rouge">y</code> are non-<code class="highlighter-rouge">NaN</code>, <code class="highlighter-rouge">isless(x,y)</code> is equivalent to <code class="highlighter-rouge">x &lt; y</code> (exception: <code class="highlighter-rouge">isless</code> distinguishes <code class="highlighter-rouge">-0.0</code> from <code class="highlighter-rouge">+0.0</code>)</li>
+  <li><code class="highlighter-rouge">NaN</code> comes after all other numbers, including <code class="highlighter-rouge">Inf</code></li>
 </ul>
 
-<p><code>&lt;</code> follows IEEE 754 standards, whereas <code>isless</code> operates more directly on the bit representation.  If you’re curious, you can find the definitions of all these functions in the <code>float.jl</code> file.</p>
+<p><code class="highlighter-rouge">&lt;</code> follows IEEE 754 standards, whereas <code class="highlighter-rouge">isless</code> operates more directly on the bit representation.  If you’re curious, you can find the definitions of all these functions in the <code class="highlighter-rouge">float.jl</code> file.</p>
 
 <div class="footer">
 Julia is a <a href="https://numfocus.org/projects/index.html">NumFocus project</a>.

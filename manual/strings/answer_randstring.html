@@ -17,14 +17,14 @@
 </head>
 <body>
 <div id="site" class="site">
-<pre><code>function randstring(len::Int)
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>function randstring(len::Int)
     const cset = char([0x30:0x39,0x41:0x5a,0x61:0x7a])
 const strset = convert(ASCIIString,strcat(cset...))
     index = int(ceil(strlen(strset)*rand(len)))
     s = strset[index]
     return s
 end
-</code></pre>
+</code></pre></div></div>
 
 <div class="footer">
 Julia is a <a href="https://numfocus.org/projects/index.html">NumFocus project</a>.

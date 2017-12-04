@@ -96,8 +96,6 @@
       
       
       
-        
-      
       <li><a href="https://github.com/JuliaLang/julia" class="">소스코드</a></li>
   
       
@@ -118,8 +116,6 @@
       
       
       
-      
-        
       
       <li><a href="http://pkg.julialang.org/" class="">패키지</a></li>
   
@@ -176,8 +172,6 @@
       
       
       
-      
-        
       
       <li><a href="http://juliacon.org" class="">줄리아콘</a></li>
   
@@ -258,13 +252,13 @@ ready(function () {
 
 <h2 id="simple-persistent-distributed-storage">Simple persistent distributed storage</h2>
 
-<p>This project proposes to implement a very simple persistent storage mechanism for Julia variables so that data can be saved to and loaded from disk with a consistent interface that is agnostic of the underlying storage layer. Data will be tagged with a minimal amount of metadata by default to support type annotations, time-stamped versioning and other user-specifiable tags, not unlike the <code>git stash</code> mechanism for storing blobs. The underlying engine for persistent storage should be generic and interoperable with any reasonable choice of binary blob storage mechanism, e.g. MongoDB, ODBC, or HDFS. Of particular interest will be persistent storage for distributed objects such as <code>DArray</code>s, and making use of the underlying storage engine’s mechanisms for data movement and redundant storage for such data.</p>
+<p>This project proposes to implement a very simple persistent storage mechanism for Julia variables so that data can be saved to and loaded from disk with a consistent interface that is agnostic of the underlying storage layer. Data will be tagged with a minimal amount of metadata by default to support type annotations, time-stamped versioning and other user-specifiable tags, not unlike the <code class="highlighter-rouge">git stash</code> mechanism for storing blobs. The underlying engine for persistent storage should be generic and interoperable with any reasonable choice of binary blob storage mechanism, e.g. MongoDB, ODBC, or HDFS. Of particular interest will be persistent storage for distributed objects such as <code class="highlighter-rouge">DArray</code>s, and making use of the underlying storage engine’s mechanisms for data movement and redundant storage for such data.</p>
 
 <h2 id="dynamic-distributed-execution-for-data-parallel-tasks-in-julia">Dynamic distributed execution for data parallel tasks in Julia</h2>
 
 <p>Distributed computation frameworks like Hadoop/MapReduce have demonstrated the usefulness of an abstraction layer that takes care of low level concurrency concerns such as atomicity and fine-grained synchronization, thus allowing users to concentrate on task-level decomposition of extremely large problems such as massively distributed text processing. However, the tree-based scatter/gather design of MapReduce limits its usefulness for general purpose data parallelism, and in particular poses significant restrictions on the implementation of iterative algorithms.</p>
 
-<p>This project proposal is to implement a native Julia framework for distributed execution for general purpose data parallelism, using dynamic, runtime-generated general task graphs which are flexible enough to describe multiple classes of parallel algorithms. Students will be expected to weave together native Julia parallelism constructs such as the <code>ClusterManager</code> for massively parallel execution, and automate the handling of data dependencies using native Julia <code>RemoteRefs</code> as remote data futures and handles. Students will also be encouraged to experiment with novel scheduling algorithms.</p>
+<p>This project proposal is to implement a native Julia framework for distributed execution for general purpose data parallelism, using dynamic, runtime-generated general task graphs which are flexible enough to describe multiple classes of parallel algorithms. Students will be expected to weave together native Julia parallelism constructs such as the <code class="highlighter-rouge">ClusterManager</code> for massively parallel execution, and automate the handling of data dependencies using native Julia <code class="highlighter-rouge">RemoteRefs</code> as remote data futures and handles. Students will also be encouraged to experiment with novel scheduling algorithms.</p>
 
 <h2 id="gpuarrays">GPUArrays</h2>
 

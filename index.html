@@ -89,14 +89,12 @@
       
       
       
-      <li><a href="/" class="">홈</a></li>
+      <li><a href="/" class="active">홈</a></li>
   
       
       
       
       
-      
-        
       
       <li><a href="https://github.com/JuliaLang/julia" class="">소스코드</a></li>
   
@@ -118,8 +116,6 @@
       
       
       
-      
-        
       
       <li><a href="http://pkg.julialang.org/" class="">패키지</a></li>
   
@@ -176,8 +172,6 @@
       
       
       
-      
-        
       
       <li><a href="http://juliacon.org" class="">줄리아콘</a></li>
   
@@ -321,7 +315,7 @@ We encourage you to skim the code to get a sense for how easy or difficult numer
 <center>
 <div class="figure" style="align: center; width: 77%">
 <?xml version="1.0" encoding="UTF-8"?>
-<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:gadfly="http://www.gadflyjl.org/ns" version="1.2" width="203.2mm" height="125.58mm" viewbox="0 0 203.2 125.58" stroke="none" fill="#000000" stroke-width="0.3" font-size="3.88">
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:gadfly="http://www.gadflyjl.org/ns" version="1.2" width="203.2mm" height="125.58mm" viewBox="0 0 203.2 125.58" stroke="none" fill="#000000" stroke-width="0.3" font-size="3.88">
 <g class="plotroot yscalable" id="img-f199a8e4-1">
   <g class="guide xlabels" font-size="2.82" font-family="Georgia" fill="#6C606B" id="img-f199a8e4-2">
     <text x="18.99" y="114.32" text-anchor="middle" dy="0.6em">C</text>
@@ -691,9 +685,9 @@ We encourage you to skim the code to get a sense for how easy or difficult numer
   </g>
 </g>
 <defs>
-  <clippath id="img-f199a8e4-25">
+  <clipPath id="img-f199a8e4-25">
   <path d="M12.64,5 L 168.93 5 168.93 113.32 12.64 113.32" />
-</clippath>
+</clipPath>
   <g id="img-f199a8e4-14">
     <circle cx="0" cy="0" r="0.91" id="img-f199a8e4-343" />
   </g>
@@ -1000,7 +994,7 @@ See the <a href="/benchmarks/">benchmarks page</a> for more information.
 
 <p>To give a quick taste of what Julia looks like, here is the code used in the Mandelbrot and random matrix statistics benchmarks:</p>
 
-<div class="highlight"><pre><code class="language-julia" data-lang="julia"><span class="k">function</span><span class="nf"> mandel</span><span class="x">(</span><span class="n">z</span><span class="x">)</span>
+<figure class="highlight"><pre><code class="language-julia" data-lang="julia"><span class="k">function</span><span class="nf"> mandel</span><span class="x">(</span><span class="n">z</span><span class="x">)</span>
     <span class="n">c</span> <span class="o">=</span> <span class="n">z</span>
     <span class="n">maxiter</span> <span class="o">=</span> <span class="mi">80</span>
     <span class="k">for</span> <span class="n">n</span> <span class="o">=</span> <span class="mi">1</span><span class="x">:</span><span class="n">maxiter</span>
@@ -1027,11 +1021,11 @@ See the <a href="/benchmarks/">benchmarks page</a> for more information.
         <span class="n">w</span><span class="x">[</span><span class="n">i</span><span class="x">]</span> <span class="o">=</span> <span class="n">trace</span><span class="x">((</span><span class="n">Q</span><span class="o">.</span><span class="err">'</span><span class="o">*</span><span class="n">Q</span><span class="x">)</span><span class="o">^</span><span class="mi">4</span><span class="x">)</span>
     <span class="k">end</span>
     <span class="n">std</span><span class="x">(</span><span class="n">v</span><span class="x">)</span><span class="o">/</span><span class="n">mean</span><span class="x">(</span><span class="n">v</span><span class="x">),</span> <span class="n">std</span><span class="x">(</span><span class="n">w</span><span class="x">)</span><span class="o">/</span><span class="n">mean</span><span class="x">(</span><span class="n">w</span><span class="x">)</span>
-<span class="k">end</span></code></pre></div>
+<span class="k">end</span></code></pre></figure>
 
 <p>The code above is quite clear, and should feel familiar to anyone who
 has programmed in other mathematical languages.  The Julia
-implementation of <code>randmatstat</code> is considerably simpler than the
+implementation of <code class="highlighter-rouge">randmatstat</code> is considerably simpler than the
 equivalent <a href="https://github.com/JuliaLang/julia/blob/master/test/perf/micro/perf.c#L126">C
 implementation</a>,
 without giving up much performance. Planned compiler optimizations
@@ -1048,11 +1042,11 @@ programming and is very much an intentional feature of the language.</p>
 Instead, it provides a number of <a href="http://docs.julialang.org/en/stable/manual/parallel-computing">key building blocks for distributed computation</a>, making it flexible enough to support a number of styles of parallelism, and allowing users to add more.
 The following simple example demonstrates how to count the number of heads in a large number of coin tosses in parallel.</p>
 
-<div class="highlight"><pre><code class="language-julia" data-lang="julia"><span class="n">nheads</span> <span class="o">=</span> <span class="nd">@parallel</span> <span class="x">(</span><span class="o">+</span><span class="x">)</span> <span class="k">for</span> <span class="n">i</span><span class="o">=</span><span class="mi">1</span><span class="x">:</span><span class="mi">100000000</span>
+<figure class="highlight"><pre><code class="language-julia" data-lang="julia"><span class="n">nheads</span> <span class="o">=</span> <span class="nd">@parallel</span> <span class="x">(</span><span class="o">+</span><span class="x">)</span> <span class="k">for</span> <span class="n">i</span><span class="o">=</span><span class="mi">1</span><span class="x">:</span><span class="mi">100000000</span>
   <span class="n">rand</span><span class="x">(</span><span class="kt">Bool</span><span class="x">)</span>
-<span class="k">end</span></code></pre></div>
+<span class="k">end</span></code></pre></figure>
 
-<p>This computation is automatically distributed across all available compute nodes, and the result, reduced by summation (<code>+</code>), is returned at the calling node.</p>
+<p>This computation is automatically distributed across all available compute nodes, and the result, reduced by summation (<code class="highlighter-rouge">+</code>), is returned at the calling node.</p>
 
 <p>Here is a screenshot of a web-based interactive <a href="https://github.com/JuliaLang/IJulia.jl">IJulia Notebook</a> session, using <a href="https://github.com/dcjones/Gadfly.jl">Gadfly</a>. <a href="http://www.juliabox.com">JuliaBox</a> provides a way to run IJulia notebooks in your browser on Docker sandboxed containers provisioned on demand.</p>
 
