@@ -113,7 +113,7 @@ Stacktrace:
 julia&gt; sqrt(-1 + 0im)
 0.0 + 1.0im</code></pre><p>The <a href="integers-and-floating-point-numbers.html#man-numeric-literal-coefficients-1">literal numeric coefficient notation</a> does not work when constructing a complex number from variables. Instead, the multiplication must be explicitly written out:</p><pre><code class="language-julia-repl">julia&gt; a = 1; b = 2; a + b*im
 1 + 2im</code></pre><p>However, this is <em>not</em> recommended; Use the <a href="../stdlib/numbers.html#Base.complex-Tuple{Complex}"><code>complex</code></a> function instead to construct a complex value directly from its real and imaginary parts:</p><pre><code class="language-julia-repl">julia&gt; a = 1; b = 2; complex(a, b)
-1 + 2im</code></pre><p>This construction avoids the multiplication and addition operations.</p><p><a href="../stdlib/numbers.html#Base.Inf"><code>Inf</code></a> and <a href="../stdlib/numbers.html#Base.NaN"><code>NaN</code></a> propagate through complex numbers in the real and imaginary parts of a complex number as described in the <a href="manual/@ref">Special floating-point values</a> section:</p><pre><code class="language-julia-repl">julia&gt; 1 + Inf*im
+1 + 2im</code></pre><p>This construction avoids the multiplication and addition operations.</p><p><a href="../stdlib/numbers.html#Base.Inf"><code>Inf</code></a> and <a href="../stdlib/numbers.html#Base.NaN"><code>NaN</code></a> propagate through complex numbers in the real and imaginary parts of a complex number as described in the <a href="integers-and-floating-point-numbers.html#Special-floating-point-values-1">Special floating-point values</a> section:</p><pre><code class="language-julia-repl">julia&gt; 1 + Inf*im
 1.0 + Inf*im
 
 julia&gt; 1 + NaN*im

@@ -21,7 +21,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Home",
     "title": "매뉴얼",
     "category": "section",
-    "text": "Introduction\nGetting Started\nVariables\nIntegers and Floating-Point Numbers\nMathematical Operations and Elementary Functions\nComplex and Rational Numbers\nStrings\nFunctions\nControl Flow\nScope of Variables\nTypes\nMethods\nConstructors\nConversion and Promotion\nInterfaces\nModules\nDocumentation\nMetaprogramming\nMulti-dimensional Arrays\nLinear Algebra\nNetworking and Streams\nParallel Computing\nDate and DateTime\nRunning External Programs\nCalling C and Fortran Code\nHandling Operating System Variation\nEnvironment Variables\nInteracting With Julia\nEmbedding Julia\nPackages\nProfiling\nStack Traces\nPerformance Tips\nWorkflow Tips\nStyle Guide\nFrequently Asked Questions\nNoteworthy Differences from other Languages\nUnicode Input"
+    "text": "Introduction\nGetting Started\nVariables\nIntegers and Floating-Point Numbers\nMathematical Operations and Elementary Functions\nComplex and Rational Numbers\nStrings\nFunctions\nControl Flow\nScope of Variables\nTypes\nMethods\nConstructors\nConversion and Promotion\nInterfaces\nModules\nDocumentation\nMetaprogramming\nMulti-dimensional Arrays\nLinear Algebra\nMissing Values\nNetworking and Streams\nParallel Computing\nDate and DateTime\nRunning External Programs\nCalling C and Fortran Code\nHandling Operating System Variation\nEnvironment Variables\nInteracting With Julia\nEmbedding Julia\nPackages\nProfiling\nStack Traces\nPerformance Tips\nWorkflow Tips\nStyle Guide\nFrequently Asked Questions\nNoteworthy Differences from other Languages\nUnicode Input"
 },
 
 {
@@ -65,7 +65,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "manual/getting-started.html#시작하기-1",
+    "location": "manual/getting-started.html#Getting-Started-1",
     "page": "시작하기",
     "title": "시작하기",
     "category": "section",
@@ -89,7 +89,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "manual/variables.html#변수-1",
+    "location": "manual/variables.html#Variables-1",
     "page": "변수",
     "title": "변수",
     "category": "section",
@@ -113,11 +113,11 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "manual/integers-and-floating-point-numbers.html#정수와-부동소수점으로-표현되는-실수-1",
+    "location": "manual/integers-and-floating-point-numbers.html#Integers-and-Floating-Point-Numbers-1",
     "page": "정수와 부동소수점으로 표현되는 실수",
     "title": "정수와 부동소수점으로 표현되는 실수",
     "category": "section",
-    "text": "정수와 부동소수점(floating-point)으로 표현되는 실수는 수치 연산에 있어서 가장 기본적인 구성 요소이다. 이와 같은 값들의 Julia 내부에서의 내장 표현은 숫자 프라미티브(numberic primitives)이라고 하고, 실수나 부동소수점처럼 코드상에서 즉각적으로 표현되는 값을은 수치형 리터럴(numeric literal)이라고 알려져있다.  예를들어, 1은 정수형 리터럴이지만, 1.0은 부동소수점 리터럴이다; 그리고 위 리터럴들이 바이너리 형태로 메모리상에서 표현되는 객체(object)를 숫자 프리미티브(numeric primitives)라고 한다.Julia는 넓은 범위의 기본 수치 타입과 수치연산자, 그리고 비트연산자를 모두 제공한다. 현대의 컴퓨터에서 기본으로 제공되는 Julia에 내장된 표준 수학 함수들은 Julia로 하여금 연산 자원을 최대한 활용 수 있도록 한다. 게다가 Julia는 하드웨어에서 기본적으로 표현하지 못하는 자들을 표현할 수 있게 만든 [] Additionally, Julia provides Arbitrary Precision Arithmetic를 지원한다. 그러나 Arbitrary precision Arithmetic 사용하면 성능상으로 느려질 수 있다다음은 Julia에서 기본적으로 지원하는 타입니다:정수형 타입:타입 부호 여부 비트 수 최솟값 최댓값\nInt8 ✓ 8 -2^7 2^7 - 1\nUInt8   8 0 2^8 - 1\nInt16 ✓ 16 -2^15 2^15 - 1\nUInt16   16 0 2^16 - 1\nInt32 ✓ 32 -2^31 2^31 - 1\nUInt32   32 0 2^32 - 1\nInt64 ✓ 64 -2^63 2^63 - 1\nUInt64   64 0 2^64 - 1\nInt128 ✓ 128 -2^127 2^127 - 1\nUInt128   128 0 2^128 - 1\nBool N/A 8 false (0) true (1)부동소수점 타입:타입 정밀도 비트 수\nFloat16 half 16\nFloat32 single 32\nFloat64 double 64추가적으로 Complex and Rational Numbers는 위ㅔ어서 언급한 타입에 기초하여 만들어졌다. 모든 기본 수치 타입들은 유연하고, 쉽게 확장이 가능한  type promotion system 덕분에 자유롭게 상호운용이 가능하다."
+    "text": "정수와 부동소수점(floating-point)으로 표현되는 실수는 수치 연산에 있어서 가장 기본적인 구성 요소이다. 이와 같은 값들의 Julia 내부에서의 내장 표현은 숫자 프라미티브(numberic primitives)이라고 하고, 실수나 부동소수점처럼 코드상에서 즉각적으로 표현되는 값을은 수치형 리터럴(numeric literal)이라고 알려져있다.  예를들어, 1은 정수형 리터럴이지만, 1.0은 부동소수점 리터럴이다; 그리고 위 리터럴들이 바이너리 형태로 메모리상에서 표현되는 객체(object)를 숫자 프리미티브(numeric primitives)라고 한다.Julia는 넓은 범위의 기본 수치 타입과 수치연산자, 그리고 비트연산자를 모두 제공한다. 현대의 컴퓨터에서 기본으로 제공되는 Julia에 내장된 표준 수학 함수들은 Julia로 하여금 연산 자원을 최대한 활용 수 있도록 한다. 게다가 Julia는 하드웨어에서 기본적으로 표현하지 못하는 자들을 표현할 수 있게 만든 [] Additionally, Julia provides Arbitrary Precision Arithmetic를 지원한다. 그러나 Arbitrary Precision Arithmetic 사용하면 성능상으로 느려질 수 있다다음은 Julia에서 기본적으로 지원하는 타입니다:정수형 타입:타입 부호 여부 비트 수 최솟값 최댓값\nInt8 ✓ 8 -2^7 2^7 - 1\nUInt8   8 0 2^8 - 1\nInt16 ✓ 16 -2^15 2^15 - 1\nUInt16   16 0 2^16 - 1\nInt32 ✓ 32 -2^31 2^31 - 1\nUInt32   32 0 2^32 - 1\nInt64 ✓ 64 -2^63 2^63 - 1\nUInt64   64 0 2^64 - 1\nInt128 ✓ 128 -2^127 2^127 - 1\nUInt128   128 0 2^128 - 1\nBool N/A 8 false (0) true (1)부동소수점 타입:타입 정밀도 비트 수\nFloat16 half 16\nFloat32 single 32\nFloat64 double 64추가적으로 Complex and Rational Numbers는 위ㅔ어서 언급한 타입에 기초하여 만들어졌다. 모든 기본 수치 타입들은 유연하고, 쉽게 확장이 가능한  type promotion system 덕분에 자유롭게 상호운용이 가능하다."
 },
 
 {
@@ -161,7 +161,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "manual/integers-and-floating-point-numbers.html#특별한-부동-소수점-값들-1",
+    "location": "manual/integers-and-floating-point-numbers.html#Special-floating-point-values-1",
     "page": "정수와 부동소수점으로 표현되는 실수",
     "title": "특별한 부동 소수점 값들",
     "category": "section",
@@ -193,7 +193,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "manual/integers-and-floating-point-numbers.html#임의-정밀도-연산-1",
+    "location": "manual/integers-and-floating-point-numbers.html#Arbitrary-Precision-Arithmetic-1",
     "page": "정수와 부동소수점으로 표현되는 실수",
     "title": "임의 정밀도 연산",
     "category": "section",
@@ -665,7 +665,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "manual/control-flow.html#복합-표현-1",
+    "location": "manual/control-flow.html#man-compound-expressions-1",
     "page": "Control Flow",
     "title": "복합 표현",
     "category": "section",
@@ -673,7 +673,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "manual/control-flow.html#조건부-평가-1",
+    "location": "manual/control-flow.html#man-conditional-evaluation-1",
     "page": "Control Flow",
     "title": "조건부 평가",
     "category": "section",
@@ -681,7 +681,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "manual/control-flow.html#단락-평가-1",
+    "location": "manual/control-flow.html#Short-Circuit-Evaluation-1",
     "page": "Control Flow",
     "title": "단락 평가",
     "category": "section",
@@ -689,7 +689,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "manual/control-flow.html#반복-평가:-루프-1",
+    "location": "manual/control-flow.html#man-loops-1",
     "page": "Control Flow",
     "title": "반복 평가: 루프",
     "category": "section",
@@ -753,9 +753,9 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "manual/control-flow.html#태스크(일명-코루틴)-1",
+    "location": "manual/control-flow.html#man-tasks-1",
     "page": "Control Flow",
-    "title": "태스크(일명 코루틴)",
+    "title": "태스크 (일명 코루틴)",
     "category": "section",
     "text": "태스크는 유연한 방식으로 계산을 일시 중단하고 다시 시작할 수 있게 해주는 제어 흐름 기능입니다. 이 기능은 다른 프로그래밍 언어에서는 대칭 코루틴, 경량 스레드, 협업 멀티태스킹 또는 원샷 컨티뉴에이션과 같은 다른 이름으로 불립니다.컴퓨팅 작업(실제로는 특정 기능 실행)이 Task로 지정되면, 다른 Task로 전환하여 그 태스크를 중단할 수 있습니다. 원래의 Task는 나중에 다시 시작될 수 있으며, 중단된 그 시점에서 바로 시작됩니다. 처음에는 함수 호출과 비슷하게 보일 수 있지만, 두 가지 중요한 차이점이 있습니다. 첫째, 태스크 전환은 공간을 사용하지 않아 호출 스택을 사용하지 않고도 얼마든지 태스크 전환이 발생할 수 있습니다. 둘째, 함수 호출과는 달리 태스크간 전환은 임의의 순서로 발생할 수 있습니다. 함수 호출은 호출된 함수가 제어가 호출 함수로 돌아가기 전에 실행을 완료해야 하는 구조입니다.이러한 종류의 제어 흐름은 특정 문제를 훨씬 쉽게 해결할 수 있습니다. 일부 문제에서 필요한 작업의 다양한 부분은 함수 호출에 의해 자연스럽게 관련되지 않습니다. 수행해야 할 작업 중에 명확한 \"호출자\"나 \"호출 수신자\"가 없기 때문입니다. 한 예로 복잡한 프로시저가 값을 생성하고, 다른 복잡한 프로시저가 값을 소비하는 생산자-소비자 문제가 있습니다. 소비자는 단순히 값을 얻기 위해 생산자 함수를 호출할 수 없습니다. 왜냐하면 생산자가 생성할 값이 더 많아 반환할 준비가 되지 않았기 때문입니다. 태스크를 통해 생산자와 소비자는 필요한 만큼 오래 실행하고 필요한 만큼 값을 주고 받을 수 있습니다.Julia는 이 문제를 해결하기 위한 Channel 메커니즘을 제공합니다. Channel은 여러 태스크를 읽고 쓸 수 있는 대기 가능한 선입선출(FIFO) 대기열(queue)입니다.put! 호출을 통해 값을 생성하는 생산자 태스크를 정의해 봅시다. 값을 소비하려면 생산자가 새 태스크를 실행하도록 예약해야 합니다. 인수가 하나인 함수를 인수로 받아들이는 특별한 Channel 생성자는 채널에 묶여진 작업을 실행하는 데 사용할 수 있습니다. 그런 다음 채널 객체에서 반복적으로 값을 take!를 통해 가져올 수 있습니다.julia> function producer(c::Channel)\n           put!(c, \"start\")\n           for n=1:4\n               put!(c, 2n)\n           end\n           put!(c, \"stop\")\n       end;\n\njulia> chnl = Channel(producer);\n\njulia> take!(chnl)\n\"start\"\n\njulia> take!(chnl)\n2\n\njulia> take!(chnl)\n4\n\njulia> take!(chnl)\n6\n\njulia> take!(chnl)\n8\n\njulia> take!(chnl)\n\"stop\"이 동작을 생각하는 한 가지 방법은 producer가 여러 번 반환이 가능하다는 것입니다. put! 호출 사이에 생성자의 실행이 일시 중단되고 소비자가 제어권을 가집니다.반환된 Channel은 for 루프에서 반복용 객체로 사용될 수 있습니다. 이때 루프 변수는 생성된 모든 값을 취합니다. 채널이 닫히면 루프도 종료됩니다.julia> for x in Channel(producer)\n           println(x)\n       end\nstart\n2\n4\n6\n8\nstop생산자 측에서 채널을 명시적으로 닫을 필요는 없었음을 알아두십시오. 이는 채널을 태스크에 묶는 동작이 채널의 수명과 묶인 태스크의 수명을 연결짓기 때문입니다. 채널 객체는 태스크가 종료되면 자동으로 닫힙니다. 여러 채널을 하나의 태스크에 묶을 수 있고, 그 반대로도 가능합니다.태스크 생성자가 인수가 없는 함수를 예상하는 동안, 태스크에 묶인 채널을 만드는 채널 메소드는 채널 유형의 단일 인수를 허용하는 함수를 필요로 합니다. 공통 패턴은 생산자가 매개 변수화된 경우이며, 이 경우 부분 함수 응용 프로그램은 인수가 없거나 1개의 인수를 갖는 익명 함수를 작성하는 데 필요합니다.태스크 객체의 경우 직접 또는 편리한 매크로를 사용하여 수행할 수 있습니다.function mytask(myarg)\n    ...\nend\n\ntaskHdl = Task(() -> mytask(7))\n# 또는 동일하게\ntaskHdl = @task mytask(7)고급 작업 배분 패턴을 조율하기 위해, 태스크 및 채널 생성자와 바인드 및 스케쥴을 사용하여 일련의 채널을 생산자/소비자 태스크 집합과 명시적으로 연결할 수 있습니다.현재 Julia의 태스크 기능은 별도의 CPU 코어를 사용하도록 스케쥴되어 있지 않습니다. 진짜 커널 스레드는 Parallel Computing 주제에서 논의하겠습니다."
 },
@@ -1073,11 +1073,11 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "manual/methods.html#메소드-1",
+    "location": "manual/methods.html#Methods-1",
     "page": "메소드",
     "title": "메소드",
     "category": "section",
-    "text": "함수에서 함수는 인수의 튜플을 반환 값으로 매핑하는 객체이거나 적절한 값을 반환 할 수없는 경우 예외를 throw합니다. 두 가지 정수를 더하는 것은 부동 소수점 수에 정수를 더하는 것과는 다른 두 개의 부동 소수점 수를 더하는 것과는 매우 다릅니다. . 이러한 구현의 차이점에도 불구하고 이러한 작업은 모두 \"추가\"라는 일반적인 개념에 속합니다. 따라서 Julia에서 이러한 동작은 모두 하나의 객체 인 + 함수에 속합니다.동일한 개념의 여러 구현을 원활하게 사용하기 위해 함수를 한꺼번에 정의 할 필요는 없지만 인수 유형 및 개수의 특정 조합에 특정 동작을 제공함으로써 구분할 수 있습니다. 함수에 대해 가능한 한 행동의 정의를 메소드 라고합니다. 지금까지 우리는 하나의 메소드로 정의 된 함수의 예제만을 제시했으며, 모든 유형의 인수에 적용 할 수 있습니다. 그러나 메소드 정의의 서명에는 그 수 이외에 인수의 유형을 표시하기 위해 주석을 달 수 있으며 단일 메소드 정의 이상이 제공 될 수 있습니다. 함수가 특정 튜플의 인수에 적용되면 해당 인수에 적용 할 수있는 가장 구체적인 메서드가 적용됩니다. 따라서 함수의 전반적인 동작은 다양한 메서드 정의의 동작을 패치하는 것입니다. 패치 워크가 잘 설계된 경우, 메소드의 구현이 상당히 다를 수도 있지만, 함수의 외부 동작은 매끄럽고 일관성있게 나타납니다.함수가 적용될 때 실행할 메소드의 선택은 dispatch 라고합니다. Julia는 파견 프로세스가 주어진 인수의 수와 함수의 모든 인수 유형에 따라 함수의 메소드 중 어느 것을 호출 할 것인지 선택할 수 있습니다. 이것은 전통적인 객체 지향 언어와는 다르다. 디스패치는 특별한 인수 구문을 사용하는 첫 번째 인수에만 기반을 두며 종종 인수로 명시 적으로 작성되지 않고 암시된다. [^ 1] 함수의 인수를 모두 사용하여 첫 번째 메서드가 아닌 호출 할 메서드를 선택하는 것이 다중 디스패치로 알려져 있습니다. 다중 디스패치는 수학적 코드에서 특히 유용합니다. 다른 연산보다 하나의 인수에 \"속하는\"연산을 인위적으로 판단하는 것은 의미가 없습니다. x + y 의 더하기 연산이 y 보다 x 에 속해 있습니까? 수학 연산자의 구현은 일반적으로 모든 인수의 유형에 따라 다릅니다. 그러나 수학적 작업을 넘어서더라도, 다중 파견은 프로그램을 구조화하고 조직화하는 데있어 유쾌하고 편리한 패러다임입니다.[1]: 예를 들어,obj.meth(arg1, arg2) 와 같은 메소드 호출에서 C ++이나 Java에서 객체 obj는 메소드 호출을 \"받는다\"는 의미가 아니라 this 키워드를 통해 메소드에 암묵적으로 전달됩니다. 명시적인 메소드 인수. 현재 this 객체가 메소드 호출의 수신자 일 때 meth (arg1, arg2) 만 쓰고 this 를 수신 객체로 함축하여 생략 할 수 있습니다."
+    "text": "함수에서 함수는 인수의 튜플을 반환 값으로 매핑하는 객체이거나 적절한 값을 반환 할 수없는 경우 예외를 throw합니다. 두 가지 정수를 더하는 것은 부동 소수점 수에 정수를 더하는 것과는 다른 두 개의 부동 소수점 수를 더하는 것과는 매우 다릅니다. 이러한 구현의 차이점에도 불구하고 이러한 작업은 모두 \"추가\"라는 일반적인 개념에 속합니다. 따라서 Julia에서 이러한 동작은 모두 하나의 객체 인 + 함수에 속합니다.동일한 개념의 여러 구현을 원활하게 사용하기 위해 함수를 한꺼번에 정의 할 필요는 없지만 인수 유형 및 개수의 특정 조합에 특정 동작을 제공함으로써 구분할 수 있습니다. 함수에 대해 가능한 한 행동의 정의를 메소드 라고합니다. 지금까지 우리는 하나의 메소드로 정의 된 함수의 예제만을 제시했으며, 모든 유형의 인수에 적용 할 수 있습니다. 그러나 메소드 정의의 서명에는 그 수 이외에 인수의 유형을 표시하기 위해 주석을 달 수 있으며 단일 메소드 정의 이상이 제공 될 수 있습니다. 함수가 특정 튜플의 인수에 적용되면 해당 인수에 적용 할 수있는 가장 구체적인 메서드가 적용됩니다. 따라서 함수의 전반적인 동작은 다양한 메서드 정의의 동작을 패치하는 것입니다. 패치 워크가 잘 설계된 경우, 메소드의 구현이 상당히 다를 수도 있지만, 함수의 외부 동작은 매끄럽고 일관성있게 나타납니다.함수가 적용될 때 실행할 메소드의 선택은 dispatch 라고합니다. Julia는 파견 프로세스가 주어진 인수의 수와 함수의 모든 인수 유형에 따라 함수의 메소드 중 어느 것을 호출 할 것인지 선택할 수 있습니다. 이것은 전통적인 객체 지향 언어와는 다르다. 디스패치는 특별한 인수 구문을 사용하는 첫 번째 인수에만 기반을 두며 종종 인수로 명시 적으로 작성되지 않고 암시된다. [1] 함수의 인수를 모두 사용하여 첫 번째 메서드가 아닌 호출 할 메서드를 선택하는 것이 다중 디스패치로 알려져 있습니다. 다중 디스패치는 수학적 코드에서 특히 유용합니다. 다른 연산보다 하나의 인수에 \"속하는\"연산을 인위적으로 판단하는 것은 의미가 없습니다. x + y 의 더하기 연산이 y 보다 x 에 속해 있습니까? 수학 연산자의 구현은 일반적으로 모든 인수의 유형에 따라 다릅니다. 그러나 수학적 작업을 넘어서더라도, 다중 파견은 프로그램을 구조화하고 조직화하는 데있어 유쾌하고 편리한 패러다임입니다.[1]: 예를 들어,obj.meth(arg1, arg2) 와 같은 메소드 호출에서 C ++이나 Java에서 객체 obj는 메소드 호출을 \"받는다\"는 의미가 아니라 this 키워드를 통해 메소드에 암묵적으로 전달됩니다. 명시적인 메소드 인수. 현재 this 객체가 메소드 호출의 수신자 일 때 meth (arg1, arg2) 만 쓰고 this 를 수신 객체로 함축하여 생략 할 수 있습니다."
 },
 
 {
@@ -1085,11 +1085,11 @@ var documenterSearchIndex = {"docs": [
     "page": "메소드",
     "title": "메소드 정의",
     "category": "section",
-    "text": "지금까지 우리는 예제에서 제약되지 않은 인자 타입을 가진 하나의 메소드를 가진 함수만을 정의했다. 이러한 함수는 전통적인 동적 유형 지정 언어 에서처럼 작동합니다. 그럼에도 불구하고 우리는 다중 디스패치와 메소드를 의식하지 않고 거의 연속적으로 사용했습니다. 앞서 말한 + 함수와 같은 모든 Julia의 표준 함수와 연산자에는 인수 유형과 개수의 다양한 조합을 통해 동작을 정의하는 많은 메소드가 있습니다.함수를 정의 할 때 Composite Types 섹션에서 소개 한 :: type-assertion 연산자를 사용하여 적용 할 수있는 매개 변수의 유형을 선택적으로 제한 할 수 있습니다. :julia> f(x::Float64, y::Float64) = 2x + y\nf (generic function with 1 method)이 함수 정의는 x 와 y 가 모두 타입의 값인 호출에만 적용됩니다 Float64:julia> f(2.0, 3.0)\n7.0다른 유형의 인수에 적용하면 MethodError 가됩니다.julia> f(2.0, 3)\nERROR: MethodError: no method matching f(::Float64, ::Int64)\nClosest candidates are:\n  f(::Float64, !Matched::Float64) at none:1\n\njulia> f(Float32(2.0), 3.0)\nERROR: MethodError: no method matching f(::Float32, ::Float64)\nClosest candidates are:\n  f(!Matched::Float64, ::Float64) at none:1\n\njulia> f(2.0, \"3.0\")\nERROR: MethodError: no method matching f(::Float64, ::String)\nClosest candidates are:\n  f(::Float64, !Matched::Float64) at none:1\n\njulia> f(\"2.0\", \"3.0\")\nERROR: MethodError: no method matching f(::String, ::String)보시다시피, 인수는 정확히 Float64 유형이어야합니다. 정수 또는 32 비트 부동 소수점 값과 같은 다른 숫자 유형은 자동으로 '64 비트 부동 소수점으로 변환되지 않으며 숫자로 해석되는 문자열도 아닙니다. Float64 는 구체적인 타입이고 Julia에서 구체적인 타입을 서브 클래 싱 할 수 없기 때문에, 그러한 정의는 정확히 Float64 타입의 인자에만 적용될 수 있습니다. 그러나 선언 된 매개 변수 유형이 추상 인 경우보다 일반적인 메소드를 작성하는 것이 종종 유용 할 수 있습니다.julia> f(x::Number, y::Number) = 2x - y\nf (generic function with 2 methods)\n\njulia> f(2.0, 3)\n1.0이 메소드 정의는 Number 의 인스턴스 인 모든 인수 쌍에 적용됩니다. 그들은 각각 숫자 값인 한 동일한 유형일 필요는 없습니다. 서로 다른 숫자 타입을 처리하는 문제는 2x - y 표현식의 산술 연산에 위임됩니다.여러 메소드로 함수를 정의하려면 함수의 수와 유형을 여러 번 정의해야합니다. 함수에 대한 첫 번째 메서드 정의는 함수 개체를 만들고 후속 메서드 정의는 기존 함수 개체에 새 메서드를 추가합니다. 인수의 수와 유형과 일치하는 가장 구체적인 메소드 정의는 함수가 적용될 때 실행됩니다. 따라서, 위의 두 메소드 정의는 함께 추상 타입 Number 의 모든 인스턴스 쌍에 대해 f 에 대한 동작을 정의하지만 Float64 쌍에 고유 한 다른 동작을 사용하여 정의됩니다. 값. 인수 중 하나가 64 비트 부동 소수점이지만 다른 하나는 부동 소수점인 경우 f(Float64, Float64) 메서드를 호출 할 수 없으며보다 일반적인 f(Number, Number) 메서드를 사용해야합니다.julia> f(2.0, 3.0)\n7.0\n\njulia> f(2, 3.0)\n1.0\n\njulia> f(2.0, 3)\n1.0\n\njulia> f(2, 3)\n12x + y 정의는 첫 번째 경우에만 사용되는 반면, 2x-y 정의는 다른 것에 사용됩니다. 자동 주조 또는 함수 인수 변환이 수행되지 않습니다. Julia의 모든 변환은 비 마법적이고 완전히 명시 적입니다. 그러나 전환 및 판촉 은 충분히 발전된 기술의 영리한 적용이 마법과 구별 될 수 없음을 보여줍니다.[Clarke61]숫자가 아닌 값과 2 개보다 적거나 많은 인수의 경우, f 함수는 정의되지 않은 채로 남아 있으며, 여전히 MethodError 가됩니다 :julia> f(\"foo\", 3)\nERROR: MethodError: no method matching f(::String, ::Int64)\nClosest candidates are:\n  f(!Matched::Number, ::Number) at none:1\n\njulia> f()\nERROR: MethodError: no method matching f()\nClosest candidates are:\n  f(!Matched::Float64, !Matched::Float64) at none:1\n  f(!Matched::Number, !Matched::Number) at none:1대화 형 세션에서 함수 객체 자체를 입력하면 함수에 어떤 메소드가 있는지 쉽게 알 수 있습니다.julia> f\nf (generic function with 2 methods)이 출력은 f 가 두 가지 메소드를 가진 함수 객체라는 것을 알려줍니다. 이러한 메소드의 서명이 무엇인지 알아 보려면 methods 함수를 사용하십시오.julia> methods(f)\n# 2 methods for generic function \"f\":\n[1] f(x::Float64, y::Float64) in Main at none:1\n[2] f(x::Number, y::Number) in Main at none:1f 에는 두 개의 Float64 인수를 취하는 메소드와 Number 타입의 인수를 취하는 메소드가 있습니다. 또한 메소드가 정의 된 파일과 행 번호를 표시합니다.이 메소드가 REPL에 정의 되었기 때문에 명백한 행 번호는 none:1 입니다.:: 를 사용한 타입 선언이 없으면 메소드 매개 변수의 타입은 기본적으로 Any 이며, 이는 Julia의 모든 값이 추상 타입 Any 의 인스턴스이기 때문에 제약이 없다는 것을 의미합니다. 따라서 f 에 대한 catch-all 메소드를 다음과 같이 정의 할 수 있습니다 :julia> f(x,y) = println(\"Whoa there, Nelly.\")\nf (generic function with 3 methods)\n\njulia> f(\"foo\", 1)\nWhoa there, Nelly.이 catch-all은 한 쌍의 매개 변수 값에 대해 가능한 다른 메서드 정의보다 덜 구체적이므로 다른 메서드 정의가 적용되지 않는 인수 쌍에서만 호출됩니다.단순한 개념으로 보일지라도, 가치 유형에 대한 다중 파견은 아마도 줄리아 언어의 가장 강력하고 핵심적인 단일 기능 일 것입니다. 핵심 운영에는 일반적으로 수십 가지 방법이 있습니다 :julia> methods(+)\n# 180 methods for generic function \"+\":\n[1] +(x::Bool, z::Complex{Bool}) in Base at complex.jl:227\n[2] +(x::Bool, y::Bool) in Base at bool.jl:89\n[3] +(x::Bool) in Base at bool.jl:86\n[4] +(x::Bool, y::T) where T<:AbstractFloat in Base at bool.jl:96\n[5] +(x::Bool, z::Complex) in Base at complex.jl:234\n[6] +(a::Float16, b::Float16) in Base at float.jl:373\n[7] +(x::Float32, y::Float32) in Base at float.jl:375\n[8] +(x::Float64, y::Float64) in Base at float.jl:376\n[9] +(z::Complex{Bool}, x::Bool) in Base at complex.jl:228\n[10] +(z::Complex{Bool}, x::Real) in Base at complex.jl:242\n[11] +(x::Char, y::Integer) in Base at char.jl:40\n[12] +(c::BigInt, x::BigFloat) in Base.MPFR at mpfr.jl:307\n[13] +(a::BigInt, b::BigInt, c::BigInt, d::BigInt, e::BigInt) in Base.GMP at gmp.jl:392\n[14] +(a::BigInt, b::BigInt, c::BigInt, d::BigInt) in Base.GMP at gmp.jl:391\n[15] +(a::BigInt, b::BigInt, c::BigInt) in Base.GMP at gmp.jl:390\n[16] +(x::BigInt, y::BigInt) in Base.GMP at gmp.jl:361\n[17] +(x::BigInt, c::Union{UInt16, UInt32, UInt64, UInt8}) in Base.GMP at gmp.jl:398\n...\n[180] +(a, b, c, xs...) in Base at operators.jl:424유연한 파라 메트릭 유형 시스템과의 다중 디스패치 기능을 통해 Julia는 구현 세부 정보에서 분리 된 상위 수준의 알고리즘을 추상적으로 표현할 수 있지만 런타임에 각 사례를 처리 할 수있는 효율적인 특수 코드를 생성 할 수 있습니다."
+    "text": "지금까지 우리는 예제에서 제약되지 않은 인자 타입을 가진 하나의 메소드를 가진 함수만을 정의했다. 이러한 함수는 전통적인 동적 유형 지정 언어 에서처럼 작동합니다. 그럼에도 불구하고 우리는 다중 디스패치와 메소드를 의식하지 않고 거의 연속적으로 사용했습니다. 앞서 말한 + 함수와 같은 모든 Julia의 표준 함수와 연산자에는 인수 유형과 개수의 다양한 조합을 통해 동작을 정의하는 많은 메소드가 있습니다.함수를 정의 할 때 Composite Types 섹션에서 소개 한 :: type-assertion 연산자를 사용하여 적용 할 수있는 매개 변수의 유형을 선택적으로 제한 할 수 있습니다. :julia> f(x::Float64, y::Float64) = 2x + y\nf (generic function with 1 method)이 함수 정의는 x 와 y 가 모두 타입의 값인 호출에만 적용됩니다 Float64:julia> f(2.0, 3.0)\n7.0다른 유형의 인수에 적용하면 MethodError 가됩니다.julia> f(2.0, 3)\nERROR: MethodError: no method matching f(::Float64, ::Int64)\nClosest candidates are:\n  f(::Float64, !Matched::Float64) at none:1\n\njulia> f(Float32(2.0), 3.0)\nERROR: MethodError: no method matching f(::Float32, ::Float64)\nClosest candidates are:\n  f(!Matched::Float64, ::Float64) at none:1\n\njulia> f(2.0, \"3.0\")\nERROR: MethodError: no method matching f(::Float64, ::String)\nClosest candidates are:\n  f(::Float64, !Matched::Float64) at none:1\n\njulia> f(\"2.0\", \"3.0\")\nERROR: MethodError: no method matching f(::String, ::String)보시다시피, 인수는 정확히 Float64 유형이어야합니다. 정수 또는 32 비트 부동 소수점 값과 같은 다른 숫자 유형은 자동으로 '64 비트 부동 소수점으로 변환되지 않으며 숫자로 해석되는 문자열도 아닙니다. Float64 는 구체적인 타입이고 Julia에서 구체적인 타입을 서브 클래 싱 할 수 없기 때문에, 그러한 정의는 정확히 Float64 타입의 인자에만 적용될 수 있습니다. 그러나 선언 된 매개 변수 유형이 추상 인 경우보다 일반적인 메소드를 작성하는 것이 종종 유용 할 수 있습니다.julia> f(x::Number, y::Number) = 2x - y\nf (generic function with 2 methods)\n\njulia> f(2.0, 3)\n1.0이 메소드 정의는 Number 의 인스턴스 인 모든 인수 쌍에 적용됩니다. 그들은 각각 숫자 값인 한 동일한 유형일 필요는 없습니다. 서로 다른 숫자 타입을 처리하는 문제는 2x - y 표현식의 산술 연산에 위임됩니다.여러 메소드로 함수를 정의하려면 함수의 수와 유형을 여러 번 정의해야합니다. 함수에 대한 첫 번째 메서드 정의는 함수 개체를 만들고 후속 메서드 정의는 기존 함수 개체에 새 메서드를 추가합니다. 인수의 수와 유형과 일치하는 가장 구체적인 메소드 정의는 함수가 적용될 때 실행됩니다. 따라서, 위의 두 메소드 정의는 함께 추상 타입 Number 의 모든 인스턴스 쌍에 대해 f 에 대한 동작을 정의하지만 Float64 쌍에 고유 한 다른 동작을 사용하여 정의됩니다. 값. 인수 중 하나가 64 비트 부동 소수점이지만 다른 하나는 부동 소수점인 경우 f(Float64, Float64) 메서드를 호출 할 수 없으며보다 일반적인 f(Number, Number) 메서드를 사용해야합니다.julia> f(2.0, 3.0)\n7.0\n\njulia> f(2, 3.0)\n1.0\n\njulia> f(2.0, 3)\n1.0\n\njulia> f(2, 3)\n12x + y 정의는 첫 번째 경우에만 사용되는 반면, 2x-y 정의는 다른 것에 사용됩니다. 자동 주조 또는 함수 인수 변환이 수행되지 않습니다. Julia의 모든 변환은 비 마법적이고 완전히 명시 적입니다. 그러나 전환 및 판촉 은 충분히 발전된 기술의 영리한 적용이 마법과 구별 될 수 없음을 보여줍니다. [Clarke61]숫자가 아닌 값과 2 개보다 적거나 많은 인수의 경우, f 함수는 정의되지 않은 채로 남아 있으며, 여전히 MethodError 가됩니다 :julia> f(\"foo\", 3)\nERROR: MethodError: no method matching f(::String, ::Int64)\nClosest candidates are:\n  f(!Matched::Number, ::Number) at none:1\n\njulia> f()\nERROR: MethodError: no method matching f()\nClosest candidates are:\n  f(!Matched::Float64, !Matched::Float64) at none:1\n  f(!Matched::Number, !Matched::Number) at none:1대화 형 세션에서 함수 객체 자체를 입력하면 함수에 어떤 메소드가 있는지 쉽게 알 수 있습니다.julia> f\nf (generic function with 2 methods)이 출력은 f 가 두 가지 메소드를 가진 함수 객체라는 것을 알려줍니다. 이러한 메소드의 서명이 무엇인지 알아 보려면 methods 함수를 사용하십시오.julia> methods(f)\n# 2 methods for generic function \"f\":\n[1] f(x::Float64, y::Float64) in Main at none:1\n[2] f(x::Number, y::Number) in Main at none:1f 에는 두 개의 Float64 인수를 취하는 메소드와 Number 타입의 인수를 취하는 메소드가 있습니다. 또한 메소드가 정의 된 파일과 행 번호를 표시합니다.이 메소드가 REPL에 정의 되었기 때문에 명백한 행 번호는 none:1 입니다.:: 를 사용한 타입 선언이 없으면 메소드 매개 변수의 타입은 기본적으로 Any 이며, 이는 Julia의 모든 값이 추상 타입 Any 의 인스턴스이기 때문에 제약이 없다는 것을 의미합니다. 따라서 f 에 대한 catch-all 메소드를 다음과 같이 정의 할 수 있습니다 :julia> f(x,y) = println(\"Whoa there, Nelly.\")\nf (generic function with 3 methods)\n\njulia> f(\"foo\", 1)\nWhoa there, Nelly.이 catch-all은 한 쌍의 매개 변수 값에 대해 가능한 다른 메서드 정의보다 덜 구체적이므로 다른 메서드 정의가 적용되지 않는 인수 쌍에서만 호출됩니다.단순한 개념으로 보일지라도, 가치 유형에 대한 다중 파견은 아마도 줄리아 언어의 가장 강력하고 핵심적인 단일 기능 일 것입니다. 핵심 운영에는 일반적으로 수십 가지 방법이 있습니다 :julia> methods(+)\n# 180 methods for generic function \"+\":\n[1] +(x::Bool, z::Complex{Bool}) in Base at complex.jl:227\n[2] +(x::Bool, y::Bool) in Base at bool.jl:89\n[3] +(x::Bool) in Base at bool.jl:86\n[4] +(x::Bool, y::T) where T<:AbstractFloat in Base at bool.jl:96\n[5] +(x::Bool, z::Complex) in Base at complex.jl:234\n[6] +(a::Float16, b::Float16) in Base at float.jl:373\n[7] +(x::Float32, y::Float32) in Base at float.jl:375\n[8] +(x::Float64, y::Float64) in Base at float.jl:376\n[9] +(z::Complex{Bool}, x::Bool) in Base at complex.jl:228\n[10] +(z::Complex{Bool}, x::Real) in Base at complex.jl:242\n[11] +(x::Char, y::Integer) in Base at char.jl:40\n[12] +(c::BigInt, x::BigFloat) in Base.MPFR at mpfr.jl:307\n[13] +(a::BigInt, b::BigInt, c::BigInt, d::BigInt, e::BigInt) in Base.GMP at gmp.jl:392\n[14] +(a::BigInt, b::BigInt, c::BigInt, d::BigInt) in Base.GMP at gmp.jl:391\n[15] +(a::BigInt, b::BigInt, c::BigInt) in Base.GMP at gmp.jl:390\n[16] +(x::BigInt, y::BigInt) in Base.GMP at gmp.jl:361\n[17] +(x::BigInt, c::Union{UInt16, UInt32, UInt64, UInt8}) in Base.GMP at gmp.jl:398\n...\n[180] +(a, b, c, xs...) in Base at operators.jl:424유연한 파라 메트릭 유형 시스템과의 다중 디스패치 기능을 통해 Julia는 구현 세부 정보에서 분리 된 상위 수준의 알고리즘을 추상적으로 표현할 수 있지만 런타임에 각 사례를 처리 할 수있는 효율적인 특수 코드를 생성 할 수 있습니다."
 },
 
 {
-    "location": "manual/methods.html#[방법-모호성](@-id-man-ambiguities)-1",
+    "location": "manual/methods.html#man-ambiguities-1",
     "page": "메소드",
     "title": "방법 모호성",
     "category": "section",
@@ -1097,11 +1097,11 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "manual/methods.html#파라-메-트릭-메소드-1",
+    "location": "manual/methods.html#Parametric-Methods-1",
     "page": "메소드",
-    "title": "파라 메 트릭 메소드",
+    "title": "파라메트릭 메소드",
     "category": "section",
-    "text": "메소드 정의는 선택적으로 서명을 한정하는 매개 변수를 가질 수 있습니다.julia> same_type(x::T, y::T) where {T} = true\nsame_type (generic function with 1 method)\n\njulia> same_type(x,y) = false\nsame_type (generic function with 2 methods)첫 번째 방법은 두 인수가 모두 동일한 구체 유형일 때마다 적용됩니다. 두 번째 방법은 다른 모든 경우를 포괄하는 포괄적인 방식으로 작동합니다. 따라서 전반적으로 두 인수가 같은 유형인지 여부를 확인하는 부울 함수를 정의합니다.julia> same_type(1, 2)\ntrue\n\njulia> same_type(1, 2.0)\nfalse\n\njulia> same_type(1.0, 2.0)\ntrue\n\njulia> same_type(\"foo\", 2.0)\nfalse\n\njulia> same_type(\"foo\", \"bar\")\ntrue\n\njulia> same_type(Int32(1), Int64(2))\nfalse이러한 정의는 형식 서명이 UnionAll (UnionAll Types 참조) 유형인 메소드에 해당합니다.이러한 종류의 파견에 의한 기능 행동의 정의는 매우 흔하며, 심지어 줄리아에서도 관용적입니다. 메소드 유형 매개 변수는 인수의 유형으로 사용되는 것으로 제한되지 않으며 함수의 본문 또는 본문에 값이있는 모든 위치에서 사용할 수 있습니다. 다음은 메소드 시그니처의 매개 변수 유형 Vector {T} 에 대한 유형 매개 변수로 메소드 유형 매개 변수 T 가 사용되는 예제입니다.julia> myappend(v::Vector{T}, x::T) where {T} = [v..., x]\nmyappend (한가지 메소드를 가진 일반함수)\n\njulia> myappend([1,2,3],4)\n4-element Array{Int64,1}:\n 1\n 2\n 3\n 4\n\njulia> myappend([1,2,3],2.5)\nERROR: MethodError : myappend와 일치하는 메서드가 없습니다.(::Array{Int64,1}, ::Float64)\n가장 가까운 후보자는:\n  myappend(::Array{T,1}, !Matched::T) where T at none:1\n\njulia> myappend([1.0,2.0,3.0],4.0)\n4-element Array{Float64,1}:\n 1.0\n 2.0\n 3.0\n 4.0\n\njulia> myappend([1.0,2.0,3.0],4)\nERROR : MethodError : myappend와 일치하는 메서드가 없습니다.(::Array{Float64,1}, ::Int64)\n가장 가까운 후보자는:\n  myappend(::Array{T,1}, !Matched::T) where T at none:1보시다시피, 첨부 된 요소의 유형은 추가되는 벡터의 요소 유형과 일치해야합니다. 그렇지 않으면 MethodError 가 발생합니다. 다음 예제에서는 메서드 유형 매개 변수 T 가 반환 값으로 사용됩니다.julia> mytypeof(x::T) where {T} = T\nmytypeof (한가지 메소드를 가진 일반함수)\n\njulia> mytypeof(1)\nInt64\n\njulia> mytypeof(1.0)\nFloat64타입 선언에 타입 파라미터에 하위 타입 제약 조건을 넣을 수있는 것처럼 (파라 메트릭 타입 참조), 메소드의 타입 파라미터를 제한 할 수도 있습니다 :julia> same_type_numeric(x::T, y::T) where {T<:Number} = true\nsame_type_numeric (한가지 메소드를 가진 일반함수)\n\njulia> same_type_numeric(x::Number, y::Number) = false\nsame_type_numeric (두가지 메소드를 가진 일반함수s)\n\njulia> same_type_numeric(1, 2)\ntrue\n\njulia> same_type_numeric(1, 2.0)\nfalse\n\njulia> same_type_numeric(1.0, 2.0)\ntrue\n\njulia> same_type_numeric(\"foo\", 2.0)\nERROR: MethodError : same_type_numeric과 일치하는 메서드가 없습니다.(::String, ::Float64)\n가장 가까운 후보자는:\n  same_type_numeric(!Matched::T<:Number, ::T<:Number) where T<:Number at none:1\n  same_type_numeric(!Matched::Number, ::Number) at none:1\n\njulia> same_type_numeric(\"foo\", \"bar\")\nERROR: MethodError: same_type_numeric과 일치하는 메서드가 없습니다.(::String, ::String)\n\njulia> same_type_numeric(Int32(1), Int64(2))\nfalsesame_type_numeric 함수는 위에 정의 된 same_type 함수와 매우 비슷하게 동작하지만 숫자 쌍에 대해서만 정의됩니다.파라 메트릭 메소드는 타입 작성에 사용되는 where 표현식과 같은 구문을 허용합니다 (UnionAll Types 참조). 하나의 매개 변수 만있는 경우에는 {T} 에있는 중괄호를 생략 할 수 있지만 명확성을 위해 선호하는 경우가 많습니다. 여러 매개 변수는 쉼표로 구분할 수 있습니다. e.g. where {T, S<:Real}, 또는 where 중첩을 사용하여 작성 , e.g. where S<:Real where T."
+    "text": "메소드 정의는 선택적으로 서명을 한정하는 매개 변수를 가질 수 있습니다.julia> same_type(x::T, y::T) where {T} = true\nsame_type (generic function with 1 method)\n\njulia> same_type(x,y) = false\nsame_type (generic function with 2 methods)첫 번째 방법은 두 인수가 모두 동일한 구체 유형일 때마다 적용됩니다. 두 번째 방법은 다른 모든 경우를 포괄하는 포괄적인 방식으로 작동합니다. 따라서 전반적으로 두 인수가 같은 유형인지 여부를 확인하는 부울 함수를 정의합니다.julia> same_type(1, 2)\ntrue\n\njulia> same_type(1, 2.0)\nfalse\n\njulia> same_type(1.0, 2.0)\ntrue\n\njulia> same_type(\"foo\", 2.0)\nfalse\n\njulia> same_type(\"foo\", \"bar\")\ntrue\n\njulia> same_type(Int32(1), Int64(2))\nfalse이러한 정의는 형식 서명이 UnionAll (UnionAll Types 참조) 유형인 메소드에 해당합니다.이러한 종류의 파견에 의한 기능 행동의 정의는 매우 흔하며, 심지어 줄리아에서도 관용적입니다. 메소드 유형 매개 변수는 인수의 유형으로 사용되는 것으로 제한되지 않으며 함수의 본문 또는 본문에 값이있는 모든 위치에서 사용할 수 있습니다. 다음은 메소드 시그니처의 매개 변수 유형 Vector {T} 에 대한 유형 매개 변수로 메소드 유형 매개 변수 T 가 사용되는 예제입니다.julia> myappend(v::Vector{T}, x::T) where {T} = [v..., x]\nmyappend (한가지 메소드를 가진 일반함수)\n\njulia> myappend([1,2,3],4)\n4-element Array{Int64,1}:\n 1\n 2\n 3\n 4\n\njulia> myappend([1,2,3],2.5)\nERROR: MethodError : myappend와 일치하는 메서드가 없습니다.(::Array{Int64,1}, ::Float64)\n가장 가까운 후보자는:\n  myappend(::Array{T,1}, !Matched::T) where T at none:1\n\njulia> myappend([1.0,2.0,3.0],4.0)\n4-element Array{Float64,1}:\n 1.0\n 2.0\n 3.0\n 4.0\n\njulia> myappend([1.0,2.0,3.0],4)\nERROR : MethodError : myappend와 일치하는 메서드가 없습니다.(::Array{Float64,1}, ::Int64)\n가장 가까운 후보자는:\n  myappend(::Array{T,1}, !Matched::T) where T at none:1보시다시피, 첨부 된 요소의 유형은 추가되는 벡터의 요소 유형과 일치해야합니다. 그렇지 않으면 MethodError 가 발생합니다. 다음 예제에서는 메서드 유형 매개 변수 T 가 반환 값으로 사용됩니다.julia> mytypeof(x::T) where {T} = T\nmytypeof (한가지 메소드를 가진 일반함수)\n\njulia> mytypeof(1)\nInt64\n\njulia> mytypeof(1.0)\nFloat64타입 선언에 타입 파라미터에 하위 타입 제약 조건을 넣을 수있는 것처럼 (파라메트릭 타입 참조), 메소드의 타입 파라미터를 제한 할 수도 있습니다 :julia> same_type_numeric(x::T, y::T) where {T<:Number} = true\nsame_type_numeric (한가지 메소드를 가진 일반함수)\n\njulia> same_type_numeric(x::Number, y::Number) = false\nsame_type_numeric (두가지 메소드를 가진 일반함수s)\n\njulia> same_type_numeric(1, 2)\ntrue\n\njulia> same_type_numeric(1, 2.0)\nfalse\n\njulia> same_type_numeric(1.0, 2.0)\ntrue\n\njulia> same_type_numeric(\"foo\", 2.0)\nERROR: MethodError : same_type_numeric과 일치하는 메서드가 없습니다.(::String, ::Float64)\n가장 가까운 후보자는:\n  same_type_numeric(!Matched::T<:Number, ::T<:Number) where T<:Number at none:1\n  same_type_numeric(!Matched::Number, ::Number) at none:1\n\njulia> same_type_numeric(\"foo\", \"bar\")\nERROR: MethodError: same_type_numeric과 일치하는 메서드가 없습니다.(::String, ::String)\n\njulia> same_type_numeric(Int32(1), Int64(2))\nfalsesame_type_numeric 함수는 위에 정의 된 same_type 함수와 매우 비슷하게 동작하지만 숫자 쌍에 대해서만 정의됩니다.파라 메트릭 메소드는 타입 작성에 사용되는 where 표현식과 같은 구문을 허용합니다 (UnionAll Types 참조). 하나의 매개 변수 만있는 경우에는 {T} 에있는 중괄호를 생략 할 수 있지만 명확성을 위해 선호하는 경우가 많습니다. 여러 매개 변수는 쉼표로 구분할 수 있습니다. e.g. where {T, S<:Real}, 또는 where 중첩을 사용하여 작성 , e.g. where S<:Real where T."
 },
 
 {
@@ -1149,7 +1149,7 @@ var documenterSearchIndex = {"docs": [
     "page": "메소드",
     "title": "Trait-based 디스패치",
     "category": "section",
-    "text": "위의 iterated 디스패치를 ​​자연스럽게 확장하면 형식계층에 정의된 집합과 독립적인 형식집합을 디스패치 할 수있는 계층을 메서드선택에 추가 할 수 있습니다. 우리는 문제의유형의 조합 을 작성하여 그러한 집합을 구성 할 수 있지만, 생성 후에 연합 유형을 변경할 수 없으므로이 집합은 확장 할 수 없습니다. 그러나 이러한 확장가능 세트는 종종 \"Holy-trait\" 이라고하는 디자인 패턴으로 프로그래밍 될 수 있습니다.이 패턴은 함수인수가 속할 수있는 각 특성집합에 대해 다른 단일값 (또는 유형)을 계산하는 일반함수를 정의하여 구현됩니다. 이 기능이 순수하면 정상적인 발송과 비교하여 성능에 영향을주지 않습니다.이전 섹션의 예제는 map 및 promote의 구현세부사항을 설명했습니다.이 두 특성은 이러한 특성에 따라 작동합니다. map 의 구현과 같이 행렬을 반복 할 때 중요한 질문 중 하나는 데이터를 순회하기 위해 사용하는 순서입니다. AbstractArray 보조형이 Base.IndexStyle 형질을 구현할 때 map 과 같은 다른함수는 이러한 정보를 보내서 최상의 알고리즘을 선택합니다 (Abstract Array Interface). 즉, 일반정의 + 특성클래스를 사용하면 시스템에서 가장 빠른 버전을 선택할 수 있기 때문에 각 하위유형에서 map 의 사용자정의버전을 구현할 필요가 없습니다. trait-based의 디스패치를 ​​보여주는 map 의 장난감 구현 :map(f, a::AbstractArray, b::AbstractArray) = map(Base.IndexStyle(a, b), f, a, b)\n# 일반적인 구현 :\nmap(::Base.IndexCartesian, f, a::AbstractArray, b::AbstractArray) = ...\n# 선형 인덱싱 구현 (더 빠름)\nmap(::Base.IndexLinear, f, a::AbstractArray, b::AbstractArray) = ...이 trait-based 접근법은 스칼라 + 에 의해 채택 된 promote 메커니즘에도 존재합니다. 이것은 promote_type 을 사용하는데, 이것은 최적의 공통 유형을 반환합니다. 두 가지 유형의 피연산자가 주어진 경우 연산을 계산합시다. 이를 통해 모든 유형의 인수에 대해 모든 함수를 구현하는 문제를 줄이고, 각 유형에서 일반 유형으로 변환 작업을 구현하는 훨씬 작은 문제와 선호되는 preferred pair-wise promotion rules표를 줄일 수 있습니다."
+    "text": "위의 iterated 디스패치를 ​​자연스럽게 확장하면 형식계층에 정의된 집합과 독립적인 형식집합을 디스패치 할 수있는 계층을 메서드선택에 추가 할 수 있습니다. 우리는 문제의유형의 조합 을 작성하여 그러한 집합을 구성 할 수 있지만, 생성 후에 연합 유형을 변경할 수 없으므로이 집합은 확장 할 수 없습니다. 그러나 이러한 확장가능 세트는 종종 \"Holy-trait\" 이라고하는 디자인 패턴으로 프로그래밍 될 수 있습니다.이 패턴은 함수인수가 속할 수있는 각 특성집합에 대해 다른 단일값 (또는 유형)을 계산하는 일반함수를 정의하여 구현됩니다. 이 기능이 순수하면 정상적인 발송과 비교하여 성능에 영향을주지 않습니다.이전 섹션의 예제는 map 및 promote의 구현세부사항을 설명했습니다.이 두 특성은 이러한 특성에 따라 작동합니다. map 의 구현과 같이 행렬을 반복 할 때 중요한 질문 중 하나는 데이터를 순회하기 위해 사용하는 순서입니다. AbstractArray 보조형이 Base.IndexStyle 형질을 구현할 때 map 과 같은 다른함수는 이러한 정보를 보내서 최상의 알고리즘을 선택합니다 (Abstract Array Interface). 즉, 일반정의 + 특성클래스를 사용하면 시스템에서 가장 빠른 버전을 선택할 수 있기 때문에 각 하위유형에서 map 의 사용자정의버전을 구현할 필요가 없습니다. trait-based의 디스패치를 보여주는 map 의 장난감 구현:map(f, a::AbstractArray, b::AbstractArray) = map(Base.IndexStyle(a, b), f, a, b)\n# 일반적인 구현 :\nmap(::Base.IndexCartesian, f, a::AbstractArray, b::AbstractArray) = ...\n# 선형 인덱싱 구현 (더 빠름)\nmap(::Base.IndexLinear, f, a::AbstractArray, b::AbstractArray) = ...이 trait-based 접근법은 스칼라 + 에 의해 채택 된 promote 메커니즘에도 존재합니다. 이것은 promote_type 을 사용하는데, 이것은 최적의 공통 유형을 반환합니다. 두 가지 유형의 피연산자가 주어진 경우 연산을 계산합시다. 이를 통해 모든 유형의 인수에 대해 모든 함수를 구현하는 문제를 줄이고, 각 유형에서 일반 유형으로 변환 작업을 구현하는 훨씬 작은 문제와 선호되는 preferred pair-wise promotion rules표를 줄일 수 있습니다."
 },
 
 {
@@ -1157,7 +1157,7 @@ var documenterSearchIndex = {"docs": [
     "page": "메소드",
     "title": "출력 유형 계산",
     "category": "section",
-    "text": "trait-based 프로모션에 대한 논의는 다음 디자인패턴으로의 전환을 제공합니다. 매트릭스 작동을위한 출력 요소 유형 계산.추가 같은 기본 연산을 구현하기 위해 promote_type 함수를 사용하여 원하는 출력유형을 계산합니다. (이전과 마찬가지로 + 호출로 promote 호출에서 이것을 보았습니다).행렬에 대한 함수의 경우보다 더 복잡한 연산 순서에 대해 예상되는 반환 형식을 계산해야 할 수도 있습니다. 이 작업은 종종 다음 단계로 수행됩니다.알고리즘의 커널에 의해 수행되는 일련의 연산을 나타내는 작은 함수 op 를 작성합니다.\n결과 행렬의 요소 타입 R 을promote_op (op, argument_types ...) 로 계산합니다. 여기서 argument_types 는 각 입력 배열에 적용된 eltype 에서 계산됩니다.\n출력 행렬을 similar(R, dims) 로 만듭니다. 여기서 dims 는 출력 배열의 원하는 차원입니다.For a more specific example, a generic square-matrix multiply pseudo-code might look like:좀 더 구체적인 예를 들어, 일반제곱 - 행렬곱셈 pseudo코드는 다음과 같습니다.function matmul(a::AbstractMatrix, b::AbstractMatrix)\n    op = (ai, bi) -> ai * bi + ai * bi\n\n    ## 이것은 `one(eltype (a))` 가 생성 가능하다고 가정하기 때문에 불충분합니다.:\n    # R = typeof(op(one(eltype(a)), one(eltype(b))))\n\n    ## 이것은`a [1]`이 있다고 가정하기 때문에 실패하고, 배열의 모든 요소를 ​​나타 내기 때문에 실패합니다\n    # R = typeof(op(a[1], b[1]))\n\n    ## 이것은 `+` 가 `promote_type` 를 호출한다고 가정하기 때문에 올바르지 않습니다.\n    ## 그러나 Bool과 같은 일부 유형에서는 그렇지 않습니다.:\n    # R = promote_type(ai, bi)\n\n    # 타입 추론의 반환 값에 따라 매우 취약하기 때문에 잘못되었습니다.(최적화가 불가능할뿐만 아니라):\n    # R = Base.return_types(op, (eltype(a), eltype(b)))\n\n    ## 그래서 결국 이렇습니다.:\n    R = promote_op(op, eltype(a), eltype(b))\n    ## 때로는 원하는 유형보다 더 큰 유형을 제공 할 수도 있지만 항상 올바른 유형을 제공합니다.\n\n    output = similar(b, R, (size(a, 1), size(b, 2)))\n    if size(a, 2) > 0\n        for j in 1:size(b, 2)\n            for i in 1:size(b, 1)\n                ## 여기서 `R` 는 `Any`, `zero(Any)` 는 정의되지 않았기 때문에 `ab = zero(R)` 을 사용하지 않습니다.\n                ## 우리는 또한 typeof (a * b)! = typeof (a * b + a * b) == R이 가능하기 때문에 `ab::R` 을 선언하여 루프에서  `ab` 의 타입을 상수로 만들어야합니다.\n                ab::R = a[i, 1] * b[1, j]\n                for k in 2:size(a, 2)\n                    ab += a[i, k] * b[k, j]\n                end\n                output[i, j] = ab\n            end\n        end\n    end\n    return output\nend"
+    "text": "trait-based 프로모션에 대한 논의는 다음 디자인패턴으로의 전환을 제공합니다. 매트릭스 작동을위한 출력 요소 유형 계산.추가 같은 기본 연산을 구현하기 위해 promote_type 함수를 사용하여 원하는 출력유형을 계산합니다. (이전과 마찬가지로 + 호출로 promote 호출에서 이것을 보았습니다).행렬에 대한 함수의 경우보다 더 복잡한 연산 순서에 대해 예상되는 반환 형식을 계산해야 할 수도 있습니다. 이 작업은 종종 다음 단계로 수행됩니다.알고리즘의 커널에 의해 수행되는 일련의 연산을 나타내는 작은 함수 op 를 작성합니다.\n결과 행렬의 요소 타입 R 을promote_op (op, argument_types ...) 로 계산합니다. 여기서 argument_types 는 각 입력 배열에 적용된 eltype 에서 계산됩니다.\n출력 행렬을 similar(R, dims) 로 만듭니다. 여기서 dims 는 출력 배열의 원하는 차원입니다.For a more specific example, a generic square-matrix multiply pseudo-code might look like:좀 더 구체적인 예를 들어, 일반제곱 - 행렬곱셈 pseudo코드는 다음과 같습니다.function matmul(a::AbstractMatrix, b::AbstractMatrix)\n    op = (ai, bi) -> ai * bi + ai * bi\n\n    ## 이것은 `one(eltype (a))` 가 생성 가능하다고 가정하기 때문에 불충분합니다.:\n    # R = typeof(op(one(eltype(a)), one(eltype(b))))\n\n    ## 이것은`a [1]`이 있다고 가정하기 때문에 실패하고, 배열의 모든 요소를 나타내기 때문에 실패합니다\n    # R = typeof(op(a[1], b[1]))\n\n    ## 이것은 `+` 가 `promote_type` 를 호출한다고 가정하기 때문에 올바르지 않습니다.\n    ## 그러나 Bool과 같은 일부 유형에서는 그렇지 않습니다.:\n    # R = promote_type(ai, bi)\n\n    # 타입 추론의 반환 값에 따라 매우 취약하기 때문에 잘못되었습니다.(최적화가 불가능할뿐만 아니라):\n    # R = Base.return_types(op, (eltype(a), eltype(b)))\n\n    ## 그래서 결국 이렇습니다.:\n    R = promote_op(op, eltype(a), eltype(b))\n    ## 때로는 원하는 유형보다 더 큰 유형을 제공 할 수도 있지만 항상 올바른 유형을 제공합니다.\n\n    output = similar(b, R, (size(a, 1), size(b, 2)))\n    if size(a, 2) > 0\n        for j in 1:size(b, 2)\n            for i in 1:size(b, 1)\n                ## 여기서 `R` 는 `Any`, `zero(Any)` 는 정의되지 않았기 때문에 `ab = zero(R)` 을 사용하지 않습니다.\n                ## 우리는 또한 typeof (a * b)! = typeof (a * b + a * b) == R이 가능하기 때문에 `ab::R` 을 선언하여 루프에서  `ab` 의 타입을 상수로 만들어야합니다.\n                ab::R = a[i, 1] * b[1, j]\n                for k in 2:size(a, 2)\n                    ab += a[i, k] * b[k, j]\n                end\n                output[i, j] = ab\n            end\n        end\n    end\n    return output\nend"
 },
 
 {
@@ -1169,15 +1169,15 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "manual/methods.html#매개-변수-적으로-제한된-Varargs-메소드-1",
+    "location": "manual/methods.html#Parametrically-constrained-Varargs-methods-1",
     "page": "메소드",
-    "title": "매개 변수 적으로 제한된 Varargs 메소드",
+    "title": "매개변수적으로 제한된 Varargs 메소드",
     "category": "section",
     "text": "함수매개변수는 \"varargs\"함수 (Varargs Functions)에 제공 될 수있는 인수의 수를 제한하는 데 사용될 수도 있습니다. Vararg {T, N} 표기법은 그러한 제약을 나타내기 위해 사용됩니다. 예 :julia> bar(a,b,x::Vararg{Any,2}) = (a,b,x)\nbar (한가지 방법을 가진 일반함수)\n\njulia> bar(1,2,3)\nERROR: MethodError: 메소드 일치 bar(::Int64, ::Int64, ::Int64) 없음\n가장 가까운 후보자는 다음과 같습니다.:\n  bar(::Any, ::Any, ::Any, !Matched::Any) at none:1\n\njulia> bar(1,2,3,4)\n(1, 2, (3, 4))\n\njulia> bar(1,2,3,4,5)\nERROR: MethodError: 메소드 일치 bar(::Int64, ::Int64, ::Int64, ::Int64, ::Int64) 없음\n가장 가까운 후보자는 다음과 같습니다.:\n  bar(::Any, ::Any, ::Any, ::Any) at none:1보다 유용하게 파라미터에 의해 varargs 메소드를 제한하는 것이 가능합니다. 예 :function getindex(A::AbstractArray{T,N}, indexes::Vararg{Number,N}) where {T,N}인덱스 의 수가 배열의 차원과 일치 할 때만 호출됩니다.When only the type of supplied arguments needs to be constrained Vararg{T} can be equivalently written as T.... For instance f(x::Int...) = x is a shorthand for f(x::Vararg{Int}) = x.오직 제공된 인자의 타입만이 제약을 받아야 할 때 Vararg{T} 는 T... 와 같이 쓰일 수 있습니다. 예를 들어, f(x::Int ...) = x 는 f(x::Vararg{Int}) = x 의 속기입니다."
 },
 
 {
-    "location": "manual/methods.html#키워드-인수-선택-사항에-대한-참고-사항-1",
+    "location": "manual/methods.html#Note-on-Optional-and-keyword-Arguments-1",
     "page": "메소드",
     "title": "키워드 인수 선택 사항에 대한 참고 사항",
     "category": "section",
@@ -4325,7 +4325,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Frequently Asked Questions",
     "title": "How does \"null\" or \"nothingness\" work in Julia?",
     "category": "section",
-    "text": "Unlike many languages (for example, C and Java), Julia does not have a \"null\" value. When a reference (variable, object field, or array element) is uninitialized, accessing it will immediately throw an error. This situation can be detected using the isdefined function.Some functions are used only for their side effects, and do not need to return a value. In these cases, the convention is to return the value nothing, which is just a singleton object of type Void. This is an ordinary type with no fields; there is nothing special about it except for this convention, and that the REPL does not print anything for it. Some language constructs that would not otherwise have a value also yield nothing, for example if false; end.For situations where a value exists only sometimes (for example, missing statistical data), it is best to use the Nullable{T} type, which allows specifying the type of a missing value.The empty tuple (()) is another form of nothingness. But, it should not really be thought of as nothing but rather a tuple of zero values.In code written for Julia prior to version 0.4 you may occasionally see None, which is quite different. It is the empty (or \"bottom\") type, a type with no values and no subtypes (except itself). This is now written as Union{} (an empty union type). You will generally not need to use this type."
+    "text": "Unlike many languages (for example, C and Java), Julia does not have a \"null\" value. When a reference (variable, object field, or array element) is uninitialized, accessing it will immediately throw an error. This situation can be detected using the isdefined or isassigned functions.Some functions are used only for their side effects, and do not need to return a value. In these cases, the convention is to return the value nothing, which is just a singleton object of type Void. This is an ordinary type with no fields; there is nothing special about it except for this convention, and that the REPL does not print anything for it. Some language constructs that would not otherwise have a value also yield nothing, for example if false; end.To represent missing data in the statistical sense (NA in R or NULL in SQL), use the missing object. See the `Missing Values| section for more details.The empty tuple (()) is another form of nothingness. But, it should not really be thought of as nothing but rather a tuple of zero values.In code written for Julia prior to version 0.4 you may occasionally see None, which is quite different. It is the empty (or \"bottom\") type, a type with no values and no subtypes (except itself). This is now written as Union{} (an empty union type). You will generally not need to use this type."
 },
 
 {
@@ -4413,7 +4413,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Noteworthy Differences from other Languages",
     "title": "Noteworthy differences from R",
     "category": "section",
-    "text": "One of Julia's goals is to provide an effective language for data analysis and statistical programming. For users coming to Julia from R, these are some noteworthy differences:Julia's single quotes enclose characters, not strings.\nJulia can create substrings by indexing into strings. In R, strings must be converted into character vectors before creating substrings.\nIn Julia, like Python but unlike R, strings can be created with triple quotes \"\"\" ... \"\"\". This syntax is convenient for constructing strings that contain line breaks.\nIn Julia, varargs are specified using the splat operator ..., which always follows the name of a specific variable, unlike R, for which ... can occur in isolation.\nIn Julia, modulus is mod(a, b), not a %% b. % in Julia is the remainder operator.\nIn Julia, not all data structures support logical indexing. Furthermore, logical indexing in Julia is supported only with vectors of length equal to the object being indexed. For example:\nIn R, c(1, 2, 3, 4)[c(TRUE, FALSE)] is equivalent to c(1, 3).\nIn R, c(1, 2, 3, 4)[c(TRUE, FALSE, TRUE, FALSE)] is equivalent to c(1, 3).\nIn Julia, [1, 2, 3, 4][[true, false]] throws a BoundsError.\nIn Julia, [1, 2, 3, 4][[true, false, true, false]] produces [1, 3].\nLike many languages, Julia does not always allow operations on vectors of different lengths, unlike R where the vectors only need to share a common index range.  For example, c(1, 2, 3, 4) + c(1, 2) is valid R but the equivalent [1, 2, 3, 4] + [1, 2] will throw an error in Julia.\nJulia allows an optional trailing comma when that comma does not change the meaning of code. This can cause confusion among R users when indexing into arrays. For example, x[1,] in R would return the first row of a matrix; in Julia, however, the comma is ignored, so x[1,] == x[1], and will return the first element. To extract a row, be sure to use :, as in x[1,:].\nJulia's map takes the function first, then its arguments, unlike lapply(<structure>, function, ...) in R. Similarly Julia's equivalent of apply(X, MARGIN, FUN, ...) in R is mapslices where the function is the first argument.\nMultivariate apply in R, e.g. mapply(choose, 11:13, 1:3), can be written as broadcast(binomial, 11:13, 1:3) in Julia. Equivalently Julia offers a shorter dot syntax for vectorizing functions binomial.(11:13, 1:3).\nJulia uses end to denote the end of conditional blocks, like if, loop blocks, like while/ for, and functions. In lieu of the one-line if ( cond ) statement, Julia allows statements of the form if cond; statement; end, cond && statement and !cond || statement. Assignment statements in the latter two syntaxes must be explicitly wrapped in parentheses, e.g. cond && (x = value).\nIn Julia, <-, <<- and -> are not assignment operators.\nJulia's -> creates an anonymous function.\nJulia constructs vectors using brackets. Julia's [1, 2, 3] is the equivalent of R's c(1, 2, 3).\nJulia's * operator can perform matrix multiplication, unlike in R. If A and B are matrices, then A * B denotes a matrix multiplication in Julia, equivalent to R's A %*% B. In R, this same notation would perform an element-wise (Hadamard) product. To get the element-wise multiplication operation, you need to write A .* B in Julia.\nJulia performs matrix transposition using the .' operator and conjugated transposition using the ' operator. Julia's A.' is therefore equivalent to R's t(A).\nJulia does not require parentheses when writing if statements or for/while loops: use for i in [1, 2, 3] instead of for (i in c(1, 2, 3)) and if i == 1 instead of if (i == 1).\nJulia does not treat the numbers 0 and 1 as Booleans. You cannot write if (1) in Julia, because if statements accept only booleans. Instead, you can write if true, if Bool(1), or if 1==1.\nJulia does not provide nrow and ncol. Instead, use size(M, 1) for nrow(M) and size(M, 2) for ncol(M).\nJulia is careful to distinguish scalars, vectors and matrices.  In R, 1 and c(1) are the same. In Julia, they cannot be used interchangeably.\nJulia's diag and diagm are not like R's.\nJulia cannot assign to the results of function calls on the left hand side of an assignment operation: you cannot write diag(M) = ones(n).\nJulia discourages populating the main namespace with functions. Most statistical functionality for Julia is found in packages under the JuliaStats organization. For example:\nFunctions pertaining to probability distributions are provided by the Distributions package.\nThe DataFrames package provides data frames.\nGeneralized linear models are provided by the GLM package.\nJulia provides tuples and real hash tables, but not R-style lists. When returning multiple items, you should typically use a tuple: instead of list(a = 1, b = 2), use (1, 2).\nJulia encourages users to write their own types, which are easier to use than S3 or S4 objects in R. Julia's multiple dispatch system means that table(x::TypeA) and table(x::TypeB) act like R's table.TypeA(x) and table.TypeB(x).\nIn Julia, values are passed and assigned by reference. If a function modifies an array, the changes will be visible in the caller. This is very different from R and allows new functions to operate on large data structures much more efficiently.\nIn Julia, vectors and matrices are concatenated using hcat, vcat and hvcat, not c, rbind and cbind like in R.\nIn Julia, a range like a:b is not shorthand for a vector like in R, but is a specialized AbstractRange object that is used for iteration without high memory overhead. To convert a range into a vector, use collect(a:b).\nJulia's max and min are the equivalent of pmax and pmin respectively in R, but both arguments need to have the same dimensions.  While maximum and minimum replace max and min in R, there are important differences.\nJulia's sum, prod, maximum, and minimum are different from their counterparts in R. They all accept one or two arguments. The first argument is an iterable collection such as an array.  If there is a second argument, then this argument indicates the dimensions, over which the operation is carried out.  For instance, let A=[[1 2],[3 4]] in Julia and B=rbind(c(1,2),c(3,4)) be the same matrix in R.  Then sum(A) gives the same result as sum(B), but sum(A, 1) is a row vector containing the sum over each column and sum(A, 2) is a column vector containing the sum over each row.  This contrasts to the behavior of R, where sum(B,1)=11 and sum(B,2)=12.  If the second argument is a vector, then it specifies all the dimensions over which the sum is performed, e.g., sum(A,[1,2])=10.  It should be noted that there is no error checking regarding the second argument.\nJulia has several functions that can mutate their arguments. For example, it has both sort and sort!.\nIn R, performance requires vectorization. In Julia, almost the opposite is true: the best performing code is often achieved by using devectorized loops.\nJulia is eagerly evaluated and does not support R-style lazy evaluation. For most users, this means that there are very few unquoted expressions or column names.\nJulia does not support the NULL type.\nJulia lacks the equivalent of R's assign or get.\nIn Julia, return does not require parentheses.\nIn R, an idiomatic way to remove unwanted values is to use logical indexing, like in the expression x[x>3] or in the statement x = x[x>3] to modify x in-place. In contrast, Julia provides the higher order functions filter and filter!, allowing users to write filter(z->z>3, x) and filter!(z->z>3, x) as alternatives to the corresponding transliterations x[x.>3] and x = x[x.>3]. Using filter! reduces the use of temporary arrays."
+    "text": "One of Julia's goals is to provide an effective language for data analysis and statistical programming. For users coming to Julia from R, these are some noteworthy differences:Julia's single quotes enclose characters, not strings.\nJulia can create substrings by indexing into strings. In R, strings must be converted into character vectors before creating substrings.\nIn Julia, like Python but unlike R, strings can be created with triple quotes \"\"\" ... \"\"\". This syntax is convenient for constructing strings that contain line breaks.\nIn Julia, varargs are specified using the splat operator ..., which always follows the name of a specific variable, unlike R, for which ... can occur in isolation.\nIn Julia, modulus is mod(a, b), not a %% b. % in Julia is the remainder operator.\nIn Julia, not all data structures support logical indexing. Furthermore, logical indexing in Julia is supported only with vectors of length equal to the object being indexed. For example:\nIn R, c(1, 2, 3, 4)[c(TRUE, FALSE)] is equivalent to c(1, 3).\nIn R, c(1, 2, 3, 4)[c(TRUE, FALSE, TRUE, FALSE)] is equivalent to c(1, 3).\nIn Julia, [1, 2, 3, 4][[true, false]] throws a BoundsError.\nIn Julia, [1, 2, 3, 4][[true, false, true, false]] produces [1, 3].\nLike many languages, Julia does not always allow operations on vectors of different lengths, unlike R where the vectors only need to share a common index range.  For example, c(1, 2, 3, 4) + c(1, 2) is valid R but the equivalent [1, 2, 3, 4] + [1, 2] will throw an error in Julia.\nJulia allows an optional trailing comma when that comma does not change the meaning of code. This can cause confusion among R users when indexing into arrays. For example, x[1,] in R would return the first row of a matrix; in Julia, however, the comma is ignored, so x[1,] == x[1], and will return the first element. To extract a row, be sure to use :, as in x[1,:].\nJulia's map takes the function first, then its arguments, unlike lapply(<structure>, function, ...) in R. Similarly Julia's equivalent of apply(X, MARGIN, FUN, ...) in R is mapslices where the function is the first argument.\nMultivariate apply in R, e.g. mapply(choose, 11:13, 1:3), can be written as broadcast(binomial, 11:13, 1:3) in Julia. Equivalently Julia offers a shorter dot syntax for vectorizing functions binomial.(11:13, 1:3).\nJulia uses end to denote the end of conditional blocks, like if, loop blocks, like while/ for, and functions. In lieu of the one-line if ( cond ) statement, Julia allows statements of the form if cond; statement; end, cond && statement and !cond || statement. Assignment statements in the latter two syntaxes must be explicitly wrapped in parentheses, e.g. cond && (x = value).\nIn Julia, <-, <<- and -> are not assignment operators.\nJulia's -> creates an anonymous function.\nJulia constructs vectors using brackets. Julia's [1, 2, 3] is the equivalent of R's c(1, 2, 3).\nJulia's * operator can perform matrix multiplication, unlike in R. If A and B are matrices, then A * B denotes a matrix multiplication in Julia, equivalent to R's A %*% B. In R, this same notation would perform an element-wise (Hadamard) product. To get the element-wise multiplication operation, you need to write A .* B in Julia.\nJulia performs matrix transposition using the .' operator and conjugated transposition using the ' operator. Julia's A.' is therefore equivalent to R's t(A).\nJulia does not require parentheses when writing if statements or for/while loops: use for i in [1, 2, 3] instead of for (i in c(1, 2, 3)) and if i == 1 instead of if (i == 1).\nJulia does not treat the numbers 0 and 1 as Booleans. You cannot write if (1) in Julia, because if statements accept only booleans. Instead, you can write if true, if Bool(1), or if 1==1.\nJulia does not provide nrow and ncol. Instead, use size(M, 1) for nrow(M) and size(M, 2) for ncol(M).\nJulia is careful to distinguish scalars, vectors and matrices.  In R, 1 and c(1) are the same. In Julia, they cannot be used interchangeably.\nJulia's diag and diagm are not like R's.\nJulia cannot assign to the results of function calls on the left hand side of an assignment operation: you cannot write diag(M) = ones(n).\nJulia discourages populating the main namespace with functions. Most statistical functionality for Julia is found in packages under the JuliaStats organization. For example:\nFunctions pertaining to probability distributions are provided by the Distributions package.\nThe DataFrames package provides data frames.\nGeneralized linear models are provided by the GLM package.\nJulia provides tuples and real hash tables, but not R-style lists. When returning multiple items, you should typically use a tuple: instead of list(a = 1, b = 2), use (1, 2).\nJulia encourages users to write their own types, which are easier to use than S3 or S4 objects in R. Julia's multiple dispatch system means that table(x::TypeA) and table(x::TypeB) act like R's table.TypeA(x) and table.TypeB(x).\nIn Julia, values are passed and assigned by reference. If a function modifies an array, the changes will be visible in the caller. This is very different from R and allows new functions to operate on large data structures much more efficiently.\nIn Julia, vectors and matrices are concatenated using hcat, vcat and hvcat, not c, rbind and cbind like in R.\nIn Julia, a range like a:b is not shorthand for a vector like in R, but is a specialized AbstractRange object that is used for iteration without high memory overhead. To convert a range into a vector, use collect(a:b).\nJulia's max and min are the equivalent of pmax and pmin respectively in R, but both arguments need to have the same dimensions.  While maximum and minimum replace max and min in R, there are important differences.\nJulia's sum, prod, maximum, and minimum are different from their counterparts in R. They all accept one or two arguments. The first argument is an iterable collection such as an array.  If there is a second argument, then this argument indicates the dimensions, over which the operation is carried out.  For instance, let A=[[1 2],[3 4]] in Julia and B=rbind(c(1,2),c(3,4)) be the same matrix in R.  Then sum(A) gives the same result as sum(B), but sum(A, 1) is a row vector containing the sum over each column and sum(A, 2) is a column vector containing the sum over each row.  This contrasts to the behavior of R, where sum(B,1)=11 and sum(B,2)=12.  If the second argument is a vector, then it specifies all the dimensions over which the sum is performed, e.g., sum(A,[1,2])=10.  It should be noted that there is no error checking regarding the second argument.\nJulia has several functions that can mutate their arguments. For example, it has both sort and sort!.\nIn R, performance requires vectorization. In Julia, almost the opposite is true: the best performing code is often achieved by using devectorized loops.\nJulia is eagerly evaluated and does not support R-style lazy evaluation. For most users, this means that there are very few unquoted expressions or column names.\nJulia does not support the NULL type. The closest equivalent is nothing, but it behaves like a scalar value rather than like a list. Use x == nothing instead of is.null(x).\nIn Julia, missing values are represented by the missing object rather than by NA. Use ismissing(x) instead of isna(x).\nJulia lacks the equivalent of R's assign or get.\nIn Julia, return does not require parentheses.\nIn R, an idiomatic way to remove unwanted values is to use logical indexing, like in the expression x[x>3] or in the statement x = x[x>3] to modify x in-place. In contrast, Julia provides the higher order functions filter and filter!, allowing users to write filter(z->z>3, x) and filter!(z->z>3, x) as alternatives to the corresponding transliterations x[x.>3] and x = x[x.>3]. Using filter! reduces the use of temporary arrays."
 },
 
 {
@@ -5841,6 +5841,38 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
+    "location": "stdlib/base.html#Base.Missing",
+    "page": "Essentials",
+    "title": "Base.Missing",
+    "category": "Type",
+    "text": "Missing\n\nA type with no fields whose singleton instance missing is used to represent missing values.\n\n\n\n"
+},
+
+{
+    "location": "stdlib/base.html#Base.missing",
+    "page": "Essentials",
+    "title": "Base.missing",
+    "category": "Constant",
+    "text": "missing\n\nThe singleton instance of type Missing representing a missing value.\n\n\n\n"
+},
+
+{
+    "location": "stdlib/base.html#Base.ismissing",
+    "page": "Essentials",
+    "title": "Base.ismissing",
+    "category": "Function",
+    "text": "ismissing(x)\n\nIndicate whether x is missing.\n\n\n\n"
+},
+
+{
+    "location": "stdlib/base.html#Missing-Values-1",
+    "page": "Essentials",
+    "title": "Missing Values",
+    "category": "section",
+    "text": "Base.Missing\nBase.missing\nBase.ismissing"
+},
+
+{
     "location": "stdlib/base.html#Base.run",
     "page": "Essentials",
     "title": "Base.run",
@@ -6297,6 +6329,14 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
+    "location": "stdlib/base.html#Base.MissingException",
+    "page": "Essentials",
+    "title": "Base.MissingException",
+    "category": "Type",
+    "text": "MissingException(msg)\n\nException thrown when a missing value is encountered in a situation where it is not supported. The error message, in the msg field may provide more specific details.\n\n\n\n"
+},
+
+{
     "location": "stdlib/base.html#Base.NullException",
     "page": "Essentials",
     "title": "Base.NullException",
@@ -6413,7 +6453,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Essentials",
     "title": "Errors",
     "category": "section",
-    "text": "Base.error\nCore.throw\nBase.rethrow\nBase.backtrace\nBase.catch_backtrace\nBase.assert\nBase.@assert\nBase.ArgumentError\nBase.AssertionError\nCore.BoundsError\nBase.DimensionMismatch\nCore.DivideError\nCore.DomainError\nBase.EOFError\nCore.ErrorException\nCore.InexactError\nCore.InterruptException\nBase.KeyError\nBase.LoadError\nBase.MethodError\nBase.NullException\nCore.OutOfMemoryError\nCore.ReadOnlyMemoryError\nCore.OverflowError\nBase.ParseError\nBase.ProcessExitedException\nCore.StackOverflowError\nBase.SystemError\nCore.TypeError\nCore.UndefRefError\nCore.UndefVarError\nBase.InitError\nBase.retry\nBase.ExponentialBackOff"
+    "text": "Base.error\nCore.throw\nBase.rethrow\nBase.backtrace\nBase.catch_backtrace\nBase.assert\nBase.@assert\nBase.ArgumentError\nBase.AssertionError\nCore.BoundsError\nBase.DimensionMismatch\nCore.DivideError\nCore.DomainError\nBase.EOFError\nCore.ErrorException\nCore.InexactError\nCore.InterruptException\nBase.KeyError\nBase.LoadError\nBase.MethodError\nBase.MissingException\nBase.NullException\nCore.OutOfMemoryError\nCore.ReadOnlyMemoryError\nCore.OverflowError\nBase.ParseError\nBase.ProcessExitedException\nCore.StackOverflowError\nBase.SystemError\nCore.TypeError\nCore.UndefRefError\nCore.UndefVarError\nBase.InitError\nBase.retry\nBase.ExponentialBackOff"
 },
 
 {
@@ -7189,7 +7229,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Collections and Data Structures",
     "title": "Base.count",
     "category": "Function",
-    "text": "count(p, itr) -> Integer\ncount(itr) -> Integer\n\nCount the number of elements in itr for which predicate p returns true. If p is omitted, counts the number of true elements in itr (which should be a collection of boolean values).\n\njulia> count(i->(4<=i<=6), [2,3,4,5,6])\n3\n\njulia> count([true, false, true, true])\n3\n\n\n\nLibGit2.count(f::Function, walker::GitRevWalker; oid::GitHash=GitHash(), by::Cint=Consts.SORT_NONE, rev::Bool=false)\n\nUsing the GitRevWalker walker to \"walk\" over every commit in the repository's history, find the number of commits which return true when f is applied to them. The keyword arguments are:     * oid: The GitHash of the commit to begin the walk from. The default is to use       push_head! and therefore the HEAD commit and all its ancestors.     * by: The sorting method. The default is not to sort. Other options are to sort by       topology (LibGit2.Consts.SORT_TOPOLOGICAL), to sort forwards in time       (LibGit2.Consts.SORT_TIME, most ancient first) or to sort backwards in time       (LibGit2.Consts.SORT_REVERSE, most recent first).     * rev: Whether to reverse the sorted order (for instance, if topological sorting is used).\n\nExamples\n\ncnt = LibGit2.with(LibGit2.GitRevWalker(repo)) do walker\n    count((oid, repo)->(oid == commit_oid1), walker, oid=commit_oid1, by=LibGit2.Consts.SORT_TIME)\nend\n\ncount finds the number of commits along the walk with a certain GitHash commit_oid1, starting the walk from that commit and moving forwards in time from it. Since the GitHash is unique to a commit, cnt will be 1.\n\n\n\n"
+    "text": "LibGit2.count(f::Function, walker::GitRevWalker; oid::GitHash=GitHash(), by::Cint=Consts.SORT_NONE, rev::Bool=false)\n\nUsing the GitRevWalker walker to \"walk\" over every commit in the repository's history, find the number of commits which return true when f is applied to them. The keyword arguments are:     * oid: The GitHash of the commit to begin the walk from. The default is to use       push_head! and therefore the HEAD commit and all its ancestors.     * by: The sorting method. The default is not to sort. Other options are to sort by       topology (LibGit2.Consts.SORT_TOPOLOGICAL), to sort forwards in time       (LibGit2.Consts.SORT_TIME, most ancient first) or to sort backwards in time       (LibGit2.Consts.SORT_REVERSE, most recent first).     * rev: Whether to reverse the sorted order (for instance, if topological sorting is used).\n\nExamples\n\ncnt = LibGit2.with(LibGit2.GitRevWalker(repo)) do walker\n    count((oid, repo)->(oid == commit_oid1), walker, oid=commit_oid1, by=LibGit2.Consts.SORT_TIME)\nend\n\ncount finds the number of commits along the walk with a certain GitHash commit_oid1, starting the walk from that commit and moving forwards in time from it. Since the GitHash is unique to a commit, cnt will be 1.\n\n\n\ncount(p, itr) -> Integer\ncount(itr) -> Integer\n\nCount the number of elements in itr for which predicate p returns true. If p is omitted, counts the number of true elements in itr (which should be a collection of boolean values).\n\njulia> count(i->(4<=i<=6), [2,3,4,5,6])\n3\n\njulia> count([true, false, true, true])\n3\n\n\n\n"
 },
 
 {
@@ -7221,7 +7261,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Collections and Data Structures",
     "title": "Base.map",
     "category": "Function",
-    "text": "map(f, c...) -> collection\n\nTransform collection c by applying f to each element. For multiple collection arguments, apply f elementwise.\n\nSee also: mapslices\n\nExamples\n\njulia> map(x -> x * 2, [1, 2, 3])\n3-element Array{Int64,1}:\n 2\n 4\n 6\n\njulia> map(+, [1, 2, 3], [10, 20, 30])\n3-element Array{Int64,1}:\n 11\n 22\n 33\n\n\n\nmap(f, x::Nullable)\n\nReturn f applied to the value of x if it has one, as a Nullable. If x is null, then return a null value of type Nullable{S}. S is guaranteed to be either Union{} or a concrete type. Whichever of these is chosen is an implementation detail, but typically the choice that maximizes performance would be used. If x has a value, then the return type is guaranteed to be of type Nullable{typeof(f(x))}.\n\nExamples\n\njulia> map(isodd, Nullable(1))\nNullable{Bool}(true)\n\njulia> map(isodd, Nullable(2))\nNullable{Bool}(false)\n\njulia> map(isodd, Nullable{Int}())\nNullable{Bool}()\n\n\n\nLibGit2.map(f::Function, walker::GitRevWalker; oid::GitHash=GitHash(), range::AbstractString=\"\", by::Cint=Consts.SORT_NONE, rev::Bool=false)\n\nUsing the GitRevWalker walker to \"walk\" over every commit in the repository's history, apply f to each commit in the walk. The keyword arguments are:     * oid: The GitHash of the commit to begin the walk from. The default is to use       push_head! and therefore the HEAD commit and all its ancestors.     * range: A range of GitHashs in the format oid1..oid2. f will be       applied to all commits between the two.     * by: The sorting method. The default is not to sort. Other options are to sort by       topology (LibGit2.Consts.SORT_TOPOLOGICAL), to sort forwards in time       (LibGit2.Consts.SORT_TIME, most ancient first) or to sort backwards in time       (LibGit2.Consts.SORT_REVERSE, most recent first).     * rev: Whether to reverse the sorted order (for instance, if topological sorting is used).\n\nExamples\n\noids = LibGit2.with(LibGit2.GitRevWalker(repo)) do walker\n    LibGit2.map((oid, repo)->string(oid), walker, by=LibGit2.Consts.SORT_TIME)\nend\n\nHere, map visits each commit using the GitRevWalker and finds its GitHash.\n\n\n\n"
+    "text": "LibGit2.map(f::Function, walker::GitRevWalker; oid::GitHash=GitHash(), range::AbstractString=\"\", by::Cint=Consts.SORT_NONE, rev::Bool=false)\n\nUsing the GitRevWalker walker to \"walk\" over every commit in the repository's history, apply f to each commit in the walk. The keyword arguments are:     * oid: The GitHash of the commit to begin the walk from. The default is to use       push_head! and therefore the HEAD commit and all its ancestors.     * range: A range of GitHashs in the format oid1..oid2. f will be       applied to all commits between the two.     * by: The sorting method. The default is not to sort. Other options are to sort by       topology (LibGit2.Consts.SORT_TOPOLOGICAL), to sort forwards in time       (LibGit2.Consts.SORT_TIME, most ancient first) or to sort backwards in time       (LibGit2.Consts.SORT_REVERSE, most recent first).     * rev: Whether to reverse the sorted order (for instance, if topological sorting is used).\n\nExamples\n\noids = LibGit2.with(LibGit2.GitRevWalker(repo)) do walker\n    LibGit2.map((oid, repo)->string(oid), walker, by=LibGit2.Consts.SORT_TIME)\nend\n\nHere, map visits each commit using the GitRevWalker and finds its GitHash.\n\n\n\nmap(f, c...) -> collection\n\nTransform collection c by applying f to each element. For multiple collection arguments, apply f elementwise.\n\nSee also: mapslices\n\nExamples\n\njulia> map(x -> x * 2, [1, 2, 3])\n3-element Array{Int64,1}:\n 2\n 4\n 6\n\njulia> map(+, [1, 2, 3], [10, 20, 30])\n3-element Array{Int64,1}:\n 11\n 22\n 33\n\n\n\nmap(f, x::Nullable)\n\nReturn f applied to the value of x if it has one, as a Nullable. If x is null, then return a null value of type Nullable{S}. S is guaranteed to be either Union{} or a concrete type. Whichever of these is chosen is an implementation detail, but typically the choice that maximizes performance would be used. If x has a value, then the return type is guaranteed to be of type Nullable{typeof(f(x))}.\n\nExamples\n\njulia> map(isodd, Nullable(1))\nNullable{Bool}(true)\n\njulia> map(isodd, Nullable(2))\nNullable{Bool}(false)\n\njulia> map(isodd, Nullable{Int}())\nNullable{Bool}()\n\n\n\n"
 },
 
 {
@@ -7493,7 +7533,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Collections and Data Structures",
     "title": "Base.pairs",
     "category": "Function",
-    "text": "pairs(IndexLinear(), A)\npairs(IndexCartesian(), A)\npairs(IndexStyle(A), A)\n\nAn iterator that accesses each element of the array A, returning i => x, where i is the index for the element and x = A[i]. Identical to pairs(A), except that the style of index can be selected. Also similar to enumerate(A), except i will be a valid index for A, while enumerate always counts from 1 regardless of the indices of A.\n\nSpecifying IndexLinear() ensures that i will be an integer; specifying IndexCartesian() ensures that i will be a CartesianIndex; specifying IndexStyle(A) chooses whichever has been defined as the native indexing style for array A.\n\nExamples\n\njulia> A = [\"a\" \"d\"; \"b\" \"e\"; \"c\" \"f\"];\n\njulia> for (index, value) in pairs(IndexStyle(A), A)\n           println(\"$index $value\")\n       end\n1 a\n2 b\n3 c\n4 d\n5 e\n6 f\n\njulia> S = view(A, 1:2, :);\n\njulia> for (index, value) in pairs(IndexStyle(S), S)\n           println(\"$index $value\")\n       end\nCartesianIndex(1, 1) a\nCartesianIndex(2, 1) b\nCartesianIndex(1, 2) d\nCartesianIndex(2, 2) e\n\nSee also: IndexStyle, indices.\n\n\n\npairs(collection)\n\nReturn an iterator over key => value pairs for any collection that maps a set of keys to a set of values. This includes arrays, where the keys are the array indices.\n\n\n\n"
+    "text": "pairs(collection)\n\nReturn an iterator over key => value pairs for any collection that maps a set of keys to a set of values. This includes arrays, where the keys are the array indices.\n\n\n\npairs(IndexLinear(), A)\npairs(IndexCartesian(), A)\npairs(IndexStyle(A), A)\n\nAn iterator that accesses each element of the array A, returning i => x, where i is the index for the element and x = A[i]. Identical to pairs(A), except that the style of index can be selected. Also similar to enumerate(A), except i will be a valid index for A, while enumerate always counts from 1 regardless of the indices of A.\n\nSpecifying IndexLinear() ensures that i will be an integer; specifying IndexCartesian() ensures that i will be a CartesianIndex; specifying IndexStyle(A) chooses whichever has been defined as the native indexing style for array A.\n\nExamples\n\njulia> A = [\"a\" \"d\"; \"b\" \"e\"; \"c\" \"f\"];\n\njulia> for (index, value) in pairs(IndexStyle(A), A)\n           println(\"$index $value\")\n       end\n1 a\n2 b\n3 c\n4 d\n5 e\n6 f\n\njulia> S = view(A, 1:2, :);\n\njulia> for (index, value) in pairs(IndexStyle(S), S)\n           println(\"$index $value\")\n       end\nCartesianIndex(1, 1) a\nCartesianIndex(2, 1) b\nCartesianIndex(1, 2) d\nCartesianIndex(2, 2) e\n\nSee also: IndexStyle, indices.\n\n\n\n"
 },
 
 {
@@ -7797,7 +7837,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Mathematics",
     "title": "Base.:+",
     "category": "Function",
-    "text": "dt::Date + t::Time -> DateTime\n\nThe addition of a Date with a Time produces a DateTime. The hour, minute, second, and millisecond parts of the Time are used along with the year, month, and day of the Date to create the new DateTime. Non-zero microseconds or nanoseconds in the Time type will result in an InexactError being thrown.\n\n\n\n+(x, y...)\n\nAddition operator. x+y+z+... calls this function with all arguments, i.e. +(x, y, z, ...).\n\nExamples\n\njulia> 1 + 20 + 4\n25\n\njulia> +(1, 20, 4)\n25\n\n\n\n"
+    "text": "+(x, y...)\n\nAddition operator. x+y+z+... calls this function with all arguments, i.e. +(x, y, z, ...).\n\nExamples\n\njulia> 1 + 20 + 4\n25\n\njulia> +(1, 20, 4)\n25\n\n\n\ndt::Date + t::Time -> DateTime\n\nThe addition of a Date with a Time produces a DateTime. The hour, minute, second, and millisecond parts of the Time are used along with the year, month, and day of the Date to create the new DateTime. Non-zero microseconds or nanoseconds in the Time type will result in an InexactError being thrown.\n\n\n\n"
 },
 
 {
@@ -8997,7 +9037,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Mathematics",
     "title": "Base.conj",
     "category": "Function",
-    "text": "conj(v::RowVector)\n\nReturn a ConjArray lazy view of the input, where each element is conjugated.\n\nExamples\n\njulia> v = [1+im, 1-im].'\n1×2 RowVector{Complex{Int64},Array{Complex{Int64},1}}:\n 1+1im  1-1im\n\njulia> conj(v)\n1×2 RowVector{Complex{Int64},ConjArray{Complex{Int64},1,Array{Complex{Int64},1}}}:\n 1-1im  1+1im\n\n\n\nconj(z)\n\nCompute the complex conjugate of a complex number z.\n\nExamples\n\njulia> conj(1 + 3im)\n1 - 3im\n\n\n\n"
+    "text": "conj(z)\n\nCompute the complex conjugate of a complex number z.\n\nExamples\n\njulia> conj(1 + 3im)\n1 - 3im\n\n\n\nconj(v::RowVector)\n\nReturn a ConjArray lazy view of the input, where each element is conjugated.\n\nExamples\n\njulia> v = [1+im, 1-im].'\n1×2 RowVector{Complex{Int64},Array{Complex{Int64},1}}:\n 1+1im  1-1im\n\njulia> conj(v)\n1×2 RowVector{Complex{Int64},ConjArray{Complex{Int64},1,Array{Complex{Int64},1}}}:\n 1-1im  1+1im\n\n\n\n"
 },
 
 {
@@ -10257,11 +10297,651 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
+    "location": "stdlib/strings.html#Base.length-Tuple{AbstractString}",
+    "page": "Strings",
+    "title": "Base.length",
+    "category": "Method",
+    "text": "length(s::AbstractString)\n\nThe number of characters in string s.\n\nExamples\n\njulia> length(\"jμΛIα\")\n5\n\n\n\n"
+},
+
+{
+    "location": "stdlib/strings.html#Base.sizeof-Tuple{AbstractString}",
+    "page": "Strings",
+    "title": "Base.sizeof",
+    "category": "Method",
+    "text": "sizeof(s::AbstractString)\n\nThe number of bytes in string s.\n\nExamples\n\njulia> sizeof(\"❤\")\n3\n\n\n\n"
+},
+
+{
+    "location": "stdlib/strings.html#Base.:*-Tuple{Union{Char, AbstractString},Vararg{Union{Char, AbstractString},N} where N}",
+    "page": "Strings",
+    "title": "Base.:*",
+    "category": "Method",
+    "text": "*(s::Union{AbstractString, Char}, t::Union{AbstractString, Char}...)\n\nConcatenate strings and/or characters, producing a String. This is equivalent to calling the string function on the arguments.\n\nExamples\n\njulia> \"Hello \" * \"world\"\n\"Hello world\"\n\njulia> 'j' * \"ulia\"\n\"julia\"\n\n\n\n"
+},
+
+{
+    "location": "stdlib/strings.html#Base.:^-Tuple{AbstractString,Integer}",
+    "page": "Strings",
+    "title": "Base.:^",
+    "category": "Method",
+    "text": "^(s::Union{AbstractString,Char}, n::Integer)\n\nRepeat a string or character n times. The repeat function is an alias to this operator.\n\nExamples\n\njulia> \"Test \"^3\n\"Test Test Test \"\n\n\n\n"
+},
+
+{
+    "location": "stdlib/strings.html#Base.string",
+    "page": "Strings",
+    "title": "Base.string",
+    "category": "Function",
+    "text": "string(xs...)\n\nCreate a string from any values using the print function.\n\nExamples\n\njulia> string(\"a\", 1, true)\n\"a1true\"\n\n\n\n"
+},
+
+{
+    "location": "stdlib/strings.html#Base.repeat-Tuple{AbstractString,Integer}",
+    "page": "Strings",
+    "title": "Base.repeat",
+    "category": "Method",
+    "text": "repeat(s::AbstractString, r::Integer)\n\nRepeat a string r times. This can equivalently be accomplished by calling s^r.\n\nExamples\n\njulia> repeat(\"ha\", 3)\n\"hahaha\"\n\n\n\n"
+},
+
+{
+    "location": "stdlib/strings.html#Base.repeat-Tuple{Char,Integer}",
+    "page": "Strings",
+    "title": "Base.repeat",
+    "category": "Method",
+    "text": "repeat(c::Char, r::Integer) -> String\n\nRepeat a character r times. This can equivalently be accomplished by calling c^r.\n\nExamples\n\njulia> repeat('A', 3)\n\"AAA\"\n\n\n\n"
+},
+
+{
+    "location": "stdlib/strings.html#Base.repr",
+    "page": "Strings",
+    "title": "Base.repr",
+    "category": "Function",
+    "text": "repr(x)\n\nCreate a string from any value using the show function.\n\nExamples\n\njulia> repr(1)\n\"1\"\n\njulia> repr(zeros(3))\n\"[0.0, 0.0, 0.0]\"\n\n\n\n\n"
+},
+
+{
+    "location": "stdlib/strings.html#Core.String-Tuple{AbstractString}",
+    "page": "Strings",
+    "title": "Core.String",
+    "category": "Method",
+    "text": "String(s::AbstractString)\n\nConvert a string to a contiguous byte array representation encoded as UTF-8 bytes. This representation is often appropriate for passing strings to C.\n\n\n\n"
+},
+
+{
+    "location": "stdlib/strings.html#Base.SubString",
+    "page": "Strings",
+    "title": "Base.SubString",
+    "category": "Type",
+    "text": "SubString(s::AbstractString, i::Integer, j::Integer=endof(s))\nSubString(s::AbstractString, r::UnitRange{<:Integer})\n\nLike getindex, but returns a view into the parent string s within range i:j or r respectively instead of making a copy.\n\nExamples\n\njulia> SubString(\"abc\", 1, 2)\n\"ab\"\n\njulia> SubString(\"abc\", 1:2)\n\"ab\"\n\njulia> SubString(\"abc\", 2)\n\"bc\"\n\n\n\n"
+},
+
+{
+    "location": "stdlib/strings.html#Base.transcode",
+    "page": "Strings",
+    "title": "Base.transcode",
+    "category": "Function",
+    "text": "transcode(T, src)\n\nConvert string data between Unicode encodings. src is either a String or a Vector{UIntXX} of UTF-XX code units, where XX is 8, 16, or 32. T indicates the encoding of the return value: String to return a (UTF-8 encoded) String or UIntXX to return a Vector{UIntXX} of UTF-XX data.   (The alias Cwchar_t can also be used as the integer type, for converting wchar_t* strings used by external C libraries.)\n\nThe transcode function succeeds as long as the input data can be reasonably represented in the target encoding; it always succeeds for conversions between UTF-XX encodings, even for invalid Unicode data.\n\nOnly conversion to/from UTF-8 is currently supported.\n\n\n\n"
+},
+
+{
+    "location": "stdlib/strings.html#Base.unsafe_string",
+    "page": "Strings",
+    "title": "Base.unsafe_string",
+    "category": "Function",
+    "text": "unsafe_string(p::Ptr{UInt8}, [length::Integer])\n\nCopy a string from the address of a C-style (NUL-terminated) string encoded as UTF-8. (The pointer can be safely freed afterwards.) If length is specified (the length of the data in bytes), the string does not have to be NUL-terminated.\n\nThis function is labelled \"unsafe\" because it will crash if p is not a valid memory address to data of the requested length.\n\n\n\n"
+},
+
+{
+    "location": "stdlib/strings.html#Base.codeunit-Tuple{AbstractString,Integer}",
+    "page": "Strings",
+    "title": "Base.codeunit",
+    "category": "Method",
+    "text": "codeunit(s::AbstractString, i::Integer)\n\nGet the ith code unit of an encoded string. For example, returns the ith byte of the representation of a UTF-8 string.\n\nExamples\n\njulia> s = \"δ=γ\"; [codeunit(s, i) for i in 1:sizeof(s)]\n5-element Array{UInt8,1}:\n 0xce\n 0xb4\n 0x3d\n 0xce\n 0xb3\n\n\n\n"
+},
+
+{
+    "location": "stdlib/strings.html#Base.ascii",
+    "page": "Strings",
+    "title": "Base.ascii",
+    "category": "Function",
+    "text": "ascii(s::AbstractString)\n\nConvert a string to String type and check that it contains only ASCII data, otherwise throwing an ArgumentError indicating the position of the first non-ASCII byte.\n\nExamples\n\njulia> ascii(\"abcdeγfgh\")\nERROR: ArgumentError: invalid ASCII at index 6 in \"abcdeγfgh\"\nStacktrace:\n[...]\n\njulia> ascii(\"abcdefgh\")\n\"abcdefgh\"\n\n\n\n"
+},
+
+{
+    "location": "stdlib/strings.html#Base.@r_str",
+    "page": "Strings",
+    "title": "Base.@r_str",
+    "category": "Macro",
+    "text": "@r_str -> Regex\n\nConstruct a regex, such as r\"^[a-z]*$\". The regex also accepts one or more flags, listed after the ending quote, to change its behaviour:\n\ni enables case-insensitive matching\nm treats the ^ and $ tokens as matching the start and end of individual lines, as opposed to the whole string.\ns allows the . modifier to match newlines.\nx enables \"comment mode\": whitespace is enabled except when escaped with \\, and # is treated as starting a comment.\n\nFor example, this regex has all three flags enabled:\n\njulia> match(r\"a+.*b+.*?d$\"ism, \"Goodbye,\\nOh, angry,\\nBad world\\n\")\nRegexMatch(\"angry,\\nBad world\")\n\n\n\n"
+},
+
+{
+    "location": "stdlib/strings.html#Base.@raw_str",
+    "page": "Strings",
+    "title": "Base.@raw_str",
+    "category": "Macro",
+    "text": "@raw_str -> String\n\nCreate a raw string without interpolation and unescaping. The exception is that quotation marks still must be escaped. Backslashes escape both quotation marks and other backslashes, but only when a sequence of backslashes precedes a quote character. Thus, 2n backslashes followed by a quote encodes n backslashes and the end of the literal while 2n+1 backslashes followed by a quote encodes n backslashes followed by a quote character.\n\nExamples\n\njulia> println(raw\"\\ $x\")\n\\ $x\n\njulia> println(raw\"\\\"\")\n\"\n\njulia> println(raw\"\\\\\\\"\")\n\\\"\n\njulia> println(raw\"\\\\x \\\\\\\"\")\n\\\\x \\\"\n\n\n\n"
+},
+
+{
+    "location": "stdlib/strings.html#Base.Docs.@html_str",
+    "page": "Strings",
+    "title": "Base.Docs.@html_str",
+    "category": "Macro",
+    "text": "@html_str -> Docs.HTML\n\nCreate an HTML object from a literal string.\n\n\n\n"
+},
+
+{
+    "location": "stdlib/strings.html#Base.Docs.@text_str",
+    "page": "Strings",
+    "title": "Base.Docs.@text_str",
+    "category": "Macro",
+    "text": "@text_str -> Docs.Text\n\nCreate a Text object from a literal string.\n\n\n\n"
+},
+
+{
+    "location": "stdlib/strings.html#Base.UTF8proc.normalize_string",
+    "page": "Strings",
+    "title": "Base.UTF8proc.normalize_string",
+    "category": "Function",
+    "text": "normalize_string(s::AbstractString, normalform::Symbol)\n\nNormalize the string s according to one of the four \"normal forms\" of the Unicode standard: normalform can be :NFC, :NFD, :NFKC, or :NFKD.  Normal forms C (canonical composition) and D (canonical decomposition) convert different visually identical representations of the same abstract string into a single canonical form, with form C being more compact.  Normal forms KC and KD additionally canonicalize \"compatibility equivalents\": they convert characters that are abstractly similar but visually distinct into a single canonical choice (e.g. they expand ligatures into the individual characters), with form KC being more compact.\n\nAlternatively, finer control and additional transformations may be be obtained by calling normalize_string(s; keywords...), where any number of the following boolean keywords options (which all default to false except for compose) are specified:\n\ncompose=false: do not perform canonical composition\ndecompose=true: do canonical decomposition instead of canonical composition (compose=true is ignored if present)\ncompat=true: compatibility equivalents are canonicalized\ncasefold=true: perform Unicode case folding, e.g. for case-insensitive string comparison\nnewline2lf=true, newline2ls=true, or newline2ps=true: convert various newline sequences (LF, CRLF, CR, NEL) into a linefeed (LF), line-separation (LS), or paragraph-separation (PS) character, respectively\nstripmark=true: strip diacritical marks (e.g. accents)\nstripignore=true: strip Unicode's \"default ignorable\" characters (e.g. the soft hyphen or the left-to-right marker)\nstripcc=true: strip control characters; horizontal tabs and form feeds are converted to spaces; newlines are also converted to spaces unless a newline-conversion flag was specified\nrejectna=true: throw an error if unassigned code points are found\nstable=true: enforce Unicode Versioning Stability\n\nFor example, NFKC corresponds to the options compose=true, compat=true, stable=true.\n\nExamples\n\njulia> \"μ\" == normalize_string(\"µ\", compat=true) #LHS: Unicode U+03bc, RHS: Unicode U+00b5\ntrue\n\njulia> normalize_string(\"JuLiA\", casefold=true)\n\"julia\"\n\njulia> normalize_string(\"JúLiA\", stripmark=true)\n\"JuLiA\"\n\n\n\n"
+},
+
+{
+    "location": "stdlib/strings.html#Base.UTF8proc.graphemes",
+    "page": "Strings",
+    "title": "Base.UTF8proc.graphemes",
+    "category": "Function",
+    "text": "graphemes(s::AbstractString) -> GraphemeIterator\n\nReturns an iterator over substrings of s that correspond to the extended graphemes in the string, as defined by Unicode UAX #29. (Roughly, these are what users would perceive as single characters, even though they may contain more than one codepoint; for example a letter combined with an accent mark is a single grapheme.)\n\n\n\n"
+},
+
+{
+    "location": "stdlib/strings.html#Base.isvalid-Tuple{Any}",
+    "page": "Strings",
+    "title": "Base.isvalid",
+    "category": "Method",
+    "text": "isvalid(value) -> Bool\n\nReturns true if the given value is valid for its type, which currently can be either Char or String.\n\nExamples\n\njulia> isvalid(Char(0xd800))\nfalse\n\njulia> isvalid(Char(0xd799))\ntrue\n\n\n\n"
+},
+
+{
+    "location": "stdlib/strings.html#Base.isvalid-Tuple{Any,Any}",
+    "page": "Strings",
+    "title": "Base.isvalid",
+    "category": "Method",
+    "text": "isvalid(T, value) -> Bool\n\nReturns true if the given value is valid for that type. Types currently can be either Char or String. Values for Char can be of type Char or UInt32. Values for String can be of that type, or Vector{UInt8}.\n\nExamples\n\njulia> isvalid(Char, 0xd800)\nfalse\n\njulia> isvalid(Char, 0xd799)\ntrue\n\n\n\n"
+},
+
+{
+    "location": "stdlib/strings.html#Base.isvalid-Tuple{AbstractString,Integer}",
+    "page": "Strings",
+    "title": "Base.isvalid",
+    "category": "Method",
+    "text": "isvalid(str::AbstractString, i::Integer)\n\nTell whether index i is valid for the given string.\n\nExamples\n\njulia> str = \"αβγdef\";\n\njulia> isvalid(str, 1)\ntrue\n\njulia> str[1]\n'α': Unicode U+03b1 (category Ll: Letter, lowercase)\n\njulia> isvalid(str, 2)\nfalse\n\njulia> str[2]\nERROR: UnicodeError: invalid character index\nStacktrace:\n[...]\n\n\n\n"
+},
+
+{
+    "location": "stdlib/strings.html#Base.UTF8proc.is_assigned_char",
+    "page": "Strings",
+    "title": "Base.UTF8proc.is_assigned_char",
+    "category": "Function",
+    "text": "is_assigned_char(c) -> Bool\n\nReturns true if the given char or integer is an assigned Unicode code point.\n\nExamples\n\njulia> is_assigned_char(101)\ntrue\n\njulia> is_assigned_char('\\x01')\ntrue\n\n\n\n"
+},
+
+{
+    "location": "stdlib/strings.html#Base.ismatch",
+    "page": "Strings",
+    "title": "Base.ismatch",
+    "category": "Function",
+    "text": "ismatch(r::Regex, s::AbstractString) -> Bool\n\nTest whether a string contains a match of the given regular expression.\n\nExamples\n\njulia> rx = r\"a.a\"\nr\"a.a\"\n\njulia> ismatch(rx, \"aba\")\ntrue\n\njulia> ismatch(rx, \"abba\")\nfalse\n\njulia> rx(\"aba\")\ntrue\n\n\n\n"
+},
+
+{
+    "location": "stdlib/strings.html#Base.match",
+    "page": "Strings",
+    "title": "Base.match",
+    "category": "Function",
+    "text": "match(r::Regex, s::AbstractString[, idx::Integer[, addopts]])\n\nSearch for the first match of the regular expression r in s and return a RegexMatch object containing the match, or nothing if the match failed. The matching substring can be retrieved by accessing m.match and the captured sequences can be retrieved by accessing m.captures The optional idx argument specifies an index at which to start the search.\n\nExamples\n\njulia> rx = r\"a(.)a\"\nr\"a(.)a\"\n\njulia> m = match(rx, \"cabac\")\nRegexMatch(\"aba\", 1=\"b\")\n\njulia> m.captures\n1-element Array{Union{Void, SubString{String}},1}:\n \"b\"\n\njulia> m.match\n\"aba\"\n\njulia> match(rx, \"cabac\", 3) == nothing\ntrue\n\n\n\n"
+},
+
+{
+    "location": "stdlib/strings.html#Base.eachmatch",
+    "page": "Strings",
+    "title": "Base.eachmatch",
+    "category": "Function",
+    "text": "eachmatch(r::Regex, s::AbstractString[, overlap::Bool=false])\n\nSearch for all matches of a the regular expression r in s and return a iterator over the matches. If overlap is true, the matching sequences are allowed to overlap indices in the original string, otherwise they must be from distinct character ranges.\n\nExamples\n\njulia> rx = r\"a.a\"\nr\"a.a\"\n\njulia> m = eachmatch(rx, \"a1a2a3a\")\nBase.RegexMatchIterator(r\"a.a\", \"a1a2a3a\", false)\n\njulia> collect(m)\n2-element Array{RegexMatch,1}:\n RegexMatch(\"a1a\")\n RegexMatch(\"a3a\")\n\njulia> collect(eachmatch(rx, \"a1a2a3a\", true))\n3-element Array{RegexMatch,1}:\n RegexMatch(\"a1a\")\n RegexMatch(\"a2a\")\n RegexMatch(\"a3a\")\n\n\n\n"
+},
+
+{
+    "location": "stdlib/strings.html#Base.matchall",
+    "page": "Strings",
+    "title": "Base.matchall",
+    "category": "Function",
+    "text": "matchall(r::Regex, s::AbstractString[, overlap::Bool=false]) -> Vector{AbstractString}\n\nReturn a vector of the matching substrings from eachmatch.\n\nExamples\n\njulia> rx = r\"a.a\"\nr\"a.a\"\n\njulia> matchall(rx, \"a1a2a3a\")\n2-element Array{SubString{String},1}:\n \"a1a\"\n \"a3a\"\n\njulia> matchall(rx, \"a1a2a3a\", true)\n3-element Array{SubString{String},1}:\n \"a1a\"\n \"a2a\"\n \"a3a\"\n\n\n\n"
+},
+
+{
+    "location": "stdlib/strings.html#Base.isless-Tuple{AbstractString,AbstractString}",
+    "page": "Strings",
+    "title": "Base.isless",
+    "category": "Method",
+    "text": "isless(a::AbstractString, b::AbstractString)\n\nTest whether string a comes before string b in alphabetical order.\n\nExamples\n\njulia> isless(\"a\", \"b\")\ntrue\n\njulia> isless(\"β\", \"α\")\nfalse\n\njulia> isless(\"a\", \"a\")\nfalse\n\n\n\n"
+},
+
+{
+    "location": "stdlib/strings.html#Base.:==-Tuple{AbstractString,AbstractString}",
+    "page": "Strings",
+    "title": "Base.:==",
+    "category": "Method",
+    "text": "==(a::AbstractString, b::AbstractString)\n\nTest whether two strings are equal character by character.\n\nExamples\n\njulia> \"abc\" == \"abc\"\ntrue\n\njulia> \"abc\" == \"αβγ\"\nfalse\n\n\n\n"
+},
+
+{
+    "location": "stdlib/strings.html#Base.cmp-Tuple{AbstractString,AbstractString}",
+    "page": "Strings",
+    "title": "Base.cmp",
+    "category": "Method",
+    "text": "cmp(a::AbstractString, b::AbstractString)\n\nCompare two strings for equality.\n\nReturn 0 if both strings have the same length and the character at each index is the same in both strings. Return -1 if a is a substring of b, or if a comes before b in alphabetical order. Return 1 if b is a substring of a, or if b comes before a in alphabetical order.\n\nExamples\n\njulia> cmp(\"abc\", \"abc\")\n0\n\njulia> cmp(\"ab\", \"abc\")\n-1\n\njulia> cmp(\"abc\", \"ab\")\n1\n\njulia> cmp(\"ab\", \"ac\")\n-1\n\njulia> cmp(\"ac\", \"ab\")\n1\n\njulia> cmp(\"α\", \"a\")\n1\n\njulia> cmp(\"b\", \"β\")\n-1\n\n\n\n"
+},
+
+{
+    "location": "stdlib/strings.html#Base.lpad",
+    "page": "Strings",
+    "title": "Base.lpad",
+    "category": "Function",
+    "text": "lpad(s, n::Integer, p::AbstractString=\" \")\n\nMake a string at least n columns wide when printed by padding s on the left with copies of p.\n\nExamples\n\njulia> lpad(\"March\",10)\n\"     March\"\n\n\n\n"
+},
+
+{
+    "location": "stdlib/strings.html#Base.rpad",
+    "page": "Strings",
+    "title": "Base.rpad",
+    "category": "Function",
+    "text": "rpad(s, n::Integer, p::AbstractString=\" \")\n\nMake a string at least n columns wide when printed by padding s on the right with copies of p.\n\nExamples\n\njulia> rpad(\"March\",20)\n\"March               \"\n\n\n\n"
+},
+
+{
+    "location": "stdlib/strings.html#Base.search",
+    "page": "Strings",
+    "title": "Base.search",
+    "category": "Function",
+    "text": "search(string::AbstractString, chars::Chars, [start::Integer])\n\nSearch for the first occurrence of the given characters within the given string. The second argument may be a single character, a vector or a set of characters, a string, or a regular expression (though regular expressions are only allowed on contiguous strings, such as ASCII or UTF-8 strings). The third argument optionally specifies a starting index. The return value is a range of indexes where the matching sequence is found, such that s[search(s,x)] == x:\n\nsearch(string, \"substring\") = start:end such that string[start:end] == \"substring\", or 0:-1 if unmatched.\n\nsearch(string, 'c') = index such that string[index] == 'c', or 0 if unmatched.\n\nExamples\n\njulia> search(\"Hello to the world\", \"z\")\n0:-1\n\njulia> search(\"JuliaLang\",\"Julia\")\n1:5\n\n\n\n"
+},
+
+{
+    "location": "stdlib/strings.html#Base.rsearch",
+    "page": "Strings",
+    "title": "Base.rsearch",
+    "category": "Function",
+    "text": "rsearch(s::AbstractString, chars::Chars, [start::Integer])\n\nSimilar to search, but returning the last occurrence of the given characters within the given string, searching in reverse from start.\n\nExamples\n\njulia> rsearch(\"aaabbb\",\"b\")\n6:6\n\n\n\n"
+},
+
+{
+    "location": "stdlib/strings.html#Base.searchindex",
+    "page": "Strings",
+    "title": "Base.searchindex",
+    "category": "Function",
+    "text": "searchindex(s::AbstractString, substring, [start::Integer])\n\nSimilar to search, but return only the start index at which the substring is found, or 0 if it is not.\n\nExamples\n\njulia> searchindex(\"Hello to the world\", \"z\")\n0\n\njulia> searchindex(\"JuliaLang\",\"Julia\")\n1\n\njulia> searchindex(\"JuliaLang\",\"Lang\")\n6\n\n\n\n"
+},
+
+{
+    "location": "stdlib/strings.html#Base.rsearchindex",
+    "page": "Strings",
+    "title": "Base.rsearchindex",
+    "category": "Function",
+    "text": "rsearchindex(s::AbstractString, substring, [start::Integer])\n\nSimilar to rsearch, but return only the start index at which the substring is found, or 0 if it is not.\n\nExamples\n\njulia> rsearchindex(\"aaabbb\",\"b\")\n6\n\njulia> rsearchindex(\"aaabbb\",\"a\")\n3\n\n\n\n"
+},
+
+{
+    "location": "stdlib/strings.html#Base.contains-Tuple{AbstractString,AbstractString}",
+    "page": "Strings",
+    "title": "Base.contains",
+    "category": "Method",
+    "text": "contains(haystack::AbstractString, needle::Union{AbstractString,Char})\n\nDetermine whether the second argument is a substring of the first.\n\nExamples\n\njulia> contains(\"JuliaLang is pretty cool!\", \"Julia\")\ntrue\n\n\n\n"
+},
+
+{
+    "location": "stdlib/strings.html#Base.reverse-Tuple{Union{SubString{String}, String}}",
+    "page": "Strings",
+    "title": "Base.reverse",
+    "category": "Method",
+    "text": "reverse(s::AbstractString) -> AbstractString\n\nReverses a string. Technically, this function reverses the codepoints in a string and its main utility is for reversed-order string processing, especially for reversed regular-expression searches. See also reverseind to convert indices in s to indices in reverse(s) and vice-versa, and graphemes to operate on user-visible \"characters\" (graphemes) rather than codepoints. See also Iterators.reverse for reverse-order iteration without making a copy. Custom string types must implement the reverse function themselves and should typically return a string with the same type and encoding. If they return a string with a different encoding, they must also override reverseind for that string type to satisfy s[reverseind(s,i)] == reverse(s)[i].\n\nExamples\n\njulia> reverse(\"JuliaLang\")\n\"gnaLailuJ\"\n\njulia> reverse(\"ax̂e\") # combining characters can lead to surprising results\n\"êxa\"\n\njulia> join(reverse(collect(graphemes(\"ax̂e\")))) # reverses graphemes\n\"ex̂a\"\n\n\n\n"
+},
+
+{
+    "location": "stdlib/strings.html#Base.replace",
+    "page": "Strings",
+    "title": "Base.replace",
+    "category": "Function",
+    "text": "replace(s::AbstractString, pat, r, [count::Integer])\n\nSearch for the given pattern pat in s, and replace each occurrence with r. If count is provided, replace at most count occurrences. As with search, the second argument may be a single character, a vector or a set of characters, a string, or a regular expression. If r is a function, each occurrence is replaced with r(s) where s is the matched substring. If pat is a regular expression and r is a SubstitutionString, then capture group references in r are replaced with the corresponding matched text. To remove instances of pat from string, set r to the empty String (\"\").\n\nExamples\n\njulia> replace(\"Python is a programming language.\", \"Python\", \"Julia\")\n\"Julia is a programming language.\"\n\njulia> replace(\"The quick foxes run quickly.\", \"quick\", \"slow\", 1)\n\"The slow foxes run quickly.\"\n\njulia> replace(\"The quick foxes run quickly.\", \"quick\", \"\", 1)\n\"The  foxes run quickly.\"\n\n\n\n"
+},
+
+{
+    "location": "stdlib/strings.html#Base.split",
+    "page": "Strings",
+    "title": "Base.split",
+    "category": "Function",
+    "text": "split(ce::LibGit2.ConfigEntry) -> Tuple{String,String,String,String}\n\nBreak the ConfigEntry up to the following pieces: section, subsection, name, and value.\n\nExamples\n\nGiven the git configuration file containing:\n\n[credential \"https://example.com\"]\n    username = me\n\nThe ConfigEntry would look like the following:\n\njulia> entry\nConfigEntry(\"credential.https://example.com.username\", \"me\")\n\njulia> split(entry)\n(\"credential\", \"https://example.com\", \"username\", \"me\")\n\nRefer to the git config syntax documenation for more details.\n\n\n\nsplit(s::AbstractString, [chars]; limit::Integer=0, keep::Bool=true)\n\nReturn an array of substrings by splitting the given string on occurrences of the given character delimiters, which may be specified in any of the formats allowed by search's second argument (i.e. a single character, collection of characters, string, or regular expression). If chars is omitted, it defaults to the set of all space characters, and keep is taken to be false. The two keyword arguments are optional: they are a maximum size for the result and a flag determining whether empty fields should be kept in the result.\n\nExamples\n\njulia> a = \"Ma.rch\"\n\"Ma.rch\"\n\njulia> split(a,\".\")\n2-element Array{SubString{String},1}:\n \"Ma\"\n \"rch\"\n\n\n\n"
+},
+
+{
+    "location": "stdlib/strings.html#Base.rsplit",
+    "page": "Strings",
+    "title": "Base.rsplit",
+    "category": "Function",
+    "text": "rsplit(s::AbstractString, [chars]; limit::Integer=0, keep::Bool=true)\n\nSimilar to split, but starting from the end of the string.\n\nExamples\n\njulia> a = \"M.a.r.c.h\"\n\"M.a.r.c.h\"\n\njulia> rsplit(a,\".\")\n5-element Array{SubString{String},1}:\n \"M\"\n \"a\"\n \"r\"\n \"c\"\n \"h\"\n\njulia> rsplit(a,\".\";limit=1)\n1-element Array{SubString{String},1}:\n \"M.a.r.c.h\"\n\njulia> rsplit(a,\".\";limit=2)\n2-element Array{SubString{String},1}:\n \"M.a.r.c\"\n \"h\"\n\n\n\n"
+},
+
+{
+    "location": "stdlib/strings.html#Base.strip",
+    "page": "Strings",
+    "title": "Base.strip",
+    "category": "Function",
+    "text": "strip(s::AbstractString, [chars::Chars])\n\nReturn s with any leading and trailing whitespace removed. If chars (a character, or vector or set of characters) is provided, instead remove characters contained in it.\n\nExamples\n\njulia> strip(\"{3, 5}\\n\", ['{', '}', '\\n'])\n\"3, 5\"\n\n\n\n"
+},
+
+{
+    "location": "stdlib/strings.html#Base.lstrip",
+    "page": "Strings",
+    "title": "Base.lstrip",
+    "category": "Function",
+    "text": "lstrip(s::AbstractString[, chars::Chars])\n\nReturn s with any leading whitespace and delimiters removed. The default delimiters to remove are ' ', \\t, \\n, \\v, \\f, and \\r. If chars (a character, or vector or set of characters) is provided, instead remove characters contained in it.\n\nExamples\n\njulia> a = lpad(\"March\", 20)\n\"               March\"\n\njulia> lstrip(a)\n\"March\"\n\n\n\n"
+},
+
+{
+    "location": "stdlib/strings.html#Base.rstrip",
+    "page": "Strings",
+    "title": "Base.rstrip",
+    "category": "Function",
+    "text": "rstrip(s::AbstractString[, chars::Chars])\n\nReturn s with any trailing whitespace and delimiters removed. The default delimiters to remove are ' ', \\t, \\n, \\v, \\f, and \\r. If chars (a character, or vector or set of characters) is provided, instead remove characters contained in it.\n\nExamples\n\njulia> a = rpad(\"March\", 20)\n\"March               \"\n\njulia> rstrip(a)\n\"March\"\n\n\n\n"
+},
+
+{
+    "location": "stdlib/strings.html#Base.startswith",
+    "page": "Strings",
+    "title": "Base.startswith",
+    "category": "Function",
+    "text": "startswith(s::AbstractString, prefix::AbstractString)\n\nReturns true if s starts with prefix. If prefix is a vector or set of characters, tests whether the first character of s belongs to that set.\n\nSee also endswith.\n\nExamples\n\njulia> startswith(\"JuliaLang\", \"Julia\")\ntrue\n\n\n\n"
+},
+
+{
+    "location": "stdlib/strings.html#Base.endswith",
+    "page": "Strings",
+    "title": "Base.endswith",
+    "category": "Function",
+    "text": "endswith(s::AbstractString, suffix::AbstractString)\n\nReturns true if s ends with suffix. If suffix is a vector or set of characters, tests whether the last character of s belongs to that set.\n\nSee also startswith.\n\nExamples\n\njulia> endswith(\"Sunday\", \"day\")\ntrue\n\n\n\n"
+},
+
+{
+    "location": "stdlib/strings.html#Base.first-Tuple{AbstractString,Integer}",
+    "page": "Strings",
+    "title": "Base.first",
+    "category": "Method",
+    "text": "first(str::AbstractString, nchar::Integer)\n\nGet a string consisting of the first nchar characters of str.\n\njulia> first(\"∀ϵ≠0: ϵ²>0\", 0)\n\"\"\n\njulia> first(\"∀ϵ≠0: ϵ²>0\", 1)\n\"∀\"\n\njulia> first(\"∀ϵ≠0: ϵ²>0\", 3)\n\"∀ϵ≠\"\n\n\n\n"
+},
+
+{
+    "location": "stdlib/strings.html#Base.last-Tuple{AbstractString,Integer}",
+    "page": "Strings",
+    "title": "Base.last",
+    "category": "Method",
+    "text": "last(str::AbstractString, nchar::Integer)\n\nGet a string consisting of the last nchar characters of str.\n\njulia> last(\"∀ϵ≠0: ϵ²>0\", 0)\n\"\"\n\njulia> last(\"∀ϵ≠0: ϵ²>0\", 1)\n\"0\"\n\njulia> last(\"∀ϵ≠0: ϵ²>0\", 3)\n\"²>0\"\n\n\n\n"
+},
+
+{
+    "location": "stdlib/strings.html#Base.uppercase",
+    "page": "Strings",
+    "title": "Base.uppercase",
+    "category": "Function",
+    "text": "uppercase(s::AbstractString)\n\nReturn s with all characters converted to uppercase.\n\nExamples\n\njulia> uppercase(\"Julia\")\n\"JULIA\"\n\n\n\n"
+},
+
+{
+    "location": "stdlib/strings.html#Base.lowercase",
+    "page": "Strings",
+    "title": "Base.lowercase",
+    "category": "Function",
+    "text": "lowercase(s::AbstractString)\n\nReturn s with all characters converted to lowercase.\n\nExamples\n\njulia> lowercase(\"STRINGS AND THINGS\")\n\"strings and things\"\n\n\n\n"
+},
+
+{
+    "location": "stdlib/strings.html#Base.titlecase",
+    "page": "Strings",
+    "title": "Base.titlecase",
+    "category": "Function",
+    "text": "titlecase(s::AbstractString)\n\nCapitalize the first character of each word in s. See also ucfirst to capitalize only the first character in s.\n\nExamples\n\njulia> titlecase(\"the julia programming language\")\n\"The Julia Programming Language\"\n\n\n\n"
+},
+
+{
+    "location": "stdlib/strings.html#Base.ucfirst",
+    "page": "Strings",
+    "title": "Base.ucfirst",
+    "category": "Function",
+    "text": "ucfirst(s::AbstractString)\n\nReturn string with the first character converted to uppercase (technically \"title case\" for Unicode). See also titlecase to capitalize the first character of every word in s.\n\nExamples\n\njulia> ucfirst(\"python\")\n\"Python\"\n\n\n\n"
+},
+
+{
+    "location": "stdlib/strings.html#Base.lcfirst",
+    "page": "Strings",
+    "title": "Base.lcfirst",
+    "category": "Function",
+    "text": "lcfirst(s::AbstractString)\n\nReturn string with the first character converted to lowercase.\n\nExamples\n\njulia> lcfirst(\"Julia\")\n\"julia\"\n\n\n\n"
+},
+
+{
+    "location": "stdlib/strings.html#Base.join",
+    "page": "Strings",
+    "title": "Base.join",
+    "category": "Function",
+    "text": "join(io::IO, strings, delim, [last])\n\nJoin an array of strings into a single string, inserting the given delimiter between adjacent strings. If last is given, it will be used instead of delim between the last two strings. For example,\n\nExamples\n\njulia> join([\"apples\", \"bananas\", \"pineapples\"], \", \", \" and \")\n\"apples, bananas and pineapples\"\n\nstrings can be any iterable over elements x which are convertible to strings via print(io::IOBuffer, x). strings will be printed to io.\n\n\n\n"
+},
+
+{
+    "location": "stdlib/strings.html#Base.chop",
+    "page": "Strings",
+    "title": "Base.chop",
+    "category": "Function",
+    "text": "chop(s::AbstractString, head::Integer=0, tail::Integer=1)\n\nRemove the first head and the last tail characters from s. The call chop(s) removes the last character from s. If it is requested to remove more characters than length(s) then an empty string is returned.\n\nExamples\n\njulia> a = \"March\"\n\"March\"\n\njulia> chop(a)\n\"Marc\"\n\njulia> chop(a, 1, 2)\n\"ar\"\n\njulia> chop(a, 5, 5)\n\"\"\n\n\n\n"
+},
+
+{
+    "location": "stdlib/strings.html#Base.chomp",
+    "page": "Strings",
+    "title": "Base.chomp",
+    "category": "Function",
+    "text": "chomp(s::AbstractString)\n\nRemove a single trailing newline from a string.\n\nExamples\n\njulia> chomp(\"Hello\\n\")\n\"Hello\"\n\n\n\n"
+},
+
+{
+    "location": "stdlib/strings.html#Base.ind2chr",
+    "page": "Strings",
+    "title": "Base.ind2chr",
+    "category": "Function",
+    "text": "ind2chr(s::AbstractString, i::Integer)\n\nConvert a byte index i to a character index with respect to string s.\n\nSee also chr2ind.\n\nExamples\n\njulia> str = \"αβγdef\";\n\njulia> ind2chr(str, 3)\n2\n\njulia> chr2ind(str, 2)\n3\n\n\n\n"
+},
+
+{
+    "location": "stdlib/strings.html#Base.chr2ind",
+    "page": "Strings",
+    "title": "Base.chr2ind",
+    "category": "Function",
+    "text": "chr2ind(s::AbstractString, i::Integer)\n\nConvert a character index i to a byte index.\n\nSee also ind2chr.\n\nExamples\n\njulia> str = \"αβγdef\";\n\njulia> chr2ind(str, 2)\n3\n\njulia> ind2chr(str, 3)\n2\n\n\n\n"
+},
+
+{
+    "location": "stdlib/strings.html#Base.thisind",
+    "page": "Strings",
+    "title": "Base.thisind",
+    "category": "Function",
+    "text": "thisind(s::AbstractString, i::Integer)\n\nIf i is the index into a character in s then thisind returns the index of the start of that character. If i < start(s) then it returns start(s) - 1. If i > ncodeunits(s) then it returns ncodeunits(s) + 1.\n\nExamples\n\n```jldoctest julia> thisind(\"αβγdef\", -5) 0\n\njulia> thisind(\"αβγdef\", 1) 1\n\njulia> thisind(\"αβγdef\", 3) 3\n\njulia> thisind(\"αβγdef\", 4) 3\n\njulia> thisind(\"αβγdef\", 9) 9\n\njulia> thisind(\"αβγdef\", 10) 10\n\njulia> thisind(\"αβγdef\", 20) 10\n\n\n\n"
+},
+
+{
+    "location": "stdlib/strings.html#Base.nextind",
+    "page": "Strings",
+    "title": "Base.nextind",
+    "category": "Function",
+    "text": "nextind(str::AbstractString, i::Integer, nchar::Integer=1)\n\nGet the next valid string index after i. Returns a value greater than endof(str) at or after the end of the string. If the nchar argument is given the function goes forward nchar characters.\n\nExamples\n\njulia> str = \"αβγdef\";\n\njulia> nextind(str, 1)\n3\n\njulia> nextind(str, 1, 2)\n5\n\njulia> endof(str)\n9\n\njulia> nextind(str, 9)\n10\n\n\n\n"
+},
+
+{
+    "location": "stdlib/strings.html#Base.prevind",
+    "page": "Strings",
+    "title": "Base.prevind",
+    "category": "Function",
+    "text": "prevind(str::AbstractString, i::Integer, nchar::Integer=1)\n\nGet the previous valid string index before i. Returns a value less than 1 at the beginning of the string. If the nchar argument is given the function goes back nchar characters.\n\nExamples\n\njulia> prevind(\"αβγdef\", 3)\n1\n\njulia> prevind(\"αβγdef\", 1)\n0\n\njulia> prevind(\"αβγdef\", 3, 2)\n0\n\n\n\n"
+},
+
+{
+    "location": "stdlib/strings.html#Base.Random.randstring",
+    "page": "Strings",
+    "title": "Base.Random.randstring",
+    "category": "Function",
+    "text": "randstring([rng=GLOBAL_RNG], [chars], [len=8])\n\nCreate a random string of length len, consisting of characters from chars, which defaults to the set of upper- and lower-case letters and the digits 0-9. The optional rng argument specifies a random number generator, see Random Numbers.\n\nExamples\n\njulia> srand(0); randstring()\n\"c03rgKi1\"\n\njulia> randstring(MersenneTwister(0), 'a':'z', 6)\n\"wijzek\"\n\njulia> randstring(\"ACGT\")\n\"TATCGGTC\"\n\nnote: Note\nchars can be any collection of characters, of type Char or UInt8 (more efficient), provided rand can randomly pick characters from it.\n\n\n\n"
+},
+
+{
+    "location": "stdlib/strings.html#Base.UTF8proc.textwidth",
+    "page": "Strings",
+    "title": "Base.UTF8proc.textwidth",
+    "category": "Function",
+    "text": "textwidth(c)\n\nGive the number of columns needed to print a character.\n\nExamples\n\njulia> textwidth('α')\n1\n\njulia> textwidth('❤')\n2\n\n\n\ntextwidth(s::AbstractString)\n\nGive the number of columns needed to print a string.\n\nExamples\n\njulia> textwidth(\"March\")\n5\n\n\n\n"
+},
+
+{
+    "location": "stdlib/strings.html#Base.UTF8proc.isalnum",
+    "page": "Strings",
+    "title": "Base.UTF8proc.isalnum",
+    "category": "Function",
+    "text": "isalnum(c::Char) -> Bool\n\nTests whether a character is alphanumeric. A character is classified as alphabetic if it belongs to the Unicode general category Letter or Number, i.e. a character whose category code begins with 'L' or 'N'.\n\nExamples\n\njulia> isalnum('❤')\nfalse\n\njulia> isalnum('9')\ntrue\n\njulia> isalnum('α')\ntrue\n\n\n\n"
+},
+
+{
+    "location": "stdlib/strings.html#Base.UTF8proc.isalpha",
+    "page": "Strings",
+    "title": "Base.UTF8proc.isalpha",
+    "category": "Function",
+    "text": "isalpha(c::Char) -> Bool\n\nTests whether a character is alphabetic. A character is classified as alphabetic if it belongs to the Unicode general category Letter, i.e. a character whose category code begins with 'L'.\n\nExamples\n\njulia> isalpha('❤')\nfalse\n\njulia> isalpha('α')\ntrue\n\njulia> isalpha('9')\nfalse\n\n\n\n"
+},
+
+{
+    "location": "stdlib/strings.html#Base.isascii",
+    "page": "Strings",
+    "title": "Base.isascii",
+    "category": "Function",
+    "text": "isascii(c::Union{Char,AbstractString}) -> Bool\n\nTest whether a character belongs to the ASCII character set, or whether this is true for all elements of a string.\n\nExamples\n\njulia> isascii('a')\ntrue\n\njulia> isascii('α')\nfalse\n\njulia> isascii(\"abc\")\ntrue\n\njulia> isascii(\"αβγ\")\nfalse\n\n\n\n"
+},
+
+{
+    "location": "stdlib/strings.html#Base.UTF8proc.iscntrl",
+    "page": "Strings",
+    "title": "Base.UTF8proc.iscntrl",
+    "category": "Function",
+    "text": "iscntrl(c::Char) -> Bool\n\nTests whether a character is a control character. Control characters are the non-printing characters of the Latin-1 subset of Unicode.\n\nExamples\n\njulia> iscntrl('\\x01')\ntrue\n\njulia> iscntrl('a')\nfalse\n\n\n\n"
+},
+
+{
+    "location": "stdlib/strings.html#Base.UTF8proc.isdigit",
+    "page": "Strings",
+    "title": "Base.UTF8proc.isdigit",
+    "category": "Function",
+    "text": "isdigit(c::Char) -> Bool\n\nTests whether a character is a numeric digit (0-9).\n\nExamples\n\njulia> isdigit('❤')\nfalse\n\njulia> isdigit('9')\ntrue\n\njulia> isdigit('α')\nfalse\n\n\n\n"
+},
+
+{
+    "location": "stdlib/strings.html#Base.UTF8proc.isgraph",
+    "page": "Strings",
+    "title": "Base.UTF8proc.isgraph",
+    "category": "Function",
+    "text": "isgraph(c::Char) -> Bool\n\nTests whether a character is printable, and not a space. Any character that would cause a printer to use ink should be classified with isgraph(c)==true.\n\nExamples\n\njulia> isgraph('\\x01')\nfalse\n\njulia> isgraph('A')\ntrue\n\n\n\n"
+},
+
+{
+    "location": "stdlib/strings.html#Base.UTF8proc.islower",
+    "page": "Strings",
+    "title": "Base.UTF8proc.islower",
+    "category": "Function",
+    "text": "islower(c::Char) -> Bool\n\nTests whether a character is a lowercase letter. A character is classified as lowercase if it belongs to Unicode category Ll, Letter: Lowercase.\n\nExamples\n\njulia> islower('α')\ntrue\n\njulia> islower('Γ')\nfalse\n\njulia> islower('❤')\nfalse\n\n\n\n"
+},
+
+{
+    "location": "stdlib/strings.html#Base.UTF8proc.isnumber",
+    "page": "Strings",
+    "title": "Base.UTF8proc.isnumber",
+    "category": "Function",
+    "text": "isnumber(c::Char) -> Bool\n\nTests whether a character is numeric. A character is classified as numeric if it belongs to the Unicode general category Number, i.e. a character whose category code begins with 'N'.\n\nExamples\n\njulia> isnumber('9')\ntrue\n\njulia> isnumber('α')\nfalse\n\njulia> isnumber('❤')\nfalse\n\n\n\n"
+},
+
+{
+    "location": "stdlib/strings.html#Base.UTF8proc.isprint",
+    "page": "Strings",
+    "title": "Base.UTF8proc.isprint",
+    "category": "Function",
+    "text": "isprint(c::Char) -> Bool\n\nTests whether a character is printable, including spaces, but not a control character.\n\nExamples\n\njulia> isprint('\\x01')\nfalse\n\njulia> isprint('A')\ntrue\n\n\n\n"
+},
+
+{
+    "location": "stdlib/strings.html#Base.UTF8proc.ispunct",
+    "page": "Strings",
+    "title": "Base.UTF8proc.ispunct",
+    "category": "Function",
+    "text": "ispunct(c::Char) -> Bool\n\nTests whether a character belongs to the Unicode general category Punctuation, i.e. a character whose category code begins with 'P'.\n\nExamples\n\njulia> ispunct('α')\nfalse\n\njulia> ispunct('/')\ntrue\n\njulia> ispunct(';')\ntrue\n\n\n\n"
+},
+
+{
+    "location": "stdlib/strings.html#Base.UTF8proc.isspace",
+    "page": "Strings",
+    "title": "Base.UTF8proc.isspace",
+    "category": "Function",
+    "text": "isspace(c::Char) -> Bool\n\nTests whether a character is any whitespace character. Includes ASCII characters '\\t', '\\n', '\\v', '\\f', '\\r', and ' ', Latin-1 character U+0085, and characters in Unicode category Zs.\n\nExamples\n\njulia> isspace('\\n')\ntrue\n\njulia> isspace('\\r')\ntrue\n\njulia> isspace(' ')\ntrue\n\njulia> isspace('\\x20')\ntrue\n\n\n\n"
+},
+
+{
+    "location": "stdlib/strings.html#Base.UTF8proc.isupper",
+    "page": "Strings",
+    "title": "Base.UTF8proc.isupper",
+    "category": "Function",
+    "text": "isupper(c::Char) -> Bool\n\nTests whether a character is an uppercase letter. A character is classified as uppercase if it belongs to Unicode category Lu, Letter: Uppercase, or Lt, Letter: Titlecase.\n\nExamples\n\njulia> isupper('γ')\nfalse\n\njulia> isupper('Γ')\ntrue\n\njulia> isupper('❤')\nfalse\n\n\n\n"
+},
+
+{
+    "location": "stdlib/strings.html#Base.isxdigit",
+    "page": "Strings",
+    "title": "Base.isxdigit",
+    "category": "Function",
+    "text": "isxdigit(c::Char) -> Bool\n\nTest whether a character is a valid hexadecimal digit. Note that this does not include x (as in the standard 0x prefix).\n\nExamples\n\njulia> isxdigit('a')\ntrue\n\njulia> isxdigit('x')\nfalse\n\n\n\n"
+},
+
+{
+    "location": "stdlib/strings.html#Core.Symbol",
+    "page": "Strings",
+    "title": "Core.Symbol",
+    "category": "Type",
+    "text": "Symbol(x...) -> Symbol\n\nCreate a Symbol by concatenating the string representations of the arguments together.\n\nExamples\n\njulia> Symbol(\"my\", \"name\")\n:myname\n\njulia> Symbol(\"day\", 4)\n:day4\n\n\n\n"
+},
+
+{
+    "location": "stdlib/strings.html#Base.escape_string",
+    "page": "Strings",
+    "title": "Base.escape_string",
+    "category": "Function",
+    "text": "escape_string(str::AbstractString[, esc::AbstractString]) -> AbstractString\n\nGeneral escaping of traditional C and Unicode escape sequences. Any characters in esc are also escaped (with a backslash). The reverse is unescape_string.\n\n\n\nescape_string(io, str::AbstractString[, esc::AbstractString]) -> Void\n\nEscape sequences in str and print result to io. See also unescape_string.\n\n\n\n"
+},
+
+{
+    "location": "stdlib/strings.html#Base.unescape_string",
+    "page": "Strings",
+    "title": "Base.unescape_string",
+    "category": "Function",
+    "text": "unescape_string(str::AbstractString) -> AbstractString\n\nGeneral unescaping of traditional C and Unicode escape sequences. Reverse of escape_string.\n\n\n\nunescape_string(io, str::AbstractString) -> Void\n\nUnescapes sequences and prints result to io. See also escape_string.\n\n\n\n"
+},
+
+{
     "location": "stdlib/strings.html#lib-strings-1",
     "page": "Strings",
     "title": "Strings",
     "category": "section",
-    "text": "Base.length(::AbstractString)\nBase.sizeof(::AbstractString)\nBase.:*(::Union{Char, AbstractString}, ::Union{Char, AbstractString}...)\nBase.:^(::AbstractString, ::Integer)\nBase.string\nBase.repeat(::AbstractString, ::Integer)\nBase.repeat(::Char, ::Integer)\nBase.repr\nCore.String(::AbstractString)\nBase.SubString\nBase.transcode\nBase.unsafe_string\nBase.codeunit(::AbstractString, ::Integer)\nBase.ascii\nBase.@r_str\nBase.@raw_str\nBase.Docs.@html_str\nBase.Docs.@text_str\nBase.UTF8proc.normalize_string\nBase.UTF8proc.graphemes\nBase.isvalid(::Any)\nBase.isvalid(::Any, ::Any)\nBase.isvalid(::AbstractString, ::Integer)\nBase.UTF8proc.is_assigned_char\nBase.ismatch\nBase.match\nBase.eachmatch\nBase.matchall\nBase.isless(::AbstractString, ::AbstractString)\nBase.:(==)(::AbstractString, ::AbstractString)\nBase.cmp(::AbstractString, ::AbstractString)\nBase.lpad\nBase.rpad\nBase.search\nBase.rsearch\nBase.searchindex\nBase.rsearchindex\nBase.contains(::AbstractString, ::AbstractString)\nBase.reverse(::AbstractString)\nBase.replace\nBase.split\nBase.rsplit\nBase.strip\nBase.lstrip\nBase.rstrip\nBase.startswith\nBase.endswith\nBase.first(::AbstractString, ::Integer)\nBase.last(::AbstractString, ::Integer)\nBase.uppercase\nBase.lowercase\nBase.titlecase\nBase.ucfirst\nBase.lcfirst\nBase.join\nBase.chop\nBase.chomp\nBase.ind2chr\nBase.chr2ind\nBase.thisind\nBase.nextind\nBase.prevind\nBase.Random.randstring\nBase.UTF8proc.textwidth\nBase.UTF8proc.isalnum\nBase.UTF8proc.isalpha\nBase.isascii\nBase.UTF8proc.iscntrl\nBase.UTF8proc.isdigit\nBase.UTF8proc.isgraph\nBase.UTF8proc.islower\nBase.UTF8proc.isnumber\nBase.UTF8proc.isprint\nBase.UTF8proc.ispunct\nBase.UTF8proc.isspace\nBase.UTF8proc.isupper\nBase.isxdigit\nCore.Symbol\nBase.escape_string\nBase.unescape_string"
+    "text": "Base.length(::AbstractString)\nBase.sizeof(::AbstractString)\nBase.:*(::Union{Char, AbstractString}, ::Union{Char, AbstractString}...)\nBase.:^(::AbstractString, ::Integer)\nBase.string\nBase.repeat(::AbstractString, ::Integer)\nBase.repeat(::Char, ::Integer)\nBase.repr\nCore.String(::AbstractString)\nBase.SubString\nBase.transcode\nBase.unsafe_string\nBase.codeunit(::AbstractString, ::Integer)\nBase.ascii\nBase.@r_str\nBase.@raw_str\nBase.Docs.@html_str\nBase.Docs.@text_str\nBase.UTF8proc.normalize_string\nBase.UTF8proc.graphemes\nBase.isvalid(::Any)\nBase.isvalid(::Any, ::Any)\nBase.isvalid(::AbstractString, ::Integer)\nBase.UTF8proc.is_assigned_char\nBase.ismatch\nBase.match\nBase.eachmatch\nBase.matchall\nBase.isless(::AbstractString, ::AbstractString)\nBase.:(==)(::AbstractString, ::AbstractString)\nBase.cmp(::AbstractString, ::AbstractString)\nBase.lpad\nBase.rpad\nBase.search\nBase.rsearch\nBase.searchindex\nBase.rsearchindex\nBase.contains(::AbstractString, ::AbstractString)\nBase.reverse(::Union{String,SubString{String}})\nBase.replace\nBase.split\nBase.rsplit\nBase.strip\nBase.lstrip\nBase.rstrip\nBase.startswith\nBase.endswith\nBase.first(::AbstractString, ::Integer)\nBase.last(::AbstractString, ::Integer)\nBase.uppercase\nBase.lowercase\nBase.titlecase\nBase.ucfirst\nBase.lcfirst\nBase.join\nBase.chop\nBase.chomp\nBase.ind2chr\nBase.chr2ind\nBase.thisind\nBase.nextind\nBase.prevind\nBase.Random.randstring\nBase.UTF8proc.textwidth\nBase.UTF8proc.isalnum\nBase.UTF8proc.isalpha\nBase.isascii\nBase.UTF8proc.iscntrl\nBase.UTF8proc.isdigit\nBase.UTF8proc.isgraph\nBase.UTF8proc.islower\nBase.UTF8proc.isnumber\nBase.UTF8proc.isprint\nBase.UTF8proc.ispunct\nBase.UTF8proc.isspace\nBase.UTF8proc.isupper\nBase.isxdigit\nCore.Symbol\nBase.escape_string\nBase.unescape_string"
 },
 
 {
@@ -12501,7 +13181,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Linear Algebra",
     "title": "Base.:*",
     "category": "Method",
-    "text": "*(A::AbstractMatrix, B::AbstractMatrix)\n\nMatrix multiplication.\n\nExamples\n\njulia> [1 1; 0 1] * [1 0; 1 1]\n2×2 Array{Int64,2}:\n 2  1\n 1  1\n\n\n\n*(x, y...)\n\nMultiplication operator. x*y*z*... calls this function with all arguments, i.e. *(x, y, z, ...).\n\nExamples\n\njulia> 2 * 7 * 8\n112\n\njulia> *(2, 7, 8)\n112\n\n\n\n"
+    "text": "*(x, y...)\n\nMultiplication operator. x*y*z*... calls this function with all arguments, i.e. *(x, y, z, ...).\n\nExamples\n\njulia> 2 * 7 * 8\n112\n\njulia> *(2, 7, 8)\n112\n\n\n\n*(A::AbstractMatrix, B::AbstractMatrix)\n\nMatrix multiplication.\n\nExamples\n\njulia> [1 1; 0 1] * [1 0; 1 1]\n2×2 Array{Int64,2}:\n 2  1\n 1  1\n\n\n\n"
 },
 
 {
@@ -18806,6 +19486,30 @@ var documenterSearchIndex = {"docs": [
     "title": "Iterative Eigensolvers",
     "category": "page",
     "text": ""
+},
+
+{
+    "location": "stdlib/iterativeeigensolvers.html#IterativeEigenSolvers.eigs-Tuple{Any}",
+    "page": "Iterative Eigensolvers",
+    "title": "IterativeEigenSolvers.eigs",
+    "category": "Method",
+    "text": "eigs(A; nev=6, ncv=max(20,2*nev+1), which=:LM, tol=0.0, maxiter=300, sigma=nothing, ritzvec=true, v0=zeros((0,))) -> (d,[v,],nconv,niter,nmult,resid)\n\nComputes eigenvalues d of A using implicitly restarted Lanczos or Arnoldi iterations for real symmetric or general nonsymmetric matrices respectively. See the manual for more information.\n\neigs returns the nev requested eigenvalues in d, the corresponding Ritz vectors v (only if ritzvec=true), the number of converged eigenvalues nconv, the number of iterations niter and the number of matrix vector multiplications nmult, as well as the final residual vector resid.\n\nExamples\n\njulia> using IterativeEigenSolvers\n\njulia> A = Diagonal(1:4);\n\njulia> λ, ϕ = eigs(A, nev = 2);\n\njulia> λ\n2-element Array{Float64,1}:\n 4.0\n 3.0\n\n\n\n"
+},
+
+{
+    "location": "stdlib/iterativeeigensolvers.html#IterativeEigenSolvers.eigs-Tuple{Any,Any}",
+    "page": "Iterative Eigensolvers",
+    "title": "IterativeEigenSolvers.eigs",
+    "category": "Method",
+    "text": "eigs(A, B; nev=6, ncv=max(20,2*nev+1), which=:LM, tol=0.0, maxiter=300, sigma=nothing, ritzvec=true, v0=zeros((0,))) -> (d,[v,],nconv,niter,nmult,resid)\n\nComputes generalized eigenvalues d of A and B using implicitly restarted Lanczos or Arnoldi iterations for real symmetric or general nonsymmetric matrices respectively. See the manual for more information.\n\n\n\n"
+},
+
+{
+    "location": "stdlib/iterativeeigensolvers.html#IterativeEigenSolvers.svds",
+    "page": "Iterative Eigensolvers",
+    "title": "IterativeEigenSolvers.svds",
+    "category": "Function",
+    "text": "svds(A; nsv=6, ritzvec=true, tol=0.0, maxiter=1000, ncv=2*nsv, v0=zeros((0,))) -> (SVD([left_sv,] s, [right_sv,]), nconv, niter, nmult, resid)\n\nComputes the largest singular values s of A using implicitly restarted Lanczos iterations derived from eigs.\n\nInputs\n\nA: Linear operator whose singular values are desired. A may be represented as a subtype of AbstractArray, e.g., a sparse matrix, or any other type supporting the four methods size(A), eltype(A), A * vector, and A' * vector.\nnsv: Number of singular values. Default: 6.\nritzvec: If true, return the left and right singular vectors left_sv and right_sv.  If false, omit the singular vectors. Default: true.\ntol: tolerance, see eigs.\nmaxiter: Maximum number of iterations, see eigs. Default: 1000.\nncv: Maximum size of the Krylov subspace, see eigs (there called nev). Default: 2*nsv.\nv0: Initial guess for the first Krylov vector. It may have length min(size(A)...), or 0.\n\nOutputs\n\nsvd: An SVD object containing the left singular vectors, the requested values, and the right singular vectors. If ritzvec = false, the left and right singular vectors will be empty.\nnconv: Number of converged singular values.\nniter: Number of iterations.\nnmult: Number of matrix–vector products used.\nresid: Final residual vector.\n\nExamples\n\njulia> A = Diagonal(1:4);\n\njulia> s = svds(A, nsv = 2)[1];\n\njulia> s[:S]\n2-element Array{Float64,1}:\n 4.0\n 2.9999999999999996\n\nnote: Implementation\nsvds(A) is formally equivalent to calling eigs to perform implicitly restarted Lanczos tridiagonalization on the Hermitian matrix A^prime A or AA^prime such that the size is smallest.\n\n\n\n"
 },
 
 {
