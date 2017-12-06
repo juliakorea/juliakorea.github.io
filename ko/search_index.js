@@ -7189,7 +7189,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Collections and Data Structures",
     "title": "Base.count",
     "category": "Function",
-    "text": "LibGit2.count(f::Function, walker::GitRevWalker; oid::GitHash=GitHash(), by::Cint=Consts.SORT_NONE, rev::Bool=false)\n\nUsing the GitRevWalker walker to \"walk\" over every commit in the repository's history, find the number of commits which return true when f is applied to them. The keyword arguments are:     * oid: The GitHash of the commit to begin the walk from. The default is to use       push_head! and therefore the HEAD commit and all its ancestors.     * by: The sorting method. The default is not to sort. Other options are to sort by       topology (LibGit2.Consts.SORT_TOPOLOGICAL), to sort forwards in time       (LibGit2.Consts.SORT_TIME, most ancient first) or to sort backwards in time       (LibGit2.Consts.SORT_REVERSE, most recent first).     * rev: Whether to reverse the sorted order (for instance, if topological sorting is used).\n\nExamples\n\ncnt = LibGit2.with(LibGit2.GitRevWalker(repo)) do walker\n    count((oid, repo)->(oid == commit_oid1), walker, oid=commit_oid1, by=LibGit2.Consts.SORT_TIME)\nend\n\ncount finds the number of commits along the walk with a certain GitHash commit_oid1, starting the walk from that commit and moving forwards in time from it. Since the GitHash is unique to a commit, cnt will be 1.\n\n\n\ncount(p, itr) -> Integer\ncount(itr) -> Integer\n\nCount the number of elements in itr for which predicate p returns true. If p is omitted, counts the number of true elements in itr (which should be a collection of boolean values).\n\njulia> count(i->(4<=i<=6), [2,3,4,5,6])\n3\n\njulia> count([true, false, true, true])\n3\n\n\n\n"
+    "text": "count(p, itr) -> Integer\ncount(itr) -> Integer\n\nCount the number of elements in itr for which predicate p returns true. If p is omitted, counts the number of true elements in itr (which should be a collection of boolean values).\n\njulia> count(i->(4<=i<=6), [2,3,4,5,6])\n3\n\njulia> count([true, false, true, true])\n3\n\n\n\nLibGit2.count(f::Function, walker::GitRevWalker; oid::GitHash=GitHash(), by::Cint=Consts.SORT_NONE, rev::Bool=false)\n\nUsing the GitRevWalker walker to \"walk\" over every commit in the repository's history, find the number of commits which return true when f is applied to them. The keyword arguments are:     * oid: The GitHash of the commit to begin the walk from. The default is to use       push_head! and therefore the HEAD commit and all its ancestors.     * by: The sorting method. The default is not to sort. Other options are to sort by       topology (LibGit2.Consts.SORT_TOPOLOGICAL), to sort forwards in time       (LibGit2.Consts.SORT_TIME, most ancient first) or to sort backwards in time       (LibGit2.Consts.SORT_REVERSE, most recent first).     * rev: Whether to reverse the sorted order (for instance, if topological sorting is used).\n\nExamples\n\ncnt = LibGit2.with(LibGit2.GitRevWalker(repo)) do walker\n    count((oid, repo)->(oid == commit_oid1), walker, oid=commit_oid1, by=LibGit2.Consts.SORT_TIME)\nend\n\ncount finds the number of commits along the walk with a certain GitHash commit_oid1, starting the walk from that commit and moving forwards in time from it. Since the GitHash is unique to a commit, cnt will be 1.\n\n\n\n"
 },
 
 {
@@ -7197,7 +7197,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Collections and Data Structures",
     "title": "Base.any",
     "category": "Method",
-    "text": "any(p, itr) -> Bool\n\nDetermine whether predicate p returns true for any elements of itr, returning true as soon as the first item in itr for which p returns true is encountered (short-circuiting).\n\njulia> any(i->(4<=i<=6), [3,5,7])\ntrue\n\njulia> any(i -> (println(i); i > 3), 1:10)\n1\n2\n3\n4\ntrue\n\n\n\n"
+    "text": "any(p, itr) -> Bool\n\nDetermine whether predicate p returns true for any elements of itr, returning true as soon as the first item in itr for which p returns true is encountered (short-circuiting).\n\nIf the input contains missing values, return missing if all non-missing values are false (or equivalently, if the input contains no true value).\n\njulia> any(i->(4<=i<=6), [3,5,7])\ntrue\n\njulia> any(i -> (println(i); i > 3), 1:10)\n1\n2\n3\n4\ntrue\n\n\n\n"
 },
 
 {
@@ -7205,7 +7205,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Collections and Data Structures",
     "title": "Base.all",
     "category": "Method",
-    "text": "all(p, itr) -> Bool\n\nDetermine whether predicate p returns true for all elements of itr, returning false as soon as the first item in itr for which p returns false is encountered (short-circuiting).\n\njulia> all(i->(4<=i<=6), [4,5,6])\ntrue\n\njulia> all(i -> (println(i); i < 3), 1:10)\n1\n2\n3\nfalse\n\n\n\n"
+    "text": "all(p, itr) -> Bool\n\nDetermine whether predicate p returns true for all elements of itr, returning false as soon as the first item in itr for which p returns false is encountered (short-circuiting).\n\nIf the input contains missing values, return missing if all non-missing values are true (or equivalently, if the input contains no false value).\n\njulia> all(i->(4<=i<=6), [4,5,6])\ntrue\n\njulia> all(i -> (println(i); i < 3), 1:10)\n1\n2\n3\nfalse\n\n\n\n"
 },
 
 {
@@ -7221,7 +7221,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Collections and Data Structures",
     "title": "Base.map",
     "category": "Function",
-    "text": "LibGit2.map(f::Function, walker::GitRevWalker; oid::GitHash=GitHash(), range::AbstractString=\"\", by::Cint=Consts.SORT_NONE, rev::Bool=false)\n\nUsing the GitRevWalker walker to \"walk\" over every commit in the repository's history, apply f to each commit in the walk. The keyword arguments are:     * oid: The GitHash of the commit to begin the walk from. The default is to use       push_head! and therefore the HEAD commit and all its ancestors.     * range: A range of GitHashs in the format oid1..oid2. f will be       applied to all commits between the two.     * by: The sorting method. The default is not to sort. Other options are to sort by       topology (LibGit2.Consts.SORT_TOPOLOGICAL), to sort forwards in time       (LibGit2.Consts.SORT_TIME, most ancient first) or to sort backwards in time       (LibGit2.Consts.SORT_REVERSE, most recent first).     * rev: Whether to reverse the sorted order (for instance, if topological sorting is used).\n\nExamples\n\noids = LibGit2.with(LibGit2.GitRevWalker(repo)) do walker\n    LibGit2.map((oid, repo)->string(oid), walker, by=LibGit2.Consts.SORT_TIME)\nend\n\nHere, map visits each commit using the GitRevWalker and finds its GitHash.\n\n\n\nmap(f, c...) -> collection\n\nTransform collection c by applying f to each element. For multiple collection arguments, apply f elementwise.\n\nSee also: mapslices\n\nExamples\n\njulia> map(x -> x * 2, [1, 2, 3])\n3-element Array{Int64,1}:\n 2\n 4\n 6\n\njulia> map(+, [1, 2, 3], [10, 20, 30])\n3-element Array{Int64,1}:\n 11\n 22\n 33\n\n\n\nmap(f, x::Nullable)\n\nReturn f applied to the value of x if it has one, as a Nullable. If x is null, then return a null value of type Nullable{S}. S is guaranteed to be either Union{} or a concrete type. Whichever of these is chosen is an implementation detail, but typically the choice that maximizes performance would be used. If x has a value, then the return type is guaranteed to be of type Nullable{typeof(f(x))}.\n\nExamples\n\njulia> map(isodd, Nullable(1))\nNullable{Bool}(true)\n\njulia> map(isodd, Nullable(2))\nNullable{Bool}(false)\n\njulia> map(isodd, Nullable{Int}())\nNullable{Bool}()\n\n\n\n"
+    "text": "map(f, c...) -> collection\n\nTransform collection c by applying f to each element. For multiple collection arguments, apply f elementwise.\n\nSee also: mapslices\n\nExamples\n\njulia> map(x -> x * 2, [1, 2, 3])\n3-element Array{Int64,1}:\n 2\n 4\n 6\n\njulia> map(+, [1, 2, 3], [10, 20, 30])\n3-element Array{Int64,1}:\n 11\n 22\n 33\n\n\n\nmap(f, x::Nullable)\n\nReturn f applied to the value of x if it has one, as a Nullable. If x is null, then return a null value of type Nullable{S}. S is guaranteed to be either Union{} or a concrete type. Whichever of these is chosen is an implementation detail, but typically the choice that maximizes performance would be used. If x has a value, then the return type is guaranteed to be of type Nullable{typeof(f(x))}.\n\nExamples\n\njulia> map(isodd, Nullable(1))\nNullable{Bool}(true)\n\njulia> map(isodd, Nullable(2))\nNullable{Bool}(false)\n\njulia> map(isodd, Nullable{Int}())\nNullable{Bool}()\n\n\n\nLibGit2.map(f::Function, walker::GitRevWalker; oid::GitHash=GitHash(), range::AbstractString=\"\", by::Cint=Consts.SORT_NONE, rev::Bool=false)\n\nUsing the GitRevWalker walker to \"walk\" over every commit in the repository's history, apply f to each commit in the walk. The keyword arguments are:     * oid: The GitHash of the commit to begin the walk from. The default is to use       push_head! and therefore the HEAD commit and all its ancestors.     * range: A range of GitHashs in the format oid1..oid2. f will be       applied to all commits between the two.     * by: The sorting method. The default is not to sort. Other options are to sort by       topology (LibGit2.Consts.SORT_TOPOLOGICAL), to sort forwards in time       (LibGit2.Consts.SORT_TIME, most ancient first) or to sort backwards in time       (LibGit2.Consts.SORT_REVERSE, most recent first).     * rev: Whether to reverse the sorted order (for instance, if topological sorting is used).\n\nExamples\n\noids = LibGit2.with(LibGit2.GitRevWalker(repo)) do walker\n    LibGit2.map((oid, repo)->string(oid), walker, by=LibGit2.Consts.SORT_TIME)\nend\n\nHere, map visits each commit using the GitRevWalker and finds its GitHash.\n\n\n\n"
 },
 
 {
@@ -8997,7 +8997,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Mathematics",
     "title": "Base.conj",
     "category": "Function",
-    "text": "conj(z)\n\nCompute the complex conjugate of a complex number z.\n\nExamples\n\njulia> conj(1 + 3im)\n1 - 3im\n\n\n\nconj(v::RowVector)\n\nReturn a ConjArray lazy view of the input, where each element is conjugated.\n\nExamples\n\njulia> v = [1+im, 1-im].'\n1×2 RowVector{Complex{Int64},Array{Complex{Int64},1}}:\n 1+1im  1-1im\n\njulia> conj(v)\n1×2 RowVector{Complex{Int64},ConjArray{Complex{Int64},1,Array{Complex{Int64},1}}}:\n 1-1im  1+1im\n\n\n\n"
+    "text": "conj(v::RowVector)\n\nReturn a ConjArray lazy view of the input, where each element is conjugated.\n\nExamples\n\njulia> v = [1+im, 1-im].'\n1×2 RowVector{Complex{Int64},Array{Complex{Int64},1}}:\n 1+1im  1-1im\n\njulia> conj(v)\n1×2 RowVector{Complex{Int64},ConjArray{Complex{Int64},1,Array{Complex{Int64},1}}}:\n 1-1im  1+1im\n\n\n\nconj(z)\n\nCompute the complex conjugate of a complex number z.\n\nExamples\n\njulia> conj(1 + 3im)\n1 - 3im\n\n\n\n"
 },
 
 {
@@ -12501,7 +12501,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Linear Algebra",
     "title": "Base.:*",
     "category": "Method",
-    "text": "*(x, y...)\n\nMultiplication operator. x*y*z*... calls this function with all arguments, i.e. *(x, y, z, ...).\n\nExamples\n\njulia> 2 * 7 * 8\n112\n\njulia> *(2, 7, 8)\n112\n\n\n\n*(A::AbstractMatrix, B::AbstractMatrix)\n\nMatrix multiplication.\n\nExamples\n\njulia> [1 1; 0 1] * [1 0; 1 1]\n2×2 Array{Int64,2}:\n 2  1\n 1  1\n\n\n\n"
+    "text": "*(A::AbstractMatrix, B::AbstractMatrix)\n\nMatrix multiplication.\n\nExamples\n\njulia> [1 1; 0 1] * [1 0; 1 1]\n2×2 Array{Int64,2}:\n 2  1\n 1  1\n\n\n\n*(x, y...)\n\nMultiplication operator. x*y*z*... calls this function with all arguments, i.e. *(x, y, z, ...).\n\nExamples\n\njulia> 2 * 7 * 8\n112\n\njulia> *(2, 7, 8)\n112\n\n\n\n"
 },
 
 {
@@ -17709,7 +17709,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Iteration utilities",
     "title": "Base.Iterators.reverse",
     "category": "Function",
-    "text": "Iterators.reverse(itr)\n\nGiven an iterator itr, then reverse(itr) is an iterator over the same collection but in the reverse order.\n\nThis iterator is \"lazy\" in that it does not make a copy of the collection in order to reverse it; see Base.reverse for an eager implementation.\n\nNot all iterator types T support reverse-order iteration.  If T doesn't, then iterating over Iterators.reverse(itr::T) will throw a MethodError because of the missing start, next, and done methods for Iterators.Reverse{T}.  (To implement these methods, the original iterator itr::T can be obtained from r = Iterators.reverse(itr) by r.itr.)\n\n\n\n"
+    "text": "Iterators.reverse(itr)\n\nGiven an iterator itr, then reverse(itr) is an iterator over the same collection but in the reverse order.\n\nThis iterator is \"lazy\" in that it does not make a copy of the collection in order to reverse it; see Base.reverse for an eager implementation.\n\nNot all iterator types T support reverse-order iteration.  If T doesn't, then iterating over Iterators.reverse(itr::T) will throw a MethodError because of the missing start, next, and done methods for Iterators.Reverse{T}.  (To implement these methods, the original iterator itr::T can be obtained from r = Iterators.reverse(itr) by r.itr.)\n\nExamples\n\njulia> foreach(println, Iterators.reverse(1:5))\n5\n4\n3\n2\n1\n\n\n\n"
 },
 
 {
@@ -21293,7 +21293,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Base.LibGit2",
     "title": "Base.LibGit2.approve",
     "category": "Function",
-    "text": "approve(payload::CredentialPayload) -> Void\n\nStore the payload credential for re-use in a future authentication. Should only be called when authentication was successful.\n\n\n\n"
+    "text": "approve(payload::CredentialPayload; shred::Bool=true) -> Void\n\nStore the payload credential for re-use in a future authentication. Should only be called when authentication was successful.\n\nThe shred keyword controls whether sensitive information in the payload credential field should be destroyed. Should only be set to false during testing.\n\n\n\n"
 },
 
 {
@@ -21301,7 +21301,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Base.LibGit2",
     "title": "Base.LibGit2.reject",
     "category": "Function",
-    "text": "reject(payload::CredentialPayload) -> Void\n\nDiscard the payload credential from begin re-used in future authentication. Should only be called when authentication was unsuccessful.\n\n\n\n"
+    "text": "reject(payload::CredentialPayload; shred::Bool=true) -> Void\n\nDiscard the payload credential from begin re-used in future authentication. Should only be called when authentication was unsuccessful.\n\nThe shred keyword controls whether sensitive information in the payload credential field should be destroyed. Should only be set to false during testing.\n\n\n\n"
 },
 
 {
