@@ -2257,6 +2257,70 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
+    "location": "manual/missing.html#",
+    "page": "Missing Values",
+    "title": "Missing Values",
+    "category": "page",
+    "text": ""
+},
+
+{
+    "location": "manual/missing.html#missing-1",
+    "page": "Missing Values",
+    "title": "Missing Values",
+    "category": "section",
+    "text": "Julia provides support for representing missing values in the statistical sense, that is for situations where no value is available for a variable in an observation, but a valid value theoretically exists. Missing values are represented via the missing object, which is the singleton instance of the type Missing. missing is equivalent to NULL in SQL and NA in R, and behaves like them in most situations."
+},
+
+{
+    "location": "manual/missing.html#Propagation-of-Missing-Values-1",
+    "page": "Missing Values",
+    "title": "Propagation of Missing Values",
+    "category": "section",
+    "text": "The behavior of missing values follows one basic rule: missing values propagate automatically when passed to standard operators and functions, in particular mathematical functions. Uncertainty about the value of one of the operands induces uncertainty about the result. In practice, this means an operation involving a missing value generally returns missing:julia> missing + 1\nmissing\n\njulia> \"a\" * missing\nmissing\n\njulia> abs(missing)\nmissing\nAs missing is a normal Julia object, this propagation rule only works for functions which have opted in to implement this behavior. This can be achieved either via a specific method defined for arguments of type Missing, or simply by accepting arguments of this type, and passing them to functions which propagate them (like standard operators). Packages should consider whether it makes sense to propagate missing values when defining new functions, and define methods appropriately if that is the case. Passing a missing value to a function for which no method accepting arguments of type Missing is defined throws a MethodError, just like for any other type."
+},
+
+{
+    "location": "manual/missing.html#Equality-and-Comparison-Operators-1",
+    "page": "Missing Values",
+    "title": "Equality and Comparison Operators",
+    "category": "section",
+    "text": "Standard equality and comparison operators follow the propagation rule presented above: if any of the operands is missing, the result is missing. Here are a few examples:julia> missing == 1\nmissing\n\njulia> missing == missing\nmissing\n\njulia> missing < 1\nmissing\n\njulia> 2 >= missing\nmissing\nIn particular, note that missing == missing returns missing, so == cannot be used to test whether a value is missing. To test whether x is missing, use ismissing(x).Special comparison operators isequal and === are exceptions to the propagation rule: they always return a Bool value, even in the presence of missing values, considering missing as equal to missing and as different from any other value. They can therefore be used to test whether a value is missing:julia> missing === 1\nfalse\n\njulia> isequal(missing, 1)\nfalse\n\njulia> missing === missing\ntrue\n\njulia> isequal(missing, missing)\ntrue\nThe isless operator is another exception: missing is considered as greater than any other value. This operator is used by sort, which therefore places missing values after all other values.julia> isless(1, missing)\ntrue\n\njulia> isless(missing, Inf)\nfalse\n\njulia> isless(missing, missing)\nfalse\n"
+},
+
+{
+    "location": "manual/missing.html#Logical-operators-1",
+    "page": "Missing Values",
+    "title": "Logical operators",
+    "category": "section",
+    "text": "Logical (or boolean) operators |, & and xor are another special case, as they only propagate missing values when it is logically required. For these operators, whether or not the result is uncertain depends on the particular operation, following the well-established rules of three-valued logic which are also implemented by NULL in SQL and NA in R. This abstract definition actually corresponds to a relatively natural behavior which is best explained via concrete examples.Let us illustrate this principle with the logical \"or\" operator |. Following the rules of boolean logic, if one of the operands is true, the value of the other operand does not have an influence on the result, which will always be true:julia> true | true\ntrue\n\njulia> true | false\ntrue\n\njulia> false | true\ntrue\nBased on this observation, we can conclude that if one of the operands is true and the other missing, we know that the result is true in spite of the uncertainty about the actual value of one of the operands. If we had been able to observe the actual value of the second operand, it could only be true or false, and in both cases the result would be true. Therefore, in this particular case, missingness does not propagate:julia> true | missing\ntrue\n\njulia> missing | true\ntrue\nOn the contrary, if one of the operands is false, the result could be either true or false depending on the value of the other operand. Therefore, if that operand is missing, the result has to be missing too:julia> false | true\ntrue\n\njulia> true | false\ntrue\n\njulia> false | false\nfalse\n\njulia> false | missing\nmissing\n\njulia> missing | false\nmissing\nThe behavior of the logical \"and\" operator & is similar to that of the | operator, with the difference that missingness does not propagate when one of the operands is false. For example, when that is the case of the first operand:julia> false & false\nfalse\n\njulia> false & true\nfalse\n\njulia> false & missing\nfalse\nOn the other hand, missingness propagates when one of the operands is true, for example the first one:julia> true & true\ntrue\n\njulia> true & false\nfalse\n\njulia> true & missing\nmissing\nFinally, the \"exclusive or\" logical operator xor always propagates missing values, since both operands always have an effect on the result. Also note that the negation operator ! returns missing when the operand is missing just like other unary operators."
+},
+
+{
+    "location": "manual/missing.html#Control-Flow-and-Short-Circuiting-Operators-1",
+    "page": "Missing Values",
+    "title": "Control Flow and Short-Circuiting Operators",
+    "category": "section",
+    "text": "Control flow operators including if, while and the ternary operator x ? y : z do not allow for missing values. This is because of the uncertainty about whether the actual value would be true or false if we could observe it, which implies that we do not know how the program should behave. A TypeError is thrown as soon as a missing value is encountered in this context:julia> if missing\n           println(\"here\")\n       end\nERROR: TypeError: non-boolean (Missing) used in boolean context\nFor the same reason, contrary to logical operators presented above, the short-circuiting boolean operators && and || do not allow for missing values in situations where the value of the operand determines whether the next operand is evaluated or not. For example:julia> missing || false\nERROR: TypeError: non-boolean (Missing) used in boolean context\n\njulia> missing && false\nERROR: TypeError: non-boolean (Missing) used in boolean context\n\njulia> true && missing && false\nERROR: TypeError: non-boolean (Missing) used in boolean context\nOn the other hand, no error is thrown when the result can be determined without the missing values. This is the case when the code short-circuits before evaluating the missing operand, and when the missing operand is the last one:julia> true && missing\nmissing\n\njulia> false && missing\nfalse\n"
+},
+
+{
+    "location": "manual/missing.html#Arrays-With-Missing-Values-1",
+    "page": "Missing Values",
+    "title": "Arrays With Missing Values",
+    "category": "section",
+    "text": "Arrays containing missing values can be created like other arrays:julia> [1, missing]\n2-element Array{Union{Missing, Int64},1}:\n 1\n  missing\nAs this example shows, the element type of such arrays is Union{Missing, T}, with T the type of the non-missing values. This simply reflects the fact that array entries can be either of type T (here, Int64) or of type Missing. This kind of array uses an efficient memory storage equivalent to an Array{T} holding the actual values combined with an Array{UInt8} indicating the type of the entry (i.e. whether it is Missing or T).Uninitialized arrays allowing for missing values can be constructed with the standard syntax. By default, arrays with an isbits element type are filled with missing values:julia> Array{Union{Missing, Int}}(uninitialized, 2, 3)\n2×3 Array{Union{Missing, Int64},2}:\n missing  missing  missing\n missing  missing  missing\nAn array allowing for missing values but which does not contain any such value can be converted back to an array which does not allow for missing values using convert. If the array contains missing values, a MethodError is thrown during conversion:julia> x = Union{Missing, String}[\"a\", \"b\"]\n2-element Array{Union{Missing, String},1}:\n \"a\"\n \"b\"\n\njulia> convert(Array{String}, x)\n2-element Array{String,1}:\n \"a\"\n \"b\"\n\njulia> y = Union{Missing, String}[missing, \"b\"]\n2-element Array{Union{Missing, String},1}:\n missing\n \"b\"\n\njulia> convert(Array{String}, y)\nERROR: MethodError: Cannot `convert` an object of type Missing to an object of type String\nThis may have arisen from a call to the constructor String(...),\nsince type constructors fall back to convert methods.\nStacktrace:\n[...]"
+},
+
+{
+    "location": "manual/missing.html#Logical-Operations-on-Arrays-1",
+    "page": "Missing Values",
+    "title": "Logical Operations on Arrays",
+    "category": "section",
+    "text": "The three-valued logic described above for logical operators is also used by logical functions applied to arrays. Thus, array equality tests using the == operator return missing whenever the result cannot be determined without knowing the actual value of the missing entry. In practice, this means that missing is returned if all non-missing values of the compared arrays are equal, but one or both arrays contain missing values (possibly at different positions):julia> [1, missing] == [2, missing]\nfalse\n\njulia> [1, missing] == [1, missing]\nmissing\n\njulia> [1, 2, missing] == [1, missing, 2]\nmissing\nAs for single values, use isequal to treat missing values as equal to other missing values but different from non-missing values:julia> isequal([1, missing], [1, missing])\ntrue\n\njulia> isequal([1, 2, missing], [1, missing, 2])\nfalse\nFunctions any and all also follow the rules of three-valued logic, returning missing when the result cannot be determined:julia> all([true, missing])\nmissing\n\njulia> all([false, missing])\nfalse\n\njulia> any([true, missing])\ntrue\n\njulia> any([false, missing])\nmissing\n"
+},
+
+{
     "location": "manual/networking-and-streams.html#",
     "page": "Networking and Streams",
     "title": "Networking and Streams",
@@ -7533,7 +7597,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Collections and Data Structures",
     "title": "Base.pairs",
     "category": "Function",
-    "text": "pairs(collection)\n\nReturn an iterator over key => value pairs for any collection that maps a set of keys to a set of values. This includes arrays, where the keys are the array indices.\n\n\n\npairs(IndexLinear(), A)\npairs(IndexCartesian(), A)\npairs(IndexStyle(A), A)\n\nAn iterator that accesses each element of the array A, returning i => x, where i is the index for the element and x = A[i]. Identical to pairs(A), except that the style of index can be selected. Also similar to enumerate(A), except i will be a valid index for A, while enumerate always counts from 1 regardless of the indices of A.\n\nSpecifying IndexLinear() ensures that i will be an integer; specifying IndexCartesian() ensures that i will be a CartesianIndex; specifying IndexStyle(A) chooses whichever has been defined as the native indexing style for array A.\n\nExamples\n\njulia> A = [\"a\" \"d\"; \"b\" \"e\"; \"c\" \"f\"];\n\njulia> for (index, value) in pairs(IndexStyle(A), A)\n           println(\"$index $value\")\n       end\n1 a\n2 b\n3 c\n4 d\n5 e\n6 f\n\njulia> S = view(A, 1:2, :);\n\njulia> for (index, value) in pairs(IndexStyle(S), S)\n           println(\"$index $value\")\n       end\nCartesianIndex(1, 1) a\nCartesianIndex(2, 1) b\nCartesianIndex(1, 2) d\nCartesianIndex(2, 2) e\n\nSee also: IndexStyle, indices.\n\n\n\n"
+    "text": "pairs(IndexLinear(), A)\npairs(IndexCartesian(), A)\npairs(IndexStyle(A), A)\n\nAn iterator that accesses each element of the array A, returning i => x, where i is the index for the element and x = A[i]. Identical to pairs(A), except that the style of index can be selected. Also similar to enumerate(A), except i will be a valid index for A, while enumerate always counts from 1 regardless of the indices of A.\n\nSpecifying IndexLinear() ensures that i will be an integer; specifying IndexCartesian() ensures that i will be a CartesianIndex; specifying IndexStyle(A) chooses whichever has been defined as the native indexing style for array A.\n\nExamples\n\njulia> A = [\"a\" \"d\"; \"b\" \"e\"; \"c\" \"f\"];\n\njulia> for (index, value) in pairs(IndexStyle(A), A)\n           println(\"$index $value\")\n       end\n1 a\n2 b\n3 c\n4 d\n5 e\n6 f\n\njulia> S = view(A, 1:2, :);\n\njulia> for (index, value) in pairs(IndexStyle(S), S)\n           println(\"$index $value\")\n       end\nCartesianIndex(1, 1) a\nCartesianIndex(2, 1) b\nCartesianIndex(1, 2) d\nCartesianIndex(2, 2) e\n\nSee also: IndexStyle, indices.\n\n\n\npairs(collection)\n\nReturn an iterator over key => value pairs for any collection that maps a set of keys to a set of values. This includes arrays, where the keys are the array indices.\n\n\n\n"
 },
 
 {
@@ -7837,7 +7901,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Mathematics",
     "title": "Base.:+",
     "category": "Function",
-    "text": "+(x, y...)\n\nAddition operator. x+y+z+... calls this function with all arguments, i.e. +(x, y, z, ...).\n\nExamples\n\njulia> 1 + 20 + 4\n25\n\njulia> +(1, 20, 4)\n25\n\n\n\ndt::Date + t::Time -> DateTime\n\nThe addition of a Date with a Time produces a DateTime. The hour, minute, second, and millisecond parts of the Time are used along with the year, month, and day of the Date to create the new DateTime. Non-zero microseconds or nanoseconds in the Time type will result in an InexactError being thrown.\n\n\n\n"
+    "text": "dt::Date + t::Time -> DateTime\n\nThe addition of a Date with a Time produces a DateTime. The hour, minute, second, and millisecond parts of the Time are used along with the year, month, and day of the Date to create the new DateTime. Non-zero microseconds or nanoseconds in the Time type will result in an InexactError being thrown.\n\n\n\n+(x, y...)\n\nAddition operator. x+y+z+... calls this function with all arguments, i.e. +(x, y, z, ...).\n\nExamples\n\njulia> 1 + 20 + 4\n25\n\njulia> +(1, 20, 4)\n25\n\n\n\n"
 },
 
 {
@@ -9037,7 +9101,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Mathematics",
     "title": "Base.conj",
     "category": "Function",
-    "text": "conj(z)\n\nCompute the complex conjugate of a complex number z.\n\nExamples\n\njulia> conj(1 + 3im)\n1 - 3im\n\n\n\nconj(v::RowVector)\n\nReturn a ConjArray lazy view of the input, where each element is conjugated.\n\nExamples\n\njulia> v = [1+im, 1-im].'\n1×2 RowVector{Complex{Int64},Array{Complex{Int64},1}}:\n 1+1im  1-1im\n\njulia> conj(v)\n1×2 RowVector{Complex{Int64},ConjArray{Complex{Int64},1,Array{Complex{Int64},1}}}:\n 1-1im  1+1im\n\n\n\n"
+    "text": "conj(v::RowVector)\n\nReturn a ConjArray lazy view of the input, where each element is conjugated.\n\nExamples\n\njulia> v = [1+im, 1-im].'\n1×2 RowVector{Complex{Int64},Array{Complex{Int64},1}}:\n 1+1im  1-1im\n\njulia> conj(v)\n1×2 RowVector{Complex{Int64},ConjArray{Complex{Int64},1,Array{Complex{Int64},1}}}:\n 1-1im  1+1im\n\n\n\nconj(z)\n\nCompute the complex conjugate of a complex number z.\n\nExamples\n\njulia> conj(1 + 3im)\n1 - 3im\n\n\n\n"
 },
 
 {
@@ -9669,7 +9733,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Numbers",
     "title": "Base.parse",
     "category": "Method",
-    "text": "parse(type, str, [base])\n\nParse a string as a number. If the type is an integer type, then a base can be specified (the default is 10). If the type is a floating point type, the string is parsed as a decimal floating point number. If the string does not contain a valid number, an error is raised.\n\njulia> parse(Int, \"1234\")\n1234\n\njulia> parse(Int, \"1234\", 5)\n194\n\njulia> parse(Int, \"afc\", 16)\n2812\n\njulia> parse(Float64, \"1.2e-3\")\n0.0012\n\n\n\n"
+    "text": "parse(type, str, [base])\n\nParse a string as a number. For Integer types, a base can be specified (the default is 10). For floating-point types, the string is parsed as a decimal floating-point number.  Complex types are parsed from decimal strings of the form \"R±Iim\" as a Complex(R,I) of the requested type; \"i\" or \"j\" can also be used instead of \"im\", and \"R\" or \"Iim\" are also permitted. If the string does not contain a valid number, an error is raised.\n\njulia> parse(Int, \"1234\")\n1234\n\njulia> parse(Int, \"1234\", 5)\n194\n\njulia> parse(Int, \"afc\", 16)\n2812\n\njulia> parse(Float64, \"1.2e-3\")\n0.0012\n\njulia> parse(Complex{Float64}, \"3.2e-1 + 4.5im\")\n0.32 + 4.5im\n\n\n\n"
 },
 
 {
@@ -13181,7 +13245,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Linear Algebra",
     "title": "Base.:*",
     "category": "Method",
-    "text": "*(x, y...)\n\nMultiplication operator. x*y*z*... calls this function with all arguments, i.e. *(x, y, z, ...).\n\nExamples\n\njulia> 2 * 7 * 8\n112\n\njulia> *(2, 7, 8)\n112\n\n\n\n*(A::AbstractMatrix, B::AbstractMatrix)\n\nMatrix multiplication.\n\nExamples\n\njulia> [1 1; 0 1] * [1 0; 1 1]\n2×2 Array{Int64,2}:\n 2  1\n 1  1\n\n\n\n"
+    "text": "*(A::AbstractMatrix, B::AbstractMatrix)\n\nMatrix multiplication.\n\nExamples\n\njulia> [1 1; 0 1] * [1 0; 1 1]\n2×2 Array{Int64,2}:\n 2  1\n 1  1\n\n\n\n*(x, y...)\n\nMultiplication operator. x*y*z*... calls this function with all arguments, i.e. *(x, y, z, ...).\n\nExamples\n\njulia> 2 * 7 * 8\n112\n\njulia> *(2, 7, 8)\n112\n\n\n\n"
 },
 
 {
@@ -16101,7 +16165,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Delimited Files",
     "title": "DelimitedFiles.readdlm",
     "category": "Method",
-    "text": "readdlm(source, delim::Char, T::Type, eol::Char; header=false, skipstart=0, skipblanks=true, use_mmap, quotes=true, dims, comments=true, comment_char='#')\n\nRead a matrix from the source where each line (separated by eol) gives one row, with elements separated by the given delimiter. The source can be a text file, stream or byte array. Memory mapped files can be used by passing the byte array representation of the mapped segment as source.\n\nIf T is a numeric type, the result is an array of that type, with any non-numeric elements as NaN for floating-point types, or zero. Other useful values of T include String, AbstractString, and Any.\n\nIf header is true, the first row of data will be read as header and the tuple (data_cells, header_cells) is returned instead of only data_cells.\n\nSpecifying skipstart will ignore the corresponding number of initial lines from the input.\n\nIf skipblanks is true, blank lines in the input will be ignored.\n\nIf use_mmap is true, the file specified by source is memory mapped for potential speedups. Default is true except on Windows. On Windows, you may want to specify true if the file is large, and is only read once and not written to.\n\nIf quotes is true, columns enclosed within double-quote (\") characters are allowed to contain new lines and column delimiters. Double-quote characters within a quoted field must be escaped with another double-quote.  Specifying dims as a tuple of the expected rows and columns (including header, if any) may speed up reading of large files.  If comments is true, lines beginning with comment_char and text following comment_char in any line are ignored.\n\n\n\n"
+    "text": "readdlm(source, delim::Char, T::Type, eol::Char; header=false, skipstart=0, skipblanks=true, use_mmap, quotes=true, dims, comments=true, comment_char='#')\n\nRead a matrix from the source where each line (separated by eol) gives one row, with elements separated by the given delimiter. The source can be a text file, stream or byte array. Memory mapped files can be used by passing the byte array representation of the mapped segment as source.\n\nIf T is a numeric type, the result is an array of that type, with any non-numeric elements as NaN for floating-point types, or zero. Other useful values of T include String, AbstractString, and Any.\n\nIf header is true, the first row of data will be read as header and the tuple (data_cells, header_cells) is returned instead of only data_cells.\n\nSpecifying skipstart will ignore the corresponding number of initial lines from the input.\n\nIf skipblanks is true, blank lines in the input will be ignored.\n\nIf use_mmap is true, the file specified by source is memory mapped for potential speedups. Default is true except on Windows. On Windows, you may want to specify true if the file is large, and is only read once and not written to.\n\nIf quotes is true, columns enclosed within double-quote (\") characters are allowed to contain new lines and column delimiters. Double-quote characters within a quoted field must be escaped with another double-quote.  Specifying dims as a tuple of the expected rows and columns (including header, if any) may speed up reading of large files.  If comments is true, lines beginning with comment_char and text following comment_char in any line are ignored.\n\nExamples\n\njulia> using DelimitedFiles\n\njulia> x = [1; 2; 3; 4];\n\njulia> y = [5; 6; 7; 8];\n\njulia> open(\"delim_file.txt\", \"w\") do io\n           writedlm(io, [x y])\n       end\n\njulia> readdlm(\"delim_file.txt\", '	', Int, '\n')\n4×2 Array{Int64,2}:\n 1  5\n 2  6\n 3  7\n 4  8\n\n\n\n"
 },
 
 {
@@ -16149,7 +16213,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Delimited Files",
     "title": "DelimitedFiles.writedlm",
     "category": "Function",
-    "text": "writedlm(f, A, delim='\\t'; opts)\n\nWrite A (a vector, matrix, or an iterable collection of iterable rows) as text to f (either a filename string or an IO stream) using the given delimiter delim (which defaults to tab, but can be any printable Julia object, typically a Char or AbstractString).\n\nFor example, two vectors x and y of the same length can be written as two columns of tab-delimited text to f by either writedlm(f, [x y]) or by writedlm(f, zip(x, y)).\n\n\n\n"
+    "text": "writedlm(f, A, delim='\\t'; opts)\n\nWrite A (a vector, matrix, or an iterable collection of iterable rows) as text to f (either a filename string or an IO stream) using the given delimiter delim (which defaults to tab, but can be any printable Julia object, typically a Char or AbstractString).\n\nFor example, two vectors x and y of the same length can be written as two columns of tab-delimited text to f by either writedlm(f, [x y]) or by writedlm(f, zip(x, y)).\n\nExamples\n\njulia> using DelimitedFiles\n\njulia> x = [1; 2; 3; 4];\n\njulia> y = [5; 6; 7; 8];\n\njulia> open(\"delim_file.txt\", \"w\") do io\n           writedlm(io, [x y])\n       end\n\njulia> readdlm(\"delim_file.txt\", '	', Int, '\n')\n4×2 Array{Int64,2}:\n 1  5\n 2  6\n 3  7\n 4  8\n\n\n\n"
 },
 
 {
@@ -16205,7 +16269,7 @@ var documenterSearchIndex = {"docs": [
     "page": "I/O and Network",
     "title": "Base.open",
     "category": "Function",
-    "text": "open(filename::AbstractString, [read::Bool, write::Bool, create::Bool, truncate::Bool, append::Bool]) -> IOStream\n\nOpen a file in a mode specified by five boolean arguments. The default is to open files for reading only. Return a stream for accessing the file.\n\n\n\nopen(filename::AbstractString, [mode::AbstractString]) -> IOStream\n\nAlternate syntax for open, where a string-based mode specifier is used instead of the five booleans. The values of mode correspond to those from fopen(3) or Perl open, and are equivalent to setting the following boolean groups:\n\nMode Description\nr read\nr+ read, write\nw write, create, truncate\nw+ read, write, create, truncate\na write, create, append\na+ read, write, create, append\n\n\n\nopen(f::Function, args...)\n\nApply the function f to the result of open(args...) and close the resulting file descriptor upon completion.\n\nExamples\n\nopen(f->read(f, String), \"file.txt\")\n\n\n\nopen(command, mode::AbstractString=\"r\", stdio=DevNull)\n\nStart running command asynchronously, and return a tuple (stream,process).  If mode is \"r\", then stream reads from the process's standard output and stdio optionally specifies the process's standard input stream.  If mode is \"w\", then stream writes to the process's standard input and stdio optionally specifies the process's standard output stream.\n\n\n\nopen(f::Function, command, mode::AbstractString=\"r\", stdio=DevNull)\n\nSimilar to open(command, mode, stdio), but calls f(stream) on the resulting process stream, then closes the input stream and waits for the process to complete. Returns the value returned by f.\n\n\n\n"
+    "text": "open(filename::AbstractString, [read::Bool, write::Bool, create::Bool, truncate::Bool, append::Bool]) -> IOStream\n\nOpen a file in a mode specified by five boolean arguments. The default is to open files for reading only. Return a stream for accessing the file.\n\n\n\nopen(filename::AbstractString, [mode::AbstractString]) -> IOStream\n\nAlternate syntax for open, where a string-based mode specifier is used instead of the five booleans. The values of mode correspond to those from fopen(3) or Perl open, and are equivalent to setting the following boolean groups:\n\nMode Description\nr read\nr+ read, write\nw write, create, truncate\nw+ read, write, create, truncate\na write, create, append\na+ read, write, create, append\n\n\n\nopen(f::Function, args...)\n\nApply the function f to the result of open(args...) and close the resulting file descriptor upon completion.\n\nExamples\n\njulia> open(\"myfile.txt\", \"w\") do io\n           write(io, \"Hello world!\");\n       end\n\njulia> open(f->read(f, String), \"myfile.txt\")\n\"Hello world!\"\n\njulia> rm(\"myfile.txt\")\n\n\n\nopen(command, mode::AbstractString=\"r\", stdio=DevNull)\n\nStart running command asynchronously, and return a tuple (stream,process).  If mode is \"r\", then stream reads from the process's standard output and stdio optionally specifies the process's standard input stream.  If mode is \"w\", then stream writes to the process's standard input and stdio optionally specifies the process's standard output stream.\n\n\n\nopen(f::Function, command, mode::AbstractString=\"r\", stdio=DevNull)\n\nSimilar to open(command, mode, stdio), but calls f(stream) on the resulting process stream, then closes the input stream and waits for the process to complete. Returns the value returned by f.\n\n\n\n"
 },
 
 {
@@ -16389,7 +16453,7 @@ var documenterSearchIndex = {"docs": [
     "page": "I/O and Network",
     "title": "Base.iswritable",
     "category": "Function",
-    "text": "iswritable(io) -> Bool\n\nReturn true if the specified IO object is writable (if that can be determined).\n\n\n\n"
+    "text": "iswritable(io) -> Bool\n\nReturn true if the specified IO object is writable (if that can be determined).\n\nExamples\n\njulia> open(\"myfile.txt\", \"w\") do io\n           write(io, \"Hello world!\");\n           iswritable(io)\n       end\ntrue\n\njulia> open(\"myfile.txt\", \"r\") do io\n           iswritable(io)\n       end\nfalse\n\njulia> rm(\"myfile.txt\")\n\n\n\n"
 },
 
 {
@@ -16397,7 +16461,7 @@ var documenterSearchIndex = {"docs": [
     "page": "I/O and Network",
     "title": "Base.isreadable",
     "category": "Function",
-    "text": "isreadable(io) -> Bool\n\nReturn true if the specified IO object is readable (if that can be determined).\n\n\n\n"
+    "text": "isreadable(io) -> Bool\n\nReturn true if the specified IO object is readable (if that can be determined).\n\nExamples\n\njulia> open(\"myfile.txt\", \"w\") do io\n           write(io, \"Hello world!\");\n           isreadable(io)\n       end\nfalse\n\njulia> open(\"myfile.txt\", \"r\") do io\n           isreadable(io)\n       end\ntrue\n\njulia> rm(\"myfile.txt\")\n\n\n\n"
 },
 
 {
@@ -21945,27 +22009,19 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "devdocs/libgit2.html#Base.LibGit2.AbstractCredentials",
+    "location": "devdocs/libgit2.html#Base.LibGit2.UserPasswordCredential",
     "page": "Base.LibGit2",
-    "title": "Base.LibGit2.AbstractCredentials",
+    "title": "Base.LibGit2.UserPasswordCredential",
     "category": "Type",
-    "text": "Abstract credentials payload\n\n\n\n"
+    "text": "Credential that support only user and password parameters\n\n\n\n"
 },
 
 {
-    "location": "devdocs/libgit2.html#Base.LibGit2.UserPasswordCredentials",
+    "location": "devdocs/libgit2.html#Base.LibGit2.SSHCredential",
     "page": "Base.LibGit2",
-    "title": "Base.LibGit2.UserPasswordCredentials",
+    "title": "Base.LibGit2.SSHCredential",
     "category": "Type",
-    "text": "Credentials that support only user and password parameters\n\n\n\n"
-},
-
-{
-    "location": "devdocs/libgit2.html#Base.LibGit2.SSHCredentials",
-    "page": "Base.LibGit2",
-    "title": "Base.LibGit2.SSHCredentials",
-    "category": "Type",
-    "text": "SSH credentials type\n\n\n\n"
+    "text": "SSH credential type\n\n\n\n"
 },
 
 {
@@ -21973,7 +22029,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Base.LibGit2",
     "title": "Base.LibGit2.isfilled",
     "category": "Function",
-    "text": "isfilled(cred::AbstractCredentials) -> Bool\n\nVerifies that a credential is ready for use in authentication.\n\n\n\n"
+    "text": "isfilled(cred::AbstractCredential) -> Bool\n\nVerifies that a credential is ready for use in authentication.\n\n\n\n"
 },
 
 {
@@ -21981,7 +22037,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Base.LibGit2",
     "title": "Base.LibGit2.CachedCredentials",
     "category": "Type",
-    "text": "Credentials that support caching\n\n\n\n"
+    "text": "Caches credential information for re-use\n\n\n\n"
 },
 
 {
@@ -22013,7 +22069,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Base.LibGit2",
     "title": "Functionality",
     "category": "section",
-    "text": "Some of this documentation assumes some prior knowledge of the libgit2 API. For more information on some of the objects and methods referenced here, consult the upstream libgit2 API reference.Base.LibGit2.Buffer\nBase.LibGit2.CheckoutOptions\nBase.LibGit2.CloneOptions\nBase.LibGit2.DescribeOptions\nBase.LibGit2.DescribeFormatOptions\nBase.LibGit2.DiffDelta\nBase.LibGit2.DiffFile\nBase.LibGit2.DiffOptionsStruct\nBase.LibGit2.FetchHead\nBase.LibGit2.FetchOptions\nBase.LibGit2.GitAnnotated\nBase.LibGit2.GitBlame\nBase.LibGit2.GitBlob\nBase.LibGit2.GitCommit\nBase.LibGit2.GitHash\nBase.LibGit2.GitObject\nBase.LibGit2.GitRemote\nBase.LibGit2.GitRemoteAnon\nBase.LibGit2.GitRepo\nBase.LibGit2.GitRepoExt\nBase.LibGit2.GitRevWalker\nBase.LibGit2.GitShortHash\nBase.LibGit2.GitSignature\nBase.LibGit2.GitStatus\nBase.LibGit2.GitTag\nBase.LibGit2.GitTree\nBase.LibGit2.IndexEntry\nBase.LibGit2.IndexTime\nBase.LibGit2.BlameOptions\nBase.LibGit2.MergeOptions\nBase.LibGit2.ProxyOptions\nBase.LibGit2.PushOptions\nBase.LibGit2.RebaseOperation\nBase.LibGit2.RebaseOptions\nBase.LibGit2.RemoteCallbacks\nBase.LibGit2.SignatureStruct\nBase.LibGit2.StatusEntry\nBase.LibGit2.StatusOptions\nBase.LibGit2.StrArrayStruct\nBase.LibGit2.TimeStruct\nBase.LibGit2.add!\nBase.LibGit2.add_fetch!\nBase.LibGit2.add_push!\nBase.LibGit2.addblob!\nBase.LibGit2.author\nBase.LibGit2.authors\nBase.LibGit2.branch\nBase.LibGit2.branch!\nBase.LibGit2.checkout!\nBase.LibGit2.clone\nBase.LibGit2.commit\nBase.LibGit2.committer\nBase.LibGit2.count(::Function, ::Base.LibGit2.GitRevWalker; ::Base.LibGit2.GitHash, ::Cint, ::Bool)\nBase.LibGit2.counthunks\nBase.LibGit2.create_branch\nBase.LibGit2.credentials_callback\nBase.LibGit2.credentials_cb\nBase.LibGit2.default_signature\nBase.LibGit2.delete_branch\nBase.LibGit2.diff_files\nBase.LibGit2.entryid\nBase.LibGit2.entrytype\nBase.LibGit2.fetch\nBase.LibGit2.fetchheads\nBase.LibGit2.fetch_refspecs\nBase.LibGit2.fetchhead_foreach_cb\nBase.LibGit2.merge_base\nBase.LibGit2.merge!(::Base.LibGit2.GitRepo; ::Any...)\nBase.LibGit2.merge!(::Base.LibGit2.GitRepo, ::Vector{Base.LibGit2.GitAnnotated}; ::Base.LibGit2.MergeOptions, ::Base.LibGit2.CheckoutOptions)\nBase.LibGit2.merge!(::Base.LibGit2.GitRepo, ::Vector{Base.LibGit2.GitAnnotated}, ::Bool; ::Base.LibGit2.MergeOptions, ::Base.LibGit2.CheckoutOptions)\nBase.LibGit2.ffmerge!\nBase.LibGit2.fullname\nBase.LibGit2.features\nBase.LibGit2.filename\nBase.LibGit2.filemode\nBase.LibGit2.gitdir\nBase.LibGit2.git_url\nBase.LibGit2.@githash_str\nBase.LibGit2.head\nBase.LibGit2.head!\nBase.LibGit2.head_oid\nBase.LibGit2.headname\nBase.LibGit2.init\nBase.LibGit2.is_ancestor_of\nBase.LibGit2.isbinary\nBase.LibGit2.iscommit\nBase.LibGit2.isdiff\nBase.LibGit2.isdirty\nBase.LibGit2.isorphan\nBase.LibGit2.isset\nBase.LibGit2.iszero\nBase.LibGit2.lookup_branch\nBase.LibGit2.map(::Function, ::Base.LibGit2.GitRevWalker; ::Base.LibGit2.GitHash, ::AbstractString, ::Cint, ::Bool)\nBase.LibGit2.mirror_callback\nBase.LibGit2.mirror_cb\nBase.LibGit2.message\nBase.LibGit2.merge_analysis\nBase.LibGit2.name\nBase.LibGit2.need_update\nBase.LibGit2.objtype\nBase.LibGit2.path\nBase.LibGit2.peel\nBase.LibGit2.posixpath\nBase.LibGit2.push\nBase.LibGit2.push!(::Base.LibGit2.GitRevWalker, ::Base.LibGit2.GitHash)\nBase.LibGit2.push_head!\nBase.LibGit2.push_refspecs\nBase.LibGit2.raw\nBase.LibGit2.read_tree!\nBase.LibGit2.rebase!\nBase.LibGit2.ref_list\nBase.LibGit2.reftype\nBase.LibGit2.remotes\nBase.LibGit2.remove!\nBase.LibGit2.reset\nBase.LibGit2.reset!\nBase.LibGit2.restore\nBase.LibGit2.revcount\nBase.LibGit2.set_remote_url\nBase.LibGit2.shortname\nBase.LibGit2.snapshot\nBase.LibGit2.status\nBase.LibGit2.stage\nBase.LibGit2.tag_create\nBase.LibGit2.tag_delete\nBase.LibGit2.tag_list\nBase.LibGit2.target\nBase.LibGit2.toggle\nBase.LibGit2.transact\nBase.LibGit2.treewalk\nBase.LibGit2.upstream\nBase.LibGit2.update!\nBase.LibGit2.url\nBase.LibGit2.version\nBase.LibGit2.with\nBase.LibGit2.with_warn\nBase.LibGit2.workdir\nBase.LibGit2.GitObject(::Base.LibGit2.GitTreeEntry)\nBase.LibGit2.AbstractCredentials\nBase.LibGit2.UserPasswordCredentials\nBase.LibGit2.SSHCredentials\nBase.LibGit2.isfilled\nBase.LibGit2.CachedCredentials\nBase.LibGit2.CredentialPayload\nBase.LibGit2.approve\nBase.LibGit2.reject"
+    "text": "Some of this documentation assumes some prior knowledge of the libgit2 API. For more information on some of the objects and methods referenced here, consult the upstream libgit2 API reference.Base.LibGit2.Buffer\nBase.LibGit2.CheckoutOptions\nBase.LibGit2.CloneOptions\nBase.LibGit2.DescribeOptions\nBase.LibGit2.DescribeFormatOptions\nBase.LibGit2.DiffDelta\nBase.LibGit2.DiffFile\nBase.LibGit2.DiffOptionsStruct\nBase.LibGit2.FetchHead\nBase.LibGit2.FetchOptions\nBase.LibGit2.GitAnnotated\nBase.LibGit2.GitBlame\nBase.LibGit2.GitBlob\nBase.LibGit2.GitCommit\nBase.LibGit2.GitHash\nBase.LibGit2.GitObject\nBase.LibGit2.GitRemote\nBase.LibGit2.GitRemoteAnon\nBase.LibGit2.GitRepo\nBase.LibGit2.GitRepoExt\nBase.LibGit2.GitRevWalker\nBase.LibGit2.GitShortHash\nBase.LibGit2.GitSignature\nBase.LibGit2.GitStatus\nBase.LibGit2.GitTag\nBase.LibGit2.GitTree\nBase.LibGit2.IndexEntry\nBase.LibGit2.IndexTime\nBase.LibGit2.BlameOptions\nBase.LibGit2.MergeOptions\nBase.LibGit2.ProxyOptions\nBase.LibGit2.PushOptions\nBase.LibGit2.RebaseOperation\nBase.LibGit2.RebaseOptions\nBase.LibGit2.RemoteCallbacks\nBase.LibGit2.SignatureStruct\nBase.LibGit2.StatusEntry\nBase.LibGit2.StatusOptions\nBase.LibGit2.StrArrayStruct\nBase.LibGit2.TimeStruct\nBase.LibGit2.add!\nBase.LibGit2.add_fetch!\nBase.LibGit2.add_push!\nBase.LibGit2.addblob!\nBase.LibGit2.author\nBase.LibGit2.authors\nBase.LibGit2.branch\nBase.LibGit2.branch!\nBase.LibGit2.checkout!\nBase.LibGit2.clone\nBase.LibGit2.commit\nBase.LibGit2.committer\nBase.LibGit2.count(::Function, ::Base.LibGit2.GitRevWalker; ::Base.LibGit2.GitHash, ::Cint, ::Bool)\nBase.LibGit2.counthunks\nBase.LibGit2.create_branch\nBase.LibGit2.credentials_callback\nBase.LibGit2.credentials_cb\nBase.LibGit2.default_signature\nBase.LibGit2.delete_branch\nBase.LibGit2.diff_files\nBase.LibGit2.entryid\nBase.LibGit2.entrytype\nBase.LibGit2.fetch\nBase.LibGit2.fetchheads\nBase.LibGit2.fetch_refspecs\nBase.LibGit2.fetchhead_foreach_cb\nBase.LibGit2.merge_base\nBase.LibGit2.merge!(::Base.LibGit2.GitRepo; ::Any...)\nBase.LibGit2.merge!(::Base.LibGit2.GitRepo, ::Vector{Base.LibGit2.GitAnnotated}; ::Base.LibGit2.MergeOptions, ::Base.LibGit2.CheckoutOptions)\nBase.LibGit2.merge!(::Base.LibGit2.GitRepo, ::Vector{Base.LibGit2.GitAnnotated}, ::Bool; ::Base.LibGit2.MergeOptions, ::Base.LibGit2.CheckoutOptions)\nBase.LibGit2.ffmerge!\nBase.LibGit2.fullname\nBase.LibGit2.features\nBase.LibGit2.filename\nBase.LibGit2.filemode\nBase.LibGit2.gitdir\nBase.LibGit2.git_url\nBase.LibGit2.@githash_str\nBase.LibGit2.head\nBase.LibGit2.head!\nBase.LibGit2.head_oid\nBase.LibGit2.headname\nBase.LibGit2.init\nBase.LibGit2.is_ancestor_of\nBase.LibGit2.isbinary\nBase.LibGit2.iscommit\nBase.LibGit2.isdiff\nBase.LibGit2.isdirty\nBase.LibGit2.isorphan\nBase.LibGit2.isset\nBase.LibGit2.iszero\nBase.LibGit2.lookup_branch\nBase.LibGit2.map(::Function, ::Base.LibGit2.GitRevWalker; ::Base.LibGit2.GitHash, ::AbstractString, ::Cint, ::Bool)\nBase.LibGit2.mirror_callback\nBase.LibGit2.mirror_cb\nBase.LibGit2.message\nBase.LibGit2.merge_analysis\nBase.LibGit2.name\nBase.LibGit2.need_update\nBase.LibGit2.objtype\nBase.LibGit2.path\nBase.LibGit2.peel\nBase.LibGit2.posixpath\nBase.LibGit2.push\nBase.LibGit2.push!(::Base.LibGit2.GitRevWalker, ::Base.LibGit2.GitHash)\nBase.LibGit2.push_head!\nBase.LibGit2.push_refspecs\nBase.LibGit2.raw\nBase.LibGit2.read_tree!\nBase.LibGit2.rebase!\nBase.LibGit2.ref_list\nBase.LibGit2.reftype\nBase.LibGit2.remotes\nBase.LibGit2.remove!\nBase.LibGit2.reset\nBase.LibGit2.reset!\nBase.LibGit2.restore\nBase.LibGit2.revcount\nBase.LibGit2.set_remote_url\nBase.LibGit2.shortname\nBase.LibGit2.snapshot\nBase.LibGit2.status\nBase.LibGit2.stage\nBase.LibGit2.tag_create\nBase.LibGit2.tag_delete\nBase.LibGit2.tag_list\nBase.LibGit2.target\nBase.LibGit2.toggle\nBase.LibGit2.transact\nBase.LibGit2.treewalk\nBase.LibGit2.upstream\nBase.LibGit2.update!\nBase.LibGit2.url\nBase.LibGit2.version\nBase.LibGit2.with\nBase.LibGit2.with_warn\nBase.LibGit2.workdir\nBase.LibGit2.GitObject(::Base.LibGit2.GitTreeEntry)\nBase.LibGit2.UserPasswordCredential\nBase.LibGit2.SSHCredential\nBase.LibGit2.isfilled\nBase.LibGit2.CachedCredentials\nBase.LibGit2.CredentialPayload\nBase.LibGit2.approve\nBase.LibGit2.reject"
 },
 
 {
