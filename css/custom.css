@@ -1,3 +1,8 @@
 p {
   line-height: 1.9em;
 }
+
+#site {
+  margin: 0;
+  padding: 0.2em 0.8em;
+}
