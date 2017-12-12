@@ -2202,58 +2202,58 @@ var documenterSearchIndex = {"docs": [
 
 {
     "location": "manual/linear-algebra.html#",
-    "page": "Linear algebra",
-    "title": "Linear algebra",
+    "page": "선형 대수",
+    "title": "선형 대수",
     "category": "page",
     "text": ""
 },
 
 {
     "location": "manual/linear-algebra.html#Linear-algebra-1",
-    "page": "Linear algebra",
-    "title": "Linear algebra",
+    "page": "선형 대수",
+    "title": "선형 대수",
     "category": "section",
-    "text": "In addition to (and as part of) its support for multi-dimensional arrays, Julia provides native implementations of many common and useful linear algebra operations. Basic operations, such as trace, det, and inv are all supported:julia> A = [1 2 3; 4 1 6; 7 8 1]\n3×3 Array{Int64,2}:\n 1  2  3\n 4  1  6\n 7  8  1\n\njulia> trace(A)\n3\n\njulia> det(A)\n104.0\n\njulia> inv(A)\n3×3 Array{Float64,2}:\n -0.451923   0.211538    0.0865385\n  0.365385  -0.192308    0.0576923\n  0.240385   0.0576923  -0.0673077As well as other useful operations, such as finding eigenvalues or eigenvectors:julia> A = [-4. -17.; 2. 2.]\n2×2 Array{Float64,2}:\n -4.0  -17.0\n  2.0    2.0\n\njulia> eigvals(A)\n2-element Array{Complex{Float64},1}:\n -1.0 + 5.0im\n -1.0 - 5.0im\n\njulia> eigvecs(A)\n2×2 Array{Complex{Float64},2}:\n  0.945905+0.0im        0.945905-0.0im\n -0.166924-0.278207im  -0.166924+0.278207imIn addition, Julia provides many factorizations which can be used to speed up problems such as linear solve or matrix exponentiation by pre-factorizing a matrix into a form more amenable (for performance or memory reasons) to the problem. See the documentation on factorize for more information. As an example:julia> A = [1.5 2 -4; 3 -1 -6; -10 2.3 4]\n3×3 Array{Float64,2}:\n   1.5   2.0  -4.0\n   3.0  -1.0  -6.0\n -10.0   2.3   4.0\n\njulia> factorize(A)\nBase.LinAlg.LU{Float64,Array{Float64,2}} with factors L and U:\n[1.0 0.0 0.0; -0.15 1.0 0.0; -0.3 -0.132196 1.0]\n[-10.0 2.3 4.0; 0.0 2.345 -3.4; 0.0 0.0 -5.24947]Since A is not Hermitian, symmetric, triangular, tridiagonal, or bidiagonal, an LU factorization may be the best we can do. Compare with:julia> B = [1.5 2 -4; 2 -1 -3; -4 -3 5]\n3×3 Array{Float64,2}:\n  1.5   2.0  -4.0\n  2.0  -1.0  -3.0\n -4.0  -3.0   5.0\n\njulia> factorize(B)\nBase.LinAlg.BunchKaufman{Float64,Array{Float64,2}}\nD factor:\n3×3 Tridiagonal{Float64,Array{Float64,1}}:\n -1.64286   0.0   ⋅\n  0.0      -2.8  0.0\n   ⋅        0.0  5.0\nU factor:\n3×3 Base.LinAlg.UnitUpperTriangular{Float64,Array{Float64,2}}:\n 1.0  0.142857  -0.8\n 0.0  1.0       -0.6\n 0.0  0.0        1.0\npermutation:\n3-element Array{Int64,1}:\n 1\n 2\n 3Here, Julia was able to detect that B is in fact symmetric, and used a more appropriate factorization. Often it's possible to write more efficient code for a matrix that is known to have certain properties e.g. it is symmetric, or tridiagonal. Julia provides some special types so that you can \"tag\" matrices as having these properties. For instance:julia> B = [1.5 2 -4; 2 -1 -3; -4 -3 5]\n3×3 Array{Float64,2}:\n  1.5   2.0  -4.0\n  2.0  -1.0  -3.0\n -4.0  -3.0   5.0\n\njulia> sB = Symmetric(B)\n3×3 Symmetric{Float64,Array{Float64,2}}:\n  1.5   2.0  -4.0\n  2.0  -1.0  -3.0\n -4.0  -3.0   5.0sB has been tagged as a matrix that's (real) symmetric, so for later operations we might perform on it, such as eigenfactorization or computing matrix-vector products, efficiencies can be found by only referencing half of it. For example:julia> B = [1.5 2 -4; 2 -1 -3; -4 -3 5]\n3×3 Array{Float64,2}:\n  1.5   2.0  -4.0\n  2.0  -1.0  -3.0\n -4.0  -3.0   5.0\n\njulia> sB = Symmetric(B)\n3×3 Symmetric{Float64,Array{Float64,2}}:\n  1.5   2.0  -4.0\n  2.0  -1.0  -3.0\n -4.0  -3.0   5.0\n\njulia> x = [1; 2; 3]\n3-element Array{Int64,1}:\n 1\n 2\n 3\n\njulia> sB\\x\n3-element Array{Float64,1}:\n -1.7391304347826084\n -1.1086956521739126\n -1.4565217391304346The \\ operation here performs the linear solution. Julia's parser provides convenient dispatch to specialized methods for the transpose of a matrix left-divided by a vector, or for the various combinations of transpose operations in matrix-matrix solutions. Many of these are further specialized for certain special matrix types. For example, A\\B will end up calling Base.LinAlg.A_ldiv_B! while A'\\B will end up calling Base.LinAlg.Ac_ldiv_B, even though we used the same left-division operator. This works for matrices too: A.'\\B.' would call Base.LinAlg.At_ldiv_Bt. The left-division operator is pretty powerful and it's easy to write compact, readable code that is flexible enough to solve all sorts of systems of linear equations."
+    "text": "다차원 배열 지원에 더불어, Julia는 자주 쓰이고 유용한 여러 선형 대수 연산의 네이티브 구현을 제공한다. trace, det, inv 등의 기초적 연산을 모두 지원한다:julia> A = [1 2 3; 4 1 6; 7 8 1]\n3×3 Array{Int64,2}:\n 1  2  3\n 4  1  6\n 7  8  1\n\njulia> trace(A)\n3\n\njulia> det(A)\n104.0\n\njulia> inv(A)\n3×3 Array{Float64,2}:\n -0.451923   0.211538    0.0865385\n  0.365385  -0.192308    0.0576923\n  0.240385   0.0576923  -0.0673077또한 고윳값과 고유 벡터 찾기 등의 다른 유용한 연산들도 지원한다:julia> A = [-4. -17.; 2. 2.]\n2×2 Array{Float64,2}:\n -4.0  -17.0\n  2.0    2.0\n\njulia> eigvals(A)\n2-element Array{Complex{Float64},1}:\n -1.0 + 5.0im\n -1.0 - 5.0im\n\njulia> eigvecs(A)\n2×2 Array{Complex{Float64},2}:\n  0.945905+0.0im        0.945905-0.0im\n -0.166924-0.278207im  -0.166924+0.278207im이에 더불어, Julia는 여러 분해를 제공한다:  선형 방정식 풀이나 행렬 지수 함수 계산 등을 할 때, 행렬을 (성능이나 메모리 등의 이유로) 더 용이한 형태로 사전 분해 함으로써 속도를 높여줄 수 있다. 자세한 내용은 factorize 문서를 참조하라. 예를 들어:julia> A = [1.5 2 -4; 3 -1 -6; -10 2.3 4]\n3×3 Array{Float64,2}:\n   1.5   2.0  -4.0\n   3.0  -1.0  -6.0\n -10.0   2.3   4.0\n\njulia> factorize(A)\nBase.LinAlg.LU{Float64,Array{Float64,2}} with factors L and U:\n[1.0 0.0 0.0; -0.15 1.0 0.0; -0.3 -0.132196 1.0]\n[-10.0 2.3 4.0; 0.0 2.345 -3.4; 0.0 0.0 -5.24947]A가 에르미트, 대칭, 삼각, 3중 대각 또는 2중 대각이 아니므로, LU 분해가 가장 좋은 방법일 것이다. 이를 다음과 비교해보자:julia> B = [1.5 2 -4; 2 -1 -3; -4 -3 5]\n3×3 Array{Float64,2}:\n  1.5   2.0  -4.0\n  2.0  -1.0  -3.0\n -4.0  -3.0   5.0\n\njulia> factorize(B)\nBase.LinAlg.BunchKaufman{Float64,Array{Float64,2}}\nD factor:\n3×3 Tridiagonal{Float64,Array{Float64,1}}:\n -1.64286   0.0   ⋅\n  0.0      -2.8  0.0\n   ⋅        0.0  5.0\nU factor:\n3×3 Base.LinAlg.UnitUpperTriangular{Float64,Array{Float64,2}}:\n 1.0  0.142857  -0.8\n 0.0  1.0       -0.6\n 0.0  0.0        1.0\npermutation:\n3-element Array{Int64,1}:\n 1\n 2\n 3여기서는 Julia가 B가 대칭임을 감지하여 더 적절한 분해를 사용하였다. 행렬의 특성(예를 들어 대칭, 3중 대각 등)을 알고 있는 경우 더 효율적인 코드를 작성할 수 있는 경우가 많이 있다. Julia는 행렬에 태그를 붙여 이러한 특성들을 표기할 수 있도록 해주는 특수 타입들을 제공한다. 예를 들어:julia> B = [1.5 2 -4; 2 -1 -3; -4 -3 5]\n3×3 Array{Float64,2}:\n  1.5   2.0  -4.0\n  2.0  -1.0  -3.0\n -4.0  -3.0   5.0\n\njulia> sB = Symmetric(B)\n3×3 Symmetric{Float64,Array{Float64,2}}:\n  1.5   2.0  -4.0\n  2.0  -1.0  -3.0\n -4.0  -3.0   5.0sB는 (실)대칭인 행렬로 태그되었다. 따라서 이후에 고윳값 분해나 벡터와의 곱 등을 할 때, 참조하는 데이터를 반으로 줄임으로써 계산을 효율적으로 할 수 있다. 예를 들어:julia> B = [1.5 2 -4; 2 -1 -3; -4 -3 5]\n3×3 Array{Float64,2}:\n  1.5   2.0  -4.0\n  2.0  -1.0  -3.0\n -4.0  -3.0   5.0\n\njulia> sB = Symmetric(B)\n3×3 Symmetric{Float64,Array{Float64,2}}:\n  1.5   2.0  -4.0\n  2.0  -1.0  -3.0\n -4.0  -3.0   5.0\n\njulia> x = [1; 2; 3]\n3-element Array{Int64,1}:\n 1\n 2\n 3\n\njulia> sB\\x\n3-element Array{Float64,1}:\n -1.7391304347826084\n -1.1086956521739126\n -1.4565217391304346여기서 \\ (왼쪽나누기) 연산은 선형 해법을 계산한다. 행렬의 전치를 벡터로 왼쪽나누기 하거나, 행렬간의 선형 해법에서 전치가 있는 경우 등에 대해 Julia의 파서는 특수화된 함수를 배정하며, 이는 행렬 타입에 따라 더 특수화 되는 경우가 많다. 예를 들어, 똑같은 왼쪽나누기 연산자를 사용했음에도 불구하고, A\\B는 Base.LinAlg.A_ldiv_B!를 호출하는 반면 A'\\B는 Base.LinAlg.Ac_ldiv_B를 호출한다. 행렬에 대해서도 마찬가지이다: A.'\\B.'는 Base.LinAlg.At_ldiv_Bt를 호출한다. 왼쪽나누기 연산자는 강력하여 간소하고 읽기 쉬우면서도 모든 종류의 선형 방정식의 풀이할 수 있을 정도로 충분히 유연한 코드를 작성하기 쉽게 해 준다."
 },
 
 {
-    "location": "manual/linear-algebra.html#Special-matrices-1",
-    "page": "Linear algebra",
-    "title": "Special matrices",
+    "location": "manual/linear-algebra.html#특수-행렬-1",
+    "page": "선형 대수",
+    "title": "특수 행렬",
     "category": "section",
-    "text": "Matrices with special symmetries and structures arise often in linear algebra and are frequently associated with various matrix factorizations. Julia features a rich collection of special matrix types, which allow for fast computation with specialized routines that are specially developed for particular matrix types.The following tables summarize the types of special matrices that have been implemented in Julia, as well as whether hooks to various optimized methods for them in LAPACK are available.Type Description\nSymmetric Symmetric matrix\nHermitian Hermitian matrix\nUpperTriangular Upper triangular matrix\nLowerTriangular Lower triangular matrix\nTridiagonal Tridiagonal matrix\nSymTridiagonal Symmetric tridiagonal matrix\nBidiagonal Upper/lower bidiagonal matrix\nDiagonal Diagonal matrix\nUniformScaling Uniform scaling operator"
+    "text": "선형대수에서는 특수한 대칭성과 구조를 가진 행렬이 종종 등장하는데, 행렬의 종류에 따라 여러가지 행렬 분해와 연관지을 수 있다. Julia는 특수 행렬 타입의 풍부한 컬렉션을 제공하며, 이를 통해 특정 행렬 타입에 특수화된 루틴으로 계산을 빠르게 할 수 있도록 해준다.다음은 Julia에 구현된 특수 행렬의 종류와, 이들에 대해 최적화 된 LAPACK 메소드로의 후크 여부를 요약한 표이다.행렬 타입 설명\nSymmetric 대칭 행렬\nHermitian 에르미트 행렬\nUpperTriangular 상 삼각 행렬\nLowerTriangular 하 삼각 행렬\nTridiagonal 3중 대각 행렬\nSymTridiagonal 대칭 3중 삼각 행렬\nBidiagonal 상/하 2중 대각 행렬\nDiagonal 대각 행렬\nUniformScaling 균일 스케일링 연산자"
 },
 
 {
-    "location": "manual/linear-algebra.html#Elementary-operations-1",
-    "page": "Linear algebra",
-    "title": "Elementary operations",
+    "location": "manual/linear-algebra.html#기초-연산-1",
+    "page": "선형 대수",
+    "title": "기초 연산",
     "category": "section",
-    "text": "Matrix type + - * \\ Other functions with optimized methods\nSymmetric    MV inv, sqrt, exp\nHermitian    MV inv, sqrt, exp\nUpperTriangular   MV MV inv, det\nLowerTriangular   MV MV inv, det\nSymTridiagonal M M MS MV eigmax, eigmin\nTridiagonal M M MS MV \nBidiagonal M M MS MV \nDiagonal M M MV MV inv, det, logdet, /\nUniformScaling M M MVS MVS /Legend:Key Description\nM (matrix) An optimized method for matrix-matrix operations is available\nV (vector) An optimized method for matrix-vector operations is available\nS (scalar) An optimized method for matrix-scalar operations is available"
+    "text": "행렬 타입 + - * \\ 그 외 최적화된 함수\nSymmetric    MV inv, sqrt, exp\nHermitian    MV inv, sqrt, exp\nUpperTriangular   MV MV inv, det\nLowerTriangular   MV MV inv, det\nSymTridiagonal M M MS MV eigmax, eigmin\nTridiagonal M M MS MV \nBidiagonal M M MS MV \nDiagonal M M MV MV inv, det, logdet, /\nUniformScaling M M MVS MVS /범례:기호 설명\nM (matrix, 행뎔) 최적화된 행렬-행렬 연산을 사용할 수 있음\nV (vector, 벡터) 최적화된 행렬-벡터 연산을 사용할 수 있음\nS (scalar, 스칼라) 최적화된 행렬-스칼라 연산을 사용할 수 있음"
 },
 
 {
-    "location": "manual/linear-algebra.html#Matrix-factorizations-1",
-    "page": "Linear algebra",
-    "title": "Matrix factorizations",
+    "location": "manual/linear-algebra.html#행렬-분해-1",
+    "page": "선형 대수",
+    "title": "행렬 분해",
     "category": "section",
-    "text": "Matrix type LAPACK eig eigvals eigvecs svd svdvals\nSymmetric SY  ARI   \nHermitian HE  ARI   \nUpperTriangular TR A A A  \nLowerTriangular TR A A A  \nSymTridiagonal ST A ARI AV  \nTridiagonal GT     \nBidiagonal BD    A A\nDiagonal DI  A   Legend:Key Description Example\nA (all) An optimized method to find all the characteristic values and/or vectors is available e.g. eigvals(M)\nR (range) An optimized method to find the ilth through the ihth characteristic values are available eigvals(M, il, ih)\nI (interval) An optimized method to find the characteristic values in the interval [vl, vh] is available eigvals(M, vl, vh)\nV (vectors) An optimized method to find the characteristic vectors corresponding to the characteristic values x=[x1, x2,...] is available eigvecs(M, x)"
+    "text": "행렬 타입 LAPACK eig eigvals eigvecs svd svdvals\nSymmetric SY  ARI   \nHermitian HE  ARI   \nUpperTriangular TR A A A  \nLowerTriangular TR A A A  \nSymTridiagonal ST A ARI AV  \nTridiagonal GT     \nBidiagonal BD    A A\nDiagonal DI  A   범례:기호 설명 예시\nA (all, 모두) 모든 특성 값 및 특성 벡터를 찾는 최적화된 메소드를 사용할 수 있음 예) eigvals(M)\nR (range, 범위) il번째에서 ih번째 사이의 특성 값을 찾는 최적화된 메소드를 사용할 수 있음 eigvals(M, il, ih)\nI (interval, 구간) 구간 [vl, vh] 사이의 특성 값을 찾는 최적화된 메소드를 사용할 수 있음 eigvals(M, vl, vh)\nV (vectors, 벡터) 특성 값들 x=[x1, x2,...]에 해당하는 특성 벡터들을 찾는 최적화된 메소드를 사용할 수 있음 eigvecs(M, x)"
 },
 
 {
-    "location": "manual/linear-algebra.html#The-uniform-scaling-operator-1",
-    "page": "Linear algebra",
-    "title": "The uniform scaling operator",
+    "location": "manual/linear-algebra.html#균일-스케일링-연산자-1",
+    "page": "선형 대수",
+    "title": "균일 스케일링 연산자",
     "category": "section",
-    "text": "A UniformScaling operator represents a scalar times the identity operator, λ*I. The identity operator I is defined as a constant and is an instance of UniformScaling. The size of these operators are generic and match the other matrix in the binary operations +, -, * and \\. For A+I and A-I this means that A must be square. Multiplication with the identity operator I is a noop (except for checking that the scaling factor is one) and therefore almost without overhead.To see the UniformScaling operator in action:julia> U = UniformScaling(2);\n\njulia> a = [1 2; 3 4]\n2×2 Array{Int64,2}:\n 1  2\n 3  4\n\njulia> a + U\n2×2 Array{Int64,2}:\n 3  2\n 3  6\n\njulia> a * U\n2×2 Array{Int64,2}:\n 2  4\n 6  8\n\njulia> [a U]\n2×4 Array{Int64,2}:\n 1  2  2  0\n 3  4  0  2\n\njulia> b = [1 2 3; 4 5 6]\n2×3 Array{Int64,2}:\n 1  2  3\n 4  5  6\n\njulia> b - U\nERROR: DimensionMismatch(\"matrix is not square: dimensions are (2, 3)\")\nStacktrace:\n [1] checksquare at ./linalg/linalg.jl:220 [inlined]\n [2] -(::Array{Int64,2}, ::UniformScaling{Int64}) at ./linalg/uniformscaling.jl:156\n [3] top-level scope"
+    "text": "UniformScaling 연산자는 스칼라와 단위 행렬의 곱 λ*I를 나타낸다. 항등 연산자 I 는 상수로 정의되며 UniformScaling 의 인스턴스이다. UniformScaling 연산자의 크기는 제네릭하며 이항 연산자 +, -, *, \\ 에서 다른 행렬과 일치하도록 결정된다. A+I and A-I 는 A 가 정사각 행렬임을 의미한다. 항등 연산자 I를 곱하는 것은 (스케일링 비율이 1임을 체크하는 것을 제외하면) noop이며 따라서 오버헤드가 거의 없다.UniformScaling 연산자가 어떻게 사용되는지 살펴보자:julia> U = UniformScaling(2);\n\njulia> a = [1 2; 3 4]\n2×2 Array{Int64,2}:\n 1  2\n 3  4\n\njulia> a + U\n2×2 Array{Int64,2}:\n 3  2\n 3  6\n\njulia> a * U\n2×2 Array{Int64,2}:\n 2  4\n 6  8\n\njulia> [a U]\n2×4 Array{Int64,2}:\n 1  2  2  0\n 3  4  0  2\n\njulia> b = [1 2 3; 4 5 6]\n2×3 Array{Int64,2}:\n 1  2  3\n 4  5  6\n\njulia> b - U\nERROR: DimensionMismatch(\"matrix is not square: dimensions are (2, 3)\")\nStacktrace:\n [1] checksquare at ./linalg/linalg.jl:220 [inlined]\n [2] -(::Array{Int64,2}, ::UniformScaling{Int64}) at ./linalg/uniformscaling.jl:156\n [3] top-level scope"
 },
 
 {
     "location": "manual/linear-algebra.html#man-linalg-factorizations-1",
-    "page": "Linear algebra",
-    "title": "Matrix factorizations",
+    "page": "선형 대수",
+    "title": "행렬 분해",
     "category": "section",
-    "text": "Matrix factorizations (a.k.a. matrix decompositions) compute the factorization of a matrix into a product of matrices, and are one of the central concepts in linear algebra.The following table summarizes the types of matrix factorizations that have been implemented in Julia. Details of their associated methods can be found in the Linear Algebra section of the standard library documentation.Type Description\nCholesky Cholesky factorization\nCholeskyPivoted Pivoted Cholesky factorization\nLU LU factorization\nLUTridiagonal LU factorization for Tridiagonal matrices\nQR QR factorization\nQRCompactWY Compact WY form of the QR factorization\nQRPivoted Pivoted QR factorization\nHessenberg Hessenberg decomposition\nEigen Spectral decomposition\nSVD Singular value decomposition\nGeneralizedSVD Generalized SVD"
+    "text": "행렬 분해는 주어진 행렬을 여러 행렬의 곱으로 분해하는 것이며, 선형 대수의 중심이 되는 개념 중 하나이다.아래는 Julia에 구현된 행렬 분해를 요약한 표이다. 각 분해와 연관된 메소드에 관한 자세한 내용은 표준 라이브러리 문서의 선형 대수 섹션을 참조하기 바란다.종류 설명\nCholesky 숄레스키 분해\nCholeskyPivoted 피벗 숄레스키 분해\nLU LU 분해\nLUTridiagonal Tridiagonal 행렬에 대한 LU 분해\nQR QR 분해\nQRCompactWY QR 분해의 컴팩트 WY 폼\nQRPivoted 피벗 QR 분해\nHessenberg 헤센베르크 분해\nEigen 고윳값 분해\nSVD 특이값 분해\nGeneralizedSVD 일반화된 특이값 분해"
 },
 
 {
@@ -7597,7 +7597,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Collections and Data Structures",
     "title": "Base.pairs",
     "category": "Function",
-    "text": "pairs(IndexLinear(), A)\npairs(IndexCartesian(), A)\npairs(IndexStyle(A), A)\n\nAn iterator that accesses each element of the array A, returning i => x, where i is the index for the element and x = A[i]. Identical to pairs(A), except that the style of index can be selected. Also similar to enumerate(A), except i will be a valid index for A, while enumerate always counts from 1 regardless of the indices of A.\n\nSpecifying IndexLinear() ensures that i will be an integer; specifying IndexCartesian() ensures that i will be a CartesianIndex; specifying IndexStyle(A) chooses whichever has been defined as the native indexing style for array A.\n\nExamples\n\njulia> A = [\"a\" \"d\"; \"b\" \"e\"; \"c\" \"f\"];\n\njulia> for (index, value) in pairs(IndexStyle(A), A)\n           println(\"$index $value\")\n       end\n1 a\n2 b\n3 c\n4 d\n5 e\n6 f\n\njulia> S = view(A, 1:2, :);\n\njulia> for (index, value) in pairs(IndexStyle(S), S)\n           println(\"$index $value\")\n       end\nCartesianIndex(1, 1) a\nCartesianIndex(2, 1) b\nCartesianIndex(1, 2) d\nCartesianIndex(2, 2) e\n\nSee also: IndexStyle, indices.\n\n\n\npairs(collection)\n\nReturn an iterator over key => value pairs for any collection that maps a set of keys to a set of values. This includes arrays, where the keys are the array indices.\n\n\n\n"
+    "text": "pairs(collection)\n\nReturn an iterator over key => value pairs for any collection that maps a set of keys to a set of values. This includes arrays, where the keys are the array indices.\n\n\n\npairs(IndexLinear(), A)\npairs(IndexCartesian(), A)\npairs(IndexStyle(A), A)\n\nAn iterator that accesses each element of the array A, returning i => x, where i is the index for the element and x = A[i]. Identical to pairs(A), except that the style of index can be selected. Also similar to enumerate(A), except i will be a valid index for A, while enumerate always counts from 1 regardless of the indices of A.\n\nSpecifying IndexLinear() ensures that i will be an integer; specifying IndexCartesian() ensures that i will be a CartesianIndex; specifying IndexStyle(A) chooses whichever has been defined as the native indexing style for array A.\n\nExamples\n\njulia> A = [\"a\" \"d\"; \"b\" \"e\"; \"c\" \"f\"];\n\njulia> for (index, value) in pairs(IndexStyle(A), A)\n           println(\"$index $value\")\n       end\n1 a\n2 b\n3 c\n4 d\n5 e\n6 f\n\njulia> S = view(A, 1:2, :);\n\njulia> for (index, value) in pairs(IndexStyle(S), S)\n           println(\"$index $value\")\n       end\nCartesianIndex(1, 1) a\nCartesianIndex(2, 1) b\nCartesianIndex(1, 2) d\nCartesianIndex(2, 2) e\n\nSee also: IndexStyle, indices.\n\n\n\n"
 },
 
 {
@@ -7901,7 +7901,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Mathematics",
     "title": "Base.:+",
     "category": "Function",
-    "text": "dt::Date + t::Time -> DateTime\n\nThe addition of a Date with a Time produces a DateTime. The hour, minute, second, and millisecond parts of the Time are used along with the year, month, and day of the Date to create the new DateTime. Non-zero microseconds or nanoseconds in the Time type will result in an InexactError being thrown.\n\n\n\n+(x, y...)\n\nAddition operator. x+y+z+... calls this function with all arguments, i.e. +(x, y, z, ...).\n\nExamples\n\njulia> 1 + 20 + 4\n25\n\njulia> +(1, 20, 4)\n25\n\n\n\n"
+    "text": "+(x, y...)\n\nAddition operator. x+y+z+... calls this function with all arguments, i.e. +(x, y, z, ...).\n\nExamples\n\njulia> 1 + 20 + 4\n25\n\njulia> +(1, 20, 4)\n25\n\n\n\ndt::Date + t::Time -> DateTime\n\nThe addition of a Date with a Time produces a DateTime. The hour, minute, second, and millisecond parts of the Time are used along with the year, month, and day of the Date to create the new DateTime. Non-zero microseconds or nanoseconds in the Time type will result in an InexactError being thrown.\n\n\n\n"
 },
 
 {
@@ -9101,7 +9101,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Mathematics",
     "title": "Base.conj",
     "category": "Function",
-    "text": "conj(v::RowVector)\n\nReturn a ConjArray lazy view of the input, where each element is conjugated.\n\nExamples\n\njulia> v = [1+im, 1-im].'\n1×2 RowVector{Complex{Int64},Array{Complex{Int64},1}}:\n 1+1im  1-1im\n\njulia> conj(v)\n1×2 RowVector{Complex{Int64},ConjArray{Complex{Int64},1,Array{Complex{Int64},1}}}:\n 1-1im  1+1im\n\n\n\nconj(z)\n\nCompute the complex conjugate of a complex number z.\n\nExamples\n\njulia> conj(1 + 3im)\n1 - 3im\n\n\n\n"
+    "text": "conj(z)\n\nCompute the complex conjugate of a complex number z.\n\nExamples\n\njulia> conj(1 + 3im)\n1 - 3im\n\n\n\nconj(v::RowVector)\n\nReturn a ConjArray lazy view of the input, where each element is conjugated.\n\nExamples\n\njulia> v = [1+im, 1-im].'\n1×2 RowVector{Complex{Int64},Array{Complex{Int64},1}}:\n 1+1im  1-1im\n\njulia> conj(v)\n1×2 RowVector{Complex{Int64},ConjArray{Complex{Int64},1,Array{Complex{Int64},1}}}:\n 1-1im  1+1im\n\n\n\n"
 },
 
 {
