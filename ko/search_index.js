@@ -2509,7 +2509,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Parallel Computing",
     "title": "Cluster Managers with Custom Transports",
     "category": "section",
-    "text": "Replacing the default TCP/IP all-to-all socket connections with a custom transport layer is a little more involved. Each Julia process has as many communication tasks as the workers it is connected to. For example, consider a Julia cluster of 32 processes in an all-to-all mesh network:Each Julia process thus has 31 communication tasks.\nEach task handles all incoming messages from a single remote worker in a message-processing loop.\nThe message-processing loop waits on an IO object (for example, a TCPSocket in the default implementation), reads an entire message, processes it and waits for the next one.\nSending messages to a process is done directly from any Julia task–not just communication tasks–again, via the appropriate IO object.Replacing the default transport requires the new implementation to set up connections to remote workers and to provide appropriate IO objects that the message-processing loops can wait on. The manager-specific callbacks to be implemented are:connect(manager::FooManager, pid::Integer, config::WorkerConfig)\nkill(manager::FooManager, pid::Int, config::WorkerConfig)The default implementation (which uses TCP/IP sockets) is implemented as connect(manager::ClusterManager, pid::Integer, config::WorkerConfig).connect should return a pair of IO objects, one for reading data sent from worker pid, and the other to write data that needs to be sent to worker pid. Custom cluster managers can use an in-memory BufferStream as the plumbing to proxy data between the custom, possibly non-IO transport and Julia's in-built parallel infrastructure.A BufferStream is an in-memory IOBuffer which behaves like an IO–it is a stream which can be handled asynchronously.Folder examples/clustermanager/0mq contains an example of using ZeroMQ to connect Julia workers in a star topology with a 0MQ broker in the middle. Note: The Julia processes are still all logically connected to each other–any worker can message any other worker directly without any awareness of 0MQ being used as the transport layer.When using custom transports:Julia workers must NOT be started with --worker. Starting with --worker will result in the newly launched workers defaulting to the TCP/IP socket transport implementation.\nFor every incoming logical connection with a worker, Base.process_messages(rd::IO, wr::IO)() must be called. This launches a new task that handles reading and writing of messages from/to the worker represented by the IO objects.\ninit_worker(cookie, manager::FooManager) MUST be called as part of worker process initialization.\nField connect_at::Any in WorkerConfig can be set by the cluster manager when launch is called. The value of this field is passed in in all connect callbacks. Typically, it carries information on how to connect to a worker. For example, the TCP/IP socket transport uses this field to specify the (host, port) tuple at which to connect to a worker.kill(manager, pid, config) is called to remove a worker from the cluster. On the master process, the corresponding IO objects must be closed by the implementation to ensure proper cleanup. The default implementation simply executes an exit() call on the specified remote worker.examples/clustermanager/simple is an example that shows a simple implementation using UNIX domain sockets for cluster setup."
+    "text": "Replacing the default TCP/IP all-to-all socket connections with a custom transport layer is a little more involved. Each Julia process has as many communication tasks as the workers it is connected to. For example, consider a Julia cluster of 32 processes in an all-to-all mesh network:Each Julia process thus has 31 communication tasks.\nEach task handles all incoming messages from a single remote worker in a message-processing loop.\nThe message-processing loop waits on an IO object (for example, a TCPSocket in the default implementation), reads an entire message, processes it and waits for the next one.\nSending messages to a process is done directly from any Julia task–not just communication tasks–again, via the appropriate IO object.Replacing the default transport requires the new implementation to set up connections to remote workers and to provide appropriate IO objects that the message-processing loops can wait on. The manager-specific callbacks to be implemented are:connect(manager::FooManager, pid::Integer, config::WorkerConfig)\nkill(manager::FooManager, pid::Int, config::WorkerConfig)The default implementation (which uses TCP/IP sockets) is implemented as connect(manager::ClusterManager, pid::Integer, config::WorkerConfig).connect should return a pair of IO objects, one for reading data sent from worker pid, and the other to write data that needs to be sent to worker pid. Custom cluster managers can use an in-memory BufferStream as the plumbing to proxy data between the custom, possibly non-IO transport and Julia's in-built parallel infrastructure.A BufferStream is an in-memory IOBuffer which behaves like an IO–it is a stream which can be handled asynchronously.Folder examples/clustermanager/0mq contains an example of using ZeroMQ to connect Julia workers in a star topology with a 0MQ broker in the middle. Note: The Julia processes are still all logically connected to each other–any worker can message any other worker directly without any awareness of 0MQ being used as the transport layer.When using custom transports:Julia workers must NOT be started with --worker. Starting with --worker will result in the newly launched workers defaulting to the TCP/IP socket transport implementation.\nFor every incoming logical connection with a worker, Base.process_messages(rd::IO, wr::IO)() must be called. This launches a new task that handles reading and writing of messages from/to the worker represented by the IO objects.\ninit_worker(cookie, manager::FooManager) must be called as part of worker process initialization.\nField connect_at::Any in WorkerConfig can be set by the cluster manager when launch is called. The value of this field is passed in in all connect callbacks. Typically, it carries information on how to connect to a worker. For example, the TCP/IP socket transport uses this field to specify the (host, port) tuple at which to connect to a worker.kill(manager, pid, config) is called to remove a worker from the cluster. On the master process, the corresponding IO objects must be closed by the implementation to ensure proper cleanup. The default implementation simply executes an exit() call on the specified remote worker.examples/clustermanager/simple is an example that shows a simple implementation using UNIX domain sockets for cluster setup."
 },
 
 {
@@ -2717,7 +2717,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Interacting With Julia",
     "title": "Key bindings",
     "category": "section",
-    "text": "The Julia REPL makes great use of key bindings. Several control-key bindings were already introduced above (^D to exit, ^R and ^S for searching), but there are many more. In addition to the control-key, there are also meta-key bindings. These vary more by platform, but most terminals default to using alt- or option- held down with a key to send the meta-key (or can be configured to do so).Keybinding Description\nProgram control  \n^D Exit (when buffer is empty)\n^C Interrupt or cancel\n^L Clear console screen\nReturn/Enter, ^J New line, executing if it is complete\nmeta-Return/Enter Insert new line without executing it\n? or ; Enter help or shell mode (when at start of a line)\n^R, ^S Incremental history search, described above\nCursor movement  \nRight arrow, ^F Move right one character\nLeft arrow, ^B Move left one character\nctrl-Right, meta-F Move right one word\nctrl-Left, meta-B Move left one word\nHome, ^A Move to beginning of line\nEnd, ^E Move to end of line\nUp arrow, ^P Move up one line (or change to the previous history entry that matches the text before the cursor)\nDown arrow, ^N Move down one line (or change to the next history entry that matches the text before the cursor)\nShift-Arrow Key Move cursor according to the direction of the Arrow key, while activating the region (\"shift selection\")\nPage-up, meta-P Change to the previous history entry\nPage-down, meta-N Change to the next history entry\nmeta-< Change to the first history entry (of the current session if it is before the current position in history)\nmeta-> Change to the last history entry\n^-Space Set the \"mark\" in the editing region (and de-activate the region if it's active)\n^-Space ^-Space Set the \"mark\" in the editing region and make the region \"active\", i.e. highlighted\n^G De-activate the region (i.e. make it not highlighted)\n^X^X Exchange the current position with the mark\nEditing  \nBackspace, ^H Delete the previous character\nDelete, ^D Forward delete one character (when buffer has text)\nmeta-Backspace Delete the previous word\nmeta-d Forward delete the next word\n^W Delete previous text up to the nearest whitespace\nmeta-w Copy the current region in the kill ring\nmeta-W \"Kill\" the current region, placing the text in the kill ring\n^K \"Kill\" to end of line, placing the text in the kill ring\n^Y \"Yank\" insert the text from the kill ring\nmeta-y Replace a previously yanked text with an older entry from the kill ring\n^T Transpose the characters about the cursor\nmeta-Up arrow Transpose current line with line above\nmeta-Down arrow Transpose current line with line below\nmeta-u Change the next word to uppercase\nmeta-c Change the next word to titlecase\nmeta-l Change the next word to lowercase\n^/, ^_ Undo previous editing action\n^Q Write a number in REPL and press ^Q to open editor at corresponding stackframe or method\nmeta-Left Arrow indent the current line on the left\nmeta-Right Arrow indent the current line on the right"
+    "text": "The Julia REPL makes great use of key bindings. Several control-key bindings were already introduced above (^D to exit, ^R and ^S for searching), but there are many more. In addition to the control-key, there are also meta-key bindings. These vary more by platform, but most terminals default to using alt- or option- held down with a key to send the meta-key (or can be configured to do so).Keybinding Description\nProgram control  \n^D Exit (when buffer is empty)\n^C Interrupt or cancel\n^L Clear console screen\nReturn/Enter, ^J New line, executing if it is complete\nmeta-Return/Enter Insert new line without executing it\n? or ; Enter help or shell mode (when at start of a line)\n^R, ^S Incremental history search, described above\nCursor movement  \nRight arrow, ^F Move right one character\nLeft arrow, ^B Move left one character\nctrl-Right, meta-F Move right one word\nctrl-Left, meta-B Move left one word\nHome, ^A Move to beginning of line\nEnd, ^E Move to end of line\nUp arrow, ^P Move up one line (or change to the previous history entry that matches the text before the cursor)\nDown arrow, ^N Move down one line (or change to the next history entry that matches the text before the cursor)\nShift-Arrow Key Move cursor according to the direction of the Arrow key, while activating the region (\"shift selection\")\nPage-up, meta-P Change to the previous history entry\nPage-down, meta-N Change to the next history entry\nmeta-< Change to the first history entry (of the current session if it is before the current position in history)\nmeta-> Change to the last history entry\n^-Space Set the \"mark\" in the editing region (and de-activate the region if it's active)\n^-Space ^-Space Set the \"mark\" in the editing region and make the region \"active\", i.e. highlighted\n^G De-activate the region (i.e. make it not highlighted)\n^X^X Exchange the current position with the mark\nEditing  \nBackspace, ^H Delete the previous character, or the whole region when it's active\nDelete, ^D Forward delete one character (when buffer has text)\nmeta-Backspace Delete the previous word\nmeta-d Forward delete the next word\n^W Delete previous text up to the nearest whitespace\nmeta-w Copy the current region in the kill ring\nmeta-W \"Kill\" the current region, placing the text in the kill ring\n^K \"Kill\" to end of line, placing the text in the kill ring\n^Y \"Yank\" insert the text from the kill ring\nmeta-y Replace a previously yanked text with an older entry from the kill ring\n^T Transpose the characters about the cursor\nmeta-Up arrow Transpose current line with line above\nmeta-Down arrow Transpose current line with line below\nmeta-u Change the next word to uppercase\nmeta-c Change the next word to titlecase\nmeta-l Change the next word to lowercase\n^/, ^_ Undo previous editing action\n^Q Write a number in REPL and press ^Q to open editor at corresponding stackframe or method\nmeta-Left Arrow indent the current line on the left\nmeta-Right Arrow indent the current line on the right"
 },
 
 {
@@ -4117,7 +4117,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Style Guide",
     "title": "Use naming conventions consistent with Julia's base/",
     "category": "section",
-    "text": "modules and type names use capitalization and camel case: module SparseArrays, struct UnitRange.\nfunctions are lowercase (maximum, convert) and, when readable, with multiple words squashed together (isequal, haskey). When necessary, use underscores as word separators. Underscores are also used to indicate a combination of concepts (remotecall_fetch as a more efficient implementation of fetch(remotecall(...))) or as modifiers (sum_kbn).\nconciseness is valued, but avoid abbreviation (indexin rather than indxin) as it becomes difficult to remember whether and how particular words are abbreviated.If a function name requires multiple words, consider whether it might represent more than one concept and might be better split into pieces."
+    "text": "modules and type names use capitalization and camel case: module SparseArrays, struct UnitRange.\nfunctions are lowercase (maximum, convert) and, when readable, with multiple words squashed together (isequal, haskey). When necessary, use underscores as word separators. Underscores are also used to indicate a combination of concepts (remotecall_fetch as a more efficient implementation of fetch(remotecall(...))) or as modifiers.\nconciseness is valued, but avoid abbreviation (indexin rather than indxin) as it becomes difficult to remember whether and how particular words are abbreviated.If a function name requires multiple words, consider whether it might represent more than one concept and might be better split into pieces."
 },
 
 {
@@ -5357,7 +5357,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Essentials",
     "title": "Base.oftype",
     "category": "Function",
-    "text": "oftype(x, y)\n\nConvert y to the type of x (convert(typeof(x), y)).\n\n\n\n"
+    "text": "oftype(x, y)\n\nConvert y to the type of x (convert(typeof(x), y)).\n\nExamples\n\njulia> x = 4;\n\njulia> y = 3.;\n\njulia> oftype(x, y)\n3\n\njulia> oftype(y, x)\n4.0\n\n\n\n"
 },
 
 {
@@ -5789,7 +5789,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Essentials",
     "title": "Base.@boundscheck",
     "category": "Macro",
-    "text": "@boundscheck(blk)\n\nAnnotates the expression blk as a bounds checking block, allowing it to be elided by @inbounds.\n\nNote that the function in which @boundscheck is written must be inlined into its caller with @inline in order for @inbounds to have effect.\n\njulia> @inline function g(A, i)\n           @boundscheck checkbounds(A, i)\n           return \"accessing ($A)[$i]\"\n       end\n       f1() = return g(1:2, -1)\n       f2() = @inbounds return g(1:2, -1)\nf2 (generic function with 1 method)\n\njulia> f1()\nERROR: BoundsError: attempt to access 2-element UnitRange{Int64} at index [-1]\nStacktrace:\n [1] throw_boundserror(::UnitRange{Int64}, ::Tuple{Int64}) at ./abstractarray.jl:435\n [2] checkbounds at ./abstractarray.jl:399 [inlined]\n [3] g at ./none:2 [inlined]\n [4] f1() at ./none:1\n\njulia> f2()\n\"accessing (1:2)[-1]\"\n\nwarning: Warning\nThe @boundscheck annotation allows you, as a library writer, to opt-in to allowing other code to remove your bounds checks with @inbounds. As noted there, the caller must verify—using information they can access—that their accesses are valid before using @inbounds. For indexing into your AbstractArray subclasses, for example, this involves checking the indices against its size. Therefore, @boundscheck annotations should only be added to a getindex or setindex! implementation after you are certain its behavior is correct.\n\n\n\n"
+    "text": "@boundscheck(blk)\n\nAnnotates the expression blk as a bounds checking block, allowing it to be elided by @inbounds.\n\nnote: Note\nThe function in which @boundscheck is written must be inlined into its caller in order for @inbounds to have effect.\n\nExamples\n\njulia> @inline function g(A, i)\n           @boundscheck checkbounds(A, i)\n           return \"accessing ($A)[$i]\"\n       end\n       f1() = return g(1:2, -1)\n       f2() = @inbounds return g(1:2, -1)\nf2 (generic function with 1 method)\n\njulia> f1()\nERROR: BoundsError: attempt to access 2-element UnitRange{Int64} at index [-1]\nStacktrace:\n [1] throw_boundserror(::UnitRange{Int64}, ::Tuple{Int64}) at ./abstractarray.jl:435\n [2] checkbounds at ./abstractarray.jl:399 [inlined]\n [3] g at ./none:2 [inlined]\n [4] f1() at ./none:1\n\njulia> f2()\n\"accessing (1:2)[-1]\"\n\nwarning: Warning\nThe @boundscheck annotation allows you, as a library writer, to opt-in to allowing other code to remove your bounds checks with @inbounds. As noted there, the caller must verify—using information they can access—that their accesses are valid before using @inbounds. For indexing into your AbstractArray subclasses, for example, this involves checking the indices against its size. Therefore, @boundscheck annotations should only be added to a getindex or setindex! implementation after you are certain its behavior is correct.\n\n\n\n"
 },
 
 {
@@ -7053,7 +7053,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Collections and Data Structures",
     "title": "Base.foldl",
     "category": "Method",
-    "text": "foldl(op, v0, itr)\n\nLike reduce, but with guaranteed left associativity. v0 will be used exactly once.\n\njulia> foldl(-, 1, 2:5)\n-13\n\n\n\n"
+    "text": "foldl(op, v0, itr)\n\nLike reduce, but with guaranteed left associativity. v0 will be used exactly once.\n\njulia> foldl(=>, 0, 1:4)\n(((0=>1)=>2)=>3) => 4\n\n\n\n"
 },
 
 {
@@ -7061,7 +7061,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Collections and Data Structures",
     "title": "Base.foldl",
     "category": "Method",
-    "text": "foldl(op, itr)\n\nLike foldl(op, v0, itr), but using the first element of itr as v0. In general, this cannot be used with empty collections (see reduce(op, itr)).\n\njulia> foldl(-, 2:5)\n-10\n\n\n\n"
+    "text": "foldl(op, itr)\n\nLike foldl(op, v0, itr), but using the first element of itr as v0. In general, this cannot be used with empty collections (see reduce(op, itr)).\n\njulia> foldl(=>, 1:4)\n((1=>2)=>3) => 4\n\n\n\n"
 },
 
 {
@@ -7069,7 +7069,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Collections and Data Structures",
     "title": "Base.foldr",
     "category": "Method",
-    "text": "foldr(op, v0, itr)\n\nLike reduce, but with guaranteed right associativity. v0 will be used exactly once.\n\njulia> foldr(-, 1, 2:5)\n-1\n\n\n\n"
+    "text": "foldr(op, v0, itr)\n\nLike reduce, but with guaranteed right associativity. v0 will be used exactly once.\n\njulia> foldr(=>, 0, 1:4)\n1 => (2=>(3=>(4=>0)))\n\n\n\n"
 },
 
 {
@@ -7077,7 +7077,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Collections and Data Structures",
     "title": "Base.foldr",
     "category": "Method",
-    "text": "foldr(op, itr)\n\nLike foldr(op, v0, itr), but using the last element of itr as v0. In general, this cannot be used with empty collections (see reduce(op, itr)).\n\njulia> foldr(-, 2:5)\n-2\n\n\n\n"
+    "text": "foldr(op, itr)\n\nLike foldr(op, v0, itr), but using the last element of itr as v0. In general, this cannot be used with empty collections (see reduce(op, itr)).\n\njulia> foldr(=>, 1:4)\n1 => (2=>(3=>4))\n\n\n\n"
 },
 
 {
@@ -7589,7 +7589,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Collections and Data Structures",
     "title": "Base.values",
     "category": "Function",
-    "text": "values(iterator)\n\nFor an iterator or collection that has keys and values, return an iterator over the values. This function simply returns its argument by default, since the elements of a general iterator are normally considered its \"values\".\n\n\n\nvalues(a::Associative)\n\nReturn an iterator over all values in a collection. collect(values(a)) returns an array of values. Since the values are stored internally in a hash table, the order in which they are returned may vary. But keys(a) and values(a) both iterate a and return the elements in the same order.\n\nExamples\n\njulia> a = Dict('a'=>2, 'b'=>3)\nDict{Char,Int64} with 2 entries:\n  'b' => 3\n  'a' => 2\n\njulia> collect(values(a))\n2-element Array{Int64,1}:\n 3\n 2\n\n\n\n"
+    "text": "values(iterator)\n\nFor an iterator or collection that has keys and values, return an iterator over the values. This function simply returns its argument by default, since the elements of a general iterator are normally considered its \"values\".\n\nExamples\n\njulia> d = Dict(\"a\"=>1, \"b\"=>2);\n\njulia> values(d)\nBase.ValueIterator for a Dict{String,Int64} with 2 entries. Values:\n  2\n  1\n\njulia> values([2])\n1-element Array{Int64,1}:\n 2\n\n\n\nvalues(a::Associative)\n\nReturn an iterator over all values in a collection. collect(values(a)) returns an array of values. Since the values are stored internally in a hash table, the order in which they are returned may vary. But keys(a) and values(a) both iterate a and return the elements in the same order.\n\nExamples\n\njulia> a = Dict('a'=>2, 'b'=>3)\nDict{Char,Int64} with 2 entries:\n  'b' => 3\n  'a' => 2\n\njulia> collect(values(a))\n2-element Array{Int64,1}:\n 3\n 2\n\n\n\n"
 },
 
 {
@@ -7901,7 +7901,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Mathematics",
     "title": "Base.:+",
     "category": "Function",
-    "text": "+(x, y...)\n\nAddition operator. x+y+z+... calls this function with all arguments, i.e. +(x, y, z, ...).\n\nExamples\n\njulia> 1 + 20 + 4\n25\n\njulia> +(1, 20, 4)\n25\n\n\n\ndt::Date + t::Time -> DateTime\n\nThe addition of a Date with a Time produces a DateTime. The hour, minute, second, and millisecond parts of the Time are used along with the year, month, and day of the Date to create the new DateTime. Non-zero microseconds or nanoseconds in the Time type will result in an InexactError being thrown.\n\n\n\n"
+    "text": "dt::Date + t::Time -> DateTime\n\nThe addition of a Date with a Time produces a DateTime. The hour, minute, second, and millisecond parts of the Time are used along with the year, month, and day of the Date to create the new DateTime. Non-zero microseconds or nanoseconds in the Time type will result in an InexactError being thrown.\n\n\n\n+(x, y...)\n\nAddition operator. x+y+z+... calls this function with all arguments, i.e. +(x, y, z, ...).\n\nExamples\n\njulia> 1 + 20 + 4\n25\n\njulia> +(1, 20, 4)\n25\n\n\n\n"
 },
 
 {
@@ -9101,7 +9101,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Mathematics",
     "title": "Base.conj",
     "category": "Function",
-    "text": "conj(z)\n\nCompute the complex conjugate of a complex number z.\n\nExamples\n\njulia> conj(1 + 3im)\n1 - 3im\n\n\n\nconj(v::RowVector)\n\nReturn a ConjArray lazy view of the input, where each element is conjugated.\n\nExamples\n\njulia> v = [1+im, 1-im].'\n1×2 RowVector{Complex{Int64},Array{Complex{Int64},1}}:\n 1+1im  1-1im\n\njulia> conj(v)\n1×2 RowVector{Complex{Int64},ConjArray{Complex{Int64},1,Array{Complex{Int64},1}}}:\n 1-1im  1+1im\n\n\n\n"
+    "text": "conj(v::RowVector)\n\nReturn a ConjArray lazy view of the input, where each element is conjugated.\n\nExamples\n\njulia> v = [1+im, 1-im].'\n1×2 RowVector{Complex{Int64},Array{Complex{Int64},1}}:\n 1+1im  1-1im\n\njulia> conj(v)\n1×2 RowVector{Complex{Int64},ConjArray{Complex{Int64},1,Array{Complex{Int64},1}}}:\n 1-1im  1+1im\n\n\n\nconj(z)\n\nCompute the complex conjugate of a complex number z.\n\nExamples\n\njulia> conj(1 + 3im)\n1 - 3im\n\n\n\n"
 },
 
 {
@@ -11517,7 +11517,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Arrays",
     "title": "Base.isassigned",
     "category": "Function",
-    "text": "isassigned(array, i) -> Bool\n\nTest whether the given array has a value associated with index i. Return false if the index is out of bounds, or has an undefined reference.\n\njulia> isassigned(rand(3, 3), 5)\ntrue\n\njulia> isassigned(rand(3, 3), 3 * 3 + 1)\nfalse\n\njulia> mutable struct Foo end\n\njulia> v = similar(rand(3), Foo)\n3-element Array{Foo,1}:\n #undef\n #undef\n #undef\n\njulia> isassigned(v, 1)\nfalse\n\n\n\n"
+    "text": "isassigned(array, i) -> Bool\n\nTest whether the given array has a value associated with index i. Return false if the index is out of bounds, or has an undefined reference.\n\nExamples\n\njulia> isassigned(rand(3, 3), 5)\ntrue\n\njulia> isassigned(rand(3, 3), 3 * 3 + 1)\nfalse\n\njulia> mutable struct Foo end\n\njulia> v = similar(rand(3), Foo)\n3-element Array{Foo,1}:\n #undef\n #undef\n #undef\n\njulia> isassigned(v, 1)\nfalse\n\n\n\n"
 },
 
 {
@@ -11913,14 +11913,6 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/arrays.html#Base.cumsum_kbn",
-    "page": "Arrays",
-    "title": "Base.cumsum_kbn",
-    "category": "Function",
-    "text": "cumsum_kbn(A, dim::Integer)\n\nCumulative sum along a dimension, using the Kahan-Babuska-Neumaier compensated summation algorithm for additional accuracy.\n\n\n\n"
-},
-
-{
     "location": "stdlib/arrays.html#Base.LinAlg.diff",
     "page": "Arrays",
     "title": "Base.LinAlg.diff",
@@ -11985,19 +11977,11 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/arrays.html#Base.sum_kbn",
-    "page": "Arrays",
-    "title": "Base.sum_kbn",
-    "category": "Function",
-    "text": "sum_kbn(A)\n\nReturns the sum of all elements of A, using the Kahan-Babuska-Neumaier compensated summation algorithm for additional accuracy.\n\n\n\n"
-},
-
-{
     "location": "stdlib/arrays.html#Array-functions-1",
     "page": "Arrays",
     "title": "Array functions",
     "category": "section",
-    "text": "Base.accumulate(::Any, ::Any, ::Integer)\nBase.accumulate!\nBase.cumprod\nBase.cumprod!\nBase.cumsum\nBase.cumsum!\nBase.cumsum_kbn\nBase.LinAlg.diff\nBase.repeat(::AbstractArray)\nBase.rot180\nBase.rotl90\nBase.rotr90\nBase.reducedim\nBase.mapreducedim\nBase.mapslices\nBase.sum_kbn"
+    "text": "Base.accumulate(::Any, ::Any, ::Integer)\nBase.accumulate!\nBase.cumprod\nBase.cumprod!\nBase.cumsum\nBase.cumsum!\nBase.LinAlg.diff\nBase.repeat(::AbstractArray)\nBase.rot180\nBase.rotl90\nBase.rotr90\nBase.reducedim\nBase.mapreducedim\nBase.mapslices"
 },
 
 {
@@ -13245,7 +13229,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Linear Algebra",
     "title": "Base.:*",
     "category": "Method",
-    "text": "*(x, y...)\n\nMultiplication operator. x*y*z*... calls this function with all arguments, i.e. *(x, y, z, ...).\n\nExamples\n\njulia> 2 * 7 * 8\n112\n\njulia> *(2, 7, 8)\n112\n\n\n\n*(A::AbstractMatrix, B::AbstractMatrix)\n\nMatrix multiplication.\n\nExamples\n\njulia> [1 1; 0 1] * [1 0; 1 1]\n2×2 Array{Int64,2}:\n 2  1\n 1  1\n\n\n\n"
+    "text": "*(A::AbstractMatrix, B::AbstractMatrix)\n\nMatrix multiplication.\n\nExamples\n\njulia> [1 1; 0 1] * [1 0; 1 1]\n2×2 Array{Int64,2}:\n 2  1\n 1  1\n\n\n\n*(x, y...)\n\nMultiplication operator. x*y*z*... calls this function with all arguments, i.e. *(x, y, z, ...).\n\nExamples\n\njulia> 2 * 7 * 8\n112\n\njulia> *(2, 7, 8)\n112\n\n\n\n"
 },
 
 {
@@ -16269,7 +16253,7 @@ var documenterSearchIndex = {"docs": [
     "page": "I/O and Network",
     "title": "Base.open",
     "category": "Function",
-    "text": "open(filename::AbstractString, [read::Bool, write::Bool, create::Bool, truncate::Bool, append::Bool]) -> IOStream\n\nOpen a file in a mode specified by five boolean arguments. The default is to open files for reading only. Return a stream for accessing the file.\n\n\n\nopen(filename::AbstractString, [mode::AbstractString]) -> IOStream\n\nAlternate syntax for open, where a string-based mode specifier is used instead of the five booleans. The values of mode correspond to those from fopen(3) or Perl open, and are equivalent to setting the following boolean groups:\n\nMode Description\nr read\nr+ read, write\nw write, create, truncate\nw+ read, write, create, truncate\na write, create, append\na+ read, write, create, append\n\n\n\nopen(f::Function, args...)\n\nApply the function f to the result of open(args...) and close the resulting file descriptor upon completion.\n\nExamples\n\njulia> open(\"myfile.txt\", \"w\") do io\n           write(io, \"Hello world!\");\n       end\n\njulia> open(f->read(f, String), \"myfile.txt\")\n\"Hello world!\"\n\njulia> rm(\"myfile.txt\")\n\n\n\nopen(command, mode::AbstractString=\"r\", stdio=DevNull)\n\nStart running command asynchronously, and return a tuple (stream,process).  If mode is \"r\", then stream reads from the process's standard output and stdio optionally specifies the process's standard input stream.  If mode is \"w\", then stream writes to the process's standard input and stdio optionally specifies the process's standard output stream.\n\n\n\nopen(f::Function, command, mode::AbstractString=\"r\", stdio=DevNull)\n\nSimilar to open(command, mode, stdio), but calls f(stream) on the resulting process stream, then closes the input stream and waits for the process to complete. Returns the value returned by f.\n\n\n\n"
+    "text": "open(filename::AbstractString, [read::Bool, write::Bool, create::Bool, truncate::Bool, append::Bool]) -> IOStream\n\nOpen a file in a mode specified by five boolean arguments. The default is to open files for reading only. Return a stream for accessing the file.\n\n\n\nopen(filename::AbstractString, [mode::AbstractString]) -> IOStream\n\nAlternate syntax for open, where a string-based mode specifier is used instead of the five booleans. The values of mode correspond to those from fopen(3) or Perl open, and are equivalent to setting the following boolean groups:\n\nMode Description\nr read\nr+ read, write\nw write, create, truncate\nw+ read, write, create, truncate\na write, create, append\na+ read, write, create, append\n\nExamples\n\njulia> io = open(\"myfile.txt\", \"w\");\n\njulia> write(io, \"Hello world!\");\n\njulia> close(io);\n\njulia> io = open(\"myfile.txt\", \"r\");\n\njulia> read(io, String)\n\"Hello world!\"\n\njulia> write(io, \"This file is read only\")\nERROR: ArgumentError: write failed, IOStream is not writeable\n[...]\n\njulia> close(io)\n\njulia> io = open(\"myfile.txt\", \"a\");\n\njulia> write(io, \"This stream is not read only\")\n28\n\njulia> close(io)\n\njulia> rm(\"myfile.txt\")\n\n\n\nopen(f::Function, args...)\n\nApply the function f to the result of open(args...) and close the resulting file descriptor upon completion.\n\nExamples\n\njulia> open(\"myfile.txt\", \"w\") do io\n           write(io, \"Hello world!\");\n       end\n\njulia> open(f->read(f, String), \"myfile.txt\")\n\"Hello world!\"\n\njulia> rm(\"myfile.txt\")\n\n\n\nopen(command, mode::AbstractString=\"r\", stdio=DevNull)\n\nStart running command asynchronously, and return a tuple (stream,process).  If mode is \"r\", then stream reads from the process's standard output and stdio optionally specifies the process's standard input stream.  If mode is \"w\", then stream writes to the process's standard input and stdio optionally specifies the process's standard output stream.\n\n\n\nopen(f::Function, command, mode::AbstractString=\"r\", stdio=DevNull)\n\nSimilar to open(command, mode, stdio), but calls f(stream) on the resulting process stream, then closes the input stream and waits for the process to complete. Returns the value returned by f.\n\n\n\n"
 },
 
 {
@@ -16277,7 +16261,7 @@ var documenterSearchIndex = {"docs": [
     "page": "I/O and Network",
     "title": "Base.IOBuffer",
     "category": "Type",
-    "text": "IOBuffer([data, ][readable::Bool=true, writable::Bool=false[, maxsize::Int=typemax(Int)]])\n\nCreate an IOBuffer, which may optionally operate on a pre-existing array. If the readable/writable arguments are given, they restrict whether or not the buffer may be read from or written to respectively. The last argument optionally specifies a size beyond which the buffer may not be grown.\n\n\n\nIOBuffer() -> IOBuffer\n\nCreate an in-memory I/O stream.\n\n\n\nIOBuffer(size::Integer)\n\nCreate a fixed size IOBuffer. The buffer will not grow dynamically.\n\n\n\nIOBuffer(string::String)\n\nCreate a read-only IOBuffer on the data underlying the given string.\n\nExamples\n\njulia> io = IOBuffer(\"Haho\");\n\njulia> String(take!(io))\n\"Haho\"\n\njulia> String(take!(io))\n\"Haho\"\n\n\n\n"
+    "text": "IOBuffer([data, ][readable::Bool=true, writable::Bool=false[, maxsize::Int=typemax(Int)]])\n\nCreate an IOBuffer, which may optionally operate on a pre-existing array. If the readable/writable arguments are given, they restrict whether or not the buffer may be read from or written to respectively. The last argument optionally specifies a size beyond which the buffer may not be grown.\n\nExamples\n\njulia> io = IOBuffer(\"JuliaLang is a GitHub organization.\")\nIOBuffer(data=UInt8[...], readable=true, writable=false, seekable=true, append=false, size=35, maxsize=Inf, ptr=1, mark=-1)\n\njulia> read(io, String)\n\"JuliaLang is a GitHub organization.\"\n\njulia> write(io, \"This isn't writable.\")\nERROR: ArgumentError: ensureroom failed, IOBuffer is not writeable\n\njulia> io = IOBuffer(UInt8[], true, true, 34)\nIOBuffer(data=UInt8[...], readable=true, writable=true, seekable=true, append=false, size=0, maxsize=34, ptr=1, mark=-1)\n\njulia> write(io, \"JuliaLang is a GitHub organization.\")\n34\n\njulia> String(take!(io))\n\"JuliaLang is a GitHub organization\"\n\n\n\nIOBuffer() -> IOBuffer\n\nCreate an in-memory I/O stream, which is both readable and writable.\n\nExamples\n\njulia> io = IOBuffer();\n\njulia> write(io, \"JuliaLang is a GitHub organization.\", \" It has many members.\")\n56\n\njulia> String(take!(io))\n\"JuliaLang is a GitHub organization. It has many members.\"\n\n\n\nIOBuffer(size::Integer)\n\nCreate a fixed size IOBuffer. The buffer will not grow dynamically.\n\nExamples\n\njulia> io = IOBuffer(12)\nIOBuffer(data=UInt8[...], readable=true, writable=true, seekable=true, append=false, size=0, maxsize=12, ptr=1, mark=-1)\n\njulia> write(io, \"Hello world.\")\n12\n\njulia> String(take!(io))\n\"Hello world.\"\n\njulia> write(io, \"Hello world again.\")\n12\n\njulia> String(take!(io))\n\"Hello world \"\n\n\n\nIOBuffer(string::String)\n\nCreate a read-only IOBuffer on the data underlying the given string.\n\nExamples\n\njulia> io = IOBuffer(\"Haho\");\n\njulia> String(take!(io))\n\"Haho\"\n\njulia> String(take!(io))\n\"Haho\"\n\n\n\n"
 },
 
 {
@@ -16285,7 +16269,7 @@ var documenterSearchIndex = {"docs": [
     "page": "I/O and Network",
     "title": "Base.take!",
     "category": "Method",
-    "text": "take!(b::IOBuffer)\n\nObtain the contents of an IOBuffer as an array, without copying. Afterwards, the IOBuffer is reset to its initial state.\n\n\n\n"
+    "text": "take!(b::IOBuffer)\n\nObtain the contents of an IOBuffer as an array, without copying. Afterwards, the IOBuffer is reset to its initial state.\n\nExamples\n\njulia> io = IOBuffer();\n\njulia> write(io, \"JuliaLang is a GitHub organization.\", \"It has many members.\")\n55\n\njulia> String(take!(io))\n\"JuliaLang is a GitHub organization.It has many members.\"\n\n\n\n"
 },
 
 {
@@ -16317,7 +16301,7 @@ var documenterSearchIndex = {"docs": [
     "page": "I/O and Network",
     "title": "Base.write",
     "category": "Function",
-    "text": "write(stream::IO, x)\nwrite(filename::AbstractString, x)\n\nWrite the canonical binary representation of a value to the given I/O stream or file. Return the number of bytes written into the stream.\n\nYou can write multiple values with the same write call. i.e. the following are equivalent:\n\nwrite(stream, x, y...)\nwrite(stream, x) + write(stream, y...)\n\n\n\n"
+    "text": "write(io::IO, x)\nwrite(filename::AbstractString, x)\n\nWrite the canonical binary representation of a value to the given I/O stream or file. Return the number of bytes written into the stream.\n\nYou can write multiple values with the same write call. i.e. the following are equivalent:\n\nwrite(io, x, y...)\nwrite(io, x) + write(io, y...)\n\nExamples\n\njulia> io = IOBuffer();\n\njulia> write(io, \"JuliaLang is a GitHub organization.\", \" It has many members.\")\n56\n\njulia> String(take!(io))\n\"JuliaLang is a GitHub organization. It has many members.\"\n\njulia> write(io, \"Sometimes those members\") + write(io, \" write documentation.\")\n44\n\njulia> String(take!(io))\n\"Sometimes those members write documentation.\"\n\n\n\n"
 },
 
 {
@@ -16325,7 +16309,7 @@ var documenterSearchIndex = {"docs": [
     "page": "I/O and Network",
     "title": "Base.read",
     "category": "Function",
-    "text": "read(stream::IO, T)\n\nRead a single value of type T from stream, in canonical binary representation.\n\nread(stream::IO, String)\n\nRead the entirety of stream, as a String.\n\n\n\nread(filename::AbstractString, args...)\n\nOpen a file and read its contents. args is passed to read: this is equivalent to open(io->read(io, args...), filename).\n\nread(filename::AbstractString, String)\n\nRead the entire contents of a file as a string.\n\n\n\nread(s::IO, nb=typemax(Int))\n\nRead at most nb bytes from s, returning a Vector{UInt8} of the bytes read.\n\n\n\nread(s::IOStream, nb::Integer; all=true)\n\nRead at most nb bytes from s, returning a Vector{UInt8} of the bytes read.\n\nIf all is true (the default), this function will block repeatedly trying to read all requested bytes, until an error or end-of-file occurs. If all is false, at most one read call is performed, and the amount of data returned is device-dependent. Note that not all stream types support the all option.\n\n\n\n"
+    "text": "read(io::IO, T)\n\nRead a single value of type T from io, in canonical binary representation.\n\nread(io::IO, String)\n\nRead the entirety of io, as a String.\n\nExamples\n\njulia> io = IOBuffer(\"JuliaLang is a GitHub organization\");\n\njulia> read(io, Char)\n'J': ASCII/Unicode U+004a (category Lu: Letter, uppercase)\n\njulia> io = IOBuffer(\"JuliaLang is a GitHub organization\");\n\njulia> read(io, String)\n\"JuliaLang is a GitHub organization\"\n\n\n\nread(filename::AbstractString, args...)\n\nOpen a file and read its contents. args is passed to read: this is equivalent to open(io->read(io, args...), filename).\n\nread(filename::AbstractString, String)\n\nRead the entire contents of a file as a string.\n\n\n\nread(s::IO, nb=typemax(Int))\n\nRead at most nb bytes from s, returning a Vector{UInt8} of the bytes read.\n\n\n\nread(s::IOStream, nb::Integer; all=true)\n\nRead at most nb bytes from s, returning a Vector{UInt8} of the bytes read.\n\nIf all is true (the default), this function will block repeatedly trying to read all requested bytes, until an error or end-of-file occurs. If all is false, at most one read call is performed, and the amount of data returned is device-dependent. Note that not all stream types support the all option.\n\n\n\n"
 },
 
 {
@@ -16365,7 +16349,7 @@ var documenterSearchIndex = {"docs": [
     "page": "I/O and Network",
     "title": "Base.position",
     "category": "Function",
-    "text": "position(s)\n\nGet the current position of a stream.\n\n\n\n"
+    "text": "position(s)\n\nGet the current position of a stream.\n\nExamples\n\njulia> io = IOBuffer(\"JuliaLang is a GitHub organization.\");\n\njulia> seek(io, 5);\n\njulia> position(io)\n5\n\njulia> skip(io, 10);\n\njulia> position(io)\n15\n\njulia> seekend(io);\n\njulia> position(io)\n35\n\n\n\n"
 },
 
 {
@@ -16373,7 +16357,7 @@ var documenterSearchIndex = {"docs": [
     "page": "I/O and Network",
     "title": "Base.seek",
     "category": "Function",
-    "text": "seek(s, pos)\n\nSeek a stream to the given position.\n\n\n\n"
+    "text": "seek(s, pos)\n\nSeek a stream to the given position.\n\nExamples\n\njulia> io = IOBuffer(\"JuliaLang is a GitHub organization.\");\n\njulia> seek(io, 5);\n\njulia> read(io, Char)\n'L': ASCII/Unicode U+004c (category Lu: Letter, uppercase)\n\n\n\n"
 },
 
 {
@@ -16381,7 +16365,7 @@ var documenterSearchIndex = {"docs": [
     "page": "I/O and Network",
     "title": "Base.seekstart",
     "category": "Function",
-    "text": "seekstart(s)\n\nSeek a stream to its beginning.\n\n\n\n"
+    "text": "seekstart(s)\n\nSeek a stream to its beginning.\n\nExamples\n\njulia> io = IOBuffer(\"JuliaLang is a GitHub organization.\");\n\njulia> seek(io, 5);\n\njulia> read(io, Char)\n'L': ASCII/Unicode U+004c (category Lu: Letter, uppercase)\n\njulia> seekstart(io);\n\njulia> read(io, Char)\n'J': ASCII/Unicode U+004a (category Lu: Letter, uppercase)\n\n\n\n"
 },
 
 {
@@ -16397,7 +16381,7 @@ var documenterSearchIndex = {"docs": [
     "page": "I/O and Network",
     "title": "Base.skip",
     "category": "Function",
-    "text": "skip(s, offset)\n\nSeek a stream relative to the current position.\n\n\n\n"
+    "text": "skip(s, offset)\n\nSeek a stream relative to the current position.\n\nExamples\n\njulia> io = IOBuffer(\"JuliaLang is a GitHub organization.\");\n\njulia> seek(io, 5);\n\njulia> skip(io, 10);\n\njulia> read(io, Char)\n'G': ASCII/Unicode U+0047 (category Lu: Letter, uppercase)\n\n\n\n"
 },
 
 {
@@ -16445,7 +16429,7 @@ var documenterSearchIndex = {"docs": [
     "page": "I/O and Network",
     "title": "Base.isreadonly",
     "category": "Function",
-    "text": "isreadonly(stream) -> Bool\n\nDetermine whether a stream is read-only.\n\n\n\n"
+    "text": "isreadonly(io) -> Bool\n\nDetermine whether a stream is read-only.\n\nExamples\n\njulia> io = IOBuffer(\"JuliaLang is a GitHub organization\");\n\njulia> isreadonly(io)\ntrue\n\njulia> io = IOBuffer();\n\njulia> isreadonly(io)\nfalse\n\n\n\n"
 },
 
 {
@@ -16573,7 +16557,7 @@ var documenterSearchIndex = {"docs": [
     "page": "I/O and Network",
     "title": "Base.truncate",
     "category": "Function",
-    "text": "truncate(file,n)\n\nResize the file or buffer given by the first argument to exactly n bytes, filling previously unallocated space with '\\0' if the file or buffer is grown.\n\n\n\n"
+    "text": "truncate(file,n)\n\nResize the file or buffer given by the first argument to exactly n bytes, filling previously unallocated space with '\\0' if the file or buffer is grown.\n\nExamples\n\njulia> io = IOBuffer();\n\njulia> write(io, \"JuliaLang is a GitHub organization.\")\n35\n\njulia> truncate(io, 15)\nIOBuffer(data=UInt8[...], readable=true, writable=true, seekable=true, append=false, size=15, maxsize=Inf, ptr=16, mark=-1)\n\njulia> String(take!(io))\n\"JuliaLang is a \"\n\njulia> io = IOBuffer();\n\njulia> write(io, \"JuliaLang is a GitHub organization.\");\n\njulia> truncate(io, 40);\n\njulia> String(take!(io))\n\"JuliaLang is a GitHub organization.     \"\n\n\n\n"
 },
 
 {
@@ -16581,7 +16565,7 @@ var documenterSearchIndex = {"docs": [
     "page": "I/O and Network",
     "title": "Base.skipchars",
     "category": "Function",
-    "text": "skipchars(io::IO, predicate; linecomment=nothing)\n\nAdvance the stream io such that the next-read character will be the first remaining for which predicate returns false. If the keyword argument linecomment is specified, all characters from that character until the start of the next line are ignored.\n\njulia> buf = IOBuffer(\"    text\")\nIOBuffer(data=UInt8[...], readable=true, writable=false, seekable=true, append=false, size=8, maxsize=Inf, ptr=1, mark=-1)\n\njulia> skipchars(buf, isspace)\nIOBuffer(data=UInt8[...], readable=true, writable=false, seekable=true, append=false, size=8, maxsize=Inf, ptr=5, mark=-1)\n\njulia> String(readavailable(buf))\n\"text\"\n\n\n\n"
+    "text": "skipchars(io::IO, predicate; linecomment=nothing)\n\nAdvance the stream io such that the next-read character will be the first remaining for which predicate returns false. If the keyword argument linecomment is specified, all characters from that character until the start of the next line are ignored.\n\nExamples\n\njulia> buf = IOBuffer(\"    text\")\nIOBuffer(data=UInt8[...], readable=true, writable=false, seekable=true, append=false, size=8, maxsize=Inf, ptr=1, mark=-1)\n\njulia> skipchars(buf, isspace)\nIOBuffer(data=UInt8[...], readable=true, writable=false, seekable=true, append=false, size=8, maxsize=Inf, ptr=5, mark=-1)\n\njulia> String(readavailable(buf))\n\"text\"\n\n\n\n"
 },
 
 {
@@ -16589,7 +16573,7 @@ var documenterSearchIndex = {"docs": [
     "page": "I/O and Network",
     "title": "Base.countlines",
     "category": "Function",
-    "text": "countlines(io::IO, eol::Char='\\n')\n\nRead io until the end of the stream/file and count the number of lines. To specify a file pass the filename as the first argument. EOL markers other than '\\n' are supported by passing them as the second argument.\n\n\n\n"
+    "text": "countlines(io::IO, eol::Char='\\n')\n\nRead io until the end of the stream/file and count the number of lines. To specify a file pass the filename as the first argument. EOL markers other than '\\n' are supported by passing them as the second argument.\n\nExamples\n\njulia> io = IOBuffer(\"JuliaLang is a GitHub organization.\n\");\n\njulia> countlines(io)\n1\n\njulia> io = IOBuffer(\"JuliaLang is a GitHub organization.\");\n\njulia> countlines(io)\n0\n\njulia> countlines(io, '.')\n1\n\n\n\n"
 },
 
 {
@@ -16621,7 +16605,7 @@ var documenterSearchIndex = {"docs": [
     "page": "I/O and Network",
     "title": "Base.IOContext",
     "category": "Method",
-    "text": "IOContext(io::IO, KV::Pair...)\n\nCreate an IOContext that wraps a given stream, adding the specified key=>value pairs to the properties of that stream (note that io can itself be an IOContext).\n\nuse (key => value) in dict to see if this particular combination is in the properties set\nuse get(dict, key, default) to retrieve the most recent value for a particular key\n\nThe following properties are in common use:\n\n:compact: Boolean specifying that small values should be printed more compactly, e.g. that numbers should be printed with fewer digits. This is set when printing array elements.\n:limit: Boolean specifying that containers should be truncated, e.g. showing … in place of most elements.\n:displaysize: A Tuple{Int,Int} giving the size in rows and columns to use for text output. This can be used to override the display size for called functions, but to get the size of the screen use the displaysize function.\n\njulia> function f(io::IO)\n           if get(io, :short, false)\n               print(io, \"short\")\n           else\n               print(io, \"loooooong\")\n           end\n       end\nf (generic function with 1 method)\n\njulia> f(STDOUT)\nloooooong\njulia> f(IOContext(STDOUT, :short => true))\nshort\n\n\n\n"
+    "text": "IOContext(io::IO, KV::Pair...)\n\nCreate an IOContext that wraps a given stream, adding the specified key=>value pairs to the properties of that stream (note that io can itself be an IOContext).\n\nuse (key => value) in dict to see if this particular combination is in the properties set\nuse get(dict, key, default) to retrieve the most recent value for a particular key\n\nThe following properties are in common use:\n\n:compact: Boolean specifying that small values should be printed more compactly, e.g. that numbers should be printed with fewer digits. This is set when printing array elements.\n:limit: Boolean specifying that containers should be truncated, e.g. showing … in place of most elements.\n:displaysize: A Tuple{Int,Int} giving the size in rows and columns to use for text output. This can be used to override the display size for called functions, but to get the size of the screen use the displaysize function.\n:typeinfo: a Type characterizing the information already printed concerning the type of the object about to be displayed. This is mainly useful when displaying a collection of objects of the same type, so that redundant type information can be avoided (e.g. [Float16(0)] can be shown as \"Float16[0.0]\" instead of \"Float16[Float16(0.0)]\" : while displaying the elements of the array, the :typeinfo property will be set to Float16).\n\nExamples\n\njulia> function f(io::IO)\n           if get(io, :short, false)\n               print(io, \"short\")\n           else\n               print(io, \"loooooong\")\n           end\n       end\nf (generic function with 1 method)\n\njulia> f(STDOUT)\nloooooong\njulia> f(IOContext(STDOUT, :short => true))\nshort\n\n\n\n"
 },
 
 {
@@ -16653,7 +16637,7 @@ var documenterSearchIndex = {"docs": [
     "page": "I/O and Network",
     "title": "Base.showcompact",
     "category": "Function",
-    "text": "showcompact(x)\nshowcompact(io::IO, x)\n\nShow a compact representation of a value to io. If io is not specified, the default is to print to STDOUT.\n\nThis is used for printing array elements without repeating type information (which would be redundant with that printed once for the whole array), and without line breaks inside the representation of an element.\n\nTo offer a compact representation different from its standard one, a custom type should test get(io, :compact, false) in its normal show method.\n\n\n\n"
+    "text": "showcompact(x)\nshowcompact(io::IO, x)\n\nShow a compact representation of a value to io. If io is not specified, the default is to print to STDOUT.\n\nThis is used for printing array elements without repeating type information (which would be redundant with that printed once for the whole array), and without line breaks inside the representation of an element.\n\nTo offer a compact representation different from its standard one, a custom type should test get(io, :compact, false) in its normal show method.\n\nExamples\n\njulia> A = [1. 2.; 3. 4]\n2×2 Array{Float64,2}:\n 1.0  2.0\n 3.0  4.0\n\njulia> showcompact(A)\n[1.0 2.0; 3.0 4.0]\n\n\n\n"
 },
 
 {
@@ -16661,7 +16645,7 @@ var documenterSearchIndex = {"docs": [
     "page": "I/O and Network",
     "title": "Base.summary",
     "category": "Function",
-    "text": "summary(io::IO, x)\nstr = summary(x)\n\nPrint to a stream io, or return a string str, giving a brief description of a value. By default returns string(typeof(x)), e.g. Int64.\n\nFor arrays, returns a string of size and type info, e.g. 10-element Array{Int64,1}.\n\njulia> summary(1)\n\"Int64\"\n\njulia> summary(zeros(2))\n\"2-element Array{Float64,1}\"\n\n\n\n"
+    "text": "summary(io::IO, x)\nstr = summary(x)\n\nPrint to a stream io, or return a string str, giving a brief description of a value. By default returns string(typeof(x)), e.g. Int64.\n\nFor arrays, returns a string of size and type info, e.g. 10-element Array{Int64,1}.\n\nExamples\n\njulia> summary(1)\n\"Int64\"\n\njulia> summary(zeros(2))\n\"2-element Array{Float64,1}\"\n\n\n\n"
 },
 
 {
@@ -16749,7 +16733,7 @@ var documenterSearchIndex = {"docs": [
     "page": "I/O and Network",
     "title": "Base.dump",
     "category": "Function",
-    "text": "dump(x; maxdepth=8)\n\nShow every part of the representation of a value.\n\njulia> struct MyStruct\n           x\n           y\n       end\n\njulia> x = MyStruct(1, (2,3));\n\njulia> dump(x)\nMyStruct\n  x: Int64 1\n  y: Tuple{Int64,Int64}\n    1: Int64 2\n    2: Int64 3\n\nNested data structures are truncated at maxdepth.\n\njulia> struct DeeplyNested\n           xs::Vector{DeeplyNested}\n       end;\n\njulia> x = DeeplyNested([]);\n\njulia> push!(x.xs, x);\n\njulia> dump(x)\nDeeplyNested\n  xs: Array{DeeplyNested}((1,))\n    1: DeeplyNested\n      xs: Array{DeeplyNested}((1,))\n        1: DeeplyNested\n          xs: Array{DeeplyNested}((1,))\n            1: DeeplyNested\n              xs: Array{DeeplyNested}((1,))\n                1: DeeplyNested\n\njulia> dump(x, maxdepth=2)\nDeeplyNested\n  xs: Array{DeeplyNested}((1,))\n    1: DeeplyNested\n\n\n\n"
+    "text": "dump(x; maxdepth=8)\n\nShow every part of the representation of a value.\n\nExamples\n\njulia> struct MyStruct\n           x\n           y\n       end\n\njulia> x = MyStruct(1, (2,3));\n\njulia> dump(x)\nMyStruct\n  x: Int64 1\n  y: Tuple{Int64,Int64}\n    1: Int64 2\n    2: Int64 3\n\nNested data structures are truncated at maxdepth.\n\njulia> struct DeeplyNested\n           xs::Vector{DeeplyNested}\n       end;\n\njulia> x = DeeplyNested([]);\n\njulia> push!(x.xs, x);\n\njulia> dump(x)\nDeeplyNested\n  xs: Array{DeeplyNested}((1,))\n    1: DeeplyNested\n      xs: Array{DeeplyNested}((1,))\n        1: DeeplyNested\n          xs: Array{DeeplyNested}((1,))\n            1: DeeplyNested\n              xs: Array{DeeplyNested}((1,))\n                1: DeeplyNested\n\njulia> dump(x, maxdepth=2)\nDeeplyNested\n  xs: Array{DeeplyNested}((1,))\n    1: DeeplyNested\n\n\n\n"
 },
 
 {
@@ -16765,7 +16749,7 @@ var documenterSearchIndex = {"docs": [
     "page": "I/O and Network",
     "title": "Base.readline",
     "category": "Function",
-    "text": "readline(stream::IO=STDIN; chomp::Bool=true)\nreadline(filename::AbstractString; chomp::Bool=true)\n\nRead a single line of text from the given I/O stream or file (defaults to STDIN). When reading from a file, the text is assumed to be encoded in UTF-8. Lines in the input end with '\\n' or \"\\r\\n\" or the end of an input stream. When chomp is true (as it is by default), these trailing newline characters are removed from the line before it is returned. When chomp is false, they are returned as part of the line.\n\n\n\n"
+    "text": "readline(io::IO=STDIN; chomp::Bool=true)\nreadline(filename::AbstractString; chomp::Bool=true)\n\nRead a single line of text from the given I/O stream or file (defaults to STDIN). When reading from a file, the text is assumed to be encoded in UTF-8. Lines in the input end with '\\n' or \"\\r\\n\" or the end of an input stream. When chomp is true (as it is by default), these trailing newline characters are removed from the line before it is returned. When chomp is false, they are returned as part of the line.\n\nExamples\n\njulia> open(\"my_file.txt\", \"w\") do io\n           write(io, \"JuliaLang is a GitHub organization.\nIt has many members.\n\");\n       end\n57\n\njulia> readline(\"my_file.txt\")\n\"JuliaLang is a GitHub organization.\"\n\njulia> readline(\"my_file.txt\", chomp=false)\n\"JuliaLang is a GitHub organization.\n\"\n\njulia> rm(\"my_file.txt\")\n\n\n\n"
 },
 
 {
@@ -16773,7 +16757,7 @@ var documenterSearchIndex = {"docs": [
     "page": "I/O and Network",
     "title": "Base.readuntil",
     "category": "Function",
-    "text": "readuntil(stream::IO, delim)\nreaduntil(filename::AbstractString, delim)\n\nRead a string from an I/O stream or a file, up to and including the given delimiter byte. The text is assumed to be encoded in UTF-8.\n\n\n\n"
+    "text": "readuntil(stream::IO, delim)\nreaduntil(filename::AbstractString, delim)\n\nRead a string from an I/O stream or a file, up to and including the given delimiter byte. The text is assumed to be encoded in UTF-8.\n\nExamples\n\njulia> open(\"my_file.txt\", \"w\") do io\n           write(io, \"JuliaLang is a GitHub organization.\nIt has many members.\n\");\n       end\n57\n\njulia> readuntil(\"my_file.txt\", 'L')\n\"JuliaL\"\n\njulia> readuntil(\"my_file.txt\", '.')\n\"JuliaLang is a GitHub organization.\"\n\njulia> rm(\"my_file.txt\")\n\n\n\n"
 },
 
 {
@@ -16781,7 +16765,7 @@ var documenterSearchIndex = {"docs": [
     "page": "I/O and Network",
     "title": "Base.readlines",
     "category": "Function",
-    "text": "readlines(stream::IO=STDIN; chomp::Bool=true)\nreadlines(filename::AbstractString; chomp::Bool=true)\n\nRead all lines of an I/O stream or a file as a vector of strings. Behavior is equivalent to saving the result of reading readline repeatedly with the same arguments and saving the resulting lines as a vector of strings.\n\n\n\n"
+    "text": "readlines(io::IO=STDIN; chomp::Bool=true)\nreadlines(filename::AbstractString; chomp::Bool=true)\n\nRead all lines of an I/O stream or a file as a vector of strings. Behavior is equivalent to saving the result of reading readline repeatedly with the same arguments and saving the resulting lines as a vector of strings.\n\nExamples\n\njulia> open(\"my_file.txt\", \"w\") do io\n           write(io, \"JuliaLang is a GitHub organization.\nIt has many members.\n\");\n       end\n57\n\njulia> readlines(\"my_file.txt\")\n2-element Array{String,1}:\n \"JuliaLang is a GitHub organization.\"\n \"It has many members.\"\n\njulia> readlines(\"my_file.txt\", chomp=false)\n2-element Array{String,1}:\n \"JuliaLang is a GitHub organization.\n\"\n \"It has many members.\n\"\n\njulia> rm(\"my_file.txt\")\n\n\n\n"
 },
 
 {
@@ -16837,7 +16821,7 @@ var documenterSearchIndex = {"docs": [
     "page": "I/O and Network",
     "title": "Base.show",
     "category": "Method",
-    "text": "show(stream, mime, x)\n\nThe display functions ultimately call show in order to write an object x as a given mime type to a given I/O stream (usually a memory buffer), if possible. In order to provide a rich multimedia representation of a user-defined type T, it is only necessary to define a new show method for T, via: show(stream, ::MIME\"mime\", x::T) = ..., where mime is a MIME-type string and the function body calls write (or similar) to write that representation of x to stream. (Note that the MIME\"\" notation only supports literal strings; to construct MIME types in a more flexible manner use MIME{Symbol(\"\")}.)\n\nFor example, if you define a MyImage type and know how to write it to a PNG file, you could define a function show(stream, ::MIME\"image/png\", x::MyImage) = ... to allow your images to be displayed on any PNG-capable AbstractDisplay (such as IJulia). As usual, be sure to import Base.show in order to add new methods to the built-in Julia function show.\n\nThe default MIME type is MIME\"text/plain\". There is a fallback definition for text/plain output that calls show with 2 arguments. Therefore, this case should be handled by defining a 2-argument show(stream::IO, x::MyType) method.\n\nTechnically, the MIME\"mime\" macro defines a singleton type for the given mime string, which allows us to exploit Julia's dispatch mechanisms in determining how to display objects of any given type.\n\nThe first argument to show can be an IOContext specifying output format properties. See IOContext for details.\n\n\n\n"
+    "text": "show(io, mime, x)\n\nThe display functions ultimately call show in order to write an object x as a given mime type to a given I/O stream io (usually a memory buffer), if possible. In order to provide a rich multimedia representation of a user-defined type T, it is only necessary to define a new show method for T, via: show(io, ::MIME\"mime\", x::T) = ..., where mime is a MIME-type string and the function body calls write (or similar) to write that representation of x to io. (Note that the MIME\"\" notation only supports literal strings; to construct MIME types in a more flexible manner use MIME{Symbol(\"\")}.)\n\nFor example, if you define a MyImage type and know how to write it to a PNG file, you could define a function show(io, ::MIME\"image/png\", x::MyImage) = ... to allow your images to be displayed on any PNG-capable AbstractDisplay (such as IJulia). As usual, be sure to import Base.show in order to add new methods to the built-in Julia function show.\n\nThe default MIME type is MIME\"text/plain\". There is a fallback definition for text/plain output that calls show with 2 arguments. Therefore, this case should be handled by defining a 2-argument show(io::IO, x::MyType) method.\n\nTechnically, the MIME\"mime\" macro defines a singleton type for the given mime string, which allows us to exploit Julia's dispatch mechanisms in determining how to display objects of any given type.\n\nThe first argument to show can be an IOContext specifying output format properties. See IOContext for details.\n\n\n\n"
 },
 
 {
@@ -16853,7 +16837,7 @@ var documenterSearchIndex = {"docs": [
     "page": "I/O and Network",
     "title": "Base.Multimedia.reprmime",
     "category": "Function",
-    "text": "reprmime(mime, x)\n\nReturns an AbstractString or Vector{UInt8} containing the representation of x in the requested mime type, as written by show (throwing a MethodError if no appropriate show is available). An AbstractString is returned for MIME types with textual representations (such as \"text/html\" or \"application/postscript\"), whereas binary data is returned as Vector{UInt8}. (The function istextmime(mime) returns whether or not Julia treats a given mime type as text.)\n\nAs a special case, if x is an AbstractString (for textual MIME types) or a Vector{UInt8} (for binary MIME types), the reprmime function assumes that x is already in the requested mime format and simply returns x. This special case does not apply to the \"text/plain\" MIME type. This is useful so that raw data can be passed to display(m::MIME, x).\n\n\n\n"
+    "text": "reprmime(mime, x)\n\nReturns an AbstractString or Vector{UInt8} containing the representation of x in the requested mime type, as written by show (throwing a MethodError if no appropriate show is available). An AbstractString is returned for MIME types with textual representations (such as \"text/html\" or \"application/postscript\"), whereas binary data is returned as Vector{UInt8}. (The function istextmime(mime) returns whether or not Julia treats a given mime type as text.)\n\nAs a special case, if x is an AbstractString (for textual MIME types) or a Vector{UInt8} (for binary MIME types), the reprmime function assumes that x is already in the requested mime format and simply returns x. This special case does not apply to the \"text/plain\" MIME type. This is useful so that raw data can be passed to display(m::MIME, x).\n\nExamples\n\njulia> A = [1 2; 3 4];\n\njulia> reprmime(\"text/plain\", A)\n\"2×2 Array{Int64,2}:\\n 1  2\\n 3  4\"\n\n\n\n"
 },
 
 {
@@ -16997,7 +16981,7 @@ var documenterSearchIndex = {"docs": [
     "page": "I/O and Network",
     "title": "Base.nb_available",
     "category": "Function",
-    "text": "nb_available(stream)\n\nReturn the number of bytes available for reading before a read from this stream or buffer will block.\n\n\n\n"
+    "text": "nb_available(io)\n\nReturn the number of bytes available for reading before a read from this stream or buffer will block.\n\nExamples\n\njulia> io = IOBuffer(\"JuliaLang is a GitHub organization\");\n\njulia> nb_available(io)\n34\n\n\n\n"
 },
 
 {
