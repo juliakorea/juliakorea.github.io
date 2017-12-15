@@ -29,7 +29,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Home",
     "title": "Standard Library",
     "category": "section",
-    "text": "Essentials\nCollections and Data Structures\nMathematics\nNumbers\nStrings\nArrays\nTasks and Parallel Computing\nLinear Algebra\nConstants\nFilesystem\nDelimited Files\nI/O and Network\nPunctuation\nSorting and Related Functions\nPackage Manager Functions\nDates and Time\nIteration utilities\nUnit Testing\nC Interface\nC Standard Library\nDynamic Linker\nStackTraces\nSIMD Support\nProfiling\nMemory-mapped I/O\nShared Arrays\nBase64\nFile Events\nIterative Eigensolvers"
+    "text": "Essentials\nCollections and Data Structures\nMathematics\nNumbers\nStrings\nArrays\nTasks\nDistributed Computing\nMulti-Threading\nShared Arrays\nLinear Algebra\nConstants\nFilesystem\nDelimited Files\nI/O and Network\nPunctuation\nSorting and Related Functions\nPackage Manager Functions\nDates and Time\nIteration utilities\nUnit Testing\nC Interface\nC Standard Library\nDynamic Linker\nStackTraces\nSIMD Support\nProfiling\nMemory-mapped I/O\nBase64\nFile Events\nIterative Eigensolvers\nUnicode"
 },
 
 {
@@ -461,7 +461,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Strings",
     "title": "Common Operations",
     "category": "section",
-    "text": "You can lexicographically compare strings using the standard comparison operators:julia> \"abracadabra\" < \"xylophone\"\ntrue\n\njulia> \"abracadabra\" == \"xylophone\"\nfalse\n\njulia> \"Hello, world.\" != \"Goodbye, world.\"\ntrue\n\njulia> \"1 + 2 = 3\" == \"1 + 2 = $(1 + 2)\"\ntrueYou can search for the index of a particular character using the search function:julia> search(\"xylophone\", 'x')\n1\n\njulia> search(\"xylophone\", 'p')\n5\n\njulia> search(\"xylophone\", 'z')\n0You can start the search for a character at a given offset by providing a third argument:julia> search(\"xylophone\", 'o')\n4\n\njulia> search(\"xylophone\", 'o', 5)\n7\n\njulia> search(\"xylophone\", 'o', 8)\n0You can use the contains function to check if a substring is contained in a string:julia> contains(\"Hello, world.\", \"world\")\ntrue\n\njulia> contains(\"Xylophon\", \"o\")\ntrue\n\njulia> contains(\"Xylophon\", \"a\")\nfalse\n\njulia> contains(\"Xylophon\", 'o')\ntrueThe last example shows that contains can also look for a character literal.Two other handy string functions are repeat and join:julia> repeat(\".:Z:.\", 10)\n\".:Z:..:Z:..:Z:..:Z:..:Z:..:Z:..:Z:..:Z:..:Z:..:Z:.\"\n\njulia> join([\"apples\", \"bananas\", \"pineapples\"], \", \", \" and \")\n\"apples, bananas and pineapples\"Some other useful functions include:endof(str) gives the maximal (byte) index that can be used to index into str.\nlength(str) the number of characters in str.\ni = start(str) gives the first valid index at which a character can be found in str (typically 1).\nc, j = next(str,i) returns next character at or after the index i and the next valid character index following that. With start and endof, can be used to iterate through the characters in str.\nind2chr(str,i) gives the number of characters in str up to and including any at index i.\nchr2ind(str,j) gives the index at which the jth character in str occurs."
+    "text": "You can lexicographically compare strings using the standard comparison operators:julia> \"abracadabra\" < \"xylophone\"\ntrue\n\njulia> \"abracadabra\" == \"xylophone\"\nfalse\n\njulia> \"Hello, world.\" != \"Goodbye, world.\"\ntrue\n\njulia> \"1 + 2 = 3\" == \"1 + 2 = $(1 + 2)\"\ntrueYou can search for the index of a particular character using the search function:julia> search(\"xylophone\", 'x')\n1\n\njulia> search(\"xylophone\", 'p')\n5\n\njulia> search(\"xylophone\", 'z')\n0You can start the search for a character at a given offset by providing a third argument:julia> search(\"xylophone\", 'o')\n4\n\njulia> search(\"xylophone\", 'o', 5)\n7\n\njulia> search(\"xylophone\", 'o', 8)\n0You can use the contains function to check if a substring is contained in a string:julia> contains(\"Hello, world.\", \"world\")\ntrue\n\njulia> contains(\"Xylophon\", \"o\")\ntrue\n\njulia> contains(\"Xylophon\", \"a\")\nfalse\n\njulia> contains(\"Xylophon\", 'o')\ntrueThe last example shows that contains can also look for a character literal.Two other handy string functions are repeat and join:julia> repeat(\".:Z:.\", 10)\n\".:Z:..:Z:..:Z:..:Z:..:Z:..:Z:..:Z:..:Z:..:Z:..:Z:.\"\n\njulia> join([\"apples\", \"bananas\", \"pineapples\"], \", \", \" and \")\n\"apples, bananas and pineapples\"Some other useful functions include:endof(str) gives the maximal (byte) index that can be used to index into str.\nlength(str) the number of characters in str.\nlength(str, i, j) the number of valid character indices in str from i to j.\ni = start(str) gives the first valid index at which a character can be found in str (typically 1).\nc, j = next(str,i) returns next character at or after the index i and the next valid character index following that. With start and endof, can be used to iterate through the characters in str.\nthisind(str, i) given an arbitrary index into a string find the first index of the character into which the index points.\nnextind(str, i, n=1) find the start of the nth character starting after index i.\nprevind(str, i, n=1) find the start of the nth character starting before index i."
 },
 
 {
@@ -1517,7 +1517,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Modules",
     "title": "Module initialization and precompilation",
     "category": "section",
-    "text": "Large modules can take several seconds to load because executing all of the statements in a module often involves compiling a large amount of code. Julia provides the ability to create precompiled versions of modules to reduce this time.To create an incremental precompiled module file, add __precompile__() at the top of your module file (before the module starts). This will cause it to be automatically compiled the first time it is imported. Alternatively, you can manually call Base.compilecache(modulename). The resulting cache files will be stored in Base.LOAD_CACHE_PATH[1]. Subsequently, the module is automatically recompiled upon import whenever any of its dependencies change; dependencies are modules it imports, the Julia build, files it includes, or explicit dependencies declared by include_dependency(path) in the module file(s).For file dependencies, a change is determined by examining whether the modification time (mtime) of each file loaded by include or added explicitly by include_dependency is unchanged, or equal to the modification time truncated to the nearest second (to accommodate systems that can't copy mtime with sub-second accuracy). It also takes into account whether the path to the file chosen by the search logic in require matches the path that had created the precompile file.It also takes into account the set of dependencies already loaded into the current process and won't recompile those modules, even if their files change or disappear, in order to avoid creating incompatibilities between the running system and the precompile cache. If you want to have changes to the source reflected in the running system, you should call reload(\"Module\") on the module you changed, and any module that depended on it in which you want to see the change reflected.Precompiling a module also recursively precompiles any modules that are imported therein. If you know that it is not safe to precompile your module (for the reasons described below), you should put __precompile__(false) in the module file to cause Base.compilecache to throw an error (and thereby prevent the module from being imported by any other precompiled module).__precompile__() should not be used in a module unless all of its dependencies are also using __precompile__(). Failure to do so can result in a runtime error when loading the module.In order to make your module work with precompilation, however, you may need to change your module to explicitly separate any initialization steps that must occur at runtime from steps that can occur at compile time.  For this purpose, Julia allows you to define an __init__() function in your module that executes any initialization steps that must occur at runtime. This function will not be called during compilation (--output-* or __precompile__()). You may, of course, call it manually if necessary, but the default is to assume this function deals with computing state for the local machine, which does not need to be – or even should not be – captured in the compiled image. It will be called after the module is loaded into a process, including if it is being loaded into an incremental compile (--output-incremental=yes), but not if it is being loaded into a full-compilation process.In particular, if you define a function __init__() in a module, then Julia will call __init__() immediately after the module is loaded (e.g., by import, using, or require) at runtime for the first time (i.e., __init__ is only called once, and only after all statements in the module have been executed). Because it is called after the module is fully imported, any submodules or other imported modules have their __init__ functions called before the __init__ of the enclosing module.Two typical uses of __init__ are calling runtime initialization functions of external C libraries and initializing global constants that involve pointers returned by external libraries.  For example, suppose that we are calling a C library libfoo that requires us to call a foo_init() initialization function at runtime. Suppose that we also want to define a global constant foo_data_ptr that holds the return value of a void *foo_data() function defined by libfoo – this constant must be initialized at runtime (not at compile time) because the pointer address will change from run to run.  You could accomplish this by defining the following __init__ function in your module:const foo_data_ptr = Ref{Ptr{Void}}(0)\nfunction __init__()\n    ccall((:foo_init, :libfoo), Void, ())\n    foo_data_ptr[] = ccall((:foo_data, :libfoo), Ptr{Void}, ())\n    nothing\nendNotice that it is perfectly possible to define a global inside a function like __init__; this is one of the advantages of using a dynamic language. But by making it a constant at global scope, we can ensure that the type is known to the compiler and allow it to generate better optimized code. Obviously, any other globals in your module that depends on foo_data_ptr would also have to be initialized in __init__.Constants involving most Julia objects that are not produced by ccall do not need to be placed in __init__: their definitions can be precompiled and loaded from the cached module image. This includes complicated heap-allocated objects like arrays. However, any routine that returns a raw pointer value must be called at runtime for precompilation to work (Ptr objects will turn into null pointers unless they are hidden inside an isbits object). This includes the return values of the Julia functions cfunction and pointer.Dictionary and set types, or in general anything that depends on the output of a hash(key) method, are a trickier case.  In the common case where the keys are numbers, strings, symbols, ranges, Expr, or compositions of these types (via arrays, tuples, sets, pairs, etc.) they are safe to precompile.  However, for a few other key types, such as Function or DataType and generic user-defined types where you haven't defined a hash method, the fallback hash method depends on the memory address of the object (via its object_id) and hence may change from run to run. If you have one of these key types, or if you aren't sure, to be safe you can initialize this dictionary from within your __init__ function. Alternatively, you can use the ObjectIdDict dictionary type, which is specially handled by precompilation so that it is safe to initialize at compile-time.When using precompilation, it is important to keep a clear sense of the distinction between the compilation phase and the execution phase. In this mode, it will often be much more clearly apparent that Julia is a compiler which allows execution of arbitrary Julia code, not a standalone interpreter that also generates compiled code.Other known potential failure scenarios include:Global counters (for example, for attempting to uniquely identify objects) Consider the following code snippet:\nmutable struct UniquedById\n    myid::Int\n    let counter = 0\n        UniquedById() = new(counter += 1)\n    end\nend\nwhile the intent of this code was to give every instance a unique id, the counter value is recorded at the end of compilation. All subsequent usages of this incrementally compiled module will start from that same counter value.\nNote that object_id (which works by hashing the memory pointer) has similar issues (see notes on Dict usage below).\nOne alternative is to use a macro to capture @__MODULE__ and store it alone with the current counter value, however, it may be better to redesign the code to not depend on this global state.\nAssociative collections (such as Dict and Set) need to be re-hashed in __init__. (In the future, a mechanism may be provided to register an initializer function.)\nDepending on compile-time side-effects persisting through load-time. Example include: modifying arrays or other variables in other Julia modules; maintaining handles to open files or devices; storing pointers to other system resources (including memory);\nCreating accidental \"copies\" of global state from another module, by referencing it directly instead of via its lookup path. For example, (in global scope):\n#mystdout = Base.STDOUT #= will not work correctly, since this will copy Base.STDOUT into this module =#\n# instead use accessor functions:\ngetstdout() = Base.STDOUT #= best option =#\n# or move the assignment into the runtime:\n__init__() = global mystdout = Base.STDOUT #= also works =#Several additional restrictions are placed on the operations that can be done while precompiling code to help the user avoid other wrong-behavior situations:Calling eval to cause a side-effect in another module. This will also cause a warning to be emitted when the incremental precompile flag is set.\nglobal const statements from local scope after __init__() has been started (see issue #12010 for plans to add an error for this)\nReplacing a module (or calling workspace()) is a runtime error while doing an incremental precompile.A few other points to be aware of:No code reload / cache invalidation is performed after changes are made to the source files themselves, (including by Pkg.update), and no cleanup is done after Pkg.rm\nThe memory sharing behavior of a reshaped array is disregarded by precompilation (each view gets its own copy)\nExpecting the filesystem to be unchanged between compile-time and runtime e.g. @__FILE__/source_path() to find resources at runtime, or the BinDeps @checked_lib macro. Sometimes this is unavoidable. However, when possible, it can be good practice to copy resources into the module at compile-time so they won't need to be found at runtime.\nWeakRef objects and finalizers are not currently handled properly by the serializer (this will be fixed in an upcoming release).\nIt is usually best to avoid capturing references to instances of internal metadata objects such as Method, MethodInstance, MethodTable, TypeMapLevel, TypeMapEntry and fields of those objects, as this can confuse the serializer and may not lead to the outcome you desire. It is not necessarily an error to do this, but you simply need to be prepared that the system will try to copy some of these and to create a single unique instance of others.It is sometimes helpful during module development to turn off incremental precompilation. The command line flag --compiled-modules={yes|no} enables you to toggle module precompilation on and off. When Julia is started with --compiled-modules=no the serialized modules in the compile cache are ignored when loading modules and module dependencies. Base.compilecache can still be called manually and it will respect __precompile__() directives for the module. The state of this command line flag is passed to Pkg.build to disable automatic precompilation triggering when installing, updating, and explicitly building packages."
+    "text": "Large modules can take several seconds to load because executing all of the statements in a module often involves compiling a large amount of code. Julia provides the ability to create precompiled versions of modules to reduce this time.To create an incremental precompiled module file, add __precompile__() at the top of your module file (before the module starts). This will cause it to be automatically compiled the first time it is imported. Alternatively, you can manually call Base.compilecache(modulename). The resulting cache files will be stored in Base.LOAD_CACHE_PATH[1]. Subsequently, the module is automatically recompiled upon import whenever any of its dependencies change; dependencies are modules it imports, the Julia build, files it includes, or explicit dependencies declared by include_dependency(path) in the module file(s).For file dependencies, a change is determined by examining whether the modification time (mtime) of each file loaded by include or added explicitly by include_dependency is unchanged, or equal to the modification time truncated to the nearest second (to accommodate systems that can't copy mtime with sub-second accuracy). It also takes into account whether the path to the file chosen by the search logic in require matches the path that had created the precompile file.It also takes into account the set of dependencies already loaded into the current process and won't recompile those modules, even if their files change or disappear, in order to avoid creating incompatibilities between the running system and the precompile cache. If you want to have changes to the source reflected in the running system, you should call reload(\"Module\") on the module you changed, and any module that depended on it in which you want to see the change reflected.Precompiling a module also recursively precompiles any modules that are imported therein. If you know that it is not safe to precompile your module (for the reasons described below), you should put __precompile__(false) in the module file to cause Base.compilecache to throw an error (and thereby prevent the module from being imported by any other precompiled module).__precompile__() should not be used in a module unless all of its dependencies are also using __precompile__(). Failure to do so can result in a runtime error when loading the module.In order to make your module work with precompilation, however, you may need to change your module to explicitly separate any initialization steps that must occur at runtime from steps that can occur at compile time.  For this purpose, Julia allows you to define an __init__() function in your module that executes any initialization steps that must occur at runtime. This function will not be called during compilation (--output-* or __precompile__()). You may, of course, call it manually if necessary, but the default is to assume this function deals with computing state for the local machine, which does not need to be – or even should not be – captured in the compiled image. It will be called after the module is loaded into a process, including if it is being loaded into an incremental compile (--output-incremental=yes), but not if it is being loaded into a full-compilation process.In particular, if you define a function __init__() in a module, then Julia will call __init__() immediately after the module is loaded (e.g., by import, using, or require) at runtime for the first time (i.e., __init__ is only called once, and only after all statements in the module have been executed). Because it is called after the module is fully imported, any submodules or other imported modules have their __init__ functions called before the __init__ of the enclosing module.Two typical uses of __init__ are calling runtime initialization functions of external C libraries and initializing global constants that involve pointers returned by external libraries.  For example, suppose that we are calling a C library libfoo that requires us to call a foo_init() initialization function at runtime. Suppose that we also want to define a global constant foo_data_ptr that holds the return value of a void *foo_data() function defined by libfoo – this constant must be initialized at runtime (not at compile time) because the pointer address will change from run to run.  You could accomplish this by defining the following __init__ function in your module:const foo_data_ptr = Ref{Ptr{Void}}(0)\nfunction __init__()\n    ccall((:foo_init, :libfoo), Void, ())\n    foo_data_ptr[] = ccall((:foo_data, :libfoo), Ptr{Void}, ())\n    nothing\nendNotice that it is perfectly possible to define a global inside a function like __init__; this is one of the advantages of using a dynamic language. But by making it a constant at global scope, we can ensure that the type is known to the compiler and allow it to generate better optimized code. Obviously, any other globals in your module that depends on foo_data_ptr would also have to be initialized in __init__.Constants involving most Julia objects that are not produced by ccall do not need to be placed in __init__: their definitions can be precompiled and loaded from the cached module image. This includes complicated heap-allocated objects like arrays. However, any routine that returns a raw pointer value must be called at runtime for precompilation to work (Ptr objects will turn into null pointers unless they are hidden inside an isbits object). This includes the return values of the Julia functions cfunction and pointer.Dictionary and set types, or in general anything that depends on the output of a hash(key) method, are a trickier case.  In the common case where the keys are numbers, strings, symbols, ranges, Expr, or compositions of these types (via arrays, tuples, sets, pairs, etc.) they are safe to precompile.  However, for a few other key types, such as Function or DataType and generic user-defined types where you haven't defined a hash method, the fallback hash method depends on the memory address of the object (via its object_id) and hence may change from run to run. If you have one of these key types, or if you aren't sure, to be safe you can initialize this dictionary from within your __init__ function. Alternatively, you can use the ObjectIdDict dictionary type, which is specially handled by precompilation so that it is safe to initialize at compile-time.When using precompilation, it is important to keep a clear sense of the distinction between the compilation phase and the execution phase. In this mode, it will often be much more clearly apparent that Julia is a compiler which allows execution of arbitrary Julia code, not a standalone interpreter that also generates compiled code.Other known potential failure scenarios include:Global counters (for example, for attempting to uniquely identify objects) Consider the following code snippet:\nmutable struct UniquedById\n    myid::Int\n    let counter = 0\n        UniquedById() = new(counter += 1)\n    end\nend\nwhile the intent of this code was to give every instance a unique id, the counter value is recorded at the end of compilation. All subsequent usages of this incrementally compiled module will start from that same counter value.\nNote that object_id (which works by hashing the memory pointer) has similar issues (see notes on Dict usage below).\nOne alternative is to use a macro to capture @__MODULE__ and store it alone with the current counter value, however, it may be better to redesign the code to not depend on this global state.\nAssociative collections (such as Dict and Set) need to be re-hashed in __init__. (In the future, a mechanism may be provided to register an initializer function.)\nDepending on compile-time side-effects persisting through load-time. Example include: modifying arrays or other variables in other Julia modules; maintaining handles to open files or devices; storing pointers to other system resources (including memory);\nCreating accidental \"copies\" of global state from another module, by referencing it directly instead of via its lookup path. For example, (in global scope):\n#mystdout = Base.STDOUT #= will not work correctly, since this will copy Base.STDOUT into this module =#\n# instead use accessor functions:\ngetstdout() = Base.STDOUT #= best option =#\n# or move the assignment into the runtime:\n__init__() = global mystdout = Base.STDOUT #= also works =#Several additional restrictions are placed on the operations that can be done while precompiling code to help the user avoid other wrong-behavior situations:Calling eval to cause a side-effect in another module. This will also cause a warning to be emitted when the incremental precompile flag is set.\nglobal const statements from local scope after __init__() has been started (see issue #12010 for plans to add an error for this)\nReplacing a module is a runtime error while doing an incremental precompile.A few other points to be aware of:No code reload / cache invalidation is performed after changes are made to the source files themselves, (including by Pkg.update), and no cleanup is done after Pkg.rm\nThe memory sharing behavior of a reshaped array is disregarded by precompilation (each view gets its own copy)\nExpecting the filesystem to be unchanged between compile-time and runtime e.g. @__FILE__/source_path() to find resources at runtime, or the BinDeps @checked_lib macro. Sometimes this is unavoidable. However, when possible, it can be good practice to copy resources into the module at compile-time so they won't need to be found at runtime.\nWeakRef objects and finalizers are not currently handled properly by the serializer (this will be fixed in an upcoming release).\nIt is usually best to avoid capturing references to instances of internal metadata objects such as Method, MethodInstance, MethodTable, TypeMapLevel, TypeMapEntry and fields of those objects, as this can confuse the serializer and may not lead to the outcome you desire. It is not necessarily an error to do this, but you simply need to be prepared that the system will try to copy some of these and to create a single unique instance of others.It is sometimes helpful during module development to turn off incremental precompilation. The command line flag --compiled-modules={yes|no} enables you to toggle module precompilation on and off. When Julia is started with --compiled-modules=no the serialized modules in the compile cache are ignored when loading modules and module dependencies. Base.compilecache can still be called manually and it will respect __precompile__() directives for the module. The state of this command line flag is passed to Pkg.build to disable automatic precompilation triggering when installing, updating, and explicitly building packages."
 },
 
 {
@@ -2277,7 +2277,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Missing Values",
     "title": "Propagation of Missing Values",
     "category": "section",
-    "text": "The behavior of missing values follows one basic rule: missing values propagate automatically when passed to standard operators and functions, in particular mathematical functions. Uncertainty about the value of one of the operands induces uncertainty about the result. In practice, this means an operation involving a missing value generally returns missing:julia> missing + 1\nmissing\n\njulia> \"a\" * missing\nmissing\n\njulia> abs(missing)\nmissing\nAs missing is a normal Julia object, this propagation rule only works for functions which have opted in to implement this behavior. This can be achieved either via a specific method defined for arguments of type Missing, or simply by accepting arguments of this type, and passing them to functions which propagate them (like standard operators). Packages should consider whether it makes sense to propagate missing values when defining new functions, and define methods appropriately if that is the case. Passing a missing value to a function for which no method accepting arguments of type Missing is defined throws a MethodError, just like for any other type."
+    "text": "The behavior of missing values follows one basic rule: missing values propagate automatically when passed to standard operators and functions, in particular mathematical functions. Uncertainty about the value of one of the operands induces uncertainty about the result. In practice, this means an operation involving a missing value generally returns missingjulia> missing + 1\nmissing\n\njulia> \"a\" * missing\nmissing\n\njulia> abs(missing)\nmissingAs missing is a normal Julia object, this propagation rule only works for functions which have opted in to implement this behavior. This can be achieved either via a specific method defined for arguments of type Missing, or simply by accepting arguments of this type, and passing them to functions which propagate them (like standard operators). Packages should consider whether it makes sense to propagate missing values when defining new functions, and define methods appropriately if that is the case. Passing a missing value to a function for which no method accepting arguments of type Missing is defined throws a MethodError, just like for any other type."
 },
 
 {
@@ -2285,7 +2285,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Missing Values",
     "title": "Equality and Comparison Operators",
     "category": "section",
-    "text": "Standard equality and comparison operators follow the propagation rule presented above: if any of the operands is missing, the result is missing. Here are a few examples:julia> missing == 1\nmissing\n\njulia> missing == missing\nmissing\n\njulia> missing < 1\nmissing\n\njulia> 2 >= missing\nmissing\nIn particular, note that missing == missing returns missing, so == cannot be used to test whether a value is missing. To test whether x is missing, use ismissing(x).Special comparison operators isequal and === are exceptions to the propagation rule: they always return a Bool value, even in the presence of missing values, considering missing as equal to missing and as different from any other value. They can therefore be used to test whether a value is missing:julia> missing === 1\nfalse\n\njulia> isequal(missing, 1)\nfalse\n\njulia> missing === missing\ntrue\n\njulia> isequal(missing, missing)\ntrue\nThe isless operator is another exception: missing is considered as greater than any other value. This operator is used by sort, which therefore places missing values after all other values.julia> isless(1, missing)\ntrue\n\njulia> isless(missing, Inf)\nfalse\n\njulia> isless(missing, missing)\nfalse\n"
+    "text": "Standard equality and comparison operators follow the propagation rule presented above: if any of the operands is missing, the result is missing. Here are a few examplesjulia> missing == 1\nmissing\n\njulia> missing == missing\nmissing\n\njulia> missing < 1\nmissing\n\njulia> 2 >= missing\nmissingIn particular, note that missing == missing returns missing, so == cannot be used to test whether a value is missing. To test whether x is missing, use ismissing(x).Special comparison operators isequal and === are exceptions to the propagation rule: they always return a Bool value, even in the presence of missing values, considering missing as equal to missing and as different from any other value. They can therefore be used to test whether a value is missingjulia> missing === 1\nfalse\n\njulia> isequal(missing, 1)\nfalse\n\njulia> missing === missing\ntrue\n\njulia> isequal(missing, missing)\ntrueThe isless operator is another exception: missing is considered as greater than any other value. This operator is used by sort, which therefore places missing values after all other values.julia> isless(1, missing)\ntrue\n\njulia> isless(missing, Inf)\nfalse\n\njulia> isless(missing, missing)\nfalse"
 },
 
 {
@@ -2293,7 +2293,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Missing Values",
     "title": "Logical operators",
     "category": "section",
-    "text": "Logical (or boolean) operators |, & and xor are another special case, as they only propagate missing values when it is logically required. For these operators, whether or not the result is uncertain depends on the particular operation, following the well-established rules of three-valued logic which are also implemented by NULL in SQL and NA in R. This abstract definition actually corresponds to a relatively natural behavior which is best explained via concrete examples.Let us illustrate this principle with the logical \"or\" operator |. Following the rules of boolean logic, if one of the operands is true, the value of the other operand does not have an influence on the result, which will always be true:julia> true | true\ntrue\n\njulia> true | false\ntrue\n\njulia> false | true\ntrue\nBased on this observation, we can conclude that if one of the operands is true and the other missing, we know that the result is true in spite of the uncertainty about the actual value of one of the operands. If we had been able to observe the actual value of the second operand, it could only be true or false, and in both cases the result would be true. Therefore, in this particular case, missingness does not propagate:julia> true | missing\ntrue\n\njulia> missing | true\ntrue\nOn the contrary, if one of the operands is false, the result could be either true or false depending on the value of the other operand. Therefore, if that operand is missing, the result has to be missing too:julia> false | true\ntrue\n\njulia> true | false\ntrue\n\njulia> false | false\nfalse\n\njulia> false | missing\nmissing\n\njulia> missing | false\nmissing\nThe behavior of the logical \"and\" operator & is similar to that of the | operator, with the difference that missingness does not propagate when one of the operands is false. For example, when that is the case of the first operand:julia> false & false\nfalse\n\njulia> false & true\nfalse\n\njulia> false & missing\nfalse\nOn the other hand, missingness propagates when one of the operands is true, for example the first one:julia> true & true\ntrue\n\njulia> true & false\nfalse\n\njulia> true & missing\nmissing\nFinally, the \"exclusive or\" logical operator xor always propagates missing values, since both operands always have an effect on the result. Also note that the negation operator ! returns missing when the operand is missing just like other unary operators."
+    "text": "Logical (or boolean) operators |, & and xor are another special case, as they only propagate missing values when it is logically required. For these operators, whether or not the result is uncertain depends on the particular operation, following the well-established rules of three-valued logic which are also implemented by NULL in SQL and NA in R. This abstract definition actually corresponds to a relatively natural behavior which is best explained via concrete examples.Let us illustrate this principle with the logical \"or\" operator |. Following the rules of boolean logic, if one of the operands is true, the value of the other operand does not have an influence on the result, which will always be truejulia> true | true\ntrue\n\njulia> true | false\ntrue\n\njulia> false | true\ntrueBased on this observation, we can conclude that if one of the operands is true and the other missing, we know that the result is true in spite of the uncertainty about the actual value of one of the operands. If we had been able to observe the actual value of the second operand, it could only be true or false, and in both cases the result would be true. Therefore, in this particular case, missingness does not propagatejulia> true | missing\ntrue\n\njulia> missing | true\ntrueOn the contrary, if one of the operands is false, the result could be either true or false depending on the value of the other operand. Therefore, if that operand is missing, the result has to be missing toojulia> false | true\ntrue\n\njulia> true | false\ntrue\n\njulia> false | false\nfalse\n\njulia> false | missing\nmissing\n\njulia> missing | false\nmissingThe behavior of the logical \"and\" operator & is similar to that of the | operator, with the difference that missingness does not propagate when one of the operands is false. For example, when that is the case of the first operandjulia> false & false\nfalse\n\njulia> false & true\nfalse\n\njulia> false & missing\nfalseOn the other hand, missingness propagates when one of the operands is true, for example the first onejulia> true & true\ntrue\n\njulia> true & false\nfalse\n\njulia> true & missing\nmissingFinally, the \"exclusive or\" logical operator xor always propagates missing values, since both operands always have an effect on the result. Also note that the negation operator ! returns missing when the operand is missing just like other unary operators."
 },
 
 {
@@ -2301,7 +2301,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Missing Values",
     "title": "Control Flow and Short-Circuiting Operators",
     "category": "section",
-    "text": "Control flow operators including if, while and the ternary operator x ? y : z do not allow for missing values. This is because of the uncertainty about whether the actual value would be true or false if we could observe it, which implies that we do not know how the program should behave. A TypeError is thrown as soon as a missing value is encountered in this context:julia> if missing\n           println(\"here\")\n       end\nERROR: TypeError: non-boolean (Missing) used in boolean context\nFor the same reason, contrary to logical operators presented above, the short-circuiting boolean operators && and || do not allow for missing values in situations where the value of the operand determines whether the next operand is evaluated or not. For example:julia> missing || false\nERROR: TypeError: non-boolean (Missing) used in boolean context\n\njulia> missing && false\nERROR: TypeError: non-boolean (Missing) used in boolean context\n\njulia> true && missing && false\nERROR: TypeError: non-boolean (Missing) used in boolean context\nOn the other hand, no error is thrown when the result can be determined without the missing values. This is the case when the code short-circuits before evaluating the missing operand, and when the missing operand is the last one:julia> true && missing\nmissing\n\njulia> false && missing\nfalse\n"
+    "text": "Control flow operators including if, while and the ternary operator x ? y : z do not allow for missing values. This is because of the uncertainty about whether the actual value would be true or false if we could observe it, which implies that we do not know how the program should behave. A TypeError is thrown as soon as a missing value is encountered in this contextjulia> if missing\n           println(\"here\")\n       end\nERROR: TypeError: non-boolean (Missing) used in boolean contextFor the same reason, contrary to logical operators presented above, the short-circuiting boolean operators && and || do not allow for missing values in situations where the value of the operand determines whether the next operand is evaluated or not. For examplejulia> missing || false\nERROR: TypeError: non-boolean (Missing) used in boolean context\n\njulia> missing && false\nERROR: TypeError: non-boolean (Missing) used in boolean context\n\njulia> true && missing && false\nERROR: TypeError: non-boolean (Missing) used in boolean contextOn the other hand, no error is thrown when the result can be determined without the missing values. This is the case when the code short-circuits before evaluating the missing operand, and when the missing operand is the last onejulia> true && missing\nmissing\n\njulia> false && missing\nfalse"
 },
 
 {
@@ -2309,7 +2309,15 @@ var documenterSearchIndex = {"docs": [
     "page": "Missing Values",
     "title": "Arrays With Missing Values",
     "category": "section",
-    "text": "Arrays containing missing values can be created like other arrays:julia> [1, missing]\n2-element Array{Union{Missing, Int64},1}:\n 1\n  missing\nAs this example shows, the element type of such arrays is Union{Missing, T}, with T the type of the non-missing values. This simply reflects the fact that array entries can be either of type T (here, Int64) or of type Missing. This kind of array uses an efficient memory storage equivalent to an Array{T} holding the actual values combined with an Array{UInt8} indicating the type of the entry (i.e. whether it is Missing or T).Uninitialized arrays allowing for missing values can be constructed with the standard syntax. By default, arrays with an isbits element type are filled with missing values:julia> Array{Union{Missing, Int}}(uninitialized, 2, 3)\n2×3 Array{Union{Missing, Int64},2}:\n missing  missing  missing\n missing  missing  missing\nAn array allowing for missing values but which does not contain any such value can be converted back to an array which does not allow for missing values using convert. If the array contains missing values, a MethodError is thrown during conversion:julia> x = Union{Missing, String}[\"a\", \"b\"]\n2-element Array{Union{Missing, String},1}:\n \"a\"\n \"b\"\n\njulia> convert(Array{String}, x)\n2-element Array{String,1}:\n \"a\"\n \"b\"\n\njulia> y = Union{Missing, String}[missing, \"b\"]\n2-element Array{Union{Missing, String},1}:\n missing\n \"b\"\n\njulia> convert(Array{String}, y)\nERROR: MethodError: Cannot `convert` an object of type Missing to an object of type String\nThis may have arisen from a call to the constructor String(...),\nsince type constructors fall back to convert methods.\nStacktrace:\n[...]"
+    "text": "Arrays containing missing values can be created like other arraysjulia> [1, missing]\n2-element Array{Union{Missing, Int64},1}:\n 1\n  missingAs this example shows, the element type of such arrays is Union{Missing, T}, with T the type of the non-missing values. This simply reflects the fact that array entries can be either of type T (here, Int64) or of type Missing. This kind of array uses an efficient memory storage equivalent to an Array{T} holding the actual values combined with an Array{UInt8} indicating the type of the entry (i.e. whether it is Missing or T).Uninitialized arrays allowing for missing values can be constructed with the standard syntax. By default, arrays with an isbits element type are filled with missing valuesjulia> Array{Union{Missing, Int}}(uninitialized, 2, 3)\n2×3 Array{Union{Missing, Int64},2}:\n missing  missing  missing\n missing  missing  missingAn array allowing for missing values but which does not contain any such value can be converted back to an array which does not allow for missing values using convert. If the array contains missing values, a MethodError is thrown during conversionjulia> x = Union{Missing, String}[\"a\", \"b\"]\n2-element Array{Union{Missing, String},1}:\n \"a\"\n \"b\"\n\njulia> convert(Array{String}, x)\n2-element Array{String,1}:\n \"a\"\n \"b\"\n\njulia> y = Union{Missing, String}[missing, \"b\"]\n2-element Array{Union{Missing, String},1}:\n missing\n \"b\"\n\njulia> convert(Array{String}, y)\nERROR: MethodError: Cannot `convert` an object of type Missing to an object of type String\nThis may have arisen from a call to the constructor String(...),\nsince type constructors fall back to convert methods.\nStacktrace:\n[..."
+},
+
+{
+    "location": "manual/missing.html#Skipping-Missing-Values-1",
+    "page": "Missing Values",
+    "title": "Skipping Missing Values",
+    "category": "section",
+    "text": "Since missing values propagate with standard mathematical operators, reduction functions return missing when called on arrays which contain missing valuesjulia> sum([1, missing])\nmissingIn this situation, use the skipmissing function to skip missing valuesjulia> sum(skipmissing([1, missing]))\n1This convenience function returns an iterator which filters out missing values efficiently. It can therefore be used with any function which supports iteratorsjulia> maximum(skipmissing([3, missing, 2, 1]))\n3\n\njulia> mean(skipmissing([3, missing, 2, 1]))\n2.0\n\njulia> mapreduce(sqrt, +, skipmissing([3, missing, 2, 1]))\n4.146264369941973Use collect to extract non-missing values and store them in an arrayjulia> collect(skipmissing([3, missing, 2, 1]))\n3-element Array{Int64,1}:\n 3\n 2\n 1"
 },
 
 {
@@ -2317,7 +2325,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Missing Values",
     "title": "Logical Operations on Arrays",
     "category": "section",
-    "text": "The three-valued logic described above for logical operators is also used by logical functions applied to arrays. Thus, array equality tests using the == operator return missing whenever the result cannot be determined without knowing the actual value of the missing entry. In practice, this means that missing is returned if all non-missing values of the compared arrays are equal, but one or both arrays contain missing values (possibly at different positions):julia> [1, missing] == [2, missing]\nfalse\n\njulia> [1, missing] == [1, missing]\nmissing\n\njulia> [1, 2, missing] == [1, missing, 2]\nmissing\nAs for single values, use isequal to treat missing values as equal to other missing values but different from non-missing values:julia> isequal([1, missing], [1, missing])\ntrue\n\njulia> isequal([1, 2, missing], [1, missing, 2])\nfalse\nFunctions any and all also follow the rules of three-valued logic, returning missing when the result cannot be determined:julia> all([true, missing])\nmissing\n\njulia> all([false, missing])\nfalse\n\njulia> any([true, missing])\ntrue\n\njulia> any([false, missing])\nmissing\n"
+    "text": "The three-valued logic described above for logical operators is also used by logical functions applied to arrays. Thus, array equality tests using the == operator return missing whenever the result cannot be determined without knowing the actual value of the missing entry. In practice, this means that missing is returned if all non-missing values of the compared arrays are equal, but one or both arrays contain missing values (possibly at different positions)julia> [1, missing] == [2, missing]\nfalse\n\njulia> [1, missing] == [1, missing]\nmissing\n\njulia> [1, 2, missing] == [1, missing, 2]\nmissingAs for single values, use isequal to treat missing values as equal to other missing values but different from non-missing valuesjulia> isequal([1, missing], [1, missing])\ntrue\n\njulia> isequal([1, 2, missing], [1, missing, 2])\nfalseFunctions any and all also follow the rules of three-valued logic, returning missing when the result cannot be determinedjulia> all([true, missing])\nmissing\n\njulia> all([false, missing])\nfalse\n\njulia> any([true, missing])\ntrue\n\njulia> any([false, missing])\nmissing"
 },
 
 {
@@ -2397,7 +2405,15 @@ var documenterSearchIndex = {"docs": [
     "page": "Parallel Computing",
     "title": "Parallel Computing",
     "category": "section",
-    "text": "Most modern computers possess more than one CPU, and several computers can be combined together in a cluster. Harnessing the power of these multiple CPUs allows many computations to be completed more quickly. There are two major factors that influence performance: the speed of the CPUs themselves, and the speed of their access to memory. In a cluster, it's fairly obvious that a given CPU will have fastest access to the RAM within the same computer (node). Perhaps more surprisingly, similar issues are relevant on a typical multicore laptop, due to differences in the speed of main memory and the cache. Consequently, a good multiprocessing environment should allow control over the \"ownership\" of a chunk of memory by a particular CPU. Julia provides a multiprocessing environment based on message passing to allow programs to run on multiple processes in separate memory domains at once.Julia's implementation of message passing is different from other environments such as MPI [1]. Communication in Julia is generally \"one-sided\", meaning that the programmer needs to explicitly manage only one process in a two-process operation. Furthermore, these operations typically do not look like \"message send\" and \"message receive\" but rather resemble higher-level operations like calls to user functions.Parallel programming in Julia is built on two primitives: remote references and remote calls. A remote reference is an object that can be used from any process to refer to an object stored on a particular process. A remote call is a request by one process to call a certain function on certain arguments on another (possibly the same) process.Remote references come in two flavors: Future and RemoteChannel.A remote call returns a Future to its result. Remote calls return immediately; the process that made the call proceeds to its next operation while the remote call happens somewhere else. You can wait for a remote call to finish by calling wait on the returned Future, and you can obtain the full value of the result using fetch.On the other hand, RemoteChannel s are rewritable. For example, multiple processes can co-ordinate their processing by referencing the same remote Channel.Each process has an associated identifier. The process providing the interactive Julia prompt always has an id equal to 1. The processes used by default for parallel operations are referred to as \"workers\". When there is only one process, process 1 is considered a worker. Otherwise, workers are considered to be all processes other than process 1.Let's try this out. Starting with julia -p n provides n worker processes on the local machine. Generally it makes sense for n to equal the number of CPU cores on the machine.$ ./julia -p 2\n\njulia> r = remotecall(rand, 2, 2, 2)\nFuture(2, 1, 4, Nullable{Any}())\n\njulia> s = @spawnat 2 1 .+ fetch(r)\nFuture(2, 1, 5, Nullable{Any}())\n\njulia> fetch(s)\n2×2 Array{Float64,2}:\n 1.18526  1.50912\n 1.16296  1.60607The first argument to remotecall is the function to call. Most parallel programming in Julia does not reference specific processes or the number of processes available, but remotecall is considered a low-level interface providing finer control. The second argument to remotecall is the id of the process that will do the work, and the remaining arguments will be passed to the function being called.As you can see, in the first line we asked process 2 to construct a 2-by-2 random matrix, and in the second line we asked it to add 1 to it. The result of both calculations is available in the two futures, r and s. The @spawnat macro evaluates the expression in the second argument on the process specified by the first argument.Occasionally you might want a remotely-computed value immediately. This typically happens when you read from a remote object to obtain data needed by the next local operation. The function remotecall_fetch exists for this purpose. It is equivalent to fetch(remotecall(...)) but is more efficient.julia> remotecall_fetch(getindex, 2, r, 1, 1)\n0.18526337335308085Remember that getindex(r,1,1) is equivalent to r[1,1], so this call fetches the first element of the future r.The syntax of remotecall is not especially convenient. The macro @spawn makes things easier. It operates on an expression rather than a function, and picks where to do the operation for you:julia> r = @spawn rand(2,2)\nFuture(2, 1, 4, Nullable{Any}())\n\njulia> s = @spawn 1 .+ fetch(r)\nFuture(3, 1, 5, Nullable{Any}())\n\njulia> fetch(s)\n2×2 Array{Float64,2}:\n 1.38854  1.9098\n 1.20939  1.57158Note that we used 1 .+ fetch(r) instead of 1 .+ r. This is because we do not know where the code will run, so in general a fetch might be required to move r to the process doing the addition. In this case, @spawn is smart enough to perform the computation on the process that owns r, so the fetch will be a no-op (no work is done).(It is worth noting that @spawn is not built-in but defined in Julia as a macro. It is possible to define your own such constructs.)An important thing to remember is that, once fetched, a Future will cache its value locally. Further fetch calls do not entail a network hop. Once all referencing Futures have fetched, the remote stored value is deleted."
+    "text": "This part of the manual details the following types of parallel programming available in Julia.Distributed memory using multiple processes on one or more nodes\nShared memory using multiple processes on a single node\nMulti-threading"
+},
+
+{
+    "location": "manual/parallel-computing.html#Distributed-Memory-Parallelism-1",
+    "page": "Parallel Computing",
+    "title": "Distributed Memory Parallelism",
+    "category": "section",
+    "text": "An implementation of distributed memory parallel computing is provided by module Distributed as part of the standard library shipped with Julia.Most modern computers possess more than one CPU, and several computers can be combined together in a cluster. Harnessing the power of these multiple CPUs allows many computations to be completed more quickly. There are two major factors that influence performance: the speed of the CPUs themselves, and the speed of their access to memory. In a cluster, it's fairly obvious that a given CPU will have fastest access to the RAM within the same computer (node). Perhaps more surprisingly, similar issues are relevant on a typical multicore laptop, due to differences in the speed of main memory and the cache. Consequently, a good multiprocessing environment should allow control over the \"ownership\" of a chunk of memory by a particular CPU. Julia provides a multiprocessing environment based on message passing to allow programs to run on multiple processes in separate memory domains at once.Julia's implementation of message passing is different from other environments such as MPI [1]. Communication in Julia is generally \"one-sided\", meaning that the programmer needs to explicitly manage only one process in a two-process operation. Furthermore, these operations typically do not look like \"message send\" and \"message receive\" but rather resemble higher-level operations like calls to user functions.Distributed programming in Julia is built on two primitives: remote references and remote calls. A remote reference is an object that can be used from any process to refer to an object stored on a particular process. A remote call is a request by one process to call a certain function on certain arguments on another (possibly the same) process.Remote references come in two flavors: Future and RemoteChannel.A remote call returns a Future to its result. Remote calls return immediately; the process that made the call proceeds to its next operation while the remote call happens somewhere else. You can wait for a remote call to finish by calling wait on the returned Future, and you can obtain the full value of the result using fetch.On the other hand, RemoteChannel s are rewritable. For example, multiple processes can co-ordinate their processing by referencing the same remote Channel.Each process has an associated identifier. The process providing the interactive Julia prompt always has an id equal to 1. The processes used by default for parallel operations are referred to as \"workers\". When there is only one process, process 1 is considered a worker. Otherwise, workers are considered to be all processes other than process 1.Let's try this out. Starting with julia -p n provides n worker processes on the local machine. Generally it makes sense for n to equal the number of CPU cores on the machine. Note that the -p argument implicitly loads module Distributed.$ ./julia -p 2\n\njulia> r = remotecall(rand, 2, 2, 2)\nFuture(2, 1, 4, Nullable{Any}())\n\njulia> s = @spawnat 2 1 .+ fetch(r)\nFuture(2, 1, 5, Nullable{Any}())\n\njulia> fetch(s)\n2×2 Array{Float64,2}:\n 1.18526  1.50912\n 1.16296  1.60607The first argument to remotecall is the function to call. Most parallel programming in Julia does not reference specific processes or the number of processes available, but remotecall is considered a low-level interface providing finer control. The second argument to remotecall is the id of the process that will do the work, and the remaining arguments will be passed to the function being called.As you can see, in the first line we asked process 2 to construct a 2-by-2 random matrix, and in the second line we asked it to add 1 to it. The result of both calculations is available in the two futures, r and s. The @spawnat macro evaluates the expression in the second argument on the process specified by the first argument.Occasionally you might want a remotely-computed value immediately. This typically happens when you read from a remote object to obtain data needed by the next local operation. The function remotecall_fetch exists for this purpose. It is equivalent to fetch(remotecall(...)) but is more efficient.julia> remotecall_fetch(getindex, 2, r, 1, 1)\n0.18526337335308085Remember that getindex(r,1,1) is equivalent to r[1,1], so this call fetches the first element of the future r.The syntax of remotecall is not especially convenient. The macro @spawn makes things easier. It operates on an expression rather than a function, and picks where to do the operation for you:julia> r = @spawn rand(2,2)\nFuture(2, 1, 4, Nullable{Any}())\n\njulia> s = @spawn 1 .+ fetch(r)\nFuture(3, 1, 5, Nullable{Any}())\n\njulia> fetch(s)\n2×2 Array{Float64,2}:\n 1.38854  1.9098\n 1.20939  1.57158Note that we used 1 .+ fetch(r) instead of 1 .+ r. This is because we do not know where the code will run, so in general a fetch might be required to move r to the process doing the addition. In this case, @spawn is smart enough to perform the computation on the process that owns r, so the fetch will be a no-op (no work is done).(It is worth noting that @spawn is not built-in but defined in Julia as a macro. It is possible to define your own such constructs.)An important thing to remember is that, once fetched, a Future will cache its value locally. Further fetch calls do not entail a network hop. Once all referencing Futures have fetched, the remote stored value is deleted."
 },
 
 {
@@ -2405,7 +2421,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Parallel Computing",
     "title": "Code Availability and Loading Packages",
     "category": "section",
-    "text": "Your code must be available on any process that runs it. For example, type the following into the Julia prompt:julia> function rand2(dims...)\n           return 2*rand(dims...)\n       end\n\njulia> rand2(2,2)\n2×2 Array{Float64,2}:\n 0.153756  0.368514\n 1.15119   0.918912\n\njulia> fetch(@spawn rand2(2,2))\nERROR: RemoteException(2, CapturedException(UndefVarError(Symbol(\"#rand2\"))\nStacktrace:\n[...]Process 1 knew about the function rand2, but process 2 did not.Most commonly you'll be loading code from files or packages, and you have a considerable amount of flexibility in controlling which processes load code. Consider a file, DummyModule.jl, containing the following code:module DummyModule\n\nexport MyType, f\n\nmutable struct MyType\n    a::Int\nend\n\nf(x) = x^2+1\n\nprintln(\"loaded\")\n\nendStarting Julia with julia -p 2, you can use this to verify the following:include(\"DummyModule.jl\") loads the file on just a single process (whichever one executes the statement).\nusing DummyModule causes the module to be loaded on all processes; however, the module is brought into scope only on the one executing the statement.\nAs long as DummyModule is loaded on process 2, commands like\nrr = RemoteChannel(2)\nput!(rr, MyType(7))\nallow you to store an object of type MyType on process 2 even if DummyModule is not in scope on process 2.You can force a command to run on all processes using the @everywhere macro. For example, @everywhere can also be used to directly define a function on all processes:julia> @everywhere id = myid()\n\njulia> remotecall_fetch(()->id, 2)\n2A file can also be preloaded on multiple processes at startup, and a driver script can be used to drive the computation:julia -p <n> -L file1.jl -L file2.jl driver.jlThe Julia process running the driver script in the example above has an id equal to 1, just like a process providing an interactive prompt.The base Julia installation has in-built support for two types of clusters:A local cluster specified with the -p option as shown above.\nA cluster spanning machines using the --machinefile option. This uses a passwordless ssh login to start Julia worker processes (from the same path as the current host) on the specified machines.Functions addprocs, rmprocs, workers, and others are available as a programmatic means of adding, removing and querying the processes in a cluster.Note that workers do not run a .juliarc.jl startup script, nor do they synchronize their global state (such as global variables, new method definitions, and loaded modules) with any of the other running processes.Other types of clusters can be supported by writing your own custom ClusterManager, as described below in the ClusterManagers section."
+    "text": "Your code must be available on any process that runs it. For example, type the following into the Julia prompt:julia> function rand2(dims...)\n           return 2*rand(dims...)\n       end\n\njulia> rand2(2,2)\n2×2 Array{Float64,2}:\n 0.153756  0.368514\n 1.15119   0.918912\n\njulia> fetch(@spawn rand2(2,2))\nERROR: RemoteException(2, CapturedException(UndefVarError(Symbol(\"#rand2\"))\nStacktrace:\n[...]Process 1 knew about the function rand2, but process 2 did not.Most commonly you'll be loading code from files or packages, and you have a considerable amount of flexibility in controlling which processes load code. Consider a file, DummyModule.jl, containing the following code:module DummyModule\n\nexport MyType, f\n\nmutable struct MyType\n    a::Int\nend\n\nf(x) = x^2+1\n\nprintln(\"loaded\")\n\nendStarting Julia with julia -p 2, you can use this to verify the following:include(\"DummyModule.jl\") loads the file on just a single process (whichever one executes the statement).\nusing DummyModule causes the module to be loaded on all processes; however, the module is brought into scope only on the one executing the statement.\nAs long as DummyModule is loaded on process 2, commands like\nrr = RemoteChannel(2)\nput!(rr, MyType(7))\nallow you to store an object of type MyType on process 2 even if DummyModule is not in scope on process 2.You can force a command to run on all processes using the @everywhere macro. For example, @everywhere can also be used to directly define a function on all processes:julia> @everywhere id = myid()\n\njulia> remotecall_fetch(()->id, 2)\n2A file can also be preloaded on multiple processes at startup, and a driver script can be used to drive the computation:julia -p <n> -L file1.jl -L file2.jl driver.jlThe Julia process running the driver script in the example above has an id equal to 1, just like a process providing an interactive prompt.The base Julia installation has in-built support for two types of clusters:A local cluster specified with the -p option as shown above.\nA cluster spanning machines using the --machinefile option. This uses a passwordless ssh login to start Julia worker processes (from the same path as the current host) on the specified machines.Functions addprocs, rmprocs, workers, and others are available as a programmatic means of adding, removing and querying the processes in a cluster.julia> using Distributed\n\njulia> addprocs(2)\n2-element Array{Int64,1}:\n 2\n 3Module Distributed must be explicitly loaded on the master process before invoking addprocs. It is automatically made available on the worker processes.Note that workers do not run a .juliarc.jl startup script, nor do they synchronize their global state (such as global variables, new method definitions, and loaded modules) with any of the other running processes.Other types of clusters can be supported by writing your own custom ClusterManager, as described below in the ClusterManagers section."
 },
 
 {
@@ -2413,7 +2429,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Parallel Computing",
     "title": "Data Movement",
     "category": "section",
-    "text": "Sending messages and moving data constitute most of the overhead in a parallel program. Reducing the number of messages and the amount of data sent is critical to achieving performance and scalability. To this end, it is important to understand the data movement performed by Julia's various parallel programming constructs.fetch can be considered an explicit data movement operation, since it directly asks that an object be moved to the local machine. @spawn (and a few related constructs) also moves data, but this is not as obvious, hence it can be called an implicit data movement operation. Consider these two approaches to constructing and squaring a random matrix:Method 1:julia> A = rand(1000,1000);\n\njulia> Bref = @spawn A^2;\n\n[...]\n\njulia> fetch(Bref);Method 2:julia> Bref = @spawn rand(1000,1000)^2;\n\n[...]\n\njulia> fetch(Bref);The difference seems trivial, but in fact is quite significant due to the behavior of @spawn. In the first method, a random matrix is constructed locally, then sent to another process where it is squared. In the second method, a random matrix is both constructed and squared on another process. Therefore the second method sends much less data than the first.In this toy example, the two methods are easy to distinguish and choose from. However, in a real program designing data movement might require more thought and likely some measurement. For example, if the first process needs matrix A then the first method might be better. Or, if computing A is expensive and only the current process has it, then moving it to another process might be unavoidable. Or, if the current process has very little to do between the @spawn and fetch(Bref), it might be better to eliminate the parallelism altogether. Or imagine rand(1000,1000) is replaced with a more expensive operation. Then it might make sense to add another @spawn statement just for this step."
+    "text": "Sending messages and moving data constitute most of the overhead in a distributed program. Reducing the number of messages and the amount of data sent is critical to achieving performance and scalability. To this end, it is important to understand the data movement performed by Julia's various distributed programming constructs.fetch can be considered an explicit data movement operation, since it directly asks that an object be moved to the local machine. @spawn (and a few related constructs) also moves data, but this is not as obvious, hence it can be called an implicit data movement operation. Consider these two approaches to constructing and squaring a random matrix:Method 1:julia> A = rand(1000,1000);\n\njulia> Bref = @spawn A^2;\n\n[...]\n\njulia> fetch(Bref);Method 2:julia> Bref = @spawn rand(1000,1000)^2;\n\n[...]\n\njulia> fetch(Bref);The difference seems trivial, but in fact is quite significant due to the behavior of @spawn. In the first method, a random matrix is constructed locally, then sent to another process where it is squared. In the second method, a random matrix is both constructed and squared on another process. Therefore the second method sends much less data than the first.In this toy example, the two methods are easy to distinguish and choose from. However, in a real program designing data movement might require more thought and likely some measurement. For example, if the first process needs matrix A then the first method might be better. Or, if computing A is expensive and only the current process has it, then moving it to another process might be unavoidable. Or, if the current process has very little to do between the @spawn and fetch(Bref), it might be better to eliminate the parallelism altogether. Or imagine rand(1000,1000) is replaced with a more expensive operation. Then it might make sense to add another @spawn statement just for this step."
 },
 
 {
@@ -2429,7 +2445,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Parallel Computing",
     "title": "Parallel Map and Loops",
     "category": "section",
-    "text": "Fortunately, many useful parallel computations do not require data movement. A common example is a Monte Carlo simulation, where multiple processes can handle independent simulation trials simultaneously. We can use @spawn to flip coins on two processes. First, write the following function in count_heads.jl:function count_heads(n)\n    c::Int = 0\n    for i = 1:n\n        c += rand(Bool)\n    end\n    c\nendThe function count_heads simply adds together n random bits. Here is how we can perform some trials on two machines, and add together the results:julia> @everywhere include_string(Main, $(read(\"count_heads.jl\", String)), \"count_heads.jl\")\n\njulia> a = @spawn count_heads(100000000)\nFuture(2, 1, 6, Nullable{Any}())\n\njulia> b = @spawn count_heads(100000000)\nFuture(3, 1, 7, Nullable{Any}())\n\njulia> fetch(a)+fetch(b)\n100001564This example demonstrates a powerful and often-used parallel programming pattern. Many iterations run independently over several processes, and then their results are combined using some function. The combination process is called a reduction, since it is generally tensor-rank-reducing: a vector of numbers is reduced to a single number, or a matrix is reduced to a single row or column, etc. In code, this typically looks like the pattern x = f(x,v[i]), where x is the accumulator, f is the reduction function, and the v[i] are the elements being reduced. It is desirable for f to be associative, so that it does not matter what order the operations are performed in.Notice that our use of this pattern with count_heads can be generalized. We used two explicit @spawn statements, which limits the parallelism to two processes. To run on any number of processes, we can use a parallel for loop, which can be written in Julia using @parallel like this:nheads = @parallel (+) for i = 1:200000000\n    Int(rand(Bool))\nendThis construct implements the pattern of assigning iterations to multiple processes, and combining them with a specified reduction (in this case (+)). The result of each iteration is taken as the value of the last expression inside the loop. The whole parallel loop expression itself evaluates to the final answer.Note that although parallel for loops look like serial for loops, their behavior is dramatically different. In particular, the iterations do not happen in a specified order, and writes to variables or arrays will not be globally visible since iterations run on different processes. Any variables used inside the parallel loop will be copied and broadcast to each process.For example, the following code will not work as intended:a = zeros(100000)\n@parallel for i = 1:100000\n    a[i] = i\nendThis code will not initialize all of a, since each process will have a separate copy of it. Parallel for loops like these must be avoided. Fortunately, Shared Arrays can be used to get around this limitation:a = SharedArray{Float64}(10)\n@parallel for i = 1:10\n    a[i] = i\nendUsing \"outside\" variables in parallel loops is perfectly reasonable if the variables are read-only:a = randn(1000)\n@parallel (+) for i = 1:100000\n    f(a[rand(1:end)])\nendHere each iteration applies f to a randomly-chosen sample from a vector a shared by all processes.As you could see, the reduction operator can be omitted if it is not needed. In that case, the loop executes asynchronously, i.e. it spawns independent tasks on all available workers and returns an array of Future immediately without waiting for completion. The caller can wait for the Future completions at a later point by calling fetch on them, or wait for completion at the end of the loop by prefixing it with @sync, like @sync @parallel for.In some cases no reduction operator is needed, and we merely wish to apply a function to all integers in some range (or, more generally, to all elements in some collection). This is another useful operation called parallel map, implemented in Julia as the pmap function. For example, we could compute the singular values of several large random matrices in parallel as follows:julia> M = Matrix{Float64}[rand(1000,1000) for i = 1:10];\n\njulia> pmap(svd, M);Julia's pmap is designed for the case where each function call does a large amount of work. In contrast, @parallel for can handle situations where each iteration is tiny, perhaps merely summing two numbers. Only worker processes are used by both pmap and @parallel for for the parallel computation. In case of @parallel for, the final reduction is done on the calling process."
+    "text": "Fortunately, many useful parallel computations do not require data movement. A common example is a Monte Carlo simulation, where multiple processes can handle independent simulation trials simultaneously. We can use @spawn to flip coins on two processes. First, write the following function in count_heads.jl:function count_heads(n)\n    c::Int = 0\n    for i = 1:n\n        c += rand(Bool)\n    end\n    c\nendThe function count_heads simply adds together n random bits. Here is how we can perform some trials on two machines, and add together the results:julia> @everywhere include_string(Main, $(read(\"count_heads.jl\", String)), \"count_heads.jl\")\n\njulia> a = @spawn count_heads(100000000)\nFuture(2, 1, 6, Nullable{Any}())\n\njulia> b = @spawn count_heads(100000000)\nFuture(3, 1, 7, Nullable{Any}())\n\njulia> fetch(a)+fetch(b)\n100001564This example demonstrates a powerful and often-used parallel programming pattern. Many iterations run independently over several processes, and then their results are combined using some function. The combination process is called a reduction, since it is generally tensor-rank-reducing: a vector of numbers is reduced to a single number, or a matrix is reduced to a single row or column, etc. In code, this typically looks like the pattern x = f(x,v[i]), where x is the accumulator, f is the reduction function, and the v[i] are the elements being reduced. It is desirable for f to be associative, so that it does not matter what order the operations are performed in.Notice that our use of this pattern with count_heads can be generalized. We used two explicit @spawn statements, which limits the parallelism to two processes. To run on any number of processes, we can use a parallel for loop, which can be written in Julia using @parallel like this:nheads = @parallel (+) for i = 1:200000000\n    Int(rand(Bool))\nendThis construct implements the pattern of assigning iterations to multiple processes, and combining them with a specified reduction (in this case (+)). The result of each iteration is taken as the value of the last expression inside the loop. The whole parallel loop expression itself evaluates to the final answer.Note that although parallel for loops look like serial for loops, their behavior is dramatically different. In particular, the iterations do not happen in a specified order, and writes to variables or arrays will not be globally visible since iterations run on different processes. Any variables used inside the parallel loop will be copied and broadcast to each process.For example, the following code will not work as intended:a = zeros(100000)\n@parallel for i = 1:100000\n    a[i] = i\nendThis code will not initialize all of a, since each process will have a separate copy of it. Parallel for loops like these must be avoided. Fortunately, Shared Arrays can be used to get around this limitation:using SharedArrays\n\na = SharedArray{Float64}(10)\n@parallel for i = 1:10\n    a[i] = i\nendUsing \"outside\" variables in parallel loops is perfectly reasonable if the variables are read-only:a = randn(1000)\n@parallel (+) for i = 1:100000\n    f(a[rand(1:end)])\nendHere each iteration applies f to a randomly-chosen sample from a vector a shared by all processes.As you could see, the reduction operator can be omitted if it is not needed. In that case, the loop executes asynchronously, i.e. it spawns independent tasks on all available workers and returns an array of Future immediately without waiting for completion. The caller can wait for the Future completions at a later point by calling fetch on them, or wait for completion at the end of the loop by prefixing it with @sync, like @sync @parallel for.In some cases no reduction operator is needed, and we merely wish to apply a function to all integers in some range (or, more generally, to all elements in some collection). This is another useful operation called parallel map, implemented in Julia as the pmap function. For example, we could compute the singular values of several large random matrices in parallel as follows:julia> M = Matrix{Float64}[rand(1000,1000) for i = 1:10];\n\njulia> pmap(svd, M);Julia's pmap is designed for the case where each function call does a large amount of work. In contrast, @parallel for can handle situations where each iteration is tiny, perhaps merely summing two numbers. Only worker processes are used by both pmap and @parallel for for the parallel computation. In case of @parallel for, the final reduction is done on the calling process."
 },
 
 {
@@ -2485,7 +2501,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Parallel Computing",
     "title": "Shared Arrays",
     "category": "section",
-    "text": "Shared Arrays use system shared memory to map the same array across many processes. While there are some similarities to a DArray, the behavior of a SharedArray is quite different. In a DArray, each process has local access to just a chunk of the data, and no two processes share the same chunk; in contrast, in a SharedArray each \"participating\" process has access to the entire array.  A SharedArray is a good choice when you want to have a large amount of data jointly accessible to two or more processes on the same machine.SharedArray indexing (assignment and accessing values) works just as with regular arrays, and is efficient because the underlying memory is available to the local process. Therefore, most algorithms work naturally on SharedArrays, albeit in single-process mode. In cases where an algorithm insists on an Array input, the underlying array can be retrieved from a SharedArray by calling sdata. For other AbstractArray types, sdata just returns the object itself, so it's safe to use sdata on any Array-type object.The constructor for a shared array is of the form:SharedArray{T,N}(dims::NTuple; init=false, pids=Int[])which creates an N-dimensional shared array of a bits type T and size dims across the processes specified by pids. Unlike distributed arrays, a shared array is accessible only from those participating workers specified by the pids named argument (and the creating process too, if it is on the same host).If an init function, of signature initfn(S::SharedArray), is specified, it is called on all the participating workers. You can specify that each worker runs the init function on a distinct portion of the array, thereby parallelizing initialization.Here's a brief example:julia> addprocs(3)\n3-element Array{Int64,1}:\n 2\n 3\n 4\n\njulia> @everywhere using SharedArrays\n\njulia> S = SharedArray{Int,2}((3,4), init = S -> S[localindexes(S)] = myid())\n3×4 SharedArray{Int64,2}:\n 2  2  3  4\n 2  3  3  4\n 2  3  4  4\n\njulia> S[3,2] = 7\n7\n\njulia> S\n3×4 SharedArray{Int64,2}:\n 2  2  3  4\n 2  3  3  4\n 2  7  4  4SharedArrays.localindexes provides disjoint one-dimensional ranges of indexes, and is sometimes convenient for splitting up tasks among processes. You can, of course, divide the work any way you wish:julia> S = SharedArray{Int,2}((3,4), init = S -> S[indexpids(S):length(procs(S)):length(S)] = myid())\n3×4 SharedArray{Int64,2}:\n 2  2  2  2\n 3  3  3  3\n 4  4  4  4Since all processes have access to the underlying data, you do have to be careful not to set up conflicts. For example:@sync begin\n    for p in procs(S)\n        @async begin\n            remotecall_wait(fill!, p, S, p)\n        end\n    end\nendwould result in undefined behavior. Because each process fills the entire array with its own pid, whichever process is the last to execute (for any particular element of S) will have its pid retained.As a more extended and complex example, consider running the following \"kernel\" in parallel:q[i,j,t+1] = q[i,j,t] + u[i,j,t]In this case, if we try to split up the work using a one-dimensional index, we are likely to run into trouble: if q[i,j,t] is near the end of the block assigned to one worker and q[i,j,t+1] is near the beginning of the block assigned to another, it's very likely that q[i,j,t] will not be ready at the time it's needed for computing q[i,j,t+1]. In such cases, one is better off chunking the array manually. Let's split along the second dimension. Define a function that returns the (irange, jrange) indexes assigned to this worker:julia> @everywhere function myrange(q::SharedArray)\n           idx = indexpids(q)\n           if idx == 0 # This worker is not assigned a piece\n               return 1:0, 1:0\n           end\n           nchunks = length(procs(q))\n           splits = [round(Int, s) for s in linspace(0,size(q,2),nchunks+1)]\n           1:size(q,1), splits[idx]+1:splits[idx+1]\n       endNext, define the kernel:julia> @everywhere function advection_chunk!(q, u, irange, jrange, trange)\n           @show (irange, jrange, trange)  # display so we can see what's happening\n           for t in trange, j in jrange, i in irange\n               q[i,j,t+1] = q[i,j,t] + u[i,j,t]\n           end\n           q\n       endWe also define a convenience wrapper for a SharedArray implementationjulia> @everywhere advection_shared_chunk!(q, u) =\n           advection_chunk!(q, u, myrange(q)..., 1:size(q,3)-1)Now let's compare three different versions, one that runs in a single process:julia> advection_serial!(q, u) = advection_chunk!(q, u, 1:size(q,1), 1:size(q,2), 1:size(q,3)-1);one that uses @parallel:julia> function advection_parallel!(q, u)\n           for t = 1:size(q,3)-1\n               @sync @parallel for j = 1:size(q,2)\n                   for i = 1:size(q,1)\n                       q[i,j,t+1]= q[i,j,t] + u[i,j,t]\n                   end\n               end\n           end\n           q\n       end;and one that delegates in chunks:julia> function advection_shared!(q, u)\n           @sync begin\n               for p in procs(q)\n                   @async remotecall_wait(advection_shared_chunk!, p, q, u)\n               end\n           end\n           q\n       end;If we create SharedArrays and time these functions, we get the following results (with julia -p 4):julia> q = SharedArray{Float64,3}((500,500,500));\n\njulia> u = SharedArray{Float64,3}((500,500,500));Run the functions once to JIT-compile and @time them on the second run:julia> @time advection_serial!(q, u);\n(irange,jrange,trange) = (1:500,1:500,1:499)\n 830.220 milliseconds (216 allocations: 13820 bytes)\n\njulia> @time advection_parallel!(q, u);\n   2.495 seconds      (3999 k allocations: 289 MB, 2.09% gc time)\n\njulia> @time advection_shared!(q,u);\n        From worker 2:       (irange,jrange,trange) = (1:500,1:125,1:499)\n        From worker 4:       (irange,jrange,trange) = (1:500,251:375,1:499)\n        From worker 3:       (irange,jrange,trange) = (1:500,126:250,1:499)\n        From worker 5:       (irange,jrange,trange) = (1:500,376:500,1:499)\n 238.119 milliseconds (2264 allocations: 169 KB)The biggest advantage of advection_shared! is that it minimizes traffic among the workers, allowing each to compute for an extended time on the assigned piece."
+    "text": "Shared Arrays use system shared memory to map the same array across many processes. While there are some similarities to a DArray, the behavior of a SharedArray is quite different. In a DArray, each process has local access to just a chunk of the data, and no two processes share the same chunk; in contrast, in a SharedArray each \"participating\" process has access to the entire array.  A SharedArray is a good choice when you want to have a large amount of data jointly accessible to two or more processes on the same machine.Shared Array support is available via module SharedArrays which must be explicitly loaded on all participating workers.SharedArray indexing (assignment and accessing values) works just as with regular arrays, and is efficient because the underlying memory is available to the local process. Therefore, most algorithms work naturally on SharedArrays, albeit in single-process mode. In cases where an algorithm insists on an Array input, the underlying array can be retrieved from a SharedArray by calling sdata. For other AbstractArray types, sdata just returns the object itself, so it's safe to use sdata on any Array-type object.The constructor for a shared array is of the form:SharedArray{T,N}(dims::NTuple; init=false, pids=Int[])which creates an N-dimensional shared array of a bits type T and size dims across the processes specified by pids. Unlike distributed arrays, a shared array is accessible only from those participating workers specified by the pids named argument (and the creating process too, if it is on the same host).If an init function, of signature initfn(S::SharedArray), is specified, it is called on all the participating workers. You can specify that each worker runs the init function on a distinct portion of the array, thereby parallelizing initialization.Here's a brief example:julia> using Distributed\n\njulia> addprocs(3)\n3-element Array{Int64,1}:\n 2\n 3\n 4\n\njulia> @everywhere using SharedArrays\n\njulia> S = SharedArray{Int,2}((3,4), init = S -> S[localindexes(S)] = myid())\n3×4 SharedArray{Int64,2}:\n 2  2  3  4\n 2  3  3  4\n 2  3  4  4\n\njulia> S[3,2] = 7\n7\n\njulia> S\n3×4 SharedArray{Int64,2}:\n 2  2  3  4\n 2  3  3  4\n 2  7  4  4SharedArrays.localindexes provides disjoint one-dimensional ranges of indexes, and is sometimes convenient for splitting up tasks among processes. You can, of course, divide the work any way you wish:julia> S = SharedArray{Int,2}((3,4), init = S -> S[indexpids(S):length(procs(S)):length(S)] = myid())\n3×4 SharedArray{Int64,2}:\n 2  2  2  2\n 3  3  3  3\n 4  4  4  4Since all processes have access to the underlying data, you do have to be careful not to set up conflicts. For example:@sync begin\n    for p in procs(S)\n        @async begin\n            remotecall_wait(fill!, p, S, p)\n        end\n    end\nendwould result in undefined behavior. Because each process fills the entire array with its own pid, whichever process is the last to execute (for any particular element of S) will have its pid retained.As a more extended and complex example, consider running the following \"kernel\" in parallel:q[i,j,t+1] = q[i,j,t] + u[i,j,t]In this case, if we try to split up the work using a one-dimensional index, we are likely to run into trouble: if q[i,j,t] is near the end of the block assigned to one worker and q[i,j,t+1] is near the beginning of the block assigned to another, it's very likely that q[i,j,t] will not be ready at the time it's needed for computing q[i,j,t+1]. In such cases, one is better off chunking the array manually. Let's split along the second dimension. Define a function that returns the (irange, jrange) indexes assigned to this worker:julia> @everywhere function myrange(q::SharedArray)\n           idx = indexpids(q)\n           if idx == 0 # This worker is not assigned a piece\n               return 1:0, 1:0\n           end\n           nchunks = length(procs(q))\n           splits = [round(Int, s) for s in linspace(0,size(q,2),nchunks+1)]\n           1:size(q,1), splits[idx]+1:splits[idx+1]\n       endNext, define the kernel:julia> @everywhere function advection_chunk!(q, u, irange, jrange, trange)\n           @show (irange, jrange, trange)  # display so we can see what's happening\n           for t in trange, j in jrange, i in irange\n               q[i,j,t+1] = q[i,j,t] + u[i,j,t]\n           end\n           q\n       endWe also define a convenience wrapper for a SharedArray implementationjulia> @everywhere advection_shared_chunk!(q, u) =\n           advection_chunk!(q, u, myrange(q)..., 1:size(q,3)-1)Now let's compare three different versions, one that runs in a single process:julia> advection_serial!(q, u) = advection_chunk!(q, u, 1:size(q,1), 1:size(q,2), 1:size(q,3)-1);one that uses @parallel:julia> function advection_parallel!(q, u)\n           for t = 1:size(q,3)-1\n               @sync @parallel for j = 1:size(q,2)\n                   for i = 1:size(q,1)\n                       q[i,j,t+1]= q[i,j,t] + u[i,j,t]\n                   end\n               end\n           end\n           q\n       end;and one that delegates in chunks:julia> function advection_shared!(q, u)\n           @sync begin\n               for p in procs(q)\n                   @async remotecall_wait(advection_shared_chunk!, p, q, u)\n               end\n           end\n           q\n       end;If we create SharedArrays and time these functions, we get the following results (with julia -p 4):julia> q = SharedArray{Float64,3}((500,500,500));\n\njulia> u = SharedArray{Float64,3}((500,500,500));Run the functions once to JIT-compile and @time them on the second run:julia> @time advection_serial!(q, u);\n(irange,jrange,trange) = (1:500,1:500,1:499)\n 830.220 milliseconds (216 allocations: 13820 bytes)\n\njulia> @time advection_parallel!(q, u);\n   2.495 seconds      (3999 k allocations: 289 MB, 2.09% gc time)\n\njulia> @time advection_shared!(q,u);\n        From worker 2:       (irange,jrange,trange) = (1:500,1:125,1:499)\n        From worker 4:       (irange,jrange,trange) = (1:500,251:375,1:499)\n        From worker 3:       (irange,jrange,trange) = (1:500,126:250,1:499)\n        From worker 5:       (irange,jrange,trange) = (1:500,376:500,1:499)\n 238.119 milliseconds (2264 allocations: 169 KB)The biggest advantage of advection_shared! is that it minimizes traffic among the workers, allowing each to compute for an extended time on the assigned piece."
 },
 
 {
@@ -2525,7 +2541,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Parallel Computing",
     "title": "Cluster Cookie",
     "category": "section",
-    "text": "All processes in a cluster share the same cookie which, by default, is a randomly generated string on the master process:Base.cluster_cookie() returns the cookie, while Base.cluster_cookie(cookie)() sets it and returns the new cookie.\nAll connections are authenticated on both sides to ensure that only workers started by the master are allowed to connect to each other.\nThe cookie may be passed to the workers at startup via argument --worker=<cookie>. If argument --worker is specified without the cookie, the worker tries to read the cookie from its standard input (STDIN). The STDIN is closed immediately after the cookie is retrieved.\nClusterManagers can retrieve the cookie on the master by calling Base.cluster_cookie(). Cluster managers not using the default TCP/IP transport (and hence not specifying --worker) must call init_worker(cookie, manager) with the same cookie as on the master.Note that environments requiring higher levels of security can implement this via a custom ClusterManager. For example, cookies can be pre-shared and hence not specified as a startup argument."
+    "text": "All processes in a cluster share the same cookie which, by default, is a randomly generated string on the master process:cluster_cookie() returns the cookie, while cluster_cookie(cookie)() sets it and returns the new cookie.\nAll connections are authenticated on both sides to ensure that only workers started by the master are allowed to connect to each other.\nThe cookie may be passed to the workers at startup via argument --worker=<cookie>. If argument --worker is specified without the cookie, the worker tries to read the cookie from its standard input (STDIN). The STDIN is closed immediately after the cookie is retrieved.\nClusterManagers can retrieve the cookie on the master by calling cluster_cookie(). Cluster managers not using the default TCP/IP transport (and hence not specifying --worker) must call init_worker(cookie, manager) with the same cookie as on the master.Note that environments requiring higher levels of security can implement this via a custom ClusterManager. For example, cookies can be pre-shared and hence not specified as a startup argument."
 },
 
 {
@@ -2845,7 +2861,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Calling C and Fortran Code",
     "title": "Type Correspondences:",
     "category": "section",
-    "text": "First, a review of some relevant Julia type terminology:Syntax / Keyword Example Description\nmutable struct String \"Leaf Type\" :: A group of related data that includes a type-tag, is managed by the Julia GC, and is defined by object-identity. The type parameters of a leaf type must be fully defined (no TypeVars are allowed) in order for the instance to be constructed.\nabstract type Any, AbstractArray{T, N}, Complex{T} \"Super Type\" :: A super-type (not a leaf-type) that cannot be instantiated, but can be used to describe a group of types.\nT{A} Vector{Int} \"Type Parameter\" :: A specialization of a type (typically used for dispatch or storage optimization).\n  \"TypeVar\" :: The T in the type parameter declaration is referred to as a TypeVar (short for type variable).\nprimitive type Int, Float64 \"Primitive Type\" :: A type with no fields, but a size. It is stored and defined by-value.\nstruct Pair{Int, Int} \"Struct\" :: A type with all fields defined to be constant. It is defined by-value, and may be stored with a type-tag.\n Complex128 (isbits) \"Is-Bits\"   :: A primitive type, or a struct type where all fields are other isbits types. It is defined by-value, and is stored without a type-tag.\nstruct ...; end nothing \"Singleton\" :: a Leaf Type or Struct with no fields.\n(...) or tuple(...) (1, 2, 3) \"Tuple\" :: an immutable data-structure similar to an anonymous struct type, or a constant array. Represented as either an array or a struct."
+    "text": "First, a review of some relevant Julia type terminology:Syntax / Keyword Example Description\nmutable struct String \"Leaf Type\" :: A group of related data that includes a type-tag, is managed by the Julia GC, and is defined by object-identity. The type parameters of a leaf type must be fully defined (no TypeVars are allowed) in order for the instance to be constructed.\nabstract type Any, AbstractArray{T, N}, Complex{T} \"Super Type\" :: A super-type (not a leaf-type) that cannot be instantiated, but can be used to describe a group of types.\nT{A} Vector{Int} \"Type Parameter\" :: A specialization of a type (typically used for dispatch or storage optimization).\n  \"TypeVar\" :: The T in the type parameter declaration is referred to as a TypeVar (short for type variable).\nprimitive type Int, Float64 \"Primitive Type\" :: A type with no fields, but a size. It is stored and defined by-value.\nstruct Pair{Int, Int} \"Struct\" :: A type with all fields defined to be constant. It is defined by-value, and may be stored with a type-tag.\n ComplexF64 (isbits) \"Is-Bits\"   :: A primitive type, or a struct type where all fields are other isbits types. It is defined by-value, and is stored without a type-tag.\nstruct ...; end nothing \"Singleton\" :: a Leaf Type or Struct with no fields.\n(...) or tuple(...) (1, 2, 3) \"Tuple\" :: an immutable data-structure similar to an anonymous struct type, or a constant array. Represented as either an array or a struct."
 },
 
 {
@@ -2853,7 +2869,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Calling C and Fortran Code",
     "title": "Bits Types:",
     "category": "section",
-    "text": "There are several special types to be aware of, as no other type can be defined to behave the same:Float32\nExactly corresponds to the float type in C (or REAL*4 in Fortran).\nFloat64\nExactly corresponds to the double type in C (or REAL*8 in Fortran).\nComplex64\nExactly corresponds to the complex float type in C (or COMPLEX*8 in Fortran).\nComplex128\nExactly corresponds to the complex double type in C (or COMPLEX*16 in Fortran).\nSigned\nExactly corresponds to the signed type annotation in C (or any INTEGER type in Fortran). Any Julia type that is not a subtype of Signed is assumed to be unsigned.Ref{T}\nBehaves like a Ptr{T} that can manage its memory via the Julia GC.Array{T,N}\nWhen an array is passed to C as a Ptr{T} argument, it is not reinterpret-cast: Julia requires that the element type of the array matches T, and the address of the first element is passed.\nTherefore, if an Array contains data in the wrong format, it will have to be explicitly converted using a call such as trunc(Int32, a).\nTo pass an array A as a pointer of a different type without converting the data beforehand (for example, to pass a Float64 array to a function that operates on uninterpreted bytes), you can declare the argument as Ptr{Void}.\nIf an array of eltype Ptr{T} is passed as a Ptr{Ptr{T}} argument, Base.cconvert will attempt to first make a null-terminated copy of the array with each element replaced by its Base.cconvert version. This allows, for example, passing an argv pointer array of type Vector{String} to an argument of type Ptr{Ptr{Cchar}}.On all systems we currently support, basic C/C++ value types may be translated to Julia types as follows. Every C type also has a corresponding Julia type with the same name, prefixed by C. This can help for writing portable code (and remembering that an int in C is not the same as an Int in Julia).System Independent:C name Fortran name Standard Julia Alias Julia Base Type\nunsigned char CHARACTER Cuchar UInt8\nbool (only in C++)  Cuchar UInt8\nshort INTEGER*2, LOGICAL*2 Cshort Int16\nunsigned short   Cushort UInt16\nint, BOOL (C, typical) INTEGER*4, LOGICAL*4 Cint Int32\nunsigned int   Cuint UInt32\nlong long INTEGER*8, LOGICAL*8 Clonglong Int64\nunsigned long long   Culonglong UInt64\nintmax_t   Cintmax_t Int64\nuintmax_t   Cuintmax_t UInt64\nfloat REAL*4i Cfloat Float32\ndouble REAL*8 Cdouble Float64\ncomplex float COMPLEX*8 Complex64 Complex{Float32}\ncomplex double COMPLEX*16 Complex128 Complex{Float64}\nptrdiff_t   Cptrdiff_t Int\nssize_t   Cssize_t Int\nsize_t   Csize_t UInt\nvoid     Void\nvoid and [[noreturn]] or _Noreturn     Union{}\nvoid*     Ptr{Void}\nT* (where T represents an appropriately defined type)     Ref{T}\nchar* (or char[], e.g. a string) CHARACTER*N   Cstring if NUL-terminated, or Ptr{UInt8} if not\nchar** (or *char[])     Ptr{Ptr{UInt8}}\njl_value_t* (any Julia Type)     Any\njl_value_t** (a reference to a Julia Type)     Ref{Any}\nva_arg     Not supported\n... (variadic function specification)     T... (where T is one of the above types, variadic functions of different argument types are not supported)The Cstring type is essentially a synonym for Ptr{UInt8}, except the conversion to Cstring throws an error if the Julia string contains any embedded NUL characters (which would cause the string to be silently truncated if the C routine treats NUL as the terminator).  If you are passing a char* to a C routine that does not assume NUL termination (e.g. because you pass an explicit string length), or if you know for certain that your Julia string does not contain NUL and want to skip the check, you can use Ptr{UInt8} as the argument type. Cstring can also be used as the ccall return type, but in that case it obviously does not introduce any extra checks and is only meant to improve readability of the call.System-dependent:C name Standard Julia Alias Julia Base Type\nchar Cchar Int8 (x86, x86_64), UInt8 (powerpc, arm)\nlong Clong Int (UNIX), Int32 (Windows)\nunsigned long Culong UInt (UNIX), UInt32 (Windows)\nwchar_t Cwchar_t Int32 (UNIX), UInt16 (Windows)note: Note\nWhen calling a Fortran function, all inputs must be passed by reference, so all type correspondences above should contain an additional Ptr{..} or Ref{..} wrapper around their type specification.warning: Warning\nFor string arguments (char*) the Julia type should be Cstring (if NUL- terminated data is expected) or either Ptr{Cchar} or Ptr{UInt8} otherwise (these two pointer types have the same effect), as described above, not String. Similarly, for array arguments (T[] or T*), the Julia type should again be Ptr{T}, not Vector{T}.warning: Warning\nJulia's Char type is 32 bits, which is not the same as the wide character type (wchar_t or wint_t) on all platforms.warning: Warning\nA return type of Union{} means the function will not return i.e. C++11 [[noreturn]] or C11 _Noreturn (e.g. jl_throw or longjmp). Do not use this for functions that return no value (void) but do return, use Void instead.note: Note\nFor wchar_t* arguments, the Julia type should be Cwstring (if the C routine expects a NUL-terminated string) or Ptr{Cwchar_t} otherwise. Note also that UTF-8 string data in Julia is internally NUL-terminated, so it can be passed to C functions expecting NUL-terminated data without making a copy (but using the Cwstring type will cause an error to be thrown if the string itself contains NUL characters).note: Note\nC functions that take an argument of the type char** can be called by using a Ptr{Ptr{UInt8}} type within Julia. For example, C functions of the form:int main(int argc, char **argv);can be called via the following Julia code:argv = [ \"a.out\", \"arg1\", \"arg2\" ]\nccall(:main, Int32, (Int32, Ptr{Ptr{UInt8}}), length(argv), argv)note: Note\nA C function declared to return Void will return the value nothing in Julia."
+    "text": "There are several special types to be aware of, as no other type can be defined to behave the same:Float32\nExactly corresponds to the float type in C (or REAL*4 in Fortran).\nFloat64\nExactly corresponds to the double type in C (or REAL*8 in Fortran).\nComplexF32\nExactly corresponds to the complex float type in C (or COMPLEX*8 in Fortran).\nComplexF64\nExactly corresponds to the complex double type in C (or COMPLEX*16 in Fortran).\nSigned\nExactly corresponds to the signed type annotation in C (or any INTEGER type in Fortran). Any Julia type that is not a subtype of Signed is assumed to be unsigned.Ref{T}\nBehaves like a Ptr{T} that can manage its memory via the Julia GC.Array{T,N}\nWhen an array is passed to C as a Ptr{T} argument, it is not reinterpret-cast: Julia requires that the element type of the array matches T, and the address of the first element is passed.\nTherefore, if an Array contains data in the wrong format, it will have to be explicitly converted using a call such as trunc(Int32, a).\nTo pass an array A as a pointer of a different type without converting the data beforehand (for example, to pass a Float64 array to a function that operates on uninterpreted bytes), you can declare the argument as Ptr{Void}.\nIf an array of eltype Ptr{T} is passed as a Ptr{Ptr{T}} argument, Base.cconvert will attempt to first make a null-terminated copy of the array with each element replaced by its Base.cconvert version. This allows, for example, passing an argv pointer array of type Vector{String} to an argument of type Ptr{Ptr{Cchar}}.On all systems we currently support, basic C/C++ value types may be translated to Julia types as follows. Every C type also has a corresponding Julia type with the same name, prefixed by C. This can help for writing portable code (and remembering that an int in C is not the same as an Int in Julia).System Independent:C name Fortran name Standard Julia Alias Julia Base Type\nunsigned char CHARACTER Cuchar UInt8\nbool (only in C++)  Cuchar UInt8\nshort INTEGER*2, LOGICAL*2 Cshort Int16\nunsigned short   Cushort UInt16\nint, BOOL (C, typical) INTEGER*4, LOGICAL*4 Cint Int32\nunsigned int   Cuint UInt32\nlong long INTEGER*8, LOGICAL*8 Clonglong Int64\nunsigned long long   Culonglong UInt64\nintmax_t   Cintmax_t Int64\nuintmax_t   Cuintmax_t UInt64\nfloat REAL*4i Cfloat Float32\ndouble REAL*8 Cdouble Float64\ncomplex float COMPLEX*8 ComplexF32 Complex{Float32}\ncomplex double COMPLEX*16 ComplexF64 Complex{Float64}\nptrdiff_t   Cptrdiff_t Int\nssize_t   Cssize_t Int\nsize_t   Csize_t UInt\nvoid     Void\nvoid and [[noreturn]] or _Noreturn     Union{}\nvoid*     Ptr{Void}\nT* (where T represents an appropriately defined type)     Ref{T}\nchar* (or char[], e.g. a string) CHARACTER*N   Cstring if NUL-terminated, or Ptr{UInt8} if not\nchar** (or *char[])     Ptr{Ptr{UInt8}}\njl_value_t* (any Julia Type)     Any\njl_value_t** (a reference to a Julia Type)     Ref{Any}\nva_arg     Not supported\n... (variadic function specification)     T... (where T is one of the above types, variadic functions of different argument types are not supported)The Cstring type is essentially a synonym for Ptr{UInt8}, except the conversion to Cstring throws an error if the Julia string contains any embedded NUL characters (which would cause the string to be silently truncated if the C routine treats NUL as the terminator).  If you are passing a char* to a C routine that does not assume NUL termination (e.g. because you pass an explicit string length), or if you know for certain that your Julia string does not contain NUL and want to skip the check, you can use Ptr{UInt8} as the argument type. Cstring can also be used as the ccall return type, but in that case it obviously does not introduce any extra checks and is only meant to improve readability of the call.System-dependent:C name Standard Julia Alias Julia Base Type\nchar Cchar Int8 (x86, x86_64), UInt8 (powerpc, arm)\nlong Clong Int (UNIX), Int32 (Windows)\nunsigned long Culong UInt (UNIX), UInt32 (Windows)\nwchar_t Cwchar_t Int32 (UNIX), UInt16 (Windows)note: Note\nWhen calling a Fortran function, all inputs must be passed by reference, so all type correspondences above should contain an additional Ptr{..} or Ref{..} wrapper around their type specification.warning: Warning\nFor string arguments (char*) the Julia type should be Cstring (if NUL- terminated data is expected) or either Ptr{Cchar} or Ptr{UInt8} otherwise (these two pointer types have the same effect), as described above, not String. Similarly, for array arguments (T[] or T*), the Julia type should again be Ptr{T}, not Vector{T}.warning: Warning\nJulia's Char type is 32 bits, which is not the same as the wide character type (wchar_t or wint_t) on all platforms.warning: Warning\nA return type of Union{} means the function will not return i.e. C++11 [[noreturn]] or C11 _Noreturn (e.g. jl_throw or longjmp). Do not use this for functions that return no value (void) but do return, use Void instead.note: Note\nFor wchar_t* arguments, the Julia type should be Cwstring (if the C routine expects a NUL-terminated string) or Ptr{Cwchar_t} otherwise. Note also that UTF-8 string data in Julia is internally NUL-terminated, so it can be passed to C functions expecting NUL-terminated data without making a copy (but using the Cwstring type will cause an error to be thrown if the string itself contains NUL characters).note: Note\nC functions that take an argument of the type char** can be called by using a Ptr{Ptr{UInt8}} type within Julia. For example, C functions of the form:int main(int argc, char **argv);can be called via the following Julia code:argv = [ \"a.out\", \"arg1\", \"arg2\" ]\nccall(:main, Int32, (Int32, Ptr{Ptr{UInt8}}), length(argv), argv)note: Note\nA C function declared to return Void will return the value nothing in Julia."
 },
 
 {
@@ -4389,7 +4405,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Frequently Asked Questions",
     "title": "How does \"null\" or \"nothingness\" work in Julia?",
     "category": "section",
-    "text": "Unlike many languages (for example, C and Java), Julia does not have a \"null\" value. When a reference (variable, object field, or array element) is uninitialized, accessing it will immediately throw an error. This situation can be detected using the isdefined or isassigned functions.Some functions are used only for their side effects, and do not need to return a value. In these cases, the convention is to return the value nothing, which is just a singleton object of type Void. This is an ordinary type with no fields; there is nothing special about it except for this convention, and that the REPL does not print anything for it. Some language constructs that would not otherwise have a value also yield nothing, for example if false; end.To represent missing data in the statistical sense (NA in R or NULL in SQL), use the missing object. See the `Missing Values| section for more details.The empty tuple (()) is another form of nothingness. But, it should not really be thought of as nothing but rather a tuple of zero values.In code written for Julia prior to version 0.4 you may occasionally see None, which is quite different. It is the empty (or \"bottom\") type, a type with no values and no subtypes (except itself). This is now written as Union{} (an empty union type). You will generally not need to use this type."
+    "text": "Unlike many languages (for example, C and Java), Julia does not have a \"null\" value. When a reference (variable, object field, or array element) is uninitialized, accessing it will immediately throw an error. This situation can be detected using the isdefined or isassigned functions.Some functions are used only for their side effects, and do not need to return a value. In these cases, the convention is to return the value nothing, which is just a singleton object of type Void. This is an ordinary type with no fields; there is nothing special about it except for this convention, and that the REPL does not print anything for it. Some language constructs that would not otherwise have a value also yield nothing, for example if false; end.To represent missing data in the statistical sense (NA in R or NULL in SQL), use the missing object. See the Missing Values section for more details.The empty tuple (()) is another form of nothingness. But, it should not really be thought of as nothing but rather a tuple of zero values.In code written for Julia prior to version 0.4 you may occasionally see None, which is quite different. It is the empty (or \"bottom\") type, a type with no values and no subtypes (except itself). This is now written as Union{} (an empty union type). You will generally not need to use this type."
 },
 
 {
@@ -4477,7 +4493,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Noteworthy Differences from other Languages",
     "title": "Noteworthy differences from R",
     "category": "section",
-    "text": "One of Julia's goals is to provide an effective language for data analysis and statistical programming. For users coming to Julia from R, these are some noteworthy differences:Julia's single quotes enclose characters, not strings.\nJulia can create substrings by indexing into strings. In R, strings must be converted into character vectors before creating substrings.\nIn Julia, like Python but unlike R, strings can be created with triple quotes \"\"\" ... \"\"\". This syntax is convenient for constructing strings that contain line breaks.\nIn Julia, varargs are specified using the splat operator ..., which always follows the name of a specific variable, unlike R, for which ... can occur in isolation.\nIn Julia, modulus is mod(a, b), not a %% b. % in Julia is the remainder operator.\nIn Julia, not all data structures support logical indexing. Furthermore, logical indexing in Julia is supported only with vectors of length equal to the object being indexed. For example:\nIn R, c(1, 2, 3, 4)[c(TRUE, FALSE)] is equivalent to c(1, 3).\nIn R, c(1, 2, 3, 4)[c(TRUE, FALSE, TRUE, FALSE)] is equivalent to c(1, 3).\nIn Julia, [1, 2, 3, 4][[true, false]] throws a BoundsError.\nIn Julia, [1, 2, 3, 4][[true, false, true, false]] produces [1, 3].\nLike many languages, Julia does not always allow operations on vectors of different lengths, unlike R where the vectors only need to share a common index range.  For example, c(1, 2, 3, 4) + c(1, 2) is valid R but the equivalent [1, 2, 3, 4] + [1, 2] will throw an error in Julia.\nJulia allows an optional trailing comma when that comma does not change the meaning of code. This can cause confusion among R users when indexing into arrays. For example, x[1,] in R would return the first row of a matrix; in Julia, however, the comma is ignored, so x[1,] == x[1], and will return the first element. To extract a row, be sure to use :, as in x[1,:].\nJulia's map takes the function first, then its arguments, unlike lapply(<structure>, function, ...) in R. Similarly Julia's equivalent of apply(X, MARGIN, FUN, ...) in R is mapslices where the function is the first argument.\nMultivariate apply in R, e.g. mapply(choose, 11:13, 1:3), can be written as broadcast(binomial, 11:13, 1:3) in Julia. Equivalently Julia offers a shorter dot syntax for vectorizing functions binomial.(11:13, 1:3).\nJulia uses end to denote the end of conditional blocks, like if, loop blocks, like while/ for, and functions. In lieu of the one-line if ( cond ) statement, Julia allows statements of the form if cond; statement; end, cond && statement and !cond || statement. Assignment statements in the latter two syntaxes must be explicitly wrapped in parentheses, e.g. cond && (x = value).\nIn Julia, <-, <<- and -> are not assignment operators.\nJulia's -> creates an anonymous function.\nJulia constructs vectors using brackets. Julia's [1, 2, 3] is the equivalent of R's c(1, 2, 3).\nJulia's * operator can perform matrix multiplication, unlike in R. If A and B are matrices, then A * B denotes a matrix multiplication in Julia, equivalent to R's A %*% B. In R, this same notation would perform an element-wise (Hadamard) product. To get the element-wise multiplication operation, you need to write A .* B in Julia.\nJulia performs matrix transposition using the .' operator and conjugated transposition using the ' operator. Julia's A.' is therefore equivalent to R's t(A).\nJulia does not require parentheses when writing if statements or for/while loops: use for i in [1, 2, 3] instead of for (i in c(1, 2, 3)) and if i == 1 instead of if (i == 1).\nJulia does not treat the numbers 0 and 1 as Booleans. You cannot write if (1) in Julia, because if statements accept only booleans. Instead, you can write if true, if Bool(1), or if 1==1.\nJulia does not provide nrow and ncol. Instead, use size(M, 1) for nrow(M) and size(M, 2) for ncol(M).\nJulia is careful to distinguish scalars, vectors and matrices.  In R, 1 and c(1) are the same. In Julia, they cannot be used interchangeably.\nJulia's diag and diagm are not like R's.\nJulia cannot assign to the results of function calls on the left hand side of an assignment operation: you cannot write diag(M) = ones(n).\nJulia discourages populating the main namespace with functions. Most statistical functionality for Julia is found in packages under the JuliaStats organization. For example:\nFunctions pertaining to probability distributions are provided by the Distributions package.\nThe DataFrames package provides data frames.\nGeneralized linear models are provided by the GLM package.\nJulia provides tuples and real hash tables, but not R-style lists. When returning multiple items, you should typically use a tuple: instead of list(a = 1, b = 2), use (1, 2).\nJulia encourages users to write their own types, which are easier to use than S3 or S4 objects in R. Julia's multiple dispatch system means that table(x::TypeA) and table(x::TypeB) act like R's table.TypeA(x) and table.TypeB(x).\nIn Julia, values are passed and assigned by reference. If a function modifies an array, the changes will be visible in the caller. This is very different from R and allows new functions to operate on large data structures much more efficiently.\nIn Julia, vectors and matrices are concatenated using hcat, vcat and hvcat, not c, rbind and cbind like in R.\nIn Julia, a range like a:b is not shorthand for a vector like in R, but is a specialized AbstractRange object that is used for iteration without high memory overhead. To convert a range into a vector, use collect(a:b).\nJulia's max and min are the equivalent of pmax and pmin respectively in R, but both arguments need to have the same dimensions.  While maximum and minimum replace max and min in R, there are important differences.\nJulia's sum, prod, maximum, and minimum are different from their counterparts in R. They all accept one or two arguments. The first argument is an iterable collection such as an array.  If there is a second argument, then this argument indicates the dimensions, over which the operation is carried out.  For instance, let A=[[1 2],[3 4]] in Julia and B=rbind(c(1,2),c(3,4)) be the same matrix in R.  Then sum(A) gives the same result as sum(B), but sum(A, 1) is a row vector containing the sum over each column and sum(A, 2) is a column vector containing the sum over each row.  This contrasts to the behavior of R, where sum(B,1)=11 and sum(B,2)=12.  If the second argument is a vector, then it specifies all the dimensions over which the sum is performed, e.g., sum(A,[1,2])=10.  It should be noted that there is no error checking regarding the second argument.\nJulia has several functions that can mutate their arguments. For example, it has both sort and sort!.\nIn R, performance requires vectorization. In Julia, almost the opposite is true: the best performing code is often achieved by using devectorized loops.\nJulia is eagerly evaluated and does not support R-style lazy evaluation. For most users, this means that there are very few unquoted expressions or column names.\nJulia does not support the NULL type. The closest equivalent is nothing, but it behaves like a scalar value rather than like a list. Use x == nothing instead of is.null(x).\nIn Julia, missing values are represented by the missing object rather than by NA. Use ismissing(x) instead of isna(x).\nJulia lacks the equivalent of R's assign or get.\nIn Julia, return does not require parentheses.\nIn R, an idiomatic way to remove unwanted values is to use logical indexing, like in the expression x[x>3] or in the statement x = x[x>3] to modify x in-place. In contrast, Julia provides the higher order functions filter and filter!, allowing users to write filter(z->z>3, x) and filter!(z->z>3, x) as alternatives to the corresponding transliterations x[x.>3] and x = x[x.>3]. Using filter! reduces the use of temporary arrays."
+    "text": "One of Julia's goals is to provide an effective language for data analysis and statistical programming. For users coming to Julia from R, these are some noteworthy differences:Julia's single quotes enclose characters, not strings.\nJulia can create substrings by indexing into strings. In R, strings must be converted into character vectors before creating substrings.\nIn Julia, like Python but unlike R, strings can be created with triple quotes \"\"\" ... \"\"\". This syntax is convenient for constructing strings that contain line breaks.\nIn Julia, varargs are specified using the splat operator ..., which always follows the name of a specific variable, unlike R, for which ... can occur in isolation.\nIn Julia, modulus is mod(a, b), not a %% b. % in Julia is the remainder operator.\nIn Julia, not all data structures support logical indexing. Furthermore, logical indexing in Julia is supported only with vectors of length equal to the object being indexed. For example:\nIn R, c(1, 2, 3, 4)[c(TRUE, FALSE)] is equivalent to c(1, 3).\nIn R, c(1, 2, 3, 4)[c(TRUE, FALSE, TRUE, FALSE)] is equivalent to c(1, 3).\nIn Julia, [1, 2, 3, 4][[true, false]] throws a BoundsError.\nIn Julia, [1, 2, 3, 4][[true, false, true, false]] produces [1, 3].\nLike many languages, Julia does not always allow operations on vectors of different lengths, unlike R where the vectors only need to share a common index range.  For example, c(1, 2, 3, 4) + c(1, 2) is valid R but the equivalent [1, 2, 3, 4] + [1, 2] will throw an error in Julia.\nJulia allows an optional trailing comma when that comma does not change the meaning of code. This can cause confusion among R users when indexing into arrays. For example, x[1,] in R would return the first row of a matrix; in Julia, however, the comma is ignored, so x[1,] == x[1], and will return the first element. To extract a row, be sure to use :, as in x[1,:].\nJulia's map takes the function first, then its arguments, unlike lapply(<structure>, function, ...) in R. Similarly Julia's equivalent of apply(X, MARGIN, FUN, ...) in R is mapslices where the function is the first argument.\nMultivariate apply in R, e.g. mapply(choose, 11:13, 1:3), can be written as broadcast(binomial, 11:13, 1:3) in Julia. Equivalently Julia offers a shorter dot syntax for vectorizing functions binomial.(11:13, 1:3).\nJulia uses end to denote the end of conditional blocks, like if, loop blocks, like while/ for, and functions. In lieu of the one-line if ( cond ) statement, Julia allows statements of the form if cond; statement; end, cond && statement and !cond || statement. Assignment statements in the latter two syntaxes must be explicitly wrapped in parentheses, e.g. cond && (x = value).\nIn Julia, <-, <<- and -> are not assignment operators.\nJulia's -> creates an anonymous function.\nJulia constructs vectors using brackets. Julia's [1, 2, 3] is the equivalent of R's c(1, 2, 3).\nJulia's * operator can perform matrix multiplication, unlike in R. If A and B are matrices, then A * B denotes a matrix multiplication in Julia, equivalent to R's A %*% B. In R, this same notation would perform an element-wise (Hadamard) product. To get the element-wise multiplication operation, you need to write A .* B in Julia.\nJulia performs matrix transposition using the .' operator and conjugated transposition using the ' operator. Julia's A.' is therefore equivalent to R's t(A).\nJulia does not require parentheses when writing if statements or for/while loops: use for i in [1, 2, 3] instead of for (i in c(1, 2, 3)) and if i == 1 instead of if (i == 1).\nJulia does not treat the numbers 0 and 1 as Booleans. You cannot write if (1) in Julia, because if statements accept only booleans. Instead, you can write if true, if Bool(1), or if 1==1.\nJulia does not provide nrow and ncol. Instead, use size(M, 1) for nrow(M) and size(M, 2) for ncol(M).\nJulia is careful to distinguish scalars, vectors and matrices.  In R, 1 and c(1) are the same. In Julia, they cannot be used interchangeably.\nJulia's diag and diagm are not like R's.\nJulia cannot assign to the results of function calls on the left hand side of an assignment operation: you cannot write diag(M) = ones(n).\nJulia discourages populating the main namespace with functions. Most statistical functionality for Julia is found in packages under the JuliaStats organization. For example:\nFunctions pertaining to probability distributions are provided by the Distributions package.\nThe DataFrames package provides data frames.\nGeneralized linear models are provided by the GLM package.\nJulia provides tuples and real hash tables, but not R-style lists. When returning multiple items, you should typically use a tuple: instead of list(a = 1, b = 2), use (1, 2).\nJulia encourages users to write their own types, which are easier to use than S3 or S4 objects in R. Julia's multiple dispatch system means that table(x::TypeA) and table(x::TypeB) act like R's table.TypeA(x) and table.TypeB(x).\nIn Julia, values are passed and assigned by reference. If a function modifies an array, the changes will be visible in the caller. This is very different from R and allows new functions to operate on large data structures much more efficiently.\nIn Julia, vectors and matrices are concatenated using hcat, vcat and hvcat, not c, rbind and cbind like in R.\nIn Julia, a range like a:b is not shorthand for a vector like in R, but is a specialized AbstractRange object that is used for iteration without high memory overhead. To convert a range into a vector, use collect(a:b).\nJulia's max and min are the equivalent of pmax and pmin respectively in R, but both arguments need to have the same dimensions.  While maximum and minimum replace max and min in R, there are important differences.\nJulia's sum, prod, maximum, and minimum are different from their counterparts in R. They all accept one or two arguments. The first argument is an iterable collection such as an array.  If there is a second argument, then this argument indicates the dimensions, over which the operation is carried out.  For instance, let A=[[1 2],[3 4]] in Julia and B=rbind(c(1,2),c(3,4)) be the same matrix in R.  Then sum(A) gives the same result as sum(B), but sum(A, 1) is a row vector containing the sum over each column and sum(A, 2) is a column vector containing the sum over each row.  This contrasts to the behavior of R, where sum(B,1)=11 and sum(B,2)=12.  If the second argument is a vector, then it specifies all the dimensions over which the sum is performed, e.g., sum(A,[1,2])=10.  It should be noted that there is no error checking regarding the second argument.\nJulia has several functions that can mutate their arguments. For example, it has both sort and sort!.\nIn R, performance requires vectorization. In Julia, almost the opposite is true: the best performing code is often achieved by using devectorized loops.\nJulia is eagerly evaluated and does not support R-style lazy evaluation. For most users, this means that there are very few unquoted expressions or column names.\nJulia does not support the NULL type. The closest equivalent is nothing, but it behaves like a scalar value rather than like a list. Use x == nothing instead of is.null(x).\nIn Julia, missing values are represented by the missing object rather than by NA. Use ismissing(x) instead of isna(x). The skipmissing function is generally used instead of na.rm=TRUE (though in some particular cases functions take a skipmissing argument).\nJulia lacks the equivalent of R's assign or get.\nIn Julia, return does not require parentheses.\nIn R, an idiomatic way to remove unwanted values is to use logical indexing, like in the expression x[x>3] or in the statement x = x[x>3] to modify x in-place. In contrast, Julia provides the higher order functions filter and filter!, allowing users to write filter(z->z>3, x) and filter!(z->z>3, x) as alternatives to the corresponding transliterations x[x.>3] and x = x[x.>3]. Using filter! reduces the use of temporary arrays."
 },
 
 {
@@ -4509,7 +4525,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Unicode Input",
     "title": "Unicode Input",
     "category": "section",
-    "text": "The following table lists Unicode characters that can be entered via tab completion of LaTeX-like abbreviations in the Julia REPL (and in various other editing environments).  You can also get information on how to type a symbol by entering it in the REPL help, i.e. by typing ? and then entering the symbol in the REPL (e.g., by copy-paste from somewhere you saw the symbol).warning: Warning\nThis table may appear to contain missing characters in the second column, or even show characters that are inconsistent with the characters as they are rendered in the Julia REPL. In these cases, users are strongly advised to check their choice of fonts in their browser and REPL environment, as there are known issues with glyphs in many fonts.#\n# Generate a table containing all LaTeX and Emoji tab completions available in the REPL.\n#\n\nconst NBSP = '\\u00A0'\n\nfunction tab_completions(symbols...)\n    completions = Dict{String, Vector{String}}()\n    for each in symbols, (k, v) in each\n        completions[v] = push!(get!(completions, v, String[]), k)\n    end\n    return completions\nend\n\nfunction unicode_data()\n    file = normpath(@__DIR__, \"..\", \"..\", \"..\", \"..\", \"UnicodeData.txt\")\n    names = Dict{UInt32, String}()\n    open(file) do unidata\n        for line in readlines(unidata)\n            id, name, desc = split(line, \";\")[[1, 2, 11]]\n            codepoint = parse(UInt32, \"0x$id\")\n            names[codepoint] = titlecase(lowercase(name == \"\" ? desc : desc == \"\" ? name : \"$name / $desc\"))\n        end\n    end\n    return names\nend\n\n# Surround combining characters with no-break spaces (i.e '\\u00A0'). Follows the same format\n# for how unicode is displayed on the unicode.org website:\n# http://unicode.org/cldr/utility/character.jsp?a=0300\nfunction fix_combining_chars(char)\n    cat = Base.UTF8proc.category_code(char)\n    return cat == 6 || cat == 8 ? \"$NBSP$char$NBSP\" : \"$char\"\nend\n\n\nfunction table_entries(completions, unicode_dict)\n    entries = [[\n        \"Code point(s)\", \"Character(s)\",\n        \"Tab completion sequence(s)\", \"Unicode name(s)\"\n    ]]\n    for (chars, inputs) in sort!(collect(completions), by = first)\n        code_points, unicode_names, characters = String[], String[], String[]\n        for char in chars\n            push!(code_points, \"U+$(uppercase(hex(char, 5)))\")\n            push!(unicode_names, get(unicode_dict, UInt32(char), \"(No Unicode name)\"))\n            push!(characters, isempty(characters) ? fix_combining_chars(char) : \"$char\")\n        end\n        push!(entries, [\n            join(code_points, \" + \"), join(characters),\n            join(inputs, \", \"), join(unicode_names, \" + \")\n        ])\n    end\n    return Markdown.Table(entries, [:l, :l, :l, :l])\nend\n\ntable_entries(\n    tab_completions(\n        Base.REPLCompletions.latex_symbols,\n        Base.REPLCompletions.emoji_symbols\n    ),\n    unicode_data()\n)"
+    "text": "The following table lists Unicode characters that can be entered via tab completion of LaTeX-like abbreviations in the Julia REPL (and in various other editing environments).  You can also get information on how to type a symbol by entering it in the REPL help, i.e. by typing ? and then entering the symbol in the REPL (e.g., by copy-paste from somewhere you saw the symbol).warning: Warning\nThis table may appear to contain missing characters in the second column, or even show characters that are inconsistent with the characters as they are rendered in the Julia REPL. In these cases, users are strongly advised to check their choice of fonts in their browser and REPL environment, as there are known issues with glyphs in many fonts.#\n# Generate a table containing all LaTeX and Emoji tab completions available in the REPL.\n#\n\nconst NBSP = '\\u00A0'\n\nfunction tab_completions(symbols...)\n    completions = Dict{String, Vector{String}}()\n    for each in symbols, (k, v) in each\n        completions[v] = push!(get!(completions, v, String[]), k)\n    end\n    return completions\nend\n\nfunction unicode_data()\n    file = normpath(@__DIR__, \"..\", \"..\", \"..\", \"..\", \"UnicodeData.txt\")\n    names = Dict{UInt32, String}()\n    open(file) do unidata\n        for line in readlines(unidata)\n            id, name, desc = split(line, \";\")[[1, 2, 11]]\n            codepoint = parse(UInt32, \"0x$id\")\n            names[codepoint] = Base.Unicode.titlecase(Base.Unicode.lowercase(\n                name == \"\" ? desc : desc == \"\" ? name : \"$name / $desc\"))\n        end\n    end\n    return names\nend\n\n# Surround combining characters with no-break spaces (i.e '\\u00A0'). Follows the same format\n# for how unicode is displayed on the unicode.org website:\n# http://unicode.org/cldr/utility/character.jsp?a=0300\nfunction fix_combining_chars(char)\n    cat = Base.Unicode.category_code(char)\n    return cat == 6 || cat == 8 ? \"$NBSP$char$NBSP\" : \"$char\"\nend\n\n\nfunction table_entries(completions, unicode_dict)\n    entries = [[\n        \"Code point(s)\", \"Character(s)\",\n        \"Tab completion sequence(s)\", \"Unicode name(s)\"\n    ]]\n    for (chars, inputs) in sort!(collect(completions), by = first)\n        code_points, unicode_names, characters = String[], String[], String[]\n        for char in chars\n            push!(code_points, \"U+$(Base.Unicode.uppercase(hex(char, 5)))\")\n            push!(unicode_names, get(unicode_dict, UInt32(char), \"(No Unicode name)\"))\n            push!(characters, isempty(characters) ? fix_combining_chars(char) : \"$char\")\n        end\n        push!(entries, [\n            join(code_points, \" + \"), join(characters),\n            join(inputs, \", \"), join(unicode_names, \" + \")\n        ])\n    end\n    return Markdown.Table(entries, [:l, :l, :l, :l])\nend\n\ntable_entries(\n    tab_completions(\n        Base.REPLCompletions.latex_symbols,\n        Base.REPLCompletions.emoji_symbols\n    ),\n    unicode_data()\n)"
 },
 
 {
@@ -4777,14 +4793,6 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/base.html#Base.workspace",
-    "page": "Essentials",
-    "title": "Base.workspace",
-    "category": "Function",
-    "text": "workspace()\n\nReplace the top-level module (Main) with a new one, providing a clean workspace. The previous Main module is made available as LastMain.\n\nIf Package was previously loaded, using Package in the new Main will re-use the loaded copy. Run reload(\"Package\") first to load a fresh copy.\n\nThis function should only be used interactively.\n\n\n\n"
-},
-
-{
     "location": "stdlib/base.html#ans",
     "page": "Essentials",
     "title": "ans",
@@ -4797,7 +4805,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Essentials",
     "title": "Getting Around",
     "category": "section",
-    "text": "Base.exit\nBase.quit\nBase.atexit\nBase.atreplinit\nBase.isinteractive\nBase.varinfo\nBase.summarysize\nBase.edit(::AbstractString, ::Integer)\nBase.edit(::Any)\nBase.@edit\nBase.less(::AbstractString)\nBase.less(::Any)\nBase.@less\nBase.clipboard(::Any)\nBase.clipboard()\nBase.reload\nBase.require\nBase.compilecache\nBase.__precompile__\nBase.include\nBase.include_string\nBase.include_dependency\nBase.Docs.apropos\nBase.which(::Any, ::Any)\nBase.which(::Symbol)\nBase.@which\nBase.methods\nBase.methodswith\nBase.@show\nBase.versioninfo\nBase.workspace\nans"
+    "text": "Base.exit\nBase.quit\nBase.atexit\nBase.atreplinit\nBase.isinteractive\nBase.varinfo\nBase.summarysize\nBase.edit(::AbstractString, ::Integer)\nBase.edit(::Any)\nBase.@edit\nBase.less(::AbstractString)\nBase.less(::Any)\nBase.@less\nBase.clipboard(::Any)\nBase.clipboard()\nBase.reload\nBase.require\nBase.compilecache\nBase.__precompile__\nBase.include\nBase.include_string\nBase.include_dependency\nBase.Docs.apropos\nBase.which(::Any, ::Any)\nBase.which(::Symbol)\nBase.@which\nBase.methods\nBase.methodswith\nBase.@show\nBase.versioninfo\nans"
 },
 
 {
@@ -5049,14 +5057,6 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/base.html#Base.Distributed",
-    "page": "Essentials",
-    "title": "Base.Distributed",
-    "category": "Module",
-    "text": "Tools for distributed parallel processing.\n\n\n\n"
-},
-
-{
     "location": "stdlib/base.html#Base.Docs",
     "page": "Essentials",
     "title": "Base.Docs",
@@ -5181,7 +5181,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Essentials",
     "title": "Base Modules",
     "category": "section",
-    "text": "Base.BLAS\nBase.Distributed\nBase.Docs\nBase.Iterators\nBase.LAPACK\nBase.LibGit2\nBase.Libc\nBase.Libdl\nBase.LinAlg\nBase.Markdown\nBase.Meta\nBase.Pkg\nBase.Serializer\nBase.SparseArrays\nBase.StackTraces\nBase.Sys\nBase.Threads"
+    "text": "Base.BLAS\nBase.Docs\nBase.Iterators\nBase.LAPACK\nBase.LibGit2\nBase.Libc\nBase.Libdl\nBase.LinAlg\nBase.Markdown\nBase.Meta\nBase.Pkg\nBase.Serializer\nBase.SparseArrays\nBase.StackTraces\nBase.Sys\nBase.Threads"
 },
 
 {
@@ -5461,7 +5461,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Essentials",
     "title": "Base.sizeof",
     "category": "Method",
-    "text": "sizeof(T)\n\nSize, in bytes, of the canonical binary representation of the given DataType T, if any.\n\nExamples\n\njulia> sizeof(Float32)\n4\n\njulia> sizeof(Complex128)\n16\n\nIf T does not have a specific size, an error is thrown.\n\njulia> sizeof(Base.LinAlg.LU)\nERROR: argument is an abstract type; size is indeterminate\nStacktrace:\n[...]\n\n\n\n"
+    "text": "sizeof(T)\n\nSize, in bytes, of the canonical binary representation of the given DataType T, if any.\n\nExamples\n\njulia> sizeof(Float32)\n4\n\njulia> sizeof(ComplexF64)\n16\n\nIf T does not have a specific size, an error is thrown.\n\njulia> sizeof(Base.LinAlg.LU)\nERROR: argument is an abstract type; size is indeterminate\nStacktrace:\n[...]\n\n\n\n"
 },
 
 {
@@ -5725,7 +5725,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Essentials",
     "title": "Base.:∘",
     "category": "Function",
-    "text": "f ∘ g\n\nCompose functions: i.e. (f ∘ g)(args...) means f(g(args...)). The ∘ symbol can be entered in the Julia REPL (and most editors, appropriately configured) by typing \\circ<tab>.\n\nExamples\n\njulia> map(uppercase∘hex, 250:255)\n6-element Array{String,1}:\n \"FA\"\n \"FB\"\n \"FC\"\n \"FD\"\n \"FE\"\n \"FF\"\n\n\n\n"
+    "text": "f ∘ g\n\nCompose functions: i.e. (f ∘ g)(args...) means f(g(args...)). The ∘ symbol can be entered in the Julia REPL (and most editors, appropriately configured) by typing \\circ<tab>.\n\nExamples\n\njulia> using Unicode\n\njulia> map(uppercase∘hex, 250:255)\n6-element Array{String,1}:\n \"FA\"\n \"FB\"\n \"FC\"\n \"FD\"\n \"FE\"\n \"FF\"\n\n\n\n"
 },
 
 {
@@ -5929,11 +5929,19 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
+    "location": "stdlib/base.html#Base.skipmissing",
+    "page": "Essentials",
+    "title": "Base.skipmissing",
+    "category": "Function",
+    "text": "skipmissing(itr)\n\nReturn an iterator over the elements in itr skipping missing values.\n\nUse collect to obtain an Array containing the non-missing values in itr. Note that even if itr is a multidimensional array, the result will always be a Vector since it is not possible to remove missings while preserving dimensions of the input.\n\nExamples\n\njulia> sum(skipmissing([1, missing, 2]))\n3\n\njulia> collect(skipmissing([1, missing, 2]))\n2-element Array{Int64,1}:\n1\n2\n\njulia> collect(skipmissing([1 missing; 2 missing]))\n2-element Array{Int64,1}:\n1\n2\n\n\n\n\n"
+},
+
+{
     "location": "stdlib/base.html#Missing-Values-1",
     "page": "Essentials",
     "title": "Missing Values",
     "category": "section",
-    "text": "Base.Missing\nBase.missing\nBase.ismissing"
+    "text": "Base.Missing\nBase.missing\nBase.ismissing\nBase.skipmissing"
 },
 
 {
@@ -6373,7 +6381,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Essentials",
     "title": "Base.KeyError",
     "category": "Type",
-    "text": "KeyError(key)\n\nAn indexing operation into an Associative (Dict) or Set like object tried to access or delete a non-existent element.\n\n\n\n"
+    "text": "KeyError(key)\n\nAn indexing operation into an AbstractDict (Dict) or Set like object tried to access or delete a non-existent element.\n\n\n\n"
 },
 
 {
@@ -6438,14 +6446,6 @@ var documenterSearchIndex = {"docs": [
     "title": "Base.ParseError",
     "category": "Type",
     "text": "ParseError(msg)\n\nThe expression passed to the parse function could not be interpreted as a valid Julia expression.\n\n\n\n"
-},
-
-{
-    "location": "stdlib/base.html#Base.Distributed.ProcessExitedException",
-    "page": "Essentials",
-    "title": "Base.Distributed.ProcessExitedException",
-    "category": "Type",
-    "text": "ProcessExitedException()\n\nAfter a client Julia process has exited, further attempts to reference the dead child will throw this exception.\n\n\n\n"
 },
 
 {
@@ -6517,7 +6517,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Essentials",
     "title": "Errors",
     "category": "section",
-    "text": "Base.error\nCore.throw\nBase.rethrow\nBase.backtrace\nBase.catch_backtrace\nBase.assert\nBase.@assert\nBase.ArgumentError\nBase.AssertionError\nCore.BoundsError\nBase.DimensionMismatch\nCore.DivideError\nCore.DomainError\nBase.EOFError\nCore.ErrorException\nCore.InexactError\nCore.InterruptException\nBase.KeyError\nBase.LoadError\nBase.MethodError\nBase.MissingException\nBase.NullException\nCore.OutOfMemoryError\nCore.ReadOnlyMemoryError\nCore.OverflowError\nBase.ParseError\nBase.ProcessExitedException\nCore.StackOverflowError\nBase.SystemError\nCore.TypeError\nCore.UndefRefError\nCore.UndefVarError\nBase.InitError\nBase.retry\nBase.ExponentialBackOff"
+    "text": "Base.error\nCore.throw\nBase.rethrow\nBase.backtrace\nBase.catch_backtrace\nBase.assert\nBase.@assert\nBase.ArgumentError\nBase.AssertionError\nCore.BoundsError\nBase.DimensionMismatch\nCore.DivideError\nCore.DomainError\nBase.EOFError\nCore.ErrorException\nCore.InexactError\nCore.InterruptException\nBase.KeyError\nBase.LoadError\nBase.MethodError\nBase.MissingException\nBase.NullException\nCore.OutOfMemoryError\nCore.ReadOnlyMemoryError\nCore.OverflowError\nBase.ParseError\nCore.StackOverflowError\nBase.SystemError\nCore.TypeError\nCore.UndefRefError\nCore.UndefVarError\nBase.InitError\nBase.retry\nBase.ExponentialBackOff"
 },
 
 {
@@ -6573,7 +6573,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Essentials",
     "title": "Base.module_parent",
     "category": "Function",
-    "text": "module_parent(m::Module) -> Module\n\nGet a module's enclosing Module. Main is its own parent, as is LastMain after workspace().\n\nExamples\n\njulia> module_parent(Main)\nMain\n\njulia> module_parent(Base.LinAlg.BLAS)\nBase.LinAlg\n\n\n\n"
+    "text": "module_parent(m::Module) -> Module\n\nGet a module's enclosing Module. Main is its own parent.\n\nExamples\n\njulia> module_parent(Main)\nMain\n\njulia> module_parent(Base.LinAlg.BLAS)\nBase.LinAlg\n\n\n\n"
 },
 
 {
@@ -6965,7 +6965,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Collections and Data Structures",
     "title": "Base.length",
     "category": "Function",
-    "text": "length(collection) -> Integer\n\nReturn the number of elements in the collection.\n\nUse endof to get the last valid index of an indexable collection.\n\nExamples\n\njulia> length(1:5)\n5\n\njulia> length([1, 2, 3, 4])\n4\n\njulia> length([1 2; 3 4])\n4\n\n\n\nlength(s::AbstractString)\n\nThe number of characters in string s.\n\nExamples\n\njulia> length(\"jμΛIα\")\n5\n\n\n\n"
+    "text": "length(collection) -> Integer\n\nReturn the number of elements in the collection.\n\nUse endof to get the last valid index of an indexable collection.\n\nExamples\n\njulia> length(1:5)\n5\n\njulia> length([1, 2, 3, 4])\n4\n\njulia> length([1 2; 3 4])\n4\n\n\n\nlength(s::AbstractString) -> Int\nlength(s::AbstractString, i::Integer, j::Integer) -> Int\n\nThe number of characters in string s from indices i through j. This is computed as the number of code unit indices from i to j which are valid character indices. Without only a single string argument, this computes the number of characters in the entire string. With i and j arguments it computes the number of indices between i and j inclusive that are valid indices in the string s. In addition to in-bounds values, i may take the out-of-bounds value ncodeunits(s) + 1 and j may take the out-of-bounds value 0.\n\nSee also: isvalid, ncodeunits, endof, thisind, nextind, prevind\n\nExamples\n\njulia> length(\"jμΛIα\")\n5\n\n\n\n"
 },
 
 {
@@ -6989,7 +6989,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Collections and Data Structures",
     "title": "Base.eltype",
     "category": "Function",
-    "text": "eltype(type)\n\nDetermine the type of the elements generated by iterating a collection of the given type. For associative collection types, this will be a Pair{KeyType,ValType}. The definition eltype(x) = eltype(typeof(x)) is provided for convenience so that instances can be passed instead of types. However the form that accepts a type argument should be defined for new types.\n\nExamples\n\njulia> eltype(ones(Float32,2,2))\nFloat32\n\njulia> eltype(ones(Int8,2,2))\nInt8\n\n\n\n"
+    "text": "eltype(type)\n\nDetermine the type of the elements generated by iterating a collection of the given type. For dictionary types, this will be a Pair{KeyType,ValType}. The definition eltype(x) = eltype(typeof(x)) is provided for convenience so that instances can be passed instead of types. However the form that accepts a type argument should be defined for new types.\n\nExamples\n\njulia> eltype(ones(Float32,2,2))\nFloat32\n\njulia> eltype(ones(Int8,2,2))\nInt8\n\n\n\n"
 },
 
 {
@@ -7389,7 +7389,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Collections and Data Structures",
     "title": "Base.first",
     "category": "Function",
-    "text": "first(coll)\n\nGet the first element of an iterable collection. Return the start point of an AbstractRange even if it is empty.\n\nExamples\n\njulia> first(2:2:10)\n2\n\njulia> first([1; 2; 3; 4])\n1\n\n\n\nfirst(str::AbstractString, nchar::Integer)\n\nGet a string consisting of the first nchar characters of str.\n\njulia> first(\"∀ϵ≠0: ϵ²>0\", 0)\n\"\"\n\njulia> first(\"∀ϵ≠0: ϵ²>0\", 1)\n\"∀\"\n\njulia> first(\"∀ϵ≠0: ϵ²>0\", 3)\n\"∀ϵ≠\"\n\n\n\n"
+    "text": "first(coll)\n\nGet the first element of an iterable collection. Return the start point of an AbstractRange even if it is empty.\n\nExamples\n\njulia> first(2:2:10)\n2\n\njulia> first([1; 2; 3; 4])\n1\n\n\n\nfirst(s::AbstractString, n::Integer)\n\nGet a string consisting of the first n characters of s.\n\njulia> first(\"∀ϵ≠0: ϵ²>0\", 0)\n\"\"\n\njulia> first(\"∀ϵ≠0: ϵ²>0\", 1)\n\"∀\"\n\njulia> first(\"∀ϵ≠0: ϵ²>0\", 3)\n\"∀ϵ≠\"\n\n\n\n"
 },
 
 {
@@ -7397,7 +7397,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Collections and Data Structures",
     "title": "Base.last",
     "category": "Function",
-    "text": "last(coll)\n\nGet the last element of an ordered collection, if it can be computed in O(1) time. This is accomplished by calling endof to get the last index. Return the end point of an AbstractRange even if it is empty.\n\nExamples\n\njulia> last(1:2:10)\n9\n\njulia> last([1; 2; 3; 4])\n4\n\n\n\nlast(str::AbstractString, nchar::Integer)\n\nGet a string consisting of the last nchar characters of str.\n\njulia> last(\"∀ϵ≠0: ϵ²>0\", 0)\n\"\"\n\njulia> last(\"∀ϵ≠0: ϵ²>0\", 1)\n\"0\"\n\njulia> last(\"∀ϵ≠0: ϵ²>0\", 3)\n\"²>0\"\n\n\n\n"
+    "text": "last(coll)\n\nGet the last element of an ordered collection, if it can be computed in O(1) time. This is accomplished by calling endof to get the last index. Return the end point of an AbstractRange even if it is empty.\n\nExamples\n\njulia> last(1:2:10)\n9\n\njulia> last([1; 2; 3; 4])\n4\n\n\n\nlast(s::AbstractString, n::Integer)\n\nGet a string consisting of the last n characters of s.\n\njulia> last(\"∀ϵ≠0: ϵ²>0\", 0)\n\"\"\n\njulia> last(\"∀ϵ≠0: ϵ²>0\", 1)\n\"0\"\n\njulia> last(\"∀ϵ≠0: ϵ²>0\", 3)\n\"²>0\"\n\n\n\n"
 },
 
 {
@@ -7413,7 +7413,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Collections and Data Structures",
     "title": "Base.collect",
     "category": "Method",
-    "text": "collect(collection)\n\nReturn an Array of all items in a collection or iterator. For associative collections, returns Pair{KeyType, ValType}. If the argument is array-like or is an iterator with the HasShape() trait, the result will have the same shape and number of dimensions as the argument.\n\nExamples\n\njulia> collect(1:2:13)\n7-element Array{Int64,1}:\n  1\n  3\n  5\n  7\n  9\n 11\n 13\n\n\n\n"
+    "text": "collect(collection)\n\nReturn an Array of all items in a collection or iterator. For dictionaries, returns Pair{KeyType, ValType}. If the argument is array-like or is an iterator with the HasShape() trait, the result will have the same shape and number of dimensions as the argument.\n\nExamples\n\njulia> collect(1:2:13)\n7-element Array{Int64,1}:\n  1\n  3\n  5\n  7\n  9\n 11\n 13\n\n\n\n"
 },
 
 {
@@ -7437,7 +7437,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Collections and Data Structures",
     "title": "Base.filter",
     "category": "Function",
-    "text": "filter(f, a::AbstractArray)\n\nReturn a copy of a, removing elements for which f is false. The function f is passed one argument.\n\nExamples\n\njulia> a = 1:10\n1:10\n\njulia> filter(isodd, a)\n5-element Array{Int64,1}:\n 1\n 3\n 5\n 7\n 9\n\n\n\nfilter(f, d::Associative)\n\nReturn a copy of d, removing elements for which f is false. The function f is passed key=>value pairs.\n\nExamples\n\njulia> d = Dict(1=>\"a\", 2=>\"b\")\nDict{Int64,String} with 2 entries:\n  2 => \"b\"\n  1 => \"a\"\n\njulia> filter(p->isodd(p.first), d)\nDict{Int64,String} with 1 entry:\n  1 => \"a\"\n\n\n\nfilter(p, x::Nullable)\n\nReturn null if either x is null or p(get(x)) is false, and x otherwise.\n\nExamples\n\njulia> filter(isodd, Nullable(5))\nNullable{Int64}(5)\n\njulia> filter(isodd, Nullable(4))\nNullable{Int64}()\n\njulia> filter(isodd, Nullable{Int}())\nNullable{Int64}()\n\n\n\n"
+    "text": "filter(f, a::AbstractArray)\n\nReturn a copy of a, removing elements for which f is false. The function f is passed one argument.\n\nExamples\n\njulia> a = 1:10\n1:10\n\njulia> filter(isodd, a)\n5-element Array{Int64,1}:\n 1\n 3\n 5\n 7\n 9\n\n\n\nfilter(f, d::AbstractDict)\n\nReturn a copy of d, removing elements for which f is false. The function f is passed key=>value pairs.\n\nExamples\n\njulia> d = Dict(1=>\"a\", 2=>\"b\")\nDict{Int64,String} with 2 entries:\n  2 => \"b\"\n  1 => \"a\"\n\njulia> filter(p->isodd(p.first), d)\nDict{Int64,String} with 1 entry:\n  1 => \"a\"\n\n\n\nfilter(p, x::Nullable)\n\nReturn null if either x is null or p(get(x)) is false, and x otherwise.\n\nExamples\n\njulia> filter(isodd, Nullable(5))\nNullable{Int64}(5)\n\njulia> filter(isodd, Nullable(4))\nNullable{Int64}()\n\njulia> filter(isodd, Nullable{Int}())\nNullable{Int64}()\n\n\n\n"
 },
 
 {
@@ -7445,7 +7445,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Collections and Data Structures",
     "title": "Base.filter!",
     "category": "Function",
-    "text": "filter!(f, a::AbstractVector)\n\nUpdate a, removing elements for which f is false. The function f is passed one argument.\n\nExamples\n\njulia> filter!(isodd, collect(1:10))\n5-element Array{Int64,1}:\n 1\n 3\n 5\n 7\n 9\n\n\n\nfilter!(f, d::Associative)\n\nUpdate d, removing elements for which f is false. The function f is passed key=>value pairs.\n\nExample\n\njulia> d = Dict(1=>\"a\", 2=>\"b\", 3=>\"c\")\nDict{Int64,String} with 3 entries:\n  2 => \"b\"\n  3 => \"c\"\n  1 => \"a\"\n\njulia> filter!(p->isodd(p.first), d)\nDict{Int64,String} with 2 entries:\n  3 => \"c\"\n  1 => \"a\"\n\n\n\n"
+    "text": "filter!(f, a::AbstractVector)\n\nUpdate a, removing elements for which f is false. The function f is passed one argument.\n\nExamples\n\njulia> filter!(isodd, collect(1:10))\n5-element Array{Int64,1}:\n 1\n 3\n 5\n 7\n 9\n\n\n\nfilter!(f, d::AbstractDict)\n\nUpdate d, removing elements for which f is false. The function f is passed key=>value pairs.\n\nExample\n\njulia> d = Dict(1=>\"a\", 2=>\"b\", 3=>\"c\")\nDict{Int64,String} with 3 entries:\n  2 => \"b\"\n  3 => \"c\"\n  1 => \"a\"\n\njulia> filter!(p->isodd(p.first), d)\nDict{Int64,String} with 2 entries:\n  3 => \"c\"\n  1 => \"a\"\n\n\n\n"
 },
 
 {
@@ -7589,7 +7589,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Collections and Data Structures",
     "title": "Base.values",
     "category": "Function",
-    "text": "values(iterator)\n\nFor an iterator or collection that has keys and values, return an iterator over the values. This function simply returns its argument by default, since the elements of a general iterator are normally considered its \"values\".\n\nExamples\n\njulia> d = Dict(\"a\"=>1, \"b\"=>2);\n\njulia> values(d)\nBase.ValueIterator for a Dict{String,Int64} with 2 entries. Values:\n  2\n  1\n\njulia> values([2])\n1-element Array{Int64,1}:\n 2\n\n\n\nvalues(a::Associative)\n\nReturn an iterator over all values in a collection. collect(values(a)) returns an array of values. Since the values are stored internally in a hash table, the order in which they are returned may vary. But keys(a) and values(a) both iterate a and return the elements in the same order.\n\nExamples\n\njulia> a = Dict('a'=>2, 'b'=>3)\nDict{Char,Int64} with 2 entries:\n  'b' => 3\n  'a' => 2\n\njulia> collect(values(a))\n2-element Array{Int64,1}:\n 3\n 2\n\n\n\n"
+    "text": "values(iterator)\n\nFor an iterator or collection that has keys and values, return an iterator over the values. This function simply returns its argument by default, since the elements of a general iterator are normally considered its \"values\".\n\nExamples\n\njulia> d = Dict(\"a\"=>1, \"b\"=>2);\n\njulia> values(d)\nBase.ValueIterator for a Dict{String,Int64} with 2 entries. Values:\n  2\n  1\n\njulia> values([2])\n1-element Array{Int64,1}:\n 2\n\n\n\nvalues(a::AbstractDict)\n\nReturn an iterator over all values in a collection. collect(values(a)) returns an array of values. Since the values are stored internally in a hash table, the order in which they are returned may vary. But keys(a) and values(a) both iterate a and return the elements in the same order.\n\nExamples\n\njulia> a = Dict('a'=>2, 'b'=>3)\nDict{Char,Int64} with 2 entries:\n  'b' => 3\n  'a' => 2\n\njulia> collect(values(a))\n2-element Array{Int64,1}:\n 3\n 2\n\n\n\n"
 },
 
 {
@@ -7597,7 +7597,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Collections and Data Structures",
     "title": "Base.pairs",
     "category": "Function",
-    "text": "pairs(collection)\n\nReturn an iterator over key => value pairs for any collection that maps a set of keys to a set of values. This includes arrays, where the keys are the array indices.\n\n\n\npairs(IndexLinear(), A)\npairs(IndexCartesian(), A)\npairs(IndexStyle(A), A)\n\nAn iterator that accesses each element of the array A, returning i => x, where i is the index for the element and x = A[i]. Identical to pairs(A), except that the style of index can be selected. Also similar to enumerate(A), except i will be a valid index for A, while enumerate always counts from 1 regardless of the indices of A.\n\nSpecifying IndexLinear() ensures that i will be an integer; specifying IndexCartesian() ensures that i will be a CartesianIndex; specifying IndexStyle(A) chooses whichever has been defined as the native indexing style for array A.\n\nExamples\n\njulia> A = [\"a\" \"d\"; \"b\" \"e\"; \"c\" \"f\"];\n\njulia> for (index, value) in pairs(IndexStyle(A), A)\n           println(\"$index $value\")\n       end\n1 a\n2 b\n3 c\n4 d\n5 e\n6 f\n\njulia> S = view(A, 1:2, :);\n\njulia> for (index, value) in pairs(IndexStyle(S), S)\n           println(\"$index $value\")\n       end\nCartesianIndex(1, 1) a\nCartesianIndex(2, 1) b\nCartesianIndex(1, 2) d\nCartesianIndex(2, 2) e\n\nSee also: IndexStyle, indices.\n\n\n\n"
+    "text": "pairs(IndexLinear(), A)\npairs(IndexCartesian(), A)\npairs(IndexStyle(A), A)\n\nAn iterator that accesses each element of the array A, returning i => x, where i is the index for the element and x = A[i]. Identical to pairs(A), except that the style of index can be selected. Also similar to enumerate(A), except i will be a valid index for A, while enumerate always counts from 1 regardless of the indices of A.\n\nSpecifying IndexLinear() ensures that i will be an integer; specifying IndexCartesian() ensures that i will be a CartesianIndex; specifying IndexStyle(A) chooses whichever has been defined as the native indexing style for array A.\n\nExamples\n\njulia> A = [\"a\" \"d\"; \"b\" \"e\"; \"c\" \"f\"];\n\njulia> for (index, value) in pairs(IndexStyle(A), A)\n           println(\"$index $value\")\n       end\n1 a\n2 b\n3 c\n4 d\n5 e\n6 f\n\njulia> S = view(A, 1:2, :);\n\njulia> for (index, value) in pairs(IndexStyle(S), S)\n           println(\"$index $value\")\n       end\nCartesianIndex(1, 1) a\nCartesianIndex(2, 1) b\nCartesianIndex(1, 2) d\nCartesianIndex(2, 2) e\n\nSee also: IndexStyle, indices.\n\n\n\npairs(collection)\n\nReturn an iterator over key => value pairs for any collection that maps a set of keys to a set of values. This includes arrays, where the keys are the array indices.\n\n\n\n"
 },
 
 {
@@ -7605,23 +7605,23 @@ var documenterSearchIndex = {"docs": [
     "page": "Collections and Data Structures",
     "title": "Base.merge",
     "category": "Function",
-    "text": "merge(d::Associative, others::Associative...)\n\nConstruct a merged collection from the given collections. If necessary, the types of the resulting collection will be promoted to accommodate the types of the merged collections. If the same key is present in another collection, the value for that key will be the value it has in the last collection listed.\n\nExamples\n\njulia> a = Dict(\"foo\" => 0.0, \"bar\" => 42.0)\nDict{String,Float64} with 2 entries:\n  \"bar\" => 42.0\n  \"foo\" => 0.0\n\njulia> b = Dict(\"baz\" => 17, \"bar\" => 4711)\nDict{String,Int64} with 2 entries:\n  \"bar\" => 4711\n  \"baz\" => 17\n\njulia> merge(a, b)\nDict{String,Float64} with 3 entries:\n  \"bar\" => 4711.0\n  \"baz\" => 17.0\n  \"foo\" => 0.0\n\njulia> merge(b, a)\nDict{String,Float64} with 3 entries:\n  \"bar\" => 42.0\n  \"baz\" => 17.0\n  \"foo\" => 0.0\n\n\n\nmerge(combine, d::Associative, others::Associative...)\n\nConstruct a merged collection from the given collections. If necessary, the types of the resulting collection will be promoted to accommodate the types of the merged collections. Values with the same key will be combined using the combiner function.\n\nExamples\n\njulia> a = Dict(\"foo\" => 0.0, \"bar\" => 42.0)\nDict{String,Float64} with 2 entries:\n  \"bar\" => 42.0\n  \"foo\" => 0.0\n\njulia> b = Dict(\"baz\" => 17, \"bar\" => 4711)\nDict{String,Int64} with 2 entries:\n  \"bar\" => 4711\n  \"baz\" => 17\n\njulia> merge(+, a, b)\nDict{String,Float64} with 3 entries:\n  \"bar\" => 4753.0\n  \"baz\" => 17.0\n  \"foo\" => 0.0\n\n\n\nmerge(a::NamedTuple, b::NamedTuple)\n\nConstruct a new named tuple by merging two existing ones. The order of fields in a is preserved, but values are taken from matching fields in b. Fields present only in b are appended at the end.\n\njulia> merge((a=1, b=2, c=3), (b=4, d=5))\n(a = 1, b = 4, c = 3, d = 5)\n\n\n\nmerge(a::NamedTuple, iterable)\n\nInterpret an iterable of key-value pairs as a named tuple, and perform a merge.\n\njulia> merge((a=1, b=2, c=3), [:b=>4, :d=>5])\n(a = 1, b = 4, c = 3, d = 5)\n\n\n\n"
+    "text": "merge(d::AbstractDict, others::AbstractDict...)\n\nConstruct a merged collection from the given collections. If necessary, the types of the resulting collection will be promoted to accommodate the types of the merged collections. If the same key is present in another collection, the value for that key will be the value it has in the last collection listed.\n\nExamples\n\njulia> a = Dict(\"foo\" => 0.0, \"bar\" => 42.0)\nDict{String,Float64} with 2 entries:\n  \"bar\" => 42.0\n  \"foo\" => 0.0\n\njulia> b = Dict(\"baz\" => 17, \"bar\" => 4711)\nDict{String,Int64} with 2 entries:\n  \"bar\" => 4711\n  \"baz\" => 17\n\njulia> merge(a, b)\nDict{String,Float64} with 3 entries:\n  \"bar\" => 4711.0\n  \"baz\" => 17.0\n  \"foo\" => 0.0\n\njulia> merge(b, a)\nDict{String,Float64} with 3 entries:\n  \"bar\" => 42.0\n  \"baz\" => 17.0\n  \"foo\" => 0.0\n\n\n\nmerge(combine, d::AbstractDict, others::AbstractDict...)\n\nConstruct a merged collection from the given collections. If necessary, the types of the resulting collection will be promoted to accommodate the types of the merged collections. Values with the same key will be combined using the combiner function.\n\nExamples\n\njulia> a = Dict(\"foo\" => 0.0, \"bar\" => 42.0)\nDict{String,Float64} with 2 entries:\n  \"bar\" => 42.0\n  \"foo\" => 0.0\n\njulia> b = Dict(\"baz\" => 17, \"bar\" => 4711)\nDict{String,Int64} with 2 entries:\n  \"bar\" => 4711\n  \"baz\" => 17\n\njulia> merge(+, a, b)\nDict{String,Float64} with 3 entries:\n  \"bar\" => 4753.0\n  \"baz\" => 17.0\n  \"foo\" => 0.0\n\n\n\nmerge(a::NamedTuple, b::NamedTuple)\n\nConstruct a new named tuple by merging two existing ones. The order of fields in a is preserved, but values are taken from matching fields in b. Fields present only in b are appended at the end.\n\njulia> merge((a=1, b=2, c=3), (b=4, d=5))\n(a = 1, b = 4, c = 3, d = 5)\n\n\n\nmerge(a::NamedTuple, iterable)\n\nInterpret an iterable of key-value pairs as a named tuple, and perform a merge.\n\njulia> merge((a=1, b=2, c=3), [:b=>4, :d=>5])\n(a = 1, b = 4, c = 3, d = 5)\n\n\n\n"
 },
 
 {
-    "location": "stdlib/collections.html#Base.merge!-Tuple{Associative,Vararg{Associative,N} where N}",
+    "location": "stdlib/collections.html#Base.merge!-Tuple{AbstractDict,Vararg{AbstractDict,N} where N}",
     "page": "Collections and Data Structures",
     "title": "Base.merge!",
     "category": "Method",
-    "text": "merge!(d::Associative, others::Associative...)\n\nUpdate collection with pairs from the other collections. See also merge.\n\nExamples\n\njulia> d1 = Dict(1 => 2, 3 => 4);\n\njulia> d2 = Dict(1 => 4, 4 => 5);\n\njulia> merge!(d1, d2);\n\njulia> d1\nDict{Int64,Int64} with 3 entries:\n  4 => 5\n  3 => 4\n  1 => 4\n\n\n\n"
+    "text": "merge!(d::AbstractDict, others::AbstractDict...)\n\nUpdate collection with pairs from the other collections. See also merge.\n\nExamples\n\njulia> d1 = Dict(1 => 2, 3 => 4);\n\njulia> d2 = Dict(1 => 4, 4 => 5);\n\njulia> merge!(d1, d2);\n\njulia> d1\nDict{Int64,Int64} with 3 entries:\n  4 => 5\n  3 => 4\n  1 => 4\n\n\n\n"
 },
 
 {
-    "location": "stdlib/collections.html#Base.merge!-Tuple{Function,Associative,Vararg{Associative,N} where N}",
+    "location": "stdlib/collections.html#Base.merge!-Tuple{Function,AbstractDict,Vararg{AbstractDict,N} where N}",
     "page": "Collections and Data Structures",
     "title": "Base.merge!",
     "category": "Method",
-    "text": "merge!(combine, d::Associative, others::Associative...)\n\nUpdate collection with pairs from the other collections. Values with the same key will be combined using the combiner function.\n\nExamples\n\njulia> d1 = Dict(1 => 2, 3 => 4);\n\njulia> d2 = Dict(1 => 4, 4 => 5);\n\njulia> merge!(+, d1, d2);\n\njulia> d1\nDict{Int64,Int64} with 3 entries:\n  4 => 5\n  3 => 4\n  1 => 6\n\njulia> merge!(-, d1, d1);\n\njulia> d1\nDict{Int64,Int64} with 3 entries:\n  4 => 0\n  3 => 0\n  1 => 0\n\n\n\n"
+    "text": "merge!(combine, d::AbstractDict, others::AbstractDict...)\n\nUpdate collection with pairs from the other collections. Values with the same key will be combined using the combiner function.\n\nExamples\n\njulia> d1 = Dict(1 => 2, 3 => 4);\n\njulia> d2 = Dict(1 => 4, 4 => 5);\n\njulia> merge!(+, d1, d2);\n\njulia> d1\nDict{Int64,Int64} with 3 entries:\n  4 => 5\n  3 => 4\n  1 => 6\n\njulia> merge!(-, d1, d1);\n\njulia> d1\nDict{Int64,Int64} with 3 entries:\n  4 => 0\n  3 => 0\n  1 => 0\n\n\n\n"
 },
 
 {
@@ -7637,7 +7637,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Collections and Data Structures",
     "title": "Base.keytype",
     "category": "Function",
-    "text": "keytype(type)\n\nGet the key type of an associative collection type. Behaves similarly to eltype.\n\nExamples\n\njulia> keytype(Dict(Int32(1) => \"foo\"))\nInt32\n\n\n\n"
+    "text": "keytype(type)\n\nGet the key type of an dictionary type. Behaves similarly to eltype.\n\nExamples\n\njulia> keytype(Dict(Int32(1) => \"foo\"))\nInt32\n\n\n\n"
 },
 
 {
@@ -7645,15 +7645,15 @@ var documenterSearchIndex = {"docs": [
     "page": "Collections and Data Structures",
     "title": "Base.valtype",
     "category": "Function",
-    "text": "valtype(type)\n\nGet the value type of an associative collection type. Behaves similarly to eltype.\n\nExamples\n\njulia> valtype(Dict(Int32(1) => \"foo\"))\nString\n\n\n\n"
+    "text": "valtype(type)\n\nGet the value type of an dictionary type. Behaves similarly to eltype.\n\nExamples\n\njulia> valtype(Dict(Int32(1) => \"foo\"))\nString\n\n\n\n"
 },
 
 {
-    "location": "stdlib/collections.html#Associative-Collections-1",
+    "location": "stdlib/collections.html#Dictionaries-1",
     "page": "Collections and Data Structures",
-    "title": "Associative Collections",
+    "title": "Dictionaries",
     "category": "section",
-    "text": "Dict is the standard associative collection. Its implementation uses hash as the hashing function for the key, and isequal to determine equality. Define these two functions for custom types to override how they are stored in a hash table.ObjectIdDict is a special hash table where the keys are always object identities.WeakKeyDict is a hash table implementation where the keys are weak references to objects, and thus may be garbage collected even when referenced in a hash table.Dicts can be created by passing pair objects constructed with => to a Dict constructor: Dict(\"A\"=>1, \"B\"=>2). This call will attempt to infer type information from the keys and values (i.e. this example creates a Dict{String, Int64}). To explicitly specify types use the syntax Dict{KeyType,ValueType}(...). For example, Dict{String,Int32}(\"A\"=>1, \"B\"=>2).Associative collections may also be created with generators. For example, Dict(i => f(i) for i = 1:10).Given a dictionary D, the syntax D[x] returns the value of key x (if it exists) or throws an error, and D[x] = y stores the key-value pair x => y in D (replacing any existing value for the key x).  Multiple arguments to D[...] are converted to tuples; for example, the syntax D[x,y]  is equivalent to D[(x,y)], i.e. it refers to the value keyed by the tuple (x,y).Base.Dict\nBase.ObjectIdDict\nBase.WeakKeyDict\nBase.haskey\nBase.get(::Any, ::Any, ::Any)\nBase.get\nBase.get!(::Any, ::Any, ::Any)\nBase.get!(::Function, ::Any, ::Any)\nBase.getkey\nBase.delete!\nBase.pop!(::Any, ::Any, ::Any)\nBase.keys\nBase.values\nBase.pairs\nBase.merge\nBase.merge!(::Associative, ::Associative...)\nBase.merge!(::Function, ::Associative, ::Associative...)\nBase.sizehint!\nBase.keytype\nBase.valtypeFully implemented by:ObjectIdDict\nDict\nWeakKeyDictPartially implemented by:BitSet\nSet\nEnvDict\nArray\nBitArray"
+    "text": "Dict is the standard dictionary. Its implementation uses hash as the hashing function for the key, and isequal to determine equality. Define these two functions for custom types to override how they are stored in a hash table.ObjectIdDict is a special hash table where the keys are always object identities.WeakKeyDict is a hash table implementation where the keys are weak references to objects, and thus may be garbage collected even when referenced in a hash table.Dicts can be created by passing pair objects constructed with => to a Dict constructor: Dict(\"A\"=>1, \"B\"=>2). This call will attempt to infer type information from the keys and values (i.e. this example creates a Dict{String, Int64}). To explicitly specify types use the syntax Dict{KeyType,ValueType}(...). For example, Dict{String,Int32}(\"A\"=>1, \"B\"=>2).Dictionaries may also be created with generators. For example, Dict(i => f(i) for i = 1:10).Given a dictionary D, the syntax D[x] returns the value of key x (if it exists) or throws an error, and D[x] = y stores the key-value pair x => y in D (replacing any existing value for the key x).  Multiple arguments to D[...] are converted to tuples; for example, the syntax D[x,y]  is equivalent to D[(x,y)], i.e. it refers to the value keyed by the tuple (x,y).Base.Dict\nBase.ObjectIdDict\nBase.WeakKeyDict\nBase.haskey\nBase.get(::Any, ::Any, ::Any)\nBase.get\nBase.get!(::Any, ::Any, ::Any)\nBase.get!(::Function, ::Any, ::Any)\nBase.getkey\nBase.delete!\nBase.pop!(::Any, ::Any, ::Any)\nBase.keys\nBase.values\nBase.pairs\nBase.merge\nBase.merge!(::Associative, ::Associative...)\nBase.merge!(::Function, ::Associative, ::Associative...)\nBase.sizehint!\nBase.keytype\nBase.valtypeFully implemented by:ObjectIdDict\nDict\nWeakKeyDictPartially implemented by:BitSet\nSet\nEnvDict\nArray\nBitArray"
 },
 
 {
@@ -7901,7 +7901,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Mathematics",
     "title": "Base.:+",
     "category": "Function",
-    "text": "+(x, y...)\n\nAddition operator. x+y+z+... calls this function with all arguments, i.e. +(x, y, z, ...).\n\nExamples\n\njulia> 1 + 20 + 4\n25\n\njulia> +(1, 20, 4)\n25\n\n\n\ndt::Date + t::Time -> DateTime\n\nThe addition of a Date with a Time produces a DateTime. The hour, minute, second, and millisecond parts of the Time are used along with the year, month, and day of the Date to create the new DateTime. Non-zero microseconds or nanoseconds in the Time type will result in an InexactError being thrown.\n\n\n\n"
+    "text": "dt::Date + t::Time -> DateTime\n\nThe addition of a Date with a Time produces a DateTime. The hour, minute, second, and millisecond parts of the Time are used along with the year, month, and day of the Date to create the new DateTime. Non-zero microseconds or nanoseconds in the Time type will result in an InexactError being thrown.\n\n\n\n+(x, y...)\n\nAddition operator. x+y+z+... calls this function with all arguments, i.e. +(x, y, z, ...).\n\nExamples\n\njulia> 1 + 20 + 4\n25\n\njulia> +(1, 20, 4)\n25\n\n\n\n"
 },
 
 {
@@ -8157,7 +8157,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Mathematics",
     "title": "Base.:==",
     "category": "Function",
-    "text": "==(x, y)\n\nGeneric equality operator, giving a single Bool result. Falls back to ===. Should be implemented for all types with a notion of equality, based on the abstract value that an instance represents. For example, all numeric types are compared by numeric value, ignoring type. Strings are compared as sequences of characters, ignoring encoding.\n\nFollows IEEE semantics for floating-point numbers.\n\nCollections should generally implement == by calling == recursively on all contents.\n\nNew numeric types should implement this function for two arguments of the new type, and handle comparison to other types via promotion rules where possible.\n\n\n\n==(a::AbstractString, b::AbstractString)\n\nTest whether two strings are equal character by character.\n\nExamples\n\njulia> \"abc\" == \"abc\"\ntrue\n\njulia> \"abc\" == \"αβγ\"\nfalse\n\n\n\n"
+    "text": "==(x, y)\n\nGeneric equality operator, giving a single Bool result. Falls back to ===. Should be implemented for all types with a notion of equality, based on the abstract value that an instance represents. For example, all numeric types are compared by numeric value, ignoring type. Strings are compared as sequences of characters, ignoring encoding.\n\nFollows IEEE semantics for floating-point numbers.\n\nCollections should generally implement == by calling == recursively on all contents.\n\nNew numeric types should implement this function for two arguments of the new type, and handle comparison to other types via promotion rules where possible.\n\n\n\n==(a::AbstractString, b::AbstractString) -> Bool\n\nTest whether two strings are equal character by character (technically, Unicode code point by code point).\n\nExamples\n\njulia> \"abc\" == \"abc\"\ntrue\n\njulia> \"abc\" == \"αβγ\"\nfalse\n\n\n\n"
 },
 
 {
@@ -8213,7 +8213,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Mathematics",
     "title": "Base.cmp",
     "category": "Function",
-    "text": "cmp(x,y)\n\nReturn -1, 0, or 1 depending on whether x is less than, equal to, or greater than y, respectively. Uses the total order implemented by isless. For floating-point numbers, uses < but throws an error for unordered arguments.\n\nExamples\n\njulia> cmp(1, 2)\n-1\n\njulia> cmp(2, 1)\n1\n\njulia> cmp(2+im, 3-im)\nERROR: MethodError: no method matching isless(::Complex{Int64}, ::Complex{Int64})\nStacktrace:\n[...]\n\n\n\ncmp(a::AbstractString, b::AbstractString)\n\nCompare two strings for equality.\n\nReturn 0 if both strings have the same length and the character at each index is the same in both strings. Return -1 if a is a substring of b, or if a comes before b in alphabetical order. Return 1 if b is a substring of a, or if b comes before a in alphabetical order.\n\nExamples\n\njulia> cmp(\"abc\", \"abc\")\n0\n\njulia> cmp(\"ab\", \"abc\")\n-1\n\njulia> cmp(\"abc\", \"ab\")\n1\n\njulia> cmp(\"ab\", \"ac\")\n-1\n\njulia> cmp(\"ac\", \"ab\")\n1\n\njulia> cmp(\"α\", \"a\")\n1\n\njulia> cmp(\"b\", \"β\")\n-1\n\n\n\n"
+    "text": "cmp(x,y)\n\nReturn -1, 0, or 1 depending on whether x is less than, equal to, or greater than y, respectively. Uses the total order implemented by isless. For floating-point numbers, uses < but throws an error for unordered arguments.\n\nExamples\n\njulia> cmp(1, 2)\n-1\n\njulia> cmp(2, 1)\n1\n\njulia> cmp(2+im, 3-im)\nERROR: MethodError: no method matching isless(::Complex{Int64}, ::Complex{Int64})\nStacktrace:\n[...]\n\n\n\ncmp(a::AbstractString, b::AbstractString) -> Int\n\nCompare two strings for equality. Return 0 if both strings have the same length and the character at each index is the same in both strings. Return -1 if a is a substring of b, or if a comes before b in alphabetical order. Return 1 if b is a substring of a, or if b comes before a in alphabetical order (technically, lexicographical order by Unicode code points).\n\nExamples\n\njulia> cmp(\"abc\", \"abc\")\n0\n\njulia> cmp(\"ab\", \"abc\")\n-1\n\njulia> cmp(\"abc\", \"ab\")\n1\n\njulia> cmp(\"ab\", \"ac\")\n-1\n\njulia> cmp(\"ac\", \"ab\")\n1\n\njulia> cmp(\"α\", \"a\")\n1\n\njulia> cmp(\"b\", \"β\")\n-1\n\n\n\n"
 },
 
 {
@@ -9101,7 +9101,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Mathematics",
     "title": "Base.conj",
     "category": "Function",
-    "text": "conj(z)\n\nCompute the complex conjugate of a complex number z.\n\nExamples\n\njulia> conj(1 + 3im)\n1 - 3im\n\n\n\nconj(v::RowVector)\n\nReturn a ConjArray lazy view of the input, where each element is conjugated.\n\nExamples\n\njulia> v = [1+im, 1-im].'\n1×2 RowVector{Complex{Int64},Array{Complex{Int64},1}}:\n 1+1im  1-1im\n\njulia> conj(v)\n1×2 RowVector{Complex{Int64},ConjArray{Complex{Int64},1,Array{Complex{Int64},1}}}:\n 1-1im  1+1im\n\n\n\n"
+    "text": "conj(v::RowVector)\n\nReturn a ConjArray lazy view of the input, where each element is conjugated.\n\nExamples\n\njulia> v = [1+im, 1-im].'\n1×2 RowVector{Complex{Int64},Array{Complex{Int64},1}}:\n 1+1im  1-1im\n\njulia> conj(v)\n1×2 RowVector{Complex{Int64},ConjArray{Complex{Int64},1,Array{Complex{Int64},1}}}:\n 1-1im  1+1im\n\n\n\nconj(z)\n\nCompute the complex conjugate of a complex number z.\n\nExamples\n\njulia> conj(1 + 3im)\n1 - 3im\n\n\n\n"
 },
 
 {
@@ -9637,7 +9637,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Numbers",
     "title": "Base.Complex",
     "category": "Type",
-    "text": "Complex{T<:Real} <: Number\n\nComplex number type with real and imaginary part of type T.\n\nComplex32, Complex64 and Complex128 are aliases for Complex{Float16}, Complex{Float32} and Complex{Float64} respectively.\n\n\n\n"
+    "text": "Complex{T<:Real} <: Number\n\nComplex number type with real and imaginary part of type T.\n\nComplexF16, ComplexF32 and ComplexF64 are aliases for Complex{Float16}, Complex{Float32} and Complex{Float64} respectively.\n\n\n\n"
 },
 
 {
@@ -10285,7 +10285,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Numbers",
     "title": "Base.Random.rand",
     "category": "Function",
-    "text": "rand([rng=GLOBAL_RNG], [S], [dims...])\n\nPick a random element or array of random elements from the set of values specified by S; S can be\n\nan indexable collection (for example 1:n or ['x','y','z']),\nan Associative or AbstractSet object,\na string (considered as a collection of characters), or\na type: the set of values to pick from is then equivalent to typemin(S):typemax(S) for integers (this is not applicable to BigInt), and to 0 1) for floating point numbers;\n\nS defaults to Float64.\n\nExamples\n\njulia> rand(Int, 2)\n2-element Array{Int64,1}:\n 1339893410598768192\n 1575814717733606317\n\njulia> rand(MersenneTwister(0), Dict(1=>2, 3=>4))\n1=>2\n\nnote: Note\nThe complexity of rand(rng, s::Union{Associative,AbstractSet}) is linear in the length of s, unless an optimized method with constant complexity is available, which is the case for Dict, Set and BitSet. For more than a few calls, use rand(rng, collect(s)) instead, or either rand(rng, Dict(s)) or rand(rng, Set(s)) as appropriate.\n\n\n\n"
+    "text": "rand([rng=GLOBAL_RNG], [S], [dims...])\n\nPick a random element or array of random elements from the set of values specified by S; S can be\n\nan indexable collection (for example 1:n or ['x','y','z']),\nan AbstractDict or AbstractSet object,\na string (considered as a collection of characters), or\na type: the set of values to pick from is then equivalent to typemin(S):typemax(S) for integers (this is not applicable to BigInt), and to 0 1) for floating point numbers;\n\nS defaults to Float64.\n\nExamples\n\njulia> rand(Int, 2)\n2-element Array{Int64,1}:\n 1339893410598768192\n 1575814717733606317\n\njulia> rand(MersenneTwister(0), Dict(1=>2, 3=>4))\n1=>2\n\nnote: Note\nThe complexity of rand(rng, s::Union{AbstractDict,AbstractSet}) is linear in the length of s, unless an optimized method with constant complexity is available, which is the case for Dict, Set and BitSet. For more than a few calls, use rand(rng, collect(s)) instead, or either rand(rng, Dict(s)) or rand(rng, Set(s)) as appropriate.\n\n\n\n"
 },
 
 {
@@ -10309,7 +10309,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Numbers",
     "title": "Base.Random.randn",
     "category": "Function",
-    "text": "randn([rng=GLOBAL_RNG], [T=Float64], [dims...])\n\nGenerate a normally-distributed random number of type T with mean 0 and standard deviation 1. Optionally generate an array of normally-distributed random numbers. The Base module currently provides an implementation for the types Float16, Float32, and Float64 (the default), and their Complex counterparts. When the type argument is complex, the values are drawn from the circularly symmetric complex normal distribution.\n\nExamples\n\njulia> rng = MersenneTwister(1234);\n\njulia> randn(rng, Complex128)\n0.6133070881429037 - 0.6376291670853887im\n\njulia> randn(rng, Complex64, (2, 3))\n2×3 Array{Complex{Float32},2}:\n -0.349649-0.638457im  0.376756-0.192146im  -0.396334-0.0136413im\n  0.611224+1.56403im   0.355204-0.365563im  0.0905552+1.31012im\n\n\n\n"
+    "text": "randn([rng=GLOBAL_RNG], [T=Float64], [dims...])\n\nGenerate a normally-distributed random number of type T with mean 0 and standard deviation 1. Optionally generate an array of normally-distributed random numbers. The Base module currently provides an implementation for the types Float16, Float32, and Float64 (the default), and their Complex counterparts. When the type argument is complex, the values are drawn from the circularly symmetric complex normal distribution.\n\nExamples\n\njulia> rng = MersenneTwister(1234);\n\njulia> randn(rng, ComplexF64)\n0.6133070881429037 - 0.6376291670853887im\n\njulia> randn(rng, ComplexF32, (2, 3))\n2×3 Array{Complex{Float32},2}:\n -0.349649-0.638457im  0.376756-0.192146im  -0.396334-0.0136413im\n  0.611224+1.56403im   0.355204-0.365563im  0.0905552+1.31012im\n\n\n\n"
 },
 
 {
@@ -10365,7 +10365,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Strings",
     "title": "Base.length",
     "category": "Method",
-    "text": "length(s::AbstractString)\n\nThe number of characters in string s.\n\nExamples\n\njulia> length(\"jμΛIα\")\n5\n\n\n\n"
+    "text": "length(s::AbstractString) -> Int\nlength(s::AbstractString, i::Integer, j::Integer) -> Int\n\nThe number of characters in string s from indices i through j. This is computed as the number of code unit indices from i to j which are valid character indices. Without only a single string argument, this computes the number of characters in the entire string. With i and j arguments it computes the number of indices between i and j inclusive that are valid indices in the string s. In addition to in-bounds values, i may take the out-of-bounds value ncodeunits(s) + 1 and j may take the out-of-bounds value 0.\n\nSee also: isvalid, ncodeunits, endof, thisind, nextind, prevind\n\nExamples\n\njulia> length(\"jμΛIα\")\n5\n\n\n\n"
 },
 
 {
@@ -10373,7 +10373,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Strings",
     "title": "Base.sizeof",
     "category": "Method",
-    "text": "sizeof(s::AbstractString)\n\nThe number of bytes in string s.\n\nExamples\n\njulia> sizeof(\"❤\")\n3\n\n\n\n"
+    "text": "sizeof(T)\n\nSize, in bytes, of the canonical binary representation of the given DataType T, if any.\n\nExamples\n\njulia> sizeof(Float32)\n4\n\njulia> sizeof(ComplexF64)\n16\n\nIf T does not have a specific size, an error is thrown.\n\njulia> sizeof(Base.LinAlg.LU)\nERROR: argument is an abstract type; size is indeterminate\nStacktrace:\n[...]\n\n\n\n"
 },
 
 {
@@ -10381,7 +10381,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Strings",
     "title": "Base.:*",
     "category": "Method",
-    "text": "*(s::Union{AbstractString, Char}, t::Union{AbstractString, Char}...)\n\nConcatenate strings and/or characters, producing a String. This is equivalent to calling the string function on the arguments.\n\nExamples\n\njulia> \"Hello \" * \"world\"\n\"Hello world\"\n\njulia> 'j' * \"ulia\"\n\"julia\"\n\n\n\n"
+    "text": "*(s::Union{AbstractString, Char}, t::Union{AbstractString, Char}...) -> AbstractString\n\nConcatenate strings and/or characters, producing a String. This is equivalent to calling the string function on the arguments. Concatenation of built-in string types always produces a value of type String but other string types may choose to return a string of a different type as appropriate.\n\nExamples\n\njulia> \"Hello \" * \"world\"\n\"Hello world\"\n\njulia> 'j' * \"ulia\"\n\"julia\"\n\n\n\n"
 },
 
 {
@@ -10389,7 +10389,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Strings",
     "title": "Base.:^",
     "category": "Method",
-    "text": "^(s::Union{AbstractString,Char}, n::Integer)\n\nRepeat a string or character n times. The repeat function is an alias to this operator.\n\nExamples\n\njulia> \"Test \"^3\n\"Test Test Test \"\n\n\n\n"
+    "text": "^(s::Union{AbstractString,Char}, n::Integer)\n\nRepeat a string or character n times. This can also be written as repeat(s, n).\n\nSee also: repeat\n\nExamples\n\njulia> \"Test \"^3\n\"Test Test Test \"\n\n\n\n"
 },
 
 {
@@ -10405,7 +10405,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Strings",
     "title": "Base.repeat",
     "category": "Method",
-    "text": "repeat(s::AbstractString, r::Integer)\n\nRepeat a string r times. This can equivalently be accomplished by calling s^r.\n\nExamples\n\njulia> repeat(\"ha\", 3)\n\"hahaha\"\n\n\n\n"
+    "text": "repeat(s::AbstractString, r::Integer)\n\nRepeat a string r times. This can be written as s^r.\n\nSee also: ^\n\nExamples\n\njulia> repeat(\"ha\", 3)\n\"hahaha\"\n\n\n\n"
 },
 
 {
@@ -10457,11 +10457,19 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/strings.html#Base.codeunit-Tuple{AbstractString,Integer}",
+    "location": "stdlib/strings.html#Base.ncodeunits-Tuple{AbstractString}",
+    "page": "Strings",
+    "title": "Base.ncodeunits",
+    "category": "Method",
+    "text": "ncodeunits(s::AbstractString) -> Int\n\nReturn the number of code units in a string. Indices that are in bounds to access this string must satisfy 1 ≤ i ≤ ncodeunits(s). Not all such indices are valid – they may not be the start of a character, but they will return a code unit value when calling codeunit(s,i).\n\nSee also: codeunit, checkbounds, sizeof, length, endof\n\n\n\n"
+},
+
+{
+    "location": "stdlib/strings.html#Base.codeunit",
     "page": "Strings",
     "title": "Base.codeunit",
-    "category": "Method",
-    "text": "codeunit(s::AbstractString, i::Integer)\n\nGet the ith code unit of an encoded string. For example, returns the ith byte of the representation of a UTF-8 string.\n\nExamples\n\njulia> s = \"δ=γ\"; [codeunit(s, i) for i in 1:sizeof(s)]\n5-element Array{UInt8,1}:\n 0xce\n 0xb4\n 0x3d\n 0xce\n 0xb3\n\n\n\n"
+    "category": "Function",
+    "text": "codeunit(s::AbstractString) -> Type{<:Union{UInt8, UInt16, UInt32}}\n\nReturn the code unit type of the given string object. For ASCII, Latin-1, or UTF-8 encoded strings, this would be UInt8; for UCS-2 and UTF-16 it would be UInt16; for UTF-32 it would be UInt32. The unit code type need not be limited to these three types, but it's hard to think of widely used string encodings that don't use one of these units. codeunit(s) is the same as typeof(codeunit(s,1)) when s is a non-empty string.\n\nSee also: ncodeunits\n\n\n\ncodeunit(s::AbstractString, i::Integer) -> Union{UInt8, UInt16, UInt32}\n\nReturn the code unit value in the string s at index i. Note that\n\ncodeunit(s, i) :: codeunit(s)\n\nI.e. the value returned by codeunit(s, i) is of the type returned by codeunit(s).\n\nSee also: ncodeunits, checkbounds\n\n\n\n"
 },
 
 {
@@ -10505,22 +10513,6 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/strings.html#Base.UTF8proc.normalize_string",
-    "page": "Strings",
-    "title": "Base.UTF8proc.normalize_string",
-    "category": "Function",
-    "text": "normalize_string(s::AbstractString, normalform::Symbol)\n\nNormalize the string s according to one of the four \"normal forms\" of the Unicode standard: normalform can be :NFC, :NFD, :NFKC, or :NFKD.  Normal forms C (canonical composition) and D (canonical decomposition) convert different visually identical representations of the same abstract string into a single canonical form, with form C being more compact.  Normal forms KC and KD additionally canonicalize \"compatibility equivalents\": they convert characters that are abstractly similar but visually distinct into a single canonical choice (e.g. they expand ligatures into the individual characters), with form KC being more compact.\n\nAlternatively, finer control and additional transformations may be be obtained by calling normalize_string(s; keywords...), where any number of the following boolean keywords options (which all default to false except for compose) are specified:\n\ncompose=false: do not perform canonical composition\ndecompose=true: do canonical decomposition instead of canonical composition (compose=true is ignored if present)\ncompat=true: compatibility equivalents are canonicalized\ncasefold=true: perform Unicode case folding, e.g. for case-insensitive string comparison\nnewline2lf=true, newline2ls=true, or newline2ps=true: convert various newline sequences (LF, CRLF, CR, NEL) into a linefeed (LF), line-separation (LS), or paragraph-separation (PS) character, respectively\nstripmark=true: strip diacritical marks (e.g. accents)\nstripignore=true: strip Unicode's \"default ignorable\" characters (e.g. the soft hyphen or the left-to-right marker)\nstripcc=true: strip control characters; horizontal tabs and form feeds are converted to spaces; newlines are also converted to spaces unless a newline-conversion flag was specified\nrejectna=true: throw an error if unassigned code points are found\nstable=true: enforce Unicode Versioning Stability\n\nFor example, NFKC corresponds to the options compose=true, compat=true, stable=true.\n\nExamples\n\njulia> \"μ\" == normalize_string(\"µ\", compat=true) #LHS: Unicode U+03bc, RHS: Unicode U+00b5\ntrue\n\njulia> normalize_string(\"JuLiA\", casefold=true)\n\"julia\"\n\njulia> normalize_string(\"JúLiA\", stripmark=true)\n\"JuLiA\"\n\n\n\n"
-},
-
-{
-    "location": "stdlib/strings.html#Base.UTF8proc.graphemes",
-    "page": "Strings",
-    "title": "Base.UTF8proc.graphemes",
-    "category": "Function",
-    "text": "graphemes(s::AbstractString) -> GraphemeIterator\n\nReturns an iterator over substrings of s that correspond to the extended graphemes in the string, as defined by Unicode UAX #29. (Roughly, these are what users would perceive as single characters, even though they may contain more than one codepoint; for example a letter combined with an accent mark is a single grapheme.)\n\n\n\n"
-},
-
-{
     "location": "stdlib/strings.html#Base.isvalid-Tuple{Any}",
     "page": "Strings",
     "title": "Base.isvalid",
@@ -10541,15 +10533,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Strings",
     "title": "Base.isvalid",
     "category": "Method",
-    "text": "isvalid(str::AbstractString, i::Integer)\n\nTell whether index i is valid for the given string.\n\nExamples\n\njulia> str = \"αβγdef\";\n\njulia> isvalid(str, 1)\ntrue\n\njulia> str[1]\n'α': Unicode U+03b1 (category Ll: Letter, lowercase)\n\njulia> isvalid(str, 2)\nfalse\n\njulia> str[2]\nERROR: UnicodeError: invalid character index\nStacktrace:\n[...]\n\n\n\n"
-},
-
-{
-    "location": "stdlib/strings.html#Base.UTF8proc.is_assigned_char",
-    "page": "Strings",
-    "title": "Base.UTF8proc.is_assigned_char",
-    "category": "Function",
-    "text": "is_assigned_char(c) -> Bool\n\nReturns true if the given char or integer is an assigned Unicode code point.\n\nExamples\n\njulia> is_assigned_char(101)\ntrue\n\njulia> is_assigned_char('\\x01')\ntrue\n\n\n\n"
+    "text": "isvalid(s::AbstractString, i::Integer) -> Bool\n\nPredicate indicating whether the given index is the start of the encoding of a character in s or not. If isvalid(s, i) is true then s[i] will return the character whose encoding starts at that index, if it's false, then s[i] will raise an invalid index error or a bounds error depending on if i is in bounds. In order for isvalid(s, i) to be an O(1) function, the encoding of s must be self-synchronizing this is a basic assumption of Julia's generic string support.\n\nSee also: getindex, next, thisind, nextind, prevind, length\n\nExamples\n\njulia> str = \"αβγdef\";\n\njulia> isvalid(str, 1)\ntrue\n\njulia> str[1]\n'α': Unicode U+03b1 (category Ll: Letter, lowercase)\n\njulia> isvalid(str, 2)\nfalse\n\njulia> str[2]\nERROR: StringIndexError: invalid character index\nStacktrace:\n[...]\n\n\n\n"
 },
 
 {
@@ -10589,7 +10573,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Strings",
     "title": "Base.isless",
     "category": "Method",
-    "text": "isless(a::AbstractString, b::AbstractString)\n\nTest whether string a comes before string b in alphabetical order.\n\nExamples\n\njulia> isless(\"a\", \"b\")\ntrue\n\njulia> isless(\"β\", \"α\")\nfalse\n\njulia> isless(\"a\", \"a\")\nfalse\n\n\n\n"
+    "text": "isless(a::AbstractString, b::AbstractString) -> Bool\n\nTest whether string a comes before string b in alphabetical order (technically, in lexicographical order by Unicode code points).\n\nExamples\n\njulia> isless(\"a\", \"b\")\ntrue\n\njulia> isless(\"β\", \"α\")\nfalse\n\njulia> isless(\"a\", \"a\")\nfalse\n\n\n\n"
 },
 
 {
@@ -10597,7 +10581,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Strings",
     "title": "Base.:==",
     "category": "Method",
-    "text": "==(a::AbstractString, b::AbstractString)\n\nTest whether two strings are equal character by character.\n\nExamples\n\njulia> \"abc\" == \"abc\"\ntrue\n\njulia> \"abc\" == \"αβγ\"\nfalse\n\n\n\n"
+    "text": "==(a::AbstractString, b::AbstractString) -> Bool\n\nTest whether two strings are equal character by character (technically, Unicode code point by code point).\n\nExamples\n\njulia> \"abc\" == \"abc\"\ntrue\n\njulia> \"abc\" == \"αβγ\"\nfalse\n\n\n\n"
 },
 
 {
@@ -10605,7 +10589,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Strings",
     "title": "Base.cmp",
     "category": "Method",
-    "text": "cmp(a::AbstractString, b::AbstractString)\n\nCompare two strings for equality.\n\nReturn 0 if both strings have the same length and the character at each index is the same in both strings. Return -1 if a is a substring of b, or if a comes before b in alphabetical order. Return 1 if b is a substring of a, or if b comes before a in alphabetical order.\n\nExamples\n\njulia> cmp(\"abc\", \"abc\")\n0\n\njulia> cmp(\"ab\", \"abc\")\n-1\n\njulia> cmp(\"abc\", \"ab\")\n1\n\njulia> cmp(\"ab\", \"ac\")\n-1\n\njulia> cmp(\"ac\", \"ab\")\n1\n\njulia> cmp(\"α\", \"a\")\n1\n\njulia> cmp(\"b\", \"β\")\n-1\n\n\n\n"
+    "text": "cmp(a::AbstractString, b::AbstractString) -> Int\n\nCompare two strings for equality. Return 0 if both strings have the same length and the character at each index is the same in both strings. Return -1 if a is a substring of b, or if a comes before b in alphabetical order. Return 1 if b is a substring of a, or if b comes before a in alphabetical order (technically, lexicographical order by Unicode code points).\n\nExamples\n\njulia> cmp(\"abc\", \"abc\")\n0\n\njulia> cmp(\"ab\", \"abc\")\n-1\n\njulia> cmp(\"abc\", \"ab\")\n1\n\njulia> cmp(\"ab\", \"ac\")\n-1\n\njulia> cmp(\"ac\", \"ab\")\n1\n\njulia> cmp(\"α\", \"a\")\n1\n\njulia> cmp(\"b\", \"β\")\n-1\n\n\n\n"
 },
 
 {
@@ -10613,7 +10597,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Strings",
     "title": "Base.lpad",
     "category": "Function",
-    "text": "lpad(s, n::Integer, p::AbstractString=\" \")\n\nMake a string at least n columns wide when printed by padding s on the left with copies of p.\n\nExamples\n\njulia> lpad(\"March\",10)\n\"     March\"\n\n\n\n"
+    "text": "lpad(s, n::Integer, p::Union{Char,AbstractString}=' ') -> String\n\nStringify s and pad the resulting string on the left with p to make it n characters (code points) long. If s is already n characters long, an equal string is returned. Pad with spaces by default.\n\nExamples\n\njulia> lpad(\"March\", 10)\n\"     March\"\n\n\n\n"
 },
 
 {
@@ -10621,7 +10605,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Strings",
     "title": "Base.rpad",
     "category": "Function",
-    "text": "rpad(s, n::Integer, p::AbstractString=\" \")\n\nMake a string at least n columns wide when printed by padding s on the right with copies of p.\n\nExamples\n\njulia> rpad(\"March\",20)\n\"March               \"\n\n\n\n"
+    "text": "rpad(s, n::Integer, p::Union{Char,AbstractString}=' ') -> String\n\nStringify s and pad the resulting string on the right with p to make it n characters (code points) long. If s is already n characters long, an equal string is returned. Pad with spaces by default.\n\nExamples\n\njulia> rpad(\"March\", 20)\n\"March               \"\n\n\n\n"
 },
 
 {
@@ -10669,7 +10653,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Strings",
     "title": "Base.reverse",
     "category": "Method",
-    "text": "reverse(s::AbstractString) -> AbstractString\n\nReverses a string. Technically, this function reverses the codepoints in a string and its main utility is for reversed-order string processing, especially for reversed regular-expression searches. See also reverseind to convert indices in s to indices in reverse(s) and vice-versa, and graphemes to operate on user-visible \"characters\" (graphemes) rather than codepoints. See also Iterators.reverse for reverse-order iteration without making a copy. Custom string types must implement the reverse function themselves and should typically return a string with the same type and encoding. If they return a string with a different encoding, they must also override reverseind for that string type to satisfy s[reverseind(s,i)] == reverse(s)[i].\n\nExamples\n\njulia> reverse(\"JuliaLang\")\n\"gnaLailuJ\"\n\njulia> reverse(\"ax̂e\") # combining characters can lead to surprising results\n\"êxa\"\n\njulia> join(reverse(collect(graphemes(\"ax̂e\")))) # reverses graphemes\n\"ex̂a\"\n\n\n\n"
+    "text": "reverse(s::AbstractString) -> AbstractString\n\nReverses a string. Technically, this function reverses the codepoints in a string and its main utility is for reversed-order string processing, especially for reversed regular-expression searches. See also reverseind to convert indices in s to indices in reverse(s) and vice-versa, and Unicode.graphemes to operate on user-visible \"characters\" (graphemes) rather than codepoints. See also Iterators.reverse for reverse-order iteration without making a copy. Custom string types must implement the reverse function themselves and should typically return a string with the same type and encoding. If they return a string with a different encoding, they must also override reverseind for that string type to satisfy s[reverseind(s,i)] == reverse(s)[i].\n\nExamples\n\njulia> reverse(\"JuliaLang\")\n\"gnaLailuJ\"\n\njulia> reverse(\"ax̂e\") # combining characters can lead to surprising results\n\"êxa\"\n\njulia> using Unicode\n\njulia> join(reverse(collect(graphemes(\"ax̂e\")))) # reverses graphemes\n\"ex̂a\"\n\n\n\n"
 },
 
 {
@@ -10741,7 +10725,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Strings",
     "title": "Base.first",
     "category": "Method",
-    "text": "first(str::AbstractString, nchar::Integer)\n\nGet a string consisting of the first nchar characters of str.\n\njulia> first(\"∀ϵ≠0: ϵ²>0\", 0)\n\"\"\n\njulia> first(\"∀ϵ≠0: ϵ²>0\", 1)\n\"∀\"\n\njulia> first(\"∀ϵ≠0: ϵ²>0\", 3)\n\"∀ϵ≠\"\n\n\n\n"
+    "text": "first(s::AbstractString, n::Integer)\n\nGet a string consisting of the first n characters of s.\n\njulia> first(\"∀ϵ≠0: ϵ²>0\", 0)\n\"\"\n\njulia> first(\"∀ϵ≠0: ϵ²>0\", 1)\n\"∀\"\n\njulia> first(\"∀ϵ≠0: ϵ²>0\", 3)\n\"∀ϵ≠\"\n\n\n\n"
 },
 
 {
@@ -10749,47 +10733,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Strings",
     "title": "Base.last",
     "category": "Method",
-    "text": "last(str::AbstractString, nchar::Integer)\n\nGet a string consisting of the last nchar characters of str.\n\njulia> last(\"∀ϵ≠0: ϵ²>0\", 0)\n\"\"\n\njulia> last(\"∀ϵ≠0: ϵ²>0\", 1)\n\"0\"\n\njulia> last(\"∀ϵ≠0: ϵ²>0\", 3)\n\"²>0\"\n\n\n\n"
-},
-
-{
-    "location": "stdlib/strings.html#Base.uppercase",
-    "page": "Strings",
-    "title": "Base.uppercase",
-    "category": "Function",
-    "text": "uppercase(s::AbstractString)\n\nReturn s with all characters converted to uppercase.\n\nExamples\n\njulia> uppercase(\"Julia\")\n\"JULIA\"\n\n\n\n"
-},
-
-{
-    "location": "stdlib/strings.html#Base.lowercase",
-    "page": "Strings",
-    "title": "Base.lowercase",
-    "category": "Function",
-    "text": "lowercase(s::AbstractString)\n\nReturn s with all characters converted to lowercase.\n\nExamples\n\njulia> lowercase(\"STRINGS AND THINGS\")\n\"strings and things\"\n\n\n\n"
-},
-
-{
-    "location": "stdlib/strings.html#Base.titlecase",
-    "page": "Strings",
-    "title": "Base.titlecase",
-    "category": "Function",
-    "text": "titlecase(s::AbstractString)\n\nCapitalize the first character of each word in s. See also ucfirst to capitalize only the first character in s.\n\nExamples\n\njulia> titlecase(\"the julia programming language\")\n\"The Julia Programming Language\"\n\n\n\n"
-},
-
-{
-    "location": "stdlib/strings.html#Base.ucfirst",
-    "page": "Strings",
-    "title": "Base.ucfirst",
-    "category": "Function",
-    "text": "ucfirst(s::AbstractString)\n\nReturn string with the first character converted to uppercase (technically \"title case\" for Unicode). See also titlecase to capitalize the first character of every word in s.\n\nExamples\n\njulia> ucfirst(\"python\")\n\"Python\"\n\n\n\n"
-},
-
-{
-    "location": "stdlib/strings.html#Base.lcfirst",
-    "page": "Strings",
-    "title": "Base.lcfirst",
-    "category": "Function",
-    "text": "lcfirst(s::AbstractString)\n\nReturn string with the first character converted to lowercase.\n\nExamples\n\njulia> lcfirst(\"Julia\")\n\"julia\"\n\n\n\n"
+    "text": "last(s::AbstractString, n::Integer)\n\nGet a string consisting of the last n characters of s.\n\njulia> last(\"∀ϵ≠0: ϵ²>0\", 0)\n\"\"\n\njulia> last(\"∀ϵ≠0: ϵ²>0\", 1)\n\"0\"\n\njulia> last(\"∀ϵ≠0: ϵ²>0\", 3)\n\"²>0\"\n\n\n\n"
 },
 
 {
@@ -10817,27 +10761,11 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/strings.html#Base.ind2chr",
-    "page": "Strings",
-    "title": "Base.ind2chr",
-    "category": "Function",
-    "text": "ind2chr(s::AbstractString, i::Integer)\n\nConvert a byte index i to a character index with respect to string s.\n\nSee also chr2ind.\n\nExamples\n\njulia> str = \"αβγdef\";\n\njulia> ind2chr(str, 3)\n2\n\njulia> chr2ind(str, 2)\n3\n\n\n\n"
-},
-
-{
-    "location": "stdlib/strings.html#Base.chr2ind",
-    "page": "Strings",
-    "title": "Base.chr2ind",
-    "category": "Function",
-    "text": "chr2ind(s::AbstractString, i::Integer)\n\nConvert a character index i to a byte index.\n\nSee also ind2chr.\n\nExamples\n\njulia> str = \"αβγdef\";\n\njulia> chr2ind(str, 2)\n3\n\njulia> ind2chr(str, 3)\n2\n\n\n\n"
-},
-
-{
     "location": "stdlib/strings.html#Base.thisind",
     "page": "Strings",
     "title": "Base.thisind",
     "category": "Function",
-    "text": "thisind(s::AbstractString, i::Integer)\n\nIf i is the index into a character in s then thisind returns the index of the start of that character. If i < start(s) then it returns start(s) - 1. If i > ncodeunits(s) then it returns ncodeunits(s) + 1.\n\nExamples\n\n```jldoctest julia> thisind(\"αβγdef\", -5) 0\n\njulia> thisind(\"αβγdef\", 1) 1\n\njulia> thisind(\"αβγdef\", 3) 3\n\njulia> thisind(\"αβγdef\", 4) 3\n\njulia> thisind(\"αβγdef\", 9) 9\n\njulia> thisind(\"αβγdef\", 10) 10\n\njulia> thisind(\"αβγdef\", 20) 10\n\n\n\n"
+    "text": "thisind(s::AbstractString, i::Integer) -> Int\n\nIf i is in bounds in s return the index of the start of the character whose encoding code unit i is part of. In other words, if i is the start of a character, return i; if i is not the start of a character, rewind until the start of a character and return that index. If i is out of bounds in s return i.\n\nExamples\n\n```jldoctest julia> thisind(\"αβγdef\", -5) -5\n\njulia> thisind(\"αβγdef\", 1) 1\n\njulia> thisind(\"αβγdef\", 3) 3\n\njulia> thisind(\"αβγdef\", 4) 3\n\njulia> thisind(\"αβγdef\", 9) 9\n\njulia> thisind(\"αβγdef\", 10) 10\n\njulia> thisind(\"αβγdef\", 20) 20\n\n\n\n"
 },
 
 {
@@ -10845,7 +10773,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Strings",
     "title": "Base.nextind",
     "category": "Function",
-    "text": "nextind(str::AbstractString, i::Integer, nchar::Integer=1)\n\nGet the next valid string index after i. Returns a value greater than endof(str) at or after the end of the string. If the nchar argument is given the function goes forward nchar characters.\n\nExamples\n\njulia> str = \"αβγdef\";\n\njulia> nextind(str, 1)\n3\n\njulia> nextind(str, 1, 2)\n5\n\njulia> endof(str)\n9\n\njulia> nextind(str, 9)\n10\n\n\n\n"
+    "text": "nextind(str::AbstractString, i::Integer, n::Integer=1) -> Int\n\nIf i is in bounds in s return the index of the start of the character whose encoding starts after index i. If i is out of bounds in s return i + 1. If n == 0 return i.\n\nExamples\n\njulia> str = \"αβγdef\";\n\njulia> nextind(str, 1)\n3\n\njulia> nextind(str, 1, 2)\n5\n\njulia> endof(str)\n9\n\njulia> nextind(str, 9)\n10\n\n\n\n"
 },
 
 {
@@ -10853,7 +10781,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Strings",
     "title": "Base.prevind",
     "category": "Function",
-    "text": "prevind(str::AbstractString, i::Integer, nchar::Integer=1)\n\nGet the previous valid string index before i. Returns a value less than 1 at the beginning of the string. If the nchar argument is given the function goes back nchar characters.\n\nExamples\n\njulia> prevind(\"αβγdef\", 3)\n1\n\njulia> prevind(\"αβγdef\", 1)\n0\n\njulia> prevind(\"αβγdef\", 3, 2)\n0\n\n\n\n"
+    "text": "prevind(str::AbstractString, i::Integer, n::Integer=1) -> Int\n\nIf i is in bounds in s return the index of the start of the character whose encoding starts before index i. In other words, if i is the start of a character, return the start of the previous character; if i is not the start of a character, rewind until the start of a character and return that index. If i is out of bounds in s return i - 1. If n == 0 return i.\n\nExamples\n\njulia> prevind(\"αβγdef\", 3)\n1\n\njulia> prevind(\"αβγdef\", 1)\n0\n\njulia> prevind(\"αβγdef\", 0)\n-1\n\njulia> prevind(\"αβγdef\", 3, 2)\n0\n\n\n\n"
 },
 
 {
@@ -10862,118 +10790,6 @@ var documenterSearchIndex = {"docs": [
     "title": "Base.Random.randstring",
     "category": "Function",
     "text": "randstring([rng=GLOBAL_RNG], [chars], [len=8])\n\nCreate a random string of length len, consisting of characters from chars, which defaults to the set of upper- and lower-case letters and the digits 0-9. The optional rng argument specifies a random number generator, see Random Numbers.\n\nExamples\n\njulia> srand(0); randstring()\n\"c03rgKi1\"\n\njulia> randstring(MersenneTwister(0), 'a':'z', 6)\n\"wijzek\"\n\njulia> randstring(\"ACGT\")\n\"TATCGGTC\"\n\nnote: Note\nchars can be any collection of characters, of type Char or UInt8 (more efficient), provided rand can randomly pick characters from it.\n\n\n\n"
-},
-
-{
-    "location": "stdlib/strings.html#Base.UTF8proc.textwidth",
-    "page": "Strings",
-    "title": "Base.UTF8proc.textwidth",
-    "category": "Function",
-    "text": "textwidth(c)\n\nGive the number of columns needed to print a character.\n\nExamples\n\njulia> textwidth('α')\n1\n\njulia> textwidth('❤')\n2\n\n\n\ntextwidth(s::AbstractString)\n\nGive the number of columns needed to print a string.\n\nExamples\n\njulia> textwidth(\"March\")\n5\n\n\n\n"
-},
-
-{
-    "location": "stdlib/strings.html#Base.UTF8proc.isalnum",
-    "page": "Strings",
-    "title": "Base.UTF8proc.isalnum",
-    "category": "Function",
-    "text": "isalnum(c::Char) -> Bool\n\nTests whether a character is alphanumeric. A character is classified as alphabetic if it belongs to the Unicode general category Letter or Number, i.e. a character whose category code begins with 'L' or 'N'.\n\nExamples\n\njulia> isalnum('❤')\nfalse\n\njulia> isalnum('9')\ntrue\n\njulia> isalnum('α')\ntrue\n\n\n\n"
-},
-
-{
-    "location": "stdlib/strings.html#Base.UTF8proc.isalpha",
-    "page": "Strings",
-    "title": "Base.UTF8proc.isalpha",
-    "category": "Function",
-    "text": "isalpha(c::Char) -> Bool\n\nTests whether a character is alphabetic. A character is classified as alphabetic if it belongs to the Unicode general category Letter, i.e. a character whose category code begins with 'L'.\n\nExamples\n\njulia> isalpha('❤')\nfalse\n\njulia> isalpha('α')\ntrue\n\njulia> isalpha('9')\nfalse\n\n\n\n"
-},
-
-{
-    "location": "stdlib/strings.html#Base.isascii",
-    "page": "Strings",
-    "title": "Base.isascii",
-    "category": "Function",
-    "text": "isascii(c::Union{Char,AbstractString}) -> Bool\n\nTest whether a character belongs to the ASCII character set, or whether this is true for all elements of a string.\n\nExamples\n\njulia> isascii('a')\ntrue\n\njulia> isascii('α')\nfalse\n\njulia> isascii(\"abc\")\ntrue\n\njulia> isascii(\"αβγ\")\nfalse\n\n\n\n"
-},
-
-{
-    "location": "stdlib/strings.html#Base.UTF8proc.iscntrl",
-    "page": "Strings",
-    "title": "Base.UTF8proc.iscntrl",
-    "category": "Function",
-    "text": "iscntrl(c::Char) -> Bool\n\nTests whether a character is a control character. Control characters are the non-printing characters of the Latin-1 subset of Unicode.\n\nExamples\n\njulia> iscntrl('\\x01')\ntrue\n\njulia> iscntrl('a')\nfalse\n\n\n\n"
-},
-
-{
-    "location": "stdlib/strings.html#Base.UTF8proc.isdigit",
-    "page": "Strings",
-    "title": "Base.UTF8proc.isdigit",
-    "category": "Function",
-    "text": "isdigit(c::Char) -> Bool\n\nTests whether a character is a numeric digit (0-9).\n\nExamples\n\njulia> isdigit('❤')\nfalse\n\njulia> isdigit('9')\ntrue\n\njulia> isdigit('α')\nfalse\n\n\n\n"
-},
-
-{
-    "location": "stdlib/strings.html#Base.UTF8proc.isgraph",
-    "page": "Strings",
-    "title": "Base.UTF8proc.isgraph",
-    "category": "Function",
-    "text": "isgraph(c::Char) -> Bool\n\nTests whether a character is printable, and not a space. Any character that would cause a printer to use ink should be classified with isgraph(c)==true.\n\nExamples\n\njulia> isgraph('\\x01')\nfalse\n\njulia> isgraph('A')\ntrue\n\n\n\n"
-},
-
-{
-    "location": "stdlib/strings.html#Base.UTF8proc.islower",
-    "page": "Strings",
-    "title": "Base.UTF8proc.islower",
-    "category": "Function",
-    "text": "islower(c::Char) -> Bool\n\nTests whether a character is a lowercase letter. A character is classified as lowercase if it belongs to Unicode category Ll, Letter: Lowercase.\n\nExamples\n\njulia> islower('α')\ntrue\n\njulia> islower('Γ')\nfalse\n\njulia> islower('❤')\nfalse\n\n\n\n"
-},
-
-{
-    "location": "stdlib/strings.html#Base.UTF8proc.isnumber",
-    "page": "Strings",
-    "title": "Base.UTF8proc.isnumber",
-    "category": "Function",
-    "text": "isnumber(c::Char) -> Bool\n\nTests whether a character is numeric. A character is classified as numeric if it belongs to the Unicode general category Number, i.e. a character whose category code begins with 'N'.\n\nExamples\n\njulia> isnumber('9')\ntrue\n\njulia> isnumber('α')\nfalse\n\njulia> isnumber('❤')\nfalse\n\n\n\n"
-},
-
-{
-    "location": "stdlib/strings.html#Base.UTF8proc.isprint",
-    "page": "Strings",
-    "title": "Base.UTF8proc.isprint",
-    "category": "Function",
-    "text": "isprint(c::Char) -> Bool\n\nTests whether a character is printable, including spaces, but not a control character.\n\nExamples\n\njulia> isprint('\\x01')\nfalse\n\njulia> isprint('A')\ntrue\n\n\n\n"
-},
-
-{
-    "location": "stdlib/strings.html#Base.UTF8proc.ispunct",
-    "page": "Strings",
-    "title": "Base.UTF8proc.ispunct",
-    "category": "Function",
-    "text": "ispunct(c::Char) -> Bool\n\nTests whether a character belongs to the Unicode general category Punctuation, i.e. a character whose category code begins with 'P'.\n\nExamples\n\njulia> ispunct('α')\nfalse\n\njulia> ispunct('/')\ntrue\n\njulia> ispunct(';')\ntrue\n\n\n\n"
-},
-
-{
-    "location": "stdlib/strings.html#Base.UTF8proc.isspace",
-    "page": "Strings",
-    "title": "Base.UTF8proc.isspace",
-    "category": "Function",
-    "text": "isspace(c::Char) -> Bool\n\nTests whether a character is any whitespace character. Includes ASCII characters '\\t', '\\n', '\\v', '\\f', '\\r', and ' ', Latin-1 character U+0085, and characters in Unicode category Zs.\n\nExamples\n\njulia> isspace('\\n')\ntrue\n\njulia> isspace('\\r')\ntrue\n\njulia> isspace(' ')\ntrue\n\njulia> isspace('\\x20')\ntrue\n\n\n\n"
-},
-
-{
-    "location": "stdlib/strings.html#Base.UTF8proc.isupper",
-    "page": "Strings",
-    "title": "Base.UTF8proc.isupper",
-    "category": "Function",
-    "text": "isupper(c::Char) -> Bool\n\nTests whether a character is an uppercase letter. A character is classified as uppercase if it belongs to Unicode category Lu, Letter: Uppercase, or Lt, Letter: Titlecase.\n\nExamples\n\njulia> isupper('γ')\nfalse\n\njulia> isupper('Γ')\ntrue\n\njulia> isupper('❤')\nfalse\n\n\n\n"
-},
-
-{
-    "location": "stdlib/strings.html#Base.isxdigit",
-    "page": "Strings",
-    "title": "Base.isxdigit",
-    "category": "Function",
-    "text": "isxdigit(c::Char) -> Bool\n\nTest whether a character is a valid hexadecimal digit. Note that this does not include x (as in the standard 0x prefix).\n\nExamples\n\njulia> isxdigit('a')\ntrue\n\njulia> isxdigit('x')\nfalse\n\n\n\n"
 },
 
 {
@@ -11005,7 +10821,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Strings",
     "title": "Strings",
     "category": "section",
-    "text": "Base.length(::AbstractString)\nBase.sizeof(::AbstractString)\nBase.:*(::Union{Char, AbstractString}, ::Union{Char, AbstractString}...)\nBase.:^(::AbstractString, ::Integer)\nBase.string\nBase.repeat(::AbstractString, ::Integer)\nBase.repeat(::Char, ::Integer)\nBase.repr\nCore.String(::AbstractString)\nBase.SubString\nBase.transcode\nBase.unsafe_string\nBase.codeunit(::AbstractString, ::Integer)\nBase.ascii\nBase.@r_str\nBase.@raw_str\nBase.Docs.@html_str\nBase.Docs.@text_str\nBase.UTF8proc.normalize_string\nBase.UTF8proc.graphemes\nBase.isvalid(::Any)\nBase.isvalid(::Any, ::Any)\nBase.isvalid(::AbstractString, ::Integer)\nBase.UTF8proc.is_assigned_char\nBase.ismatch\nBase.match\nBase.eachmatch\nBase.matchall\nBase.isless(::AbstractString, ::AbstractString)\nBase.:(==)(::AbstractString, ::AbstractString)\nBase.cmp(::AbstractString, ::AbstractString)\nBase.lpad\nBase.rpad\nBase.search\nBase.rsearch\nBase.searchindex\nBase.rsearchindex\nBase.contains(::AbstractString, ::AbstractString)\nBase.reverse(::Union{String,SubString{String}})\nBase.replace\nBase.split\nBase.rsplit\nBase.strip\nBase.lstrip\nBase.rstrip\nBase.startswith\nBase.endswith\nBase.first(::AbstractString, ::Integer)\nBase.last(::AbstractString, ::Integer)\nBase.uppercase\nBase.lowercase\nBase.titlecase\nBase.ucfirst\nBase.lcfirst\nBase.join\nBase.chop\nBase.chomp\nBase.ind2chr\nBase.chr2ind\nBase.thisind\nBase.nextind\nBase.prevind\nBase.Random.randstring\nBase.UTF8proc.textwidth\nBase.UTF8proc.isalnum\nBase.UTF8proc.isalpha\nBase.isascii\nBase.UTF8proc.iscntrl\nBase.UTF8proc.isdigit\nBase.UTF8proc.isgraph\nBase.UTF8proc.islower\nBase.UTF8proc.isnumber\nBase.UTF8proc.isprint\nBase.UTF8proc.ispunct\nBase.UTF8proc.isspace\nBase.UTF8proc.isupper\nBase.isxdigit\nCore.Symbol\nBase.escape_string\nBase.unescape_string"
+    "text": "Base.length(::AbstractString)\nBase.sizeof(::AbstractString)\nBase.:*(::Union{Char, AbstractString}, ::Union{Char, AbstractString}...)\nBase.:^(::AbstractString, ::Integer)\nBase.string\nBase.repeat(::AbstractString, ::Integer)\nBase.repeat(::Char, ::Integer)\nBase.repr\nCore.String(::AbstractString)\nBase.SubString\nBase.transcode\nBase.unsafe_string\nBase.ncodeunits(::AbstractString)\nBase.codeunit\nBase.ascii\nBase.@r_str\nBase.@raw_str\nBase.Docs.@html_str\nBase.Docs.@text_str\nBase.isvalid(::Any)\nBase.isvalid(::Any, ::Any)\nBase.isvalid(::AbstractString, ::Integer)\nBase.ismatch\nBase.match\nBase.eachmatch\nBase.matchall\nBase.isless(::AbstractString, ::AbstractString)\nBase.:(==)(::AbstractString, ::AbstractString)\nBase.cmp(::AbstractString, ::AbstractString)\nBase.lpad\nBase.rpad\nBase.search\nBase.rsearch\nBase.searchindex\nBase.rsearchindex\nBase.contains(::AbstractString, ::AbstractString)\nBase.reverse(::Union{String,SubString{String}})\nBase.replace\nBase.split\nBase.rsplit\nBase.strip\nBase.lstrip\nBase.rstrip\nBase.startswith\nBase.endswith\nBase.first(::AbstractString, ::Integer)\nBase.last(::AbstractString, ::Integer)\nBase.join\nBase.chop\nBase.chomp\nBase.thisind\nBase.nextind\nBase.prevind\nBase.Random.randstring\nCore.Symbol\nBase.escape_string\nBase.unescape_string"
 },
 
 {
@@ -11149,7 +10965,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Arrays",
     "title": "Base.ones",
     "category": "Function",
-    "text": "ones([T=Float64,] dims...)\n\nCreate an Array, with element type T, of all ones with size specified by dims. See also zeros, similar.\n\nExamples\n\njulia> ones(1,2)\n1×2 Array{Float64,2}:\n 1.0  1.0\n\njulia> ones(Complex128, 2, 3)\n2×3 Array{Complex{Float64},2}:\n 1.0+0.0im  1.0+0.0im  1.0+0.0im\n 1.0+0.0im  1.0+0.0im  1.0+0.0im\n\n\n\n"
+    "text": "ones([T=Float64,] dims...)\n\nCreate an Array, with element type T, of all ones with size specified by dims. See also zeros, similar.\n\nExamples\n\njulia> ones(1,2)\n1×2 Array{Float64,2}:\n 1.0  1.0\n\njulia> ones(ComplexF64, 2, 3)\n2×3 Array{Complex{Float64},2}:\n 1.0+0.0im  1.0+0.0im  1.0+0.0im\n 1.0+0.0im  1.0+0.0im  1.0+0.0im\n\n\n\n"
 },
 
 {
@@ -11829,7 +11645,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Arrays",
     "title": "Base.permutedims",
     "category": "Function",
-    "text": "permutedims(A, perm)\n\nPermute the dimensions of array A. perm is a vector specifying a permutation of length ndims(A). This is a generalization of transpose for multi-dimensional arrays. Transpose is equivalent to permutedims(A, [2,1]).\n\nSee also: PermutedDimsArray.\n\nExamples\n\njulia> A = reshape(collect(1:8), (2,2,2))\n2×2×2 Array{Int64,3}:\n[:, :, 1] =\n 1  3\n 2  4\n\n[:, :, 2] =\n 5  7\n 6  8\n\njulia> permutedims(A, [3, 2, 1])\n2×2×2 Array{Int64,3}:\n[:, :, 1] =\n 1  3\n 5  7\n\n[:, :, 2] =\n 2  4\n 6  8\n\n\n\n"
+    "text": "permutedims(A::AbstractArray, perm)\n\nPermute the dimensions of array A. perm is a vector specifying a permutation of length ndims(A).\n\nSee also: PermutedDimsArray.\n\nExamples\n\njulia> A = reshape(collect(1:8), (2,2,2))\n2×2×2 Array{Int64,3}:\n[:, :, 1] =\n 1  3\n 2  4\n\n[:, :, 2] =\n 5  7\n 6  8\n\njulia> permutedims(A, [3, 2, 1])\n2×2×2 Array{Int64,3}:\n[:, :, 1] =\n 1  3\n 5  7\n\n[:, :, 2] =\n 2  4\n 6  8\n\n\n\npermutedims(m::AbstractMatrix)\n\nPermute the dimensions of the matrix m, by flipping the elements across the diagonal of the matrix. Differs from transpose in that the operation is not recursive.\n\n\n\npermutedims(v::AbstractVector)\n\nReshape vector v into a 1 × length(v) row matrix.\n\n\n\n"
 },
 
 {
@@ -12069,7 +11885,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Arrays",
     "title": "Base.reverse",
     "category": "Function",
-    "text": "reverse(v [, start=1 [, stop=length(v) ]] )\n\nReturn a copy of v reversed from start to stop.  See also Iterators.reverse for reverse-order iteration without making a copy.\n\nExamples\n\njulia> A = collect(1:5)\n5-element Array{Int64,1}:\n 1\n 2\n 3\n 4\n 5\n\njulia> reverse(A)\n5-element Array{Int64,1}:\n 5\n 4\n 3\n 2\n 1\n\njulia> reverse(A, 1, 4)\n5-element Array{Int64,1}:\n 4\n 3\n 2\n 1\n 5\n\njulia> reverse(A, 3, 5)\n5-element Array{Int64,1}:\n 1\n 2\n 5\n 4\n 3\n\n\n\nreverse(s::AbstractString) -> AbstractString\n\nReverses a string. Technically, this function reverses the codepoints in a string and its main utility is for reversed-order string processing, especially for reversed regular-expression searches. See also reverseind to convert indices in s to indices in reverse(s) and vice-versa, and graphemes to operate on user-visible \"characters\" (graphemes) rather than codepoints. See also Iterators.reverse for reverse-order iteration without making a copy. Custom string types must implement the reverse function themselves and should typically return a string with the same type and encoding. If they return a string with a different encoding, they must also override reverseind for that string type to satisfy s[reverseind(s,i)] == reverse(s)[i].\n\nExamples\n\njulia> reverse(\"JuliaLang\")\n\"gnaLailuJ\"\n\njulia> reverse(\"ax̂e\") # combining characters can lead to surprising results\n\"êxa\"\n\njulia> join(reverse(collect(graphemes(\"ax̂e\")))) # reverses graphemes\n\"ex̂a\"\n\n\n\n"
+    "text": "reverse(v [, start=1 [, stop=length(v) ]] )\n\nReturn a copy of v reversed from start to stop.  See also Iterators.reverse for reverse-order iteration without making a copy.\n\nExamples\n\njulia> A = collect(1:5)\n5-element Array{Int64,1}:\n 1\n 2\n 3\n 4\n 5\n\njulia> reverse(A)\n5-element Array{Int64,1}:\n 5\n 4\n 3\n 2\n 1\n\njulia> reverse(A, 1, 4)\n5-element Array{Int64,1}:\n 4\n 3\n 2\n 1\n 5\n\njulia> reverse(A, 3, 5)\n5-element Array{Int64,1}:\n 1\n 2\n 5\n 4\n 3\n\n\n\nreverse(s::AbstractString) -> AbstractString\n\nReverses a string. Technically, this function reverses the codepoints in a string and its main utility is for reversed-order string processing, especially for reversed regular-expression searches. See also reverseind to convert indices in s to indices in reverse(s) and vice-versa, and Unicode.graphemes to operate on user-visible \"characters\" (graphemes) rather than codepoints. See also Iterators.reverse for reverse-order iteration without making a copy. Custom string types must implement the reverse function themselves and should typically return a string with the same type and encoding. If they return a string with a different encoding, they must also override reverseind for that string type to satisfy s[reverseind(s,i)] == reverse(s)[i].\n\nExamples\n\njulia> reverse(\"JuliaLang\")\n\"gnaLailuJ\"\n\njulia> reverse(\"ax̂e\") # combining characters can lead to surprising results\n\"êxa\"\n\njulia> using Unicode\n\njulia> join(reverse(collect(graphemes(\"ax̂e\")))) # reverses graphemes\n\"ex̂a\"\n\n\n\n"
 },
 
 {
@@ -12282,23 +12098,15 @@ var documenterSearchIndex = {"docs": [
 
 {
     "location": "stdlib/parallel.html#",
-    "page": "Tasks and Parallel Computing",
-    "title": "Tasks and Parallel Computing",
+    "page": "Tasks",
+    "title": "Tasks",
     "category": "page",
     "text": ""
 },
 
 {
-    "location": "stdlib/parallel.html#Tasks-and-Parallel-Computing-1",
-    "page": "Tasks and Parallel Computing",
-    "title": "Tasks and Parallel Computing",
-    "category": "section",
-    "text": ""
-},
-
-{
     "location": "stdlib/parallel.html#Core.Task",
-    "page": "Tasks and Parallel Computing",
+    "page": "Tasks",
     "title": "Core.Task",
     "category": "Type",
     "text": "Task(func)\n\nCreate a Task (i.e. coroutine) to execute the given function func (which must be callable with no arguments). The task exits when this function returns.\n\nExamples\n\njulia> a() = det(rand(1000, 1000));\n\njulia> b = Task(a);\n\nIn this example, b is a runnable Task that hasn't started yet.\n\n\n\n"
@@ -12306,7 +12114,7 @@ var documenterSearchIndex = {"docs": [
 
 {
     "location": "stdlib/parallel.html#Base.current_task",
-    "page": "Tasks and Parallel Computing",
+    "page": "Tasks",
     "title": "Base.current_task",
     "category": "Function",
     "text": "current_task()\n\nGet the currently running Task.\n\n\n\n"
@@ -12314,7 +12122,7 @@ var documenterSearchIndex = {"docs": [
 
 {
     "location": "stdlib/parallel.html#Base.istaskdone",
-    "page": "Tasks and Parallel Computing",
+    "page": "Tasks",
     "title": "Base.istaskdone",
     "category": "Function",
     "text": "istaskdone(t::Task) -> Bool\n\nDetermine whether a task has exited.\n\njulia> a2() = det(rand(1000, 1000));\n\njulia> b = Task(a2);\n\njulia> istaskdone(b)\nfalse\n\njulia> schedule(b);\n\njulia> yield();\n\njulia> istaskdone(b)\ntrue\n\n\n\n"
@@ -12322,7 +12130,7 @@ var documenterSearchIndex = {"docs": [
 
 {
     "location": "stdlib/parallel.html#Base.istaskstarted",
-    "page": "Tasks and Parallel Computing",
+    "page": "Tasks",
     "title": "Base.istaskstarted",
     "category": "Function",
     "text": "istaskstarted(t::Task) -> Bool\n\nDetermine whether a task has started executing.\n\njulia> a3() = det(rand(1000, 1000));\n\njulia> b = Task(a3);\n\njulia> istaskstarted(b)\nfalse\n\n\n\n"
@@ -12330,7 +12138,7 @@ var documenterSearchIndex = {"docs": [
 
 {
     "location": "stdlib/parallel.html#Base.yield",
-    "page": "Tasks and Parallel Computing",
+    "page": "Tasks",
     "title": "Base.yield",
     "category": "Function",
     "text": "yield()\n\nSwitch to the scheduler to allow another scheduled task to run. A task that calls this function is still runnable, and will be restarted immediately if there are no other runnable tasks.\n\n\n\nyield(t::Task, arg = nothing)\n\nA fast, unfair-scheduling version of schedule(t, arg); yield() which immediately yields to t before calling the scheduler.\n\n\n\n"
@@ -12338,7 +12146,7 @@ var documenterSearchIndex = {"docs": [
 
 {
     "location": "stdlib/parallel.html#Base.yieldto",
-    "page": "Tasks and Parallel Computing",
+    "page": "Tasks",
     "title": "Base.yieldto",
     "category": "Function",
     "text": "yieldto(t::Task, arg = nothing)\n\nSwitch to the given task. The first time a task is switched to, the task's function is called with no arguments. On subsequent switches, arg is returned from the task's last call to yieldto. This is a low-level call that only switches tasks, not considering states or scheduling in any way. Its use is discouraged.\n\n\n\n"
@@ -12346,7 +12154,7 @@ var documenterSearchIndex = {"docs": [
 
 {
     "location": "stdlib/parallel.html#Base.task_local_storage-Tuple{Any}",
-    "page": "Tasks and Parallel Computing",
+    "page": "Tasks",
     "title": "Base.task_local_storage",
     "category": "Method",
     "text": "task_local_storage(key)\n\nLook up the value of a key in the current task's task-local storage.\n\n\n\n"
@@ -12354,7 +12162,7 @@ var documenterSearchIndex = {"docs": [
 
 {
     "location": "stdlib/parallel.html#Base.task_local_storage-Tuple{Any,Any}",
-    "page": "Tasks and Parallel Computing",
+    "page": "Tasks",
     "title": "Base.task_local_storage",
     "category": "Method",
     "text": "task_local_storage(key, value)\n\nAssign a value to a key in the current task's task-local storage.\n\n\n\n"
@@ -12362,7 +12170,7 @@ var documenterSearchIndex = {"docs": [
 
 {
     "location": "stdlib/parallel.html#Base.task_local_storage-Tuple{Function,Any,Any}",
-    "page": "Tasks and Parallel Computing",
+    "page": "Tasks",
     "title": "Base.task_local_storage",
     "category": "Method",
     "text": "task_local_storage(body, key, value)\n\nCall the function body with a modified task-local storage, in which value is assigned to key; the previous value of key, or lack thereof, is restored afterwards. Useful for emulating dynamic scoping.\n\n\n\n"
@@ -12370,7 +12178,7 @@ var documenterSearchIndex = {"docs": [
 
 {
     "location": "stdlib/parallel.html#Base.Condition",
-    "page": "Tasks and Parallel Computing",
+    "page": "Tasks",
     "title": "Base.Condition",
     "category": "Type",
     "text": "Condition()\n\nCreate an edge-triggered event source that tasks can wait for. Tasks that call wait on a Condition are suspended and queued. Tasks are woken up when notify is later called on the Condition. Edge triggering means that only tasks waiting at the time notify is called can be woken up. For level-triggered notifications, you must keep extra state to keep track of whether a notification has happened. The Channel type does this, and so can be used for level-triggered events.\n\n\n\n"
@@ -12378,7 +12186,7 @@ var documenterSearchIndex = {"docs": [
 
 {
     "location": "stdlib/parallel.html#Base.notify",
-    "page": "Tasks and Parallel Computing",
+    "page": "Tasks",
     "title": "Base.notify",
     "category": "Function",
     "text": "notify(condition, val=nothing; all=true, error=false)\n\nWake up tasks waiting for a condition, passing them val. If all is true (the default), all waiting tasks are woken, otherwise only one is. If error is true, the passed value is raised as an exception in the woken tasks.\n\nReturn the count of tasks woken up. Return 0 if no tasks are waiting on condition.\n\n\n\n"
@@ -12386,7 +12194,7 @@ var documenterSearchIndex = {"docs": [
 
 {
     "location": "stdlib/parallel.html#Base.schedule",
-    "page": "Tasks and Parallel Computing",
+    "page": "Tasks",
     "title": "Base.schedule",
     "category": "Function",
     "text": "schedule(t::Task, [val]; error=false)\n\nAdd a Task to the scheduler's queue. This causes the task to run constantly when the system is otherwise idle, unless the task performs a blocking operation such as wait.\n\nIf a second argument val is provided, it will be passed to the task (via the return value of yieldto) when it runs again. If error is true, the value is raised as an exception in the woken task.\n\njulia> a5() = det(rand(1000, 1000));\n\njulia> b = Task(a5);\n\njulia> istaskstarted(b)\nfalse\n\njulia> schedule(b);\n\njulia> yield();\n\njulia> istaskstarted(b)\ntrue\n\njulia> istaskdone(b)\ntrue\n\n\n\n"
@@ -12394,7 +12202,7 @@ var documenterSearchIndex = {"docs": [
 
 {
     "location": "stdlib/parallel.html#Base.@schedule",
-    "page": "Tasks and Parallel Computing",
+    "page": "Tasks",
     "title": "Base.@schedule",
     "category": "Macro",
     "text": "@schedule\n\nWrap an expression in a Task and add it to the local machine's scheduler queue. Similar to @async except that an enclosing @sync does NOT wait for tasks started with an @schedule.\n\n\n\n"
@@ -12402,7 +12210,7 @@ var documenterSearchIndex = {"docs": [
 
 {
     "location": "stdlib/parallel.html#Base.@task",
-    "page": "Tasks and Parallel Computing",
+    "page": "Tasks",
     "title": "Base.@task",
     "category": "Macro",
     "text": "@task\n\nWrap an expression in a Task without executing it, and return the Task. This only creates a task, and does not run it.\n\njulia> a1() = det(rand(1000, 1000));\n\njulia> b = @task a1();\n\njulia> istaskstarted(b)\nfalse\n\njulia> schedule(b);\n\njulia> yield();\n\njulia> istaskdone(b)\ntrue\n\n\n\n"
@@ -12410,7 +12218,7 @@ var documenterSearchIndex = {"docs": [
 
 {
     "location": "stdlib/parallel.html#Base.sleep",
-    "page": "Tasks and Parallel Computing",
+    "page": "Tasks",
     "title": "Base.sleep",
     "category": "Function",
     "text": "sleep(seconds)\n\nBlock the current task for a specified number of seconds. The minimum sleep time is 1 millisecond or input of 0.001.\n\n\n\n"
@@ -12418,7 +12226,7 @@ var documenterSearchIndex = {"docs": [
 
 {
     "location": "stdlib/parallel.html#Base.Channel",
-    "page": "Tasks and Parallel Computing",
+    "page": "Tasks",
     "title": "Base.Channel",
     "category": "Type",
     "text": "Channel{T}(sz::Int)\n\nConstructs a Channel with an internal buffer that can hold a maximum of sz objects of type T. put! calls on a full channel block until an object is removed with take!.\n\nChannel(0) constructs an unbuffered channel. put! blocks until a matching take! is called. And vice-versa.\n\nOther constructors:\n\nChannel(Inf): equivalent to Channel{Any}(typemax(Int))\nChannel(sz): equivalent to Channel{Any}(sz)\n\n\n\n"
@@ -12426,7 +12234,7 @@ var documenterSearchIndex = {"docs": [
 
 {
     "location": "stdlib/parallel.html#Base.put!-Tuple{Channel,Any}",
-    "page": "Tasks and Parallel Computing",
+    "page": "Tasks",
     "title": "Base.put!",
     "category": "Method",
     "text": "put!(c::Channel, v)\n\nAppend an item v to the channel c. Blocks if the channel is full.\n\nFor unbuffered channels, blocks until a take! is performed by a different task.\n\n\n\n"
@@ -12434,7 +12242,7 @@ var documenterSearchIndex = {"docs": [
 
 {
     "location": "stdlib/parallel.html#Base.take!-Tuple{Channel}",
-    "page": "Tasks and Parallel Computing",
+    "page": "Tasks",
     "title": "Base.take!",
     "category": "Method",
     "text": "take!(c::Channel)\n\nRemove and return a value from a Channel. Blocks until data is available.\n\nFor unbuffered channels, blocks until a put! is performed by a different task.\n\n\n\n"
@@ -12442,7 +12250,7 @@ var documenterSearchIndex = {"docs": [
 
 {
     "location": "stdlib/parallel.html#Base.isready-Tuple{Channel}",
-    "page": "Tasks and Parallel Computing",
+    "page": "Tasks",
     "title": "Base.isready",
     "category": "Method",
     "text": "isready(c::Channel)\n\nDetermine whether a Channel has a value stored to it. Returns immediately, does not block.\n\nFor unbuffered channels returns true if there are tasks waiting on a put!.\n\n\n\n"
@@ -12450,7 +12258,7 @@ var documenterSearchIndex = {"docs": [
 
 {
     "location": "stdlib/parallel.html#Base.fetch-Tuple{Channel}",
-    "page": "Tasks and Parallel Computing",
+    "page": "Tasks",
     "title": "Base.fetch",
     "category": "Method",
     "text": "fetch(c::Channel)\n\nWait for and get the first available item from the channel. Does not remove the item. fetch is unsupported on an unbuffered (0-size) channel.\n\n\n\n"
@@ -12458,7 +12266,7 @@ var documenterSearchIndex = {"docs": [
 
 {
     "location": "stdlib/parallel.html#Base.close-Tuple{Channel}",
-    "page": "Tasks and Parallel Computing",
+    "page": "Tasks",
     "title": "Base.close",
     "category": "Method",
     "text": "close(c::Channel)\n\nClose a channel. An exception is thrown by:\n\nput! on a closed channel.\ntake! and fetch on an empty, closed channel.\n\n\n\n"
@@ -12466,7 +12274,7 @@ var documenterSearchIndex = {"docs": [
 
 {
     "location": "stdlib/parallel.html#Base.bind-Tuple{Channel,Task}",
-    "page": "Tasks and Parallel Computing",
+    "page": "Tasks",
     "title": "Base.bind",
     "category": "Method",
     "text": "bind(chnl::Channel, task::Task)\n\nAssociate the lifetime of chnl with a task. Channel chnl is automatically closed when the task terminates. Any uncaught exception in the task is propagated to all waiters on chnl.\n\nThe chnl object can be explicitly closed independent of task termination. Terminating tasks have no effect on already closed Channel objects.\n\nWhen a channel is bound to multiple tasks, the first task to terminate will close the channel. When multiple channels are bound to the same task, termination of the task will close all of the bound channels.\n\nExamples\n\njulia> c = Channel(0);\n\njulia> task = @schedule foreach(i->put!(c, i), 1:4);\n\njulia> bind(c,task);\n\njulia> for i in c\n           @show i\n       end;\ni = 1\ni = 2\ni = 3\ni = 4\n\njulia> isopen(c)\nfalse\n\njulia> c = Channel(0);\n\njulia> task = @schedule (put!(c,1);error(\"foo\"));\n\njulia> bind(c,task);\n\njulia> take!(c)\n1\n\njulia> put!(c,1);\nERROR: foo\nStacktrace:\n[...]\n\n\n\n"
@@ -12474,7 +12282,7 @@ var documenterSearchIndex = {"docs": [
 
 {
     "location": "stdlib/parallel.html#Base.asyncmap",
-    "page": "Tasks and Parallel Computing",
+    "page": "Tasks",
     "title": "Base.asyncmap",
     "category": "Function",
     "text": "asyncmap(f, c...; ntasks=0, batch_size=nothing)\n\nUses multiple concurrent tasks to map f over a collection (or multiple equal length collections). For multiple collection arguments, f is applied elementwise.\n\nntasks specifies the number of tasks to run concurrently. Depending on the length of the collections, if ntasks is unspecified, up to 100 tasks will be used for concurrent mapping.\n\nntasks can also be specified as a zero-arg function. In this case, the number of tasks to run in parallel is checked before processing every element and a new task started if the value of ntasks_func is less than the current number of tasks.\n\nIf batch_size is specified, the collection is processed in batch mode. f must then be a function that must accept a Vector of argument tuples and must return a vector of results. The input vector will have a length of batch_size or less.\n\nThe following examples highlight execution in different tasks by returning the object_id of the tasks in which the mapping function is executed.\n\nFirst, with ntasks undefined, each element is processed in a different task.\n\njulia> tskoid() = object_id(current_task());\n\njulia> asyncmap(x->tskoid(), 1:5)\n5-element Array{UInt64,1}:\n 0x6e15e66c75c75853\n 0x440f8819a1baa682\n 0x9fb3eeadd0c83985\n 0xebd3e35fe90d4050\n 0x29efc93edce2b961\n\njulia> length(unique(asyncmap(x->tskoid(), 1:5)))\n5\n\nWith ntasks=2 all elements are processed in 2 tasks.\n\njulia> asyncmap(x->tskoid(), 1:5; ntasks=2)\n5-element Array{UInt64,1}:\n 0x027ab1680df7ae94\n 0xa23d2f80cd7cf157\n 0x027ab1680df7ae94\n 0xa23d2f80cd7cf157\n 0x027ab1680df7ae94\n\njulia> length(unique(asyncmap(x->tskoid(), 1:5; ntasks=2)))\n2\n\nWith batch_size defined, the mapping function needs to be changed to accept an array of argument tuples and return an array of results. map is used in the modified mapping function to achieve this.\n\njulia> batch_func(input) = map(x->string(\"args_tuple: \", x, \", element_val: \", x[1], \", task: \", tskoid()), input)\nbatch_func (generic function with 1 method)\n\njulia> asyncmap(batch_func, 1:5; ntasks=2, batch_size=2)\n5-element Array{String,1}:\n \"args_tuple: (1,), element_val: 1, task: 9118321258196414413\"\n \"args_tuple: (2,), element_val: 2, task: 4904288162898683522\"\n \"args_tuple: (3,), element_val: 3, task: 9118321258196414413\"\n \"args_tuple: (4,), element_val: 4, task: 4904288162898683522\"\n \"args_tuple: (5,), element_val: 5, task: 9118321258196414413\"\n\nnote: Note\nCurrently, all tasks in Julia are executed in a single OS thread co-operatively. Consequently, ayncmap is beneficial only when the mapping function involves any I/O - disk, network, remote worker invocation, etc.\n\n\n\n"
@@ -12482,7 +12290,7 @@ var documenterSearchIndex = {"docs": [
 
 {
     "location": "stdlib/parallel.html#Base.asyncmap!",
-    "page": "Tasks and Parallel Computing",
+    "page": "Tasks",
     "title": "Base.asyncmap!",
     "category": "Function",
     "text": "asyncmap!(f, results, c...; ntasks=0, batch_size=nothing)\n\nLike asyncmap, but stores output in results rather than returning a collection.\n\n\n\n"
@@ -12490,722 +12298,730 @@ var documenterSearchIndex = {"docs": [
 
 {
     "location": "stdlib/parallel.html#Tasks-1",
-    "page": "Tasks and Parallel Computing",
+    "page": "Tasks",
     "title": "Tasks",
     "category": "section",
     "text": "Core.Task\nBase.current_task\nBase.istaskdone\nBase.istaskstarted\nBase.yield\nBase.yieldto\nBase.task_local_storage(::Any)\nBase.task_local_storage(::Any, ::Any)\nBase.task_local_storage(::Function, ::Any, ::Any)\nBase.Condition\nBase.notify\nBase.schedule\nBase.@schedule\nBase.@task\nBase.sleep\nBase.Channel\nBase.put!(::Channel, ::Any)\nBase.take!(::Channel)\nBase.isready(::Channel)\nBase.fetch(::Channel)\nBase.close(::Channel)\nBase.bind(c::Channel, task::Task)\nBase.asyncmap\nBase.asyncmap!"
 },
 
 {
-    "location": "stdlib/parallel.html#Base.Distributed.addprocs",
-    "page": "Tasks and Parallel Computing",
-    "title": "Base.Distributed.addprocs",
+    "location": "stdlib/distributed.html#",
+    "page": "Distributed Computing",
+    "title": "Distributed Computing",
+    "category": "page",
+    "text": ""
+},
+
+{
+    "location": "stdlib/distributed.html#Distributed.addprocs",
+    "page": "Distributed Computing",
+    "title": "Distributed.addprocs",
     "category": "Function",
     "text": "addprocs(manager::ClusterManager; kwargs...) -> List of process identifiers\n\nLaunches worker processes via the specified cluster manager.\n\nFor example, Beowulf clusters are supported via a custom cluster manager implemented in the package ClusterManagers.jl.\n\nThe number of seconds a newly launched worker waits for connection establishment from the master can be specified via variable JULIA_WORKER_TIMEOUT in the worker process's environment. Relevant only when using TCP/IP as transport.\n\n\n\naddprocs(machines; tunnel=false, sshflags=``, max_parallel=10, kwargs...) -> List of process identifiers\n\nAdd processes on remote machines via SSH. Requires julia to be installed in the same location on each node, or to be available via a shared file system.\n\nmachines is a vector of machine specifications. Workers are started for each specification.\n\nA machine specification is either a string machine_spec or a tuple - (machine_spec, count).\n\nmachine_spec is a string of the form [user@]host[:port] [bind_addr[:port]]. user defaults to current user, port to the standard ssh port. If [bind_addr[:port]] is specified, other workers will connect to this worker at the specified bind_addr and port.\n\ncount is the number of workers to be launched on the specified host. If specified as :auto it will launch as many workers as the number of cores on the specific host.\n\nKeyword arguments:\n\ntunnel: if true then SSH tunneling will be used to connect to the worker from the master process. Default is false.\nsshflags: specifies additional ssh options, e.g. sshflags=`-i /home/foo/bar.pem`\nmax_parallel: specifies the maximum number of workers connected to in parallel at a host. Defaults to 10.\ndir: specifies the working directory on the workers. Defaults to the host's current directory (as found by pwd())\nenable_threaded_blas: if true then  BLAS will run on multiple threads in added processes. Default is false.\nexename: name of the julia executable. Defaults to \"$JULIA_HOME/julia\" or \"$JULIA_HOME/julia-debug\" as the case may be.\nexeflags: additional flags passed to the worker processes.\ntopology: Specifies how the workers connect to each other. Sending a message between unconnected workers results in an error.\ntopology=:all_to_all: All processes are connected to each other. The default.\ntopology=:master_slave: Only the driver process, i.e. pid 1 connects to the workers. The workers do not connect to each other.\ntopology=:custom: The launch method of the cluster manager specifies the connection topology via fields ident and connect_idents in WorkerConfig. A worker with a cluster manager identity ident will connect to all workers specified in connect_idents.\nlazy: Applicable only with topology=:all_to_all. If true, worker-worker connections are setup lazily, i.e. they are setup at the first instance of a remote call between workers. Default is true.\n\nEnvironment variables :\n\nIf the master process fails to establish a connection with a newly launched worker within 60.0 seconds, the worker treats it as a fatal situation and terminates. This timeout can be controlled via environment variable JULIA_WORKER_TIMEOUT. The value of JULIA_WORKER_TIMEOUT on the master process specifies the number of seconds a newly launched worker waits for connection establishment.\n\n\n\naddprocs(; kwargs...) -> List of process identifiers\n\nEquivalent to addprocs(Sys.CPU_CORES; kwargs...)\n\nNote that workers do not run a .juliarc.jl startup script, nor do they synchronize their global state (such as global variables, new method definitions, and loaded modules) with any of the other running processes.\n\n\n\naddprocs(np::Integer; restrict=true, kwargs...) -> List of process identifiers\n\nLaunches workers using the in-built LocalManager which only launches workers on the local host. This can be used to take advantage of multiple cores. addprocs(4) will add 4 processes on the local machine. If restrict is true, binding is restricted to 127.0.0.1. Keyword args dir, exename, exeflags, topology, lazy and enable_threaded_blas have the same effect as documented for addprocs(machines).\n\n\n\n"
 },
 
 {
-    "location": "stdlib/parallel.html#Base.Distributed.nprocs",
-    "page": "Tasks and Parallel Computing",
-    "title": "Base.Distributed.nprocs",
+    "location": "stdlib/distributed.html#Distributed.nprocs",
+    "page": "Distributed Computing",
+    "title": "Distributed.nprocs",
     "category": "Function",
     "text": "nprocs()\n\nGet the number of available processes.\n\n\n\n"
 },
 
 {
-    "location": "stdlib/parallel.html#Base.Distributed.nworkers",
-    "page": "Tasks and Parallel Computing",
-    "title": "Base.Distributed.nworkers",
+    "location": "stdlib/distributed.html#Distributed.nworkers",
+    "page": "Distributed Computing",
+    "title": "Distributed.nworkers",
     "category": "Function",
     "text": "nworkers()\n\nGet the number of available worker processes. This is one less than nprocs(). Equal to nprocs() if nprocs() == 1.\n\n\n\n"
 },
 
 {
-    "location": "stdlib/parallel.html#Base.Distributed.procs-Tuple{}",
-    "page": "Tasks and Parallel Computing",
-    "title": "Base.Distributed.procs",
+    "location": "stdlib/distributed.html#Distributed.procs-Tuple{}",
+    "page": "Distributed Computing",
+    "title": "Distributed.procs",
     "category": "Method",
     "text": "procs()\n\nReturn a list of all process identifiers.\n\n\n\n"
 },
 
 {
-    "location": "stdlib/parallel.html#Base.Distributed.procs-Tuple{Integer}",
-    "page": "Tasks and Parallel Computing",
-    "title": "Base.Distributed.procs",
+    "location": "stdlib/distributed.html#Distributed.procs-Tuple{Integer}",
+    "page": "Distributed Computing",
+    "title": "Distributed.procs",
     "category": "Method",
     "text": "procs(pid::Integer)\n\nReturn a list of all process identifiers on the same physical node. Specifically all workers bound to the same ip-address as pid are returned.\n\n\n\n"
 },
 
 {
-    "location": "stdlib/parallel.html#Base.Distributed.workers",
-    "page": "Tasks and Parallel Computing",
-    "title": "Base.Distributed.workers",
+    "location": "stdlib/distributed.html#Distributed.workers",
+    "page": "Distributed Computing",
+    "title": "Distributed.workers",
     "category": "Function",
     "text": "workers()\n\nReturn a list of all worker process identifiers.\n\n\n\n"
 },
 
 {
-    "location": "stdlib/parallel.html#Base.Distributed.rmprocs",
-    "page": "Tasks and Parallel Computing",
-    "title": "Base.Distributed.rmprocs",
+    "location": "stdlib/distributed.html#Distributed.rmprocs",
+    "page": "Distributed Computing",
+    "title": "Distributed.rmprocs",
     "category": "Function",
     "text": "rmprocs(pids...; waitfor=typemax(Int))\n\nRemove the specified workers. Note that only process 1 can add or remove workers.\n\nArgument waitfor specifies how long to wait for the workers to shut down:     - If unspecified, rmprocs will wait until all requested pids are removed.     - An ErrorException is raised if all workers cannot be terminated before       the requested waitfor seconds.     - With a waitfor value of 0, the call returns immediately with the workers       scheduled for removal in a different task. The scheduled Task object is       returned. The user should call wait on the task before invoking any other       parallel calls.\n\n\n\n"
 },
 
 {
-    "location": "stdlib/parallel.html#Base.Distributed.interrupt",
-    "page": "Tasks and Parallel Computing",
-    "title": "Base.Distributed.interrupt",
+    "location": "stdlib/distributed.html#Distributed.interrupt",
+    "page": "Distributed Computing",
+    "title": "Distributed.interrupt",
     "category": "Function",
     "text": "interrupt(pids::Integer...)\n\nInterrupt the current executing task on the specified workers. This is equivalent to pressing Ctrl-C on the local machine. If no arguments are given, all workers are interrupted.\n\n\n\ninterrupt(pids::AbstractVector=workers())\n\nInterrupt the current executing task on the specified workers. This is equivalent to pressing Ctrl-C on the local machine. If no arguments are given, all workers are interrupted.\n\n\n\n"
 },
 
 {
-    "location": "stdlib/parallel.html#Base.Distributed.myid",
-    "page": "Tasks and Parallel Computing",
-    "title": "Base.Distributed.myid",
+    "location": "stdlib/distributed.html#Distributed.myid",
+    "page": "Distributed Computing",
+    "title": "Distributed.myid",
     "category": "Function",
     "text": "myid()\n\nGet the id of the current process.\n\n\n\n"
 },
 
 {
-    "location": "stdlib/parallel.html#Base.Distributed.pmap",
-    "page": "Tasks and Parallel Computing",
-    "title": "Base.Distributed.pmap",
+    "location": "stdlib/distributed.html#Distributed.pmap",
+    "page": "Distributed Computing",
+    "title": "Distributed.pmap",
     "category": "Function",
     "text": "pmap([::AbstractWorkerPool], f, c...; distributed=true, batch_size=1, on_error=nothing, retry_delays=[], retry_check=nothing) -> collection\n\nTransform collection c by applying f to each element using available workers and tasks.\n\nFor multiple collection arguments, apply f elementwise.\n\nNote that f must be made available to all worker processes; see Code Availability and Loading Packages for details.\n\nIf a worker pool is not specified, all available workers, i.e., the default worker pool is used.\n\nBy default, pmap distributes the computation over all specified workers. To use only the local process and distribute over tasks, specify distributed=false. This is equivalent to using asyncmap. For example, pmap(f, c; distributed=false) is equivalent to asyncmap(f,c; ntasks=()->nworkers())\n\npmap can also use a mix of processes and tasks via the batch_size argument. For batch sizes greater than 1, the collection is processed in multiple batches, each of length batch_size or less. A batch is sent as a single request to a free worker, where a local asyncmap processes elements from the batch using multiple concurrent tasks.\n\nAny error stops pmap from processing the remainder of the collection. To override this behavior you can specify an error handling function via argument on_error which takes in a single argument, i.e., the exception. The function can stop the processing by rethrowing the error, or, to continue, return any value which is then returned inline with the results to the caller.\n\nConsider the following two examples. The first one returns the exception object inline, the second a 0 in place of any exception:\n\njulia> pmap(x->iseven(x) ? error(\"foo\") : x, 1:4; on_error=identity)\n4-element Array{Any,1}:\n 1\n  ErrorException(\"foo\")\n 3\n  ErrorException(\"foo\")\n\njulia> pmap(x->iseven(x) ? error(\"foo\") : x, 1:4; on_error=ex->0)\n4-element Array{Int64,1}:\n 1\n 0\n 3\n 0\n\nErrors can also be handled by retrying failed computations. Keyword arguments retry_delays and retry_check are passed through to retry as keyword arguments delays and check respectively. If batching is specified, and an entire batch fails, all items in the batch are retried.\n\nNote that if both on_error and retry_delays are specified, the on_error hook is called before retrying. If on_error does not throw (or rethrow) an exception, the element will not be retried.\n\nExample: On errors, retry f on an element a maximum of 3 times without any delay between retries.\n\npmap(f, c; retry_delays = zeros(3))\n\nExample: Retry f only if the exception is not of type InexactError, with exponentially increasing delays up to 3 times. Return a NaN in place for all InexactError occurrences.\n\npmap(f, c; on_error = e->(isa(e, InexactError) ? NaN : rethrow(e)), retry_delays = ExponentialBackOff(n = 3))\n\n\n\n"
 },
 
 {
-    "location": "stdlib/parallel.html#Base.Distributed.RemoteException",
-    "page": "Tasks and Parallel Computing",
-    "title": "Base.Distributed.RemoteException",
+    "location": "stdlib/distributed.html#Distributed.RemoteException",
+    "page": "Distributed Computing",
+    "title": "Distributed.RemoteException",
     "category": "Type",
     "text": "RemoteException(captured)\n\nExceptions on remote computations are captured and rethrown locally.  A RemoteException wraps the pid of the worker and a captured exception. A CapturedException captures the remote exception and a serializable form of the call stack when the exception was raised.\n\n\n\n"
 },
 
 {
-    "location": "stdlib/parallel.html#Base.Distributed.Future",
-    "page": "Tasks and Parallel Computing",
-    "title": "Base.Distributed.Future",
+    "location": "stdlib/distributed.html#Distributed.Future",
+    "page": "Distributed Computing",
+    "title": "Distributed.Future",
     "category": "Type",
     "text": "Future(pid::Integer=myid())\n\nCreate a Future on process pid. The default pid is the current process.\n\n\n\n"
 },
 
 {
-    "location": "stdlib/parallel.html#Base.Distributed.RemoteChannel-Tuple{Integer}",
-    "page": "Tasks and Parallel Computing",
-    "title": "Base.Distributed.RemoteChannel",
-    "category": "Method",
-    "text": "RemoteChannel(pid::Integer=myid())\n\nMake a reference to a Channel{Any}(1) on process pid. The default pid is the current process.\n\n\n\n"
+    "location": "stdlib/distributed.html#Distributed.RemoteChannel",
+    "page": "Distributed Computing",
+    "title": "Distributed.RemoteChannel",
+    "category": "Type",
+    "text": "RemoteChannel(pid::Integer=myid())\n\nMake a reference to a Channel{Any}(1) on process pid. The default pid is the current process.\n\nRemoteChannel(f::Function, pid::Integer=myid())\n\nCreate references to remote channels of a specific size and type. f is a function that when executed on pid must return an implementation of an AbstractChannel.\n\nFor example, RemoteChannel(()->Channel{Int}(10), pid), will return a reference to a channel of type Int and size 10 on pid.\n\nThe default pid is the current process.\n\n\n\n"
 },
 
 {
-    "location": "stdlib/parallel.html#Base.Distributed.RemoteChannel-Tuple{Function,Integer}",
-    "page": "Tasks and Parallel Computing",
-    "title": "Base.Distributed.RemoteChannel",
-    "category": "Method",
-    "text": "RemoteChannel(f::Function, pid::Integer=myid())\n\nCreate references to remote channels of a specific size and type. f is a function that when executed on pid must return an implementation of an AbstractChannel.\n\nFor example, RemoteChannel(()->Channel{Int}(10), pid), will return a reference to a channel of type Int and size 10 on pid.\n\nThe default pid is the current process.\n\n\n\n"
-},
-
-{
-    "location": "stdlib/parallel.html#Base.wait",
-    "page": "Tasks and Parallel Computing",
+    "location": "stdlib/distributed.html#Base.wait",
+    "page": "Distributed Computing",
     "title": "Base.wait",
     "category": "Function",
-    "text": "wait([x])\n\nBlock the current task until some event occurs, depending on the type of the argument:\n\nRemoteChannel : Wait for a value to become available on the specified remote channel.\nFuture : Wait for a value to become available for the specified future.\nChannel: Wait for a value to be appended to the channel.\nCondition: Wait for notify on a condition.\nProcess: Wait for a process or process chain to exit. The exitcode field of a process can be used to determine success or failure.\nTask: Wait for a Task to finish, returning its result value. If the task fails with an exception, the exception is propagated (re-thrown in the task that called wait).\nRawFD: Wait for changes on a file descriptor (see the FileWatching package).\n\nIf no argument is passed, the task blocks for an undefined period. A task can only be restarted by an explicit call to schedule or yieldto.\n\nOften wait is called within a while loop to ensure a waited-for condition is met before proceeding.\n\n\n\n"
+    "text": "wait(r::Future)\n\nWait for a value to become available for the specified future.\n\n\n\nwait(r::RemoteChannel, args...)\n\nWait for a value to become available on the specified remote channel.\n\n\n\nwait([x])\n\nBlock the current task until some event occurs, depending on the type of the argument:\n\nChannel: Wait for a value to be appended to the channel.\nCondition: Wait for notify on a condition.\nProcess: Wait for a process or process chain to exit. The exitcode field of a process can be used to determine success or failure.\nTask: Wait for a Task to finish, returning its result value. If the task fails with an exception, the exception is propagated (re-thrown in the task that called wait).\nRawFD: Wait for changes on a file descriptor (see the FileWatching package).\n\nIf no argument is passed, the task blocks for an undefined period. A task can only be restarted by an explicit call to schedule or yieldto.\n\nOften wait is called within a while loop to ensure a waited-for condition is met before proceeding.\n\n\n\n"
 },
 
 {
-    "location": "stdlib/parallel.html#Base.fetch-Tuple{Any}",
-    "page": "Tasks and Parallel Computing",
+    "location": "stdlib/distributed.html#Base.fetch-Tuple{Any}",
+    "page": "Distributed Computing",
     "title": "Base.fetch",
     "category": "Method",
     "text": "fetch(x)\n\nWaits and fetches a value from x depending on the type of x:\n\nFuture: Wait for and get the value of a Future. The fetched value is cached locally. Further calls to fetch on the same reference return the cached value. If the remote value is an exception, throws a RemoteException which captures the remote exception and backtrace.\nRemoteChannel: Wait for and get the value of a remote reference. Exceptions raised are same as for a Future .\n\nDoes not remove the item fetched.\n\n\n\n"
 },
 
 {
-    "location": "stdlib/parallel.html#Base.Distributed.remotecall-Tuple{Any,Integer,Vararg{Any,N} where N}",
-    "page": "Tasks and Parallel Computing",
-    "title": "Base.Distributed.remotecall",
+    "location": "stdlib/distributed.html#Distributed.remotecall-Tuple{Any,Integer,Vararg{Any,N} where N}",
+    "page": "Distributed Computing",
+    "title": "Distributed.remotecall",
     "category": "Method",
     "text": "remotecall(f, id::Integer, args...; kwargs...) -> Future\n\nCall a function f asynchronously on the given arguments on the specified process. Return a Future. Keyword arguments, if any, are passed through to f.\n\n\n\n"
 },
 
 {
-    "location": "stdlib/parallel.html#Base.Distributed.remotecall_wait-Tuple{Any,Integer,Vararg{Any,N} where N}",
-    "page": "Tasks and Parallel Computing",
-    "title": "Base.Distributed.remotecall_wait",
+    "location": "stdlib/distributed.html#Distributed.remotecall_wait-Tuple{Any,Integer,Vararg{Any,N} where N}",
+    "page": "Distributed Computing",
+    "title": "Distributed.remotecall_wait",
     "category": "Method",
     "text": "remotecall_wait(f, id::Integer, args...; kwargs...)\n\nPerform a faster wait(remotecall(...)) in one message on the Worker specified by worker id id. Keyword arguments, if any, are passed through to f.\n\nSee also wait and remotecall.\n\n\n\n"
 },
 
 {
-    "location": "stdlib/parallel.html#Base.Distributed.remotecall_fetch-Tuple{Any,Integer,Vararg{Any,N} where N}",
-    "page": "Tasks and Parallel Computing",
-    "title": "Base.Distributed.remotecall_fetch",
+    "location": "stdlib/distributed.html#Distributed.remotecall_fetch-Tuple{Any,Integer,Vararg{Any,N} where N}",
+    "page": "Distributed Computing",
+    "title": "Distributed.remotecall_fetch",
     "category": "Method",
     "text": "remotecall_fetch(f, id::Integer, args...; kwargs...)\n\nPerform fetch(remotecall(...)) in one message. Keyword arguments, if any, are passed through to f. Any remote exceptions are captured in a RemoteException and thrown.\n\nSee also fetch and remotecall.\n\n\n\n"
 },
 
 {
-    "location": "stdlib/parallel.html#Base.Distributed.remote_do-Tuple{Any,Integer,Vararg{Any,N} where N}",
-    "page": "Tasks and Parallel Computing",
-    "title": "Base.Distributed.remote_do",
+    "location": "stdlib/distributed.html#Distributed.remote_do-Tuple{Any,Integer,Vararg{Any,N} where N}",
+    "page": "Distributed Computing",
+    "title": "Distributed.remote_do",
     "category": "Method",
     "text": "remote_do(f, id::Integer, args...; kwargs...) -> nothing\n\nExecutes f on worker id asynchronously. Unlike remotecall, it does not store the result of computation, nor is there a way to wait for its completion.\n\nA successful invocation indicates that the request has been accepted for execution on the remote node.\n\nWhile consecutive remotecalls to the same worker are serialized in the order they are invoked, the order of executions on the remote worker is undetermined. For example, remote_do(f1, 2); remotecall(f2, 2); remote_do(f3, 2) will serialize the call to f1, followed by f2 and f3 in that order. However, it is not guaranteed that f1 is executed before f3 on worker 2.\n\nAny exceptions thrown by f are printed to STDERR on the remote worker.\n\nKeyword arguments, if any, are passed through to f.\n\n\n\n"
 },
 
 {
-    "location": "stdlib/parallel.html#Base.put!-Tuple{RemoteChannel,Vararg{Any,N} where N}",
-    "page": "Tasks and Parallel Computing",
+    "location": "stdlib/distributed.html#Base.put!-Tuple{RemoteChannel,Vararg{Any,N} where N}",
+    "page": "Distributed Computing",
     "title": "Base.put!",
     "category": "Method",
     "text": "put!(rr::RemoteChannel, args...)\n\nStore a set of values to the RemoteChannel. If the channel is full, blocks until space is available. Return the first argument.\n\n\n\n"
 },
 
 {
-    "location": "stdlib/parallel.html#Base.put!-Tuple{Future,Any}",
-    "page": "Tasks and Parallel Computing",
+    "location": "stdlib/distributed.html#Base.put!-Tuple{Future,Any}",
+    "page": "Distributed Computing",
     "title": "Base.put!",
     "category": "Method",
     "text": "put!(rr::Future, v)\n\nStore a value to a Future rr. Futures are write-once remote references. A put! on an already set Future throws an Exception. All asynchronous remote calls return Futures and set the value to the return value of the call upon completion.\n\n\n\n"
 },
 
 {
-    "location": "stdlib/parallel.html#Base.take!-Tuple{RemoteChannel,Vararg{Any,N} where N}",
-    "page": "Tasks and Parallel Computing",
+    "location": "stdlib/distributed.html#Base.take!-Tuple{RemoteChannel,Vararg{Any,N} where N}",
+    "page": "Distributed Computing",
     "title": "Base.take!",
     "category": "Method",
     "text": "take!(rr::RemoteChannel, args...)\n\nFetch value(s) from a RemoteChannel rr, removing the value(s) in the process.\n\n\n\n"
 },
 
 {
-    "location": "stdlib/parallel.html#Base.isready-Tuple{RemoteChannel,Vararg{Any,N} where N}",
-    "page": "Tasks and Parallel Computing",
+    "location": "stdlib/distributed.html#Base.isready-Tuple{RemoteChannel,Vararg{Any,N} where N}",
+    "page": "Distributed Computing",
     "title": "Base.isready",
     "category": "Method",
     "text": "isready(rr::RemoteChannel, args...)\n\nDetermine whether a RemoteChannel has a value stored to it. Note that this function can cause race conditions, since by the time you receive its result it may no longer be true. However, it can be safely used on a Future since they are assigned only once.\n\n\n\n"
 },
 
 {
-    "location": "stdlib/parallel.html#Base.isready-Tuple{Future}",
-    "page": "Tasks and Parallel Computing",
+    "location": "stdlib/distributed.html#Base.isready-Tuple{Future}",
+    "page": "Distributed Computing",
     "title": "Base.isready",
     "category": "Method",
     "text": "isready(rr::Future)\n\nDetermine whether a Future has a value stored to it.\n\nIf the argument Future is owned by a different node, this call will block to wait for the answer. It is recommended to wait for rr in a separate task instead or to use a local Channel as a proxy:\n\nc = Channel(1)\n@async put!(c, remotecall_fetch(long_computation, p))\nisready(c)  # will not block\n\n\n\n"
 },
 
 {
-    "location": "stdlib/parallel.html#Base.Distributed.WorkerPool",
-    "page": "Tasks and Parallel Computing",
-    "title": "Base.Distributed.WorkerPool",
+    "location": "stdlib/distributed.html#Distributed.WorkerPool",
+    "page": "Distributed Computing",
+    "title": "Distributed.WorkerPool",
     "category": "Type",
     "text": "WorkerPool(workers::Vector{Int})\n\nCreate a WorkerPool from a vector of worker ids.\n\n\n\n"
 },
 
 {
-    "location": "stdlib/parallel.html#Base.Distributed.CachingPool",
-    "page": "Tasks and Parallel Computing",
-    "title": "Base.Distributed.CachingPool",
+    "location": "stdlib/distributed.html#Distributed.CachingPool",
+    "page": "Distributed Computing",
+    "title": "Distributed.CachingPool",
     "category": "Type",
     "text": "CachingPool(workers::Vector{Int})\n\nAn implementation of an AbstractWorkerPool. remote, remotecall_fetch, pmap (and other remote calls which execute functions remotely) benefit from caching the serialized/deserialized functions on the worker nodes, especially closures (which may capture large amounts of data).\n\nThe remote cache is maintained for the lifetime of the returned CachingPool object. To clear the cache earlier, use clear!(pool).\n\nFor global variables, only the bindings are captured in a closure, not the data. let blocks can be used to capture global data.\n\nExamples\n\nconst foo = rand(10^8);\nwp = CachingPool(workers())\nlet foo = foo\n    pmap(wp, i -> sum(foo) + i, 1:100);\nend\n\nThe above would transfer foo only once to each worker.\n\n\n\n"
 },
 
 {
-    "location": "stdlib/parallel.html#Base.Distributed.default_worker_pool",
-    "page": "Tasks and Parallel Computing",
-    "title": "Base.Distributed.default_worker_pool",
+    "location": "stdlib/distributed.html#Distributed.default_worker_pool",
+    "page": "Distributed Computing",
+    "title": "Distributed.default_worker_pool",
     "category": "Function",
     "text": "default_worker_pool()\n\nWorkerPool containing idle workers - used by remote(f) and pmap (by default).\n\n\n\n"
 },
 
 {
-    "location": "stdlib/parallel.html#Base.Distributed.clear!-Tuple{CachingPool}",
-    "page": "Tasks and Parallel Computing",
-    "title": "Base.Distributed.clear!",
+    "location": "stdlib/distributed.html#Distributed.clear!-Tuple{CachingPool}",
+    "page": "Distributed Computing",
+    "title": "Distributed.clear!",
     "category": "Method",
     "text": "clear!(pool::CachingPool) -> pool\n\nRemoves all cached functions from all participating workers.\n\n\n\n"
 },
 
 {
-    "location": "stdlib/parallel.html#Base.Distributed.remote",
-    "page": "Tasks and Parallel Computing",
-    "title": "Base.Distributed.remote",
+    "location": "stdlib/distributed.html#Distributed.remote",
+    "page": "Distributed Computing",
+    "title": "Distributed.remote",
     "category": "Function",
     "text": "remote([::AbstractWorkerPool], f) -> Function\n\nReturn an anonymous function that executes function f on an available worker using remotecall_fetch.\n\n\n\n"
 },
 
 {
-    "location": "stdlib/parallel.html#Base.Distributed.remotecall-Tuple{Any,Base.Distributed.AbstractWorkerPool,Vararg{Any,N} where N}",
-    "page": "Tasks and Parallel Computing",
-    "title": "Base.Distributed.remotecall",
+    "location": "stdlib/distributed.html#Distributed.remotecall-Tuple{Any,AbstractWorkerPool,Vararg{Any,N} where N}",
+    "page": "Distributed Computing",
+    "title": "Distributed.remotecall",
     "category": "Method",
     "text": "remotecall(f, pool::AbstractWorkerPool, args...; kwargs...) -> Future\n\nWorkerPool variant of remotecall(f, pid, ....). Waits for and takes a free worker from pool and performs a remotecall on it.\n\n\n\n"
 },
 
 {
-    "location": "stdlib/parallel.html#Base.Distributed.remotecall_wait-Tuple{Any,Base.Distributed.AbstractWorkerPool,Vararg{Any,N} where N}",
-    "page": "Tasks and Parallel Computing",
-    "title": "Base.Distributed.remotecall_wait",
+    "location": "stdlib/distributed.html#Distributed.remotecall_wait-Tuple{Any,AbstractWorkerPool,Vararg{Any,N} where N}",
+    "page": "Distributed Computing",
+    "title": "Distributed.remotecall_wait",
     "category": "Method",
     "text": "remotecall_wait(f, pool::AbstractWorkerPool, args...; kwargs...) -> Future\n\nWorkerPool variant of remotecall_wait(f, pid, ....). Waits for and takes a free worker from pool and performs a remotecall_wait on it.\n\n\n\n"
 },
 
 {
-    "location": "stdlib/parallel.html#Base.Distributed.remotecall_fetch-Tuple{Any,Base.Distributed.AbstractWorkerPool,Vararg{Any,N} where N}",
-    "page": "Tasks and Parallel Computing",
-    "title": "Base.Distributed.remotecall_fetch",
+    "location": "stdlib/distributed.html#Distributed.remotecall_fetch-Tuple{Any,AbstractWorkerPool,Vararg{Any,N} where N}",
+    "page": "Distributed Computing",
+    "title": "Distributed.remotecall_fetch",
     "category": "Method",
     "text": "remotecall_fetch(f, pool::AbstractWorkerPool, args...; kwargs...) -> result\n\nWorkerPool variant of remotecall_fetch(f, pid, ....). Waits for and takes a free worker from pool and performs a remotecall_fetch on it.\n\n\n\n"
 },
 
 {
-    "location": "stdlib/parallel.html#Base.Distributed.remote_do-Tuple{Any,Base.Distributed.AbstractWorkerPool,Vararg{Any,N} where N}",
-    "page": "Tasks and Parallel Computing",
-    "title": "Base.Distributed.remote_do",
+    "location": "stdlib/distributed.html#Distributed.remote_do-Tuple{Any,AbstractWorkerPool,Vararg{Any,N} where N}",
+    "page": "Distributed Computing",
+    "title": "Distributed.remote_do",
     "category": "Method",
     "text": "remote_do(f, pool::AbstractWorkerPool, args...; kwargs...) -> nothing\n\nWorkerPool variant of remote_do(f, pid, ....). Waits for and takes a free worker from pool and performs a remote_do on it.\n\n\n\n"
 },
 
 {
-    "location": "stdlib/parallel.html#Base.timedwait",
-    "page": "Tasks and Parallel Computing",
+    "location": "stdlib/distributed.html#Base.timedwait",
+    "page": "Distributed Computing",
     "title": "Base.timedwait",
     "category": "Function",
     "text": "timedwait(testcb::Function, secs::Float64; pollint::Float64=0.1)\n\nWaits until testcb returns true or for secs seconds, whichever is earlier. testcb is polled every pollint seconds.\n\n\n\n"
 },
 
 {
-    "location": "stdlib/parallel.html#Base.Distributed.@spawn",
-    "page": "Tasks and Parallel Computing",
-    "title": "Base.Distributed.@spawn",
+    "location": "stdlib/distributed.html#Distributed.@spawn",
+    "page": "Distributed Computing",
+    "title": "Distributed.@spawn",
     "category": "Macro",
     "text": "@spawn\n\nCreate a closure around an expression and run it on an automatically-chosen process, returning a Future to the result.\n\nExamples\n\njulia> addprocs(3);\n\njulia> f = @spawn myid()\nFuture(2, 1, 5, Nullable{Any}())\n\njulia> fetch(f)\n2\n\njulia> f = @spawn myid()\nFuture(3, 1, 7, Nullable{Any}())\n\njulia> fetch(f)\n3\n\n\n\n"
 },
 
 {
-    "location": "stdlib/parallel.html#Base.Distributed.@spawnat",
-    "page": "Tasks and Parallel Computing",
-    "title": "Base.Distributed.@spawnat",
+    "location": "stdlib/distributed.html#Distributed.@spawnat",
+    "page": "Distributed Computing",
+    "title": "Distributed.@spawnat",
     "category": "Macro",
     "text": "@spawnat\n\nCreate a closure around an expression and run the closure asynchronously on process p. Return a Future to the result. Accepts two arguments, p and an expression.\n\nExamples\n\njulia> addprocs(1);\n\njulia> f = @spawnat 2 myid()\nFuture(2, 1, 3, Nullable{Any}())\n\njulia> fetch(f)\n2\n\n\n\n"
 },
 
 {
-    "location": "stdlib/parallel.html#Base.Distributed.@fetch",
-    "page": "Tasks and Parallel Computing",
-    "title": "Base.Distributed.@fetch",
+    "location": "stdlib/distributed.html#Distributed.@fetch",
+    "page": "Distributed Computing",
+    "title": "Distributed.@fetch",
     "category": "Macro",
     "text": "@fetch\n\nEquivalent to fetch(@spawn expr). See fetch and @spawn.\n\nExamples\n\njulia> addprocs(3);\n\njulia> @fetch myid()\n2\n\njulia> @fetch myid()\n3\n\njulia> @fetch myid()\n4\n\njulia> @fetch myid()\n2\n\n\n\n"
 },
 
 {
-    "location": "stdlib/parallel.html#Base.Distributed.@fetchfrom",
-    "page": "Tasks and Parallel Computing",
-    "title": "Base.Distributed.@fetchfrom",
+    "location": "stdlib/distributed.html#Distributed.@fetchfrom",
+    "page": "Distributed Computing",
+    "title": "Distributed.@fetchfrom",
     "category": "Macro",
     "text": "@fetchfrom\n\nEquivalent to fetch(@spawnat p expr). See fetch and @spawnat.\n\nExamples\n\njulia> addprocs(3);\n\njulia> @fetchfrom 2 myid()\n2\n\njulia> @fetchfrom 4 myid()\n4\n\n\n\n"
 },
 
 {
-    "location": "stdlib/parallel.html#Base.@async",
-    "page": "Tasks and Parallel Computing",
+    "location": "stdlib/distributed.html#Base.@async",
+    "page": "Distributed Computing",
     "title": "Base.@async",
     "category": "Macro",
     "text": "@async\n\nLike @schedule, @async wraps an expression in a Task and adds it to the local machine's scheduler queue. Additionally it adds the task to the set of items that the nearest enclosing @sync waits for.\n\n\n\n"
 },
 
 {
-    "location": "stdlib/parallel.html#Base.@sync",
-    "page": "Tasks and Parallel Computing",
+    "location": "stdlib/distributed.html#Base.@sync",
+    "page": "Distributed Computing",
     "title": "Base.@sync",
     "category": "Macro",
     "text": "@sync\n\nWait until all dynamically-enclosed uses of @async, @spawn, @spawnat and @parallel are complete. All exceptions thrown by enclosed async operations are collected and thrown as a CompositeException.\n\n\n\n"
 },
 
 {
-    "location": "stdlib/parallel.html#Base.Distributed.@parallel",
-    "page": "Tasks and Parallel Computing",
-    "title": "Base.Distributed.@parallel",
+    "location": "stdlib/distributed.html#Distributed.@parallel",
+    "page": "Distributed Computing",
+    "title": "Distributed.@parallel",
     "category": "Macro",
     "text": "@parallel\n\nA parallel for loop of the form :\n\n@parallel [reducer] for var = range\n    body\nend\n\nThe specified range is partitioned and locally executed across all workers. In case an optional reducer function is specified, @parallel performs local reductions on each worker with a final reduction on the calling process.\n\nNote that without a reducer function, @parallel executes asynchronously, i.e. it spawns independent tasks on all available workers and returns immediately without waiting for completion. To wait for completion, prefix the call with @sync, like :\n\n@sync @parallel for var = range\n    body\nend\n\n\n\n"
 },
 
 {
-    "location": "stdlib/parallel.html#Base.Distributed.@everywhere",
-    "page": "Tasks and Parallel Computing",
-    "title": "Base.Distributed.@everywhere",
+    "location": "stdlib/distributed.html#Distributed.@everywhere",
+    "page": "Distributed Computing",
+    "title": "Distributed.@everywhere",
     "category": "Macro",
     "text": "@everywhere [procs()] expr\n\nExecute an expression under Main on all procs. Errors on any of the processes are collected into a CompositeException and thrown. For example:\n\n@everywhere bar = 1\n\nwill define Main.bar on all processes.\n\nUnlike @spawn and @spawnat, @everywhere does not capture any local variables. Instead, local variables can be broadcast using interpolation:\n\nfoo = 1\n@everywhere bar = $foo\n\nThe optional argument procs allows specifying a subset of all processes to have execute the expression.\n\nEquivalent to calling remotecall_eval(Main, procs, expr).\n\n\n\n"
 },
 
 {
-    "location": "stdlib/parallel.html#Base.Distributed.clear!-Tuple{Any,Any}",
-    "page": "Tasks and Parallel Computing",
-    "title": "Base.Distributed.clear!",
+    "location": "stdlib/distributed.html#Distributed.clear!-Tuple{Any,Any}",
+    "page": "Distributed Computing",
+    "title": "Distributed.clear!",
     "category": "Method",
     "text": "clear!(syms, pids=workers(); mod=Main)\n\nClears global bindings in modules by initializing them to nothing. syms should be of type Symbol or a collection of Symbols . pids and mod identify the processes and the module in which global variables are to be reinitialized. Only those names found to be defined under mod are cleared.\n\nAn exception is raised if a global constant is requested to be cleared.\n\n\n\n"
 },
 
 {
-    "location": "stdlib/parallel.html#Base.Distributed.remoteref_id",
-    "page": "Tasks and Parallel Computing",
-    "title": "Base.Distributed.remoteref_id",
+    "location": "stdlib/distributed.html#Distributed.remoteref_id",
+    "page": "Distributed Computing",
+    "title": "Distributed.remoteref_id",
     "category": "Function",
-    "text": "Base.remoteref_id(r::AbstractRemoteRef) -> RRID\n\nFutures and RemoteChannels are identified by fields:\n\nwhere - refers to the node where the underlying object/storage referred to by the reference actually exists.\nwhence - refers to the node the remote reference was created from. Note that this is different from the node where the underlying object referred to actually exists. For example calling RemoteChannel(2) from the master process would result in a where value of 2 and a whence value of 1.\nid is unique across all references created from the worker specified by whence.\n\nTaken together,  whence and id uniquely identify a reference across all workers.\n\nBase.remoteref_id is a low-level API which returns a Base.RRID object that wraps whence and id values of a remote reference.\n\n\n\n"
+    "text": "remoteref_id(r::AbstractRemoteRef) -> RRID\n\nFutures and RemoteChannels are identified by fields:\n\nwhere - refers to the node where the underlying object/storage referred to by the reference actually exists.\nwhence - refers to the node the remote reference was created from. Note that this is different from the node where the underlying object referred to actually exists. For example calling RemoteChannel(2) from the master process would result in a where value of 2 and a whence value of 1.\nid is unique across all references created from the worker specified by whence.\n\nTaken together,  whence and id uniquely identify a reference across all workers.\n\nremoteref_id is a low-level API which returns a RRID object that wraps whence and id values of a remote reference.\n\n\n\n"
 },
 
 {
-    "location": "stdlib/parallel.html#Base.Distributed.channel_from_id",
-    "page": "Tasks and Parallel Computing",
-    "title": "Base.Distributed.channel_from_id",
+    "location": "stdlib/distributed.html#Distributed.channel_from_id",
+    "page": "Distributed Computing",
+    "title": "Distributed.channel_from_id",
     "category": "Function",
-    "text": "Base.channel_from_id(id) -> c\n\nA low-level API which returns the backing AbstractChannel for an id returned by remoteref_id. The call is valid only on the node where the backing channel exists.\n\n\n\n"
+    "text": "channel_from_id(id) -> c\n\nA low-level API which returns the backing AbstractChannel for an id returned by remoteref_id. The call is valid only on the node where the backing channel exists.\n\n\n\n"
 },
 
 {
-    "location": "stdlib/parallel.html#Base.Distributed.worker_id_from_socket",
-    "page": "Tasks and Parallel Computing",
-    "title": "Base.Distributed.worker_id_from_socket",
+    "location": "stdlib/distributed.html#Distributed.worker_id_from_socket",
+    "page": "Distributed Computing",
+    "title": "Distributed.worker_id_from_socket",
     "category": "Function",
-    "text": "Base.worker_id_from_socket(s) -> pid\n\nA low-level API which, given a IO connection or a Worker, returns the pid of the worker it is connected to. This is useful when writing custom serialize methods for a type, which optimizes the data written out depending on the receiving process id.\n\n\n\n"
+    "text": "worker_id_from_socket(s) -> pid\n\nA low-level API which, given a IO connection or a Worker, returns the pid of the worker it is connected to. This is useful when writing custom serialize methods for a type, which optimizes the data written out depending on the receiving process id.\n\n\n\n"
 },
 
 {
-    "location": "stdlib/parallel.html#Base.Distributed.cluster_cookie-Tuple{}",
-    "page": "Tasks and Parallel Computing",
-    "title": "Base.Distributed.cluster_cookie",
+    "location": "stdlib/distributed.html#Distributed.cluster_cookie-Tuple{}",
+    "page": "Distributed Computing",
+    "title": "Distributed.cluster_cookie",
     "category": "Method",
-    "text": "Base.cluster_cookie() -> cookie\n\nReturn the cluster cookie.\n\n\n\n"
+    "text": "cluster_cookie() -> cookie\n\nReturn the cluster cookie.\n\n\n\n"
 },
 
 {
-    "location": "stdlib/parallel.html#Base.Distributed.cluster_cookie-Tuple{Any}",
-    "page": "Tasks and Parallel Computing",
-    "title": "Base.Distributed.cluster_cookie",
+    "location": "stdlib/distributed.html#Distributed.cluster_cookie-Tuple{Any}",
+    "page": "Distributed Computing",
+    "title": "Distributed.cluster_cookie",
     "category": "Method",
-    "text": "Base.cluster_cookie(cookie) -> cookie\n\nSet the passed cookie as the cluster cookie, then returns it.\n\n\n\n"
+    "text": "cluster_cookie(cookie) -> cookie\n\nSet the passed cookie as the cluster cookie, then returns it.\n\n\n\n"
 },
 
 {
-    "location": "stdlib/parallel.html#General-Parallel-Computing-Support-1",
-    "page": "Tasks and Parallel Computing",
-    "title": "General Parallel Computing Support",
+    "location": "stdlib/distributed.html#Distributed-Computing-1",
+    "page": "Distributed Computing",
+    "title": "Distributed Computing",
     "category": "section",
-    "text": "Base.addprocs\nBase.nprocs\nBase.nworkers\nBase.procs()\nBase.procs(::Integer)\nBase.workers\nBase.rmprocs\nBase.interrupt\nBase.myid\nBase.pmap\nBase.RemoteException\nBase.Future\nBase.RemoteChannel(::Integer)\nBase.RemoteChannel(::Function, ::Integer)\nBase.wait\nBase.fetch(::Any)\nBase.remotecall(::Any, ::Integer, ::Any...)\nBase.remotecall_wait(::Any, ::Integer, ::Any...)\nBase.remotecall_fetch(::Any, ::Integer, ::Any...)\nBase.remote_do(::Any, ::Integer, ::Any...)\nBase.put!(::RemoteChannel, ::Any...)\nBase.put!(::Future, ::Any)\nBase.take!(::RemoteChannel, ::Any...)\nBase.isready(::RemoteChannel, ::Any...)\nBase.isready(::Future)\nBase.WorkerPool\nBase.CachingPool\nBase.default_worker_pool\nBase.clear!(::CachingPool)\nBase.remote\nBase.remotecall(::Any, ::Base.Distributed.AbstractWorkerPool, ::Any...)\nBase.remotecall_wait(::Any, ::Base.Distributed.AbstractWorkerPool, ::Any...)\nBase.remotecall_fetch(::Any, ::Base.Distributed.AbstractWorkerPool, ::Any...)\nBase.remote_do(::Any, ::Base.Distributed.AbstractWorkerPool, ::Any...)\nBase.timedwait\nBase.@spawn\nBase.@spawnat\nBase.@fetch\nBase.@fetchfrom\nBase.@async\nBase.@sync\nBase.@parallel\nBase.@everywhere\nBase.clear!(::Any, ::Any; ::Any)\nBase.remoteref_id\nBase.channel_from_id\nBase.worker_id_from_socket\nBase.cluster_cookie()\nBase.cluster_cookie(::Any)"
+    "text": "Distributed.addprocs\nDistributed.nprocs\nDistributed.nworkers\nDistributed.procs()\nDistributed.procs(::Integer)\nDistributed.workers\nDistributed.rmprocs\nDistributed.interrupt\nDistributed.myid\nDistributed.pmap\nDistributed.RemoteException\nDistributed.Future\nDistributed.RemoteChannel\nDistributed.wait\nDistributed.fetch(::Any)\nDistributed.remotecall(::Any, ::Integer, ::Any...)\nDistributed.remotecall_wait(::Any, ::Integer, ::Any...)\nDistributed.remotecall_fetch(::Any, ::Integer, ::Any...)\nDistributed.remote_do(::Any, ::Integer, ::Any...)\nDistributed.put!(::RemoteChannel, ::Any...)\nDistributed.put!(::Future, ::Any)\nDistributed.take!(::RemoteChannel, ::Any...)\nDistributed.isready(::RemoteChannel, ::Any...)\nDistributed.isready(::Future)\nDistributed.WorkerPool\nDistributed.CachingPool\nDistributed.default_worker_pool\nDistributed.clear!(::CachingPool)\nDistributed.remote\nDistributed.remotecall(::Any, ::AbstractWorkerPool, ::Any...)\nDistributed.remotecall_wait(::Any, ::AbstractWorkerPool, ::Any...)\nDistributed.remotecall_fetch(::Any, ::AbstractWorkerPool, ::Any...)\nDistributed.remote_do(::Any, ::AbstractWorkerPool, ::Any...)\nDistributed.timedwait\nDistributed.@spawn\nDistributed.@spawnat\nDistributed.@fetch\nDistributed.@fetchfrom\nDistributed.@async\nDistributed.@sync\nDistributed.@parallel\nDistributed.@everywhere\nDistributed.clear!(::Any, ::Any; ::Any)\nDistributed.remoteref_id\nDistributed.channel_from_id\nDistributed.worker_id_from_socket\nDistributed.cluster_cookie()\nDistributed.cluster_cookie(::Any)"
 },
 
 {
-    "location": "stdlib/parallel.html#Base.Threads.threadid",
-    "page": "Tasks and Parallel Computing",
-    "title": "Base.Threads.threadid",
-    "category": "Function",
-    "text": "Threads.threadid()\n\nGet the ID number of the current thread of execution. The master thread has ID 1.\n\n\n\n"
-},
-
-{
-    "location": "stdlib/parallel.html#Base.Threads.nthreads",
-    "page": "Tasks and Parallel Computing",
-    "title": "Base.Threads.nthreads",
-    "category": "Function",
-    "text": "Threads.nthreads()\n\nGet the number of threads available to the Julia process. This is the inclusive upper bound on threadid().\n\n\n\n"
-},
-
-{
-    "location": "stdlib/parallel.html#Base.Threads.@threads",
-    "page": "Tasks and Parallel Computing",
-    "title": "Base.Threads.@threads",
-    "category": "Macro",
-    "text": "Threads.@threads\n\nA macro to parallelize a for-loop to run with multiple threads. This spawns nthreads() number of threads, splits the iteration space amongst them, and iterates in parallel. A barrier is placed at the end of the loop which waits for all the threads to finish execution, and the loop returns.\n\n\n\n"
-},
-
-{
-    "location": "stdlib/parallel.html#Base.Threads.Atomic",
-    "page": "Tasks and Parallel Computing",
-    "title": "Base.Threads.Atomic",
-    "category": "Type",
-    "text": "Threads.Atomic{T}\n\nHolds a reference to an object of type T, ensuring that it is only accessed atomically, i.e. in a thread-safe manner.\n\nOnly certain \"simple\" types can be used atomically, namely the primitive integer and float-point types. These are Int8...Int128, UInt8...UInt128, and Float16...Float64.\n\nNew atomic objects can be created from a non-atomic values; if none is specified, the atomic object is initialized with zero.\n\nAtomic objects can be accessed using the [] notation:\n\nExamples\n\njulia> x = Threads.Atomic{Int}(3)\nBase.Threads.Atomic{Int64}(3)\n\njulia> x[] = 1\n1\n\njulia> x[]\n1\n\nAtomic operations use an atomic_ prefix, such as atomic_add!, atomic_xchg!, etc.\n\n\n\n"
-},
-
-{
-    "location": "stdlib/parallel.html#Base.Threads.atomic_cas!",
-    "page": "Tasks and Parallel Computing",
-    "title": "Base.Threads.atomic_cas!",
-    "category": "Function",
-    "text": "Threads.atomic_cas!(x::Atomic{T}, cmp::T, newval::T) where T\n\nAtomically compare-and-set x\n\nAtomically compares the value in x with cmp. If equal, write newval to x. Otherwise, leaves x unmodified. Returns the old value in x. By comparing the returned value to cmp (via ===) one knows whether x was modified and now holds the new value newval.\n\nFor further details, see LLVM's cmpxchg instruction.\n\nThis function can be used to implement transactional semantics. Before the transaction, one records the value in x. After the transaction, the new value is stored only if x has not been modified in the mean time.\n\nExamples\n\njulia> x = Threads.Atomic{Int}(3)\nBase.Threads.Atomic{Int64}(3)\n\njulia> Threads.atomic_cas!(x, 4, 2);\n\njulia> x\nBase.Threads.Atomic{Int64}(3)\n\njulia> Threads.atomic_cas!(x, 3, 2);\n\njulia> x\nBase.Threads.Atomic{Int64}(2)\n\n\n\n"
-},
-
-{
-    "location": "stdlib/parallel.html#Base.Threads.atomic_xchg!",
-    "page": "Tasks and Parallel Computing",
-    "title": "Base.Threads.atomic_xchg!",
-    "category": "Function",
-    "text": "Threads.atomic_xchg!(x::Atomic{T}, newval::T) where T\n\nAtomically exchange the value in x\n\nAtomically exchanges the value in x with newval. Returns the old value.\n\nFor further details, see LLVM's atomicrmw xchg instruction.\n\nExamples\n\njulia> x = Threads.Atomic{Int}(3)\nBase.Threads.Atomic{Int64}(3)\n\njulia> Threads.atomic_xchg!(x, 2)\n3\n\njulia> x[]\n2\n\n\n\n"
-},
-
-{
-    "location": "stdlib/parallel.html#Base.Threads.atomic_add!",
-    "page": "Tasks and Parallel Computing",
-    "title": "Base.Threads.atomic_add!",
-    "category": "Function",
-    "text": "Threads.atomic_add!(x::Atomic{T}, val::T) where T\n\nAtomically add val to x\n\nPerforms x[] += val atomically. Returns the old value.\n\nFor further details, see LLVM's atomicrmw add instruction.\n\nExamples\n\njulia> x = Threads.Atomic{Int}(3)\nBase.Threads.Atomic{Int64}(3)\n\njulia> Threads.atomic_add!(x, 2)\n3\n\njulia> x[]\n5\n\n\n\n"
-},
-
-{
-    "location": "stdlib/parallel.html#Base.Threads.atomic_sub!",
-    "page": "Tasks and Parallel Computing",
-    "title": "Base.Threads.atomic_sub!",
-    "category": "Function",
-    "text": "Threads.atomic_sub!(x::Atomic{T}, val::T) where T\n\nAtomically subtract val from x\n\nPerforms x[] -= val atomically. Returns the old value.\n\nFor further details, see LLVM's atomicrmw sub instruction.\n\nExamples\n\njulia> x = Threads.Atomic{Int}(3)\nBase.Threads.Atomic{Int64}(3)\n\njulia> Threads.atomic_sub!(x, 2)\n3\n\njulia> x[]\n1\n\n\n\n"
-},
-
-{
-    "location": "stdlib/parallel.html#Base.Threads.atomic_and!",
-    "page": "Tasks and Parallel Computing",
-    "title": "Base.Threads.atomic_and!",
-    "category": "Function",
-    "text": "Threads.atomic_and!(x::Atomic{T}, val::T) where T\n\nAtomically bitwise-and x with val\n\nPerforms x[] &= val atomically. Returns the old value.\n\nFor further details, see LLVM's atomicrmw and instruction.\n\nExamples\n\njulia> x = Threads.Atomic{Int}(3)\nBase.Threads.Atomic{Int64}(3)\n\njulia> Threads.atomic_and!(x, 2)\n3\n\njulia> x[]\n2\n\n\n\n"
-},
-
-{
-    "location": "stdlib/parallel.html#Base.Threads.atomic_nand!",
-    "page": "Tasks and Parallel Computing",
-    "title": "Base.Threads.atomic_nand!",
-    "category": "Function",
-    "text": "Threads.atomic_nand!(x::Atomic{T}, val::T) where T\n\nAtomically bitwise-nand (not-and) x with val\n\nPerforms x[] = ~(x[] & val) atomically. Returns the old value.\n\nFor further details, see LLVM's atomicrmw nand instruction.\n\nExamples\n\njulia> x = Threads.Atomic{Int}(3)\nBase.Threads.Atomic{Int64}(3)\n\njulia> Threads.atomic_nand!(x, 2)\n3\n\njulia> x[]\n-3\n\n\n\n"
-},
-
-{
-    "location": "stdlib/parallel.html#Base.Threads.atomic_or!",
-    "page": "Tasks and Parallel Computing",
-    "title": "Base.Threads.atomic_or!",
-    "category": "Function",
-    "text": "Threads.atomic_or!(x::Atomic{T}, val::T) where T\n\nAtomically bitwise-or x with val\n\nPerforms x[] |= val atomically. Returns the old value.\n\nFor further details, see LLVM's atomicrmw or instruction.\n\nExamples\n\njulia> x = Threads.Atomic{Int}(5)\nBase.Threads.Atomic{Int64}(5)\n\njulia> Threads.atomic_or!(x, 7)\n5\n\njulia> x[]\n7\n\n\n\n"
-},
-
-{
-    "location": "stdlib/parallel.html#Base.Threads.atomic_xor!",
-    "page": "Tasks and Parallel Computing",
-    "title": "Base.Threads.atomic_xor!",
-    "category": "Function",
-    "text": "Threads.atomic_xor!(x::Atomic{T}, val::T) where T\n\nAtomically bitwise-xor (exclusive-or) x with val\n\nPerforms x[] $= val atomically. Returns the old value.\n\nFor further details, see LLVM's atomicrmw xor instruction.\n\nExamples\n\njulia> x = Threads.Atomic{Int}(5)\nBase.Threads.Atomic{Int64}(5)\n\njulia> Threads.atomic_xor!(x, 7)\n5\n\njulia> x[]\n2\n\n\n\n"
-},
-
-{
-    "location": "stdlib/parallel.html#Base.Threads.atomic_max!",
-    "page": "Tasks and Parallel Computing",
-    "title": "Base.Threads.atomic_max!",
-    "category": "Function",
-    "text": "Threads.atomic_max!(x::Atomic{T}, val::T) where T\n\nAtomically store the maximum of x and val in x\n\nPerforms x[] = max(x[], val) atomically. Returns the old value.\n\nFor further details, see LLVM's atomicrmw max instruction.\n\nExamples\n\njulia> x = Threads.Atomic{Int}(5)\nBase.Threads.Atomic{Int64}(5)\n\njulia> Threads.atomic_max!(x, 7)\n5\n\njulia> x[]\n7\n\n\n\n"
-},
-
-{
-    "location": "stdlib/parallel.html#Base.Threads.atomic_min!",
-    "page": "Tasks and Parallel Computing",
-    "title": "Base.Threads.atomic_min!",
-    "category": "Function",
-    "text": "Threads.atomic_min!(x::Atomic{T}, val::T) where T\n\nAtomically store the minimum of x and val in x\n\nPerforms x[] = min(x[], val) atomically. Returns the old value.\n\nFor further details, see LLVM's atomicrmw min instruction.\n\nExamples\n\njulia> x = Threads.Atomic{Int}(7)\nBase.Threads.Atomic{Int64}(7)\n\njulia> Threads.atomic_min!(x, 5)\n7\n\njulia> x[]\n5\n\n\n\n"
-},
-
-{
-    "location": "stdlib/parallel.html#Base.Threads.atomic_fence",
-    "page": "Tasks and Parallel Computing",
-    "title": "Base.Threads.atomic_fence",
-    "category": "Function",
-    "text": "Threads.atomic_fence()\n\nInsert a sequential-consistency memory fence\n\nInserts a memory fence with sequentially-consistent ordering semantics. There are algorithms where this is needed, i.e. where an acquire/release ordering is insufficient.\n\nThis is likely a very expensive operation. Given that all other atomic operations in Julia already have acquire/release semantics, explicit fences should not be necessary in most cases.\n\nFor further details, see LLVM's fence instruction.\n\n\n\n"
-},
-
-{
-    "location": "stdlib/parallel.html#Multi-Threading-1",
-    "page": "Tasks and Parallel Computing",
-    "title": "Multi-Threading",
-    "category": "section",
-    "text": "This experimental interface supports Julia's multi-threading capabilities. Types and functions described here might (and likely will) change in the future.Base.Threads.threadid\nBase.Threads.nthreads\nBase.Threads.@threads\nBase.Threads.Atomic\nBase.Threads.atomic_cas!\nBase.Threads.atomic_xchg!\nBase.Threads.atomic_add!\nBase.Threads.atomic_sub!\nBase.Threads.atomic_and!\nBase.Threads.atomic_nand!\nBase.Threads.atomic_or!\nBase.Threads.atomic_xor!\nBase.Threads.atomic_max!\nBase.Threads.atomic_min!\nBase.Threads.atomic_fence"
-},
-
-{
-    "location": "stdlib/parallel.html#Base.@threadcall",
-    "page": "Tasks and Parallel Computing",
-    "title": "Base.@threadcall",
-    "category": "Macro",
-    "text": "@threadcall((cfunc, clib), rettype, (argtypes...), argvals...)\n\nThe @threadcall macro is called in the same way as ccall but does the work in a different thread. This is useful when you want to call a blocking C function without causing the main julia thread to become blocked. Concurrency is limited by size of the libuv thread pool, which defaults to 4 threads but can be increased by setting the UV_THREADPOOL_SIZE environment variable and restarting the julia process.\n\nNote that the called function should never call back into Julia.\n\n\n\n"
-},
-
-{
-    "location": "stdlib/parallel.html#ccall-using-a-threadpool-(Experimental)-1",
-    "page": "Tasks and Parallel Computing",
-    "title": "ccall using a threadpool (Experimental)",
-    "category": "section",
-    "text": "Base.@threadcall"
-},
-
-{
-    "location": "stdlib/parallel.html#Base.Threads.AbstractLock",
-    "page": "Tasks and Parallel Computing",
-    "title": "Base.Threads.AbstractLock",
-    "category": "Type",
-    "text": "AbstractLock\n\nAbstract supertype describing types that implement the thread-safe synchronization primitives: lock, trylock, unlock, and islocked\n\n\n\n"
-},
-
-{
-    "location": "stdlib/parallel.html#Base.lock",
-    "page": "Tasks and Parallel Computing",
-    "title": "Base.lock",
-    "category": "Function",
-    "text": "lock(the_lock)\n\nAcquires the lock when it becomes available. If the lock is already locked by a different task/thread, it waits for it to become available.\n\nEach lock must be matched by an unlock.\n\n\n\n"
-},
-
-{
-    "location": "stdlib/parallel.html#Base.unlock",
-    "page": "Tasks and Parallel Computing",
-    "title": "Base.unlock",
-    "category": "Function",
-    "text": "unlock(the_lock)\n\nReleases ownership of the lock.\n\nIf this is a recursive lock which has been acquired before, it just decrements an internal counter and returns immediately.\n\n\n\n"
-},
-
-{
-    "location": "stdlib/parallel.html#Base.trylock",
-    "page": "Tasks and Parallel Computing",
-    "title": "Base.trylock",
-    "category": "Function",
-    "text": "trylock(the_lock) -> Success (Boolean)\n\nAcquires the lock if it is available, returning true if successful. If the lock is already locked by a different task/thread, returns false.\n\nEach successful trylock must be matched by an unlock.\n\n\n\n"
-},
-
-{
-    "location": "stdlib/parallel.html#Base.islocked",
-    "page": "Tasks and Parallel Computing",
-    "title": "Base.islocked",
-    "category": "Function",
-    "text": "islocked(the_lock) -> Status (Boolean)\n\nCheck whether the lock is held by any task/thread. This should not be used for synchronization (see instead trylock).\n\n\n\n"
-},
-
-{
-    "location": "stdlib/parallel.html#Base.ReentrantLock",
-    "page": "Tasks and Parallel Computing",
-    "title": "Base.ReentrantLock",
-    "category": "Type",
-    "text": "ReentrantLock()\n\nCreates a reentrant lock for synchronizing Tasks. The same task can acquire the lock as many times as required. Each lock must be matched with an unlock.\n\nThis lock is NOT threadsafe. See Threads.Mutex for a threadsafe lock.\n\n\n\n"
-},
-
-{
-    "location": "stdlib/parallel.html#Base.Threads.Mutex",
-    "page": "Tasks and Parallel Computing",
-    "title": "Base.Threads.Mutex",
-    "category": "Type",
-    "text": "Mutex()\n\nThese are standard system mutexes for locking critical sections of logic.\n\nOn Windows, this is a critical section object, on pthreads, this is a pthread_mutex_t.\n\nSee also SpinLock for a lighter-weight lock.\n\n\n\n"
-},
-
-{
-    "location": "stdlib/parallel.html#Base.Threads.SpinLock",
-    "page": "Tasks and Parallel Computing",
-    "title": "Base.Threads.SpinLock",
-    "category": "Type",
-    "text": "SpinLock()\n\nCreates a non-reentrant lock. Recursive use will result in a deadlock. Each lock must be matched with an unlock.\n\nTest-and-test-and-set spin locks are quickest up to about 30ish contending threads. If you have more contention than that, perhaps a lock is the wrong way to synchronize.\n\nSee also RecursiveSpinLock for a version that permits recursion.\n\nSee also Mutex for a more efficient version on one core or if the lock may be held for a considerable length of time.\n\n\n\n"
-},
-
-{
-    "location": "stdlib/parallel.html#Base.Threads.RecursiveSpinLock",
-    "page": "Tasks and Parallel Computing",
-    "title": "Base.Threads.RecursiveSpinLock",
-    "category": "Type",
-    "text": "RecursiveSpinLock()\n\nCreates a reentrant lock. The same thread can acquire the lock as many times as required. Each lock must be matched with an unlock.\n\nSee also SpinLock for a slightly faster version.\n\nSee also Mutex for a more efficient version on one core or if the lock may be held for a considerable length of time.\n\n\n\n"
-},
-
-{
-    "location": "stdlib/parallel.html#Base.Semaphore",
-    "page": "Tasks and Parallel Computing",
-    "title": "Base.Semaphore",
-    "category": "Type",
-    "text": "Semaphore(sem_size)\n\nCreates a counting semaphore that allows at most sem_size acquires to be in use at any time. Each acquire must be mached with a release.\n\nThis construct is NOT threadsafe.\n\n\n\n"
-},
-
-{
-    "location": "stdlib/parallel.html#Base.acquire",
-    "page": "Tasks and Parallel Computing",
-    "title": "Base.acquire",
-    "category": "Function",
-    "text": "acquire(s::Semaphore)\n\nWait for one of the sem_size permits to be available, blocking until one can be acquired.\n\n\n\n"
-},
-
-{
-    "location": "stdlib/parallel.html#Base.release",
-    "page": "Tasks and Parallel Computing",
-    "title": "Base.release",
-    "category": "Function",
-    "text": "release(s::Semaphore)\n\nReturn one permit to the pool, possibly allowing another task to acquire it and resume execution.\n\n\n\n"
-},
-
-{
-    "location": "stdlib/parallel.html#Synchronization-Primitives-1",
-    "page": "Tasks and Parallel Computing",
-    "title": "Synchronization Primitives",
-    "category": "section",
-    "text": "Base.Threads.AbstractLock\nBase.lock\nBase.unlock\nBase.trylock\nBase.islocked\nBase.ReentrantLock\nBase.Threads.Mutex\nBase.Threads.SpinLock\nBase.Threads.RecursiveSpinLock\nBase.Semaphore\nBase.acquire\nBase.release"
-},
-
-{
-    "location": "stdlib/parallel.html#Base.Distributed.launch",
-    "page": "Tasks and Parallel Computing",
-    "title": "Base.Distributed.launch",
+    "location": "stdlib/distributed.html#Distributed.launch",
+    "page": "Distributed Computing",
+    "title": "Distributed.launch",
     "category": "Function",
     "text": "launch(manager::ClusterManager, params::Dict, launched::Array, launch_ntfy::Condition)\n\nImplemented by cluster managers. For every Julia worker launched by this function, it should append a WorkerConfig entry to launched and notify launch_ntfy. The function MUST exit once all workers, requested by manager have been launched. params is a dictionary of all keyword arguments addprocs was called with.\n\n\n\n"
 },
 
 {
-    "location": "stdlib/parallel.html#Base.Distributed.manage",
-    "page": "Tasks and Parallel Computing",
-    "title": "Base.Distributed.manage",
+    "location": "stdlib/distributed.html#Distributed.manage",
+    "page": "Distributed Computing",
+    "title": "Distributed.manage",
     "category": "Function",
     "text": "manage(manager::ClusterManager, id::Integer, config::WorkerConfig. op::Symbol)\n\nImplemented by cluster managers. It is called on the master process, during a worker's lifetime, with appropriate op values:\n\nwith :register/:deregister when a worker is added / removed from the Julia worker pool.\nwith :interrupt when interrupt(workers) is called. The ClusterManager should signal the appropriate worker with an interrupt signal.\nwith :finalize for cleanup purposes.\n\n\n\n"
 },
 
 {
-    "location": "stdlib/parallel.html#Base.kill-Tuple{ClusterManager,Int64,WorkerConfig}",
-    "page": "Tasks and Parallel Computing",
+    "location": "stdlib/distributed.html#Base.kill-Tuple{ClusterManager,Int64,WorkerConfig}",
+    "page": "Distributed Computing",
     "title": "Base.kill",
     "category": "Method",
     "text": "kill(manager::ClusterManager, pid::Int, config::WorkerConfig)\n\nImplemented by cluster managers. It is called on the master process, by rmprocs. It should cause the remote worker specified by pid to exit. kill(manager::ClusterManager.....) executes a remote exit() on pid.\n\n\n\n"
 },
 
 {
-    "location": "stdlib/parallel.html#Base.connect-Tuple{ClusterManager,Int64,WorkerConfig}",
-    "page": "Tasks and Parallel Computing",
+    "location": "stdlib/distributed.html#Base.connect-Tuple{ClusterManager,Int64,WorkerConfig}",
+    "page": "Distributed Computing",
     "title": "Base.connect",
     "category": "Method",
     "text": "connect(manager::ClusterManager, pid::Int, config::WorkerConfig) -> (instrm::IO, outstrm::IO)\n\nImplemented by cluster managers using custom transports. It should establish a logical connection to worker with id pid, specified by config and return a pair of IO objects. Messages from pid to current process will be read off instrm, while messages to be sent to pid will be written to outstrm. The custom transport implementation must ensure that messages are delivered and received completely and in order. connect(manager::ClusterManager.....) sets up TCP/IP socket connections in-between workers.\n\n\n\n"
 },
 
 {
-    "location": "stdlib/parallel.html#Base.Distributed.init_worker",
-    "page": "Tasks and Parallel Computing",
-    "title": "Base.Distributed.init_worker",
+    "location": "stdlib/distributed.html#Distributed.init_worker",
+    "page": "Distributed Computing",
+    "title": "Distributed.init_worker",
     "category": "Function",
     "text": "init_worker(cookie::AbstractString, manager::ClusterManager=DefaultClusterManager())\n\nCalled by cluster managers implementing custom transports. It initializes a newly launched process as a worker. Command line argument --worker[=<cookie>] has the effect of initializing a process as a worker using TCP/IP sockets for transport. cookie is a cluster_cookie.\n\n\n\n"
 },
 
 {
-    "location": "stdlib/parallel.html#Base.Distributed.start_worker",
-    "page": "Tasks and Parallel Computing",
-    "title": "Base.Distributed.start_worker",
+    "location": "stdlib/distributed.html#Distributed.start_worker",
+    "page": "Distributed Computing",
+    "title": "Distributed.start_worker",
     "category": "Function",
-    "text": "start_worker(out::IO=STDOUT)\nstart_worker(cookie::AbstractString)\nstart_worker(out::IO, cookie::AbstractString)\n\nBase.start_worker is an internal function which is the default entry point for worker processes connecting via TCP/IP. It sets up the process as a Julia cluster worker.\n\nIf the cookie is unspecified, the worker tries to read it from its STDIN.\n\nhost:port information is written to stream out (defaults to STDOUT).\n\nThe function closes STDIN (after reading the cookie if required), redirects STDERR to STDOUT, listens on a free port (or if specified, the port in the --bind-to command line option) and schedules tasks to process incoming TCP connections and requests.\n\nIt does not return.\n\n\n\n"
+    "text": "start_worker(out::IO=STDOUT)\nstart_worker(cookie::AbstractString)\nstart_worker(out::IO, cookie::AbstractString)\n\nstart_worker is an internal function which is the default entry point for worker processes connecting via TCP/IP. It sets up the process as a Julia cluster worker.\n\nIf the cookie is unspecified, the worker tries to read it from its STDIN.\n\nhost:port information is written to stream out (defaults to STDOUT).\n\nThe function closes STDIN (after reading the cookie if required), redirects STDERR to STDOUT, listens on a free port (or if specified, the port in the --bind-to command line option) and schedules tasks to process incoming TCP connections and requests.\n\nIt does not return.\n\n\n\n"
 },
 
 {
-    "location": "stdlib/parallel.html#Base.Distributed.process_messages",
-    "page": "Tasks and Parallel Computing",
-    "title": "Base.Distributed.process_messages",
+    "location": "stdlib/distributed.html#Distributed.process_messages",
+    "page": "Distributed Computing",
+    "title": "Distributed.process_messages",
     "category": "Function",
-    "text": "Base.process_messages(r_stream::IO, w_stream::IO, incoming::Bool=true)\n\nCalled by cluster managers using custom transports. It should be called when the custom transport implementation receives the first message from a remote worker. The custom transport must manage a logical connection to the remote worker and provide two IO objects, one for incoming messages and the other for messages addressed to the remote worker. If incoming is true, the remote peer initiated the connection. Whichever of the pair initiates the connection sends the cluster cookie and its Julia version number to perform the authentication handshake.\n\nSee also cluster_cookie.\n\n\n\n"
+    "text": "process_messages(r_stream::IO, w_stream::IO, incoming::Bool=true)\n\nCalled by cluster managers using custom transports. It should be called when the custom transport implementation receives the first message from a remote worker. The custom transport must manage a logical connection to the remote worker and provide two IO objects, one for incoming messages and the other for messages addressed to the remote worker. If incoming is true, the remote peer initiated the connection. Whichever of the pair initiates the connection sends the cluster cookie and its Julia version number to perform the authentication handshake.\n\nSee also cluster_cookie.\n\n\n\n"
 },
 
 {
-    "location": "stdlib/parallel.html#Cluster-Manager-Interface-1",
-    "page": "Tasks and Parallel Computing",
+    "location": "stdlib/distributed.html#Cluster-Manager-Interface-1",
+    "page": "Distributed Computing",
     "title": "Cluster Manager Interface",
     "category": "section",
-    "text": "This interface provides a mechanism to launch and manage Julia workers on different cluster environments. There are two types of managers present in Base: LocalManager, for launching additional workers on the same host, and SSHManager, for launching on remote hosts via ssh. TCP/IP sockets are used to connect and transport messages between processes. It is possible for Cluster Managers to provide a different transport.Base.launch\nBase.manage\nBase.kill(::ClusterManager, ::Int, ::WorkerConfig)\nBase.connect(::ClusterManager, ::Int, ::WorkerConfig)\nBase.init_worker\nBase.start_worker\nBase.process_messages"
+    "text": "This interface provides a mechanism to launch and manage Julia workers on different cluster environments. There are two types of managers present in Base: LocalManager, for launching additional workers on the same host, and SSHManager, for launching on remote hosts via ssh. TCP/IP sockets are used to connect and transport messages between processes. It is possible for Cluster Managers to provide a different transport.Distributed.launch\nDistributed.manage\nDistributed.kill(::ClusterManager, ::Int, ::WorkerConfig)\nDistributed.connect(::ClusterManager, ::Int, ::WorkerConfig)\nDistributed.init_worker\nDistributed.start_worker\nDistributed.process_messages"
+},
+
+{
+    "location": "stdlib/multi-threading.html#",
+    "page": "Multi-Threading",
+    "title": "Multi-Threading",
+    "category": "page",
+    "text": ""
+},
+
+{
+    "location": "stdlib/multi-threading.html#Base.Threads.threadid",
+    "page": "Multi-Threading",
+    "title": "Base.Threads.threadid",
+    "category": "Function",
+    "text": "Threads.threadid()\n\nGet the ID number of the current thread of execution. The master thread has ID 1.\n\n\n\n"
+},
+
+{
+    "location": "stdlib/multi-threading.html#Base.Threads.nthreads",
+    "page": "Multi-Threading",
+    "title": "Base.Threads.nthreads",
+    "category": "Function",
+    "text": "Threads.nthreads()\n\nGet the number of threads available to the Julia process. This is the inclusive upper bound on threadid().\n\n\n\n"
+},
+
+{
+    "location": "stdlib/multi-threading.html#Base.Threads.@threads",
+    "page": "Multi-Threading",
+    "title": "Base.Threads.@threads",
+    "category": "Macro",
+    "text": "Threads.@threads\n\nA macro to parallelize a for-loop to run with multiple threads. This spawns nthreads() number of threads, splits the iteration space amongst them, and iterates in parallel. A barrier is placed at the end of the loop which waits for all the threads to finish execution, and the loop returns.\n\n\n\n"
+},
+
+{
+    "location": "stdlib/multi-threading.html#Base.Threads.Atomic",
+    "page": "Multi-Threading",
+    "title": "Base.Threads.Atomic",
+    "category": "Type",
+    "text": "Threads.Atomic{T}\n\nHolds a reference to an object of type T, ensuring that it is only accessed atomically, i.e. in a thread-safe manner.\n\nOnly certain \"simple\" types can be used atomically, namely the primitive integer and float-point types. These are Int8...Int128, UInt8...UInt128, and Float16...Float64.\n\nNew atomic objects can be created from a non-atomic values; if none is specified, the atomic object is initialized with zero.\n\nAtomic objects can be accessed using the [] notation:\n\nExamples\n\njulia> x = Threads.Atomic{Int}(3)\nBase.Threads.Atomic{Int64}(3)\n\njulia> x[] = 1\n1\n\njulia> x[]\n1\n\nAtomic operations use an atomic_ prefix, such as atomic_add!, atomic_xchg!, etc.\n\n\n\n"
+},
+
+{
+    "location": "stdlib/multi-threading.html#Base.Threads.atomic_cas!",
+    "page": "Multi-Threading",
+    "title": "Base.Threads.atomic_cas!",
+    "category": "Function",
+    "text": "Threads.atomic_cas!(x::Atomic{T}, cmp::T, newval::T) where T\n\nAtomically compare-and-set x\n\nAtomically compares the value in x with cmp. If equal, write newval to x. Otherwise, leaves x unmodified. Returns the old value in x. By comparing the returned value to cmp (via ===) one knows whether x was modified and now holds the new value newval.\n\nFor further details, see LLVM's cmpxchg instruction.\n\nThis function can be used to implement transactional semantics. Before the transaction, one records the value in x. After the transaction, the new value is stored only if x has not been modified in the mean time.\n\nExamples\n\njulia> x = Threads.Atomic{Int}(3)\nBase.Threads.Atomic{Int64}(3)\n\njulia> Threads.atomic_cas!(x, 4, 2);\n\njulia> x\nBase.Threads.Atomic{Int64}(3)\n\njulia> Threads.atomic_cas!(x, 3, 2);\n\njulia> x\nBase.Threads.Atomic{Int64}(2)\n\n\n\n"
+},
+
+{
+    "location": "stdlib/multi-threading.html#Base.Threads.atomic_xchg!",
+    "page": "Multi-Threading",
+    "title": "Base.Threads.atomic_xchg!",
+    "category": "Function",
+    "text": "Threads.atomic_xchg!(x::Atomic{T}, newval::T) where T\n\nAtomically exchange the value in x\n\nAtomically exchanges the value in x with newval. Returns the old value.\n\nFor further details, see LLVM's atomicrmw xchg instruction.\n\nExamples\n\njulia> x = Threads.Atomic{Int}(3)\nBase.Threads.Atomic{Int64}(3)\n\njulia> Threads.atomic_xchg!(x, 2)\n3\n\njulia> x[]\n2\n\n\n\n"
+},
+
+{
+    "location": "stdlib/multi-threading.html#Base.Threads.atomic_add!",
+    "page": "Multi-Threading",
+    "title": "Base.Threads.atomic_add!",
+    "category": "Function",
+    "text": "Threads.atomic_add!(x::Atomic{T}, val::T) where T\n\nAtomically add val to x\n\nPerforms x[] += val atomically. Returns the old value.\n\nFor further details, see LLVM's atomicrmw add instruction.\n\nExamples\n\njulia> x = Threads.Atomic{Int}(3)\nBase.Threads.Atomic{Int64}(3)\n\njulia> Threads.atomic_add!(x, 2)\n3\n\njulia> x[]\n5\n\n\n\n"
+},
+
+{
+    "location": "stdlib/multi-threading.html#Base.Threads.atomic_sub!",
+    "page": "Multi-Threading",
+    "title": "Base.Threads.atomic_sub!",
+    "category": "Function",
+    "text": "Threads.atomic_sub!(x::Atomic{T}, val::T) where T\n\nAtomically subtract val from x\n\nPerforms x[] -= val atomically. Returns the old value.\n\nFor further details, see LLVM's atomicrmw sub instruction.\n\nExamples\n\njulia> x = Threads.Atomic{Int}(3)\nBase.Threads.Atomic{Int64}(3)\n\njulia> Threads.atomic_sub!(x, 2)\n3\n\njulia> x[]\n1\n\n\n\n"
+},
+
+{
+    "location": "stdlib/multi-threading.html#Base.Threads.atomic_and!",
+    "page": "Multi-Threading",
+    "title": "Base.Threads.atomic_and!",
+    "category": "Function",
+    "text": "Threads.atomic_and!(x::Atomic{T}, val::T) where T\n\nAtomically bitwise-and x with val\n\nPerforms x[] &= val atomically. Returns the old value.\n\nFor further details, see LLVM's atomicrmw and instruction.\n\nExamples\n\njulia> x = Threads.Atomic{Int}(3)\nBase.Threads.Atomic{Int64}(3)\n\njulia> Threads.atomic_and!(x, 2)\n3\n\njulia> x[]\n2\n\n\n\n"
+},
+
+{
+    "location": "stdlib/multi-threading.html#Base.Threads.atomic_nand!",
+    "page": "Multi-Threading",
+    "title": "Base.Threads.atomic_nand!",
+    "category": "Function",
+    "text": "Threads.atomic_nand!(x::Atomic{T}, val::T) where T\n\nAtomically bitwise-nand (not-and) x with val\n\nPerforms x[] = ~(x[] & val) atomically. Returns the old value.\n\nFor further details, see LLVM's atomicrmw nand instruction.\n\nExamples\n\njulia> x = Threads.Atomic{Int}(3)\nBase.Threads.Atomic{Int64}(3)\n\njulia> Threads.atomic_nand!(x, 2)\n3\n\njulia> x[]\n-3\n\n\n\n"
+},
+
+{
+    "location": "stdlib/multi-threading.html#Base.Threads.atomic_or!",
+    "page": "Multi-Threading",
+    "title": "Base.Threads.atomic_or!",
+    "category": "Function",
+    "text": "Threads.atomic_or!(x::Atomic{T}, val::T) where T\n\nAtomically bitwise-or x with val\n\nPerforms x[] |= val atomically. Returns the old value.\n\nFor further details, see LLVM's atomicrmw or instruction.\n\nExamples\n\njulia> x = Threads.Atomic{Int}(5)\nBase.Threads.Atomic{Int64}(5)\n\njulia> Threads.atomic_or!(x, 7)\n5\n\njulia> x[]\n7\n\n\n\n"
+},
+
+{
+    "location": "stdlib/multi-threading.html#Base.Threads.atomic_xor!",
+    "page": "Multi-Threading",
+    "title": "Base.Threads.atomic_xor!",
+    "category": "Function",
+    "text": "Threads.atomic_xor!(x::Atomic{T}, val::T) where T\n\nAtomically bitwise-xor (exclusive-or) x with val\n\nPerforms x[] $= val atomically. Returns the old value.\n\nFor further details, see LLVM's atomicrmw xor instruction.\n\nExamples\n\njulia> x = Threads.Atomic{Int}(5)\nBase.Threads.Atomic{Int64}(5)\n\njulia> Threads.atomic_xor!(x, 7)\n5\n\njulia> x[]\n2\n\n\n\n"
+},
+
+{
+    "location": "stdlib/multi-threading.html#Base.Threads.atomic_max!",
+    "page": "Multi-Threading",
+    "title": "Base.Threads.atomic_max!",
+    "category": "Function",
+    "text": "Threads.atomic_max!(x::Atomic{T}, val::T) where T\n\nAtomically store the maximum of x and val in x\n\nPerforms x[] = max(x[], val) atomically. Returns the old value.\n\nFor further details, see LLVM's atomicrmw max instruction.\n\nExamples\n\njulia> x = Threads.Atomic{Int}(5)\nBase.Threads.Atomic{Int64}(5)\n\njulia> Threads.atomic_max!(x, 7)\n5\n\njulia> x[]\n7\n\n\n\n"
+},
+
+{
+    "location": "stdlib/multi-threading.html#Base.Threads.atomic_min!",
+    "page": "Multi-Threading",
+    "title": "Base.Threads.atomic_min!",
+    "category": "Function",
+    "text": "Threads.atomic_min!(x::Atomic{T}, val::T) where T\n\nAtomically store the minimum of x and val in x\n\nPerforms x[] = min(x[], val) atomically. Returns the old value.\n\nFor further details, see LLVM's atomicrmw min instruction.\n\nExamples\n\njulia> x = Threads.Atomic{Int}(7)\nBase.Threads.Atomic{Int64}(7)\n\njulia> Threads.atomic_min!(x, 5)\n7\n\njulia> x[]\n5\n\n\n\n"
+},
+
+{
+    "location": "stdlib/multi-threading.html#Base.Threads.atomic_fence",
+    "page": "Multi-Threading",
+    "title": "Base.Threads.atomic_fence",
+    "category": "Function",
+    "text": "Threads.atomic_fence()\n\nInsert a sequential-consistency memory fence\n\nInserts a memory fence with sequentially-consistent ordering semantics. There are algorithms where this is needed, i.e. where an acquire/release ordering is insufficient.\n\nThis is likely a very expensive operation. Given that all other atomic operations in Julia already have acquire/release semantics, explicit fences should not be necessary in most cases.\n\nFor further details, see LLVM's fence instruction.\n\n\n\n"
+},
+
+{
+    "location": "stdlib/multi-threading.html#Multi-Threading-1",
+    "page": "Multi-Threading",
+    "title": "Multi-Threading",
+    "category": "section",
+    "text": "This experimental interface supports Julia's multi-threading capabilities. Types and functions described here might (and likely will) change in the future.Base.Threads.threadid\nBase.Threads.nthreads\nBase.Threads.@threads\nBase.Threads.Atomic\nBase.Threads.atomic_cas!\nBase.Threads.atomic_xchg!\nBase.Threads.atomic_add!\nBase.Threads.atomic_sub!\nBase.Threads.atomic_and!\nBase.Threads.atomic_nand!\nBase.Threads.atomic_or!\nBase.Threads.atomic_xor!\nBase.Threads.atomic_max!\nBase.Threads.atomic_min!\nBase.Threads.atomic_fence"
+},
+
+{
+    "location": "stdlib/multi-threading.html#Base.@threadcall",
+    "page": "Multi-Threading",
+    "title": "Base.@threadcall",
+    "category": "Macro",
+    "text": "@threadcall((cfunc, clib), rettype, (argtypes...), argvals...)\n\nThe @threadcall macro is called in the same way as ccall but does the work in a different thread. This is useful when you want to call a blocking C function without causing the main julia thread to become blocked. Concurrency is limited by size of the libuv thread pool, which defaults to 4 threads but can be increased by setting the UV_THREADPOOL_SIZE environment variable and restarting the julia process.\n\nNote that the called function should never call back into Julia.\n\n\n\n"
+},
+
+{
+    "location": "stdlib/multi-threading.html#ccall-using-a-threadpool-(Experimental)-1",
+    "page": "Multi-Threading",
+    "title": "ccall using a threadpool (Experimental)",
+    "category": "section",
+    "text": "Base.@threadcall"
+},
+
+{
+    "location": "stdlib/multi-threading.html#Base.Threads.AbstractLock",
+    "page": "Multi-Threading",
+    "title": "Base.Threads.AbstractLock",
+    "category": "Type",
+    "text": "AbstractLock\n\nAbstract supertype describing types that implement the thread-safe synchronization primitives: lock, trylock, unlock, and islocked\n\n\n\n"
+},
+
+{
+    "location": "stdlib/multi-threading.html#Base.lock",
+    "page": "Multi-Threading",
+    "title": "Base.lock",
+    "category": "Function",
+    "text": "lock(the_lock)\n\nAcquires the lock when it becomes available. If the lock is already locked by a different task/thread, it waits for it to become available.\n\nEach lock must be matched by an unlock.\n\n\n\n"
+},
+
+{
+    "location": "stdlib/multi-threading.html#Base.unlock",
+    "page": "Multi-Threading",
+    "title": "Base.unlock",
+    "category": "Function",
+    "text": "unlock(the_lock)\n\nReleases ownership of the lock.\n\nIf this is a recursive lock which has been acquired before, it just decrements an internal counter and returns immediately.\n\n\n\n"
+},
+
+{
+    "location": "stdlib/multi-threading.html#Base.trylock",
+    "page": "Multi-Threading",
+    "title": "Base.trylock",
+    "category": "Function",
+    "text": "trylock(the_lock) -> Success (Boolean)\n\nAcquires the lock if it is available, returning true if successful. If the lock is already locked by a different task/thread, returns false.\n\nEach successful trylock must be matched by an unlock.\n\n\n\n"
+},
+
+{
+    "location": "stdlib/multi-threading.html#Base.islocked",
+    "page": "Multi-Threading",
+    "title": "Base.islocked",
+    "category": "Function",
+    "text": "islocked(the_lock) -> Status (Boolean)\n\nCheck whether the lock is held by any task/thread. This should not be used for synchronization (see instead trylock).\n\n\n\n"
+},
+
+{
+    "location": "stdlib/multi-threading.html#Base.ReentrantLock",
+    "page": "Multi-Threading",
+    "title": "Base.ReentrantLock",
+    "category": "Type",
+    "text": "ReentrantLock()\n\nCreates a reentrant lock for synchronizing Tasks. The same task can acquire the lock as many times as required. Each lock must be matched with an unlock.\n\nThis lock is NOT threadsafe. See Threads.Mutex for a threadsafe lock.\n\n\n\n"
+},
+
+{
+    "location": "stdlib/multi-threading.html#Base.Threads.Mutex",
+    "page": "Multi-Threading",
+    "title": "Base.Threads.Mutex",
+    "category": "Type",
+    "text": "Mutex()\n\nThese are standard system mutexes for locking critical sections of logic.\n\nOn Windows, this is a critical section object, on pthreads, this is a pthread_mutex_t.\n\nSee also SpinLock for a lighter-weight lock.\n\n\n\n"
+},
+
+{
+    "location": "stdlib/multi-threading.html#Base.Threads.SpinLock",
+    "page": "Multi-Threading",
+    "title": "Base.Threads.SpinLock",
+    "category": "Type",
+    "text": "SpinLock()\n\nCreates a non-reentrant lock. Recursive use will result in a deadlock. Each lock must be matched with an unlock.\n\nTest-and-test-and-set spin locks are quickest up to about 30ish contending threads. If you have more contention than that, perhaps a lock is the wrong way to synchronize.\n\nSee also RecursiveSpinLock for a version that permits recursion.\n\nSee also Mutex for a more efficient version on one core or if the lock may be held for a considerable length of time.\n\n\n\n"
+},
+
+{
+    "location": "stdlib/multi-threading.html#Base.Threads.RecursiveSpinLock",
+    "page": "Multi-Threading",
+    "title": "Base.Threads.RecursiveSpinLock",
+    "category": "Type",
+    "text": "RecursiveSpinLock()\n\nCreates a reentrant lock. The same thread can acquire the lock as many times as required. Each lock must be matched with an unlock.\n\nSee also SpinLock for a slightly faster version.\n\nSee also Mutex for a more efficient version on one core or if the lock may be held for a considerable length of time.\n\n\n\n"
+},
+
+{
+    "location": "stdlib/multi-threading.html#Base.Semaphore",
+    "page": "Multi-Threading",
+    "title": "Base.Semaphore",
+    "category": "Type",
+    "text": "Semaphore(sem_size)\n\nCreates a counting semaphore that allows at most sem_size acquires to be in use at any time. Each acquire must be mached with a release.\n\nThis construct is NOT threadsafe.\n\n\n\n"
+},
+
+{
+    "location": "stdlib/multi-threading.html#Base.acquire",
+    "page": "Multi-Threading",
+    "title": "Base.acquire",
+    "category": "Function",
+    "text": "acquire(s::Semaphore)\n\nWait for one of the sem_size permits to be available, blocking until one can be acquired.\n\n\n\n"
+},
+
+{
+    "location": "stdlib/multi-threading.html#Base.release",
+    "page": "Multi-Threading",
+    "title": "Base.release",
+    "category": "Function",
+    "text": "release(s::Semaphore)\n\nReturn one permit to the pool, possibly allowing another task to acquire it and resume execution.\n\n\n\n"
+},
+
+{
+    "location": "stdlib/multi-threading.html#Synchronization-Primitives-1",
+    "page": "Multi-Threading",
+    "title": "Synchronization Primitives",
+    "category": "section",
+    "text": "Base.Threads.AbstractLock\nBase.lock\nBase.unlock\nBase.trylock\nBase.islocked\nBase.ReentrantLock\nBase.Threads.Mutex\nBase.Threads.SpinLock\nBase.Threads.RecursiveSpinLock\nBase.Semaphore\nBase.acquire\nBase.release"
 },
 
 {
@@ -13229,7 +13045,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Linear Algebra",
     "title": "Base.:*",
     "category": "Method",
-    "text": "*(A::AbstractMatrix, B::AbstractMatrix)\n\nMatrix multiplication.\n\nExamples\n\njulia> [1 1; 0 1] * [1 0; 1 1]\n2×2 Array{Int64,2}:\n 2  1\n 1  1\n\n\n\n*(x, y...)\n\nMultiplication operator. x*y*z*... calls this function with all arguments, i.e. *(x, y, z, ...).\n\nExamples\n\njulia> 2 * 7 * 8\n112\n\njulia> *(2, 7, 8)\n112\n\n\n\n"
+    "text": "*(A::AbstractMatrix, B::AbstractMatrix)\n\nMatrix multiplication.\n\nExamples\n\njulia> [1 1; 0 1] * [1 0; 1 1]\n2×2 Array{Int64,2}:\n 2  1\n 1  1\n\n\n\n"
 },
 
 {
@@ -13461,7 +13277,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Linear Algebra",
     "title": "Base.LinAlg.qrfact",
     "category": "Function",
-    "text": "qrfact(A, pivot=Val(false)) -> F\n\nCompute the QR factorization of the matrix A: an orthogonal (or unitary if A is complex-valued) matrix Q, and an upper triangular matrix R such that\n\nA = Q R\n\nThe returned object F stores the factorization in a packed format:\n\nif pivot == Val(true) then F is a QRPivoted object,\notherwise if the element type of A is a BLAS type (Float32, Float64, Complex64 or Complex128), then F is a QRCompactWY object,\notherwise F is a QR object.\n\nThe individual components of the factorization F can be accessed by indexing with a symbol:\n\nF[:Q]: the orthogonal/unitary matrix Q\nF[:R]: the upper triangular matrix R\nF[:p]: the permutation vector of the pivot (QRPivoted only)\nF[:P]: the permutation matrix of the pivot (QRPivoted only)\n\nThe following functions are available for the QR objects: inv, size, and \\. When A is rectangular, \\ will return a least squares solution and if the solution is not unique, the one with smallest norm is returned.\n\nMultiplication with respect to either full/square or non-full/square Q is allowed, i.e. both F[:Q]*F[:R] and F[:Q]*A are supported. A Q matrix can be converted into a regular matrix with Matrix.\n\nExamples\n\njulia> A = [3.0 -6.0; 4.0 -8.0; 0.0 1.0]\n3×2 Array{Float64,2}:\n 3.0  -6.0\n 4.0  -8.0\n 0.0   1.0\n\njulia> F = qrfact(A)\nBase.LinAlg.QRCompactWY{Float64,Array{Float64,2}} with factors Q and R:\n[-0.6 0.0 0.8; -0.8 0.0 -0.6; 0.0 -1.0 0.0]\n[-5.0 10.0; 0.0 -1.0]\n\njulia> F[:Q] * F[:R] == A\ntrue\n\nnote: Note\nqrfact returns multiple types because LAPACK uses several representations that minimize the memory storage requirements of products of Householder elementary reflectors, so that the Q and R matrices can be stored compactly rather as two separate dense matrices.\n\n\n\n"
+    "text": "qrfact(A, pivot=Val(false)) -> F\n\nCompute the QR factorization of the matrix A: an orthogonal (or unitary if A is complex-valued) matrix Q, and an upper triangular matrix R such that\n\nA = Q R\n\nThe returned object F stores the factorization in a packed format:\n\nif pivot == Val(true) then F is a QRPivoted object,\notherwise if the element type of A is a BLAS type (Float32, Float64, ComplexF32 or ComplexF64), then F is a QRCompactWY object,\notherwise F is a QR object.\n\nThe individual components of the factorization F can be accessed by indexing with a symbol:\n\nF[:Q]: the orthogonal/unitary matrix Q\nF[:R]: the upper triangular matrix R\nF[:p]: the permutation vector of the pivot (QRPivoted only)\nF[:P]: the permutation matrix of the pivot (QRPivoted only)\n\nThe following functions are available for the QR objects: inv, size, and \\. When A is rectangular, \\ will return a least squares solution and if the solution is not unique, the one with smallest norm is returned.\n\nMultiplication with respect to either full/square or non-full/square Q is allowed, i.e. both F[:Q]*F[:R] and F[:Q]*A are supported. A Q matrix can be converted into a regular matrix with Matrix.\n\nExamples\n\njulia> A = [3.0 -6.0; 4.0 -8.0; 0.0 1.0]\n3×2 Array{Float64,2}:\n 3.0  -6.0\n 4.0  -8.0\n 0.0   1.0\n\njulia> F = qrfact(A)\nBase.LinAlg.QRCompactWY{Float64,Array{Float64,2}} with factors Q and R:\n[-0.6 0.0 0.8; -0.8 0.0 -0.6; 0.0 -1.0 0.0]\n[-5.0 10.0; 0.0 -1.0]\n\njulia> F[:Q] * F[:R] == A\ntrue\n\nnote: Note\nqrfact returns multiple types because LAPACK uses several representations that minimize the memory storage requirements of products of Householder elementary reflectors, so that the Q and R matrices can be stored compactly rather as two separate dense matrices.\n\n\n\n"
 },
 
 {
@@ -14245,7 +14061,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Linear Algebra",
     "title": "Base.transpose",
     "category": "Function",
-    "text": "transpose(A::AbstractMatrix)\n\nThe transposition operator (.').\n\nExamples\n\njulia> A = [1 2 3; 4 5 6; 7 8 9]\n3×3 Array{Int64,2}:\n 1  2  3\n 4  5  6\n 7  8  9\n\njulia> transpose(A)\n3×3 Array{Int64,2}:\n 1  4  7\n 2  5  8\n 3  6  9\n\n\n\ntranspose(v::AbstractVector)\n\nThe transposition operator (.').\n\nExamples\n\njulia> v = [1,2,3]\n3-element Array{Int64,1}:\n 1\n 2\n 3\n\njulia> transpose(v)\n1×3 RowVector{Int64,Array{Int64,1}}:\n 1  2  3\n\n\n\n"
+    "text": "transpose(A::AbstractMatrix)\n\nThe transposition operator (.'). Note that the transposition is applied recursively to elements.\n\nThis operation is intended for linear algebra usage - for general data manipulation see permutedims, which is non-recursive.\n\nExamples\n\njulia> A = [1 2 3; 4 5 6; 7 8 9]\n3×3 Array{Int64,2}:\n 1  2  3\n 4  5  6\n 7  8  9\n\njulia> transpose(A)\n3×3 Array{Int64,2}:\n 1  4  7\n 2  5  8\n 3  6  9\n\n\n\ntranspose(v::AbstractVector)\n\nThe transposition operator (.').\n\nExamples\n\njulia> v = [1,2,3]\n3-element Array{Int64,1}:\n 1\n 2\n 3\n\njulia> transpose(v)\n1×3 RowVector{Int64,Array{Int64,1}}:\n 1  2  3\n\n\n\n"
 },
 
 {
@@ -14261,7 +14077,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Linear Algebra",
     "title": "Base.adjoint",
     "category": "Function",
-    "text": "adjoint(A)\n\nThe conjugate transposition operator (').\n\nExamples\n\njulia> A =  [3+2im 9+2im; 8+7im  4+6im]\n2×2 Array{Complex{Int64},2}:\n 3+2im  9+2im\n 8+7im  4+6im\n\njulia> adjoint(A)\n2×2 Array{Complex{Int64},2}:\n 3-2im  8-7im\n 9-2im  4-6im\n\n\n\n"
+    "text": "adjoint(A)\n\nThe conjugate transposition operator ('). Note that adjoint is applied recursively to elements.\n\nThis operation is intended for linear algebra usage - for general data manipulation see permutedims.\n\nExamples\n\njulia> A =  [3+2im 9+2im; 8+7im  4+6im]\n2×2 Array{Complex{Int64},2}:\n 3+2im  9+2im\n 8+7im  4+6im\n\njulia> adjoint(A)\n2×2 Array{Complex{Int64},2}:\n 3-2im  8-7im\n 9-2im  4-6im\n\n\n\n"
 },
 
 {
@@ -14325,7 +14141,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Linear Algebra",
     "title": "Base.LinAlg.A_mul_B!",
     "category": "Function",
-    "text": "A_mul_B!(Y, A, B) -> Y\n\nCalculates the matrix-matrix or matrix-vector product AB and stores the result in Y, overwriting the existing value of Y. Note that Y must not be aliased with either A or B.\n\nExamples\n\njulia> A=[1.0 2.0; 3.0 4.0]; B=[1.0 1.0; 1.0 1.0]; Y = similar(B); A_mul_B!(Y, A, B);\n\njulia> Y\n2×2 Array{Float64,2}:\n 3.0  3.0\n 7.0  7.0\n\n\n\nA_mul_B!(A, B)\n\nCalculate the matrix-matrix product AB, overwriting one of A or B (but not both), and return the result (the overwritten argument).\n\n\n\n"
+    "text": "A_mul_B!(A, B)\n\nCalculate the matrix-matrix product AB, overwriting one of A or B (but not both), and return the result (the overwritten argument).\n\n\n\nA_mul_B!(Y, A, B) -> Y\n\nCalculates the matrix-matrix or matrix-vector product AB and stores the result in Y, overwriting the existing value of Y. Note that Y must not be aliased with either A or B.\n\nExamples\n\njulia> A=[1.0 2.0; 3.0 4.0]; B=[1.0 1.0; 1.0 1.0]; Y = similar(B); A_mul_B!(Y, A, B);\n\njulia> Y\n2×2 Array{Float64,2}:\n 3.0  3.0\n 7.0  7.0\n\n\n\n"
 },
 
 {
@@ -14485,7 +14301,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Linear Algebra",
     "title": "BLAS Functions",
     "category": "section",
-    "text": "In Julia (as in much of scientific computation), dense linear-algebra operations are based on the LAPACK library, which in turn is built on top of basic linear-algebra building-blocks known as the BLAS. There are highly optimized implementations of BLAS available for every computer architecture, and sometimes in high-performance linear algebra routines it is useful to call the BLAS functions directly.Base.LinAlg.BLAS provides wrappers for some of the BLAS functions. Those BLAS functions that overwrite one of the input arrays have names ending in '!'.  Usually, a BLAS function has four methods defined, for Float64, Float32, Complex128, and Complex64 arrays."
+    "text": "In Julia (as in much of scientific computation), dense linear-algebra operations are based on the LAPACK library, which in turn is built on top of basic linear-algebra building-blocks known as the BLAS. There are highly optimized implementations of BLAS available for every computer architecture, and sometimes in high-performance linear algebra routines it is useful to call the BLAS functions directly.Base.LinAlg.BLAS provides wrappers for some of the BLAS functions. Those BLAS functions that overwrite one of the input arrays have names ending in '!'.  Usually, a BLAS function has four methods defined, for Float64, Float32, ComplexF64, and ComplexF32 arrays."
 },
 
 {
@@ -15525,7 +15341,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Linear Algebra",
     "title": "LAPACK Functions",
     "category": "section",
-    "text": "Base.LinAlg.LAPACK provides wrappers for some of the LAPACK functions for linear algebra.  Those functions that overwrite one of the input arrays have names ending in '!'.Usually a function has 4 methods defined, one each for Float64, Float32, Complex128 and Complex64 arrays.Note that the LAPACK API provided by Julia can and will change in the future. Since this API is not user-facing, there is no commitment to support/deprecate this specific set of functions in future releases.Base.LinAlg.LAPACK.gbtrf!\nBase.LinAlg.LAPACK.gbtrs!\nBase.LinAlg.LAPACK.gebal!\nBase.LinAlg.LAPACK.gebak!\nBase.LinAlg.LAPACK.gebrd!\nBase.LinAlg.LAPACK.gelqf!\nBase.LinAlg.LAPACK.geqlf!\nBase.LinAlg.LAPACK.geqrf!\nBase.LinAlg.LAPACK.geqp3!\nBase.LinAlg.LAPACK.gerqf!\nBase.LinAlg.LAPACK.geqrt!\nBase.LinAlg.LAPACK.geqrt3!\nBase.LinAlg.LAPACK.getrf!\nBase.LinAlg.LAPACK.tzrzf!\nBase.LinAlg.LAPACK.ormrz!\nBase.LinAlg.LAPACK.gels!\nBase.LinAlg.LAPACK.gesv!\nBase.LinAlg.LAPACK.getrs!\nBase.LinAlg.LAPACK.getri!\nBase.LinAlg.LAPACK.gesvx!\nBase.LinAlg.LAPACK.gelsd!\nBase.LinAlg.LAPACK.gelsy!\nBase.LinAlg.LAPACK.gglse!\nBase.LinAlg.LAPACK.geev!\nBase.LinAlg.LAPACK.gesdd!\nBase.LinAlg.LAPACK.gesvd!\nBase.LinAlg.LAPACK.ggsvd!\nBase.LinAlg.LAPACK.ggsvd3!\nBase.LinAlg.LAPACK.geevx!\nBase.LinAlg.LAPACK.ggev!\nBase.LinAlg.LAPACK.gtsv!\nBase.LinAlg.LAPACK.gttrf!\nBase.LinAlg.LAPACK.gttrs!\nBase.LinAlg.LAPACK.orglq!\nBase.LinAlg.LAPACK.orgqr!\nBase.LinAlg.LAPACK.orgql!\nBase.LinAlg.LAPACK.orgrq!\nBase.LinAlg.LAPACK.ormlq!\nBase.LinAlg.LAPACK.ormqr!\nBase.LinAlg.LAPACK.ormql!\nBase.LinAlg.LAPACK.ormrq!\nBase.LinAlg.LAPACK.gemqrt!\nBase.LinAlg.LAPACK.posv!\nBase.LinAlg.LAPACK.potrf!\nBase.LinAlg.LAPACK.potri!\nBase.LinAlg.LAPACK.potrs!\nBase.LinAlg.LAPACK.pstrf!\nBase.LinAlg.LAPACK.ptsv!\nBase.LinAlg.LAPACK.pttrf!\nBase.LinAlg.LAPACK.pttrs!\nBase.LinAlg.LAPACK.trtri!\nBase.LinAlg.LAPACK.trtrs!\nBase.LinAlg.LAPACK.trcon!\nBase.LinAlg.LAPACK.trevc!\nBase.LinAlg.LAPACK.trrfs!\nBase.LinAlg.LAPACK.stev!\nBase.LinAlg.LAPACK.stebz!\nBase.LinAlg.LAPACK.stegr!\nBase.LinAlg.LAPACK.stein!\nBase.LinAlg.LAPACK.syconv!\nBase.LinAlg.LAPACK.sysv!\nBase.LinAlg.LAPACK.sytrf!\nBase.LinAlg.LAPACK.sytri!\nBase.LinAlg.LAPACK.sytrs!\nBase.LinAlg.LAPACK.hesv!\nBase.LinAlg.LAPACK.hetrf!\nBase.LinAlg.LAPACK.hetri!\nBase.LinAlg.LAPACK.hetrs!\nBase.LinAlg.LAPACK.syev!\nBase.LinAlg.LAPACK.syevr!\nBase.LinAlg.LAPACK.sygvd!\nBase.LinAlg.LAPACK.bdsqr!\nBase.LinAlg.LAPACK.bdsdc!\nBase.LinAlg.LAPACK.gecon!\nBase.LinAlg.LAPACK.gehrd!\nBase.LinAlg.LAPACK.orghr!\nBase.LinAlg.LAPACK.gees!\nBase.LinAlg.LAPACK.gges!\nBase.LinAlg.LAPACK.trexc!\nBase.LinAlg.LAPACK.trsen!\nBase.LinAlg.LAPACK.tgsen!\nBase.LinAlg.LAPACK.trsyl!"
+    "text": "Base.LinAlg.LAPACK provides wrappers for some of the LAPACK functions for linear algebra.  Those functions that overwrite one of the input arrays have names ending in '!'.Usually a function has 4 methods defined, one each for Float64, Float32, ComplexF64 and ComplexF32 arrays.Note that the LAPACK API provided by Julia can and will change in the future. Since this API is not user-facing, there is no commitment to support/deprecate this specific set of functions in future releases.Base.LinAlg.LAPACK.gbtrf!\nBase.LinAlg.LAPACK.gbtrs!\nBase.LinAlg.LAPACK.gebal!\nBase.LinAlg.LAPACK.gebak!\nBase.LinAlg.LAPACK.gebrd!\nBase.LinAlg.LAPACK.gelqf!\nBase.LinAlg.LAPACK.geqlf!\nBase.LinAlg.LAPACK.geqrf!\nBase.LinAlg.LAPACK.geqp3!\nBase.LinAlg.LAPACK.gerqf!\nBase.LinAlg.LAPACK.geqrt!\nBase.LinAlg.LAPACK.geqrt3!\nBase.LinAlg.LAPACK.getrf!\nBase.LinAlg.LAPACK.tzrzf!\nBase.LinAlg.LAPACK.ormrz!\nBase.LinAlg.LAPACK.gels!\nBase.LinAlg.LAPACK.gesv!\nBase.LinAlg.LAPACK.getrs!\nBase.LinAlg.LAPACK.getri!\nBase.LinAlg.LAPACK.gesvx!\nBase.LinAlg.LAPACK.gelsd!\nBase.LinAlg.LAPACK.gelsy!\nBase.LinAlg.LAPACK.gglse!\nBase.LinAlg.LAPACK.geev!\nBase.LinAlg.LAPACK.gesdd!\nBase.LinAlg.LAPACK.gesvd!\nBase.LinAlg.LAPACK.ggsvd!\nBase.LinAlg.LAPACK.ggsvd3!\nBase.LinAlg.LAPACK.geevx!\nBase.LinAlg.LAPACK.ggev!\nBase.LinAlg.LAPACK.gtsv!\nBase.LinAlg.LAPACK.gttrf!\nBase.LinAlg.LAPACK.gttrs!\nBase.LinAlg.LAPACK.orglq!\nBase.LinAlg.LAPACK.orgqr!\nBase.LinAlg.LAPACK.orgql!\nBase.LinAlg.LAPACK.orgrq!\nBase.LinAlg.LAPACK.ormlq!\nBase.LinAlg.LAPACK.ormqr!\nBase.LinAlg.LAPACK.ormql!\nBase.LinAlg.LAPACK.ormrq!\nBase.LinAlg.LAPACK.gemqrt!\nBase.LinAlg.LAPACK.posv!\nBase.LinAlg.LAPACK.potrf!\nBase.LinAlg.LAPACK.potri!\nBase.LinAlg.LAPACK.potrs!\nBase.LinAlg.LAPACK.pstrf!\nBase.LinAlg.LAPACK.ptsv!\nBase.LinAlg.LAPACK.pttrf!\nBase.LinAlg.LAPACK.pttrs!\nBase.LinAlg.LAPACK.trtri!\nBase.LinAlg.LAPACK.trtrs!\nBase.LinAlg.LAPACK.trcon!\nBase.LinAlg.LAPACK.trevc!\nBase.LinAlg.LAPACK.trrfs!\nBase.LinAlg.LAPACK.stev!\nBase.LinAlg.LAPACK.stebz!\nBase.LinAlg.LAPACK.stegr!\nBase.LinAlg.LAPACK.stein!\nBase.LinAlg.LAPACK.syconv!\nBase.LinAlg.LAPACK.sysv!\nBase.LinAlg.LAPACK.sytrf!\nBase.LinAlg.LAPACK.sytri!\nBase.LinAlg.LAPACK.sytrs!\nBase.LinAlg.LAPACK.hesv!\nBase.LinAlg.LAPACK.hetrf!\nBase.LinAlg.LAPACK.hetri!\nBase.LinAlg.LAPACK.hetrs!\nBase.LinAlg.LAPACK.syev!\nBase.LinAlg.LAPACK.syevr!\nBase.LinAlg.LAPACK.sygvd!\nBase.LinAlg.LAPACK.bdsqr!\nBase.LinAlg.LAPACK.bdsdc!\nBase.LinAlg.LAPACK.gecon!\nBase.LinAlg.LAPACK.gehrd!\nBase.LinAlg.LAPACK.orghr!\nBase.LinAlg.LAPACK.gees!\nBase.LinAlg.LAPACK.gges!\nBase.LinAlg.LAPACK.trexc!\nBase.LinAlg.LAPACK.trsen!\nBase.LinAlg.LAPACK.tgsen!\nBase.LinAlg.LAPACK.trsyl!"
 },
 
 {
@@ -16149,7 +15965,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Delimited Files",
     "title": "DelimitedFiles.readdlm",
     "category": "Method",
-    "text": "readdlm(source, delim::Char, T::Type, eol::Char; header=false, skipstart=0, skipblanks=true, use_mmap, quotes=true, dims, comments=true, comment_char='#')\n\nRead a matrix from the source where each line (separated by eol) gives one row, with elements separated by the given delimiter. The source can be a text file, stream or byte array. Memory mapped files can be used by passing the byte array representation of the mapped segment as source.\n\nIf T is a numeric type, the result is an array of that type, with any non-numeric elements as NaN for floating-point types, or zero. Other useful values of T include String, AbstractString, and Any.\n\nIf header is true, the first row of data will be read as header and the tuple (data_cells, header_cells) is returned instead of only data_cells.\n\nSpecifying skipstart will ignore the corresponding number of initial lines from the input.\n\nIf skipblanks is true, blank lines in the input will be ignored.\n\nIf use_mmap is true, the file specified by source is memory mapped for potential speedups. Default is true except on Windows. On Windows, you may want to specify true if the file is large, and is only read once and not written to.\n\nIf quotes is true, columns enclosed within double-quote (\") characters are allowed to contain new lines and column delimiters. Double-quote characters within a quoted field must be escaped with another double-quote.  Specifying dims as a tuple of the expected rows and columns (including header, if any) may speed up reading of large files.  If comments is true, lines beginning with comment_char and text following comment_char in any line are ignored.\n\nExamples\n\njulia> using DelimitedFiles\n\njulia> x = [1; 2; 3; 4];\n\njulia> y = [5; 6; 7; 8];\n\njulia> open(\"delim_file.txt\", \"w\") do io\n           writedlm(io, [x y])\n       end\n\njulia> readdlm(\"delim_file.txt\", '	', Int, '\n')\n4×2 Array{Int64,2}:\n 1  5\n 2  6\n 3  7\n 4  8\n\n\n\n"
+    "text": "readdlm(source, delim::Char, T::Type, eol::Char; header=false, skipstart=0, skipblanks=true, use_mmap, quotes=true, dims, comments=true, comment_char='#')\n\nRead a matrix from the source where each line (separated by eol) gives one row, with elements separated by the given delimiter. The source can be a text file, stream or byte array. Memory mapped files can be used by passing the byte array representation of the mapped segment as source.\n\nIf T is a numeric type, the result is an array of that type, with any non-numeric elements as NaN for floating-point types, or zero. Other useful values of T include String, AbstractString, and Any.\n\nIf header is true, the first row of data will be read as header and the tuple (data_cells, header_cells) is returned instead of only data_cells.\n\nSpecifying skipstart will ignore the corresponding number of initial lines from the input.\n\nIf skipblanks is true, blank lines in the input will be ignored.\n\nIf use_mmap is true, the file specified by source is memory mapped for potential speedups. Default is true except on Windows. On Windows, you may want to specify true if the file is large, and is only read once and not written to.\n\nIf quotes is true, columns enclosed within double-quote (\") characters are allowed to contain new lines and column delimiters. Double-quote characters within a quoted field must be escaped with another double-quote.  Specifying dims as a tuple of the expected rows and columns (including header, if any) may speed up reading of large files.  If comments is true, lines beginning with comment_char and text following comment_char in any line are ignored.\n\nExamples\n\njulia> using DelimitedFiles\n\njulia> x = [1; 2; 3; 4];\n\njulia> y = [5; 6; 7; 8];\n\njulia> open(\"delim_file.txt\", \"w\") do io\n           writedlm(io, [x y])\n       end\n\njulia> readdlm(\"delim_file.txt\", '\\t', Int, '\\n')\n4×2 Array{Int64,2}:\n 1  5\n 2  6\n 3  7\n 4  8\n\n\n\n"
 },
 
 {
@@ -16165,7 +15981,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Delimited Files",
     "title": "DelimitedFiles.readdlm",
     "category": "Method",
-    "text": "readdlm(source, delim::Char, T::Type; options...)\n\nThe end of line delimiter is taken as \\n.\n\n\n\n"
+    "text": "readdlm(source, delim::Char, T::Type; options...)\n\nThe end of line delimiter is taken as \\n.\n\nExamples\n\njulia> using DelimitedFiles\n\njulia> x = [1; 2; 3; 4];\n\njulia> y = [1.1; 2.2; 3.3; 4.4];\n\njulia> open(\"delim_file.txt\", \"w\") do io\n           writedlm(io, [x y], ',')\n       end;\n\njulia> readdlm(\"delim_file.txt\", ',', Float64)\n4×2 Array{Float64,2}:\n 1.0  1.1\n 2.0  2.2\n 3.0  3.3\n 4.0  4.4\n\njulia> rm(\"delim_file.txt\")\n\n\n\n"
 },
 
 {
@@ -16173,7 +15989,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Delimited Files",
     "title": "DelimitedFiles.readdlm",
     "category": "Method",
-    "text": "readdlm(source, delim::Char; options...)\n\nThe end of line delimiter is taken as \\n. If all data is numeric, the result will be a numeric array. If some elements cannot be parsed as numbers, a heterogeneous array of numbers and strings is returned.\n\n\n\n"
+    "text": "readdlm(source, delim::Char; options...)\n\nThe end of line delimiter is taken as \\n. If all data is numeric, the result will be a numeric array. If some elements cannot be parsed as numbers, a heterogeneous array of numbers and strings is returned.\n\nExamples\n\njulia> using DelimitedFiles\n\njulia> x = [1; 2; 3; 4];\n\njulia> y = [1.1; 2.2; 3.3; 4.4];\n\njulia> open(\"delim_file.txt\", \"w\") do io\n           writedlm(io, [x y], ',')\n       end;\n\njulia> readdlm(\"delim_file.txt\", ',')\n4×2 Array{Float64,2}:\n 1.0  1.1\n 2.0  2.2\n 3.0  3.3\n 4.0  4.4\n\njulia> rm(\"delim_file.txt\")\n\njulia> z = [\"a\"; \"b\"; \"c\"; \"d\"];\n\njulia> open(\"delim_file.txt\", \"w\") do io\n           writedlm(io, [x z], ',')\n       end;\n\njulia> readdlm(\"delim_file.txt\", ',')\n4×2 Array{Any,2}:\n 1  \"a\"\n 2  \"b\"\n 3  \"c\"\n 4  \"d\"\n\njulia> rm(\"delim_file.txt\")\n\n\n\n"
 },
 
 {
@@ -16181,7 +15997,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Delimited Files",
     "title": "DelimitedFiles.readdlm",
     "category": "Method",
-    "text": "readdlm(source, T::Type; options...)\n\nThe columns are assumed to be separated by one or more whitespaces. The end of line delimiter is taken as \\n.\n\n\n\n"
+    "text": "readdlm(source, T::Type; options...)\n\nThe columns are assumed to be separated by one or more whitespaces. The end of line delimiter is taken as \\n.\n\nExamples\n\njulia> using DelimitedFiles\n\njulia> x = [1; 2; 3; 4];\n\njulia> y = [5; 6; 7; 8];\n\njulia> open(\"delim_file.txt\", \"w\") do io\n           writedlm(io, [x y])\n       end;\n\njulia> readdlm(\"delim_file.txt\", Int64)\n4×2 Array{Int64,2}:\n 1  5\n 2  6\n 3  7\n 4  8\n\njulia> readdlm(\"delim_file.txt\", Float64)\n4×2 Array{Float64,2}:\n 1.0  5.0\n 2.0  6.0\n 3.0  7.0\n 4.0  8.0\n\njulia> rm(\"delim_file.txt\")\n\n\n\n"
 },
 
 {
@@ -16189,7 +16005,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Delimited Files",
     "title": "DelimitedFiles.readdlm",
     "category": "Method",
-    "text": "readdlm(source; options...)\n\nThe columns are assumed to be separated by one or more whitespaces. The end of line delimiter is taken as \\n. If all data is numeric, the result will be a numeric array. If some elements cannot be parsed as numbers, a heterogeneous array of numbers and strings is returned.\n\n\n\n"
+    "text": "readdlm(source; options...)\n\nThe columns are assumed to be separated by one or more whitespaces. The end of line delimiter is taken as \\n. If all data is numeric, the result will be a numeric array. If some elements cannot be parsed as numbers, a heterogeneous array of numbers and strings is returned.\n\nExamples\n\njulia> using DelimitedFiles\n\njulia> x = [1; 2; 3; 4];\n\njulia> y = [\"a\"; \"b\"; \"c\"; \"d\"];\n\njulia> open(\"delim_file.txt\", \"w\") do io\n           writedlm(io, [x y])\n       end;\n\njulia> readdlm(\"delim_file.txt\")\n4×2 Array{Any,2}:\n 1  \"a\"\n 2  \"b\"\n 3  \"c\"\n 4  \"d\"\n\njulia> rm(\"delim_file.txt\")\n\n\n\n"
 },
 
 {
@@ -16197,7 +16013,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Delimited Files",
     "title": "DelimitedFiles.writedlm",
     "category": "Function",
-    "text": "writedlm(f, A, delim='\\t'; opts)\n\nWrite A (a vector, matrix, or an iterable collection of iterable rows) as text to f (either a filename string or an IO stream) using the given delimiter delim (which defaults to tab, but can be any printable Julia object, typically a Char or AbstractString).\n\nFor example, two vectors x and y of the same length can be written as two columns of tab-delimited text to f by either writedlm(f, [x y]) or by writedlm(f, zip(x, y)).\n\nExamples\n\njulia> using DelimitedFiles\n\njulia> x = [1; 2; 3; 4];\n\njulia> y = [5; 6; 7; 8];\n\njulia> open(\"delim_file.txt\", \"w\") do io\n           writedlm(io, [x y])\n       end\n\njulia> readdlm(\"delim_file.txt\", '	', Int, '\n')\n4×2 Array{Int64,2}:\n 1  5\n 2  6\n 3  7\n 4  8\n\n\n\n"
+    "text": "writedlm(f, A, delim='\\t'; opts)\n\nWrite A (a vector, matrix, or an iterable collection of iterable rows) as text to f (either a filename string or an IO stream) using the given delimiter delim (which defaults to tab, but can be any printable Julia object, typically a Char or AbstractString).\n\nFor example, two vectors x and y of the same length can be written as two columns of tab-delimited text to f by either writedlm(f, [x y]) or by writedlm(f, zip(x, y)).\n\nExamples\n\njulia> using DelimitedFiles\n\njulia> x = [1; 2; 3; 4];\n\njulia> y = [5; 6; 7; 8];\n\njulia> open(\"delim_file.txt\", \"w\") do io\n           writedlm(io, [x y])\n       end\n\njulia> readdlm(\"delim_file.txt\", '\\t', Int, '\\n')\n4×2 Array{Int64,2}:\n 1  5\n 2  6\n 3  7\n 4  8\n\n\n\n"
 },
 
 {
@@ -16453,7 +16269,7 @@ var documenterSearchIndex = {"docs": [
     "page": "I/O and Network",
     "title": "Base.isopen",
     "category": "Function",
-    "text": "isopen(object) -> Bool\n\nDetermine whether an object - such as a stream, timer, or mmap – is not yet closed. Once an object is closed, it will never produce a new event. However, a closed stream may still have data to read in its buffer, use eof to check for the ability to read data. Use the FileWatching package to be notified when a stream might be writable or readable.\n\n\n\n"
+    "text": "isopen(object) -> Bool\n\nDetermine whether an object - such as a stream, timer, or mmap – is not yet closed. Once an object is closed, it will never produce a new event. However, since a closed stream may still have data to read in its buffer, use eof to check for the ability to read data. Use the FileWatching package to be notified when a stream might be writable or readable.\n\nExamples\n\njulia> io = open(\"my_file.txt\", \"w+\");\n\njulia> isopen(io)\ntrue\n\njulia> close(io)\n\njulia> isopen(io)\nfalse\n\n\n\n"
 },
 
 {
@@ -16549,7 +16365,7 @@ var documenterSearchIndex = {"docs": [
     "page": "I/O and Network",
     "title": "Base.readchomp",
     "category": "Function",
-    "text": "readchomp(x)\n\nRead the entirety of x as a string and remove a single trailing newline. Equivalent to chomp!(read(x, String)).\n\n\n\n"
+    "text": "readchomp(x)\n\nRead the entirety of x as a string and remove a single trailing newline if there is one. Equivalent to chomp(read(x, String)).\n\nExamples\n\njulia> open(\"my_file.txt\", \"w\") do io\n           write(io, \"JuliaLang is a GitHub organization.\\nIt has many members.\\n\");\n       end;\n\njulia> readchomp(\"my_file.txt\")\n\"JuliaLang is a GitHub organization.\\nIt has many members.\"\n\njulia> rm(\"my_file.txt\");\n\n\n\n"
 },
 
 {
@@ -16565,7 +16381,7 @@ var documenterSearchIndex = {"docs": [
     "page": "I/O and Network",
     "title": "Base.skipchars",
     "category": "Function",
-    "text": "skipchars(io::IO, predicate; linecomment=nothing)\n\nAdvance the stream io such that the next-read character will be the first remaining for which predicate returns false. If the keyword argument linecomment is specified, all characters from that character until the start of the next line are ignored.\n\nExamples\n\njulia> buf = IOBuffer(\"    text\")\nIOBuffer(data=UInt8[...], readable=true, writable=false, seekable=true, append=false, size=8, maxsize=Inf, ptr=1, mark=-1)\n\njulia> skipchars(buf, isspace)\nIOBuffer(data=UInt8[...], readable=true, writable=false, seekable=true, append=false, size=8, maxsize=Inf, ptr=5, mark=-1)\n\njulia> String(readavailable(buf))\n\"text\"\n\n\n\n"
+    "text": "skipchars(io::IO, predicate; linecomment=nothing)\n\nAdvance the stream io such that the next-read character will be the first remaining for which predicate returns false. If the keyword argument linecomment is specified, all characters from that character until the start of the next line are ignored.\n\nExamples\n\njulia> buf = IOBuffer(\"    text\")\nIOBuffer(data=UInt8[...], readable=true, writable=false, seekable=true, append=false, size=8, maxsize=Inf, ptr=1, mark=-1)\n\njulia> using Unicode\n\njulia> skipchars(buf, isspace)\nIOBuffer(data=UInt8[...], readable=true, writable=false, seekable=true, append=false, size=8, maxsize=Inf, ptr=5, mark=-1)\n\njulia> String(readavailable(buf))\n\"text\"\n\n\n\n"
 },
 
 {
@@ -16725,7 +16541,7 @@ var documenterSearchIndex = {"docs": [
     "page": "I/O and Network",
     "title": "Base.showerror",
     "category": "Function",
-    "text": "showerror(io, e)\n\nShow a descriptive representation of an exception object.\n\n\n\n"
+    "text": "showerror(io, e)\n\nShow a descriptive representation of an exception object e. This method is used to display the exception after a call to throw.\n\nExamples\n\njulia> struct MyException <: Exception\n           msg::AbstractString\n       end\n\njulia> function Base.showerror(io::IO, err::MyException)\n           print(io, \"MyException: \")\n           print(io, err.msg)\n       end\n\njulia> err = MyException(\"test exception\")\nMyException(\"test exception\")\n\njulia> sprint(showerror, err)\n\"MyException: test exception\"\n\njulia> throw(MyException(\"test exception\"))\nERROR: MyException: test exception\n\n\n\n"
 },
 
 {
@@ -16749,7 +16565,7 @@ var documenterSearchIndex = {"docs": [
     "page": "I/O and Network",
     "title": "Base.readline",
     "category": "Function",
-    "text": "readline(io::IO=STDIN; chomp::Bool=true)\nreadline(filename::AbstractString; chomp::Bool=true)\n\nRead a single line of text from the given I/O stream or file (defaults to STDIN). When reading from a file, the text is assumed to be encoded in UTF-8. Lines in the input end with '\\n' or \"\\r\\n\" or the end of an input stream. When chomp is true (as it is by default), these trailing newline characters are removed from the line before it is returned. When chomp is false, they are returned as part of the line.\n\nExamples\n\njulia> open(\"my_file.txt\", \"w\") do io\n           write(io, \"JuliaLang is a GitHub organization.\nIt has many members.\n\");\n       end\n57\n\njulia> readline(\"my_file.txt\")\n\"JuliaLang is a GitHub organization.\"\n\njulia> readline(\"my_file.txt\", chomp=false)\n\"JuliaLang is a GitHub organization.\n\"\n\njulia> rm(\"my_file.txt\")\n\n\n\n"
+    "text": "readline(io::IO=STDIN; chomp::Bool=true)\nreadline(filename::AbstractString; chomp::Bool=true)\n\nRead a single line of text from the given I/O stream or file (defaults to STDIN). When reading from a file, the text is assumed to be encoded in UTF-8. Lines in the input end with '\\n' or \"\\r\\n\" or the end of an input stream. When chomp is true (as it is by default), these trailing newline characters are removed from the line before it is returned. When chomp is false, they are returned as part of the line.\n\nExamples\n\njulia> open(\"my_file.txt\", \"w\") do io\n           write(io, \"JuliaLang is a GitHub organization.\\nIt has many members.\\n\");\n       end\n57\n\njulia> readline(\"my_file.txt\")\n\"JuliaLang is a GitHub organization.\"\n\njulia> readline(\"my_file.txt\", chomp=false)\n\"JuliaLang is a GitHub organization.\\n\"\n\njulia> rm(\"my_file.txt\")\n\n\n\n"
 },
 
 {
@@ -16757,7 +16573,7 @@ var documenterSearchIndex = {"docs": [
     "page": "I/O and Network",
     "title": "Base.readuntil",
     "category": "Function",
-    "text": "readuntil(stream::IO, delim)\nreaduntil(filename::AbstractString, delim)\n\nRead a string from an I/O stream or a file, up to and including the given delimiter byte. The text is assumed to be encoded in UTF-8.\n\nExamples\n\njulia> open(\"my_file.txt\", \"w\") do io\n           write(io, \"JuliaLang is a GitHub organization.\nIt has many members.\n\");\n       end\n57\n\njulia> readuntil(\"my_file.txt\", 'L')\n\"JuliaL\"\n\njulia> readuntil(\"my_file.txt\", '.')\n\"JuliaLang is a GitHub organization.\"\n\njulia> rm(\"my_file.txt\")\n\n\n\n"
+    "text": "readuntil(stream::IO, delim)\nreaduntil(filename::AbstractString, delim)\n\nRead a string from an I/O stream or a file, up to and including the given delimiter byte. The text is assumed to be encoded in UTF-8.\n\nExamples\n\njulia> open(\"my_file.txt\", \"w\") do io\n           write(io, \"JuliaLang is a GitHub organization.\\nIt has many members.\\n\");\n       end\n57\n\njulia> readuntil(\"my_file.txt\", 'L')\n\"JuliaL\"\n\njulia> readuntil(\"my_file.txt\", '.')\n\"JuliaLang is a GitHub organization.\"\n\njulia> rm(\"my_file.txt\")\n\n\n\n"
 },
 
 {
@@ -16765,7 +16581,7 @@ var documenterSearchIndex = {"docs": [
     "page": "I/O and Network",
     "title": "Base.readlines",
     "category": "Function",
-    "text": "readlines(io::IO=STDIN; chomp::Bool=true)\nreadlines(filename::AbstractString; chomp::Bool=true)\n\nRead all lines of an I/O stream or a file as a vector of strings. Behavior is equivalent to saving the result of reading readline repeatedly with the same arguments and saving the resulting lines as a vector of strings.\n\nExamples\n\njulia> open(\"my_file.txt\", \"w\") do io\n           write(io, \"JuliaLang is a GitHub organization.\nIt has many members.\n\");\n       end\n57\n\njulia> readlines(\"my_file.txt\")\n2-element Array{String,1}:\n \"JuliaLang is a GitHub organization.\"\n \"It has many members.\"\n\njulia> readlines(\"my_file.txt\", chomp=false)\n2-element Array{String,1}:\n \"JuliaLang is a GitHub organization.\n\"\n \"It has many members.\n\"\n\njulia> rm(\"my_file.txt\")\n\n\n\n"
+    "text": "readlines(io::IO=STDIN; chomp::Bool=true)\nreadlines(filename::AbstractString; chomp::Bool=true)\n\nRead all lines of an I/O stream or a file as a vector of strings. Behavior is equivalent to saving the result of reading readline repeatedly with the same arguments and saving the resulting lines as a vector of strings.\n\nExamples\n\njulia> open(\"my_file.txt\", \"w\") do io\n           write(io, \"JuliaLang is a GitHub organization.\\nIt has many members.\\n\");\n       end\n57\n\njulia> readlines(\"my_file.txt\")\n2-element Array{String,1}:\n \"JuliaLang is a GitHub organization.\"\n \"It has many members.\"\n\njulia> readlines(\"my_file.txt\", chomp=false)\n2-element Array{String,1}:\n \"JuliaLang is a GitHub organization.\\n\"\n \"It has many members.\\n\"\n\njulia> rm(\"my_file.txt\")\n\n\n\n"
 },
 
 {
@@ -16773,7 +16589,7 @@ var documenterSearchIndex = {"docs": [
     "page": "I/O and Network",
     "title": "Base.eachline",
     "category": "Function",
-    "text": "eachline(stream::IO=STDIN; chomp::Bool=true)\neachline(filename::AbstractString; chomp::Bool=true)\n\nCreate an iterable EachLine object that will yield each line from an I/O stream or a file. Iteration calls readline on the stream argument repeatedly with chomp passed through, determining whether trailing end-of-line characters are removed. When called with a file name, the file is opened once at the beginning of iteration and closed at the end. If iteration is interrupted, the file will be closed when the EachLine object is garbage collected.\n\n\n\n"
+    "text": "eachline(io::IO=STDIN; chomp::Bool=true)\neachline(filename::AbstractString; chomp::Bool=true)\n\nCreate an iterable EachLine object that will yield each line from an I/O stream or a file. Iteration calls readline on the stream argument repeatedly with chomp passed through, determining whether trailing end-of-line characters are removed. When called with a file name, the file is opened once at the beginning of iteration and closed at the end. If iteration is interrupted, the file will be closed when the EachLine object is garbage collected.\n\nExamples\n\njulia> open(\"my_file.txt\", \"w\") do io\n           write(io, \"JuliaLang is a GitHub organization.\\n It has many members.\\n\");\n       end;\n\njulia> for line in eachline(\"my_file.txt\")\n           print(line)\n       end\nJuliaLang is a GitHub organization. It has many members.\n\njulia> rm(\"my_file.txt\");\n\n\n\n"
 },
 
 {
@@ -19373,7 +19189,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Memory-mapped I/O",
     "title": "Mmap.Anonymous",
     "category": "Type",
-    "text": "Mmap.Anonymous(name, readonly, create)\n\nCreate an IO-like object for creating zeroed-out mmapped-memory that is not tied to a file for use in Mmap.mmap. Used by SharedArray for creating shared memory arrays.\n\n\n\n"
+    "text": "Mmap.Anonymous(name::AbstractString=\"\", readonly::Bool=false, create::Bool=true)\n\nCreate an IO-like object for creating zeroed-out mmapped-memory that is not tied to a file for use in Mmap.mmap. Used by SharedArray for creating shared memory arrays.\n\nExamples\n\njulia> using Mmap\n\njulia> anon = Mmap.Anonymous();\n\njulia> isreadable(anon)\ntrue\n\njulia> iswritable(anon)\ntrue\n\njulia> isopen(anon)\ntrue\n\n\n\n"
 },
 
 {
@@ -19381,7 +19197,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Memory-mapped I/O",
     "title": "Mmap.mmap",
     "category": "Function",
-    "text": "Mmap.mmap(io::Union{IOStream,AbstractString,Mmap.AnonymousMmap}[, type::Type{Array{T,N}}, dims, offset]; grow::Bool=true, shared::Bool=true)\n       Mmap.mmap(type::Type{Array{T,N}}, dims)\n\nCreate an Array whose values are linked to a file, using memory-mapping. This provides a convenient way of working with data too large to fit in the computer's memory.\n\nThe type is an Array{T,N} with a bits-type element of T and dimension N that determines how the bytes of the array are interpreted. Note that the file must be stored in binary format, and no format conversions are possible (this is a limitation of operating systems, not Julia).\n\ndims is a tuple or single Integer specifying the size or length of the array.\n\nThe file is passed via the stream argument, either as an open IOStream or filename string. When you initialize the stream, use \"r\" for a \"read-only\" array, and \"w+\" to create a new array used to write values to disk.\n\nIf no type argument is specified, the default is Vector{UInt8}.\n\nOptionally, you can specify an offset (in bytes) if, for example, you want to skip over a header in the file. The default value for the offset is the current stream position for an IOStream.\n\nThe grow keyword argument specifies whether the disk file should be grown to accommodate the requested size of array (if the total file size is < requested array size). Write privileges are required to grow the file.\n\nThe shared keyword argument specifies whether the resulting Array and changes made to it will be visible to other processes mapping the same file.\n\nFor example, the following code\n\n# Create a file for mmapping\n# (you could alternatively use mmap to do this step, too)\nA = rand(1:20, 5, 30)\ns = open(\"/tmp/mmap.bin\", \"w+\")\n# We'll write the dimensions of the array as the first two Ints in the file\nwrite(s, size(A,1))\nwrite(s, size(A,2))\n# Now write the data\nwrite(s, A)\nclose(s)\n\n# Test by reading it back in\ns = open(\"/tmp/mmap.bin\")   # default is read-only\nm = read(s, Int)\nn = read(s, Int)\nA2 = Mmap.mmap(s, Matrix{Int}, (m,n))\n\ncreates a m-by-n Matrix{Int}, linked to the file associated with stream s.\n\nA more portable file would need to encode the word size – 32 bit or 64 bit – and endianness information in the header. In practice, consider encoding binary data using standard formats like HDF5 (which can be used with memory-mapping).\n\n\n\nMmap.mmap(io, BitArray, [dims, offset])\n\nCreate a BitArray whose values are linked to a file, using memory-mapping; it has the same purpose, works in the same way, and has the same arguments, as mmap, but the byte representation is different.\n\nExample: B = Mmap.mmap(s, BitArray, (25,30000))\n\nThis would create a 25-by-30000 BitArray, linked to the file associated with stream s.\n\n\n\n"
+    "text": "Mmap.mmap(io::Union{IOStream,AbstractString,Mmap.AnonymousMmap}[, type::Type{Array{T,N}}, dims, offset]; grow::Bool=true, shared::Bool=true)\n       Mmap.mmap(type::Type{Array{T,N}}, dims)\n\nCreate an Array whose values are linked to a file, using memory-mapping. This provides a convenient way of working with data too large to fit in the computer's memory.\n\nThe type is an Array{T,N} with a bits-type element of T and dimension N that determines how the bytes of the array are interpreted. Note that the file must be stored in binary format, and no format conversions are possible (this is a limitation of operating systems, not Julia).\n\ndims is a tuple or single Integer specifying the size or length of the array.\n\nThe file is passed via the stream argument, either as an open IOStream or filename string. When you initialize the stream, use \"r\" for a \"read-only\" array, and \"w+\" to create a new array used to write values to disk.\n\nIf no type argument is specified, the default is Vector{UInt8}.\n\nOptionally, you can specify an offset (in bytes) if, for example, you want to skip over a header in the file. The default value for the offset is the current stream position for an IOStream.\n\nThe grow keyword argument specifies whether the disk file should be grown to accommodate the requested size of array (if the total file size is < requested array size). Write privileges are required to grow the file.\n\nThe shared keyword argument specifies whether the resulting Array and changes made to it will be visible to other processes mapping the same file.\n\nFor example, the following code\n\n# Create a file for mmapping\n# (you could alternatively use mmap to do this step, too)\nA = rand(1:20, 5, 30)\ns = open(\"/tmp/mmap.bin\", \"w+\")\n# We'll write the dimensions of the array as the first two Ints in the file\nwrite(s, size(A,1))\nwrite(s, size(A,2))\n# Now write the data\nwrite(s, A)\nclose(s)\n\n# Test by reading it back in\ns = open(\"/tmp/mmap.bin\")   # default is read-only\nm = read(s, Int)\nn = read(s, Int)\nA2 = Mmap.mmap(s, Matrix{Int}, (m,n))\n\ncreates a m-by-n Matrix{Int}, linked to the file associated with stream s.\n\nA more portable file would need to encode the word size – 32 bit or 64 bit – and endianness information in the header. In practice, consider encoding binary data using standard formats like HDF5 (which can be used with memory-mapping).\n\n\n\nMmap.mmap(io, BitArray, [dims, offset])\n\nCreate a BitArray whose values are linked to a file, using memory-mapping; it has the same purpose, works in the same way, and has the same arguments, as mmap, but the byte representation is different.\n\nExamples\n\njulia> using Mmap\n\njulia> io = open(\"mmap.bin\", \"w+\");\n\njulia> B = Mmap.mmap(io, BitArray, (25,30000));\n\njulia> B[3, 4000] = true;\n\njulia> Mmap.sync!(B);\n\njulia> close(io);\n\njulia> io = open(\"mmap.bin\", \"r+\");\n\njulia> C = Mmap.mmap(io, BitArray, (25,30000));\n\njulia> C[3, 4000]\ntrue\n\njulia> C[2, 4000]\nfalse\n\njulia> close(io)\n\njulia> rm(\"mmap.bin\")\n\nThis creates a 25-by-30000 BitArray, linked to the file associated with stream io.\n\n\n\n"
 },
 
 {
@@ -19417,9 +19233,9 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/sharedarrays.html#Base.Distributed.procs-Tuple{SharedArray}",
+    "location": "stdlib/sharedarrays.html#Distributed.procs-Tuple{SharedArray}",
     "page": "Shared Arrays",
-    "title": "Base.Distributed.procs",
+    "title": "Distributed.procs",
     "category": "Method",
     "text": "procs(S::SharedArray)\n\nGet the vector of processes mapping the shared array.\n\n\n\n"
 },
@@ -19566,6 +19382,190 @@ var documenterSearchIndex = {"docs": [
     "title": "Iterative Eigensolvers",
     "category": "section",
     "text": "Julia provides bindings to ARPACK, which can be used to perform iterative solutions for eigensystems (using eigs) or singular value decompositions (using svds).eigs calculates the eigenvalues and, optionally, eigenvectors of its input(s) using implicitly restarted Lanczos or Arnoldi iterations for real symmetric or general nonsymmetric matrices respectively.For the single matrix version,eigs(A; nev=6, ncv=max(20,2*nev+1), which=:LM, tol=0.0, maxiter=300, sigma=nothing, ritzvec=true, v0=zeros((0,))) -> (d,[v,],nconv,niter,nmult,resid)the following keyword arguments are supported:nev: Number of eigenvalues\nncv: Number of Krylov vectors used in the computation; should satisfy nev+1 <= ncv <= n for real symmetric problems and nev+2 <= ncv <= n for other problems, where n is the size of the input matrix A. The default is ncv = max(20,2*nev+1). Note that these restrictions limit the input matrix A to be of dimension at least 2.\nwhich: type of eigenvalues to compute. See the note below.which type of eigenvalues\n:LM eigenvalues of largest magnitude (default)\n:SM eigenvalues of smallest magnitude\n:LR eigenvalues of largest real part\n:SR eigenvalues of smallest real part\n:LI eigenvalues of largest imaginary part (nonsymmetric or complex A only)\n:SI eigenvalues of smallest imaginary part (nonsymmetric or complex A only)\n:BE compute half of the eigenvalues from each end of the spectrum, biased in favor of the high end. (real symmetric A only)tol: parameter defining the relative tolerance for convergence of Ritz values (eigenvalue estimates).    A Ritz value  is considered converged when its associated residual    is less than or equal to the product of tol and max(^23 ),    where ɛ = eps(real(eltype(A)))/2 is LAPACK's machine epsilon.    The residual associated with  and its corresponding Ritz vector v    is defined as the norm Av - v.    The specified value of tol should be positive; otherwise, it is ignored    and  is used instead.    Default: .\nmaxiter: Maximum number of iterations (default = 300)\nsigma: Specifies the level shift used in inverse iteration. If nothing (default), defaults to ordinary (forward) iterations. Otherwise, find eigenvalues close to sigma using shift and invert iterations.\nritzvec: Returns the Ritz vectors v (eigenvectors) if true\nv0: starting vector from which to start the iterationsWe can see the various keywords in action in the following examples:julia> using IterativeEigenSolvers\n\njulia> A = Diagonal(1:4);\n\njulia> λ, ϕ = eigs(A, nev = 2, which=:SM);\n\njulia> λ\n2-element Array{Float64,1}:\n 1.0000000000000002\n 2.0\n\njulia> B = Diagonal([1., 2., -3im, 4im])\n4×4 Diagonal{Complex{Float64},Array{Complex{Float64},1}}:\n 1.0+0.0im      ⋅          ⋅          ⋅\n     ⋅      2.0+0.0im      ⋅          ⋅\n     ⋅          ⋅      0.0-3.0im      ⋅\n     ⋅          ⋅          ⋅      0.0+4.0im\n\njulia> λ, ϕ = eigs(B, nev=1, which=:LI);\n\njulia> λ\n1-element Array{Complex{Float64},1}:\n -4.440892098500626e-16 + 3.999999999999998im\n\njulia> λ, ϕ = eigs(B, nev=1, which=:SI);\n\njulia> λ\n1-element Array{Complex{Float64},1}:\n 1.3877787807814457e-16 - 2.999999999999999im\n\njulia> λ, ϕ = eigs(B, nev=1, which=:LR);\n\njulia> λ\n1-element Array{Complex{Float64},1}:\n 2.0 + 4.242754940683747e-17im\n\njulia> λ, ϕ = eigs(B, nev=1, which=:SR);\n\njulia> λ\n1-element Array{Complex{Float64},1}:\n 4.440892098500626e-16 + 4.0000000000000036im\n\njulia> λ, ϕ = eigs(B, nev=1, sigma=1.5);\n\njulia> λ\n1-element Array{Complex{Float64},1}:\n 1.9999999999999996 + 2.4290457684137336e-17imnote: Note\nThe sigma and which keywords interact: the description of eigenvalues searched for by which do not necessarily refer to the eigenvalues of A, but rather the linear operator constructed by the specification of the iteration mode implied by sigma.sigma iteration mode which refers to eigenvalues of\nnothing ordinary (forward) A\nreal or complex inverse with level shift sigma (A - sigma I )^-1note: Note\nAlthough tol has a default value, the best choice depends strongly on the matrix A. We recommend that users _always_ specify a value for tol which suits their specific needs.For details of how the errors in the computed eigenvalues are estimated, see:B. N. Parlett, \"The Symmetric Eigenvalue Problem\", SIAM: Philadelphia, 2/e (1998), Ch. 13.2, \"Accessing Accuracy in Lanczos Problems\", pp. 290-292 ff.\nR. B. Lehoucq and D. C. Sorensen, \"Deflation Techniques for an Implicitly Restarted Arnoldi Iteration\", SIAM Journal on Matrix Analysis and Applications (1996), 17(4), 789–821.  doi:10.1137/S0895479895281484For the two-input generalized eigensolution version,eigs(A, B; nev=6, ncv=max(20,2*nev+1), which=:LM, tol=0.0, maxiter=300, sigma=nothing, ritzvec=true, v0=zeros((0,))) -> (d,[v,],nconv,niter,nmult,resid)the following keyword arguments are supported:nev: Number of eigenvalues\nncv: Number of Krylov vectors used in the computation; should satisfy nev+1 <= ncv <= n for real symmetric problems and nev+2 <= ncv <= n for other problems, where n is the size of the input matrices A and B. The default is ncv = max(20,2*nev+1). Note that these restrictions limit the input matrix A to be of dimension at least 2.\nwhich: type of eigenvalues to compute. See the note below.which type of eigenvalues\n:LM eigenvalues of largest magnitude (default)\n:SM eigenvalues of smallest magnitude\n:LR eigenvalues of largest real part\n:SR eigenvalues of smallest real part\n:LI eigenvalues of largest imaginary part (nonsymmetric or complex A only)\n:SI eigenvalues of smallest imaginary part (nonsymmetric or complex A only)\n:BE compute half of the eigenvalues from each end of the spectrum, biased in favor of the high end. (real symmetric A only)tol: relative tolerance used in the convergence criterion for eigenvalues, similar to    tol in the eigs(A) method for the ordinary eigenvalue    problem, but effectively for the eigenvalues of B^-1 A instead of A.    See the documentation for the ordinary eigenvalue problem in    eigs(A) and the accompanying note about tol.\nmaxiter: Maximum number of iterations (default = 300)\nsigma: Specifies the level shift used in inverse iteration. If nothing (default), defaults to ordinary (forward) iterations. Otherwise, find eigenvalues close to sigma using shift and invert iterations.\nritzvec: Returns the Ritz vectors v (eigenvectors) if true\nv0: starting vector from which to start the iterationseigs returns the nev requested eigenvalues in d, the corresponding Ritz vectors v (only if ritzvec=true), the number of converged eigenvalues nconv, the number of iterations niter and the number of matrix vector multiplications nmult, as well as the final residual vector resid.We can see the various keywords in action in the following examples:julia> using IterativeEigenSolvers\n\njulia> A = sparse(1.0I, 4, 4); B = Diagonal(1:4);\n\njulia> λ, ϕ = eigs(A, B, nev = 2);\n\njulia> λ\n2-element Array{Float64,1}:\n 1.0\n 0.4999999999999999\n\njulia> A = sparse(1.0I, 4, 4); B = Diagonal([1, -2im, 3, 4im]);\n\njulia> λ, ϕ = eigs(A, B, nev=1, which=:SI);\n\njulia> λ\n1-element Array{Complex{Float64},1}:\n 0.03291282838780993 - 2.0627621271174514im\n\njulia> λ, ϕ = eigs(A, B, nev=1, which=:LI);\n\njulia> λ\n1-element Array{Complex{Float64},1}:\n -0.6428551411711136 + 2.1820633510068994imnote: Note\nThe sigma and which keywords interact: the description of eigenvalues searched for by which do not necessarily refer to the eigenvalue problem Av = Bvlambda, but rather the linear operator constructed by the specification of the iteration mode implied by sigma.sigma iteration mode which refers to the problem\nnothing ordinary (forward) Av = Bvlambda\nreal or complex inverse with level shift sigma (A - sigma B )^-1B = vnuIterativeEigenSolvers.eigs(::Any)\nIterativeEigenSolvers.eigs(::Any, ::Any)\nIterativeEigenSolvers.svds"
+},
+
+{
+    "location": "stdlib/unicode.html#",
+    "page": "Unicode",
+    "title": "Unicode",
+    "category": "page",
+    "text": ""
+},
+
+{
+    "location": "stdlib/unicode.html#Base.Unicode.isassigned",
+    "page": "Unicode",
+    "title": "Base.Unicode.isassigned",
+    "category": "Function",
+    "text": "Unicode.isassigned(c) -> Bool\n\nReturns true if the given char or integer is an assigned Unicode code point.\n\nExamples\n\njulia> using Unicode\n\njulia> isassigned(101)\ntrue\n\njulia> isassigned('\\x01')\ntrue\n\n\n\n"
+},
+
+{
+    "location": "stdlib/unicode.html#Base.Unicode.normalize",
+    "page": "Unicode",
+    "title": "Base.Unicode.normalize",
+    "category": "Function",
+    "text": "Unicode.normalize(s::AbstractString, normalform::Symbol)\n\nNormalize the string s according to one of the four \"normal forms\" of the Unicode standard: normalform can be :NFC, :NFD, :NFKC, or :NFKD.  Normal forms C (canonical composition) and D (canonical decomposition) convert different visually identical representations of the same abstract string into a single canonical form, with form C being more compact.  Normal forms KC and KD additionally canonicalize \"compatibility equivalents\": they convert characters that are abstractly similar but visually distinct into a single canonical choice (e.g. they expand ligatures into the individual characters), with form KC being more compact.\n\nAlternatively, finer control and additional transformations may be be obtained by calling Unicode.normalize(s; keywords...), where any number of the following boolean keywords options (which all default to false except for compose) are specified:\n\ncompose=false: do not perform canonical composition\ndecompose=true: do canonical decomposition instead of canonical composition (compose=true is ignored if present)\ncompat=true: compatibility equivalents are canonicalized\ncasefold=true: perform Unicode case folding, e.g. for case-insensitive string comparison\nnewline2lf=true, newline2ls=true, or newline2ps=true: convert various newline sequences (LF, CRLF, CR, NEL) into a linefeed (LF), line-separation (LS), or paragraph-separation (PS) character, respectively\nstripmark=true: strip diacritical marks (e.g. accents)\nstripignore=true: strip Unicode's \"default ignorable\" characters (e.g. the soft hyphen or the left-to-right marker)\nstripcc=true: strip control characters; horizontal tabs and form feeds are converted to spaces; newlines are also converted to spaces unless a newline-conversion flag was specified\nrejectna=true: throw an error if unassigned code points are found\nstable=true: enforce Unicode Versioning Stability\n\nFor example, NFKC corresponds to the options compose=true, compat=true, stable=true.\n\nExamples\n\njulia> using Unicode\n\njulia> \"μ\" == normalize(\"µ\", compat=true) #LHS: Unicode U+03bc, RHS: Unicode U+00b5\ntrue\n\njulia> normalize(\"JuLiA\", casefold=true)\n\"julia\"\n\njulia> normalize(\"JúLiA\", stripmark=true)\n\"JuLiA\"\n\n\n\n"
+},
+
+{
+    "location": "stdlib/unicode.html#Base.Unicode.graphemes",
+    "page": "Unicode",
+    "title": "Base.Unicode.graphemes",
+    "category": "Function",
+    "text": "graphemes(s::AbstractString) -> GraphemeIterator\n\nReturns an iterator over substrings of s that correspond to the extended graphemes in the string, as defined by Unicode UAX #29. (Roughly, these are what users would perceive as single characters, even though they may contain more than one codepoint; for example a letter combined with an accent mark is a single grapheme.)\n\n\n\n"
+},
+
+{
+    "location": "stdlib/unicode.html#Base.Unicode.uppercase",
+    "page": "Unicode",
+    "title": "Base.Unicode.uppercase",
+    "category": "Function",
+    "text": "uppercase(s::AbstractString)\n\nReturn s with all characters converted to uppercase.\n\nExamples\n\njulia> using Unicode\n\njulia> uppercase(\"Julia\")\n\"JULIA\"\n\n\n\n"
+},
+
+{
+    "location": "stdlib/unicode.html#Base.Unicode.lowercase",
+    "page": "Unicode",
+    "title": "Base.Unicode.lowercase",
+    "category": "Function",
+    "text": "lowercase(s::AbstractString)\n\nReturn s with all characters converted to lowercase.\n\nExamples\n\njulia> using Unicode\n\njulia> lowercase(\"STRINGS AND THINGS\")\n\"strings and things\"\n\n\n\n"
+},
+
+{
+    "location": "stdlib/unicode.html#Base.Unicode.titlecase",
+    "page": "Unicode",
+    "title": "Base.Unicode.titlecase",
+    "category": "Function",
+    "text": "titlecase(s::AbstractString) -> String\n\nCapitalize the first character of each word in s. See also ucfirst to capitalize only the first character in s.\n\nExamples\n\njulia> titlecase(\"the Julia programming language\")\n\"The Julia Programming Language\"\n\n\n\n"
+},
+
+{
+    "location": "stdlib/unicode.html#Base.Unicode.ucfirst",
+    "page": "Unicode",
+    "title": "Base.Unicode.ucfirst",
+    "category": "Function",
+    "text": "ucfirst(s::AbstractString) -> String\n\nReturn s with the first character converted to uppercase (technically \"title case\" for Unicode). See also titlecase to capitalize the first character of every word in s.\n\nSee also: lcfirst, uppercase, lowercase, titlecase\n\nExamples\n\njulia> ucfirst(\"python\")\n\"Python\"\n\n\n\n"
+},
+
+{
+    "location": "stdlib/unicode.html#Base.Unicode.lcfirst",
+    "page": "Unicode",
+    "title": "Base.Unicode.lcfirst",
+    "category": "Function",
+    "text": "lcfirst(s::AbstractString)\n\nReturn s with the first character converted to lowercase.\n\nSee also: ucfirst, uppercase, lowercase, titlecase\n\nExamples\n\njulia> lcfirst(\"Julia\")\n\"julia\"\n\n\n\n"
+},
+
+{
+    "location": "stdlib/unicode.html#Base.Unicode.textwidth",
+    "page": "Unicode",
+    "title": "Base.Unicode.textwidth",
+    "category": "Function",
+    "text": "textwidth(c)\n\nGive the number of columns needed to print a character.\n\nExamples\n\njulia> using Unicode\n\njulia> textwidth('α')\n1\n\njulia> textwidth('❤')\n2\n\n\n\ntextwidth(s::AbstractString)\n\nGive the number of columns needed to print a string.\n\nExamples\n\njulia> using Unicode\n\njulia> textwidth(\"March\")\n5\n\n\n\n"
+},
+
+{
+    "location": "stdlib/unicode.html#Base.Unicode.isalnum",
+    "page": "Unicode",
+    "title": "Base.Unicode.isalnum",
+    "category": "Function",
+    "text": "isalnum(c::Char) -> Bool\n\nTests whether a character is alphanumeric. A character is classified as alphabetic if it belongs to the Unicode general category Letter or Number, i.e. a character whose category code begins with 'L' or 'N'.\n\nExamples\n\njulia> using Unicode\n\njulia> isalnum('❤')\nfalse\n\njulia> isalnum('9')\ntrue\n\njulia> isalnum('α')\ntrue\n\n\n\n"
+},
+
+{
+    "location": "stdlib/unicode.html#Base.Unicode.isalpha",
+    "page": "Unicode",
+    "title": "Base.Unicode.isalpha",
+    "category": "Function",
+    "text": "isalpha(c::Char) -> Bool\n\nTests whether a character is alphabetic. A character is classified as alphabetic if it belongs to the Unicode general category Letter, i.e. a character whose category code begins with 'L'.\n\nExamples\n\njulia> using Unicode\n\njulia> isalpha('❤')\nfalse\n\njulia> isalpha('α')\ntrue\n\njulia> isalpha('9')\nfalse\n\n\n\n"
+},
+
+{
+    "location": "stdlib/unicode.html#Base.Unicode.iscntrl",
+    "page": "Unicode",
+    "title": "Base.Unicode.iscntrl",
+    "category": "Function",
+    "text": "iscntrl(c::Char) -> Bool\n\nTests whether a character is a control character. Control characters are the non-printing characters of the Latin-1 subset of Unicode.\n\nExamples\n\njulia> using Unicode\n\njulia> iscntrl('\\x01')\ntrue\n\njulia> iscntrl('a')\nfalse\n\n\n\n"
+},
+
+{
+    "location": "stdlib/unicode.html#Base.Unicode.isdigit",
+    "page": "Unicode",
+    "title": "Base.Unicode.isdigit",
+    "category": "Function",
+    "text": "isdigit(c::Char) -> Bool\n\nTests whether a character is a decimal digit (0-9).\n\nExamples\n\njulia> using Unicode\n\njulia> isdigit('❤')\nfalse\n\njulia> isdigit('9')\ntrue\n\njulia> isdigit('α')\nfalse\n\n\n\n"
+},
+
+{
+    "location": "stdlib/unicode.html#Base.Unicode.isgraph",
+    "page": "Unicode",
+    "title": "Base.Unicode.isgraph",
+    "category": "Function",
+    "text": "isgraph(c::Char) -> Bool\n\nTests whether a character is printable, and not a space. Any character that would cause a printer to use ink should be classified with isgraph(c)==true.\n\nExamples\n\njulia> using Unicode\n\njulia> isgraph('\\x01')\nfalse\n\njulia> isgraph('A')\ntrue\n\n\n\n"
+},
+
+{
+    "location": "stdlib/unicode.html#Base.Unicode.islower",
+    "page": "Unicode",
+    "title": "Base.Unicode.islower",
+    "category": "Function",
+    "text": "islower(c::Char) -> Bool\n\nTests whether a character is a lowercase letter. A character is classified as lowercase if it belongs to Unicode category Ll, Letter: Lowercase.\n\nExamples\n\njulia> using Unicode\n\njulia> islower('α')\ntrue\n\njulia> islower('Γ')\nfalse\n\njulia> islower('❤')\nfalse\n\n\n\n"
+},
+
+{
+    "location": "stdlib/unicode.html#Base.Unicode.isnumeric",
+    "page": "Unicode",
+    "title": "Base.Unicode.isnumeric",
+    "category": "Function",
+    "text": "isnumeric(c::Char) -> Bool\n\nTests whether a character is numeric. A character is classified as numeric if it belongs to the Unicode general category Number, i.e. a character whose category code begins with 'N'.\n\nNote that this broad category includes characters such as ¾ and ௰. Use isdigit to check whether a character a decimal digit between 0 and 9.\n\nExamples\n\njulia> using Unicode\n\njulia> isnumeric('௰')\ntrue\n\njulia> isnumeric('9')\ntrue\n\njulia> isnumeric('α')\nfalse\n\njulia> isnumeric('❤')\nfalse\n\n\n\n"
+},
+
+{
+    "location": "stdlib/unicode.html#Base.Unicode.isprint",
+    "page": "Unicode",
+    "title": "Base.Unicode.isprint",
+    "category": "Function",
+    "text": "isprint(c::Char) -> Bool\n\nTests whether a character is printable, including spaces, but not a control character.\n\nExamples\n\njulia> using Unicode\n\njulia> isprint('\\x01')\nfalse\n\njulia> isprint('A')\ntrue\n\n\n\n"
+},
+
+{
+    "location": "stdlib/unicode.html#Base.Unicode.ispunct",
+    "page": "Unicode",
+    "title": "Base.Unicode.ispunct",
+    "category": "Function",
+    "text": "ispunct(c::Char) -> Bool\n\nTests whether a character belongs to the Unicode general category Punctuation, i.e. a character whose category code begins with 'P'.\n\nExamples\n\njulia> using Unicode\n\njulia> ispunct('α')\nfalse\n\njulia> ispunct('/')\ntrue\n\njulia> ispunct(';')\ntrue\n\n\n\n"
+},
+
+{
+    "location": "stdlib/unicode.html#Base.Unicode.isspace",
+    "page": "Unicode",
+    "title": "Base.Unicode.isspace",
+    "category": "Function",
+    "text": "isspace(c::Char) -> Bool\n\nTests whether a character is any whitespace character. Includes ASCII characters '\\t', '\\n', '\\v', '\\f', '\\r', and ' ', Latin-1 character U+0085, and characters in Unicode category Zs.\n\nExamples\n\njulia> using Unicode\n\njulia> isspace('\\n')\ntrue\n\njulia> isspace('\\r')\ntrue\n\njulia> isspace(' ')\ntrue\n\njulia> isspace('\\x20')\ntrue\n\n\n\n"
+},
+
+{
+    "location": "stdlib/unicode.html#Base.Unicode.isupper",
+    "page": "Unicode",
+    "title": "Base.Unicode.isupper",
+    "category": "Function",
+    "text": "isupper(c::Char) -> Bool\n\nTests whether a character is an uppercase letter. A character is classified as uppercase if it belongs to Unicode category Lu, Letter: Uppercase, or Lt, Letter: Titlecase.\n\nExamples\n\njulia> using Unicode\n\njulia> isupper('γ')\nfalse\n\njulia> isupper('Γ')\ntrue\n\njulia> isupper('❤')\nfalse\n\n\n\n"
+},
+
+{
+    "location": "stdlib/unicode.html#Base.Unicode.isxdigit",
+    "page": "Unicode",
+    "title": "Base.Unicode.isxdigit",
+    "category": "Function",
+    "text": "isxdigit(c::Char) -> Bool\n\nTest whether a character is a valid hexadecimal digit. Note that this does not include x (as in the standard 0x prefix).\n\nExamples\n\njulia> using Unicode\n\njulia> isxdigit('a')\ntrue\n\njulia> isxdigit('x')\nfalse\n\n\n\n"
+},
+
+{
+    "location": "stdlib/unicode.html#Unicode-1",
+    "page": "Unicode",
+    "title": "Unicode",
+    "category": "section",
+    "text": "Unicode.isassigned\nUnicode.normalize\nUnicode.graphemes\nUnicode.uppercase\nUnicode.lowercase\nUnicode.titlecase\nUnicode.ucfirst\nUnicode.lcfirst\nUnicode.textwidth\nUnicode.isalnum\nUnicode.isalpha\nUnicode.iscntrl\nUnicode.isdigit\nUnicode.isgraph\nUnicode.islower\nUnicode.isnumeric\nUnicode.isprint\nUnicode.ispunct\nUnicode.isspace\nUnicode.isupper\nUnicode.isxdigit"
 },
 
 {
