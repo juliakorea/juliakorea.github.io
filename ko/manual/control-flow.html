@@ -311,18 +311,7 @@ before fussy_sqrt
 ERROR: negative x not allowed
 Stacktrace:
  [1] fussy_sqrt at ./none:1 [inlined]
- [2] verbose_fussy_sqrt(::Int64) at ./none:3</code></pre><h3><a class="nav-anchor" id="경고-및-정보-메시지-1" href="#경고-및-정보-메시지-1">경고 및 정보 메시지</a></h3><p>또한 Julia는 표준 오류 입출력에 메시지를 쓰지만 <code>Exception</code>을 throw하지도 않고, 때문에 실행을 중단하지도 않는 다른 함수를 제공합니다.</p><pre><code class="language-julia-repl">julia&gt; info(&quot;Hi&quot;); 1+1
-INFO: Hi
-2
-
-julia&gt; warn(&quot;Hi&quot;); 1+1
-WARNING: Hi
-2
-
-julia&gt; error(&quot;Hi&quot;); 1+1
-ERROR: Hi
-Stacktrace:
- [1] error(::String) at ./error.jl:33</code></pre><h3><a class="nav-anchor" id="try/catch문-1" href="#try/catch문-1"><code>try/catch</code>문</a></h3><p><code>try/catch</code>문은 <code>Exception</code>을 테스트할 수 있습니다. 예를 들어, 사용자 정의 제곱근 함수를 <code>Exception</code>을 사용하여 필요에 따라 실수 또는 복소수 제곱근 방법을 자동으로 호출하도록 작성할 수 있습니다.</p><pre><code class="language-julia-repl">julia&gt; f(x) = try
+ [2] verbose_fussy_sqrt(::Int64) at ./none:3</code></pre><h3><a class="nav-anchor" id="try/catch문-1" href="#try/catch문-1"><code>try/catch</code>문</a></h3><p><code>try/catch</code>문은 <code>Exception</code>을 테스트할 수 있습니다. 예를 들어, 사용자 정의 제곱근 함수를 <code>Exception</code>을 사용하여 필요에 따라 실수 또는 복소수 제곱근 방법을 자동으로 호출하도록 작성할 수 있습니다.</p><pre><code class="language-julia-repl">julia&gt; f(x) = try
            sqrt(x)
        catch
            sqrt(complex(x, 0))
