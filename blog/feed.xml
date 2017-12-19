@@ -4,13 +4,130 @@
  <title>The Julia Blog</title>
  <link href="http://julialang.org/blog/feed.xml" rel="self"/>
  <link href="http://julialang.org/blog"/>
- <updated>2017-12-08T15:20:41+09:00</updated>
+ <updated>2017-12-20T01:49:20+09:00</updated>
  <id>http://julialang.org/blog</id>
  <author>
    <name>Julia Developers</name>
    <email>julia-dev@googlegroups.com</email>
  </author>
 
+ 
+ <entry>
+   <title>On Machine Learning and Programming Languages</title>
+   <link href="http://julialang.org/blog/2017/12/ml&pl"/>
+   <updated>2017-12-06T00:00:00+09:00</updated>
+   <id>http://julialang.org/blog/2017/12/ml&pl</id>
+   <content type="html">&lt;blockquote&gt;
+  &lt;p&gt;Any sufficiently complicated machine learning system contains an ad-hoc, informally-specified, bug-ridden, slow implementation of half of a programming language.&lt;sup id=&quot;fnref:greenspun&quot;&gt;&lt;a href=&quot;#fn:greenspun&quot; class=&quot;footnote&quot;&gt;1&lt;/a&gt;&lt;/sup&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;div style=&quot;font-size:75%&quot;&gt;
+By Mike Innes (Julia Computing), David Barber (UCL), Tim Besard (UGent), James Bradbury (Salesforce Research), Valentin Churavy (MIT), Simon Danisch (MIT), Alan Edelman (MIT), Stefan Karpinski (Julia Computing), Jon Malmaud (MIT), Jarrett Revels (MIT), Viral Shah (Julia Computing), Pontus Stenetorp (UCL) and Deniz Yuret (Koç University)
+&lt;/div&gt;
+
+&lt;p&gt;&lt;span class=&quot;drop&quot;&gt;A&lt;/span&gt;s programming languages (PL) people, we have watched with great interest as machine learning (ML) has exploded – and with it, the complexity of ML models and the frameworks people are using to build them. State-of-the-art models are increasingly &lt;em&gt;programs&lt;/em&gt;, with support for programming constructs like loops and recursion, and this brings out many interesting issues in the tools we use to create them – that is, programming languages.&lt;/p&gt;
+
+&lt;p&gt;While machine learning does not yet have a dedicated language, several efforts are effectively creating hidden new languages underneath a Python API (like TensorFlow) while others are reusing Python as a modelling language (like PyTorch). We’d like to ask – are new ML-tailored languages required, and if so, why? More importantly, what might the ideal ML language of the future look like?&lt;/p&gt;
+
+&lt;h2 id=&quot;pig-latin-and-other-hidden-languages&quot;&gt;Pig Latin, and Other Hidden Languages&lt;/h2&gt;
+
+&lt;p&gt;TensorFlow (TF) and its ilk&lt;sup id=&quot;fnref:tf&quot;&gt;&lt;a href=&quot;#fn:tf&quot; class=&quot;footnote&quot;&gt;2&lt;/a&gt;&lt;/sup&gt; are &lt;a href=&quot;https://dl.acm.org/citation.cfm?doid=3088525.3088527&quot;&gt;already programming languages&lt;/a&gt;, albeit limited ones. This may seem surprising given that one uses Python to program TF. However, consider that TF requires you to write Python code to &lt;a href=&quot;https://www.tensorflow.org/programmers_guide/graphs&quot;&gt;build an expression tree&lt;/a&gt; in its internal language, which it then evaluates.&lt;/p&gt;
+
+&lt;p&gt;In fact, you can program in “lazy” TensorFlow style in any language. Consider the following JavaScript code, which implements a trivial function (&lt;code class=&quot;highlighter-rouge&quot;&gt;add&lt;/code&gt;) in this style:&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-javascript&quot; data-lang=&quot;javascript&quot;&gt;&lt;span class=&quot;kd&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;add&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;a&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;b&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+  &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;`&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;${&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;a&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;+&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;${&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;b&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;`&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;nx&quot;&gt;x&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;y&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;
+&lt;span class=&quot;nx&quot;&gt;z&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;add&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'x'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'y'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// 'x+y'&lt;/span&gt;
+&lt;span class=&quot;kr&quot;&gt;eval&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;z&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// 3&lt;/span&gt;
+&lt;span class=&quot;nx&quot;&gt;x&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;4&lt;/span&gt;
+&lt;span class=&quot;kr&quot;&gt;eval&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;z&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// 6&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;Here we are &lt;em&gt;metaprogramming&lt;/em&gt; – writing code that writes code. In this case both the meta-language and the target language are the same (JavaScript) but they could just as well be different languages (as in the C preprocessor for the C language), or we can use a data structure (an &lt;a href=&quot;https://en.wikipedia.org/wiki/Abstract_syntax_tree&quot;&gt;AST&lt;/a&gt;) instead of a string – the principle is the same. In TensorFlow, Python serves as a meta-language for writing programs in TF’s graph-based language.&lt;sup id=&quot;fnref:ast&quot;&gt;&lt;a href=&quot;#fn:ast&quot; class=&quot;footnote&quot;&gt;3&lt;/a&gt;&lt;/sup&gt; If you’re not convinced, consider that TensorFlow’s graph even supports constructs like &lt;a href=&quot;https://www.tensorflow.org/programmers_guide/variables&quot;&gt;variable scoping&lt;/a&gt; and &lt;a href=&quot;https://www.tensorflow.org/api_docs/python/tf/cond&quot;&gt;control flow&lt;/a&gt; – but rather than using Python syntax, you manipulate these constructs through an API.&lt;/p&gt;
+
+&lt;p&gt;TensorFlow and similar tools present themselves as “just libraries”, but they are extremely unusual ones. Most libraries provide a simple set of functions and data structures, not an entirely new programming system and runtime. Why is such a complex approach necessary?&lt;/p&gt;
+
+&lt;h2 id=&quot;why-create-a-new-language&quot;&gt;Why create a new language?&lt;/h2&gt;
+
+&lt;p&gt;The core reason for building new languages is simple: ML research has extremely high computational demands, and simplifying the modelling language makes it easier to add domain-specific optimisations and features. Training models requires excellent hardware support, good numerics, low interpreter overhead and multiple kinds of parallelism. Where general-purpose languages like Python struggle to provide these features, TensorFlow can handle them seamlessly.&lt;/p&gt;
+
+&lt;p&gt;There’s a snag, though. These impressive optimisations rely on simplifying assumptions (ML models won’t be recursive, or need custom gradients, right?), which make it easier to apply optimisations or deploy to small devices. Unfortunately for engineers, model complexity has increased and researchers thoroughly enjoy violating these assumptions. Models now demand conditional branching (ok, easy enough to hack in), loops for recurrence (less easy but possible), and even &lt;a href=&quot;https://arxiv.org/pdf/1503.00075.pdf&quot;&gt;recursion over trees&lt;/a&gt; (virtually impossible to deal with). In many areas of ML, including &lt;a href=&quot;https://blog.keras.io/the-future-of-deep-learning.html&quot;&gt;neural networks&lt;/a&gt; and &lt;a href=&quot;https://eng.uber.com/pyro/&quot;&gt;probabilistic programming&lt;/a&gt;, models are becoming increasingly like programs, including ones that reason about &lt;em&gt;other&lt;/em&gt; programs (e.g. &lt;a href=&quot;https://arxiv.org/pdf/1705.03633.pdf&quot;&gt;program generators&lt;/a&gt; and &lt;a href=&quot;https://arxiv.org/abs/1605.06640&quot;&gt;interpreters&lt;/a&gt;), and with non-differentiable components like Monte Carlo Tree Search. It’s enormously challenging to build runtimes that provide complete flexibility while achieving top performance, but increasingly the most powerful models and groundbreaking results need both.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/images/sentiment-treebank.png&quot; /&gt;&lt;/p&gt;
+&lt;div class=&quot;desc&quot;&gt;
+  Using ML with complex tree-structured data, like the &lt;a href=&quot;https://nlp.stanford.edu/sentiment/treebank.html&quot;&gt;Stanford Sentiment Treebank&lt;/a&gt;, requires differentiable, recursive algorithms.
+&lt;/div&gt;
+
+&lt;p&gt;Another practical downside of this approach, at least in its current incarnations, is the need for meta-programming of the kind discussed above. Building and evaluating expression trees imposes significant additional burdens on both the programmer and the compiler. It becomes tricky to reason about because the code now has two execution times, each with different language semantics, and things like step-through debugging are much harder. This could be resolved by creating a syntactic language for the new runtime, but this means no less than creating a full new programming language. Is this worthwhile when we have popular numerical languages already?&lt;/p&gt;
+
+&lt;h2 id=&quot;can-we-just-use-python&quot;&gt;Can we just use Python?&lt;/h2&gt;
+
+&lt;p&gt;As ML models began to need the full power of a programming language, Chainer and others pioneered a &lt;a href=&quot;https://arxiv.org/pdf/1701.03980.pdf&quot;&gt;“define-by-run”&lt;/a&gt; approach wherein a Python program is itself the model, using runtime automatic differentiation (AD) for derivatives. This is fantastic from a usability standpoint: If you want a recursive model that operates over trees, simply write that down, and let the AD do its magic! The difference in feel is &lt;a href=&quot;https://twitter.com/karpathy/status/868178954032513024?lang=en&quot;&gt;hard to overstate&lt;/a&gt;, and a frictionless approach to playing with novel ideas is invaluable to research.&lt;/p&gt;
+
+&lt;p&gt;However, getting Python to scale to ML’s heavy computational demands is far harder than you might expect. A &lt;a href=&quot;https://www.youtube.com/watch?v=DBVLcgq2Eg0&quot;&gt;huge amount of work&lt;/a&gt; goes into replicating optimisations that fast languages get for free, and the PL boneyard is full of &lt;a href=&quot;https://arstechnica.com/information-technology/2009/03/google-launches-project-to-boost-python-performance-by-5x/&quot;&gt;high-profile&lt;/a&gt; yet &lt;a href=&quot;https://blog.pyston.org/2017/01/31/pyston-0-6-1-released-and-future-plans/&quot;&gt;failed&lt;/a&gt; efforts to make Python faster. &lt;a href=&quot;http://blog.kevmod.com/2017/02/personal-thoughts-about-pystons-outcome/&quot;&gt;Python’s semantics&lt;/a&gt; also make it fundamentally difficult to provide model-level parallelism or compile models for small devices.&lt;/p&gt;
+
+&lt;p&gt;Efforts like &lt;a href=&quot;https://mxnet.incubator.apache.org/api/python/gluon.html&quot;&gt;Gluon&lt;/a&gt; for MXNet are finding ways to get the best of both, at least to some extent. The idea is to combine basic dynamic AD with code-tracing approaches that produce “static sub-graphs” that can be optimised. This is unfortunately something of a mashing together of disparate implementations and APIs. It’s also limited; MXNet uses its graph not just for kernel-level optimisations but also for high-level graph scheduling, such as &lt;a href=&quot;https://mxnet.incubator.apache.org/how_to/multi_devices.html&quot;&gt;splitting a model across multiple GPUs&lt;/a&gt;. It’s unclear how these hybrids will handle this, other than by adding another new API for graph containers whose nodes can be dynamic computations.&lt;/p&gt;
+
+&lt;h2 id=&quot;what-might-a-tailor-made-ml-language-look-like&quot;&gt;What might a tailor-made ML language look like?&lt;/h2&gt;
+
+&lt;p&gt;There are few domains as demanding about language-level design issues as machine learning. But it’s not unprecedented, and in areas like &lt;a href=&quot;https://coq.inria.fr/&quot;&gt;formal reasoning and verification&lt;/a&gt; or &lt;a href=&quot;https://chapel-lang.org/&quot;&gt;cluster computing&lt;/a&gt;, new, tailor-made languages have proved an effective solution. Similarly, we expect to see new or existing languages customised for the kind of numerical, differentiable, parallelisable and even probabilistic computations needed in ML.&lt;/p&gt;
+
+&lt;p&gt;An obvious current challenge for ML languages is achieving generality alongside performance, and the early hybrid approaches will need much more development. We expect that future ML runtimes will need to support arbitrary mixing of approaches (computational graphs that are static within dynamic within static …) and will need to get better at compiling dynamic code for deployment. Ideally, there will only be single, flexible “graph format” (or AST). The AST should have a syntax and statically describe dynamic behaviour (e.g. with a written &lt;code class=&quot;highlighter-rouge&quot;&gt;for&lt;/code&gt; loop) – in other words, it should look a lot more like a standard programming language.&lt;/p&gt;
+
+&lt;p&gt;&lt;em&gt;Programmable semantics&lt;/em&gt; would open up new levels of flexibility, and could be provided by a feature similar to macros. This would allow features like multi-GPU training to be built on top of the core system, by specifying where the code should have pure dataflow semantics (as opposed to standard imperative semantics, which are more flexible but may include side-effects that are unsafe to optimise). It could also allow the kinds of program manipulation needed by probabilistic programming languages, or the &lt;a href=&quot;https://www.cs.cmu.edu/~guyb/papers/Ble90.pdf&quot;&gt;vectorisation&lt;/a&gt; (batching) passes usually implemented by hand in NLP models.&lt;/p&gt;
+
+&lt;p&gt;As well as the PL community, ML engineers should pay close attention to the traditional Automatic Differentiation (AD) community. ML languages can take inspiration from pioneering work on &lt;a href=&quot;https://arxiv.org/pdf/1611.03416.pdf&quot;&gt;languages designed for truly first-class derivative&lt;/a&gt; support. Such languages can easily mix symbolic with runtime techniques (helping with the tradeoffs mentioned above), mix forward and reverse mode AD (for improved performance and memory usage), and &lt;a href=&quot;http://mikeinnes.github.io/2017/08/24/cudanative.html&quot;&gt;differentiate GPU kernels&lt;/a&gt; – all with no loss in performance.&lt;/p&gt;
+
+&lt;p&gt;ML research will increasingly need more powerful type systems, user-defined types and more means for extension. Gone are the days when it was enough to hard-code support for strided arrays on NVIDIA GPUs; cutting-edge techniques like &lt;a href=&quot;https://people.eecs.berkeley.edu/~elghaoui/Pubs/cidu2011_final.pdf&quot;&gt;sparse machine learning&lt;/a&gt;, new hardware like &lt;a href=&quot;https://cloud.google.com/tpu/&quot;&gt;TPUs&lt;/a&gt;, &lt;a href=&quot;https://www.intelnervana.com/&quot;&gt;Nervana&lt;/a&gt; and &lt;a href=&quot;https://www.forbes.com/sites/moorinsights/2017/08/28/microsoft-fpga-wins-versus-google-tpus-for-ai/#118733643904&quot;&gt;FPGAs&lt;/a&gt;, and diverse deployment targets like &lt;a href=&quot;http://www.wired.co.uk/article/google-raspberry-pi-ai&quot;&gt;ARM chips&lt;/a&gt; or the &lt;a href=&quot;https://developer.apple.com/documentation/coreml&quot;&gt;iPhone’s CoreML&lt;/a&gt; chip all call for greater levels of flexibility. &lt;a href=&quot;https://github.com/tensorflow/tensorflow/pull/5267/files&quot;&gt;Large-scale refactoring of core C++ code&lt;/a&gt; for each new development will not scale.&lt;/p&gt;
+
+&lt;p&gt;Consider a world where adding new hardware support – or new kinds of data representations – could easily be accomplished by a user in high-level code, without changes to the original system. Here we expect ML systems to take inspiration from existing numerical computing languages, which can &lt;a href=&quot;https://arxiv.org/pdf/1604.03410.pdf&quot;&gt;already handle these tasks&lt;/a&gt; with ease.&lt;/p&gt;
+
+&lt;p&gt;Type systems can also have safety benefits, but current ones are not suited to array-heavy code where array dimensions are meaningful (for example, spatial vs channel vs batch dimensions in images). These distinctions are left to &lt;a href=&quot;https://github.com/pytorch/pytorch/issues/1220&quot;&gt;pure convention&lt;/a&gt;, and hairy dimension-permuting code has no protection from mistakes, leaving much room for more array-aware type systems. We expect the trend towards dynamic typing to continue,&lt;sup id=&quot;fnref:types&quot;&gt;&lt;a href=&quot;#fn:types&quot; class=&quot;footnote&quot;&gt;4&lt;/a&gt;&lt;/sup&gt; mainly due to practitioners’ preference for interactivity and scripting, but hope to see further innovations like &lt;a href=&quot;https://cntk.ai/pythondocs/sequence.html&quot;&gt;CNTK’s optionally dynamic dimensions&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;ML engineers are increasingly interested in traditional &lt;a href=&quot;https://papers.nips.cc/paper/5656-hidden-technical-debt-in-machine-learning-systems.pdf&quot;&gt;software engineering problems&lt;/a&gt; like the maintenance and extension of production systems. The &lt;a href=&quot;https://medium.com/@karpathy/software-2-0-a64152b37c35&quot;&gt;ML programming model&lt;/a&gt; makes it harder to create abstraction barriers and interfaces between components, and re-training of a model can easily break backwards compatibility. ML languages will likely be able to incorporate solutions to these problems just as regular languages do, but this remains an open design problem.&lt;/p&gt;
+
+&lt;div style=&quot;text-align:center&quot;&gt;
+&lt;a href=&quot;https://xkcd.com/1838/&quot;&gt;
+&lt;img height=&quot;350px&quot; src=&quot;https://imgs.xkcd.com/comics/machine_learning_2x.png&quot; /&gt;
+&lt;/a&gt;
+&lt;/div&gt;
+&lt;div class=&quot;desc&quot;&gt;
+  Software Engineering 2.0? &lt;i&gt;(via XKCD)&lt;/i&gt;
+&lt;/div&gt;
+
+&lt;p&gt;A downside to any new language is that it require a new library ecosystem, as only code written for the new runtime benefits from it. For example, rather than reusing the Python ecosystem, the TensorFlow developers need to rewrite libraries for tasks like &lt;a href=&quot;https://www.tensorflow.org/api_guides/python/image&quot;&gt;image processing&lt;/a&gt; and &lt;a href=&quot;https://www.tensorflow.org/api_docs/python/tf/TextLineReader&quot;&gt;file IO&lt;/a&gt; in the graph language, throwing out the vast effort behind projects like SciPy. This may well be the only way forward, but ML practitioners should not split from the wider numerical and HPC community. An ideal ML ecosystem is an ideal numerical one, and vice versa, and collaboration between these communities will multiply everyone’s efforts.&lt;/p&gt;
+
+&lt;p&gt;We expect to see these developments coming from several angles. Graph IRs and formats like &lt;a href=&quot;https://www.tensorflow.org/performance/xla/&quot;&gt;XLA&lt;/a&gt;, &lt;a href=&quot;https://github.com/onnx/onnx&quot;&gt;ONNX&lt;/a&gt; and &lt;a href=&quot;https://github.com/dmlc/nnvm&quot;&gt;NNVM&lt;/a&gt; are becoming ever more sophisticated and will likely take more inspiration from traditional language design,&lt;sup id=&quot;fnref:chris&quot;&gt;&lt;a href=&quot;#fn:chris&quot; class=&quot;footnote&quot;&gt;5&lt;/a&gt;&lt;/sup&gt; perhaps even adding surface syntax to become fully-fledged programming languages. TensorFlow’s XLA has started a push towards special-purpose compiler stacks that now includes &lt;a href=&quot;http://tvmlang.org/&quot;&gt;TVM&lt;/a&gt;, &lt;a href=&quot;http://dlvm.org/&quot;&gt;DLVM&lt;/a&gt;, &lt;a href=&quot;https://github.com/google/sling/tree/master/myelin&quot;&gt;myelin&lt;/a&gt;, and other ongoing work. Meanwhile, projects like the &lt;a href=&quot;https://github.com/pytorch/pytorch/tree/master/torch/csrc/jit&quot;&gt;PyTorch JIT&lt;/a&gt;, &lt;a href=&quot;https://mxnet.incubator.apache.org/api/python/gluon.html&quot;&gt;Gluon&lt;/a&gt; and &lt;a href=&quot;https://github.com/google/tangent&quot;&gt;Tangent&lt;/a&gt; are efforts to make Python itself a better modelling language, in spite of the significant challenges. Having just argued that ML is a numerical programming languages problem, we in the Julia community feel that it is an excellent substrate for experimenting with these kinds of language-level issues, and will continue to push the boundaries with projects like &lt;a href=&quot;https://github.com/denizyuret/Knet.jl&quot;&gt;Knet&lt;/a&gt;, &lt;a href=&quot;https://fluxml.github.io/&quot;&gt;Flux&lt;/a&gt;, &lt;a href=&quot;https://github.com/jrevels/Cassette.jl&quot;&gt;Cassette&lt;/a&gt;, &lt;a href=&quot;https://github.com/JuliaGPU/CUDAnative.jl&quot;&gt;CUDAnative&lt;/a&gt;, &lt;a href=&quot;https://github.com/MikeInnes/DataFlow.jl&quot;&gt;DataFlow.jl&lt;/a&gt;, and more.&lt;/p&gt;
+
+&lt;h2 id=&quot;conclusion-an-inference-about-machine-learning&quot;&gt;Conclusion: An Inference about Machine Learning&lt;/h2&gt;
+
+&lt;p&gt;Machine learning models have become extremely general information-processing systems that build ever higher-level and more complex abstractions; recurrence, recursion, higher-order models, even &lt;a href=&quot;https://nlp.stanford.edu/blog/hybrid-tree-sequence-neural-networks-with-spinn/&quot;&gt;stack machines&lt;/a&gt; and &lt;a href=&quot;https://arxiv.org/abs/1605.06640&quot;&gt;language interpreters&lt;/a&gt;, all implemented as compositions of basic components. ML is a new programming paradigm, albeit a strange one that’s heavily numerical, differentiable and parallel. And as in any engineering field, the tooling available will have a profound impact on the scope and quality of future work.&lt;/p&gt;
+
+&lt;p&gt;All this suggests that designers of ML systems have a momentous challenge ahead of them. But while that’s true, there’s some good news: The very same problems have been deeply explored, if not already solved, by language researchers over the last few decades! To really take this new field to its full potential, the machine learning and programming languages communities will have to combine forces, and the real challenge is to integrating the disparate expertise of these two groups.&lt;/p&gt;
+
+&lt;p&gt;Can we build systems that treat numerics, derivatives and parallelism as first-class features, without sacrificing traditional programming ideas and wisdom? This is the foundational question which languages over the coming decade will have to answer.&lt;/p&gt;
+&lt;div class=&quot;footnotes&quot;&gt;
+  &lt;ol&gt;
+    &lt;li id=&quot;fn:greenspun&quot;&gt;
+      &lt;p&gt;After &lt;a href=&quot;https://en.wikipedia.org/wiki/Greenspun%27s_tenth_rule&quot;&gt;Philip Greenspun&lt;/a&gt;&amp;nbsp;&lt;a href=&quot;#fnref:greenspun&quot; class=&quot;reversefootnote&quot;&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
+    &lt;/li&gt;
+    &lt;li id=&quot;fn:tf&quot;&gt;
+      &lt;p&gt;We use TensorFlow for example, but could substitute other “define-before-run” frameworks like CNTK or MXNet.&amp;nbsp;&lt;a href=&quot;#fnref:tf&quot; class=&quot;reversefootnote&quot;&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
+    &lt;/li&gt;
+    &lt;li id=&quot;fn:ast&quot;&gt;
+      &lt;p&gt;TensorFlow’s graph is effectively a dataflow-based AST (Abstract Syntax Tree).&amp;nbsp;&lt;a href=&quot;#fnref:ast&quot; class=&quot;reversefootnote&quot;&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
+    &lt;/li&gt;
+    &lt;li id=&quot;fn:types&quot;&gt;
+      &lt;p&gt;Though we note that, internally, current systems span the gamut from fully dynamic (PyTorch and its ATen backend) to unusually static (TensorFlow’s XLA and MXNet, where all dimensions are known before the graph is run).&amp;nbsp;&lt;a href=&quot;#fnref:types&quot; class=&quot;reversefootnote&quot;&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
+    &lt;/li&gt;
+    &lt;li id=&quot;fn:chris&quot;&gt;
+      &lt;p&gt;Google Brain’s increasing hiring of programming languages experts, such as &lt;a href=&quot;https://techcrunch.com/2017/08/14/swift-creator-chris-lattner-joins-google-brain-after-tesla-autopilot-stint/&quot;&gt;Chris Lattner&lt;/a&gt;, is an interesting development on this point.&amp;nbsp;&lt;a href=&quot;#fnref:chris&quot; class=&quot;reversefootnote&quot;&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
+    &lt;/li&gt;
+  &lt;/ol&gt;
+&lt;/div&gt;
+</content>
+ </entry>
  
  <entry>
    <title>GSoC 2017: Native Julia second order ODE and BVP solvers</title>

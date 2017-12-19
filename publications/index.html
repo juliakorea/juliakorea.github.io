@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="ko" lang="ko">
+
 <head>
   <meta name="viewport" content="width=device-width; initial-scale=1.0;">
   <meta http-equiv="content-type" content="text/html; charset=utf-8" />
@@ -24,14 +25,15 @@
     window.dataLayer = window.dataLayer || [];
     function gtag(){dataLayer.push(arguments);}
     gtag('js', new Date());
-  
+
     gtag('config', 'UA-110655381-1'); // juliakorea 추적 ID
   </script>
-
 </head>
+
 <body>
-<div id="site" class="site">
-<div class="title"><a href="/">
+  <div id="site" class="site">
+    
+    <div class="title"><a href="/">
 <svg version="1.1" id="Layer_1"
 	 xmlns="http://www.w3.org/2000/svg"
 	 xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
@@ -299,6 +301,19 @@ url:&nbsp;<a href="http://julialang.org/publications/julia-fresh-approach-BEKS.p
 
 </li>
   
+  <li id="BFD2017">
+<b>Effective Extensible Programming: Unleashing Julia on GPUs</b>.
+Tim Besard, Christophe Foket and Bjorn De Sutter
+(2017)
+: 1&ndash;14.
+
+
+arXiv:&nbsp;<a href="https://arxiv.org/abs/1712.03112">1712.03112</a>. 
+
+Packages: <a href="https://github.com/JuliaGPU/CUDAnative.jl">CUDAnative.jl</a>, <a href="https://github.com/JuliaGPU/CUDAdrv.jl">CUDAdrv.jl</a> and <a href="https://github.com/maleadt/LLVM.jl">LLVM.jl</a>. 
+
+</li>
+  
   <li id="CLLDNR17">
 <b>Molecular structure, configurational entropy and viscosity of silicate melts: Link through the Adam and Gibbs theory of viscous flow</b>.
 Charles Le Losq and Daniel R. Neuville
@@ -348,6 +363,19 @@ doi:&nbsp;<a href="http://dx.doi.org/10.1016/j.cageo.2017.05.012">10.1016/j.cage
 
 
 Packages: <a href="https://github.com/juliohm/ImageQuilting.jl">ImageQuilting.jl</a>. 
+
+</li>
+  
+  <li id="JDMJ2017">
+<b>Self-induced temperature gradients in Brownian dynamics</b>.
+Jack Devine and M. W. Jack
+(2017)
+<i>Physical Review E</i>, 96(6): 062130.
+doi:&nbsp;<a href="http://dx.doi.org/10.1103/PhysRevE.96.062130">10.1103/PhysRevE.96.062130</a>. 
+
+
+
+
 
 </li>
   
@@ -497,6 +525,19 @@ Packages: <a href="https://github.com/carlobaldassi/BinaryCommitteeMachineRSGD.j
 
 </li>
   
+  <li id="BVD2016">
+<b>High-level GPU programming in Julia</b>.
+Tim Besard, Pieter Verstraete and Bjorn De Sutter
+(2016)
+: 1&ndash;10.
+
+
+arXiv:&nbsp;<a href="https://arxiv.org/abs/1604.0341">1604.0341</a>. 
+
+
+
+</li>
+  
   <li id="DTP16">
 <b>A two-step linear programming model for energy-efficient timetables in metro railway networks</b>.
 Shuvomoy Das Gupta, J. Kevin Tobin and Lacra Pavel
@@ -630,6 +671,19 @@ Packages: <a href="https://github.com/diegozea/MIToS.jl">MIToS.jl</a>.
 
   <h2> 2015 </h2>
   
+  <li id="BDFP2014">
+<b>Case study of multiple trace transform implementations</b>.
+Tim Besard, Bjorn De Sutter, Andrés Frías-Velázquez and Wilfried Philips
+(2015)
+<i>International Journal of High Performance Computing Applications</i>, 29(4): 489&ndash;505.
+doi:&nbsp;<a href="http://dx.doi.org/10.1177/1094342015584091">10.1177/1094342015584091</a>. 
+
+
+
+
+
+</li>
+  
   <li id="BOMHFV15">
 <b>Is High Temporal Resolution Achievable for Paediatric Cardiac Acquisitions during Several Heart Beats? Illustration with Cardiac Phase Contrast Cine-MRI</b>.
 Laurent Bonnemains, Freddy Odille, Christophe Meyer, Gabriella Hossu, Jacques Felblinger and Pierre-André Vuissoz
@@ -736,6 +790,19 @@ Packages: <a href="https://github.com/weijianzhang/MatrixDepot.jl">MatrixDepot.j
   
 
   <h2> 2014 </h2>
+  
+  <li id="ASB16">
+<b>A Comparison of Programming Languages in Economics</b>.
+S. Boragan Aruoba and Jesus Fernandez-Villaverde
+(2014)
+.
+
+
+
+
+
+
+</li>
   
   <li id="BCKSE14">
 <b>Array operators using multiple dispatch: a design methodology for array implementations in dynamic languages</b>.
@@ -1059,11 +1126,28 @@ arXiv:&nbsp;<a href="https://arxiv.org/abs/1209.5145">1209.5145</a>.
 </ul>
 
 
-<div class="footer">
-Julia is a <a href="https://numfocus.org/projects/index.html">NumFocus project</a>.
-We thank <a href="https://fastly.com">Fastly</a> for their generous infrastructural support.
-<a href="https://github.com/JuliaLang/julialang.github.com/edit/master/publications/index.md">Edit this page on GitHub.</a>
-</div>
+    <div class="footer">
+      Julia is a <a href="https://numfocus.org/projects/index.html">NumFocus project</a>.
+      We thank <a href="https://fastly.com">Fastly</a> for their generous infrastructural support.
+      
+      <a href="https://github.com/juliakorea/translate-home/edit/master/src/publications/index.md">Edit this page on GitHub.</a>
+    </div>
+
+    <!-- Add "contribute" link to the Transifex language dropdown -->
+    <script>
+      // Create a link element for the translation prompt
+      var txPromptLink = document.createElement( "a" );
+      txPromptLink.href = "https://www.transifex.com/julialang-i18n/julialang-web/";
+      txPromptLink.appendChild( document.createTextNode( "Add your language!" ) );
+      txPromptLink.style.fontWeight = "bold";
+
+      // Wrap the translation prompt link in a list item element
+      var txPrompt = document.createElement( "li" );
+      txPrompt.appendChild( txPromptLink );
+
+      // Add the translation prompt list item to the list of languages
+      document.getElementById( "tx-live-lang-picker" ).appendChild( txPrompt );
+    </script>
 
 <!--Flipcause Integration v3.0// Flipcause Integration Instructions:
     Install the following code block once in the website Header (after <head> tag) -->
@@ -1206,15 +1290,24 @@ We thank <a href="https://fastly.com">Fastly</a> for their generous infrastructu
 <div id="fc-fade" class="fc-black_overlay" onclick="close_window()"></div>
 <div id="fc-light" class="fc-white_content">
   <div id="fc-main" class="fc-main-box">
-    <div id="fc-close" class="fc-widget_close" onclick="close_window()">
-      </div><iframe id="fc-myFrame" iframe height="580" width="925" style="border: 0;
-                                                                           border-radius:5px 5px 5px 5px; box-shadow:0 0 8px rgba(0, 0, 0, 0.5);" scrolling="no" src=""></iframe></div>
+    <div id="fc-close" class="fc-widget_close" onclick="close_window()"></div>
+    <iframe id="fc-myFrame" iframe height="580" width="925"
+            style="border: 0; border-radius: 5px 5px 5px 5px; box-shadow: 0 0 8px rgba(0, 0, 0, 0.5);"
+            scrolling="no" src=""></iframe>
+  </div>
 </div>
 
 <!--END Flipcause Main Integration Code-->
 
-<div style="background:#ccc; border-radius:0px 0px 0px 0px;font-weight:normal; font-family:Arial, Helvetica, sans-serif;border:none;box-shadow:none;left: 50%; margin-left:-72.5px;clear: both;display: block; width:145px;height:45px; line-height:2.8; position:relative; font-size:16px;text-align:center; cursor:pointer;color:#fff;text-decoration: none; z-index:1" onclick="open_window('MjI1Nw==')">Donate Now</div>
-</div>
-
+    <div style="background: #ccc; border-radius: 0px 0px 0px 0px; font-weight: normal;
+                font-family: Arial, Helvetica, sans-serif; border: none; box-shadow: none;
+                left: 50%; margin-left: -72.5px; clear: both; display: block; width: 145px;
+                height: 45px; line-height: 2.8; position: relative; font-size: 16px;
+                text-align: center; cursor: pointer; color: #fff; text-decoration: none; z-index:1"
+         onclick="open_window('MjI1Nw==')">
+      Donate Now
+    </div>
+    
+  </div><!-- main wrapper -->
 </body>
 </html>
