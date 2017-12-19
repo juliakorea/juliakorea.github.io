@@ -2501,7 +2501,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Parallel Computing",
     "title": "Specifying Network Topology (Experimental)",
     "category": "section",
-    "text": "The keyword argument topology passed to addprocs is used to specify how the workers must be connected to each other::all_to_all, the default: all workers are connected to each other.\n:master_slave: only the driver process, i.e. pid 1, has connections to the workers.\n:custom: the launch method of the cluster manager specifies the connection topology via the fields ident and connect_idents in WorkerConfig. A worker with a cluster-manager-provided identity ident will connect to all workers specified in connect_idents.Keyword argument lazy=true|false only affects topology option :all_to_all. If true, the cluster starts off with the master connected to all workers. Specific worker-worker connections are established at the first remote invocation between two workers. This helps in reducing initial resources allocated for intra-cluster communication. Connections are setup depending on the runtime requirements of a parallel program. Default value for lazy is true.Currently, sending a message between unconnected workers results in an error. This behaviour, as with the functionality and interface, should be considered experimental in nature and may change in future releases."
+    "text": "The keyword argument topology passed to addprocs is used to specify how the workers must be connected to each other::all_to_all, the default: all workers are connected to each other.\n:master_worker: only the driver process, i.e. pid 1, has connections to the workers.\n:custom: the launch method of the cluster manager specifies the connection topology via the fields ident and connect_idents in WorkerConfig. A worker with a cluster-manager-provided identity ident will connect to all workers specified in connect_idents.Keyword argument lazy=true|false only affects topology option :all_to_all. If true, the cluster starts off with the master connected to all workers. Specific worker-worker connections are established at the first remote invocation between two workers. This helps in reducing initial resources allocated for intra-cluster communication. Connections are setup depending on the runtime requirements of a parallel program. Default value for lazy is true.Currently, sending a message between unconnected workers results in an error. This behaviour, as with the functionality and interface, should be considered experimental in nature and may change in future releases."
 },
 
 {
@@ -7229,7 +7229,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Collections and Data Structures",
     "title": "Base.count",
     "category": "Function",
-    "text": "count(p, itr) -> Integer\ncount(itr) -> Integer\n\nCount the number of elements in itr for which predicate p returns true. If p is omitted, counts the number of true elements in itr (which should be a collection of boolean values).\n\njulia> count(i->(4<=i<=6), [2,3,4,5,6])\n3\n\njulia> count([true, false, true, true])\n3\n\n\n\nLibGit2.count(f::Function, walker::GitRevWalker; oid::GitHash=GitHash(), by::Cint=Consts.SORT_NONE, rev::Bool=false)\n\nUsing the GitRevWalker walker to \"walk\" over every commit in the repository's history, find the number of commits which return true when f is applied to them. The keyword arguments are:     * oid: The GitHash of the commit to begin the walk from. The default is to use       push_head! and therefore the HEAD commit and all its ancestors.     * by: The sorting method. The default is not to sort. Other options are to sort by       topology (LibGit2.Consts.SORT_TOPOLOGICAL), to sort forwards in time       (LibGit2.Consts.SORT_TIME, most ancient first) or to sort backwards in time       (LibGit2.Consts.SORT_REVERSE, most recent first).     * rev: Whether to reverse the sorted order (for instance, if topological sorting is used).\n\nExamples\n\ncnt = LibGit2.with(LibGit2.GitRevWalker(repo)) do walker\n    count((oid, repo)->(oid == commit_oid1), walker, oid=commit_oid1, by=LibGit2.Consts.SORT_TIME)\nend\n\ncount finds the number of commits along the walk with a certain GitHash commit_oid1, starting the walk from that commit and moving forwards in time from it. Since the GitHash is unique to a commit, cnt will be 1.\n\n\n\n"
+    "text": "LibGit2.count(f::Function, walker::GitRevWalker; oid::GitHash=GitHash(), by::Cint=Consts.SORT_NONE, rev::Bool=false)\n\nUsing the GitRevWalker walker to \"walk\" over every commit in the repository's history, find the number of commits which return true when f is applied to them. The keyword arguments are:     * oid: The GitHash of the commit to begin the walk from. The default is to use       push_head! and therefore the HEAD commit and all its ancestors.     * by: The sorting method. The default is not to sort. Other options are to sort by       topology (LibGit2.Consts.SORT_TOPOLOGICAL), to sort forwards in time       (LibGit2.Consts.SORT_TIME, most ancient first) or to sort backwards in time       (LibGit2.Consts.SORT_REVERSE, most recent first).     * rev: Whether to reverse the sorted order (for instance, if topological sorting is used).\n\nExamples\n\ncnt = LibGit2.with(LibGit2.GitRevWalker(repo)) do walker\n    count((oid, repo)->(oid == commit_oid1), walker, oid=commit_oid1, by=LibGit2.Consts.SORT_TIME)\nend\n\ncount finds the number of commits along the walk with a certain GitHash commit_oid1, starting the walk from that commit and moving forwards in time from it. Since the GitHash is unique to a commit, cnt will be 1.\n\n\n\ncount(p, itr) -> Integer\ncount(itr) -> Integer\n\nCount the number of elements in itr for which predicate p returns true. If p is omitted, counts the number of true elements in itr (which should be a collection of boolean values).\n\njulia> count(i->(4<=i<=6), [2,3,4,5,6])\n3\n\njulia> count([true, false, true, true])\n3\n\n\n\n"
 },
 
 {
@@ -7261,7 +7261,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Collections and Data Structures",
     "title": "Base.map",
     "category": "Function",
-    "text": "map(f, c...) -> collection\n\nTransform collection c by applying f to each element. For multiple collection arguments, apply f elementwise.\n\nSee also: mapslices\n\nExamples\n\njulia> map(x -> x * 2, [1, 2, 3])\n3-element Array{Int64,1}:\n 2\n 4\n 6\n\njulia> map(+, [1, 2, 3], [10, 20, 30])\n3-element Array{Int64,1}:\n 11\n 22\n 33\n\n\n\nLibGit2.map(f::Function, walker::GitRevWalker; oid::GitHash=GitHash(), range::AbstractString=\"\", by::Cint=Consts.SORT_NONE, rev::Bool=false)\n\nUsing the GitRevWalker walker to \"walk\" over every commit in the repository's history, apply f to each commit in the walk. The keyword arguments are:     * oid: The GitHash of the commit to begin the walk from. The default is to use       push_head! and therefore the HEAD commit and all its ancestors.     * range: A range of GitHashs in the format oid1..oid2. f will be       applied to all commits between the two.     * by: The sorting method. The default is not to sort. Other options are to sort by       topology (LibGit2.Consts.SORT_TOPOLOGICAL), to sort forwards in time       (LibGit2.Consts.SORT_TIME, most ancient first) or to sort backwards in time       (LibGit2.Consts.SORT_REVERSE, most recent first).     * rev: Whether to reverse the sorted order (for instance, if topological sorting is used).\n\nExamples\n\noids = LibGit2.with(LibGit2.GitRevWalker(repo)) do walker\n    LibGit2.map((oid, repo)->string(oid), walker, by=LibGit2.Consts.SORT_TIME)\nend\n\nHere, map visits each commit using the GitRevWalker and finds its GitHash.\n\n\n\n"
+    "text": "LibGit2.map(f::Function, walker::GitRevWalker; oid::GitHash=GitHash(), range::AbstractString=\"\", by::Cint=Consts.SORT_NONE, rev::Bool=false)\n\nUsing the GitRevWalker walker to \"walk\" over every commit in the repository's history, apply f to each commit in the walk. The keyword arguments are:     * oid: The GitHash of the commit to begin the walk from. The default is to use       push_head! and therefore the HEAD commit and all its ancestors.     * range: A range of GitHashs in the format oid1..oid2. f will be       applied to all commits between the two.     * by: The sorting method. The default is not to sort. Other options are to sort by       topology (LibGit2.Consts.SORT_TOPOLOGICAL), to sort forwards in time       (LibGit2.Consts.SORT_TIME, most ancient first) or to sort backwards in time       (LibGit2.Consts.SORT_REVERSE, most recent first).     * rev: Whether to reverse the sorted order (for instance, if topological sorting is used).\n\nExamples\n\noids = LibGit2.with(LibGit2.GitRevWalker(repo)) do walker\n    LibGit2.map((oid, repo)->string(oid), walker, by=LibGit2.Consts.SORT_TIME)\nend\n\nHere, map visits each commit using the GitRevWalker and finds its GitHash.\n\n\n\nmap(f, c...) -> collection\n\nTransform collection c by applying f to each element. For multiple collection arguments, apply f elementwise.\n\nSee also: mapslices\n\nExamples\n\njulia> map(x -> x * 2, [1, 2, 3])\n3-element Array{Int64,1}:\n 2\n 4\n 6\n\njulia> map(+, [1, 2, 3], [10, 20, 30])\n3-element Array{Int64,1}:\n 11\n 22\n 33\n\n\n\n"
 },
 
 {
@@ -7449,6 +7449,14 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
+    "location": "stdlib/collections.html#Base.ImmutableDict",
+    "page": "Collections and Data Structures",
+    "title": "Base.ImmutableDict",
+    "category": "Type",
+    "text": "ImmutableDict\n\nImmutableDict is a Dictionary implemented as an immutable linked list, which is optimal for small dictionaries that are constructed over many individual insertions Note that it is not possible to remove a value, although it can be partially overridden and hidden by inserting a new value with the same key\n\nImmutableDict(KV::Pair)\n\nCreate a new entry in the Immutable Dictionary for the key => value pair\n\nuse (key => value) in dict to see if this particular combination is in the properties set\nuse get(dict, key, default) to retrieve the most recent value for a particular key\n\n\n\n"
+},
+
+{
     "location": "stdlib/collections.html#Base.haskey",
     "page": "Collections and Data Structures",
     "title": "Base.haskey",
@@ -7533,7 +7541,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Collections and Data Structures",
     "title": "Base.pairs",
     "category": "Function",
-    "text": "pairs(IndexLinear(), A)\npairs(IndexCartesian(), A)\npairs(IndexStyle(A), A)\n\nAn iterator that accesses each element of the array A, returning i => x, where i is the index for the element and x = A[i]. Identical to pairs(A), except that the style of index can be selected. Also similar to enumerate(A), except i will be a valid index for A, while enumerate always counts from 1 regardless of the indices of A.\n\nSpecifying IndexLinear() ensures that i will be an integer; specifying IndexCartesian() ensures that i will be a CartesianIndex; specifying IndexStyle(A) chooses whichever has been defined as the native indexing style for array A.\n\nExamples\n\njulia> A = [\"a\" \"d\"; \"b\" \"e\"; \"c\" \"f\"];\n\njulia> for (index, value) in pairs(IndexStyle(A), A)\n           println(\"$index $value\")\n       end\n1 a\n2 b\n3 c\n4 d\n5 e\n6 f\n\njulia> S = view(A, 1:2, :);\n\njulia> for (index, value) in pairs(IndexStyle(S), S)\n           println(\"$index $value\")\n       end\nCartesianIndex(1, 1) a\nCartesianIndex(2, 1) b\nCartesianIndex(1, 2) d\nCartesianIndex(2, 2) e\n\nSee also: IndexStyle, axes.\n\n\n\npairs(collection)\n\nReturn an iterator over key => value pairs for any collection that maps a set of keys to a set of values. This includes arrays, where the keys are the array indices.\n\n\n\n"
+    "text": "pairs(IndexLinear(), A)\npairs(IndexCartesian(), A)\npairs(IndexStyle(A), A)\n\nAn iterator that accesses each element of the array A, returning i => x, where i is the index for the element and x = A[i]. Identical to pairs(A), except that the style of index can be selected. Also similar to enumerate(A), except i will be a valid index for A, while enumerate always counts from 1 regardless of the indices of A.\n\nSpecifying IndexLinear() ensures that i will be an integer; specifying IndexCartesian() ensures that i will be a CartesianIndex; specifying IndexStyle(A) chooses whichever has been defined as the native indexing style for array A.\n\nMutation of the bounds of the underlying array will invalidate this iterator.\n\nExamples\n\njulia> A = [\"a\" \"d\"; \"b\" \"e\"; \"c\" \"f\"];\n\njulia> for (index, value) in pairs(IndexStyle(A), A)\n           println(\"$index $value\")\n       end\n1 a\n2 b\n3 c\n4 d\n5 e\n6 f\n\njulia> S = view(A, 1:2, :);\n\njulia> for (index, value) in pairs(IndexStyle(S), S)\n           println(\"$index $value\")\n       end\nCartesianIndex(1, 1) a\nCartesianIndex(2, 1) b\nCartesianIndex(1, 2) d\nCartesianIndex(2, 2) e\n\nSee also: IndexStyle, axes.\n\n\n\npairs(collection)\n\nReturn an iterator over key => value pairs for any collection that maps a set of keys to a set of values. This includes arrays, where the keys are the array indices.\n\n\n\n"
 },
 
 {
@@ -7589,7 +7597,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Collections and Data Structures",
     "title": "Dictionaries",
     "category": "section",
-    "text": "Dict is the standard dictionary. Its implementation uses hash as the hashing function for the key, and isequal to determine equality. Define these two functions for custom types to override how they are stored in a hash table.ObjectIdDict is a special hash table where the keys are always object identities.WeakKeyDict is a hash table implementation where the keys are weak references to objects, and thus may be garbage collected even when referenced in a hash table.Dicts can be created by passing pair objects constructed with => to a Dict constructor: Dict(\"A\"=>1, \"B\"=>2). This call will attempt to infer type information from the keys and values (i.e. this example creates a Dict{String, Int64}). To explicitly specify types use the syntax Dict{KeyType,ValueType}(...). For example, Dict{String,Int32}(\"A\"=>1, \"B\"=>2).Dictionaries may also be created with generators. For example, Dict(i => f(i) for i = 1:10).Given a dictionary D, the syntax D[x] returns the value of key x (if it exists) or throws an error, and D[x] = y stores the key-value pair x => y in D (replacing any existing value for the key x).  Multiple arguments to D[...] are converted to tuples; for example, the syntax D[x,y]  is equivalent to D[(x,y)], i.e. it refers to the value keyed by the tuple (x,y).Base.Dict\nBase.ObjectIdDict\nBase.WeakKeyDict\nBase.haskey\nBase.get(::Any, ::Any, ::Any)\nBase.get\nBase.get!(::Any, ::Any, ::Any)\nBase.get!(::Function, ::Any, ::Any)\nBase.getkey\nBase.delete!\nBase.pop!(::Any, ::Any, ::Any)\nBase.keys\nBase.values\nBase.pairs\nBase.merge\nBase.merge!(::Associative, ::Associative...)\nBase.merge!(::Function, ::Associative, ::Associative...)\nBase.sizehint!\nBase.keytype\nBase.valtypeFully implemented by:ObjectIdDict\nDict\nWeakKeyDictPartially implemented by:BitSet\nSet\nEnvDict\nArray\nBitArray"
+    "text": "Dict is the standard dictionary. Its implementation uses hash as the hashing function for the key, and isequal to determine equality. Define these two functions for custom types to override how they are stored in a hash table.ObjectIdDict is a special hash table where the keys are always object identities.WeakKeyDict is a hash table implementation where the keys are weak references to objects, and thus may be garbage collected even when referenced in a hash table.Dicts can be created by passing pair objects constructed with => to a Dict constructor: Dict(\"A\"=>1, \"B\"=>2). This call will attempt to infer type information from the keys and values (i.e. this example creates a Dict{String, Int64}). To explicitly specify types use the syntax Dict{KeyType,ValueType}(...). For example, Dict{String,Int32}(\"A\"=>1, \"B\"=>2).Dictionaries may also be created with generators. For example, Dict(i => f(i) for i = 1:10).Given a dictionary D, the syntax D[x] returns the value of key x (if it exists) or throws an error, and D[x] = y stores the key-value pair x => y in D (replacing any existing value for the key x).  Multiple arguments to D[...] are converted to tuples; for example, the syntax D[x,y]  is equivalent to D[(x,y)], i.e. it refers to the value keyed by the tuple (x,y).Base.Dict\nBase.ObjectIdDict\nBase.WeakKeyDict\nBase.ImmutableDict\nBase.haskey\nBase.get(::Any, ::Any, ::Any)\nBase.get\nBase.get!(::Any, ::Any, ::Any)\nBase.get!(::Function, ::Any, ::Any)\nBase.getkey\nBase.delete!\nBase.pop!(::Any, ::Any, ::Any)\nBase.keys\nBase.values\nBase.pairs\nBase.merge\nBase.merge!(::Associative, ::Associative...)\nBase.merge!(::Function, ::Associative, ::Associative...)\nBase.sizehint!\nBase.keytype\nBase.valtypeFully implemented by:ObjectIdDict\nDict\nWeakKeyDictPartially implemented by:BitSet\nSet\nEnvDict\nArray\nBitArray\nImmutableDict\nIterators.IndexValue"
 },
 
 {
@@ -7801,11 +7809,19 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
+    "location": "stdlib/collections.html#Base.Iterators.IndexValue",
+    "page": "Collections and Data Structures",
+    "title": "Base.Iterators.IndexValue",
+    "category": "Type",
+    "text": "Iterators.IndexValue(values, keys) <: AbstractDict{eltype(keys), eltype(values)}\n\nTransforms an indexable container into an Dictionary-view of the same data. Modifying the key-space of the underlying data may invalidate this object.\n\n\n\n"
+},
+
+{
     "location": "stdlib/collections.html#Utility-Collections-1",
     "page": "Collections and Data Structures",
     "title": "Utility Collections",
     "category": "section",
-    "text": "Base.Pair"
+    "text": "Base.Pair\nIterators.IndexValue"
 },
 
 {
@@ -9037,7 +9053,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Mathematics",
     "title": "Base.conj",
     "category": "Function",
-    "text": "conj(v::RowVector)\n\nReturn a ConjArray lazy view of the input, where each element is conjugated.\n\nExamples\n\njulia> v = [1+im, 1-im].'\n1×2 RowVector{Complex{Int64},Array{Complex{Int64},1}}:\n 1+1im  1-1im\n\njulia> conj(v)\n1×2 RowVector{Complex{Int64},ConjArray{Complex{Int64},1,Array{Complex{Int64},1}}}:\n 1-1im  1+1im\n\n\n\nconj(z)\n\nCompute the complex conjugate of a complex number z.\n\nExamples\n\njulia> conj(1 + 3im)\n1 - 3im\n\n\n\n"
+    "text": "conj(v::RowVector)\n\nReturn a ConjArray lazy view of the input, where each element is conjugated.\n\nExamples\n\njulia> v = RowVector([1+im, 1-im])\n1×2 RowVector{Complex{Int64},Array{Complex{Int64},1}}:\n 1+1im  1-1im\n\njulia> conj(v)\n1×2 RowVector{Complex{Int64},ConjArray{Complex{Int64},1,Array{Complex{Int64},1}}}:\n 1-1im  1+1im\n\n\n\nconj(z)\n\nCompute the complex conjugate of a complex number z.\n\nExamples\n\njulia> conj(1 + 3im)\n1 - 3im\n\n\n\n"
 },
 
 {
@@ -10277,7 +10293,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Numbers",
     "title": "Base.Random.randjump",
     "category": "Function",
-    "text": "randjump(r::MersenneTwister, jumps::Integer,\n         [jumppoly::AbstractString=dSFMT.JPOLY1e21]) -> Vector{MersenneTwister}\n\nCreate an array of the size jumps of initialized MersenneTwister RNG objects. The first RNG object given as a parameter and following MersenneTwister RNGs in the array are initialized such that a state of the RNG object in the array would be moved forward (without generating numbers) from a previous RNG object array element on a particular number of steps encoded by the jump polynomial jumppoly.\n\nDefault jump polynomial moves forward MersenneTwister RNG state by 10^20 steps.\n\n\n\n"
+    "text": "randjump(r::MersenneTwister, jumps, steps=10^20) -> Vector{MersenneTwister}\n\nCreate an array of size jumps of initialized MersenneTwister RNG objects. The first RNG object given as a parameter and following MersenneTwister RNGs in the array are initialized such that a state of the RNG object in the array would be moved forward (without generating numbers) from a previous RNG object array element by steps steps. One such step corresponds to the generation of two Float64 numbers.\n\n\n\nrandjump(r::MersenneTwister, jumps, jumppoly::AbstractString) -> Vector{MersenneTwister}\n\nSimilar to randjump(r, jumps, steps) where the number of steps is determined by a jump polynomial jumppoly with coefficients in GF(2) (the field with two elements) encoded as an hexadecimal string.\n\n\n\n"
 },
 
 {
@@ -10605,7 +10621,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Strings",
     "title": "Base.split",
     "category": "Function",
-    "text": "split(s::AbstractString, [chars]; limit::Integer=0, keep::Bool=true)\n\nReturn an array of substrings by splitting the given string on occurrences of the given character delimiters, which may be specified in any of the formats allowed by search's second argument (i.e. a single character, collection of characters, string, or regular expression). If chars is omitted, it defaults to the set of all space characters, and keep is taken to be false. The two keyword arguments are optional: they are a maximum size for the result and a flag determining whether empty fields should be kept in the result.\n\nExamples\n\njulia> a = \"Ma.rch\"\n\"Ma.rch\"\n\njulia> split(a,\".\")\n2-element Array{SubString{String},1}:\n \"Ma\"\n \"rch\"\n\n\n\nsplit(ce::LibGit2.ConfigEntry) -> Tuple{String,String,String,String}\n\nBreak the ConfigEntry up to the following pieces: section, subsection, name, and value.\n\nExamples\n\nGiven the git configuration file containing:\n\n[credential \"https://example.com\"]\n    username = me\n\nThe ConfigEntry would look like the following:\n\njulia> entry\nConfigEntry(\"credential.https://example.com.username\", \"me\")\n\njulia> split(entry)\n(\"credential\", \"https://example.com\", \"username\", \"me\")\n\nRefer to the git config syntax documenation for more details.\n\n\n\n"
+    "text": "split(ce::LibGit2.ConfigEntry) -> Tuple{String,String,String,String}\n\nBreak the ConfigEntry up to the following pieces: section, subsection, name, and value.\n\nExamples\n\nGiven the git configuration file containing:\n\n[credential \"https://example.com\"]\n    username = me\n\nThe ConfigEntry would look like the following:\n\njulia> entry\nConfigEntry(\"credential.https://example.com.username\", \"me\")\n\njulia> split(entry)\n(\"credential\", \"https://example.com\", \"username\", \"me\")\n\nRefer to the git config syntax documenation for more details.\n\n\n\nsplit(s::AbstractString, [chars]; limit::Integer=0, keep::Bool=true)\n\nReturn an array of substrings by splitting the given string on occurrences of the given character delimiters, which may be specified in any of the formats allowed by search's second argument (i.e. a single character, collection of characters, string, or regular expression). If chars is omitted, it defaults to the set of all space characters, and keep is taken to be false. The two keyword arguments are optional: they are a maximum size for the result and a flag determining whether empty fields should be kept in the result.\n\nExamples\n\njulia> a = \"Ma.rch\"\n\"Ma.rch\"\n\njulia> split(a,\".\")\n2-element Array{SubString{String},1}:\n \"Ma\"\n \"rch\"\n\n\n\n"
 },
 
 {
@@ -11317,7 +11333,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Arrays",
     "title": "Base.IteratorsMD.LinearIndices",
     "category": "Type",
-    "text": "LinearIndices(inds::CartesianIndices) -> R\nLinearIndices(sz::Dims) -> R\nLinearIndices(istart:istop, jstart:jstop, ...) -> R\n\nDefine a mapping between cartesian indices and the corresponding linear index into a CartesianIndices\n\nExample\n\nThe main purpose of this type is intuitive conversion from cartesian to linear indexing:\n\njulia> linear = LinearIndices(1:3,1:2)\nLinearIndices{2,Tuple{UnitRange{Int64},UnitRange{Int64}}} with indices 1:3×1:2:\n  1  4\n  2  5\n  3  6\n\njulia> linear[1,2]\n4\n\n\n\n"
+    "text": "LinearIndices(inds::CartesianIndices) -> R\nLinearIndices(sz::Dims) -> R\nLinearIndices(istart:istop, jstart:jstop, ...) -> R\n\nDefine a mapping between cartesian indices and the corresponding linear index into a CartesianIndices.\n\nExample\n\nThe main purpose of this type is intuitive conversion from cartesian to linear indexing:\n\njulia> linear = LinearIndices(1:3,1:2)\nLinearIndices{2,Tuple{UnitRange{Int64},UnitRange{Int64}}} with indices 1:3×1:2:\n  1  4\n  2  5\n  3  6\n\njulia> linear[1,2]\n4\n\n\n\n"
 },
 
 {
@@ -11373,7 +11389,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Arrays",
     "title": "Base.@views",
     "category": "Macro",
-    "text": "@views expression\n\nConvert every array-slicing operation in the given expression (which may be a begin/end block, loop, function, etc.) to return a view.   Scalar indices, non-array types, and explicit getindex calls (as opposed to array[...]) are unaffected.\n\nNote that the @views macro only affects array[...] expressions that appear explicitly in the given expression, not array slicing that occurs in functions called by that code.\n\n\n\n"
+    "text": "@views expression\n\nConvert every array-slicing operation in the given expression (which may be a begin/end block, loop, function, etc.) to return a view. Scalar indices, non-array types, and explicit getindex calls (as opposed to array[...]) are unaffected.\n\nnote: Note\nThe @views macro only affects array[...] expressions that appear explicitly in the given expression, not array slicing that occurs in functions called by that code.\n\nExamples\n\njulia> A = zeros(3, 3);\n\njulia> @views for row in 1:3\n           b = A[row, :]\n           b[:] = row\n       end\n\njulia> A\n3×3 Array{Float64,2}:\n 1.0  1.0  1.0\n 2.0  2.0  2.0\n 3.0  3.0  3.0\n\n\n\n"
 },
 
 {
@@ -11653,7 +11669,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Arrays",
     "title": "Base.accumulate",
     "category": "Method",
-    "text": "accumulate(op, A, dim::Integer)\n\nCumulative operation op along the dimension dim. See also accumulate! to use a preallocated output array, both for performance and to control the precision of the output (e.g. to avoid overflow). For common operations there are specialized variants of accumulate, see: cumsum, cumprod\n\njulia> accumulate(+, fill(1, 3, 3), 1)\n3×3 Array{Int64,2}:\n 1  1  1\n 2  2  2\n 3  3  3\n\njulia> accumulate(+, fill(1, 3, 3), 2)\n3×3 Array{Int64,2}:\n 1  2  3\n 1  2  3\n 1  2  3\n\n\n\n"
+    "text": "accumulate(op, A, dim::Integer)\n\nCumulative operation op along the dimension dim. See also accumulate! to use a preallocated output array, both for performance and to control the precision of the output (e.g. to avoid overflow). For common operations there are specialized variants of accumulate, see: cumsum, cumprod\n\nExamples\n\njulia> accumulate(+, fill(1, 3, 3), 1)\n3×3 Array{Int64,2}:\n 1  1  1\n 2  2  2\n 3  3  3\n\njulia> accumulate(+, fill(1, 3, 3), 2)\n3×3 Array{Int64,2}:\n 1  2  3\n 1  2  3\n 1  2  3\n\n\n\n"
 },
 
 {
@@ -11661,7 +11677,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Arrays",
     "title": "Base.accumulate!",
     "category": "Function",
-    "text": "accumulate!(op, B, A, dim::Integer)\n\nCumulative operation op on A along the dimension dim, storing the result in B. See also accumulate.\n\n\n\naccumulate!(op, y, x::AbstractVector)\n\nCumulative operation op on a vector x, storing the result in y. See also accumulate.\n\n\n\n"
+    "text": "accumulate!(op, B, A, dim::Integer)\n\nCumulative operation op on A along the dimension dim, storing the result in B. See also accumulate.\n\nExamples\n\njulia> A = [1 2; 3 4];\n\njulia> B = [0 0; 0 0];\n\njulia> accumulate!(-, B, A, 1);\n\njulia> B\n2×2 Array{Int64,2}:\n  1   2\n -2  -2\n\njulia> accumulate!(-, B, A, 2);\n\njulia> B\n2×2 Array{Int64,2}:\n 1  -1\n 3  -1\n\n\n\naccumulate!(op, y, x::AbstractVector)\n\nCumulative operation op on a vector x, storing the result in y. See also accumulate.\n\nExamples\n\n``jldoctest julia> x = SparseVector(7, [1, 3, 5], [2., 4., 5.]);\n\njulia> y = zeros(7);\n\njulia> accumulate!(+, y, x);\n\njulia> y 7-element Array{Float64,1}:   2.0   2.0   6.0   6.0  11.0  11.0  11.0 ```\n\n\n\n"
 },
 
 {
@@ -11669,7 +11685,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Arrays",
     "title": "Base.cumprod",
     "category": "Function",
-    "text": "cumprod(A, dim::Integer)\n\nCumulative product along the dimension dim. See also cumprod! to use a preallocated output array, both for performance and to control the precision of the output (e.g. to avoid overflow).\n\njulia> a = [1 2 3; 4 5 6]\n2×3 Array{Int64,2}:\n 1  2  3\n 4  5  6\n\njulia> cumprod(a,1)\n2×3 Array{Int64,2}:\n 1   2   3\n 4  10  18\n\njulia> cumprod(a,2)\n2×3 Array{Int64,2}:\n 1   2    6\n 4  20  120\n\n\n\ncumprod(x::AbstractVector)\n\nCumulative product of a vector. See also cumprod! to use a preallocated output array, both for performance and to control the precision of the output (e.g. to avoid overflow).\n\njulia> cumprod(fill(1//2, 3))\n3-element Array{Rational{Int64},1}:\n 1//2\n 1//4\n 1//8\n\njulia> cumprod([fill(1//3, 2, 2) for i in 1:3])\n3-element Array{Array{Rational{Int64},2},1}:\n Rational{Int64}[1//3 1//3; 1//3 1//3]\n Rational{Int64}[2//9 2//9; 2//9 2//9]\n Rational{Int64}[4//27 4//27; 4//27 4//27]\n\n\n\n"
+    "text": "cumprod(A, dim::Integer)\n\nCumulative product along the dimension dim. See also cumprod! to use a preallocated output array, both for performance and to control the precision of the output (e.g. to avoid overflow).\n\nExamples\n\njulia> a = [1 2 3; 4 5 6]\n2×3 Array{Int64,2}:\n 1  2  3\n 4  5  6\n\njulia> cumprod(a,1)\n2×3 Array{Int64,2}:\n 1   2   3\n 4  10  18\n\njulia> cumprod(a,2)\n2×3 Array{Int64,2}:\n 1   2    6\n 4  20  120\n\n\n\ncumprod(x::AbstractVector)\n\nCumulative product of a vector. See also cumprod! to use a preallocated output array, both for performance and to control the precision of the output (e.g. to avoid overflow).\n\nExamples\n\njulia> cumprod(fill(1//2, 3))\n3-element Array{Rational{Int64},1}:\n 1//2\n 1//4\n 1//8\n\njulia> cumprod([fill(1//3, 2, 2) for i in 1:3])\n3-element Array{Array{Rational{Int64},2},1}:\n Rational{Int64}[1//3 1//3; 1//3 1//3]\n Rational{Int64}[2//9 2//9; 2//9 2//9]\n Rational{Int64}[4//27 4//27; 4//27 4//27]\n\n\n\n"
 },
 
 {
@@ -11685,7 +11701,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Arrays",
     "title": "Base.cumsum",
     "category": "Function",
-    "text": "cumsum(A, dim::Integer)\n\nCumulative sum along the dimension dim. See also cumsum! to use a preallocated output array, both for performance and to control the precision of the output (e.g. to avoid overflow).\n\njulia> a = [1 2 3; 4 5 6]\n2×3 Array{Int64,2}:\n 1  2  3\n 4  5  6\n\njulia> cumsum(a,1)\n2×3 Array{Int64,2}:\n 1  2  3\n 5  7  9\n\njulia> cumsum(a,2)\n2×3 Array{Int64,2}:\n 1  3   6\n 4  9  15\n\n\n\ncumsum(x::AbstractVector)\n\nCumulative sum a vector. See also cumsum! to use a preallocated output array, both for performance and to control the precision of the output (e.g. to avoid overflow).\n\njulia> cumsum([1, 1, 1])\n3-element Array{Int64,1}:\n 1\n 2\n 3\n\njulia> cumsum([fill(1, 2) for i in 1:3])\n3-element Array{Array{Int64,1},1}:\n [1, 1]\n [2, 2]\n [3, 3]\n\n\n\n"
+    "text": "cumsum(A, dim::Integer)\n\nCumulative sum along the dimension dim. See also cumsum! to use a preallocated output array, both for performance and to control the precision of the output (e.g. to avoid overflow).\n\nExamples\n\njulia> a = [1 2 3; 4 5 6]\n2×3 Array{Int64,2}:\n 1  2  3\n 4  5  6\n\njulia> cumsum(a,1)\n2×3 Array{Int64,2}:\n 1  2  3\n 5  7  9\n\njulia> cumsum(a,2)\n2×3 Array{Int64,2}:\n 1  3   6\n 4  9  15\n\n\n\ncumsum(x::AbstractVector)\n\nCumulative sum a vector. See also cumsum! to use a preallocated output array, both for performance and to control the precision of the output (e.g. to avoid overflow).\n\nExamples\n\njulia> cumsum([1, 1, 1])\n3-element Array{Int64,1}:\n 1\n 2\n 3\n\njulia> cumsum([fill(1, 2) for i in 1:3])\n3-element Array{Array{Int64,1},1}:\n [1, 1]\n [2, 2]\n [3, 3]\n\n\n\n"
 },
 
 {
@@ -12277,7 +12293,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Distributed Computing",
     "title": "Distributed.addprocs",
     "category": "Function",
-    "text": "addprocs(manager::ClusterManager; kwargs...) -> List of process identifiers\n\nLaunches worker processes via the specified cluster manager.\n\nFor example, Beowulf clusters are supported via a custom cluster manager implemented in the package ClusterManagers.jl.\n\nThe number of seconds a newly launched worker waits for connection establishment from the master can be specified via variable JULIA_WORKER_TIMEOUT in the worker process's environment. Relevant only when using TCP/IP as transport.\n\n\n\naddprocs(machines; tunnel=false, sshflags=``, max_parallel=10, kwargs...) -> List of process identifiers\n\nAdd processes on remote machines via SSH. Requires julia to be installed in the same location on each node, or to be available via a shared file system.\n\nmachines is a vector of machine specifications. Workers are started for each specification.\n\nA machine specification is either a string machine_spec or a tuple - (machine_spec, count).\n\nmachine_spec is a string of the form [user@]host[:port] [bind_addr[:port]]. user defaults to current user, port to the standard ssh port. If [bind_addr[:port]] is specified, other workers will connect to this worker at the specified bind_addr and port.\n\ncount is the number of workers to be launched on the specified host. If specified as :auto it will launch as many workers as the number of cores on the specific host.\n\nKeyword arguments:\n\ntunnel: if true then SSH tunneling will be used to connect to the worker from the master process. Default is false.\nsshflags: specifies additional ssh options, e.g. sshflags=`-i /home/foo/bar.pem`\nmax_parallel: specifies the maximum number of workers connected to in parallel at a host. Defaults to 10.\ndir: specifies the working directory on the workers. Defaults to the host's current directory (as found by pwd())\nenable_threaded_blas: if true then  BLAS will run on multiple threads in added processes. Default is false.\nexename: name of the julia executable. Defaults to \"$(Sys.BINDIR)/julia\" or \"$(Sys.BINDIR)/julia-debug\" as the case may be.\nexeflags: additional flags passed to the worker processes.\ntopology: Specifies how the workers connect to each other. Sending a message between unconnected workers results in an error.\ntopology=:all_to_all: All processes are connected to each other. The default.\ntopology=:master_slave: Only the driver process, i.e. pid 1 connects to the workers. The workers do not connect to each other.\ntopology=:custom: The launch method of the cluster manager specifies the connection topology via fields ident and connect_idents in WorkerConfig. A worker with a cluster manager identity ident will connect to all workers specified in connect_idents.\nlazy: Applicable only with topology=:all_to_all. If true, worker-worker connections are setup lazily, i.e. they are setup at the first instance of a remote call between workers. Default is true.\n\nEnvironment variables :\n\nIf the master process fails to establish a connection with a newly launched worker within 60.0 seconds, the worker treats it as a fatal situation and terminates. This timeout can be controlled via environment variable JULIA_WORKER_TIMEOUT. The value of JULIA_WORKER_TIMEOUT on the master process specifies the number of seconds a newly launched worker waits for connection establishment.\n\n\n\naddprocs(; kwargs...) -> List of process identifiers\n\nEquivalent to addprocs(Sys.CPU_CORES; kwargs...)\n\nNote that workers do not run a .juliarc.jl startup script, nor do they synchronize their global state (such as global variables, new method definitions, and loaded modules) with any of the other running processes.\n\n\n\naddprocs(np::Integer; restrict=true, kwargs...) -> List of process identifiers\n\nLaunches workers using the in-built LocalManager which only launches workers on the local host. This can be used to take advantage of multiple cores. addprocs(4) will add 4 processes on the local machine. If restrict is true, binding is restricted to 127.0.0.1. Keyword args dir, exename, exeflags, topology, lazy and enable_threaded_blas have the same effect as documented for addprocs(machines).\n\n\n\n"
+    "text": "addprocs(manager::ClusterManager; kwargs...) -> List of process identifiers\n\nLaunches worker processes via the specified cluster manager.\n\nFor example, Beowulf clusters are supported via a custom cluster manager implemented in the package ClusterManagers.jl.\n\nThe number of seconds a newly launched worker waits for connection establishment from the master can be specified via variable JULIA_WORKER_TIMEOUT in the worker process's environment. Relevant only when using TCP/IP as transport.\n\n\n\naddprocs(machines; tunnel=false, sshflags=``, max_parallel=10, kwargs...) -> List of process identifiers\n\nAdd processes on remote machines via SSH. Requires julia to be installed in the same location on each node, or to be available via a shared file system.\n\nmachines is a vector of machine specifications. Workers are started for each specification.\n\nA machine specification is either a string machine_spec or a tuple - (machine_spec, count).\n\nmachine_spec is a string of the form [user@]host[:port] [bind_addr[:port]]. user defaults to current user, port to the standard ssh port. If [bind_addr[:port]] is specified, other workers will connect to this worker at the specified bind_addr and port.\n\ncount is the number of workers to be launched on the specified host. If specified as :auto it will launch as many workers as the number of cores on the specific host.\n\nKeyword arguments:\n\ntunnel: if true then SSH tunneling will be used to connect to the worker from the master process. Default is false.\nsshflags: specifies additional ssh options, e.g. sshflags=`-i /home/foo/bar.pem`\nmax_parallel: specifies the maximum number of workers connected to in parallel at a host. Defaults to 10.\ndir: specifies the working directory on the workers. Defaults to the host's current directory (as found by pwd())\nenable_threaded_blas: if true then  BLAS will run on multiple threads in added processes. Default is false.\nexename: name of the julia executable. Defaults to \"$(Sys.BINDIR)/julia\" or \"$(Sys.BINDIR)/julia-debug\" as the case may be.\nexeflags: additional flags passed to the worker processes.\ntopology: Specifies how the workers connect to each other. Sending a message between unconnected workers results in an error.\ntopology=:all_to_all: All processes are connected to each other. The default.\ntopology=:master_worker: Only the driver process, i.e. pid 1 connects to the workers. The workers do not connect to each other.\ntopology=:custom: The launch method of the cluster manager specifies the connection topology via fields ident and connect_idents in WorkerConfig. A worker with a cluster manager identity ident will connect to all workers specified in connect_idents.\nlazy: Applicable only with topology=:all_to_all. If true, worker-worker connections are setup lazily, i.e. they are setup at the first instance of a remote call between workers. Default is true.\n\nEnvironment variables :\n\nIf the master process fails to establish a connection with a newly launched worker within 60.0 seconds, the worker treats it as a fatal situation and terminates. This timeout can be controlled via environment variable JULIA_WORKER_TIMEOUT. The value of JULIA_WORKER_TIMEOUT on the master process specifies the number of seconds a newly launched worker waits for connection establishment.\n\n\n\naddprocs(; kwargs...) -> List of process identifiers\n\nEquivalent to addprocs(Sys.CPU_CORES; kwargs...)\n\nNote that workers do not run a .juliarc.jl startup script, nor do they synchronize their global state (such as global variables, new method definitions, and loaded modules) with any of the other running processes.\n\n\n\naddprocs(np::Integer; restrict=true, kwargs...) -> List of process identifiers\n\nLaunches workers using the in-built LocalManager which only launches workers on the local host. This can be used to take advantage of multiple cores. addprocs(4) will add 4 processes on the local machine. If restrict is true, binding is restricted to 127.0.0.1. Keyword args dir, exename, exeflags, topology, lazy and enable_threaded_blas have the same effect as documented for addprocs(machines).\n\n\n\n"
 },
 
 {
@@ -13085,7 +13101,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Linear Algebra",
     "title": "Base.LinAlg.Symmetric",
     "category": "Type",
-    "text": "Symmetric(A, uplo=:U)\n\nConstruct a Symmetric view of the upper (if uplo = :U) or lower (if uplo = :L) triangle of the matrix A.\n\nExamples\n\njulia> A = [1 0 2 0 3; 0 4 0 5 0; 6 0 7 0 8; 0 9 0 1 0; 2 0 3 0 4]\n5×5 Array{Int64,2}:\n 1  0  2  0  3\n 0  4  0  5  0\n 6  0  7  0  8\n 0  9  0  1  0\n 2  0  3  0  4\n\njulia> Supper = Symmetric(A)\n5×5 Symmetric{Int64,Array{Int64,2}}:\n 1  0  2  0  3\n 0  4  0  5  0\n 2  0  7  0  8\n 0  5  0  1  0\n 3  0  8  0  4\n\njulia> Slower = Symmetric(A, :L)\n5×5 Symmetric{Int64,Array{Int64,2}}:\n 1  0  6  0  2\n 0  4  0  9  0\n 6  0  7  0  3\n 0  9  0  1  0\n 2  0  3  0  4\n\nNote that Supper will not be equal to Slower unless A is itself symmetric (e.g. if A == A.').\n\n\n\n"
+    "text": "Symmetric(A, uplo=:U)\n\nConstruct a Symmetric view of the upper (if uplo = :U) or lower (if uplo = :L) triangle of the matrix A.\n\nExamples\n\njulia> A = [1 0 2 0 3; 0 4 0 5 0; 6 0 7 0 8; 0 9 0 1 0; 2 0 3 0 4]\n5×5 Array{Int64,2}:\n 1  0  2  0  3\n 0  4  0  5  0\n 6  0  7  0  8\n 0  9  0  1  0\n 2  0  3  0  4\n\njulia> Supper = Symmetric(A)\n5×5 Symmetric{Int64,Array{Int64,2}}:\n 1  0  2  0  3\n 0  4  0  5  0\n 2  0  7  0  8\n 0  5  0  1  0\n 3  0  8  0  4\n\njulia> Slower = Symmetric(A, :L)\n5×5 Symmetric{Int64,Array{Int64,2}}:\n 1  0  6  0  2\n 0  4  0  9  0\n 6  0  7  0  3\n 0  9  0  1  0\n 2  0  3  0  4\n\nNote that Supper will not be equal to Slower unless A is itself symmetric (e.g. if A == Transpose(A)).\n\n\n\n"
 },
 
 {
@@ -13293,7 +13309,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Linear Algebra",
     "title": "Base.LinAlg.lq",
     "category": "Function",
-    "text": "lq(A; full = false) -> L, Q\n\nPerform an LQ factorization of A such that A = L*Q. The default (full = false) computes a factorization with possibly-rectangular L and Q, commonly the \"thin\" factorization. The LQ factorization is the QR factorization of A.'. If the explicit, full/square form of Q is requested via full = true, L is not extended with zeros.\n\nnote: Note\nWhile in QR factorization the \"thin\" factorization is so named due to yielding either a square or \"tall\"/\"thin\" rectangular factor Q, in LQ factorization the \"thin\" factorization somewhat confusingly produces either a square or \"short\"/\"wide\" rectangular factor Q. \"Thin\" factorizations more broadly are also referred to as \"reduced\" factorizatons.\n\n\n\n"
+    "text": "lq(A; full = false) -> L, Q\n\nPerform an LQ factorization of A such that A = L*Q. The default (full = false) computes a factorization with possibly-rectangular L and Q, commonly the \"thin\" factorization. The LQ factorization is the QR factorization of Transpose(A). If the explicit, full/square form of Q is requested via full = true, L is not extended with zeros.\n\nnote: Note\nWhile in QR factorization the \"thin\" factorization is so named due to yielding either a square or \"tall\"/\"thin\" rectangular factor Q, in LQ factorization the \"thin\" factorization somewhat confusingly produces either a square or \"short\"/\"wide\" rectangular factor Q. \"Thin\" factorizations more broadly are also referred to as \"reduced\" factorizatons.\n\n\n\n"
 },
 
 {
@@ -14005,7 +14021,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Linear Algebra",
     "title": "Base.LinAlg.RowVector",
     "category": "Type",
-    "text": "RowVector(vector)\n\nA lazy-view wrapper of an AbstractVector, which turns a length-n vector into a 1×n shaped row vector and represents the transpose of a vector (the elements are also transposed recursively). This type is usually constructed (and unwrapped) via the transpose function or .' operator (or related adjoint or ' operator).\n\nBy convention, a vector can be multiplied by a matrix on its left (A * v) whereas a row vector can be multiplied by a matrix on its right (such that v.' * A = (A.' * v).'). It differs from a 1×n-sized matrix by the facts that its transpose returns a vector and the inner product v1.' * v2 returns a scalar, but will otherwise behave similarly.\n\nExamples\n\njulia> a = [1; 2; 3; 4]\n4-element Array{Int64,1}:\n 1\n 2\n 3\n 4\n\njulia> RowVector(a)\n1×4 RowVector{Int64,Array{Int64,1}}:\n 1  2  3  4\n\njulia> a.'\n1×4 RowVector{Int64,Array{Int64,1}}:\n 1  2  3  4\n\njulia> a.'[3]\n3\n\njulia> a.'[1,3]\n3\n\njulia> a.'[3,1]\nERROR: BoundsError: attempt to access 1×4 RowVector{Int64,Array{Int64,1}} at index [3, 1]\n[...]\n\njulia> a.'*a\n30\n\njulia> B = [1 2; 3 4; 5 6; 7 8]\n4×2 Array{Int64,2}:\n 1  2\n 3  4\n 5  6\n 7  8\n\njulia> a.'*B\n1×2 RowVector{Int64,Array{Int64,1}}:\n 50  60\n\n\n\n"
+    "text": "RowVector(vector)\n\nA lazy-view wrapper of an AbstractVector, which turns a length-n vector into a 1×n shaped row vector and represents the transpose of a vector (the elements are also transposed recursively).\n\nBy convention, a vector can be multiplied by a matrix on its left (A * v) whereas a row vector can be multiplied by a matrix on its right (such that RowVector(v) * A = RowVector(Transpose(A) * v)). It differs from a 1×n-sized matrix by the facts that its transpose returns a vector and the inner product RowVector(v1) * v2 returns a scalar, but will otherwise behave similarly.\n\nExamples\n\njulia> a = [1; 2; 3; 4]\n4-element Array{Int64,1}:\n 1\n 2\n 3\n 4\n\njulia> RowVector(a)\n1×4 RowVector{Int64,Array{Int64,1}}:\n 1  2  3  4\n\njulia> RowVector(a)[3]\n3\n\njulia> RowVector(a)[1,3]\n3\n\njulia> RowVector(a)[3,1]\nERROR: BoundsError: attempt to access 1×4 RowVector{Int64,Array{Int64,1}} at index [3, 1]\n[...]\n\njulia> RowVector(a)*a\n30\n\njulia> B = [1 2; 3 4; 5 6; 7 8]\n4×2 Array{Int64,2}:\n 1  2\n 3  4\n 5  6\n 7  8\n\njulia> RowVector(a)*B\n1×2 RowVector{Int64,Array{Int64,1}}:\n 50  60\n\n\n\n"
 },
 
 {
@@ -14021,7 +14037,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Linear Algebra",
     "title": "Base.transpose",
     "category": "Function",
-    "text": "transpose(A::AbstractMatrix)\n\nThe transposition operator (.'). Note that the transposition is applied recursively to elements.\n\nThis operation is intended for linear algebra usage - for general data manipulation see permutedims, which is non-recursive.\n\nExamples\n\njulia> A = [1 2 3; 4 5 6; 7 8 9]\n3×3 Array{Int64,2}:\n 1  2  3\n 4  5  6\n 7  8  9\n\njulia> transpose(A)\n3×3 Array{Int64,2}:\n 1  4  7\n 2  5  8\n 3  6  9\n\n\n\n"
+    "text": "transpose(A::AbstractMatrix)\n\nEager matrix transpose. Note that the transposition is applied recursively to elements.\n\nThis operation is intended for linear algebra usage - for general data manipulation see permutedims, which is non-recursive.\n\nExamples\n\njulia> A = [1 2 3; 4 5 6; 7 8 9]\n3×3 Array{Int64,2}:\n 1  2  3\n 4  5  6\n 7  8  9\n\njulia> transpose(A)\n3×3 Array{Int64,2}:\n 1  4  7\n 2  5  8\n 3  6  9\n\n\n\n"
 },
 
 {
@@ -14373,7 +14389,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Linear Algebra",
     "title": "Base.LinAlg.BLAS.syr!",
     "category": "Function",
-    "text": "syr!(uplo, alpha, x, A)\n\nRank-1 update of the symmetric matrix A with vector x as alpha*x*x.' + A. uplo controls which triangle of A is updated. Returns A.\n\n\n\n"
+    "text": "syr!(uplo, alpha, x, A)\n\nRank-1 update of the symmetric matrix A with vector x as alpha*x*Transpose(x) + A. uplo controls which triangle of A is updated. Returns A.\n\n\n\n"
 },
 
 {
@@ -14381,7 +14397,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Linear Algebra",
     "title": "Base.LinAlg.BLAS.syrk!",
     "category": "Function",
-    "text": "syrk!(uplo, trans, alpha, A, beta, C)\n\nRank-k update of the symmetric matrix C as alpha*A*A.' + beta*C or alpha*A.'*A + beta*C according to trans. Only the uplo triangle of C is used. Returns C.\n\n\n\n"
+    "text": "syrk!(uplo, trans, alpha, A, beta, C)\n\nRank-k update of the symmetric matrix C as alpha*A*Transpose(A) + beta*C or alpha*Transpose(A)*A + beta*C according to trans. Only the uplo triangle of C is used. Returns C.\n\n\n\n"
 },
 
 {
@@ -14389,7 +14405,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Linear Algebra",
     "title": "Base.LinAlg.BLAS.syrk",
     "category": "Function",
-    "text": "syrk(uplo, trans, alpha, A)\n\nReturns either the upper triangle or the lower triangle of A, according to uplo, of alpha*A*A.' or alpha*A.'*A, according to trans.\n\n\n\n"
+    "text": "syrk(uplo, trans, alpha, A)\n\nReturns either the upper triangle or the lower triangle of A, according to uplo, of alpha*A*Transpose(A) or alpha*Transpose(A)*A, according to trans.\n\n\n\n"
 },
 
 {
@@ -14765,7 +14781,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Linear Algebra",
     "title": "Base.LinAlg.LAPACK.gels!",
     "category": "Function",
-    "text": "gels!(trans, A, B) -> (F, B, ssr)\n\nSolves the linear equation A * X = B, A.' * X =B, or A' * X = B using a QR or LQ factorization. Modifies the matrix/vector B in place with the solution. A is overwritten with its QR or LQ factorization. trans may be one of N (no modification), T (transpose), or C (conjugate transpose). gels! searches for the minimum norm/least squares solution. A may be under or over determined. The solution is returned in B.\n\n\n\n"
+    "text": "gels!(trans, A, B) -> (F, B, ssr)\n\nSolves the linear equation A * X = B, Transpose(A) * X = B, or Adjoint(A) * X = B using a QR or LQ factorization. Modifies the matrix/vector B in place with the solution. A is overwritten with its QR or LQ factorization. trans may be one of N (no modification), T (transpose), or C (conjugate transpose). gels! searches for the minimum norm/least squares solution. A may be under or over determined. The solution is returned in B.\n\n\n\n"
 },
 
 {
@@ -14781,7 +14797,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Linear Algebra",
     "title": "Base.LinAlg.LAPACK.getrs!",
     "category": "Function",
-    "text": "getrs!(trans, A, ipiv, B)\n\nSolves the linear equation A * X = B, A.' * X =B, or A' * X = B for square A. Modifies the matrix/vector B in place with the solution. A is the LU factorization from getrf!, with ipiv the pivoting information. trans may be one of N (no modification), T (transpose), or C (conjugate transpose).\n\n\n\n"
+    "text": "getrs!(trans, A, ipiv, B)\n\nSolves the linear equation A * X = B, Transpose(A) * X = B, or Adjoint(A) * X = B for square A. Modifies the matrix/vector B in place with the solution. A is the LU factorization from getrf!, with ipiv the pivoting information. trans may be one of N (no modification), T (transpose), or C (conjugate transpose).\n\n\n\n"
 },
 
 {
@@ -14797,7 +14813,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Linear Algebra",
     "title": "Base.LinAlg.LAPACK.gesvx!",
     "category": "Function",
-    "text": "gesvx!(fact, trans, A, AF, ipiv, equed, R, C, B) -> (X, equed, R, C, B, rcond, ferr, berr, work)\n\nSolves the linear equation A * X = B (trans = N), A.' * X =B (trans = T), or A' * X = B (trans = C) using the LU factorization of A. fact may be E, in which case A will be equilibrated and copied to AF; F, in which case AF and ipiv from a previous LU factorization are inputs; or N, in which case A will be copied to AF and then factored. If fact = F, equed may be N, meaning A has not been equilibrated; R, meaning A was multiplied by Diagonal(R) from the left; C, meaning A was multiplied by Diagonal(C) from the right; or B, meaning A was multiplied by Diagonal(R) from the left and Diagonal(C) from the right. If fact = F and equed = R or B the elements of R must all be positive. If fact = F and equed = C or B the elements of C must all be positive.\n\nReturns the solution X; equed, which is an output if fact is not N, and describes the equilibration that was performed; R, the row equilibration diagonal; C, the column equilibration diagonal; B, which may be overwritten with its equilibrated form Diagonal(R)*B (if trans = N and equed = R,B) or Diagonal(C)*B (if trans = T,C and equed = C,B); rcond, the reciprocal condition number of A after equilbrating; ferr, the forward error bound for each solution vector in X; berr, the forward error bound for each solution vector in X; and work, the reciprocal pivot growth factor.\n\n\n\ngesvx!(A, B)\n\nThe no-equilibration, no-transpose simplification of gesvx!.\n\n\n\n"
+    "text": "gesvx!(fact, trans, A, AF, ipiv, equed, R, C, B) -> (X, equed, R, C, B, rcond, ferr, berr, work)\n\nSolves the linear equation A * X = B (trans = N), Transpose(A) * X = B (trans = T), or Adjoint(A) * X = B (trans = C) using the LU factorization of A. fact may be E, in which case A will be equilibrated and copied to AF; F, in which case AF and ipiv from a previous LU factorization are inputs; or N, in which case A will be copied to AF and then factored. If fact = F, equed may be N, meaning A has not been equilibrated; R, meaning A was multiplied by Diagonal(R) from the left; C, meaning A was multiplied by Diagonal(C) from the right; or B, meaning A was multiplied by Diagonal(R) from the left and Diagonal(C) from the right. If fact = F and equed = R or B the elements of R must all be positive. If fact = F and equed = C or B the elements of C must all be positive.\n\nReturns the solution X; equed, which is an output if fact is not N, and describes the equilibration that was performed; R, the row equilibration diagonal; C, the column equilibration diagonal; B, which may be overwritten with its equilibrated form Diagonal(R)*B (if trans = N and equed = R,B) or Diagonal(C)*B (if trans = T,C and equed = C,B); rcond, the reciprocal condition number of A after equilbrating; ferr, the forward error bound for each solution vector in X; berr, the forward error bound for each solution vector in X; and work, the reciprocal pivot growth factor.\n\n\n\ngesvx!(A, B)\n\nThe no-equilibration, no-transpose simplification of gesvx!.\n\n\n\n"
 },
 
 {
@@ -14901,7 +14917,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Linear Algebra",
     "title": "Base.LinAlg.LAPACK.gttrs!",
     "category": "Function",
-    "text": "gttrs!(trans, dl, d, du, du2, ipiv, B)\n\nSolves the equation A * X = B (trans = N), A.' * X = B (trans = T), or A' * X = B (trans = C) using the LU factorization computed by gttrf!. B is overwritten with the solution X.\n\n\n\n"
+    "text": "gttrs!(trans, dl, d, du, du2, ipiv, B)\n\nSolves the equation A * X = B (trans = N), Transpose(A) * X = B (trans = T), or Adjoint(A) * X = B (trans = C) using the LU factorization computed by gttrf!. B is overwritten with the solution X.\n\n\n\n"
 },
 
 {
@@ -14941,7 +14957,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Linear Algebra",
     "title": "Base.LinAlg.LAPACK.ormlq!",
     "category": "Function",
-    "text": "ormlq!(side, trans, A, tau, C)\n\nComputes Q * C (trans = N), Q.' * C (trans = T), Q' * C (trans = C) for side = L or the equivalent right-sided multiplication for side = R using Q from a LQ factorization of A computed using gelqf!. C is overwritten.\n\n\n\n"
+    "text": "ormlq!(side, trans, A, tau, C)\n\nComputes Q * C (trans = N), Transpose(Q) * C (trans = T), Adjoint(Q) * C (trans = C) for side = L or the equivalent right-sided multiplication for side = R using Q from a LQ factorization of A computed using gelqf!. C is overwritten.\n\n\n\n"
 },
 
 {
@@ -14949,7 +14965,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Linear Algebra",
     "title": "Base.LinAlg.LAPACK.ormqr!",
     "category": "Function",
-    "text": "ormqr!(side, trans, A, tau, C)\n\nComputes Q * C (trans = N), Q.' * C (trans = T), Q' * C (trans = C) for side = L or the equivalent right-sided multiplication for side = R using Q from a QR factorization of A computed using geqrf!. C is overwritten.\n\n\n\n"
+    "text": "ormqr!(side, trans, A, tau, C)\n\nComputes Q * C (trans = N), Transpose(Q) * C (trans = T), Adjoint(Q) * C (trans = C) for side = L or the equivalent right-sided multiplication for side = R using Q from a QR factorization of A computed using geqrf!. C is overwritten.\n\n\n\n"
 },
 
 {
@@ -14957,7 +14973,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Linear Algebra",
     "title": "Base.LinAlg.LAPACK.ormql!",
     "category": "Function",
-    "text": "ormql!(side, trans, A, tau, C)\n\nComputes Q * C (trans = N), Q.' * C (trans = T), Q' * C (trans = C) for side = L or the equivalent right-sided multiplication for side = R using Q from a QL factorization of A computed using geqlf!. C is overwritten.\n\n\n\n"
+    "text": "ormql!(side, trans, A, tau, C)\n\nComputes Q * C (trans = N), Transpose(Q) * C (trans = T), Adjoint(Q) * C (trans = C) for side = L or the equivalent right-sided multiplication for side = R using Q from a QL factorization of A computed using geqlf!. C is overwritten.\n\n\n\n"
 },
 
 {
@@ -14965,7 +14981,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Linear Algebra",
     "title": "Base.LinAlg.LAPACK.ormrq!",
     "category": "Function",
-    "text": "ormrq!(side, trans, A, tau, C)\n\nComputes Q * C (trans = N), Q.' * C (trans = T), Q' * C (trans = C) for side = L or the equivalent right-sided multiplication for side = R using Q from a RQ factorization of A computed using gerqf!. C is overwritten.\n\n\n\n"
+    "text": "ormrq!(side, trans, A, tau, C)\n\nComputes Q * C (trans = N), Transpose(Q) * C (trans = T), Adjoint(Q) * C (trans = C) for side = L or the equivalent right-sided multiplication for side = R using Q from a RQ factorization of A computed using gerqf!. C is overwritten.\n\n\n\n"
 },
 
 {
@@ -14973,7 +14989,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Linear Algebra",
     "title": "Base.LinAlg.LAPACK.gemqrt!",
     "category": "Function",
-    "text": "gemqrt!(side, trans, V, T, C)\n\nComputes Q * C (trans = N), Q.' * C (trans = T), Q' * C (trans = C) for side = L or the equivalent right-sided multiplication for side = R using Q from a QR factorization of A computed using geqrt!. C is overwritten.\n\n\n\n"
+    "text": "gemqrt!(side, trans, V, T, C)\n\nComputes Q * C (trans = N), Transpose(Q) * C (trans = T), Adjoint(Q) * C (trans = C) for side = L or the equivalent right-sided multiplication for side = R using Q from a QR factorization of A computed using geqrt!. C is overwritten.\n\n\n\n"
 },
 
 {
@@ -15053,7 +15069,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Linear Algebra",
     "title": "Base.LinAlg.LAPACK.trtrs!",
     "category": "Function",
-    "text": "trtrs!(uplo, trans, diag, A, B)\n\nSolves A * X = B (trans = N), A.' * X = B (trans = T), or A' * X = B (trans = C) for (upper if uplo = U, lower if uplo = L) triangular matrix A. If diag = N, A has non-unit diagonal elements. If diag = U, all diagonal elements of A are one. B is overwritten with the solution X.\n\n\n\n"
+    "text": "trtrs!(uplo, trans, diag, A, B)\n\nSolves A * X = B (trans = N), Transpose(A) * X = B (trans = T), or Adjoint(A) * X = B (trans = C) for (upper if uplo = U, lower if uplo = L) triangular matrix A. If diag = N, A has non-unit diagonal elements. If diag = U, all diagonal elements of A are one. B is overwritten with the solution X.\n\n\n\n"
 },
 
 {
@@ -15077,7 +15093,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Linear Algebra",
     "title": "Base.LinAlg.LAPACK.trrfs!",
     "category": "Function",
-    "text": "trrfs!(uplo, trans, diag, A, B, X, Ferr, Berr) -> (Ferr, Berr)\n\nEstimates the error in the solution to A * X = B (trans = N), A.' * X = B (trans = T), A' * X = B (trans = C) for side = L, or the equivalent equations a right-handed side = R X * A after computing X using trtrs!. If uplo = U, A is upper triangular. If uplo = L, A is lower triangular. If diag = N, A has non-unit diagonal elements. If diag = U, all diagonal elements of A are one. Ferr and Berr are optional inputs. Ferr is the forward error and Berr is the backward error, each component-wise.\n\n\n\n"
+    "text": "trrfs!(uplo, trans, diag, A, B, X, Ferr, Berr) -> (Ferr, Berr)\n\nEstimates the error in the solution to A * X = B (trans = N), Transpose(A) * X = B (trans = T), Adjoint(A) * X = B (trans = C) for side = L, or the equivalent equations a right-handed side = R X * A after computing X using trtrs!. If uplo = U, A is upper triangular. If uplo = L, A is lower triangular. If diag = N, A has non-unit diagonal elements. If diag = U, all diagonal elements of A are one. Ferr and Berr are optional inputs. Ferr is the forward error and Berr is the backward error, each component-wise.\n\n\n\n"
 },
 
 {
@@ -16381,7 +16397,7 @@ var documenterSearchIndex = {"docs": [
     "page": "I/O and Network",
     "title": "Base.IOContext",
     "category": "Method",
-    "text": "IOContext(io::IO, KV::Pair...)\n\nCreate an IOContext that wraps a given stream, adding the specified key=>value pairs to the properties of that stream (note that io can itself be an IOContext).\n\nuse (key => value) in dict to see if this particular combination is in the properties set\nuse get(dict, key, default) to retrieve the most recent value for a particular key\n\nThe following properties are in common use:\n\n:compact: Boolean specifying that small values should be printed more compactly, e.g. that numbers should be printed with fewer digits. This is set when printing array elements.\n:limit: Boolean specifying that containers should be truncated, e.g. showing … in place of most elements.\n:displaysize: A Tuple{Int,Int} giving the size in rows and columns to use for text output. This can be used to override the display size for called functions, but to get the size of the screen use the displaysize function.\n:typeinfo: a Type characterizing the information already printed concerning the type of the object about to be displayed. This is mainly useful when displaying a collection of objects of the same type, so that redundant type information can be avoided (e.g. [Float16(0)] can be shown as \"Float16[0.0]\" instead of \"Float16[Float16(0.0)]\" : while displaying the elements of the array, the :typeinfo property will be set to Float16).\n\nExamples\n\njulia> function f(io::IO)\n           if get(io, :short, false)\n               print(io, \"short\")\n           else\n               print(io, \"loooooong\")\n           end\n       end\nf (generic function with 1 method)\n\njulia> f(STDOUT)\nloooooong\njulia> f(IOContext(STDOUT, :short => true))\nshort\n\n\n\n"
+    "text": "IOContext(io::IO, KV::Pair...)\n\nCreate an IOContext that wraps a given stream, adding the specified key=>value pairs to the properties of that stream (note that io can itself be an IOContext).\n\nuse (key => value) in dict to see if this particular combination is in the properties set\nuse get(dict, key, default) to retrieve the most recent value for a particular key\n\nThe following properties are in common use:\n\n:compact: Boolean specifying that small values should be printed more compactly, e.g. that numbers should be printed with fewer digits. This is set when printing array elements.\n:limit: Boolean specifying that containers should be truncated, e.g. showing … in place of most elements.\n:displaysize: A Tuple{Int,Int} giving the size in rows and columns to use for text output. This can be used to override the display size for called functions, but to get the size of the screen use the displaysize function.\n:typeinfo: a Type characterizing the information already printed concerning the type of the object about to be displayed. This is mainly useful when displaying a collection of objects of the same type, so that redundant type information can be avoided (e.g. [Float16(0)] can be shown as \"Float16[0.0]\" instead of \"Float16[Float16(0.0)]\" : while displaying the elements of the array, the :typeinfo property will be set to Float16).\n:color: Boolean specifying whether ANSI color/escape codes are supported/expected. By default, this is determined by whether io is a compatible terminal and by any --color command-line flag when julia was launched.\n\nExamples\n\njulia> function f(io::IO)\n           if get(io, :short, false)\n               print(io, \"short\")\n           else\n               print(io, \"loooooong\")\n           end\n       end\nf (generic function with 1 method)\n\njulia> f(STDOUT)\nloooooong\njulia> f(IOContext(STDOUT, :short => true))\nshort\n\n\n\n"
 },
 
 {
@@ -18453,7 +18469,7 @@ var documenterSearchIndex = {"docs": [
     "page": "C Interface",
     "title": "Base.copyto!",
     "category": "Function",
-    "text": "copyto!(dest, do, src, so, N)\n\nCopy N elements from collection src starting at offset so, to array dest starting at offset do. Return dest.\n\n\n\ncopyto!(dest::AbstractArray, src) -> dest\n\nCopy all elements from collection src to array dest, whose length must be greater than or equal to the length n of src. The first n elements of dest are overwritten, the other elements are left untouched.\n\n\n\ncopyto!(dest, Rdest::CartesianIndices, src, Rsrc::CartesianIndices) -> dest\n\nCopy the block of src in the range of Rsrc to the block of dest in the range of Rdest. The sizes of the two regions must match.\n\n\n\n"
+    "text": "copyto!(dest, do, src, so, N)\n\nCopy N elements from collection src starting at offset so, to array dest starting at offset do. Return dest.\n\n\n\ncopyto!(dest::AbstractArray, src) -> dest\n\nCopy all elements from collection src to array dest, whose length must be greater than or equal to the length n of src. The first n elements of dest are overwritten, the other elements are left untouched.\n\nExamples\n\njulia> x = [1., 0., 3., 0., 5.];\n\njulia> y = zeros(7);\n\njulia> copyto!(y, x);\n\njulia> y\n7-element Array{Float64,1}:\n 1.0\n 0.0\n 3.0\n 0.0\n 5.0\n 0.0\n 0.0\n\n\n\ncopyto!(dest, Rdest::CartesianIndices, src, Rsrc::CartesianIndices) -> dest\n\nCopy the block of src in the range of Rsrc to the block of dest in the range of Rdest. The sizes of the two regions must match.\n\n\n\n"
 },
 
 {
