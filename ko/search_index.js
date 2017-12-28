@@ -106,39 +106,39 @@ var documenterSearchIndex = {"docs": [
 
 {
     "location": "manual/integers-and-floating-point-numbers.html#",
-    "page": "정수와 부동소수점으로 표현되는 실수",
-    "title": "정수와 부동소수점으로 표현되는 실수",
+    "page": "정수와 부동 소수점 수",
+    "title": "정수와 부동 소수점 수",
     "category": "page",
     "text": ""
 },
 
 {
     "location": "manual/integers-and-floating-point-numbers.html#Integers-and-Floating-Point-Numbers-1",
-    "page": "정수와 부동소수점으로 표현되는 실수",
-    "title": "정수와 부동소수점으로 표현되는 실수",
+    "page": "정수와 부동 소수점 수",
+    "title": "정수와 부동 소수점 수",
     "category": "section",
-    "text": "정수와 부동소수점(floating-point)으로 표현되는 실수는 수치 연산에 있어서 가장 기본적인 구성 요소이다. 이와 같은 값들의 Julia 내부에서의 내장 표현은 숫자 프라미티브(numberic primitives)이라고 하고, 실수나 부동소수점처럼 코드상에서 즉각적으로 표현되는 값을은 수치형 리터럴(numeric literal)이라고 알려져있다.  예를들어, 1은 정수형 리터럴이지만, 1.0은 부동소수점 리터럴이다; 그리고 위 리터럴들이 바이너리 형태로 메모리상에서 표현되는 객체(object)를 숫자 프리미티브(numeric primitives)라고 한다.Julia는 넓은 범위의 기본 수치 타입과 수치연산자, 그리고 비트연산자를 모두 제공한다. 현대의 컴퓨터에서 기본으로 제공되는 Julia에 내장된 표준 수학 함수들은 Julia로 하여금 연산 자원을 최대한 활용 수 있도록 한다. 게다가 Julia는 하드웨어에서 기본적으로 표현하지 못하는 자들을 표현할 수 있게 만든 [] Additionally, Julia provides Arbitrary Precision Arithmetic를 지원한다. 그러나 Arbitrary Precision Arithmetic 사용하면 성능상으로 느려질 수 있다다음은 Julia에서 기본적으로 지원하는 타입니다:정수형 타입:타입 부호 여부 비트 수 최솟값 최댓값\nInt8 ✓ 8 -2^7 2^7 - 1\nUInt8   8 0 2^8 - 1\nInt16 ✓ 16 -2^15 2^15 - 1\nUInt16   16 0 2^16 - 1\nInt32 ✓ 32 -2^31 2^31 - 1\nUInt32   32 0 2^32 - 1\nInt64 ✓ 64 -2^63 2^63 - 1\nUInt64   64 0 2^64 - 1\nInt128 ✓ 128 -2^127 2^127 - 1\nUInt128   128 0 2^128 - 1\nBool N/A 8 false (0) true (1)부동소수점 타입:타입 정밀도 비트 수\nFloat16 half 16\nFloat32 single 32\nFloat64 double 64추가적으로 Complex and Rational Numbers는 위ㅔ어서 언급한 타입에 기초하여 만들어졌다. 모든 기본 수치 타입들은 유연하고, 쉽게 확장이 가능한  type promotion system 덕분에 자유롭게 상호운용이 가능하다."
+    "text": "정수와 부동 소수점 수는 수치 연산에 있어 기본적인 구성 요소이다. 줄리아 내에서 이와 같은 값의 표현은 숫자 프리미티브(numeric primitives)로 불리운다. 정수와 부동 소수점 표현은 코드에서 바로 그 값을 가지며 수치형 리터럴(numeric literals)로 알려 있다. 예를 들어, 1은 정수형 리터럴이고, 1.0은 부동 소수점 수인 리터럴이다; 이들의 메모리 상 바이너리를 객체(object)로 표현하면 숫자 프리미티브이다.줄리아는 표준 수학 함수에 쓰이는 기본 수치 타입과 완전한 산술 비트 연산자를 폭넓게 제공한다. 이들을 컴퓨터가 지원하는 숫자 타입과 연산에 직접 매핑하여 줄리아가 최적의 연산 자원을 활용할 수 있도록 한다. 추가로 줄리아는 임의 정밀도 산술(Arbitrary Precision Arithmetic)을 소프트웨어적으로 지원하는데, 하드웨어적 표현으로는 효율적으로 구성하기 힘든 아주 정밀한 숫자를 다루며 상대적으로 성능은 다소 줄게 된다.다음은 줄리아에서 기본적으로 지원하는 타입이다:정수형 타입:타입 부호 여부 비트 수 최솟값 최댓값\nInt8 ✓ 8 -2^7 2^7 - 1\nUInt8   8 0 2^8 - 1\nInt16 ✓ 16 -2^15 2^15 - 1\nUInt16   16 0 2^16 - 1\nInt32 ✓ 32 -2^31 2^31 - 1\nUInt32   32 0 2^32 - 1\nInt64 ✓ 64 -2^63 2^63 - 1\nUInt64   64 0 2^64 - 1\nInt128 ✓ 128 -2^127 2^127 - 1\nUInt128   128 0 2^128 - 1\nBool N/A 8 false (0) true (1)부동소수점 타입:타입 정밀도 비트 수\nFloat16 half 16\nFloat32 single 32\nFloat64 double 64추가적으로 Complex and Rational Numbers는 위에서 언급한 타입에 기초하여 만들어졌다. 모든 기본 수치 타입들은 유연하고, 쉽게 확장이 가능한  type promotion system 덕분에 자유롭게 상호운용이 가능하다."
 },
 
 {
     "location": "manual/integers-and-floating-point-numbers.html#정수-1",
-    "page": "정수와 부동소수점으로 표현되는 실수",
+    "page": "정수와 부동 소수점 수",
     "title": "정수",
     "category": "section",
-    "text": "정수 리터럴은 다음과 같은 표준적인 방식으로 표한한다:julia> 1\n1\n\njulia> 1234\n1234정수 리터럴은 해당 시스템이 32비트 아키텍처인지 혹은 64비트 아키텍처인지에 따라 결정된다:# 32-bit system:\njulia> typeof(1)\nInt32\n\n# 64-bit system:\njulia> typeof(1)\nInt64Julia의 내부변수 Sys.WORD_SIZE는 해당 시스템이 32비트인지 64비트인지 알려주는 역할을 한다:# 32-bit system:\njulia> Sys.WORD_SIZE\n32\n\n# 64-bit system:\njulia> Sys.WORD_SIZE\n64Julia는 부호가 있는 정수형과 부호가 없는 정수형을 위해 Int와 UInt라는 타입 또한 정의하고 있다:# 32-bit system:\njulia> Int\nInt32\njulia> UInt\nUInt32\n\n# 64-bit system:\njulia> Int\nInt64\njulia> UInt\nUInt6432비트로 표현할 수 없지만 64비트로 표현이 가능한 큰 정수형 리터럴은 시스템의 타입과는 상관없이 항상 64비트를 생성한다:# 32-bit or 64-bit system:\njulia> typeof(3000000000)\nInt64부호가 없는 정수형의 입출력은 항상 0x라는 접두어가 붙으며 16진수는 0-9a-f범위의 숫자와 문자를 쓴다.(입력할 때, 대문자 A-F도 쓸 수 있다.) :julia> 0x1\n0x01\n\njulia> typeof(ans)\nUInt8\n\njulia> 0x123\n0x0123\n\njulia> typeof(ans)\nUInt16\n\njulia> 0x1234567\n0x01234567\n\njulia> typeof(ans)\nUInt32\n\njulia> 0x123456789abcdef\n0x0123456789abcdef\n\njulia> typeof(ans)\nUInt64일반적으로 부호가 없는 16진수 정수 리터럴을 쓸 때, 단순히 정수를 표현사기 보다는 사람들은 고정된 바이트 시퀀스(fixed numeric byte sequence)를 표현하기 위해 16진수를 쓰는 경향이 있기 때문에, 위와 같이 부호가 없는 정수형에 16진수 형태를 결합시키도록 하였다.ans 가 대화형 실행 환경에서 가장 최근에 실행된 표현식의 결과를 나타내었다는 것을 떠올려보면, 위의 Julia 코드는 다른 환경에서는 제대로 실행이 안될 것이라는 것을 알 수 있다. Julia는 2진수와 8진수 리터럴 또한 지원한다:julia> 0b10\n0x02\n\njulia> typeof(ans)\nUInt8\n\njulia> 0o10\n0x08\n\njulia> typeof(ans)\nUInt8정수형과 같은 기본 수치 타입의 최소값과 최대값은 typemin과 typemax 함수를 통해 알 수 있다:julia> (typemin(Int32), typemax(Int32))\n(-2147483648, 2147483647)\n\njulia> for T in [Int8,Int16,Int32,Int64,Int128,UInt8,UInt16,UInt32,UInt64,UInt128]\n           println(\"$(lpad(T,7)): [$(typemin(T)),$(typemax(T))]\")\n       end\n   Int8: [-128,127]\n  Int16: [-32768,32767]\n  Int32: [-2147483648,2147483647]\n  Int64: [-9223372036854775808,9223372036854775807]\n Int128: [-170141183460469231731687303715884105728,170141183460469231731687303715884105727]\n  UInt8: [0,255]\n UInt16: [0,65535]\n UInt32: [0,4294967295]\n UInt64: [0,18446744073709551615]\nUInt128: [0,340282366920938463463374607431768211455]typemin과 typemax가 제공하는 값들은 항상 매개변수의 타입과 같은 타입을 가진다. (위 예제에서 쓰는 for loops, Strings, Interpolation과 같은 표현들은 아직 소개하지 않은 것들이다. 그러나 약간의 프로그래밍 지식이 있다면 이해하기 별 문제가 없을 것이다. )"
+    "text": "정수 리터럴은 다음과 같은 표준적인 방식으로 표한한다:julia> 1\n1\n\njulia> 1234\n1234정수 리터럴은 해당 시스템이 32비트 아키텍처인지 혹은 64비트 아키텍처인지에 따라 결정된다:# 32-bit system:\njulia> typeof(1)\nInt32\n\n# 64-bit system:\njulia> typeof(1)\nInt64줄리아의 내부변수 Sys.WORD_SIZE는 해당 시스템이 32비트인지 64비트인지 알려주는 역할을 한다:# 32-bit system:\njulia> Sys.WORD_SIZE\n32\n\n# 64-bit system:\njulia> Sys.WORD_SIZE\n64줄리아는 부호가 있는 정수형과 부호가 없는 정수형을 위해 Int와 UInt라는 타입 또한 정의하고 있다:# 32-bit system:\njulia> Int\nInt32\njulia> UInt\nUInt32\n\n# 64-bit system:\njulia> Int\nInt64\njulia> UInt\nUInt6432비트로 표현할 수 없지만 64비트로 표현이 가능한 큰 정수형 리터럴은 시스템의 타입과는 상관없이 항상 64비트를 생성한다:# 32-bit or 64-bit system:\njulia> typeof(3000000000)\nInt64부호가 없는 정수형의 입출력은 항상 0x라는 접두어가 붙으며 16진수는 0-9a-f범위의 숫자와 문자를 쓴다.(입력할 때, 대문자 A-F도 쓸 수 있다.) :julia> 0x1\n0x01\n\njulia> typeof(ans)\nUInt8\n\njulia> 0x123\n0x0123\n\njulia> typeof(ans)\nUInt16\n\njulia> 0x1234567\n0x01234567\n\njulia> typeof(ans)\nUInt32\n\njulia> 0x123456789abcdef\n0x0123456789abcdef\n\njulia> typeof(ans)\nUInt64\n\njulia> 0x11112222333344445555666677778888\n0x11112222333344445555666677778888\n\njulia> typeof(ans)\nUInt128일반적으로 부호가 없는 16진수 정수 리터럴을 쓸 때, 단순히 정수를 표현사기 보다는 사람들은 고정된 바이트 시퀀스(fixed numeric byte sequence)를 표현하기 위해 16진수를 쓰는 경향이 있기 때문에, 위와 같이 부호가 없는 정수형에 16진수 형태를 결합시키도록 하였다.ans 가 대화형 실행 환경에서 가장 최근에 실행된 표현식의 결과를 나타내었다는 것을 떠올려보면, 위의 줄리아 코드는 다른 환경에서는 제대로 실행이 안될 것이라는 것을 알 수 있다. 줄리아는 2진수와 8진수 리터럴 또한 지원한다:julia> 0b10\n0x02\n\njulia> typeof(ans)\nUInt8\n\njulia> 0o010\n0x08\n\njulia> typeof(ans)\nUInt8\n\njulia> 0x00000000000000001111222233334444\n0x00000000000000001111222233334444\n\njulia> typeof(ans)\nUInt128As for hexadecimal literals, binary and octal literals produce unsigned integer types. The size of the binary data item is the minimal needed size, if the leading digit of the literal is not 0. In the case of leading zeros, the size is determined by the minimal needed size for a literal, which has the same length but leading digit 1. That allows the user to control the size. Values, which cannot be stored in UInt128 cannot be written as such literals.Binary, octal, and hexadecimal literals may be signed by a - immediately preceding the unsigned literal. They produce an unsigned integer of the same size as the unsigned literal would do, with the two's complement of the value:julia> -0x2\n0xfe\n\njulia> -0x0002\n0xfffe정수형과 같은 기본 수치 타입의 최소값과 최대값은 typemin과 typemax 함수를 통해 알 수 있다:julia> (typemin(Int32), typemax(Int32))\n(-2147483648, 2147483647)\n\njulia> for T in [Int8,Int16,Int32,Int64,Int128,UInt8,UInt16,UInt32,UInt64,UInt128]\n           println(\"$(lpad(T,7)): [$(typemin(T)),$(typemax(T))]\")\n       end\n   Int8: [-128,127]\n  Int16: [-32768,32767]\n  Int32: [-2147483648,2147483647]\n  Int64: [-9223372036854775808,9223372036854775807]\n Int128: [-170141183460469231731687303715884105728,170141183460469231731687303715884105727]\n  UInt8: [0,255]\n UInt16: [0,65535]\n UInt32: [0,4294967295]\n UInt64: [0,18446744073709551615]\nUInt128: [0,340282366920938463463374607431768211455]typemin과 typemax가 제공하는 값들은 항상 매개변수의 타입과 같은 타입을 가진다. (위 예제에서 쓰는 for loops, Strings, Interpolation과 같은 표현들은 아직 소개하지 않은 것들이다. 그러나 약간의 프로그래밍 지식이 있다면 이해하기 별 문제가 없을 것이다. )"
 },
 
 {
     "location": "manual/integers-and-floating-point-numbers.html#오버플로우(Overflow)-동작-1",
-    "page": "정수와 부동소수점으로 표현되는 실수",
+    "page": "정수와 부동 소수점 수",
     "title": "오버플로우(Overflow) 동작",
     "category": "section",
-    "text": "Julia에서는 주어진 타입에서 표현할 수 있는 값을 넘어서게 되면 다음과 같이 주어진 범위를 벗어나지 않는(wraparound) 동작을 보여준다:julia> x = typemax(Int64)\n9223372036854775807\n\njulia> x + 1\n-9223372036854775808\n\njulia> x + 1 == typemin(Int64)\ntrue위와 같기 때문에, Juali 정수의 연산은 사실 나머지 연산임을 알 수 있다. 오버플로우가 나올 수 있는 프로그램에서는 오버플로우를 명시적으로 체크하는 것이 필수적이다; 그런 경우가 아니라면 Arbitrary Precision Arithmetic에서 BigInt타입을 사용하는 것을 추천한다."
+    "text": "줄리아에서는 주어진 타입에서 표현할 수 있는 값을 넘어서게 되면 다음과 같이 주어진 범위를 벗어나지 않는(wraparound) 동작을 보여준다:julia> x = typemax(Int64)\n9223372036854775807\n\njulia> x + 1\n-9223372036854775808\n\njulia> x + 1 == typemin(Int64)\ntrue위와 같기 때문에, Juali 정수의 연산은 사실 나머지 연산임을 알 수 있다. 오버플로우가 나올 수 있는 프로그램에서는 오버플로우를 명시적으로 체크하는 것이 필수적이다; 그런 경우가 아니라면 Arbitrary Precision Arithmetic에서 BigInt타입을 사용하는 것을 추천한다."
 },
 
 {
     "location": "manual/integers-and-floating-point-numbers.html#나눗셈-관련-에러들-1",
-    "page": "정수와 부동소수점으로 표현되는 실수",
+    "page": "정수와 부동 소수점 수",
     "title": "나눗셈 관련 에러들",
     "category": "section",
     "text": "정수의 나눗셈 연산 (div 함수)는 두 가지 예외적인 경우가 있다; 0으로 나누기, 그리고 컴퓨터가 표현할 수 있는 최소의 음의 정수값(typemin)을 -1로 나누는 것이다. 두 가지 경우 DivideError를 유발한다. 두 나머지 연산 함수( rem과 mod)는 두 번째 매개변수가 0일 때, DivideError를 던진다(throw)."
@@ -146,7 +146,7 @@ var documenterSearchIndex = {"docs": [
 
 {
     "location": "manual/integers-and-floating-point-numbers.html#부동소수점으로-표현되는-실수-1",
-    "page": "정수와 부동소수점으로 표현되는 실수",
+    "page": "정수와 부동 소수점 수",
     "title": "부동소수점으로 표현되는 실수",
     "category": "section",
     "text": "부동소수점 리터럴은 필요할 때 E-notation 표준 포맷을 이용하여 표현된다:julia> 1.0\n1.0\n\njulia> 1.\n1.0\n\njulia> 0.5\n0.5\n\njulia> .5\n0.5\n\njulia> -1.23\n-1.23\n\njulia> 1e10\n1.0e10\n\njulia> 2.5e-4\n0.00025위에 나온 결과는 모두 Float64타입의 값들이다. Float32값들은 e대신 f를 쓰면 입력할 수 있다:julia> 0.5f0\n0.5f0\n\njulia> typeof(ans)\nFloat32\n\njulia> 2.5f-4\n0.00025f0값들은 쉽게 Float32타입으로 변환할 수 있다:julia> Float32(-1.5)\n-1.5f0\n\njulia> typeof(ans)\nFloat3216진수로 표현되는 부동소수점 리터럴은 유효하지만, Base-2 이전에 p를 사는 경우 Float64타입에서만 가능하다:julia> 0x1p0\n1.0\n\njulia> 0x1.8p3\n12.0\n\njulia> 0x.4p-1\n0.125\n\njulia> typeof(ans)\nFloat6416비트의 정밀도가 절반인 부동소수점(Half-precision floating-point)(Float16)도 지원되지만,  계산을 위해 Float32를 사용한 소프트웨어로 구현되어있다.julia> sizeof(Float16(4.))\n2\n\njulia> 2*Float16(4.)\nFloat16(8.0)밑줄_는 수 구분자로 쓰일 수 있다:julia> 10_000, 0.000_000_005, 0xdead_beef, 0b1011_0010\n(10000, 5.0e-9, 0xdeadbeef, 0xb2)"
@@ -154,7 +154,7 @@ var documenterSearchIndex = {"docs": [
 
 {
     "location": "manual/integers-and-floating-point-numbers.html#실수로서의-숫자-0-1",
-    "page": "정수와 부동소수점으로 표현되는 실수",
+    "page": "정수와 부동 소수점 수",
     "title": "실수로서의 숫자 0",
     "category": "section",
     "text": "부동 소수점은 양수 0과 음수 0으로 불리는 두 개의 0을  가진다. 그 둘은 값은 0으로써 같지만, 다음과 같이 bits함수를 잉ㅇ하면 알 수 있듯이, 바이너리로 표기했을 때 다르다는 것을 알 수 있다:julia> 0.0 == -0.0\ntrue\n\njulia> bitstring(0.0)\n\"0000000000000000000000000000000000000000000000000000000000000000\"\n\njulia> bitstring(-0.0)\n\"1000000000000000000000000000000000000000000000000000000000000000\""
@@ -162,7 +162,7 @@ var documenterSearchIndex = {"docs": [
 
 {
     "location": "manual/integers-and-floating-point-numbers.html#Special-floating-point-values-1",
-    "page": "정수와 부동소수점으로 표현되는 실수",
+    "page": "정수와 부동 소수점 수",
     "title": "특별한 부동 소수점 값들",
     "category": "section",
     "text": "다음은 실수에는 포함되지는 않은 세 종류의 특정 표준 부동 소수점이 있다:Float16 Float32 Float64 이름 설명\nInf16 Inf32 Inf positive infinity 모든 유한한 부동 소수점 실수보다 큰 값\n-Inf16 -Inf32 -Inf negative infinity 모든 유한한 부동 소수점 실수보다 작은 값\nNaN16 NaN32 NaN not a number 어떤 부동 소수점 실수와도 같지 않은 값이와 같은 유한하지 않은 부동 소수점 값들이 서로와 다른 실수에 대해서 순서를 매길 때에는 Numeric Comparisons를 참고하길 바란다. IEEE 754 standard에 따르면, 위에서의 부동 소수점 실수들은 어떤 산술 연산에 의한 결과임을 알 수 있다:julia> 1/Inf\n0.0\n\njulia> 1/0\nInf\n\njulia> -5/0\n-Inf\n\njulia> 0.000001/0\nInf\n\njulia> 0/0\nNaN\n\njulia> 500 + Inf\nInf\n\njulia> 500 - Inf\n-Inf\n\njulia> Inf + Inf\nInf\n\njulia> Inf - Inf\nNaN\n\njulia> Inf * Inf\nInf\n\njulia> Inf / Inf\nNaN\n\njulia> 0 * Inf\nNaNtypemin과 typemax 함수는 부동 소수점 타입에도 적용이 가능하다:julia> (typemin(Float16),typemax(Float16))\n(-Inf16, Inf16)\n\njulia> (typemin(Float32),typemax(Float32))\n(-Inf32, Inf32)\n\njulia> (typemin(Float64),typemax(Float64))\n(-Inf, Inf)"
@@ -170,15 +170,15 @@ var documenterSearchIndex = {"docs": [
 
 {
     "location": "manual/integers-and-floating-point-numbers.html#계산기-입실론(Machine-epsilon)-1",
-    "page": "정수와 부동소수점으로 표현되는 실수",
+    "page": "정수와 부동 소수점 수",
     "title": "계산기 입실론(Machine epsilon)",
     "category": "section",
-    "text": "대부분 실수들은 부동 소수점 형태로는 정확하게 표현할 수 없다. 그리고 현재로서는 많은 경우 두 인접한 부동 소수점으로 표현 가능한 실수가 얼만큼 떨어져 있는지 알 필요가 있다. 따라서 이를 위해 계산기 입실론(machine epsilon)이라는 개념이 도입하게 되었다.Julia는 eps라는 것을 제공한다. 이는 1.0과  1.0 다음으로 큰 표현 가능한 부동 소수점 값과의 거리를 말한다:julia> eps(Float32)\n1.1920929f-7\n\njulia> eps(Float64)\n2.220446049250313e-16\n\njulia> eps() # same as eps(Float64)\n2.220446049250313e-16위 코드에서 나오는 값들은 Float64와 Float64값 중에서 바이너리로 표기했을 때, 2.0^-23과 2.0^-52를 각각 나타낸다. eps 함수는 부동 소수점 실수를 매개변수로 받을 수도 있는데, 이 때는 1.0이 아니라 주어진 값과 주어진 값 바로 옆에서 주어진 값과의 거리를 반환한다. 그 말은 epx(x)의 반환값은 x와 같은 타입이고, x+eps(x)는 x보다 큰 x바로 옆에 있는 포현 가능한 부동 소수점 실수를 뜻한다:julia> eps(1.0)\n2.220446049250313e-16\n\njulia> eps(1000.)\n1.1368683772161603e-13\n\njulia> eps(1e-27)\n1.793662034335766e-43\n\njulia> eps(0.0)\n5.0e-324두 인접하면서 표현 가능한 부동 소수점 실수들은 상수가 아니지만, 작은 값에서는 작은 값을 지니고, 큰 값들에서는 큰 값을 나타낸다. 다른 말로 하면, 표현 가능한 부동 소수점 실수들은 실수축 상에서 0에 근접할 때 가장 밀집되어있고, 0에서 멀어질수록 점점 드물다. 정의에 의하면, eps(1,0)은 eps(Float64)와 같은데, 그 이유는 1.0은 64비트 부동 소수점 실수이기 때문이다.또한 Julia는 nextfloat과 prevfloat 함수를 제공하는데, 이는 표현 가능한 부동 소수점 실수 중에서 주어진 실수 바로 옆에있는 크거나 작은 수를 반환한다:julia> x = 1.25f0\n1.25f0\n\njulia> nextfloat(x)\n1.2500001f0\n\njulia> prevfloat(x)\n1.2499999f0\n\njulia> bitstring(prevfloat(x))\n\"00111111100111111111111111111111\"\n\njulia> bitstring(x)\n\"00111111101000000000000000000000\"\n\njulia> bitstring(nextfloat(x))\n\"00111111101000000000000000000001\"위의 예제는 서로 이웃한 표현 가능한 부동 소수점 수는 바이너리 정수 표기법을 가질 수 있다는 기본적인 원리를 새삼 일깨워준다."
+    "text": "대부분 실수들은 부동 소수점 형태로는 정확하게 표현할 수 없다. 그리고 현재로서는 많은 경우 두 인접한 부동 소수점으로 표현 가능한 실수가 얼만큼 떨어져 있는지 알 필요가 있다. 따라서 이를 위해 계산기 입실론(machine epsilon)이라는 개념이 도입하게 되었다.줄리아는 eps라는 것을 제공한다. 이는 1.0과  1.0 다음으로 큰 표현 가능한 부동 소수점 값과의 거리를 말한다:julia> eps(Float32)\n1.1920929f-7\n\njulia> eps(Float64)\n2.220446049250313e-16\n\njulia> eps() # same as eps(Float64)\n2.220446049250313e-16위 코드에서 나오는 값들은 Float64와 Float64값 중에서 바이너리로 표기했을 때, 2.0^-23과 2.0^-52를 각각 나타낸다. eps 함수는 부동 소수점 실수를 매개변수로 받을 수도 있는데, 이 때는 1.0이 아니라 주어진 값과 주어진 값 바로 옆에서 주어진 값과의 거리를 반환한다. 그 말은 epx(x)의 반환값은 x와 같은 타입이고, x+eps(x)는 x보다 큰 x바로 옆에 있는 포현 가능한 부동 소수점 실수를 뜻한다:julia> eps(1.0)\n2.220446049250313e-16\n\njulia> eps(1000.)\n1.1368683772161603e-13\n\njulia> eps(1e-27)\n1.793662034335766e-43\n\njulia> eps(0.0)\n5.0e-324두 인접하면서 표현 가능한 부동 소수점 실수들은 상수가 아니지만, 작은 값에서는 작은 값을 지니고, 큰 값들에서는 큰 값을 나타낸다. 다른 말로 하면, 표현 가능한 부동 소수점 실수들은 실수축 상에서 0에 근접할 때 가장 밀집되어있고, 0에서 멀어질수록 점점 드물다. 정의에 의하면, eps(1,0)은 eps(Float64)와 같은데, 그 이유는 1.0은 64비트 부동 소수점 실수이기 때문이다.또한 줄리아는 nextfloat과 prevfloat 함수를 제공하는데, 이는 표현 가능한 부동 소수점 실수 중에서 주어진 실수 바로 옆에있는 크거나 작은 수를 반환한다:julia> x = 1.25f0\n1.25f0\n\njulia> nextfloat(x)\n1.2500001f0\n\njulia> prevfloat(x)\n1.2499999f0\n\njulia> bitstring(prevfloat(x))\n\"00111111100111111111111111111111\"\n\njulia> bitstring(x)\n\"00111111101000000000000000000000\"\n\njulia> bitstring(nextfloat(x))\n\"00111111101000000000000000000001\"위의 예제는 서로 이웃한 표현 가능한 부동 소수점 수는 바이너리 정수 표기법을 가질 수 있다는 기본적인 원리를 새삼 일깨워준다."
 },
 
 {
     "location": "manual/integers-and-floating-point-numbers.html#반올림-모드-1",
-    "page": "정수와 부동소수점으로 표현되는 실수",
+    "page": "정수와 부동 소수점 수",
     "title": "반올림 모드",
     "category": "section",
     "text": "만약 어떤 숫자가 정확한 부동 소수점 표현을 가지고 있지 않다면, 그 수는 반드시 어떤 표현 가능한 값으로 반올림되어야 한다. 그러나, 만약 사용자가 원한다면IEEE 754 standard에 따라 반올림 방식을 변경할 수 있다.julia> x = 1.1; y = 0.1;\n\njulia> x + y\n1.2000000000000002\n\njulia> setrounding(Float64,RoundDown) do\n           x + y\n       end\n1.2기본 반올림 모드는 항상 RoundNearest이다. 이는 가장 근접한 표현 가능한 값으로 반올림 하지만, 만약 두 표현 값 중간에 주어진 값이 걸쳐 있으면 가수부 값 중 짝수(바이너리 임으로 0)로 반올림 하는 모드이다.!!! 경고     : 반올림은 일반적으로 기본 산술 함수(+, -,     *, /, sqrt)와 타입 변환 연산에서만 정확하다. 많은 다른 함수들은 기본 값인 RoundNearest를 가정하고 짜여져 있고, 이는 다른 반올림 모드에서는 부정확한 값을 제공할 수 있다."
@@ -186,7 +186,7 @@ var documenterSearchIndex = {"docs": [
 
 {
     "location": "manual/integers-and-floating-point-numbers.html#부동-소수점-실수에-대해서-더-읽으면-좋은-문서들-1",
-    "page": "정수와 부동소수점으로 표현되는 실수",
+    "page": "정수와 부동 소수점 수",
     "title": "부동 소수점 실수에 대해서 더 읽으면 좋은 문서들",
     "category": "section",
     "text": "부동 소수점 연산은 많은 미묘한 것들을 수반하고 있기 때문에 저수준(low-level) 구현에 익숙하지 않은 유저들은 당활할 수도 있다. 그러나 그 미묘한 점들은 과학적 연산과 관련된 많은 책들에서 잘 설명되고 있고, 아래에 나열하는 참고문헌도 참고하면 좋을 것이다:부동 소수점과 관련해서 가장 확실한 가이드는 IEEE 754-2008 Standard이지만, 유료이다.\n부동 소수점이 어떻게 표현되는지에 대한 간략하면서도 명쾌한 설명은 John D. Cook's 블로그 글를 참고하면 된다. 같은 주제에 관하여 이와 더불어서 그의 소개글은 부동 소수점이 실수의 이상적인 추상화와 다름으로써 생기는 몇가지 문제에 대해서도 다루고 있다.\nBruce Dawson의 series of blog posts on floating-point numbers도 추천하는 바이다.\n상급자들은 부동 소수점의 내부 구현에 관한 이야기들과 부동 소수점 연산을 할 때 맞닥뜨릴 수 있는 수치적인 정확도에 관한 문제들에 대해서는 David Goldberg의 논문 What Every Computer Scientist Should Know About Floating-Point Arithmetic를 참고하는 것이 좋다.\n특별히 부동 소수점의 역사, 근거 및 문제점에 대한 훨씬 더 자세한 문서화, 수치 컴퓨팅에서의 토론은  일반적으로 \"부동 소수점의 아버지\"로 알려진 William Kahan의 collected writings을 참조하세요. 관심이 더 생긴다면 An Interview with the Old Man of Floating-Point를 읽기 바란다."
@@ -194,23 +194,23 @@ var documenterSearchIndex = {"docs": [
 
 {
     "location": "manual/integers-and-floating-point-numbers.html#Arbitrary-Precision-Arithmetic-1",
-    "page": "정수와 부동소수점으로 표현되는 실수",
+    "page": "정수와 부동 소수점 수",
     "title": "임의 정밀도 연산",
     "category": "section",
-    "text": "임의 정밀도의 정수와 부동 소수점들의 연산을 위해, Julia는 GNU Multiple Precision Arithmetic Library (GMP)와 GNU MPFR Library을 각각 래빙(wrapping)하였다. BigInt와 BigFloat타입은 Julia에서 각각 임의 정밀도의 정수와 부동 소수점을 다루기 위해 사용되고 있다.기본 수치 타입으로부터 임의 정밀도 정수와 부동 소수점 타입을 만들기 위해 생성자가 존재하며, parse는 AbstractString들로 부터 임의 정밀도 타입을 만들 수 있게 해준다. 한번 임의 정밀도 타입이 만들어지면, type promotion and conversion mechanism덕분에 자유롭게 다른 수치타입과 연산을 수행할 수 있다:julia> BigInt(typemax(Int64)) + 1\n9223372036854775808\n\njulia> parse(BigInt, \"123456789012345678901234567890\") + 1\n123456789012345678901234567891\n\njulia> parse(BigFloat, \"1.23456789012345678901\")\n1.234567890123456789010000000000000000000000000000000000000000000000000000000004\n\njulia> BigFloat(2.0^66) / 3\n2.459565876494606882133333333333333333333333333333333333333333333333333333333344e+19\n\njulia> factorial(BigInt(40))\n815915283247897734345611269596115894272000000000그러나, 기본 타입과 BigInt/BigFloat간의 묵시적 형 변환(type promotion)은 자동으로 이루어지지 않고, 반드시 명시적으로 처리되어야 한다.julia> x = typemin(Int64)\n-9223372036854775808\n\njulia> x = x - 1\n9223372036854775807\n\njulia> typeof(x)\nInt64\n\njulia> y = BigInt(typemin(Int64))\n-9223372036854775808\n\njulia> y = y - 1\n-9223372036854775809\n\njulia> typeof(y)\nBigIntBigFloat타입에서 기본 정밀도(가수부의 비트수)와 반올림 모드는 setprecision와 setrounding를 호출함으로써 변경할 수 있으며, 한 번 호출된 이후에는 그 설정이 계속 유지 된다. 특정 블럭의 코드에서만 정밀도와 반올림을 변경하기 위해서는 do블럭의 코드에서와 같은 함수를 호출한다:julia> setrounding(BigFloat, RoundUp) do\n           BigFloat(1) + parse(BigFloat, \"0.1\")\n       end\n1.100000000000000000000000000000000000000000000000000000000000000000000000000003\n\njulia> setrounding(BigFloat, RoundDown) do\n           BigFloat(1) + parse(BigFloat, \"0.1\")\n       end\n1.099999999999999999999999999999999999999999999999999999999999999999999999999986\n\njulia> setprecision(40) do\n           BigFloat(1) + parse(BigFloat, \"0.1\")\n       end\n1.1000000000004"
+    "text": "임의 정밀도의 정수와 부동 소수점들의 연산을 위해, 줄리아는 GNU Multiple Precision Arithmetic Library (GMP)와 GNU MPFR Library을 각각 래빙(wrapping)하였다. BigInt와 BigFloat타입은 줄리아에서 각각 임의 정밀도의 정수와 부동 소수점을 다루기 위해 사용되고 있다.기본 수치 타입으로부터 임의 정밀도 정수와 부동 소수점 타입을 만들기 위해 생성자가 존재하며, parse는 AbstractString들로 부터 임의 정밀도 타입을 만들 수 있게 해준다. 한번 임의 정밀도 타입이 만들어지면, type promotion and conversion mechanism덕분에 자유롭게 다른 수치타입과 연산을 수행할 수 있다:julia> BigInt(typemax(Int64)) + 1\n9223372036854775808\n\njulia> parse(BigInt, \"123456789012345678901234567890\") + 1\n123456789012345678901234567891\n\njulia> parse(BigFloat, \"1.23456789012345678901\")\n1.234567890123456789010000000000000000000000000000000000000000000000000000000004\n\njulia> BigFloat(2.0^66) / 3\n2.459565876494606882133333333333333333333333333333333333333333333333333333333344e+19\n\njulia> factorial(BigInt(40))\n815915283247897734345611269596115894272000000000그러나, 기본 타입과 BigInt/BigFloat간의 묵시적 형 변환(type promotion)은 자동으로 이루어지지 않고, 반드시 명시적으로 처리되어야 한다.julia> x = typemin(Int64)\n-9223372036854775808\n\njulia> x = x - 1\n9223372036854775807\n\njulia> typeof(x)\nInt64\n\njulia> y = BigInt(typemin(Int64))\n-9223372036854775808\n\njulia> y = y - 1\n-9223372036854775809\n\njulia> typeof(y)\nBigIntBigFloat타입에서 기본 정밀도(가수부의 비트수)와 반올림 모드는 setprecision와 setrounding를 호출함으로써 변경할 수 있으며, 한 번 호출된 이후에는 그 설정이 계속 유지 된다. 특정 블럭의 코드에서만 정밀도와 반올림을 변경하기 위해서는 do블럭의 코드에서와 같은 함수를 호출한다:julia> setrounding(BigFloat, RoundUp) do\n           BigFloat(1) + parse(BigFloat, \"0.1\")\n       end\n1.100000000000000000000000000000000000000000000000000000000000000000000000000003\n\njulia> setrounding(BigFloat, RoundDown) do\n           BigFloat(1) + parse(BigFloat, \"0.1\")\n       end\n1.099999999999999999999999999999999999999999999999999999999999999999999999999986\n\njulia> setprecision(40) do\n           BigFloat(1) + parse(BigFloat, \"0.1\")\n       end\n1.1000000000004"
 },
 
 {
     "location": "manual/integers-and-floating-point-numbers.html#man-numeric-literal-coefficients-1",
-    "page": "정수와 부동소수점으로 표현되는 실수",
+    "page": "정수와 부동 소수점 수",
     "title": "수치형 리터럴 계수",
     "category": "section",
-    "text": "보통의 수학 식과 표현식을 깔끔하게 표현하기 위해서, Julia는 변수가 수치형 리터럴 바로 다음에 있으면 둘 사이의 관계가 곱셈임을 가정한다. 이는 다항식의 표현을 더욱 깔끔하게 만든다:julia> x = 3\n3\n\njulia> 2x^2 - 3x + 1\n10\n\njulia> 1.5x^2 - .5x + 1\n13.0이는 지수함수의 표현도 매우 아름답게 만들 수 있다:julia> 2^2x\n64수치형 리터럴 계수의 선행(precedence)도 부정연산과 같은 단항 연산과 같이 작동한다. 따라서 2^3x는 2^(3x)으로, 2x^3은 2*(x^3)으로 파싱(parsing)된다.수치형 리터럴은 괄호가 있는 식에서도 계수(coeffiients)로 작동할 수 있다:julia> 2(x-1)^2 - 3(x-1) + 1\n3!!! 중요 :      내재적(implicit)으로 사용된 수치형 리터럴 계수의 선행은 다른 곱셈(*)과 나눗셈(/,\\, //) 같은 이진 연산자보다 높습니다. 예를들어 1/2im1은 -0.5im과 같고, 6//2(2+1)는 1//1과 같습니다.게다가 괄호 표현식은 변수 또한 계수로 생각하여, 곱셈기호 없이도 변수들 간의 곱으로 식을 표현할 수도 있다:julia> (x-1)x\n6그러나 두 괄호식을 병치하거나 괄호식 앞에 변수를 두는 경우는 계수로 사용할 수 없다:julia> (x-1)(x+1)\nERROR: MethodError: objects of type Int64 are not callable\n\njulia> x(x+1)\nERROR: MethodError: objects of type Int64 are not callable두 표현식은 함수로써 인식된다. 괄호앞에 붙는 수치형 리터럴이 아닌 표현식들은 모두 함수와 함수의 매개변수로 인식된다(자세한 설명을 위해서는 Functions를 참고하도록 하자). 그래서 두 가지 경우 모두 왼쪽에 있는 값이 함수가 아님을 알려주는 에러가 발생한다.위에서 언급한 문법적 강화효과는 수학식을 작성할 때 생기는 시각적 공해를 줄일 수 있도록 해준다. 단지 한 가지 알아야 할 점은 수치형 계수와 이에 곱해지는 변수 혹은 괄호식 등 사이에는 빈칸이 있어서는 안된다."
+    "text": "보통의 수학 식과 표현식을 깔끔하게 표현하기 위해서, 줄리아는 변수가 수치형 리터럴 바로 다음에 있으면 둘 사이의 관계가 곱셈임을 가정한다. 이는 다항식의 표현을 더욱 깔끔하게 만든다:julia> x = 3\n3\n\njulia> 2x^2 - 3x + 1\n10\n\njulia> 1.5x^2 - .5x + 1\n13.0이는 지수함수의 표현도 매우 아름답게 만들 수 있다:julia> 2^2x\n64수치형 리터럴 계수의 선행(precedence)도 부정연산과 같은 단항 연산과 같이 작동한다. 따라서 2^3x는 2^(3x)으로, 2x^3은 2*(x^3)으로 파싱(parsing)된다.수치형 리터럴은 괄호가 있는 식에서도 계수(coeffiients)로 작동할 수 있다:julia> 2(x-1)^2 - 3(x-1) + 1\n3!!! 중요 :      내재적(implicit)으로 사용된 수치형 리터럴 계수의 선행은 다른 곱셈(*)과 나눗셈(/,\\, //) 같은 이진 연산자보다 높습니다. 예를들어 1/2im1은 -0.5im과 같고, 6//2(2+1)는 1//1과 같습니다.게다가 괄호 표현식은 변수 또한 계수로 생각하여, 곱셈기호 없이도 변수들 간의 곱으로 식을 표현할 수도 있다:julia> (x-1)x\n6그러나 두 괄호식을 병치하거나 괄호식 앞에 변수를 두는 경우는 계수로 사용할 수 없다:julia> (x-1)(x+1)\nERROR: MethodError: objects of type Int64 are not callable\n\njulia> x(x+1)\nERROR: MethodError: objects of type Int64 are not callable두 표현식은 함수로써 인식된다. 괄호앞에 붙는 수치형 리터럴이 아닌 표현식들은 모두 함수와 함수의 매개변수로 인식된다(자세한 설명을 위해서는 Functions를 참고하도록 하자). 그래서 두 가지 경우 모두 왼쪽에 있는 값이 함수가 아님을 알려주는 에러가 발생한다.위에서 언급한 문법적 강화효과는 수학식을 작성할 때 생기는 시각적 공해를 줄일 수 있도록 해준다. 단지 한 가지 알아야 할 점은 수치형 계수와 이에 곱해지는 변수 혹은 괄호식 등 사이에는 빈칸이 있어서는 안된다."
 },
 
 {
     "location": "manual/integers-and-floating-point-numbers.html#문법적-충돌-1",
-    "page": "정수와 부동소수점으로 표현되는 실수",
+    "page": "정수와 부동 소수점 수",
     "title": "문법적 충돌",
     "category": "section",
     "text": "리터럴 계수를 병치하는 문법은 16진수 정수 리터럴과 부동 소수점의 공학적 표현이라는 두 수치형 리터럴 문법과 충돌이 생길 수 있다. 다음은 문법적 충돌이 발생하는 예이다:16진수 리터럴 표현식 0xff는 수치형 리터럴 0과 변수 xff의 곱셈으로 해석될 수 있다.\n부동 소수점 리터럴 표현식 1e10은 수치형 리터럴 1이 변수 e10에 곱해지는 걸로 해석될 수 있고 이는 e가 아닌 E를 쓸 때에도 마찬가지이다.이 두 가지 경우에, 우리는 수치형 리터러를 해석하는데 있어서 다음과 같은 방식으로 모호함을 해결했다:0x로 시작하는 표현식은 항상 16진수 리터럴이다.\n수치형 리터럴으로 시작하는 표현식에서 수치형 리터럴 다음에 e또는 E가 뒤따라오면 항상 부동소수점 리터럴이다."
@@ -218,10 +218,10 @@ var documenterSearchIndex = {"docs": [
 
 {
     "location": "manual/integers-and-floating-point-numbers.html#리터럴-0과-1-1",
-    "page": "정수와 부동소수점으로 표현되는 실수",
+    "page": "정수와 부동 소수점 수",
     "title": "리터럴 0과 1",
     "category": "section",
-    "text": "Julia는 어떤 특정한 타입이나 주어진 변수의 타입에 따라 리터럴 0이나 1을 리턴하는 함수를 제공한다.함수 설명\nzero(x) x타입이나 변수 x의 타입의 리터럴 0\none(x) x타입이나 변수 x의 타입의 리터럴 1위 함수들은 Numeric Comparisons에서 불필요한 type conversion에 의한 성능저하를 줄일 때 유용하다.Examples:julia> zero(Float32)\n0.0f0\n\njulia> zero(1.0)\n0.0\n\njulia> one(Int32)\n1\n\njulia> one(BigFloat)\n1.0"
+    "text": "줄리아는 어떤 특정한 타입이나 주어진 변수의 타입에 따라 리터럴 0이나 1을 리턴하는 함수를 제공한다.함수 설명\nzero(x) x타입이나 변수 x의 타입의 리터럴 0\none(x) x타입이나 변수 x의 타입의 리터럴 1위 함수들은 Numeric Comparisons에서 불필요한 type conversion에 의한 성능저하를 줄일 때 유용하다.Examples:julia> zero(Float32)\n0.0f0\n\njulia> zero(1.0)\n0.0\n\njulia> one(Int32)\n1\n\njulia> one(BigFloat)\n1.0"
 },
 
 {
@@ -7237,7 +7237,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Collections and Data Structures",
     "title": "Base.count",
     "category": "Function",
-    "text": "LibGit2.count(f::Function, walker::GitRevWalker; oid::GitHash=GitHash(), by::Cint=Consts.SORT_NONE, rev::Bool=false)\n\nUsing the GitRevWalker walker to \"walk\" over every commit in the repository's history, find the number of commits which return true when f is applied to them. The keyword arguments are:     * oid: The GitHash of the commit to begin the walk from. The default is to use       push_head! and therefore the HEAD commit and all its ancestors.     * by: The sorting method. The default is not to sort. Other options are to sort by       topology (LibGit2.Consts.SORT_TOPOLOGICAL), to sort forwards in time       (LibGit2.Consts.SORT_TIME, most ancient first) or to sort backwards in time       (LibGit2.Consts.SORT_REVERSE, most recent first).     * rev: Whether to reverse the sorted order (for instance, if topological sorting is used).\n\nExamples\n\ncnt = LibGit2.with(LibGit2.GitRevWalker(repo)) do walker\n    count((oid, repo)->(oid == commit_oid1), walker, oid=commit_oid1, by=LibGit2.Consts.SORT_TIME)\nend\n\ncount finds the number of commits along the walk with a certain GitHash commit_oid1, starting the walk from that commit and moving forwards in time from it. Since the GitHash is unique to a commit, cnt will be 1.\n\n\n\ncount(p, itr) -> Integer\ncount(itr) -> Integer\n\nCount the number of elements in itr for which predicate p returns true. If p is omitted, counts the number of true elements in itr (which should be a collection of boolean values).\n\njulia> count(i->(4<=i<=6), [2,3,4,5,6])\n3\n\njulia> count([true, false, true, true])\n3\n\n\n\n"
+    "text": "count(p, itr) -> Integer\ncount(itr) -> Integer\n\nCount the number of elements in itr for which predicate p returns true. If p is omitted, counts the number of true elements in itr (which should be a collection of boolean values).\n\njulia> count(i->(4<=i<=6), [2,3,4,5,6])\n3\n\njulia> count([true, false, true, true])\n3\n\n\n\nLibGit2.count(f::Function, walker::GitRevWalker; oid::GitHash=GitHash(), by::Cint=Consts.SORT_NONE, rev::Bool=false)\n\nUsing the GitRevWalker walker to \"walk\" over every commit in the repository's history, find the number of commits which return true when f is applied to them. The keyword arguments are:     * oid: The GitHash of the commit to begin the walk from. The default is to use       push_head! and therefore the HEAD commit and all its ancestors.     * by: The sorting method. The default is not to sort. Other options are to sort by       topology (LibGit2.Consts.SORT_TOPOLOGICAL), to sort forwards in time       (LibGit2.Consts.SORT_TIME, most ancient first) or to sort backwards in time       (LibGit2.Consts.SORT_REVERSE, most recent first).     * rev: Whether to reverse the sorted order (for instance, if topological sorting is used).\n\nExamples\n\ncnt = LibGit2.with(LibGit2.GitRevWalker(repo)) do walker\n    count((oid, repo)->(oid == commit_oid1), walker, oid=commit_oid1, by=LibGit2.Consts.SORT_TIME)\nend\n\ncount finds the number of commits along the walk with a certain GitHash commit_oid1, starting the walk from that commit and moving forwards in time from it. Since the GitHash is unique to a commit, cnt will be 1.\n\n\n\n"
 },
 
 {
@@ -7269,7 +7269,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Collections and Data Structures",
     "title": "Base.map",
     "category": "Function",
-    "text": "LibGit2.map(f::Function, walker::GitRevWalker; oid::GitHash=GitHash(), range::AbstractString=\"\", by::Cint=Consts.SORT_NONE, rev::Bool=false)\n\nUsing the GitRevWalker walker to \"walk\" over every commit in the repository's history, apply f to each commit in the walk. The keyword arguments are:     * oid: The GitHash of the commit to begin the walk from. The default is to use       push_head! and therefore the HEAD commit and all its ancestors.     * range: A range of GitHashs in the format oid1..oid2. f will be       applied to all commits between the two.     * by: The sorting method. The default is not to sort. Other options are to sort by       topology (LibGit2.Consts.SORT_TOPOLOGICAL), to sort forwards in time       (LibGit2.Consts.SORT_TIME, most ancient first) or to sort backwards in time       (LibGit2.Consts.SORT_REVERSE, most recent first).     * rev: Whether to reverse the sorted order (for instance, if topological sorting is used).\n\nExamples\n\noids = LibGit2.with(LibGit2.GitRevWalker(repo)) do walker\n    LibGit2.map((oid, repo)->string(oid), walker, by=LibGit2.Consts.SORT_TIME)\nend\n\nHere, map visits each commit using the GitRevWalker and finds its GitHash.\n\n\n\nmap(f, c...) -> collection\n\nTransform collection c by applying f to each element. For multiple collection arguments, apply f elementwise.\n\nSee also: mapslices\n\nExamples\n\njulia> map(x -> x * 2, [1, 2, 3])\n3-element Array{Int64,1}:\n 2\n 4\n 6\n\njulia> map(+, [1, 2, 3], [10, 20, 30])\n3-element Array{Int64,1}:\n 11\n 22\n 33\n\n\n\n"
+    "text": "map(f, c...) -> collection\n\nTransform collection c by applying f to each element. For multiple collection arguments, apply f elementwise.\n\nSee also: mapslices\n\nExamples\n\njulia> map(x -> x * 2, [1, 2, 3])\n3-element Array{Int64,1}:\n 2\n 4\n 6\n\njulia> map(+, [1, 2, 3], [10, 20, 30])\n3-element Array{Int64,1}:\n 11\n 22\n 33\n\n\n\nLibGit2.map(f::Function, walker::GitRevWalker; oid::GitHash=GitHash(), range::AbstractString=\"\", by::Cint=Consts.SORT_NONE, rev::Bool=false)\n\nUsing the GitRevWalker walker to \"walk\" over every commit in the repository's history, apply f to each commit in the walk. The keyword arguments are:     * oid: The GitHash of the commit to begin the walk from. The default is to use       push_head! and therefore the HEAD commit and all its ancestors.     * range: A range of GitHashs in the format oid1..oid2. f will be       applied to all commits between the two.     * by: The sorting method. The default is not to sort. Other options are to sort by       topology (LibGit2.Consts.SORT_TOPOLOGICAL), to sort forwards in time       (LibGit2.Consts.SORT_TIME, most ancient first) or to sort backwards in time       (LibGit2.Consts.SORT_REVERSE, most recent first).     * rev: Whether to reverse the sorted order (for instance, if topological sorting is used).\n\nExamples\n\noids = LibGit2.with(LibGit2.GitRevWalker(repo)) do walker\n    LibGit2.map((oid, repo)->string(oid), walker, by=LibGit2.Consts.SORT_TIME)\nend\n\nHere, map visits each commit using the GitRevWalker and finds its GitHash.\n\n\n\n"
 },
 
 {
@@ -9077,7 +9077,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Mathematics",
     "title": "Base.conj",
     "category": "Function",
-    "text": "conj(z)\n\nCompute the complex conjugate of a complex number z.\n\nExamples\n\njulia> conj(1 + 3im)\n1 - 3im\n\n\n\nconj(v::RowVector)\n\nReturn a ConjArray lazy view of the input, where each element is conjugated.\n\nExamples\n\njulia> v = RowVector([1+im, 1-im])\n1×2 RowVector{Complex{Int64},Array{Complex{Int64},1}}:\n 1+1im  1-1im\n\njulia> conj(v)\n1×2 RowVector{Complex{Int64},ConjArray{Complex{Int64},1,Array{Complex{Int64},1}}}:\n 1-1im  1+1im\n\n\n\n"
+    "text": "conj(v::RowVector)\n\nReturn a ConjArray lazy view of the input, where each element is conjugated.\n\nExamples\n\njulia> v = RowVector([1+im, 1-im])\n1×2 RowVector{Complex{Int64},Array{Complex{Int64},1}}:\n 1+1im  1-1im\n\njulia> conj(v)\n1×2 RowVector{Complex{Int64},ConjArray{Complex{Int64},1,Array{Complex{Int64},1}}}:\n 1-1im  1+1im\n\n\n\nconj(z)\n\nCompute the complex conjugate of a complex number z.\n\nExamples\n\njulia> conj(1 + 3im)\n1 - 3im\n\n\n\n"
 },
 
 {
@@ -10645,7 +10645,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Strings",
     "title": "Base.split",
     "category": "Function",
-    "text": "split(ce::LibGit2.ConfigEntry) -> Tuple{String,String,String,String}\n\nBreak the ConfigEntry up to the following pieces: section, subsection, name, and value.\n\nExamples\n\nGiven the git configuration file containing:\n\n[credential \"https://example.com\"]\n    username = me\n\nThe ConfigEntry would look like the following:\n\njulia> entry\nConfigEntry(\"credential.https://example.com.username\", \"me\")\n\njulia> split(entry)\n(\"credential\", \"https://example.com\", \"username\", \"me\")\n\nRefer to the git config syntax documenation for more details.\n\n\n\nsplit(s::AbstractString, [chars]; limit::Integer=0, keep::Bool=true)\n\nReturn an array of substrings by splitting the given string on occurrences of the given character delimiters, which may be specified in any of the formats allowed by search's second argument (i.e. a single character, collection of characters, string, or regular expression). If chars is omitted, it defaults to the set of all space characters, and keep is taken to be false. The two keyword arguments are optional: they are a maximum size for the result and a flag determining whether empty fields should be kept in the result.\n\nExamples\n\njulia> a = \"Ma.rch\"\n\"Ma.rch\"\n\njulia> split(a,\".\")\n2-element Array{SubString{String},1}:\n \"Ma\"\n \"rch\"\n\n\n\n"
+    "text": "split(s::AbstractString, [chars]; limit::Integer=0, keep::Bool=true)\n\nReturn an array of substrings by splitting the given string on occurrences of the given character delimiters, which may be specified in any of the formats allowed by search's second argument (i.e. a single character, collection of characters, string, or regular expression). If chars is omitted, it defaults to the set of all space characters, and keep is taken to be false. The two keyword arguments are optional: they are a maximum size for the result and a flag determining whether empty fields should be kept in the result.\n\nExamples\n\njulia> a = \"Ma.rch\"\n\"Ma.rch\"\n\njulia> split(a,\".\")\n2-element Array{SubString{String},1}:\n \"Ma\"\n \"rch\"\n\n\n\nsplit(ce::LibGit2.ConfigEntry) -> Tuple{String,String,String,String}\n\nBreak the ConfigEntry up to the following pieces: section, subsection, name, and value.\n\nExamples\n\nGiven the git configuration file containing:\n\n[credential \"https://example.com\"]\n    username = me\n\nThe ConfigEntry would look like the following:\n\njulia> entry\nConfigEntry(\"credential.https://example.com.username\", \"me\")\n\njulia> split(entry)\n(\"credential\", \"https://example.com\", \"username\", \"me\")\n\nRefer to the git config syntax documenation for more details.\n\n\n\n"
 },
 
 {
