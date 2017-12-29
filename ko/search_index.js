@@ -2173,7 +2173,7 @@ var documenterSearchIndex = {"docs": [
     "page": "선형 대수",
     "title": "선형 대수",
     "category": "section",
-    "text": "다차원 배열 지원에 더불어, Julia는 자주 쓰이고 유용한 여러 선형 대수 연산의 네이티브 구현을 제공한다. trace, det, inv 등의 기초적 연산을 모두 지원한다:julia> A = [1 2 3; 4 1 6; 7 8 1]\n3×3 Array{Int64,2}:\n 1  2  3\n 4  1  6\n 7  8  1\n\njulia> trace(A)\n3\n\njulia> det(A)\n104.0\n\njulia> inv(A)\n3×3 Array{Float64,2}:\n -0.451923   0.211538    0.0865385\n  0.365385  -0.192308    0.0576923\n  0.240385   0.0576923  -0.0673077또한 고윳값과 고유 벡터 찾기 등의 다른 유용한 연산들도 지원한다:julia> A = [-4. -17.; 2. 2.]\n2×2 Array{Float64,2}:\n -4.0  -17.0\n  2.0    2.0\n\njulia> eigvals(A)\n2-element Array{Complex{Float64},1}:\n -1.0 + 5.0im\n -1.0 - 5.0im\n\njulia> eigvecs(A)\n2×2 Array{Complex{Float64},2}:\n  0.945905+0.0im        0.945905-0.0im\n -0.166924-0.278207im  -0.166924+0.278207im이에 더불어, Julia는 여러 분해를 제공한다:  선형 방정식 풀이나 행렬 지수 함수 계산 등을 할 때, 행렬을 (성능이나 메모리 등의 이유로) 더 용이한 형태로 사전 분해 함으로써 속도를 높여줄 수 있다. 자세한 내용은 factorize 문서를 참조하라. 예를 들어:julia> A = [1.5 2 -4; 3 -1 -6; -10 2.3 4]\n3×3 Array{Float64,2}:\n   1.5   2.0  -4.0\n   3.0  -1.0  -6.0\n -10.0   2.3   4.0\n\njulia> factorize(A)\nBase.LinAlg.LU{Float64,Array{Float64,2}} with factors L and U:\n[1.0 0.0 0.0; -0.15 1.0 0.0; -0.3 -0.132196 1.0]\n[-10.0 2.3 4.0; 0.0 2.345 -3.4; 0.0 0.0 -5.24947]A가 에르미트, 대칭, 삼각, 3중 대각 또는 2중 대각이 아니므로, LU 분해가 가장 좋은 방법일 것이다. 이를 다음과 비교해보자:julia> B = [1.5 2 -4; 2 -1 -3; -4 -3 5]\n3×3 Array{Float64,2}:\n  1.5   2.0  -4.0\n  2.0  -1.0  -3.0\n -4.0  -3.0   5.0\n\njulia> factorize(B)\nBase.LinAlg.BunchKaufman{Float64,Array{Float64,2}}\nD factor:\n3×3 Tridiagonal{Float64,Array{Float64,1}}:\n -1.64286   0.0   ⋅\n  0.0      -2.8  0.0\n   ⋅        0.0  5.0\nU factor:\n3×3 Base.LinAlg.UnitUpperTriangular{Float64,Array{Float64,2}}:\n 1.0  0.142857  -0.8\n 0.0  1.0       -0.6\n 0.0  0.0        1.0\npermutation:\n3-element Array{Int64,1}:\n 1\n 2\n 3여기서는 Julia가 B가 대칭임을 감지하여 더 적절한 분해를 사용하였다. 행렬의 특성(예를 들어 대칭, 3중 대각 등)을 알고 있는 경우 더 효율적인 코드를 작성할 수 있는 경우가 많이 있다. Julia는 행렬에 태그를 붙여 이러한 특성들을 표기할 수 있도록 해주는 특수 타입들을 제공한다. 예를 들어:julia> B = [1.5 2 -4; 2 -1 -3; -4 -3 5]\n3×3 Array{Float64,2}:\n  1.5   2.0  -4.0\n  2.0  -1.0  -3.0\n -4.0  -3.0   5.0\n\njulia> sB = Symmetric(B)\n3×3 Symmetric{Float64,Array{Float64,2}}:\n  1.5   2.0  -4.0\n  2.0  -1.0  -3.0\n -4.0  -3.0   5.0sB는 (실)대칭인 행렬로 태그되었다. 따라서 이후에 고윳값 분해나 벡터와의 곱 등을 할 때, 참조하는 데이터를 반으로 줄임으로써 계산을 효율적으로 할 수 있다. 예를 들어:julia> B = [1.5 2 -4; 2 -1 -3; -4 -3 5]\n3×3 Array{Float64,2}:\n  1.5   2.0  -4.0\n  2.0  -1.0  -3.0\n -4.0  -3.0   5.0\n\njulia> sB = Symmetric(B)\n3×3 Symmetric{Float64,Array{Float64,2}}:\n  1.5   2.0  -4.0\n  2.0  -1.0  -3.0\n -4.0  -3.0   5.0\n\njulia> x = [1; 2; 3]\n3-element Array{Int64,1}:\n 1\n 2\n 3\n\njulia> sB\\x\n3-element Array{Float64,1}:\n -1.7391304347826084\n -1.1086956521739126\n -1.4565217391304346여기서 \\ (왼쪽나누기) 연산은 선형 해법을 계산한다. 행렬의 전치를 벡터로 왼쪽나누기 하거나, 행렬간의 선형 해법에서 전치가 있는 경우 등에 대해 Julia의 파서는 특수화된 함수를 배정하며, 이는 행렬 타입에 따라 더 특수화 되는 경우가 많다. 예를 들어, 똑같은 왼쪽나누기 연산자를 사용했음에도 불구하고, A\\B는 Base.LinAlg.A_ldiv_B!를 호출하는 반면 A'\\B는 Base.LinAlg.Ac_ldiv_B를 호출한다. 행렬에 대해서도 마찬가지이다: A.'\\B.'는 Base.LinAlg.At_ldiv_Bt를 호출한다. 왼쪽나누기 연산자는 강력하여 간소하고 읽기 쉬우면서도 모든 종류의 선형 방정식의 풀이할 수 있을 정도로 충분히 유연한 코드를 작성하기 쉽게 해 준다."
+    "text": "다차원 배열 지원에 더불어, Julia는 자주 쓰이고 유용한 여러 선형 대수 연산의 네이티브 구현을 제공한다. trace, det, inv 등의 기초적 연산을 모두 지원한다:julia> A = [1 2 3; 4 1 6; 7 8 1]\n3×3 Array{Int64,2}:\n 1  2  3\n 4  1  6\n 7  8  1\n\njulia> trace(A)\n3\n\njulia> det(A)\n104.0\n\njulia> inv(A)\n3×3 Array{Float64,2}:\n -0.451923   0.211538    0.0865385\n  0.365385  -0.192308    0.0576923\n  0.240385   0.0576923  -0.0673077또한 고윳값과 고유 벡터 찾기 등의 다른 유용한 연산들도 지원한다:julia> A = [-4. -17.; 2. 2.]\n2×2 Array{Float64,2}:\n -4.0  -17.0\n  2.0    2.0\n\njulia> eigvals(A)\n2-element Array{Complex{Float64},1}:\n -1.0 + 5.0im\n -1.0 - 5.0im\n\njulia> eigvecs(A)\n2×2 Array{Complex{Float64},2}:\n  0.945905+0.0im        0.945905-0.0im\n -0.166924-0.278207im  -0.166924+0.278207im이에 더불어, Julia는 여러 분해를 제공한다:  선형 방정식 풀이나 행렬 지수 함수 계산 등을 할 때, 행렬을 (성능이나 메모리 등의 이유로) 더 용이한 형태로 사전 분해 함으로써 속도를 높여줄 수 있다. 자세한 내용은 factorize 문서를 참조하라. 예를 들어:julia> A = [1.5 2 -4; 3 -1 -6; -10 2.3 4]\n3×3 Array{Float64,2}:\n   1.5   2.0  -4.0\n   3.0  -1.0  -6.0\n -10.0   2.3   4.0\n\njulia> factorize(A)\nBase.LinAlg.LU{Float64,Array{Float64,2}} with factors L and U:\n[1.0 0.0 0.0; -0.15 1.0 0.0; -0.3 -0.132196 1.0]\n[-10.0 2.3 4.0; 0.0 2.345 -3.4; 0.0 0.0 -5.24947]A가 에르미트, 대칭, 삼각, 3중 대각 또는 2중 대각이 아니므로, LU 분해가 가장 좋은 방법일 것이다. 이를 다음과 비교해보자:julia> B = [1.5 2 -4; 2 -1 -3; -4 -3 5]\n3×3 Array{Float64,2}:\n  1.5   2.0  -4.0\n  2.0  -1.0  -3.0\n -4.0  -3.0   5.0\n\njulia> factorize(B)\nBase.LinAlg.BunchKaufman{Float64,Array{Float64,2}}\nD factor:\n3×3 Tridiagonal{Float64,Array{Float64,1}}:\n -1.64286   0.0   ⋅\n  0.0      -2.8  0.0\n   ⋅        0.0  5.0\nU factor:\n3×3 Base.LinAlg.UnitUpperTriangular{Float64,Array{Float64,2}}:\n 1.0  0.142857  -0.8\n 0.0  1.0       -0.6\n 0.0  0.0        1.0\npermutation:\n3-element Array{Int64,1}:\n 1\n 2\n 3여기서는 Julia가 B가 대칭임을 감지하여 더 적절한 분해를 사용하였다. 행렬의 특성(예를 들어 대칭, 3중 대각 등)을 알고 있는 경우 더 효율적인 코드를 작성할 수 있는 경우가 많이 있다. Julia는 행렬에 태그를 붙여 이러한 특성들을 표기할 수 있도록 해주는 특수 타입들을 제공한다. 예를 들어:julia> B = [1.5 2 -4; 2 -1 -3; -4 -3 5]\n3×3 Array{Float64,2}:\n  1.5   2.0  -4.0\n  2.0  -1.0  -3.0\n -4.0  -3.0   5.0\n\njulia> sB = Symmetric(B)\n3×3 Symmetric{Float64,Array{Float64,2}}:\n  1.5   2.0  -4.0\n  2.0  -1.0  -3.0\n -4.0  -3.0   5.0sB는 (실)대칭인 행렬로 태그되었다. 따라서 이후에 고윳값 분해나 벡터와의 곱 등을 할 때, 참조하는 데이터를 반으로 줄임으로써 계산을 효율적으로 할 수 있다. 예를 들어:julia> B = [1.5 2 -4; 2 -1 -3; -4 -3 5]\n3×3 Array{Float64,2}:\n  1.5   2.0  -4.0\n  2.0  -1.0  -3.0\n -4.0  -3.0   5.0\n\njulia> sB = Symmetric(B)\n3×3 Symmetric{Float64,Array{Float64,2}}:\n  1.5   2.0  -4.0\n  2.0  -1.0  -3.0\n -4.0  -3.0   5.0\n\njulia> x = [1; 2; 3]\n3-element Array{Int64,1}:\n 1\n 2\n 3\n\njulia> sB\\x\n3-element Array{Float64,1}:\n -1.7391304347826084\n -1.1086956521739126\n -1.4565217391304346여기서 \\ (왼쪽나누기) 연산은 선형 해법을 계산한다. 왼쪽나누기 연산자는 강력하여 간소하고 읽기 쉬우면서도 모든 종류의 선형 방정식의 풀이할 수 있을 정도로 충분히 유연한 코드를 작성하기 쉽게 해 준다."
 },
 
 {
@@ -7581,7 +7581,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Collections and Data Structures",
     "title": "Base.pairs",
     "category": "Function",
-    "text": "pairs(collection)\n\nReturn an iterator over key => value pairs for any collection that maps a set of keys to a set of values. This includes arrays, where the keys are the array indices.\n\n\n\npairs(IndexLinear(), A)\npairs(IndexCartesian(), A)\npairs(IndexStyle(A), A)\n\nAn iterator that accesses each element of the array A, returning i => x, where i is the index for the element and x = A[i]. Identical to pairs(A), except that the style of index can be selected. Also similar to enumerate(A), except i will be a valid index for A, while enumerate always counts from 1 regardless of the indices of A.\n\nSpecifying IndexLinear() ensures that i will be an integer; specifying IndexCartesian() ensures that i will be a CartesianIndex; specifying IndexStyle(A) chooses whichever has been defined as the native indexing style for array A.\n\nMutation of the bounds of the underlying array will invalidate this iterator.\n\nExamples\n\njulia> A = [\"a\" \"d\"; \"b\" \"e\"; \"c\" \"f\"];\n\njulia> for (index, value) in pairs(IndexStyle(A), A)\n           println(\"$index $value\")\n       end\n1 a\n2 b\n3 c\n4 d\n5 e\n6 f\n\njulia> S = view(A, 1:2, :);\n\njulia> for (index, value) in pairs(IndexStyle(S), S)\n           println(\"$index $value\")\n       end\nCartesianIndex(1, 1) a\nCartesianIndex(2, 1) b\nCartesianIndex(1, 2) d\nCartesianIndex(2, 2) e\n\nSee also: IndexStyle, axes.\n\n\n\n"
+    "text": "pairs(IndexLinear(), A)\npairs(IndexCartesian(), A)\npairs(IndexStyle(A), A)\n\nAn iterator that accesses each element of the array A, returning i => x, where i is the index for the element and x = A[i]. Identical to pairs(A), except that the style of index can be selected. Also similar to enumerate(A), except i will be a valid index for A, while enumerate always counts from 1 regardless of the indices of A.\n\nSpecifying IndexLinear() ensures that i will be an integer; specifying IndexCartesian() ensures that i will be a CartesianIndex; specifying IndexStyle(A) chooses whichever has been defined as the native indexing style for array A.\n\nMutation of the bounds of the underlying array will invalidate this iterator.\n\nExamples\n\njulia> A = [\"a\" \"d\"; \"b\" \"e\"; \"c\" \"f\"];\n\njulia> for (index, value) in pairs(IndexStyle(A), A)\n           println(\"$index $value\")\n       end\n1 a\n2 b\n3 c\n4 d\n5 e\n6 f\n\njulia> S = view(A, 1:2, :);\n\njulia> for (index, value) in pairs(IndexStyle(S), S)\n           println(\"$index $value\")\n       end\nCartesianIndex(1, 1) a\nCartesianIndex(2, 1) b\nCartesianIndex(1, 2) d\nCartesianIndex(2, 2) e\n\nSee also: IndexStyle, axes.\n\n\n\npairs(collection)\n\nReturn an iterator over key => value pairs for any collection that maps a set of keys to a set of values. This includes arrays, where the keys are the array indices.\n\n\n\n"
 },
 
 {
@@ -9077,7 +9077,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Mathematics",
     "title": "Base.conj",
     "category": "Function",
-    "text": "conj(v::RowVector)\n\nReturn a ConjArray lazy view of the input, where each element is conjugated.\n\nExamples\n\njulia> v = RowVector([1+im, 1-im])\n1×2 RowVector{Complex{Int64},Array{Complex{Int64},1}}:\n 1+1im  1-1im\n\njulia> conj(v)\n1×2 RowVector{Complex{Int64},ConjArray{Complex{Int64},1,Array{Complex{Int64},1}}}:\n 1-1im  1+1im\n\n\n\nconj(z)\n\nCompute the complex conjugate of a complex number z.\n\nExamples\n\njulia> conj(1 + 3im)\n1 - 3im\n\n\n\n"
+    "text": "conj(z)\n\nCompute the complex conjugate of a complex number z.\n\nExamples\n\njulia> conj(1 + 3im)\n1 - 3im\n\n\n\nconj(v::RowVector)\n\nReturn a ConjArray lazy view of the input, where each element is conjugated.\n\nExamples\n\njulia> v = RowVector([1+im, 1-im])\n1×2 RowVector{Complex{Int64},Array{Complex{Int64},1}}:\n 1+1im  1-1im\n\njulia> conj(v)\n1×2 RowVector{Complex{Int64},ConjArray{Complex{Int64},1,Array{Complex{Int64},1}}}:\n 1-1im  1+1im\n\n\n\n"
 },
 
 {
@@ -13341,7 +13341,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Linear Algebra",
     "title": "Base.LinAlg.bkfact",
     "category": "Function",
-    "text": "bkfact(A, uplo::Symbol=:U, symmetric::Bool=issymmetric(A), rook::Bool=false) -> BunchKaufman\n\nCompute the Bunch-Kaufman [Bunch1977] factorization of a symmetric or Hermitian matrix A and return a BunchKaufman object. uplo indicates which triangle of matrix A to reference. If symmetric is true, A is assumed to be symmetric. If symmetric is false, A is assumed to be Hermitian. If rook is true, rook pivoting is used. If rook is false, rook pivoting is not used. The following functions are available for BunchKaufman objects: size, \\, inv, issymmetric, ishermitian.\n\n[Bunch1977]: J R Bunch and L Kaufman, Some stable methods for calculating inertia and solving symmetric linear systems, Mathematics of Computation 31:137 (1977), 163-179. url.\n\nExamples\n\njulia> A = [1 2; 2 3]\n2×2 Array{Int64,2}:\n 1  2\n 2  3\n\njulia> bkfact(A)\nBase.LinAlg.BunchKaufman{Float64,Array{Float64,2}}\nD factor:\n2×2 Tridiagonal{Float64,Array{Float64,1}}:\n -0.333333  0.0\n  0.0       3.0\nU factor:\n2×2 Base.LinAlg.UnitUpperTriangular{Float64,Array{Float64,2}}:\n 1.0  0.666667\n 0.0  1.0\npermutation:\n2-element Array{Int64,1}:\n 1\n 2\n\n\n\n"
+    "text": "bkfact(A, rook::Bool=false) -> BunchKaufman\n\nCompute the Bunch-Kaufman [Bunch1977] factorization of a symmetric or Hermitian matrix A as PUDUP or PLDLP, depending on which triangle is stored in A, and return a BunchKaufman object.\n\nIf rook is true, rook pivoting is used. If rook is false, rook pivoting is not used.\n\nThe following functions are available for BunchKaufman objects: size, \\, inv, issymmetric, ishermitian, getindex.\n\nNote that  P is symmetric, so P=P=P.\n\n[Bunch1977]: J R Bunch and L Kaufman, Some stable methods for calculating inertia and solving symmetric linear systems, Mathematics of Computation 31:137 (1977), 163-179. url.\n\nExamples\n\njulia> A = [1 2; 2 3]\n2×2 Array{Int64,2}:\n 1  2\n 2  3\n\njulia> bkfact(A)\nBase.LinAlg.BunchKaufman{Float64,Array{Float64,2}}\nD factor:\n2×2 Tridiagonal{Float64,Array{Float64,1}}:\n -0.333333  0.0\n  0.0       3.0\nU factor:\n2×2 Base.LinAlg.UnitUpperTriangular{Float64,Array{Float64,2}}:\n 1.0  0.666667\n 0.0  1.0\npermutation:\n2-element Array{Int64,1}:\n 1\n 2\n\n\n\n"
 },
 
 {
@@ -14113,179 +14113,27 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/linalg.html#Base.LinAlg.A_ldiv_B!",
+    "location": "stdlib/linalg.html#Base.LinAlg.mul!",
     "page": "Linear Algebra",
-    "title": "Base.LinAlg.A_ldiv_B!",
+    "title": "Base.LinAlg.mul!",
     "category": "Function",
-    "text": "A_ldiv_B!([Y,] A, B) -> Y\n\nCompute A \\ B in-place and store the result in Y, returning the result. If only two arguments are passed, then A_ldiv_B!(A, B) overwrites B with the result.\n\nThe argument A should not be a matrix.  Rather, instead of matrices it should be a factorization object (e.g. produced by factorize or cholfact). The reason for this is that factorization itself is both expensive and typically allocates memory (although it can also be done in-place via, e.g., lufact!), and performance-critical situations requiring A_ldiv_B! usually also require fine-grained control over the factorization of A.\n\n\n\n"
+    "text": "mul!(Y, A, B) -> Y\n\nCalculates the matrix-matrix or matrix-vector product AB and stores the result in Y, overwriting the existing value of Y. Note that Y must not be aliased with either A or B.\n\nExamples\n\njulia> A=[1.0 2.0; 3.0 4.0]; B=[1.0 1.0; 1.0 1.0]; Y = similar(B); mul!(Y, A, B);\n\njulia> Y\n2×2 Array{Float64,2}:\n 3.0  3.0\n 7.0  7.0\n\n\n\nmul!(A, B)\n\nCalculate the matrix-matrix product AB, overwriting one of A or B (but not both), and return the result (the overwritten argument).\n\n\n\n"
 },
 
 {
-    "location": "stdlib/linalg.html#Base.A_ldiv_Bc",
+    "location": "stdlib/linalg.html#Base.LinAlg.ldiv!",
     "page": "Linear Algebra",
-    "title": "Base.A_ldiv_Bc",
+    "title": "Base.LinAlg.ldiv!",
     "category": "Function",
-    "text": "A_ldiv_Bc(A, B)\n\nFor matrices or vectors A and B, calculates A \\ B.\n\n\n\n"
+    "text": "ldiv!([Y,] A, B) -> Y\n\nCompute A \\ B in-place and store the result in Y, returning the result. If only two arguments are passed, then ldiv!(A, B) overwrites B with the result.\n\nThe argument A should not be a matrix.  Rather, instead of matrices it should be a factorization object (e.g. produced by factorize or cholfact). The reason for this is that factorization itself is both expensive and typically allocates memory (although it can also be done in-place via, e.g., lufact!), and performance-critical situations requiring ldiv! usually also require fine-grained control over the factorization of A.\n\n\n\n"
 },
 
 {
-    "location": "stdlib/linalg.html#Base.A_ldiv_Bt",
+    "location": "stdlib/linalg.html#Base.LinAlg.rdiv!",
     "page": "Linear Algebra",
-    "title": "Base.A_ldiv_Bt",
+    "title": "Base.LinAlg.rdiv!",
     "category": "Function",
-    "text": "A_ldiv_Bt(A, B)\n\nFor matrices or vectors A and B, calculates A \\ B.\n\n\n\n"
-},
-
-{
-    "location": "stdlib/linalg.html#Base.LinAlg.A_mul_B!",
-    "page": "Linear Algebra",
-    "title": "Base.LinAlg.A_mul_B!",
-    "category": "Function",
-    "text": "A_mul_B!(A, B)\n\nCalculate the matrix-matrix product AB, overwriting one of A or B (but not both), and return the result (the overwritten argument).\n\n\n\nA_mul_B!(Y, A, B) -> Y\n\nCalculates the matrix-matrix or matrix-vector product AB and stores the result in Y, overwriting the existing value of Y. Note that Y must not be aliased with either A or B.\n\nExamples\n\njulia> A=[1.0 2.0; 3.0 4.0]; B=[1.0 1.0; 1.0 1.0]; Y = similar(B); A_mul_B!(Y, A, B);\n\njulia> Y\n2×2 Array{Float64,2}:\n 3.0  3.0\n 7.0  7.0\n\n\n\n"
-},
-
-{
-    "location": "stdlib/linalg.html#Base.A_mul_Bc",
-    "page": "Linear Algebra",
-    "title": "Base.A_mul_Bc",
-    "category": "Function",
-    "text": "A_mul_Bc(A, B)\n\nFor matrices or vectors A and B, calculates AB.\n\n\n\n"
-},
-
-{
-    "location": "stdlib/linalg.html#Base.A_mul_Bt",
-    "page": "Linear Algebra",
-    "title": "Base.A_mul_Bt",
-    "category": "Function",
-    "text": "A_mul_Bt(A, B)\n\nFor matrices or vectors A and B, calculates AB.\n\n\n\n"
-},
-
-{
-    "location": "stdlib/linalg.html#Base.A_rdiv_Bc",
-    "page": "Linear Algebra",
-    "title": "Base.A_rdiv_Bc",
-    "category": "Function",
-    "text": "A_rdiv_Bc(A, B)\n\nFor matrices or vectors A and B, calculates A  B.\n\n\n\n"
-},
-
-{
-    "location": "stdlib/linalg.html#Base.A_rdiv_Bt",
-    "page": "Linear Algebra",
-    "title": "Base.A_rdiv_Bt",
-    "category": "Function",
-    "text": "A_rdiv_Bt(A, B)\n\nFor matrices or vectors A and B, calculates A  B.\n\n\n\n"
-},
-
-{
-    "location": "stdlib/linalg.html#Base.Ac_ldiv_B",
-    "page": "Linear Algebra",
-    "title": "Base.Ac_ldiv_B",
-    "category": "Function",
-    "text": "Ac_ldiv_B(A, B)\n\nFor matrices or vectors A and B, calculates A \\ B.\n\n\n\n"
-},
-
-{
-    "location": "stdlib/linalg.html#Base.LinAlg.Ac_ldiv_B!",
-    "page": "Linear Algebra",
-    "title": "Base.LinAlg.Ac_ldiv_B!",
-    "category": "Function",
-    "text": "Ac_ldiv_B!([Y,] A, B) -> Y\n\nSimilar to A_ldiv_B!, but return A \\ B, computing the result in-place in Y (or overwriting B if Y is not supplied).\n\n\n\n"
-},
-
-{
-    "location": "stdlib/linalg.html#Base.Ac_ldiv_Bc",
-    "page": "Linear Algebra",
-    "title": "Base.Ac_ldiv_Bc",
-    "category": "Function",
-    "text": "Ac_ldiv_Bc(A, B)\n\nFor matrices or vectors A and B, calculates A \\ B.\n\n\n\n"
-},
-
-{
-    "location": "stdlib/linalg.html#Base.Ac_mul_B",
-    "page": "Linear Algebra",
-    "title": "Base.Ac_mul_B",
-    "category": "Function",
-    "text": "Ac_mul_B(A, B)\n\nFor matrices or vectors A and B, calculates AB.\n\n\n\n"
-},
-
-{
-    "location": "stdlib/linalg.html#Base.Ac_mul_Bc",
-    "page": "Linear Algebra",
-    "title": "Base.Ac_mul_Bc",
-    "category": "Function",
-    "text": "Ac_mul_Bc(A, B)\n\nFor matrices or vectors A and B, calculates A B.\n\n\n\n"
-},
-
-{
-    "location": "stdlib/linalg.html#Base.Ac_rdiv_B",
-    "page": "Linear Algebra",
-    "title": "Base.Ac_rdiv_B",
-    "category": "Function",
-    "text": "Ac_rdiv_B(A, B)\n\nFor matrices or vectors A and B, calculates A  B.\n\n\n\n"
-},
-
-{
-    "location": "stdlib/linalg.html#Base.Ac_rdiv_Bc",
-    "page": "Linear Algebra",
-    "title": "Base.Ac_rdiv_Bc",
-    "category": "Function",
-    "text": "Ac_rdiv_Bc(A, B)\n\nFor matrices or vectors A and B, calculates A  B.\n\n\n\n"
-},
-
-{
-    "location": "stdlib/linalg.html#Base.At_ldiv_B",
-    "page": "Linear Algebra",
-    "title": "Base.At_ldiv_B",
-    "category": "Function",
-    "text": "At_ldiv_B(A, B)\n\nFor matrices or vectors A and B, calculates A \\ B.\n\n\n\n"
-},
-
-{
-    "location": "stdlib/linalg.html#Base.LinAlg.At_ldiv_B!",
-    "page": "Linear Algebra",
-    "title": "Base.LinAlg.At_ldiv_B!",
-    "category": "Function",
-    "text": "At_ldiv_B!([Y,] A, B) -> Y\n\nSimilar to A_ldiv_B!, but return A \\ B, computing the result in-place in Y (or overwriting B if Y is not supplied).\n\n\n\n"
-},
-
-{
-    "location": "stdlib/linalg.html#Base.At_ldiv_Bt",
-    "page": "Linear Algebra",
-    "title": "Base.At_ldiv_Bt",
-    "category": "Function",
-    "text": "At_ldiv_Bt(A, B)\n\nFor matrices or vectors A and B, calculates A \\ B.\n\n\n\n"
-},
-
-{
-    "location": "stdlib/linalg.html#Base.At_mul_B",
-    "page": "Linear Algebra",
-    "title": "Base.At_mul_B",
-    "category": "Function",
-    "text": "At_mul_B(A, B)\n\nFor matrices or vectors A and B, calculates AB.\n\n\n\n"
-},
-
-{
-    "location": "stdlib/linalg.html#Base.At_mul_Bt",
-    "page": "Linear Algebra",
-    "title": "Base.At_mul_Bt",
-    "category": "Function",
-    "text": "At_mul_Bt(A, B)\n\nFor matrices or vectors A and B, calculates AB.\n\n\n\n"
-},
-
-{
-    "location": "stdlib/linalg.html#Base.At_rdiv_B",
-    "page": "Linear Algebra",
-    "title": "Base.At_rdiv_B",
-    "category": "Function",
-    "text": "At_rdiv_B(A, B)\n\nFor matrices or vectors A and B, calculates A  B.\n\n\n\n"
-},
-
-{
-    "location": "stdlib/linalg.html#Base.At_rdiv_Bt",
-    "page": "Linear Algebra",
-    "title": "Base.At_rdiv_Bt",
-    "category": "Function",
-    "text": "At_rdiv_Bt(A, B)\n\nFor matrices or vectors A and B, calculates A  B.\n\n\n\n"
+    "text": "rdiv!([Y,] A, B) -> Y\n\nCompute A / B in-place and store the result in Y, returning the result. If only two arguments are passed, then rdiv!(A, B) overwrites A with the result.\n\nThe argument B should not be a matrix.  Rather, instead of matrices it should be a factorization object (e.g. produced by factorize or cholfact). The reason for this is that factorization itself is both expensive and typically allocates memory (although it can also be done in-place via, e.g., lufact!), and performance-critical situations requiring rdiv! usually also require fine-grained control over the factorization of B.\n\n\n\n"
 },
 
 {
@@ -14293,7 +14141,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Linear Algebra",
     "title": "Low-level matrix operations",
     "category": "section",
-    "text": "Matrix operations involving transpositions operations like A' \\ B are converted by the Julia parser into calls to specially named functions like Ac_ldiv_B. If you want to overload these operations for your own types, then it is useful to know the names of these functions.Also, in many cases there are in-place versions of matrix operations that allow you to supply a pre-allocated output vector or matrix.  This is useful when optimizing critical code in order to avoid the overhead of repeated allocations. These in-place operations are suffixed with ! below (e.g. A_mul_B!) according to the usual Julia convention.Base.LinAlg.A_ldiv_B!\nBase.A_ldiv_Bc\nBase.A_ldiv_Bt\nBase.LinAlg.A_mul_B!\nBase.A_mul_Bc\nBase.A_mul_Bt\nBase.A_rdiv_Bc\nBase.A_rdiv_Bt\nBase.Ac_ldiv_B\nBase.LinAlg.Ac_ldiv_B!\nBase.Ac_ldiv_Bc\nBase.Ac_mul_B\nBase.Ac_mul_Bc\nBase.Ac_rdiv_B\nBase.Ac_rdiv_Bc\nBase.At_ldiv_B\nBase.LinAlg.At_ldiv_B!\nBase.At_ldiv_Bt\nBase.At_mul_B\nBase.At_mul_Bt\nBase.At_rdiv_B\nBase.At_rdiv_Bt"
+    "text": "In many cases there are in-place versions of matrix operations that allow you to supply a pre-allocated output vector or matrix.  This is useful when optimizing critical code in order to avoid the overhead of repeated allocations. These in-place operations are suffixed with ! below (e.g. mul!) according to the usual Julia convention.Base.LinAlg.mul!\nBase.LinAlg.ldiv!\nBase.LinAlg.rdiv!"
 },
 
 {
