@@ -13,15 +13,23 @@ var documenterSearchIndex = {"docs": [
     "page": "Home",
     "title": "Julia Documentation",
     "category": "section",
-    "text": ""
+    "text": "Manual\nBase\nStandard Library\nDeveloper Documentation"
 },
 
 {
-    "location": "index.html#매뉴얼-1",
+    "location": "index.html#Manual-1",
     "page": "Home",
-    "title": "매뉴얼",
+    "title": "Manual",
     "category": "section",
     "text": "Introduction\nGetting Started\nVariables\nIntegers and Floating-Point Numbers\nMathematical Operations and Elementary Functions\nComplex and Rational Numbers\nStrings\nFunctions\nControl Flow\nScope of Variables\nTypes\nMethods\nConstructors\nConversion and Promotion\nInterfaces\nModules\nDocumentation\nMetaprogramming\nMulti-dimensional Arrays\nLinear Algebra\nMissing Values\nNetworking and Streams\nParallel Computing\nDate and DateTime\nRunning External Programs\nCalling C and Fortran Code\nHandling Operating System Variation\nEnvironment Variables\nInteracting With Julia\nEmbedding Julia\nPackages\nProfiling\nStack Traces\nPerformance Tips\nWorkflow Tips\nStyle Guide\nFrequently Asked Questions\nNoteworthy Differences from other Languages\nUnicode Input"
+},
+
+{
+    "location": "index.html#Base-1",
+    "page": "Home",
+    "title": "Base",
+    "category": "section",
+    "text": "Essentials\nCollections and Data Structures\nMathematics\nNumbers\nStrings\nArrays\nTasks\nDistributed Computing\nMulti-Threading\nShared Arrays\nLinear Algebra\nConstants\nFilesystem\nI/O and Network\nPunctuation\nSorting and Related Functions\nPackage Manager Functions\nIteration utilities\nC Interface\nC Standard Library\nDynamic Linker\nStackTraces\nSIMD Support"
 },
 
 {
@@ -29,7 +37,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Home",
     "title": "Standard Library",
     "category": "section",
-    "text": "Essentials\nCollections and Data Structures\nMathematics\nNumbers\nStrings\nArrays\nTasks\nDistributed Computing\nMulti-Threading\nShared Arrays\nLinear Algebra\nConstants\nFilesystem\nDelimited Files\nI/O and Network\nPunctuation\nSorting and Related Functions\nPackage Manager Functions\nDates and Time\nIteration utilities\nUnit Testing\nC Interface\nC Standard Library\nDynamic Linker\nStackTraces\nSIMD Support\nProfiling\nMemory-mapped I/O\nBase64\nFile Events\nIterative Eigensolvers\nUnicode\nPrintf"
+    "text": "Base64\nCRC32c\nDates and Time\nDelimited Files\nDistributed Computing\nFile Events\nIterative Eigensolvers\nMemory-mapped I/O\nPrintf\nProfiling\nShared Arrays\nUnit Testing\nUnicode"
 },
 
 {
@@ -53,7 +61,7 @@ var documenterSearchIndex = {"docs": [
     "page": "소개글",
     "title": "소개글",
     "category": "section",
-    "text": "과학 분야 컴퓨팅은 고성능의 많은 수학적 계산 처리를 필요로 한다. 하지만 당사자인 전문 연구자들은 속도가 느리더라도 동적인 언어로서 그들의 업무를 처리한다. 동적 언어를 즐겨쓰는 여러가지 이유로 보건데, 이러한 추세가 쉽게 사그러들지는 않아 보인다. 다행히 근래의 언어 디자인과 컴파일러 기법의 발달은, 미뤄두었던 성능 문제를 해결함으로서 프로토타이핑 작업에 요구되는 개별 환경의 생산성, 또 성능이 중요한 애플리케이션의 구축에서도 충분히 그 효용을 발휘한다. 줄리아 프로그래밍 언어는 다음과 같은 역할을 수행한다: 과학과 수학 분야 컴퓨팅에 적합한, 기존의 정적 타입 언어에 견줄만한 성능을 갖춘 유연한 동적 언어.줄리아 컴파일러는 파이썬, R과 같은 언어의 해석 방식과 다르다. 줄리아가 뽑아내는 성능이 아마도 처음에는 의아할 것이다. 그럼에도 작성한 코드가 느리다면 성능 팁을 읽어보길 권한다. 줄리아가 어떤 식으로 작동하는지 이해한 뒤라면, C에 근접하는 성능의 코드를 짜는 건 쉽다.줄리아는 타입 추론과 LLVM으로 구현한 적시 컴파일 (JIT)을 사용해 선택적 타입, 멀티플 디스패치, 좋은 성능을 이뤄내고 있다. 그리고 명령형, 함수형, 객체 지향 프로그래밍의 특징을 포괄하는 다양한 패러다임을 추구한다. 줄리아는 고급 단계의 수치 계산에 있어 R, 매트랩, 파이썬처럼 간편하고 표현력이 우수하다. 뿐만 아니라 일반적인 형태의 프로그래밍 또한 가능하다. 이를 위해 줄리아는 수학 프로그래밍 언어를 근간으로 해서 구축하였고 리스프, 펄, 파이썬, 루아, 루비와 같은 인기있는 동적 언어의 기능을 취합하고 있다.기존에 있는 동적 언어와 비교해 보는 줄리아만의 독특한 점은:핵심 언어는 최소한으로 꾸린다; 정수를 다루는 프리미티브 연산자(+ - * 같은)를 비롯하여 기본 라이브러리는 줄리아 자체로 작성되었다.\n객체를 구성하고 서술하는 타입(types)을 풍부하게 지원하며, 타입 선언을 만들 때도 선택적으로 사용된다.\n인자 타입을 조합함으로서 함수의 작동 행위를 정의하는 멀티플 디스패치(multiple dispatch)\n인자 타입에 따라 효율적이고 특화된 코드를 자동으로 생성\nC와 같은 정적으로 컴파일되는 언어에 근접하는 훌륭한 성능동적 언어에 대해 \"타입이 없다\"는 식으로 말하곤 하는데 사실은 그렇지 않다: 프리미티브(숫자와 같은 기본 타입의)이거나 별도 정의를 통틀어 모든 객체는 타입을 가진다. 그러나 대부분의 동적 언어는 타입 선언의 부족으로 컴파일러가 해당 값의 타입을 인지하지 못한다거나 타입에 대해 무엇인지 명시적으로 밝힐 수 없는 상태가 되곤 한다. 한편 정적 언어는 타입 정보를 – 대개 – 컴파일러용으로서 달기에, 타입은 오직 컴파일 시점에만 존재하여 실행시에는 이를 다루거나 표현할 수 없다. 줄리아에서 타입은 그 자체로 런타임 객체이며 컴파일러가 요하는 정보를 알려주는 데에도 쓰인다.보통의 프로그래머라면 개의치 않을 타입과 멀티플 디스패치는 줄리아의 핵심 개념이다: 함수들은 서로 다른 인자 타입들을 조합함으로서 정의되고 가장 그 정의와 맞물리는 타입을 찾아 디스패치하여 실행된다. 이 모델은 수학 프로그래밍과 잘 맞는데, 전통적인 객체 지향 디스패치라면 첫번째 인자로 연산자를 \"갖는\" 것은 자연스럽지 않다. 연산자는 단지 특별히 표기한 함수일 뿐이다 – + 함수에 엮일 새로운 데이터 타입을 정의하려면, 해당하는 메서드 정의만 추가하면 된다. 기존 코드는 새로운 데이터 타입과 더불어 원할하게 작동한다.런타임 타입 추론(타입 지정을 점진적으로 늘려가며)을 이유로, 또 이 프로젝트를 시작할 때 무엇보다도 성능을 강조하였기에 줄리아의 계산 효율은 다른 동적 언어들에 비해 우월하며 심지어 정적으로 컴파일하는 경쟁 언어들마저 능가한다. 거대 규모의 수치 해석 문제에 있어 속도는 매번 그리고 앞으로도, 아마 항상 결정적 요소일 것이다: 처리되는 데이터의 양이 지난 수십년간 무어의 법칙을 따르고 있지 않은가.사용하기 편하면서도 강력하고 효율적인 언어를 줄리아는 목표하고 있다. 다른 시스템과 견주어 줄리아를 씀으로 좋은 점은 다음과 같다:자유롭게 사용 가능하며 오픈 소스이다 (MIT 라이센스)\n사용자가 정의한 타입 또한 내장한 타입처럼 빠르고 간결하다\n성능을 위해 코드를 벡터화할 필요가 없다; 벡터화하지 않은 코드도 빠르다\n병렬과 분산 처리를 위해 고안되었다\n가벼운 \"그린\" 쓰레딩 (코루틴)\n거슬리지 않는 강력한 타입 시스템\n숫자와 다른 타입을 위한 우아하고 확장 가능한 컨버젼 및 프로모션(타입 변환)\n효율적인 유니코드 와 UTF-8 지원\nC 함수 직접 호출(별도의 래퍼나 특정한 API가 필요하지 않음)\n다른 프로세스를 관리하는 쉘과 비슷한 강력한 기능\n리스프와 비슷한 매크로, 메타프로그래밍을 위한 장치들"
+    "text": "과학 분야 컴퓨팅은 고성능의 많은 수학적 계산 처리를 필요로 한다. 하지만 당사자인 전문 연구자들은 속도가 느리더라도 동적인 언어로서 그들의 업무를 처리한다. 동적 언어를 즐겨쓰는 여러가지 이유로 보건데, 이러한 추세가 쉽게 사그러들지는 않아 보인다. 다행히 근래의 언어 디자인과 컴파일러 기법의 발달은, 미뤄두었던 성능 문제를 해결함으로서 프로토타이핑 작업에 요구되는 개별 환경의 생산성, 또 성능이 중요한 애플리케이션의 구축에서도 충분히 그 효용을 발휘한다. 줄리아 프로그래밍 언어는 다음과 같은 역할을 수행한다: 과학과 수학 분야 컴퓨팅에 적합한, 기존의 정적 타입 언어에 견줄만한 성능을 갖춘 유연한 동적 언어.줄리아 컴파일러는 파이썬, R과 같은 언어의 해석 방식과 다르다. 줄리아가 뽑아내는 성능이 아마도 처음에는 의아할 것이다. 그럼에도 작성한 코드가 느리다면 성능 팁을 읽어보길 권한다. 줄리아가 어떤 식으로 작동하는지 이해한 뒤라면, C에 근접하는 성능의 코드를 짜는 건 쉽다.줄리아는 타입 추론과 LLVM으로 구현한 적시 컴파일 (JIT)을 사용해 선택적 타입, 멀티플 디스패치, 좋은 성능을 이뤄내고 있다. 그리고 명령형, 함수형, 객체 지향 프로그래밍의 특징을 포괄하는 다양한 패러다임을 추구한다. 줄리아는 고급 단계의 수치 계산에 있어 R, 매트랩, 파이썬처럼 간편하고 표현력이 우수하다. 뿐만 아니라 일반적인 형태의 프로그래밍 또한 가능하다. 이를 위해 줄리아는 수학 프로그래밍 언어를 근간으로 해서 구축하였고 리스프, 펄, 파이썬, 루아, 루비와 같은 인기있는 동적 언어의 기능을 취합하고 있다.기존에 있는 동적 언어와 비교해 보는 줄리아만의 독특한 점은:핵심 언어는 최소한으로 꾸린다; 정수를 다루는 프리미티브 연산자(+ - * 같은)를 포함하는, 줄리아 Base와 표준 라이브러리는 줄리아 코드로 짜여져 있다.\n객체를 구성하고 서술하는 타입(types)을 풍부하게 지원하며, 타입 선언을 만들 때도 선택적으로 사용된다.\n인자 타입을 조합함으로서 함수의 작동 행위를 정의하는 멀티플 디스패치(multiple dispatch)\n인자 타입에 따라 효율적이고 특화된 코드를 자동으로 생성\nC와 같은 정적으로 컴파일되는 언어에 근접하는 훌륭한 성능동적 언어에 대해 \"타입이 없다\"는 식으로 말하곤 하는데 사실은 그렇지 않다: 프리미티브(숫자와 같은 기본 타입의)이거나 별도 정의를 통틀어 모든 객체는 타입을 가진다. 그러나 대부분의 동적 언어는 타입 선언의 부족으로 컴파일러가 해당 값의 타입을 인지하지 못한다거나 타입에 대해 무엇인지 명시적으로 밝힐 수 없는 상태가 되곤 한다. 한편 정적 언어는 타입 정보를 – 대개 – 컴파일러용으로서 달기에, 타입은 오직 컴파일 시점에만 존재하여 실행시에는 이를 다루거나 표현할 수 없다. 줄리아에서 타입은 그 자체로 런타임 객체이며 컴파일러가 요하는 정보를 알려주는 데에도 쓰인다.보통의 프로그래머라면 개의치 않을 타입과 멀티플 디스패치는 줄리아의 핵심 개념이다: 함수들은 서로 다른 인자 타입들을 조합함으로서 정의되고 가장 그 정의와 맞물리는 타입을 찾아 디스패치하여 실행된다. 이 모델은 수학 프로그래밍과 잘 맞는데, 전통적인 객체 지향 디스패치라면 첫번째 인자로 연산자를 \"갖는\" 것은 자연스럽지 않다. 연산자는 단지 특별히 표기한 함수일 뿐이다 – + 함수에 엮일 새로운 데이터 타입을 정의하려면, 해당하는 메서드 정의만 추가하면 된다. 기존 코드는 새로운 데이터 타입과 더불어 원할하게 작동한다.런타임 타입 추론(타입 지정을 점진적으로 늘려가며)을 이유로, 또 이 프로젝트를 시작할 때 무엇보다도 성능을 강조하였기에 줄리아의 계산 효율은 다른 동적 언어들에 비해 우월하며 심지어 정적으로 컴파일하는 경쟁 언어들마저 능가한다. 거대 규모의 수치 해석 문제에 있어 속도는 매번 그리고 앞으로도, 아마 항상 결정적 요소일 것이다: 처리되는 데이터의 양이 지난 수십년간 무어의 법칙을 따르고 있지 않은가.사용하기 편하면서도 강력하고 효율적인 언어를 줄리아는 목표하고 있다. 다른 시스템과 견주어 줄리아를 씀으로 좋은 점은 다음과 같다:자유롭게 사용 가능하며 오픈 소스이다 (MIT 라이센스)\n사용자가 정의한 타입 또한 내장한 타입처럼 빠르고 간결하다\n성능을 위해 코드를 벡터화할 필요가 없다; 벡터화하지 않은 코드도 빠르다\n병렬과 분산 처리를 위해 고안되었다\n가벼운 \"그린\" 쓰레딩 (코루틴)\n거슬리지 않는 강력한 타입 시스템\n숫자와 다른 타입을 위한 우아하고 확장 가능한 컨버젼 및 프로모션(타입 변환)\n효율적인 유니코드 와 UTF-8 지원\nC 함수 직접 호출(별도의 래퍼나 특정한 API가 필요하지 않음)\n다른 프로세스를 관리하는 쉘과 비슷한 강력한 기능\n리스프와 비슷한 매크로, 메타프로그래밍을 위한 장치들"
 },
 
 {
@@ -765,7 +773,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Control Flow",
     "title": "태스크와 이벤트",
     "category": "section",
-    "text": "대부분의 태스크 전환은 입출력 요청과 같은 이벤트를 기다린 결과로 발생하며, 이는 표준 라이브러리에 포함된 스케줄러에 의해 수행됩니다. 스케줄러는 실행 가능한 작업 대기열을 관리하고 메시지 도착과 같은 외부 이벤트를 기반으로 작업을 다시 시작하는 이벤트 루프를 실행합니다.이벤트를 기다리는 기본적인 함수로는 wait가 있습니다. 여러 객체는 wait를 구현할 수 있는데, 그 예로 Process 객체가 주어진다면, wait는 그 객체가 종료될 때까지 기다릴 것입니다. wait는 종종 명시적이지 않습니다. 예를 들자면, wait는 데이터를 사용할 수 있을 때까지 기다리기 위해 read 호출 내부에서 발생할 수 있습니다.이 모든 경우에, wait는 태스크를 대기열에 넣고 재시작하는 Condition 객체에서 궁극적으로 작동합니다. 태스크가 Condition에서 wait를 호출하면, 태스크는 실행 불가능한 것으로 표시되고, 조건 대기열에 추가되며 스케줄러로 전환됩니다. 스케줄러는 실행할 다른 태스크를 선택하거나 외부 이벤트 대기를 차단합니다. 모든 것이 잘되면 결국 이벤트 처리기가 조건에서 notify를 호출하여 해당 조건을 기다리는 작업을 다시 실행 가능하게 만듭니다.태스크를 호출하여 명시적으로 생성된 태스크는 처음에는 스케줄러에게 알려지지 않습니다. 원한다면 yieldto를 사용하여 수동으로 작업을 관리할 수도 있습니다. 하지만 그런 태스크가 이벤트를 기다리면 예상대로 이벤트가 발생할 때 자동적으로 재시작됩니다. 이벤트를 기다리지 않고 언제든지 스케줄러가 작업을 실행할 수 있게 하는 것도 가능합니다. 이 방법은 schedule을 호출하거나, schedule 또는 @async 매크로(자세한 사항은 Parallel Computing 참조)를 사용하여 수행할 수 있습니다."
+    "text": "대부분의 태스크 전환은 입출력 요청과 같은 이벤트를 기다린 결과로 발생하며, 이는 줄리아 Base에 포함된 스케줄러에 의해 수행됩니다. 스케줄러는 실행 가능한 작업 대기열을 관리하고 메시지 도착과 같은 외부 이벤트를 기반으로 작업을 다시 시작하는 이벤트 루프를 실행합니다.이벤트를 기다리는 기본적인 함수로는 wait가 있습니다. 여러 객체는 wait를 구현할 수 있는데, 그 예로 Process 객체가 주어진다면, wait는 그 객체가 종료될 때까지 기다릴 것입니다. wait는 종종 명시적이지 않습니다. 예를 들자면, wait는 데이터를 사용할 수 있을 때까지 기다리기 위해 read 호출 내부에서 발생할 수 있습니다.이 모든 경우에, wait는 태스크를 대기열에 넣고 재시작하는 Condition 객체에서 궁극적으로 작동합니다. 태스크가 Condition에서 wait를 호출하면, 태스크는 실행 불가능한 것으로 표시되고, 조건 대기열에 추가되며 스케줄러로 전환됩니다. 스케줄러는 실행할 다른 태스크를 선택하거나 외부 이벤트 대기를 차단합니다. 모든 것이 잘되면 결국 이벤트 처리기가 조건에서 notify를 호출하여 해당 조건을 기다리는 작업을 다시 실행 가능하게 만듭니다.태스크를 호출하여 명시적으로 생성된 태스크는 처음에는 스케줄러에게 알려지지 않습니다. 원한다면 yieldto를 사용하여 수동으로 작업을 관리할 수도 있습니다. 하지만 그런 태스크가 이벤트를 기다리면 예상대로 이벤트가 발생할 때 자동적으로 재시작됩니다. 이벤트를 기다리지 않고 언제든지 스케줄러가 작업을 실행할 수 있게 하는 것도 가능합니다. 이 방법은 schedule을 호출하거나, schedule 또는 @async 매크로(자세한 사항은 Parallel Computing 참조)를 사용하여 수행할 수 있습니다."
 },
 
 {
@@ -1085,7 +1093,7 @@ var documenterSearchIndex = {"docs": [
     "page": "메소드",
     "title": "다른 형식 매개 변수를 사용하여 비슷한 유형 만들기",
     "category": "section",
-    "text": "일반적인 코드를 만들 때 유형의 레이아웃을 변경하고 유사한 유형의 객체를 생성해야하는 경우가 종종 있습니다. 유형 매개 변수의 변경이 필요합니다. 예를 들어 임의의 요소 유형을 가진 일종의 추상 배열을 가질 수 있으며 특정 요소 유형으로 계산을 작성하려고합니다. 이 유형 변환을 계산하는 방법을 설명하는 각 AbstractArray{T} 하위 유형에 대한 메소드를 구현해야합니다. 하나의 부속 유형에 대해 다른 매개 변수를 갖는 다른 부속 유형으로의 변환이 없습니다. (빠른 검토 : 이것이 왜 있는지 보시겠습니까?)AbstractArray 의 부속유형은 일반적으로이를 달성하는 두가지 메소드를 구현합니다. 입력배열을 특정 AbstractArray {T, N} 추상유형의 부속유형으로 변환하는 메소드 및 특정요소 유형을 가진 초기화되지 않은 새로운 배열을 만드는 방법. 이들의 샘플구현은 표준 라이브러리에서 찾을 수 있습니다. 다음은 input 과 output 이 같은 타입으로되어 있다는 것을 보장하는 기본적인 예제사용법입니다 :input = convert(AbstractArray{Eltype}, input)\noutput = similar(input, Eltype)이를 확장하기 위해 알고리즘에 입력배열의 복사본이 필요한경우 반환값이 원래입력의 별칭일 수 있으므로 convert 는 충분하지 않습니다. 출력배열을 만들기 위해 similar와 입력데이터로 채우기 위해 copyto! 를 결합하는 것은 변경가능한 입력인수 복사본에 대한 요구사항을 표현하는 일반적인 방법입니다.:copy_with_eltype(input, Eltype) = copyto!(similar(input, Eltype), input)"
+    "text": "일반적인 코드를 만들 때 유형의 레이아웃을 변경하고 유사한 유형의 객체를 생성해야하는 경우가 종종 있습니다. 유형 매개 변수의 변경이 필요합니다. 예를 들어 임의의 요소 유형을 가진 일종의 추상 배열을 가질 수 있으며 특정 요소 유형으로 계산을 작성하려고합니다. 이 유형 변환을 계산하는 방법을 설명하는 각 AbstractArray{T} 하위 유형에 대한 메소드를 구현해야합니다. 하나의 부속 유형에 대해 다른 매개 변수를 갖는 다른 부속 유형으로의 변환이 없습니다. (빠른 검토 : 이것이 왜 있는지 보시겠습니까?)AbstractArray 의 부속유형은 일반적으로이를 달성하는 두가지 메소드를 구현합니다. 입력배열을 특정 AbstractArray {T, N} 추상유형의 부속유형으로 변환하는 메소드 및 특정요소 유형을 가진 초기화되지 않은 새로운 배열을 만드는 방법. 이들의 샘플구현은 줄리아 Base에서 찾을 수 있습니다. 다음은 input 과 output 이 같은 타입으로되어 있다는 것을 보장하는 기본적인 예제사용법입니다 :input = convert(AbstractArray{Eltype}, input)\noutput = similar(input, Eltype)이를 확장하기 위해 알고리즘에 입력배열의 복사본이 필요한경우 반환값이 원래입력의 별칭일 수 있으므로 convert 는 충분하지 않습니다. 출력배열을 만들기 위해 similar와 입력데이터로 채우기 위해 copyto! 를 결합하는 것은 변경가능한 입력인수 복사본에 대한 요구사항을 표현하는 일반적인 방법입니다.:copy_with_eltype(input, Eltype) = copyto!(similar(input, Eltype), input)"
 },
 
 {
@@ -1301,7 +1309,39 @@ var documenterSearchIndex = {"docs": [
     "page": "Conversion and Promotion",
     "title": "Conversion vs. Construction",
     "category": "section",
-    "text": "Note that the behavior of convert(T, x) appears to be nearly identical to T(x). Indeed, it usually is. However, there is a key semantic difference: since convert can be called implicitly, its methods are restricted to cases that are considered \"safe\" or \"unsurprising\". convert will only convert between types that represent the same basic kind of thing (e.g. different representations of numbers, or different string encodings). It is also usually lossless; converting a value to a different type and back again should result in the exact same value.Notice that some constructors don't implement the concept of \"conversion\". For example, Vector{Int}(5) constructs a 5-element vector, which is not really a \"conversion\" from an integer to a vector.Finally, convert(T, x) is expected to return the original x if x is already of type T. In contrast, if T is a mutable collection type then T(x) should always make a new collection (copying elements from x)."
+    "text": "Note that the behavior of convert(T, x) appears to be nearly identical to T(x). Indeed, it usually is. However, there is a key semantic difference: since convert can be called implicitly, its methods are restricted to cases that are considered \"safe\" or \"unsurprising\". convert will only convert between types that represent the same basic kind of thing (e.g. different representations of numbers, or different string encodings). It is also usually lossless; converting a value to a different type and back again should result in the exact same value.There are four general kinds of cases where constructors differ from convert:"
+},
+
+{
+    "location": "manual/conversion-and-promotion.html#Constructors-for-types-unrelated-to-their-arguments-1",
+    "page": "Conversion and Promotion",
+    "title": "Constructors for types unrelated to their arguments",
+    "category": "section",
+    "text": "Some constructors don't implement the concept of \"conversion\". For example, Timer(2) creates a 2-second timer, which is not really a \"conversion\" from an integer to a timer."
+},
+
+{
+    "location": "manual/conversion-and-promotion.html#Mutable-collections-1",
+    "page": "Conversion and Promotion",
+    "title": "Mutable collections",
+    "category": "section",
+    "text": "convert(T, x) is expected to return the original x if x is already of type T. In contrast, if T is a mutable collection type then T(x) should always make a new collection (copying elements from x)."
+},
+
+{
+    "location": "manual/conversion-and-promotion.html#Wrapper-types-1",
+    "page": "Conversion and Promotion",
+    "title": "Wrapper types",
+    "category": "section",
+    "text": "For some types which \"wrap\" other values, the constructor may wrap its argument inside a new object even if it is already of the requested type. For example Some(x) wraps x to indicate that a value is present (in a context where the result might be a Some or nothing). However, x itself might be the object Some(y), in which case the result is Some(Some(y)), with two levels of wrapping. convert(Some, x), on the other hand, would just return x since it is already a Some."
+},
+
+{
+    "location": "manual/conversion-and-promotion.html#Constructors-that-don't-return-instances-of-their-own-type-1",
+    "page": "Conversion and Promotion",
+    "title": "Constructors that don't return instances of their own type",
+    "category": "section",
+    "text": "In very rare cases it might make sense for the constructor T(x) to return an object not of type T. This could happen if a wrapper type is its own inverse (e.g. Flip(Flip(x)) === x), or to support an old calling syntax for backwards compatibility when a library is restructured. But convert(T, x) should always return a value of type T."
 },
 
 {
@@ -1309,7 +1349,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Conversion and Promotion",
     "title": "Defining New Conversions",
     "category": "section",
-    "text": "When defining a new type, initially all ways of creating it should be defined as constructors. If it becomes clear that implicit conversion would be useful, and that some constructors meet the above \"safety\" criteria, then convert methods can be added. These methods are typically quite simple, as they only need to call the appropriate constructor. Such a definition might look like this:convert(::Type{MyType}, x) = MyType(x)The type of the first argument of this method is a singleton type, Type{MyType}, the only instance of which is MyType. Thus, this method is only invoked when the first argument is the type value MyType. Notice the syntax used for the first argument: the argument name is omitted prior to the :: symbol, and only the type is given. This is the syntax in Julia for a function argument whose type is specified but whose value is never used in the function body. In this example, since the type is a singleton, there would never be any reason to use its value within the body.All instances of some abstract types are by default considered \"sufficiently similar\" that a universal convert definition is provided in the standard library. For example, this definition states that it's valid to convert any Number type to any other by calling a 1-argument constructor:convert(::Type{T}, x::Number) where {T<:Number} = T(x)This means that new Number types only need to define constructors, since this definition will handle convert for them. An identity conversion is also provided to handle the case where the argument is already of the requested type:convert(::Type{T}, x::T) where {T<:Number} = xSimilar definitions exist for AbstractString, AbstractArray, and AbstractDict."
+    "text": "When defining a new type, initially all ways of creating it should be defined as constructors. If it becomes clear that implicit conversion would be useful, and that some constructors meet the above \"safety\" criteria, then convert methods can be added. These methods are typically quite simple, as they only need to call the appropriate constructor. Such a definition might look like this:convert(::Type{MyType}, x) = MyType(x)The type of the first argument of this method is a singleton type, Type{MyType}, the only instance of which is MyType. Thus, this method is only invoked when the first argument is the type value MyType. Notice the syntax used for the first argument: the argument name is omitted prior to the :: symbol, and only the type is given. This is the syntax in Julia for a function argument whose type is specified but whose value does not need to be referenced by name. In this example, since the type is a singleton, we already know its value without referring to an argument name.All instances of some abstract types are by default considered \"sufficiently similar\" that a universal convert definition is provided in Julia Base. For example, this definition states that it's valid to convert any Number type to any other by calling a 1-argument constructor:convert(::Type{T}, x::Number) where {T<:Number} = T(x)This means that new Number types only need to define constructors, since this definition will handle convert for them. An identity conversion is also provided to handle the case where the argument is already of the requested type:convert(::Type{T}, x::T) where {T<:Number} = xSimilar definitions exist for AbstractString, AbstractArray, and AbstractDict."
 },
 
 {
@@ -1317,7 +1357,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Conversion and Promotion",
     "title": "Promotion",
     "category": "section",
-    "text": "Promotion refers to converting values of mixed types to a single common type. Although it is not strictly necessary, it is generally implied that the common type to which the values are converted can faithfully represent all of the original values. In this sense, the term \"promotion\" is appropriate since the values are converted to a \"greater\" type – i.e. one which can represent all of the input values in a single common type. It is important, however, not to confuse this with object-oriented (structural) super-typing, or Julia's notion of abstract super-types: promotion has nothing to do with the type hierarchy, and everything to do with converting between alternate representations. For instance, although every Int32 value can also be represented as a Float64 value, Int32 is not a subtype of Float64.Promotion to a common \"greater\" type is performed in Julia by the promote function, which takes any number of arguments, and returns a tuple of the same number of values, converted to a common type, or throws an exception if promotion is not possible. The most common use case for promotion is to convert numeric arguments to a common type:julia> promote(1, 2.5)\n(1.0, 2.5)\n\njulia> promote(1, 2.5, 3)\n(1.0, 2.5, 3.0)\n\njulia> promote(2, 3//4)\n(2//1, 3//4)\n\njulia> promote(1, 2.5, 3, 3//4)\n(1.0, 2.5, 3.0, 0.75)\n\njulia> promote(1.5, im)\n(1.5 + 0.0im, 0.0 + 1.0im)\n\njulia> promote(1 + 2im, 3//4)\n(1//1 + 2//1*im, 3//4 + 0//1*im)Floating-point values are promoted to the largest of the floating-point argument types. Integer values are promoted to the larger of either the native machine word size or the largest integer argument type. Mixtures of integers and floating-point values are promoted to a floating-point type big enough to hold all the values. Integers mixed with rationals are promoted to rationals. Rationals mixed with floats are promoted to floats. Complex values mixed with real values are promoted to the appropriate kind of complex value.That is really all there is to using promotions. The rest is just a matter of clever application, the most typical \"clever\" application being the definition of catch-all methods for numeric operations like the arithmetic operators +, -, * and /. Here are some of the catch-all method definitions given in promotion.jl:+(x::Number, y::Number) = +(promote(x,y)...)\n-(x::Number, y::Number) = -(promote(x,y)...)\n*(x::Number, y::Number) = *(promote(x,y)...)\n/(x::Number, y::Number) = /(promote(x,y)...)These method definitions say that in the absence of more specific rules for adding, subtracting, multiplying and dividing pairs of numeric values, promote the values to a common type and then try again. That's all there is to it: nowhere else does one ever need to worry about promotion to a common numeric type for arithmetic operations – it just happens automatically. There are definitions of catch-all promotion methods for a number of other arithmetic and mathematical functions in promotion.jl, but beyond that, there are hardly any calls to promote required in the Julia standard library. The most common usages of promote occur in outer constructors methods, provided for convenience, to allow constructor calls with mixed types to delegate to an inner type with fields promoted to an appropriate common type. For example, recall that rational.jl provides the following outer constructor method:Rational(n::Integer, d::Integer) = Rational(promote(n,d)...)This allows calls like the following to work:julia> Rational(Int8(15),Int32(-5))\n-3//1\n\njulia> typeof(ans)\nRational{Int32}For most user-defined types, it is better practice to require programmers to supply the expected types to constructor functions explicitly, but sometimes, especially for numeric problems, it can be convenient to do promotion automatically."
+    "text": "Promotion refers to converting values of mixed types to a single common type. Although it is not strictly necessary, it is generally implied that the common type to which the values are converted can faithfully represent all of the original values. In this sense, the term \"promotion\" is appropriate since the values are converted to a \"greater\" type – i.e. one which can represent all of the input values in a single common type. It is important, however, not to confuse this with object-oriented (structural) super-typing, or Julia's notion of abstract super-types: promotion has nothing to do with the type hierarchy, and everything to do with converting between alternate representations. For instance, although every Int32 value can also be represented as a Float64 value, Int32 is not a subtype of Float64.Promotion to a common \"greater\" type is performed in Julia by the promote function, which takes any number of arguments, and returns a tuple of the same number of values, converted to a common type, or throws an exception if promotion is not possible. The most common use case for promotion is to convert numeric arguments to a common type:julia> promote(1, 2.5)\n(1.0, 2.5)\n\njulia> promote(1, 2.5, 3)\n(1.0, 2.5, 3.0)\n\njulia> promote(2, 3//4)\n(2//1, 3//4)\n\njulia> promote(1, 2.5, 3, 3//4)\n(1.0, 2.5, 3.0, 0.75)\n\njulia> promote(1.5, im)\n(1.5 + 0.0im, 0.0 + 1.0im)\n\njulia> promote(1 + 2im, 3//4)\n(1//1 + 2//1*im, 3//4 + 0//1*im)Floating-point values are promoted to the largest of the floating-point argument types. Integer values are promoted to the larger of either the native machine word size or the largest integer argument type. Mixtures of integers and floating-point values are promoted to a floating-point type big enough to hold all the values. Integers mixed with rationals are promoted to rationals. Rationals mixed with floats are promoted to floats. Complex values mixed with real values are promoted to the appropriate kind of complex value.That is really all there is to using promotions. The rest is just a matter of clever application, the most typical \"clever\" application being the definition of catch-all methods for numeric operations like the arithmetic operators +, -, * and /. Here are some of the catch-all method definitions given in promotion.jl:+(x::Number, y::Number) = +(promote(x,y)...)\n-(x::Number, y::Number) = -(promote(x,y)...)\n*(x::Number, y::Number) = *(promote(x,y)...)\n/(x::Number, y::Number) = /(promote(x,y)...)These method definitions say that in the absence of more specific rules for adding, subtracting, multiplying and dividing pairs of numeric values, promote the values to a common type and then try again. That's all there is to it: nowhere else does one ever need to worry about promotion to a common numeric type for arithmetic operations – it just happens automatically. There are definitions of catch-all promotion methods for a number of other arithmetic and mathematical functions in promotion.jl, but beyond that, there are hardly any calls to promote required in Julia Base. The most common usages of promote occur in outer constructors methods, provided for convenience, to allow constructor calls with mixed types to delegate to an inner type with fields promoted to an appropriate common type. For example, recall that rational.jl provides the following outer constructor method:Rational(n::Integer, d::Integer) = Rational(promote(n,d)...)This allows calls like the following to work:julia> Rational(Int8(15),Int32(-5))\n-3//1\n\njulia> typeof(ans)\nRational{Int32}For most user-defined types, it is better practice to require programmers to supply the expected types to constructor functions explicitly, but sometimes, especially for numeric problems, it can be convenient to do promotion automatically."
 },
 
 {
@@ -1325,7 +1365,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Conversion and Promotion",
     "title": "Defining Promotion Rules",
     "category": "section",
-    "text": "Although one could, in principle, define methods for the promote function directly, this would require many redundant definitions for all possible permutations of argument types. Instead, the behavior of promote is defined in terms of an auxiliary function called promote_rule, which one can provide methods for. The promote_rule function takes a pair of type objects and returns another type object, such that instances of the argument types will be promoted to the returned type. Thus, by defining the rule:promote_rule(::Type{Float64}, ::Type{Float32}) = Float64one declares that when 64-bit and 32-bit floating-point values are promoted together, they should be promoted to 64-bit floating-point. The promotion type does not need to be one of the argument types, however; the following promotion rules both occur in Julia's standard library:promote_rule(::Type{UInt8}, ::Type{Int8}) = Int\npromote_rule(::Type{BigInt}, ::Type{Int8}) = BigIntIn the latter case, the result type is BigInt since BigInt is the only type large enough to hold integers for arbitrary-precision integer arithmetic. Also note that one does not need to define both promote_rule(::Type{A}, ::Type{B}) and promote_rule(::Type{B}, ::Type{A}) – the symmetry is implied by the way promote_rule is used in the promotion process.The promote_rule function is used as a building block to define a second function called promote_type, which, given any number of type objects, returns the common type to which those values, as arguments to promote should be promoted. Thus, if one wants to know, in absence of actual values, what type a collection of values of certain types would promote to, one can use promote_type:julia> promote_type(Int8, Int64)\nInt64Internally, promote_type is used inside of promote to determine what type argument values should be converted to for promotion. It can, however, be useful in its own right. The curious reader can read the code in promotion.jl, which defines the complete promotion mechanism in about 35 lines."
+    "text": "Although one could, in principle, define methods for the promote function directly, this would require many redundant definitions for all possible permutations of argument types. Instead, the behavior of promote is defined in terms of an auxiliary function called promote_rule, which one can provide methods for. The promote_rule function takes a pair of type objects and returns another type object, such that instances of the argument types will be promoted to the returned type. Thus, by defining the rule:promote_rule(::Type{Float64}, ::Type{Float32}) = Float64one declares that when 64-bit and 32-bit floating-point values are promoted together, they should be promoted to 64-bit floating-point. The promotion type does not need to be one of the argument types, however; the following promotion rules both occur in Julia Base:promote_rule(::Type{UInt8}, ::Type{Int8}) = Int\npromote_rule(::Type{BigInt}, ::Type{Int8}) = BigIntIn the latter case, the result type is BigInt since BigInt is the only type large enough to hold integers for arbitrary-precision integer arithmetic. Also note that one does not need to define both promote_rule(::Type{A}, ::Type{B}) and promote_rule(::Type{B}, ::Type{A}) – the symmetry is implied by the way promote_rule is used in the promotion process.The promote_rule function is used as a building block to define a second function called promote_type, which, given any number of type objects, returns the common type to which those values, as arguments to promote should be promoted. Thus, if one wants to know, in absence of actual values, what type a collection of values of certain types would promote to, one can use promote_type:julia> promote_type(Int8, Int64)\nInt64Internally, promote_type is used inside of promote to determine what type argument values should be converted to for promotion. It can, however, be useful in its own right. The curious reader can read the code in promotion.jl, which defines the complete promotion mechanism in about 35 lines."
 },
 
 {
@@ -1357,7 +1397,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Interfaces",
     "title": "Iteration",
     "category": "section",
-    "text": "Required methods   Brief description\nstart(iter)   Returns the initial iteration state\nnext(iter, state)   Returns the current item and the next state\ndone(iter, state)   Tests if there are any items remaining\nImportant optional methods Default definition Brief description\nIteratorSize(IterType) HasLength() One of HasLength(), HasShape(), IsInfinite(), or SizeUnknown() as appropriate\nIteratorEltype(IterType) HasEltype() Either EltypeUnknown() or HasEltype() as appropriate\neltype(IterType) Any The type of the items returned by next()\nlength(iter) (undefined) The number of items, if known\nsize(iter, [dim...]) (undefined) The number of items in each dimension, if knownValue returned by IteratorSize(IterType) Required Methods\nHasLength() length(iter)\nHasShape() length(iter)  and size(iter, [dim...])\nIsInfinite() (none)\nSizeUnknown() (none)Value returned by IteratorEltype(IterType) Required Methods\nHasEltype() eltype(IterType)\nEltypeUnknown() (none)Sequential iteration is implemented by the methods start, done, and next. Instead of mutating objects as they are iterated over, Julia provides these three methods to keep track of the iteration state externally from the object. The start(iter) method returns the initial state for the iterable object iter. That state gets passed along to done(iter, state), which tests if there are any elements remaining, and next(iter, state), which returns a tuple containing the current element and an updated state. The state object can be anything, and is generally considered to be an implementation detail private to the iterable object.Any object defines these three methods is iterable and can be used in the many functions that rely upon iteration. It can also be used directly in a for loop since the syntax:for i in iter   # or  \"for i = iter\"\n    # body\nendis translated into:state = start(iter)\nwhile !done(iter, state)\n    (i, state) = next(iter, state)\n    # body\nendA simple example is an iterable sequence of square numbers with a defined length:julia> struct Squares\n           count::Int\n       end\n\njulia> Base.start(::Squares) = 1\n\njulia> Base.next(S::Squares, state) = (state*state, state+1)\n\njulia> Base.done(S::Squares, state) = state > S.count\n\njulia> Base.eltype(::Type{Squares}) = Int # Note that this is defined for the type\n\njulia> Base.length(S::Squares) = S.countWith only start, next, and done definitions, the Squares type is already pretty powerful. We can iterate over all the elements:julia> for i in Squares(7)\n           println(i)\n       end\n1\n4\n9\n16\n25\n36\n49We can use many of the builtin methods that work with iterables, like in, mean and std:julia> 25 in Squares(10)\ntrue\n\njulia> mean(Squares(100))\n3383.5\n\njulia> std(Squares(100))\n3024.355854282583There are a few more methods we can extend to give Julia more information about this iterable collection.  We know that the elements in a Squares sequence will always be Int. By extending the eltype method, we can give that information to Julia and help it make more specialized code in the more complicated methods. We also know the number of elements in our sequence, so we can extend length, too.Now, when we ask Julia to collect all the elements into an array it can preallocate a Vector{Int} of the right size instead of blindly push!ing each element into a Vector{Any}:julia> collect(Squares(10))' # transposed to save space\n1×10 RowVector{Int64,Array{Int64,1}}:\n 1  4  9  16  25  36  49  64  81  100While we can rely upon generic implementations, we can also extend specific methods where we know there is a simpler algorithm. For example, there's a formula to compute the sum of squares, so we can override the generic iterative version with a more performant solution:julia> Base.sum(S::Squares) = (n = S.count; return n*(n+1)*(2n+1)÷6)\n\njulia> sum(Squares(1803))\n1955361914This is a very common pattern throughout the Julia standard library: a small set of required methods define an informal interface that enable many fancier behaviors. In some cases, types will want to additionally specialize those extra behaviors when they know a more efficient algorithm can be used in their specific case.It is also often useful to allow iteration over a collection in reverse order by iterating over Iterators.reverse(iterator).  To actually support reverse-order iteration, however, an iterator type T needs to implement start, next, and done methods for Iterators.Reverse{T}. (Given r::Iterators.Reverse{T}, the underling iterator of type T is r.itr.) In our Squares example, we would implement Iterators.Reverse{Squares} methods:julia> Base.start(rS::Iterators.Reverse{Squares}) = rS.itr.count\n\njulia> Base.next(::Iterators.Reverse{Squares}, state) = (state*state, state-1)\n\njulia> Base.done(::Iterators.Reverse{Squares}, state) = state < 1\n\njulia> collect(Iterators.reverse(Squares(10)))' # transposed to save space\n1×10 RowVector{Int64,Array{Int64,1}}:\n 100  81  64  49  36  25  16  9  4  1"
+    "text": "Required methods   Brief description\nstart(iter)   Returns the initial iteration state\nnext(iter, state)   Returns the current item and the next state\ndone(iter, state)   Tests if there are any items remaining\nImportant optional methods Default definition Brief description\nIteratorSize(IterType) HasLength() One of HasLength(), HasShape(), IsInfinite(), or SizeUnknown() as appropriate\nIteratorEltype(IterType) HasEltype() Either EltypeUnknown() or HasEltype() as appropriate\neltype(IterType) Any The type of the items returned by next()\nlength(iter) (undefined) The number of items, if known\nsize(iter, [dim...]) (undefined) The number of items in each dimension, if knownValue returned by IteratorSize(IterType) Required Methods\nHasLength() length(iter)\nHasShape() length(iter)  and size(iter, [dim...])\nIsInfinite() (none)\nSizeUnknown() (none)Value returned by IteratorEltype(IterType) Required Methods\nHasEltype() eltype(IterType)\nEltypeUnknown() (none)Sequential iteration is implemented by the methods start, done, and next. Instead of mutating objects as they are iterated over, Julia provides these three methods to keep track of the iteration state externally from the object. The start(iter) method returns the initial state for the iterable object iter. That state gets passed along to done(iter, state), which tests if there are any elements remaining, and next(iter, state), which returns a tuple containing the current element and an updated state. The state object can be anything, and is generally considered to be an implementation detail private to the iterable object.Any object defines these three methods is iterable and can be used in the many functions that rely upon iteration. It can also be used directly in a for loop since the syntax:for i in iter   # or  \"for i = iter\"\n    # body\nendis translated into:state = start(iter)\nwhile !done(iter, state)\n    (i, state) = next(iter, state)\n    # body\nendA simple example is an iterable sequence of square numbers with a defined length:julia> struct Squares\n           count::Int\n       end\n\njulia> Base.start(::Squares) = 1\n\njulia> Base.next(S::Squares, state) = (state*state, state+1)\n\njulia> Base.done(S::Squares, state) = state > S.count\n\njulia> Base.eltype(::Type{Squares}) = Int # Note that this is defined for the type\n\njulia> Base.length(S::Squares) = S.countWith only start, next, and done definitions, the Squares type is already pretty powerful. We can iterate over all the elements:julia> for i in Squares(7)\n           println(i)\n       end\n1\n4\n9\n16\n25\n36\n49We can use many of the builtin methods that work with iterables, like in, mean and std:julia> 25 in Squares(10)\ntrue\n\njulia> mean(Squares(100))\n3383.5\n\njulia> std(Squares(100))\n3024.355854282583There are a few more methods we can extend to give Julia more information about this iterable collection.  We know that the elements in a Squares sequence will always be Int. By extending the eltype method, we can give that information to Julia and help it make more specialized code in the more complicated methods. We also know the number of elements in our sequence, so we can extend length, too.Now, when we ask Julia to collect all the elements into an array it can preallocate a Vector{Int} of the right size instead of blindly push!ing each element into a Vector{Any}:julia> collect(Squares(10))' # transposed to save space\n1×10 RowVector{Int64,Array{Int64,1}}:\n 1  4  9  16  25  36  49  64  81  100While we can rely upon generic implementations, we can also extend specific methods where we know there is a simpler algorithm. For example, there's a formula to compute the sum of squares, so we can override the generic iterative version with a more performant solution:julia> Base.sum(S::Squares) = (n = S.count; return n*(n+1)*(2n+1)÷6)\n\njulia> sum(Squares(1803))\n1955361914This is a very common pattern throughout Julia Base: a small set of required methods define an informal interface that enable many fancier behaviors. In some cases, types will want to additionally specialize those extra behaviors when they know a more efficient algorithm can be used in their specific case.It is also often useful to allow iteration over a collection in reverse order by iterating over Iterators.reverse(iterator).  To actually support reverse-order iteration, however, an iterator type T needs to implement start, next, and done methods for Iterators.Reverse{T}. (Given r::Iterators.Reverse{T}, the underling iterator of type T is r.itr.) In our Squares example, we would implement Iterators.Reverse{Squares} methods:julia> Base.start(rS::Iterators.Reverse{Squares}) = rS.itr.count\n\njulia> Base.next(::Iterators.Reverse{Squares}, state) = (state*state, state-1)\n\njulia> Base.done(::Iterators.Reverse{Squares}, state) = state < 1\n\njulia> collect(Iterators.reverse(Squares(10)))' # transposed to save space\n1×10 RowVector{Int64,Array{Int64,1}}:\n 100  81  64  49  36  25  16  9  4  1"
 },
 
 {
@@ -1373,7 +1413,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Interfaces",
     "title": "Abstract Arrays",
     "category": "section",
-    "text": "Methods to implement   Brief description\nsize(A)   Returns a tuple containing the dimensions of A\ngetindex(A, i::Int)   (if IndexLinear) Linear scalar indexing\ngetindex(A, I::Vararg{Int, N})   (if IndexCartesian, where N = ndims(A)) N-dimensional scalar indexing\nsetindex!(A, v, i::Int)   (if IndexLinear) Scalar indexed assignment\nsetindex!(A, v, I::Vararg{Int, N})   (if IndexCartesian, where N = ndims(A)) N-dimensional scalar indexed assignment\nOptional methods Default definition Brief description\nIndexStyle(::Type) IndexCartesian() Returns either IndexLinear() or IndexCartesian(). See the description below.\ngetindex(A, I...) defined in terms of scalar getindex Multidimensional and nonscalar indexing\nsetindex!(A, I...) defined in terms of scalar setindex! Multidimensional and nonscalar indexed assignment\nstart/next/done defined in terms of scalar getindex Iteration\nlength(A) prod(size(A)) Number of elements\nsimilar(A) similar(A, eltype(A), size(A)) Return a mutable array with the same shape and element type\nsimilar(A, ::Type{S}) similar(A, S, size(A)) Return a mutable array with the same shape and the specified element type\nsimilar(A, dims::NTuple{Int}) similar(A, eltype(A), dims) Return a mutable array with the same element type and size dims\nsimilar(A, ::Type{S}, dims::NTuple{Int}) Array{S}(uninitialized, dims) Return a mutable array with the specified element type and size\nNon-traditional indices Default definition Brief description\naxes(A) map(OneTo, size(A)) Return the AbstractUnitRange of valid indices\nBase.similar(A, ::Type{S}, inds::NTuple{Ind}) similar(A, S, Base.to_shape(inds)) Return a mutable array with the specified indices inds (see below)\nBase.similar(T::Union{Type,Function}, inds) T(Base.to_shape(inds)) Return an array similar to T with the specified indices inds (see below)If a type is defined as a subtype of AbstractArray, it inherits a very large set of rich behaviors including iteration and multidimensional indexing built on top of single-element access.  See the arrays manual page and standard library section for more supported methods.A key part in defining an AbstractArray subtype is IndexStyle. Since indexing is such an important part of an array and often occurs in hot loops, it's important to make both indexing and indexed assignment as efficient as possible.  Array data structures are typically defined in one of two ways: either it most efficiently accesses its elements using just one index (linear indexing) or it intrinsically accesses the elements with indices specified for every dimension.  These two modalities are identified by Julia as IndexLinear() and IndexCartesian().  Converting a linear index to multiple indexing subscripts is typically very expensive, so this provides a traits-based mechanism to enable efficient generic code for all array types.This distinction determines which scalar indexing methods the type must define. IndexLinear() arrays are simple: just define getindex(A::ArrayType, i::Int).  When the array is subsequently indexed with a multidimensional set of indices, the fallback getindex(A::AbstractArray, I...)() efficiently converts the indices into one linear index and then calls the above method. IndexCartesian() arrays, on the other hand, require methods to be defined for each supported dimensionality with ndims(A) Int indices. For example, the built-in SparseMatrixCSC type only supports two dimensions, so it just defines getindex(A::SparseMatrixCSC, i::Int, j::Int). The same holds for setindex!.Returning to the sequence of squares from above, we could instead define it as a subtype of an AbstractArray{Int, 1}:julia> struct SquaresVector <: AbstractArray{Int, 1}\n           count::Int\n       end\n\njulia> Base.size(S::SquaresVector) = (S.count,)\n\njulia> Base.IndexStyle(::Type{<:SquaresVector}) = IndexLinear()\n\njulia> Base.getindex(S::SquaresVector, i::Int) = i*iNote that it's very important to specify the two parameters of the AbstractArray; the first defines the eltype, and the second defines the ndims. That supertype and those three methods are all it takes for SquaresVector to be an iterable, indexable, and completely functional array:julia> s = SquaresVector(7)\n7-element SquaresVector:\n  1\n  4\n  9\n 16\n 25\n 36\n 49\n\njulia> s[s .> 20]\n3-element Array{Int64,1}:\n 25\n 36\n 49\n\njulia> s \\ [1 2; 3 4; 5 6; 7 8; 9 10; 11 12; 13 14]\n1×2 RowVector{Float64,Array{Float64,1}}:\n 0.305389  0.335329\n\njulia> s ⋅ s # dot(s, s)\n4676As a more complicated example, let's define our own toy N-dimensional sparse-like array type built on top of Dict:julia> struct SparseArray{T,N} <: AbstractArray{T,N}\n           data::Dict{NTuple{N,Int}, T}\n           dims::NTuple{N,Int}\n       end\n\njulia> SparseArray(::Type{T}, dims::Int...) where {T} = SparseArray(T, dims);\n\njulia> SparseArray(::Type{T}, dims::NTuple{N,Int}) where {T,N} = SparseArray{T,N}(Dict{NTuple{N,Int}, T}(), dims);\n\njulia> Base.size(A::SparseArray) = A.dims\n\njulia> Base.similar(A::SparseArray, ::Type{T}, dims::Dims) where {T} = SparseArray(T, dims)\n\njulia> Base.getindex(A::SparseArray{T,N}, I::Vararg{Int,N}) where {T,N} = get(A.data, I, zero(T))\n\njulia> Base.setindex!(A::SparseArray{T,N}, v, I::Vararg{Int,N}) where {T,N} = (A.data[I] = v)Notice that this is an IndexCartesian array, so we must manually define getindex and setindex! at the dimensionality of the array. Unlike the SquaresVector, we are able to define setindex!, and so we can mutate the array:julia> A = SparseArray(Float64, 3, 3)\n3×3 SparseArray{Float64,2}:\n 0.0  0.0  0.0\n 0.0  0.0  0.0\n 0.0  0.0  0.0\n\njulia> fill!(A, 2)\n3×3 SparseArray{Float64,2}:\n 2.0  2.0  2.0\n 2.0  2.0  2.0\n 2.0  2.0  2.0\n\njulia> A[:] = 1:length(A); A\n3×3 SparseArray{Float64,2}:\n 1.0  4.0  7.0\n 2.0  5.0  8.0\n 3.0  6.0  9.0The result of indexing an AbstractArray can itself be an array (for instance when indexing by an AbstractRange). The AbstractArray fallback methods use similar to allocate an Array of the appropriate size and element type, which is filled in using the basic indexing method described above. However, when implementing an array wrapper you often want the result to be wrapped as well:julia> A[1:2,:]\n2×3 SparseArray{Float64,2}:\n 1.0  4.0  7.0\n 2.0  5.0  8.0In this example it is accomplished by defining Base.similar{T}(A::SparseArray, ::Type{T}, dims::Dims) to create the appropriate wrapped array. (Note that while similar supports 1- and 2-argument forms, in most case you only need to specialize the 3-argument form.) For this to work it's important that SparseArray is mutable (supports setindex!). Defining similar, getindex and setindex! for SparseArray also makes it possible to copy the array:julia> copy(A)\n3×3 SparseArray{Float64,2}:\n 1.0  4.0  7.0\n 2.0  5.0  8.0\n 3.0  6.0  9.0In addition to all the iterable and indexable methods from above, these types can also interact with each other and use most of the methods defined in the standard library for AbstractArrays:julia> A[SquaresVector(3)]\n3-element SparseArray{Float64,1}:\n 1.0\n 4.0\n 9.0\n\njulia> dot(A[:,1],A[:,2])\n32.0If you are defining an array type that allows non-traditional indexing (indices that start at something other than 1), you should specialize indices. You should also specialize similar so that the dims argument (ordinarily a Dims size-tuple) can accept AbstractUnitRange objects, perhaps range-types Ind of your own design. For more information, see Arrays with custom indices."
+    "text": "Methods to implement   Brief description\nsize(A)   Returns a tuple containing the dimensions of A\ngetindex(A, i::Int)   (if IndexLinear) Linear scalar indexing\ngetindex(A, I::Vararg{Int, N})   (if IndexCartesian, where N = ndims(A)) N-dimensional scalar indexing\nsetindex!(A, v, i::Int)   (if IndexLinear) Scalar indexed assignment\nsetindex!(A, v, I::Vararg{Int, N})   (if IndexCartesian, where N = ndims(A)) N-dimensional scalar indexed assignment\nOptional methods Default definition Brief description\nIndexStyle(::Type) IndexCartesian() Returns either IndexLinear() or IndexCartesian(). See the description below.\ngetindex(A, I...) defined in terms of scalar getindex Multidimensional and nonscalar indexing\nsetindex!(A, I...) defined in terms of scalar setindex! Multidimensional and nonscalar indexed assignment\nstart/next/done defined in terms of scalar getindex Iteration\nlength(A) prod(size(A)) Number of elements\nsimilar(A) similar(A, eltype(A), size(A)) Return a mutable array with the same shape and element type\nsimilar(A, ::Type{S}) similar(A, S, size(A)) Return a mutable array with the same shape and the specified element type\nsimilar(A, dims::NTuple{Int}) similar(A, eltype(A), dims) Return a mutable array with the same element type and size dims\nsimilar(A, ::Type{S}, dims::NTuple{Int}) Array{S}(uninitialized, dims) Return a mutable array with the specified element type and size\nNon-traditional indices Default definition Brief description\naxes(A) map(OneTo, size(A)) Return the AbstractUnitRange of valid indices\nBase.similar(A, ::Type{S}, inds::NTuple{Ind}) similar(A, S, Base.to_shape(inds)) Return a mutable array with the specified indices inds (see below)\nBase.similar(T::Union{Type,Function}, inds) T(Base.to_shape(inds)) Return an array similar to T with the specified indices inds (see below)If a type is defined as a subtype of AbstractArray, it inherits a very large set of rich behaviors including iteration and multidimensional indexing built on top of single-element access.  See the arrays manual page and the Julia Base section for more supported methods.A key part in defining an AbstractArray subtype is IndexStyle. Since indexing is such an important part of an array and often occurs in hot loops, it's important to make both indexing and indexed assignment as efficient as possible.  Array data structures are typically defined in one of two ways: either it most efficiently accesses its elements using just one index (linear indexing) or it intrinsically accesses the elements with indices specified for every dimension.  These two modalities are identified by Julia as IndexLinear() and IndexCartesian().  Converting a linear index to multiple indexing subscripts is typically very expensive, so this provides a traits-based mechanism to enable efficient generic code for all array types.This distinction determines which scalar indexing methods the type must define. IndexLinear() arrays are simple: just define getindex(A::ArrayType, i::Int).  When the array is subsequently indexed with a multidimensional set of indices, the fallback getindex(A::AbstractArray, I...)() efficiently converts the indices into one linear index and then calls the above method. IndexCartesian() arrays, on the other hand, require methods to be defined for each supported dimensionality with ndims(A) Int indices. For example, the built-in SparseMatrixCSC type only supports two dimensions, so it just defines getindex(A::SparseMatrixCSC, i::Int, j::Int). The same holds for setindex!.Returning to the sequence of squares from above, we could instead define it as a subtype of an AbstractArray{Int, 1}:julia> struct SquaresVector <: AbstractArray{Int, 1}\n           count::Int\n       end\n\njulia> Base.size(S::SquaresVector) = (S.count,)\n\njulia> Base.IndexStyle(::Type{<:SquaresVector}) = IndexLinear()\n\njulia> Base.getindex(S::SquaresVector, i::Int) = i*iNote that it's very important to specify the two parameters of the AbstractArray; the first defines the eltype, and the second defines the ndims. That supertype and those three methods are all it takes for SquaresVector to be an iterable, indexable, and completely functional array:julia> s = SquaresVector(7)\n7-element SquaresVector:\n  1\n  4\n  9\n 16\n 25\n 36\n 49\n\njulia> s[s .> 20]\n3-element Array{Int64,1}:\n 25\n 36\n 49\n\njulia> s \\ [1 2; 3 4; 5 6; 7 8; 9 10; 11 12; 13 14]\n1×2 RowVector{Float64,Array{Float64,1}}:\n 0.305389  0.335329\n\njulia> s ⋅ s # dot(s, s)\n4676As a more complicated example, let's define our own toy N-dimensional sparse-like array type built on top of Dict:julia> struct SparseArray{T,N} <: AbstractArray{T,N}\n           data::Dict{NTuple{N,Int}, T}\n           dims::NTuple{N,Int}\n       end\n\njulia> SparseArray(::Type{T}, dims::Int...) where {T} = SparseArray(T, dims);\n\njulia> SparseArray(::Type{T}, dims::NTuple{N,Int}) where {T,N} = SparseArray{T,N}(Dict{NTuple{N,Int}, T}(), dims);\n\njulia> Base.size(A::SparseArray) = A.dims\n\njulia> Base.similar(A::SparseArray, ::Type{T}, dims::Dims) where {T} = SparseArray(T, dims)\n\njulia> Base.getindex(A::SparseArray{T,N}, I::Vararg{Int,N}) where {T,N} = get(A.data, I, zero(T))\n\njulia> Base.setindex!(A::SparseArray{T,N}, v, I::Vararg{Int,N}) where {T,N} = (A.data[I] = v)Notice that this is an IndexCartesian array, so we must manually define getindex and setindex! at the dimensionality of the array. Unlike the SquaresVector, we are able to define setindex!, and so we can mutate the array:julia> A = SparseArray(Float64, 3, 3)\n3×3 SparseArray{Float64,2}:\n 0.0  0.0  0.0\n 0.0  0.0  0.0\n 0.0  0.0  0.0\n\njulia> fill!(A, 2)\n3×3 SparseArray{Float64,2}:\n 2.0  2.0  2.0\n 2.0  2.0  2.0\n 2.0  2.0  2.0\n\njulia> A[:] = 1:length(A); A\n3×3 SparseArray{Float64,2}:\n 1.0  4.0  7.0\n 2.0  5.0  8.0\n 3.0  6.0  9.0The result of indexing an AbstractArray can itself be an array (for instance when indexing by an AbstractRange). The AbstractArray fallback methods use similar to allocate an Array of the appropriate size and element type, which is filled in using the basic indexing method described above. However, when implementing an array wrapper you often want the result to be wrapped as well:julia> A[1:2,:]\n2×3 SparseArray{Float64,2}:\n 1.0  4.0  7.0\n 2.0  5.0  8.0In this example it is accomplished by defining Base.similar{T}(A::SparseArray, ::Type{T}, dims::Dims) to create the appropriate wrapped array. (Note that while similar supports 1- and 2-argument forms, in most case you only need to specialize the 3-argument form.) For this to work it's important that SparseArray is mutable (supports setindex!). Defining similar, getindex and setindex! for SparseArray also makes it possible to copy the array:julia> copy(A)\n3×3 SparseArray{Float64,2}:\n 1.0  4.0  7.0\n 2.0  5.0  8.0\n 3.0  6.0  9.0In addition to all the iterable and indexable methods from above, these types can also interact with each other and use most of the methods defined in Julia Base for AbstractArrays:julia> A[SquaresVector(3)]\n3-element SparseArray{Float64,1}:\n 1.0\n 4.0\n 9.0\n\njulia> dot(A[:,1],A[:,2])\n32.0If you are defining an array type that allows non-traditional indexing (indices that start at something other than 1), you should specialize indices. You should also specialize similar so that the dims argument (ordinarily a Dims size-tuple) can accept AbstractUnitRange objects, perhaps range-types Ind of your own design. For more information, see Arrays with custom indices."
 },
 
 {
@@ -1445,7 +1485,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Modules",
     "title": "Standard modules",
     "category": "section",
-    "text": "There are three important standard modules: Main, Core, and Base.Main is the top-level module, and Julia starts with Main set as the current module.  Variables defined at the prompt go in Main, and varinfo() lists variables in Main.Core contains all identifiers considered \"built in\" to the language, i.e. part of the core language and not libraries. Every module implicitly specifies using Core, since you can't do anything without those definitions.Base is the standard library (the contents of base/). All modules implicitly contain using Base, since this is needed in the vast majority of cases."
+    "text": "There are three important standard modules: Main, Core, and Base.Main is the top-level module, and Julia starts with Main set as the current module.  Variables defined at the prompt go in Main, and varinfo() lists variables in Main.Core contains all identifiers considered \"built in\" to the language, i.e. part of the core language and not libraries. Every module implicitly specifies using Core, since you can't do anything without those definitions.Base is a module that contains basic functionality (the contents of base/). All modules implicitly contain using Base, since this is needed in the vast majority of cases."
 },
 
 {
@@ -1909,7 +1949,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Metaprogramming",
     "title": "Building an advanced macro",
     "category": "section",
-    "text": "Here is a simplified definition of Julia's @assert macro:julia> macro assert(ex)\n           return :( $ex ? nothing : throw(AssertionError($(string(ex)))) )\n       end\n@assert (macro with 1 method)This macro can be used like this:julia> @assert 1 == 1.0\n\njulia> @assert 1 == 0\nERROR: AssertionError: 1 == 0In place of the written syntax, the macro call is expanded at parse time to its returned result. This is equivalent to writing:1 == 1.0 ? nothing : throw(AssertionError(\"1 == 1.0\"))\n1 == 0 ? nothing : throw(AssertionError(\"1 == 0\"))That is, in the first call, the expression :(1 == 1.0) is spliced into the test condition slot, while the value of string(:(1 == 1.0)) is spliced into the assertion message slot. The entire expression, thus constructed, is placed into the syntax tree where the @assert macro call occurs. Then at execution time, if the test expression evaluates to true, then nothing is returned, whereas if the test is false, an error is raised indicating the asserted expression that was false. Notice that it would not be possible to write this as a function, since only the value of the condition is available and it would be impossible to display the expression that computed it in the error message.The actual definition of @assert in the standard library is more complicated. It allows the user to optionally specify their own error message, instead of just printing the failed expression. Just like in functions with a variable number of arguments, this is specified with an ellipses following the last argument:julia> macro assert(ex, msgs...)\n           msg_body = isempty(msgs) ? ex : msgs[1]\n           msg = string(msg_body)\n           return :($ex ? nothing : throw(AssertionError($msg)))\n       end\n@assert (macro with 1 method)Now @assert has two modes of operation, depending upon the number of arguments it receives! If there's only one argument, the tuple of expressions captured by msgs will be empty and it will behave the same as the simpler definition above. But now if the user specifies a second argument, it is printed in the message body instead of the failing expression. You can inspect the result of a macro expansion with the aptly named @macroexpand macro:julia> @macroexpand @assert a == b\n:(if Main.a == Main.b\n        Main.nothing\n    else\n        (Main.throw)((Main.AssertionError)(\"a == b\"))\n    end)\n\njulia> @macroexpand @assert a==b \"a should equal b!\"\n:(if Main.a == Main.b\n        Main.nothing\n    else\n        (Main.throw)((Main.AssertionError)(\"a should equal b!\"))\n    end)There is yet another case that the actual @assert macro handles: what if, in addition to printing \"a should equal b,\" we wanted to print their values? One might naively try to use string interpolation in the custom message, e.g., @assert a==b \"a ($a) should equal b ($b)!\", but this won't work as expected with the above macro. Can you see why? Recall from string interpolation that an interpolated string is rewritten to a call to string. Compare:julia> typeof(:(\"a should equal b\"))\nString\n\njulia> typeof(:(\"a ($a) should equal b ($b)!\"))\nExpr\n\njulia> dump(:(\"a ($a) should equal b ($b)!\"))\nExpr\n  head: Symbol string\n  args: Array{Any}((5,))\n    1: String \"a (\"\n    2: Symbol a\n    3: String \") should equal b (\"\n    4: Symbol b\n    5: String \")!\"\n  typ: AnySo now instead of getting a plain string in msg_body, the macro is receiving a full expression that will need to be evaluated in order to display as expected. This can be spliced directly into the returned expression as an argument to the string call; see error.jl for the complete implementation.The @assert macro makes great use of splicing into quoted expressions to simplify the manipulation of expressions inside the macro body."
+    "text": "Here is a simplified definition of Julia's @assert macro:julia> macro assert(ex)\n           return :( $ex ? nothing : throw(AssertionError($(string(ex)))) )\n       end\n@assert (macro with 1 method)This macro can be used like this:julia> @assert 1 == 1.0\n\njulia> @assert 1 == 0\nERROR: AssertionError: 1 == 0In place of the written syntax, the macro call is expanded at parse time to its returned result. This is equivalent to writing:1 == 1.0 ? nothing : throw(AssertionError(\"1 == 1.0\"))\n1 == 0 ? nothing : throw(AssertionError(\"1 == 0\"))That is, in the first call, the expression :(1 == 1.0) is spliced into the test condition slot, while the value of string(:(1 == 1.0)) is spliced into the assertion message slot. The entire expression, thus constructed, is placed into the syntax tree where the @assert macro call occurs. Then at execution time, if the test expression evaluates to true, then nothing is returned, whereas if the test is false, an error is raised indicating the asserted expression that was false. Notice that it would not be possible to write this as a function, since only the value of the condition is available and it would be impossible to display the expression that computed it in the error message.The actual definition of @assert in Julia Base is more complicated. It allows the user to optionally specify their own error message, instead of just printing the failed expression. Just like in functions with a variable number of arguments, this is specified with an ellipses following the last argument:julia> macro assert(ex, msgs...)\n           msg_body = isempty(msgs) ? ex : msgs[1]\n           msg = string(msg_body)\n           return :($ex ? nothing : throw(AssertionError($msg)))\n       end\n@assert (macro with 1 method)Now @assert has two modes of operation, depending upon the number of arguments it receives! If there's only one argument, the tuple of expressions captured by msgs will be empty and it will behave the same as the simpler definition above. But now if the user specifies a second argument, it is printed in the message body instead of the failing expression. You can inspect the result of a macro expansion with the aptly named @macroexpand macro:julia> @macroexpand @assert a == b\n:(if Main.a == Main.b\n        Main.nothing\n    else\n        (Main.throw)((Main.AssertionError)(\"a == b\"))\n    end)\n\njulia> @macroexpand @assert a==b \"a should equal b!\"\n:(if Main.a == Main.b\n        Main.nothing\n    else\n        (Main.throw)((Main.AssertionError)(\"a should equal b!\"))\n    end)There is yet another case that the actual @assert macro handles: what if, in addition to printing \"a should equal b,\" we wanted to print their values? One might naively try to use string interpolation in the custom message, e.g., @assert a==b \"a ($a) should equal b ($b)!\", but this won't work as expected with the above macro. Can you see why? Recall from string interpolation that an interpolated string is rewritten to a call to string. Compare:julia> typeof(:(\"a should equal b\"))\nString\n\njulia> typeof(:(\"a ($a) should equal b ($b)!\"))\nExpr\n\njulia> dump(:(\"a ($a) should equal b ($b)!\"))\nExpr\n  head: Symbol string\n  args: Array{Any}((5,))\n    1: String \"a (\"\n    2: Symbol a\n    3: String \") should equal b (\"\n    4: Symbol b\n    5: String \")!\"\n  typ: AnySo now instead of getting a plain string in msg_body, the macro is receiving a full expression that will need to be evaluated in order to display as expected. This can be spliced directly into the returned expression as an argument to the string call; see error.jl for the complete implementation.The @assert macro makes great use of splicing into quoted expressions to simplify the manipulation of expressions inside the macro body."
 },
 
 {
@@ -1917,7 +1957,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Metaprogramming",
     "title": "Hygiene",
     "category": "section",
-    "text": "An issue that arises in more complex macros is that of hygiene. In short, macros must ensure that the variables they introduce in their returned expressions do not accidentally clash with existing variables in the surrounding code they expand into. Conversely, the expressions that are passed into a macro as arguments are often expected to evaluate in the context of the surrounding code, interacting with and modifying the existing variables. Another concern arises from the fact that a macro may be called in a different module from where it was defined. In this case we need to ensure that all global variables are resolved to the correct module. Julia already has a major advantage over languages with textual macro expansion (like C) in that it only needs to consider the returned expression. All the other variables (such as msg in @assert above) follow the normal scoping block behavior.To demonstrate these issues, let us consider writing a @time macro that takes an expression as its argument, records the time, evaluates the expression, records the time again, prints the difference between the before and after times, and then has the value of the expression as its final value. The macro might look like this:macro time(ex)\n    return quote\n        local t0 = time()\n        local val = $ex\n        local t1 = time()\n        println(\"elapsed time: \", t1-t0, \" seconds\")\n        val\n    end\nendHere, we want t0, t1, and val to be private temporary variables, and we want time to refer to the time function in the standard library, not to any time variable the user might have (the same applies to println). Imagine the problems that could occur if the user expression ex also contained assignments to a variable called t0, or defined its own time variable. We might get errors, or mysteriously incorrect behavior.Julia's macro expander solves these problems in the following way. First, variables within a macro result are classified as either local or global. A variable is considered local if it is assigned to (and not declared global), declared local, or used as a function argument name. Otherwise, it is considered global. Local variables are then renamed to be unique (using the gensym function, which generates new symbols), and global variables are resolved within the macro definition environment. Therefore both of the above concerns are handled; the macro's locals will not conflict with any user variables, and time and println will refer to the standard library definitions.One problem remains however. Consider the following use of this macro:module MyModule\nimport Base.@time\n\ntime() = ... # compute something\n\n@time time()\nendHere the user expression ex is a call to time, but not the same time function that the macro uses. It clearly refers to MyModule.time. Therefore we must arrange for the code in ex to be resolved in the macro call environment. This is done by \"escaping\" the expression with esc:macro time(ex)\n    ...\n    local val = $(esc(ex))\n    ...\nendAn expression wrapped in this manner is left alone by the macro expander and simply pasted into the output verbatim. Therefore it will be resolved in the macro call environment.This escaping mechanism can be used to \"violate\" hygiene when necessary, in order to introduce or manipulate user variables. For example, the following macro sets x to zero in the call environment:julia> macro zerox()\n           return esc(:(x = 0))\n       end\n@zerox (macro with 1 method)\n\njulia> function foo()\n           x = 1\n           @zerox\n           return x # is zero\n       end\nfoo (generic function with 1 method)\n\njulia> foo()\n0This kind of manipulation of variables should be used judiciously, but is occasionally quite handy.Getting the hygiene rules correct can be a formidable challenge. Before using a macro, you might want to consider whether a function closure would be sufficient. Another useful strategy is to defer as much work as possible to runtime. For example, many macros simply wrap their arguments in a QuoteNode or other similar Expr. Some examples of this include @task body which simply returns schedule(Task(() -> $body)), and @eval expr, which simply returns eval(QuoteNode(expr)).To demonstrate, we might rewrite the @time example above as:macro time(expr)\n    return :(timeit(() -> $(esc(expr))))\nend\nfunction timeit(f)\n    t0 = time()\n    val = f()\n    t1 = time()\n    println(\"elapsed time: \", t1-t0, \" seconds\")\n    return val\nendHowever, we don't do this for a good reason: wrapping the expr in a new scope block (the anonymous function) also slightly changes the meaning of the expression (the scope of any variables in it), while we want @time to be usable with minimum impact on the wrapped code."
+    "text": "An issue that arises in more complex macros is that of hygiene. In short, macros must ensure that the variables they introduce in their returned expressions do not accidentally clash with existing variables in the surrounding code they expand into. Conversely, the expressions that are passed into a macro as arguments are often expected to evaluate in the context of the surrounding code, interacting with and modifying the existing variables. Another concern arises from the fact that a macro may be called in a different module from where it was defined. In this case we need to ensure that all global variables are resolved to the correct module. Julia already has a major advantage over languages with textual macro expansion (like C) in that it only needs to consider the returned expression. All the other variables (such as msg in @assert above) follow the normal scoping block behavior.To demonstrate these issues, let us consider writing a @time macro that takes an expression as its argument, records the time, evaluates the expression, records the time again, prints the difference between the before and after times, and then has the value of the expression as its final value. The macro might look like this:macro time(ex)\n    return quote\n        local t0 = time()\n        local val = $ex\n        local t1 = time()\n        println(\"elapsed time: \", t1-t0, \" seconds\")\n        val\n    end\nendHere, we want t0, t1, and val to be private temporary variables, and we want time to refer to the time function in Julia Base, not to any time variable the user might have (the same applies to println). Imagine the problems that could occur if the user expression ex also contained assignments to a variable called t0, or defined its own time variable. We might get errors, or mysteriously incorrect behavior.Julia's macro expander solves these problems in the following way. First, variables within a macro result are classified as either local or global. A variable is considered local if it is assigned to (and not declared global), declared local, or used as a function argument name. Otherwise, it is considered global. Local variables are then renamed to be unique (using the gensym function, which generates new symbols), and global variables are resolved within the macro definition environment. Therefore both of the above concerns are handled; the macro's locals will not conflict with any user variables, and time and println will refer to the Julia Base definitions.One problem remains however. Consider the following use of this macro:module MyModule\nimport Base.@time\n\ntime() = ... # compute something\n\n@time time()\nendHere the user expression ex is a call to time, but not the same time function that the macro uses. It clearly refers to MyModule.time. Therefore we must arrange for the code in ex to be resolved in the macro call environment. This is done by \"escaping\" the expression with esc:macro time(ex)\n    ...\n    local val = $(esc(ex))\n    ...\nendAn expression wrapped in this manner is left alone by the macro expander and simply pasted into the output verbatim. Therefore it will be resolved in the macro call environment.This escaping mechanism can be used to \"violate\" hygiene when necessary, in order to introduce or manipulate user variables. For example, the following macro sets x to zero in the call environment:julia> macro zerox()\n           return esc(:(x = 0))\n       end\n@zerox (macro with 1 method)\n\njulia> function foo()\n           x = 1\n           @zerox\n           return x # is zero\n       end\nfoo (generic function with 1 method)\n\njulia> foo()\n0This kind of manipulation of variables should be used judiciously, but is occasionally quite handy.Getting the hygiene rules correct can be a formidable challenge. Before using a macro, you might want to consider whether a function closure would be sufficient. Another useful strategy is to defer as much work as possible to runtime. For example, many macros simply wrap their arguments in a QuoteNode or other similar Expr. Some examples of this include @task body which simply returns schedule(Task(() -> $body)), and @eval expr, which simply returns eval(QuoteNode(expr)).To demonstrate, we might rewrite the @time example above as:macro time(expr)\n    return :(timeit(() -> $(esc(expr))))\nend\nfunction timeit(f)\n    t0 = time()\n    val = f()\n    t1 = time()\n    println(\"elapsed time: \", t1-t0, \" seconds\")\n    return val\nendHowever, we don't do this for a good reason: wrapping the expr in a new scope block (the anonymous function) also slightly changes the meaning of the expression (the scope of any variables in it), while we want @time to be usable with minimum impact on the wrapped code."
 },
 
 {
@@ -2165,7 +2205,7 @@ var documenterSearchIndex = {"docs": [
     "page": "다차원 배열",
     "title": "밀집 메소드와 희소 메소드 간의 대응",
     "category": "section",
-    "text": "다음의 표는 희소 행렬의 내장 메소드와 이에 대응하는 밀집 행렬의 메소드를 담고있다. 일반적으로 희소 행렬을 생성하는 메소드가 그에 대응하는 밀집 행렬 메소드와 다른 점은, 결과 행렬이 주어진 희소 행렬 S의 희소성 패턴을 따르거나, 결과 희소 행렬의 밀도가 d이라는 것이다. (즉, 행렬의 각 원소가 0이 아닐 확률이 d이다.)자세한 내용은 표준 라이브러리 레퍼런스의 밀집 벡터와 행렬을 참조하기 바란다.희소 밀집 설명\nspzeros(m,n) zeros(m,n) 크기가 m × n 인 0의 행렬을 생성한다. (spzeros(m,n) 는 빈 행렬이다.)\nsparse(I, n, n) Matrix(I,n,n) 크기가 m × n 인 단위 행렬을 생성한다.\nArray(S) sparse(A) 밀집 행렬과 희소 행렬을 상호 변환한다.\nsprand(m,n,d) rand(m,n) 크기가 m × n 인 랜덤 행렬을 생성한다. 생성되는 행렬의 밀도는 d이며, 0이 아닌 원소는 독립 동일하게 반열린구간 0 1)에서의 연속 균등 분포를 따른다.\nsprandn(m,n,d) randn(m,n) 크기가 m × n 인 랜덤 행렬을 생성한다. 생성되는 행렬의 밀도는 d이며, 0이 아닌 원소는 독립 동일하게 표준 정규 분포를 따른다.\nsprandn(m,n,d,X) randn(m,n,X) 크기가 m × n 인 랜덤 행렬을 생성한다. 생성되는 행렬의 밀도는 d이며, 0이 아닌 원소는 독립 동일하게 X 분포를 따른다. (Distributions 패키지를 필요로 한다.)"
+    "text": "다음의 표는 희소 행렬의 내장 메소드와 이에 대응하는 밀집 행렬의 메소드를 담고있다. 일반적으로 희소 행렬을 생성하는 메소드가 그에 대응하는 밀집 행렬 메소드와 다른 점은, 결과 행렬이 주어진 희소 행렬 S의 희소성 패턴을 따르거나, 결과 희소 행렬의 밀도가 d이라는 것이다. (즉, 행렬의 각 원소가 0이 아닐 확률이 d이다.)자세한 내용은 줄리아 Base 레퍼런스의 밀집 벡터와 행렬을 참조하기 바란다.희소 밀집 설명\nspzeros(m,n) zeros(m,n) 크기가 m × n 인 0의 행렬을 생성한다. (spzeros(m,n) 는 빈 행렬이다.)\nsparse(I, n, n) Matrix(I,n,n) 크기가 m × n 인 단위 행렬을 생성한다.\nArray(S) sparse(A) 밀집 행렬과 희소 행렬을 상호 변환한다.\nsprand(m,n,d) rand(m,n) 크기가 m × n 인 랜덤 행렬을 생성한다. 생성되는 행렬의 밀도는 d이며, 0이 아닌 원소는 독립 동일하게 반열린구간 0 1)에서의 연속 균등 분포를 따른다.\nsprandn(m,n,d) randn(m,n) 크기가 m × n 인 랜덤 행렬을 생성한다. 생성되는 행렬의 밀도는 d이며, 0이 아닌 원소는 독립 동일하게 표준 정규 분포를 따른다.\nsprandn(m,n,d,X) randn(m,n,X) 크기가 m × n 인 랜덤 행렬을 생성한다. 생성되는 행렬의 밀도는 d이며, 0이 아닌 원소는 독립 동일하게 X 분포를 따른다. (Distributions 패키지를 필요로 한다.)"
 },
 
 {
@@ -2221,7 +2261,7 @@ var documenterSearchIndex = {"docs": [
     "page": "선형 대수",
     "title": "행렬 분해",
     "category": "section",
-    "text": "행렬 분해는 주어진 행렬을 여러 행렬의 곱으로 분해하는 것이며, 선형 대수의 중심이 되는 개념 중 하나이다.아래는 Julia에 구현된 행렬 분해를 요약한 표이다. 각 분해와 연관된 메소드에 관한 자세한 내용은 표준 라이브러리 문서의 선형 대수 섹션을 참조하기 바란다.종류 설명\nCholesky 숄레스키 분해\nCholeskyPivoted 피벗 숄레스키 분해\nLU LU 분해\nLUTridiagonal Tridiagonal 행렬에 대한 LU 분해\nQR QR 분해\nQRCompactWY QR 분해의 컴팩트 WY 폼\nQRPivoted 피벗 QR 분해\nHessenberg 헤센베르크 분해\nEigen 고윳값 분해\nSVD 특이값 분해\nGeneralizedSVD 일반화된 특이값 분해"
+    "text": "행렬 분해는 주어진 행렬을 여러 행렬의 곱으로 분해하는 것이며, 선형 대수의 중심이 되는 개념 중 하나이다.아래는 Julia에 구현된 행렬 분해를 요약한 표이다. 각 분해와 연관된 메소드에 관한 자세한 내용은 줄리아 Base 문서의 선형 대수 섹션을 참조하기 바란다.종류 설명\nCholesky 숄레스키 분해\nCholeskyPivoted 피벗 숄레스키 분해\nLU LU 분해\nLUTridiagonal Tridiagonal 행렬에 대한 LU 분해\nQR QR 분해\nQRCompactWY QR 분해의 컴팩트 WY 폼\nQRPivoted 피벗 QR 분해\nHessenberg 헤센베르크 분해\nEigen 고윳값 분해\nSVD 특이값 분해\nGeneralizedSVD 일반화된 특이값 분해"
 },
 
 {
@@ -2325,7 +2365,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Networking and Streams",
     "title": "Text I/O",
     "category": "section",
-    "text": "Note that the write method mentioned above operates on binary streams. In particular, values do not get converted to any canonical text representation but are written out as is:julia> write(STDOUT, 0x61);  # suppress return value 1 with ;\naNote that a is written to STDOUT by the write function and that the returned value is 1 (since 0x61 is one byte).For text I/O, use the print or show methods, depending on your needs (see the standard library reference for a detailed discussion of the difference between the two):julia> print(STDOUT, 0x61)\n97"
+    "text": "Note that the write method mentioned above operates on binary streams. In particular, values do not get converted to any canonical text representation but are written out as is:julia> write(STDOUT, 0x61);  # suppress return value 1 with ;\naNote that a is written to STDOUT by the write function and that the returned value is 1 (since 0x61 is one byte).For text I/O, use the print or show methods, depending on your needs (see the Julia Base reference for a detailed discussion of the difference between the two):julia> print(STDOUT, 0x61)\n97"
 },
 
 {
@@ -3861,7 +3901,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Performance Tips",
     "title": "Separate kernel functions (aka, function barriers)",
     "category": "section",
-    "text": "Many functions follow a pattern of performing some set-up work, and then running many iterations to perform a core computation. Where possible, it is a good idea to put these core computations in separate functions. For example, the following contrived function returns an array of a randomly-chosen type:DocTestSetup = quote\n    srand(1234)\nendjulia> function strange_twos(n)\n           a = Vector{rand(Bool) ? Int64 : Float64}(n)\n           for i = 1:n\n               a[i] = 2\n           end\n           return a\n       end\nstrange_twos (generic function with 1 method)\n\njulia> strange_twos(3)\n3-element Array{Float64,1}:\n 2.0\n 2.0\n 2.0This should be written as:julia> function fill_twos!(a)\n           for i=eachindex(a)\n               a[i] = 2\n           end\n       end\nfill_twos! (generic function with 1 method)\n\njulia> function strange_twos(n)\n           a = Vector{rand(Bool) ? Int64 : Float64}(uninitialized, n)\n           fill_twos!(a)\n           return a\n       end\nstrange_twos (generic function with 1 method)\n\njulia> strange_twos(3)\n3-element Array{Float64,1}:\n 2.0\n 2.0\n 2.0Julia's compiler specializes code for argument types at function boundaries, so in the original implementation it does not know the type of a during the loop (since it is chosen randomly). Therefore the second version is generally faster since the inner loop can be recompiled as part of fill_twos! for different types of a.The second form is also often better style and can lead to more code reuse.This pattern is used in several places in the standard library. For example, see hvcat_fill in abstractarray.jl, or the fill! function, which we could have used instead of writing our own fill_twos!.Functions like strange_twos occur when dealing with data of uncertain type, for example data loaded from an input file that might contain either integers, floats, strings, or something else."
+    "text": "Many functions follow a pattern of performing some set-up work, and then running many iterations to perform a core computation. Where possible, it is a good idea to put these core computations in separate functions. For example, the following contrived function returns an array of a randomly-chosen type:DocTestSetup = quote\n    srand(1234)\nendjulia> function strange_twos(n)\n           a = Vector{rand(Bool) ? Int64 : Float64}(n)\n           for i = 1:n\n               a[i] = 2\n           end\n           return a\n       end\nstrange_twos (generic function with 1 method)\n\njulia> strange_twos(3)\n3-element Array{Float64,1}:\n 2.0\n 2.0\n 2.0This should be written as:julia> function fill_twos!(a)\n           for i=eachindex(a)\n               a[i] = 2\n           end\n       end\nfill_twos! (generic function with 1 method)\n\njulia> function strange_twos(n)\n           a = Vector{rand(Bool) ? Int64 : Float64}(uninitialized, n)\n           fill_twos!(a)\n           return a\n       end\nstrange_twos (generic function with 1 method)\n\njulia> strange_twos(3)\n3-element Array{Float64,1}:\n 2.0\n 2.0\n 2.0Julia's compiler specializes code for argument types at function boundaries, so in the original implementation it does not know the type of a during the loop (since it is chosen randomly). Therefore the second version is generally faster since the inner loop can be recompiled as part of fill_twos! for different types of a.The second form is also often better style and can lead to more code reuse.This pattern is used in several places in Julia Base. For example, see hvcat_fill in abstractarray.jl, or the fill! function, which we could have used instead of writing our own fill_twos!.Functions like strange_twos occur when dealing with data of uncertain type, for example data loaded from an input file that might contain either integers, floats, strings, or something else."
 },
 
 {
@@ -3877,7 +3917,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Performance Tips",
     "title": "The dangers of abusing multiple dispatch (aka, more on types with values-as-parameters)",
     "category": "section",
-    "text": "Once one learns to appreciate multiple dispatch, there's an understandable tendency to go crazy and try to use it for everything. For example, you might imagine using it to store information, e.g.struct Car{Make,Model}\n    year::Int\n    ...more fields...\nendand then dispatch on objects like Car{:Honda,:Accord}(year, args...).This might be worthwhile when the following are true:You require CPU-intensive processing on each Car, and it becomes vastly more efficient if you know the Make and Model at compile time.\nYou have homogenous lists of the same type of Car to process, so that you can store them all in an Array{Car{:Honda,:Accord},N}.When the latter holds, a function processing such a homogenous array can be productively specialized: Julia knows the type of each element in advance (all objects in the container have the same concrete type), so Julia can \"look up\" the correct method calls when the function is being compiled (obviating the need to check at run-time) and thereby emit efficient code for processing the whole list.When these do not hold, then it's likely that you'll get no benefit; worse, the resulting \"combinatorial explosion of types\" will be counterproductive.  If items[i+1] has a different type than item[i], Julia has to look up the type at run-time, search for the appropriate method in method tables, decide (via type intersection) which one matches, determine whether it has been JIT-compiled yet (and do so if not), and then make the call. In essence, you're asking the full type- system and JIT-compilation machinery to basically execute the equivalent of a switch statement or dictionary lookup in your own code.Some run-time benchmarks comparing (1) type dispatch, (2) dictionary lookup, and (3) a \"switch\" statement can be found on the mailing list.Perhaps even worse than the run-time impact is the compile-time impact: Julia will compile specialized functions for each different Car{Make, Model}; if you have hundreds or thousands of such types, then every function that accepts such an object as a parameter (from a custom get_year function you might write yourself, to the generic push! function in the standard library) will have hundreds or thousands of variants compiled for it.  Each of these increases the size of the cache of compiled code, the length of internal lists of methods, etc.  Excess enthusiasm for values-as-parameters can easily waste enormous resources."
+    "text": "Once one learns to appreciate multiple dispatch, there's an understandable tendency to go crazy and try to use it for everything. For example, you might imagine using it to store information, e.g.struct Car{Make,Model}\n    year::Int\n    ...more fields...\nendand then dispatch on objects like Car{:Honda,:Accord}(year, args...).This might be worthwhile when the following are true:You require CPU-intensive processing on each Car, and it becomes vastly more efficient if you know the Make and Model at compile time.\nYou have homogenous lists of the same type of Car to process, so that you can store them all in an Array{Car{:Honda,:Accord},N}.When the latter holds, a function processing such a homogenous array can be productively specialized: Julia knows the type of each element in advance (all objects in the container have the same concrete type), so Julia can \"look up\" the correct method calls when the function is being compiled (obviating the need to check at run-time) and thereby emit efficient code for processing the whole list.When these do not hold, then it's likely that you'll get no benefit; worse, the resulting \"combinatorial explosion of types\" will be counterproductive.  If items[i+1] has a different type than item[i], Julia has to look up the type at run-time, search for the appropriate method in method tables, decide (via type intersection) which one matches, determine whether it has been JIT-compiled yet (and do so if not), and then make the call. In essence, you're asking the full type- system and JIT-compilation machinery to basically execute the equivalent of a switch statement or dictionary lookup in your own code.Some run-time benchmarks comparing (1) type dispatch, (2) dictionary lookup, and (3) a \"switch\" statement can be found on the mailing list.Perhaps even worse than the run-time impact is the compile-time impact: Julia will compile specialized functions for each different Car{Make, Model}; if you have hundreds or thousands of such types, then every function that accepts such an object as a parameter (from a custom get_year function you might write yourself, to the generic push! function in Julia Base) will have hundreds or thousands of variants compiled for it.  Each of these increases the size of the cache of compiled code, the length of internal lists of methods, etc.  Excess enthusiasm for values-as-parameters can easily waste enormous resources."
 },
 
 {
@@ -4069,7 +4109,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Style Guide",
     "title": "Append ! to names of functions that modify their arguments",
     "category": "section",
-    "text": "Instead of:function double(a::AbstractArray{<:Number})\n    for i = 1:endof(a)\n        a[i] *= 2\n    end\n    return a\nenduse:function double!(a::AbstractArray{<:Number})\n    for i = 1:endof(a)\n        a[i] *= 2\n    end\n    return a\nendThe Julia standard library uses this convention throughout and contains examples of functions with both copying and modifying forms (e.g., sort and sort!), and others which are just modifying (e.g., push!, pop!, splice!).  It is typical for such functions to also return the modified array for convenience."
+    "text": "Instead of:function double(a::AbstractArray{<:Number})\n    for i = 1:endof(a)\n        a[i] *= 2\n    end\n    return a\nenduse:function double!(a::AbstractArray{<:Number})\n    for i = 1:endof(a)\n        a[i] *= 2\n    end\n    return a\nendJulia Base uses this convention throughout and contains examples of functions with both copying and modifying forms (e.g., sort and sort!), and others which are just modifying (e.g., push!, pop!, splice!).  It is typical for such functions to also return the modified array for convenience."
 },
 
 {
@@ -4505,7 +4545,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/base.html#",
+    "location": "base/base.html#",
     "page": "Essentials",
     "title": "Essentials",
     "category": "page",
@@ -4513,7 +4553,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/base.html#Essentials-1",
+    "location": "base/base.html#Essentials-1",
     "page": "Essentials",
     "title": "Essentials",
     "category": "section",
@@ -4521,15 +4561,15 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/base.html#Introduction-1",
+    "location": "base/base.html#Introduction-1",
     "page": "Essentials",
     "title": "Introduction",
     "category": "section",
-    "text": "The Julia standard library contains a range of functions and macros appropriate for performing scientific and numerical computing, but is also as broad as those of many general purpose programming languages.  Additional functionality is available from a growing collection of available packages. Functions are grouped by topic below.Some general notes:To use module functions, use import Module to import the module, and Module.fn(x) to use the functions.\nAlternatively, using Module will import all exported Module functions into the current namespace.\nBy convention, function names ending with an exclamation point (!) modify their arguments. Some functions have both modifying (e.g., sort!) and non-modifying (sort) versions."
+    "text": "Julia Base contains a range of functions and macros appropriate for performing scientific and numerical computing, but is also as broad as those of many general purpose programming languages.  Additional functionality is available from a growing collection of available packages. Functions are grouped by topic below.Some general notes:To use module functions, use import Module to import the module, and Module.fn(x) to use the functions.\nAlternatively, using Module will import all exported Module functions into the current namespace.\nBy convention, function names ending with an exclamation point (!) modify their arguments. Some functions have both modifying (e.g., sort!) and non-modifying (sort) versions."
 },
 
 {
-    "location": "stdlib/base.html#Base.exit",
+    "location": "base/base.html#Base.exit",
     "page": "Essentials",
     "title": "Base.exit",
     "category": "Function",
@@ -4537,7 +4577,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/base.html#Base.quit",
+    "location": "base/base.html#Base.quit",
     "page": "Essentials",
     "title": "Base.quit",
     "category": "Function",
@@ -4545,7 +4585,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/base.html#Base.atexit",
+    "location": "base/base.html#Base.atexit",
     "page": "Essentials",
     "title": "Base.atexit",
     "category": "Function",
@@ -4553,7 +4593,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/base.html#Base.atreplinit",
+    "location": "base/base.html#Base.atreplinit",
     "page": "Essentials",
     "title": "Base.atreplinit",
     "category": "Function",
@@ -4561,7 +4601,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/base.html#Base.isinteractive",
+    "location": "base/base.html#Base.isinteractive",
     "page": "Essentials",
     "title": "Base.isinteractive",
     "category": "Function",
@@ -4569,7 +4609,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/base.html#Base.varinfo",
+    "location": "base/base.html#Base.varinfo",
     "page": "Essentials",
     "title": "Base.varinfo",
     "category": "Function",
@@ -4577,7 +4617,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/base.html#Base.summarysize",
+    "location": "base/base.html#Base.summarysize",
     "page": "Essentials",
     "title": "Base.summarysize",
     "category": "Function",
@@ -4585,7 +4625,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/base.html#Base.edit-Tuple{AbstractString,Integer}",
+    "location": "base/base.html#Base.edit-Tuple{AbstractString,Integer}",
     "page": "Essentials",
     "title": "Base.edit",
     "category": "Method",
@@ -4593,7 +4633,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/base.html#Base.edit-Tuple{Any}",
+    "location": "base/base.html#Base.edit-Tuple{Any}",
     "page": "Essentials",
     "title": "Base.edit",
     "category": "Method",
@@ -4601,7 +4641,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/base.html#Base.@edit",
+    "location": "base/base.html#Base.@edit",
     "page": "Essentials",
     "title": "Base.@edit",
     "category": "Macro",
@@ -4609,7 +4649,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/base.html#Base.less-Tuple{AbstractString}",
+    "location": "base/base.html#Base.less-Tuple{AbstractString}",
     "page": "Essentials",
     "title": "Base.less",
     "category": "Method",
@@ -4617,7 +4657,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/base.html#Base.less-Tuple{Any}",
+    "location": "base/base.html#Base.less-Tuple{Any}",
     "page": "Essentials",
     "title": "Base.less",
     "category": "Method",
@@ -4625,7 +4665,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/base.html#Base.@less",
+    "location": "base/base.html#Base.@less",
     "page": "Essentials",
     "title": "Base.@less",
     "category": "Macro",
@@ -4633,7 +4673,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/base.html#Base.clipboard-Tuple{Any}",
+    "location": "base/base.html#Base.clipboard-Tuple{Any}",
     "page": "Essentials",
     "title": "Base.clipboard",
     "category": "Method",
@@ -4641,7 +4681,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/base.html#Base.clipboard-Tuple{}",
+    "location": "base/base.html#Base.clipboard-Tuple{}",
     "page": "Essentials",
     "title": "Base.clipboard",
     "category": "Method",
@@ -4649,7 +4689,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/base.html#Base.require",
+    "location": "base/base.html#Base.require",
     "page": "Essentials",
     "title": "Base.require",
     "category": "Function",
@@ -4657,7 +4697,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/base.html#Base.compilecache",
+    "location": "base/base.html#Base.compilecache",
     "page": "Essentials",
     "title": "Base.compilecache",
     "category": "Function",
@@ -4665,7 +4705,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/base.html#Base.__precompile__",
+    "location": "base/base.html#Base.__precompile__",
     "page": "Essentials",
     "title": "Base.__precompile__",
     "category": "Function",
@@ -4673,7 +4713,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/base.html#Base.include",
+    "location": "base/base.html#Base.include",
     "page": "Essentials",
     "title": "Base.include",
     "category": "Function",
@@ -4681,7 +4721,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/base.html#Base.include_string",
+    "location": "base/base.html#Base.include_string",
     "page": "Essentials",
     "title": "Base.include_string",
     "category": "Function",
@@ -4689,7 +4729,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/base.html#Base.include_dependency",
+    "location": "base/base.html#Base.include_dependency",
     "page": "Essentials",
     "title": "Base.include_dependency",
     "category": "Function",
@@ -4697,7 +4737,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/base.html#Base.Docs.apropos",
+    "location": "base/base.html#Base.Docs.apropos",
     "page": "Essentials",
     "title": "Base.Docs.apropos",
     "category": "Function",
@@ -4705,7 +4745,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/base.html#Base.which-Tuple{Any,Any}",
+    "location": "base/base.html#Base.which-Tuple{Any,Any}",
     "page": "Essentials",
     "title": "Base.which",
     "category": "Method",
@@ -4713,7 +4753,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/base.html#Base.which-Tuple{Symbol}",
+    "location": "base/base.html#Base.which-Tuple{Symbol}",
     "page": "Essentials",
     "title": "Base.which",
     "category": "Method",
@@ -4721,7 +4761,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/base.html#Base.@which",
+    "location": "base/base.html#Base.@which",
     "page": "Essentials",
     "title": "Base.@which",
     "category": "Macro",
@@ -4729,7 +4769,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/base.html#Base.methods",
+    "location": "base/base.html#Base.methods",
     "page": "Essentials",
     "title": "Base.methods",
     "category": "Function",
@@ -4737,7 +4777,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/base.html#Base.methodswith",
+    "location": "base/base.html#Base.methodswith",
     "page": "Essentials",
     "title": "Base.methodswith",
     "category": "Function",
@@ -4745,7 +4785,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/base.html#Base.@show",
+    "location": "base/base.html#Base.@show",
     "page": "Essentials",
     "title": "Base.@show",
     "category": "Macro",
@@ -4753,7 +4793,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/base.html#Base.versioninfo",
+    "location": "base/base.html#Base.versioninfo",
     "page": "Essentials",
     "title": "Base.versioninfo",
     "category": "Function",
@@ -4761,7 +4801,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/base.html#ans",
+    "location": "base/base.html#ans",
     "page": "Essentials",
     "title": "ans",
     "category": "Keyword",
@@ -4769,7 +4809,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/base.html#Getting-Around-1",
+    "location": "base/base.html#Getting-Around-1",
     "page": "Essentials",
     "title": "Getting Around",
     "category": "section",
@@ -4777,7 +4817,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/base.html#module",
+    "location": "base/base.html#module",
     "page": "Essentials",
     "title": "module",
     "category": "Keyword",
@@ -4785,7 +4825,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/base.html#export",
+    "location": "base/base.html#export",
     "page": "Essentials",
     "title": "export",
     "category": "Keyword",
@@ -4793,7 +4833,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/base.html#import",
+    "location": "base/base.html#import",
     "page": "Essentials",
     "title": "import",
     "category": "Keyword",
@@ -4801,7 +4841,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/base.html#using",
+    "location": "base/base.html#using",
     "page": "Essentials",
     "title": "using",
     "category": "Keyword",
@@ -4809,7 +4849,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/base.html#baremodule",
+    "location": "base/base.html#baremodule",
     "page": "Essentials",
     "title": "baremodule",
     "category": "Keyword",
@@ -4817,7 +4857,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/base.html#function",
+    "location": "base/base.html#function",
     "page": "Essentials",
     "title": "function",
     "category": "Keyword",
@@ -4825,7 +4865,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/base.html#macro",
+    "location": "base/base.html#macro",
     "page": "Essentials",
     "title": "macro",
     "category": "Keyword",
@@ -4833,7 +4873,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/base.html#return",
+    "location": "base/base.html#return",
     "page": "Essentials",
     "title": "return",
     "category": "Keyword",
@@ -4841,7 +4881,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/base.html#do",
+    "location": "base/base.html#do",
     "page": "Essentials",
     "title": "do",
     "category": "Keyword",
@@ -4849,7 +4889,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/base.html#begin",
+    "location": "base/base.html#begin",
     "page": "Essentials",
     "title": "begin",
     "category": "Keyword",
@@ -4857,7 +4897,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/base.html#end",
+    "location": "base/base.html#end",
     "page": "Essentials",
     "title": "end",
     "category": "Keyword",
@@ -4865,7 +4905,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/base.html#let",
+    "location": "base/base.html#let",
     "page": "Essentials",
     "title": "let",
     "category": "Keyword",
@@ -4873,7 +4913,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/base.html#if",
+    "location": "base/base.html#if",
     "page": "Essentials",
     "title": "if",
     "category": "Keyword",
@@ -4881,7 +4921,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/base.html#for",
+    "location": "base/base.html#for",
     "page": "Essentials",
     "title": "for",
     "category": "Keyword",
@@ -4889,7 +4929,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/base.html#while",
+    "location": "base/base.html#while",
     "page": "Essentials",
     "title": "while",
     "category": "Keyword",
@@ -4897,7 +4937,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/base.html#break",
+    "location": "base/base.html#break",
     "page": "Essentials",
     "title": "break",
     "category": "Keyword",
@@ -4905,7 +4945,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/base.html#continue",
+    "location": "base/base.html#continue",
     "page": "Essentials",
     "title": "continue",
     "category": "Keyword",
@@ -4913,7 +4953,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/base.html#try",
+    "location": "base/base.html#try",
     "page": "Essentials",
     "title": "try",
     "category": "Keyword",
@@ -4921,7 +4961,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/base.html#finally",
+    "location": "base/base.html#finally",
     "page": "Essentials",
     "title": "finally",
     "category": "Keyword",
@@ -4929,7 +4969,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/base.html#quote",
+    "location": "base/base.html#quote",
     "page": "Essentials",
     "title": "quote",
     "category": "Keyword",
@@ -4937,7 +4977,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/base.html#local",
+    "location": "base/base.html#local",
     "page": "Essentials",
     "title": "local",
     "category": "Keyword",
@@ -4945,7 +4985,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/base.html#global",
+    "location": "base/base.html#global",
     "page": "Essentials",
     "title": "global",
     "category": "Keyword",
@@ -4953,7 +4993,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/base.html#const",
+    "location": "base/base.html#const",
     "page": "Essentials",
     "title": "const",
     "category": "Keyword",
@@ -4961,7 +5001,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/base.html#struct",
+    "location": "base/base.html#struct",
     "page": "Essentials",
     "title": "struct",
     "category": "Keyword",
@@ -4969,7 +5009,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/base.html#mutable struct",
+    "location": "base/base.html#mutable struct",
     "page": "Essentials",
     "title": "mutable struct",
     "category": "Keyword",
@@ -4977,7 +5017,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/base.html#abstract type",
+    "location": "base/base.html#abstract type",
     "page": "Essentials",
     "title": "abstract type",
     "category": "Keyword",
@@ -4985,7 +5025,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/base.html#primitive type",
+    "location": "base/base.html#primitive type",
     "page": "Essentials",
     "title": "primitive type",
     "category": "Keyword",
@@ -4993,7 +5033,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/base.html#...",
+    "location": "base/base.html#...",
     "page": "Essentials",
     "title": "...",
     "category": "Keyword",
@@ -5001,7 +5041,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/base.html#;",
+    "location": "base/base.html#;",
     "page": "Essentials",
     "title": ";",
     "category": "Keyword",
@@ -5009,7 +5049,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/base.html#Keywords-1",
+    "location": "base/base.html#Keywords-1",
     "page": "Essentials",
     "title": "Keywords",
     "category": "section",
@@ -5017,7 +5057,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/base.html#Base.LinAlg.BLAS",
+    "location": "base/base.html#Base.LinAlg.BLAS",
     "page": "Essentials",
     "title": "Base.LinAlg.BLAS",
     "category": "Module",
@@ -5025,7 +5065,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/base.html#Base.Docs",
+    "location": "base/base.html#Base.Docs",
     "page": "Essentials",
     "title": "Base.Docs",
     "category": "Module",
@@ -5033,7 +5073,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/base.html#Base.Iterators",
+    "location": "base/base.html#Base.Iterators",
     "page": "Essentials",
     "title": "Base.Iterators",
     "category": "Module",
@@ -5041,7 +5081,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/base.html#Base.LinAlg.LAPACK",
+    "location": "base/base.html#Base.LinAlg.LAPACK",
     "page": "Essentials",
     "title": "Base.LinAlg.LAPACK",
     "category": "Module",
@@ -5049,7 +5089,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/base.html#Base.LibGit2",
+    "location": "base/base.html#Base.LibGit2",
     "page": "Essentials",
     "title": "Base.LibGit2",
     "category": "Module",
@@ -5057,7 +5097,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/base.html#Base.Libc",
+    "location": "base/base.html#Base.Libc",
     "page": "Essentials",
     "title": "Base.Libc",
     "category": "Module",
@@ -5065,7 +5105,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/base.html#Base.Libdl",
+    "location": "base/base.html#Base.Libdl",
     "page": "Essentials",
     "title": "Base.Libdl",
     "category": "Module",
@@ -5073,7 +5113,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/base.html#Base.LinAlg",
+    "location": "base/base.html#Base.LinAlg",
     "page": "Essentials",
     "title": "Base.LinAlg",
     "category": "Module",
@@ -5081,7 +5121,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/base.html#Base.Markdown",
+    "location": "base/base.html#Base.Markdown",
     "page": "Essentials",
     "title": "Base.Markdown",
     "category": "Module",
@@ -5089,7 +5129,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/base.html#Base.Meta",
+    "location": "base/base.html#Base.Meta",
     "page": "Essentials",
     "title": "Base.Meta",
     "category": "Module",
@@ -5097,7 +5137,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/base.html#Base.Pkg",
+    "location": "base/base.html#Base.Pkg",
     "page": "Essentials",
     "title": "Base.Pkg",
     "category": "Module",
@@ -5105,7 +5145,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/base.html#Base.Serializer",
+    "location": "base/base.html#Base.Serializer",
     "page": "Essentials",
     "title": "Base.Serializer",
     "category": "Module",
@@ -5113,7 +5153,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/base.html#Base.SparseArrays",
+    "location": "base/base.html#Base.SparseArrays",
     "page": "Essentials",
     "title": "Base.SparseArrays",
     "category": "Module",
@@ -5121,7 +5161,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/base.html#Base.StackTraces",
+    "location": "base/base.html#Base.StackTraces",
     "page": "Essentials",
     "title": "Base.StackTraces",
     "category": "Module",
@@ -5129,7 +5169,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/base.html#Base.Sys",
+    "location": "base/base.html#Base.Sys",
     "page": "Essentials",
     "title": "Base.Sys",
     "category": "Module",
@@ -5137,7 +5177,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/base.html#Base.Threads",
+    "location": "base/base.html#Base.Threads",
     "page": "Essentials",
     "title": "Base.Threads",
     "category": "Module",
@@ -5145,7 +5185,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/base.html#Base-Modules-1",
+    "location": "base/base.html#Base-Modules-1",
     "page": "Essentials",
     "title": "Base Modules",
     "category": "section",
@@ -5153,7 +5193,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/base.html#Core.:===",
+    "location": "base/base.html#Core.:===",
     "page": "Essentials",
     "title": "Core.:===",
     "category": "Function",
@@ -5161,7 +5201,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/base.html#Core.isa",
+    "location": "base/base.html#Core.isa",
     "page": "Essentials",
     "title": "Core.isa",
     "category": "Function",
@@ -5169,7 +5209,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/base.html#Base.isequal",
+    "location": "base/base.html#Base.isequal",
     "page": "Essentials",
     "title": "Base.isequal",
     "category": "Function",
@@ -5177,7 +5217,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/base.html#Base.isless",
+    "location": "base/base.html#Base.isless",
     "page": "Essentials",
     "title": "Base.isless",
     "category": "Function",
@@ -5185,7 +5225,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/base.html#Base.ifelse",
+    "location": "base/base.html#Base.ifelse",
     "page": "Essentials",
     "title": "Base.ifelse",
     "category": "Function",
@@ -5193,7 +5233,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/base.html#Core.typeassert",
+    "location": "base/base.html#Core.typeassert",
     "page": "Essentials",
     "title": "Core.typeassert",
     "category": "Function",
@@ -5201,7 +5241,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/base.html#Core.typeof",
+    "location": "base/base.html#Core.typeof",
     "page": "Essentials",
     "title": "Core.typeof",
     "category": "Function",
@@ -5209,7 +5249,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/base.html#Core.tuple",
+    "location": "base/base.html#Core.tuple",
     "page": "Essentials",
     "title": "Core.tuple",
     "category": "Function",
@@ -5217,7 +5257,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/base.html#Base.ntuple",
+    "location": "base/base.html#Base.ntuple",
     "page": "Essentials",
     "title": "Base.ntuple",
     "category": "Function",
@@ -5225,7 +5265,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/base.html#Base.object_id",
+    "location": "base/base.html#Base.object_id",
     "page": "Essentials",
     "title": "Base.object_id",
     "category": "Function",
@@ -5233,7 +5273,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/base.html#Base.hash",
+    "location": "base/base.html#Base.hash",
     "page": "Essentials",
     "title": "Base.hash",
     "category": "Function",
@@ -5241,7 +5281,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/base.html#Base.finalizer",
+    "location": "base/base.html#Base.finalizer",
     "page": "Essentials",
     "title": "Base.finalizer",
     "category": "Function",
@@ -5249,7 +5289,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/base.html#Base.finalize",
+    "location": "base/base.html#Base.finalize",
     "page": "Essentials",
     "title": "Base.finalize",
     "category": "Function",
@@ -5257,15 +5297,15 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/base.html#Base.copy",
+    "location": "base/base.html#Base.copy",
     "page": "Essentials",
     "title": "Base.copy",
     "category": "Function",
-    "text": "copy(x)\n\nCreate a shallow copy of x: the outer structure is copied, but not all internal values. For example, copying an array produces a new array with identically-same elements as the original.\n\n\n\ntranspose(A::AbstractMatrix)\n\nEager matrix transpose. Note that the transposition is applied recursively to elements.\n\nThis operation is intended for linear algebra usage - for general data manipulation see permutedims, which is non-recursive.\n\nExamples\n\njulia> A = [1 2 3; 4 5 6; 7 8 9]\n3×3 Array{Int64,2}:\n 1  2  3\n 4  5  6\n 7  8  9\n\njulia> transpose(A)\n3×3 Array{Int64,2}:\n 1  4  7\n 2  5  8\n 3  6  9\n\n\n\n"
+    "text": "transpose(A::AbstractMatrix)\n\nEager matrix transpose. Note that the transposition is applied recursively to elements.\n\nThis operation is intended for linear algebra usage - for general data manipulation see permutedims, which is non-recursive.\n\nExamples\n\njulia> A = [1 2 3; 4 5 6; 7 8 9]\n3×3 Array{Int64,2}:\n 1  2  3\n 4  5  6\n 7  8  9\n\njulia> transpose(A)\n3×3 Array{Int64,2}:\n 1  4  7\n 2  5  8\n 3  6  9\n\n\n\ncopy(x)\n\nCreate a shallow copy of x: the outer structure is copied, but not all internal values. For example, copying an array produces a new array with identically-same elements as the original.\n\n\n\n"
 },
 
 {
-    "location": "stdlib/base.html#Base.deepcopy",
+    "location": "base/base.html#Base.deepcopy",
     "page": "Essentials",
     "title": "Base.deepcopy",
     "category": "Function",
@@ -5273,7 +5313,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/base.html#Base.getproperty",
+    "location": "base/base.html#Base.getproperty",
     "page": "Essentials",
     "title": "Base.getproperty",
     "category": "Function",
@@ -5281,7 +5321,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/base.html#Base.setproperty!",
+    "location": "base/base.html#Base.setproperty!",
     "page": "Essentials",
     "title": "Base.setproperty!",
     "category": "Function",
@@ -5289,7 +5329,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/base.html#Core.getfield",
+    "location": "base/base.html#Core.getfield",
     "page": "Essentials",
     "title": "Core.getfield",
     "category": "Function",
@@ -5297,7 +5337,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/base.html#Core.setfield!",
+    "location": "base/base.html#Core.setfield!",
     "page": "Essentials",
     "title": "Core.setfield!",
     "category": "Function",
@@ -5305,7 +5345,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/base.html#Core.isdefined",
+    "location": "base/base.html#Core.isdefined",
     "page": "Essentials",
     "title": "Core.isdefined",
     "category": "Function",
@@ -5313,7 +5353,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/base.html#Base.@isdefined",
+    "location": "base/base.html#Base.@isdefined",
     "page": "Essentials",
     "title": "Base.@isdefined",
     "category": "Macro",
@@ -5321,7 +5361,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/base.html#Base.convert",
+    "location": "base/base.html#Base.convert",
     "page": "Essentials",
     "title": "Base.convert",
     "category": "Function",
@@ -5329,7 +5369,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/base.html#Base.promote",
+    "location": "base/base.html#Base.promote",
     "page": "Essentials",
     "title": "Base.promote",
     "category": "Function",
@@ -5337,7 +5377,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/base.html#Base.oftype",
+    "location": "base/base.html#Base.oftype",
     "page": "Essentials",
     "title": "Base.oftype",
     "category": "Function",
@@ -5345,7 +5385,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/base.html#Base.widen",
+    "location": "base/base.html#Base.widen",
     "page": "Essentials",
     "title": "Base.widen",
     "category": "Function",
@@ -5353,7 +5393,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/base.html#Base.identity",
+    "location": "base/base.html#Base.identity",
     "page": "Essentials",
     "title": "Base.identity",
     "category": "Function",
@@ -5361,7 +5401,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/base.html#All-Objects-1",
+    "location": "base/base.html#All-Objects-1",
     "page": "Essentials",
     "title": "All Objects",
     "category": "section",
@@ -5369,7 +5409,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/base.html#Base.supertype",
+    "location": "base/base.html#Base.supertype",
     "page": "Essentials",
     "title": "Base.supertype",
     "category": "Function",
@@ -5377,7 +5417,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/base.html#Core.:<:",
+    "location": "base/base.html#Core.:<:",
     "page": "Essentials",
     "title": "Core.:<:",
     "category": "Function",
@@ -5385,7 +5425,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/base.html#Base.:>:",
+    "location": "base/base.html#Base.:>:",
     "page": "Essentials",
     "title": "Base.:>:",
     "category": "Function",
@@ -5393,7 +5433,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/base.html#Base.subtypes",
+    "location": "base/base.html#Base.subtypes",
     "page": "Essentials",
     "title": "Base.subtypes",
     "category": "Function",
@@ -5401,7 +5441,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/base.html#Base.typemin",
+    "location": "base/base.html#Base.typemin",
     "page": "Essentials",
     "title": "Base.typemin",
     "category": "Function",
@@ -5409,7 +5449,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/base.html#Base.typemax",
+    "location": "base/base.html#Base.typemax",
     "page": "Essentials",
     "title": "Base.typemax",
     "category": "Function",
@@ -5417,7 +5457,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/base.html#Base.realmin",
+    "location": "base/base.html#Base.realmin",
     "page": "Essentials",
     "title": "Base.realmin",
     "category": "Function",
@@ -5425,7 +5465,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/base.html#Base.realmax",
+    "location": "base/base.html#Base.realmax",
     "page": "Essentials",
     "title": "Base.realmax",
     "category": "Function",
@@ -5433,7 +5473,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/base.html#Base.maxintfloat",
+    "location": "base/base.html#Base.maxintfloat",
     "page": "Essentials",
     "title": "Base.maxintfloat",
     "category": "Function",
@@ -5441,7 +5481,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/base.html#Base.sizeof-Tuple{Type}",
+    "location": "base/base.html#Base.sizeof-Tuple{Type}",
     "page": "Essentials",
     "title": "Base.sizeof",
     "category": "Method",
@@ -5449,7 +5489,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/base.html#Base.eps-Tuple{Type{#s43} where #s43<:AbstractFloat}",
+    "location": "base/base.html#Base.eps-Tuple{Type{#s43} where #s43<:AbstractFloat}",
     "page": "Essentials",
     "title": "Base.eps",
     "category": "Method",
@@ -5457,7 +5497,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/base.html#Base.eps-Tuple{AbstractFloat}",
+    "location": "base/base.html#Base.eps-Tuple{AbstractFloat}",
     "page": "Essentials",
     "title": "Base.eps",
     "category": "Method",
@@ -5465,7 +5505,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/base.html#Base.promote_type",
+    "location": "base/base.html#Base.promote_type",
     "page": "Essentials",
     "title": "Base.promote_type",
     "category": "Function",
@@ -5473,7 +5513,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/base.html#Base.promote_rule",
+    "location": "base/base.html#Base.promote_rule",
     "page": "Essentials",
     "title": "Base.promote_rule",
     "category": "Function",
@@ -5481,7 +5521,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/base.html#Base.fieldoffset",
+    "location": "base/base.html#Base.fieldoffset",
     "page": "Essentials",
     "title": "Base.fieldoffset",
     "category": "Function",
@@ -5489,7 +5529,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/base.html#Core.fieldtype",
+    "location": "base/base.html#Core.fieldtype",
     "page": "Essentials",
     "title": "Core.fieldtype",
     "category": "Function",
@@ -5497,7 +5537,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/base.html#Base.isimmutable",
+    "location": "base/base.html#Base.isimmutable",
     "page": "Essentials",
     "title": "Base.isimmutable",
     "category": "Function",
@@ -5505,7 +5545,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/base.html#Base.isbits",
+    "location": "base/base.html#Base.isbits",
     "page": "Essentials",
     "title": "Base.isbits",
     "category": "Function",
@@ -5513,7 +5553,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/base.html#Base.isconcrete",
+    "location": "base/base.html#Base.isconcrete",
     "page": "Essentials",
     "title": "Base.isconcrete",
     "category": "Function",
@@ -5521,7 +5561,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/base.html#Base.typejoin",
+    "location": "base/base.html#Base.typejoin",
     "page": "Essentials",
     "title": "Base.typejoin",
     "category": "Function",
@@ -5529,7 +5569,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/base.html#Base.typeintersect",
+    "location": "base/base.html#Base.typeintersect",
     "page": "Essentials",
     "title": "Base.typeintersect",
     "category": "Function",
@@ -5537,7 +5577,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/base.html#Base.instances",
+    "location": "base/base.html#Base.instances",
     "page": "Essentials",
     "title": "Base.instances",
     "category": "Function",
@@ -5545,7 +5585,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/base.html#Properties-of-Types-1",
+    "location": "base/base.html#Properties-of-Types-1",
     "page": "Essentials",
     "title": "Properties of Types",
     "category": "section",
@@ -5553,7 +5593,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/base.html#Core.Any",
+    "location": "base/base.html#Core.Any",
     "page": "Essentials",
     "title": "Core.Any",
     "category": "Type",
@@ -5561,7 +5601,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/base.html#Core.Union",
+    "location": "base/base.html#Core.Union",
     "page": "Essentials",
     "title": "Core.Union",
     "category": "Type",
@@ -5569,7 +5609,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/base.html#Union{}",
+    "location": "base/base.html#Union{}",
     "page": "Essentials",
     "title": "Union{}",
     "category": "Keyword",
@@ -5577,7 +5617,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/base.html#Core.UnionAll",
+    "location": "base/base.html#Core.UnionAll",
     "page": "Essentials",
     "title": "Core.UnionAll",
     "category": "Type",
@@ -5585,7 +5625,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/base.html#Core.Tuple",
+    "location": "base/base.html#Core.Tuple",
     "page": "Essentials",
     "title": "Core.Tuple",
     "category": "Type",
@@ -5593,7 +5633,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/base.html#Base.Val",
+    "location": "base/base.html#Base.Val",
     "page": "Essentials",
     "title": "Base.Val",
     "category": "Type",
@@ -5601,7 +5641,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/base.html#Core.Vararg",
+    "location": "base/base.html#Core.Vararg",
     "page": "Essentials",
     "title": "Core.Vararg",
     "category": "Type",
@@ -5609,7 +5649,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/base.html#Core.Nothing",
+    "location": "base/base.html#Core.Nothing",
     "page": "Essentials",
     "title": "Core.Nothing",
     "category": "Type",
@@ -5617,7 +5657,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/base.html#Base.Some",
+    "location": "base/base.html#Base.Some",
     "page": "Essentials",
     "title": "Base.Some",
     "category": "Type",
@@ -5625,7 +5665,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/base.html#Base.Enums.@enum",
+    "location": "base/base.html#Base.Enums.@enum",
     "page": "Essentials",
     "title": "Base.Enums.@enum",
     "category": "Macro",
@@ -5633,7 +5673,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/base.html#Special-Types-1",
+    "location": "base/base.html#Special-Types-1",
     "page": "Essentials",
     "title": "Special Types",
     "category": "section",
@@ -5641,7 +5681,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/base.html#Core.Function",
+    "location": "base/base.html#Core.Function",
     "page": "Essentials",
     "title": "Core.Function",
     "category": "Type",
@@ -5649,7 +5689,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/base.html#Base.method_exists",
+    "location": "base/base.html#Base.method_exists",
     "page": "Essentials",
     "title": "Base.method_exists",
     "category": "Function",
@@ -5657,7 +5697,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/base.html#Core.applicable",
+    "location": "base/base.html#Core.applicable",
     "page": "Essentials",
     "title": "Core.applicable",
     "category": "Function",
@@ -5665,7 +5705,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/base.html#Core.invoke",
+    "location": "base/base.html#Core.invoke",
     "page": "Essentials",
     "title": "Core.invoke",
     "category": "Function",
@@ -5673,7 +5713,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/base.html#Base.invokelatest",
+    "location": "base/base.html#Base.invokelatest",
     "page": "Essentials",
     "title": "Base.invokelatest",
     "category": "Function",
@@ -5681,7 +5721,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/base.html#new",
+    "location": "base/base.html#new",
     "page": "Essentials",
     "title": "new",
     "category": "Keyword",
@@ -5689,7 +5729,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/base.html#Base.:|>",
+    "location": "base/base.html#Base.:|>",
     "page": "Essentials",
     "title": "Base.:|>",
     "category": "Function",
@@ -5697,7 +5737,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/base.html#Base.:∘",
+    "location": "base/base.html#Base.:∘",
     "page": "Essentials",
     "title": "Base.:∘",
     "category": "Function",
@@ -5705,7 +5745,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/base.html#Base.equalto",
+    "location": "base/base.html#Base.equalto",
     "page": "Essentials",
     "title": "Base.equalto",
     "category": "Type",
@@ -5713,7 +5753,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/base.html#Generic-Functions-1",
+    "location": "base/base.html#Generic-Functions-1",
     "page": "Essentials",
     "title": "Generic Functions",
     "category": "section",
@@ -5721,7 +5761,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/base.html#Core.eval",
+    "location": "base/base.html#Core.eval",
     "page": "Essentials",
     "title": "Core.eval",
     "category": "Function",
@@ -5729,7 +5769,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/base.html#Base.@eval",
+    "location": "base/base.html#Base.@eval",
     "page": "Essentials",
     "title": "Base.@eval",
     "category": "Macro",
@@ -5737,7 +5777,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/base.html#Base.evalfile",
+    "location": "base/base.html#Base.evalfile",
     "page": "Essentials",
     "title": "Base.evalfile",
     "category": "Function",
@@ -5745,7 +5785,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/base.html#Base.esc",
+    "location": "base/base.html#Base.esc",
     "page": "Essentials",
     "title": "Base.esc",
     "category": "Function",
@@ -5753,7 +5793,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/base.html#Base.@inbounds",
+    "location": "base/base.html#Base.@inbounds",
     "page": "Essentials",
     "title": "Base.@inbounds",
     "category": "Macro",
@@ -5761,7 +5801,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/base.html#Base.@boundscheck",
+    "location": "base/base.html#Base.@boundscheck",
     "page": "Essentials",
     "title": "Base.@boundscheck",
     "category": "Macro",
@@ -5769,7 +5809,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/base.html#Base.@inline",
+    "location": "base/base.html#Base.@inline",
     "page": "Essentials",
     "title": "Base.@inline",
     "category": "Macro",
@@ -5777,7 +5817,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/base.html#Base.@noinline",
+    "location": "base/base.html#Base.@noinline",
     "page": "Essentials",
     "title": "Base.@noinline",
     "category": "Macro",
@@ -5785,7 +5825,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/base.html#Base.@nospecialize",
+    "location": "base/base.html#Base.@nospecialize",
     "page": "Essentials",
     "title": "Base.@nospecialize",
     "category": "Macro",
@@ -5793,7 +5833,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/base.html#Base.gensym",
+    "location": "base/base.html#Base.gensym",
     "page": "Essentials",
     "title": "Base.gensym",
     "category": "Function",
@@ -5801,7 +5841,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/base.html#Base.@gensym",
+    "location": "base/base.html#Base.@gensym",
     "page": "Essentials",
     "title": "Base.@gensym",
     "category": "Macro",
@@ -5809,7 +5849,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/base.html#Base.@goto",
+    "location": "base/base.html#Base.@goto",
     "page": "Essentials",
     "title": "Base.@goto",
     "category": "Macro",
@@ -5817,7 +5857,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/base.html#Base.@label",
+    "location": "base/base.html#Base.@label",
     "page": "Essentials",
     "title": "Base.@label",
     "category": "Macro",
@@ -5825,7 +5865,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/base.html#Base.@polly",
+    "location": "base/base.html#Base.@polly",
     "page": "Essentials",
     "title": "Base.@polly",
     "category": "Macro",
@@ -5833,7 +5873,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/base.html#Syntax-1",
+    "location": "base/base.html#Syntax-1",
     "page": "Essentials",
     "title": "Syntax",
     "category": "section",
@@ -5841,7 +5881,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/base.html#Base.Missing",
+    "location": "base/base.html#Base.Missing",
     "page": "Essentials",
     "title": "Base.Missing",
     "category": "Type",
@@ -5849,7 +5889,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/base.html#Base.missing",
+    "location": "base/base.html#Base.missing",
     "page": "Essentials",
     "title": "Base.missing",
     "category": "Constant",
@@ -5857,7 +5897,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/base.html#Base.coalesce",
+    "location": "base/base.html#Base.coalesce",
     "page": "Essentials",
     "title": "Base.coalesce",
     "category": "Function",
@@ -5865,7 +5905,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/base.html#Base.ismissing",
+    "location": "base/base.html#Base.ismissing",
     "page": "Essentials",
     "title": "Base.ismissing",
     "category": "Function",
@@ -5873,7 +5913,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/base.html#Base.skipmissing",
+    "location": "base/base.html#Base.skipmissing",
     "page": "Essentials",
     "title": "Base.skipmissing",
     "category": "Function",
@@ -5881,7 +5921,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/base.html#Missing-Values-1",
+    "location": "base/base.html#Missing-Values-1",
     "page": "Essentials",
     "title": "Missing Values",
     "category": "section",
@@ -5889,7 +5929,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/base.html#Base.run",
+    "location": "base/base.html#Base.run",
     "page": "Essentials",
     "title": "Base.run",
     "category": "Function",
@@ -5897,7 +5937,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/base.html#Base.spawn",
+    "location": "base/base.html#Base.spawn",
     "page": "Essentials",
     "title": "Base.spawn",
     "category": "Function",
@@ -5905,7 +5945,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/base.html#Base.DevNull",
+    "location": "base/base.html#Base.DevNull",
     "page": "Essentials",
     "title": "Base.DevNull",
     "category": "Constant",
@@ -5913,7 +5953,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/base.html#Base.success",
+    "location": "base/base.html#Base.success",
     "page": "Essentials",
     "title": "Base.success",
     "category": "Function",
@@ -5921,7 +5961,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/base.html#Base.process_running",
+    "location": "base/base.html#Base.process_running",
     "page": "Essentials",
     "title": "Base.process_running",
     "category": "Function",
@@ -5929,7 +5969,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/base.html#Base.process_exited",
+    "location": "base/base.html#Base.process_exited",
     "page": "Essentials",
     "title": "Base.process_exited",
     "category": "Function",
@@ -5937,7 +5977,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/base.html#Base.kill-Tuple{Base.Process,Integer}",
+    "location": "base/base.html#Base.kill-Tuple{Base.Process,Integer}",
     "page": "Essentials",
     "title": "Base.kill",
     "category": "Method",
@@ -5945,7 +5985,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/base.html#Base.Sys.set_process_title",
+    "location": "base/base.html#Base.Sys.set_process_title",
     "page": "Essentials",
     "title": "Base.Sys.set_process_title",
     "category": "Function",
@@ -5953,7 +5993,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/base.html#Base.Sys.get_process_title",
+    "location": "base/base.html#Base.Sys.get_process_title",
     "page": "Essentials",
     "title": "Base.Sys.get_process_title",
     "category": "Function",
@@ -5961,7 +6001,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/base.html#Base.readandwrite",
+    "location": "base/base.html#Base.readandwrite",
     "page": "Essentials",
     "title": "Base.readandwrite",
     "category": "Function",
@@ -5969,7 +6009,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/base.html#Base.ignorestatus",
+    "location": "base/base.html#Base.ignorestatus",
     "page": "Essentials",
     "title": "Base.ignorestatus",
     "category": "Function",
@@ -5977,7 +6017,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/base.html#Base.detach",
+    "location": "base/base.html#Base.detach",
     "page": "Essentials",
     "title": "Base.detach",
     "category": "Function",
@@ -5985,7 +6025,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/base.html#Base.Cmd",
+    "location": "base/base.html#Base.Cmd",
     "page": "Essentials",
     "title": "Base.Cmd",
     "category": "Type",
@@ -5993,7 +6033,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/base.html#Base.setenv",
+    "location": "base/base.html#Base.setenv",
     "page": "Essentials",
     "title": "Base.setenv",
     "category": "Function",
@@ -6001,7 +6041,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/base.html#Base.withenv",
+    "location": "base/base.html#Base.withenv",
     "page": "Essentials",
     "title": "Base.withenv",
     "category": "Function",
@@ -6009,7 +6049,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/base.html#Base.pipeline-Tuple{Any,Any,Any,Vararg{Any,N} where N}",
+    "location": "base/base.html#Base.pipeline-Tuple{Any,Any,Any,Vararg{Any,N} where N}",
     "page": "Essentials",
     "title": "Base.pipeline",
     "category": "Method",
@@ -6017,7 +6057,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/base.html#Base.pipeline-Tuple{Base.AbstractCmd}",
+    "location": "base/base.html#Base.pipeline-Tuple{Base.AbstractCmd}",
     "page": "Essentials",
     "title": "Base.pipeline",
     "category": "Method",
@@ -6025,7 +6065,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/base.html#Base.Libc.gethostname",
+    "location": "base/base.html#Base.Libc.gethostname",
     "page": "Essentials",
     "title": "Base.Libc.gethostname",
     "category": "Function",
@@ -6033,7 +6073,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/base.html#Base.getipaddr",
+    "location": "base/base.html#Base.getipaddr",
     "page": "Essentials",
     "title": "Base.getipaddr",
     "category": "Function",
@@ -6041,7 +6081,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/base.html#Base.Libc.getpid",
+    "location": "base/base.html#Base.Libc.getpid",
     "page": "Essentials",
     "title": "Base.Libc.getpid",
     "category": "Function",
@@ -6049,7 +6089,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/base.html#Base.Libc.time-Tuple{}",
+    "location": "base/base.html#Base.Libc.time-Tuple{}",
     "page": "Essentials",
     "title": "Base.Libc.time",
     "category": "Method",
@@ -6057,7 +6097,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/base.html#Base.time_ns",
+    "location": "base/base.html#Base.time_ns",
     "page": "Essentials",
     "title": "Base.time_ns",
     "category": "Function",
@@ -6065,7 +6105,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/base.html#Base.@time",
+    "location": "base/base.html#Base.@time",
     "page": "Essentials",
     "title": "Base.@time",
     "category": "Macro",
@@ -6073,7 +6113,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/base.html#Base.@timev",
+    "location": "base/base.html#Base.@timev",
     "page": "Essentials",
     "title": "Base.@timev",
     "category": "Macro",
@@ -6081,7 +6121,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/base.html#Base.@timed",
+    "location": "base/base.html#Base.@timed",
     "page": "Essentials",
     "title": "Base.@timed",
     "category": "Macro",
@@ -6089,7 +6129,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/base.html#Base.@elapsed",
+    "location": "base/base.html#Base.@elapsed",
     "page": "Essentials",
     "title": "Base.@elapsed",
     "category": "Macro",
@@ -6097,7 +6137,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/base.html#Base.@allocated",
+    "location": "base/base.html#Base.@allocated",
     "page": "Essentials",
     "title": "Base.@allocated",
     "category": "Macro",
@@ -6105,7 +6145,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/base.html#Base.EnvDict",
+    "location": "base/base.html#Base.EnvDict",
     "page": "Essentials",
     "title": "Base.EnvDict",
     "category": "Type",
@@ -6113,7 +6153,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/base.html#Base.ENV",
+    "location": "base/base.html#Base.ENV",
     "page": "Essentials",
     "title": "Base.ENV",
     "category": "Constant",
@@ -6121,7 +6161,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/base.html#Base.Sys.isunix",
+    "location": "base/base.html#Base.Sys.isunix",
     "page": "Essentials",
     "title": "Base.Sys.isunix",
     "category": "Function",
@@ -6129,7 +6169,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/base.html#Base.Sys.isapple",
+    "location": "base/base.html#Base.Sys.isapple",
     "page": "Essentials",
     "title": "Base.Sys.isapple",
     "category": "Function",
@@ -6137,7 +6177,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/base.html#Base.Sys.islinux",
+    "location": "base/base.html#Base.Sys.islinux",
     "page": "Essentials",
     "title": "Base.Sys.islinux",
     "category": "Function",
@@ -6145,7 +6185,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/base.html#Base.Sys.isbsd",
+    "location": "base/base.html#Base.Sys.isbsd",
     "page": "Essentials",
     "title": "Base.Sys.isbsd",
     "category": "Function",
@@ -6153,7 +6193,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/base.html#Base.Sys.iswindows",
+    "location": "base/base.html#Base.Sys.iswindows",
     "page": "Essentials",
     "title": "Base.Sys.iswindows",
     "category": "Function",
@@ -6161,7 +6201,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/base.html#Base.Sys.windows_version",
+    "location": "base/base.html#Base.Sys.windows_version",
     "page": "Essentials",
     "title": "Base.Sys.windows_version",
     "category": "Function",
@@ -6169,7 +6209,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/base.html#Base.@static",
+    "location": "base/base.html#Base.@static",
     "page": "Essentials",
     "title": "Base.@static",
     "category": "Macro",
@@ -6177,7 +6217,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/base.html#System-1",
+    "location": "base/base.html#System-1",
     "page": "Essentials",
     "title": "System",
     "category": "section",
@@ -6185,7 +6225,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/base.html#Base.error",
+    "location": "base/base.html#Base.error",
     "page": "Essentials",
     "title": "Base.error",
     "category": "Function",
@@ -6193,7 +6233,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/base.html#Core.throw",
+    "location": "base/base.html#Core.throw",
     "page": "Essentials",
     "title": "Core.throw",
     "category": "Function",
@@ -6201,7 +6241,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/base.html#Base.rethrow",
+    "location": "base/base.html#Base.rethrow",
     "page": "Essentials",
     "title": "Base.rethrow",
     "category": "Function",
@@ -6209,7 +6249,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/base.html#Base.backtrace",
+    "location": "base/base.html#Base.backtrace",
     "page": "Essentials",
     "title": "Base.backtrace",
     "category": "Function",
@@ -6217,7 +6257,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/base.html#Base.catch_backtrace",
+    "location": "base/base.html#Base.catch_backtrace",
     "page": "Essentials",
     "title": "Base.catch_backtrace",
     "category": "Function",
@@ -6225,7 +6265,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/base.html#Base.assert",
+    "location": "base/base.html#Base.assert",
     "page": "Essentials",
     "title": "Base.assert",
     "category": "Function",
@@ -6233,7 +6273,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/base.html#Base.@assert",
+    "location": "base/base.html#Base.@assert",
     "page": "Essentials",
     "title": "Base.@assert",
     "category": "Macro",
@@ -6241,7 +6281,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/base.html#Core.ArgumentError",
+    "location": "base/base.html#Core.ArgumentError",
     "page": "Essentials",
     "title": "Core.ArgumentError",
     "category": "Type",
@@ -6249,7 +6289,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/base.html#Core.AssertionError",
+    "location": "base/base.html#Core.AssertionError",
     "page": "Essentials",
     "title": "Core.AssertionError",
     "category": "Type",
@@ -6257,7 +6297,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/base.html#Core.BoundsError",
+    "location": "base/base.html#Core.BoundsError",
     "page": "Essentials",
     "title": "Core.BoundsError",
     "category": "Type",
@@ -6265,7 +6305,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/base.html#Base.DimensionMismatch",
+    "location": "base/base.html#Base.DimensionMismatch",
     "page": "Essentials",
     "title": "Base.DimensionMismatch",
     "category": "Type",
@@ -6273,7 +6313,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/base.html#Core.DivideError",
+    "location": "base/base.html#Core.DivideError",
     "page": "Essentials",
     "title": "Core.DivideError",
     "category": "Type",
@@ -6281,7 +6321,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/base.html#Core.DomainError",
+    "location": "base/base.html#Core.DomainError",
     "page": "Essentials",
     "title": "Core.DomainError",
     "category": "Type",
@@ -6289,7 +6329,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/base.html#Base.EOFError",
+    "location": "base/base.html#Base.EOFError",
     "page": "Essentials",
     "title": "Base.EOFError",
     "category": "Type",
@@ -6297,7 +6337,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/base.html#Core.ErrorException",
+    "location": "base/base.html#Core.ErrorException",
     "page": "Essentials",
     "title": "Core.ErrorException",
     "category": "Type",
@@ -6305,7 +6345,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/base.html#Core.InexactError",
+    "location": "base/base.html#Core.InexactError",
     "page": "Essentials",
     "title": "Core.InexactError",
     "category": "Type",
@@ -6313,7 +6353,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/base.html#Core.InterruptException",
+    "location": "base/base.html#Core.InterruptException",
     "page": "Essentials",
     "title": "Core.InterruptException",
     "category": "Type",
@@ -6321,7 +6361,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/base.html#Base.KeyError",
+    "location": "base/base.html#Base.KeyError",
     "page": "Essentials",
     "title": "Base.KeyError",
     "category": "Type",
@@ -6329,7 +6369,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/base.html#Core.LoadError",
+    "location": "base/base.html#Core.LoadError",
     "page": "Essentials",
     "title": "Core.LoadError",
     "category": "Type",
@@ -6337,7 +6377,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/base.html#Core.MethodError",
+    "location": "base/base.html#Core.MethodError",
     "page": "Essentials",
     "title": "Core.MethodError",
     "category": "Type",
@@ -6345,7 +6385,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/base.html#Base.MissingException",
+    "location": "base/base.html#Base.MissingException",
     "page": "Essentials",
     "title": "Base.MissingException",
     "category": "Type",
@@ -6353,7 +6393,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/base.html#Core.OutOfMemoryError",
+    "location": "base/base.html#Core.OutOfMemoryError",
     "page": "Essentials",
     "title": "Core.OutOfMemoryError",
     "category": "Type",
@@ -6361,7 +6401,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/base.html#Core.ReadOnlyMemoryError",
+    "location": "base/base.html#Core.ReadOnlyMemoryError",
     "page": "Essentials",
     "title": "Core.ReadOnlyMemoryError",
     "category": "Type",
@@ -6369,7 +6409,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/base.html#Core.OverflowError",
+    "location": "base/base.html#Core.OverflowError",
     "page": "Essentials",
     "title": "Core.OverflowError",
     "category": "Type",
@@ -6377,7 +6417,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/base.html#Base.ParseError",
+    "location": "base/base.html#Base.ParseError",
     "page": "Essentials",
     "title": "Base.ParseError",
     "category": "Type",
@@ -6385,7 +6425,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/base.html#Core.StackOverflowError",
+    "location": "base/base.html#Core.StackOverflowError",
     "page": "Essentials",
     "title": "Core.StackOverflowError",
     "category": "Type",
@@ -6393,7 +6433,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/base.html#Base.SystemError",
+    "location": "base/base.html#Base.SystemError",
     "page": "Essentials",
     "title": "Base.SystemError",
     "category": "Type",
@@ -6401,7 +6441,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/base.html#Core.TypeError",
+    "location": "base/base.html#Core.TypeError",
     "page": "Essentials",
     "title": "Core.TypeError",
     "category": "Type",
@@ -6409,7 +6449,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/base.html#Core.UndefRefError",
+    "location": "base/base.html#Core.UndefRefError",
     "page": "Essentials",
     "title": "Core.UndefRefError",
     "category": "Type",
@@ -6417,7 +6457,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/base.html#Core.UndefVarError",
+    "location": "base/base.html#Core.UndefVarError",
     "page": "Essentials",
     "title": "Core.UndefVarError",
     "category": "Type",
@@ -6425,7 +6465,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/base.html#Core.InitError",
+    "location": "base/base.html#Core.InitError",
     "page": "Essentials",
     "title": "Core.InitError",
     "category": "Type",
@@ -6433,7 +6473,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/base.html#Base.retry",
+    "location": "base/base.html#Base.retry",
     "page": "Essentials",
     "title": "Base.retry",
     "category": "Function",
@@ -6441,7 +6481,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/base.html#Base.ExponentialBackOff",
+    "location": "base/base.html#Base.ExponentialBackOff",
     "page": "Essentials",
     "title": "Base.ExponentialBackOff",
     "category": "Type",
@@ -6449,7 +6489,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/base.html#Errors-1",
+    "location": "base/base.html#Errors-1",
     "page": "Essentials",
     "title": "Errors",
     "category": "section",
@@ -6457,7 +6497,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/base.html#Base.Timer-Tuple{Function,Real,Real}",
+    "location": "base/base.html#Base.Timer-Tuple{Function,Real,Real}",
     "page": "Essentials",
     "title": "Base.Timer",
     "category": "Method",
@@ -6465,7 +6505,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/base.html#Base.Timer",
+    "location": "base/base.html#Base.Timer",
     "page": "Essentials",
     "title": "Base.Timer",
     "category": "Type",
@@ -6473,7 +6513,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/base.html#Base.AsyncCondition",
+    "location": "base/base.html#Base.AsyncCondition",
     "page": "Essentials",
     "title": "Base.AsyncCondition",
     "category": "Type",
@@ -6481,7 +6521,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/base.html#Base.AsyncCondition-Tuple{Function}",
+    "location": "base/base.html#Base.AsyncCondition-Tuple{Function}",
     "page": "Essentials",
     "title": "Base.AsyncCondition",
     "category": "Method",
@@ -6489,7 +6529,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/base.html#Events-1",
+    "location": "base/base.html#Events-1",
     "page": "Essentials",
     "title": "Events",
     "category": "section",
@@ -6497,7 +6537,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/base.html#Base.module_name",
+    "location": "base/base.html#Base.module_name",
     "page": "Essentials",
     "title": "Base.module_name",
     "category": "Function",
@@ -6505,7 +6545,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/base.html#Base.module_parent",
+    "location": "base/base.html#Base.module_parent",
     "page": "Essentials",
     "title": "Base.module_parent",
     "category": "Function",
@@ -6513,7 +6553,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/base.html#Base.@__MODULE__",
+    "location": "base/base.html#Base.@__MODULE__",
     "page": "Essentials",
     "title": "Base.@__MODULE__",
     "category": "Macro",
@@ -6521,7 +6561,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/base.html#Base.fullname",
+    "location": "base/base.html#Base.fullname",
     "page": "Essentials",
     "title": "Base.fullname",
     "category": "Function",
@@ -6529,7 +6569,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/base.html#Base.names",
+    "location": "base/base.html#Base.names",
     "page": "Essentials",
     "title": "Base.names",
     "category": "Function",
@@ -6537,7 +6577,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/base.html#Core.nfields",
+    "location": "base/base.html#Core.nfields",
     "page": "Essentials",
     "title": "Core.nfields",
     "category": "Function",
@@ -6545,7 +6585,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/base.html#Base.fieldnames",
+    "location": "base/base.html#Base.fieldnames",
     "page": "Essentials",
     "title": "Base.fieldnames",
     "category": "Function",
@@ -6553,7 +6593,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/base.html#Base.fieldname",
+    "location": "base/base.html#Base.fieldname",
     "page": "Essentials",
     "title": "Base.fieldname",
     "category": "Function",
@@ -6561,7 +6601,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/base.html#Base.fieldcount",
+    "location": "base/base.html#Base.fieldcount",
     "page": "Essentials",
     "title": "Base.fieldcount",
     "category": "Function",
@@ -6569,7 +6609,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/base.html#Base.datatype_module",
+    "location": "base/base.html#Base.datatype_module",
     "page": "Essentials",
     "title": "Base.datatype_module",
     "category": "Function",
@@ -6577,7 +6617,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/base.html#Base.datatype_name",
+    "location": "base/base.html#Base.datatype_name",
     "page": "Essentials",
     "title": "Base.datatype_name",
     "category": "Function",
@@ -6585,7 +6625,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/base.html#Base.isconst",
+    "location": "base/base.html#Base.isconst",
     "page": "Essentials",
     "title": "Base.isconst",
     "category": "Function",
@@ -6593,7 +6633,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/base.html#Base.function_name",
+    "location": "base/base.html#Base.function_name",
     "page": "Essentials",
     "title": "Base.function_name",
     "category": "Function",
@@ -6601,7 +6641,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/base.html#Base.function_module-Tuple{Function}",
+    "location": "base/base.html#Base.function_module-Tuple{Function}",
     "page": "Essentials",
     "title": "Base.function_module",
     "category": "Method",
@@ -6609,7 +6649,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/base.html#Base.function_module-Tuple{Any,Any}",
+    "location": "base/base.html#Base.function_module-Tuple{Any,Any}",
     "page": "Essentials",
     "title": "Base.function_module",
     "category": "Method",
@@ -6617,7 +6657,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/base.html#Base.functionloc-Tuple{Any,Any}",
+    "location": "base/base.html#Base.functionloc-Tuple{Any,Any}",
     "page": "Essentials",
     "title": "Base.functionloc",
     "category": "Method",
@@ -6625,7 +6665,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/base.html#Base.functionloc-Tuple{Method}",
+    "location": "base/base.html#Base.functionloc-Tuple{Method}",
     "page": "Essentials",
     "title": "Base.functionloc",
     "category": "Method",
@@ -6633,7 +6673,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/base.html#Base.@functionloc",
+    "location": "base/base.html#Base.@functionloc",
     "page": "Essentials",
     "title": "Base.@functionloc",
     "category": "Macro",
@@ -6641,7 +6681,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/base.html#Reflection-1",
+    "location": "base/base.html#Reflection-1",
     "page": "Essentials",
     "title": "Reflection",
     "category": "section",
@@ -6649,7 +6689,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/base.html#Base.gc",
+    "location": "base/base.html#Base.gc",
     "page": "Essentials",
     "title": "Base.gc",
     "category": "Function",
@@ -6657,7 +6697,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/base.html#Base.gc_enable",
+    "location": "base/base.html#Base.gc_enable",
     "page": "Essentials",
     "title": "Base.gc_enable",
     "category": "Function",
@@ -6665,7 +6705,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/base.html#Base.Meta.lower",
+    "location": "base/base.html#Base.Meta.lower",
     "page": "Essentials",
     "title": "Base.Meta.lower",
     "category": "Function",
@@ -6673,7 +6713,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/base.html#Base.Meta.@lower",
+    "location": "base/base.html#Base.Meta.@lower",
     "page": "Essentials",
     "title": "Base.Meta.@lower",
     "category": "Macro",
@@ -6681,7 +6721,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/base.html#Base.Meta.parse-Tuple{AbstractString,Int64}",
+    "location": "base/base.html#Base.Meta.parse-Tuple{AbstractString,Int64}",
     "page": "Essentials",
     "title": "Base.Meta.parse",
     "category": "Method",
@@ -6689,7 +6729,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/base.html#Base.Meta.parse-Tuple{AbstractString}",
+    "location": "base/base.html#Base.Meta.parse-Tuple{AbstractString}",
     "page": "Essentials",
     "title": "Base.Meta.parse",
     "category": "Method",
@@ -6697,7 +6737,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/base.html#Base.macroexpand",
+    "location": "base/base.html#Base.macroexpand",
     "page": "Essentials",
     "title": "Base.macroexpand",
     "category": "Function",
@@ -6705,7 +6745,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/base.html#Base.@macroexpand",
+    "location": "base/base.html#Base.@macroexpand",
     "page": "Essentials",
     "title": "Base.@macroexpand",
     "category": "Macro",
@@ -6713,7 +6753,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/base.html#Base.@macroexpand1",
+    "location": "base/base.html#Base.@macroexpand1",
     "page": "Essentials",
     "title": "Base.@macroexpand1",
     "category": "Macro",
@@ -6721,7 +6761,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/base.html#Base.code_lowered",
+    "location": "base/base.html#Base.code_lowered",
     "page": "Essentials",
     "title": "Base.code_lowered",
     "category": "Function",
@@ -6729,7 +6769,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/base.html#Base.@code_lowered",
+    "location": "base/base.html#Base.@code_lowered",
     "page": "Essentials",
     "title": "Base.@code_lowered",
     "category": "Macro",
@@ -6737,7 +6777,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/base.html#Base.code_typed",
+    "location": "base/base.html#Base.code_typed",
     "page": "Essentials",
     "title": "Base.code_typed",
     "category": "Function",
@@ -6745,7 +6785,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/base.html#Base.@code_typed",
+    "location": "base/base.html#Base.@code_typed",
     "page": "Essentials",
     "title": "Base.@code_typed",
     "category": "Macro",
@@ -6753,7 +6793,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/base.html#Base.code_warntype",
+    "location": "base/base.html#Base.code_warntype",
     "page": "Essentials",
     "title": "Base.code_warntype",
     "category": "Function",
@@ -6761,7 +6801,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/base.html#Base.@code_warntype",
+    "location": "base/base.html#Base.@code_warntype",
     "page": "Essentials",
     "title": "Base.@code_warntype",
     "category": "Macro",
@@ -6769,7 +6809,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/base.html#Base.code_llvm",
+    "location": "base/base.html#Base.code_llvm",
     "page": "Essentials",
     "title": "Base.code_llvm",
     "category": "Function",
@@ -6777,7 +6817,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/base.html#Base.@code_llvm",
+    "location": "base/base.html#Base.@code_llvm",
     "page": "Essentials",
     "title": "Base.@code_llvm",
     "category": "Macro",
@@ -6785,7 +6825,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/base.html#Base.code_native",
+    "location": "base/base.html#Base.code_native",
     "page": "Essentials",
     "title": "Base.code_native",
     "category": "Function",
@@ -6793,7 +6833,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/base.html#Base.@code_native",
+    "location": "base/base.html#Base.@code_native",
     "page": "Essentials",
     "title": "Base.@code_native",
     "category": "Macro",
@@ -6801,7 +6841,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/base.html#Base.precompile",
+    "location": "base/base.html#Base.precompile",
     "page": "Essentials",
     "title": "Base.precompile",
     "category": "Function",
@@ -6809,7 +6849,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/base.html#Internals-1",
+    "location": "base/base.html#Internals-1",
     "page": "Essentials",
     "title": "Internals",
     "category": "section",
@@ -6817,7 +6857,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/collections.html#",
+    "location": "base/collections.html#",
     "page": "Collections and Data Structures",
     "title": "Collections and Data Structures",
     "category": "page",
@@ -6825,7 +6865,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/collections.html#Collections-and-Data-Structures-1",
+    "location": "base/collections.html#Collections-and-Data-Structures-1",
     "page": "Collections and Data Structures",
     "title": "Collections and Data Structures",
     "category": "section",
@@ -6833,7 +6873,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/collections.html#Base.start",
+    "location": "base/collections.html#Base.start",
     "page": "Collections and Data Structures",
     "title": "Base.start",
     "category": "Function",
@@ -6841,7 +6881,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/collections.html#Base.done",
+    "location": "base/collections.html#Base.done",
     "page": "Collections and Data Structures",
     "title": "Base.done",
     "category": "Function",
@@ -6849,7 +6889,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/collections.html#Base.next",
+    "location": "base/collections.html#Base.next",
     "page": "Collections and Data Structures",
     "title": "Base.next",
     "category": "Function",
@@ -6857,7 +6897,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/collections.html#Base.IteratorSize",
+    "location": "base/collections.html#Base.IteratorSize",
     "page": "Collections and Data Structures",
     "title": "Base.IteratorSize",
     "category": "Type",
@@ -6865,7 +6905,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/collections.html#Base.IteratorEltype",
+    "location": "base/collections.html#Base.IteratorEltype",
     "page": "Collections and Data Structures",
     "title": "Base.IteratorEltype",
     "category": "Type",
@@ -6873,7 +6913,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/collections.html#lib-collections-iteration-1",
+    "location": "base/collections.html#lib-collections-iteration-1",
     "page": "Collections and Data Structures",
     "title": "Iteration",
     "category": "section",
@@ -6881,7 +6921,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/collections.html#Base.isempty",
+    "location": "base/collections.html#Base.isempty",
     "page": "Collections and Data Structures",
     "title": "Base.isempty",
     "category": "Function",
@@ -6889,7 +6929,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/collections.html#Base.empty!",
+    "location": "base/collections.html#Base.empty!",
     "page": "Collections and Data Structures",
     "title": "Base.empty!",
     "category": "Function",
@@ -6897,7 +6937,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/collections.html#Base.length",
+    "location": "base/collections.html#Base.length",
     "page": "Collections and Data Structures",
     "title": "Base.length",
     "category": "Function",
@@ -6905,7 +6945,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/collections.html#General-Collections-1",
+    "location": "base/collections.html#General-Collections-1",
     "page": "Collections and Data Structures",
     "title": "General Collections",
     "category": "section",
@@ -6913,7 +6953,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/collections.html#Base.in",
+    "location": "base/collections.html#Base.in",
     "page": "Collections and Data Structures",
     "title": "Base.in",
     "category": "Function",
@@ -6921,7 +6961,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/collections.html#Base.eltype",
+    "location": "base/collections.html#Base.eltype",
     "page": "Collections and Data Structures",
     "title": "Base.eltype",
     "category": "Function",
@@ -6929,7 +6969,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/collections.html#Base.indexin",
+    "location": "base/collections.html#Base.indexin",
     "page": "Collections and Data Structures",
     "title": "Base.indexin",
     "category": "Function",
@@ -6937,7 +6977,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/collections.html#Base.unique",
+    "location": "base/collections.html#Base.unique",
     "page": "Collections and Data Structures",
     "title": "Base.unique",
     "category": "Function",
@@ -6945,7 +6985,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/collections.html#Base.unique!",
+    "location": "base/collections.html#Base.unique!",
     "page": "Collections and Data Structures",
     "title": "Base.unique!",
     "category": "Function",
@@ -6953,7 +6993,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/collections.html#Base.allunique",
+    "location": "base/collections.html#Base.allunique",
     "page": "Collections and Data Structures",
     "title": "Base.allunique",
     "category": "Function",
@@ -6961,7 +7001,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/collections.html#Base.reduce-Tuple{Any,Any,Any}",
+    "location": "base/collections.html#Base.reduce-Tuple{Any,Any,Any}",
     "page": "Collections and Data Structures",
     "title": "Base.reduce",
     "category": "Method",
@@ -6969,7 +7009,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/collections.html#Base.reduce-Tuple{Any,Any}",
+    "location": "base/collections.html#Base.reduce-Tuple{Any,Any}",
     "page": "Collections and Data Structures",
     "title": "Base.reduce",
     "category": "Method",
@@ -6977,7 +7017,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/collections.html#Base.foldl-Tuple{Any,Any,Any}",
+    "location": "base/collections.html#Base.foldl-Tuple{Any,Any,Any}",
     "page": "Collections and Data Structures",
     "title": "Base.foldl",
     "category": "Method",
@@ -6985,7 +7025,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/collections.html#Base.foldl-Tuple{Any,Any}",
+    "location": "base/collections.html#Base.foldl-Tuple{Any,Any}",
     "page": "Collections and Data Structures",
     "title": "Base.foldl",
     "category": "Method",
@@ -6993,7 +7033,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/collections.html#Base.foldr-Tuple{Any,Any,Any}",
+    "location": "base/collections.html#Base.foldr-Tuple{Any,Any,Any}",
     "page": "Collections and Data Structures",
     "title": "Base.foldr",
     "category": "Method",
@@ -7001,7 +7041,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/collections.html#Base.foldr-Tuple{Any,Any}",
+    "location": "base/collections.html#Base.foldr-Tuple{Any,Any}",
     "page": "Collections and Data Structures",
     "title": "Base.foldr",
     "category": "Method",
@@ -7009,7 +7049,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/collections.html#Base.maximum-Tuple{Any}",
+    "location": "base/collections.html#Base.maximum-Tuple{Any}",
     "page": "Collections and Data Structures",
     "title": "Base.maximum",
     "category": "Method",
@@ -7017,7 +7057,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/collections.html#Base.maximum-Tuple{Any,Any}",
+    "location": "base/collections.html#Base.maximum-Tuple{Any,Any}",
     "page": "Collections and Data Structures",
     "title": "Base.maximum",
     "category": "Method",
@@ -7025,7 +7065,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/collections.html#Base.maximum!",
+    "location": "base/collections.html#Base.maximum!",
     "page": "Collections and Data Structures",
     "title": "Base.maximum!",
     "category": "Function",
@@ -7033,7 +7073,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/collections.html#Base.minimum-Tuple{Any}",
+    "location": "base/collections.html#Base.minimum-Tuple{Any}",
     "page": "Collections and Data Structures",
     "title": "Base.minimum",
     "category": "Method",
@@ -7041,7 +7081,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/collections.html#Base.minimum-Tuple{Any,Any}",
+    "location": "base/collections.html#Base.minimum-Tuple{Any,Any}",
     "page": "Collections and Data Structures",
     "title": "Base.minimum",
     "category": "Method",
@@ -7049,7 +7089,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/collections.html#Base.minimum!",
+    "location": "base/collections.html#Base.minimum!",
     "page": "Collections and Data Structures",
     "title": "Base.minimum!",
     "category": "Function",
@@ -7057,7 +7097,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/collections.html#Base.extrema-Tuple{Any}",
+    "location": "base/collections.html#Base.extrema-Tuple{Any}",
     "page": "Collections and Data Structures",
     "title": "Base.extrema",
     "category": "Method",
@@ -7065,7 +7105,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/collections.html#Base.extrema-Tuple{AbstractArray,Any}",
+    "location": "base/collections.html#Base.extrema-Tuple{AbstractArray,Any}",
     "page": "Collections and Data Structures",
     "title": "Base.extrema",
     "category": "Method",
@@ -7073,7 +7113,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/collections.html#Base.indmax",
+    "location": "base/collections.html#Base.indmax",
     "page": "Collections and Data Structures",
     "title": "Base.indmax",
     "category": "Function",
@@ -7081,7 +7121,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/collections.html#Base.indmin",
+    "location": "base/collections.html#Base.indmin",
     "page": "Collections and Data Structures",
     "title": "Base.indmin",
     "category": "Function",
@@ -7089,7 +7129,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/collections.html#Base.findmax-Tuple{Any}",
+    "location": "base/collections.html#Base.findmax-Tuple{Any}",
     "page": "Collections and Data Structures",
     "title": "Base.findmax",
     "category": "Method",
@@ -7097,7 +7137,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/collections.html#Base.findmax-Tuple{AbstractArray,Any}",
+    "location": "base/collections.html#Base.findmax-Tuple{AbstractArray,Any}",
     "page": "Collections and Data Structures",
     "title": "Base.findmax",
     "category": "Method",
@@ -7105,7 +7145,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/collections.html#Base.findmin-Tuple{Any}",
+    "location": "base/collections.html#Base.findmin-Tuple{Any}",
     "page": "Collections and Data Structures",
     "title": "Base.findmin",
     "category": "Method",
@@ -7113,7 +7153,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/collections.html#Base.findmin-Tuple{AbstractArray,Any}",
+    "location": "base/collections.html#Base.findmin-Tuple{AbstractArray,Any}",
     "page": "Collections and Data Structures",
     "title": "Base.findmin",
     "category": "Method",
@@ -7121,7 +7161,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/collections.html#Base.findmax!",
+    "location": "base/collections.html#Base.findmax!",
     "page": "Collections and Data Structures",
     "title": "Base.findmax!",
     "category": "Function",
@@ -7129,7 +7169,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/collections.html#Base.findmin!",
+    "location": "base/collections.html#Base.findmin!",
     "page": "Collections and Data Structures",
     "title": "Base.findmin!",
     "category": "Function",
@@ -7137,7 +7177,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/collections.html#Base.sum",
+    "location": "base/collections.html#Base.sum",
     "page": "Collections and Data Structures",
     "title": "Base.sum",
     "category": "Function",
@@ -7145,7 +7185,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/collections.html#Base.sum!",
+    "location": "base/collections.html#Base.sum!",
     "page": "Collections and Data Structures",
     "title": "Base.sum!",
     "category": "Function",
@@ -7153,7 +7193,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/collections.html#Base.prod",
+    "location": "base/collections.html#Base.prod",
     "page": "Collections and Data Structures",
     "title": "Base.prod",
     "category": "Function",
@@ -7161,7 +7201,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/collections.html#Base.prod!",
+    "location": "base/collections.html#Base.prod!",
     "page": "Collections and Data Structures",
     "title": "Base.prod!",
     "category": "Function",
@@ -7169,7 +7209,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/collections.html#Base.any-Tuple{Any}",
+    "location": "base/collections.html#Base.any-Tuple{Any}",
     "page": "Collections and Data Structures",
     "title": "Base.any",
     "category": "Method",
@@ -7177,7 +7217,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/collections.html#Base.any-Tuple{AbstractArray,Any}",
+    "location": "base/collections.html#Base.any-Tuple{AbstractArray,Any}",
     "page": "Collections and Data Structures",
     "title": "Base.any",
     "category": "Method",
@@ -7185,7 +7225,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/collections.html#Base.any!",
+    "location": "base/collections.html#Base.any!",
     "page": "Collections and Data Structures",
     "title": "Base.any!",
     "category": "Function",
@@ -7193,7 +7233,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/collections.html#Base.all-Tuple{Any}",
+    "location": "base/collections.html#Base.all-Tuple{Any}",
     "page": "Collections and Data Structures",
     "title": "Base.all",
     "category": "Method",
@@ -7201,7 +7241,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/collections.html#Base.all-Tuple{AbstractArray,Any}",
+    "location": "base/collections.html#Base.all-Tuple{AbstractArray,Any}",
     "page": "Collections and Data Structures",
     "title": "Base.all",
     "category": "Method",
@@ -7209,7 +7249,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/collections.html#Base.all!",
+    "location": "base/collections.html#Base.all!",
     "page": "Collections and Data Structures",
     "title": "Base.all!",
     "category": "Function",
@@ -7217,15 +7257,15 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/collections.html#Base.count",
+    "location": "base/collections.html#Base.count",
     "page": "Collections and Data Structures",
     "title": "Base.count",
     "category": "Function",
-    "text": "count(p, itr) -> Integer\ncount(itr) -> Integer\n\nCount the number of elements in itr for which predicate p returns true. If p is omitted, counts the number of true elements in itr (which should be a collection of boolean values).\n\njulia> count(i->(4<=i<=6), [2,3,4,5,6])\n3\n\njulia> count([true, false, true, true])\n3\n\n\n\nLibGit2.count(f::Function, walker::GitRevWalker; oid::GitHash=GitHash(), by::Cint=Consts.SORT_NONE, rev::Bool=false)\n\nUsing the GitRevWalker walker to \"walk\" over every commit in the repository's history, find the number of commits which return true when f is applied to them. The keyword arguments are:     * oid: The GitHash of the commit to begin the walk from. The default is to use       push_head! and therefore the HEAD commit and all its ancestors.     * by: The sorting method. The default is not to sort. Other options are to sort by       topology (LibGit2.Consts.SORT_TOPOLOGICAL), to sort forwards in time       (LibGit2.Consts.SORT_TIME, most ancient first) or to sort backwards in time       (LibGit2.Consts.SORT_REVERSE, most recent first).     * rev: Whether to reverse the sorted order (for instance, if topological sorting is used).\n\nExamples\n\ncnt = LibGit2.with(LibGit2.GitRevWalker(repo)) do walker\n    count((oid, repo)->(oid == commit_oid1), walker, oid=commit_oid1, by=LibGit2.Consts.SORT_TIME)\nend\n\ncount finds the number of commits along the walk with a certain GitHash commit_oid1, starting the walk from that commit and moving forwards in time from it. Since the GitHash is unique to a commit, cnt will be 1.\n\n\n\n"
+    "text": "LibGit2.count(f::Function, walker::GitRevWalker; oid::GitHash=GitHash(), by::Cint=Consts.SORT_NONE, rev::Bool=false)\n\nUsing the GitRevWalker walker to \"walk\" over every commit in the repository's history, find the number of commits which return true when f is applied to them. The keyword arguments are:     * oid: The GitHash of the commit to begin the walk from. The default is to use       push_head! and therefore the HEAD commit and all its ancestors.     * by: The sorting method. The default is not to sort. Other options are to sort by       topology (LibGit2.Consts.SORT_TOPOLOGICAL), to sort forwards in time       (LibGit2.Consts.SORT_TIME, most ancient first) or to sort backwards in time       (LibGit2.Consts.SORT_REVERSE, most recent first).     * rev: Whether to reverse the sorted order (for instance, if topological sorting is used).\n\nExamples\n\ncnt = LibGit2.with(LibGit2.GitRevWalker(repo)) do walker\n    count((oid, repo)->(oid == commit_oid1), walker, oid=commit_oid1, by=LibGit2.Consts.SORT_TIME)\nend\n\ncount finds the number of commits along the walk with a certain GitHash commit_oid1, starting the walk from that commit and moving forwards in time from it. Since the GitHash is unique to a commit, cnt will be 1.\n\n\n\ncount(p, itr) -> Integer\ncount(itr) -> Integer\n\nCount the number of elements in itr for which predicate p returns true. If p is omitted, counts the number of true elements in itr (which should be a collection of boolean values).\n\njulia> count(i->(4<=i<=6), [2,3,4,5,6])\n3\n\njulia> count([true, false, true, true])\n3\n\n\n\n"
 },
 
 {
-    "location": "stdlib/collections.html#Base.any-Tuple{Any,Any}",
+    "location": "base/collections.html#Base.any-Tuple{Any,Any}",
     "page": "Collections and Data Structures",
     "title": "Base.any",
     "category": "Method",
@@ -7233,7 +7273,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/collections.html#Base.all-Tuple{Any,Any}",
+    "location": "base/collections.html#Base.all-Tuple{Any,Any}",
     "page": "Collections and Data Structures",
     "title": "Base.all",
     "category": "Method",
@@ -7241,7 +7281,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/collections.html#Base.foreach",
+    "location": "base/collections.html#Base.foreach",
     "page": "Collections and Data Structures",
     "title": "Base.foreach",
     "category": "Function",
@@ -7249,15 +7289,15 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/collections.html#Base.map",
+    "location": "base/collections.html#Base.map",
     "page": "Collections and Data Structures",
     "title": "Base.map",
     "category": "Function",
-    "text": "map(f, c...) -> collection\n\nTransform collection c by applying f to each element. For multiple collection arguments, apply f elementwise.\n\nSee also: mapslices\n\nExamples\n\njulia> map(x -> x * 2, [1, 2, 3])\n3-element Array{Int64,1}:\n 2\n 4\n 6\n\njulia> map(+, [1, 2, 3], [10, 20, 30])\n3-element Array{Int64,1}:\n 11\n 22\n 33\n\n\n\nLibGit2.map(f::Function, walker::GitRevWalker; oid::GitHash=GitHash(), range::AbstractString=\"\", by::Cint=Consts.SORT_NONE, rev::Bool=false)\n\nUsing the GitRevWalker walker to \"walk\" over every commit in the repository's history, apply f to each commit in the walk. The keyword arguments are:     * oid: The GitHash of the commit to begin the walk from. The default is to use       push_head! and therefore the HEAD commit and all its ancestors.     * range: A range of GitHashs in the format oid1..oid2. f will be       applied to all commits between the two.     * by: The sorting method. The default is not to sort. Other options are to sort by       topology (LibGit2.Consts.SORT_TOPOLOGICAL), to sort forwards in time       (LibGit2.Consts.SORT_TIME, most ancient first) or to sort backwards in time       (LibGit2.Consts.SORT_REVERSE, most recent first).     * rev: Whether to reverse the sorted order (for instance, if topological sorting is used).\n\nExamples\n\noids = LibGit2.with(LibGit2.GitRevWalker(repo)) do walker\n    LibGit2.map((oid, repo)->string(oid), walker, by=LibGit2.Consts.SORT_TIME)\nend\n\nHere, map visits each commit using the GitRevWalker and finds its GitHash.\n\n\n\n"
+    "text": "LibGit2.map(f::Function, walker::GitRevWalker; oid::GitHash=GitHash(), range::AbstractString=\"\", by::Cint=Consts.SORT_NONE, rev::Bool=false)\n\nUsing the GitRevWalker walker to \"walk\" over every commit in the repository's history, apply f to each commit in the walk. The keyword arguments are:     * oid: The GitHash of the commit to begin the walk from. The default is to use       push_head! and therefore the HEAD commit and all its ancestors.     * range: A range of GitHashs in the format oid1..oid2. f will be       applied to all commits between the two.     * by: The sorting method. The default is not to sort. Other options are to sort by       topology (LibGit2.Consts.SORT_TOPOLOGICAL), to sort forwards in time       (LibGit2.Consts.SORT_TIME, most ancient first) or to sort backwards in time       (LibGit2.Consts.SORT_REVERSE, most recent first).     * rev: Whether to reverse the sorted order (for instance, if topological sorting is used).\n\nExamples\n\noids = LibGit2.with(LibGit2.GitRevWalker(repo)) do walker\n    LibGit2.map((oid, repo)->string(oid), walker, by=LibGit2.Consts.SORT_TIME)\nend\n\nHere, map visits each commit using the GitRevWalker and finds its GitHash.\n\n\n\nmap(f, c...) -> collection\n\nTransform collection c by applying f to each element. For multiple collection arguments, apply f elementwise.\n\nSee also: mapslices\n\nExamples\n\njulia> map(x -> x * 2, [1, 2, 3])\n3-element Array{Int64,1}:\n 2\n 4\n 6\n\njulia> map(+, [1, 2, 3], [10, 20, 30])\n3-element Array{Int64,1}:\n 11\n 22\n 33\n\n\n\n"
 },
 
 {
-    "location": "stdlib/collections.html#Base.map!",
+    "location": "base/collections.html#Base.map!",
     "page": "Collections and Data Structures",
     "title": "Base.map!",
     "category": "Function",
@@ -7265,7 +7305,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/collections.html#Base.mapreduce-NTuple{4,Any}",
+    "location": "base/collections.html#Base.mapreduce-NTuple{4,Any}",
     "page": "Collections and Data Structures",
     "title": "Base.mapreduce",
     "category": "Method",
@@ -7273,7 +7313,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/collections.html#Base.mapreduce-Tuple{Any,Any,Any}",
+    "location": "base/collections.html#Base.mapreduce-Tuple{Any,Any,Any}",
     "page": "Collections and Data Structures",
     "title": "Base.mapreduce",
     "category": "Method",
@@ -7281,7 +7321,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/collections.html#Base.mapfoldl-NTuple{4,Any}",
+    "location": "base/collections.html#Base.mapfoldl-NTuple{4,Any}",
     "page": "Collections and Data Structures",
     "title": "Base.mapfoldl",
     "category": "Method",
@@ -7289,7 +7329,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/collections.html#Base.mapfoldl-Tuple{Any,Any,Any}",
+    "location": "base/collections.html#Base.mapfoldl-Tuple{Any,Any,Any}",
     "page": "Collections and Data Structures",
     "title": "Base.mapfoldl",
     "category": "Method",
@@ -7297,7 +7337,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/collections.html#Base.mapfoldr-NTuple{4,Any}",
+    "location": "base/collections.html#Base.mapfoldr-NTuple{4,Any}",
     "page": "Collections and Data Structures",
     "title": "Base.mapfoldr",
     "category": "Method",
@@ -7305,7 +7345,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/collections.html#Base.mapfoldr-Tuple{Any,Any,Any}",
+    "location": "base/collections.html#Base.mapfoldr-Tuple{Any,Any,Any}",
     "page": "Collections and Data Structures",
     "title": "Base.mapfoldr",
     "category": "Method",
@@ -7313,7 +7353,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/collections.html#Base.first",
+    "location": "base/collections.html#Base.first",
     "page": "Collections and Data Structures",
     "title": "Base.first",
     "category": "Function",
@@ -7321,7 +7361,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/collections.html#Base.last",
+    "location": "base/collections.html#Base.last",
     "page": "Collections and Data Structures",
     "title": "Base.last",
     "category": "Function",
@@ -7329,7 +7369,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/collections.html#Base.step",
+    "location": "base/collections.html#Base.step",
     "page": "Collections and Data Structures",
     "title": "Base.step",
     "category": "Function",
@@ -7337,7 +7377,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/collections.html#Base.collect-Tuple{Any}",
+    "location": "base/collections.html#Base.collect-Tuple{Any}",
     "page": "Collections and Data Structures",
     "title": "Base.collect",
     "category": "Method",
@@ -7345,7 +7385,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/collections.html#Base.collect-Tuple{Type,Any}",
+    "location": "base/collections.html#Base.collect-Tuple{Type,Any}",
     "page": "Collections and Data Structures",
     "title": "Base.collect",
     "category": "Method",
@@ -7353,7 +7393,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/collections.html#Base.issubset-Tuple{Any,Any}",
+    "location": "base/collections.html#Base.issubset-Tuple{Any,Any}",
     "page": "Collections and Data Structures",
     "title": "Base.issubset",
     "category": "Method",
@@ -7361,7 +7401,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/collections.html#Base.filter",
+    "location": "base/collections.html#Base.filter",
     "page": "Collections and Data Structures",
     "title": "Base.filter",
     "category": "Function",
@@ -7369,7 +7409,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/collections.html#Base.filter!",
+    "location": "base/collections.html#Base.filter!",
     "page": "Collections and Data Structures",
     "title": "Base.filter!",
     "category": "Function",
@@ -7377,7 +7417,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/collections.html#Base.replace-Tuple{Any,Vararg{Pair,N} where N}",
+    "location": "base/collections.html#Base.replace-Tuple{Any,Vararg{Pair,N} where N}",
     "page": "Collections and Data Structures",
     "title": "Base.replace",
     "category": "Method",
@@ -7385,7 +7425,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/collections.html#Base.replace-Tuple{Union{Function, Type},Any,Any}",
+    "location": "base/collections.html#Base.replace-Tuple{Union{Function, Type},Any,Any}",
     "page": "Collections and Data Structures",
     "title": "Base.replace",
     "category": "Method",
@@ -7393,7 +7433,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/collections.html#Base.replace-Tuple{Union{Function, Type},Any}",
+    "location": "base/collections.html#Base.replace-Tuple{Union{Function, Type},Any}",
     "page": "Collections and Data Structures",
     "title": "Base.replace",
     "category": "Method",
@@ -7401,7 +7441,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/collections.html#Base.replace!",
+    "location": "base/collections.html#Base.replace!",
     "page": "Collections and Data Structures",
     "title": "Base.replace!",
     "category": "Function",
@@ -7409,7 +7449,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/collections.html#Iterable-Collections-1",
+    "location": "base/collections.html#Iterable-Collections-1",
     "page": "Collections and Data Structures",
     "title": "Iterable Collections",
     "category": "section",
@@ -7417,7 +7457,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/collections.html#Base.getindex",
+    "location": "base/collections.html#Base.getindex",
     "page": "Collections and Data Structures",
     "title": "Base.getindex",
     "category": "Function",
@@ -7425,7 +7465,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/collections.html#Base.setindex!",
+    "location": "base/collections.html#Base.setindex!",
     "page": "Collections and Data Structures",
     "title": "Base.setindex!",
     "category": "Function",
@@ -7433,7 +7473,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/collections.html#Base.endof",
+    "location": "base/collections.html#Base.endof",
     "page": "Collections and Data Structures",
     "title": "Base.endof",
     "category": "Function",
@@ -7441,7 +7481,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/collections.html#Indexable-Collections-1",
+    "location": "base/collections.html#Indexable-Collections-1",
     "page": "Collections and Data Structures",
     "title": "Indexable Collections",
     "category": "section",
@@ -7449,7 +7489,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/collections.html#Base.Dict",
+    "location": "base/collections.html#Base.Dict",
     "page": "Collections and Data Structures",
     "title": "Base.Dict",
     "category": "Type",
@@ -7457,7 +7497,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/collections.html#Base.ObjectIdDict",
+    "location": "base/collections.html#Base.ObjectIdDict",
     "page": "Collections and Data Structures",
     "title": "Base.ObjectIdDict",
     "category": "Type",
@@ -7465,7 +7505,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/collections.html#Base.WeakKeyDict",
+    "location": "base/collections.html#Base.WeakKeyDict",
     "page": "Collections and Data Structures",
     "title": "Base.WeakKeyDict",
     "category": "Type",
@@ -7473,7 +7513,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/collections.html#Base.ImmutableDict",
+    "location": "base/collections.html#Base.ImmutableDict",
     "page": "Collections and Data Structures",
     "title": "Base.ImmutableDict",
     "category": "Type",
@@ -7481,7 +7521,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/collections.html#Base.haskey",
+    "location": "base/collections.html#Base.haskey",
     "page": "Collections and Data Structures",
     "title": "Base.haskey",
     "category": "Function",
@@ -7489,7 +7529,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/collections.html#Base.get-Tuple{Any,Any,Any}",
+    "location": "base/collections.html#Base.get-Tuple{Any,Any,Any}",
     "page": "Collections and Data Structures",
     "title": "Base.get",
     "category": "Method",
@@ -7497,7 +7537,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/collections.html#Base.get",
+    "location": "base/collections.html#Base.get",
     "page": "Collections and Data Structures",
     "title": "Base.get",
     "category": "Function",
@@ -7505,7 +7545,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/collections.html#Base.get!-Tuple{Any,Any,Any}",
+    "location": "base/collections.html#Base.get!-Tuple{Any,Any,Any}",
     "page": "Collections and Data Structures",
     "title": "Base.get!",
     "category": "Method",
@@ -7513,7 +7553,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/collections.html#Base.get!-Tuple{Function,Any,Any}",
+    "location": "base/collections.html#Base.get!-Tuple{Function,Any,Any}",
     "page": "Collections and Data Structures",
     "title": "Base.get!",
     "category": "Method",
@@ -7521,7 +7561,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/collections.html#Base.getkey",
+    "location": "base/collections.html#Base.getkey",
     "page": "Collections and Data Structures",
     "title": "Base.getkey",
     "category": "Function",
@@ -7529,7 +7569,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/collections.html#Base.delete!",
+    "location": "base/collections.html#Base.delete!",
     "page": "Collections and Data Structures",
     "title": "Base.delete!",
     "category": "Function",
@@ -7537,7 +7577,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/collections.html#Base.pop!-Tuple{Any,Any,Any}",
+    "location": "base/collections.html#Base.pop!-Tuple{Any,Any,Any}",
     "page": "Collections and Data Structures",
     "title": "Base.pop!",
     "category": "Method",
@@ -7545,7 +7585,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/collections.html#Base.keys",
+    "location": "base/collections.html#Base.keys",
     "page": "Collections and Data Structures",
     "title": "Base.keys",
     "category": "Function",
@@ -7553,7 +7593,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/collections.html#Base.values",
+    "location": "base/collections.html#Base.values",
     "page": "Collections and Data Structures",
     "title": "Base.values",
     "category": "Function",
@@ -7561,15 +7601,15 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/collections.html#Base.pairs",
+    "location": "base/collections.html#Base.pairs",
     "page": "Collections and Data Structures",
     "title": "Base.pairs",
     "category": "Function",
-    "text": "pairs(collection)\n\nReturn an iterator over key => value pairs for any collection that maps a set of keys to a set of values. This includes arrays, where the keys are the array indices.\n\n\n\npairs(IndexLinear(), A)\npairs(IndexCartesian(), A)\npairs(IndexStyle(A), A)\n\nAn iterator that accesses each element of the array A, returning i => x, where i is the index for the element and x = A[i]. Identical to pairs(A), except that the style of index can be selected. Also similar to enumerate(A), except i will be a valid index for A, while enumerate always counts from 1 regardless of the indices of A.\n\nSpecifying IndexLinear() ensures that i will be an integer; specifying IndexCartesian() ensures that i will be a CartesianIndex; specifying IndexStyle(A) chooses whichever has been defined as the native indexing style for array A.\n\nMutation of the bounds of the underlying array will invalidate this iterator.\n\nExamples\n\njulia> A = [\"a\" \"d\"; \"b\" \"e\"; \"c\" \"f\"];\n\njulia> for (index, value) in pairs(IndexStyle(A), A)\n           println(\"$index $value\")\n       end\n1 a\n2 b\n3 c\n4 d\n5 e\n6 f\n\njulia> S = view(A, 1:2, :);\n\njulia> for (index, value) in pairs(IndexStyle(S), S)\n           println(\"$index $value\")\n       end\nCartesianIndex(1, 1) a\nCartesianIndex(2, 1) b\nCartesianIndex(1, 2) d\nCartesianIndex(2, 2) e\n\nSee also: IndexStyle, axes.\n\n\n\n"
+    "text": "pairs(IndexLinear(), A)\npairs(IndexCartesian(), A)\npairs(IndexStyle(A), A)\n\nAn iterator that accesses each element of the array A, returning i => x, where i is the index for the element and x = A[i]. Identical to pairs(A), except that the style of index can be selected. Also similar to enumerate(A), except i will be a valid index for A, while enumerate always counts from 1 regardless of the indices of A.\n\nSpecifying IndexLinear() ensures that i will be an integer; specifying IndexCartesian() ensures that i will be a CartesianIndex; specifying IndexStyle(A) chooses whichever has been defined as the native indexing style for array A.\n\nMutation of the bounds of the underlying array will invalidate this iterator.\n\nExamples\n\njulia> A = [\"a\" \"d\"; \"b\" \"e\"; \"c\" \"f\"];\n\njulia> for (index, value) in pairs(IndexStyle(A), A)\n           println(\"$index $value\")\n       end\n1 a\n2 b\n3 c\n4 d\n5 e\n6 f\n\njulia> S = view(A, 1:2, :);\n\njulia> for (index, value) in pairs(IndexStyle(S), S)\n           println(\"$index $value\")\n       end\nCartesianIndex(1, 1) a\nCartesianIndex(2, 1) b\nCartesianIndex(1, 2) d\nCartesianIndex(2, 2) e\n\nSee also: IndexStyle, axes.\n\n\n\npairs(collection)\n\nReturn an iterator over key => value pairs for any collection that maps a set of keys to a set of values. This includes arrays, where the keys are the array indices.\n\n\n\n"
 },
 
 {
-    "location": "stdlib/collections.html#Base.merge",
+    "location": "base/collections.html#Base.merge",
     "page": "Collections and Data Structures",
     "title": "Base.merge",
     "category": "Function",
@@ -7577,7 +7617,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/collections.html#Base.merge!-Tuple{AbstractDict,Vararg{AbstractDict,N} where N}",
+    "location": "base/collections.html#Base.merge!-Tuple{AbstractDict,Vararg{AbstractDict,N} where N}",
     "page": "Collections and Data Structures",
     "title": "Base.merge!",
     "category": "Method",
@@ -7585,7 +7625,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/collections.html#Base.merge!-Tuple{Function,AbstractDict,Vararg{AbstractDict,N} where N}",
+    "location": "base/collections.html#Base.merge!-Tuple{Function,AbstractDict,Vararg{AbstractDict,N} where N}",
     "page": "Collections and Data Structures",
     "title": "Base.merge!",
     "category": "Method",
@@ -7593,7 +7633,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/collections.html#Base.sizehint!",
+    "location": "base/collections.html#Base.sizehint!",
     "page": "Collections and Data Structures",
     "title": "Base.sizehint!",
     "category": "Function",
@@ -7601,7 +7641,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/collections.html#Base.keytype",
+    "location": "base/collections.html#Base.keytype",
     "page": "Collections and Data Structures",
     "title": "Base.keytype",
     "category": "Function",
@@ -7609,7 +7649,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/collections.html#Base.valtype",
+    "location": "base/collections.html#Base.valtype",
     "page": "Collections and Data Structures",
     "title": "Base.valtype",
     "category": "Function",
@@ -7617,7 +7657,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/collections.html#Dictionaries-1",
+    "location": "base/collections.html#Dictionaries-1",
     "page": "Collections and Data Structures",
     "title": "Dictionaries",
     "category": "section",
@@ -7625,7 +7665,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/collections.html#Base.Set",
+    "location": "base/collections.html#Base.Set",
     "page": "Collections and Data Structures",
     "title": "Base.Set",
     "category": "Type",
@@ -7633,7 +7673,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/collections.html#Base.BitSet",
+    "location": "base/collections.html#Base.BitSet",
     "page": "Collections and Data Structures",
     "title": "Base.BitSet",
     "category": "Type",
@@ -7641,7 +7681,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/collections.html#Base.union",
+    "location": "base/collections.html#Base.union",
     "page": "Collections and Data Structures",
     "title": "Base.union",
     "category": "Function",
@@ -7649,7 +7689,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/collections.html#Base.union!",
+    "location": "base/collections.html#Base.union!",
     "page": "Collections and Data Structures",
     "title": "Base.union!",
     "category": "Function",
@@ -7657,7 +7697,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/collections.html#Base.intersect",
+    "location": "base/collections.html#Base.intersect",
     "page": "Collections and Data Structures",
     "title": "Base.intersect",
     "category": "Function",
@@ -7665,7 +7705,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/collections.html#Base.setdiff",
+    "location": "base/collections.html#Base.setdiff",
     "page": "Collections and Data Structures",
     "title": "Base.setdiff",
     "category": "Function",
@@ -7673,7 +7713,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/collections.html#Base.setdiff!",
+    "location": "base/collections.html#Base.setdiff!",
     "page": "Collections and Data Structures",
     "title": "Base.setdiff!",
     "category": "Function",
@@ -7681,7 +7721,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/collections.html#Base.symdiff",
+    "location": "base/collections.html#Base.symdiff",
     "page": "Collections and Data Structures",
     "title": "Base.symdiff",
     "category": "Function",
@@ -7689,7 +7729,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/collections.html#Base.symdiff!",
+    "location": "base/collections.html#Base.symdiff!",
     "page": "Collections and Data Structures",
     "title": "Base.symdiff!",
     "category": "Function",
@@ -7697,7 +7737,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/collections.html#Base.intersect!",
+    "location": "base/collections.html#Base.intersect!",
     "page": "Collections and Data Structures",
     "title": "Base.intersect!",
     "category": "Function",
@@ -7705,7 +7745,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/collections.html#Base.issubset",
+    "location": "base/collections.html#Base.issubset",
     "page": "Collections and Data Structures",
     "title": "Base.issubset",
     "category": "Function",
@@ -7713,7 +7753,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/collections.html#Set-Like-Collections-1",
+    "location": "base/collections.html#Set-Like-Collections-1",
     "page": "Collections and Data Structures",
     "title": "Set-Like Collections",
     "category": "section",
@@ -7721,7 +7761,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/collections.html#Base.push!",
+    "location": "base/collections.html#Base.push!",
     "page": "Collections and Data Structures",
     "title": "Base.push!",
     "category": "Function",
@@ -7729,7 +7769,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/collections.html#Base.pop!",
+    "location": "base/collections.html#Base.pop!",
     "page": "Collections and Data Structures",
     "title": "Base.pop!",
     "category": "Function",
@@ -7737,7 +7777,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/collections.html#Base.pushfirst!",
+    "location": "base/collections.html#Base.pushfirst!",
     "page": "Collections and Data Structures",
     "title": "Base.pushfirst!",
     "category": "Function",
@@ -7745,7 +7785,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/collections.html#Base.popfirst!",
+    "location": "base/collections.html#Base.popfirst!",
     "page": "Collections and Data Structures",
     "title": "Base.popfirst!",
     "category": "Function",
@@ -7753,7 +7793,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/collections.html#Base.insert!",
+    "location": "base/collections.html#Base.insert!",
     "page": "Collections and Data Structures",
     "title": "Base.insert!",
     "category": "Function",
@@ -7761,7 +7801,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/collections.html#Base.deleteat!",
+    "location": "base/collections.html#Base.deleteat!",
     "page": "Collections and Data Structures",
     "title": "Base.deleteat!",
     "category": "Function",
@@ -7769,7 +7809,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/collections.html#Base.splice!",
+    "location": "base/collections.html#Base.splice!",
     "page": "Collections and Data Structures",
     "title": "Base.splice!",
     "category": "Function",
@@ -7777,7 +7817,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/collections.html#Base.resize!",
+    "location": "base/collections.html#Base.resize!",
     "page": "Collections and Data Structures",
     "title": "Base.resize!",
     "category": "Function",
@@ -7785,7 +7825,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/collections.html#Base.append!",
+    "location": "base/collections.html#Base.append!",
     "page": "Collections and Data Structures",
     "title": "Base.append!",
     "category": "Function",
@@ -7793,7 +7833,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/collections.html#Base.prepend!",
+    "location": "base/collections.html#Base.prepend!",
     "page": "Collections and Data Structures",
     "title": "Base.prepend!",
     "category": "Function",
@@ -7801,7 +7841,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/collections.html#Dequeues-1",
+    "location": "base/collections.html#Dequeues-1",
     "page": "Collections and Data Structures",
     "title": "Dequeues",
     "category": "section",
@@ -7809,7 +7849,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/collections.html#Base.Pair",
+    "location": "base/collections.html#Base.Pair",
     "page": "Collections and Data Structures",
     "title": "Base.Pair",
     "category": "Type",
@@ -7817,7 +7857,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/collections.html#Base.Iterators.IndexValue",
+    "location": "base/collections.html#Base.Iterators.IndexValue",
     "page": "Collections and Data Structures",
     "title": "Base.Iterators.IndexValue",
     "category": "Type",
@@ -7825,7 +7865,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/collections.html#Utility-Collections-1",
+    "location": "base/collections.html#Utility-Collections-1",
     "page": "Collections and Data Structures",
     "title": "Utility Collections",
     "category": "section",
@@ -7833,7 +7873,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/math.html#",
+    "location": "base/math.html#",
     "page": "Mathematics",
     "title": "Mathematics",
     "category": "page",
@@ -7841,7 +7881,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/math.html#Mathematics-1",
+    "location": "base/math.html#Mathematics-1",
     "page": "Mathematics",
     "title": "Mathematics",
     "category": "section",
@@ -7849,7 +7889,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/math.html#Base.:--Tuple{Any}",
+    "location": "base/math.html#Base.:--Tuple{Any}",
     "page": "Mathematics",
     "title": "Base.:-",
     "category": "Method",
@@ -7857,7 +7897,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/math.html#Base.:+",
+    "location": "base/math.html#Base.:+",
     "page": "Mathematics",
     "title": "Base.:+",
     "category": "Function",
@@ -7865,7 +7905,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/math.html#Base.:--Tuple{Any,Any}",
+    "location": "base/math.html#Base.:--Tuple{Any,Any}",
     "page": "Mathematics",
     "title": "Base.:-",
     "category": "Method",
@@ -7873,7 +7913,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/math.html#Base.:*-Tuple{Any,Vararg{Any,N} where N}",
+    "location": "base/math.html#Base.:*-Tuple{Any,Vararg{Any,N} where N}",
     "page": "Mathematics",
     "title": "Base.:*",
     "category": "Method",
@@ -7881,7 +7921,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/math.html#Base.:/",
+    "location": "base/math.html#Base.:/",
     "page": "Mathematics",
     "title": "Base.:/",
     "category": "Function",
@@ -7889,7 +7929,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/math.html#Base.:\\-Tuple{Any,Any}",
+    "location": "base/math.html#Base.:\\-Tuple{Any,Any}",
     "page": "Mathematics",
     "title": "Base.:\\",
     "category": "Method",
@@ -7897,7 +7937,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/math.html#Base.:^-Tuple{Number,Number}",
+    "location": "base/math.html#Base.:^-Tuple{Number,Number}",
     "page": "Mathematics",
     "title": "Base.:^",
     "category": "Method",
@@ -7905,7 +7945,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/math.html#Base.fma",
+    "location": "base/math.html#Base.fma",
     "page": "Mathematics",
     "title": "Base.fma",
     "category": "Function",
@@ -7913,7 +7953,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/math.html#Base.muladd",
+    "location": "base/math.html#Base.muladd",
     "page": "Mathematics",
     "title": "Base.muladd",
     "category": "Function",
@@ -7921,7 +7961,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/math.html#Base.inv-Tuple{Number}",
+    "location": "base/math.html#Base.inv-Tuple{Number}",
     "page": "Mathematics",
     "title": "Base.inv",
     "category": "Method",
@@ -7929,7 +7969,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/math.html#Base.div",
+    "location": "base/math.html#Base.div",
     "page": "Mathematics",
     "title": "Base.div",
     "category": "Function",
@@ -7937,7 +7977,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/math.html#Base.fld",
+    "location": "base/math.html#Base.fld",
     "page": "Mathematics",
     "title": "Base.fld",
     "category": "Function",
@@ -7945,7 +7985,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/math.html#Base.cld",
+    "location": "base/math.html#Base.cld",
     "page": "Mathematics",
     "title": "Base.cld",
     "category": "Function",
@@ -7953,7 +7993,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/math.html#Base.mod",
+    "location": "base/math.html#Base.mod",
     "page": "Mathematics",
     "title": "Base.mod",
     "category": "Function",
@@ -7961,7 +8001,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/math.html#Base.rem",
+    "location": "base/math.html#Base.rem",
     "page": "Mathematics",
     "title": "Base.rem",
     "category": "Function",
@@ -7969,7 +8009,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/math.html#Base.Math.rem2pi",
+    "location": "base/math.html#Base.Math.rem2pi",
     "page": "Mathematics",
     "title": "Base.Math.rem2pi",
     "category": "Function",
@@ -7977,7 +8017,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/math.html#Base.Math.mod2pi",
+    "location": "base/math.html#Base.Math.mod2pi",
     "page": "Mathematics",
     "title": "Base.Math.mod2pi",
     "category": "Function",
@@ -7985,7 +8025,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/math.html#Base.divrem",
+    "location": "base/math.html#Base.divrem",
     "page": "Mathematics",
     "title": "Base.divrem",
     "category": "Function",
@@ -7993,7 +8033,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/math.html#Base.fldmod",
+    "location": "base/math.html#Base.fldmod",
     "page": "Mathematics",
     "title": "Base.fldmod",
     "category": "Function",
@@ -8001,7 +8041,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/math.html#Base.fld1",
+    "location": "base/math.html#Base.fld1",
     "page": "Mathematics",
     "title": "Base.fld1",
     "category": "Function",
@@ -8009,7 +8049,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/math.html#Base.mod1",
+    "location": "base/math.html#Base.mod1",
     "page": "Mathematics",
     "title": "Base.mod1",
     "category": "Function",
@@ -8017,7 +8057,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/math.html#Base.fldmod1",
+    "location": "base/math.html#Base.fldmod1",
     "page": "Mathematics",
     "title": "Base.fldmod1",
     "category": "Function",
@@ -8025,7 +8065,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/math.html#Base.://",
+    "location": "base/math.html#Base.://",
     "page": "Mathematics",
     "title": "Base.://",
     "category": "Function",
@@ -8033,7 +8073,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/math.html#Base.rationalize",
+    "location": "base/math.html#Base.rationalize",
     "page": "Mathematics",
     "title": "Base.rationalize",
     "category": "Function",
@@ -8041,7 +8081,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/math.html#Base.numerator",
+    "location": "base/math.html#Base.numerator",
     "page": "Mathematics",
     "title": "Base.numerator",
     "category": "Function",
@@ -8049,7 +8089,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/math.html#Base.denominator",
+    "location": "base/math.html#Base.denominator",
     "page": "Mathematics",
     "title": "Base.denominator",
     "category": "Function",
@@ -8057,7 +8097,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/math.html#Base.:<<",
+    "location": "base/math.html#Base.:<<",
     "page": "Mathematics",
     "title": "Base.:<<",
     "category": "Function",
@@ -8065,7 +8105,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/math.html#Base.:>>",
+    "location": "base/math.html#Base.:>>",
     "page": "Mathematics",
     "title": "Base.:>>",
     "category": "Function",
@@ -8073,7 +8113,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/math.html#Base.:>>>",
+    "location": "base/math.html#Base.:>>>",
     "page": "Mathematics",
     "title": "Base.:>>>",
     "category": "Function",
@@ -8081,7 +8121,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/math.html#Base.colon",
+    "location": "base/math.html#Base.colon",
     "page": "Mathematics",
     "title": "Base.colon",
     "category": "Function",
@@ -8089,7 +8129,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/math.html#Base.range",
+    "location": "base/math.html#Base.range",
     "page": "Mathematics",
     "title": "Base.range",
     "category": "Function",
@@ -8097,7 +8137,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/math.html#Base.OneTo",
+    "location": "base/math.html#Base.OneTo",
     "page": "Mathematics",
     "title": "Base.OneTo",
     "category": "Type",
@@ -8105,7 +8145,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/math.html#Base.StepRangeLen",
+    "location": "base/math.html#Base.StepRangeLen",
     "page": "Mathematics",
     "title": "Base.StepRangeLen",
     "category": "Type",
@@ -8113,7 +8153,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/math.html#Base.:==",
+    "location": "base/math.html#Base.:==",
     "page": "Mathematics",
     "title": "Base.:==",
     "category": "Function",
@@ -8121,7 +8161,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/math.html#Base.:!=",
+    "location": "base/math.html#Base.:!=",
     "page": "Mathematics",
     "title": "Base.:!=",
     "category": "Function",
@@ -8129,7 +8169,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/math.html#Base.:!==",
+    "location": "base/math.html#Base.:!==",
     "page": "Mathematics",
     "title": "Base.:!==",
     "category": "Function",
@@ -8137,7 +8177,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/math.html#Base.:<",
+    "location": "base/math.html#Base.:<",
     "page": "Mathematics",
     "title": "Base.:<",
     "category": "Function",
@@ -8145,7 +8185,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/math.html#Base.:<=",
+    "location": "base/math.html#Base.:<=",
     "page": "Mathematics",
     "title": "Base.:<=",
     "category": "Function",
@@ -8153,7 +8193,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/math.html#Base.:>",
+    "location": "base/math.html#Base.:>",
     "page": "Mathematics",
     "title": "Base.:>",
     "category": "Function",
@@ -8161,7 +8201,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/math.html#Base.:>=",
+    "location": "base/math.html#Base.:>=",
     "page": "Mathematics",
     "title": "Base.:>=",
     "category": "Function",
@@ -8169,7 +8209,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/math.html#Base.cmp",
+    "location": "base/math.html#Base.cmp",
     "page": "Mathematics",
     "title": "Base.cmp",
     "category": "Function",
@@ -8177,7 +8217,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/math.html#Base.:~",
+    "location": "base/math.html#Base.:~",
     "page": "Mathematics",
     "title": "Base.:~",
     "category": "Function",
@@ -8185,7 +8225,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/math.html#Base.:&",
+    "location": "base/math.html#Base.:&",
     "page": "Mathematics",
     "title": "Base.:&",
     "category": "Function",
@@ -8193,7 +8233,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/math.html#Base.:|",
+    "location": "base/math.html#Base.:|",
     "page": "Mathematics",
     "title": "Base.:|",
     "category": "Function",
@@ -8201,7 +8241,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/math.html#Base.xor",
+    "location": "base/math.html#Base.xor",
     "page": "Mathematics",
     "title": "Base.xor",
     "category": "Function",
@@ -8209,7 +8249,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/math.html#Base.:!",
+    "location": "base/math.html#Base.:!",
     "page": "Mathematics",
     "title": "Base.:!",
     "category": "Function",
@@ -8217,7 +8257,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/math.html#&&",
+    "location": "base/math.html#&&",
     "page": "Mathematics",
     "title": "&&",
     "category": "Keyword",
@@ -8225,7 +8265,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/math.html#||",
+    "location": "base/math.html#||",
     "page": "Mathematics",
     "title": "||",
     "category": "Keyword",
@@ -8233,7 +8273,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/math.html#math-ops-1",
+    "location": "base/math.html#math-ops-1",
     "page": "Mathematics",
     "title": "Mathematical Operators",
     "category": "section",
@@ -8241,7 +8281,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/math.html#Base.isapprox",
+    "location": "base/math.html#Base.isapprox",
     "page": "Mathematics",
     "title": "Base.isapprox",
     "category": "Function",
@@ -8249,7 +8289,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/math.html#Base.sin-Tuple{Number}",
+    "location": "base/math.html#Base.sin-Tuple{Number}",
     "page": "Mathematics",
     "title": "Base.sin",
     "category": "Method",
@@ -8257,7 +8297,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/math.html#Base.cos-Tuple{Number}",
+    "location": "base/math.html#Base.cos-Tuple{Number}",
     "page": "Mathematics",
     "title": "Base.cos",
     "category": "Method",
@@ -8265,7 +8305,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/math.html#Base.Math.sincos-Tuple{Float64}",
+    "location": "base/math.html#Base.Math.sincos-Tuple{Float64}",
     "page": "Mathematics",
     "title": "Base.Math.sincos",
     "category": "Method",
@@ -8273,7 +8313,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/math.html#Base.tan-Tuple{Number}",
+    "location": "base/math.html#Base.tan-Tuple{Number}",
     "page": "Mathematics",
     "title": "Base.tan",
     "category": "Method",
@@ -8281,7 +8321,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/math.html#Base.Math.sind",
+    "location": "base/math.html#Base.Math.sind",
     "page": "Mathematics",
     "title": "Base.Math.sind",
     "category": "Function",
@@ -8289,7 +8329,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/math.html#Base.Math.cosd",
+    "location": "base/math.html#Base.Math.cosd",
     "page": "Mathematics",
     "title": "Base.Math.cosd",
     "category": "Function",
@@ -8297,7 +8337,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/math.html#Base.Math.tand",
+    "location": "base/math.html#Base.Math.tand",
     "page": "Mathematics",
     "title": "Base.Math.tand",
     "category": "Function",
@@ -8305,7 +8345,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/math.html#Base.Math.sinpi",
+    "location": "base/math.html#Base.Math.sinpi",
     "page": "Mathematics",
     "title": "Base.Math.sinpi",
     "category": "Function",
@@ -8313,7 +8353,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/math.html#Base.Math.cospi",
+    "location": "base/math.html#Base.Math.cospi",
     "page": "Mathematics",
     "title": "Base.Math.cospi",
     "category": "Function",
@@ -8321,7 +8361,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/math.html#Base.sinh-Tuple{Number}",
+    "location": "base/math.html#Base.sinh-Tuple{Number}",
     "page": "Mathematics",
     "title": "Base.sinh",
     "category": "Method",
@@ -8329,7 +8369,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/math.html#Base.cosh-Tuple{Number}",
+    "location": "base/math.html#Base.cosh-Tuple{Number}",
     "page": "Mathematics",
     "title": "Base.cosh",
     "category": "Method",
@@ -8337,7 +8377,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/math.html#Base.tanh-Tuple{Number}",
+    "location": "base/math.html#Base.tanh-Tuple{Number}",
     "page": "Mathematics",
     "title": "Base.tanh",
     "category": "Method",
@@ -8345,7 +8385,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/math.html#Base.asin-Tuple{Number}",
+    "location": "base/math.html#Base.asin-Tuple{Number}",
     "page": "Mathematics",
     "title": "Base.asin",
     "category": "Method",
@@ -8353,7 +8393,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/math.html#Base.acos-Tuple{Number}",
+    "location": "base/math.html#Base.acos-Tuple{Number}",
     "page": "Mathematics",
     "title": "Base.acos",
     "category": "Method",
@@ -8361,7 +8401,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/math.html#Base.atan-Tuple{Number}",
+    "location": "base/math.html#Base.atan-Tuple{Number}",
     "page": "Mathematics",
     "title": "Base.atan",
     "category": "Method",
@@ -8369,7 +8409,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/math.html#Base.Math.atan2",
+    "location": "base/math.html#Base.Math.atan2",
     "page": "Mathematics",
     "title": "Base.Math.atan2",
     "category": "Function",
@@ -8377,7 +8417,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/math.html#Base.Math.asind",
+    "location": "base/math.html#Base.Math.asind",
     "page": "Mathematics",
     "title": "Base.Math.asind",
     "category": "Function",
@@ -8385,7 +8425,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/math.html#Base.Math.acosd",
+    "location": "base/math.html#Base.Math.acosd",
     "page": "Mathematics",
     "title": "Base.Math.acosd",
     "category": "Function",
@@ -8393,7 +8433,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/math.html#Base.Math.atand",
+    "location": "base/math.html#Base.Math.atand",
     "page": "Mathematics",
     "title": "Base.Math.atand",
     "category": "Function",
@@ -8401,7 +8441,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/math.html#Base.Math.sec-Tuple{Number}",
+    "location": "base/math.html#Base.Math.sec-Tuple{Number}",
     "page": "Mathematics",
     "title": "Base.Math.sec",
     "category": "Method",
@@ -8409,7 +8449,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/math.html#Base.Math.csc-Tuple{Number}",
+    "location": "base/math.html#Base.Math.csc-Tuple{Number}",
     "page": "Mathematics",
     "title": "Base.Math.csc",
     "category": "Method",
@@ -8417,7 +8457,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/math.html#Base.Math.cot-Tuple{Number}",
+    "location": "base/math.html#Base.Math.cot-Tuple{Number}",
     "page": "Mathematics",
     "title": "Base.Math.cot",
     "category": "Method",
@@ -8425,7 +8465,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/math.html#Base.Math.secd",
+    "location": "base/math.html#Base.Math.secd",
     "page": "Mathematics",
     "title": "Base.Math.secd",
     "category": "Function",
@@ -8433,7 +8473,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/math.html#Base.Math.cscd",
+    "location": "base/math.html#Base.Math.cscd",
     "page": "Mathematics",
     "title": "Base.Math.cscd",
     "category": "Function",
@@ -8441,7 +8481,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/math.html#Base.Math.cotd",
+    "location": "base/math.html#Base.Math.cotd",
     "page": "Mathematics",
     "title": "Base.Math.cotd",
     "category": "Function",
@@ -8449,7 +8489,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/math.html#Base.Math.asec-Tuple{Number}",
+    "location": "base/math.html#Base.Math.asec-Tuple{Number}",
     "page": "Mathematics",
     "title": "Base.Math.asec",
     "category": "Method",
@@ -8457,7 +8497,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/math.html#Base.Math.acsc-Tuple{Number}",
+    "location": "base/math.html#Base.Math.acsc-Tuple{Number}",
     "page": "Mathematics",
     "title": "Base.Math.acsc",
     "category": "Method",
@@ -8465,7 +8505,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/math.html#Base.Math.acot-Tuple{Number}",
+    "location": "base/math.html#Base.Math.acot-Tuple{Number}",
     "page": "Mathematics",
     "title": "Base.Math.acot",
     "category": "Method",
@@ -8473,7 +8513,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/math.html#Base.Math.asecd",
+    "location": "base/math.html#Base.Math.asecd",
     "page": "Mathematics",
     "title": "Base.Math.asecd",
     "category": "Function",
@@ -8481,7 +8521,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/math.html#Base.Math.acscd",
+    "location": "base/math.html#Base.Math.acscd",
     "page": "Mathematics",
     "title": "Base.Math.acscd",
     "category": "Function",
@@ -8489,7 +8529,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/math.html#Base.Math.acotd",
+    "location": "base/math.html#Base.Math.acotd",
     "page": "Mathematics",
     "title": "Base.Math.acotd",
     "category": "Function",
@@ -8497,7 +8537,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/math.html#Base.Math.sech-Tuple{Number}",
+    "location": "base/math.html#Base.Math.sech-Tuple{Number}",
     "page": "Mathematics",
     "title": "Base.Math.sech",
     "category": "Method",
@@ -8505,7 +8545,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/math.html#Base.Math.csch-Tuple{Number}",
+    "location": "base/math.html#Base.Math.csch-Tuple{Number}",
     "page": "Mathematics",
     "title": "Base.Math.csch",
     "category": "Method",
@@ -8513,7 +8553,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/math.html#Base.Math.coth-Tuple{Number}",
+    "location": "base/math.html#Base.Math.coth-Tuple{Number}",
     "page": "Mathematics",
     "title": "Base.Math.coth",
     "category": "Method",
@@ -8521,7 +8561,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/math.html#Base.asinh-Tuple{Number}",
+    "location": "base/math.html#Base.asinh-Tuple{Number}",
     "page": "Mathematics",
     "title": "Base.asinh",
     "category": "Method",
@@ -8529,7 +8569,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/math.html#Base.acosh-Tuple{Number}",
+    "location": "base/math.html#Base.acosh-Tuple{Number}",
     "page": "Mathematics",
     "title": "Base.acosh",
     "category": "Method",
@@ -8537,7 +8577,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/math.html#Base.atanh-Tuple{Number}",
+    "location": "base/math.html#Base.atanh-Tuple{Number}",
     "page": "Mathematics",
     "title": "Base.atanh",
     "category": "Method",
@@ -8545,7 +8585,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/math.html#Base.Math.asech-Tuple{Number}",
+    "location": "base/math.html#Base.Math.asech-Tuple{Number}",
     "page": "Mathematics",
     "title": "Base.Math.asech",
     "category": "Method",
@@ -8553,7 +8593,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/math.html#Base.Math.acsch-Tuple{Number}",
+    "location": "base/math.html#Base.Math.acsch-Tuple{Number}",
     "page": "Mathematics",
     "title": "Base.Math.acsch",
     "category": "Method",
@@ -8561,7 +8601,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/math.html#Base.Math.acoth-Tuple{Number}",
+    "location": "base/math.html#Base.Math.acoth-Tuple{Number}",
     "page": "Mathematics",
     "title": "Base.Math.acoth",
     "category": "Method",
@@ -8569,7 +8609,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/math.html#Base.Math.sinc",
+    "location": "base/math.html#Base.Math.sinc",
     "page": "Mathematics",
     "title": "Base.Math.sinc",
     "category": "Function",
@@ -8577,7 +8617,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/math.html#Base.Math.cosc",
+    "location": "base/math.html#Base.Math.cosc",
     "page": "Mathematics",
     "title": "Base.Math.cosc",
     "category": "Function",
@@ -8585,7 +8625,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/math.html#Base.Math.deg2rad",
+    "location": "base/math.html#Base.Math.deg2rad",
     "page": "Mathematics",
     "title": "Base.Math.deg2rad",
     "category": "Function",
@@ -8593,7 +8633,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/math.html#Base.Math.rad2deg",
+    "location": "base/math.html#Base.Math.rad2deg",
     "page": "Mathematics",
     "title": "Base.Math.rad2deg",
     "category": "Function",
@@ -8601,7 +8641,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/math.html#Base.Math.hypot",
+    "location": "base/math.html#Base.Math.hypot",
     "page": "Mathematics",
     "title": "Base.Math.hypot",
     "category": "Function",
@@ -8609,7 +8649,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/math.html#Base.log-Tuple{Number}",
+    "location": "base/math.html#Base.log-Tuple{Number}",
     "page": "Mathematics",
     "title": "Base.log",
     "category": "Method",
@@ -8617,7 +8657,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/math.html#Base.log-Tuple{Number,Number}",
+    "location": "base/math.html#Base.log-Tuple{Number,Number}",
     "page": "Mathematics",
     "title": "Base.log",
     "category": "Method",
@@ -8625,7 +8665,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/math.html#Base.log2",
+    "location": "base/math.html#Base.log2",
     "page": "Mathematics",
     "title": "Base.log2",
     "category": "Function",
@@ -8633,7 +8673,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/math.html#Base.log10",
+    "location": "base/math.html#Base.log10",
     "page": "Mathematics",
     "title": "Base.log10",
     "category": "Function",
@@ -8641,7 +8681,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/math.html#Base.log1p",
+    "location": "base/math.html#Base.log1p",
     "page": "Mathematics",
     "title": "Base.log1p",
     "category": "Function",
@@ -8649,7 +8689,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/math.html#Base.Math.frexp",
+    "location": "base/math.html#Base.Math.frexp",
     "page": "Mathematics",
     "title": "Base.Math.frexp",
     "category": "Function",
@@ -8657,7 +8697,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/math.html#Base.exp-Tuple{Float64}",
+    "location": "base/math.html#Base.exp-Tuple{Float64}",
     "page": "Mathematics",
     "title": "Base.exp",
     "category": "Method",
@@ -8665,7 +8705,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/math.html#Base.exp2",
+    "location": "base/math.html#Base.exp2",
     "page": "Mathematics",
     "title": "Base.exp2",
     "category": "Function",
@@ -8673,7 +8713,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/math.html#Base.exp10",
+    "location": "base/math.html#Base.exp10",
     "page": "Mathematics",
     "title": "Base.exp10",
     "category": "Function",
@@ -8681,7 +8721,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/math.html#Base.Math.ldexp",
+    "location": "base/math.html#Base.Math.ldexp",
     "page": "Mathematics",
     "title": "Base.Math.ldexp",
     "category": "Function",
@@ -8689,7 +8729,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/math.html#Base.Math.modf",
+    "location": "base/math.html#Base.Math.modf",
     "page": "Mathematics",
     "title": "Base.Math.modf",
     "category": "Function",
@@ -8697,7 +8737,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/math.html#Base.expm1",
+    "location": "base/math.html#Base.expm1",
     "page": "Mathematics",
     "title": "Base.expm1",
     "category": "Function",
@@ -8705,7 +8745,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/math.html#Base.round-Tuple{Type,Any}",
+    "location": "base/math.html#Base.round-Tuple{Type,Any}",
     "page": "Mathematics",
     "title": "Base.round",
     "category": "Method",
@@ -8713,7 +8753,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/math.html#Base.Rounding.RoundingMode",
+    "location": "base/math.html#Base.Rounding.RoundingMode",
     "page": "Mathematics",
     "title": "Base.Rounding.RoundingMode",
     "category": "Type",
@@ -8721,7 +8761,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/math.html#Base.Rounding.RoundNearest",
+    "location": "base/math.html#Base.Rounding.RoundNearest",
     "page": "Mathematics",
     "title": "Base.Rounding.RoundNearest",
     "category": "Constant",
@@ -8729,7 +8769,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/math.html#Base.Rounding.RoundNearestTiesAway",
+    "location": "base/math.html#Base.Rounding.RoundNearestTiesAway",
     "page": "Mathematics",
     "title": "Base.Rounding.RoundNearestTiesAway",
     "category": "Constant",
@@ -8737,7 +8777,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/math.html#Base.Rounding.RoundNearestTiesUp",
+    "location": "base/math.html#Base.Rounding.RoundNearestTiesUp",
     "page": "Mathematics",
     "title": "Base.Rounding.RoundNearestTiesUp",
     "category": "Constant",
@@ -8745,7 +8785,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/math.html#Base.Rounding.RoundToZero",
+    "location": "base/math.html#Base.Rounding.RoundToZero",
     "page": "Mathematics",
     "title": "Base.Rounding.RoundToZero",
     "category": "Constant",
@@ -8753,7 +8793,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/math.html#Base.Rounding.RoundUp",
+    "location": "base/math.html#Base.Rounding.RoundUp",
     "page": "Mathematics",
     "title": "Base.Rounding.RoundUp",
     "category": "Constant",
@@ -8761,7 +8801,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/math.html#Base.Rounding.RoundDown",
+    "location": "base/math.html#Base.Rounding.RoundDown",
     "page": "Mathematics",
     "title": "Base.Rounding.RoundDown",
     "category": "Constant",
@@ -8769,7 +8809,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/math.html#Base.round-Union{Tuple{MI}, Tuple{MR}, Tuple{T}, Tuple{Complex{T},RoundingMode{MR},RoundingMode{MI}}} where MI where MR where T<:AbstractFloat",
+    "location": "base/math.html#Base.round-Union{Tuple{MI}, Tuple{MR}, Tuple{T}, Tuple{Complex{T},RoundingMode{MR},RoundingMode{MI}}} where MI where MR where T<:AbstractFloat",
     "page": "Mathematics",
     "title": "Base.round",
     "category": "Method",
@@ -8777,7 +8817,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/math.html#Base.ceil",
+    "location": "base/math.html#Base.ceil",
     "page": "Mathematics",
     "title": "Base.ceil",
     "category": "Function",
@@ -8785,7 +8825,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/math.html#Base.floor",
+    "location": "base/math.html#Base.floor",
     "page": "Mathematics",
     "title": "Base.floor",
     "category": "Function",
@@ -8793,7 +8833,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/math.html#Base.trunc",
+    "location": "base/math.html#Base.trunc",
     "page": "Mathematics",
     "title": "Base.trunc",
     "category": "Function",
@@ -8801,7 +8841,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/math.html#Base.unsafe_trunc",
+    "location": "base/math.html#Base.unsafe_trunc",
     "page": "Mathematics",
     "title": "Base.unsafe_trunc",
     "category": "Function",
@@ -8809,7 +8849,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/math.html#Base.signif",
+    "location": "base/math.html#Base.signif",
     "page": "Mathematics",
     "title": "Base.signif",
     "category": "Function",
@@ -8817,7 +8857,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/math.html#Base.min",
+    "location": "base/math.html#Base.min",
     "page": "Mathematics",
     "title": "Base.min",
     "category": "Function",
@@ -8825,7 +8865,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/math.html#Base.max",
+    "location": "base/math.html#Base.max",
     "page": "Mathematics",
     "title": "Base.max",
     "category": "Function",
@@ -8833,7 +8873,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/math.html#Base.minmax",
+    "location": "base/math.html#Base.minmax",
     "page": "Mathematics",
     "title": "Base.minmax",
     "category": "Function",
@@ -8841,7 +8881,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/math.html#Base.Math.clamp",
+    "location": "base/math.html#Base.Math.clamp",
     "page": "Mathematics",
     "title": "Base.Math.clamp",
     "category": "Function",
@@ -8849,7 +8889,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/math.html#Base.Math.clamp!",
+    "location": "base/math.html#Base.Math.clamp!",
     "page": "Mathematics",
     "title": "Base.Math.clamp!",
     "category": "Function",
@@ -8857,7 +8897,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/math.html#Base.abs",
+    "location": "base/math.html#Base.abs",
     "page": "Mathematics",
     "title": "Base.abs",
     "category": "Function",
@@ -8865,7 +8905,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/math.html#Base.Checked.checked_abs",
+    "location": "base/math.html#Base.Checked.checked_abs",
     "page": "Mathematics",
     "title": "Base.Checked.checked_abs",
     "category": "Function",
@@ -8873,7 +8913,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/math.html#Base.Checked.checked_neg",
+    "location": "base/math.html#Base.Checked.checked_neg",
     "page": "Mathematics",
     "title": "Base.Checked.checked_neg",
     "category": "Function",
@@ -8881,7 +8921,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/math.html#Base.Checked.checked_add",
+    "location": "base/math.html#Base.Checked.checked_add",
     "page": "Mathematics",
     "title": "Base.Checked.checked_add",
     "category": "Function",
@@ -8889,7 +8929,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/math.html#Base.Checked.checked_sub",
+    "location": "base/math.html#Base.Checked.checked_sub",
     "page": "Mathematics",
     "title": "Base.Checked.checked_sub",
     "category": "Function",
@@ -8897,7 +8937,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/math.html#Base.Checked.checked_mul",
+    "location": "base/math.html#Base.Checked.checked_mul",
     "page": "Mathematics",
     "title": "Base.Checked.checked_mul",
     "category": "Function",
@@ -8905,7 +8945,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/math.html#Base.Checked.checked_div",
+    "location": "base/math.html#Base.Checked.checked_div",
     "page": "Mathematics",
     "title": "Base.Checked.checked_div",
     "category": "Function",
@@ -8913,7 +8953,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/math.html#Base.Checked.checked_rem",
+    "location": "base/math.html#Base.Checked.checked_rem",
     "page": "Mathematics",
     "title": "Base.Checked.checked_rem",
     "category": "Function",
@@ -8921,7 +8961,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/math.html#Base.Checked.checked_fld",
+    "location": "base/math.html#Base.Checked.checked_fld",
     "page": "Mathematics",
     "title": "Base.Checked.checked_fld",
     "category": "Function",
@@ -8929,7 +8969,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/math.html#Base.Checked.checked_mod",
+    "location": "base/math.html#Base.Checked.checked_mod",
     "page": "Mathematics",
     "title": "Base.Checked.checked_mod",
     "category": "Function",
@@ -8937,7 +8977,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/math.html#Base.Checked.checked_cld",
+    "location": "base/math.html#Base.Checked.checked_cld",
     "page": "Mathematics",
     "title": "Base.Checked.checked_cld",
     "category": "Function",
@@ -8945,7 +8985,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/math.html#Base.Checked.add_with_overflow",
+    "location": "base/math.html#Base.Checked.add_with_overflow",
     "page": "Mathematics",
     "title": "Base.Checked.add_with_overflow",
     "category": "Function",
@@ -8953,7 +8993,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/math.html#Base.Checked.sub_with_overflow",
+    "location": "base/math.html#Base.Checked.sub_with_overflow",
     "page": "Mathematics",
     "title": "Base.Checked.sub_with_overflow",
     "category": "Function",
@@ -8961,7 +9001,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/math.html#Base.Checked.mul_with_overflow",
+    "location": "base/math.html#Base.Checked.mul_with_overflow",
     "page": "Mathematics",
     "title": "Base.Checked.mul_with_overflow",
     "category": "Function",
@@ -8969,7 +9009,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/math.html#Base.abs2",
+    "location": "base/math.html#Base.abs2",
     "page": "Mathematics",
     "title": "Base.abs2",
     "category": "Function",
@@ -8977,7 +9017,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/math.html#Base.copysign",
+    "location": "base/math.html#Base.copysign",
     "page": "Mathematics",
     "title": "Base.copysign",
     "category": "Function",
@@ -8985,7 +9025,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/math.html#Base.sign",
+    "location": "base/math.html#Base.sign",
     "page": "Mathematics",
     "title": "Base.sign",
     "category": "Function",
@@ -8993,7 +9033,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/math.html#Base.signbit",
+    "location": "base/math.html#Base.signbit",
     "page": "Mathematics",
     "title": "Base.signbit",
     "category": "Function",
@@ -9001,7 +9041,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/math.html#Base.flipsign",
+    "location": "base/math.html#Base.flipsign",
     "page": "Mathematics",
     "title": "Base.flipsign",
     "category": "Function",
@@ -9009,7 +9049,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/math.html#Base.sqrt-Tuple{Real}",
+    "location": "base/math.html#Base.sqrt-Tuple{Real}",
     "page": "Mathematics",
     "title": "Base.sqrt",
     "category": "Method",
@@ -9017,7 +9057,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/math.html#Base.isqrt",
+    "location": "base/math.html#Base.isqrt",
     "page": "Mathematics",
     "title": "Base.isqrt",
     "category": "Function",
@@ -9025,7 +9065,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/math.html#Base.Math.cbrt",
+    "location": "base/math.html#Base.Math.cbrt",
     "page": "Mathematics",
     "title": "Base.Math.cbrt",
     "category": "Function",
@@ -9033,7 +9073,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/math.html#Base.real-Tuple{Complex}",
+    "location": "base/math.html#Base.real-Tuple{Complex}",
     "page": "Mathematics",
     "title": "Base.real",
     "category": "Method",
@@ -9041,7 +9081,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/math.html#Base.imag",
+    "location": "base/math.html#Base.imag",
     "page": "Mathematics",
     "title": "Base.imag",
     "category": "Function",
@@ -9049,7 +9089,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/math.html#Base.reim",
+    "location": "base/math.html#Base.reim",
     "page": "Mathematics",
     "title": "Base.reim",
     "category": "Function",
@@ -9057,15 +9097,15 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/math.html#Base.conj",
+    "location": "base/math.html#Base.conj",
     "page": "Mathematics",
     "title": "Base.conj",
     "category": "Function",
-    "text": "conj(z)\n\nCompute the complex conjugate of a complex number z.\n\nExamples\n\njulia> conj(1 + 3im)\n1 - 3im\n\n\n\nconj(v::RowVector)\n\nReturn a ConjArray lazy view of the input, where each element is conjugated.\n\nExamples\n\njulia> v = RowVector([1+im, 1-im])\n1×2 RowVector{Complex{Int64},Array{Complex{Int64},1}}:\n 1+1im  1-1im\n\njulia> conj(v)\n1×2 RowVector{Complex{Int64},ConjArray{Complex{Int64},1,Array{Complex{Int64},1}}}:\n 1-1im  1+1im\n\n\n\n"
+    "text": "conj(v::RowVector)\n\nReturn a ConjArray lazy view of the input, where each element is conjugated.\n\nExamples\n\njulia> v = RowVector([1+im, 1-im])\n1×2 RowVector{Complex{Int64},Array{Complex{Int64},1}}:\n 1+1im  1-1im\n\njulia> conj(v)\n1×2 RowVector{Complex{Int64},ConjArray{Complex{Int64},1,Array{Complex{Int64},1}}}:\n 1-1im  1+1im\n\n\n\nconj(z)\n\nCompute the complex conjugate of a complex number z.\n\nExamples\n\njulia> conj(1 + 3im)\n1 - 3im\n\n\n\n"
 },
 
 {
-    "location": "stdlib/math.html#Base.angle",
+    "location": "base/math.html#Base.angle",
     "page": "Mathematics",
     "title": "Base.angle",
     "category": "Function",
@@ -9073,7 +9113,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/math.html#Base.cis",
+    "location": "base/math.html#Base.cis",
     "page": "Mathematics",
     "title": "Base.cis",
     "category": "Function",
@@ -9081,7 +9121,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/math.html#Base.binomial",
+    "location": "base/math.html#Base.binomial",
     "page": "Mathematics",
     "title": "Base.binomial",
     "category": "Function",
@@ -9089,7 +9129,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/math.html#Base.factorial",
+    "location": "base/math.html#Base.factorial",
     "page": "Mathematics",
     "title": "Base.factorial",
     "category": "Function",
@@ -9097,7 +9137,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/math.html#Base.gcd",
+    "location": "base/math.html#Base.gcd",
     "page": "Mathematics",
     "title": "Base.gcd",
     "category": "Function",
@@ -9105,7 +9145,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/math.html#Base.lcm",
+    "location": "base/math.html#Base.lcm",
     "page": "Mathematics",
     "title": "Base.lcm",
     "category": "Function",
@@ -9113,7 +9153,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/math.html#Base.gcdx",
+    "location": "base/math.html#Base.gcdx",
     "page": "Mathematics",
     "title": "Base.gcdx",
     "category": "Function",
@@ -9121,7 +9161,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/math.html#Base.ispow2",
+    "location": "base/math.html#Base.ispow2",
     "page": "Mathematics",
     "title": "Base.ispow2",
     "category": "Function",
@@ -9129,7 +9169,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/math.html#Base.nextpow2",
+    "location": "base/math.html#Base.nextpow2",
     "page": "Mathematics",
     "title": "Base.nextpow2",
     "category": "Function",
@@ -9137,7 +9177,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/math.html#Base.prevpow2",
+    "location": "base/math.html#Base.prevpow2",
     "page": "Mathematics",
     "title": "Base.prevpow2",
     "category": "Function",
@@ -9145,7 +9185,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/math.html#Base.nextpow",
+    "location": "base/math.html#Base.nextpow",
     "page": "Mathematics",
     "title": "Base.nextpow",
     "category": "Function",
@@ -9153,7 +9193,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/math.html#Base.prevpow",
+    "location": "base/math.html#Base.prevpow",
     "page": "Mathematics",
     "title": "Base.prevpow",
     "category": "Function",
@@ -9161,7 +9201,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/math.html#Base.nextprod",
+    "location": "base/math.html#Base.nextprod",
     "page": "Mathematics",
     "title": "Base.nextprod",
     "category": "Function",
@@ -9169,7 +9209,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/math.html#Base.invmod",
+    "location": "base/math.html#Base.invmod",
     "page": "Mathematics",
     "title": "Base.invmod",
     "category": "Function",
@@ -9177,7 +9217,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/math.html#Base.powermod",
+    "location": "base/math.html#Base.powermod",
     "page": "Mathematics",
     "title": "Base.powermod",
     "category": "Function",
@@ -9185,7 +9225,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/math.html#Base.Math.gamma",
+    "location": "base/math.html#Base.Math.gamma",
     "page": "Mathematics",
     "title": "Base.Math.gamma",
     "category": "Function",
@@ -9193,7 +9233,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/math.html#Base.Math.lgamma",
+    "location": "base/math.html#Base.Math.lgamma",
     "page": "Mathematics",
     "title": "Base.Math.lgamma",
     "category": "Function",
@@ -9201,7 +9241,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/math.html#Base.Math.lfact",
+    "location": "base/math.html#Base.Math.lfact",
     "page": "Mathematics",
     "title": "Base.Math.lfact",
     "category": "Function",
@@ -9209,7 +9249,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/math.html#Base.Math.beta",
+    "location": "base/math.html#Base.Math.beta",
     "page": "Mathematics",
     "title": "Base.Math.beta",
     "category": "Function",
@@ -9217,7 +9257,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/math.html#Base.Math.lbeta",
+    "location": "base/math.html#Base.Math.lbeta",
     "page": "Mathematics",
     "title": "Base.Math.lbeta",
     "category": "Function",
@@ -9225,7 +9265,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/math.html#Base.ndigits",
+    "location": "base/math.html#Base.ndigits",
     "page": "Mathematics",
     "title": "Base.ndigits",
     "category": "Function",
@@ -9233,7 +9273,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/math.html#Base.widemul",
+    "location": "base/math.html#Base.widemul",
     "page": "Mathematics",
     "title": "Base.widemul",
     "category": "Function",
@@ -9241,7 +9281,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/math.html#Base.Math.@evalpoly",
+    "location": "base/math.html#Base.Math.@evalpoly",
     "page": "Mathematics",
     "title": "Base.Math.@evalpoly",
     "category": "Macro",
@@ -9249,7 +9289,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/math.html#Base.FastMath.@fastmath",
+    "location": "base/math.html#Base.FastMath.@fastmath",
     "page": "Mathematics",
     "title": "Base.FastMath.@fastmath",
     "category": "Macro",
@@ -9257,7 +9297,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/math.html#Mathematical-Functions-1",
+    "location": "base/math.html#Mathematical-Functions-1",
     "page": "Mathematics",
     "title": "Mathematical Functions",
     "category": "section",
@@ -9265,7 +9305,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/math.html#Base.mean",
+    "location": "base/math.html#Base.mean",
     "page": "Mathematics",
     "title": "Base.mean",
     "category": "Function",
@@ -9273,7 +9313,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/math.html#Base.mean!",
+    "location": "base/math.html#Base.mean!",
     "page": "Mathematics",
     "title": "Base.mean!",
     "category": "Function",
@@ -9281,7 +9321,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/math.html#Base.std",
+    "location": "base/math.html#Base.std",
     "page": "Mathematics",
     "title": "Base.std",
     "category": "Function",
@@ -9289,7 +9329,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/math.html#Base.stdm",
+    "location": "base/math.html#Base.stdm",
     "page": "Mathematics",
     "title": "Base.stdm",
     "category": "Function",
@@ -9297,7 +9337,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/math.html#Base.var",
+    "location": "base/math.html#Base.var",
     "page": "Mathematics",
     "title": "Base.var",
     "category": "Function",
@@ -9305,7 +9345,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/math.html#Base.varm",
+    "location": "base/math.html#Base.varm",
     "page": "Mathematics",
     "title": "Base.varm",
     "category": "Function",
@@ -9313,7 +9353,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/math.html#Base.middle",
+    "location": "base/math.html#Base.middle",
     "page": "Mathematics",
     "title": "Base.middle",
     "category": "Function",
@@ -9321,7 +9361,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/math.html#Base.median",
+    "location": "base/math.html#Base.median",
     "page": "Mathematics",
     "title": "Base.median",
     "category": "Function",
@@ -9329,7 +9369,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/math.html#Base.median!",
+    "location": "base/math.html#Base.median!",
     "page": "Mathematics",
     "title": "Base.median!",
     "category": "Function",
@@ -9337,7 +9377,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/math.html#Base.quantile",
+    "location": "base/math.html#Base.quantile",
     "page": "Mathematics",
     "title": "Base.quantile",
     "category": "Function",
@@ -9345,7 +9385,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/math.html#Base.quantile!",
+    "location": "base/math.html#Base.quantile!",
     "page": "Mathematics",
     "title": "Base.quantile!",
     "category": "Function",
@@ -9353,7 +9393,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/math.html#Base.cov",
+    "location": "base/math.html#Base.cov",
     "page": "Mathematics",
     "title": "Base.cov",
     "category": "Function",
@@ -9361,7 +9401,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/math.html#Base.cor",
+    "location": "base/math.html#Base.cor",
     "page": "Mathematics",
     "title": "Base.cor",
     "category": "Function",
@@ -9369,7 +9409,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/math.html#Statistics-1",
+    "location": "base/math.html#Statistics-1",
     "page": "Mathematics",
     "title": "Statistics",
     "category": "section",
@@ -9377,7 +9417,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/numbers.html#",
+    "location": "base/numbers.html#",
     "page": "Numbers",
     "title": "Numbers",
     "category": "page",
@@ -9385,7 +9425,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/numbers.html#lib-numbers-1",
+    "location": "base/numbers.html#lib-numbers-1",
     "page": "Numbers",
     "title": "Numbers",
     "category": "section",
@@ -9393,7 +9433,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/numbers.html#Standard-Numeric-Types-1",
+    "location": "base/numbers.html#Standard-Numeric-Types-1",
     "page": "Numbers",
     "title": "Standard Numeric Types",
     "category": "section",
@@ -9401,7 +9441,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/numbers.html#Core.Number",
+    "location": "base/numbers.html#Core.Number",
     "page": "Numbers",
     "title": "Core.Number",
     "category": "Type",
@@ -9409,7 +9449,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/numbers.html#Core.Real",
+    "location": "base/numbers.html#Core.Real",
     "page": "Numbers",
     "title": "Core.Real",
     "category": "Type",
@@ -9417,7 +9457,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/numbers.html#Core.AbstractFloat",
+    "location": "base/numbers.html#Core.AbstractFloat",
     "page": "Numbers",
     "title": "Core.AbstractFloat",
     "category": "Type",
@@ -9425,7 +9465,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/numbers.html#Core.Integer",
+    "location": "base/numbers.html#Core.Integer",
     "page": "Numbers",
     "title": "Core.Integer",
     "category": "Type",
@@ -9433,7 +9473,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/numbers.html#Core.Signed",
+    "location": "base/numbers.html#Core.Signed",
     "page": "Numbers",
     "title": "Core.Signed",
     "category": "Type",
@@ -9441,7 +9481,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/numbers.html#Core.Unsigned",
+    "location": "base/numbers.html#Core.Unsigned",
     "page": "Numbers",
     "title": "Core.Unsigned",
     "category": "Type",
@@ -9449,7 +9489,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/numbers.html#Base.AbstractIrrational",
+    "location": "base/numbers.html#Base.AbstractIrrational",
     "page": "Numbers",
     "title": "Base.AbstractIrrational",
     "category": "Type",
@@ -9457,7 +9497,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/numbers.html#Abstract-number-types-1",
+    "location": "base/numbers.html#Abstract-number-types-1",
     "page": "Numbers",
     "title": "Abstract number types",
     "category": "section",
@@ -9465,7 +9505,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/numbers.html#Core.Float16",
+    "location": "base/numbers.html#Core.Float16",
     "page": "Numbers",
     "title": "Core.Float16",
     "category": "Type",
@@ -9473,7 +9513,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/numbers.html#Core.Float32",
+    "location": "base/numbers.html#Core.Float32",
     "page": "Numbers",
     "title": "Core.Float32",
     "category": "Type",
@@ -9481,7 +9521,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/numbers.html#Core.Float64",
+    "location": "base/numbers.html#Core.Float64",
     "page": "Numbers",
     "title": "Core.Float64",
     "category": "Type",
@@ -9489,7 +9529,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/numbers.html#Base.MPFR.BigFloat",
+    "location": "base/numbers.html#Base.MPFR.BigFloat",
     "page": "Numbers",
     "title": "Base.MPFR.BigFloat",
     "category": "Type",
@@ -9497,7 +9537,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/numbers.html#Core.Bool",
+    "location": "base/numbers.html#Core.Bool",
     "page": "Numbers",
     "title": "Core.Bool",
     "category": "Type",
@@ -9505,7 +9545,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/numbers.html#Core.Int8",
+    "location": "base/numbers.html#Core.Int8",
     "page": "Numbers",
     "title": "Core.Int8",
     "category": "Type",
@@ -9513,7 +9553,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/numbers.html#Core.UInt8",
+    "location": "base/numbers.html#Core.UInt8",
     "page": "Numbers",
     "title": "Core.UInt8",
     "category": "Type",
@@ -9521,7 +9561,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/numbers.html#Core.Int16",
+    "location": "base/numbers.html#Core.Int16",
     "page": "Numbers",
     "title": "Core.Int16",
     "category": "Type",
@@ -9529,7 +9569,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/numbers.html#Core.UInt16",
+    "location": "base/numbers.html#Core.UInt16",
     "page": "Numbers",
     "title": "Core.UInt16",
     "category": "Type",
@@ -9537,7 +9577,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/numbers.html#Core.Int32",
+    "location": "base/numbers.html#Core.Int32",
     "page": "Numbers",
     "title": "Core.Int32",
     "category": "Type",
@@ -9545,7 +9585,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/numbers.html#Core.UInt32",
+    "location": "base/numbers.html#Core.UInt32",
     "page": "Numbers",
     "title": "Core.UInt32",
     "category": "Type",
@@ -9553,7 +9593,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/numbers.html#Core.Int64",
+    "location": "base/numbers.html#Core.Int64",
     "page": "Numbers",
     "title": "Core.Int64",
     "category": "Type",
@@ -9561,7 +9601,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/numbers.html#Core.UInt64",
+    "location": "base/numbers.html#Core.UInt64",
     "page": "Numbers",
     "title": "Core.UInt64",
     "category": "Type",
@@ -9569,7 +9609,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/numbers.html#Core.Int128",
+    "location": "base/numbers.html#Core.Int128",
     "page": "Numbers",
     "title": "Core.Int128",
     "category": "Type",
@@ -9577,7 +9617,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/numbers.html#Core.UInt128",
+    "location": "base/numbers.html#Core.UInt128",
     "page": "Numbers",
     "title": "Core.UInt128",
     "category": "Type",
@@ -9585,7 +9625,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/numbers.html#Base.GMP.BigInt",
+    "location": "base/numbers.html#Base.GMP.BigInt",
     "page": "Numbers",
     "title": "Base.GMP.BigInt",
     "category": "Type",
@@ -9593,7 +9633,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/numbers.html#Base.Complex",
+    "location": "base/numbers.html#Base.Complex",
     "page": "Numbers",
     "title": "Base.Complex",
     "category": "Type",
@@ -9601,7 +9641,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/numbers.html#Base.Rational",
+    "location": "base/numbers.html#Base.Rational",
     "page": "Numbers",
     "title": "Base.Rational",
     "category": "Type",
@@ -9609,7 +9649,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/numbers.html#Base.Irrational",
+    "location": "base/numbers.html#Base.Irrational",
     "page": "Numbers",
     "title": "Base.Irrational",
     "category": "Type",
@@ -9617,7 +9657,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/numbers.html#Concrete-number-types-1",
+    "location": "base/numbers.html#Concrete-number-types-1",
     "page": "Numbers",
     "title": "Concrete number types",
     "category": "section",
@@ -9625,7 +9665,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/numbers.html#Base.bin",
+    "location": "base/numbers.html#Base.bin",
     "page": "Numbers",
     "title": "Base.bin",
     "category": "Function",
@@ -9633,7 +9673,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/numbers.html#Base.hex",
+    "location": "base/numbers.html#Base.hex",
     "page": "Numbers",
     "title": "Base.hex",
     "category": "Function",
@@ -9641,7 +9681,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/numbers.html#Base.dec",
+    "location": "base/numbers.html#Base.dec",
     "page": "Numbers",
     "title": "Base.dec",
     "category": "Function",
@@ -9649,7 +9689,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/numbers.html#Base.oct",
+    "location": "base/numbers.html#Base.oct",
     "page": "Numbers",
     "title": "Base.oct",
     "category": "Function",
@@ -9657,7 +9697,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/numbers.html#Base.base",
+    "location": "base/numbers.html#Base.base",
     "page": "Numbers",
     "title": "Base.base",
     "category": "Function",
@@ -9665,7 +9705,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/numbers.html#Base.digits",
+    "location": "base/numbers.html#Base.digits",
     "page": "Numbers",
     "title": "Base.digits",
     "category": "Function",
@@ -9673,7 +9713,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/numbers.html#Base.digits!",
+    "location": "base/numbers.html#Base.digits!",
     "page": "Numbers",
     "title": "Base.digits!",
     "category": "Function",
@@ -9681,7 +9721,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/numbers.html#Base.bitstring",
+    "location": "base/numbers.html#Base.bitstring",
     "page": "Numbers",
     "title": "Base.bitstring",
     "category": "Function",
@@ -9689,7 +9729,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/numbers.html#Base.parse-Tuple{Type,Any,Any}",
+    "location": "base/numbers.html#Base.parse-Tuple{Type,Any,Any}",
     "page": "Numbers",
     "title": "Base.parse",
     "category": "Method",
@@ -9697,7 +9737,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/numbers.html#Base.tryparse",
+    "location": "base/numbers.html#Base.tryparse",
     "page": "Numbers",
     "title": "Base.tryparse",
     "category": "Function",
@@ -9705,7 +9745,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/numbers.html#Base.big",
+    "location": "base/numbers.html#Base.big",
     "page": "Numbers",
     "title": "Base.big",
     "category": "Function",
@@ -9713,7 +9753,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/numbers.html#Base.signed",
+    "location": "base/numbers.html#Base.signed",
     "page": "Numbers",
     "title": "Base.signed",
     "category": "Function",
@@ -9721,7 +9761,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/numbers.html#Base.unsigned",
+    "location": "base/numbers.html#Base.unsigned",
     "page": "Numbers",
     "title": "Base.unsigned",
     "category": "Function",
@@ -9729,7 +9769,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/numbers.html#Base.float-Tuple{Any}",
+    "location": "base/numbers.html#Base.float-Tuple{Any}",
     "page": "Numbers",
     "title": "Base.float",
     "category": "Method",
@@ -9737,7 +9777,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/numbers.html#Base.Math.significand",
+    "location": "base/numbers.html#Base.Math.significand",
     "page": "Numbers",
     "title": "Base.Math.significand",
     "category": "Function",
@@ -9745,7 +9785,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/numbers.html#Base.Math.exponent",
+    "location": "base/numbers.html#Base.Math.exponent",
     "page": "Numbers",
     "title": "Base.Math.exponent",
     "category": "Function",
@@ -9753,7 +9793,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/numbers.html#Base.complex-Tuple{Complex}",
+    "location": "base/numbers.html#Base.complex-Tuple{Complex}",
     "page": "Numbers",
     "title": "Base.complex",
     "category": "Method",
@@ -9761,7 +9801,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/numbers.html#Base.bswap",
+    "location": "base/numbers.html#Base.bswap",
     "page": "Numbers",
     "title": "Base.bswap",
     "category": "Function",
@@ -9769,7 +9809,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/numbers.html#Base.hex2bytes",
+    "location": "base/numbers.html#Base.hex2bytes",
     "page": "Numbers",
     "title": "Base.hex2bytes",
     "category": "Function",
@@ -9777,7 +9817,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/numbers.html#Base.hex2bytes!",
+    "location": "base/numbers.html#Base.hex2bytes!",
     "page": "Numbers",
     "title": "Base.hex2bytes!",
     "category": "Function",
@@ -9785,7 +9825,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/numbers.html#Base.bytes2hex",
+    "location": "base/numbers.html#Base.bytes2hex",
     "page": "Numbers",
     "title": "Base.bytes2hex",
     "category": "Function",
@@ -9793,7 +9833,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/numbers.html#Data-Formats-1",
+    "location": "base/numbers.html#Data-Formats-1",
     "page": "Numbers",
     "title": "Data Formats",
     "category": "section",
@@ -9801,7 +9841,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/numbers.html#Base.one",
+    "location": "base/numbers.html#Base.one",
     "page": "Numbers",
     "title": "Base.one",
     "category": "Function",
@@ -9809,7 +9849,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/numbers.html#Base.oneunit",
+    "location": "base/numbers.html#Base.oneunit",
     "page": "Numbers",
     "title": "Base.oneunit",
     "category": "Function",
@@ -9817,7 +9857,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/numbers.html#Base.zero",
+    "location": "base/numbers.html#Base.zero",
     "page": "Numbers",
     "title": "Base.zero",
     "category": "Function",
@@ -9825,7 +9865,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/numbers.html#Base.im",
+    "location": "base/numbers.html#Base.im",
     "page": "Numbers",
     "title": "Base.im",
     "category": "Constant",
@@ -9833,7 +9873,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/numbers.html#Base.MathConstants.pi",
+    "location": "base/numbers.html#Base.MathConstants.pi",
     "page": "Numbers",
     "title": "Base.MathConstants.pi",
     "category": "Constant",
@@ -9841,7 +9881,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/numbers.html#Base.MathConstants.ℯ",
+    "location": "base/numbers.html#Base.MathConstants.ℯ",
     "page": "Numbers",
     "title": "Base.MathConstants.ℯ",
     "category": "Constant",
@@ -9849,7 +9889,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/numbers.html#Base.MathConstants.catalan",
+    "location": "base/numbers.html#Base.MathConstants.catalan",
     "page": "Numbers",
     "title": "Base.MathConstants.catalan",
     "category": "Constant",
@@ -9857,7 +9897,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/numbers.html#Base.MathConstants.eulergamma",
+    "location": "base/numbers.html#Base.MathConstants.eulergamma",
     "page": "Numbers",
     "title": "Base.MathConstants.eulergamma",
     "category": "Constant",
@@ -9865,7 +9905,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/numbers.html#Base.MathConstants.golden",
+    "location": "base/numbers.html#Base.MathConstants.golden",
     "page": "Numbers",
     "title": "Base.MathConstants.golden",
     "category": "Constant",
@@ -9873,7 +9913,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/numbers.html#Base.Inf",
+    "location": "base/numbers.html#Base.Inf",
     "page": "Numbers",
     "title": "Base.Inf",
     "category": "Constant",
@@ -9881,7 +9921,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/numbers.html#Base.Inf32",
+    "location": "base/numbers.html#Base.Inf32",
     "page": "Numbers",
     "title": "Base.Inf32",
     "category": "Constant",
@@ -9889,7 +9929,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/numbers.html#Base.Inf16",
+    "location": "base/numbers.html#Base.Inf16",
     "page": "Numbers",
     "title": "Base.Inf16",
     "category": "Constant",
@@ -9897,7 +9937,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/numbers.html#Base.NaN",
+    "location": "base/numbers.html#Base.NaN",
     "page": "Numbers",
     "title": "Base.NaN",
     "category": "Constant",
@@ -9905,7 +9945,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/numbers.html#Base.NaN32",
+    "location": "base/numbers.html#Base.NaN32",
     "page": "Numbers",
     "title": "Base.NaN32",
     "category": "Constant",
@@ -9913,7 +9953,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/numbers.html#Base.NaN16",
+    "location": "base/numbers.html#Base.NaN16",
     "page": "Numbers",
     "title": "Base.NaN16",
     "category": "Constant",
@@ -9921,7 +9961,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/numbers.html#Base.issubnormal",
+    "location": "base/numbers.html#Base.issubnormal",
     "page": "Numbers",
     "title": "Base.issubnormal",
     "category": "Function",
@@ -9929,7 +9969,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/numbers.html#Base.isfinite",
+    "location": "base/numbers.html#Base.isfinite",
     "page": "Numbers",
     "title": "Base.isfinite",
     "category": "Function",
@@ -9937,7 +9977,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/numbers.html#Base.isinf",
+    "location": "base/numbers.html#Base.isinf",
     "page": "Numbers",
     "title": "Base.isinf",
     "category": "Function",
@@ -9945,7 +9985,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/numbers.html#Base.isnan",
+    "location": "base/numbers.html#Base.isnan",
     "page": "Numbers",
     "title": "Base.isnan",
     "category": "Function",
@@ -9953,7 +9993,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/numbers.html#Base.iszero",
+    "location": "base/numbers.html#Base.iszero",
     "page": "Numbers",
     "title": "Base.iszero",
     "category": "Function",
@@ -9961,7 +10001,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/numbers.html#Base.isone",
+    "location": "base/numbers.html#Base.isone",
     "page": "Numbers",
     "title": "Base.isone",
     "category": "Function",
@@ -9969,7 +10009,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/numbers.html#Base.nextfloat",
+    "location": "base/numbers.html#Base.nextfloat",
     "page": "Numbers",
     "title": "Base.nextfloat",
     "category": "Function",
@@ -9977,7 +10017,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/numbers.html#Base.prevfloat",
+    "location": "base/numbers.html#Base.prevfloat",
     "page": "Numbers",
     "title": "Base.prevfloat",
     "category": "Function",
@@ -9985,7 +10025,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/numbers.html#Base.isinteger",
+    "location": "base/numbers.html#Base.isinteger",
     "page": "Numbers",
     "title": "Base.isinteger",
     "category": "Function",
@@ -9993,7 +10033,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/numbers.html#Base.isreal",
+    "location": "base/numbers.html#Base.isreal",
     "page": "Numbers",
     "title": "Base.isreal",
     "category": "Function",
@@ -10001,7 +10041,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/numbers.html#Core.Float32-Tuple{Any}",
+    "location": "base/numbers.html#Core.Float32-Tuple{Any}",
     "page": "Numbers",
     "title": "Core.Float32",
     "category": "Method",
@@ -10009,7 +10049,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/numbers.html#Core.Float64-Tuple{Any}",
+    "location": "base/numbers.html#Core.Float64-Tuple{Any}",
     "page": "Numbers",
     "title": "Core.Float64",
     "category": "Method",
@@ -10017,7 +10057,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/numbers.html#Base.GMP.BigInt-Tuple{Any}",
+    "location": "base/numbers.html#Base.GMP.BigInt-Tuple{Any}",
     "page": "Numbers",
     "title": "Base.GMP.BigInt",
     "category": "Method",
@@ -10025,7 +10065,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/numbers.html#Base.MPFR.BigFloat-Tuple{Any}",
+    "location": "base/numbers.html#Base.MPFR.BigFloat-Tuple{Any}",
     "page": "Numbers",
     "title": "Base.MPFR.BigFloat",
     "category": "Method",
@@ -10033,7 +10073,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/numbers.html#Base.Rounding.rounding",
+    "location": "base/numbers.html#Base.Rounding.rounding",
     "page": "Numbers",
     "title": "Base.Rounding.rounding",
     "category": "Function",
@@ -10041,7 +10081,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/numbers.html#Base.Rounding.setrounding-Tuple{Type,Any}",
+    "location": "base/numbers.html#Base.Rounding.setrounding-Tuple{Type,Any}",
     "page": "Numbers",
     "title": "Base.Rounding.setrounding",
     "category": "Method",
@@ -10049,7 +10089,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/numbers.html#Base.Rounding.setrounding-Tuple{Function,Type,RoundingMode}",
+    "location": "base/numbers.html#Base.Rounding.setrounding-Tuple{Function,Type,RoundingMode}",
     "page": "Numbers",
     "title": "Base.Rounding.setrounding",
     "category": "Method",
@@ -10057,7 +10097,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/numbers.html#Base.Rounding.get_zero_subnormals",
+    "location": "base/numbers.html#Base.Rounding.get_zero_subnormals",
     "page": "Numbers",
     "title": "Base.Rounding.get_zero_subnormals",
     "category": "Function",
@@ -10065,7 +10105,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/numbers.html#Base.Rounding.set_zero_subnormals",
+    "location": "base/numbers.html#Base.Rounding.set_zero_subnormals",
     "page": "Numbers",
     "title": "Base.Rounding.set_zero_subnormals",
     "category": "Function",
@@ -10073,7 +10113,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/numbers.html#General-Number-Functions-and-Constants-1",
+    "location": "base/numbers.html#General-Number-Functions-and-Constants-1",
     "page": "Numbers",
     "title": "General Number Functions and Constants",
     "category": "section",
@@ -10081,7 +10121,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/numbers.html#Base.count_ones",
+    "location": "base/numbers.html#Base.count_ones",
     "page": "Numbers",
     "title": "Base.count_ones",
     "category": "Function",
@@ -10089,7 +10129,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/numbers.html#Base.count_zeros",
+    "location": "base/numbers.html#Base.count_zeros",
     "page": "Numbers",
     "title": "Base.count_zeros",
     "category": "Function",
@@ -10097,7 +10137,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/numbers.html#Base.leading_zeros",
+    "location": "base/numbers.html#Base.leading_zeros",
     "page": "Numbers",
     "title": "Base.leading_zeros",
     "category": "Function",
@@ -10105,7 +10145,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/numbers.html#Base.leading_ones",
+    "location": "base/numbers.html#Base.leading_ones",
     "page": "Numbers",
     "title": "Base.leading_ones",
     "category": "Function",
@@ -10113,7 +10153,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/numbers.html#Base.trailing_zeros",
+    "location": "base/numbers.html#Base.trailing_zeros",
     "page": "Numbers",
     "title": "Base.trailing_zeros",
     "category": "Function",
@@ -10121,7 +10161,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/numbers.html#Base.trailing_ones",
+    "location": "base/numbers.html#Base.trailing_ones",
     "page": "Numbers",
     "title": "Base.trailing_ones",
     "category": "Function",
@@ -10129,7 +10169,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/numbers.html#Base.isodd",
+    "location": "base/numbers.html#Base.isodd",
     "page": "Numbers",
     "title": "Base.isodd",
     "category": "Function",
@@ -10137,7 +10177,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/numbers.html#Base.iseven",
+    "location": "base/numbers.html#Base.iseven",
     "page": "Numbers",
     "title": "Base.iseven",
     "category": "Function",
@@ -10145,7 +10185,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/numbers.html#Integers-1",
+    "location": "base/numbers.html#Integers-1",
     "page": "Numbers",
     "title": "Integers",
     "category": "section",
@@ -10153,7 +10193,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/numbers.html#Base.precision",
+    "location": "base/numbers.html#Base.precision",
     "page": "Numbers",
     "title": "Base.precision",
     "category": "Function",
@@ -10161,7 +10201,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/numbers.html#Base.precision-Tuple{Type{BigFloat}}",
+    "location": "base/numbers.html#Base.precision-Tuple{Type{BigFloat}}",
     "page": "Numbers",
     "title": "Base.precision",
     "category": "Method",
@@ -10169,7 +10209,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/numbers.html#Base.MPFR.setprecision",
+    "location": "base/numbers.html#Base.MPFR.setprecision",
     "page": "Numbers",
     "title": "Base.MPFR.setprecision",
     "category": "Function",
@@ -10177,7 +10217,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/numbers.html#Base.MPFR.BigFloat-Tuple{Any,Int64}",
+    "location": "base/numbers.html#Base.MPFR.BigFloat-Tuple{Any,Int64}",
     "page": "Numbers",
     "title": "Base.MPFR.BigFloat",
     "category": "Method",
@@ -10185,7 +10225,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/numbers.html#Base.MPFR.BigFloat-Tuple{Union{AbstractFloat, Integer, String},RoundingMode}",
+    "location": "base/numbers.html#Base.MPFR.BigFloat-Tuple{Union{AbstractFloat, Integer, String},RoundingMode}",
     "page": "Numbers",
     "title": "Base.MPFR.BigFloat",
     "category": "Method",
@@ -10193,7 +10233,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/numbers.html#Base.MPFR.BigFloat-Tuple{Any,Int64,RoundingMode}",
+    "location": "base/numbers.html#Base.MPFR.BigFloat-Tuple{Any,Int64,RoundingMode}",
     "page": "Numbers",
     "title": "Base.MPFR.BigFloat",
     "category": "Method",
@@ -10201,7 +10241,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/numbers.html#Base.MPFR.BigFloat-Tuple{String}",
+    "location": "base/numbers.html#Base.MPFR.BigFloat-Tuple{String}",
     "page": "Numbers",
     "title": "Base.MPFR.BigFloat",
     "category": "Method",
@@ -10209,7 +10249,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/numbers.html#BigFloats-1",
+    "location": "base/numbers.html#BigFloats-1",
     "page": "Numbers",
     "title": "BigFloats",
     "category": "section",
@@ -10217,7 +10257,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/numbers.html#Base.Random.srand",
+    "location": "base/numbers.html#Base.Random.srand",
     "page": "Numbers",
     "title": "Base.Random.srand",
     "category": "Function",
@@ -10225,7 +10265,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/numbers.html#Base.Random.MersenneTwister",
+    "location": "base/numbers.html#Base.Random.MersenneTwister",
     "page": "Numbers",
     "title": "Base.Random.MersenneTwister",
     "category": "Type",
@@ -10233,7 +10273,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/numbers.html#Base.Random.RandomDevice",
+    "location": "base/numbers.html#Base.Random.RandomDevice",
     "page": "Numbers",
     "title": "Base.Random.RandomDevice",
     "category": "Type",
@@ -10241,7 +10281,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/numbers.html#Base.Random.rand",
+    "location": "base/numbers.html#Base.Random.rand",
     "page": "Numbers",
     "title": "Base.Random.rand",
     "category": "Function",
@@ -10249,7 +10289,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/numbers.html#Base.Random.rand!",
+    "location": "base/numbers.html#Base.Random.rand!",
     "page": "Numbers",
     "title": "Base.Random.rand!",
     "category": "Function",
@@ -10257,7 +10297,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/numbers.html#Base.Random.bitrand",
+    "location": "base/numbers.html#Base.Random.bitrand",
     "page": "Numbers",
     "title": "Base.Random.bitrand",
     "category": "Function",
@@ -10265,7 +10305,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/numbers.html#Base.Random.randn",
+    "location": "base/numbers.html#Base.Random.randn",
     "page": "Numbers",
     "title": "Base.Random.randn",
     "category": "Function",
@@ -10273,7 +10313,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/numbers.html#Base.Random.randn!",
+    "location": "base/numbers.html#Base.Random.randn!",
     "page": "Numbers",
     "title": "Base.Random.randn!",
     "category": "Function",
@@ -10281,7 +10321,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/numbers.html#Base.Random.randexp",
+    "location": "base/numbers.html#Base.Random.randexp",
     "page": "Numbers",
     "title": "Base.Random.randexp",
     "category": "Function",
@@ -10289,7 +10329,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/numbers.html#Base.Random.randexp!",
+    "location": "base/numbers.html#Base.Random.randexp!",
     "page": "Numbers",
     "title": "Base.Random.randexp!",
     "category": "Function",
@@ -10297,7 +10337,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/numbers.html#Base.Random.randjump",
+    "location": "base/numbers.html#Base.Random.randjump",
     "page": "Numbers",
     "title": "Base.Random.randjump",
     "category": "Function",
@@ -10305,7 +10345,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/numbers.html#Random-Numbers-1",
+    "location": "base/numbers.html#Random-Numbers-1",
     "page": "Numbers",
     "title": "Random Numbers",
     "category": "section",
@@ -10313,7 +10353,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/strings.html#",
+    "location": "base/strings.html#",
     "page": "Strings",
     "title": "Strings",
     "category": "page",
@@ -10321,7 +10361,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/strings.html#Base.length-Tuple{AbstractString}",
+    "location": "base/strings.html#Base.length-Tuple{AbstractString}",
     "page": "Strings",
     "title": "Base.length",
     "category": "Method",
@@ -10329,7 +10369,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/strings.html#Base.sizeof-Tuple{AbstractString}",
+    "location": "base/strings.html#Base.sizeof-Tuple{AbstractString}",
     "page": "Strings",
     "title": "Base.sizeof",
     "category": "Method",
@@ -10337,7 +10377,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/strings.html#Base.:*-Tuple{Union{Char, AbstractString},Vararg{Union{Char, AbstractString},N} where N}",
+    "location": "base/strings.html#Base.:*-Tuple{Union{Char, AbstractString},Vararg{Union{Char, AbstractString},N} where N}",
     "page": "Strings",
     "title": "Base.:*",
     "category": "Method",
@@ -10345,7 +10385,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/strings.html#Base.:^-Tuple{AbstractString,Integer}",
+    "location": "base/strings.html#Base.:^-Tuple{AbstractString,Integer}",
     "page": "Strings",
     "title": "Base.:^",
     "category": "Method",
@@ -10353,7 +10393,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/strings.html#Base.string",
+    "location": "base/strings.html#Base.string",
     "page": "Strings",
     "title": "Base.string",
     "category": "Function",
@@ -10361,7 +10401,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/strings.html#Base.repeat-Tuple{AbstractString,Integer}",
+    "location": "base/strings.html#Base.repeat-Tuple{AbstractString,Integer}",
     "page": "Strings",
     "title": "Base.repeat",
     "category": "Method",
@@ -10369,7 +10409,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/strings.html#Base.repeat-Tuple{Char,Integer}",
+    "location": "base/strings.html#Base.repeat-Tuple{Char,Integer}",
     "page": "Strings",
     "title": "Base.repeat",
     "category": "Method",
@@ -10377,7 +10417,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/strings.html#Base.repr",
+    "location": "base/strings.html#Base.repr",
     "page": "Strings",
     "title": "Base.repr",
     "category": "Function",
@@ -10385,7 +10425,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/strings.html#Core.String-Tuple{AbstractString}",
+    "location": "base/strings.html#Core.String-Tuple{AbstractString}",
     "page": "Strings",
     "title": "Core.String",
     "category": "Method",
@@ -10393,7 +10433,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/strings.html#Base.SubString",
+    "location": "base/strings.html#Base.SubString",
     "page": "Strings",
     "title": "Base.SubString",
     "category": "Type",
@@ -10401,7 +10441,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/strings.html#Base.transcode",
+    "location": "base/strings.html#Base.transcode",
     "page": "Strings",
     "title": "Base.transcode",
     "category": "Function",
@@ -10409,7 +10449,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/strings.html#Base.unsafe_string",
+    "location": "base/strings.html#Base.unsafe_string",
     "page": "Strings",
     "title": "Base.unsafe_string",
     "category": "Function",
@@ -10417,7 +10457,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/strings.html#Base.ncodeunits-Tuple{AbstractString}",
+    "location": "base/strings.html#Base.ncodeunits-Tuple{AbstractString}",
     "page": "Strings",
     "title": "Base.ncodeunits",
     "category": "Method",
@@ -10425,7 +10465,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/strings.html#Base.codeunit",
+    "location": "base/strings.html#Base.codeunit",
     "page": "Strings",
     "title": "Base.codeunit",
     "category": "Function",
@@ -10433,7 +10473,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/strings.html#Base.codeunits",
+    "location": "base/strings.html#Base.codeunits",
     "page": "Strings",
     "title": "Base.codeunits",
     "category": "Function",
@@ -10441,7 +10481,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/strings.html#Base.ascii",
+    "location": "base/strings.html#Base.ascii",
     "page": "Strings",
     "title": "Base.ascii",
     "category": "Function",
@@ -10449,7 +10489,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/strings.html#Base.@r_str",
+    "location": "base/strings.html#Base.@r_str",
     "page": "Strings",
     "title": "Base.@r_str",
     "category": "Macro",
@@ -10457,7 +10497,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/strings.html#Base.@raw_str",
+    "location": "base/strings.html#Base.@raw_str",
     "page": "Strings",
     "title": "Base.@raw_str",
     "category": "Macro",
@@ -10465,7 +10505,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/strings.html#Base.Docs.@html_str",
+    "location": "base/strings.html#Base.Docs.@html_str",
     "page": "Strings",
     "title": "Base.Docs.@html_str",
     "category": "Macro",
@@ -10473,7 +10513,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/strings.html#Base.Docs.@text_str",
+    "location": "base/strings.html#Base.Docs.@text_str",
     "page": "Strings",
     "title": "Base.Docs.@text_str",
     "category": "Macro",
@@ -10481,7 +10521,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/strings.html#Base.isvalid-Tuple{Any}",
+    "location": "base/strings.html#Base.isvalid-Tuple{Any}",
     "page": "Strings",
     "title": "Base.isvalid",
     "category": "Method",
@@ -10489,7 +10529,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/strings.html#Base.isvalid-Tuple{Any,Any}",
+    "location": "base/strings.html#Base.isvalid-Tuple{Any,Any}",
     "page": "Strings",
     "title": "Base.isvalid",
     "category": "Method",
@@ -10497,7 +10537,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/strings.html#Base.isvalid-Tuple{AbstractString,Integer}",
+    "location": "base/strings.html#Base.isvalid-Tuple{AbstractString,Integer}",
     "page": "Strings",
     "title": "Base.isvalid",
     "category": "Method",
@@ -10505,7 +10545,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/strings.html#Base.match",
+    "location": "base/strings.html#Base.match",
     "page": "Strings",
     "title": "Base.match",
     "category": "Function",
@@ -10513,7 +10553,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/strings.html#Base.eachmatch",
+    "location": "base/strings.html#Base.eachmatch",
     "page": "Strings",
     "title": "Base.eachmatch",
     "category": "Function",
@@ -10521,7 +10561,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/strings.html#Base.matchall",
+    "location": "base/strings.html#Base.matchall",
     "page": "Strings",
     "title": "Base.matchall",
     "category": "Function",
@@ -10529,7 +10569,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/strings.html#Base.isless-Tuple{AbstractString,AbstractString}",
+    "location": "base/strings.html#Base.isless-Tuple{AbstractString,AbstractString}",
     "page": "Strings",
     "title": "Base.isless",
     "category": "Method",
@@ -10537,7 +10577,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/strings.html#Base.:==-Tuple{AbstractString,AbstractString}",
+    "location": "base/strings.html#Base.:==-Tuple{AbstractString,AbstractString}",
     "page": "Strings",
     "title": "Base.:==",
     "category": "Method",
@@ -10545,7 +10585,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/strings.html#Base.cmp-Tuple{AbstractString,AbstractString}",
+    "location": "base/strings.html#Base.cmp-Tuple{AbstractString,AbstractString}",
     "page": "Strings",
     "title": "Base.cmp",
     "category": "Method",
@@ -10553,7 +10593,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/strings.html#Base.lpad",
+    "location": "base/strings.html#Base.lpad",
     "page": "Strings",
     "title": "Base.lpad",
     "category": "Function",
@@ -10561,7 +10601,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/strings.html#Base.rpad",
+    "location": "base/strings.html#Base.rpad",
     "page": "Strings",
     "title": "Base.rpad",
     "category": "Function",
@@ -10569,7 +10609,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/strings.html#Base.findfirst-Tuple{AbstractString,AbstractString}",
+    "location": "base/strings.html#Base.findfirst-Tuple{AbstractString,AbstractString}",
     "page": "Strings",
     "title": "Base.findfirst",
     "category": "Method",
@@ -10577,7 +10617,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/strings.html#Base.findnext-Tuple{AbstractString,AbstractString,Integer}",
+    "location": "base/strings.html#Base.findnext-Tuple{AbstractString,AbstractString,Integer}",
     "page": "Strings",
     "title": "Base.findnext",
     "category": "Method",
@@ -10585,7 +10625,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/strings.html#Base.findlast-Tuple{AbstractString,AbstractString}",
+    "location": "base/strings.html#Base.findlast-Tuple{AbstractString,AbstractString}",
     "page": "Strings",
     "title": "Base.findlast",
     "category": "Method",
@@ -10593,7 +10633,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/strings.html#Base.findprev-Tuple{AbstractString,AbstractString,Integer}",
+    "location": "base/strings.html#Base.findprev-Tuple{AbstractString,AbstractString,Integer}",
     "page": "Strings",
     "title": "Base.findprev",
     "category": "Method",
@@ -10601,7 +10641,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/strings.html#Base.contains",
+    "location": "base/strings.html#Base.contains",
     "page": "Strings",
     "title": "Base.contains",
     "category": "Function",
@@ -10609,7 +10649,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/strings.html#Base.reverse-Tuple{Union{SubString{String}, String}}",
+    "location": "base/strings.html#Base.reverse-Tuple{Union{SubString{String}, String}}",
     "page": "Strings",
     "title": "Base.reverse",
     "category": "Method",
@@ -10617,7 +10657,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/strings.html#Base.replace-Tuple{AbstractString,Pair}",
+    "location": "base/strings.html#Base.replace-Tuple{AbstractString,Pair}",
     "page": "Strings",
     "title": "Base.replace",
     "category": "Method",
@@ -10625,7 +10665,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/strings.html#Base.split",
+    "location": "base/strings.html#Base.split",
     "page": "Strings",
     "title": "Base.split",
     "category": "Function",
@@ -10633,7 +10673,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/strings.html#Base.rsplit",
+    "location": "base/strings.html#Base.rsplit",
     "page": "Strings",
     "title": "Base.rsplit",
     "category": "Function",
@@ -10641,7 +10681,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/strings.html#Base.strip",
+    "location": "base/strings.html#Base.strip",
     "page": "Strings",
     "title": "Base.strip",
     "category": "Function",
@@ -10649,7 +10689,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/strings.html#Base.lstrip",
+    "location": "base/strings.html#Base.lstrip",
     "page": "Strings",
     "title": "Base.lstrip",
     "category": "Function",
@@ -10657,7 +10697,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/strings.html#Base.rstrip",
+    "location": "base/strings.html#Base.rstrip",
     "page": "Strings",
     "title": "Base.rstrip",
     "category": "Function",
@@ -10665,7 +10705,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/strings.html#Base.startswith",
+    "location": "base/strings.html#Base.startswith",
     "page": "Strings",
     "title": "Base.startswith",
     "category": "Function",
@@ -10673,7 +10713,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/strings.html#Base.endswith",
+    "location": "base/strings.html#Base.endswith",
     "page": "Strings",
     "title": "Base.endswith",
     "category": "Function",
@@ -10681,7 +10721,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/strings.html#Base.first-Tuple{AbstractString,Integer}",
+    "location": "base/strings.html#Base.first-Tuple{AbstractString,Integer}",
     "page": "Strings",
     "title": "Base.first",
     "category": "Method",
@@ -10689,7 +10729,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/strings.html#Base.last-Tuple{AbstractString,Integer}",
+    "location": "base/strings.html#Base.last-Tuple{AbstractString,Integer}",
     "page": "Strings",
     "title": "Base.last",
     "category": "Method",
@@ -10697,7 +10737,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/strings.html#Base.join",
+    "location": "base/strings.html#Base.join",
     "page": "Strings",
     "title": "Base.join",
     "category": "Function",
@@ -10705,7 +10745,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/strings.html#Base.chop",
+    "location": "base/strings.html#Base.chop",
     "page": "Strings",
     "title": "Base.chop",
     "category": "Function",
@@ -10713,7 +10753,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/strings.html#Base.chomp",
+    "location": "base/strings.html#Base.chomp",
     "page": "Strings",
     "title": "Base.chomp",
     "category": "Function",
@@ -10721,7 +10761,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/strings.html#Base.thisind",
+    "location": "base/strings.html#Base.thisind",
     "page": "Strings",
     "title": "Base.thisind",
     "category": "Function",
@@ -10729,7 +10769,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/strings.html#Base.nextind",
+    "location": "base/strings.html#Base.nextind",
     "page": "Strings",
     "title": "Base.nextind",
     "category": "Function",
@@ -10737,7 +10777,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/strings.html#Base.prevind",
+    "location": "base/strings.html#Base.prevind",
     "page": "Strings",
     "title": "Base.prevind",
     "category": "Function",
@@ -10745,7 +10785,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/strings.html#Base.Random.randstring",
+    "location": "base/strings.html#Base.Random.randstring",
     "page": "Strings",
     "title": "Base.Random.randstring",
     "category": "Function",
@@ -10753,7 +10793,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/strings.html#Core.Symbol",
+    "location": "base/strings.html#Core.Symbol",
     "page": "Strings",
     "title": "Core.Symbol",
     "category": "Type",
@@ -10761,7 +10801,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/strings.html#Base.escape_string",
+    "location": "base/strings.html#Base.escape_string",
     "page": "Strings",
     "title": "Base.escape_string",
     "category": "Function",
@@ -10769,7 +10809,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/strings.html#Base.unescape_string",
+    "location": "base/strings.html#Base.unescape_string",
     "page": "Strings",
     "title": "Base.unescape_string",
     "category": "Function",
@@ -10777,7 +10817,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/strings.html#lib-strings-1",
+    "location": "base/strings.html#lib-strings-1",
     "page": "Strings",
     "title": "Strings",
     "category": "section",
@@ -10785,7 +10825,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/arrays.html#",
+    "location": "base/arrays.html#",
     "page": "Arrays",
     "title": "Arrays",
     "category": "page",
@@ -10793,7 +10833,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/arrays.html#lib-arrays-1",
+    "location": "base/arrays.html#lib-arrays-1",
     "page": "Arrays",
     "title": "Arrays",
     "category": "section",
@@ -10801,7 +10841,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/arrays.html#Core.AbstractArray",
+    "location": "base/arrays.html#Core.AbstractArray",
     "page": "Arrays",
     "title": "Core.AbstractArray",
     "category": "Type",
@@ -10809,7 +10849,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/arrays.html#Base.AbstractVector",
+    "location": "base/arrays.html#Base.AbstractVector",
     "page": "Arrays",
     "title": "Base.AbstractVector",
     "category": "Type",
@@ -10817,7 +10857,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/arrays.html#Base.AbstractMatrix",
+    "location": "base/arrays.html#Base.AbstractMatrix",
     "page": "Arrays",
     "title": "Base.AbstractMatrix",
     "category": "Type",
@@ -10825,7 +10865,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/arrays.html#Core.Array",
+    "location": "base/arrays.html#Core.Array",
     "page": "Arrays",
     "title": "Core.Array",
     "category": "Type",
@@ -10833,7 +10873,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/arrays.html#Core.Array-Tuple{Uninitialized,Any}",
+    "location": "base/arrays.html#Core.Array-Tuple{Uninitialized,Any}",
     "page": "Arrays",
     "title": "Core.Array",
     "category": "Method",
@@ -10841,7 +10881,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/arrays.html#Core.Array-Tuple{Nothing,Any}",
+    "location": "base/arrays.html#Core.Array-Tuple{Nothing,Any}",
     "page": "Arrays",
     "title": "Core.Array",
     "category": "Method",
@@ -10849,7 +10889,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/arrays.html#Core.Array-Tuple{Missing,Any}",
+    "location": "base/arrays.html#Core.Array-Tuple{Missing,Any}",
     "page": "Arrays",
     "title": "Core.Array",
     "category": "Method",
@@ -10857,7 +10897,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/arrays.html#Core.Uninitialized",
+    "location": "base/arrays.html#Core.Uninitialized",
     "page": "Arrays",
     "title": "Core.Uninitialized",
     "category": "Type",
@@ -10865,7 +10905,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/arrays.html#Core.uninitialized",
+    "location": "base/arrays.html#Core.uninitialized",
     "page": "Arrays",
     "title": "Core.uninitialized",
     "category": "Constant",
@@ -10873,7 +10913,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/arrays.html#Base.Vector",
+    "location": "base/arrays.html#Base.Vector",
     "page": "Arrays",
     "title": "Base.Vector",
     "category": "Type",
@@ -10881,7 +10921,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/arrays.html#Base.Vector-Tuple{Uninitialized,Any}",
+    "location": "base/arrays.html#Base.Vector-Tuple{Uninitialized,Any}",
     "page": "Arrays",
     "title": "Base.Vector",
     "category": "Method",
@@ -10889,7 +10929,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/arrays.html#Base.Vector-Tuple{Nothing,Any}",
+    "location": "base/arrays.html#Base.Vector-Tuple{Nothing,Any}",
     "page": "Arrays",
     "title": "Base.Vector",
     "category": "Method",
@@ -10897,7 +10937,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/arrays.html#Base.Vector-Tuple{Missing,Any}",
+    "location": "base/arrays.html#Base.Vector-Tuple{Missing,Any}",
     "page": "Arrays",
     "title": "Base.Vector",
     "category": "Method",
@@ -10905,7 +10945,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/arrays.html#Base.Matrix",
+    "location": "base/arrays.html#Base.Matrix",
     "page": "Arrays",
     "title": "Base.Matrix",
     "category": "Type",
@@ -10913,7 +10953,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/arrays.html#Base.Matrix-Tuple{Uninitialized,Any,Any}",
+    "location": "base/arrays.html#Base.Matrix-Tuple{Uninitialized,Any,Any}",
     "page": "Arrays",
     "title": "Base.Matrix",
     "category": "Method",
@@ -10921,7 +10961,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/arrays.html#Base.Matrix-Tuple{Nothing,Any,Any}",
+    "location": "base/arrays.html#Base.Matrix-Tuple{Nothing,Any,Any}",
     "page": "Arrays",
     "title": "Base.Matrix",
     "category": "Method",
@@ -10929,7 +10969,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/arrays.html#Base.Matrix-Tuple{Missing,Any,Any}",
+    "location": "base/arrays.html#Base.Matrix-Tuple{Missing,Any,Any}",
     "page": "Arrays",
     "title": "Base.Matrix",
     "category": "Method",
@@ -10937,7 +10977,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/arrays.html#Base.getindex-Tuple{Type,Vararg{Any,N} where N}",
+    "location": "base/arrays.html#Base.getindex-Tuple{Type,Vararg{Any,N} where N}",
     "page": "Arrays",
     "title": "Base.getindex",
     "category": "Method",
@@ -10945,7 +10985,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/arrays.html#Base.zeros",
+    "location": "base/arrays.html#Base.zeros",
     "page": "Arrays",
     "title": "Base.zeros",
     "category": "Function",
@@ -10953,7 +10993,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/arrays.html#Base.ones",
+    "location": "base/arrays.html#Base.ones",
     "page": "Arrays",
     "title": "Base.ones",
     "category": "Function",
@@ -10961,7 +11001,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/arrays.html#Base.BitArray",
+    "location": "base/arrays.html#Base.BitArray",
     "page": "Arrays",
     "title": "Base.BitArray",
     "category": "Type",
@@ -10969,7 +11009,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/arrays.html#Base.BitArray-Tuple{Uninitialized,Vararg{Integer,N} where N}",
+    "location": "base/arrays.html#Base.BitArray-Tuple{Uninitialized,Vararg{Integer,N} where N}",
     "page": "Arrays",
     "title": "Base.BitArray",
     "category": "Method",
@@ -10977,7 +11017,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/arrays.html#Base.BitArray-Tuple{Any}",
+    "location": "base/arrays.html#Base.BitArray-Tuple{Any}",
     "page": "Arrays",
     "title": "Base.BitArray",
     "category": "Method",
@@ -10985,7 +11025,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/arrays.html#Base.trues",
+    "location": "base/arrays.html#Base.trues",
     "page": "Arrays",
     "title": "Base.trues",
     "category": "Function",
@@ -10993,7 +11033,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/arrays.html#Base.falses",
+    "location": "base/arrays.html#Base.falses",
     "page": "Arrays",
     "title": "Base.falses",
     "category": "Function",
@@ -11001,7 +11041,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/arrays.html#Base.fill",
+    "location": "base/arrays.html#Base.fill",
     "page": "Arrays",
     "title": "Base.fill",
     "category": "Function",
@@ -11009,7 +11049,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/arrays.html#Base.fill!",
+    "location": "base/arrays.html#Base.fill!",
     "page": "Arrays",
     "title": "Base.fill!",
     "category": "Function",
@@ -11017,7 +11057,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/arrays.html#Base.similar-Tuple{AbstractArray}",
+    "location": "base/arrays.html#Base.similar-Tuple{AbstractArray}",
     "page": "Arrays",
     "title": "Base.similar",
     "category": "Method",
@@ -11025,7 +11065,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/arrays.html#Base.similar-Tuple{Any,Tuple}",
+    "location": "base/arrays.html#Base.similar-Tuple{Any,Tuple}",
     "page": "Arrays",
     "title": "Base.similar",
     "category": "Method",
@@ -11033,7 +11073,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/arrays.html#Base.linspace",
+    "location": "base/arrays.html#Base.linspace",
     "page": "Arrays",
     "title": "Base.linspace",
     "category": "Function",
@@ -11041,7 +11081,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/arrays.html#Base.logspace",
+    "location": "base/arrays.html#Base.logspace",
     "page": "Arrays",
     "title": "Base.logspace",
     "category": "Function",
@@ -11049,7 +11089,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/arrays.html#Base.Random.randsubseq",
+    "location": "base/arrays.html#Base.Random.randsubseq",
     "page": "Arrays",
     "title": "Base.Random.randsubseq",
     "category": "Function",
@@ -11057,7 +11097,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/arrays.html#Base.Random.randsubseq!",
+    "location": "base/arrays.html#Base.Random.randsubseq!",
     "page": "Arrays",
     "title": "Base.Random.randsubseq!",
     "category": "Function",
@@ -11065,7 +11105,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/arrays.html#Constructors-and-Types-1",
+    "location": "base/arrays.html#Constructors-and-Types-1",
     "page": "Arrays",
     "title": "Constructors and Types",
     "category": "section",
@@ -11073,7 +11113,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/arrays.html#Base.ndims",
+    "location": "base/arrays.html#Base.ndims",
     "page": "Arrays",
     "title": "Base.ndims",
     "category": "Function",
@@ -11081,7 +11121,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/arrays.html#Base.size",
+    "location": "base/arrays.html#Base.size",
     "page": "Arrays",
     "title": "Base.size",
     "category": "Function",
@@ -11089,7 +11129,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/arrays.html#Base.axes-Tuple{Any}",
+    "location": "base/arrays.html#Base.axes-Tuple{Any}",
     "page": "Arrays",
     "title": "Base.axes",
     "category": "Method",
@@ -11097,7 +11137,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/arrays.html#Base.axes-Tuple{AbstractArray,Any}",
+    "location": "base/arrays.html#Base.axes-Tuple{AbstractArray,Any}",
     "page": "Arrays",
     "title": "Base.axes",
     "category": "Method",
@@ -11105,7 +11145,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/arrays.html#Base.length-Tuple{AbstractArray}",
+    "location": "base/arrays.html#Base.length-Tuple{AbstractArray}",
     "page": "Arrays",
     "title": "Base.length",
     "category": "Method",
@@ -11113,7 +11153,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/arrays.html#Base.eachindex",
+    "location": "base/arrays.html#Base.eachindex",
     "page": "Arrays",
     "title": "Base.eachindex",
     "category": "Function",
@@ -11121,7 +11161,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/arrays.html#Base.linearindices",
+    "location": "base/arrays.html#Base.linearindices",
     "page": "Arrays",
     "title": "Base.linearindices",
     "category": "Function",
@@ -11129,7 +11169,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/arrays.html#Base.IndexStyle",
+    "location": "base/arrays.html#Base.IndexStyle",
     "page": "Arrays",
     "title": "Base.IndexStyle",
     "category": "Type",
@@ -11137,7 +11177,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/arrays.html#Base.conj!",
+    "location": "base/arrays.html#Base.conj!",
     "page": "Arrays",
     "title": "Base.conj!",
     "category": "Function",
@@ -11145,7 +11185,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/arrays.html#Base.stride",
+    "location": "base/arrays.html#Base.stride",
     "page": "Arrays",
     "title": "Base.stride",
     "category": "Function",
@@ -11153,7 +11193,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/arrays.html#Base.strides",
+    "location": "base/arrays.html#Base.strides",
     "page": "Arrays",
     "title": "Base.strides",
     "category": "Function",
@@ -11161,7 +11201,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/arrays.html#Base.LinAlg.checksquare",
+    "location": "base/arrays.html#Base.LinAlg.checksquare",
     "page": "Arrays",
     "title": "Base.LinAlg.checksquare",
     "category": "Function",
@@ -11169,7 +11209,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/arrays.html#Basic-functions-1",
+    "location": "base/arrays.html#Basic-functions-1",
     "page": "Arrays",
     "title": "Basic functions",
     "category": "section",
@@ -11177,7 +11217,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/arrays.html#Base.broadcast",
+    "location": "base/arrays.html#Base.broadcast",
     "page": "Arrays",
     "title": "Base.broadcast",
     "category": "Function",
@@ -11185,7 +11225,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/arrays.html#Base.broadcast!",
+    "location": "base/arrays.html#Base.broadcast!",
     "page": "Arrays",
     "title": "Base.broadcast!",
     "category": "Function",
@@ -11193,7 +11233,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/arrays.html#Base.Broadcast.@__dot__",
+    "location": "base/arrays.html#Base.Broadcast.@__dot__",
     "page": "Arrays",
     "title": "Base.Broadcast.@__dot__",
     "category": "Macro",
@@ -11201,7 +11241,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/arrays.html#Base.Broadcast.broadcast_getindex",
+    "location": "base/arrays.html#Base.Broadcast.broadcast_getindex",
     "page": "Arrays",
     "title": "Base.Broadcast.broadcast_getindex",
     "category": "Function",
@@ -11209,7 +11249,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/arrays.html#Base.Broadcast.broadcast_setindex!",
+    "location": "base/arrays.html#Base.Broadcast.broadcast_setindex!",
     "page": "Arrays",
     "title": "Base.Broadcast.broadcast_setindex!",
     "category": "Function",
@@ -11217,7 +11257,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/arrays.html#Base.Broadcast.BroadcastStyle",
+    "location": "base/arrays.html#Base.Broadcast.BroadcastStyle",
     "page": "Arrays",
     "title": "Base.Broadcast.BroadcastStyle",
     "category": "Type",
@@ -11225,7 +11265,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/arrays.html#Base.Broadcast.broadcast_similar",
+    "location": "base/arrays.html#Base.Broadcast.broadcast_similar",
     "page": "Arrays",
     "title": "Base.Broadcast.broadcast_similar",
     "category": "Function",
@@ -11233,7 +11273,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/arrays.html#Base.Broadcast.broadcast_indices",
+    "location": "base/arrays.html#Base.Broadcast.broadcast_indices",
     "page": "Arrays",
     "title": "Base.Broadcast.broadcast_indices",
     "category": "Function",
@@ -11241,7 +11281,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/arrays.html#Base.Broadcast.Scalar",
+    "location": "base/arrays.html#Base.Broadcast.Scalar",
     "page": "Arrays",
     "title": "Base.Broadcast.Scalar",
     "category": "Type",
@@ -11249,7 +11289,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/arrays.html#Base.Broadcast.AbstractArrayStyle",
+    "location": "base/arrays.html#Base.Broadcast.AbstractArrayStyle",
     "page": "Arrays",
     "title": "Base.Broadcast.AbstractArrayStyle",
     "category": "Type",
@@ -11257,7 +11297,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/arrays.html#Base.Broadcast.ArrayStyle",
+    "location": "base/arrays.html#Base.Broadcast.ArrayStyle",
     "page": "Arrays",
     "title": "Base.Broadcast.ArrayStyle",
     "category": "Type",
@@ -11265,7 +11305,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/arrays.html#Base.Broadcast.DefaultArrayStyle",
+    "location": "base/arrays.html#Base.Broadcast.DefaultArrayStyle",
     "page": "Arrays",
     "title": "Base.Broadcast.DefaultArrayStyle",
     "category": "Type",
@@ -11273,7 +11313,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/arrays.html#Broadcast-and-vectorization-1",
+    "location": "base/arrays.html#Broadcast-and-vectorization-1",
     "page": "Arrays",
     "title": "Broadcast and vectorization",
     "category": "section",
@@ -11281,7 +11321,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/arrays.html#Base.getindex-Tuple{AbstractArray,Vararg{Any,N} where N}",
+    "location": "base/arrays.html#Base.getindex-Tuple{AbstractArray,Vararg{Any,N} where N}",
     "page": "Arrays",
     "title": "Base.getindex",
     "category": "Method",
@@ -11289,7 +11329,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/arrays.html#Base.setindex!-Tuple{AbstractArray,Any,Vararg{Any,N} where N}",
+    "location": "base/arrays.html#Base.setindex!-Tuple{AbstractArray,Any,Vararg{Any,N} where N}",
     "page": "Arrays",
     "title": "Base.setindex!",
     "category": "Method",
@@ -11297,7 +11337,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/arrays.html#Base.copyto!-Tuple{AbstractArray,CartesianIndices,AbstractArray,CartesianIndices}",
+    "location": "base/arrays.html#Base.copyto!-Tuple{AbstractArray,CartesianIndices,AbstractArray,CartesianIndices}",
     "page": "Arrays",
     "title": "Base.copyto!",
     "category": "Method",
@@ -11305,7 +11345,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/arrays.html#Base.isassigned",
+    "location": "base/arrays.html#Base.isassigned",
     "page": "Arrays",
     "title": "Base.isassigned",
     "category": "Function",
@@ -11313,7 +11353,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/arrays.html#Base.Colon",
+    "location": "base/arrays.html#Base.Colon",
     "page": "Arrays",
     "title": "Base.Colon",
     "category": "Type",
@@ -11321,7 +11361,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/arrays.html#Base.IteratorsMD.CartesianIndex",
+    "location": "base/arrays.html#Base.IteratorsMD.CartesianIndex",
     "page": "Arrays",
     "title": "Base.IteratorsMD.CartesianIndex",
     "category": "Type",
@@ -11329,7 +11369,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/arrays.html#Base.IteratorsMD.CartesianIndices",
+    "location": "base/arrays.html#Base.IteratorsMD.CartesianIndices",
     "page": "Arrays",
     "title": "Base.IteratorsMD.CartesianIndices",
     "category": "Type",
@@ -11337,7 +11377,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/arrays.html#Base.IteratorsMD.LinearIndices",
+    "location": "base/arrays.html#Base.IteratorsMD.LinearIndices",
     "page": "Arrays",
     "title": "Base.IteratorsMD.LinearIndices",
     "category": "Type",
@@ -11345,7 +11385,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/arrays.html#Base.to_indices",
+    "location": "base/arrays.html#Base.to_indices",
     "page": "Arrays",
     "title": "Base.to_indices",
     "category": "Function",
@@ -11353,7 +11393,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/arrays.html#Base.checkbounds",
+    "location": "base/arrays.html#Base.checkbounds",
     "page": "Arrays",
     "title": "Base.checkbounds",
     "category": "Function",
@@ -11361,7 +11401,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/arrays.html#Base.checkindex",
+    "location": "base/arrays.html#Base.checkindex",
     "page": "Arrays",
     "title": "Base.checkindex",
     "category": "Function",
@@ -11369,7 +11409,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/arrays.html#Indexing-and-assignment-1",
+    "location": "base/arrays.html#Indexing-and-assignment-1",
     "page": "Arrays",
     "title": "Indexing and assignment",
     "category": "section",
@@ -11377,7 +11417,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/arrays.html#Base.view",
+    "location": "base/arrays.html#Base.view",
     "page": "Arrays",
     "title": "Base.view",
     "category": "Function",
@@ -11385,7 +11425,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/arrays.html#Base.@view",
+    "location": "base/arrays.html#Base.@view",
     "page": "Arrays",
     "title": "Base.@view",
     "category": "Macro",
@@ -11393,7 +11433,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/arrays.html#Base.@views",
+    "location": "base/arrays.html#Base.@views",
     "page": "Arrays",
     "title": "Base.@views",
     "category": "Macro",
@@ -11401,7 +11441,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/arrays.html#Base.parent",
+    "location": "base/arrays.html#Base.parent",
     "page": "Arrays",
     "title": "Base.parent",
     "category": "Function",
@@ -11409,7 +11449,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/arrays.html#Base.parentindices",
+    "location": "base/arrays.html#Base.parentindices",
     "page": "Arrays",
     "title": "Base.parentindices",
     "category": "Function",
@@ -11417,7 +11457,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/arrays.html#Base.slicedim",
+    "location": "base/arrays.html#Base.slicedim",
     "page": "Arrays",
     "title": "Base.slicedim",
     "category": "Function",
@@ -11425,7 +11465,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/arrays.html#Base.reinterpret",
+    "location": "base/arrays.html#Base.reinterpret",
     "page": "Arrays",
     "title": "Base.reinterpret",
     "category": "Function",
@@ -11433,7 +11473,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/arrays.html#Base.reshape",
+    "location": "base/arrays.html#Base.reshape",
     "page": "Arrays",
     "title": "Base.reshape",
     "category": "Function",
@@ -11441,7 +11481,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/arrays.html#Base.squeeze",
+    "location": "base/arrays.html#Base.squeeze",
     "page": "Arrays",
     "title": "Base.squeeze",
     "category": "Function",
@@ -11449,7 +11489,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/arrays.html#Base.vec",
+    "location": "base/arrays.html#Base.vec",
     "page": "Arrays",
     "title": "Base.vec",
     "category": "Function",
@@ -11457,7 +11497,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/arrays.html#Views-(SubArrays-and-other-view-types)-1",
+    "location": "base/arrays.html#Views-(SubArrays-and-other-view-types)-1",
     "page": "Arrays",
     "title": "Views (SubArrays and other view types)",
     "category": "section",
@@ -11465,7 +11505,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/arrays.html#Base.cat",
+    "location": "base/arrays.html#Base.cat",
     "page": "Arrays",
     "title": "Base.cat",
     "category": "Function",
@@ -11473,7 +11513,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/arrays.html#Base.vcat",
+    "location": "base/arrays.html#Base.vcat",
     "page": "Arrays",
     "title": "Base.vcat",
     "category": "Function",
@@ -11481,7 +11521,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/arrays.html#Base.hcat",
+    "location": "base/arrays.html#Base.hcat",
     "page": "Arrays",
     "title": "Base.hcat",
     "category": "Function",
@@ -11489,7 +11529,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/arrays.html#Base.hvcat",
+    "location": "base/arrays.html#Base.hvcat",
     "page": "Arrays",
     "title": "Base.hvcat",
     "category": "Function",
@@ -11497,7 +11537,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/arrays.html#Base.vect",
+    "location": "base/arrays.html#Base.vect",
     "page": "Arrays",
     "title": "Base.vect",
     "category": "Function",
@@ -11505,7 +11545,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/arrays.html#Base.flipdim",
+    "location": "base/arrays.html#Base.flipdim",
     "page": "Arrays",
     "title": "Base.flipdim",
     "category": "Function",
@@ -11513,7 +11553,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/arrays.html#Base.circshift",
+    "location": "base/arrays.html#Base.circshift",
     "page": "Arrays",
     "title": "Base.circshift",
     "category": "Function",
@@ -11521,7 +11561,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/arrays.html#Base.circshift!",
+    "location": "base/arrays.html#Base.circshift!",
     "page": "Arrays",
     "title": "Base.circshift!",
     "category": "Function",
@@ -11529,7 +11569,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/arrays.html#Base.circcopy!",
+    "location": "base/arrays.html#Base.circcopy!",
     "page": "Arrays",
     "title": "Base.circcopy!",
     "category": "Function",
@@ -11537,7 +11577,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/arrays.html#Base.find-Tuple{Any}",
+    "location": "base/arrays.html#Base.find-Tuple{Any}",
     "page": "Arrays",
     "title": "Base.find",
     "category": "Method",
@@ -11545,7 +11585,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/arrays.html#Base.find-Tuple{Function,Any}",
+    "location": "base/arrays.html#Base.find-Tuple{Function,Any}",
     "page": "Arrays",
     "title": "Base.find",
     "category": "Method",
@@ -11553,7 +11593,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/arrays.html#Base.findn",
+    "location": "base/arrays.html#Base.findn",
     "page": "Arrays",
     "title": "Base.findn",
     "category": "Function",
@@ -11561,7 +11601,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/arrays.html#Base.findnz",
+    "location": "base/arrays.html#Base.findnz",
     "page": "Arrays",
     "title": "Base.findnz",
     "category": "Function",
@@ -11569,7 +11609,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/arrays.html#Base.findfirst-Tuple{Any}",
+    "location": "base/arrays.html#Base.findfirst-Tuple{Any}",
     "page": "Arrays",
     "title": "Base.findfirst",
     "category": "Method",
@@ -11577,7 +11617,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/arrays.html#Base.findfirst-Tuple{Function,Any}",
+    "location": "base/arrays.html#Base.findfirst-Tuple{Function,Any}",
     "page": "Arrays",
     "title": "Base.findfirst",
     "category": "Method",
@@ -11585,7 +11625,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/arrays.html#Base.findlast-Tuple{Any}",
+    "location": "base/arrays.html#Base.findlast-Tuple{Any}",
     "page": "Arrays",
     "title": "Base.findlast",
     "category": "Method",
@@ -11593,7 +11633,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/arrays.html#Base.findlast-Tuple{Function,Any}",
+    "location": "base/arrays.html#Base.findlast-Tuple{Function,Any}",
     "page": "Arrays",
     "title": "Base.findlast",
     "category": "Method",
@@ -11601,7 +11641,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/arrays.html#Base.findnext-Tuple{Any,Integer}",
+    "location": "base/arrays.html#Base.findnext-Tuple{Any,Integer}",
     "page": "Arrays",
     "title": "Base.findnext",
     "category": "Method",
@@ -11609,7 +11649,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/arrays.html#Base.findnext-Tuple{Function,Any,Integer}",
+    "location": "base/arrays.html#Base.findnext-Tuple{Function,Any,Integer}",
     "page": "Arrays",
     "title": "Base.findnext",
     "category": "Method",
@@ -11617,7 +11657,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/arrays.html#Base.findprev-Tuple{Any,Integer}",
+    "location": "base/arrays.html#Base.findprev-Tuple{Any,Integer}",
     "page": "Arrays",
     "title": "Base.findprev",
     "category": "Method",
@@ -11625,7 +11665,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/arrays.html#Base.findprev-Tuple{Function,Any,Integer}",
+    "location": "base/arrays.html#Base.findprev-Tuple{Function,Any,Integer}",
     "page": "Arrays",
     "title": "Base.findprev",
     "category": "Method",
@@ -11633,7 +11673,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/arrays.html#Base.permutedims",
+    "location": "base/arrays.html#Base.permutedims",
     "page": "Arrays",
     "title": "Base.permutedims",
     "category": "Function",
@@ -11641,7 +11681,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/arrays.html#Base.permutedims!",
+    "location": "base/arrays.html#Base.permutedims!",
     "page": "Arrays",
     "title": "Base.permutedims!",
     "category": "Function",
@@ -11649,7 +11689,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/arrays.html#Base.PermutedDimsArrays.PermutedDimsArray",
+    "location": "base/arrays.html#Base.PermutedDimsArrays.PermutedDimsArray",
     "page": "Arrays",
     "title": "Base.PermutedDimsArrays.PermutedDimsArray",
     "category": "Type",
@@ -11657,7 +11697,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/arrays.html#Base.promote_shape",
+    "location": "base/arrays.html#Base.promote_shape",
     "page": "Arrays",
     "title": "Base.promote_shape",
     "category": "Function",
@@ -11665,7 +11705,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/arrays.html#Concatenation-and-permutation-1",
+    "location": "base/arrays.html#Concatenation-and-permutation-1",
     "page": "Arrays",
     "title": "Concatenation and permutation",
     "category": "section",
@@ -11673,7 +11713,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/arrays.html#Base.accumulate-Tuple{Any,Any,Integer}",
+    "location": "base/arrays.html#Base.accumulate-Tuple{Any,Any,Integer}",
     "page": "Arrays",
     "title": "Base.accumulate",
     "category": "Method",
@@ -11681,7 +11721,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/arrays.html#Base.accumulate!",
+    "location": "base/arrays.html#Base.accumulate!",
     "page": "Arrays",
     "title": "Base.accumulate!",
     "category": "Function",
@@ -11689,7 +11729,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/arrays.html#Base.cumprod",
+    "location": "base/arrays.html#Base.cumprod",
     "page": "Arrays",
     "title": "Base.cumprod",
     "category": "Function",
@@ -11697,7 +11737,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/arrays.html#Base.cumprod!",
+    "location": "base/arrays.html#Base.cumprod!",
     "page": "Arrays",
     "title": "Base.cumprod!",
     "category": "Function",
@@ -11705,7 +11745,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/arrays.html#Base.cumsum",
+    "location": "base/arrays.html#Base.cumsum",
     "page": "Arrays",
     "title": "Base.cumsum",
     "category": "Function",
@@ -11713,7 +11753,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/arrays.html#Base.cumsum!",
+    "location": "base/arrays.html#Base.cumsum!",
     "page": "Arrays",
     "title": "Base.cumsum!",
     "category": "Function",
@@ -11721,15 +11761,15 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/arrays.html#Base.LinAlg.diff",
+    "location": "base/arrays.html#Base.LinAlg.diff",
     "page": "Arrays",
     "title": "Base.LinAlg.diff",
     "category": "Function",
-    "text": "diff(A, [dim::Integer=1])\n\nFinite difference operator of matrix or vector A. If A is a matrix, compute the finite difference over a dimension dim (default 1).\n\nExamples\n\njulia> a = [2 4; 6 16]\n2×2 Array{Int64,2}:\n 2   4\n 6  16\n\njulia> diff(a,2)\n2×1 Array{Int64,2}:\n  2\n 10\n\n\n\n"
+    "text": "diff(A::AbstractVector)\ndiff(A::AbstractMatrix, dim::Integer)\n\nFinite difference operator of matrix or vector A. If A is a matrix, specify the dimension over which to operate with the dim argument.\n\nExamples\n\njulia> a = [2 4; 6 16]\n2×2 Array{Int64,2}:\n 2   4\n 6  16\n\njulia> diff(a,2)\n2×1 Array{Int64,2}:\n  2\n 10\n\njulia> diff(vec(a))\n3-element Array{Int64,1}:\n  4\n -2\n 12\n\n\n\n"
 },
 
 {
-    "location": "stdlib/arrays.html#Base.repeat-Tuple{AbstractArray}",
+    "location": "base/arrays.html#Base.repeat-Tuple{AbstractArray}",
     "page": "Arrays",
     "title": "Base.repeat",
     "category": "Method",
@@ -11737,7 +11777,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/arrays.html#Base.rot180",
+    "location": "base/arrays.html#Base.rot180",
     "page": "Arrays",
     "title": "Base.rot180",
     "category": "Function",
@@ -11745,7 +11785,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/arrays.html#Base.rotl90",
+    "location": "base/arrays.html#Base.rotl90",
     "page": "Arrays",
     "title": "Base.rotl90",
     "category": "Function",
@@ -11753,7 +11793,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/arrays.html#Base.rotr90",
+    "location": "base/arrays.html#Base.rotr90",
     "page": "Arrays",
     "title": "Base.rotr90",
     "category": "Function",
@@ -11761,7 +11801,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/arrays.html#Base.reducedim",
+    "location": "base/arrays.html#Base.reducedim",
     "page": "Arrays",
     "title": "Base.reducedim",
     "category": "Function",
@@ -11769,7 +11809,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/arrays.html#Base.mapreducedim",
+    "location": "base/arrays.html#Base.mapreducedim",
     "page": "Arrays",
     "title": "Base.mapreducedim",
     "category": "Function",
@@ -11777,7 +11817,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/arrays.html#Base.mapslices",
+    "location": "base/arrays.html#Base.mapslices",
     "page": "Arrays",
     "title": "Base.mapslices",
     "category": "Function",
@@ -11785,7 +11825,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/arrays.html#Array-functions-1",
+    "location": "base/arrays.html#Array-functions-1",
     "page": "Arrays",
     "title": "Array functions",
     "category": "section",
@@ -11793,7 +11833,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/arrays.html#Base.Random.randperm",
+    "location": "base/arrays.html#Base.Random.randperm",
     "page": "Arrays",
     "title": "Base.Random.randperm",
     "category": "Function",
@@ -11801,7 +11841,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/arrays.html#Base.Random.randperm!",
+    "location": "base/arrays.html#Base.Random.randperm!",
     "page": "Arrays",
     "title": "Base.Random.randperm!",
     "category": "Function",
@@ -11809,7 +11849,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/arrays.html#Base.invperm",
+    "location": "base/arrays.html#Base.invperm",
     "page": "Arrays",
     "title": "Base.invperm",
     "category": "Function",
@@ -11817,7 +11857,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/arrays.html#Base.isperm",
+    "location": "base/arrays.html#Base.isperm",
     "page": "Arrays",
     "title": "Base.isperm",
     "category": "Function",
@@ -11825,7 +11865,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/arrays.html#Base.permute!-Tuple{Any,AbstractArray{T,1} where T}",
+    "location": "base/arrays.html#Base.permute!-Tuple{Any,AbstractArray{T,1} where T}",
     "page": "Arrays",
     "title": "Base.permute!",
     "category": "Method",
@@ -11833,7 +11873,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/arrays.html#Base.invpermute!",
+    "location": "base/arrays.html#Base.invpermute!",
     "page": "Arrays",
     "title": "Base.invpermute!",
     "category": "Function",
@@ -11841,7 +11881,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/arrays.html#Base.Random.randcycle",
+    "location": "base/arrays.html#Base.Random.randcycle",
     "page": "Arrays",
     "title": "Base.Random.randcycle",
     "category": "Function",
@@ -11849,7 +11889,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/arrays.html#Base.Random.randcycle!",
+    "location": "base/arrays.html#Base.Random.randcycle!",
     "page": "Arrays",
     "title": "Base.Random.randcycle!",
     "category": "Function",
@@ -11857,7 +11897,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/arrays.html#Base.Random.shuffle",
+    "location": "base/arrays.html#Base.Random.shuffle",
     "page": "Arrays",
     "title": "Base.Random.shuffle",
     "category": "Function",
@@ -11865,7 +11905,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/arrays.html#Base.Random.shuffle!",
+    "location": "base/arrays.html#Base.Random.shuffle!",
     "page": "Arrays",
     "title": "Base.Random.shuffle!",
     "category": "Function",
@@ -11873,7 +11913,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/arrays.html#Base.reverse",
+    "location": "base/arrays.html#Base.reverse",
     "page": "Arrays",
     "title": "Base.reverse",
     "category": "Function",
@@ -11881,7 +11921,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/arrays.html#Base.reverseind",
+    "location": "base/arrays.html#Base.reverseind",
     "page": "Arrays",
     "title": "Base.reverseind",
     "category": "Function",
@@ -11889,7 +11929,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/arrays.html#Base.reverse!",
+    "location": "base/arrays.html#Base.reverse!",
     "page": "Arrays",
     "title": "Base.reverse!",
     "category": "Function",
@@ -11897,7 +11937,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/arrays.html#Combinatorics-1",
+    "location": "base/arrays.html#Combinatorics-1",
     "page": "Arrays",
     "title": "Combinatorics",
     "category": "section",
@@ -11905,7 +11945,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/arrays.html#Base.flipbits!",
+    "location": "base/arrays.html#Base.flipbits!",
     "page": "Arrays",
     "title": "Base.flipbits!",
     "category": "Function",
@@ -11913,7 +11953,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/arrays.html#BitArrays-1",
+    "location": "base/arrays.html#BitArrays-1",
     "page": "Arrays",
     "title": "BitArrays",
     "category": "section",
@@ -11921,7 +11961,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/arrays.html#Base.SparseArrays.SparseVector",
+    "location": "base/arrays.html#Base.SparseArrays.SparseVector",
     "page": "Arrays",
     "title": "Base.SparseArrays.SparseVector",
     "category": "Type",
@@ -11929,7 +11969,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/arrays.html#Base.SparseArrays.SparseMatrixCSC",
+    "location": "base/arrays.html#Base.SparseArrays.SparseMatrixCSC",
     "page": "Arrays",
     "title": "Base.SparseArrays.SparseMatrixCSC",
     "category": "Type",
@@ -11937,7 +11977,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/arrays.html#Base.SparseArrays.sparse",
+    "location": "base/arrays.html#Base.SparseArrays.sparse",
     "page": "Arrays",
     "title": "Base.SparseArrays.sparse",
     "category": "Function",
@@ -11945,7 +11985,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/arrays.html#Base.SparseArrays.sparsevec",
+    "location": "base/arrays.html#Base.SparseArrays.sparsevec",
     "page": "Arrays",
     "title": "Base.SparseArrays.sparsevec",
     "category": "Function",
@@ -11953,7 +11993,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/arrays.html#Base.SparseArrays.issparse",
+    "location": "base/arrays.html#Base.SparseArrays.issparse",
     "page": "Arrays",
     "title": "Base.SparseArrays.issparse",
     "category": "Function",
@@ -11961,7 +12001,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/arrays.html#Base.SparseArrays.nnz",
+    "location": "base/arrays.html#Base.SparseArrays.nnz",
     "page": "Arrays",
     "title": "Base.SparseArrays.nnz",
     "category": "Function",
@@ -11969,7 +12009,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/arrays.html#Base.SparseArrays.spzeros",
+    "location": "base/arrays.html#Base.SparseArrays.spzeros",
     "page": "Arrays",
     "title": "Base.SparseArrays.spzeros",
     "category": "Function",
@@ -11977,7 +12017,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/arrays.html#Base.SparseArrays.spdiagm",
+    "location": "base/arrays.html#Base.SparseArrays.spdiagm",
     "page": "Arrays",
     "title": "Base.SparseArrays.spdiagm",
     "category": "Function",
@@ -11985,7 +12025,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/arrays.html#Base.SparseArrays.sprand",
+    "location": "base/arrays.html#Base.SparseArrays.sprand",
     "page": "Arrays",
     "title": "Base.SparseArrays.sprand",
     "category": "Function",
@@ -11993,7 +12033,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/arrays.html#Base.SparseArrays.sprandn",
+    "location": "base/arrays.html#Base.SparseArrays.sprandn",
     "page": "Arrays",
     "title": "Base.SparseArrays.sprandn",
     "category": "Function",
@@ -12001,7 +12041,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/arrays.html#Base.SparseArrays.nonzeros",
+    "location": "base/arrays.html#Base.SparseArrays.nonzeros",
     "page": "Arrays",
     "title": "Base.SparseArrays.nonzeros",
     "category": "Function",
@@ -12009,7 +12049,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/arrays.html#Base.SparseArrays.rowvals",
+    "location": "base/arrays.html#Base.SparseArrays.rowvals",
     "page": "Arrays",
     "title": "Base.SparseArrays.rowvals",
     "category": "Function",
@@ -12017,7 +12057,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/arrays.html#Base.SparseArrays.nzrange",
+    "location": "base/arrays.html#Base.SparseArrays.nzrange",
     "page": "Arrays",
     "title": "Base.SparseArrays.nzrange",
     "category": "Function",
@@ -12025,7 +12065,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/arrays.html#Base.SparseArrays.dropzeros!-Tuple{SparseMatrixCSC,Bool}",
+    "location": "base/arrays.html#Base.SparseArrays.dropzeros!-Tuple{SparseMatrixCSC,Bool}",
     "page": "Arrays",
     "title": "Base.SparseArrays.dropzeros!",
     "category": "Method",
@@ -12033,7 +12073,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/arrays.html#Base.SparseArrays.dropzeros-Tuple{SparseMatrixCSC,Bool}",
+    "location": "base/arrays.html#Base.SparseArrays.dropzeros-Tuple{SparseMatrixCSC,Bool}",
     "page": "Arrays",
     "title": "Base.SparseArrays.dropzeros",
     "category": "Method",
@@ -12041,7 +12081,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/arrays.html#Base.SparseArrays.dropzeros!-Tuple{SparseVector,Bool}",
+    "location": "base/arrays.html#Base.SparseArrays.dropzeros!-Tuple{SparseVector,Bool}",
     "page": "Arrays",
     "title": "Base.SparseArrays.dropzeros!",
     "category": "Method",
@@ -12049,7 +12089,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/arrays.html#Base.SparseArrays.dropzeros-Tuple{SparseVector,Bool}",
+    "location": "base/arrays.html#Base.SparseArrays.dropzeros-Tuple{SparseVector,Bool}",
     "page": "Arrays",
     "title": "Base.SparseArrays.dropzeros",
     "category": "Method",
@@ -12057,7 +12097,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/arrays.html#Base.SparseArrays.permute",
+    "location": "base/arrays.html#Base.SparseArrays.permute",
     "page": "Arrays",
     "title": "Base.SparseArrays.permute",
     "category": "Function",
@@ -12065,7 +12105,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/arrays.html#Base.permute!-Union{Tuple{Tq}, Tuple{Tp}, Tuple{Ti}, Tuple{Tv}, Tuple{SparseMatrixCSC{Tv,Ti},SparseMatrixCSC{Tv,Ti},AbstractArray{Tp,1},AbstractArray{Tq,1}}} where Tq<:Integer where Tp<:Integer where Ti where Tv",
+    "location": "base/arrays.html#Base.permute!-Union{Tuple{Tq}, Tuple{Tp}, Tuple{Ti}, Tuple{Tv}, Tuple{SparseMatrixCSC{Tv,Ti},SparseMatrixCSC{Tv,Ti},AbstractArray{Tp,1},AbstractArray{Tq,1}}} where Tq<:Integer where Tp<:Integer where Ti where Tv",
     "page": "Arrays",
     "title": "Base.permute!",
     "category": "Method",
@@ -12073,7 +12113,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/arrays.html#stdlib-sparse-arrays-1",
+    "location": "base/arrays.html#stdlib-sparse-arrays-1",
     "page": "Arrays",
     "title": "Sparse Vectors and Matrices",
     "category": "section",
@@ -12081,7 +12121,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/parallel.html#",
+    "location": "base/parallel.html#",
     "page": "Tasks",
     "title": "Tasks",
     "category": "page",
@@ -12089,7 +12129,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/parallel.html#Core.Task",
+    "location": "base/parallel.html#Core.Task",
     "page": "Tasks",
     "title": "Core.Task",
     "category": "Type",
@@ -12097,7 +12137,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/parallel.html#Base.current_task",
+    "location": "base/parallel.html#Base.current_task",
     "page": "Tasks",
     "title": "Base.current_task",
     "category": "Function",
@@ -12105,7 +12145,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/parallel.html#Base.istaskdone",
+    "location": "base/parallel.html#Base.istaskdone",
     "page": "Tasks",
     "title": "Base.istaskdone",
     "category": "Function",
@@ -12113,7 +12153,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/parallel.html#Base.istaskstarted",
+    "location": "base/parallel.html#Base.istaskstarted",
     "page": "Tasks",
     "title": "Base.istaskstarted",
     "category": "Function",
@@ -12121,7 +12161,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/parallel.html#Base.yield",
+    "location": "base/parallel.html#Base.yield",
     "page": "Tasks",
     "title": "Base.yield",
     "category": "Function",
@@ -12129,7 +12169,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/parallel.html#Base.yieldto",
+    "location": "base/parallel.html#Base.yieldto",
     "page": "Tasks",
     "title": "Base.yieldto",
     "category": "Function",
@@ -12137,7 +12177,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/parallel.html#Base.task_local_storage-Tuple{Any}",
+    "location": "base/parallel.html#Base.task_local_storage-Tuple{Any}",
     "page": "Tasks",
     "title": "Base.task_local_storage",
     "category": "Method",
@@ -12145,7 +12185,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/parallel.html#Base.task_local_storage-Tuple{Any,Any}",
+    "location": "base/parallel.html#Base.task_local_storage-Tuple{Any,Any}",
     "page": "Tasks",
     "title": "Base.task_local_storage",
     "category": "Method",
@@ -12153,7 +12193,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/parallel.html#Base.task_local_storage-Tuple{Function,Any,Any}",
+    "location": "base/parallel.html#Base.task_local_storage-Tuple{Function,Any,Any}",
     "page": "Tasks",
     "title": "Base.task_local_storage",
     "category": "Method",
@@ -12161,7 +12201,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/parallel.html#Base.Condition",
+    "location": "base/parallel.html#Base.Condition",
     "page": "Tasks",
     "title": "Base.Condition",
     "category": "Type",
@@ -12169,7 +12209,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/parallel.html#Base.notify",
+    "location": "base/parallel.html#Base.notify",
     "page": "Tasks",
     "title": "Base.notify",
     "category": "Function",
@@ -12177,7 +12217,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/parallel.html#Base.schedule",
+    "location": "base/parallel.html#Base.schedule",
     "page": "Tasks",
     "title": "Base.schedule",
     "category": "Function",
@@ -12185,7 +12225,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/parallel.html#Base.@schedule",
+    "location": "base/parallel.html#Base.@schedule",
     "page": "Tasks",
     "title": "Base.@schedule",
     "category": "Macro",
@@ -12193,7 +12233,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/parallel.html#Base.@task",
+    "location": "base/parallel.html#Base.@task",
     "page": "Tasks",
     "title": "Base.@task",
     "category": "Macro",
@@ -12201,7 +12241,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/parallel.html#Base.sleep",
+    "location": "base/parallel.html#Base.sleep",
     "page": "Tasks",
     "title": "Base.sleep",
     "category": "Function",
@@ -12209,7 +12249,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/parallel.html#Base.Channel",
+    "location": "base/parallel.html#Base.Channel",
     "page": "Tasks",
     "title": "Base.Channel",
     "category": "Type",
@@ -12217,7 +12257,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/parallel.html#Base.put!-Tuple{Channel,Any}",
+    "location": "base/parallel.html#Base.put!-Tuple{Channel,Any}",
     "page": "Tasks",
     "title": "Base.put!",
     "category": "Method",
@@ -12225,7 +12265,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/parallel.html#Base.take!-Tuple{Channel}",
+    "location": "base/parallel.html#Base.take!-Tuple{Channel}",
     "page": "Tasks",
     "title": "Base.take!",
     "category": "Method",
@@ -12233,7 +12273,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/parallel.html#Base.isready-Tuple{Channel}",
+    "location": "base/parallel.html#Base.isready-Tuple{Channel}",
     "page": "Tasks",
     "title": "Base.isready",
     "category": "Method",
@@ -12241,7 +12281,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/parallel.html#Base.fetch-Tuple{Channel}",
+    "location": "base/parallel.html#Base.fetch-Tuple{Channel}",
     "page": "Tasks",
     "title": "Base.fetch",
     "category": "Method",
@@ -12249,7 +12289,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/parallel.html#Base.close-Tuple{Channel}",
+    "location": "base/parallel.html#Base.close-Tuple{Channel}",
     "page": "Tasks",
     "title": "Base.close",
     "category": "Method",
@@ -12257,7 +12297,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/parallel.html#Base.bind-Tuple{Channel,Task}",
+    "location": "base/parallel.html#Base.bind-Tuple{Channel,Task}",
     "page": "Tasks",
     "title": "Base.bind",
     "category": "Method",
@@ -12265,7 +12305,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/parallel.html#Base.asyncmap",
+    "location": "base/parallel.html#Base.asyncmap",
     "page": "Tasks",
     "title": "Base.asyncmap",
     "category": "Function",
@@ -12273,7 +12313,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/parallel.html#Base.asyncmap!",
+    "location": "base/parallel.html#Base.asyncmap!",
     "page": "Tasks",
     "title": "Base.asyncmap!",
     "category": "Function",
@@ -12281,7 +12321,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/parallel.html#Tasks-1",
+    "location": "base/parallel.html#Tasks-1",
     "page": "Tasks",
     "title": "Tasks",
     "category": "section",
@@ -12289,471 +12329,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/distributed.html#",
-    "page": "Distributed Computing",
-    "title": "Distributed Computing",
-    "category": "page",
-    "text": ""
-},
-
-{
-    "location": "stdlib/distributed.html#Distributed.addprocs",
-    "page": "Distributed Computing",
-    "title": "Distributed.addprocs",
-    "category": "Function",
-    "text": "addprocs(manager::ClusterManager; kwargs...) -> List of process identifiers\n\nLaunches worker processes via the specified cluster manager.\n\nFor example, Beowulf clusters are supported via a custom cluster manager implemented in the package ClusterManagers.jl.\n\nThe number of seconds a newly launched worker waits for connection establishment from the master can be specified via variable JULIA_WORKER_TIMEOUT in the worker process's environment. Relevant only when using TCP/IP as transport.\n\n\n\naddprocs(machines; tunnel=false, sshflags=``, max_parallel=10, kwargs...) -> List of process identifiers\n\nAdd processes on remote machines via SSH. Requires julia to be installed in the same location on each node, or to be available via a shared file system.\n\nmachines is a vector of machine specifications. Workers are started for each specification.\n\nA machine specification is either a string machine_spec or a tuple - (machine_spec, count).\n\nmachine_spec is a string of the form [user@]host[:port] [bind_addr[:port]]. user defaults to current user, port to the standard ssh port. If [bind_addr[:port]] is specified, other workers will connect to this worker at the specified bind_addr and port.\n\ncount is the number of workers to be launched on the specified host. If specified as :auto it will launch as many workers as the number of cores on the specific host.\n\nKeyword arguments:\n\ntunnel: if true then SSH tunneling will be used to connect to the worker from the master process. Default is false.\nsshflags: specifies additional ssh options, e.g. sshflags=`-i /home/foo/bar.pem`\nmax_parallel: specifies the maximum number of workers connected to in parallel at a host. Defaults to 10.\ndir: specifies the working directory on the workers. Defaults to the host's current directory (as found by pwd())\nenable_threaded_blas: if true then  BLAS will run on multiple threads in added processes. Default is false.\nexename: name of the julia executable. Defaults to \"$(Sys.BINDIR)/julia\" or \"$(Sys.BINDIR)/julia-debug\" as the case may be.\nexeflags: additional flags passed to the worker processes.\ntopology: Specifies how the workers connect to each other. Sending a message between unconnected workers results in an error.\ntopology=:all_to_all: All processes are connected to each other. The default.\ntopology=:master_worker: Only the driver process, i.e. pid 1 connects to the workers. The workers do not connect to each other.\ntopology=:custom: The launch method of the cluster manager specifies the connection topology via fields ident and connect_idents in WorkerConfig. A worker with a cluster manager identity ident will connect to all workers specified in connect_idents.\nlazy: Applicable only with topology=:all_to_all. If true, worker-worker connections are setup lazily, i.e. they are setup at the first instance of a remote call between workers. Default is true.\n\nEnvironment variables :\n\nIf the master process fails to establish a connection with a newly launched worker within 60.0 seconds, the worker treats it as a fatal situation and terminates. This timeout can be controlled via environment variable JULIA_WORKER_TIMEOUT. The value of JULIA_WORKER_TIMEOUT on the master process specifies the number of seconds a newly launched worker waits for connection establishment.\n\n\n\naddprocs(; kwargs...) -> List of process identifiers\n\nEquivalent to addprocs(Sys.CPU_CORES; kwargs...)\n\nNote that workers do not run a .juliarc.jl startup script, nor do they synchronize their global state (such as global variables, new method definitions, and loaded modules) with any of the other running processes.\n\n\n\naddprocs(np::Integer; restrict=true, kwargs...) -> List of process identifiers\n\nLaunches workers using the in-built LocalManager which only launches workers on the local host. This can be used to take advantage of multiple cores. addprocs(4) will add 4 processes on the local machine. If restrict is true, binding is restricted to 127.0.0.1. Keyword args dir, exename, exeflags, topology, lazy and enable_threaded_blas have the same effect as documented for addprocs(machines).\n\n\n\n"
-},
-
-{
-    "location": "stdlib/distributed.html#Distributed.nprocs",
-    "page": "Distributed Computing",
-    "title": "Distributed.nprocs",
-    "category": "Function",
-    "text": "nprocs()\n\nGet the number of available processes.\n\n\n\n"
-},
-
-{
-    "location": "stdlib/distributed.html#Distributed.nworkers",
-    "page": "Distributed Computing",
-    "title": "Distributed.nworkers",
-    "category": "Function",
-    "text": "nworkers()\n\nGet the number of available worker processes. This is one less than nprocs(). Equal to nprocs() if nprocs() == 1.\n\n\n\n"
-},
-
-{
-    "location": "stdlib/distributed.html#Distributed.procs-Tuple{}",
-    "page": "Distributed Computing",
-    "title": "Distributed.procs",
-    "category": "Method",
-    "text": "procs()\n\nReturn a list of all process identifiers.\n\n\n\n"
-},
-
-{
-    "location": "stdlib/distributed.html#Distributed.procs-Tuple{Integer}",
-    "page": "Distributed Computing",
-    "title": "Distributed.procs",
-    "category": "Method",
-    "text": "procs(pid::Integer)\n\nReturn a list of all process identifiers on the same physical node. Specifically all workers bound to the same ip-address as pid are returned.\n\n\n\n"
-},
-
-{
-    "location": "stdlib/distributed.html#Distributed.workers",
-    "page": "Distributed Computing",
-    "title": "Distributed.workers",
-    "category": "Function",
-    "text": "workers()\n\nReturn a list of all worker process identifiers.\n\n\n\n"
-},
-
-{
-    "location": "stdlib/distributed.html#Distributed.rmprocs",
-    "page": "Distributed Computing",
-    "title": "Distributed.rmprocs",
-    "category": "Function",
-    "text": "rmprocs(pids...; waitfor=typemax(Int))\n\nRemove the specified workers. Note that only process 1 can add or remove workers.\n\nArgument waitfor specifies how long to wait for the workers to shut down:     - If unspecified, rmprocs will wait until all requested pids are removed.     - An ErrorException is raised if all workers cannot be terminated before       the requested waitfor seconds.     - With a waitfor value of 0, the call returns immediately with the workers       scheduled for removal in a different task. The scheduled Task object is       returned. The user should call wait on the task before invoking any other       parallel calls.\n\n\n\n"
-},
-
-{
-    "location": "stdlib/distributed.html#Distributed.interrupt",
-    "page": "Distributed Computing",
-    "title": "Distributed.interrupt",
-    "category": "Function",
-    "text": "interrupt(pids::Integer...)\n\nInterrupt the current executing task on the specified workers. This is equivalent to pressing Ctrl-C on the local machine. If no arguments are given, all workers are interrupted.\n\n\n\ninterrupt(pids::AbstractVector=workers())\n\nInterrupt the current executing task on the specified workers. This is equivalent to pressing Ctrl-C on the local machine. If no arguments are given, all workers are interrupted.\n\n\n\n"
-},
-
-{
-    "location": "stdlib/distributed.html#Distributed.myid",
-    "page": "Distributed Computing",
-    "title": "Distributed.myid",
-    "category": "Function",
-    "text": "myid()\n\nGet the id of the current process.\n\n\n\n"
-},
-
-{
-    "location": "stdlib/distributed.html#Distributed.pmap",
-    "page": "Distributed Computing",
-    "title": "Distributed.pmap",
-    "category": "Function",
-    "text": "pmap([::AbstractWorkerPool], f, c...; distributed=true, batch_size=1, on_error=nothing, retry_delays=[], retry_check=nothing) -> collection\n\nTransform collection c by applying f to each element using available workers and tasks.\n\nFor multiple collection arguments, apply f elementwise.\n\nNote that f must be made available to all worker processes; see Code Availability and Loading Packages for details.\n\nIf a worker pool is not specified, all available workers, i.e., the default worker pool is used.\n\nBy default, pmap distributes the computation over all specified workers. To use only the local process and distribute over tasks, specify distributed=false. This is equivalent to using asyncmap. For example, pmap(f, c; distributed=false) is equivalent to asyncmap(f,c; ntasks=()->nworkers())\n\npmap can also use a mix of processes and tasks via the batch_size argument. For batch sizes greater than 1, the collection is processed in multiple batches, each of length batch_size or less. A batch is sent as a single request to a free worker, where a local asyncmap processes elements from the batch using multiple concurrent tasks.\n\nAny error stops pmap from processing the remainder of the collection. To override this behavior you can specify an error handling function via argument on_error which takes in a single argument, i.e., the exception. The function can stop the processing by rethrowing the error, or, to continue, return any value which is then returned inline with the results to the caller.\n\nConsider the following two examples. The first one returns the exception object inline, the second a 0 in place of any exception:\n\njulia> pmap(x->iseven(x) ? error(\"foo\") : x, 1:4; on_error=identity)\n4-element Array{Any,1}:\n 1\n  ErrorException(\"foo\")\n 3\n  ErrorException(\"foo\")\n\njulia> pmap(x->iseven(x) ? error(\"foo\") : x, 1:4; on_error=ex->0)\n4-element Array{Int64,1}:\n 1\n 0\n 3\n 0\n\nErrors can also be handled by retrying failed computations. Keyword arguments retry_delays and retry_check are passed through to retry as keyword arguments delays and check respectively. If batching is specified, and an entire batch fails, all items in the batch are retried.\n\nNote that if both on_error and retry_delays are specified, the on_error hook is called before retrying. If on_error does not throw (or rethrow) an exception, the element will not be retried.\n\nExample: On errors, retry f on an element a maximum of 3 times without any delay between retries.\n\npmap(f, c; retry_delays = zeros(3))\n\nExample: Retry f only if the exception is not of type InexactError, with exponentially increasing delays up to 3 times. Return a NaN in place for all InexactError occurrences.\n\npmap(f, c; on_error = e->(isa(e, InexactError) ? NaN : rethrow(e)), retry_delays = ExponentialBackOff(n = 3))\n\n\n\n"
-},
-
-{
-    "location": "stdlib/distributed.html#Distributed.RemoteException",
-    "page": "Distributed Computing",
-    "title": "Distributed.RemoteException",
-    "category": "Type",
-    "text": "RemoteException(captured)\n\nExceptions on remote computations are captured and rethrown locally.  A RemoteException wraps the pid of the worker and a captured exception. A CapturedException captures the remote exception and a serializable form of the call stack when the exception was raised.\n\n\n\n"
-},
-
-{
-    "location": "stdlib/distributed.html#Distributed.Future",
-    "page": "Distributed Computing",
-    "title": "Distributed.Future",
-    "category": "Type",
-    "text": "Future(pid::Integer=myid())\n\nCreate a Future on process pid. The default pid is the current process.\n\n\n\n"
-},
-
-{
-    "location": "stdlib/distributed.html#Distributed.RemoteChannel",
-    "page": "Distributed Computing",
-    "title": "Distributed.RemoteChannel",
-    "category": "Type",
-    "text": "RemoteChannel(pid::Integer=myid())\n\nMake a reference to a Channel{Any}(1) on process pid. The default pid is the current process.\n\nRemoteChannel(f::Function, pid::Integer=myid())\n\nCreate references to remote channels of a specific size and type. f is a function that when executed on pid must return an implementation of an AbstractChannel.\n\nFor example, RemoteChannel(()->Channel{Int}(10), pid), will return a reference to a channel of type Int and size 10 on pid.\n\nThe default pid is the current process.\n\n\n\n"
-},
-
-{
-    "location": "stdlib/distributed.html#Base.wait",
-    "page": "Distributed Computing",
-    "title": "Base.wait",
-    "category": "Function",
-    "text": "wait([x])\n\nBlock the current task until some event occurs, depending on the type of the argument:\n\nChannel: Wait for a value to be appended to the channel.\nCondition: Wait for notify on a condition.\nProcess: Wait for a process or process chain to exit. The exitcode field of a process can be used to determine success or failure.\nTask: Wait for a Task to finish, returning its result value. If the task fails with an exception, the exception is propagated (re-thrown in the task that called wait).\nRawFD: Wait for changes on a file descriptor (see the FileWatching package).\n\nIf no argument is passed, the task blocks for an undefined period. A task can only be restarted by an explicit call to schedule or yieldto.\n\nOften wait is called within a while loop to ensure a waited-for condition is met before proceeding.\n\n\n\nwait(r::Future)\n\nWait for a value to become available for the specified future.\n\n\n\nwait(r::RemoteChannel, args...)\n\nWait for a value to become available on the specified remote channel.\n\n\n\n"
-},
-
-{
-    "location": "stdlib/distributed.html#Base.fetch-Tuple{Any}",
-    "page": "Distributed Computing",
-    "title": "Base.fetch",
-    "category": "Method",
-    "text": "fetch(x)\n\nWaits and fetches a value from x depending on the type of x:\n\nFuture: Wait for and get the value of a Future. The fetched value is cached locally. Further calls to fetch on the same reference return the cached value. If the remote value is an exception, throws a RemoteException which captures the remote exception and backtrace.\nRemoteChannel: Wait for and get the value of a remote reference. Exceptions raised are same as for a Future .\n\nDoes not remove the item fetched.\n\n\n\n"
-},
-
-{
-    "location": "stdlib/distributed.html#Distributed.remotecall-Tuple{Any,Integer,Vararg{Any,N} where N}",
-    "page": "Distributed Computing",
-    "title": "Distributed.remotecall",
-    "category": "Method",
-    "text": "remotecall(f, id::Integer, args...; kwargs...) -> Future\n\nCall a function f asynchronously on the given arguments on the specified process. Return a Future. Keyword arguments, if any, are passed through to f.\n\n\n\n"
-},
-
-{
-    "location": "stdlib/distributed.html#Distributed.remotecall_wait-Tuple{Any,Integer,Vararg{Any,N} where N}",
-    "page": "Distributed Computing",
-    "title": "Distributed.remotecall_wait",
-    "category": "Method",
-    "text": "remotecall_wait(f, id::Integer, args...; kwargs...)\n\nPerform a faster wait(remotecall(...)) in one message on the Worker specified by worker id id. Keyword arguments, if any, are passed through to f.\n\nSee also wait and remotecall.\n\n\n\n"
-},
-
-{
-    "location": "stdlib/distributed.html#Distributed.remotecall_fetch-Tuple{Any,Integer,Vararg{Any,N} where N}",
-    "page": "Distributed Computing",
-    "title": "Distributed.remotecall_fetch",
-    "category": "Method",
-    "text": "remotecall_fetch(f, id::Integer, args...; kwargs...)\n\nPerform fetch(remotecall(...)) in one message. Keyword arguments, if any, are passed through to f. Any remote exceptions are captured in a RemoteException and thrown.\n\nSee also fetch and remotecall.\n\n\n\n"
-},
-
-{
-    "location": "stdlib/distributed.html#Distributed.remote_do-Tuple{Any,Integer,Vararg{Any,N} where N}",
-    "page": "Distributed Computing",
-    "title": "Distributed.remote_do",
-    "category": "Method",
-    "text": "remote_do(f, id::Integer, args...; kwargs...) -> nothing\n\nExecutes f on worker id asynchronously. Unlike remotecall, it does not store the result of computation, nor is there a way to wait for its completion.\n\nA successful invocation indicates that the request has been accepted for execution on the remote node.\n\nWhile consecutive remotecalls to the same worker are serialized in the order they are invoked, the order of executions on the remote worker is undetermined. For example, remote_do(f1, 2); remotecall(f2, 2); remote_do(f3, 2) will serialize the call to f1, followed by f2 and f3 in that order. However, it is not guaranteed that f1 is executed before f3 on worker 2.\n\nAny exceptions thrown by f are printed to STDERR on the remote worker.\n\nKeyword arguments, if any, are passed through to f.\n\n\n\n"
-},
-
-{
-    "location": "stdlib/distributed.html#Base.put!-Tuple{RemoteChannel,Vararg{Any,N} where N}",
-    "page": "Distributed Computing",
-    "title": "Base.put!",
-    "category": "Method",
-    "text": "put!(rr::RemoteChannel, args...)\n\nStore a set of values to the RemoteChannel. If the channel is full, blocks until space is available. Return the first argument.\n\n\n\n"
-},
-
-{
-    "location": "stdlib/distributed.html#Base.put!-Tuple{Future,Any}",
-    "page": "Distributed Computing",
-    "title": "Base.put!",
-    "category": "Method",
-    "text": "put!(rr::Future, v)\n\nStore a value to a Future rr. Futures are write-once remote references. A put! on an already set Future throws an Exception. All asynchronous remote calls return Futures and set the value to the return value of the call upon completion.\n\n\n\n"
-},
-
-{
-    "location": "stdlib/distributed.html#Base.take!-Tuple{RemoteChannel,Vararg{Any,N} where N}",
-    "page": "Distributed Computing",
-    "title": "Base.take!",
-    "category": "Method",
-    "text": "take!(rr::RemoteChannel, args...)\n\nFetch value(s) from a RemoteChannel rr, removing the value(s) in the process.\n\n\n\n"
-},
-
-{
-    "location": "stdlib/distributed.html#Base.isready-Tuple{RemoteChannel,Vararg{Any,N} where N}",
-    "page": "Distributed Computing",
-    "title": "Base.isready",
-    "category": "Method",
-    "text": "isready(rr::RemoteChannel, args...)\n\nDetermine whether a RemoteChannel has a value stored to it. Note that this function can cause race conditions, since by the time you receive its result it may no longer be true. However, it can be safely used on a Future since they are assigned only once.\n\n\n\n"
-},
-
-{
-    "location": "stdlib/distributed.html#Base.isready-Tuple{Future}",
-    "page": "Distributed Computing",
-    "title": "Base.isready",
-    "category": "Method",
-    "text": "isready(rr::Future)\n\nDetermine whether a Future has a value stored to it.\n\nIf the argument Future is owned by a different node, this call will block to wait for the answer. It is recommended to wait for rr in a separate task instead or to use a local Channel as a proxy:\n\nc = Channel(1)\n@async put!(c, remotecall_fetch(long_computation, p))\nisready(c)  # will not block\n\n\n\n"
-},
-
-{
-    "location": "stdlib/distributed.html#Distributed.WorkerPool",
-    "page": "Distributed Computing",
-    "title": "Distributed.WorkerPool",
-    "category": "Type",
-    "text": "WorkerPool(workers::Vector{Int})\n\nCreate a WorkerPool from a vector of worker ids.\n\n\n\n"
-},
-
-{
-    "location": "stdlib/distributed.html#Distributed.CachingPool",
-    "page": "Distributed Computing",
-    "title": "Distributed.CachingPool",
-    "category": "Type",
-    "text": "CachingPool(workers::Vector{Int})\n\nAn implementation of an AbstractWorkerPool. remote, remotecall_fetch, pmap (and other remote calls which execute functions remotely) benefit from caching the serialized/deserialized functions on the worker nodes, especially closures (which may capture large amounts of data).\n\nThe remote cache is maintained for the lifetime of the returned CachingPool object. To clear the cache earlier, use clear!(pool).\n\nFor global variables, only the bindings are captured in a closure, not the data. let blocks can be used to capture global data.\n\nExamples\n\nconst foo = rand(10^8);\nwp = CachingPool(workers())\nlet foo = foo\n    pmap(wp, i -> sum(foo) + i, 1:100);\nend\n\nThe above would transfer foo only once to each worker.\n\n\n\n"
-},
-
-{
-    "location": "stdlib/distributed.html#Distributed.default_worker_pool",
-    "page": "Distributed Computing",
-    "title": "Distributed.default_worker_pool",
-    "category": "Function",
-    "text": "default_worker_pool()\n\nWorkerPool containing idle workers - used by remote(f) and pmap (by default).\n\n\n\n"
-},
-
-{
-    "location": "stdlib/distributed.html#Distributed.clear!-Tuple{CachingPool}",
-    "page": "Distributed Computing",
-    "title": "Distributed.clear!",
-    "category": "Method",
-    "text": "clear!(pool::CachingPool) -> pool\n\nRemoves all cached functions from all participating workers.\n\n\n\n"
-},
-
-{
-    "location": "stdlib/distributed.html#Distributed.remote",
-    "page": "Distributed Computing",
-    "title": "Distributed.remote",
-    "category": "Function",
-    "text": "remote([::AbstractWorkerPool], f) -> Function\n\nReturn an anonymous function that executes function f on an available worker using remotecall_fetch.\n\n\n\n"
-},
-
-{
-    "location": "stdlib/distributed.html#Distributed.remotecall-Tuple{Any,AbstractWorkerPool,Vararg{Any,N} where N}",
-    "page": "Distributed Computing",
-    "title": "Distributed.remotecall",
-    "category": "Method",
-    "text": "remotecall(f, pool::AbstractWorkerPool, args...; kwargs...) -> Future\n\nWorkerPool variant of remotecall(f, pid, ....). Waits for and takes a free worker from pool and performs a remotecall on it.\n\n\n\n"
-},
-
-{
-    "location": "stdlib/distributed.html#Distributed.remotecall_wait-Tuple{Any,AbstractWorkerPool,Vararg{Any,N} where N}",
-    "page": "Distributed Computing",
-    "title": "Distributed.remotecall_wait",
-    "category": "Method",
-    "text": "remotecall_wait(f, pool::AbstractWorkerPool, args...; kwargs...) -> Future\n\nWorkerPool variant of remotecall_wait(f, pid, ....). Waits for and takes a free worker from pool and performs a remotecall_wait on it.\n\n\n\n"
-},
-
-{
-    "location": "stdlib/distributed.html#Distributed.remotecall_fetch-Tuple{Any,AbstractWorkerPool,Vararg{Any,N} where N}",
-    "page": "Distributed Computing",
-    "title": "Distributed.remotecall_fetch",
-    "category": "Method",
-    "text": "remotecall_fetch(f, pool::AbstractWorkerPool, args...; kwargs...) -> result\n\nWorkerPool variant of remotecall_fetch(f, pid, ....). Waits for and takes a free worker from pool and performs a remotecall_fetch on it.\n\n\n\n"
-},
-
-{
-    "location": "stdlib/distributed.html#Distributed.remote_do-Tuple{Any,AbstractWorkerPool,Vararg{Any,N} where N}",
-    "page": "Distributed Computing",
-    "title": "Distributed.remote_do",
-    "category": "Method",
-    "text": "remote_do(f, pool::AbstractWorkerPool, args...; kwargs...) -> nothing\n\nWorkerPool variant of remote_do(f, pid, ....). Waits for and takes a free worker from pool and performs a remote_do on it.\n\n\n\n"
-},
-
-{
-    "location": "stdlib/distributed.html#Base.timedwait",
-    "page": "Distributed Computing",
-    "title": "Base.timedwait",
-    "category": "Function",
-    "text": "timedwait(testcb::Function, secs::Float64; pollint::Float64=0.1)\n\nWaits until testcb returns true or for secs seconds, whichever is earlier. testcb is polled every pollint seconds.\n\n\n\n"
-},
-
-{
-    "location": "stdlib/distributed.html#Distributed.@spawn",
-    "page": "Distributed Computing",
-    "title": "Distributed.@spawn",
-    "category": "Macro",
-    "text": "@spawn\n\nCreate a closure around an expression and run it on an automatically-chosen process, returning a Future to the result.\n\nExamples\n\njulia> addprocs(3);\n\njulia> f = @spawn myid()\nFuture(2, 1, 5, nothing)\n\njulia> fetch(f)\n2\n\njulia> f = @spawn myid()\nFuture(3, 1, 7, nothing)\n\njulia> fetch(f)\n3\n\n\n\n"
-},
-
-{
-    "location": "stdlib/distributed.html#Distributed.@spawnat",
-    "page": "Distributed Computing",
-    "title": "Distributed.@spawnat",
-    "category": "Macro",
-    "text": "@spawnat\n\nCreate a closure around an expression and run the closure asynchronously on process p. Return a Future to the result. Accepts two arguments, p and an expression.\n\nExamples\n\njulia> addprocs(1);\n\njulia> f = @spawnat 2 myid()\nFuture(2, 1, 3, nothing)\n\njulia> fetch(f)\n2\n\n\n\n"
-},
-
-{
-    "location": "stdlib/distributed.html#Distributed.@fetch",
-    "page": "Distributed Computing",
-    "title": "Distributed.@fetch",
-    "category": "Macro",
-    "text": "@fetch\n\nEquivalent to fetch(@spawn expr). See fetch and @spawn.\n\nExamples\n\njulia> addprocs(3);\n\njulia> @fetch myid()\n2\n\njulia> @fetch myid()\n3\n\njulia> @fetch myid()\n4\n\njulia> @fetch myid()\n2\n\n\n\n"
-},
-
-{
-    "location": "stdlib/distributed.html#Distributed.@fetchfrom",
-    "page": "Distributed Computing",
-    "title": "Distributed.@fetchfrom",
-    "category": "Macro",
-    "text": "@fetchfrom\n\nEquivalent to fetch(@spawnat p expr). See fetch and @spawnat.\n\nExamples\n\njulia> addprocs(3);\n\njulia> @fetchfrom 2 myid()\n2\n\njulia> @fetchfrom 4 myid()\n4\n\n\n\n"
-},
-
-{
-    "location": "stdlib/distributed.html#Base.@async",
-    "page": "Distributed Computing",
-    "title": "Base.@async",
-    "category": "Macro",
-    "text": "@async\n\nLike @schedule, @async wraps an expression in a Task and adds it to the local machine's scheduler queue. Additionally it adds the task to the set of items that the nearest enclosing @sync waits for.\n\n\n\n"
-},
-
-{
-    "location": "stdlib/distributed.html#Base.@sync",
-    "page": "Distributed Computing",
-    "title": "Base.@sync",
-    "category": "Macro",
-    "text": "@sync\n\nWait until all dynamically-enclosed uses of @async, @spawn, @spawnat and @parallel are complete. All exceptions thrown by enclosed async operations are collected and thrown as a CompositeException.\n\n\n\n"
-},
-
-{
-    "location": "stdlib/distributed.html#Distributed.@parallel",
-    "page": "Distributed Computing",
-    "title": "Distributed.@parallel",
-    "category": "Macro",
-    "text": "@parallel\n\nA parallel for loop of the form :\n\n@parallel [reducer] for var = range\n    body\nend\n\nThe specified range is partitioned and locally executed across all workers. In case an optional reducer function is specified, @parallel performs local reductions on each worker with a final reduction on the calling process.\n\nNote that without a reducer function, @parallel executes asynchronously, i.e. it spawns independent tasks on all available workers and returns immediately without waiting for completion. To wait for completion, prefix the call with @sync, like :\n\n@sync @parallel for var = range\n    body\nend\n\n\n\n"
-},
-
-{
-    "location": "stdlib/distributed.html#Distributed.@everywhere",
-    "page": "Distributed Computing",
-    "title": "Distributed.@everywhere",
-    "category": "Macro",
-    "text": "@everywhere [procs()] expr\n\nExecute an expression under Main on all procs. Errors on any of the processes are collected into a CompositeException and thrown. For example:\n\n@everywhere bar = 1\n\nwill define Main.bar on all processes.\n\nUnlike @spawn and @spawnat, @everywhere does not capture any local variables. Instead, local variables can be broadcast using interpolation:\n\nfoo = 1\n@everywhere bar = $foo\n\nThe optional argument procs allows specifying a subset of all processes to have execute the expression.\n\nEquivalent to calling remotecall_eval(Main, procs, expr).\n\n\n\n"
-},
-
-{
-    "location": "stdlib/distributed.html#Distributed.clear!-Tuple{Any,Any}",
-    "page": "Distributed Computing",
-    "title": "Distributed.clear!",
-    "category": "Method",
-    "text": "clear!(syms, pids=workers(); mod=Main)\n\nClears global bindings in modules by initializing them to nothing. syms should be of type Symbol or a collection of Symbols . pids and mod identify the processes and the module in which global variables are to be reinitialized. Only those names found to be defined under mod are cleared.\n\nAn exception is raised if a global constant is requested to be cleared.\n\n\n\n"
-},
-
-{
-    "location": "stdlib/distributed.html#Distributed.remoteref_id",
-    "page": "Distributed Computing",
-    "title": "Distributed.remoteref_id",
-    "category": "Function",
-    "text": "remoteref_id(r::AbstractRemoteRef) -> RRID\n\nFutures and RemoteChannels are identified by fields:\n\nwhere - refers to the node where the underlying object/storage referred to by the reference actually exists.\nwhence - refers to the node the remote reference was created from. Note that this is different from the node where the underlying object referred to actually exists. For example calling RemoteChannel(2) from the master process would result in a where value of 2 and a whence value of 1.\nid is unique across all references created from the worker specified by whence.\n\nTaken together,  whence and id uniquely identify a reference across all workers.\n\nremoteref_id is a low-level API which returns a RRID object that wraps whence and id values of a remote reference.\n\n\n\n"
-},
-
-{
-    "location": "stdlib/distributed.html#Distributed.channel_from_id",
-    "page": "Distributed Computing",
-    "title": "Distributed.channel_from_id",
-    "category": "Function",
-    "text": "channel_from_id(id) -> c\n\nA low-level API which returns the backing AbstractChannel for an id returned by remoteref_id. The call is valid only on the node where the backing channel exists.\n\n\n\n"
-},
-
-{
-    "location": "stdlib/distributed.html#Distributed.worker_id_from_socket",
-    "page": "Distributed Computing",
-    "title": "Distributed.worker_id_from_socket",
-    "category": "Function",
-    "text": "worker_id_from_socket(s) -> pid\n\nA low-level API which, given a IO connection or a Worker, returns the pid of the worker it is connected to. This is useful when writing custom serialize methods for a type, which optimizes the data written out depending on the receiving process id.\n\n\n\n"
-},
-
-{
-    "location": "stdlib/distributed.html#Distributed.cluster_cookie-Tuple{}",
-    "page": "Distributed Computing",
-    "title": "Distributed.cluster_cookie",
-    "category": "Method",
-    "text": "cluster_cookie() -> cookie\n\nReturn the cluster cookie.\n\n\n\n"
-},
-
-{
-    "location": "stdlib/distributed.html#Distributed.cluster_cookie-Tuple{Any}",
-    "page": "Distributed Computing",
-    "title": "Distributed.cluster_cookie",
-    "category": "Method",
-    "text": "cluster_cookie(cookie) -> cookie\n\nSet the passed cookie as the cluster cookie, then returns it.\n\n\n\n"
-},
-
-{
-    "location": "stdlib/distributed.html#Distributed-Computing-1",
-    "page": "Distributed Computing",
-    "title": "Distributed Computing",
-    "category": "section",
-    "text": "Distributed.addprocs\nDistributed.nprocs\nDistributed.nworkers\nDistributed.procs()\nDistributed.procs(::Integer)\nDistributed.workers\nDistributed.rmprocs\nDistributed.interrupt\nDistributed.myid\nDistributed.pmap\nDistributed.RemoteException\nDistributed.Future\nDistributed.RemoteChannel\nDistributed.wait\nDistributed.fetch(::Any)\nDistributed.remotecall(::Any, ::Integer, ::Any...)\nDistributed.remotecall_wait(::Any, ::Integer, ::Any...)\nDistributed.remotecall_fetch(::Any, ::Integer, ::Any...)\nDistributed.remote_do(::Any, ::Integer, ::Any...)\nDistributed.put!(::RemoteChannel, ::Any...)\nDistributed.put!(::Future, ::Any)\nDistributed.take!(::RemoteChannel, ::Any...)\nDistributed.isready(::RemoteChannel, ::Any...)\nDistributed.isready(::Future)\nDistributed.WorkerPool\nDistributed.CachingPool\nDistributed.default_worker_pool\nDistributed.clear!(::CachingPool)\nDistributed.remote\nDistributed.remotecall(::Any, ::AbstractWorkerPool, ::Any...)\nDistributed.remotecall_wait(::Any, ::AbstractWorkerPool, ::Any...)\nDistributed.remotecall_fetch(::Any, ::AbstractWorkerPool, ::Any...)\nDistributed.remote_do(::Any, ::AbstractWorkerPool, ::Any...)\nDistributed.timedwait\nDistributed.@spawn\nDistributed.@spawnat\nDistributed.@fetch\nDistributed.@fetchfrom\nDistributed.@async\nDistributed.@sync\nDistributed.@parallel\nDistributed.@everywhere\nDistributed.clear!(::Any, ::Any; ::Any)\nDistributed.remoteref_id\nDistributed.channel_from_id\nDistributed.worker_id_from_socket\nDistributed.cluster_cookie()\nDistributed.cluster_cookie(::Any)"
-},
-
-{
-    "location": "stdlib/distributed.html#Distributed.launch",
-    "page": "Distributed Computing",
-    "title": "Distributed.launch",
-    "category": "Function",
-    "text": "launch(manager::ClusterManager, params::Dict, launched::Array, launch_ntfy::Condition)\n\nImplemented by cluster managers. For every Julia worker launched by this function, it should append a WorkerConfig entry to launched and notify launch_ntfy. The function MUST exit once all workers, requested by manager have been launched. params is a dictionary of all keyword arguments addprocs was called with.\n\n\n\n"
-},
-
-{
-    "location": "stdlib/distributed.html#Distributed.manage",
-    "page": "Distributed Computing",
-    "title": "Distributed.manage",
-    "category": "Function",
-    "text": "manage(manager::ClusterManager, id::Integer, config::WorkerConfig. op::Symbol)\n\nImplemented by cluster managers. It is called on the master process, during a worker's lifetime, with appropriate op values:\n\nwith :register/:deregister when a worker is added / removed from the Julia worker pool.\nwith :interrupt when interrupt(workers) is called. The ClusterManager should signal the appropriate worker with an interrupt signal.\nwith :finalize for cleanup purposes.\n\n\n\n"
-},
-
-{
-    "location": "stdlib/distributed.html#Base.kill-Tuple{ClusterManager,Int64,WorkerConfig}",
-    "page": "Distributed Computing",
-    "title": "Base.kill",
-    "category": "Method",
-    "text": "kill(manager::ClusterManager, pid::Int, config::WorkerConfig)\n\nImplemented by cluster managers. It is called on the master process, by rmprocs. It should cause the remote worker specified by pid to exit. kill(manager::ClusterManager.....) executes a remote exit() on pid.\n\n\n\n"
-},
-
-{
-    "location": "stdlib/distributed.html#Base.connect-Tuple{ClusterManager,Int64,WorkerConfig}",
-    "page": "Distributed Computing",
-    "title": "Base.connect",
-    "category": "Method",
-    "text": "connect(manager::ClusterManager, pid::Int, config::WorkerConfig) -> (instrm::IO, outstrm::IO)\n\nImplemented by cluster managers using custom transports. It should establish a logical connection to worker with id pid, specified by config and return a pair of IO objects. Messages from pid to current process will be read off instrm, while messages to be sent to pid will be written to outstrm. The custom transport implementation must ensure that messages are delivered and received completely and in order. connect(manager::ClusterManager.....) sets up TCP/IP socket connections in-between workers.\n\n\n\n"
-},
-
-{
-    "location": "stdlib/distributed.html#Distributed.init_worker",
-    "page": "Distributed Computing",
-    "title": "Distributed.init_worker",
-    "category": "Function",
-    "text": "init_worker(cookie::AbstractString, manager::ClusterManager=DefaultClusterManager())\n\nCalled by cluster managers implementing custom transports. It initializes a newly launched process as a worker. Command line argument --worker[=<cookie>] has the effect of initializing a process as a worker using TCP/IP sockets for transport. cookie is a cluster_cookie.\n\n\n\n"
-},
-
-{
-    "location": "stdlib/distributed.html#Distributed.start_worker",
-    "page": "Distributed Computing",
-    "title": "Distributed.start_worker",
-    "category": "Function",
-    "text": "start_worker([out::IO=STDOUT], cookie::AbstractString=readline(STDIN))\n\nstart_worker is an internal function which is the default entry point for worker processes connecting via TCP/IP. It sets up the process as a Julia cluster worker.\n\nhost:port information is written to stream out (defaults to STDOUT).\n\nThe function closes STDIN (after reading the cookie if required), redirects STDERR to STDOUT, listens on a free port (or if specified, the port in the --bind-to command line option) and schedules tasks to process incoming TCP connections and requests.\n\nIt does not return.\n\n\n\n"
-},
-
-{
-    "location": "stdlib/distributed.html#Distributed.process_messages",
-    "page": "Distributed Computing",
-    "title": "Distributed.process_messages",
-    "category": "Function",
-    "text": "process_messages(r_stream::IO, w_stream::IO, incoming::Bool=true)\n\nCalled by cluster managers using custom transports. It should be called when the custom transport implementation receives the first message from a remote worker. The custom transport must manage a logical connection to the remote worker and provide two IO objects, one for incoming messages and the other for messages addressed to the remote worker. If incoming is true, the remote peer initiated the connection. Whichever of the pair initiates the connection sends the cluster cookie and its Julia version number to perform the authentication handshake.\n\nSee also cluster_cookie.\n\n\n\n"
-},
-
-{
-    "location": "stdlib/distributed.html#Cluster-Manager-Interface-1",
-    "page": "Distributed Computing",
-    "title": "Cluster Manager Interface",
-    "category": "section",
-    "text": "This interface provides a mechanism to launch and manage Julia workers on different cluster environments. There are two types of managers present in Base: LocalManager, for launching additional workers on the same host, and SSHManager, for launching on remote hosts via ssh. TCP/IP sockets are used to connect and transport messages between processes. It is possible for Cluster Managers to provide a different transport.Distributed.launch\nDistributed.manage\nDistributed.kill(::ClusterManager, ::Int, ::WorkerConfig)\nDistributed.connect(::ClusterManager, ::Int, ::WorkerConfig)\nDistributed.init_worker\nDistributed.start_worker\nDistributed.process_messages"
-},
-
-{
-    "location": "stdlib/multi-threading.html#",
+    "location": "base/multi-threading.html#",
     "page": "Multi-Threading",
     "title": "Multi-Threading",
     "category": "page",
@@ -12761,7 +12337,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/multi-threading.html#Base.Threads.threadid",
+    "location": "base/multi-threading.html#Base.Threads.threadid",
     "page": "Multi-Threading",
     "title": "Base.Threads.threadid",
     "category": "Function",
@@ -12769,7 +12345,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/multi-threading.html#Base.Threads.nthreads",
+    "location": "base/multi-threading.html#Base.Threads.nthreads",
     "page": "Multi-Threading",
     "title": "Base.Threads.nthreads",
     "category": "Function",
@@ -12777,7 +12353,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/multi-threading.html#Base.Threads.@threads",
+    "location": "base/multi-threading.html#Base.Threads.@threads",
     "page": "Multi-Threading",
     "title": "Base.Threads.@threads",
     "category": "Macro",
@@ -12785,7 +12361,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/multi-threading.html#Base.Threads.Atomic",
+    "location": "base/multi-threading.html#Base.Threads.Atomic",
     "page": "Multi-Threading",
     "title": "Base.Threads.Atomic",
     "category": "Type",
@@ -12793,7 +12369,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/multi-threading.html#Base.Threads.atomic_cas!",
+    "location": "base/multi-threading.html#Base.Threads.atomic_cas!",
     "page": "Multi-Threading",
     "title": "Base.Threads.atomic_cas!",
     "category": "Function",
@@ -12801,7 +12377,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/multi-threading.html#Base.Threads.atomic_xchg!",
+    "location": "base/multi-threading.html#Base.Threads.atomic_xchg!",
     "page": "Multi-Threading",
     "title": "Base.Threads.atomic_xchg!",
     "category": "Function",
@@ -12809,7 +12385,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/multi-threading.html#Base.Threads.atomic_add!",
+    "location": "base/multi-threading.html#Base.Threads.atomic_add!",
     "page": "Multi-Threading",
     "title": "Base.Threads.atomic_add!",
     "category": "Function",
@@ -12817,7 +12393,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/multi-threading.html#Base.Threads.atomic_sub!",
+    "location": "base/multi-threading.html#Base.Threads.atomic_sub!",
     "page": "Multi-Threading",
     "title": "Base.Threads.atomic_sub!",
     "category": "Function",
@@ -12825,7 +12401,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/multi-threading.html#Base.Threads.atomic_and!",
+    "location": "base/multi-threading.html#Base.Threads.atomic_and!",
     "page": "Multi-Threading",
     "title": "Base.Threads.atomic_and!",
     "category": "Function",
@@ -12833,7 +12409,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/multi-threading.html#Base.Threads.atomic_nand!",
+    "location": "base/multi-threading.html#Base.Threads.atomic_nand!",
     "page": "Multi-Threading",
     "title": "Base.Threads.atomic_nand!",
     "category": "Function",
@@ -12841,7 +12417,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/multi-threading.html#Base.Threads.atomic_or!",
+    "location": "base/multi-threading.html#Base.Threads.atomic_or!",
     "page": "Multi-Threading",
     "title": "Base.Threads.atomic_or!",
     "category": "Function",
@@ -12849,7 +12425,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/multi-threading.html#Base.Threads.atomic_xor!",
+    "location": "base/multi-threading.html#Base.Threads.atomic_xor!",
     "page": "Multi-Threading",
     "title": "Base.Threads.atomic_xor!",
     "category": "Function",
@@ -12857,7 +12433,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/multi-threading.html#Base.Threads.atomic_max!",
+    "location": "base/multi-threading.html#Base.Threads.atomic_max!",
     "page": "Multi-Threading",
     "title": "Base.Threads.atomic_max!",
     "category": "Function",
@@ -12865,7 +12441,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/multi-threading.html#Base.Threads.atomic_min!",
+    "location": "base/multi-threading.html#Base.Threads.atomic_min!",
     "page": "Multi-Threading",
     "title": "Base.Threads.atomic_min!",
     "category": "Function",
@@ -12873,7 +12449,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/multi-threading.html#Base.Threads.atomic_fence",
+    "location": "base/multi-threading.html#Base.Threads.atomic_fence",
     "page": "Multi-Threading",
     "title": "Base.Threads.atomic_fence",
     "category": "Function",
@@ -12881,7 +12457,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/multi-threading.html#Multi-Threading-1",
+    "location": "base/multi-threading.html#Multi-Threading-1",
     "page": "Multi-Threading",
     "title": "Multi-Threading",
     "category": "section",
@@ -12889,7 +12465,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/multi-threading.html#Base.@threadcall",
+    "location": "base/multi-threading.html#Base.@threadcall",
     "page": "Multi-Threading",
     "title": "Base.@threadcall",
     "category": "Macro",
@@ -12897,7 +12473,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/multi-threading.html#ccall-using-a-threadpool-(Experimental)-1",
+    "location": "base/multi-threading.html#ccall-using-a-threadpool-(Experimental)-1",
     "page": "Multi-Threading",
     "title": "ccall using a threadpool (Experimental)",
     "category": "section",
@@ -12905,7 +12481,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/multi-threading.html#Base.Threads.AbstractLock",
+    "location": "base/multi-threading.html#Base.Threads.AbstractLock",
     "page": "Multi-Threading",
     "title": "Base.Threads.AbstractLock",
     "category": "Type",
@@ -12913,7 +12489,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/multi-threading.html#Base.lock",
+    "location": "base/multi-threading.html#Base.lock",
     "page": "Multi-Threading",
     "title": "Base.lock",
     "category": "Function",
@@ -12921,7 +12497,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/multi-threading.html#Base.unlock",
+    "location": "base/multi-threading.html#Base.unlock",
     "page": "Multi-Threading",
     "title": "Base.unlock",
     "category": "Function",
@@ -12929,7 +12505,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/multi-threading.html#Base.trylock",
+    "location": "base/multi-threading.html#Base.trylock",
     "page": "Multi-Threading",
     "title": "Base.trylock",
     "category": "Function",
@@ -12937,7 +12513,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/multi-threading.html#Base.islocked",
+    "location": "base/multi-threading.html#Base.islocked",
     "page": "Multi-Threading",
     "title": "Base.islocked",
     "category": "Function",
@@ -12945,7 +12521,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/multi-threading.html#Base.ReentrantLock",
+    "location": "base/multi-threading.html#Base.ReentrantLock",
     "page": "Multi-Threading",
     "title": "Base.ReentrantLock",
     "category": "Type",
@@ -12953,7 +12529,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/multi-threading.html#Base.Threads.Mutex",
+    "location": "base/multi-threading.html#Base.Threads.Mutex",
     "page": "Multi-Threading",
     "title": "Base.Threads.Mutex",
     "category": "Type",
@@ -12961,7 +12537,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/multi-threading.html#Base.Threads.SpinLock",
+    "location": "base/multi-threading.html#Base.Threads.SpinLock",
     "page": "Multi-Threading",
     "title": "Base.Threads.SpinLock",
     "category": "Type",
@@ -12969,7 +12545,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/multi-threading.html#Base.Threads.RecursiveSpinLock",
+    "location": "base/multi-threading.html#Base.Threads.RecursiveSpinLock",
     "page": "Multi-Threading",
     "title": "Base.Threads.RecursiveSpinLock",
     "category": "Type",
@@ -12977,7 +12553,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/multi-threading.html#Base.Semaphore",
+    "location": "base/multi-threading.html#Base.Semaphore",
     "page": "Multi-Threading",
     "title": "Base.Semaphore",
     "category": "Type",
@@ -12985,7 +12561,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/multi-threading.html#Base.acquire",
+    "location": "base/multi-threading.html#Base.acquire",
     "page": "Multi-Threading",
     "title": "Base.acquire",
     "category": "Function",
@@ -12993,7 +12569,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/multi-threading.html#Base.release",
+    "location": "base/multi-threading.html#Base.release",
     "page": "Multi-Threading",
     "title": "Base.release",
     "category": "Function",
@@ -13001,7 +12577,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/multi-threading.html#Synchronization-Primitives-1",
+    "location": "base/multi-threading.html#Synchronization-Primitives-1",
     "page": "Multi-Threading",
     "title": "Synchronization Primitives",
     "category": "section",
@@ -13009,7 +12585,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/linalg.html#",
+    "location": "base/linalg.html#",
     "page": "Linear Algebra",
     "title": "Linear Algebra",
     "category": "page",
@@ -13017,7 +12593,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/linalg.html#Linear-Algebra-1",
+    "location": "base/linalg.html#Linear-Algebra-1",
     "page": "Linear Algebra",
     "title": "Linear Algebra",
     "category": "section",
@@ -13025,7 +12601,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/linalg.html#Base.:*-Tuple{AbstractArray{T,2} where T,AbstractArray{T,2} where T}",
+    "location": "base/linalg.html#Base.:*-Tuple{AbstractArray{T,2} where T,AbstractArray{T,2} where T}",
     "page": "Linear Algebra",
     "title": "Base.:*",
     "category": "Method",
@@ -13033,7 +12609,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/linalg.html#Base.:\\-Tuple{AbstractArray{T,2} where T,Union{AbstractArray{T,1}, AbstractArray{T,2}} where T}",
+    "location": "base/linalg.html#Base.:\\-Tuple{AbstractArray{T,2} where T,Union{AbstractArray{T,1}, AbstractArray{T,2}} where T}",
     "page": "Linear Algebra",
     "title": "Base.:\\",
     "category": "Method",
@@ -13041,7 +12617,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/linalg.html#Base.LinAlg.dot",
+    "location": "base/linalg.html#Base.LinAlg.dot",
     "page": "Linear Algebra",
     "title": "Base.LinAlg.dot",
     "category": "Function",
@@ -13049,7 +12625,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/linalg.html#Base.LinAlg.vecdot",
+    "location": "base/linalg.html#Base.LinAlg.vecdot",
     "page": "Linear Algebra",
     "title": "Base.LinAlg.vecdot",
     "category": "Function",
@@ -13057,7 +12633,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/linalg.html#Base.LinAlg.cross",
+    "location": "base/linalg.html#Base.LinAlg.cross",
     "page": "Linear Algebra",
     "title": "Base.LinAlg.cross",
     "category": "Function",
@@ -13065,7 +12641,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/linalg.html#Base.LinAlg.factorize",
+    "location": "base/linalg.html#Base.LinAlg.factorize",
     "page": "Linear Algebra",
     "title": "Base.LinAlg.factorize",
     "category": "Function",
@@ -13073,7 +12649,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/linalg.html#Base.LinAlg.Diagonal",
+    "location": "base/linalg.html#Base.LinAlg.Diagonal",
     "page": "Linear Algebra",
     "title": "Base.LinAlg.Diagonal",
     "category": "Type",
@@ -13081,7 +12657,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/linalg.html#Base.LinAlg.Bidiagonal",
+    "location": "base/linalg.html#Base.LinAlg.Bidiagonal",
     "page": "Linear Algebra",
     "title": "Base.LinAlg.Bidiagonal",
     "category": "Type",
@@ -13089,7 +12665,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/linalg.html#Base.LinAlg.SymTridiagonal",
+    "location": "base/linalg.html#Base.LinAlg.SymTridiagonal",
     "page": "Linear Algebra",
     "title": "Base.LinAlg.SymTridiagonal",
     "category": "Type",
@@ -13097,7 +12673,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/linalg.html#Base.LinAlg.Tridiagonal",
+    "location": "base/linalg.html#Base.LinAlg.Tridiagonal",
     "page": "Linear Algebra",
     "title": "Base.LinAlg.Tridiagonal",
     "category": "Type",
@@ -13105,7 +12681,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/linalg.html#Base.LinAlg.Symmetric",
+    "location": "base/linalg.html#Base.LinAlg.Symmetric",
     "page": "Linear Algebra",
     "title": "Base.LinAlg.Symmetric",
     "category": "Type",
@@ -13113,7 +12689,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/linalg.html#Base.LinAlg.Hermitian",
+    "location": "base/linalg.html#Base.LinAlg.Hermitian",
     "page": "Linear Algebra",
     "title": "Base.LinAlg.Hermitian",
     "category": "Type",
@@ -13121,7 +12697,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/linalg.html#Base.LinAlg.LowerTriangular",
+    "location": "base/linalg.html#Base.LinAlg.LowerTriangular",
     "page": "Linear Algebra",
     "title": "Base.LinAlg.LowerTriangular",
     "category": "Type",
@@ -13129,7 +12705,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/linalg.html#Base.LinAlg.UpperTriangular",
+    "location": "base/linalg.html#Base.LinAlg.UpperTriangular",
     "page": "Linear Algebra",
     "title": "Base.LinAlg.UpperTriangular",
     "category": "Type",
@@ -13137,7 +12713,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/linalg.html#Base.LinAlg.UniformScaling",
+    "location": "base/linalg.html#Base.LinAlg.UniformScaling",
     "page": "Linear Algebra",
     "title": "Base.LinAlg.UniformScaling",
     "category": "Type",
@@ -13145,7 +12721,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/linalg.html#Base.LinAlg.lu",
+    "location": "base/linalg.html#Base.LinAlg.lu",
     "page": "Linear Algebra",
     "title": "Base.LinAlg.lu",
     "category": "Function",
@@ -13153,7 +12729,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/linalg.html#Base.LinAlg.lufact",
+    "location": "base/linalg.html#Base.LinAlg.lufact",
     "page": "Linear Algebra",
     "title": "Base.LinAlg.lufact",
     "category": "Function",
@@ -13161,7 +12737,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/linalg.html#Base.LinAlg.lufact!",
+    "location": "base/linalg.html#Base.LinAlg.lufact!",
     "page": "Linear Algebra",
     "title": "Base.LinAlg.lufact!",
     "category": "Function",
@@ -13169,7 +12745,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/linalg.html#Base.LinAlg.chol",
+    "location": "base/linalg.html#Base.LinAlg.chol",
     "page": "Linear Algebra",
     "title": "Base.LinAlg.chol",
     "category": "Function",
@@ -13177,7 +12753,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/linalg.html#Base.LinAlg.cholfact",
+    "location": "base/linalg.html#Base.LinAlg.cholfact",
     "page": "Linear Algebra",
     "title": "Base.LinAlg.cholfact",
     "category": "Function",
@@ -13185,7 +12761,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/linalg.html#Base.LinAlg.cholfact!",
+    "location": "base/linalg.html#Base.LinAlg.cholfact!",
     "page": "Linear Algebra",
     "title": "Base.LinAlg.cholfact!",
     "category": "Function",
@@ -13193,7 +12769,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/linalg.html#Base.LinAlg.lowrankupdate",
+    "location": "base/linalg.html#Base.LinAlg.lowrankupdate",
     "page": "Linear Algebra",
     "title": "Base.LinAlg.lowrankupdate",
     "category": "Function",
@@ -13201,7 +12777,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/linalg.html#Base.LinAlg.lowrankdowndate",
+    "location": "base/linalg.html#Base.LinAlg.lowrankdowndate",
     "page": "Linear Algebra",
     "title": "Base.LinAlg.lowrankdowndate",
     "category": "Function",
@@ -13209,7 +12785,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/linalg.html#Base.LinAlg.lowrankupdate!",
+    "location": "base/linalg.html#Base.LinAlg.lowrankupdate!",
     "page": "Linear Algebra",
     "title": "Base.LinAlg.lowrankupdate!",
     "category": "Function",
@@ -13217,7 +12793,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/linalg.html#Base.LinAlg.lowrankdowndate!",
+    "location": "base/linalg.html#Base.LinAlg.lowrankdowndate!",
     "page": "Linear Algebra",
     "title": "Base.LinAlg.lowrankdowndate!",
     "category": "Function",
@@ -13225,7 +12801,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/linalg.html#Base.LinAlg.ldltfact",
+    "location": "base/linalg.html#Base.LinAlg.ldltfact",
     "page": "Linear Algebra",
     "title": "Base.LinAlg.ldltfact",
     "category": "Function",
@@ -13233,7 +12809,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/linalg.html#Base.LinAlg.ldltfact!",
+    "location": "base/linalg.html#Base.LinAlg.ldltfact!",
     "page": "Linear Algebra",
     "title": "Base.LinAlg.ldltfact!",
     "category": "Function",
@@ -13241,7 +12817,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/linalg.html#Base.LinAlg.qr",
+    "location": "base/linalg.html#Base.LinAlg.qr",
     "page": "Linear Algebra",
     "title": "Base.LinAlg.qr",
     "category": "Function",
@@ -13249,7 +12825,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/linalg.html#Base.LinAlg.qr!",
+    "location": "base/linalg.html#Base.LinAlg.qr!",
     "page": "Linear Algebra",
     "title": "Base.LinAlg.qr!",
     "category": "Function",
@@ -13257,7 +12833,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/linalg.html#Base.LinAlg.qrfact",
+    "location": "base/linalg.html#Base.LinAlg.qrfact",
     "page": "Linear Algebra",
     "title": "Base.LinAlg.qrfact",
     "category": "Function",
@@ -13265,7 +12841,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/linalg.html#Base.LinAlg.qrfact!",
+    "location": "base/linalg.html#Base.LinAlg.qrfact!",
     "page": "Linear Algebra",
     "title": "Base.LinAlg.qrfact!",
     "category": "Function",
@@ -13273,7 +12849,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/linalg.html#Base.LinAlg.QR",
+    "location": "base/linalg.html#Base.LinAlg.QR",
     "page": "Linear Algebra",
     "title": "Base.LinAlg.QR",
     "category": "Type",
@@ -13281,7 +12857,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/linalg.html#Base.LinAlg.QRCompactWY",
+    "location": "base/linalg.html#Base.LinAlg.QRCompactWY",
     "page": "Linear Algebra",
     "title": "Base.LinAlg.QRCompactWY",
     "category": "Type",
@@ -13289,7 +12865,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/linalg.html#Base.LinAlg.QRPivoted",
+    "location": "base/linalg.html#Base.LinAlg.QRPivoted",
     "page": "Linear Algebra",
     "title": "Base.LinAlg.QRPivoted",
     "category": "Type",
@@ -13297,7 +12873,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/linalg.html#Base.LinAlg.lqfact!",
+    "location": "base/linalg.html#Base.LinAlg.lqfact!",
     "page": "Linear Algebra",
     "title": "Base.LinAlg.lqfact!",
     "category": "Function",
@@ -13305,7 +12881,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/linalg.html#Base.LinAlg.lqfact",
+    "location": "base/linalg.html#Base.LinAlg.lqfact",
     "page": "Linear Algebra",
     "title": "Base.LinAlg.lqfact",
     "category": "Function",
@@ -13313,7 +12889,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/linalg.html#Base.LinAlg.lq",
+    "location": "base/linalg.html#Base.LinAlg.lq",
     "page": "Linear Algebra",
     "title": "Base.LinAlg.lq",
     "category": "Function",
@@ -13321,7 +12897,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/linalg.html#Base.LinAlg.bkfact",
+    "location": "base/linalg.html#Base.LinAlg.bkfact",
     "page": "Linear Algebra",
     "title": "Base.LinAlg.bkfact",
     "category": "Function",
@@ -13329,7 +12905,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/linalg.html#Base.LinAlg.bkfact!",
+    "location": "base/linalg.html#Base.LinAlg.bkfact!",
     "page": "Linear Algebra",
     "title": "Base.LinAlg.bkfact!",
     "category": "Function",
@@ -13337,7 +12913,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/linalg.html#Base.LinAlg.eig",
+    "location": "base/linalg.html#Base.LinAlg.eig",
     "page": "Linear Algebra",
     "title": "Base.LinAlg.eig",
     "category": "Function",
@@ -13345,7 +12921,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/linalg.html#Base.LinAlg.eigvals",
+    "location": "base/linalg.html#Base.LinAlg.eigvals",
     "page": "Linear Algebra",
     "title": "Base.LinAlg.eigvals",
     "category": "Function",
@@ -13353,7 +12929,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/linalg.html#Base.LinAlg.eigvals!",
+    "location": "base/linalg.html#Base.LinAlg.eigvals!",
     "page": "Linear Algebra",
     "title": "Base.LinAlg.eigvals!",
     "category": "Function",
@@ -13361,7 +12937,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/linalg.html#Base.LinAlg.eigmax",
+    "location": "base/linalg.html#Base.LinAlg.eigmax",
     "page": "Linear Algebra",
     "title": "Base.LinAlg.eigmax",
     "category": "Function",
@@ -13369,7 +12945,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/linalg.html#Base.LinAlg.eigmin",
+    "location": "base/linalg.html#Base.LinAlg.eigmin",
     "page": "Linear Algebra",
     "title": "Base.LinAlg.eigmin",
     "category": "Function",
@@ -13377,7 +12953,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/linalg.html#Base.LinAlg.eigvecs",
+    "location": "base/linalg.html#Base.LinAlg.eigvecs",
     "page": "Linear Algebra",
     "title": "Base.LinAlg.eigvecs",
     "category": "Function",
@@ -13385,7 +12961,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/linalg.html#Base.LinAlg.eigfact",
+    "location": "base/linalg.html#Base.LinAlg.eigfact",
     "page": "Linear Algebra",
     "title": "Base.LinAlg.eigfact",
     "category": "Function",
@@ -13393,7 +12969,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/linalg.html#Base.LinAlg.eigfact!",
+    "location": "base/linalg.html#Base.LinAlg.eigfact!",
     "page": "Linear Algebra",
     "title": "Base.LinAlg.eigfact!",
     "category": "Function",
@@ -13401,7 +12977,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/linalg.html#Base.LinAlg.hessfact",
+    "location": "base/linalg.html#Base.LinAlg.hessfact",
     "page": "Linear Algebra",
     "title": "Base.LinAlg.hessfact",
     "category": "Function",
@@ -13409,7 +12985,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/linalg.html#Base.LinAlg.hessfact!",
+    "location": "base/linalg.html#Base.LinAlg.hessfact!",
     "page": "Linear Algebra",
     "title": "Base.LinAlg.hessfact!",
     "category": "Function",
@@ -13417,7 +12993,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/linalg.html#Base.LinAlg.schurfact",
+    "location": "base/linalg.html#Base.LinAlg.schurfact",
     "page": "Linear Algebra",
     "title": "Base.LinAlg.schurfact",
     "category": "Function",
@@ -13425,7 +13001,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/linalg.html#Base.LinAlg.schurfact!",
+    "location": "base/linalg.html#Base.LinAlg.schurfact!",
     "page": "Linear Algebra",
     "title": "Base.LinAlg.schurfact!",
     "category": "Function",
@@ -13433,7 +13009,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/linalg.html#Base.LinAlg.schur",
+    "location": "base/linalg.html#Base.LinAlg.schur",
     "page": "Linear Algebra",
     "title": "Base.LinAlg.schur",
     "category": "Function",
@@ -13441,7 +13017,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/linalg.html#Base.LinAlg.ordschur",
+    "location": "base/linalg.html#Base.LinAlg.ordschur",
     "page": "Linear Algebra",
     "title": "Base.LinAlg.ordschur",
     "category": "Function",
@@ -13449,7 +13025,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/linalg.html#Base.LinAlg.ordschur!",
+    "location": "base/linalg.html#Base.LinAlg.ordschur!",
     "page": "Linear Algebra",
     "title": "Base.LinAlg.ordschur!",
     "category": "Function",
@@ -13457,7 +13033,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/linalg.html#Base.LinAlg.svdfact",
+    "location": "base/linalg.html#Base.LinAlg.svdfact",
     "page": "Linear Algebra",
     "title": "Base.LinAlg.svdfact",
     "category": "Function",
@@ -13465,7 +13041,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/linalg.html#Base.LinAlg.svdfact!",
+    "location": "base/linalg.html#Base.LinAlg.svdfact!",
     "page": "Linear Algebra",
     "title": "Base.LinAlg.svdfact!",
     "category": "Function",
@@ -13473,7 +13049,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/linalg.html#Base.LinAlg.svd",
+    "location": "base/linalg.html#Base.LinAlg.svd",
     "page": "Linear Algebra",
     "title": "Base.LinAlg.svd",
     "category": "Function",
@@ -13481,7 +13057,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/linalg.html#Base.LinAlg.svdvals",
+    "location": "base/linalg.html#Base.LinAlg.svdvals",
     "page": "Linear Algebra",
     "title": "Base.LinAlg.svdvals",
     "category": "Function",
@@ -13489,7 +13065,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/linalg.html#Base.LinAlg.svdvals!",
+    "location": "base/linalg.html#Base.LinAlg.svdvals!",
     "page": "Linear Algebra",
     "title": "Base.LinAlg.svdvals!",
     "category": "Function",
@@ -13497,7 +13073,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/linalg.html#Base.LinAlg.Givens",
+    "location": "base/linalg.html#Base.LinAlg.Givens",
     "page": "Linear Algebra",
     "title": "Base.LinAlg.Givens",
     "category": "Type",
@@ -13505,7 +13081,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/linalg.html#Base.LinAlg.givens",
+    "location": "base/linalg.html#Base.LinAlg.givens",
     "page": "Linear Algebra",
     "title": "Base.LinAlg.givens",
     "category": "Function",
@@ -13513,7 +13089,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/linalg.html#Base.LinAlg.triu",
+    "location": "base/linalg.html#Base.LinAlg.triu",
     "page": "Linear Algebra",
     "title": "Base.LinAlg.triu",
     "category": "Function",
@@ -13521,7 +13097,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/linalg.html#Base.LinAlg.triu!",
+    "location": "base/linalg.html#Base.LinAlg.triu!",
     "page": "Linear Algebra",
     "title": "Base.LinAlg.triu!",
     "category": "Function",
@@ -13529,7 +13105,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/linalg.html#Base.LinAlg.tril",
+    "location": "base/linalg.html#Base.LinAlg.tril",
     "page": "Linear Algebra",
     "title": "Base.LinAlg.tril",
     "category": "Function",
@@ -13537,7 +13113,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/linalg.html#Base.LinAlg.tril!",
+    "location": "base/linalg.html#Base.LinAlg.tril!",
     "page": "Linear Algebra",
     "title": "Base.LinAlg.tril!",
     "category": "Function",
@@ -13545,7 +13121,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/linalg.html#Base.LinAlg.diagind",
+    "location": "base/linalg.html#Base.LinAlg.diagind",
     "page": "Linear Algebra",
     "title": "Base.LinAlg.diagind",
     "category": "Function",
@@ -13553,7 +13129,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/linalg.html#Base.LinAlg.diag",
+    "location": "base/linalg.html#Base.LinAlg.diag",
     "page": "Linear Algebra",
     "title": "Base.LinAlg.diag",
     "category": "Function",
@@ -13561,7 +13137,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/linalg.html#Base.LinAlg.diagm",
+    "location": "base/linalg.html#Base.LinAlg.diagm",
     "page": "Linear Algebra",
     "title": "Base.LinAlg.diagm",
     "category": "Function",
@@ -13569,7 +13145,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/linalg.html#Base.LinAlg.scale!",
+    "location": "base/linalg.html#Base.LinAlg.scale!",
     "page": "Linear Algebra",
     "title": "Base.LinAlg.scale!",
     "category": "Function",
@@ -13577,7 +13153,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/linalg.html#Base.LinAlg.rank",
+    "location": "base/linalg.html#Base.LinAlg.rank",
     "page": "Linear Algebra",
     "title": "Base.LinAlg.rank",
     "category": "Function",
@@ -13585,7 +13161,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/linalg.html#Base.LinAlg.norm",
+    "location": "base/linalg.html#Base.LinAlg.norm",
     "page": "Linear Algebra",
     "title": "Base.LinAlg.norm",
     "category": "Function",
@@ -13593,7 +13169,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/linalg.html#Base.LinAlg.vecnorm",
+    "location": "base/linalg.html#Base.LinAlg.vecnorm",
     "page": "Linear Algebra",
     "title": "Base.LinAlg.vecnorm",
     "category": "Function",
@@ -13601,7 +13177,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/linalg.html#Base.LinAlg.normalize!",
+    "location": "base/linalg.html#Base.LinAlg.normalize!",
     "page": "Linear Algebra",
     "title": "Base.LinAlg.normalize!",
     "category": "Function",
@@ -13609,7 +13185,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/linalg.html#Base.LinAlg.normalize",
+    "location": "base/linalg.html#Base.LinAlg.normalize",
     "page": "Linear Algebra",
     "title": "Base.LinAlg.normalize",
     "category": "Function",
@@ -13617,7 +13193,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/linalg.html#Base.LinAlg.cond",
+    "location": "base/linalg.html#Base.LinAlg.cond",
     "page": "Linear Algebra",
     "title": "Base.LinAlg.cond",
     "category": "Function",
@@ -13625,7 +13201,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/linalg.html#Base.LinAlg.condskeel",
+    "location": "base/linalg.html#Base.LinAlg.condskeel",
     "page": "Linear Algebra",
     "title": "Base.LinAlg.condskeel",
     "category": "Function",
@@ -13633,7 +13209,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/linalg.html#Base.LinAlg.trace",
+    "location": "base/linalg.html#Base.LinAlg.trace",
     "page": "Linear Algebra",
     "title": "Base.LinAlg.trace",
     "category": "Function",
@@ -13641,7 +13217,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/linalg.html#Base.LinAlg.det",
+    "location": "base/linalg.html#Base.LinAlg.det",
     "page": "Linear Algebra",
     "title": "Base.LinAlg.det",
     "category": "Function",
@@ -13649,7 +13225,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/linalg.html#Base.LinAlg.logdet",
+    "location": "base/linalg.html#Base.LinAlg.logdet",
     "page": "Linear Algebra",
     "title": "Base.LinAlg.logdet",
     "category": "Function",
@@ -13657,7 +13233,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/linalg.html#Base.LinAlg.logabsdet",
+    "location": "base/linalg.html#Base.LinAlg.logabsdet",
     "page": "Linear Algebra",
     "title": "Base.LinAlg.logabsdet",
     "category": "Function",
@@ -13665,7 +13241,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/linalg.html#Base.inv-Tuple{AbstractArray{T,2} where T}",
+    "location": "base/linalg.html#Base.inv-Tuple{AbstractArray{T,2} where T}",
     "page": "Linear Algebra",
     "title": "Base.inv",
     "category": "Method",
@@ -13673,7 +13249,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/linalg.html#Base.LinAlg.pinv",
+    "location": "base/linalg.html#Base.LinAlg.pinv",
     "page": "Linear Algebra",
     "title": "Base.LinAlg.pinv",
     "category": "Function",
@@ -13681,7 +13257,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/linalg.html#Base.LinAlg.nullspace",
+    "location": "base/linalg.html#Base.LinAlg.nullspace",
     "page": "Linear Algebra",
     "title": "Base.LinAlg.nullspace",
     "category": "Function",
@@ -13689,7 +13265,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/linalg.html#Base.repmat",
+    "location": "base/linalg.html#Base.repmat",
     "page": "Linear Algebra",
     "title": "Base.repmat",
     "category": "Function",
@@ -13697,7 +13273,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/linalg.html#Base.kron",
+    "location": "base/linalg.html#Base.kron",
     "page": "Linear Algebra",
     "title": "Base.kron",
     "category": "Function",
@@ -13705,7 +13281,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/linalg.html#Base.SparseArrays.blkdiag",
+    "location": "base/linalg.html#Base.SparseArrays.blkdiag",
     "page": "Linear Algebra",
     "title": "Base.SparseArrays.blkdiag",
     "category": "Function",
@@ -13713,7 +13289,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/linalg.html#Base.LinAlg.linreg",
+    "location": "base/linalg.html#Base.LinAlg.linreg",
     "page": "Linear Algebra",
     "title": "Base.LinAlg.linreg",
     "category": "Function",
@@ -13721,7 +13297,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/linalg.html#Base.exp-Tuple{Union{DenseArray{#s43,2}, Base.ReinterpretArray{#s43,2,S,A} where S, Base.ReshapedArray{#s43,2,A,MI} where MI<:Tuple{Vararg{Base.MultiplicativeInverses.SignedMultiplicativeInverse{Int64},N} where N} where A<:Union{SubArray{T,N,P,I,true} where I<:Tuple{Union{Base.Slice, UnitRange},Vararg{Any,N} where N} where P where N where T, DenseArray}, SubArray{#s43,2,A,I,L} where L} where I<:Tuple{Vararg{Union{Int64, AbstractRange{Int64}, Base.AbstractCartesianIndex},N} where N} where A<:Union{Base.ReshapedArray{T,N,A,MI} where MI<:Tuple{Vararg{Base.MultiplicativeInverses.SignedMultiplicativeInverse{Int64},N} where N} where A<:Union{SubArray{T,N,P,I,true} where I<:Tuple{Union{Base.Slice, UnitRange},Vararg{Any,N} where N} where P where N where T, DenseArray} where N where T, DenseArray} where #s43<:Union{Complex{Float32}, Complex{Float64}, Float32, Float64}}",
+    "location": "base/linalg.html#Base.exp-Tuple{Union{DenseArray{#s43,2}, Base.ReinterpretArray{#s43,2,S,A} where S, Base.ReshapedArray{#s43,2,A,MI} where MI<:Tuple{Vararg{Base.MultiplicativeInverses.SignedMultiplicativeInverse{Int64},N} where N} where A<:Union{SubArray{T,N,P,I,true} where I<:Tuple{Union{Base.Slice, UnitRange},Vararg{Any,N} where N} where P where N where T, DenseArray}, SubArray{#s43,2,A,I,L} where L} where I<:Tuple{Vararg{Union{Int64, AbstractRange{Int64}, Base.AbstractCartesianIndex},N} where N} where A<:Union{Base.ReshapedArray{T,N,A,MI} where MI<:Tuple{Vararg{Base.MultiplicativeInverses.SignedMultiplicativeInverse{Int64},N} where N} where A<:Union{SubArray{T,N,P,I,true} where I<:Tuple{Union{Base.Slice, UnitRange},Vararg{Any,N} where N} where P where N where T, DenseArray} where N where T, DenseArray} where #s43<:Union{Complex{Float32}, Complex{Float64}, Float32, Float64}}",
     "page": "Linear Algebra",
     "title": "Base.exp",
     "category": "Method",
@@ -13729,7 +13305,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/linalg.html#Base.log-Tuple{Union{DenseArray{T,2}, Base.ReinterpretArray{T,2,S,A} where S, Base.ReshapedArray{T,2,A,MI} where MI<:Tuple{Vararg{Base.MultiplicativeInverses.SignedMultiplicativeInverse{Int64},N} where N} where A<:Union{SubArray{T,N,P,I,true} where I<:Tuple{Union{Base.Slice, UnitRange},Vararg{Any,N} where N} where P where N where T, DenseArray}, SubArray{T,2,A,I,L} where L} where I<:Tuple{Vararg{Union{Int64, AbstractRange{Int64}, Base.AbstractCartesianIndex},N} where N} where A<:Union{Base.ReshapedArray{T,N,A,MI} where MI<:Tuple{Vararg{Base.MultiplicativeInverses.SignedMultiplicativeInverse{Int64},N} where N} where A<:Union{SubArray{T,N,P,I,true} where I<:Tuple{Union{Base.Slice, UnitRange},Vararg{Any,N} where N} where P where N where T, DenseArray} where N where T, DenseArray} where T}",
+    "location": "base/linalg.html#Base.log-Tuple{Union{DenseArray{T,2}, Base.ReinterpretArray{T,2,S,A} where S, Base.ReshapedArray{T,2,A,MI} where MI<:Tuple{Vararg{Base.MultiplicativeInverses.SignedMultiplicativeInverse{Int64},N} where N} where A<:Union{SubArray{T,N,P,I,true} where I<:Tuple{Union{Base.Slice, UnitRange},Vararg{Any,N} where N} where P where N where T, DenseArray}, SubArray{T,2,A,I,L} where L} where I<:Tuple{Vararg{Union{Int64, AbstractRange{Int64}, Base.AbstractCartesianIndex},N} where N} where A<:Union{Base.ReshapedArray{T,N,A,MI} where MI<:Tuple{Vararg{Base.MultiplicativeInverses.SignedMultiplicativeInverse{Int64},N} where N} where A<:Union{SubArray{T,N,P,I,true} where I<:Tuple{Union{Base.Slice, UnitRange},Vararg{Any,N} where N} where P where N where T, DenseArray} where N where T, DenseArray} where T}",
     "page": "Linear Algebra",
     "title": "Base.log",
     "category": "Method",
@@ -13737,7 +13313,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/linalg.html#Base.sqrt-Tuple{Union{DenseArray{#s43,2}, Base.ReinterpretArray{#s43,2,S,A} where S, Base.ReshapedArray{#s43,2,A,MI} where MI<:Tuple{Vararg{Base.MultiplicativeInverses.SignedMultiplicativeInverse{Int64},N} where N} where A<:Union{SubArray{T,N,P,I,true} where I<:Tuple{Union{Base.Slice, UnitRange},Vararg{Any,N} where N} where P where N where T, DenseArray}, SubArray{#s43,2,A,I,L} where L} where I<:Tuple{Vararg{Union{Int64, AbstractRange{Int64}, Base.AbstractCartesianIndex},N} where N} where A<:Union{Base.ReshapedArray{T,N,A,MI} where MI<:Tuple{Vararg{Base.MultiplicativeInverses.SignedMultiplicativeInverse{Int64},N} where N} where A<:Union{SubArray{T,N,P,I,true} where I<:Tuple{Union{Base.Slice, UnitRange},Vararg{Any,N} where N} where P where N where T, DenseArray} where N where T, DenseArray} where #s43<:Real}",
+    "location": "base/linalg.html#Base.sqrt-Tuple{Union{DenseArray{#s43,2}, Base.ReinterpretArray{#s43,2,S,A} where S, Base.ReshapedArray{#s43,2,A,MI} where MI<:Tuple{Vararg{Base.MultiplicativeInverses.SignedMultiplicativeInverse{Int64},N} where N} where A<:Union{SubArray{T,N,P,I,true} where I<:Tuple{Union{Base.Slice, UnitRange},Vararg{Any,N} where N} where P where N where T, DenseArray}, SubArray{#s43,2,A,I,L} where L} where I<:Tuple{Vararg{Union{Int64, AbstractRange{Int64}, Base.AbstractCartesianIndex},N} where N} where A<:Union{Base.ReshapedArray{T,N,A,MI} where MI<:Tuple{Vararg{Base.MultiplicativeInverses.SignedMultiplicativeInverse{Int64},N} where N} where A<:Union{SubArray{T,N,P,I,true} where I<:Tuple{Union{Base.Slice, UnitRange},Vararg{Any,N} where N} where P where N where T, DenseArray} where N where T, DenseArray} where #s43<:Real}",
     "page": "Linear Algebra",
     "title": "Base.sqrt",
     "category": "Method",
@@ -13745,7 +13321,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/linalg.html#Base.cos-Tuple{Union{DenseArray{#s43,2}, Base.ReinterpretArray{#s43,2,S,A} where S, Base.ReshapedArray{#s43,2,A,MI} where MI<:Tuple{Vararg{Base.MultiplicativeInverses.SignedMultiplicativeInverse{Int64},N} where N} where A<:Union{SubArray{T,N,P,I,true} where I<:Tuple{Union{Base.Slice, UnitRange},Vararg{Any,N} where N} where P where N where T, DenseArray}, SubArray{#s43,2,A,I,L} where L} where I<:Tuple{Vararg{Union{Int64, AbstractRange{Int64}, Base.AbstractCartesianIndex},N} where N} where A<:Union{Base.ReshapedArray{T,N,A,MI} where MI<:Tuple{Vararg{Base.MultiplicativeInverses.SignedMultiplicativeInverse{Int64},N} where N} where A<:Union{SubArray{T,N,P,I,true} where I<:Tuple{Union{Base.Slice, UnitRange},Vararg{Any,N} where N} where P where N where T, DenseArray} where N where T, DenseArray} where #s43<:Real}",
+    "location": "base/linalg.html#Base.cos-Tuple{Union{DenseArray{#s43,2}, Base.ReinterpretArray{#s43,2,S,A} where S, Base.ReshapedArray{#s43,2,A,MI} where MI<:Tuple{Vararg{Base.MultiplicativeInverses.SignedMultiplicativeInverse{Int64},N} where N} where A<:Union{SubArray{T,N,P,I,true} where I<:Tuple{Union{Base.Slice, UnitRange},Vararg{Any,N} where N} where P where N where T, DenseArray}, SubArray{#s43,2,A,I,L} where L} where I<:Tuple{Vararg{Union{Int64, AbstractRange{Int64}, Base.AbstractCartesianIndex},N} where N} where A<:Union{Base.ReshapedArray{T,N,A,MI} where MI<:Tuple{Vararg{Base.MultiplicativeInverses.SignedMultiplicativeInverse{Int64},N} where N} where A<:Union{SubArray{T,N,P,I,true} where I<:Tuple{Union{Base.Slice, UnitRange},Vararg{Any,N} where N} where P where N where T, DenseArray} where N where T, DenseArray} where #s43<:Real}",
     "page": "Linear Algebra",
     "title": "Base.cos",
     "category": "Method",
@@ -13753,7 +13329,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/linalg.html#Base.sin-Tuple{Union{DenseArray{#s43,2}, Base.ReinterpretArray{#s43,2,S,A} where S, Base.ReshapedArray{#s43,2,A,MI} where MI<:Tuple{Vararg{Base.MultiplicativeInverses.SignedMultiplicativeInverse{Int64},N} where N} where A<:Union{SubArray{T,N,P,I,true} where I<:Tuple{Union{Base.Slice, UnitRange},Vararg{Any,N} where N} where P where N where T, DenseArray}, SubArray{#s43,2,A,I,L} where L} where I<:Tuple{Vararg{Union{Int64, AbstractRange{Int64}, Base.AbstractCartesianIndex},N} where N} where A<:Union{Base.ReshapedArray{T,N,A,MI} where MI<:Tuple{Vararg{Base.MultiplicativeInverses.SignedMultiplicativeInverse{Int64},N} where N} where A<:Union{SubArray{T,N,P,I,true} where I<:Tuple{Union{Base.Slice, UnitRange},Vararg{Any,N} where N} where P where N where T, DenseArray} where N where T, DenseArray} where #s43<:Real}",
+    "location": "base/linalg.html#Base.sin-Tuple{Union{DenseArray{#s43,2}, Base.ReinterpretArray{#s43,2,S,A} where S, Base.ReshapedArray{#s43,2,A,MI} where MI<:Tuple{Vararg{Base.MultiplicativeInverses.SignedMultiplicativeInverse{Int64},N} where N} where A<:Union{SubArray{T,N,P,I,true} where I<:Tuple{Union{Base.Slice, UnitRange},Vararg{Any,N} where N} where P where N where T, DenseArray}, SubArray{#s43,2,A,I,L} where L} where I<:Tuple{Vararg{Union{Int64, AbstractRange{Int64}, Base.AbstractCartesianIndex},N} where N} where A<:Union{Base.ReshapedArray{T,N,A,MI} where MI<:Tuple{Vararg{Base.MultiplicativeInverses.SignedMultiplicativeInverse{Int64},N} where N} where A<:Union{SubArray{T,N,P,I,true} where I<:Tuple{Union{Base.Slice, UnitRange},Vararg{Any,N} where N} where P where N where T, DenseArray} where N where T, DenseArray} where #s43<:Real}",
     "page": "Linear Algebra",
     "title": "Base.sin",
     "category": "Method",
@@ -13761,7 +13337,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/linalg.html#Base.Math.sincos-Tuple{Union{DenseArray{#s43,2}, Base.ReinterpretArray{#s43,2,S,A} where S, Base.ReshapedArray{#s43,2,A,MI} where MI<:Tuple{Vararg{Base.MultiplicativeInverses.SignedMultiplicativeInverse{Int64},N} where N} where A<:Union{SubArray{T,N,P,I,true} where I<:Tuple{Union{Base.Slice, UnitRange},Vararg{Any,N} where N} where P where N where T, DenseArray}, SubArray{#s43,2,A,I,L} where L} where I<:Tuple{Vararg{Union{Int64, AbstractRange{Int64}, Base.AbstractCartesianIndex},N} where N} where A<:Union{Base.ReshapedArray{T,N,A,MI} where MI<:Tuple{Vararg{Base.MultiplicativeInverses.SignedMultiplicativeInverse{Int64},N} where N} where A<:Union{SubArray{T,N,P,I,true} where I<:Tuple{Union{Base.Slice, UnitRange},Vararg{Any,N} where N} where P where N where T, DenseArray} where N where T, DenseArray} where #s43<:Real}",
+    "location": "base/linalg.html#Base.Math.sincos-Tuple{Union{DenseArray{#s43,2}, Base.ReinterpretArray{#s43,2,S,A} where S, Base.ReshapedArray{#s43,2,A,MI} where MI<:Tuple{Vararg{Base.MultiplicativeInverses.SignedMultiplicativeInverse{Int64},N} where N} where A<:Union{SubArray{T,N,P,I,true} where I<:Tuple{Union{Base.Slice, UnitRange},Vararg{Any,N} where N} where P where N where T, DenseArray}, SubArray{#s43,2,A,I,L} where L} where I<:Tuple{Vararg{Union{Int64, AbstractRange{Int64}, Base.AbstractCartesianIndex},N} where N} where A<:Union{Base.ReshapedArray{T,N,A,MI} where MI<:Tuple{Vararg{Base.MultiplicativeInverses.SignedMultiplicativeInverse{Int64},N} where N} where A<:Union{SubArray{T,N,P,I,true} where I<:Tuple{Union{Base.Slice, UnitRange},Vararg{Any,N} where N} where P where N where T, DenseArray} where N where T, DenseArray} where #s43<:Real}",
     "page": "Linear Algebra",
     "title": "Base.Math.sincos",
     "category": "Method",
@@ -13769,7 +13345,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/linalg.html#Base.tan-Tuple{Union{DenseArray{#s43,2}, Base.ReinterpretArray{#s43,2,S,A} where S, Base.ReshapedArray{#s43,2,A,MI} where MI<:Tuple{Vararg{Base.MultiplicativeInverses.SignedMultiplicativeInverse{Int64},N} where N} where A<:Union{SubArray{T,N,P,I,true} where I<:Tuple{Union{Base.Slice, UnitRange},Vararg{Any,N} where N} where P where N where T, DenseArray}, SubArray{#s43,2,A,I,L} where L} where I<:Tuple{Vararg{Union{Int64, AbstractRange{Int64}, Base.AbstractCartesianIndex},N} where N} where A<:Union{Base.ReshapedArray{T,N,A,MI} where MI<:Tuple{Vararg{Base.MultiplicativeInverses.SignedMultiplicativeInverse{Int64},N} where N} where A<:Union{SubArray{T,N,P,I,true} where I<:Tuple{Union{Base.Slice, UnitRange},Vararg{Any,N} where N} where P where N where T, DenseArray} where N where T, DenseArray} where #s43<:Real}",
+    "location": "base/linalg.html#Base.tan-Tuple{Union{DenseArray{#s43,2}, Base.ReinterpretArray{#s43,2,S,A} where S, Base.ReshapedArray{#s43,2,A,MI} where MI<:Tuple{Vararg{Base.MultiplicativeInverses.SignedMultiplicativeInverse{Int64},N} where N} where A<:Union{SubArray{T,N,P,I,true} where I<:Tuple{Union{Base.Slice, UnitRange},Vararg{Any,N} where N} where P where N where T, DenseArray}, SubArray{#s43,2,A,I,L} where L} where I<:Tuple{Vararg{Union{Int64, AbstractRange{Int64}, Base.AbstractCartesianIndex},N} where N} where A<:Union{Base.ReshapedArray{T,N,A,MI} where MI<:Tuple{Vararg{Base.MultiplicativeInverses.SignedMultiplicativeInverse{Int64},N} where N} where A<:Union{SubArray{T,N,P,I,true} where I<:Tuple{Union{Base.Slice, UnitRange},Vararg{Any,N} where N} where P where N where T, DenseArray} where N where T, DenseArray} where #s43<:Real}",
     "page": "Linear Algebra",
     "title": "Base.tan",
     "category": "Method",
@@ -13777,7 +13353,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/linalg.html#Base.Math.sec-Tuple{Union{DenseArray{T,2}, Base.ReinterpretArray{T,2,S,A} where S, Base.ReshapedArray{T,2,A,MI} where MI<:Tuple{Vararg{Base.MultiplicativeInverses.SignedMultiplicativeInverse{Int64},N} where N} where A<:Union{SubArray{T,N,P,I,true} where I<:Tuple{Union{Base.Slice, UnitRange},Vararg{Any,N} where N} where P where N where T, DenseArray}, SubArray{T,2,A,I,L} where L} where I<:Tuple{Vararg{Union{Int64, AbstractRange{Int64}, Base.AbstractCartesianIndex},N} where N} where A<:Union{Base.ReshapedArray{T,N,A,MI} where MI<:Tuple{Vararg{Base.MultiplicativeInverses.SignedMultiplicativeInverse{Int64},N} where N} where A<:Union{SubArray{T,N,P,I,true} where I<:Tuple{Union{Base.Slice, UnitRange},Vararg{Any,N} where N} where P where N where T, DenseArray} where N where T, DenseArray} where T}",
+    "location": "base/linalg.html#Base.Math.sec-Tuple{Union{DenseArray{T,2}, Base.ReinterpretArray{T,2,S,A} where S, Base.ReshapedArray{T,2,A,MI} where MI<:Tuple{Vararg{Base.MultiplicativeInverses.SignedMultiplicativeInverse{Int64},N} where N} where A<:Union{SubArray{T,N,P,I,true} where I<:Tuple{Union{Base.Slice, UnitRange},Vararg{Any,N} where N} where P where N where T, DenseArray}, SubArray{T,2,A,I,L} where L} where I<:Tuple{Vararg{Union{Int64, AbstractRange{Int64}, Base.AbstractCartesianIndex},N} where N} where A<:Union{Base.ReshapedArray{T,N,A,MI} where MI<:Tuple{Vararg{Base.MultiplicativeInverses.SignedMultiplicativeInverse{Int64},N} where N} where A<:Union{SubArray{T,N,P,I,true} where I<:Tuple{Union{Base.Slice, UnitRange},Vararg{Any,N} where N} where P where N where T, DenseArray} where N where T, DenseArray} where T}",
     "page": "Linear Algebra",
     "title": "Base.Math.sec",
     "category": "Method",
@@ -13785,7 +13361,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/linalg.html#Base.Math.csc-Tuple{Union{DenseArray{T,2}, Base.ReinterpretArray{T,2,S,A} where S, Base.ReshapedArray{T,2,A,MI} where MI<:Tuple{Vararg{Base.MultiplicativeInverses.SignedMultiplicativeInverse{Int64},N} where N} where A<:Union{SubArray{T,N,P,I,true} where I<:Tuple{Union{Base.Slice, UnitRange},Vararg{Any,N} where N} where P where N where T, DenseArray}, SubArray{T,2,A,I,L} where L} where I<:Tuple{Vararg{Union{Int64, AbstractRange{Int64}, Base.AbstractCartesianIndex},N} where N} where A<:Union{Base.ReshapedArray{T,N,A,MI} where MI<:Tuple{Vararg{Base.MultiplicativeInverses.SignedMultiplicativeInverse{Int64},N} where N} where A<:Union{SubArray{T,N,P,I,true} where I<:Tuple{Union{Base.Slice, UnitRange},Vararg{Any,N} where N} where P where N where T, DenseArray} where N where T, DenseArray} where T}",
+    "location": "base/linalg.html#Base.Math.csc-Tuple{Union{DenseArray{T,2}, Base.ReinterpretArray{T,2,S,A} where S, Base.ReshapedArray{T,2,A,MI} where MI<:Tuple{Vararg{Base.MultiplicativeInverses.SignedMultiplicativeInverse{Int64},N} where N} where A<:Union{SubArray{T,N,P,I,true} where I<:Tuple{Union{Base.Slice, UnitRange},Vararg{Any,N} where N} where P where N where T, DenseArray}, SubArray{T,2,A,I,L} where L} where I<:Tuple{Vararg{Union{Int64, AbstractRange{Int64}, Base.AbstractCartesianIndex},N} where N} where A<:Union{Base.ReshapedArray{T,N,A,MI} where MI<:Tuple{Vararg{Base.MultiplicativeInverses.SignedMultiplicativeInverse{Int64},N} where N} where A<:Union{SubArray{T,N,P,I,true} where I<:Tuple{Union{Base.Slice, UnitRange},Vararg{Any,N} where N} where P where N where T, DenseArray} where N where T, DenseArray} where T}",
     "page": "Linear Algebra",
     "title": "Base.Math.csc",
     "category": "Method",
@@ -13793,7 +13369,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/linalg.html#Base.Math.cot-Tuple{Union{DenseArray{T,2}, Base.ReinterpretArray{T,2,S,A} where S, Base.ReshapedArray{T,2,A,MI} where MI<:Tuple{Vararg{Base.MultiplicativeInverses.SignedMultiplicativeInverse{Int64},N} where N} where A<:Union{SubArray{T,N,P,I,true} where I<:Tuple{Union{Base.Slice, UnitRange},Vararg{Any,N} where N} where P where N where T, DenseArray}, SubArray{T,2,A,I,L} where L} where I<:Tuple{Vararg{Union{Int64, AbstractRange{Int64}, Base.AbstractCartesianIndex},N} where N} where A<:Union{Base.ReshapedArray{T,N,A,MI} where MI<:Tuple{Vararg{Base.MultiplicativeInverses.SignedMultiplicativeInverse{Int64},N} where N} where A<:Union{SubArray{T,N,P,I,true} where I<:Tuple{Union{Base.Slice, UnitRange},Vararg{Any,N} where N} where P where N where T, DenseArray} where N where T, DenseArray} where T}",
+    "location": "base/linalg.html#Base.Math.cot-Tuple{Union{DenseArray{T,2}, Base.ReinterpretArray{T,2,S,A} where S, Base.ReshapedArray{T,2,A,MI} where MI<:Tuple{Vararg{Base.MultiplicativeInverses.SignedMultiplicativeInverse{Int64},N} where N} where A<:Union{SubArray{T,N,P,I,true} where I<:Tuple{Union{Base.Slice, UnitRange},Vararg{Any,N} where N} where P where N where T, DenseArray}, SubArray{T,2,A,I,L} where L} where I<:Tuple{Vararg{Union{Int64, AbstractRange{Int64}, Base.AbstractCartesianIndex},N} where N} where A<:Union{Base.ReshapedArray{T,N,A,MI} where MI<:Tuple{Vararg{Base.MultiplicativeInverses.SignedMultiplicativeInverse{Int64},N} where N} where A<:Union{SubArray{T,N,P,I,true} where I<:Tuple{Union{Base.Slice, UnitRange},Vararg{Any,N} where N} where P where N where T, DenseArray} where N where T, DenseArray} where T}",
     "page": "Linear Algebra",
     "title": "Base.Math.cot",
     "category": "Method",
@@ -13801,7 +13377,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/linalg.html#Base.cosh-Tuple{Union{DenseArray{T,2}, Base.ReinterpretArray{T,2,S,A} where S, Base.ReshapedArray{T,2,A,MI} where MI<:Tuple{Vararg{Base.MultiplicativeInverses.SignedMultiplicativeInverse{Int64},N} where N} where A<:Union{SubArray{T,N,P,I,true} where I<:Tuple{Union{Base.Slice, UnitRange},Vararg{Any,N} where N} where P where N where T, DenseArray}, SubArray{T,2,A,I,L} where L} where I<:Tuple{Vararg{Union{Int64, AbstractRange{Int64}, Base.AbstractCartesianIndex},N} where N} where A<:Union{Base.ReshapedArray{T,N,A,MI} where MI<:Tuple{Vararg{Base.MultiplicativeInverses.SignedMultiplicativeInverse{Int64},N} where N} where A<:Union{SubArray{T,N,P,I,true} where I<:Tuple{Union{Base.Slice, UnitRange},Vararg{Any,N} where N} where P where N where T, DenseArray} where N where T, DenseArray} where T}",
+    "location": "base/linalg.html#Base.cosh-Tuple{Union{DenseArray{T,2}, Base.ReinterpretArray{T,2,S,A} where S, Base.ReshapedArray{T,2,A,MI} where MI<:Tuple{Vararg{Base.MultiplicativeInverses.SignedMultiplicativeInverse{Int64},N} where N} where A<:Union{SubArray{T,N,P,I,true} where I<:Tuple{Union{Base.Slice, UnitRange},Vararg{Any,N} where N} where P where N where T, DenseArray}, SubArray{T,2,A,I,L} where L} where I<:Tuple{Vararg{Union{Int64, AbstractRange{Int64}, Base.AbstractCartesianIndex},N} where N} where A<:Union{Base.ReshapedArray{T,N,A,MI} where MI<:Tuple{Vararg{Base.MultiplicativeInverses.SignedMultiplicativeInverse{Int64},N} where N} where A<:Union{SubArray{T,N,P,I,true} where I<:Tuple{Union{Base.Slice, UnitRange},Vararg{Any,N} where N} where P where N where T, DenseArray} where N where T, DenseArray} where T}",
     "page": "Linear Algebra",
     "title": "Base.cosh",
     "category": "Method",
@@ -13809,7 +13385,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/linalg.html#Base.sinh-Tuple{Union{DenseArray{T,2}, Base.ReinterpretArray{T,2,S,A} where S, Base.ReshapedArray{T,2,A,MI} where MI<:Tuple{Vararg{Base.MultiplicativeInverses.SignedMultiplicativeInverse{Int64},N} where N} where A<:Union{SubArray{T,N,P,I,true} where I<:Tuple{Union{Base.Slice, UnitRange},Vararg{Any,N} where N} where P where N where T, DenseArray}, SubArray{T,2,A,I,L} where L} where I<:Tuple{Vararg{Union{Int64, AbstractRange{Int64}, Base.AbstractCartesianIndex},N} where N} where A<:Union{Base.ReshapedArray{T,N,A,MI} where MI<:Tuple{Vararg{Base.MultiplicativeInverses.SignedMultiplicativeInverse{Int64},N} where N} where A<:Union{SubArray{T,N,P,I,true} where I<:Tuple{Union{Base.Slice, UnitRange},Vararg{Any,N} where N} where P where N where T, DenseArray} where N where T, DenseArray} where T}",
+    "location": "base/linalg.html#Base.sinh-Tuple{Union{DenseArray{T,2}, Base.ReinterpretArray{T,2,S,A} where S, Base.ReshapedArray{T,2,A,MI} where MI<:Tuple{Vararg{Base.MultiplicativeInverses.SignedMultiplicativeInverse{Int64},N} where N} where A<:Union{SubArray{T,N,P,I,true} where I<:Tuple{Union{Base.Slice, UnitRange},Vararg{Any,N} where N} where P where N where T, DenseArray}, SubArray{T,2,A,I,L} where L} where I<:Tuple{Vararg{Union{Int64, AbstractRange{Int64}, Base.AbstractCartesianIndex},N} where N} where A<:Union{Base.ReshapedArray{T,N,A,MI} where MI<:Tuple{Vararg{Base.MultiplicativeInverses.SignedMultiplicativeInverse{Int64},N} where N} where A<:Union{SubArray{T,N,P,I,true} where I<:Tuple{Union{Base.Slice, UnitRange},Vararg{Any,N} where N} where P where N where T, DenseArray} where N where T, DenseArray} where T}",
     "page": "Linear Algebra",
     "title": "Base.sinh",
     "category": "Method",
@@ -13817,7 +13393,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/linalg.html#Base.tanh-Tuple{Union{DenseArray{T,2}, Base.ReinterpretArray{T,2,S,A} where S, Base.ReshapedArray{T,2,A,MI} where MI<:Tuple{Vararg{Base.MultiplicativeInverses.SignedMultiplicativeInverse{Int64},N} where N} where A<:Union{SubArray{T,N,P,I,true} where I<:Tuple{Union{Base.Slice, UnitRange},Vararg{Any,N} where N} where P where N where T, DenseArray}, SubArray{T,2,A,I,L} where L} where I<:Tuple{Vararg{Union{Int64, AbstractRange{Int64}, Base.AbstractCartesianIndex},N} where N} where A<:Union{Base.ReshapedArray{T,N,A,MI} where MI<:Tuple{Vararg{Base.MultiplicativeInverses.SignedMultiplicativeInverse{Int64},N} where N} where A<:Union{SubArray{T,N,P,I,true} where I<:Tuple{Union{Base.Slice, UnitRange},Vararg{Any,N} where N} where P where N where T, DenseArray} where N where T, DenseArray} where T}",
+    "location": "base/linalg.html#Base.tanh-Tuple{Union{DenseArray{T,2}, Base.ReinterpretArray{T,2,S,A} where S, Base.ReshapedArray{T,2,A,MI} where MI<:Tuple{Vararg{Base.MultiplicativeInverses.SignedMultiplicativeInverse{Int64},N} where N} where A<:Union{SubArray{T,N,P,I,true} where I<:Tuple{Union{Base.Slice, UnitRange},Vararg{Any,N} where N} where P where N where T, DenseArray}, SubArray{T,2,A,I,L} where L} where I<:Tuple{Vararg{Union{Int64, AbstractRange{Int64}, Base.AbstractCartesianIndex},N} where N} where A<:Union{Base.ReshapedArray{T,N,A,MI} where MI<:Tuple{Vararg{Base.MultiplicativeInverses.SignedMultiplicativeInverse{Int64},N} where N} where A<:Union{SubArray{T,N,P,I,true} where I<:Tuple{Union{Base.Slice, UnitRange},Vararg{Any,N} where N} where P where N where T, DenseArray} where N where T, DenseArray} where T}",
     "page": "Linear Algebra",
     "title": "Base.tanh",
     "category": "Method",
@@ -13825,7 +13401,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/linalg.html#Base.Math.sech-Tuple{Union{DenseArray{T,2}, Base.ReinterpretArray{T,2,S,A} where S, Base.ReshapedArray{T,2,A,MI} where MI<:Tuple{Vararg{Base.MultiplicativeInverses.SignedMultiplicativeInverse{Int64},N} where N} where A<:Union{SubArray{T,N,P,I,true} where I<:Tuple{Union{Base.Slice, UnitRange},Vararg{Any,N} where N} where P where N where T, DenseArray}, SubArray{T,2,A,I,L} where L} where I<:Tuple{Vararg{Union{Int64, AbstractRange{Int64}, Base.AbstractCartesianIndex},N} where N} where A<:Union{Base.ReshapedArray{T,N,A,MI} where MI<:Tuple{Vararg{Base.MultiplicativeInverses.SignedMultiplicativeInverse{Int64},N} where N} where A<:Union{SubArray{T,N,P,I,true} where I<:Tuple{Union{Base.Slice, UnitRange},Vararg{Any,N} where N} where P where N where T, DenseArray} where N where T, DenseArray} where T}",
+    "location": "base/linalg.html#Base.Math.sech-Tuple{Union{DenseArray{T,2}, Base.ReinterpretArray{T,2,S,A} where S, Base.ReshapedArray{T,2,A,MI} where MI<:Tuple{Vararg{Base.MultiplicativeInverses.SignedMultiplicativeInverse{Int64},N} where N} where A<:Union{SubArray{T,N,P,I,true} where I<:Tuple{Union{Base.Slice, UnitRange},Vararg{Any,N} where N} where P where N where T, DenseArray}, SubArray{T,2,A,I,L} where L} where I<:Tuple{Vararg{Union{Int64, AbstractRange{Int64}, Base.AbstractCartesianIndex},N} where N} where A<:Union{Base.ReshapedArray{T,N,A,MI} where MI<:Tuple{Vararg{Base.MultiplicativeInverses.SignedMultiplicativeInverse{Int64},N} where N} where A<:Union{SubArray{T,N,P,I,true} where I<:Tuple{Union{Base.Slice, UnitRange},Vararg{Any,N} where N} where P where N where T, DenseArray} where N where T, DenseArray} where T}",
     "page": "Linear Algebra",
     "title": "Base.Math.sech",
     "category": "Method",
@@ -13833,7 +13409,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/linalg.html#Base.Math.csch-Tuple{Union{DenseArray{T,2}, Base.ReinterpretArray{T,2,S,A} where S, Base.ReshapedArray{T,2,A,MI} where MI<:Tuple{Vararg{Base.MultiplicativeInverses.SignedMultiplicativeInverse{Int64},N} where N} where A<:Union{SubArray{T,N,P,I,true} where I<:Tuple{Union{Base.Slice, UnitRange},Vararg{Any,N} where N} where P where N where T, DenseArray}, SubArray{T,2,A,I,L} where L} where I<:Tuple{Vararg{Union{Int64, AbstractRange{Int64}, Base.AbstractCartesianIndex},N} where N} where A<:Union{Base.ReshapedArray{T,N,A,MI} where MI<:Tuple{Vararg{Base.MultiplicativeInverses.SignedMultiplicativeInverse{Int64},N} where N} where A<:Union{SubArray{T,N,P,I,true} where I<:Tuple{Union{Base.Slice, UnitRange},Vararg{Any,N} where N} where P where N where T, DenseArray} where N where T, DenseArray} where T}",
+    "location": "base/linalg.html#Base.Math.csch-Tuple{Union{DenseArray{T,2}, Base.ReinterpretArray{T,2,S,A} where S, Base.ReshapedArray{T,2,A,MI} where MI<:Tuple{Vararg{Base.MultiplicativeInverses.SignedMultiplicativeInverse{Int64},N} where N} where A<:Union{SubArray{T,N,P,I,true} where I<:Tuple{Union{Base.Slice, UnitRange},Vararg{Any,N} where N} where P where N where T, DenseArray}, SubArray{T,2,A,I,L} where L} where I<:Tuple{Vararg{Union{Int64, AbstractRange{Int64}, Base.AbstractCartesianIndex},N} where N} where A<:Union{Base.ReshapedArray{T,N,A,MI} where MI<:Tuple{Vararg{Base.MultiplicativeInverses.SignedMultiplicativeInverse{Int64},N} where N} where A<:Union{SubArray{T,N,P,I,true} where I<:Tuple{Union{Base.Slice, UnitRange},Vararg{Any,N} where N} where P where N where T, DenseArray} where N where T, DenseArray} where T}",
     "page": "Linear Algebra",
     "title": "Base.Math.csch",
     "category": "Method",
@@ -13841,7 +13417,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/linalg.html#Base.Math.coth-Tuple{Union{DenseArray{T,2}, Base.ReinterpretArray{T,2,S,A} where S, Base.ReshapedArray{T,2,A,MI} where MI<:Tuple{Vararg{Base.MultiplicativeInverses.SignedMultiplicativeInverse{Int64},N} where N} where A<:Union{SubArray{T,N,P,I,true} where I<:Tuple{Union{Base.Slice, UnitRange},Vararg{Any,N} where N} where P where N where T, DenseArray}, SubArray{T,2,A,I,L} where L} where I<:Tuple{Vararg{Union{Int64, AbstractRange{Int64}, Base.AbstractCartesianIndex},N} where N} where A<:Union{Base.ReshapedArray{T,N,A,MI} where MI<:Tuple{Vararg{Base.MultiplicativeInverses.SignedMultiplicativeInverse{Int64},N} where N} where A<:Union{SubArray{T,N,P,I,true} where I<:Tuple{Union{Base.Slice, UnitRange},Vararg{Any,N} where N} where P where N where T, DenseArray} where N where T, DenseArray} where T}",
+    "location": "base/linalg.html#Base.Math.coth-Tuple{Union{DenseArray{T,2}, Base.ReinterpretArray{T,2,S,A} where S, Base.ReshapedArray{T,2,A,MI} where MI<:Tuple{Vararg{Base.MultiplicativeInverses.SignedMultiplicativeInverse{Int64},N} where N} where A<:Union{SubArray{T,N,P,I,true} where I<:Tuple{Union{Base.Slice, UnitRange},Vararg{Any,N} where N} where P where N where T, DenseArray}, SubArray{T,2,A,I,L} where L} where I<:Tuple{Vararg{Union{Int64, AbstractRange{Int64}, Base.AbstractCartesianIndex},N} where N} where A<:Union{Base.ReshapedArray{T,N,A,MI} where MI<:Tuple{Vararg{Base.MultiplicativeInverses.SignedMultiplicativeInverse{Int64},N} where N} where A<:Union{SubArray{T,N,P,I,true} where I<:Tuple{Union{Base.Slice, UnitRange},Vararg{Any,N} where N} where P where N where T, DenseArray} where N where T, DenseArray} where T}",
     "page": "Linear Algebra",
     "title": "Base.Math.coth",
     "category": "Method",
@@ -13849,7 +13425,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/linalg.html#Base.acos-Tuple{Union{DenseArray{T,2}, Base.ReinterpretArray{T,2,S,A} where S, Base.ReshapedArray{T,2,A,MI} where MI<:Tuple{Vararg{Base.MultiplicativeInverses.SignedMultiplicativeInverse{Int64},N} where N} where A<:Union{SubArray{T,N,P,I,true} where I<:Tuple{Union{Base.Slice, UnitRange},Vararg{Any,N} where N} where P where N where T, DenseArray}, SubArray{T,2,A,I,L} where L} where I<:Tuple{Vararg{Union{Int64, AbstractRange{Int64}, Base.AbstractCartesianIndex},N} where N} where A<:Union{Base.ReshapedArray{T,N,A,MI} where MI<:Tuple{Vararg{Base.MultiplicativeInverses.SignedMultiplicativeInverse{Int64},N} where N} where A<:Union{SubArray{T,N,P,I,true} where I<:Tuple{Union{Base.Slice, UnitRange},Vararg{Any,N} where N} where P where N where T, DenseArray} where N where T, DenseArray} where T}",
+    "location": "base/linalg.html#Base.acos-Tuple{Union{DenseArray{T,2}, Base.ReinterpretArray{T,2,S,A} where S, Base.ReshapedArray{T,2,A,MI} where MI<:Tuple{Vararg{Base.MultiplicativeInverses.SignedMultiplicativeInverse{Int64},N} where N} where A<:Union{SubArray{T,N,P,I,true} where I<:Tuple{Union{Base.Slice, UnitRange},Vararg{Any,N} where N} where P where N where T, DenseArray}, SubArray{T,2,A,I,L} where L} where I<:Tuple{Vararg{Union{Int64, AbstractRange{Int64}, Base.AbstractCartesianIndex},N} where N} where A<:Union{Base.ReshapedArray{T,N,A,MI} where MI<:Tuple{Vararg{Base.MultiplicativeInverses.SignedMultiplicativeInverse{Int64},N} where N} where A<:Union{SubArray{T,N,P,I,true} where I<:Tuple{Union{Base.Slice, UnitRange},Vararg{Any,N} where N} where P where N where T, DenseArray} where N where T, DenseArray} where T}",
     "page": "Linear Algebra",
     "title": "Base.acos",
     "category": "Method",
@@ -13857,7 +13433,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/linalg.html#Base.asin-Tuple{Union{DenseArray{T,2}, Base.ReinterpretArray{T,2,S,A} where S, Base.ReshapedArray{T,2,A,MI} where MI<:Tuple{Vararg{Base.MultiplicativeInverses.SignedMultiplicativeInverse{Int64},N} where N} where A<:Union{SubArray{T,N,P,I,true} where I<:Tuple{Union{Base.Slice, UnitRange},Vararg{Any,N} where N} where P where N where T, DenseArray}, SubArray{T,2,A,I,L} where L} where I<:Tuple{Vararg{Union{Int64, AbstractRange{Int64}, Base.AbstractCartesianIndex},N} where N} where A<:Union{Base.ReshapedArray{T,N,A,MI} where MI<:Tuple{Vararg{Base.MultiplicativeInverses.SignedMultiplicativeInverse{Int64},N} where N} where A<:Union{SubArray{T,N,P,I,true} where I<:Tuple{Union{Base.Slice, UnitRange},Vararg{Any,N} where N} where P where N where T, DenseArray} where N where T, DenseArray} where T}",
+    "location": "base/linalg.html#Base.asin-Tuple{Union{DenseArray{T,2}, Base.ReinterpretArray{T,2,S,A} where S, Base.ReshapedArray{T,2,A,MI} where MI<:Tuple{Vararg{Base.MultiplicativeInverses.SignedMultiplicativeInverse{Int64},N} where N} where A<:Union{SubArray{T,N,P,I,true} where I<:Tuple{Union{Base.Slice, UnitRange},Vararg{Any,N} where N} where P where N where T, DenseArray}, SubArray{T,2,A,I,L} where L} where I<:Tuple{Vararg{Union{Int64, AbstractRange{Int64}, Base.AbstractCartesianIndex},N} where N} where A<:Union{Base.ReshapedArray{T,N,A,MI} where MI<:Tuple{Vararg{Base.MultiplicativeInverses.SignedMultiplicativeInverse{Int64},N} where N} where A<:Union{SubArray{T,N,P,I,true} where I<:Tuple{Union{Base.Slice, UnitRange},Vararg{Any,N} where N} where P where N where T, DenseArray} where N where T, DenseArray} where T}",
     "page": "Linear Algebra",
     "title": "Base.asin",
     "category": "Method",
@@ -13865,7 +13441,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/linalg.html#Base.atan-Tuple{Union{DenseArray{T,2}, Base.ReinterpretArray{T,2,S,A} where S, Base.ReshapedArray{T,2,A,MI} where MI<:Tuple{Vararg{Base.MultiplicativeInverses.SignedMultiplicativeInverse{Int64},N} where N} where A<:Union{SubArray{T,N,P,I,true} where I<:Tuple{Union{Base.Slice, UnitRange},Vararg{Any,N} where N} where P where N where T, DenseArray}, SubArray{T,2,A,I,L} where L} where I<:Tuple{Vararg{Union{Int64, AbstractRange{Int64}, Base.AbstractCartesianIndex},N} where N} where A<:Union{Base.ReshapedArray{T,N,A,MI} where MI<:Tuple{Vararg{Base.MultiplicativeInverses.SignedMultiplicativeInverse{Int64},N} where N} where A<:Union{SubArray{T,N,P,I,true} where I<:Tuple{Union{Base.Slice, UnitRange},Vararg{Any,N} where N} where P where N where T, DenseArray} where N where T, DenseArray} where T}",
+    "location": "base/linalg.html#Base.atan-Tuple{Union{DenseArray{T,2}, Base.ReinterpretArray{T,2,S,A} where S, Base.ReshapedArray{T,2,A,MI} where MI<:Tuple{Vararg{Base.MultiplicativeInverses.SignedMultiplicativeInverse{Int64},N} where N} where A<:Union{SubArray{T,N,P,I,true} where I<:Tuple{Union{Base.Slice, UnitRange},Vararg{Any,N} where N} where P where N where T, DenseArray}, SubArray{T,2,A,I,L} where L} where I<:Tuple{Vararg{Union{Int64, AbstractRange{Int64}, Base.AbstractCartesianIndex},N} where N} where A<:Union{Base.ReshapedArray{T,N,A,MI} where MI<:Tuple{Vararg{Base.MultiplicativeInverses.SignedMultiplicativeInverse{Int64},N} where N} where A<:Union{SubArray{T,N,P,I,true} where I<:Tuple{Union{Base.Slice, UnitRange},Vararg{Any,N} where N} where P where N where T, DenseArray} where N where T, DenseArray} where T}",
     "page": "Linear Algebra",
     "title": "Base.atan",
     "category": "Method",
@@ -13873,7 +13449,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/linalg.html#Base.Math.asec-Tuple{Union{DenseArray{T,2}, Base.ReinterpretArray{T,2,S,A} where S, Base.ReshapedArray{T,2,A,MI} where MI<:Tuple{Vararg{Base.MultiplicativeInverses.SignedMultiplicativeInverse{Int64},N} where N} where A<:Union{SubArray{T,N,P,I,true} where I<:Tuple{Union{Base.Slice, UnitRange},Vararg{Any,N} where N} where P where N where T, DenseArray}, SubArray{T,2,A,I,L} where L} where I<:Tuple{Vararg{Union{Int64, AbstractRange{Int64}, Base.AbstractCartesianIndex},N} where N} where A<:Union{Base.ReshapedArray{T,N,A,MI} where MI<:Tuple{Vararg{Base.MultiplicativeInverses.SignedMultiplicativeInverse{Int64},N} where N} where A<:Union{SubArray{T,N,P,I,true} where I<:Tuple{Union{Base.Slice, UnitRange},Vararg{Any,N} where N} where P where N where T, DenseArray} where N where T, DenseArray} where T}",
+    "location": "base/linalg.html#Base.Math.asec-Tuple{Union{DenseArray{T,2}, Base.ReinterpretArray{T,2,S,A} where S, Base.ReshapedArray{T,2,A,MI} where MI<:Tuple{Vararg{Base.MultiplicativeInverses.SignedMultiplicativeInverse{Int64},N} where N} where A<:Union{SubArray{T,N,P,I,true} where I<:Tuple{Union{Base.Slice, UnitRange},Vararg{Any,N} where N} where P where N where T, DenseArray}, SubArray{T,2,A,I,L} where L} where I<:Tuple{Vararg{Union{Int64, AbstractRange{Int64}, Base.AbstractCartesianIndex},N} where N} where A<:Union{Base.ReshapedArray{T,N,A,MI} where MI<:Tuple{Vararg{Base.MultiplicativeInverses.SignedMultiplicativeInverse{Int64},N} where N} where A<:Union{SubArray{T,N,P,I,true} where I<:Tuple{Union{Base.Slice, UnitRange},Vararg{Any,N} where N} where P where N where T, DenseArray} where N where T, DenseArray} where T}",
     "page": "Linear Algebra",
     "title": "Base.Math.asec",
     "category": "Method",
@@ -13881,7 +13457,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/linalg.html#Base.Math.acsc-Tuple{Union{DenseArray{T,2}, Base.ReinterpretArray{T,2,S,A} where S, Base.ReshapedArray{T,2,A,MI} where MI<:Tuple{Vararg{Base.MultiplicativeInverses.SignedMultiplicativeInverse{Int64},N} where N} where A<:Union{SubArray{T,N,P,I,true} where I<:Tuple{Union{Base.Slice, UnitRange},Vararg{Any,N} where N} where P where N where T, DenseArray}, SubArray{T,2,A,I,L} where L} where I<:Tuple{Vararg{Union{Int64, AbstractRange{Int64}, Base.AbstractCartesianIndex},N} where N} where A<:Union{Base.ReshapedArray{T,N,A,MI} where MI<:Tuple{Vararg{Base.MultiplicativeInverses.SignedMultiplicativeInverse{Int64},N} where N} where A<:Union{SubArray{T,N,P,I,true} where I<:Tuple{Union{Base.Slice, UnitRange},Vararg{Any,N} where N} where P where N where T, DenseArray} where N where T, DenseArray} where T}",
+    "location": "base/linalg.html#Base.Math.acsc-Tuple{Union{DenseArray{T,2}, Base.ReinterpretArray{T,2,S,A} where S, Base.ReshapedArray{T,2,A,MI} where MI<:Tuple{Vararg{Base.MultiplicativeInverses.SignedMultiplicativeInverse{Int64},N} where N} where A<:Union{SubArray{T,N,P,I,true} where I<:Tuple{Union{Base.Slice, UnitRange},Vararg{Any,N} where N} where P where N where T, DenseArray}, SubArray{T,2,A,I,L} where L} where I<:Tuple{Vararg{Union{Int64, AbstractRange{Int64}, Base.AbstractCartesianIndex},N} where N} where A<:Union{Base.ReshapedArray{T,N,A,MI} where MI<:Tuple{Vararg{Base.MultiplicativeInverses.SignedMultiplicativeInverse{Int64},N} where N} where A<:Union{SubArray{T,N,P,I,true} where I<:Tuple{Union{Base.Slice, UnitRange},Vararg{Any,N} where N} where P where N where T, DenseArray} where N where T, DenseArray} where T}",
     "page": "Linear Algebra",
     "title": "Base.Math.acsc",
     "category": "Method",
@@ -13889,7 +13465,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/linalg.html#Base.Math.acot-Tuple{Union{DenseArray{T,2}, Base.ReinterpretArray{T,2,S,A} where S, Base.ReshapedArray{T,2,A,MI} where MI<:Tuple{Vararg{Base.MultiplicativeInverses.SignedMultiplicativeInverse{Int64},N} where N} where A<:Union{SubArray{T,N,P,I,true} where I<:Tuple{Union{Base.Slice, UnitRange},Vararg{Any,N} where N} where P where N where T, DenseArray}, SubArray{T,2,A,I,L} where L} where I<:Tuple{Vararg{Union{Int64, AbstractRange{Int64}, Base.AbstractCartesianIndex},N} where N} where A<:Union{Base.ReshapedArray{T,N,A,MI} where MI<:Tuple{Vararg{Base.MultiplicativeInverses.SignedMultiplicativeInverse{Int64},N} where N} where A<:Union{SubArray{T,N,P,I,true} where I<:Tuple{Union{Base.Slice, UnitRange},Vararg{Any,N} where N} where P where N where T, DenseArray} where N where T, DenseArray} where T}",
+    "location": "base/linalg.html#Base.Math.acot-Tuple{Union{DenseArray{T,2}, Base.ReinterpretArray{T,2,S,A} where S, Base.ReshapedArray{T,2,A,MI} where MI<:Tuple{Vararg{Base.MultiplicativeInverses.SignedMultiplicativeInverse{Int64},N} where N} where A<:Union{SubArray{T,N,P,I,true} where I<:Tuple{Union{Base.Slice, UnitRange},Vararg{Any,N} where N} where P where N where T, DenseArray}, SubArray{T,2,A,I,L} where L} where I<:Tuple{Vararg{Union{Int64, AbstractRange{Int64}, Base.AbstractCartesianIndex},N} where N} where A<:Union{Base.ReshapedArray{T,N,A,MI} where MI<:Tuple{Vararg{Base.MultiplicativeInverses.SignedMultiplicativeInverse{Int64},N} where N} where A<:Union{SubArray{T,N,P,I,true} where I<:Tuple{Union{Base.Slice, UnitRange},Vararg{Any,N} where N} where P where N where T, DenseArray} where N where T, DenseArray} where T}",
     "page": "Linear Algebra",
     "title": "Base.Math.acot",
     "category": "Method",
@@ -13897,7 +13473,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/linalg.html#Base.acosh-Tuple{Union{DenseArray{T,2}, Base.ReinterpretArray{T,2,S,A} where S, Base.ReshapedArray{T,2,A,MI} where MI<:Tuple{Vararg{Base.MultiplicativeInverses.SignedMultiplicativeInverse{Int64},N} where N} where A<:Union{SubArray{T,N,P,I,true} where I<:Tuple{Union{Base.Slice, UnitRange},Vararg{Any,N} where N} where P where N where T, DenseArray}, SubArray{T,2,A,I,L} where L} where I<:Tuple{Vararg{Union{Int64, AbstractRange{Int64}, Base.AbstractCartesianIndex},N} where N} where A<:Union{Base.ReshapedArray{T,N,A,MI} where MI<:Tuple{Vararg{Base.MultiplicativeInverses.SignedMultiplicativeInverse{Int64},N} where N} where A<:Union{SubArray{T,N,P,I,true} where I<:Tuple{Union{Base.Slice, UnitRange},Vararg{Any,N} where N} where P where N where T, DenseArray} where N where T, DenseArray} where T}",
+    "location": "base/linalg.html#Base.acosh-Tuple{Union{DenseArray{T,2}, Base.ReinterpretArray{T,2,S,A} where S, Base.ReshapedArray{T,2,A,MI} where MI<:Tuple{Vararg{Base.MultiplicativeInverses.SignedMultiplicativeInverse{Int64},N} where N} where A<:Union{SubArray{T,N,P,I,true} where I<:Tuple{Union{Base.Slice, UnitRange},Vararg{Any,N} where N} where P where N where T, DenseArray}, SubArray{T,2,A,I,L} where L} where I<:Tuple{Vararg{Union{Int64, AbstractRange{Int64}, Base.AbstractCartesianIndex},N} where N} where A<:Union{Base.ReshapedArray{T,N,A,MI} where MI<:Tuple{Vararg{Base.MultiplicativeInverses.SignedMultiplicativeInverse{Int64},N} where N} where A<:Union{SubArray{T,N,P,I,true} where I<:Tuple{Union{Base.Slice, UnitRange},Vararg{Any,N} where N} where P where N where T, DenseArray} where N where T, DenseArray} where T}",
     "page": "Linear Algebra",
     "title": "Base.acosh",
     "category": "Method",
@@ -13905,7 +13481,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/linalg.html#Base.asinh-Tuple{Union{DenseArray{T,2}, Base.ReinterpretArray{T,2,S,A} where S, Base.ReshapedArray{T,2,A,MI} where MI<:Tuple{Vararg{Base.MultiplicativeInverses.SignedMultiplicativeInverse{Int64},N} where N} where A<:Union{SubArray{T,N,P,I,true} where I<:Tuple{Union{Base.Slice, UnitRange},Vararg{Any,N} where N} where P where N where T, DenseArray}, SubArray{T,2,A,I,L} where L} where I<:Tuple{Vararg{Union{Int64, AbstractRange{Int64}, Base.AbstractCartesianIndex},N} where N} where A<:Union{Base.ReshapedArray{T,N,A,MI} where MI<:Tuple{Vararg{Base.MultiplicativeInverses.SignedMultiplicativeInverse{Int64},N} where N} where A<:Union{SubArray{T,N,P,I,true} where I<:Tuple{Union{Base.Slice, UnitRange},Vararg{Any,N} where N} where P where N where T, DenseArray} where N where T, DenseArray} where T}",
+    "location": "base/linalg.html#Base.asinh-Tuple{Union{DenseArray{T,2}, Base.ReinterpretArray{T,2,S,A} where S, Base.ReshapedArray{T,2,A,MI} where MI<:Tuple{Vararg{Base.MultiplicativeInverses.SignedMultiplicativeInverse{Int64},N} where N} where A<:Union{SubArray{T,N,P,I,true} where I<:Tuple{Union{Base.Slice, UnitRange},Vararg{Any,N} where N} where P where N where T, DenseArray}, SubArray{T,2,A,I,L} where L} where I<:Tuple{Vararg{Union{Int64, AbstractRange{Int64}, Base.AbstractCartesianIndex},N} where N} where A<:Union{Base.ReshapedArray{T,N,A,MI} where MI<:Tuple{Vararg{Base.MultiplicativeInverses.SignedMultiplicativeInverse{Int64},N} where N} where A<:Union{SubArray{T,N,P,I,true} where I<:Tuple{Union{Base.Slice, UnitRange},Vararg{Any,N} where N} where P where N where T, DenseArray} where N where T, DenseArray} where T}",
     "page": "Linear Algebra",
     "title": "Base.asinh",
     "category": "Method",
@@ -13913,7 +13489,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/linalg.html#Base.atanh-Tuple{Union{DenseArray{T,2}, Base.ReinterpretArray{T,2,S,A} where S, Base.ReshapedArray{T,2,A,MI} where MI<:Tuple{Vararg{Base.MultiplicativeInverses.SignedMultiplicativeInverse{Int64},N} where N} where A<:Union{SubArray{T,N,P,I,true} where I<:Tuple{Union{Base.Slice, UnitRange},Vararg{Any,N} where N} where P where N where T, DenseArray}, SubArray{T,2,A,I,L} where L} where I<:Tuple{Vararg{Union{Int64, AbstractRange{Int64}, Base.AbstractCartesianIndex},N} where N} where A<:Union{Base.ReshapedArray{T,N,A,MI} where MI<:Tuple{Vararg{Base.MultiplicativeInverses.SignedMultiplicativeInverse{Int64},N} where N} where A<:Union{SubArray{T,N,P,I,true} where I<:Tuple{Union{Base.Slice, UnitRange},Vararg{Any,N} where N} where P where N where T, DenseArray} where N where T, DenseArray} where T}",
+    "location": "base/linalg.html#Base.atanh-Tuple{Union{DenseArray{T,2}, Base.ReinterpretArray{T,2,S,A} where S, Base.ReshapedArray{T,2,A,MI} where MI<:Tuple{Vararg{Base.MultiplicativeInverses.SignedMultiplicativeInverse{Int64},N} where N} where A<:Union{SubArray{T,N,P,I,true} where I<:Tuple{Union{Base.Slice, UnitRange},Vararg{Any,N} where N} where P where N where T, DenseArray}, SubArray{T,2,A,I,L} where L} where I<:Tuple{Vararg{Union{Int64, AbstractRange{Int64}, Base.AbstractCartesianIndex},N} where N} where A<:Union{Base.ReshapedArray{T,N,A,MI} where MI<:Tuple{Vararg{Base.MultiplicativeInverses.SignedMultiplicativeInverse{Int64},N} where N} where A<:Union{SubArray{T,N,P,I,true} where I<:Tuple{Union{Base.Slice, UnitRange},Vararg{Any,N} where N} where P where N where T, DenseArray} where N where T, DenseArray} where T}",
     "page": "Linear Algebra",
     "title": "Base.atanh",
     "category": "Method",
@@ -13921,7 +13497,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/linalg.html#Base.Math.asech-Tuple{Union{DenseArray{T,2}, Base.ReinterpretArray{T,2,S,A} where S, Base.ReshapedArray{T,2,A,MI} where MI<:Tuple{Vararg{Base.MultiplicativeInverses.SignedMultiplicativeInverse{Int64},N} where N} where A<:Union{SubArray{T,N,P,I,true} where I<:Tuple{Union{Base.Slice, UnitRange},Vararg{Any,N} where N} where P where N where T, DenseArray}, SubArray{T,2,A,I,L} where L} where I<:Tuple{Vararg{Union{Int64, AbstractRange{Int64}, Base.AbstractCartesianIndex},N} where N} where A<:Union{Base.ReshapedArray{T,N,A,MI} where MI<:Tuple{Vararg{Base.MultiplicativeInverses.SignedMultiplicativeInverse{Int64},N} where N} where A<:Union{SubArray{T,N,P,I,true} where I<:Tuple{Union{Base.Slice, UnitRange},Vararg{Any,N} where N} where P where N where T, DenseArray} where N where T, DenseArray} where T}",
+    "location": "base/linalg.html#Base.Math.asech-Tuple{Union{DenseArray{T,2}, Base.ReinterpretArray{T,2,S,A} where S, Base.ReshapedArray{T,2,A,MI} where MI<:Tuple{Vararg{Base.MultiplicativeInverses.SignedMultiplicativeInverse{Int64},N} where N} where A<:Union{SubArray{T,N,P,I,true} where I<:Tuple{Union{Base.Slice, UnitRange},Vararg{Any,N} where N} where P where N where T, DenseArray}, SubArray{T,2,A,I,L} where L} where I<:Tuple{Vararg{Union{Int64, AbstractRange{Int64}, Base.AbstractCartesianIndex},N} where N} where A<:Union{Base.ReshapedArray{T,N,A,MI} where MI<:Tuple{Vararg{Base.MultiplicativeInverses.SignedMultiplicativeInverse{Int64},N} where N} where A<:Union{SubArray{T,N,P,I,true} where I<:Tuple{Union{Base.Slice, UnitRange},Vararg{Any,N} where N} where P where N where T, DenseArray} where N where T, DenseArray} where T}",
     "page": "Linear Algebra",
     "title": "Base.Math.asech",
     "category": "Method",
@@ -13929,7 +13505,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/linalg.html#Base.Math.acsch-Tuple{Union{DenseArray{T,2}, Base.ReinterpretArray{T,2,S,A} where S, Base.ReshapedArray{T,2,A,MI} where MI<:Tuple{Vararg{Base.MultiplicativeInverses.SignedMultiplicativeInverse{Int64},N} where N} where A<:Union{SubArray{T,N,P,I,true} where I<:Tuple{Union{Base.Slice, UnitRange},Vararg{Any,N} where N} where P where N where T, DenseArray}, SubArray{T,2,A,I,L} where L} where I<:Tuple{Vararg{Union{Int64, AbstractRange{Int64}, Base.AbstractCartesianIndex},N} where N} where A<:Union{Base.ReshapedArray{T,N,A,MI} where MI<:Tuple{Vararg{Base.MultiplicativeInverses.SignedMultiplicativeInverse{Int64},N} where N} where A<:Union{SubArray{T,N,P,I,true} where I<:Tuple{Union{Base.Slice, UnitRange},Vararg{Any,N} where N} where P where N where T, DenseArray} where N where T, DenseArray} where T}",
+    "location": "base/linalg.html#Base.Math.acsch-Tuple{Union{DenseArray{T,2}, Base.ReinterpretArray{T,2,S,A} where S, Base.ReshapedArray{T,2,A,MI} where MI<:Tuple{Vararg{Base.MultiplicativeInverses.SignedMultiplicativeInverse{Int64},N} where N} where A<:Union{SubArray{T,N,P,I,true} where I<:Tuple{Union{Base.Slice, UnitRange},Vararg{Any,N} where N} where P where N where T, DenseArray}, SubArray{T,2,A,I,L} where L} where I<:Tuple{Vararg{Union{Int64, AbstractRange{Int64}, Base.AbstractCartesianIndex},N} where N} where A<:Union{Base.ReshapedArray{T,N,A,MI} where MI<:Tuple{Vararg{Base.MultiplicativeInverses.SignedMultiplicativeInverse{Int64},N} where N} where A<:Union{SubArray{T,N,P,I,true} where I<:Tuple{Union{Base.Slice, UnitRange},Vararg{Any,N} where N} where P where N where T, DenseArray} where N where T, DenseArray} where T}",
     "page": "Linear Algebra",
     "title": "Base.Math.acsch",
     "category": "Method",
@@ -13937,7 +13513,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/linalg.html#Base.Math.acoth-Tuple{Union{DenseArray{T,2}, Base.ReinterpretArray{T,2,S,A} where S, Base.ReshapedArray{T,2,A,MI} where MI<:Tuple{Vararg{Base.MultiplicativeInverses.SignedMultiplicativeInverse{Int64},N} where N} where A<:Union{SubArray{T,N,P,I,true} where I<:Tuple{Union{Base.Slice, UnitRange},Vararg{Any,N} where N} where P where N where T, DenseArray}, SubArray{T,2,A,I,L} where L} where I<:Tuple{Vararg{Union{Int64, AbstractRange{Int64}, Base.AbstractCartesianIndex},N} where N} where A<:Union{Base.ReshapedArray{T,N,A,MI} where MI<:Tuple{Vararg{Base.MultiplicativeInverses.SignedMultiplicativeInverse{Int64},N} where N} where A<:Union{SubArray{T,N,P,I,true} where I<:Tuple{Union{Base.Slice, UnitRange},Vararg{Any,N} where N} where P where N where T, DenseArray} where N where T, DenseArray} where T}",
+    "location": "base/linalg.html#Base.Math.acoth-Tuple{Union{DenseArray{T,2}, Base.ReinterpretArray{T,2,S,A} where S, Base.ReshapedArray{T,2,A,MI} where MI<:Tuple{Vararg{Base.MultiplicativeInverses.SignedMultiplicativeInverse{Int64},N} where N} where A<:Union{SubArray{T,N,P,I,true} where I<:Tuple{Union{Base.Slice, UnitRange},Vararg{Any,N} where N} where P where N where T, DenseArray}, SubArray{T,2,A,I,L} where L} where I<:Tuple{Vararg{Union{Int64, AbstractRange{Int64}, Base.AbstractCartesianIndex},N} where N} where A<:Union{Base.ReshapedArray{T,N,A,MI} where MI<:Tuple{Vararg{Base.MultiplicativeInverses.SignedMultiplicativeInverse{Int64},N} where N} where A<:Union{SubArray{T,N,P,I,true} where I<:Tuple{Union{Base.Slice, UnitRange},Vararg{Any,N} where N} where P where N where T, DenseArray} where N where T, DenseArray} where T}",
     "page": "Linear Algebra",
     "title": "Base.Math.acoth",
     "category": "Method",
@@ -13945,7 +13521,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/linalg.html#Base.LinAlg.lyap",
+    "location": "base/linalg.html#Base.LinAlg.lyap",
     "page": "Linear Algebra",
     "title": "Base.LinAlg.lyap",
     "category": "Function",
@@ -13953,7 +13529,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/linalg.html#Base.LinAlg.sylvester",
+    "location": "base/linalg.html#Base.LinAlg.sylvester",
     "page": "Linear Algebra",
     "title": "Base.LinAlg.sylvester",
     "category": "Function",
@@ -13961,7 +13537,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/linalg.html#Base.LinAlg.issuccess",
+    "location": "base/linalg.html#Base.LinAlg.issuccess",
     "page": "Linear Algebra",
     "title": "Base.LinAlg.issuccess",
     "category": "Function",
@@ -13969,7 +13545,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/linalg.html#Base.LinAlg.issymmetric",
+    "location": "base/linalg.html#Base.LinAlg.issymmetric",
     "page": "Linear Algebra",
     "title": "Base.LinAlg.issymmetric",
     "category": "Function",
@@ -13977,7 +13553,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/linalg.html#Base.LinAlg.isposdef",
+    "location": "base/linalg.html#Base.LinAlg.isposdef",
     "page": "Linear Algebra",
     "title": "Base.LinAlg.isposdef",
     "category": "Function",
@@ -13985,7 +13561,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/linalg.html#Base.LinAlg.isposdef!",
+    "location": "base/linalg.html#Base.LinAlg.isposdef!",
     "page": "Linear Algebra",
     "title": "Base.LinAlg.isposdef!",
     "category": "Function",
@@ -13993,7 +13569,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/linalg.html#Base.LinAlg.istril",
+    "location": "base/linalg.html#Base.LinAlg.istril",
     "page": "Linear Algebra",
     "title": "Base.LinAlg.istril",
     "category": "Function",
@@ -14001,7 +13577,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/linalg.html#Base.LinAlg.istriu",
+    "location": "base/linalg.html#Base.LinAlg.istriu",
     "page": "Linear Algebra",
     "title": "Base.LinAlg.istriu",
     "category": "Function",
@@ -14009,7 +13585,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/linalg.html#Base.LinAlg.isdiag",
+    "location": "base/linalg.html#Base.LinAlg.isdiag",
     "page": "Linear Algebra",
     "title": "Base.LinAlg.isdiag",
     "category": "Function",
@@ -14017,7 +13593,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/linalg.html#Base.LinAlg.ishermitian",
+    "location": "base/linalg.html#Base.LinAlg.ishermitian",
     "page": "Linear Algebra",
     "title": "Base.LinAlg.ishermitian",
     "category": "Function",
@@ -14025,7 +13601,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/linalg.html#Base.LinAlg.RowVector",
+    "location": "base/linalg.html#Base.LinAlg.RowVector",
     "page": "Linear Algebra",
     "title": "Base.LinAlg.RowVector",
     "category": "Type",
@@ -14033,7 +13609,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/linalg.html#Base.LinAlg.ConjArray",
+    "location": "base/linalg.html#Base.LinAlg.ConjArray",
     "page": "Linear Algebra",
     "title": "Base.LinAlg.ConjArray",
     "category": "Type",
@@ -14041,7 +13617,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/linalg.html#Base.transpose",
+    "location": "base/linalg.html#Base.transpose",
     "page": "Linear Algebra",
     "title": "Base.transpose",
     "category": "Function",
@@ -14049,7 +13625,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/linalg.html#Base.LinAlg.transpose!",
+    "location": "base/linalg.html#Base.LinAlg.transpose!",
     "page": "Linear Algebra",
     "title": "Base.LinAlg.transpose!",
     "category": "Function",
@@ -14057,7 +13633,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/linalg.html#Base.adjoint",
+    "location": "base/linalg.html#Base.adjoint",
     "page": "Linear Algebra",
     "title": "Base.adjoint",
     "category": "Function",
@@ -14065,7 +13641,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/linalg.html#Base.LinAlg.adjoint!",
+    "location": "base/linalg.html#Base.LinAlg.adjoint!",
     "page": "Linear Algebra",
     "title": "Base.LinAlg.adjoint!",
     "category": "Function",
@@ -14073,7 +13649,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/linalg.html#Base.LinAlg.peakflops",
+    "location": "base/linalg.html#Base.LinAlg.peakflops",
     "page": "Linear Algebra",
     "title": "Base.LinAlg.peakflops",
     "category": "Function",
@@ -14081,7 +13657,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/linalg.html#Base.LinAlg.stride1",
+    "location": "base/linalg.html#Base.LinAlg.stride1",
     "page": "Linear Algebra",
     "title": "Base.LinAlg.stride1",
     "category": "Function",
@@ -14089,7 +13665,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/linalg.html#Standard-Functions-1",
+    "location": "base/linalg.html#Standard-Functions-1",
     "page": "Linear Algebra",
     "title": "Standard Functions",
     "category": "section",
@@ -14097,7 +13673,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/linalg.html#Base.LinAlg.mul!",
+    "location": "base/linalg.html#Base.LinAlg.mul!",
     "page": "Linear Algebra",
     "title": "Base.LinAlg.mul!",
     "category": "Function",
@@ -14105,7 +13681,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/linalg.html#Base.LinAlg.ldiv!",
+    "location": "base/linalg.html#Base.LinAlg.ldiv!",
     "page": "Linear Algebra",
     "title": "Base.LinAlg.ldiv!",
     "category": "Function",
@@ -14113,7 +13689,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/linalg.html#Base.LinAlg.rdiv!",
+    "location": "base/linalg.html#Base.LinAlg.rdiv!",
     "page": "Linear Algebra",
     "title": "Base.LinAlg.rdiv!",
     "category": "Function",
@@ -14121,7 +13697,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/linalg.html#Low-level-matrix-operations-1",
+    "location": "base/linalg.html#Low-level-matrix-operations-1",
     "page": "Linear Algebra",
     "title": "Low-level matrix operations",
     "category": "section",
@@ -14129,7 +13705,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/linalg.html#BLAS-Functions-1",
+    "location": "base/linalg.html#BLAS-Functions-1",
     "page": "Linear Algebra",
     "title": "BLAS Functions",
     "category": "section",
@@ -14137,7 +13713,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/linalg.html#stdlib-blas-chars-1",
+    "location": "base/linalg.html#stdlib-blas-chars-1",
     "page": "Linear Algebra",
     "title": "BLAS Character Arguments",
     "category": "section",
@@ -14145,7 +13721,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/linalg.html#stdlib-blas-side-1",
+    "location": "base/linalg.html#stdlib-blas-side-1",
     "page": "Linear Algebra",
     "title": "Multplication Order",
     "category": "section",
@@ -14153,7 +13729,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/linalg.html#stdlib-blas-uplo-1",
+    "location": "base/linalg.html#stdlib-blas-uplo-1",
     "page": "Linear Algebra",
     "title": "Triangle Referencing",
     "category": "section",
@@ -14161,7 +13737,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/linalg.html#stdlib-blas-trans-1",
+    "location": "base/linalg.html#stdlib-blas-trans-1",
     "page": "Linear Algebra",
     "title": "Transposition Operation",
     "category": "section",
@@ -14169,7 +13745,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/linalg.html#Base.LinAlg.BLAS.dotu",
+    "location": "base/linalg.html#Base.LinAlg.BLAS.dotu",
     "page": "Linear Algebra",
     "title": "Base.LinAlg.BLAS.dotu",
     "category": "Function",
@@ -14177,7 +13753,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/linalg.html#Base.LinAlg.BLAS.dotc",
+    "location": "base/linalg.html#Base.LinAlg.BLAS.dotc",
     "page": "Linear Algebra",
     "title": "Base.LinAlg.BLAS.dotc",
     "category": "Function",
@@ -14185,7 +13761,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/linalg.html#Base.LinAlg.BLAS.blascopy!",
+    "location": "base/linalg.html#Base.LinAlg.BLAS.blascopy!",
     "page": "Linear Algebra",
     "title": "Base.LinAlg.BLAS.blascopy!",
     "category": "Function",
@@ -14193,7 +13769,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/linalg.html#Base.LinAlg.BLAS.nrm2",
+    "location": "base/linalg.html#Base.LinAlg.BLAS.nrm2",
     "page": "Linear Algebra",
     "title": "Base.LinAlg.BLAS.nrm2",
     "category": "Function",
@@ -14201,7 +13777,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/linalg.html#Base.LinAlg.BLAS.asum",
+    "location": "base/linalg.html#Base.LinAlg.BLAS.asum",
     "page": "Linear Algebra",
     "title": "Base.LinAlg.BLAS.asum",
     "category": "Function",
@@ -14209,7 +13785,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/linalg.html#Base.LinAlg.axpy!",
+    "location": "base/linalg.html#Base.LinAlg.axpy!",
     "page": "Linear Algebra",
     "title": "Base.LinAlg.axpy!",
     "category": "Function",
@@ -14217,7 +13793,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/linalg.html#Base.LinAlg.BLAS.scal!",
+    "location": "base/linalg.html#Base.LinAlg.BLAS.scal!",
     "page": "Linear Algebra",
     "title": "Base.LinAlg.BLAS.scal!",
     "category": "Function",
@@ -14225,7 +13801,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/linalg.html#Base.LinAlg.BLAS.scal",
+    "location": "base/linalg.html#Base.LinAlg.BLAS.scal",
     "page": "Linear Algebra",
     "title": "Base.LinAlg.BLAS.scal",
     "category": "Function",
@@ -14233,7 +13809,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/linalg.html#Base.LinAlg.BLAS.ger!",
+    "location": "base/linalg.html#Base.LinAlg.BLAS.ger!",
     "page": "Linear Algebra",
     "title": "Base.LinAlg.BLAS.ger!",
     "category": "Function",
@@ -14241,7 +13817,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/linalg.html#Base.LinAlg.BLAS.syr!",
+    "location": "base/linalg.html#Base.LinAlg.BLAS.syr!",
     "page": "Linear Algebra",
     "title": "Base.LinAlg.BLAS.syr!",
     "category": "Function",
@@ -14249,7 +13825,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/linalg.html#Base.LinAlg.BLAS.syrk!",
+    "location": "base/linalg.html#Base.LinAlg.BLAS.syrk!",
     "page": "Linear Algebra",
     "title": "Base.LinAlg.BLAS.syrk!",
     "category": "Function",
@@ -14257,7 +13833,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/linalg.html#Base.LinAlg.BLAS.syrk",
+    "location": "base/linalg.html#Base.LinAlg.BLAS.syrk",
     "page": "Linear Algebra",
     "title": "Base.LinAlg.BLAS.syrk",
     "category": "Function",
@@ -14265,7 +13841,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/linalg.html#Base.LinAlg.BLAS.her!",
+    "location": "base/linalg.html#Base.LinAlg.BLAS.her!",
     "page": "Linear Algebra",
     "title": "Base.LinAlg.BLAS.her!",
     "category": "Function",
@@ -14273,7 +13849,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/linalg.html#Base.LinAlg.BLAS.herk!",
+    "location": "base/linalg.html#Base.LinAlg.BLAS.herk!",
     "page": "Linear Algebra",
     "title": "Base.LinAlg.BLAS.herk!",
     "category": "Function",
@@ -14281,7 +13857,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/linalg.html#Base.LinAlg.BLAS.herk",
+    "location": "base/linalg.html#Base.LinAlg.BLAS.herk",
     "page": "Linear Algebra",
     "title": "Base.LinAlg.BLAS.herk",
     "category": "Function",
@@ -14289,7 +13865,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/linalg.html#Base.LinAlg.BLAS.gbmv!",
+    "location": "base/linalg.html#Base.LinAlg.BLAS.gbmv!",
     "page": "Linear Algebra",
     "title": "Base.LinAlg.BLAS.gbmv!",
     "category": "Function",
@@ -14297,7 +13873,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/linalg.html#Base.LinAlg.BLAS.gbmv",
+    "location": "base/linalg.html#Base.LinAlg.BLAS.gbmv",
     "page": "Linear Algebra",
     "title": "Base.LinAlg.BLAS.gbmv",
     "category": "Function",
@@ -14305,7 +13881,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/linalg.html#Base.LinAlg.BLAS.sbmv!",
+    "location": "base/linalg.html#Base.LinAlg.BLAS.sbmv!",
     "page": "Linear Algebra",
     "title": "Base.LinAlg.BLAS.sbmv!",
     "category": "Function",
@@ -14313,7 +13889,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/linalg.html#Base.LinAlg.BLAS.sbmv-NTuple{5,Any}",
+    "location": "base/linalg.html#Base.LinAlg.BLAS.sbmv-NTuple{5,Any}",
     "page": "Linear Algebra",
     "title": "Base.LinAlg.BLAS.sbmv",
     "category": "Method",
@@ -14321,7 +13897,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/linalg.html#Base.LinAlg.BLAS.sbmv-NTuple{4,Any}",
+    "location": "base/linalg.html#Base.LinAlg.BLAS.sbmv-NTuple{4,Any}",
     "page": "Linear Algebra",
     "title": "Base.LinAlg.BLAS.sbmv",
     "category": "Method",
@@ -14329,7 +13905,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/linalg.html#Base.LinAlg.BLAS.gemm!",
+    "location": "base/linalg.html#Base.LinAlg.BLAS.gemm!",
     "page": "Linear Algebra",
     "title": "Base.LinAlg.BLAS.gemm!",
     "category": "Function",
@@ -14337,7 +13913,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/linalg.html#Base.LinAlg.BLAS.gemm-NTuple{5,Any}",
+    "location": "base/linalg.html#Base.LinAlg.BLAS.gemm-NTuple{5,Any}",
     "page": "Linear Algebra",
     "title": "Base.LinAlg.BLAS.gemm",
     "category": "Method",
@@ -14345,7 +13921,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/linalg.html#Base.LinAlg.BLAS.gemm-NTuple{4,Any}",
+    "location": "base/linalg.html#Base.LinAlg.BLAS.gemm-NTuple{4,Any}",
     "page": "Linear Algebra",
     "title": "Base.LinAlg.BLAS.gemm",
     "category": "Method",
@@ -14353,7 +13929,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/linalg.html#Base.LinAlg.BLAS.gemv!",
+    "location": "base/linalg.html#Base.LinAlg.BLAS.gemv!",
     "page": "Linear Algebra",
     "title": "Base.LinAlg.BLAS.gemv!",
     "category": "Function",
@@ -14361,7 +13937,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/linalg.html#Base.LinAlg.BLAS.gemv-NTuple{4,Any}",
+    "location": "base/linalg.html#Base.LinAlg.BLAS.gemv-NTuple{4,Any}",
     "page": "Linear Algebra",
     "title": "Base.LinAlg.BLAS.gemv",
     "category": "Method",
@@ -14369,7 +13945,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/linalg.html#Base.LinAlg.BLAS.gemv-Tuple{Any,Any,Any}",
+    "location": "base/linalg.html#Base.LinAlg.BLAS.gemv-Tuple{Any,Any,Any}",
     "page": "Linear Algebra",
     "title": "Base.LinAlg.BLAS.gemv",
     "category": "Method",
@@ -14377,7 +13953,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/linalg.html#Base.LinAlg.BLAS.symm!",
+    "location": "base/linalg.html#Base.LinAlg.BLAS.symm!",
     "page": "Linear Algebra",
     "title": "Base.LinAlg.BLAS.symm!",
     "category": "Function",
@@ -14385,7 +13961,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/linalg.html#Base.LinAlg.BLAS.symm-NTuple{5,Any}",
+    "location": "base/linalg.html#Base.LinAlg.BLAS.symm-NTuple{5,Any}",
     "page": "Linear Algebra",
     "title": "Base.LinAlg.BLAS.symm",
     "category": "Method",
@@ -14393,7 +13969,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/linalg.html#Base.LinAlg.BLAS.symm-NTuple{4,Any}",
+    "location": "base/linalg.html#Base.LinAlg.BLAS.symm-NTuple{4,Any}",
     "page": "Linear Algebra",
     "title": "Base.LinAlg.BLAS.symm",
     "category": "Method",
@@ -14401,7 +13977,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/linalg.html#Base.LinAlg.BLAS.symv!",
+    "location": "base/linalg.html#Base.LinAlg.BLAS.symv!",
     "page": "Linear Algebra",
     "title": "Base.LinAlg.BLAS.symv!",
     "category": "Function",
@@ -14409,7 +13985,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/linalg.html#Base.LinAlg.BLAS.symv-NTuple{4,Any}",
+    "location": "base/linalg.html#Base.LinAlg.BLAS.symv-NTuple{4,Any}",
     "page": "Linear Algebra",
     "title": "Base.LinAlg.BLAS.symv",
     "category": "Method",
@@ -14417,7 +13993,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/linalg.html#Base.LinAlg.BLAS.symv-Tuple{Any,Any,Any}",
+    "location": "base/linalg.html#Base.LinAlg.BLAS.symv-Tuple{Any,Any,Any}",
     "page": "Linear Algebra",
     "title": "Base.LinAlg.BLAS.symv",
     "category": "Method",
@@ -14425,7 +14001,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/linalg.html#Base.LinAlg.BLAS.trmm!",
+    "location": "base/linalg.html#Base.LinAlg.BLAS.trmm!",
     "page": "Linear Algebra",
     "title": "Base.LinAlg.BLAS.trmm!",
     "category": "Function",
@@ -14433,7 +14009,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/linalg.html#Base.LinAlg.BLAS.trmm",
+    "location": "base/linalg.html#Base.LinAlg.BLAS.trmm",
     "page": "Linear Algebra",
     "title": "Base.LinAlg.BLAS.trmm",
     "category": "Function",
@@ -14441,7 +14017,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/linalg.html#Base.LinAlg.BLAS.trsm!",
+    "location": "base/linalg.html#Base.LinAlg.BLAS.trsm!",
     "page": "Linear Algebra",
     "title": "Base.LinAlg.BLAS.trsm!",
     "category": "Function",
@@ -14449,7 +14025,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/linalg.html#Base.LinAlg.BLAS.trsm",
+    "location": "base/linalg.html#Base.LinAlg.BLAS.trsm",
     "page": "Linear Algebra",
     "title": "Base.LinAlg.BLAS.trsm",
     "category": "Function",
@@ -14457,7 +14033,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/linalg.html#Base.LinAlg.BLAS.trmv!",
+    "location": "base/linalg.html#Base.LinAlg.BLAS.trmv!",
     "page": "Linear Algebra",
     "title": "Base.LinAlg.BLAS.trmv!",
     "category": "Function",
@@ -14465,7 +14041,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/linalg.html#Base.LinAlg.BLAS.trmv",
+    "location": "base/linalg.html#Base.LinAlg.BLAS.trmv",
     "page": "Linear Algebra",
     "title": "Base.LinAlg.BLAS.trmv",
     "category": "Function",
@@ -14473,7 +14049,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/linalg.html#Base.LinAlg.BLAS.trsv!",
+    "location": "base/linalg.html#Base.LinAlg.BLAS.trsv!",
     "page": "Linear Algebra",
     "title": "Base.LinAlg.BLAS.trsv!",
     "category": "Function",
@@ -14481,7 +14057,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/linalg.html#Base.LinAlg.BLAS.trsv",
+    "location": "base/linalg.html#Base.LinAlg.BLAS.trsv",
     "page": "Linear Algebra",
     "title": "Base.LinAlg.BLAS.trsv",
     "category": "Function",
@@ -14489,7 +14065,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/linalg.html#Base.LinAlg.BLAS.set_num_threads",
+    "location": "base/linalg.html#Base.LinAlg.BLAS.set_num_threads",
     "page": "Linear Algebra",
     "title": "Base.LinAlg.BLAS.set_num_threads",
     "category": "Function",
@@ -14497,7 +14073,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/linalg.html#Base.LinAlg.I",
+    "location": "base/linalg.html#Base.LinAlg.I",
     "page": "Linear Algebra",
     "title": "Base.LinAlg.I",
     "category": "Constant",
@@ -14505,7 +14081,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/linalg.html#stdlib-blas-diag-1",
+    "location": "base/linalg.html#stdlib-blas-diag-1",
     "page": "Linear Algebra",
     "title": "Unit Diagonal",
     "category": "section",
@@ -14513,7 +14089,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/linalg.html#Base.LinAlg.LAPACK.gbtrf!",
+    "location": "base/linalg.html#Base.LinAlg.LAPACK.gbtrf!",
     "page": "Linear Algebra",
     "title": "Base.LinAlg.LAPACK.gbtrf!",
     "category": "Function",
@@ -14521,7 +14097,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/linalg.html#Base.LinAlg.LAPACK.gbtrs!",
+    "location": "base/linalg.html#Base.LinAlg.LAPACK.gbtrs!",
     "page": "Linear Algebra",
     "title": "Base.LinAlg.LAPACK.gbtrs!",
     "category": "Function",
@@ -14529,7 +14105,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/linalg.html#Base.LinAlg.LAPACK.gebal!",
+    "location": "base/linalg.html#Base.LinAlg.LAPACK.gebal!",
     "page": "Linear Algebra",
     "title": "Base.LinAlg.LAPACK.gebal!",
     "category": "Function",
@@ -14537,7 +14113,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/linalg.html#Base.LinAlg.LAPACK.gebak!",
+    "location": "base/linalg.html#Base.LinAlg.LAPACK.gebak!",
     "page": "Linear Algebra",
     "title": "Base.LinAlg.LAPACK.gebak!",
     "category": "Function",
@@ -14545,7 +14121,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/linalg.html#Base.LinAlg.LAPACK.gebrd!",
+    "location": "base/linalg.html#Base.LinAlg.LAPACK.gebrd!",
     "page": "Linear Algebra",
     "title": "Base.LinAlg.LAPACK.gebrd!",
     "category": "Function",
@@ -14553,7 +14129,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/linalg.html#Base.LinAlg.LAPACK.gelqf!",
+    "location": "base/linalg.html#Base.LinAlg.LAPACK.gelqf!",
     "page": "Linear Algebra",
     "title": "Base.LinAlg.LAPACK.gelqf!",
     "category": "Function",
@@ -14561,7 +14137,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/linalg.html#Base.LinAlg.LAPACK.geqlf!",
+    "location": "base/linalg.html#Base.LinAlg.LAPACK.geqlf!",
     "page": "Linear Algebra",
     "title": "Base.LinAlg.LAPACK.geqlf!",
     "category": "Function",
@@ -14569,7 +14145,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/linalg.html#Base.LinAlg.LAPACK.geqrf!",
+    "location": "base/linalg.html#Base.LinAlg.LAPACK.geqrf!",
     "page": "Linear Algebra",
     "title": "Base.LinAlg.LAPACK.geqrf!",
     "category": "Function",
@@ -14577,7 +14153,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/linalg.html#Base.LinAlg.LAPACK.geqp3!",
+    "location": "base/linalg.html#Base.LinAlg.LAPACK.geqp3!",
     "page": "Linear Algebra",
     "title": "Base.LinAlg.LAPACK.geqp3!",
     "category": "Function",
@@ -14585,7 +14161,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/linalg.html#Base.LinAlg.LAPACK.gerqf!",
+    "location": "base/linalg.html#Base.LinAlg.LAPACK.gerqf!",
     "page": "Linear Algebra",
     "title": "Base.LinAlg.LAPACK.gerqf!",
     "category": "Function",
@@ -14593,7 +14169,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/linalg.html#Base.LinAlg.LAPACK.geqrt!",
+    "location": "base/linalg.html#Base.LinAlg.LAPACK.geqrt!",
     "page": "Linear Algebra",
     "title": "Base.LinAlg.LAPACK.geqrt!",
     "category": "Function",
@@ -14601,7 +14177,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/linalg.html#Base.LinAlg.LAPACK.geqrt3!",
+    "location": "base/linalg.html#Base.LinAlg.LAPACK.geqrt3!",
     "page": "Linear Algebra",
     "title": "Base.LinAlg.LAPACK.geqrt3!",
     "category": "Function",
@@ -14609,7 +14185,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/linalg.html#Base.LinAlg.LAPACK.getrf!",
+    "location": "base/linalg.html#Base.LinAlg.LAPACK.getrf!",
     "page": "Linear Algebra",
     "title": "Base.LinAlg.LAPACK.getrf!",
     "category": "Function",
@@ -14617,7 +14193,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/linalg.html#Base.LinAlg.LAPACK.tzrzf!",
+    "location": "base/linalg.html#Base.LinAlg.LAPACK.tzrzf!",
     "page": "Linear Algebra",
     "title": "Base.LinAlg.LAPACK.tzrzf!",
     "category": "Function",
@@ -14625,7 +14201,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/linalg.html#Base.LinAlg.LAPACK.ormrz!",
+    "location": "base/linalg.html#Base.LinAlg.LAPACK.ormrz!",
     "page": "Linear Algebra",
     "title": "Base.LinAlg.LAPACK.ormrz!",
     "category": "Function",
@@ -14633,7 +14209,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/linalg.html#Base.LinAlg.LAPACK.gels!",
+    "location": "base/linalg.html#Base.LinAlg.LAPACK.gels!",
     "page": "Linear Algebra",
     "title": "Base.LinAlg.LAPACK.gels!",
     "category": "Function",
@@ -14641,7 +14217,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/linalg.html#Base.LinAlg.LAPACK.gesv!",
+    "location": "base/linalg.html#Base.LinAlg.LAPACK.gesv!",
     "page": "Linear Algebra",
     "title": "Base.LinAlg.LAPACK.gesv!",
     "category": "Function",
@@ -14649,7 +14225,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/linalg.html#Base.LinAlg.LAPACK.getrs!",
+    "location": "base/linalg.html#Base.LinAlg.LAPACK.getrs!",
     "page": "Linear Algebra",
     "title": "Base.LinAlg.LAPACK.getrs!",
     "category": "Function",
@@ -14657,7 +14233,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/linalg.html#Base.LinAlg.LAPACK.getri!",
+    "location": "base/linalg.html#Base.LinAlg.LAPACK.getri!",
     "page": "Linear Algebra",
     "title": "Base.LinAlg.LAPACK.getri!",
     "category": "Function",
@@ -14665,7 +14241,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/linalg.html#Base.LinAlg.LAPACK.gesvx!",
+    "location": "base/linalg.html#Base.LinAlg.LAPACK.gesvx!",
     "page": "Linear Algebra",
     "title": "Base.LinAlg.LAPACK.gesvx!",
     "category": "Function",
@@ -14673,7 +14249,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/linalg.html#Base.LinAlg.LAPACK.gelsd!",
+    "location": "base/linalg.html#Base.LinAlg.LAPACK.gelsd!",
     "page": "Linear Algebra",
     "title": "Base.LinAlg.LAPACK.gelsd!",
     "category": "Function",
@@ -14681,7 +14257,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/linalg.html#Base.LinAlg.LAPACK.gelsy!",
+    "location": "base/linalg.html#Base.LinAlg.LAPACK.gelsy!",
     "page": "Linear Algebra",
     "title": "Base.LinAlg.LAPACK.gelsy!",
     "category": "Function",
@@ -14689,7 +14265,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/linalg.html#Base.LinAlg.LAPACK.gglse!",
+    "location": "base/linalg.html#Base.LinAlg.LAPACK.gglse!",
     "page": "Linear Algebra",
     "title": "Base.LinAlg.LAPACK.gglse!",
     "category": "Function",
@@ -14697,7 +14273,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/linalg.html#Base.LinAlg.LAPACK.geev!",
+    "location": "base/linalg.html#Base.LinAlg.LAPACK.geev!",
     "page": "Linear Algebra",
     "title": "Base.LinAlg.LAPACK.geev!",
     "category": "Function",
@@ -14705,7 +14281,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/linalg.html#Base.LinAlg.LAPACK.gesdd!",
+    "location": "base/linalg.html#Base.LinAlg.LAPACK.gesdd!",
     "page": "Linear Algebra",
     "title": "Base.LinAlg.LAPACK.gesdd!",
     "category": "Function",
@@ -14713,7 +14289,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/linalg.html#Base.LinAlg.LAPACK.gesvd!",
+    "location": "base/linalg.html#Base.LinAlg.LAPACK.gesvd!",
     "page": "Linear Algebra",
     "title": "Base.LinAlg.LAPACK.gesvd!",
     "category": "Function",
@@ -14721,7 +14297,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/linalg.html#Base.LinAlg.LAPACK.ggsvd!",
+    "location": "base/linalg.html#Base.LinAlg.LAPACK.ggsvd!",
     "page": "Linear Algebra",
     "title": "Base.LinAlg.LAPACK.ggsvd!",
     "category": "Function",
@@ -14729,7 +14305,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/linalg.html#Base.LinAlg.LAPACK.ggsvd3!",
+    "location": "base/linalg.html#Base.LinAlg.LAPACK.ggsvd3!",
     "page": "Linear Algebra",
     "title": "Base.LinAlg.LAPACK.ggsvd3!",
     "category": "Function",
@@ -14737,7 +14313,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/linalg.html#Base.LinAlg.LAPACK.geevx!",
+    "location": "base/linalg.html#Base.LinAlg.LAPACK.geevx!",
     "page": "Linear Algebra",
     "title": "Base.LinAlg.LAPACK.geevx!",
     "category": "Function",
@@ -14745,7 +14321,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/linalg.html#Base.LinAlg.LAPACK.ggev!",
+    "location": "base/linalg.html#Base.LinAlg.LAPACK.ggev!",
     "page": "Linear Algebra",
     "title": "Base.LinAlg.LAPACK.ggev!",
     "category": "Function",
@@ -14753,7 +14329,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/linalg.html#Base.LinAlg.LAPACK.gtsv!",
+    "location": "base/linalg.html#Base.LinAlg.LAPACK.gtsv!",
     "page": "Linear Algebra",
     "title": "Base.LinAlg.LAPACK.gtsv!",
     "category": "Function",
@@ -14761,7 +14337,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/linalg.html#Base.LinAlg.LAPACK.gttrf!",
+    "location": "base/linalg.html#Base.LinAlg.LAPACK.gttrf!",
     "page": "Linear Algebra",
     "title": "Base.LinAlg.LAPACK.gttrf!",
     "category": "Function",
@@ -14769,7 +14345,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/linalg.html#Base.LinAlg.LAPACK.gttrs!",
+    "location": "base/linalg.html#Base.LinAlg.LAPACK.gttrs!",
     "page": "Linear Algebra",
     "title": "Base.LinAlg.LAPACK.gttrs!",
     "category": "Function",
@@ -14777,7 +14353,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/linalg.html#Base.LinAlg.LAPACK.orglq!",
+    "location": "base/linalg.html#Base.LinAlg.LAPACK.orglq!",
     "page": "Linear Algebra",
     "title": "Base.LinAlg.LAPACK.orglq!",
     "category": "Function",
@@ -14785,7 +14361,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/linalg.html#Base.LinAlg.LAPACK.orgqr!",
+    "location": "base/linalg.html#Base.LinAlg.LAPACK.orgqr!",
     "page": "Linear Algebra",
     "title": "Base.LinAlg.LAPACK.orgqr!",
     "category": "Function",
@@ -14793,7 +14369,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/linalg.html#Base.LinAlg.LAPACK.orgql!",
+    "location": "base/linalg.html#Base.LinAlg.LAPACK.orgql!",
     "page": "Linear Algebra",
     "title": "Base.LinAlg.LAPACK.orgql!",
     "category": "Function",
@@ -14801,7 +14377,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/linalg.html#Base.LinAlg.LAPACK.orgrq!",
+    "location": "base/linalg.html#Base.LinAlg.LAPACK.orgrq!",
     "page": "Linear Algebra",
     "title": "Base.LinAlg.LAPACK.orgrq!",
     "category": "Function",
@@ -14809,7 +14385,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/linalg.html#Base.LinAlg.LAPACK.ormlq!",
+    "location": "base/linalg.html#Base.LinAlg.LAPACK.ormlq!",
     "page": "Linear Algebra",
     "title": "Base.LinAlg.LAPACK.ormlq!",
     "category": "Function",
@@ -14817,7 +14393,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/linalg.html#Base.LinAlg.LAPACK.ormqr!",
+    "location": "base/linalg.html#Base.LinAlg.LAPACK.ormqr!",
     "page": "Linear Algebra",
     "title": "Base.LinAlg.LAPACK.ormqr!",
     "category": "Function",
@@ -14825,7 +14401,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/linalg.html#Base.LinAlg.LAPACK.ormql!",
+    "location": "base/linalg.html#Base.LinAlg.LAPACK.ormql!",
     "page": "Linear Algebra",
     "title": "Base.LinAlg.LAPACK.ormql!",
     "category": "Function",
@@ -14833,7 +14409,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/linalg.html#Base.LinAlg.LAPACK.ormrq!",
+    "location": "base/linalg.html#Base.LinAlg.LAPACK.ormrq!",
     "page": "Linear Algebra",
     "title": "Base.LinAlg.LAPACK.ormrq!",
     "category": "Function",
@@ -14841,7 +14417,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/linalg.html#Base.LinAlg.LAPACK.gemqrt!",
+    "location": "base/linalg.html#Base.LinAlg.LAPACK.gemqrt!",
     "page": "Linear Algebra",
     "title": "Base.LinAlg.LAPACK.gemqrt!",
     "category": "Function",
@@ -14849,7 +14425,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/linalg.html#Base.LinAlg.LAPACK.posv!",
+    "location": "base/linalg.html#Base.LinAlg.LAPACK.posv!",
     "page": "Linear Algebra",
     "title": "Base.LinAlg.LAPACK.posv!",
     "category": "Function",
@@ -14857,7 +14433,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/linalg.html#Base.LinAlg.LAPACK.potrf!",
+    "location": "base/linalg.html#Base.LinAlg.LAPACK.potrf!",
     "page": "Linear Algebra",
     "title": "Base.LinAlg.LAPACK.potrf!",
     "category": "Function",
@@ -14865,7 +14441,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/linalg.html#Base.LinAlg.LAPACK.potri!",
+    "location": "base/linalg.html#Base.LinAlg.LAPACK.potri!",
     "page": "Linear Algebra",
     "title": "Base.LinAlg.LAPACK.potri!",
     "category": "Function",
@@ -14873,7 +14449,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/linalg.html#Base.LinAlg.LAPACK.potrs!",
+    "location": "base/linalg.html#Base.LinAlg.LAPACK.potrs!",
     "page": "Linear Algebra",
     "title": "Base.LinAlg.LAPACK.potrs!",
     "category": "Function",
@@ -14881,7 +14457,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/linalg.html#Base.LinAlg.LAPACK.pstrf!",
+    "location": "base/linalg.html#Base.LinAlg.LAPACK.pstrf!",
     "page": "Linear Algebra",
     "title": "Base.LinAlg.LAPACK.pstrf!",
     "category": "Function",
@@ -14889,7 +14465,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/linalg.html#Base.LinAlg.LAPACK.ptsv!",
+    "location": "base/linalg.html#Base.LinAlg.LAPACK.ptsv!",
     "page": "Linear Algebra",
     "title": "Base.LinAlg.LAPACK.ptsv!",
     "category": "Function",
@@ -14897,7 +14473,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/linalg.html#Base.LinAlg.LAPACK.pttrf!",
+    "location": "base/linalg.html#Base.LinAlg.LAPACK.pttrf!",
     "page": "Linear Algebra",
     "title": "Base.LinAlg.LAPACK.pttrf!",
     "category": "Function",
@@ -14905,7 +14481,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/linalg.html#Base.LinAlg.LAPACK.pttrs!",
+    "location": "base/linalg.html#Base.LinAlg.LAPACK.pttrs!",
     "page": "Linear Algebra",
     "title": "Base.LinAlg.LAPACK.pttrs!",
     "category": "Function",
@@ -14913,7 +14489,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/linalg.html#Base.LinAlg.LAPACK.trtri!",
+    "location": "base/linalg.html#Base.LinAlg.LAPACK.trtri!",
     "page": "Linear Algebra",
     "title": "Base.LinAlg.LAPACK.trtri!",
     "category": "Function",
@@ -14921,7 +14497,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/linalg.html#Base.LinAlg.LAPACK.trtrs!",
+    "location": "base/linalg.html#Base.LinAlg.LAPACK.trtrs!",
     "page": "Linear Algebra",
     "title": "Base.LinAlg.LAPACK.trtrs!",
     "category": "Function",
@@ -14929,7 +14505,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/linalg.html#Base.LinAlg.LAPACK.trcon!",
+    "location": "base/linalg.html#Base.LinAlg.LAPACK.trcon!",
     "page": "Linear Algebra",
     "title": "Base.LinAlg.LAPACK.trcon!",
     "category": "Function",
@@ -14937,7 +14513,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/linalg.html#Base.LinAlg.LAPACK.trevc!",
+    "location": "base/linalg.html#Base.LinAlg.LAPACK.trevc!",
     "page": "Linear Algebra",
     "title": "Base.LinAlg.LAPACK.trevc!",
     "category": "Function",
@@ -14945,7 +14521,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/linalg.html#Base.LinAlg.LAPACK.trrfs!",
+    "location": "base/linalg.html#Base.LinAlg.LAPACK.trrfs!",
     "page": "Linear Algebra",
     "title": "Base.LinAlg.LAPACK.trrfs!",
     "category": "Function",
@@ -14953,7 +14529,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/linalg.html#Base.LinAlg.LAPACK.stev!",
+    "location": "base/linalg.html#Base.LinAlg.LAPACK.stev!",
     "page": "Linear Algebra",
     "title": "Base.LinAlg.LAPACK.stev!",
     "category": "Function",
@@ -14961,7 +14537,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/linalg.html#Base.LinAlg.LAPACK.stebz!",
+    "location": "base/linalg.html#Base.LinAlg.LAPACK.stebz!",
     "page": "Linear Algebra",
     "title": "Base.LinAlg.LAPACK.stebz!",
     "category": "Function",
@@ -14969,7 +14545,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/linalg.html#Base.LinAlg.LAPACK.stegr!",
+    "location": "base/linalg.html#Base.LinAlg.LAPACK.stegr!",
     "page": "Linear Algebra",
     "title": "Base.LinAlg.LAPACK.stegr!",
     "category": "Function",
@@ -14977,7 +14553,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/linalg.html#Base.LinAlg.LAPACK.stein!",
+    "location": "base/linalg.html#Base.LinAlg.LAPACK.stein!",
     "page": "Linear Algebra",
     "title": "Base.LinAlg.LAPACK.stein!",
     "category": "Function",
@@ -14985,7 +14561,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/linalg.html#Base.LinAlg.LAPACK.syconv!",
+    "location": "base/linalg.html#Base.LinAlg.LAPACK.syconv!",
     "page": "Linear Algebra",
     "title": "Base.LinAlg.LAPACK.syconv!",
     "category": "Function",
@@ -14993,7 +14569,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/linalg.html#Base.LinAlg.LAPACK.sysv!",
+    "location": "base/linalg.html#Base.LinAlg.LAPACK.sysv!",
     "page": "Linear Algebra",
     "title": "Base.LinAlg.LAPACK.sysv!",
     "category": "Function",
@@ -15001,7 +14577,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/linalg.html#Base.LinAlg.LAPACK.sytrf!",
+    "location": "base/linalg.html#Base.LinAlg.LAPACK.sytrf!",
     "page": "Linear Algebra",
     "title": "Base.LinAlg.LAPACK.sytrf!",
     "category": "Function",
@@ -15009,7 +14585,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/linalg.html#Base.LinAlg.LAPACK.sytri!",
+    "location": "base/linalg.html#Base.LinAlg.LAPACK.sytri!",
     "page": "Linear Algebra",
     "title": "Base.LinAlg.LAPACK.sytri!",
     "category": "Function",
@@ -15017,7 +14593,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/linalg.html#Base.LinAlg.LAPACK.sytrs!",
+    "location": "base/linalg.html#Base.LinAlg.LAPACK.sytrs!",
     "page": "Linear Algebra",
     "title": "Base.LinAlg.LAPACK.sytrs!",
     "category": "Function",
@@ -15025,7 +14601,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/linalg.html#Base.LinAlg.LAPACK.hesv!",
+    "location": "base/linalg.html#Base.LinAlg.LAPACK.hesv!",
     "page": "Linear Algebra",
     "title": "Base.LinAlg.LAPACK.hesv!",
     "category": "Function",
@@ -15033,7 +14609,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/linalg.html#Base.LinAlg.LAPACK.hetrf!",
+    "location": "base/linalg.html#Base.LinAlg.LAPACK.hetrf!",
     "page": "Linear Algebra",
     "title": "Base.LinAlg.LAPACK.hetrf!",
     "category": "Function",
@@ -15041,7 +14617,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/linalg.html#Base.LinAlg.LAPACK.hetri!",
+    "location": "base/linalg.html#Base.LinAlg.LAPACK.hetri!",
     "page": "Linear Algebra",
     "title": "Base.LinAlg.LAPACK.hetri!",
     "category": "Function",
@@ -15049,7 +14625,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/linalg.html#Base.LinAlg.LAPACK.hetrs!",
+    "location": "base/linalg.html#Base.LinAlg.LAPACK.hetrs!",
     "page": "Linear Algebra",
     "title": "Base.LinAlg.LAPACK.hetrs!",
     "category": "Function",
@@ -15057,7 +14633,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/linalg.html#Base.LinAlg.LAPACK.syev!",
+    "location": "base/linalg.html#Base.LinAlg.LAPACK.syev!",
     "page": "Linear Algebra",
     "title": "Base.LinAlg.LAPACK.syev!",
     "category": "Function",
@@ -15065,7 +14641,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/linalg.html#Base.LinAlg.LAPACK.syevr!",
+    "location": "base/linalg.html#Base.LinAlg.LAPACK.syevr!",
     "page": "Linear Algebra",
     "title": "Base.LinAlg.LAPACK.syevr!",
     "category": "Function",
@@ -15073,7 +14649,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/linalg.html#Base.LinAlg.LAPACK.sygvd!",
+    "location": "base/linalg.html#Base.LinAlg.LAPACK.sygvd!",
     "page": "Linear Algebra",
     "title": "Base.LinAlg.LAPACK.sygvd!",
     "category": "Function",
@@ -15081,7 +14657,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/linalg.html#Base.LinAlg.LAPACK.bdsqr!",
+    "location": "base/linalg.html#Base.LinAlg.LAPACK.bdsqr!",
     "page": "Linear Algebra",
     "title": "Base.LinAlg.LAPACK.bdsqr!",
     "category": "Function",
@@ -15089,7 +14665,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/linalg.html#Base.LinAlg.LAPACK.bdsdc!",
+    "location": "base/linalg.html#Base.LinAlg.LAPACK.bdsdc!",
     "page": "Linear Algebra",
     "title": "Base.LinAlg.LAPACK.bdsdc!",
     "category": "Function",
@@ -15097,7 +14673,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/linalg.html#Base.LinAlg.LAPACK.gecon!",
+    "location": "base/linalg.html#Base.LinAlg.LAPACK.gecon!",
     "page": "Linear Algebra",
     "title": "Base.LinAlg.LAPACK.gecon!",
     "category": "Function",
@@ -15105,7 +14681,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/linalg.html#Base.LinAlg.LAPACK.gehrd!",
+    "location": "base/linalg.html#Base.LinAlg.LAPACK.gehrd!",
     "page": "Linear Algebra",
     "title": "Base.LinAlg.LAPACK.gehrd!",
     "category": "Function",
@@ -15113,7 +14689,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/linalg.html#Base.LinAlg.LAPACK.orghr!",
+    "location": "base/linalg.html#Base.LinAlg.LAPACK.orghr!",
     "page": "Linear Algebra",
     "title": "Base.LinAlg.LAPACK.orghr!",
     "category": "Function",
@@ -15121,7 +14697,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/linalg.html#Base.LinAlg.LAPACK.gees!",
+    "location": "base/linalg.html#Base.LinAlg.LAPACK.gees!",
     "page": "Linear Algebra",
     "title": "Base.LinAlg.LAPACK.gees!",
     "category": "Function",
@@ -15129,7 +14705,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/linalg.html#Base.LinAlg.LAPACK.gges!",
+    "location": "base/linalg.html#Base.LinAlg.LAPACK.gges!",
     "page": "Linear Algebra",
     "title": "Base.LinAlg.LAPACK.gges!",
     "category": "Function",
@@ -15137,7 +14713,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/linalg.html#Base.LinAlg.LAPACK.trexc!",
+    "location": "base/linalg.html#Base.LinAlg.LAPACK.trexc!",
     "page": "Linear Algebra",
     "title": "Base.LinAlg.LAPACK.trexc!",
     "category": "Function",
@@ -15145,7 +14721,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/linalg.html#Base.LinAlg.LAPACK.trsen!",
+    "location": "base/linalg.html#Base.LinAlg.LAPACK.trsen!",
     "page": "Linear Algebra",
     "title": "Base.LinAlg.LAPACK.trsen!",
     "category": "Function",
@@ -15153,7 +14729,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/linalg.html#Base.LinAlg.LAPACK.tgsen!",
+    "location": "base/linalg.html#Base.LinAlg.LAPACK.tgsen!",
     "page": "Linear Algebra",
     "title": "Base.LinAlg.LAPACK.tgsen!",
     "category": "Function",
@@ -15161,7 +14737,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/linalg.html#Base.LinAlg.LAPACK.trsyl!",
+    "location": "base/linalg.html#Base.LinAlg.LAPACK.trsyl!",
     "page": "Linear Algebra",
     "title": "Base.LinAlg.LAPACK.trsyl!",
     "category": "Function",
@@ -15169,7 +14745,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/linalg.html#LAPACK-Functions-1",
+    "location": "base/linalg.html#LAPACK-Functions-1",
     "page": "Linear Algebra",
     "title": "LAPACK Functions",
     "category": "section",
@@ -15177,7 +14753,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/constants.html#",
+    "location": "base/constants.html#",
     "page": "Constants",
     "title": "Constants",
     "category": "page",
@@ -15185,7 +14761,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/constants.html#Core.nothing",
+    "location": "base/constants.html#Core.nothing",
     "page": "Constants",
     "title": "Core.nothing",
     "category": "Constant",
@@ -15193,7 +14769,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/constants.html#Base.PROGRAM_FILE",
+    "location": "base/constants.html#Base.PROGRAM_FILE",
     "page": "Constants",
     "title": "Base.PROGRAM_FILE",
     "category": "Constant",
@@ -15201,7 +14777,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/constants.html#Base.ARGS",
+    "location": "base/constants.html#Base.ARGS",
     "page": "Constants",
     "title": "Base.ARGS",
     "category": "Constant",
@@ -15209,7 +14785,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/constants.html#Base.C_NULL",
+    "location": "base/constants.html#Base.C_NULL",
     "page": "Constants",
     "title": "Base.C_NULL",
     "category": "Constant",
@@ -15217,7 +14793,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/constants.html#Base.VERSION",
+    "location": "base/constants.html#Base.VERSION",
     "page": "Constants",
     "title": "Base.VERSION",
     "category": "Constant",
@@ -15225,7 +14801,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/constants.html#Base.LOAD_PATH",
+    "location": "base/constants.html#Base.LOAD_PATH",
     "page": "Constants",
     "title": "Base.LOAD_PATH",
     "category": "Constant",
@@ -15233,7 +14809,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/constants.html#Base.Sys.BINDIR",
+    "location": "base/constants.html#Base.Sys.BINDIR",
     "page": "Constants",
     "title": "Base.Sys.BINDIR",
     "category": "Constant",
@@ -15241,7 +14817,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/constants.html#Base.Sys.CPU_CORES",
+    "location": "base/constants.html#Base.Sys.CPU_CORES",
     "page": "Constants",
     "title": "Base.Sys.CPU_CORES",
     "category": "Constant",
@@ -15249,7 +14825,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/constants.html#Base.Sys.WORD_SIZE",
+    "location": "base/constants.html#Base.Sys.WORD_SIZE",
     "page": "Constants",
     "title": "Base.Sys.WORD_SIZE",
     "category": "Constant",
@@ -15257,7 +14833,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/constants.html#Base.Sys.KERNEL",
+    "location": "base/constants.html#Base.Sys.KERNEL",
     "page": "Constants",
     "title": "Base.Sys.KERNEL",
     "category": "Constant",
@@ -15265,7 +14841,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/constants.html#Base.Sys.ARCH",
+    "location": "base/constants.html#Base.Sys.ARCH",
     "page": "Constants",
     "title": "Base.Sys.ARCH",
     "category": "Constant",
@@ -15273,7 +14849,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/constants.html#Base.Sys.MACHINE",
+    "location": "base/constants.html#Base.Sys.MACHINE",
     "page": "Constants",
     "title": "Base.Sys.MACHINE",
     "category": "Constant",
@@ -15281,7 +14857,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/constants.html#lib-constants-1",
+    "location": "base/constants.html#lib-constants-1",
     "page": "Constants",
     "title": "Constants",
     "category": "section",
@@ -15289,7 +14865,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/file.html#",
+    "location": "base/file.html#",
     "page": "Filesystem",
     "title": "Filesystem",
     "category": "page",
@@ -15297,7 +14873,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/file.html#Base.Filesystem.pwd",
+    "location": "base/file.html#Base.Filesystem.pwd",
     "page": "Filesystem",
     "title": "Base.Filesystem.pwd",
     "category": "Function",
@@ -15305,7 +14881,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/file.html#Base.Filesystem.cd-Tuple{AbstractString}",
+    "location": "base/file.html#Base.Filesystem.cd-Tuple{AbstractString}",
     "page": "Filesystem",
     "title": "Base.Filesystem.cd",
     "category": "Method",
@@ -15313,7 +14889,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/file.html#Base.Filesystem.cd-Tuple{Function}",
+    "location": "base/file.html#Base.Filesystem.cd-Tuple{Function}",
     "page": "Filesystem",
     "title": "Base.Filesystem.cd",
     "category": "Method",
@@ -15321,7 +14897,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/file.html#Base.Filesystem.readdir",
+    "location": "base/file.html#Base.Filesystem.readdir",
     "page": "Filesystem",
     "title": "Base.Filesystem.readdir",
     "category": "Function",
@@ -15329,7 +14905,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/file.html#Base.Filesystem.walkdir",
+    "location": "base/file.html#Base.Filesystem.walkdir",
     "page": "Filesystem",
     "title": "Base.Filesystem.walkdir",
     "category": "Function",
@@ -15337,7 +14913,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/file.html#Base.Filesystem.mkdir",
+    "location": "base/file.html#Base.Filesystem.mkdir",
     "page": "Filesystem",
     "title": "Base.Filesystem.mkdir",
     "category": "Function",
@@ -15345,7 +14921,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/file.html#Base.Filesystem.mkpath",
+    "location": "base/file.html#Base.Filesystem.mkpath",
     "page": "Filesystem",
     "title": "Base.Filesystem.mkpath",
     "category": "Function",
@@ -15353,7 +14929,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/file.html#Base.Filesystem.symlink",
+    "location": "base/file.html#Base.Filesystem.symlink",
     "page": "Filesystem",
     "title": "Base.Filesystem.symlink",
     "category": "Function",
@@ -15361,7 +14937,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/file.html#Base.Filesystem.readlink",
+    "location": "base/file.html#Base.Filesystem.readlink",
     "page": "Filesystem",
     "title": "Base.Filesystem.readlink",
     "category": "Function",
@@ -15369,7 +14945,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/file.html#Base.Filesystem.chmod",
+    "location": "base/file.html#Base.Filesystem.chmod",
     "page": "Filesystem",
     "title": "Base.Filesystem.chmod",
     "category": "Function",
@@ -15377,7 +14953,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/file.html#Base.Filesystem.chown",
+    "location": "base/file.html#Base.Filesystem.chown",
     "page": "Filesystem",
     "title": "Base.Filesystem.chown",
     "category": "Function",
@@ -15385,7 +14961,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/file.html#Base.stat",
+    "location": "base/file.html#Base.stat",
     "page": "Filesystem",
     "title": "Base.stat",
     "category": "Function",
@@ -15393,7 +14969,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/file.html#Base.Filesystem.lstat",
+    "location": "base/file.html#Base.Filesystem.lstat",
     "page": "Filesystem",
     "title": "Base.Filesystem.lstat",
     "category": "Function",
@@ -15401,7 +14977,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/file.html#Base.Filesystem.ctime",
+    "location": "base/file.html#Base.Filesystem.ctime",
     "page": "Filesystem",
     "title": "Base.Filesystem.ctime",
     "category": "Function",
@@ -15409,7 +14985,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/file.html#Base.Filesystem.mtime",
+    "location": "base/file.html#Base.Filesystem.mtime",
     "page": "Filesystem",
     "title": "Base.Filesystem.mtime",
     "category": "Function",
@@ -15417,7 +14993,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/file.html#Base.Filesystem.filemode",
+    "location": "base/file.html#Base.Filesystem.filemode",
     "page": "Filesystem",
     "title": "Base.Filesystem.filemode",
     "category": "Function",
@@ -15425,7 +15001,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/file.html#Base.Filesystem.filesize",
+    "location": "base/file.html#Base.Filesystem.filesize",
     "page": "Filesystem",
     "title": "Base.Filesystem.filesize",
     "category": "Function",
@@ -15433,7 +15009,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/file.html#Base.Filesystem.uperm",
+    "location": "base/file.html#Base.Filesystem.uperm",
     "page": "Filesystem",
     "title": "Base.Filesystem.uperm",
     "category": "Function",
@@ -15441,7 +15017,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/file.html#Base.Filesystem.gperm",
+    "location": "base/file.html#Base.Filesystem.gperm",
     "page": "Filesystem",
     "title": "Base.Filesystem.gperm",
     "category": "Function",
@@ -15449,7 +15025,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/file.html#Base.Filesystem.operm",
+    "location": "base/file.html#Base.Filesystem.operm",
     "page": "Filesystem",
     "title": "Base.Filesystem.operm",
     "category": "Function",
@@ -15457,7 +15033,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/file.html#Base.Filesystem.cp",
+    "location": "base/file.html#Base.Filesystem.cp",
     "page": "Filesystem",
     "title": "Base.Filesystem.cp",
     "category": "Function",
@@ -15465,7 +15041,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/file.html#Base.download",
+    "location": "base/file.html#Base.download",
     "page": "Filesystem",
     "title": "Base.download",
     "category": "Function",
@@ -15473,7 +15049,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/file.html#Base.Filesystem.mv",
+    "location": "base/file.html#Base.Filesystem.mv",
     "page": "Filesystem",
     "title": "Base.Filesystem.mv",
     "category": "Function",
@@ -15481,7 +15057,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/file.html#Base.Filesystem.rm",
+    "location": "base/file.html#Base.Filesystem.rm",
     "page": "Filesystem",
     "title": "Base.Filesystem.rm",
     "category": "Function",
@@ -15489,7 +15065,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/file.html#Base.Filesystem.touch",
+    "location": "base/file.html#Base.Filesystem.touch",
     "page": "Filesystem",
     "title": "Base.Filesystem.touch",
     "category": "Function",
@@ -15497,7 +15073,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/file.html#Base.Filesystem.tempname",
+    "location": "base/file.html#Base.Filesystem.tempname",
     "page": "Filesystem",
     "title": "Base.Filesystem.tempname",
     "category": "Function",
@@ -15505,7 +15081,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/file.html#Base.Filesystem.tempdir",
+    "location": "base/file.html#Base.Filesystem.tempdir",
     "page": "Filesystem",
     "title": "Base.Filesystem.tempdir",
     "category": "Function",
@@ -15513,7 +15089,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/file.html#Base.Filesystem.mktemp-Tuple{Any}",
+    "location": "base/file.html#Base.Filesystem.mktemp-Tuple{Any}",
     "page": "Filesystem",
     "title": "Base.Filesystem.mktemp",
     "category": "Method",
@@ -15521,7 +15097,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/file.html#Base.Filesystem.mktemp-Tuple{Function,Any}",
+    "location": "base/file.html#Base.Filesystem.mktemp-Tuple{Function,Any}",
     "page": "Filesystem",
     "title": "Base.Filesystem.mktemp",
     "category": "Method",
@@ -15529,7 +15105,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/file.html#Base.Filesystem.mktempdir-Tuple{Any}",
+    "location": "base/file.html#Base.Filesystem.mktempdir-Tuple{Any}",
     "page": "Filesystem",
     "title": "Base.Filesystem.mktempdir",
     "category": "Method",
@@ -15537,7 +15113,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/file.html#Base.Filesystem.mktempdir-Tuple{Function,Any}",
+    "location": "base/file.html#Base.Filesystem.mktempdir-Tuple{Function,Any}",
     "page": "Filesystem",
     "title": "Base.Filesystem.mktempdir",
     "category": "Method",
@@ -15545,7 +15121,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/file.html#Base.Filesystem.isblockdev",
+    "location": "base/file.html#Base.Filesystem.isblockdev",
     "page": "Filesystem",
     "title": "Base.Filesystem.isblockdev",
     "category": "Function",
@@ -15553,7 +15129,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/file.html#Base.Filesystem.ischardev",
+    "location": "base/file.html#Base.Filesystem.ischardev",
     "page": "Filesystem",
     "title": "Base.Filesystem.ischardev",
     "category": "Function",
@@ -15561,7 +15137,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/file.html#Base.Filesystem.isdir",
+    "location": "base/file.html#Base.Filesystem.isdir",
     "page": "Filesystem",
     "title": "Base.Filesystem.isdir",
     "category": "Function",
@@ -15569,7 +15145,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/file.html#Base.Filesystem.isfifo",
+    "location": "base/file.html#Base.Filesystem.isfifo",
     "page": "Filesystem",
     "title": "Base.Filesystem.isfifo",
     "category": "Function",
@@ -15577,7 +15153,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/file.html#Base.Filesystem.isfile",
+    "location": "base/file.html#Base.Filesystem.isfile",
     "page": "Filesystem",
     "title": "Base.Filesystem.isfile",
     "category": "Function",
@@ -15585,7 +15161,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/file.html#Base.Filesystem.islink",
+    "location": "base/file.html#Base.Filesystem.islink",
     "page": "Filesystem",
     "title": "Base.Filesystem.islink",
     "category": "Function",
@@ -15593,7 +15169,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/file.html#Base.Filesystem.ismount",
+    "location": "base/file.html#Base.Filesystem.ismount",
     "page": "Filesystem",
     "title": "Base.Filesystem.ismount",
     "category": "Function",
@@ -15601,7 +15177,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/file.html#Base.Filesystem.ispath",
+    "location": "base/file.html#Base.Filesystem.ispath",
     "page": "Filesystem",
     "title": "Base.Filesystem.ispath",
     "category": "Function",
@@ -15609,7 +15185,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/file.html#Base.Filesystem.issetgid",
+    "location": "base/file.html#Base.Filesystem.issetgid",
     "page": "Filesystem",
     "title": "Base.Filesystem.issetgid",
     "category": "Function",
@@ -15617,7 +15193,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/file.html#Base.Filesystem.issetuid",
+    "location": "base/file.html#Base.Filesystem.issetuid",
     "page": "Filesystem",
     "title": "Base.Filesystem.issetuid",
     "category": "Function",
@@ -15625,7 +15201,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/file.html#Base.Filesystem.issocket",
+    "location": "base/file.html#Base.Filesystem.issocket",
     "page": "Filesystem",
     "title": "Base.Filesystem.issocket",
     "category": "Function",
@@ -15633,7 +15209,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/file.html#Base.Filesystem.issticky",
+    "location": "base/file.html#Base.Filesystem.issticky",
     "page": "Filesystem",
     "title": "Base.Filesystem.issticky",
     "category": "Function",
@@ -15641,7 +15217,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/file.html#Base.Filesystem.homedir",
+    "location": "base/file.html#Base.Filesystem.homedir",
     "page": "Filesystem",
     "title": "Base.Filesystem.homedir",
     "category": "Function",
@@ -15649,7 +15225,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/file.html#Base.Filesystem.dirname",
+    "location": "base/file.html#Base.Filesystem.dirname",
     "page": "Filesystem",
     "title": "Base.Filesystem.dirname",
     "category": "Function",
@@ -15657,7 +15233,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/file.html#Base.Filesystem.basename",
+    "location": "base/file.html#Base.Filesystem.basename",
     "page": "Filesystem",
     "title": "Base.Filesystem.basename",
     "category": "Function",
@@ -15665,7 +15241,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/file.html#Base.@__FILE__",
+    "location": "base/file.html#Base.@__FILE__",
     "page": "Filesystem",
     "title": "Base.@__FILE__",
     "category": "Macro",
@@ -15673,7 +15249,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/file.html#Base.@__DIR__",
+    "location": "base/file.html#Base.@__DIR__",
     "page": "Filesystem",
     "title": "Base.@__DIR__",
     "category": "Macro",
@@ -15681,7 +15257,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/file.html#Base.@__LINE__",
+    "location": "base/file.html#Base.@__LINE__",
     "page": "Filesystem",
     "title": "Base.@__LINE__",
     "category": "Macro",
@@ -15689,7 +15265,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/file.html#Base.Filesystem.isabspath",
+    "location": "base/file.html#Base.Filesystem.isabspath",
     "page": "Filesystem",
     "title": "Base.Filesystem.isabspath",
     "category": "Function",
@@ -15697,7 +15273,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/file.html#Base.Filesystem.isdirpath",
+    "location": "base/file.html#Base.Filesystem.isdirpath",
     "page": "Filesystem",
     "title": "Base.Filesystem.isdirpath",
     "category": "Function",
@@ -15705,7 +15281,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/file.html#Base.Filesystem.joinpath",
+    "location": "base/file.html#Base.Filesystem.joinpath",
     "page": "Filesystem",
     "title": "Base.Filesystem.joinpath",
     "category": "Function",
@@ -15713,7 +15289,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/file.html#Base.Filesystem.abspath",
+    "location": "base/file.html#Base.Filesystem.abspath",
     "page": "Filesystem",
     "title": "Base.Filesystem.abspath",
     "category": "Function",
@@ -15721,7 +15297,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/file.html#Base.Filesystem.normpath",
+    "location": "base/file.html#Base.Filesystem.normpath",
     "page": "Filesystem",
     "title": "Base.Filesystem.normpath",
     "category": "Function",
@@ -15729,7 +15305,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/file.html#Base.Filesystem.realpath",
+    "location": "base/file.html#Base.Filesystem.realpath",
     "page": "Filesystem",
     "title": "Base.Filesystem.realpath",
     "category": "Function",
@@ -15737,7 +15313,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/file.html#Base.Filesystem.relpath",
+    "location": "base/file.html#Base.Filesystem.relpath",
     "page": "Filesystem",
     "title": "Base.Filesystem.relpath",
     "category": "Function",
@@ -15745,7 +15321,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/file.html#Base.Filesystem.expanduser",
+    "location": "base/file.html#Base.Filesystem.expanduser",
     "page": "Filesystem",
     "title": "Base.Filesystem.expanduser",
     "category": "Function",
@@ -15753,7 +15329,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/file.html#Base.Filesystem.splitdir",
+    "location": "base/file.html#Base.Filesystem.splitdir",
     "page": "Filesystem",
     "title": "Base.Filesystem.splitdir",
     "category": "Function",
@@ -15761,7 +15337,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/file.html#Base.Filesystem.splitdrive",
+    "location": "base/file.html#Base.Filesystem.splitdrive",
     "page": "Filesystem",
     "title": "Base.Filesystem.splitdrive",
     "category": "Function",
@@ -15769,7 +15345,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/file.html#Base.Filesystem.splitext",
+    "location": "base/file.html#Base.Filesystem.splitext",
     "page": "Filesystem",
     "title": "Base.Filesystem.splitext",
     "category": "Function",
@@ -15777,7 +15353,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/file.html#Filesystem-1",
+    "location": "base/file.html#Filesystem-1",
     "page": "Filesystem",
     "title": "Filesystem",
     "category": "section",
@@ -15785,79 +15361,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/delimitedfiles.html#",
-    "page": "Delimited Files",
-    "title": "Delimited Files",
-    "category": "page",
-    "text": ""
-},
-
-{
-    "location": "stdlib/delimitedfiles.html#DelimitedFiles.readdlm-Tuple{Any,Char,Type,Char}",
-    "page": "Delimited Files",
-    "title": "DelimitedFiles.readdlm",
-    "category": "Method",
-    "text": "readdlm(source, delim::Char, T::Type, eol::Char; header=false, skipstart=0, skipblanks=true, use_mmap, quotes=true, dims, comments=true, comment_char='#')\n\nRead a matrix from the source where each line (separated by eol) gives one row, with elements separated by the given delimiter. The source can be a text file, stream or byte array. Memory mapped files can be used by passing the byte array representation of the mapped segment as source.\n\nIf T is a numeric type, the result is an array of that type, with any non-numeric elements as NaN for floating-point types, or zero. Other useful values of T include String, AbstractString, and Any.\n\nIf header is true, the first row of data will be read as header and the tuple (data_cells, header_cells) is returned instead of only data_cells.\n\nSpecifying skipstart will ignore the corresponding number of initial lines from the input.\n\nIf skipblanks is true, blank lines in the input will be ignored.\n\nIf use_mmap is true, the file specified by source is memory mapped for potential speedups. Default is true except on Windows. On Windows, you may want to specify true if the file is large, and is only read once and not written to.\n\nIf quotes is true, columns enclosed within double-quote (\") characters are allowed to contain new lines and column delimiters. Double-quote characters within a quoted field must be escaped with another double-quote.  Specifying dims as a tuple of the expected rows and columns (including header, if any) may speed up reading of large files.  If comments is true, lines beginning with comment_char and text following comment_char in any line are ignored.\n\nExamples\n\njulia> using DelimitedFiles\n\njulia> x = [1; 2; 3; 4];\n\njulia> y = [5; 6; 7; 8];\n\njulia> open(\"delim_file.txt\", \"w\") do io\n           writedlm(io, [x y])\n       end\n\njulia> readdlm(\"delim_file.txt\", '\\t', Int, '\\n')\n4×2 Array{Int64,2}:\n 1  5\n 2  6\n 3  7\n 4  8\n\n\n\n"
-},
-
-{
-    "location": "stdlib/delimitedfiles.html#DelimitedFiles.readdlm-Tuple{Any,Char,Char}",
-    "page": "Delimited Files",
-    "title": "DelimitedFiles.readdlm",
-    "category": "Method",
-    "text": "readdlm(source, delim::Char, eol::Char; options...)\n\nIf all data is numeric, the result will be a numeric array. If some elements cannot be parsed as numbers, a heterogeneous array of numbers and strings is returned.\n\n\n\n"
-},
-
-{
-    "location": "stdlib/delimitedfiles.html#DelimitedFiles.readdlm-Tuple{Any,Char,Type}",
-    "page": "Delimited Files",
-    "title": "DelimitedFiles.readdlm",
-    "category": "Method",
-    "text": "readdlm(source, delim::Char, T::Type; options...)\n\nThe end of line delimiter is taken as \\n.\n\nExamples\n\njulia> using DelimitedFiles\n\njulia> x = [1; 2; 3; 4];\n\njulia> y = [1.1; 2.2; 3.3; 4.4];\n\njulia> open(\"delim_file.txt\", \"w\") do io\n           writedlm(io, [x y], ',')\n       end;\n\njulia> readdlm(\"delim_file.txt\", ',', Float64)\n4×2 Array{Float64,2}:\n 1.0  1.1\n 2.0  2.2\n 3.0  3.3\n 4.0  4.4\n\njulia> rm(\"delim_file.txt\")\n\n\n\n"
-},
-
-{
-    "location": "stdlib/delimitedfiles.html#DelimitedFiles.readdlm-Tuple{Any,Char}",
-    "page": "Delimited Files",
-    "title": "DelimitedFiles.readdlm",
-    "category": "Method",
-    "text": "readdlm(source, delim::Char; options...)\n\nThe end of line delimiter is taken as \\n. If all data is numeric, the result will be a numeric array. If some elements cannot be parsed as numbers, a heterogeneous array of numbers and strings is returned.\n\nExamples\n\njulia> using DelimitedFiles\n\njulia> x = [1; 2; 3; 4];\n\njulia> y = [1.1; 2.2; 3.3; 4.4];\n\njulia> open(\"delim_file.txt\", \"w\") do io\n           writedlm(io, [x y], ',')\n       end;\n\njulia> readdlm(\"delim_file.txt\", ',')\n4×2 Array{Float64,2}:\n 1.0  1.1\n 2.0  2.2\n 3.0  3.3\n 4.0  4.4\n\njulia> rm(\"delim_file.txt\")\n\njulia> z = [\"a\"; \"b\"; \"c\"; \"d\"];\n\njulia> open(\"delim_file.txt\", \"w\") do io\n           writedlm(io, [x z], ',')\n       end;\n\njulia> readdlm(\"delim_file.txt\", ',')\n4×2 Array{Any,2}:\n 1  \"a\"\n 2  \"b\"\n 3  \"c\"\n 4  \"d\"\n\njulia> rm(\"delim_file.txt\")\n\n\n\n"
-},
-
-{
-    "location": "stdlib/delimitedfiles.html#DelimitedFiles.readdlm-Tuple{Any,Type}",
-    "page": "Delimited Files",
-    "title": "DelimitedFiles.readdlm",
-    "category": "Method",
-    "text": "readdlm(source, T::Type; options...)\n\nThe columns are assumed to be separated by one or more whitespaces. The end of line delimiter is taken as \\n.\n\nExamples\n\njulia> using DelimitedFiles\n\njulia> x = [1; 2; 3; 4];\n\njulia> y = [5; 6; 7; 8];\n\njulia> open(\"delim_file.txt\", \"w\") do io\n           writedlm(io, [x y])\n       end;\n\njulia> readdlm(\"delim_file.txt\", Int64)\n4×2 Array{Int64,2}:\n 1  5\n 2  6\n 3  7\n 4  8\n\njulia> readdlm(\"delim_file.txt\", Float64)\n4×2 Array{Float64,2}:\n 1.0  5.0\n 2.0  6.0\n 3.0  7.0\n 4.0  8.0\n\njulia> rm(\"delim_file.txt\")\n\n\n\n"
-},
-
-{
-    "location": "stdlib/delimitedfiles.html#DelimitedFiles.readdlm-Tuple{Any}",
-    "page": "Delimited Files",
-    "title": "DelimitedFiles.readdlm",
-    "category": "Method",
-    "text": "readdlm(source; options...)\n\nThe columns are assumed to be separated by one or more whitespaces. The end of line delimiter is taken as \\n. If all data is numeric, the result will be a numeric array. If some elements cannot be parsed as numbers, a heterogeneous array of numbers and strings is returned.\n\nExamples\n\njulia> using DelimitedFiles\n\njulia> x = [1; 2; 3; 4];\n\njulia> y = [\"a\"; \"b\"; \"c\"; \"d\"];\n\njulia> open(\"delim_file.txt\", \"w\") do io\n           writedlm(io, [x y])\n       end;\n\njulia> readdlm(\"delim_file.txt\")\n4×2 Array{Any,2}:\n 1  \"a\"\n 2  \"b\"\n 3  \"c\"\n 4  \"d\"\n\njulia> rm(\"delim_file.txt\")\n\n\n\n"
-},
-
-{
-    "location": "stdlib/delimitedfiles.html#DelimitedFiles.writedlm",
-    "page": "Delimited Files",
-    "title": "DelimitedFiles.writedlm",
-    "category": "Function",
-    "text": "writedlm(f, A, delim='\\t'; opts)\n\nWrite A (a vector, matrix, or an iterable collection of iterable rows) as text to f (either a filename string or an IO stream) using the given delimiter delim (which defaults to tab, but can be any printable Julia object, typically a Char or AbstractString).\n\nFor example, two vectors x and y of the same length can be written as two columns of tab-delimited text to f by either writedlm(f, [x y]) or by writedlm(f, zip(x, y)).\n\nExamples\n\njulia> using DelimitedFiles\n\njulia> x = [1; 2; 3; 4];\n\njulia> y = [5; 6; 7; 8];\n\njulia> open(\"delim_file.txt\", \"w\") do io\n           writedlm(io, [x y])\n       end\n\njulia> readdlm(\"delim_file.txt\", '\\t', Int, '\\n')\n4×2 Array{Int64,2}:\n 1  5\n 2  6\n 3  7\n 4  8\n\n\n\n"
-},
-
-{
-    "location": "stdlib/delimitedfiles.html#Delimited-Files-1",
-    "page": "Delimited Files",
-    "title": "Delimited Files",
-    "category": "section",
-    "text": "DelimitedFiles.readdlm(::Any, ::Char, ::Type, ::Char)\nDelimitedFiles.readdlm(::Any, ::Char, ::Char)\nDelimitedFiles.readdlm(::Any, ::Char, ::Type)\nDelimitedFiles.readdlm(::Any, ::Char)\nDelimitedFiles.readdlm(::Any, ::Type)\nDelimitedFiles.readdlm(::Any)\nDelimitedFiles.writedlm"
-},
-
-{
-    "location": "stdlib/io-network.html#",
+    "location": "base/io-network.html#",
     "page": "I/O and Network",
     "title": "I/O and Network",
     "category": "page",
@@ -15865,7 +15369,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/io-network.html#I/O-and-Network-1",
+    "location": "base/io-network.html#I/O-and-Network-1",
     "page": "I/O and Network",
     "title": "I/O and Network",
     "category": "section",
@@ -15873,7 +15377,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/io-network.html#Base.STDOUT",
+    "location": "base/io-network.html#Base.STDOUT",
     "page": "I/O and Network",
     "title": "Base.STDOUT",
     "category": "Constant",
@@ -15881,7 +15385,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/io-network.html#Base.STDERR",
+    "location": "base/io-network.html#Base.STDERR",
     "page": "I/O and Network",
     "title": "Base.STDERR",
     "category": "Constant",
@@ -15889,7 +15393,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/io-network.html#Base.STDIN",
+    "location": "base/io-network.html#Base.STDIN",
     "page": "I/O and Network",
     "title": "Base.STDIN",
     "category": "Constant",
@@ -15897,7 +15401,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/io-network.html#Base.open",
+    "location": "base/io-network.html#Base.open",
     "page": "I/O and Network",
     "title": "Base.open",
     "category": "Function",
@@ -15905,7 +15409,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/io-network.html#Base.IOBuffer",
+    "location": "base/io-network.html#Base.IOBuffer",
     "page": "I/O and Network",
     "title": "Base.IOBuffer",
     "category": "Type",
@@ -15913,7 +15417,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/io-network.html#Base.take!-Tuple{Base.GenericIOBuffer}",
+    "location": "base/io-network.html#Base.take!-Tuple{Base.GenericIOBuffer}",
     "page": "I/O and Network",
     "title": "Base.take!",
     "category": "Method",
@@ -15921,7 +15425,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/io-network.html#Base.fdio",
+    "location": "base/io-network.html#Base.fdio",
     "page": "I/O and Network",
     "title": "Base.fdio",
     "category": "Function",
@@ -15929,7 +15433,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/io-network.html#Base.flush",
+    "location": "base/io-network.html#Base.flush",
     "page": "I/O and Network",
     "title": "Base.flush",
     "category": "Function",
@@ -15937,7 +15441,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/io-network.html#Base.close",
+    "location": "base/io-network.html#Base.close",
     "page": "I/O and Network",
     "title": "Base.close",
     "category": "Function",
@@ -15945,7 +15449,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/io-network.html#Base.write",
+    "location": "base/io-network.html#Base.write",
     "page": "I/O and Network",
     "title": "Base.write",
     "category": "Function",
@@ -15953,7 +15457,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/io-network.html#Base.read",
+    "location": "base/io-network.html#Base.read",
     "page": "I/O and Network",
     "title": "Base.read",
     "category": "Function",
@@ -15961,7 +15465,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/io-network.html#Base.read!",
+    "location": "base/io-network.html#Base.read!",
     "page": "I/O and Network",
     "title": "Base.read!",
     "category": "Function",
@@ -15969,7 +15473,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/io-network.html#Base.readbytes!",
+    "location": "base/io-network.html#Base.readbytes!",
     "page": "I/O and Network",
     "title": "Base.readbytes!",
     "category": "Function",
@@ -15977,7 +15481,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/io-network.html#Base.unsafe_read",
+    "location": "base/io-network.html#Base.unsafe_read",
     "page": "I/O and Network",
     "title": "Base.unsafe_read",
     "category": "Function",
@@ -15985,7 +15489,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/io-network.html#Base.unsafe_write",
+    "location": "base/io-network.html#Base.unsafe_write",
     "page": "I/O and Network",
     "title": "Base.unsafe_write",
     "category": "Function",
@@ -15993,7 +15497,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/io-network.html#Base.position",
+    "location": "base/io-network.html#Base.position",
     "page": "I/O and Network",
     "title": "Base.position",
     "category": "Function",
@@ -16001,7 +15505,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/io-network.html#Base.seek",
+    "location": "base/io-network.html#Base.seek",
     "page": "I/O and Network",
     "title": "Base.seek",
     "category": "Function",
@@ -16009,7 +15513,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/io-network.html#Base.seekstart",
+    "location": "base/io-network.html#Base.seekstart",
     "page": "I/O and Network",
     "title": "Base.seekstart",
     "category": "Function",
@@ -16017,7 +15521,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/io-network.html#Base.seekend",
+    "location": "base/io-network.html#Base.seekend",
     "page": "I/O and Network",
     "title": "Base.seekend",
     "category": "Function",
@@ -16025,7 +15529,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/io-network.html#Base.skip",
+    "location": "base/io-network.html#Base.skip",
     "page": "I/O and Network",
     "title": "Base.skip",
     "category": "Function",
@@ -16033,7 +15537,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/io-network.html#Base.mark",
+    "location": "base/io-network.html#Base.mark",
     "page": "I/O and Network",
     "title": "Base.mark",
     "category": "Function",
@@ -16041,7 +15545,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/io-network.html#Base.unmark",
+    "location": "base/io-network.html#Base.unmark",
     "page": "I/O and Network",
     "title": "Base.unmark",
     "category": "Function",
@@ -16049,7 +15553,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/io-network.html#Base.reset",
+    "location": "base/io-network.html#Base.reset",
     "page": "I/O and Network",
     "title": "Base.reset",
     "category": "Function",
@@ -16057,7 +15561,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/io-network.html#Base.ismarked",
+    "location": "base/io-network.html#Base.ismarked",
     "page": "I/O and Network",
     "title": "Base.ismarked",
     "category": "Function",
@@ -16065,7 +15569,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/io-network.html#Base.eof",
+    "location": "base/io-network.html#Base.eof",
     "page": "I/O and Network",
     "title": "Base.eof",
     "category": "Function",
@@ -16073,7 +15577,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/io-network.html#Base.isreadonly",
+    "location": "base/io-network.html#Base.isreadonly",
     "page": "I/O and Network",
     "title": "Base.isreadonly",
     "category": "Function",
@@ -16081,7 +15585,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/io-network.html#Base.iswritable",
+    "location": "base/io-network.html#Base.iswritable",
     "page": "I/O and Network",
     "title": "Base.iswritable",
     "category": "Function",
@@ -16089,7 +15593,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/io-network.html#Base.isreadable",
+    "location": "base/io-network.html#Base.isreadable",
     "page": "I/O and Network",
     "title": "Base.isreadable",
     "category": "Function",
@@ -16097,7 +15601,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/io-network.html#Base.isopen",
+    "location": "base/io-network.html#Base.isopen",
     "page": "I/O and Network",
     "title": "Base.isopen",
     "category": "Function",
@@ -16105,7 +15609,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/io-network.html#Base.Serializer.serialize",
+    "location": "base/io-network.html#Base.Serializer.serialize",
     "page": "I/O and Network",
     "title": "Base.Serializer.serialize",
     "category": "Function",
@@ -16113,7 +15617,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/io-network.html#Base.Serializer.deserialize",
+    "location": "base/io-network.html#Base.Serializer.deserialize",
     "page": "I/O and Network",
     "title": "Base.Serializer.deserialize",
     "category": "Function",
@@ -16121,7 +15625,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/io-network.html#Base.Serializer.writeheader",
+    "location": "base/io-network.html#Base.Serializer.writeheader",
     "page": "I/O and Network",
     "title": "Base.Serializer.writeheader",
     "category": "Function",
@@ -16129,7 +15633,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/io-network.html#Base.Grisu.print_shortest",
+    "location": "base/io-network.html#Base.Grisu.print_shortest",
     "page": "I/O and Network",
     "title": "Base.Grisu.print_shortest",
     "category": "Function",
@@ -16137,7 +15641,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/io-network.html#Base.fd",
+    "location": "base/io-network.html#Base.fd",
     "page": "I/O and Network",
     "title": "Base.fd",
     "category": "Function",
@@ -16145,7 +15649,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/io-network.html#Base.redirect_stdout",
+    "location": "base/io-network.html#Base.redirect_stdout",
     "page": "I/O and Network",
     "title": "Base.redirect_stdout",
     "category": "Function",
@@ -16153,7 +15657,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/io-network.html#Base.redirect_stdout-Tuple{Function,Any}",
+    "location": "base/io-network.html#Base.redirect_stdout-Tuple{Function,Any}",
     "page": "I/O and Network",
     "title": "Base.redirect_stdout",
     "category": "Method",
@@ -16161,7 +15665,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/io-network.html#Base.redirect_stderr",
+    "location": "base/io-network.html#Base.redirect_stderr",
     "page": "I/O and Network",
     "title": "Base.redirect_stderr",
     "category": "Function",
@@ -16169,7 +15673,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/io-network.html#Base.redirect_stderr-Tuple{Function,Any}",
+    "location": "base/io-network.html#Base.redirect_stderr-Tuple{Function,Any}",
     "page": "I/O and Network",
     "title": "Base.redirect_stderr",
     "category": "Method",
@@ -16177,7 +15681,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/io-network.html#Base.redirect_stdin",
+    "location": "base/io-network.html#Base.redirect_stdin",
     "page": "I/O and Network",
     "title": "Base.redirect_stdin",
     "category": "Function",
@@ -16185,7 +15689,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/io-network.html#Base.redirect_stdin-Tuple{Function,Any}",
+    "location": "base/io-network.html#Base.redirect_stdin-Tuple{Function,Any}",
     "page": "I/O and Network",
     "title": "Base.redirect_stdin",
     "category": "Method",
@@ -16193,7 +15697,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/io-network.html#Base.readchomp",
+    "location": "base/io-network.html#Base.readchomp",
     "page": "I/O and Network",
     "title": "Base.readchomp",
     "category": "Function",
@@ -16201,7 +15705,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/io-network.html#Base.truncate",
+    "location": "base/io-network.html#Base.truncate",
     "page": "I/O and Network",
     "title": "Base.truncate",
     "category": "Function",
@@ -16209,7 +15713,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/io-network.html#Base.skipchars",
+    "location": "base/io-network.html#Base.skipchars",
     "page": "I/O and Network",
     "title": "Base.skipchars",
     "category": "Function",
@@ -16217,7 +15721,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/io-network.html#Base.countlines",
+    "location": "base/io-network.html#Base.countlines",
     "page": "I/O and Network",
     "title": "Base.countlines",
     "category": "Function",
@@ -16225,7 +15729,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/io-network.html#Base.PipeBuffer",
+    "location": "base/io-network.html#Base.PipeBuffer",
     "page": "I/O and Network",
     "title": "Base.PipeBuffer",
     "category": "Function",
@@ -16233,7 +15737,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/io-network.html#Base.readavailable",
+    "location": "base/io-network.html#Base.readavailable",
     "page": "I/O and Network",
     "title": "Base.readavailable",
     "category": "Function",
@@ -16241,7 +15745,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/io-network.html#Base.IOContext",
+    "location": "base/io-network.html#Base.IOContext",
     "page": "I/O and Network",
     "title": "Base.IOContext",
     "category": "Type",
@@ -16249,7 +15753,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/io-network.html#Base.IOContext-Tuple{IO,Pair}",
+    "location": "base/io-network.html#Base.IOContext-Tuple{IO,Pair}",
     "page": "I/O and Network",
     "title": "Base.IOContext",
     "category": "Method",
@@ -16257,7 +15761,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/io-network.html#Base.IOContext-Tuple{IO,IOContext}",
+    "location": "base/io-network.html#Base.IOContext-Tuple{IO,IOContext}",
     "page": "I/O and Network",
     "title": "Base.IOContext",
     "category": "Method",
@@ -16265,7 +15769,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/io-network.html#General-I/O-1",
+    "location": "base/io-network.html#General-I/O-1",
     "page": "I/O and Network",
     "title": "General I/O",
     "category": "section",
@@ -16273,7 +15777,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/io-network.html#Base.show-Tuple{Any}",
+    "location": "base/io-network.html#Base.show-Tuple{Any}",
     "page": "I/O and Network",
     "title": "Base.show",
     "category": "Method",
@@ -16281,7 +15785,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/io-network.html#Base.showcompact",
+    "location": "base/io-network.html#Base.showcompact",
     "page": "I/O and Network",
     "title": "Base.showcompact",
     "category": "Function",
@@ -16289,7 +15793,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/io-network.html#Base.summary",
+    "location": "base/io-network.html#Base.summary",
     "page": "I/O and Network",
     "title": "Base.summary",
     "category": "Function",
@@ -16297,7 +15801,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/io-network.html#Base.print",
+    "location": "base/io-network.html#Base.print",
     "page": "I/O and Network",
     "title": "Base.print",
     "category": "Function",
@@ -16305,7 +15809,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/io-network.html#Base.println",
+    "location": "base/io-network.html#Base.println",
     "page": "I/O and Network",
     "title": "Base.println",
     "category": "Function",
@@ -16313,7 +15817,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/io-network.html#Base.print_with_color",
+    "location": "base/io-network.html#Base.print_with_color",
     "page": "I/O and Network",
     "title": "Base.print_with_color",
     "category": "Function",
@@ -16321,7 +15825,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/io-network.html#Base.sprint",
+    "location": "base/io-network.html#Base.sprint",
     "page": "I/O and Network",
     "title": "Base.sprint",
     "category": "Function",
@@ -16329,7 +15833,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/io-network.html#Base.showerror",
+    "location": "base/io-network.html#Base.showerror",
     "page": "I/O and Network",
     "title": "Base.showerror",
     "category": "Function",
@@ -16337,7 +15841,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/io-network.html#Base.dump",
+    "location": "base/io-network.html#Base.dump",
     "page": "I/O and Network",
     "title": "Base.dump",
     "category": "Function",
@@ -16345,7 +15849,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/io-network.html#Base.Meta.@dump",
+    "location": "base/io-network.html#Base.Meta.@dump",
     "page": "I/O and Network",
     "title": "Base.Meta.@dump",
     "category": "Macro",
@@ -16353,7 +15857,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/io-network.html#Base.readline",
+    "location": "base/io-network.html#Base.readline",
     "page": "I/O and Network",
     "title": "Base.readline",
     "category": "Function",
@@ -16361,7 +15865,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/io-network.html#Base.readuntil",
+    "location": "base/io-network.html#Base.readuntil",
     "page": "I/O and Network",
     "title": "Base.readuntil",
     "category": "Function",
@@ -16369,7 +15873,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/io-network.html#Base.readlines",
+    "location": "base/io-network.html#Base.readlines",
     "page": "I/O and Network",
     "title": "Base.readlines",
     "category": "Function",
@@ -16377,7 +15881,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/io-network.html#Base.eachline",
+    "location": "base/io-network.html#Base.eachline",
     "page": "I/O and Network",
     "title": "Base.eachline",
     "category": "Function",
@@ -16385,7 +15889,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/io-network.html#Base.displaysize",
+    "location": "base/io-network.html#Base.displaysize",
     "page": "I/O and Network",
     "title": "Base.displaysize",
     "category": "Function",
@@ -16393,7 +15897,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/io-network.html#Text-I/O-1",
+    "location": "base/io-network.html#Text-I/O-1",
     "page": "I/O and Network",
     "title": "Text I/O",
     "category": "section",
@@ -16401,7 +15905,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/io-network.html#Base.Multimedia.display",
+    "location": "base/io-network.html#Base.Multimedia.display",
     "page": "I/O and Network",
     "title": "Base.Multimedia.display",
     "category": "Function",
@@ -16409,7 +15913,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/io-network.html#Base.Multimedia.redisplay",
+    "location": "base/io-network.html#Base.Multimedia.redisplay",
     "page": "I/O and Network",
     "title": "Base.Multimedia.redisplay",
     "category": "Function",
@@ -16417,7 +15921,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/io-network.html#Base.Multimedia.displayable",
+    "location": "base/io-network.html#Base.Multimedia.displayable",
     "page": "I/O and Network",
     "title": "Base.Multimedia.displayable",
     "category": "Function",
@@ -16425,7 +15929,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/io-network.html#Base.show-Tuple{Any,Any,Any}",
+    "location": "base/io-network.html#Base.show-Tuple{Any,Any,Any}",
     "page": "I/O and Network",
     "title": "Base.show",
     "category": "Method",
@@ -16433,7 +15937,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/io-network.html#Base.Multimedia.mimewritable",
+    "location": "base/io-network.html#Base.Multimedia.mimewritable",
     "page": "I/O and Network",
     "title": "Base.Multimedia.mimewritable",
     "category": "Function",
@@ -16441,7 +15945,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/io-network.html#Base.Multimedia.reprmime",
+    "location": "base/io-network.html#Base.Multimedia.reprmime",
     "page": "I/O and Network",
     "title": "Base.Multimedia.reprmime",
     "category": "Function",
@@ -16449,7 +15953,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/io-network.html#Base.Multimedia.stringmime",
+    "location": "base/io-network.html#Base.Multimedia.stringmime",
     "page": "I/O and Network",
     "title": "Base.Multimedia.stringmime",
     "category": "Function",
@@ -16457,7 +15961,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/io-network.html#Base.Multimedia.pushdisplay",
+    "location": "base/io-network.html#Base.Multimedia.pushdisplay",
     "page": "I/O and Network",
     "title": "Base.Multimedia.pushdisplay",
     "category": "Function",
@@ -16465,7 +15969,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/io-network.html#Base.Multimedia.popdisplay",
+    "location": "base/io-network.html#Base.Multimedia.popdisplay",
     "page": "I/O and Network",
     "title": "Base.Multimedia.popdisplay",
     "category": "Function",
@@ -16473,7 +15977,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/io-network.html#Base.Multimedia.TextDisplay",
+    "location": "base/io-network.html#Base.Multimedia.TextDisplay",
     "page": "I/O and Network",
     "title": "Base.Multimedia.TextDisplay",
     "category": "Type",
@@ -16481,7 +15985,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/io-network.html#Base.Multimedia.istextmime",
+    "location": "base/io-network.html#Base.Multimedia.istextmime",
     "page": "I/O and Network",
     "title": "Base.Multimedia.istextmime",
     "category": "Function",
@@ -16489,7 +15993,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/io-network.html#Multimedia-I/O-1",
+    "location": "base/io-network.html#Multimedia-I/O-1",
     "page": "I/O and Network",
     "title": "Multimedia I/O",
     "category": "section",
@@ -16497,7 +16001,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/io-network.html#Base.connect-Tuple{TCPSocket,Integer}",
+    "location": "base/io-network.html#Base.connect-Tuple{TCPSocket,Integer}",
     "page": "I/O and Network",
     "title": "Base.connect",
     "category": "Method",
@@ -16505,7 +16009,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/io-network.html#Base.connect-Tuple{AbstractString}",
+    "location": "base/io-network.html#Base.connect-Tuple{AbstractString}",
     "page": "I/O and Network",
     "title": "Base.connect",
     "category": "Method",
@@ -16513,7 +16017,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/io-network.html#Base.listen-Tuple{Any}",
+    "location": "base/io-network.html#Base.listen-Tuple{Any}",
     "page": "I/O and Network",
     "title": "Base.listen",
     "category": "Method",
@@ -16521,7 +16025,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/io-network.html#Base.listen-Tuple{AbstractString}",
+    "location": "base/io-network.html#Base.listen-Tuple{AbstractString}",
     "page": "I/O and Network",
     "title": "Base.listen",
     "category": "Method",
@@ -16529,7 +16033,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/io-network.html#Base.getaddrinfo",
+    "location": "base/io-network.html#Base.getaddrinfo",
     "page": "I/O and Network",
     "title": "Base.getaddrinfo",
     "category": "Function",
@@ -16537,7 +16041,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/io-network.html#Base.getalladdrinfo",
+    "location": "base/io-network.html#Base.getalladdrinfo",
     "page": "I/O and Network",
     "title": "Base.getalladdrinfo",
     "category": "Function",
@@ -16545,7 +16049,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/io-network.html#Base.getnameinfo",
+    "location": "base/io-network.html#Base.getnameinfo",
     "page": "I/O and Network",
     "title": "Base.getnameinfo",
     "category": "Function",
@@ -16553,7 +16057,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/io-network.html#Base.getsockname",
+    "location": "base/io-network.html#Base.getsockname",
     "page": "I/O and Network",
     "title": "Base.getsockname",
     "category": "Function",
@@ -16561,7 +16065,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/io-network.html#Base.getpeername",
+    "location": "base/io-network.html#Base.getpeername",
     "page": "I/O and Network",
     "title": "Base.getpeername",
     "category": "Function",
@@ -16569,7 +16073,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/io-network.html#Base.IPv4",
+    "location": "base/io-network.html#Base.IPv4",
     "page": "I/O and Network",
     "title": "Base.IPv4",
     "category": "Type",
@@ -16577,7 +16081,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/io-network.html#Base.IPv6",
+    "location": "base/io-network.html#Base.IPv6",
     "page": "I/O and Network",
     "title": "Base.IPv6",
     "category": "Type",
@@ -16585,7 +16089,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/io-network.html#Base.nb_available",
+    "location": "base/io-network.html#Base.nb_available",
     "page": "I/O and Network",
     "title": "Base.nb_available",
     "category": "Function",
@@ -16593,7 +16097,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/io-network.html#Base.accept",
+    "location": "base/io-network.html#Base.accept",
     "page": "I/O and Network",
     "title": "Base.accept",
     "category": "Function",
@@ -16601,7 +16105,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/io-network.html#Base.listenany",
+    "location": "base/io-network.html#Base.listenany",
     "page": "I/O and Network",
     "title": "Base.listenany",
     "category": "Function",
@@ -16609,7 +16113,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/io-network.html#Base.bind",
+    "location": "base/io-network.html#Base.bind",
     "page": "I/O and Network",
     "title": "Base.bind",
     "category": "Function",
@@ -16617,7 +16121,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/io-network.html#Base.send",
+    "location": "base/io-network.html#Base.send",
     "page": "I/O and Network",
     "title": "Base.send",
     "category": "Function",
@@ -16625,7 +16129,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/io-network.html#Base.recv",
+    "location": "base/io-network.html#Base.recv",
     "page": "I/O and Network",
     "title": "Base.recv",
     "category": "Function",
@@ -16633,7 +16137,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/io-network.html#Base.recvfrom",
+    "location": "base/io-network.html#Base.recvfrom",
     "page": "I/O and Network",
     "title": "Base.recvfrom",
     "category": "Function",
@@ -16641,7 +16145,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/io-network.html#Base.setopt",
+    "location": "base/io-network.html#Base.setopt",
     "page": "I/O and Network",
     "title": "Base.setopt",
     "category": "Function",
@@ -16649,7 +16153,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/io-network.html#Base.ntoh",
+    "location": "base/io-network.html#Base.ntoh",
     "page": "I/O and Network",
     "title": "Base.ntoh",
     "category": "Function",
@@ -16657,7 +16161,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/io-network.html#Base.hton",
+    "location": "base/io-network.html#Base.hton",
     "page": "I/O and Network",
     "title": "Base.hton",
     "category": "Function",
@@ -16665,7 +16169,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/io-network.html#Base.ltoh",
+    "location": "base/io-network.html#Base.ltoh",
     "page": "I/O and Network",
     "title": "Base.ltoh",
     "category": "Function",
@@ -16673,7 +16177,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/io-network.html#Base.htol",
+    "location": "base/io-network.html#Base.htol",
     "page": "I/O and Network",
     "title": "Base.htol",
     "category": "Function",
@@ -16681,7 +16185,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/io-network.html#Base.ENDIAN_BOM",
+    "location": "base/io-network.html#Base.ENDIAN_BOM",
     "page": "I/O and Network",
     "title": "Base.ENDIAN_BOM",
     "category": "Constant",
@@ -16689,7 +16193,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/io-network.html#Network-I/O-1",
+    "location": "base/io-network.html#Network-I/O-1",
     "page": "I/O and Network",
     "title": "Network I/O",
     "category": "section",
@@ -16697,7 +16201,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/punctuation.html#",
+    "location": "base/punctuation.html#",
     "page": "Punctuation",
     "title": "Punctuation",
     "category": "page",
@@ -16705,7 +16209,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/punctuation.html#Punctuation-1",
+    "location": "base/punctuation.html#Punctuation-1",
     "page": "Punctuation",
     "title": "Punctuation",
     "category": "section",
@@ -16713,7 +16217,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/sort.html#",
+    "location": "base/sort.html#",
     "page": "Sorting and Related Functions",
     "title": "Sorting and Related Functions",
     "category": "page",
@@ -16721,7 +16225,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/sort.html#Sorting-and-Related-Functions-1",
+    "location": "base/sort.html#Sorting-and-Related-Functions-1",
     "page": "Sorting and Related Functions",
     "title": "Sorting and Related Functions",
     "category": "section",
@@ -16729,7 +16233,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/sort.html#Base.sort!",
+    "location": "base/sort.html#Base.sort!",
     "page": "Sorting and Related Functions",
     "title": "Base.sort!",
     "category": "Function",
@@ -16737,7 +16241,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/sort.html#Base.sort",
+    "location": "base/sort.html#Base.sort",
     "page": "Sorting and Related Functions",
     "title": "Base.sort",
     "category": "Function",
@@ -16745,7 +16249,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/sort.html#Base.sortperm",
+    "location": "base/sort.html#Base.sortperm",
     "page": "Sorting and Related Functions",
     "title": "Base.sortperm",
     "category": "Function",
@@ -16753,7 +16257,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/sort.html#Base.Sort.sortperm!",
+    "location": "base/sort.html#Base.Sort.sortperm!",
     "page": "Sorting and Related Functions",
     "title": "Base.Sort.sortperm!",
     "category": "Function",
@@ -16761,7 +16265,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/sort.html#Base.Sort.sortrows",
+    "location": "base/sort.html#Base.Sort.sortrows",
     "page": "Sorting and Related Functions",
     "title": "Base.Sort.sortrows",
     "category": "Function",
@@ -16769,7 +16273,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/sort.html#Base.Sort.sortcols",
+    "location": "base/sort.html#Base.Sort.sortcols",
     "page": "Sorting and Related Functions",
     "title": "Base.Sort.sortcols",
     "category": "Function",
@@ -16777,7 +16281,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/sort.html#Sorting-Functions-1",
+    "location": "base/sort.html#Sorting-Functions-1",
     "page": "Sorting and Related Functions",
     "title": "Sorting Functions",
     "category": "section",
@@ -16785,7 +16289,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/sort.html#Base.issorted",
+    "location": "base/sort.html#Base.issorted",
     "page": "Sorting and Related Functions",
     "title": "Base.issorted",
     "category": "Function",
@@ -16793,7 +16297,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/sort.html#Base.Sort.searchsorted",
+    "location": "base/sort.html#Base.Sort.searchsorted",
     "page": "Sorting and Related Functions",
     "title": "Base.Sort.searchsorted",
     "category": "Function",
@@ -16801,7 +16305,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/sort.html#Base.Sort.searchsortedfirst",
+    "location": "base/sort.html#Base.Sort.searchsortedfirst",
     "page": "Sorting and Related Functions",
     "title": "Base.Sort.searchsortedfirst",
     "category": "Function",
@@ -16809,7 +16313,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/sort.html#Base.Sort.searchsortedlast",
+    "location": "base/sort.html#Base.Sort.searchsortedlast",
     "page": "Sorting and Related Functions",
     "title": "Base.Sort.searchsortedlast",
     "category": "Function",
@@ -16817,7 +16321,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/sort.html#Base.Sort.partialsort!",
+    "location": "base/sort.html#Base.Sort.partialsort!",
     "page": "Sorting and Related Functions",
     "title": "Base.Sort.partialsort!",
     "category": "Function",
@@ -16825,7 +16329,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/sort.html#Base.Sort.partialsort",
+    "location": "base/sort.html#Base.Sort.partialsort",
     "page": "Sorting and Related Functions",
     "title": "Base.Sort.partialsort",
     "category": "Function",
@@ -16833,7 +16337,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/sort.html#Base.Sort.partialsortperm",
+    "location": "base/sort.html#Base.Sort.partialsortperm",
     "page": "Sorting and Related Functions",
     "title": "Base.Sort.partialsortperm",
     "category": "Function",
@@ -16841,7 +16345,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/sort.html#Base.Sort.partialsortperm!",
+    "location": "base/sort.html#Base.Sort.partialsortperm!",
     "page": "Sorting and Related Functions",
     "title": "Base.Sort.partialsortperm!",
     "category": "Function",
@@ -16849,7 +16353,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/sort.html#Order-Related-Functions-1",
+    "location": "base/sort.html#Order-Related-Functions-1",
     "page": "Sorting and Related Functions",
     "title": "Order-Related Functions",
     "category": "section",
@@ -16857,7 +16361,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/sort.html#Sorting-Algorithms-1",
+    "location": "base/sort.html#Sorting-Algorithms-1",
     "page": "Sorting and Related Functions",
     "title": "Sorting Algorithms",
     "category": "section",
@@ -16865,7 +16369,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/pkg.html#",
+    "location": "base/pkg.html#",
     "page": "Package Manager Functions",
     "title": "Package Manager Functions",
     "category": "page",
@@ -16873,7 +16377,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/pkg.html#Base.Pkg.dir",
+    "location": "base/pkg.html#Base.Pkg.dir",
     "page": "Package Manager Functions",
     "title": "Base.Pkg.dir",
     "category": "Function",
@@ -16881,7 +16385,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/pkg.html#Base.Pkg.init",
+    "location": "base/pkg.html#Base.Pkg.init",
     "page": "Package Manager Functions",
     "title": "Base.Pkg.init",
     "category": "Function",
@@ -16889,7 +16393,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/pkg.html#Base.Pkg.resolve",
+    "location": "base/pkg.html#Base.Pkg.resolve",
     "page": "Package Manager Functions",
     "title": "Base.Pkg.resolve",
     "category": "Function",
@@ -16897,7 +16401,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/pkg.html#Base.Pkg.edit",
+    "location": "base/pkg.html#Base.Pkg.edit",
     "page": "Package Manager Functions",
     "title": "Base.Pkg.edit",
     "category": "Function",
@@ -16905,7 +16409,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/pkg.html#Base.Pkg.add",
+    "location": "base/pkg.html#Base.Pkg.add",
     "page": "Package Manager Functions",
     "title": "Base.Pkg.add",
     "category": "Function",
@@ -16913,7 +16417,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/pkg.html#Base.Pkg.rm",
+    "location": "base/pkg.html#Base.Pkg.rm",
     "page": "Package Manager Functions",
     "title": "Base.Pkg.rm",
     "category": "Function",
@@ -16921,7 +16425,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/pkg.html#Base.Pkg.clone",
+    "location": "base/pkg.html#Base.Pkg.clone",
     "page": "Package Manager Functions",
     "title": "Base.Pkg.clone",
     "category": "Function",
@@ -16929,7 +16433,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/pkg.html#Base.Pkg.setprotocol!",
+    "location": "base/pkg.html#Base.Pkg.setprotocol!",
     "page": "Package Manager Functions",
     "title": "Base.Pkg.setprotocol!",
     "category": "Function",
@@ -16937,7 +16441,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/pkg.html#Base.Pkg.available",
+    "location": "base/pkg.html#Base.Pkg.available",
     "page": "Package Manager Functions",
     "title": "Base.Pkg.available",
     "category": "Function",
@@ -16945,7 +16449,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/pkg.html#Base.Pkg.installed",
+    "location": "base/pkg.html#Base.Pkg.installed",
     "page": "Package Manager Functions",
     "title": "Base.Pkg.installed",
     "category": "Function",
@@ -16953,7 +16457,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/pkg.html#Base.Pkg.status",
+    "location": "base/pkg.html#Base.Pkg.status",
     "page": "Package Manager Functions",
     "title": "Base.Pkg.status",
     "category": "Function",
@@ -16961,7 +16465,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/pkg.html#Base.Pkg.update",
+    "location": "base/pkg.html#Base.Pkg.update",
     "page": "Package Manager Functions",
     "title": "Base.Pkg.update",
     "category": "Function",
@@ -16969,7 +16473,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/pkg.html#Base.Pkg.checkout",
+    "location": "base/pkg.html#Base.Pkg.checkout",
     "page": "Package Manager Functions",
     "title": "Base.Pkg.checkout",
     "category": "Function",
@@ -16977,7 +16481,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/pkg.html#Base.Pkg.pin",
+    "location": "base/pkg.html#Base.Pkg.pin",
     "page": "Package Manager Functions",
     "title": "Base.Pkg.pin",
     "category": "Function",
@@ -16985,7 +16489,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/pkg.html#Base.Pkg.free",
+    "location": "base/pkg.html#Base.Pkg.free",
     "page": "Package Manager Functions",
     "title": "Base.Pkg.free",
     "category": "Function",
@@ -16993,7 +16497,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/pkg.html#Base.Pkg.build",
+    "location": "base/pkg.html#Base.Pkg.build",
     "page": "Package Manager Functions",
     "title": "Base.Pkg.build",
     "category": "Function",
@@ -17001,7 +16505,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/pkg.html#Base.Pkg.test",
+    "location": "base/pkg.html#Base.Pkg.test",
     "page": "Package Manager Functions",
     "title": "Base.Pkg.test",
     "category": "Function",
@@ -17009,7 +16513,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/pkg.html#Base.Pkg.dependents",
+    "location": "base/pkg.html#Base.Pkg.dependents",
     "page": "Package Manager Functions",
     "title": "Base.Pkg.dependents",
     "category": "Function",
@@ -17017,11 +16521,827 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/pkg.html#Package-Manager-Functions-1",
+    "location": "base/pkg.html#Package-Manager-Functions-1",
     "page": "Package Manager Functions",
     "title": "Package Manager Functions",
     "category": "section",
     "text": "All package manager functions are defined in the Pkg module. None of the Pkg module's functions are exported; to use them, you'll need to prefix each function call with an explicit Pkg., e.g. Pkg.status() or Pkg.dir().Functions for package development (e.g. tag, publish, etc.) have been moved to the PkgDev package. See PkgDev README for the documentation of those functions.Base.Pkg.dir\nBase.Pkg.init\nBase.Pkg.resolve\nBase.Pkg.edit\nBase.Pkg.add\nBase.Pkg.rm\nBase.Pkg.clone\nBase.Pkg.setprotocol!\nBase.Pkg.available\nBase.Pkg.installed\nBase.Pkg.status\nBase.Pkg.update\nBase.Pkg.checkout\nBase.Pkg.pin\nBase.Pkg.free\nBase.Pkg.build\nBase.Pkg.test\nBase.Pkg.dependents"
+},
+
+{
+    "location": "base/iterators.html#",
+    "page": "Iteration utilities",
+    "title": "Iteration utilities",
+    "category": "page",
+    "text": ""
+},
+
+{
+    "location": "base/iterators.html#Base.Iterators.zip",
+    "page": "Iteration utilities",
+    "title": "Base.Iterators.zip",
+    "category": "Function",
+    "text": "zip(iters...)\n\nFor a set of iterable objects, return an iterable of tuples, where the ith tuple contains the ith component of each input iterable.\n\nExamples\n\njulia> a = 1:5\n1:5\n\njulia> b = [\"e\",\"d\",\"b\",\"c\",\"a\"]\n5-element Array{String,1}:\n \"e\"\n \"d\"\n \"b\"\n \"c\"\n \"a\"\n\njulia> c = zip(a,b)\nBase.Iterators.Zip2{UnitRange{Int64},Array{String,1}}(1:5, [\"e\", \"d\", \"b\", \"c\", \"a\"])\n\njulia> length(c)\n5\n\njulia> first(c)\n(1, \"e\")\n\n\n\n"
+},
+
+{
+    "location": "base/iterators.html#Base.Iterators.enumerate",
+    "page": "Iteration utilities",
+    "title": "Base.Iterators.enumerate",
+    "category": "Function",
+    "text": "enumerate(iter)\n\nAn iterator that yields (i, x) where i is a counter starting at 1, and x is the ith value from the given iterator. It's useful when you need not only the values x over which you are iterating, but also the number of iterations so far. Note that i may not be valid for indexing iter; it's also possible that x != iter[i], if iter has indices that do not start at 1. See the enumerate(IndexLinear(), iter) method if you want to ensure that i is an index.\n\nExamples\n\njulia> a = [\"a\", \"b\", \"c\"];\n\njulia> for (index, value) in enumerate(a)\n           println(\"$index $value\")\n       end\n1 a\n2 b\n3 c\n\n\n\n"
+},
+
+{
+    "location": "base/iterators.html#Base.Iterators.rest",
+    "page": "Iteration utilities",
+    "title": "Base.Iterators.rest",
+    "category": "Function",
+    "text": "rest(iter, state)\n\nAn iterator that yields the same elements as iter, but starting at the given state.\n\nExamples\n\njulia> collect(Iterators.rest([1,2,3,4], 2))\n3-element Array{Any,1}:\n 2\n 3\n 4\n\n\n\n"
+},
+
+{
+    "location": "base/iterators.html#Base.Iterators.countfrom",
+    "page": "Iteration utilities",
+    "title": "Base.Iterators.countfrom",
+    "category": "Function",
+    "text": "countfrom(start=1, step=1)\n\nAn iterator that counts forever, starting at start and incrementing by step.\n\nExamples\n\njulia> for v in Iterators.countfrom(5, 2)\n           v > 10 && break\n           println(v)\n       end\n5\n7\n9\n\n\n\n"
+},
+
+{
+    "location": "base/iterators.html#Base.Iterators.take",
+    "page": "Iteration utilities",
+    "title": "Base.Iterators.take",
+    "category": "Function",
+    "text": "take(iter, n)\n\nAn iterator that generates at most the first n elements of iter.\n\nExamples\n\njulia> a = 1:2:11\n1:2:11\n\njulia> collect(a)\n6-element Array{Int64,1}:\n  1\n  3\n  5\n  7\n  9\n 11\n\njulia> collect(Iterators.take(a,3))\n3-element Array{Int64,1}:\n 1\n 3\n 5\n\n\n\n"
+},
+
+{
+    "location": "base/iterators.html#Base.Iterators.drop",
+    "page": "Iteration utilities",
+    "title": "Base.Iterators.drop",
+    "category": "Function",
+    "text": "drop(iter, n)\n\nAn iterator that generates all but the first n elements of iter.\n\nExamples\n\njulia> a = 1:2:11\n1:2:11\n\njulia> collect(a)\n6-element Array{Int64,1}:\n  1\n  3\n  5\n  7\n  9\n 11\n\njulia> collect(Iterators.drop(a,4))\n2-element Array{Int64,1}:\n  9\n 11\n\n\n\n"
+},
+
+{
+    "location": "base/iterators.html#Base.Iterators.cycle",
+    "page": "Iteration utilities",
+    "title": "Base.Iterators.cycle",
+    "category": "Function",
+    "text": "cycle(iter)\n\nAn iterator that cycles through iter forever.\n\nExamples\n\njulia> for (i, v) in enumerate(Iterators.cycle(\"hello\"))\n           print(v)\n           i > 10 && break\n       end\nhellohelloh\n\n\n\n"
+},
+
+{
+    "location": "base/iterators.html#Base.Iterators.repeated",
+    "page": "Iteration utilities",
+    "title": "Base.Iterators.repeated",
+    "category": "Function",
+    "text": "repeated(x[, n::Int])\n\nAn iterator that generates the value x forever. If n is specified, generates x that many times (equivalent to take(repeated(x), n)).\n\nExamples\n\njulia> a = Iterators.repeated([1 2], 4);\n\njulia> collect(a)\n4-element Array{Array{Int64,2},1}:\n [1 2]\n [1 2]\n [1 2]\n [1 2]\n\n\n\n"
+},
+
+{
+    "location": "base/iterators.html#Base.Iterators.product",
+    "page": "Iteration utilities",
+    "title": "Base.Iterators.product",
+    "category": "Function",
+    "text": "product(iters...)\n\nReturn an iterator over the product of several iterators. Each generated element is a tuple whose ith element comes from the ith argument iterator. The first iterator changes the fastest.\n\nExamples\n\njulia> collect(Iterators.product(1:2,3:5))\n2×3 Array{Tuple{Int64,Int64},2}:\n (1, 3)  (1, 4)  (1, 5)\n (2, 3)  (2, 4)  (2, 5)\n\n\n\n"
+},
+
+{
+    "location": "base/iterators.html#Base.Iterators.flatten",
+    "page": "Iteration utilities",
+    "title": "Base.Iterators.flatten",
+    "category": "Function",
+    "text": "flatten(iter)\n\nGiven an iterator that yields iterators, return an iterator that yields the elements of those iterators. Put differently, the elements of the argument iterator are concatenated.\n\nExamples\n\njulia> collect(Iterators.flatten((1:2, 8:9)))\n4-element Array{Int64,1}:\n 1\n 2\n 8\n 9\n\n\n\n"
+},
+
+{
+    "location": "base/iterators.html#Base.Iterators.partition",
+    "page": "Iteration utilities",
+    "title": "Base.Iterators.partition",
+    "category": "Function",
+    "text": "partition(collection, n)\n\nIterate over a collection n elements at a time.\n\nExamples\n\njulia> collect(Iterators.partition([1,2,3,4,5], 2))\n3-element Array{Array{Int64,1},1}:\n [1, 2]\n [3, 4]\n [5]\n\n\n\n"
+},
+
+{
+    "location": "base/iterators.html#Base.Iterators.filter",
+    "page": "Iteration utilities",
+    "title": "Base.Iterators.filter",
+    "category": "Function",
+    "text": "Iterators.filter(flt, itr)\n\nGiven a predicate function flt and an iterable object itr, return an iterable object which upon iteration yields the elements x of itr that satisfy flt(x). The order of the original iterator is preserved.\n\nThis function is lazy; that is, it is guaranteed to return in (1) time and use (1) additional space, and flt will not be called by an invocation of filter. Calls to flt will be made when iterating over the returned iterable object. These calls are not cached and repeated calls will be made when reiterating.\n\nSee Base.filter for an eager implementation of filtering for arrays.\n\nExamples\n\njulia> f = Iterators.filter(isodd, [1, 2, 3, 4, 5])\nBase.Iterators.Filter{Base.#isodd,Array{Int64,1}}(isodd, [1, 2, 3, 4, 5])\n\njulia> foreach(println, f)\n1\n3\n5\n\n\n\n"
+},
+
+{
+    "location": "base/iterators.html#Base.Iterators.reverse",
+    "page": "Iteration utilities",
+    "title": "Base.Iterators.reverse",
+    "category": "Function",
+    "text": "Iterators.reverse(itr)\n\nGiven an iterator itr, then reverse(itr) is an iterator over the same collection but in the reverse order.\n\nThis iterator is \"lazy\" in that it does not make a copy of the collection in order to reverse it; see Base.reverse for an eager implementation.\n\nNot all iterator types T support reverse-order iteration.  If T doesn't, then iterating over Iterators.reverse(itr::T) will throw a MethodError because of the missing start, next, and done methods for Iterators.Reverse{T}.  (To implement these methods, the original iterator itr::T can be obtained from r = Iterators.reverse(itr) by r.itr.)\n\nExamples\n\njulia> foreach(println, Iterators.reverse(1:5))\n5\n4\n3\n2\n1\n\n\n\n"
+},
+
+{
+    "location": "base/iterators.html#Iteration-utilities-1",
+    "page": "Iteration utilities",
+    "title": "Iteration utilities",
+    "category": "section",
+    "text": "Base.Iterators.zip\nBase.Iterators.enumerate\nBase.Iterators.rest\nBase.Iterators.countfrom\nBase.Iterators.take\nBase.Iterators.drop\nBase.Iterators.cycle\nBase.Iterators.repeated\nBase.Iterators.product\nBase.Iterators.flatten\nBase.Iterators.partition\nBase.Iterators.filter\nBase.Iterators.reverse"
+},
+
+{
+    "location": "base/c.html#",
+    "page": "C Interface",
+    "title": "C Interface",
+    "category": "page",
+    "text": ""
+},
+
+{
+    "location": "base/c.html#ccall",
+    "page": "C Interface",
+    "title": "ccall",
+    "category": "Keyword",
+    "text": "ccall((function_name, library), returntype, (argtype1, ...), argvalue1, ...)\nccall(function_pointer, returntype, (argtype1, ...), argvalue1, ...)\n\nCall a function in a C-exported shared library, specified by the tuple (function_name, library), where each component is either a string or symbol. Alternatively, ccall may also be used to call a function pointer function_pointer, such as one returned by dlsym.\n\nNote that the argument type tuple must be a literal tuple, and not a tuple-valued variable or expression.\n\nEach argvalue to the ccall will be converted to the corresponding argtype, by automatic insertion of calls to unsafe_convert(argtype, cconvert(argtype, argvalue)). (See also the documentation for each of these functions for further details.) In most cases, this simply results in a call to convert(argtype, argvalue).\n\n\n\n"
+},
+
+{
+    "location": "base/c.html#Core.Intrinsics.cglobal",
+    "page": "C Interface",
+    "title": "Core.Intrinsics.cglobal",
+    "category": "Function",
+    "text": "cglobal((symbol, library) [, type=Cvoid])\n\nObtain a pointer to a global variable in a C-exported shared library, specified exactly as in ccall. Returns a Ptr{Type}, defaulting to Ptr{Cvoid} if no Type argument is supplied. The values can be read or written by unsafe_load or unsafe_store!, respectively.\n\n\n\n"
+},
+
+{
+    "location": "base/c.html#Base.cfunction",
+    "page": "C Interface",
+    "title": "Base.cfunction",
+    "category": "Function",
+    "text": "cfunction(f::Function, returntype::Type, argtypes::Type) -> Ptr{Cvoid}\n\nGenerate C-callable function pointer from the Julia function f. Type annotation of the return value in the callback function is a must for situations where Julia cannot infer the return type automatically.\n\nExamples\n\njulia> function foo(x::Int, y::Int)\n           return x + y\n       end\n\njulia> cfunction(foo, Int, Tuple{Int,Int})\nPtr{Cvoid} @0x000000001b82fcd0\n\n\n\n"
+},
+
+{
+    "location": "base/c.html#Base.unsafe_convert",
+    "page": "C Interface",
+    "title": "Base.unsafe_convert",
+    "category": "Function",
+    "text": "unsafe_convert(T, x)\n\nConvert x to a C argument of type T where the input x must be the return value of cconvert(T, ...).\n\nIn cases where convert would need to take a Julia object and turn it into a Ptr, this function should be used to define and perform that conversion.\n\nBe careful to ensure that a Julia reference to x exists as long as the result of this function will be used. Accordingly, the argument x to this function should never be an expression, only a variable name or field reference. For example, x=a.b.c is acceptable, but x=[a,b,c] is not.\n\nThe unsafe prefix on this function indicates that using the result of this function after the x argument to this function is no longer accessible to the program may cause undefined behavior, including program corruption or segfaults, at any later time.\n\nSee also cconvert\n\n\n\n"
+},
+
+{
+    "location": "base/c.html#Base.cconvert",
+    "page": "C Interface",
+    "title": "Base.cconvert",
+    "category": "Function",
+    "text": "cconvert(T,x)\n\nConvert x to a value to be passed to C code as type T, typically by calling convert(T, x).\n\nIn cases where x cannot be safely converted to T, unlike convert, cconvert may return an object of a type different from T, which however is suitable for unsafe_convert to handle. The result of this function should be kept valid (for the GC) until the result of unsafe_convert is not needed anymore. This can be used to allocate memory that will be accessed by the ccall. If multiple objects need to be allocated, a tuple of the objects can be used as return value.\n\nNeither convert nor cconvert should take a Julia object and turn it into a Ptr.\n\n\n\n"
+},
+
+{
+    "location": "base/c.html#Base.unsafe_load",
+    "page": "C Interface",
+    "title": "Base.unsafe_load",
+    "category": "Function",
+    "text": "unsafe_load(p::Ptr{T}, i::Integer=1)\n\nLoad a value of type T from the address of the ith element (1-indexed) starting at p. This is equivalent to the C expression p[i-1].\n\nThe unsafe prefix on this function indicates that no validation is performed on the pointer p to ensure that it is valid. Incorrect usage may segfault your program or return garbage answers, in the same manner as C.\n\n\n\n"
+},
+
+{
+    "location": "base/c.html#Base.unsafe_store!",
+    "page": "C Interface",
+    "title": "Base.unsafe_store!",
+    "category": "Function",
+    "text": "unsafe_store!(p::Ptr{T}, x, i::Integer=1)\n\nStore a value of type T to the address of the ith element (1-indexed) starting at p. This is equivalent to the C expression p[i-1] = x.\n\nThe unsafe prefix on this function indicates that no validation is performed on the pointer p to ensure that it is valid. Incorrect usage may corrupt or segfault your program, in the same manner as C.\n\n\n\n"
+},
+
+{
+    "location": "base/c.html#Base.unsafe_copyto!-Union{Tuple{T}, Tuple{Ptr{T},Ptr{T},Any}} where T",
+    "page": "C Interface",
+    "title": "Base.unsafe_copyto!",
+    "category": "Method",
+    "text": "unsafe_copyto!(dest::Ptr{T}, src::Ptr{T}, N)\n\nCopy N elements from a source pointer to a destination, with no checking. The size of an element is determined by the type of the pointers.\n\nThe unsafe prefix on this function indicates that no validation is performed on the pointers dest and src to ensure that they are valid. Incorrect usage may corrupt or segfault your program, in the same manner as C.\n\n\n\n"
+},
+
+{
+    "location": "base/c.html#Base.unsafe_copyto!-Union{Tuple{T}, Tuple{Array{T,N} where N,Any,Array{T,N} where N,Any,Any}} where T",
+    "page": "C Interface",
+    "title": "Base.unsafe_copyto!",
+    "category": "Method",
+    "text": "unsafe_copyto!(dest::Array, do, src::Array, so, N)\n\nCopy N elements from a source array to a destination, starting at offset so in the source and do in the destination (1-indexed).\n\nThe unsafe prefix on this function indicates that no validation is performed to ensure that N is inbounds on either array. Incorrect usage may corrupt or segfault your program, in the same manner as C.\n\n\n\n"
+},
+
+{
+    "location": "base/c.html#Base.copyto!",
+    "page": "C Interface",
+    "title": "Base.copyto!",
+    "category": "Function",
+    "text": "copyto!(dest, do, src, so, N)\n\nCopy N elements from collection src starting at offset so, to array dest starting at offset do. Return dest.\n\n\n\ncopyto!(dest::AbstractArray, src) -> dest\n\nCopy all elements from collection src to array dest, whose length must be greater than or equal to the length n of src. The first n elements of dest are overwritten, the other elements are left untouched.\n\nExamples\n\njulia> x = [1., 0., 3., 0., 5.];\n\njulia> y = zeros(7);\n\njulia> copyto!(y, x);\n\njulia> y\n7-element Array{Float64,1}:\n 1.0\n 0.0\n 3.0\n 0.0\n 5.0\n 0.0\n 0.0\n\n\n\ncopyto!(dest, Rdest::CartesianIndices, src, Rsrc::CartesianIndices) -> dest\n\nCopy the block of src in the range of Rsrc to the block of dest in the range of Rdest. The sizes of the two regions must match.\n\n\n\n"
+},
+
+{
+    "location": "base/c.html#Base.pointer",
+    "page": "C Interface",
+    "title": "Base.pointer",
+    "category": "Function",
+    "text": "pointer(array [, index])\n\nGet the native address of an array or string element. Be careful to ensure that a Julia reference to a exists as long as this pointer will be used. This function is \"unsafe\" like unsafe_convert.\n\nCalling Ref(array[, index]) is generally preferable to this function.\n\n\n\n"
+},
+
+{
+    "location": "base/c.html#Base.unsafe_wrap-Union{Tuple{N}, Tuple{T}, Tuple{Union{Type{Array}, Type{Array{T,N} where N}, Type{Array{T,N}}},Ptr{T},Tuple{Vararg{Int64,N}}}} where N where T",
+    "page": "C Interface",
+    "title": "Base.unsafe_wrap",
+    "category": "Method",
+    "text": "unsafe_wrap(Array, pointer::Ptr{T}, dims, own=false)\n\nWrap a Julia Array object around the data at the address given by pointer, without making a copy.  The pointer element type T determines the array element type. dims is either an integer (for a 1d array) or a tuple of the array dimensions. own optionally specifies whether Julia should take ownership of the memory, calling free on the pointer when the array is no longer referenced.\n\nThis function is labeled \"unsafe\" because it will crash if pointer is not a valid memory address to data of the requested length.\n\n\n\n"
+},
+
+{
+    "location": "base/c.html#Base.pointer_from_objref",
+    "page": "C Interface",
+    "title": "Base.pointer_from_objref",
+    "category": "Function",
+    "text": "pointer_from_objref(x)\n\nGet the memory address of a Julia object as a Ptr. The existence of the resulting Ptr will not protect the object from garbage collection, so you must ensure that the object remains referenced for the whole time that the Ptr will be used.\n\nThis function may not be called on immutable objects, since they do not have stable memory addresses.\n\n\n\n"
+},
+
+{
+    "location": "base/c.html#Base.unsafe_pointer_to_objref",
+    "page": "C Interface",
+    "title": "Base.unsafe_pointer_to_objref",
+    "category": "Function",
+    "text": "unsafe_pointer_to_objref(p::Ptr)\n\nConvert a Ptr to an object reference. Assumes the pointer refers to a valid heap-allocated Julia object. If this is not the case, undefined behavior results, hence this function is considered \"unsafe\" and should be used with care.\n\n\n\n"
+},
+
+{
+    "location": "base/c.html#Base.disable_sigint",
+    "page": "C Interface",
+    "title": "Base.disable_sigint",
+    "category": "Function",
+    "text": "disable_sigint(f::Function)\n\nDisable Ctrl-C handler during execution of a function on the current task, for calling external code that may call julia code that is not interrupt safe. Intended to be called using do block syntax as follows:\n\ndisable_sigint() do\n    # interrupt-unsafe code\n    ...\nend\n\nThis is not needed on worker threads (Threads.threadid() != 1) since the InterruptException will only be delivered to the master thread. External functions that do not call julia code or julia runtime automatically disable sigint during their execution.\n\n\n\n"
+},
+
+{
+    "location": "base/c.html#Base.reenable_sigint",
+    "page": "C Interface",
+    "title": "Base.reenable_sigint",
+    "category": "Function",
+    "text": "reenable_sigint(f::Function)\n\nRe-enable Ctrl-C handler during execution of a function. Temporarily reverses the effect of disable_sigint.\n\n\n\n"
+},
+
+{
+    "location": "base/c.html#Base.systemerror",
+    "page": "C Interface",
+    "title": "Base.systemerror",
+    "category": "Function",
+    "text": "systemerror(sysfunc, iftrue)\n\nRaises a SystemError for errno with the descriptive string sysfunc if iftrue is true\n\n\n\n"
+},
+
+{
+    "location": "base/c.html#Core.Ptr",
+    "page": "C Interface",
+    "title": "Core.Ptr",
+    "category": "Type",
+    "text": "Ptr{T}\n\nA memory address referring to data of type T.  However, there is no guarantee that the memory is actually valid, or that it actually represents data of the specified type.\n\n\n\n"
+},
+
+{
+    "location": "base/c.html#Core.Ref",
+    "page": "C Interface",
+    "title": "Core.Ref",
+    "category": "Type",
+    "text": "Ref{T}\n\nAn object that safely references data of type T. This type is guaranteed to point to valid, Julia-allocated memory of the correct type. The underlying data is protected from freeing by the garbage collector as long as the Ref itself is referenced.\n\nIn Julia, Ref objects are dereferenced (loaded or stored) with [].\n\nCreation of a Ref to a value x of type T is usually written Ref(x). Additionally, for creating interior pointers to containers (such as Array or Ptr), it can be written Ref(a, i) for creating a reference to the i-th element of a.\n\nWhen passed as a ccall argument (either as a Ptr or Ref type), a Ref object will be converted to a native pointer to the data it references.\n\nThere is no invalid (NULL) Ref in Julia, but a C_NULL instance of Ptr can be passed to a ccall Ref argument.\n\n\n\n"
+},
+
+{
+    "location": "base/c.html#Base.Cchar",
+    "page": "C Interface",
+    "title": "Base.Cchar",
+    "category": "Type",
+    "text": "Cchar\n\nEquivalent to the native char c-type.\n\n\n\n"
+},
+
+{
+    "location": "base/c.html#Base.Cuchar",
+    "page": "C Interface",
+    "title": "Base.Cuchar",
+    "category": "Type",
+    "text": "Cuchar\n\nEquivalent to the native unsigned char c-type (UInt8).\n\n\n\n"
+},
+
+{
+    "location": "base/c.html#Base.Cshort",
+    "page": "C Interface",
+    "title": "Base.Cshort",
+    "category": "Type",
+    "text": "Cshort\n\nEquivalent to the native signed short c-type (Int16).\n\n\n\n"
+},
+
+{
+    "location": "base/c.html#Base.Cushort",
+    "page": "C Interface",
+    "title": "Base.Cushort",
+    "category": "Type",
+    "text": "Cushort\n\nEquivalent to the native unsigned short c-type (UInt16).\n\n\n\n"
+},
+
+{
+    "location": "base/c.html#Base.Cint",
+    "page": "C Interface",
+    "title": "Base.Cint",
+    "category": "Type",
+    "text": "Cint\n\nEquivalent to the native signed int c-type (Int32).\n\n\n\n"
+},
+
+{
+    "location": "base/c.html#Base.Cuint",
+    "page": "C Interface",
+    "title": "Base.Cuint",
+    "category": "Type",
+    "text": "Cuint\n\nEquivalent to the native unsigned int c-type (UInt32).\n\n\n\n"
+},
+
+{
+    "location": "base/c.html#Base.Clong",
+    "page": "C Interface",
+    "title": "Base.Clong",
+    "category": "Type",
+    "text": "Clong\n\nEquivalent to the native signed long c-type.\n\n\n\n"
+},
+
+{
+    "location": "base/c.html#Base.Culong",
+    "page": "C Interface",
+    "title": "Base.Culong",
+    "category": "Type",
+    "text": "Culong\n\nEquivalent to the native unsigned long c-type.\n\n\n\n"
+},
+
+{
+    "location": "base/c.html#Base.Clonglong",
+    "page": "C Interface",
+    "title": "Base.Clonglong",
+    "category": "Type",
+    "text": "Clonglong\n\nEquivalent to the native signed long long c-type (Int64).\n\n\n\n"
+},
+
+{
+    "location": "base/c.html#Base.Culonglong",
+    "page": "C Interface",
+    "title": "Base.Culonglong",
+    "category": "Type",
+    "text": "Culonglong\n\nEquivalent to the native unsigned long long c-type (UInt64).\n\n\n\n"
+},
+
+{
+    "location": "base/c.html#Base.Cintmax_t",
+    "page": "C Interface",
+    "title": "Base.Cintmax_t",
+    "category": "Type",
+    "text": "Cintmax_t\n\nEquivalent to the native intmax_t c-type (Int64).\n\n\n\n"
+},
+
+{
+    "location": "base/c.html#Base.Cuintmax_t",
+    "page": "C Interface",
+    "title": "Base.Cuintmax_t",
+    "category": "Type",
+    "text": "Cuintmax_t\n\nEquivalent to the native uintmax_t c-type (UInt64).\n\n\n\n"
+},
+
+{
+    "location": "base/c.html#Base.Csize_t",
+    "page": "C Interface",
+    "title": "Base.Csize_t",
+    "category": "Type",
+    "text": "Csize_t\n\nEquivalent to the native size_t c-type (UInt).\n\n\n\n"
+},
+
+{
+    "location": "base/c.html#Base.Cssize_t",
+    "page": "C Interface",
+    "title": "Base.Cssize_t",
+    "category": "Type",
+    "text": "Cssize_t\n\nEquivalent to the native ssize_t c-type.\n\n\n\n"
+},
+
+{
+    "location": "base/c.html#Base.Cptrdiff_t",
+    "page": "C Interface",
+    "title": "Base.Cptrdiff_t",
+    "category": "Type",
+    "text": "Cptrdiff_t\n\nEquivalent to the native ptrdiff_t c-type (Int).\n\n\n\n"
+},
+
+{
+    "location": "base/c.html#Base.Cwchar_t",
+    "page": "C Interface",
+    "title": "Base.Cwchar_t",
+    "category": "Type",
+    "text": "Cwchar_t\n\nEquivalent to the native wchar_t c-type (Int32).\n\n\n\n"
+},
+
+{
+    "location": "base/c.html#Base.Cfloat",
+    "page": "C Interface",
+    "title": "Base.Cfloat",
+    "category": "Type",
+    "text": "Cfloat\n\nEquivalent to the native float c-type (Float32).\n\n\n\n"
+},
+
+{
+    "location": "base/c.html#Base.Cdouble",
+    "page": "C Interface",
+    "title": "Base.Cdouble",
+    "category": "Type",
+    "text": "Cdouble\n\nEquivalent to the native double c-type (Float64).\n\n\n\n"
+},
+
+{
+    "location": "base/c.html#C-Interface-1",
+    "page": "C Interface",
+    "title": "C Interface",
+    "category": "section",
+    "text": "ccall\nCore.Intrinsics.cglobal\nBase.cfunction\nBase.unsafe_convert\nBase.cconvert\nBase.unsafe_load\nBase.unsafe_store!\nBase.unsafe_copyto!{T}(::Ptr{T}, ::Ptr{T}, ::Any)\nBase.unsafe_copyto!{T}(::Array{T}, ::Any, ::Array{T}, ::Any, ::Any)\nBase.copyto!\nBase.pointer\nBase.unsafe_wrap{T,N}(::Union{Type{Array},Type{Array{T}},Type{Array{T,N}}}, ::Ptr{T}, ::NTuple{N,Int})\nBase.pointer_from_objref\nBase.unsafe_pointer_to_objref\nBase.disable_sigint\nBase.reenable_sigint\nBase.systemerror\nCore.Ptr\nCore.Ref\nBase.Cchar\nBase.Cuchar\nBase.Cshort\nBase.Cushort\nBase.Cint\nBase.Cuint\nBase.Clong\nBase.Culong\nBase.Clonglong\nBase.Culonglong\nBase.Cintmax_t\nBase.Cuintmax_t\nBase.Csize_t\nBase.Cssize_t\nBase.Cptrdiff_t\nBase.Cwchar_t\nBase.Cfloat\nBase.Cdouble"
+},
+
+{
+    "location": "base/c.html#Core.Intrinsics.llvmcall",
+    "page": "C Interface",
+    "title": "Core.Intrinsics.llvmcall",
+    "category": "Function",
+    "text": "llvmcall(IR::String, ReturnType, (ArgumentType1, ...), ArgumentValue1, ...)\nllvmcall((declarations::String, IR::String), ReturnType, (ArgumentType1, ...), ArgumentValue1, ...)\n\nCall LLVM IR string in the first argument. Similar to an LLVM function define block, arguments are available as consecutive unnamed SSA variables (%0, %1, etc.).\n\nThe optional declarations string contains external functions declarations that are necessary for llvm to compile the IR string. Multiple declarations can be passed in by separating them with line breaks.\n\nNote that the argument type tuple must be a literal tuple, and not a tuple-valued variable or expression.\n\nEach ArgumentValue to llvmcall will be converted to the corresponding ArgumentType, by automatic insertion of calls to unsafe_convert(ArgumentType, cconvert(ArgumentType, ArgumentValue)). (see also the documentation for each of these functions for further details). In most cases, this simply results in a call to convert(ArgumentType, ArgumentValue).\n\nSee test/llvmcall.jl for usage examples.\n\n\n\n"
+},
+
+{
+    "location": "base/c.html#LLVM-Interface-1",
+    "page": "C Interface",
+    "title": "LLVM Interface",
+    "category": "section",
+    "text": "Core.Intrinsics.llvmcall"
+},
+
+{
+    "location": "base/libc.html#",
+    "page": "C Standard Library",
+    "title": "C Standard Library",
+    "category": "page",
+    "text": ""
+},
+
+{
+    "location": "base/libc.html#Base.Libc.malloc",
+    "page": "C Standard Library",
+    "title": "Base.Libc.malloc",
+    "category": "Function",
+    "text": "malloc(size::Integer) -> Ptr{Cvoid}\n\nCall malloc from the C standard library.\n\n\n\n"
+},
+
+{
+    "location": "base/libc.html#Base.Libc.calloc",
+    "page": "C Standard Library",
+    "title": "Base.Libc.calloc",
+    "category": "Function",
+    "text": "calloc(num::Integer, size::Integer) -> Ptr{Cvoid}\n\nCall calloc from the C standard library.\n\n\n\n"
+},
+
+{
+    "location": "base/libc.html#Base.Libc.realloc",
+    "page": "C Standard Library",
+    "title": "Base.Libc.realloc",
+    "category": "Function",
+    "text": "realloc(addr::Ptr, size::Integer) -> Ptr{Cvoid}\n\nCall realloc from the C standard library.\n\nSee warning in the documentation for free regarding only using this on memory originally obtained from malloc.\n\n\n\n"
+},
+
+{
+    "location": "base/libc.html#Base.Libc.free",
+    "page": "C Standard Library",
+    "title": "Base.Libc.free",
+    "category": "Function",
+    "text": "free(addr::Ptr)\n\nCall free from the C standard library. Only use this on memory obtained from malloc, not on pointers retrieved from other C libraries. Ptr objects obtained from C libraries should be freed by the free functions defined in that library, to avoid assertion failures if multiple libc libraries exist on the system.\n\n\n\n"
+},
+
+{
+    "location": "base/libc.html#Base.Libc.errno",
+    "page": "C Standard Library",
+    "title": "Base.Libc.errno",
+    "category": "Function",
+    "text": "errno([code])\n\nGet the value of the C library's errno. If an argument is specified, it is used to set the value of errno.\n\nThe value of errno is only valid immediately after a ccall to a C library routine that sets it. Specifically, you cannot call errno at the next prompt in a REPL, because lots of code is executed between prompts.\n\n\n\n"
+},
+
+{
+    "location": "base/libc.html#Base.Libc.strerror",
+    "page": "C Standard Library",
+    "title": "Base.Libc.strerror",
+    "category": "Function",
+    "text": "strerror(n=errno())\n\nConvert a system call error code to a descriptive string\n\n\n\n"
+},
+
+{
+    "location": "base/libc.html#Base.Libc.GetLastError",
+    "page": "C Standard Library",
+    "title": "Base.Libc.GetLastError",
+    "category": "Function",
+    "text": "GetLastError()\n\nCall the Win32 GetLastError function [only available on Windows].\n\n\n\n"
+},
+
+{
+    "location": "base/libc.html#Base.Libc.FormatMessage",
+    "page": "C Standard Library",
+    "title": "Base.Libc.FormatMessage",
+    "category": "Function",
+    "text": "FormatMessage(n=GetLastError())\n\nConvert a Win32 system call error code to a descriptive string [only available on Windows].\n\n\n\n"
+},
+
+{
+    "location": "base/libc.html#Base.Libc.time-Tuple{Base.Libc.TmStruct}",
+    "page": "C Standard Library",
+    "title": "Base.Libc.time",
+    "category": "Method",
+    "text": "time(t::TmStruct)\n\nConverts a TmStruct struct to a number of seconds since the epoch.\n\n\n\n"
+},
+
+{
+    "location": "base/libc.html#Base.Libc.strftime",
+    "page": "C Standard Library",
+    "title": "Base.Libc.strftime",
+    "category": "Function",
+    "text": "strftime([format], time)\n\nConvert time, given as a number of seconds since the epoch or a TmStruct, to a formatted string using the given format. Supported formats are the same as those in the standard C library.\n\n\n\n"
+},
+
+{
+    "location": "base/libc.html#Base.Libc.strptime",
+    "page": "C Standard Library",
+    "title": "Base.Libc.strptime",
+    "category": "Function",
+    "text": "strptime([format], timestr)\n\nParse a formatted time string into a TmStruct giving the seconds, minute, hour, date, etc. Supported formats are the same as those in the standard C library. On some platforms, timezones will not be parsed correctly. If the result of this function will be passed to time to convert it to seconds since the epoch, the isdst field should be filled in manually. Setting it to -1 will tell the C library to use the current system settings to determine the timezone.\n\n\n\n"
+},
+
+{
+    "location": "base/libc.html#Base.Libc.TmStruct",
+    "page": "C Standard Library",
+    "title": "Base.Libc.TmStruct",
+    "category": "Type",
+    "text": "TmStruct([seconds])\n\nConvert a number of seconds since the epoch to broken-down format, with fields sec, min, hour, mday, month, year, wday, yday, and isdst.\n\n\n\n"
+},
+
+{
+    "location": "base/libc.html#Base.Libc.flush_cstdio",
+    "page": "C Standard Library",
+    "title": "Base.Libc.flush_cstdio",
+    "category": "Function",
+    "text": "flush_cstdio()\n\nFlushes the C stdout and stderr streams (which may have been written to by external C code).\n\n\n\n"
+},
+
+{
+    "location": "base/libc.html#C-Standard-Library-1",
+    "page": "C Standard Library",
+    "title": "C Standard Library",
+    "category": "section",
+    "text": "Base.Libc.malloc\nBase.Libc.calloc\nBase.Libc.realloc\nBase.Libc.free\nBase.Libc.errno\nBase.Libc.strerror\nBase.Libc.GetLastError\nBase.Libc.FormatMessage\nBase.Libc.time(::Base.Libc.TmStruct)\nBase.Libc.strftime\nBase.Libc.strptime\nBase.Libc.TmStruct\nBase.Libc.flush_cstdio"
+},
+
+{
+    "location": "base/libdl.html#",
+    "page": "Dynamic Linker",
+    "title": "Dynamic Linker",
+    "category": "page",
+    "text": ""
+},
+
+{
+    "location": "base/libdl.html#Base.Libdl.dlopen",
+    "page": "Dynamic Linker",
+    "title": "Base.Libdl.dlopen",
+    "category": "Function",
+    "text": "dlopen(libfile::AbstractString [, flags::Integer])\n\nLoad a shared library, returning an opaque handle.\n\nThe extension given by the constant dlext (.so, .dll, or .dylib) can be omitted from the libfile string, as it is automatically appended if needed.   If libfile is not an absolute path name, then the paths in the array DL_LOAD_PATH are searched for libfile, followed by the system load path.\n\nThe optional flags argument is a bitwise-or of zero or more of RTLD_LOCAL, RTLD_GLOBAL, RTLD_LAZY, RTLD_NOW, RTLD_NODELETE, RTLD_NOLOAD, RTLD_DEEPBIND, and RTLD_FIRST. These are converted to the corresponding flags of the POSIX (and/or GNU libc and/or MacOS) dlopen command, if possible, or are ignored if the specified functionality is not available on the current platform. The default flags are platform specific. On MacOS the default dlopen flags are RTLD_LAZY|RTLD_DEEPBIND|RTLD_GLOBAL while on other platforms the defaults are RTLD_LAZY|RTLD_DEEPBIND|RTLD_LOCAL. An important usage of these flags is to specify non default behavior for when the dynamic library loader binds library references to exported symbols and if the bound references are put into process local or global scope. For instance RTLD_LAZY|RTLD_DEEPBIND|RTLD_GLOBAL allows the library's symbols to be available for usage in other shared libraries, addressing situations where there are dependencies between shared libraries.\n\n\n\n"
+},
+
+{
+    "location": "base/libdl.html#Base.Libdl.dlopen_e",
+    "page": "Dynamic Linker",
+    "title": "Base.Libdl.dlopen_e",
+    "category": "Function",
+    "text": "dlopen_e(libfile::AbstractString [, flags::Integer])\n\nSimilar to dlopen, except returns a NULL pointer instead of raising errors.\n\n\n\n"
+},
+
+{
+    "location": "base/libdl.html#Base.Libdl.RTLD_NOW",
+    "page": "Dynamic Linker",
+    "title": "Base.Libdl.RTLD_NOW",
+    "category": "Constant",
+    "text": "RTLD_DEEPBIND\nRTLD_FIRST\nRTLD_GLOBAL\nRTLD_LAZY\nRTLD_LOCAL\nRTLD_NODELETE\nRTLD_NOLOAD\nRTLD_NOW\n\nEnum constant for dlopen. See your platform man page for details, if applicable.\n\n\n\n"
+},
+
+{
+    "location": "base/libdl.html#Base.Libdl.dlsym",
+    "page": "Dynamic Linker",
+    "title": "Base.Libdl.dlsym",
+    "category": "Function",
+    "text": "dlsym(handle, sym)\n\nLook up a symbol from a shared library handle, return callable function pointer on success.\n\n\n\n"
+},
+
+{
+    "location": "base/libdl.html#Base.Libdl.dlsym_e",
+    "page": "Dynamic Linker",
+    "title": "Base.Libdl.dlsym_e",
+    "category": "Function",
+    "text": "dlsym_e(handle, sym)\n\nLook up a symbol from a shared library handle, silently return NULL pointer on lookup failure.\n\n\n\n"
+},
+
+{
+    "location": "base/libdl.html#Base.Libdl.dlclose",
+    "page": "Dynamic Linker",
+    "title": "Base.Libdl.dlclose",
+    "category": "Function",
+    "text": "dlclose(handle)\n\nClose shared library referenced by handle.\n\n\n\n"
+},
+
+{
+    "location": "base/libdl.html#Base.Libdl.dlext",
+    "page": "Dynamic Linker",
+    "title": "Base.Libdl.dlext",
+    "category": "Constant",
+    "text": "dlext\n\nFile extension for dynamic libraries (e.g. dll, dylib, so) on the current platform.\n\n\n\n"
+},
+
+{
+    "location": "base/libdl.html#Base.Libdl.find_library",
+    "page": "Dynamic Linker",
+    "title": "Base.Libdl.find_library",
+    "category": "Function",
+    "text": "find_library(names, locations)\n\nSearches for the first library in names in the paths in the locations list, DL_LOAD_PATH, or system library paths (in that order) which can successfully be dlopen'd. On success, the return value will be one of the names (potentially prefixed by one of the paths in locations). This string can be assigned to a global const and used as the library name in future ccall's. On failure, it returns the empty string.\n\n\n\n"
+},
+
+{
+    "location": "base/libdl.html#Base.Libdl.DL_LOAD_PATH",
+    "page": "Dynamic Linker",
+    "title": "Base.Libdl.DL_LOAD_PATH",
+    "category": "Constant",
+    "text": "DL_LOAD_PATH\n\nWhen calling dlopen, the paths in this list will be searched first, in order, before searching the system locations for a valid library handle.\n\n\n\n"
+},
+
+{
+    "location": "base/libdl.html#Dynamic-Linker-1",
+    "page": "Dynamic Linker",
+    "title": "Dynamic Linker",
+    "category": "section",
+    "text": "The names in Base.Libdl are not exported and need to be called e.g. as Libdl.dlopen.Base.Libdl.dlopen\nBase.Libdl.dlopen_e\nBase.Libdl.RTLD_NOW\nBase.Libdl.dlsym\nBase.Libdl.dlsym_e\nBase.Libdl.dlclose\nBase.Libdl.dlext\nBase.Libdl.find_library\nBase.Libdl.DL_LOAD_PATH"
+},
+
+{
+    "location": "base/stacktraces.html#",
+    "page": "StackTraces",
+    "title": "StackTraces",
+    "category": "page",
+    "text": ""
+},
+
+{
+    "location": "base/stacktraces.html#Base.StackTraces.StackFrame",
+    "page": "StackTraces",
+    "title": "Base.StackTraces.StackFrame",
+    "category": "Type",
+    "text": "StackFrame\n\nStack information representing execution context, with the following fields:\n\nfunc::Symbol\nThe name of the function containing the execution context.\nlinfo::Union{Core.MethodInstance, CodeInfo, Nothing}\nThe MethodInstance containing the execution context (if it could be found).\nfile::Symbol\nThe path to the file containing the execution context.\nline::Int\nThe line number in the file containing the execution context.\nfrom_c::Bool\nTrue if the code is from C.\ninlined::Bool\nTrue if the code is from an inlined frame.\npointer::UInt64\nRepresentation of the pointer to the execution context as returned by backtrace.\n\n\n\n"
+},
+
+{
+    "location": "base/stacktraces.html#Base.StackTraces.StackTrace",
+    "page": "StackTraces",
+    "title": "Base.StackTraces.StackTrace",
+    "category": "Type",
+    "text": "StackTrace\n\nAn alias for Vector{StackFrame} provided for convenience; returned by calls to stacktrace and catch_stacktrace.\n\n\n\n"
+},
+
+{
+    "location": "base/stacktraces.html#Base.StackTraces.stacktrace",
+    "page": "StackTraces",
+    "title": "Base.StackTraces.stacktrace",
+    "category": "Function",
+    "text": "stacktrace([trace::Vector{Ptr{Cvoid}},] [c_funcs::Bool=false]) -> StackTrace\n\nReturns a stack trace in the form of a vector of StackFrames. (By default stacktrace doesn't return C functions, but this can be enabled.) When called without specifying a trace, stacktrace first calls backtrace.\n\n\n\n"
+},
+
+{
+    "location": "base/stacktraces.html#Base.StackTraces.catch_stacktrace",
+    "page": "StackTraces",
+    "title": "Base.StackTraces.catch_stacktrace",
+    "category": "Function",
+    "text": "catch_stacktrace([c_funcs::Bool=false]) -> StackTrace\n\nReturns the stack trace for the most recent error thrown, rather than the current execution context.\n\n\n\n"
+},
+
+{
+    "location": "base/stacktraces.html#Base.StackTraces.lookup",
+    "page": "StackTraces",
+    "title": "Base.StackTraces.lookup",
+    "category": "Function",
+    "text": "lookup(pointer::Union{Ptr{Cvoid}, UInt}) -> Vector{StackFrame}\n\nGiven a pointer to an execution context (usually generated by a call to backtrace), looks up stack frame context information. Returns an array of frame information for all functions inlined at that point, innermost function first.\n\n\n\n"
+},
+
+{
+    "location": "base/stacktraces.html#Base.StackTraces.remove_frames!",
+    "page": "StackTraces",
+    "title": "Base.StackTraces.remove_frames!",
+    "category": "Function",
+    "text": "remove_frames!(stack::StackTrace, name::Symbol)\n\nTakes a StackTrace (a vector of StackFrames) and a function name (a Symbol) and removes the StackFrame specified by the function name from the StackTrace (also removing all frames above the specified function). Primarily used to remove StackTraces functions from the StackTrace prior to returning it.\n\n\n\nremove_frames!(stack::StackTrace, m::Module)\n\nReturns the StackTrace with all StackFrames from the provided Module removed.\n\n\n\n"
+},
+
+{
+    "location": "base/stacktraces.html#StackTraces-1",
+    "page": "StackTraces",
+    "title": "StackTraces",
+    "category": "section",
+    "text": "Base.StackTraces.StackFrame\nBase.StackTraces.StackTrace\nBase.StackTraces.stacktrace\nBase.StackTraces.catch_stacktraceThe following methods and types in Base.StackTraces are not exported and need to be called e.g. as StackTraces.lookup(ptr).Base.StackTraces.lookup\nBase.StackTraces.remove_frames!"
+},
+
+{
+    "location": "base/simd-types.html#",
+    "page": "SIMD Support",
+    "title": "SIMD Support",
+    "category": "page",
+    "text": ""
+},
+
+{
+    "location": "base/simd-types.html#SIMD-Support-1",
+    "page": "SIMD Support",
+    "title": "SIMD Support",
+    "category": "section",
+    "text": "Type VecElement{T} is intended for building libraries of SIMD operations. Practical use of it requires using llvmcall. The type is defined as:struct VecElement{T}\n    value::T\nendIt has a special compilation rule: a homogeneous tuple of VecElement{T} maps to an LLVM vector type when T is a primitive bits type and the tuple length is in the set {2-6,8-10,16}.At -O3, the compiler might automatically vectorize operations on such tuples. For example, the following program, when compiled with julia -O3 generates two SIMD addition instructions (addps) on x86 systems:const m128 = NTuple{4,VecElement{Float32}}\n\nfunction add(a::m128, b::m128)\n    (VecElement(a[1].value+b[1].value),\n     VecElement(a[2].value+b[2].value),\n     VecElement(a[3].value+b[3].value),\n     VecElement(a[4].value+b[4].value))\nend\n\ntriple(c::m128) = add(add(c,c),c)\n\ncode_native(triple,(m128,))However, since the automatic vectorization cannot be relied upon, future use will mostly be via libraries that use llvmcall."
+},
+
+{
+    "location": "stdlib/base64.html#",
+    "page": "Base64",
+    "title": "Base64",
+    "category": "page",
+    "text": ""
+},
+
+{
+    "location": "stdlib/base64.html#Base64.Base64EncodePipe",
+    "page": "Base64",
+    "title": "Base64.Base64EncodePipe",
+    "category": "Type",
+    "text": "Base64EncodePipe(ostream)\n\nReturn a new write-only I/O stream, which converts any bytes written to it into base64-encoded ASCII bytes written to ostream.  Calling close on the Base64EncodePipe stream is necessary to complete the encoding (but does not close ostream).\n\nExamples\n\njulia> io = IOBuffer();\n\njulia> iob64_encode = Base64EncodePipe(io);\n\njulia> write(iob64_encode, \"Hello!\")\n6\n\njulia> close(iob64_encode);\n\njulia> str = String(take!(io))\n\"SGVsbG8h\"\n\njulia> String(base64decode(str))\n\"Hello!\"\n\n\n\n"
+},
+
+{
+    "location": "stdlib/base64.html#Base64.base64encode",
+    "page": "Base64",
+    "title": "Base64.base64encode",
+    "category": "Function",
+    "text": "base64encode(writefunc, args...)\nbase64encode(args...)\n\nGiven a write-like function writefunc, which takes an I/O stream as its first argument, base64encode(writefunc, args...) calls writefunc to write args... to a base64-encoded string, and returns the string. base64encode(args...) is equivalent to base64encode(write, args...): it converts its arguments into bytes using the standard write functions and returns the base64-encoded string.\n\nSee also base64decode.\n\n\n\n"
+},
+
+{
+    "location": "stdlib/base64.html#Base64.Base64DecodePipe",
+    "page": "Base64",
+    "title": "Base64.Base64DecodePipe",
+    "category": "Type",
+    "text": "Base64DecodePipe(istream)\n\nReturn a new read-only I/O stream, which decodes base64-encoded data read from istream.\n\nExamples\n\njulia> io = IOBuffer();\n\njulia> iob64_decode = Base64DecodePipe(io);\n\njulia> write(io, \"SGVsbG8h\")\n8\n\njulia> seekstart(io);\n\njulia> String(read(iob64_decode))\n\"Hello!\"\n\n\n\n"
+},
+
+{
+    "location": "stdlib/base64.html#Base64.base64decode",
+    "page": "Base64",
+    "title": "Base64.base64decode",
+    "category": "Function",
+    "text": "base64decode(string)\n\nDecode the base64-encoded string and returns a Vector{UInt8} of the decoded bytes.\n\nSee also base64encode.\n\nExamples\n\njulia> b = base64decode(\"SGVsbG8h\")\n6-element Array{UInt8,1}:\n 0x48\n 0x65\n 0x6c\n 0x6c\n 0x6f\n 0x21\n\njulia> String(b)\n\"Hello!\"\n\n\n\n"
+},
+
+{
+    "location": "stdlib/base64.html#Base64-1",
+    "page": "Base64",
+    "title": "Base64",
+    "category": "section",
+    "text": "Base64.Base64EncodePipe\nBase64.base64encode\nBase64.Base64DecodePipe\nBase64.base64decode"
+},
+
+{
+    "location": "stdlib/crc32c.html#",
+    "page": "CRC32c",
+    "title": "CRC32c",
+    "category": "page",
+    "text": ""
+},
+
+{
+    "location": "stdlib/crc32c.html#CRC32c.crc32c",
+    "page": "CRC32c",
+    "title": "CRC32c.crc32c",
+    "category": "Function",
+    "text": "crc32c(data, crc::UInt32=0x00000000)\n\nCompute the CRC-32c checksum of the given data, which can be an Array{UInt8}, a contiguous subarray thereof, or a String.  Optionally, you can pass a starting crc integer to be mixed in with the checksum.  The crc parameter can be used to compute a checksum on data divided into chunks: performing crc32c(data2, crc32c(data1)) is equivalent to the checksum of [data1; data2]. (Technically, a little-endian checksum is computed.)\n\nThere is also a method crc32c(io, nb, crc) to checksum nb bytes from a stream io, or crc32c(io, crc) to checksum all the remaining bytes. Hence you can do open(crc32c, filename) to checksum an entire file, or crc32c(seekstart(buf)) to checksum an IOBuffer without calling take!.\n\nFor a String, note that the result is specific to the UTF-8 encoding (a different checksum would be obtained from a different Unicode encoding). To checksum an a::Array of some other bitstype, you can do crc32c(reinterpret(UInt8,a)), but note that the result may be endian-dependent.\n\n\n\n"
+},
+
+{
+    "location": "stdlib/crc32c.html#CRC32c.crc32c-Tuple{IO,Integer,UInt32}",
+    "page": "CRC32c",
+    "title": "CRC32c.crc32c",
+    "category": "Method",
+    "text": "crc32c(io::IO, [nb::Integer,] crc::UInt32=0x00000000)\n\nRead up to nb bytes from io and return the CRC-32c checksum, optionally mixed with a starting crc integer.  If nb is not supplied, then io will be read until the end of the stream.\n\n\n\n"
+},
+
+{
+    "location": "stdlib/crc32c.html#CRC32c-1",
+    "page": "CRC32c",
+    "title": "CRC32c",
+    "category": "section",
+    "text": "CRC32c.crc32c\nCRC32c.crc32c(::IO, ::Integer, ::UInt32)"
 },
 
 {
@@ -17937,123 +18257,827 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/iterators.html#",
-    "page": "Iteration utilities",
-    "title": "Iteration utilities",
+    "location": "stdlib/delimitedfiles.html#",
+    "page": "Delimited Files",
+    "title": "Delimited Files",
     "category": "page",
     "text": ""
 },
 
 {
-    "location": "stdlib/iterators.html#Base.Iterators.zip",
-    "page": "Iteration utilities",
-    "title": "Base.Iterators.zip",
-    "category": "Function",
-    "text": "zip(iters...)\n\nFor a set of iterable objects, return an iterable of tuples, where the ith tuple contains the ith component of each input iterable.\n\nExamples\n\njulia> a = 1:5\n1:5\n\njulia> b = [\"e\",\"d\",\"b\",\"c\",\"a\"]\n5-element Array{String,1}:\n \"e\"\n \"d\"\n \"b\"\n \"c\"\n \"a\"\n\njulia> c = zip(a,b)\nBase.Iterators.Zip2{UnitRange{Int64},Array{String,1}}(1:5, [\"e\", \"d\", \"b\", \"c\", \"a\"])\n\njulia> length(c)\n5\n\njulia> first(c)\n(1, \"e\")\n\n\n\n"
+    "location": "stdlib/delimitedfiles.html#DelimitedFiles.readdlm-Tuple{Any,Char,Type,Char}",
+    "page": "Delimited Files",
+    "title": "DelimitedFiles.readdlm",
+    "category": "Method",
+    "text": "readdlm(source, delim::Char, T::Type, eol::Char; header=false, skipstart=0, skipblanks=true, use_mmap, quotes=true, dims, comments=true, comment_char='#')\n\nRead a matrix from the source where each line (separated by eol) gives one row, with elements separated by the given delimiter. The source can be a text file, stream or byte array. Memory mapped files can be used by passing the byte array representation of the mapped segment as source.\n\nIf T is a numeric type, the result is an array of that type, with any non-numeric elements as NaN for floating-point types, or zero. Other useful values of T include String, AbstractString, and Any.\n\nIf header is true, the first row of data will be read as header and the tuple (data_cells, header_cells) is returned instead of only data_cells.\n\nSpecifying skipstart will ignore the corresponding number of initial lines from the input.\n\nIf skipblanks is true, blank lines in the input will be ignored.\n\nIf use_mmap is true, the file specified by source is memory mapped for potential speedups. Default is true except on Windows. On Windows, you may want to specify true if the file is large, and is only read once and not written to.\n\nIf quotes is true, columns enclosed within double-quote (\") characters are allowed to contain new lines and column delimiters. Double-quote characters within a quoted field must be escaped with another double-quote.  Specifying dims as a tuple of the expected rows and columns (including header, if any) may speed up reading of large files.  If comments is true, lines beginning with comment_char and text following comment_char in any line are ignored.\n\nExamples\n\njulia> using DelimitedFiles\n\njulia> x = [1; 2; 3; 4];\n\njulia> y = [5; 6; 7; 8];\n\njulia> open(\"delim_file.txt\", \"w\") do io\n           writedlm(io, [x y])\n       end\n\njulia> readdlm(\"delim_file.txt\", '\\t', Int, '\\n')\n4×2 Array{Int64,2}:\n 1  5\n 2  6\n 3  7\n 4  8\n\n\n\n"
 },
 
 {
-    "location": "stdlib/iterators.html#Base.Iterators.enumerate",
-    "page": "Iteration utilities",
-    "title": "Base.Iterators.enumerate",
-    "category": "Function",
-    "text": "enumerate(iter)\n\nAn iterator that yields (i, x) where i is a counter starting at 1, and x is the ith value from the given iterator. It's useful when you need not only the values x over which you are iterating, but also the number of iterations so far. Note that i may not be valid for indexing iter; it's also possible that x != iter[i], if iter has indices that do not start at 1. See the enumerate(IndexLinear(), iter) method if you want to ensure that i is an index.\n\nExamples\n\njulia> a = [\"a\", \"b\", \"c\"];\n\njulia> for (index, value) in enumerate(a)\n           println(\"$index $value\")\n       end\n1 a\n2 b\n3 c\n\n\n\n"
+    "location": "stdlib/delimitedfiles.html#DelimitedFiles.readdlm-Tuple{Any,Char,Char}",
+    "page": "Delimited Files",
+    "title": "DelimitedFiles.readdlm",
+    "category": "Method",
+    "text": "readdlm(source, delim::Char, eol::Char; options...)\n\nIf all data is numeric, the result will be a numeric array. If some elements cannot be parsed as numbers, a heterogeneous array of numbers and strings is returned.\n\n\n\n"
 },
 
 {
-    "location": "stdlib/iterators.html#Base.Iterators.rest",
-    "page": "Iteration utilities",
-    "title": "Base.Iterators.rest",
-    "category": "Function",
-    "text": "rest(iter, state)\n\nAn iterator that yields the same elements as iter, but starting at the given state.\n\nExamples\n\njulia> collect(Iterators.rest([1,2,3,4], 2))\n3-element Array{Any,1}:\n 2\n 3\n 4\n\n\n\n"
+    "location": "stdlib/delimitedfiles.html#DelimitedFiles.readdlm-Tuple{Any,Char,Type}",
+    "page": "Delimited Files",
+    "title": "DelimitedFiles.readdlm",
+    "category": "Method",
+    "text": "readdlm(source, delim::Char, T::Type; options...)\n\nThe end of line delimiter is taken as \\n.\n\nExamples\n\njulia> using DelimitedFiles\n\njulia> x = [1; 2; 3; 4];\n\njulia> y = [1.1; 2.2; 3.3; 4.4];\n\njulia> open(\"delim_file.txt\", \"w\") do io\n           writedlm(io, [x y], ',')\n       end;\n\njulia> readdlm(\"delim_file.txt\", ',', Float64)\n4×2 Array{Float64,2}:\n 1.0  1.1\n 2.0  2.2\n 3.0  3.3\n 4.0  4.4\n\njulia> rm(\"delim_file.txt\")\n\n\n\n"
 },
 
 {
-    "location": "stdlib/iterators.html#Base.Iterators.countfrom",
-    "page": "Iteration utilities",
-    "title": "Base.Iterators.countfrom",
-    "category": "Function",
-    "text": "countfrom(start=1, step=1)\n\nAn iterator that counts forever, starting at start and incrementing by step.\n\nExamples\n\njulia> for v in Iterators.countfrom(5, 2)\n           v > 10 && break\n           println(v)\n       end\n5\n7\n9\n\n\n\n"
+    "location": "stdlib/delimitedfiles.html#DelimitedFiles.readdlm-Tuple{Any,Char}",
+    "page": "Delimited Files",
+    "title": "DelimitedFiles.readdlm",
+    "category": "Method",
+    "text": "readdlm(source, delim::Char; options...)\n\nThe end of line delimiter is taken as \\n. If all data is numeric, the result will be a numeric array. If some elements cannot be parsed as numbers, a heterogeneous array of numbers and strings is returned.\n\nExamples\n\njulia> using DelimitedFiles\n\njulia> x = [1; 2; 3; 4];\n\njulia> y = [1.1; 2.2; 3.3; 4.4];\n\njulia> open(\"delim_file.txt\", \"w\") do io\n           writedlm(io, [x y], ',')\n       end;\n\njulia> readdlm(\"delim_file.txt\", ',')\n4×2 Array{Float64,2}:\n 1.0  1.1\n 2.0  2.2\n 3.0  3.3\n 4.0  4.4\n\njulia> rm(\"delim_file.txt\")\n\njulia> z = [\"a\"; \"b\"; \"c\"; \"d\"];\n\njulia> open(\"delim_file.txt\", \"w\") do io\n           writedlm(io, [x z], ',')\n       end;\n\njulia> readdlm(\"delim_file.txt\", ',')\n4×2 Array{Any,2}:\n 1  \"a\"\n 2  \"b\"\n 3  \"c\"\n 4  \"d\"\n\njulia> rm(\"delim_file.txt\")\n\n\n\n"
 },
 
 {
-    "location": "stdlib/iterators.html#Base.Iterators.take",
-    "page": "Iteration utilities",
-    "title": "Base.Iterators.take",
-    "category": "Function",
-    "text": "take(iter, n)\n\nAn iterator that generates at most the first n elements of iter.\n\nExamples\n\njulia> a = 1:2:11\n1:2:11\n\njulia> collect(a)\n6-element Array{Int64,1}:\n  1\n  3\n  5\n  7\n  9\n 11\n\njulia> collect(Iterators.take(a,3))\n3-element Array{Int64,1}:\n 1\n 3\n 5\n\n\n\n"
+    "location": "stdlib/delimitedfiles.html#DelimitedFiles.readdlm-Tuple{Any,Type}",
+    "page": "Delimited Files",
+    "title": "DelimitedFiles.readdlm",
+    "category": "Method",
+    "text": "readdlm(source, T::Type; options...)\n\nThe columns are assumed to be separated by one or more whitespaces. The end of line delimiter is taken as \\n.\n\nExamples\n\njulia> using DelimitedFiles\n\njulia> x = [1; 2; 3; 4];\n\njulia> y = [5; 6; 7; 8];\n\njulia> open(\"delim_file.txt\", \"w\") do io\n           writedlm(io, [x y])\n       end;\n\njulia> readdlm(\"delim_file.txt\", Int64)\n4×2 Array{Int64,2}:\n 1  5\n 2  6\n 3  7\n 4  8\n\njulia> readdlm(\"delim_file.txt\", Float64)\n4×2 Array{Float64,2}:\n 1.0  5.0\n 2.0  6.0\n 3.0  7.0\n 4.0  8.0\n\njulia> rm(\"delim_file.txt\")\n\n\n\n"
 },
 
 {
-    "location": "stdlib/iterators.html#Base.Iterators.drop",
-    "page": "Iteration utilities",
-    "title": "Base.Iterators.drop",
-    "category": "Function",
-    "text": "drop(iter, n)\n\nAn iterator that generates all but the first n elements of iter.\n\nExamples\n\njulia> a = 1:2:11\n1:2:11\n\njulia> collect(a)\n6-element Array{Int64,1}:\n  1\n  3\n  5\n  7\n  9\n 11\n\njulia> collect(Iterators.drop(a,4))\n2-element Array{Int64,1}:\n  9\n 11\n\n\n\n"
+    "location": "stdlib/delimitedfiles.html#DelimitedFiles.readdlm-Tuple{Any}",
+    "page": "Delimited Files",
+    "title": "DelimitedFiles.readdlm",
+    "category": "Method",
+    "text": "readdlm(source; options...)\n\nThe columns are assumed to be separated by one or more whitespaces. The end of line delimiter is taken as \\n. If all data is numeric, the result will be a numeric array. If some elements cannot be parsed as numbers, a heterogeneous array of numbers and strings is returned.\n\nExamples\n\njulia> using DelimitedFiles\n\njulia> x = [1; 2; 3; 4];\n\njulia> y = [\"a\"; \"b\"; \"c\"; \"d\"];\n\njulia> open(\"delim_file.txt\", \"w\") do io\n           writedlm(io, [x y])\n       end;\n\njulia> readdlm(\"delim_file.txt\")\n4×2 Array{Any,2}:\n 1  \"a\"\n 2  \"b\"\n 3  \"c\"\n 4  \"d\"\n\njulia> rm(\"delim_file.txt\")\n\n\n\n"
 },
 
 {
-    "location": "stdlib/iterators.html#Base.Iterators.cycle",
-    "page": "Iteration utilities",
-    "title": "Base.Iterators.cycle",
+    "location": "stdlib/delimitedfiles.html#DelimitedFiles.writedlm",
+    "page": "Delimited Files",
+    "title": "DelimitedFiles.writedlm",
     "category": "Function",
-    "text": "cycle(iter)\n\nAn iterator that cycles through iter forever.\n\nExamples\n\njulia> for (i, v) in enumerate(Iterators.cycle(\"hello\"))\n           print(v)\n           i > 10 && break\n       end\nhellohelloh\n\n\n\n"
+    "text": "writedlm(f, A, delim='\\t'; opts)\n\nWrite A (a vector, matrix, or an iterable collection of iterable rows) as text to f (either a filename string or an IO stream) using the given delimiter delim (which defaults to tab, but can be any printable Julia object, typically a Char or AbstractString).\n\nFor example, two vectors x and y of the same length can be written as two columns of tab-delimited text to f by either writedlm(f, [x y]) or by writedlm(f, zip(x, y)).\n\nExamples\n\njulia> using DelimitedFiles\n\njulia> x = [1; 2; 3; 4];\n\njulia> y = [5; 6; 7; 8];\n\njulia> open(\"delim_file.txt\", \"w\") do io\n           writedlm(io, [x y])\n       end\n\njulia> readdlm(\"delim_file.txt\", '\\t', Int, '\\n')\n4×2 Array{Int64,2}:\n 1  5\n 2  6\n 3  7\n 4  8\n\n\n\n"
 },
 
 {
-    "location": "stdlib/iterators.html#Base.Iterators.repeated",
-    "page": "Iteration utilities",
-    "title": "Base.Iterators.repeated",
-    "category": "Function",
-    "text": "repeated(x[, n::Int])\n\nAn iterator that generates the value x forever. If n is specified, generates x that many times (equivalent to take(repeated(x), n)).\n\nExamples\n\njulia> a = Iterators.repeated([1 2], 4);\n\njulia> collect(a)\n4-element Array{Array{Int64,2},1}:\n [1 2]\n [1 2]\n [1 2]\n [1 2]\n\n\n\n"
-},
-
-{
-    "location": "stdlib/iterators.html#Base.Iterators.product",
-    "page": "Iteration utilities",
-    "title": "Base.Iterators.product",
-    "category": "Function",
-    "text": "product(iters...)\n\nReturn an iterator over the product of several iterators. Each generated element is a tuple whose ith element comes from the ith argument iterator. The first iterator changes the fastest.\n\nExamples\n\njulia> collect(Iterators.product(1:2,3:5))\n2×3 Array{Tuple{Int64,Int64},2}:\n (1, 3)  (1, 4)  (1, 5)\n (2, 3)  (2, 4)  (2, 5)\n\n\n\n"
-},
-
-{
-    "location": "stdlib/iterators.html#Base.Iterators.flatten",
-    "page": "Iteration utilities",
-    "title": "Base.Iterators.flatten",
-    "category": "Function",
-    "text": "flatten(iter)\n\nGiven an iterator that yields iterators, return an iterator that yields the elements of those iterators. Put differently, the elements of the argument iterator are concatenated.\n\nExamples\n\njulia> collect(Iterators.flatten((1:2, 8:9)))\n4-element Array{Int64,1}:\n 1\n 2\n 8\n 9\n\n\n\n"
-},
-
-{
-    "location": "stdlib/iterators.html#Base.Iterators.partition",
-    "page": "Iteration utilities",
-    "title": "Base.Iterators.partition",
-    "category": "Function",
-    "text": "partition(collection, n)\n\nIterate over a collection n elements at a time.\n\nExamples\n\njulia> collect(Iterators.partition([1,2,3,4,5], 2))\n3-element Array{Array{Int64,1},1}:\n [1, 2]\n [3, 4]\n [5]\n\n\n\n"
-},
-
-{
-    "location": "stdlib/iterators.html#Base.Iterators.filter",
-    "page": "Iteration utilities",
-    "title": "Base.Iterators.filter",
-    "category": "Function",
-    "text": "Iterators.filter(flt, itr)\n\nGiven a predicate function flt and an iterable object itr, return an iterable object which upon iteration yields the elements x of itr that satisfy flt(x). The order of the original iterator is preserved.\n\nThis function is lazy; that is, it is guaranteed to return in (1) time and use (1) additional space, and flt will not be called by an invocation of filter. Calls to flt will be made when iterating over the returned iterable object. These calls are not cached and repeated calls will be made when reiterating.\n\nSee Base.filter for an eager implementation of filtering for arrays.\n\nExamples\n\njulia> f = Iterators.filter(isodd, [1, 2, 3, 4, 5])\nBase.Iterators.Filter{Base.#isodd,Array{Int64,1}}(isodd, [1, 2, 3, 4, 5])\n\njulia> foreach(println, f)\n1\n3\n5\n\n\n\n"
-},
-
-{
-    "location": "stdlib/iterators.html#Base.Iterators.reverse",
-    "page": "Iteration utilities",
-    "title": "Base.Iterators.reverse",
-    "category": "Function",
-    "text": "Iterators.reverse(itr)\n\nGiven an iterator itr, then reverse(itr) is an iterator over the same collection but in the reverse order.\n\nThis iterator is \"lazy\" in that it does not make a copy of the collection in order to reverse it; see Base.reverse for an eager implementation.\n\nNot all iterator types T support reverse-order iteration.  If T doesn't, then iterating over Iterators.reverse(itr::T) will throw a MethodError because of the missing start, next, and done methods for Iterators.Reverse{T}.  (To implement these methods, the original iterator itr::T can be obtained from r = Iterators.reverse(itr) by r.itr.)\n\nExamples\n\njulia> foreach(println, Iterators.reverse(1:5))\n5\n4\n3\n2\n1\n\n\n\n"
-},
-
-{
-    "location": "stdlib/iterators.html#Iteration-utilities-1",
-    "page": "Iteration utilities",
-    "title": "Iteration utilities",
+    "location": "stdlib/delimitedfiles.html#Delimited-Files-1",
+    "page": "Delimited Files",
+    "title": "Delimited Files",
     "category": "section",
-    "text": "Base.Iterators.zip\nBase.Iterators.enumerate\nBase.Iterators.rest\nBase.Iterators.countfrom\nBase.Iterators.take\nBase.Iterators.drop\nBase.Iterators.cycle\nBase.Iterators.repeated\nBase.Iterators.product\nBase.Iterators.flatten\nBase.Iterators.partition\nBase.Iterators.filter\nBase.Iterators.reverse"
+    "text": "DelimitedFiles.readdlm(::Any, ::Char, ::Type, ::Char)\nDelimitedFiles.readdlm(::Any, ::Char, ::Char)\nDelimitedFiles.readdlm(::Any, ::Char, ::Type)\nDelimitedFiles.readdlm(::Any, ::Char)\nDelimitedFiles.readdlm(::Any, ::Type)\nDelimitedFiles.readdlm(::Any)\nDelimitedFiles.writedlm"
+},
+
+{
+    "location": "stdlib/distributed.html#",
+    "page": "Distributed Computing",
+    "title": "Distributed Computing",
+    "category": "page",
+    "text": ""
+},
+
+{
+    "location": "stdlib/distributed.html#Distributed.addprocs",
+    "page": "Distributed Computing",
+    "title": "Distributed.addprocs",
+    "category": "Function",
+    "text": "addprocs(manager::ClusterManager; kwargs...) -> List of process identifiers\n\nLaunches worker processes via the specified cluster manager.\n\nFor example, Beowulf clusters are supported via a custom cluster manager implemented in the package ClusterManagers.jl.\n\nThe number of seconds a newly launched worker waits for connection establishment from the master can be specified via variable JULIA_WORKER_TIMEOUT in the worker process's environment. Relevant only when using TCP/IP as transport.\n\n\n\naddprocs(machines; tunnel=false, sshflags=``, max_parallel=10, kwargs...) -> List of process identifiers\n\nAdd processes on remote machines via SSH. Requires julia to be installed in the same location on each node, or to be available via a shared file system.\n\nmachines is a vector of machine specifications. Workers are started for each specification.\n\nA machine specification is either a string machine_spec or a tuple - (machine_spec, count).\n\nmachine_spec is a string of the form [user@]host[:port] [bind_addr[:port]]. user defaults to current user, port to the standard ssh port. If [bind_addr[:port]] is specified, other workers will connect to this worker at the specified bind_addr and port.\n\ncount is the number of workers to be launched on the specified host. If specified as :auto it will launch as many workers as the number of cores on the specific host.\n\nKeyword arguments:\n\ntunnel: if true then SSH tunneling will be used to connect to the worker from the master process. Default is false.\nsshflags: specifies additional ssh options, e.g. sshflags=`-i /home/foo/bar.pem`\nmax_parallel: specifies the maximum number of workers connected to in parallel at a host. Defaults to 10.\ndir: specifies the working directory on the workers. Defaults to the host's current directory (as found by pwd())\nenable_threaded_blas: if true then  BLAS will run on multiple threads in added processes. Default is false.\nexename: name of the julia executable. Defaults to \"$(Sys.BINDIR)/julia\" or \"$(Sys.BINDIR)/julia-debug\" as the case may be.\nexeflags: additional flags passed to the worker processes.\ntopology: Specifies how the workers connect to each other. Sending a message between unconnected workers results in an error.\ntopology=:all_to_all: All processes are connected to each other. The default.\ntopology=:master_worker: Only the driver process, i.e. pid 1 connects to the workers. The workers do not connect to each other.\ntopology=:custom: The launch method of the cluster manager specifies the connection topology via fields ident and connect_idents in WorkerConfig. A worker with a cluster manager identity ident will connect to all workers specified in connect_idents.\nlazy: Applicable only with topology=:all_to_all. If true, worker-worker connections are setup lazily, i.e. they are setup at the first instance of a remote call between workers. Default is true.\n\nEnvironment variables :\n\nIf the master process fails to establish a connection with a newly launched worker within 60.0 seconds, the worker treats it as a fatal situation and terminates. This timeout can be controlled via environment variable JULIA_WORKER_TIMEOUT. The value of JULIA_WORKER_TIMEOUT on the master process specifies the number of seconds a newly launched worker waits for connection establishment.\n\n\n\naddprocs(; kwargs...) -> List of process identifiers\n\nEquivalent to addprocs(Sys.CPU_CORES; kwargs...)\n\nNote that workers do not run a .juliarc.jl startup script, nor do they synchronize their global state (such as global variables, new method definitions, and loaded modules) with any of the other running processes.\n\n\n\naddprocs(np::Integer; restrict=true, kwargs...) -> List of process identifiers\n\nLaunches workers using the in-built LocalManager which only launches workers on the local host. This can be used to take advantage of multiple cores. addprocs(4) will add 4 processes on the local machine. If restrict is true, binding is restricted to 127.0.0.1. Keyword args dir, exename, exeflags, topology, lazy and enable_threaded_blas have the same effect as documented for addprocs(machines).\n\n\n\n"
+},
+
+{
+    "location": "stdlib/distributed.html#Distributed.nprocs",
+    "page": "Distributed Computing",
+    "title": "Distributed.nprocs",
+    "category": "Function",
+    "text": "nprocs()\n\nGet the number of available processes.\n\n\n\n"
+},
+
+{
+    "location": "stdlib/distributed.html#Distributed.nworkers",
+    "page": "Distributed Computing",
+    "title": "Distributed.nworkers",
+    "category": "Function",
+    "text": "nworkers()\n\nGet the number of available worker processes. This is one less than nprocs(). Equal to nprocs() if nprocs() == 1.\n\n\n\n"
+},
+
+{
+    "location": "stdlib/distributed.html#Distributed.procs-Tuple{}",
+    "page": "Distributed Computing",
+    "title": "Distributed.procs",
+    "category": "Method",
+    "text": "procs()\n\nReturn a list of all process identifiers.\n\n\n\n"
+},
+
+{
+    "location": "stdlib/distributed.html#Distributed.procs-Tuple{Integer}",
+    "page": "Distributed Computing",
+    "title": "Distributed.procs",
+    "category": "Method",
+    "text": "procs(pid::Integer)\n\nReturn a list of all process identifiers on the same physical node. Specifically all workers bound to the same ip-address as pid are returned.\n\n\n\n"
+},
+
+{
+    "location": "stdlib/distributed.html#Distributed.workers",
+    "page": "Distributed Computing",
+    "title": "Distributed.workers",
+    "category": "Function",
+    "text": "workers()\n\nReturn a list of all worker process identifiers.\n\n\n\n"
+},
+
+{
+    "location": "stdlib/distributed.html#Distributed.rmprocs",
+    "page": "Distributed Computing",
+    "title": "Distributed.rmprocs",
+    "category": "Function",
+    "text": "rmprocs(pids...; waitfor=typemax(Int))\n\nRemove the specified workers. Note that only process 1 can add or remove workers.\n\nArgument waitfor specifies how long to wait for the workers to shut down:     - If unspecified, rmprocs will wait until all requested pids are removed.     - An ErrorException is raised if all workers cannot be terminated before       the requested waitfor seconds.     - With a waitfor value of 0, the call returns immediately with the workers       scheduled for removal in a different task. The scheduled Task object is       returned. The user should call wait on the task before invoking any other       parallel calls.\n\n\n\n"
+},
+
+{
+    "location": "stdlib/distributed.html#Distributed.interrupt",
+    "page": "Distributed Computing",
+    "title": "Distributed.interrupt",
+    "category": "Function",
+    "text": "interrupt(pids::Integer...)\n\nInterrupt the current executing task on the specified workers. This is equivalent to pressing Ctrl-C on the local machine. If no arguments are given, all workers are interrupted.\n\n\n\ninterrupt(pids::AbstractVector=workers())\n\nInterrupt the current executing task on the specified workers. This is equivalent to pressing Ctrl-C on the local machine. If no arguments are given, all workers are interrupted.\n\n\n\n"
+},
+
+{
+    "location": "stdlib/distributed.html#Distributed.myid",
+    "page": "Distributed Computing",
+    "title": "Distributed.myid",
+    "category": "Function",
+    "text": "myid()\n\nGet the id of the current process.\n\n\n\n"
+},
+
+{
+    "location": "stdlib/distributed.html#Distributed.pmap",
+    "page": "Distributed Computing",
+    "title": "Distributed.pmap",
+    "category": "Function",
+    "text": "pmap([::AbstractWorkerPool], f, c...; distributed=true, batch_size=1, on_error=nothing, retry_delays=[], retry_check=nothing) -> collection\n\nTransform collection c by applying f to each element using available workers and tasks.\n\nFor multiple collection arguments, apply f elementwise.\n\nNote that f must be made available to all worker processes; see Code Availability and Loading Packages for details.\n\nIf a worker pool is not specified, all available workers, i.e., the default worker pool is used.\n\nBy default, pmap distributes the computation over all specified workers. To use only the local process and distribute over tasks, specify distributed=false. This is equivalent to using asyncmap. For example, pmap(f, c; distributed=false) is equivalent to asyncmap(f,c; ntasks=()->nworkers())\n\npmap can also use a mix of processes and tasks via the batch_size argument. For batch sizes greater than 1, the collection is processed in multiple batches, each of length batch_size or less. A batch is sent as a single request to a free worker, where a local asyncmap processes elements from the batch using multiple concurrent tasks.\n\nAny error stops pmap from processing the remainder of the collection. To override this behavior you can specify an error handling function via argument on_error which takes in a single argument, i.e., the exception. The function can stop the processing by rethrowing the error, or, to continue, return any value which is then returned inline with the results to the caller.\n\nConsider the following two examples. The first one returns the exception object inline, the second a 0 in place of any exception:\n\njulia> pmap(x->iseven(x) ? error(\"foo\") : x, 1:4; on_error=identity)\n4-element Array{Any,1}:\n 1\n  ErrorException(\"foo\")\n 3\n  ErrorException(\"foo\")\n\njulia> pmap(x->iseven(x) ? error(\"foo\") : x, 1:4; on_error=ex->0)\n4-element Array{Int64,1}:\n 1\n 0\n 3\n 0\n\nErrors can also be handled by retrying failed computations. Keyword arguments retry_delays and retry_check are passed through to retry as keyword arguments delays and check respectively. If batching is specified, and an entire batch fails, all items in the batch are retried.\n\nNote that if both on_error and retry_delays are specified, the on_error hook is called before retrying. If on_error does not throw (or rethrow) an exception, the element will not be retried.\n\nExample: On errors, retry f on an element a maximum of 3 times without any delay between retries.\n\npmap(f, c; retry_delays = zeros(3))\n\nExample: Retry f only if the exception is not of type InexactError, with exponentially increasing delays up to 3 times. Return a NaN in place for all InexactError occurrences.\n\npmap(f, c; on_error = e->(isa(e, InexactError) ? NaN : rethrow(e)), retry_delays = ExponentialBackOff(n = 3))\n\n\n\n"
+},
+
+{
+    "location": "stdlib/distributed.html#Distributed.RemoteException",
+    "page": "Distributed Computing",
+    "title": "Distributed.RemoteException",
+    "category": "Type",
+    "text": "RemoteException(captured)\n\nExceptions on remote computations are captured and rethrown locally.  A RemoteException wraps the pid of the worker and a captured exception. A CapturedException captures the remote exception and a serializable form of the call stack when the exception was raised.\n\n\n\n"
+},
+
+{
+    "location": "stdlib/distributed.html#Distributed.Future",
+    "page": "Distributed Computing",
+    "title": "Distributed.Future",
+    "category": "Type",
+    "text": "Future(pid::Integer=myid())\n\nCreate a Future on process pid. The default pid is the current process.\n\n\n\n"
+},
+
+{
+    "location": "stdlib/distributed.html#Distributed.RemoteChannel",
+    "page": "Distributed Computing",
+    "title": "Distributed.RemoteChannel",
+    "category": "Type",
+    "text": "RemoteChannel(pid::Integer=myid())\n\nMake a reference to a Channel{Any}(1) on process pid. The default pid is the current process.\n\nRemoteChannel(f::Function, pid::Integer=myid())\n\nCreate references to remote channels of a specific size and type. f is a function that when executed on pid must return an implementation of an AbstractChannel.\n\nFor example, RemoteChannel(()->Channel{Int}(10), pid), will return a reference to a channel of type Int and size 10 on pid.\n\nThe default pid is the current process.\n\n\n\n"
+},
+
+{
+    "location": "stdlib/distributed.html#Base.wait",
+    "page": "Distributed Computing",
+    "title": "Base.wait",
+    "category": "Function",
+    "text": "wait([x])\n\nBlock the current task until some event occurs, depending on the type of the argument:\n\nChannel: Wait for a value to be appended to the channel.\nCondition: Wait for notify on a condition.\nProcess: Wait for a process or process chain to exit. The exitcode field of a process can be used to determine success or failure.\nTask: Wait for a Task to finish, returning its result value. If the task fails with an exception, the exception is propagated (re-thrown in the task that called wait).\nRawFD: Wait for changes on a file descriptor (see the FileWatching package).\n\nIf no argument is passed, the task blocks for an undefined period. A task can only be restarted by an explicit call to schedule or yieldto.\n\nOften wait is called within a while loop to ensure a waited-for condition is met before proceeding.\n\n\n\nwait(r::Future)\n\nWait for a value to become available for the specified future.\n\n\n\nwait(r::RemoteChannel, args...)\n\nWait for a value to become available on the specified remote channel.\n\n\n\n"
+},
+
+{
+    "location": "stdlib/distributed.html#Base.fetch-Tuple{Any}",
+    "page": "Distributed Computing",
+    "title": "Base.fetch",
+    "category": "Method",
+    "text": "fetch(x)\n\nWaits and fetches a value from x depending on the type of x:\n\nFuture: Wait for and get the value of a Future. The fetched value is cached locally. Further calls to fetch on the same reference return the cached value. If the remote value is an exception, throws a RemoteException which captures the remote exception and backtrace.\nRemoteChannel: Wait for and get the value of a remote reference. Exceptions raised are same as for a Future .\n\nDoes not remove the item fetched.\n\n\n\n"
+},
+
+{
+    "location": "stdlib/distributed.html#Distributed.remotecall-Tuple{Any,Integer,Vararg{Any,N} where N}",
+    "page": "Distributed Computing",
+    "title": "Distributed.remotecall",
+    "category": "Method",
+    "text": "remotecall(f, id::Integer, args...; kwargs...) -> Future\n\nCall a function f asynchronously on the given arguments on the specified process. Return a Future. Keyword arguments, if any, are passed through to f.\n\n\n\n"
+},
+
+{
+    "location": "stdlib/distributed.html#Distributed.remotecall_wait-Tuple{Any,Integer,Vararg{Any,N} where N}",
+    "page": "Distributed Computing",
+    "title": "Distributed.remotecall_wait",
+    "category": "Method",
+    "text": "remotecall_wait(f, id::Integer, args...; kwargs...)\n\nPerform a faster wait(remotecall(...)) in one message on the Worker specified by worker id id. Keyword arguments, if any, are passed through to f.\n\nSee also wait and remotecall.\n\n\n\n"
+},
+
+{
+    "location": "stdlib/distributed.html#Distributed.remotecall_fetch-Tuple{Any,Integer,Vararg{Any,N} where N}",
+    "page": "Distributed Computing",
+    "title": "Distributed.remotecall_fetch",
+    "category": "Method",
+    "text": "remotecall_fetch(f, id::Integer, args...; kwargs...)\n\nPerform fetch(remotecall(...)) in one message. Keyword arguments, if any, are passed through to f. Any remote exceptions are captured in a RemoteException and thrown.\n\nSee also fetch and remotecall.\n\n\n\n"
+},
+
+{
+    "location": "stdlib/distributed.html#Distributed.remote_do-Tuple{Any,Integer,Vararg{Any,N} where N}",
+    "page": "Distributed Computing",
+    "title": "Distributed.remote_do",
+    "category": "Method",
+    "text": "remote_do(f, id::Integer, args...; kwargs...) -> nothing\n\nExecutes f on worker id asynchronously. Unlike remotecall, it does not store the result of computation, nor is there a way to wait for its completion.\n\nA successful invocation indicates that the request has been accepted for execution on the remote node.\n\nWhile consecutive remotecalls to the same worker are serialized in the order they are invoked, the order of executions on the remote worker is undetermined. For example, remote_do(f1, 2); remotecall(f2, 2); remote_do(f3, 2) will serialize the call to f1, followed by f2 and f3 in that order. However, it is not guaranteed that f1 is executed before f3 on worker 2.\n\nAny exceptions thrown by f are printed to STDERR on the remote worker.\n\nKeyword arguments, if any, are passed through to f.\n\n\n\n"
+},
+
+{
+    "location": "stdlib/distributed.html#Base.put!-Tuple{RemoteChannel,Vararg{Any,N} where N}",
+    "page": "Distributed Computing",
+    "title": "Base.put!",
+    "category": "Method",
+    "text": "put!(rr::RemoteChannel, args...)\n\nStore a set of values to the RemoteChannel. If the channel is full, blocks until space is available. Return the first argument.\n\n\n\n"
+},
+
+{
+    "location": "stdlib/distributed.html#Base.put!-Tuple{Future,Any}",
+    "page": "Distributed Computing",
+    "title": "Base.put!",
+    "category": "Method",
+    "text": "put!(rr::Future, v)\n\nStore a value to a Future rr. Futures are write-once remote references. A put! on an already set Future throws an Exception. All asynchronous remote calls return Futures and set the value to the return value of the call upon completion.\n\n\n\n"
+},
+
+{
+    "location": "stdlib/distributed.html#Base.take!-Tuple{RemoteChannel,Vararg{Any,N} where N}",
+    "page": "Distributed Computing",
+    "title": "Base.take!",
+    "category": "Method",
+    "text": "take!(rr::RemoteChannel, args...)\n\nFetch value(s) from a RemoteChannel rr, removing the value(s) in the process.\n\n\n\n"
+},
+
+{
+    "location": "stdlib/distributed.html#Base.isready-Tuple{RemoteChannel,Vararg{Any,N} where N}",
+    "page": "Distributed Computing",
+    "title": "Base.isready",
+    "category": "Method",
+    "text": "isready(rr::RemoteChannel, args...)\n\nDetermine whether a RemoteChannel has a value stored to it. Note that this function can cause race conditions, since by the time you receive its result it may no longer be true. However, it can be safely used on a Future since they are assigned only once.\n\n\n\n"
+},
+
+{
+    "location": "stdlib/distributed.html#Base.isready-Tuple{Future}",
+    "page": "Distributed Computing",
+    "title": "Base.isready",
+    "category": "Method",
+    "text": "isready(rr::Future)\n\nDetermine whether a Future has a value stored to it.\n\nIf the argument Future is owned by a different node, this call will block to wait for the answer. It is recommended to wait for rr in a separate task instead or to use a local Channel as a proxy:\n\nc = Channel(1)\n@async put!(c, remotecall_fetch(long_computation, p))\nisready(c)  # will not block\n\n\n\n"
+},
+
+{
+    "location": "stdlib/distributed.html#Distributed.WorkerPool",
+    "page": "Distributed Computing",
+    "title": "Distributed.WorkerPool",
+    "category": "Type",
+    "text": "WorkerPool(workers::Vector{Int})\n\nCreate a WorkerPool from a vector of worker ids.\n\n\n\n"
+},
+
+{
+    "location": "stdlib/distributed.html#Distributed.CachingPool",
+    "page": "Distributed Computing",
+    "title": "Distributed.CachingPool",
+    "category": "Type",
+    "text": "CachingPool(workers::Vector{Int})\n\nAn implementation of an AbstractWorkerPool. remote, remotecall_fetch, pmap (and other remote calls which execute functions remotely) benefit from caching the serialized/deserialized functions on the worker nodes, especially closures (which may capture large amounts of data).\n\nThe remote cache is maintained for the lifetime of the returned CachingPool object. To clear the cache earlier, use clear!(pool).\n\nFor global variables, only the bindings are captured in a closure, not the data. let blocks can be used to capture global data.\n\nExamples\n\nconst foo = rand(10^8);\nwp = CachingPool(workers())\nlet foo = foo\n    pmap(wp, i -> sum(foo) + i, 1:100);\nend\n\nThe above would transfer foo only once to each worker.\n\n\n\n"
+},
+
+{
+    "location": "stdlib/distributed.html#Distributed.default_worker_pool",
+    "page": "Distributed Computing",
+    "title": "Distributed.default_worker_pool",
+    "category": "Function",
+    "text": "default_worker_pool()\n\nWorkerPool containing idle workers - used by remote(f) and pmap (by default).\n\n\n\n"
+},
+
+{
+    "location": "stdlib/distributed.html#Distributed.clear!-Tuple{CachingPool}",
+    "page": "Distributed Computing",
+    "title": "Distributed.clear!",
+    "category": "Method",
+    "text": "clear!(pool::CachingPool) -> pool\n\nRemoves all cached functions from all participating workers.\n\n\n\n"
+},
+
+{
+    "location": "stdlib/distributed.html#Distributed.remote",
+    "page": "Distributed Computing",
+    "title": "Distributed.remote",
+    "category": "Function",
+    "text": "remote([::AbstractWorkerPool], f) -> Function\n\nReturn an anonymous function that executes function f on an available worker using remotecall_fetch.\n\n\n\n"
+},
+
+{
+    "location": "stdlib/distributed.html#Distributed.remotecall-Tuple{Any,AbstractWorkerPool,Vararg{Any,N} where N}",
+    "page": "Distributed Computing",
+    "title": "Distributed.remotecall",
+    "category": "Method",
+    "text": "remotecall(f, pool::AbstractWorkerPool, args...; kwargs...) -> Future\n\nWorkerPool variant of remotecall(f, pid, ....). Waits for and takes a free worker from pool and performs a remotecall on it.\n\n\n\n"
+},
+
+{
+    "location": "stdlib/distributed.html#Distributed.remotecall_wait-Tuple{Any,AbstractWorkerPool,Vararg{Any,N} where N}",
+    "page": "Distributed Computing",
+    "title": "Distributed.remotecall_wait",
+    "category": "Method",
+    "text": "remotecall_wait(f, pool::AbstractWorkerPool, args...; kwargs...) -> Future\n\nWorkerPool variant of remotecall_wait(f, pid, ....). Waits for and takes a free worker from pool and performs a remotecall_wait on it.\n\n\n\n"
+},
+
+{
+    "location": "stdlib/distributed.html#Distributed.remotecall_fetch-Tuple{Any,AbstractWorkerPool,Vararg{Any,N} where N}",
+    "page": "Distributed Computing",
+    "title": "Distributed.remotecall_fetch",
+    "category": "Method",
+    "text": "remotecall_fetch(f, pool::AbstractWorkerPool, args...; kwargs...) -> result\n\nWorkerPool variant of remotecall_fetch(f, pid, ....). Waits for and takes a free worker from pool and performs a remotecall_fetch on it.\n\n\n\n"
+},
+
+{
+    "location": "stdlib/distributed.html#Distributed.remote_do-Tuple{Any,AbstractWorkerPool,Vararg{Any,N} where N}",
+    "page": "Distributed Computing",
+    "title": "Distributed.remote_do",
+    "category": "Method",
+    "text": "remote_do(f, pool::AbstractWorkerPool, args...; kwargs...) -> nothing\n\nWorkerPool variant of remote_do(f, pid, ....). Waits for and takes a free worker from pool and performs a remote_do on it.\n\n\n\n"
+},
+
+{
+    "location": "stdlib/distributed.html#Base.timedwait",
+    "page": "Distributed Computing",
+    "title": "Base.timedwait",
+    "category": "Function",
+    "text": "timedwait(testcb::Function, secs::Float64; pollint::Float64=0.1)\n\nWaits until testcb returns true or for secs seconds, whichever is earlier. testcb is polled every pollint seconds.\n\n\n\n"
+},
+
+{
+    "location": "stdlib/distributed.html#Distributed.@spawn",
+    "page": "Distributed Computing",
+    "title": "Distributed.@spawn",
+    "category": "Macro",
+    "text": "@spawn\n\nCreate a closure around an expression and run it on an automatically-chosen process, returning a Future to the result.\n\nExamples\n\njulia> addprocs(3);\n\njulia> f = @spawn myid()\nFuture(2, 1, 5, nothing)\n\njulia> fetch(f)\n2\n\njulia> f = @spawn myid()\nFuture(3, 1, 7, nothing)\n\njulia> fetch(f)\n3\n\n\n\n"
+},
+
+{
+    "location": "stdlib/distributed.html#Distributed.@spawnat",
+    "page": "Distributed Computing",
+    "title": "Distributed.@spawnat",
+    "category": "Macro",
+    "text": "@spawnat\n\nCreate a closure around an expression and run the closure asynchronously on process p. Return a Future to the result. Accepts two arguments, p and an expression.\n\nExamples\n\njulia> addprocs(1);\n\njulia> f = @spawnat 2 myid()\nFuture(2, 1, 3, nothing)\n\njulia> fetch(f)\n2\n\n\n\n"
+},
+
+{
+    "location": "stdlib/distributed.html#Distributed.@fetch",
+    "page": "Distributed Computing",
+    "title": "Distributed.@fetch",
+    "category": "Macro",
+    "text": "@fetch\n\nEquivalent to fetch(@spawn expr). See fetch and @spawn.\n\nExamples\n\njulia> addprocs(3);\n\njulia> @fetch myid()\n2\n\njulia> @fetch myid()\n3\n\njulia> @fetch myid()\n4\n\njulia> @fetch myid()\n2\n\n\n\n"
+},
+
+{
+    "location": "stdlib/distributed.html#Distributed.@fetchfrom",
+    "page": "Distributed Computing",
+    "title": "Distributed.@fetchfrom",
+    "category": "Macro",
+    "text": "@fetchfrom\n\nEquivalent to fetch(@spawnat p expr). See fetch and @spawnat.\n\nExamples\n\njulia> addprocs(3);\n\njulia> @fetchfrom 2 myid()\n2\n\njulia> @fetchfrom 4 myid()\n4\n\n\n\n"
+},
+
+{
+    "location": "stdlib/distributed.html#Base.@async",
+    "page": "Distributed Computing",
+    "title": "Base.@async",
+    "category": "Macro",
+    "text": "@async\n\nLike @schedule, @async wraps an expression in a Task and adds it to the local machine's scheduler queue. Additionally it adds the task to the set of items that the nearest enclosing @sync waits for.\n\n\n\n"
+},
+
+{
+    "location": "stdlib/distributed.html#Base.@sync",
+    "page": "Distributed Computing",
+    "title": "Base.@sync",
+    "category": "Macro",
+    "text": "@sync\n\nWait until all dynamically-enclosed uses of @async, @spawn, @spawnat and @parallel are complete. All exceptions thrown by enclosed async operations are collected and thrown as a CompositeException.\n\n\n\n"
+},
+
+{
+    "location": "stdlib/distributed.html#Distributed.@parallel",
+    "page": "Distributed Computing",
+    "title": "Distributed.@parallel",
+    "category": "Macro",
+    "text": "@parallel\n\nA parallel for loop of the form :\n\n@parallel [reducer] for var = range\n    body\nend\n\nThe specified range is partitioned and locally executed across all workers. In case an optional reducer function is specified, @parallel performs local reductions on each worker with a final reduction on the calling process.\n\nNote that without a reducer function, @parallel executes asynchronously, i.e. it spawns independent tasks on all available workers and returns immediately without waiting for completion. To wait for completion, prefix the call with @sync, like :\n\n@sync @parallel for var = range\n    body\nend\n\n\n\n"
+},
+
+{
+    "location": "stdlib/distributed.html#Distributed.@everywhere",
+    "page": "Distributed Computing",
+    "title": "Distributed.@everywhere",
+    "category": "Macro",
+    "text": "@everywhere [procs()] expr\n\nExecute an expression under Main on all procs. Errors on any of the processes are collected into a CompositeException and thrown. For example:\n\n@everywhere bar = 1\n\nwill define Main.bar on all processes.\n\nUnlike @spawn and @spawnat, @everywhere does not capture any local variables. Instead, local variables can be broadcast using interpolation:\n\nfoo = 1\n@everywhere bar = $foo\n\nThe optional argument procs allows specifying a subset of all processes to have execute the expression.\n\nEquivalent to calling remotecall_eval(Main, procs, expr).\n\n\n\n"
+},
+
+{
+    "location": "stdlib/distributed.html#Distributed.clear!-Tuple{Any,Any}",
+    "page": "Distributed Computing",
+    "title": "Distributed.clear!",
+    "category": "Method",
+    "text": "clear!(syms, pids=workers(); mod=Main)\n\nClears global bindings in modules by initializing them to nothing. syms should be of type Symbol or a collection of Symbols . pids and mod identify the processes and the module in which global variables are to be reinitialized. Only those names found to be defined under mod are cleared.\n\nAn exception is raised if a global constant is requested to be cleared.\n\n\n\n"
+},
+
+{
+    "location": "stdlib/distributed.html#Distributed.remoteref_id",
+    "page": "Distributed Computing",
+    "title": "Distributed.remoteref_id",
+    "category": "Function",
+    "text": "remoteref_id(r::AbstractRemoteRef) -> RRID\n\nFutures and RemoteChannels are identified by fields:\n\nwhere - refers to the node where the underlying object/storage referred to by the reference actually exists.\nwhence - refers to the node the remote reference was created from. Note that this is different from the node where the underlying object referred to actually exists. For example calling RemoteChannel(2) from the master process would result in a where value of 2 and a whence value of 1.\nid is unique across all references created from the worker specified by whence.\n\nTaken together,  whence and id uniquely identify a reference across all workers.\n\nremoteref_id is a low-level API which returns a RRID object that wraps whence and id values of a remote reference.\n\n\n\n"
+},
+
+{
+    "location": "stdlib/distributed.html#Distributed.channel_from_id",
+    "page": "Distributed Computing",
+    "title": "Distributed.channel_from_id",
+    "category": "Function",
+    "text": "channel_from_id(id) -> c\n\nA low-level API which returns the backing AbstractChannel for an id returned by remoteref_id. The call is valid only on the node where the backing channel exists.\n\n\n\n"
+},
+
+{
+    "location": "stdlib/distributed.html#Distributed.worker_id_from_socket",
+    "page": "Distributed Computing",
+    "title": "Distributed.worker_id_from_socket",
+    "category": "Function",
+    "text": "worker_id_from_socket(s) -> pid\n\nA low-level API which, given a IO connection or a Worker, returns the pid of the worker it is connected to. This is useful when writing custom serialize methods for a type, which optimizes the data written out depending on the receiving process id.\n\n\n\n"
+},
+
+{
+    "location": "stdlib/distributed.html#Distributed.cluster_cookie-Tuple{}",
+    "page": "Distributed Computing",
+    "title": "Distributed.cluster_cookie",
+    "category": "Method",
+    "text": "cluster_cookie() -> cookie\n\nReturn the cluster cookie.\n\n\n\n"
+},
+
+{
+    "location": "stdlib/distributed.html#Distributed.cluster_cookie-Tuple{Any}",
+    "page": "Distributed Computing",
+    "title": "Distributed.cluster_cookie",
+    "category": "Method",
+    "text": "cluster_cookie(cookie) -> cookie\n\nSet the passed cookie as the cluster cookie, then returns it.\n\n\n\n"
+},
+
+{
+    "location": "stdlib/distributed.html#Distributed-Computing-1",
+    "page": "Distributed Computing",
+    "title": "Distributed Computing",
+    "category": "section",
+    "text": "Distributed.addprocs\nDistributed.nprocs\nDistributed.nworkers\nDistributed.procs()\nDistributed.procs(::Integer)\nDistributed.workers\nDistributed.rmprocs\nDistributed.interrupt\nDistributed.myid\nDistributed.pmap\nDistributed.RemoteException\nDistributed.Future\nDistributed.RemoteChannel\nDistributed.wait\nDistributed.fetch(::Any)\nDistributed.remotecall(::Any, ::Integer, ::Any...)\nDistributed.remotecall_wait(::Any, ::Integer, ::Any...)\nDistributed.remotecall_fetch(::Any, ::Integer, ::Any...)\nDistributed.remote_do(::Any, ::Integer, ::Any...)\nDistributed.put!(::RemoteChannel, ::Any...)\nDistributed.put!(::Future, ::Any)\nDistributed.take!(::RemoteChannel, ::Any...)\nDistributed.isready(::RemoteChannel, ::Any...)\nDistributed.isready(::Future)\nDistributed.WorkerPool\nDistributed.CachingPool\nDistributed.default_worker_pool\nDistributed.clear!(::CachingPool)\nDistributed.remote\nDistributed.remotecall(::Any, ::AbstractWorkerPool, ::Any...)\nDistributed.remotecall_wait(::Any, ::AbstractWorkerPool, ::Any...)\nDistributed.remotecall_fetch(::Any, ::AbstractWorkerPool, ::Any...)\nDistributed.remote_do(::Any, ::AbstractWorkerPool, ::Any...)\nDistributed.timedwait\nDistributed.@spawn\nDistributed.@spawnat\nDistributed.@fetch\nDistributed.@fetchfrom\nDistributed.@async\nDistributed.@sync\nDistributed.@parallel\nDistributed.@everywhere\nDistributed.clear!(::Any, ::Any; ::Any)\nDistributed.remoteref_id\nDistributed.channel_from_id\nDistributed.worker_id_from_socket\nDistributed.cluster_cookie()\nDistributed.cluster_cookie(::Any)"
+},
+
+{
+    "location": "stdlib/distributed.html#Distributed.launch",
+    "page": "Distributed Computing",
+    "title": "Distributed.launch",
+    "category": "Function",
+    "text": "launch(manager::ClusterManager, params::Dict, launched::Array, launch_ntfy::Condition)\n\nImplemented by cluster managers. For every Julia worker launched by this function, it should append a WorkerConfig entry to launched and notify launch_ntfy. The function MUST exit once all workers, requested by manager have been launched. params is a dictionary of all keyword arguments addprocs was called with.\n\n\n\n"
+},
+
+{
+    "location": "stdlib/distributed.html#Distributed.manage",
+    "page": "Distributed Computing",
+    "title": "Distributed.manage",
+    "category": "Function",
+    "text": "manage(manager::ClusterManager, id::Integer, config::WorkerConfig. op::Symbol)\n\nImplemented by cluster managers. It is called on the master process, during a worker's lifetime, with appropriate op values:\n\nwith :register/:deregister when a worker is added / removed from the Julia worker pool.\nwith :interrupt when interrupt(workers) is called. The ClusterManager should signal the appropriate worker with an interrupt signal.\nwith :finalize for cleanup purposes.\n\n\n\n"
+},
+
+{
+    "location": "stdlib/distributed.html#Base.kill-Tuple{ClusterManager,Int64,WorkerConfig}",
+    "page": "Distributed Computing",
+    "title": "Base.kill",
+    "category": "Method",
+    "text": "kill(manager::ClusterManager, pid::Int, config::WorkerConfig)\n\nImplemented by cluster managers. It is called on the master process, by rmprocs. It should cause the remote worker specified by pid to exit. kill(manager::ClusterManager.....) executes a remote exit() on pid.\n\n\n\n"
+},
+
+{
+    "location": "stdlib/distributed.html#Base.connect-Tuple{ClusterManager,Int64,WorkerConfig}",
+    "page": "Distributed Computing",
+    "title": "Base.connect",
+    "category": "Method",
+    "text": "connect(manager::ClusterManager, pid::Int, config::WorkerConfig) -> (instrm::IO, outstrm::IO)\n\nImplemented by cluster managers using custom transports. It should establish a logical connection to worker with id pid, specified by config and return a pair of IO objects. Messages from pid to current process will be read off instrm, while messages to be sent to pid will be written to outstrm. The custom transport implementation must ensure that messages are delivered and received completely and in order. connect(manager::ClusterManager.....) sets up TCP/IP socket connections in-between workers.\n\n\n\n"
+},
+
+{
+    "location": "stdlib/distributed.html#Distributed.init_worker",
+    "page": "Distributed Computing",
+    "title": "Distributed.init_worker",
+    "category": "Function",
+    "text": "init_worker(cookie::AbstractString, manager::ClusterManager=DefaultClusterManager())\n\nCalled by cluster managers implementing custom transports. It initializes a newly launched process as a worker. Command line argument --worker[=<cookie>] has the effect of initializing a process as a worker using TCP/IP sockets for transport. cookie is a cluster_cookie.\n\n\n\n"
+},
+
+{
+    "location": "stdlib/distributed.html#Distributed.start_worker",
+    "page": "Distributed Computing",
+    "title": "Distributed.start_worker",
+    "category": "Function",
+    "text": "start_worker([out::IO=STDOUT], cookie::AbstractString=readline(STDIN))\n\nstart_worker is an internal function which is the default entry point for worker processes connecting via TCP/IP. It sets up the process as a Julia cluster worker.\n\nhost:port information is written to stream out (defaults to STDOUT).\n\nThe function closes STDIN (after reading the cookie if required), redirects STDERR to STDOUT, listens on a free port (or if specified, the port in the --bind-to command line option) and schedules tasks to process incoming TCP connections and requests.\n\nIt does not return.\n\n\n\n"
+},
+
+{
+    "location": "stdlib/distributed.html#Distributed.process_messages",
+    "page": "Distributed Computing",
+    "title": "Distributed.process_messages",
+    "category": "Function",
+    "text": "process_messages(r_stream::IO, w_stream::IO, incoming::Bool=true)\n\nCalled by cluster managers using custom transports. It should be called when the custom transport implementation receives the first message from a remote worker. The custom transport must manage a logical connection to the remote worker and provide two IO objects, one for incoming messages and the other for messages addressed to the remote worker. If incoming is true, the remote peer initiated the connection. Whichever of the pair initiates the connection sends the cluster cookie and its Julia version number to perform the authentication handshake.\n\nSee also cluster_cookie.\n\n\n\n"
+},
+
+{
+    "location": "stdlib/distributed.html#Cluster-Manager-Interface-1",
+    "page": "Distributed Computing",
+    "title": "Cluster Manager Interface",
+    "category": "section",
+    "text": "This interface provides a mechanism to launch and manage Julia workers on different cluster environments. There are two types of managers present in Base: LocalManager, for launching additional workers on the same host, and SSHManager, for launching on remote hosts via ssh. TCP/IP sockets are used to connect and transport messages between processes. It is possible for Cluster Managers to provide a different transport.Distributed.launch\nDistributed.manage\nDistributed.kill(::ClusterManager, ::Int, ::WorkerConfig)\nDistributed.connect(::ClusterManager, ::Int, ::WorkerConfig)\nDistributed.init_worker\nDistributed.start_worker\nDistributed.process_messages"
+},
+
+{
+    "location": "stdlib/filewatching.html#",
+    "page": "File Events",
+    "title": "File Events",
+    "category": "page",
+    "text": ""
+},
+
+{
+    "location": "stdlib/filewatching.html#FileWatching.poll_fd",
+    "page": "File Events",
+    "title": "FileWatching.poll_fd",
+    "category": "Function",
+    "text": "poll_fd(fd, timeout_s::Real=-1; readable=false, writable=false)\n\nMonitor a file descriptor fd for changes in the read or write availability, and with a timeout given by timeout_s seconds.\n\nThe keyword arguments determine which of read and/or write status should be monitored; at least one of them must be set to true.\n\nThe returned value is an object with boolean fields readable, writable, and timedout, giving the result of the polling.\n\n\n\n"
+},
+
+{
+    "location": "stdlib/filewatching.html#FileWatching.poll_file",
+    "page": "File Events",
+    "title": "FileWatching.poll_file",
+    "category": "Function",
+    "text": "poll_file(path::AbstractString, interval_s::Real=5.007, timeout_s::Real=-1) -> (previous::StatStruct, current)\n\nMonitor a file for changes by polling every interval_s seconds until a change occurs or timeout_s seconds have elapsed. The interval_s should be a long period; the default is 5.007 seconds.\n\nReturns a pair of status objects (previous, current) when a change is detected. The previous status is always a StatStruct, but it may have all of the fields zeroed (indicating the file didn't previously exist, or wasn't previously accessible).\n\nThe current status object may be a StatStruct, an EOFError (indicating the timeout elapsed), or some other Exception subtype (if the stat operation failed - for example, if the path does not exist).\n\nTo determine when a file was modified, compare current isa StatStruct && mtime(prev) != mtime(current) to detect notification of changes. However, using watch_file for this operation is preferred, since it is more reliable and efficient, although in some situations it may not be available.\n\n\n\n"
+},
+
+{
+    "location": "stdlib/filewatching.html#FileWatching.watch_file",
+    "page": "File Events",
+    "title": "FileWatching.watch_file",
+    "category": "Function",
+    "text": "watch_file(path::AbstractString, timeout_s::Real=-1)\n\nWatch file or directory path for changes until a change occurs or timeout_s seconds have elapsed.\n\nThe returned value is an object with boolean fields changed, renamed, and timedout, giving the result of watching the file.\n\nThis behavior of this function varies slightly across platforms. See https://nodejs.org/api/fs.html#fs_caveats for more detailed information.\n\n\n\n"
+},
+
+{
+    "location": "stdlib/filewatching.html#lib-filewatching-1",
+    "page": "File Events",
+    "title": "File Events",
+    "category": "section",
+    "text": "FileWatching.poll_fd\nFileWatching.poll_file\nFileWatching.watch_file"
+},
+
+{
+    "location": "stdlib/iterativeeigensolvers.html#",
+    "page": "Iterative Eigensolvers",
+    "title": "Iterative Eigensolvers",
+    "category": "page",
+    "text": ""
+},
+
+{
+    "location": "stdlib/iterativeeigensolvers.html#IterativeEigensolvers.eigs-Tuple{Any}",
+    "page": "Iterative Eigensolvers",
+    "title": "IterativeEigensolvers.eigs",
+    "category": "Method",
+    "text": "eigs(A; nev=6, ncv=max(20,2*nev+1), which=:LM, tol=0.0, maxiter=300, sigma=nothing, ritzvec=true, v0=zeros((0,))) -> (d,[v,],nconv,niter,nmult,resid)\n\nComputes eigenvalues d of A using implicitly restarted Lanczos or Arnoldi iterations for real symmetric or general nonsymmetric matrices respectively. See the manual for more information.\n\neigs returns the nev requested eigenvalues in d, the corresponding Ritz vectors v (only if ritzvec=true), the number of converged eigenvalues nconv, the number of iterations niter and the number of matrix vector multiplications nmult, as well as the final residual vector resid.\n\nExamples\n\njulia> using IterativeEigensolvers\n\njulia> A = Diagonal(1:4);\n\njulia> λ, ϕ = eigs(A, nev = 2);\n\njulia> λ\n2-element Array{Float64,1}:\n 4.0\n 3.0\n\n\n\n"
+},
+
+{
+    "location": "stdlib/iterativeeigensolvers.html#IterativeEigensolvers.eigs-Tuple{Any,Any}",
+    "page": "Iterative Eigensolvers",
+    "title": "IterativeEigensolvers.eigs",
+    "category": "Method",
+    "text": "eigs(A, B; nev=6, ncv=max(20,2*nev+1), which=:LM, tol=0.0, maxiter=300, sigma=nothing, ritzvec=true, v0=zeros((0,))) -> (d,[v,],nconv,niter,nmult,resid)\n\nComputes generalized eigenvalues d of A and B using implicitly restarted Lanczos or Arnoldi iterations for real symmetric or general nonsymmetric matrices respectively. See the manual for more information.\n\n\n\n"
+},
+
+{
+    "location": "stdlib/iterativeeigensolvers.html#IterativeEigensolvers.svds",
+    "page": "Iterative Eigensolvers",
+    "title": "IterativeEigensolvers.svds",
+    "category": "Function",
+    "text": "svds(A; nsv=6, ritzvec=true, tol=0.0, maxiter=1000, ncv=2*nsv, v0=zeros((0,))) -> (SVD([left_sv,] s, [right_sv,]), nconv, niter, nmult, resid)\n\nComputes the largest singular values s of A using implicitly restarted Lanczos iterations derived from eigs.\n\nInputs\n\nA: Linear operator whose singular values are desired. A may be represented as a subtype of AbstractArray, e.g., a sparse matrix, or any other type supporting the four methods size(A), eltype(A), A * vector, and A' * vector.\nnsv: Number of singular values. Default: 6.\nritzvec: If true, return the left and right singular vectors left_sv and right_sv.  If false, omit the singular vectors. Default: true.\ntol: tolerance, see eigs.\nmaxiter: Maximum number of iterations, see eigs. Default: 1000.\nncv: Maximum size of the Krylov subspace, see eigs (there called nev). Default: 2*nsv.\nv0: Initial guess for the first Krylov vector. It may have length min(size(A)...), or 0.\n\nOutputs\n\nsvd: An SVD object containing the left singular vectors, the requested values, and the right singular vectors. If ritzvec = false, the left and right singular vectors will be empty.\nnconv: Number of converged singular values.\nniter: Number of iterations.\nnmult: Number of matrix–vector products used.\nresid: Final residual vector.\n\nExamples\n\njulia> A = Diagonal(1:4);\n\njulia> s = svds(A, nsv = 2)[1];\n\njulia> s.S\n2-element Array{Float64,1}:\n 4.0\n 2.9999999999999996\n\nnote: Implementation\nsvds(A) is formally equivalent to calling eigs to perform implicitly restarted Lanczos tridiagonalization on the Hermitian matrix A^prime A or AA^prime such that the size is smallest.\n\n\n\n"
+},
+
+{
+    "location": "stdlib/iterativeeigensolvers.html#lib-itereigen-1",
+    "page": "Iterative Eigensolvers",
+    "title": "Iterative Eigensolvers",
+    "category": "section",
+    "text": "Julia provides bindings to ARPACK, which can be used to perform iterative solutions for eigensystems (using eigs) or singular value decompositions (using svds).eigs calculates the eigenvalues and, optionally, eigenvectors of its input(s) using implicitly restarted Lanczos or Arnoldi iterations for real symmetric or general nonsymmetric matrices respectively.For the single matrix version,eigs(A; nev=6, ncv=max(20,2*nev+1), which=:LM, tol=0.0, maxiter=300, sigma=nothing, ritzvec=true, v0=zeros((0,))) -> (d,[v,],nconv,niter,nmult,resid)the following keyword arguments are supported:nev: Number of eigenvalues\nncv: Number of Krylov vectors used in the computation; should satisfy nev+1 <= ncv <= n for real symmetric problems and nev+2 <= ncv <= n for other problems, where n is the size of the input matrix A. The default is ncv = max(20,2*nev+1). Note that these restrictions limit the input matrix A to be of dimension at least 2.\nwhich: type of eigenvalues to compute. See the note below.which type of eigenvalues\n:LM eigenvalues of largest magnitude (default)\n:SM eigenvalues of smallest magnitude\n:LR eigenvalues of largest real part\n:SR eigenvalues of smallest real part\n:LI eigenvalues of largest imaginary part (nonsymmetric or complex A only)\n:SI eigenvalues of smallest imaginary part (nonsymmetric or complex A only)\n:BE compute half of the eigenvalues from each end of the spectrum, biased in favor of the high end. (real symmetric A only)tol: parameter defining the relative tolerance for convergence of Ritz values (eigenvalue estimates).    A Ritz value  is considered converged when its associated residual    is less than or equal to the product of tol and max(^23 ),    where ɛ = eps(real(eltype(A)))/2 is LAPACK's machine epsilon.    The residual associated with  and its corresponding Ritz vector v    is defined as the norm Av - v.    The specified value of tol should be positive; otherwise, it is ignored    and  is used instead.    Default: .\nmaxiter: Maximum number of iterations (default = 300)\nsigma: Specifies the level shift used in inverse iteration. If nothing (default), defaults to ordinary (forward) iterations. Otherwise, find eigenvalues close to sigma using shift and invert iterations.\nritzvec: Returns the Ritz vectors v (eigenvectors) if true\nv0: starting vector from which to start the iterationsWe can see the various keywords in action in the following examples:julia> using IterativeEigensolvers\n\njulia> A = Diagonal(1:4);\n\njulia> λ, ϕ = eigs(A, nev = 2, which=:SM);\n\njulia> λ\n2-element Array{Float64,1}:\n 1.0000000000000002\n 2.0\n\njulia> B = Diagonal([1., 2., -3im, 4im])\n4×4 Diagonal{Complex{Float64},Array{Complex{Float64},1}}:\n 1.0+0.0im      ⋅          ⋅          ⋅\n     ⋅      2.0+0.0im      ⋅          ⋅\n     ⋅          ⋅      0.0-3.0im      ⋅\n     ⋅          ⋅          ⋅      0.0+4.0im\n\njulia> λ, ϕ = eigs(B, nev=1, which=:LI);\n\njulia> λ\n1-element Array{Complex{Float64},1}:\n -4.440892098500626e-16 + 3.999999999999998im\n\njulia> λ, ϕ = eigs(B, nev=1, which=:SI);\n\njulia> λ\n1-element Array{Complex{Float64},1}:\n 1.3877787807814457e-16 - 2.999999999999999im\n\njulia> λ, ϕ = eigs(B, nev=1, which=:LR);\n\njulia> λ\n1-element Array{Complex{Float64},1}:\n 2.0 + 4.242754940683747e-17im\n\njulia> λ, ϕ = eigs(B, nev=1, which=:SR);\n\njulia> λ\n1-element Array{Complex{Float64},1}:\n 4.440892098500626e-16 + 4.0000000000000036im\n\njulia> λ, ϕ = eigs(B, nev=1, sigma=1.5);\n\njulia> λ\n1-element Array{Complex{Float64},1}:\n 1.9999999999999996 + 2.4290457684137336e-17imnote: Note\nThe sigma and which keywords interact: the description of eigenvalues searched for by which do not necessarily refer to the eigenvalues of A, but rather the linear operator constructed by the specification of the iteration mode implied by sigma.sigma iteration mode which refers to eigenvalues of\nnothing ordinary (forward) A\nreal or complex inverse with level shift sigma (A - sigma I )^-1note: Note\nAlthough tol has a default value, the best choice depends strongly on the matrix A. We recommend that users _always_ specify a value for tol which suits their specific needs.For details of how the errors in the computed eigenvalues are estimated, see:B. N. Parlett, \"The Symmetric Eigenvalue Problem\", SIAM: Philadelphia, 2/e (1998), Ch. 13.2, \"Accessing Accuracy in Lanczos Problems\", pp. 290-292 ff.\nR. B. Lehoucq and D. C. Sorensen, \"Deflation Techniques for an Implicitly Restarted Arnoldi Iteration\", SIAM Journal on Matrix Analysis and Applications (1996), 17(4), 789–821.  doi:10.1137/S0895479895281484For the two-input generalized eigensolution version,eigs(A, B; nev=6, ncv=max(20,2*nev+1), which=:LM, tol=0.0, maxiter=300, sigma=nothing, ritzvec=true, v0=zeros((0,))) -> (d,[v,],nconv,niter,nmult,resid)the following keyword arguments are supported:nev: Number of eigenvalues\nncv: Number of Krylov vectors used in the computation; should satisfy nev+1 <= ncv <= n for real symmetric problems and nev+2 <= ncv <= n for other problems, where n is the size of the input matrices A and B. The default is ncv = max(20,2*nev+1). Note that these restrictions limit the input matrix A to be of dimension at least 2.\nwhich: type of eigenvalues to compute. See the note below.which type of eigenvalues\n:LM eigenvalues of largest magnitude (default)\n:SM eigenvalues of smallest magnitude\n:LR eigenvalues of largest real part\n:SR eigenvalues of smallest real part\n:LI eigenvalues of largest imaginary part (nonsymmetric or complex A only)\n:SI eigenvalues of smallest imaginary part (nonsymmetric or complex A only)\n:BE compute half of the eigenvalues from each end of the spectrum, biased in favor of the high end. (real symmetric A only)tol: relative tolerance used in the convergence criterion for eigenvalues, similar to    tol in the eigs(A) method for the ordinary eigenvalue    problem, but effectively for the eigenvalues of B^-1 A instead of A.    See the documentation for the ordinary eigenvalue problem in    eigs(A) and the accompanying note about tol.\nmaxiter: Maximum number of iterations (default = 300)\nsigma: Specifies the level shift used in inverse iteration. If nothing (default), defaults to ordinary (forward) iterations. Otherwise, find eigenvalues close to sigma using shift and invert iterations.\nritzvec: Returns the Ritz vectors v (eigenvectors) if true\nv0: starting vector from which to start the iterationseigs returns the nev requested eigenvalues in d, the corresponding Ritz vectors v (only if ritzvec=true), the number of converged eigenvalues nconv, the number of iterations niter and the number of matrix vector multiplications nmult, as well as the final residual vector resid.We can see the various keywords in action in the following examples:julia> using IterativeEigensolvers\n\njulia> A = sparse(1.0I, 4, 4); B = Diagonal(1:4);\n\njulia> λ, ϕ = eigs(A, B, nev = 2);\n\njulia> λ\n2-element Array{Float64,1}:\n 1.0\n 0.4999999999999999\n\njulia> A = sparse(1.0I, 4, 4); B = Diagonal([1, -2im, 3, 4im]);\n\njulia> λ, ϕ = eigs(A, B, nev=1, which=:SI);\n\njulia> λ\n1-element Array{Complex{Float64},1}:\n 0.03291282838780993 - 2.0627621271174514im\n\njulia> λ, ϕ = eigs(A, B, nev=1, which=:LI);\n\njulia> λ\n1-element Array{Complex{Float64},1}:\n -0.6428551411711136 + 2.1820633510068994imnote: Note\nThe sigma and which keywords interact: the description of eigenvalues searched for by which do not necessarily refer to the eigenvalue problem Av = Bvlambda, but rather the linear operator constructed by the specification of the iteration mode implied by sigma.sigma iteration mode which refers to the problem\nnothing ordinary (forward) Av = Bvlambda\nreal or complex inverse with level shift sigma (A - sigma B )^-1B = vnuIterativeEigensolvers.eigs(::Any)\nIterativeEigensolvers.eigs(::Any, ::Any)\nIterativeEigensolvers.svds"
+},
+
+{
+    "location": "stdlib/mmap.html#",
+    "page": "Memory-mapped I/O",
+    "title": "Memory-mapped I/O",
+    "category": "page",
+    "text": ""
+},
+
+{
+    "location": "stdlib/mmap.html#Mmap.Anonymous",
+    "page": "Memory-mapped I/O",
+    "title": "Mmap.Anonymous",
+    "category": "Type",
+    "text": "Mmap.Anonymous(name::AbstractString=\"\", readonly::Bool=false, create::Bool=true)\n\nCreate an IO-like object for creating zeroed-out mmapped-memory that is not tied to a file for use in Mmap.mmap. Used by SharedArray for creating shared memory arrays.\n\nExamples\n\njulia> using Mmap\n\njulia> anon = Mmap.Anonymous();\n\njulia> isreadable(anon)\ntrue\n\njulia> iswritable(anon)\ntrue\n\njulia> isopen(anon)\ntrue\n\n\n\n"
+},
+
+{
+    "location": "stdlib/mmap.html#Mmap.mmap",
+    "page": "Memory-mapped I/O",
+    "title": "Mmap.mmap",
+    "category": "Function",
+    "text": "Mmap.mmap(io::Union{IOStream,AbstractString,Mmap.AnonymousMmap}[, type::Type{Array{T,N}}, dims, offset]; grow::Bool=true, shared::Bool=true)\n       Mmap.mmap(type::Type{Array{T,N}}, dims)\n\nCreate an Array whose values are linked to a file, using memory-mapping. This provides a convenient way of working with data too large to fit in the computer's memory.\n\nThe type is an Array{T,N} with a bits-type element of T and dimension N that determines how the bytes of the array are interpreted. Note that the file must be stored in binary format, and no format conversions are possible (this is a limitation of operating systems, not Julia).\n\ndims is a tuple or single Integer specifying the size or length of the array.\n\nThe file is passed via the stream argument, either as an open IOStream or filename string. When you initialize the stream, use \"r\" for a \"read-only\" array, and \"w+\" to create a new array used to write values to disk.\n\nIf no type argument is specified, the default is Vector{UInt8}.\n\nOptionally, you can specify an offset (in bytes) if, for example, you want to skip over a header in the file. The default value for the offset is the current stream position for an IOStream.\n\nThe grow keyword argument specifies whether the disk file should be grown to accommodate the requested size of array (if the total file size is < requested array size). Write privileges are required to grow the file.\n\nThe shared keyword argument specifies whether the resulting Array and changes made to it will be visible to other processes mapping the same file.\n\nFor example, the following code\n\n# Create a file for mmapping\n# (you could alternatively use mmap to do this step, too)\nA = rand(1:20, 5, 30)\ns = open(\"/tmp/mmap.bin\", \"w+\")\n# We'll write the dimensions of the array as the first two Ints in the file\nwrite(s, size(A,1))\nwrite(s, size(A,2))\n# Now write the data\nwrite(s, A)\nclose(s)\n\n# Test by reading it back in\ns = open(\"/tmp/mmap.bin\")   # default is read-only\nm = read(s, Int)\nn = read(s, Int)\nA2 = Mmap.mmap(s, Matrix{Int}, (m,n))\n\ncreates a m-by-n Matrix{Int}, linked to the file associated with stream s.\n\nA more portable file would need to encode the word size – 32 bit or 64 bit – and endianness information in the header. In practice, consider encoding binary data using standard formats like HDF5 (which can be used with memory-mapping).\n\n\n\nMmap.mmap(io, BitArray, [dims, offset])\n\nCreate a BitArray whose values are linked to a file, using memory-mapping; it has the same purpose, works in the same way, and has the same arguments, as mmap, but the byte representation is different.\n\nExamples\n\njulia> using Mmap\n\njulia> io = open(\"mmap.bin\", \"w+\");\n\njulia> B = Mmap.mmap(io, BitArray, (25,30000));\n\njulia> B[3, 4000] = true;\n\njulia> Mmap.sync!(B);\n\njulia> close(io);\n\njulia> io = open(\"mmap.bin\", \"r+\");\n\njulia> C = Mmap.mmap(io, BitArray, (25,30000));\n\njulia> C[3, 4000]\ntrue\n\njulia> C[2, 4000]\nfalse\n\njulia> close(io)\n\njulia> rm(\"mmap.bin\")\n\nThis creates a 25-by-30000 BitArray, linked to the file associated with stream io.\n\n\n\n"
+},
+
+{
+    "location": "stdlib/mmap.html#Mmap.sync!",
+    "page": "Memory-mapped I/O",
+    "title": "Mmap.sync!",
+    "category": "Function",
+    "text": "Mmap.sync!(array)\n\nForces synchronization between the in-memory version of a memory-mapped Array or BitArray and the on-disk version.\n\n\n\n"
+},
+
+{
+    "location": "stdlib/mmap.html#Memory-mapped-I/O-1",
+    "page": "Memory-mapped I/O",
+    "title": "Memory-mapped I/O",
+    "category": "section",
+    "text": "Mmap.Anonymous\nMmap.mmap\nMmap.sync!"
+},
+
+{
+    "location": "stdlib/printf.html#",
+    "page": "Printf",
+    "title": "Printf",
+    "category": "page",
+    "text": ""
+},
+
+{
+    "location": "stdlib/printf.html#Printf.@printf",
+    "page": "Printf",
+    "title": "Printf.@printf",
+    "category": "Macro",
+    "text": "@printf([io::IOStream], \"%Fmt\", args...)\n\nPrint args using C printf style format specification string, with some caveats: Inf and NaN are printed consistently as Inf and NaN for flags %a, %A, %e, %E, %f, %F, %g, and %G. Furthermore, if a floating point number is equally close to the numeric values of two possible output strings, the output string further away from zero is chosen.\n\nOptionally, an IOStream may be passed as the first argument to redirect output.\n\nExamples\n\njulia> @printf(\"%f %F %f %F\\n\", Inf, Inf, NaN, NaN)\nInf Inf NaN NaN\n\n\njulia> @printf \"%.0f %.1f %f\\n\" 0.5 0.025 -0.0078125\n1 0.0 -0.007813\n\n\n\n"
+},
+
+{
+    "location": "stdlib/printf.html#Printf.@sprintf",
+    "page": "Printf",
+    "title": "Printf.@sprintf",
+    "category": "Macro",
+    "text": "@sprintf(\"%Fmt\", args...)\n\nReturn @printf formatted output as string.\n\nExamples\n\njulia> s = @sprintf \"this is a %s %15.1f\" \"test\" 34.567;\n\njulia> println(s)\nthis is a test            34.6\n\n\n\n"
+},
+
+{
+    "location": "stdlib/printf.html#Printf-1",
+    "page": "Printf",
+    "title": "Printf",
+    "category": "section",
+    "text": "Printf.@printf\nPrintf.@sprintf"
+},
+
+{
+    "location": "stdlib/profile.html#",
+    "page": "Profiling",
+    "title": "Profiling",
+    "category": "page",
+    "text": ""
+},
+
+{
+    "location": "stdlib/profile.html#Profile.@profile",
+    "page": "Profiling",
+    "title": "Profile.@profile",
+    "category": "Macro",
+    "text": "@profile\n\n@profile <expression> runs your expression while taking periodic backtraces. These are appended to an internal buffer of backtraces.\n\n\n\n"
+},
+
+{
+    "location": "stdlib/profile.html#Profile.clear",
+    "page": "Profiling",
+    "title": "Profile.clear",
+    "category": "Function",
+    "text": "clear()\n\nClear any existing backtraces from the internal buffer.\n\n\n\n"
+},
+
+{
+    "location": "stdlib/profile.html#Profile.print",
+    "page": "Profiling",
+    "title": "Profile.print",
+    "category": "Function",
+    "text": "print([io::IO = STDOUT,] [data::Vector]; kwargs...)\n\nPrints profiling results to io (by default, STDOUT). If you do not supply a data vector, the internal buffer of accumulated backtraces will be used.\n\nThe keyword arguments can be any combination of:\n\nformat – Determines whether backtraces are printed with (default, :tree) or without (:flat) indentation indicating tree structure.\nC – If true, backtraces from C and Fortran code are shown (normally they are excluded).\ncombine – If true (default), instruction pointers are merged that correspond to the same line of code.\nmaxdepth – Limits the depth higher than maxdepth in the :tree format.\nsortedby – Controls the order in :flat format. :filefuncline (default) sorts by the source  line, whereas :count sorts in order of number of collected samples.\nnoisefloor – Limits frames that exceed the heuristic noise floor of the sample (only applies to format :tree).  A suggested value to try for this is 2.0 (the default is 0). This parameter hides samples for which n <= noisefloor * √N,  where n is the number of samples on this line, and N is the number of samples for the callee.\nmincount – Limits the printout to only those lines with at least mincount occurrences.\n\n\n\nprint([io::IO = STDOUT,] data::Vector, lidict::LineInfoDict; kwargs...)\n\nPrints profiling results to io. This variant is used to examine results exported by a previous call to retrieve. Supply the vector data of backtraces and a dictionary lidict of line information.\n\nSee Profile.print([io], data) for an explanation of the valid keyword arguments.\n\n\n\n"
+},
+
+{
+    "location": "stdlib/profile.html#Profile.init",
+    "page": "Profiling",
+    "title": "Profile.init",
+    "category": "Function",
+    "text": "init(; n::Integer, delay::Float64)\n\nConfigure the delay between backtraces (measured in seconds), and the number n of instruction pointers that may be stored. Each instruction pointer corresponds to a single line of code; backtraces generally consist of a long list of instruction pointers. Default settings can be obtained by calling this function with no arguments, and each can be set independently using keywords or in the order (n, delay).\n\n\n\n"
+},
+
+{
+    "location": "stdlib/profile.html#Profile.fetch",
+    "page": "Profiling",
+    "title": "Profile.fetch",
+    "category": "Function",
+    "text": "fetch() -> data\n\nReturns a reference to the internal buffer of backtraces. Note that subsequent operations, like clear, can affect data unless you first make a copy. Note that the values in data have meaning only on this machine in the current session, because it depends on the exact memory addresses used in JIT-compiling. This function is primarily for internal use; retrieve may be a better choice for most users.\n\n\n\n"
+},
+
+{
+    "location": "stdlib/profile.html#Profile.retrieve",
+    "page": "Profiling",
+    "title": "Profile.retrieve",
+    "category": "Function",
+    "text": "retrieve() -> data, lidict\n\n\"Exports\" profiling results in a portable format, returning the set of all backtraces (data) and a dictionary that maps the (session-specific) instruction pointers in data to LineInfo values that store the file name, function name, and line number. This function allows you to save profiling results for future analysis.\n\n\n\n"
+},
+
+{
+    "location": "stdlib/profile.html#Profile.callers",
+    "page": "Profiling",
+    "title": "Profile.callers",
+    "category": "Function",
+    "text": "callers(funcname, [data, lidict], [filename=<filename>], [linerange=<start:stop>]) -> Vector{Tuple{count, lineinfo}}\n\nGiven a previous profiling run, determine who called a particular function. Supplying the filename (and optionally, range of line numbers over which the function is defined) allows you to disambiguate an overloaded method. The returned value is a vector containing a count of the number of calls and line information about the caller. One can optionally supply backtrace data obtained from retrieve; otherwise, the current internal profile buffer is used.\n\n\n\n"
+},
+
+{
+    "location": "stdlib/profile.html#Profile.clear_malloc_data",
+    "page": "Profiling",
+    "title": "Profile.clear_malloc_data",
+    "category": "Function",
+    "text": "clear_malloc_data()\n\nClears any stored memory allocation data when running julia with --track-allocation. Execute the command(s) you want to test (to force JIT-compilation), then call clear_malloc_data. Then execute your command(s) again, quit Julia, and examine the resulting *.mem files.\n\n\n\n"
+},
+
+{
+    "location": "stdlib/profile.html#lib-profiling-1",
+    "page": "Profiling",
+    "title": "Profiling",
+    "category": "section",
+    "text": "Profile.@profileThe methods in Profile are not exported and need to be called e.g. as Profile.print().Profile.clear\nProfile.print\nProfile.init\nProfile.fetch\nProfile.retrieve\nProfile.callers\nProfile.clear_malloc_data"
+},
+
+{
+    "location": "stdlib/sharedarrays.html#",
+    "page": "Shared Arrays",
+    "title": "Shared Arrays",
+    "category": "page",
+    "text": ""
+},
+
+{
+    "location": "stdlib/sharedarrays.html#SharedArrays.SharedArray",
+    "page": "Shared Arrays",
+    "title": "SharedArrays.SharedArray",
+    "category": "Type",
+    "text": "SharedArray{T}(dims::NTuple; init=false, pids=Int[])\nSharedArray{T,N}(...)\n\nConstruct a SharedArray of a bits type T and size dims across the processes specified by pids - all of which have to be on the same host.  If N is specified by calling SharedArray{T,N}(dims), then N must match the length of dims.\n\nIf pids is left unspecified, the shared array will be mapped across all processes on the current host, including the master. But, localindices and indexpids will only refer to worker processes. This facilitates work distribution code to use workers for actual computation with the master process acting as a driver.\n\nIf an init function of the type initfn(S::SharedArray) is specified, it is called on all the participating workers.\n\nThe shared array is valid as long as a reference to the SharedArray object exists on the node which created the mapping.\n\nSharedArray{T}(filename::AbstractString, dims::NTuple, [offset=0]; mode=nothing, init=false, pids=Int[])\nSharedArray{T,N}(...)\n\nConstruct a SharedArray backed by the file filename, with element type T (must be a bits type) and size dims, across the processes specified by pids - all of which have to be on the same host. This file is mmapped into the host memory, with the following consequences:\n\nThe array data must be represented in binary format (e.g., an ASCII format like CSV cannot be supported)\nAny changes you make to the array values (e.g., A[3] = 0) will also change the values on disk\n\nIf pids is left unspecified, the shared array will be mapped across all processes on the current host, including the master. But, localindices and indexpids will only refer to worker processes. This facilitates work distribution code to use workers for actual computation with the master process acting as a driver.\n\nmode must be one of \"r\", \"r+\", \"w+\", or \"a+\", and defaults to \"r+\" if the file specified by filename already exists, or \"w+\" if not. If an init function of the type initfn(S::SharedArray) is specified, it is called on all the participating workers. You cannot specify an init function if the file is not writable.\n\noffset allows you to skip the specified number of bytes at the beginning of the file.\n\n\n\n"
+},
+
+{
+    "location": "stdlib/sharedarrays.html#Distributed.procs-Tuple{SharedArray}",
+    "page": "Shared Arrays",
+    "title": "Distributed.procs",
+    "category": "Method",
+    "text": "procs(S::SharedArray)\n\nGet the vector of processes mapping the shared array.\n\n\n\n"
+},
+
+{
+    "location": "stdlib/sharedarrays.html#SharedArrays.sdata",
+    "page": "Shared Arrays",
+    "title": "SharedArrays.sdata",
+    "category": "Function",
+    "text": "sdata(S::SharedArray)\n\nReturns the actual Array object backing S.\n\n\n\n"
+},
+
+{
+    "location": "stdlib/sharedarrays.html#SharedArrays.indexpids",
+    "page": "Shared Arrays",
+    "title": "SharedArrays.indexpids",
+    "category": "Function",
+    "text": "indexpids(S::SharedArray)\n\nReturns the current worker's index in the list of workers mapping the SharedArray (i.e. in the same list returned by procs(S)), or 0 if the SharedArray is not mapped locally.\n\n\n\n"
+},
+
+{
+    "location": "stdlib/sharedarrays.html#SharedArrays.localindices",
+    "page": "Shared Arrays",
+    "title": "SharedArrays.localindices",
+    "category": "Function",
+    "text": "localindices(S::SharedArray)\n\nReturns a range describing the \"default\" indices to be handled by the current process.  This range should be interpreted in the sense of linear indexing, i.e., as a sub-range of 1:length(S).  In multi-process contexts, returns an empty range in the parent process (or any process for which indexpids returns 0).\n\nIt's worth emphasizing that localindices exists purely as a convenience, and you can partition work on the array among workers any way you wish. For a SharedArray, all indices should be equally fast for each worker process.\n\n\n\n"
+},
+
+{
+    "location": "stdlib/sharedarrays.html#Shared-Arrays-1",
+    "page": "Shared Arrays",
+    "title": "Shared Arrays",
+    "category": "section",
+    "text": "SharedArrays.SharedArray\nSharedArrays.procs(::SharedArray)\nSharedArrays.sdata\nSharedArrays.indexpids\nSharedArrays.localindices"
 },
 
 {
@@ -18241,958 +19265,6 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/c.html#",
-    "page": "C Interface",
-    "title": "C Interface",
-    "category": "page",
-    "text": ""
-},
-
-{
-    "location": "stdlib/c.html#ccall",
-    "page": "C Interface",
-    "title": "ccall",
-    "category": "Keyword",
-    "text": "ccall((function_name, library), returntype, (argtype1, ...), argvalue1, ...)\nccall(function_pointer, returntype, (argtype1, ...), argvalue1, ...)\n\nCall a function in a C-exported shared library, specified by the tuple (function_name, library), where each component is either a string or symbol. Alternatively, ccall may also be used to call a function pointer function_pointer, such as one returned by dlsym.\n\nNote that the argument type tuple must be a literal tuple, and not a tuple-valued variable or expression.\n\nEach argvalue to the ccall will be converted to the corresponding argtype, by automatic insertion of calls to unsafe_convert(argtype, cconvert(argtype, argvalue)). (See also the documentation for each of these functions for further details.) In most cases, this simply results in a call to convert(argtype, argvalue).\n\n\n\n"
-},
-
-{
-    "location": "stdlib/c.html#Core.Intrinsics.cglobal",
-    "page": "C Interface",
-    "title": "Core.Intrinsics.cglobal",
-    "category": "Function",
-    "text": "cglobal((symbol, library) [, type=Cvoid])\n\nObtain a pointer to a global variable in a C-exported shared library, specified exactly as in ccall. Returns a Ptr{Type}, defaulting to Ptr{Cvoid} if no Type argument is supplied. The values can be read or written by unsafe_load or unsafe_store!, respectively.\n\n\n\n"
-},
-
-{
-    "location": "stdlib/c.html#Base.cfunction",
-    "page": "C Interface",
-    "title": "Base.cfunction",
-    "category": "Function",
-    "text": "cfunction(f::Function, returntype::Type, argtypes::Type) -> Ptr{Cvoid}\n\nGenerate C-callable function pointer from the Julia function f. Type annotation of the return value in the callback function is a must for situations where Julia cannot infer the return type automatically.\n\nExamples\n\njulia> function foo(x::Int, y::Int)\n           return x + y\n       end\n\njulia> cfunction(foo, Int, Tuple{Int,Int})\nPtr{Cvoid} @0x000000001b82fcd0\n\n\n\n"
-},
-
-{
-    "location": "stdlib/c.html#Base.unsafe_convert",
-    "page": "C Interface",
-    "title": "Base.unsafe_convert",
-    "category": "Function",
-    "text": "unsafe_convert(T, x)\n\nConvert x to a C argument of type T where the input x must be the return value of cconvert(T, ...).\n\nIn cases where convert would need to take a Julia object and turn it into a Ptr, this function should be used to define and perform that conversion.\n\nBe careful to ensure that a Julia reference to x exists as long as the result of this function will be used. Accordingly, the argument x to this function should never be an expression, only a variable name or field reference. For example, x=a.b.c is acceptable, but x=[a,b,c] is not.\n\nThe unsafe prefix on this function indicates that using the result of this function after the x argument to this function is no longer accessible to the program may cause undefined behavior, including program corruption or segfaults, at any later time.\n\nSee also cconvert\n\n\n\n"
-},
-
-{
-    "location": "stdlib/c.html#Base.cconvert",
-    "page": "C Interface",
-    "title": "Base.cconvert",
-    "category": "Function",
-    "text": "cconvert(T,x)\n\nConvert x to a value to be passed to C code as type T, typically by calling convert(T, x).\n\nIn cases where x cannot be safely converted to T, unlike convert, cconvert may return an object of a type different from T, which however is suitable for unsafe_convert to handle. The result of this function should be kept valid (for the GC) until the result of unsafe_convert is not needed anymore. This can be used to allocate memory that will be accessed by the ccall. If multiple objects need to be allocated, a tuple of the objects can be used as return value.\n\nNeither convert nor cconvert should take a Julia object and turn it into a Ptr.\n\n\n\n"
-},
-
-{
-    "location": "stdlib/c.html#Base.unsafe_load",
-    "page": "C Interface",
-    "title": "Base.unsafe_load",
-    "category": "Function",
-    "text": "unsafe_load(p::Ptr{T}, i::Integer=1)\n\nLoad a value of type T from the address of the ith element (1-indexed) starting at p. This is equivalent to the C expression p[i-1].\n\nThe unsafe prefix on this function indicates that no validation is performed on the pointer p to ensure that it is valid. Incorrect usage may segfault your program or return garbage answers, in the same manner as C.\n\n\n\n"
-},
-
-{
-    "location": "stdlib/c.html#Base.unsafe_store!",
-    "page": "C Interface",
-    "title": "Base.unsafe_store!",
-    "category": "Function",
-    "text": "unsafe_store!(p::Ptr{T}, x, i::Integer=1)\n\nStore a value of type T to the address of the ith element (1-indexed) starting at p. This is equivalent to the C expression p[i-1] = x.\n\nThe unsafe prefix on this function indicates that no validation is performed on the pointer p to ensure that it is valid. Incorrect usage may corrupt or segfault your program, in the same manner as C.\n\n\n\n"
-},
-
-{
-    "location": "stdlib/c.html#Base.unsafe_copyto!-Union{Tuple{T}, Tuple{Ptr{T},Ptr{T},Any}} where T",
-    "page": "C Interface",
-    "title": "Base.unsafe_copyto!",
-    "category": "Method",
-    "text": "unsafe_copyto!(dest::Ptr{T}, src::Ptr{T}, N)\n\nCopy N elements from a source pointer to a destination, with no checking. The size of an element is determined by the type of the pointers.\n\nThe unsafe prefix on this function indicates that no validation is performed on the pointers dest and src to ensure that they are valid. Incorrect usage may corrupt or segfault your program, in the same manner as C.\n\n\n\n"
-},
-
-{
-    "location": "stdlib/c.html#Base.unsafe_copyto!-Union{Tuple{T}, Tuple{Array{T,N} where N,Any,Array{T,N} where N,Any,Any}} where T",
-    "page": "C Interface",
-    "title": "Base.unsafe_copyto!",
-    "category": "Method",
-    "text": "unsafe_copyto!(dest::Array, do, src::Array, so, N)\n\nCopy N elements from a source array to a destination, starting at offset so in the source and do in the destination (1-indexed).\n\nThe unsafe prefix on this function indicates that no validation is performed to ensure that N is inbounds on either array. Incorrect usage may corrupt or segfault your program, in the same manner as C.\n\n\n\n"
-},
-
-{
-    "location": "stdlib/c.html#Base.copyto!",
-    "page": "C Interface",
-    "title": "Base.copyto!",
-    "category": "Function",
-    "text": "copyto!(dest, do, src, so, N)\n\nCopy N elements from collection src starting at offset so, to array dest starting at offset do. Return dest.\n\n\n\ncopyto!(dest::AbstractArray, src) -> dest\n\nCopy all elements from collection src to array dest, whose length must be greater than or equal to the length n of src. The first n elements of dest are overwritten, the other elements are left untouched.\n\nExamples\n\njulia> x = [1., 0., 3., 0., 5.];\n\njulia> y = zeros(7);\n\njulia> copyto!(y, x);\n\njulia> y\n7-element Array{Float64,1}:\n 1.0\n 0.0\n 3.0\n 0.0\n 5.0\n 0.0\n 0.0\n\n\n\ncopyto!(dest, Rdest::CartesianIndices, src, Rsrc::CartesianIndices) -> dest\n\nCopy the block of src in the range of Rsrc to the block of dest in the range of Rdest. The sizes of the two regions must match.\n\n\n\n"
-},
-
-{
-    "location": "stdlib/c.html#Base.pointer",
-    "page": "C Interface",
-    "title": "Base.pointer",
-    "category": "Function",
-    "text": "pointer(array [, index])\n\nGet the native address of an array or string element. Be careful to ensure that a Julia reference to a exists as long as this pointer will be used. This function is \"unsafe\" like unsafe_convert.\n\nCalling Ref(array[, index]) is generally preferable to this function.\n\n\n\n"
-},
-
-{
-    "location": "stdlib/c.html#Base.unsafe_wrap-Union{Tuple{N}, Tuple{T}, Tuple{Union{Type{Array}, Type{Array{T,N} where N}, Type{Array{T,N}}},Ptr{T},Tuple{Vararg{Int64,N}}}} where N where T",
-    "page": "C Interface",
-    "title": "Base.unsafe_wrap",
-    "category": "Method",
-    "text": "unsafe_wrap(Array, pointer::Ptr{T}, dims, own=false)\n\nWrap a Julia Array object around the data at the address given by pointer, without making a copy.  The pointer element type T determines the array element type. dims is either an integer (for a 1d array) or a tuple of the array dimensions. own optionally specifies whether Julia should take ownership of the memory, calling free on the pointer when the array is no longer referenced.\n\nThis function is labeled \"unsafe\" because it will crash if pointer is not a valid memory address to data of the requested length.\n\n\n\n"
-},
-
-{
-    "location": "stdlib/c.html#Base.pointer_from_objref",
-    "page": "C Interface",
-    "title": "Base.pointer_from_objref",
-    "category": "Function",
-    "text": "pointer_from_objref(x)\n\nGet the memory address of a Julia object as a Ptr. The existence of the resulting Ptr will not protect the object from garbage collection, so you must ensure that the object remains referenced for the whole time that the Ptr will be used.\n\nThis function may not be called on immutable objects, since they do not have stable memory addresses.\n\n\n\n"
-},
-
-{
-    "location": "stdlib/c.html#Base.unsafe_pointer_to_objref",
-    "page": "C Interface",
-    "title": "Base.unsafe_pointer_to_objref",
-    "category": "Function",
-    "text": "unsafe_pointer_to_objref(p::Ptr)\n\nConvert a Ptr to an object reference. Assumes the pointer refers to a valid heap-allocated Julia object. If this is not the case, undefined behavior results, hence this function is considered \"unsafe\" and should be used with care.\n\n\n\n"
-},
-
-{
-    "location": "stdlib/c.html#Base.disable_sigint",
-    "page": "C Interface",
-    "title": "Base.disable_sigint",
-    "category": "Function",
-    "text": "disable_sigint(f::Function)\n\nDisable Ctrl-C handler during execution of a function on the current task, for calling external code that may call julia code that is not interrupt safe. Intended to be called using do block syntax as follows:\n\ndisable_sigint() do\n    # interrupt-unsafe code\n    ...\nend\n\nThis is not needed on worker threads (Threads.threadid() != 1) since the InterruptException will only be delivered to the master thread. External functions that do not call julia code or julia runtime automatically disable sigint during their execution.\n\n\n\n"
-},
-
-{
-    "location": "stdlib/c.html#Base.reenable_sigint",
-    "page": "C Interface",
-    "title": "Base.reenable_sigint",
-    "category": "Function",
-    "text": "reenable_sigint(f::Function)\n\nRe-enable Ctrl-C handler during execution of a function. Temporarily reverses the effect of disable_sigint.\n\n\n\n"
-},
-
-{
-    "location": "stdlib/c.html#Base.systemerror",
-    "page": "C Interface",
-    "title": "Base.systemerror",
-    "category": "Function",
-    "text": "systemerror(sysfunc, iftrue)\n\nRaises a SystemError for errno with the descriptive string sysfunc if iftrue is true\n\n\n\n"
-},
-
-{
-    "location": "stdlib/c.html#Core.Ptr",
-    "page": "C Interface",
-    "title": "Core.Ptr",
-    "category": "Type",
-    "text": "Ptr{T}\n\nA memory address referring to data of type T.  However, there is no guarantee that the memory is actually valid, or that it actually represents data of the specified type.\n\n\n\n"
-},
-
-{
-    "location": "stdlib/c.html#Core.Ref",
-    "page": "C Interface",
-    "title": "Core.Ref",
-    "category": "Type",
-    "text": "Ref{T}\n\nAn object that safely references data of type T. This type is guaranteed to point to valid, Julia-allocated memory of the correct type. The underlying data is protected from freeing by the garbage collector as long as the Ref itself is referenced.\n\nIn Julia, Ref objects are dereferenced (loaded or stored) with [].\n\nCreation of a Ref to a value x of type T is usually written Ref(x). Additionally, for creating interior pointers to containers (such as Array or Ptr), it can be written Ref(a, i) for creating a reference to the i-th element of a.\n\nWhen passed as a ccall argument (either as a Ptr or Ref type), a Ref object will be converted to a native pointer to the data it references.\n\nThere is no invalid (NULL) Ref in Julia, but a C_NULL instance of Ptr can be passed to a ccall Ref argument.\n\n\n\n"
-},
-
-{
-    "location": "stdlib/c.html#Base.Cchar",
-    "page": "C Interface",
-    "title": "Base.Cchar",
-    "category": "Type",
-    "text": "Cchar\n\nEquivalent to the native char c-type.\n\n\n\n"
-},
-
-{
-    "location": "stdlib/c.html#Base.Cuchar",
-    "page": "C Interface",
-    "title": "Base.Cuchar",
-    "category": "Type",
-    "text": "Cuchar\n\nEquivalent to the native unsigned char c-type (UInt8).\n\n\n\n"
-},
-
-{
-    "location": "stdlib/c.html#Base.Cshort",
-    "page": "C Interface",
-    "title": "Base.Cshort",
-    "category": "Type",
-    "text": "Cshort\n\nEquivalent to the native signed short c-type (Int16).\n\n\n\n"
-},
-
-{
-    "location": "stdlib/c.html#Base.Cushort",
-    "page": "C Interface",
-    "title": "Base.Cushort",
-    "category": "Type",
-    "text": "Cushort\n\nEquivalent to the native unsigned short c-type (UInt16).\n\n\n\n"
-},
-
-{
-    "location": "stdlib/c.html#Base.Cint",
-    "page": "C Interface",
-    "title": "Base.Cint",
-    "category": "Type",
-    "text": "Cint\n\nEquivalent to the native signed int c-type (Int32).\n\n\n\n"
-},
-
-{
-    "location": "stdlib/c.html#Base.Cuint",
-    "page": "C Interface",
-    "title": "Base.Cuint",
-    "category": "Type",
-    "text": "Cuint\n\nEquivalent to the native unsigned int c-type (UInt32).\n\n\n\n"
-},
-
-{
-    "location": "stdlib/c.html#Base.Clong",
-    "page": "C Interface",
-    "title": "Base.Clong",
-    "category": "Type",
-    "text": "Clong\n\nEquivalent to the native signed long c-type.\n\n\n\n"
-},
-
-{
-    "location": "stdlib/c.html#Base.Culong",
-    "page": "C Interface",
-    "title": "Base.Culong",
-    "category": "Type",
-    "text": "Culong\n\nEquivalent to the native unsigned long c-type.\n\n\n\n"
-},
-
-{
-    "location": "stdlib/c.html#Base.Clonglong",
-    "page": "C Interface",
-    "title": "Base.Clonglong",
-    "category": "Type",
-    "text": "Clonglong\n\nEquivalent to the native signed long long c-type (Int64).\n\n\n\n"
-},
-
-{
-    "location": "stdlib/c.html#Base.Culonglong",
-    "page": "C Interface",
-    "title": "Base.Culonglong",
-    "category": "Type",
-    "text": "Culonglong\n\nEquivalent to the native unsigned long long c-type (UInt64).\n\n\n\n"
-},
-
-{
-    "location": "stdlib/c.html#Base.Cintmax_t",
-    "page": "C Interface",
-    "title": "Base.Cintmax_t",
-    "category": "Type",
-    "text": "Cintmax_t\n\nEquivalent to the native intmax_t c-type (Int64).\n\n\n\n"
-},
-
-{
-    "location": "stdlib/c.html#Base.Cuintmax_t",
-    "page": "C Interface",
-    "title": "Base.Cuintmax_t",
-    "category": "Type",
-    "text": "Cuintmax_t\n\nEquivalent to the native uintmax_t c-type (UInt64).\n\n\n\n"
-},
-
-{
-    "location": "stdlib/c.html#Base.Csize_t",
-    "page": "C Interface",
-    "title": "Base.Csize_t",
-    "category": "Type",
-    "text": "Csize_t\n\nEquivalent to the native size_t c-type (UInt).\n\n\n\n"
-},
-
-{
-    "location": "stdlib/c.html#Base.Cssize_t",
-    "page": "C Interface",
-    "title": "Base.Cssize_t",
-    "category": "Type",
-    "text": "Cssize_t\n\nEquivalent to the native ssize_t c-type.\n\n\n\n"
-},
-
-{
-    "location": "stdlib/c.html#Base.Cptrdiff_t",
-    "page": "C Interface",
-    "title": "Base.Cptrdiff_t",
-    "category": "Type",
-    "text": "Cptrdiff_t\n\nEquivalent to the native ptrdiff_t c-type (Int).\n\n\n\n"
-},
-
-{
-    "location": "stdlib/c.html#Base.Cwchar_t",
-    "page": "C Interface",
-    "title": "Base.Cwchar_t",
-    "category": "Type",
-    "text": "Cwchar_t\n\nEquivalent to the native wchar_t c-type (Int32).\n\n\n\n"
-},
-
-{
-    "location": "stdlib/c.html#Base.Cfloat",
-    "page": "C Interface",
-    "title": "Base.Cfloat",
-    "category": "Type",
-    "text": "Cfloat\n\nEquivalent to the native float c-type (Float32).\n\n\n\n"
-},
-
-{
-    "location": "stdlib/c.html#Base.Cdouble",
-    "page": "C Interface",
-    "title": "Base.Cdouble",
-    "category": "Type",
-    "text": "Cdouble\n\nEquivalent to the native double c-type (Float64).\n\n\n\n"
-},
-
-{
-    "location": "stdlib/c.html#C-Interface-1",
-    "page": "C Interface",
-    "title": "C Interface",
-    "category": "section",
-    "text": "ccall\nCore.Intrinsics.cglobal\nBase.cfunction\nBase.unsafe_convert\nBase.cconvert\nBase.unsafe_load\nBase.unsafe_store!\nBase.unsafe_copyto!{T}(::Ptr{T}, ::Ptr{T}, ::Any)\nBase.unsafe_copyto!{T}(::Array{T}, ::Any, ::Array{T}, ::Any, ::Any)\nBase.copyto!\nBase.pointer\nBase.unsafe_wrap{T,N}(::Union{Type{Array},Type{Array{T}},Type{Array{T,N}}}, ::Ptr{T}, ::NTuple{N,Int})\nBase.pointer_from_objref\nBase.unsafe_pointer_to_objref\nBase.disable_sigint\nBase.reenable_sigint\nBase.systemerror\nCore.Ptr\nCore.Ref\nBase.Cchar\nBase.Cuchar\nBase.Cshort\nBase.Cushort\nBase.Cint\nBase.Cuint\nBase.Clong\nBase.Culong\nBase.Clonglong\nBase.Culonglong\nBase.Cintmax_t\nBase.Cuintmax_t\nBase.Csize_t\nBase.Cssize_t\nBase.Cptrdiff_t\nBase.Cwchar_t\nBase.Cfloat\nBase.Cdouble"
-},
-
-{
-    "location": "stdlib/c.html#Core.Intrinsics.llvmcall",
-    "page": "C Interface",
-    "title": "Core.Intrinsics.llvmcall",
-    "category": "Function",
-    "text": "llvmcall(IR::String, ReturnType, (ArgumentType1, ...), ArgumentValue1, ...)\nllvmcall((declarations::String, IR::String), ReturnType, (ArgumentType1, ...), ArgumentValue1, ...)\n\nCall LLVM IR string in the first argument. Similar to an LLVM function define block, arguments are available as consecutive unnamed SSA variables (%0, %1, etc.).\n\nThe optional declarations string contains external functions declarations that are necessary for llvm to compile the IR string. Multiple declarations can be passed in by separating them with line breaks.\n\nNote that the argument type tuple must be a literal tuple, and not a tuple-valued variable or expression.\n\nEach ArgumentValue to llvmcall will be converted to the corresponding ArgumentType, by automatic insertion of calls to unsafe_convert(ArgumentType, cconvert(ArgumentType, ArgumentValue)). (see also the documentation for each of these functions for further details). In most cases, this simply results in a call to convert(ArgumentType, ArgumentValue).\n\nSee test/llvmcall.jl for usage examples.\n\n\n\n"
-},
-
-{
-    "location": "stdlib/c.html#LLVM-Interface-1",
-    "page": "C Interface",
-    "title": "LLVM Interface",
-    "category": "section",
-    "text": "Core.Intrinsics.llvmcall"
-},
-
-{
-    "location": "stdlib/libc.html#",
-    "page": "C Standard Library",
-    "title": "C Standard Library",
-    "category": "page",
-    "text": ""
-},
-
-{
-    "location": "stdlib/libc.html#Base.Libc.malloc",
-    "page": "C Standard Library",
-    "title": "Base.Libc.malloc",
-    "category": "Function",
-    "text": "malloc(size::Integer) -> Ptr{Cvoid}\n\nCall malloc from the C standard library.\n\n\n\n"
-},
-
-{
-    "location": "stdlib/libc.html#Base.Libc.calloc",
-    "page": "C Standard Library",
-    "title": "Base.Libc.calloc",
-    "category": "Function",
-    "text": "calloc(num::Integer, size::Integer) -> Ptr{Cvoid}\n\nCall calloc from the C standard library.\n\n\n\n"
-},
-
-{
-    "location": "stdlib/libc.html#Base.Libc.realloc",
-    "page": "C Standard Library",
-    "title": "Base.Libc.realloc",
-    "category": "Function",
-    "text": "realloc(addr::Ptr, size::Integer) -> Ptr{Cvoid}\n\nCall realloc from the C standard library.\n\nSee warning in the documentation for free regarding only using this on memory originally obtained from malloc.\n\n\n\n"
-},
-
-{
-    "location": "stdlib/libc.html#Base.Libc.free",
-    "page": "C Standard Library",
-    "title": "Base.Libc.free",
-    "category": "Function",
-    "text": "free(addr::Ptr)\n\nCall free from the C standard library. Only use this on memory obtained from malloc, not on pointers retrieved from other C libraries. Ptr objects obtained from C libraries should be freed by the free functions defined in that library, to avoid assertion failures if multiple libc libraries exist on the system.\n\n\n\n"
-},
-
-{
-    "location": "stdlib/libc.html#Base.Libc.errno",
-    "page": "C Standard Library",
-    "title": "Base.Libc.errno",
-    "category": "Function",
-    "text": "errno([code])\n\nGet the value of the C library's errno. If an argument is specified, it is used to set the value of errno.\n\nThe value of errno is only valid immediately after a ccall to a C library routine that sets it. Specifically, you cannot call errno at the next prompt in a REPL, because lots of code is executed between prompts.\n\n\n\n"
-},
-
-{
-    "location": "stdlib/libc.html#Base.Libc.strerror",
-    "page": "C Standard Library",
-    "title": "Base.Libc.strerror",
-    "category": "Function",
-    "text": "strerror(n=errno())\n\nConvert a system call error code to a descriptive string\n\n\n\n"
-},
-
-{
-    "location": "stdlib/libc.html#Base.Libc.GetLastError",
-    "page": "C Standard Library",
-    "title": "Base.Libc.GetLastError",
-    "category": "Function",
-    "text": "GetLastError()\n\nCall the Win32 GetLastError function [only available on Windows].\n\n\n\n"
-},
-
-{
-    "location": "stdlib/libc.html#Base.Libc.FormatMessage",
-    "page": "C Standard Library",
-    "title": "Base.Libc.FormatMessage",
-    "category": "Function",
-    "text": "FormatMessage(n=GetLastError())\n\nConvert a Win32 system call error code to a descriptive string [only available on Windows].\n\n\n\n"
-},
-
-{
-    "location": "stdlib/libc.html#Base.Libc.time-Tuple{Base.Libc.TmStruct}",
-    "page": "C Standard Library",
-    "title": "Base.Libc.time",
-    "category": "Method",
-    "text": "time(t::TmStruct)\n\nConverts a TmStruct struct to a number of seconds since the epoch.\n\n\n\n"
-},
-
-{
-    "location": "stdlib/libc.html#Base.Libc.strftime",
-    "page": "C Standard Library",
-    "title": "Base.Libc.strftime",
-    "category": "Function",
-    "text": "strftime([format], time)\n\nConvert time, given as a number of seconds since the epoch or a TmStruct, to a formatted string using the given format. Supported formats are the same as those in the standard C library.\n\n\n\n"
-},
-
-{
-    "location": "stdlib/libc.html#Base.Libc.strptime",
-    "page": "C Standard Library",
-    "title": "Base.Libc.strptime",
-    "category": "Function",
-    "text": "strptime([format], timestr)\n\nParse a formatted time string into a TmStruct giving the seconds, minute, hour, date, etc. Supported formats are the same as those in the standard C library. On some platforms, timezones will not be parsed correctly. If the result of this function will be passed to time to convert it to seconds since the epoch, the isdst field should be filled in manually. Setting it to -1 will tell the C library to use the current system settings to determine the timezone.\n\n\n\n"
-},
-
-{
-    "location": "stdlib/libc.html#Base.Libc.TmStruct",
-    "page": "C Standard Library",
-    "title": "Base.Libc.TmStruct",
-    "category": "Type",
-    "text": "TmStruct([seconds])\n\nConvert a number of seconds since the epoch to broken-down format, with fields sec, min, hour, mday, month, year, wday, yday, and isdst.\n\n\n\n"
-},
-
-{
-    "location": "stdlib/libc.html#Base.Libc.flush_cstdio",
-    "page": "C Standard Library",
-    "title": "Base.Libc.flush_cstdio",
-    "category": "Function",
-    "text": "flush_cstdio()\n\nFlushes the C stdout and stderr streams (which may have been written to by external C code).\n\n\n\n"
-},
-
-{
-    "location": "stdlib/libc.html#C-Standard-Library-1",
-    "page": "C Standard Library",
-    "title": "C Standard Library",
-    "category": "section",
-    "text": "Base.Libc.malloc\nBase.Libc.calloc\nBase.Libc.realloc\nBase.Libc.free\nBase.Libc.errno\nBase.Libc.strerror\nBase.Libc.GetLastError\nBase.Libc.FormatMessage\nBase.Libc.time(::Base.Libc.TmStruct)\nBase.Libc.strftime\nBase.Libc.strptime\nBase.Libc.TmStruct\nBase.Libc.flush_cstdio"
-},
-
-{
-    "location": "stdlib/libdl.html#",
-    "page": "Dynamic Linker",
-    "title": "Dynamic Linker",
-    "category": "page",
-    "text": ""
-},
-
-{
-    "location": "stdlib/libdl.html#Base.Libdl.dlopen",
-    "page": "Dynamic Linker",
-    "title": "Base.Libdl.dlopen",
-    "category": "Function",
-    "text": "dlopen(libfile::AbstractString [, flags::Integer])\n\nLoad a shared library, returning an opaque handle.\n\nThe extension given by the constant dlext (.so, .dll, or .dylib) can be omitted from the libfile string, as it is automatically appended if needed.   If libfile is not an absolute path name, then the paths in the array DL_LOAD_PATH are searched for libfile, followed by the system load path.\n\nThe optional flags argument is a bitwise-or of zero or more of RTLD_LOCAL, RTLD_GLOBAL, RTLD_LAZY, RTLD_NOW, RTLD_NODELETE, RTLD_NOLOAD, RTLD_DEEPBIND, and RTLD_FIRST. These are converted to the corresponding flags of the POSIX (and/or GNU libc and/or MacOS) dlopen command, if possible, or are ignored if the specified functionality is not available on the current platform. The default flags are platform specific. On MacOS the default dlopen flags are RTLD_LAZY|RTLD_DEEPBIND|RTLD_GLOBAL while on other platforms the defaults are RTLD_LAZY|RTLD_DEEPBIND|RTLD_LOCAL. An important usage of these flags is to specify non default behavior for when the dynamic library loader binds library references to exported symbols and if the bound references are put into process local or global scope. For instance RTLD_LAZY|RTLD_DEEPBIND|RTLD_GLOBAL allows the library's symbols to be available for usage in other shared libraries, addressing situations where there are dependencies between shared libraries.\n\n\n\n"
-},
-
-{
-    "location": "stdlib/libdl.html#Base.Libdl.dlopen_e",
-    "page": "Dynamic Linker",
-    "title": "Base.Libdl.dlopen_e",
-    "category": "Function",
-    "text": "dlopen_e(libfile::AbstractString [, flags::Integer])\n\nSimilar to dlopen, except returns a NULL pointer instead of raising errors.\n\n\n\n"
-},
-
-{
-    "location": "stdlib/libdl.html#Base.Libdl.RTLD_NOW",
-    "page": "Dynamic Linker",
-    "title": "Base.Libdl.RTLD_NOW",
-    "category": "Constant",
-    "text": "RTLD_DEEPBIND\nRTLD_FIRST\nRTLD_GLOBAL\nRTLD_LAZY\nRTLD_LOCAL\nRTLD_NODELETE\nRTLD_NOLOAD\nRTLD_NOW\n\nEnum constant for dlopen. See your platform man page for details, if applicable.\n\n\n\n"
-},
-
-{
-    "location": "stdlib/libdl.html#Base.Libdl.dlsym",
-    "page": "Dynamic Linker",
-    "title": "Base.Libdl.dlsym",
-    "category": "Function",
-    "text": "dlsym(handle, sym)\n\nLook up a symbol from a shared library handle, return callable function pointer on success.\n\n\n\n"
-},
-
-{
-    "location": "stdlib/libdl.html#Base.Libdl.dlsym_e",
-    "page": "Dynamic Linker",
-    "title": "Base.Libdl.dlsym_e",
-    "category": "Function",
-    "text": "dlsym_e(handle, sym)\n\nLook up a symbol from a shared library handle, silently return NULL pointer on lookup failure.\n\n\n\n"
-},
-
-{
-    "location": "stdlib/libdl.html#Base.Libdl.dlclose",
-    "page": "Dynamic Linker",
-    "title": "Base.Libdl.dlclose",
-    "category": "Function",
-    "text": "dlclose(handle)\n\nClose shared library referenced by handle.\n\n\n\n"
-},
-
-{
-    "location": "stdlib/libdl.html#Base.Libdl.dlext",
-    "page": "Dynamic Linker",
-    "title": "Base.Libdl.dlext",
-    "category": "Constant",
-    "text": "dlext\n\nFile extension for dynamic libraries (e.g. dll, dylib, so) on the current platform.\n\n\n\n"
-},
-
-{
-    "location": "stdlib/libdl.html#Base.Libdl.find_library",
-    "page": "Dynamic Linker",
-    "title": "Base.Libdl.find_library",
-    "category": "Function",
-    "text": "find_library(names, locations)\n\nSearches for the first library in names in the paths in the locations list, DL_LOAD_PATH, or system library paths (in that order) which can successfully be dlopen'd. On success, the return value will be one of the names (potentially prefixed by one of the paths in locations). This string can be assigned to a global const and used as the library name in future ccall's. On failure, it returns the empty string.\n\n\n\n"
-},
-
-{
-    "location": "stdlib/libdl.html#Base.Libdl.DL_LOAD_PATH",
-    "page": "Dynamic Linker",
-    "title": "Base.Libdl.DL_LOAD_PATH",
-    "category": "Constant",
-    "text": "DL_LOAD_PATH\n\nWhen calling dlopen, the paths in this list will be searched first, in order, before searching the system locations for a valid library handle.\n\n\n\n"
-},
-
-{
-    "location": "stdlib/libdl.html#Dynamic-Linker-1",
-    "page": "Dynamic Linker",
-    "title": "Dynamic Linker",
-    "category": "section",
-    "text": "The names in Base.Libdl are not exported and need to be called e.g. as Libdl.dlopen.Base.Libdl.dlopen\nBase.Libdl.dlopen_e\nBase.Libdl.RTLD_NOW\nBase.Libdl.dlsym\nBase.Libdl.dlsym_e\nBase.Libdl.dlclose\nBase.Libdl.dlext\nBase.Libdl.find_library\nBase.Libdl.DL_LOAD_PATH"
-},
-
-{
-    "location": "stdlib/profile.html#",
-    "page": "Profiling",
-    "title": "Profiling",
-    "category": "page",
-    "text": ""
-},
-
-{
-    "location": "stdlib/profile.html#Profile.@profile",
-    "page": "Profiling",
-    "title": "Profile.@profile",
-    "category": "Macro",
-    "text": "@profile\n\n@profile <expression> runs your expression while taking periodic backtraces. These are appended to an internal buffer of backtraces.\n\n\n\n"
-},
-
-{
-    "location": "stdlib/profile.html#Profile.clear",
-    "page": "Profiling",
-    "title": "Profile.clear",
-    "category": "Function",
-    "text": "clear()\n\nClear any existing backtraces from the internal buffer.\n\n\n\n"
-},
-
-{
-    "location": "stdlib/profile.html#Profile.print",
-    "page": "Profiling",
-    "title": "Profile.print",
-    "category": "Function",
-    "text": "print([io::IO = STDOUT,] [data::Vector]; kwargs...)\n\nPrints profiling results to io (by default, STDOUT). If you do not supply a data vector, the internal buffer of accumulated backtraces will be used.\n\nThe keyword arguments can be any combination of:\n\nformat – Determines whether backtraces are printed with (default, :tree) or without (:flat) indentation indicating tree structure.\nC – If true, backtraces from C and Fortran code are shown (normally they are excluded).\ncombine – If true (default), instruction pointers are merged that correspond to the same line of code.\nmaxdepth – Limits the depth higher than maxdepth in the :tree format.\nsortedby – Controls the order in :flat format. :filefuncline (default) sorts by the source  line, whereas :count sorts in order of number of collected samples.\nnoisefloor – Limits frames that exceed the heuristic noise floor of the sample (only applies to format :tree).  A suggested value to try for this is 2.0 (the default is 0). This parameter hides samples for which n <= noisefloor * √N,  where n is the number of samples on this line, and N is the number of samples for the callee.\nmincount – Limits the printout to only those lines with at least mincount occurrences.\n\n\n\nprint([io::IO = STDOUT,] data::Vector, lidict::LineInfoDict; kwargs...)\n\nPrints profiling results to io. This variant is used to examine results exported by a previous call to retrieve. Supply the vector data of backtraces and a dictionary lidict of line information.\n\nSee Profile.print([io], data) for an explanation of the valid keyword arguments.\n\n\n\n"
-},
-
-{
-    "location": "stdlib/profile.html#Profile.init",
-    "page": "Profiling",
-    "title": "Profile.init",
-    "category": "Function",
-    "text": "init(; n::Integer, delay::Float64)\n\nConfigure the delay between backtraces (measured in seconds), and the number n of instruction pointers that may be stored. Each instruction pointer corresponds to a single line of code; backtraces generally consist of a long list of instruction pointers. Default settings can be obtained by calling this function with no arguments, and each can be set independently using keywords or in the order (n, delay).\n\n\n\n"
-},
-
-{
-    "location": "stdlib/profile.html#Profile.fetch",
-    "page": "Profiling",
-    "title": "Profile.fetch",
-    "category": "Function",
-    "text": "fetch() -> data\n\nReturns a reference to the internal buffer of backtraces. Note that subsequent operations, like clear, can affect data unless you first make a copy. Note that the values in data have meaning only on this machine in the current session, because it depends on the exact memory addresses used in JIT-compiling. This function is primarily for internal use; retrieve may be a better choice for most users.\n\n\n\n"
-},
-
-{
-    "location": "stdlib/profile.html#Profile.retrieve",
-    "page": "Profiling",
-    "title": "Profile.retrieve",
-    "category": "Function",
-    "text": "retrieve() -> data, lidict\n\n\"Exports\" profiling results in a portable format, returning the set of all backtraces (data) and a dictionary that maps the (session-specific) instruction pointers in data to LineInfo values that store the file name, function name, and line number. This function allows you to save profiling results for future analysis.\n\n\n\n"
-},
-
-{
-    "location": "stdlib/profile.html#Profile.callers",
-    "page": "Profiling",
-    "title": "Profile.callers",
-    "category": "Function",
-    "text": "callers(funcname, [data, lidict], [filename=<filename>], [linerange=<start:stop>]) -> Vector{Tuple{count, lineinfo}}\n\nGiven a previous profiling run, determine who called a particular function. Supplying the filename (and optionally, range of line numbers over which the function is defined) allows you to disambiguate an overloaded method. The returned value is a vector containing a count of the number of calls and line information about the caller. One can optionally supply backtrace data obtained from retrieve; otherwise, the current internal profile buffer is used.\n\n\n\n"
-},
-
-{
-    "location": "stdlib/profile.html#Profile.clear_malloc_data",
-    "page": "Profiling",
-    "title": "Profile.clear_malloc_data",
-    "category": "Function",
-    "text": "clear_malloc_data()\n\nClears any stored memory allocation data when running julia with --track-allocation. Execute the command(s) you want to test (to force JIT-compilation), then call clear_malloc_data. Then execute your command(s) again, quit Julia, and examine the resulting *.mem files.\n\n\n\n"
-},
-
-{
-    "location": "stdlib/profile.html#lib-profiling-1",
-    "page": "Profiling",
-    "title": "Profiling",
-    "category": "section",
-    "text": "Profile.@profileThe methods in Profile are not exported and need to be called e.g. as Profile.print().Profile.clear\nProfile.print\nProfile.init\nProfile.fetch\nProfile.retrieve\nProfile.callers\nProfile.clear_malloc_data"
-},
-
-{
-    "location": "stdlib/stacktraces.html#",
-    "page": "StackTraces",
-    "title": "StackTraces",
-    "category": "page",
-    "text": ""
-},
-
-{
-    "location": "stdlib/stacktraces.html#Base.StackTraces.StackFrame",
-    "page": "StackTraces",
-    "title": "Base.StackTraces.StackFrame",
-    "category": "Type",
-    "text": "StackFrame\n\nStack information representing execution context, with the following fields:\n\nfunc::Symbol\nThe name of the function containing the execution context.\nlinfo::Union{Core.MethodInstance, CodeInfo, Nothing}\nThe MethodInstance containing the execution context (if it could be found).\nfile::Symbol\nThe path to the file containing the execution context.\nline::Int\nThe line number in the file containing the execution context.\nfrom_c::Bool\nTrue if the code is from C.\ninlined::Bool\nTrue if the code is from an inlined frame.\npointer::UInt64\nRepresentation of the pointer to the execution context as returned by backtrace.\n\n\n\n"
-},
-
-{
-    "location": "stdlib/stacktraces.html#Base.StackTraces.StackTrace",
-    "page": "StackTraces",
-    "title": "Base.StackTraces.StackTrace",
-    "category": "Type",
-    "text": "StackTrace\n\nAn alias for Vector{StackFrame} provided for convenience; returned by calls to stacktrace and catch_stacktrace.\n\n\n\n"
-},
-
-{
-    "location": "stdlib/stacktraces.html#Base.StackTraces.stacktrace",
-    "page": "StackTraces",
-    "title": "Base.StackTraces.stacktrace",
-    "category": "Function",
-    "text": "stacktrace([trace::Vector{Ptr{Cvoid}},] [c_funcs::Bool=false]) -> StackTrace\n\nReturns a stack trace in the form of a vector of StackFrames. (By default stacktrace doesn't return C functions, but this can be enabled.) When called without specifying a trace, stacktrace first calls backtrace.\n\n\n\n"
-},
-
-{
-    "location": "stdlib/stacktraces.html#Base.StackTraces.catch_stacktrace",
-    "page": "StackTraces",
-    "title": "Base.StackTraces.catch_stacktrace",
-    "category": "Function",
-    "text": "catch_stacktrace([c_funcs::Bool=false]) -> StackTrace\n\nReturns the stack trace for the most recent error thrown, rather than the current execution context.\n\n\n\n"
-},
-
-{
-    "location": "stdlib/stacktraces.html#Base.StackTraces.lookup",
-    "page": "StackTraces",
-    "title": "Base.StackTraces.lookup",
-    "category": "Function",
-    "text": "lookup(pointer::Union{Ptr{Cvoid}, UInt}) -> Vector{StackFrame}\n\nGiven a pointer to an execution context (usually generated by a call to backtrace), looks up stack frame context information. Returns an array of frame information for all functions inlined at that point, innermost function first.\n\n\n\n"
-},
-
-{
-    "location": "stdlib/stacktraces.html#Base.StackTraces.remove_frames!",
-    "page": "StackTraces",
-    "title": "Base.StackTraces.remove_frames!",
-    "category": "Function",
-    "text": "remove_frames!(stack::StackTrace, name::Symbol)\n\nTakes a StackTrace (a vector of StackFrames) and a function name (a Symbol) and removes the StackFrame specified by the function name from the StackTrace (also removing all frames above the specified function). Primarily used to remove StackTraces functions from the StackTrace prior to returning it.\n\n\n\nremove_frames!(stack::StackTrace, m::Module)\n\nReturns the StackTrace with all StackFrames from the provided Module removed.\n\n\n\n"
-},
-
-{
-    "location": "stdlib/stacktraces.html#StackTraces-1",
-    "page": "StackTraces",
-    "title": "StackTraces",
-    "category": "section",
-    "text": "Base.StackTraces.StackFrame\nBase.StackTraces.StackTrace\nBase.StackTraces.stacktrace\nBase.StackTraces.catch_stacktraceThe following methods and types in Base.StackTraces are not exported and need to be called e.g. as StackTraces.lookup(ptr).Base.StackTraces.lookup\nBase.StackTraces.remove_frames!"
-},
-
-{
-    "location": "stdlib/simd-types.html#",
-    "page": "SIMD Support",
-    "title": "SIMD Support",
-    "category": "page",
-    "text": ""
-},
-
-{
-    "location": "stdlib/simd-types.html#SIMD-Support-1",
-    "page": "SIMD Support",
-    "title": "SIMD Support",
-    "category": "section",
-    "text": "Type VecElement{T} is intended for building libraries of SIMD operations. Practical use of it requires using llvmcall. The type is defined as:struct VecElement{T}\n    value::T\nendIt has a special compilation rule: a homogeneous tuple of VecElement{T} maps to an LLVM vector type when T is a primitive bits type and the tuple length is in the set {2-6,8-10,16}.At -O3, the compiler might automatically vectorize operations on such tuples. For example, the following program, when compiled with julia -O3 generates two SIMD addition instructions (addps) on x86 systems:const m128 = NTuple{4,VecElement{Float32}}\n\nfunction add(a::m128, b::m128)\n    (VecElement(a[1].value+b[1].value),\n     VecElement(a[2].value+b[2].value),\n     VecElement(a[3].value+b[3].value),\n     VecElement(a[4].value+b[4].value))\nend\n\ntriple(c::m128) = add(add(c,c),c)\n\ncode_native(triple,(m128,))However, since the automatic vectorization cannot be relied upon, future use will mostly be via libraries that use llvmcall."
-},
-
-{
-    "location": "stdlib/base64.html#",
-    "page": "Base64",
-    "title": "Base64",
-    "category": "page",
-    "text": ""
-},
-
-{
-    "location": "stdlib/base64.html#Base64.Base64EncodePipe",
-    "page": "Base64",
-    "title": "Base64.Base64EncodePipe",
-    "category": "Type",
-    "text": "Base64EncodePipe(ostream)\n\nReturn a new write-only I/O stream, which converts any bytes written to it into base64-encoded ASCII bytes written to ostream.  Calling close on the Base64EncodePipe stream is necessary to complete the encoding (but does not close ostream).\n\nExamples\n\njulia> io = IOBuffer();\n\njulia> iob64_encode = Base64EncodePipe(io);\n\njulia> write(iob64_encode, \"Hello!\")\n6\n\njulia> close(iob64_encode);\n\njulia> str = String(take!(io))\n\"SGVsbG8h\"\n\njulia> String(base64decode(str))\n\"Hello!\"\n\n\n\n"
-},
-
-{
-    "location": "stdlib/base64.html#Base64.base64encode",
-    "page": "Base64",
-    "title": "Base64.base64encode",
-    "category": "Function",
-    "text": "base64encode(writefunc, args...)\nbase64encode(args...)\n\nGiven a write-like function writefunc, which takes an I/O stream as its first argument, base64encode(writefunc, args...) calls writefunc to write args... to a base64-encoded string, and returns the string. base64encode(args...) is equivalent to base64encode(write, args...): it converts its arguments into bytes using the standard write functions and returns the base64-encoded string.\n\nSee also base64decode.\n\n\n\n"
-},
-
-{
-    "location": "stdlib/base64.html#Base64.Base64DecodePipe",
-    "page": "Base64",
-    "title": "Base64.Base64DecodePipe",
-    "category": "Type",
-    "text": "Base64DecodePipe(istream)\n\nReturn a new read-only I/O stream, which decodes base64-encoded data read from istream.\n\nExamples\n\njulia> io = IOBuffer();\n\njulia> iob64_decode = Base64DecodePipe(io);\n\njulia> write(io, \"SGVsbG8h\")\n8\n\njulia> seekstart(io);\n\njulia> String(read(iob64_decode))\n\"Hello!\"\n\n\n\n"
-},
-
-{
-    "location": "stdlib/base64.html#Base64.base64decode",
-    "page": "Base64",
-    "title": "Base64.base64decode",
-    "category": "Function",
-    "text": "base64decode(string)\n\nDecode the base64-encoded string and returns a Vector{UInt8} of the decoded bytes.\n\nSee also base64encode.\n\nExamples\n\njulia> b = base64decode(\"SGVsbG8h\")\n6-element Array{UInt8,1}:\n 0x48\n 0x65\n 0x6c\n 0x6c\n 0x6f\n 0x21\n\njulia> String(b)\n\"Hello!\"\n\n\n\n"
-},
-
-{
-    "location": "stdlib/base64.html#Base64-1",
-    "page": "Base64",
-    "title": "Base64",
-    "category": "section",
-    "text": "Base64.Base64EncodePipe\nBase64.base64encode\nBase64.Base64DecodePipe\nBase64.base64decode"
-},
-
-{
-    "location": "stdlib/mmap.html#",
-    "page": "Memory-mapped I/O",
-    "title": "Memory-mapped I/O",
-    "category": "page",
-    "text": ""
-},
-
-{
-    "location": "stdlib/mmap.html#Mmap.Anonymous",
-    "page": "Memory-mapped I/O",
-    "title": "Mmap.Anonymous",
-    "category": "Type",
-    "text": "Mmap.Anonymous(name::AbstractString=\"\", readonly::Bool=false, create::Bool=true)\n\nCreate an IO-like object for creating zeroed-out mmapped-memory that is not tied to a file for use in Mmap.mmap. Used by SharedArray for creating shared memory arrays.\n\nExamples\n\njulia> using Mmap\n\njulia> anon = Mmap.Anonymous();\n\njulia> isreadable(anon)\ntrue\n\njulia> iswritable(anon)\ntrue\n\njulia> isopen(anon)\ntrue\n\n\n\n"
-},
-
-{
-    "location": "stdlib/mmap.html#Mmap.mmap",
-    "page": "Memory-mapped I/O",
-    "title": "Mmap.mmap",
-    "category": "Function",
-    "text": "Mmap.mmap(io::Union{IOStream,AbstractString,Mmap.AnonymousMmap}[, type::Type{Array{T,N}}, dims, offset]; grow::Bool=true, shared::Bool=true)\n       Mmap.mmap(type::Type{Array{T,N}}, dims)\n\nCreate an Array whose values are linked to a file, using memory-mapping. This provides a convenient way of working with data too large to fit in the computer's memory.\n\nThe type is an Array{T,N} with a bits-type element of T and dimension N that determines how the bytes of the array are interpreted. Note that the file must be stored in binary format, and no format conversions are possible (this is a limitation of operating systems, not Julia).\n\ndims is a tuple or single Integer specifying the size or length of the array.\n\nThe file is passed via the stream argument, either as an open IOStream or filename string. When you initialize the stream, use \"r\" for a \"read-only\" array, and \"w+\" to create a new array used to write values to disk.\n\nIf no type argument is specified, the default is Vector{UInt8}.\n\nOptionally, you can specify an offset (in bytes) if, for example, you want to skip over a header in the file. The default value for the offset is the current stream position for an IOStream.\n\nThe grow keyword argument specifies whether the disk file should be grown to accommodate the requested size of array (if the total file size is < requested array size). Write privileges are required to grow the file.\n\nThe shared keyword argument specifies whether the resulting Array and changes made to it will be visible to other processes mapping the same file.\n\nFor example, the following code\n\n# Create a file for mmapping\n# (you could alternatively use mmap to do this step, too)\nA = rand(1:20, 5, 30)\ns = open(\"/tmp/mmap.bin\", \"w+\")\n# We'll write the dimensions of the array as the first two Ints in the file\nwrite(s, size(A,1))\nwrite(s, size(A,2))\n# Now write the data\nwrite(s, A)\nclose(s)\n\n# Test by reading it back in\ns = open(\"/tmp/mmap.bin\")   # default is read-only\nm = read(s, Int)\nn = read(s, Int)\nA2 = Mmap.mmap(s, Matrix{Int}, (m,n))\n\ncreates a m-by-n Matrix{Int}, linked to the file associated with stream s.\n\nA more portable file would need to encode the word size – 32 bit or 64 bit – and endianness information in the header. In practice, consider encoding binary data using standard formats like HDF5 (which can be used with memory-mapping).\n\n\n\nMmap.mmap(io, BitArray, [dims, offset])\n\nCreate a BitArray whose values are linked to a file, using memory-mapping; it has the same purpose, works in the same way, and has the same arguments, as mmap, but the byte representation is different.\n\nExamples\n\njulia> using Mmap\n\njulia> io = open(\"mmap.bin\", \"w+\");\n\njulia> B = Mmap.mmap(io, BitArray, (25,30000));\n\njulia> B[3, 4000] = true;\n\njulia> Mmap.sync!(B);\n\njulia> close(io);\n\njulia> io = open(\"mmap.bin\", \"r+\");\n\njulia> C = Mmap.mmap(io, BitArray, (25,30000));\n\njulia> C[3, 4000]\ntrue\n\njulia> C[2, 4000]\nfalse\n\njulia> close(io)\n\njulia> rm(\"mmap.bin\")\n\nThis creates a 25-by-30000 BitArray, linked to the file associated with stream io.\n\n\n\n"
-},
-
-{
-    "location": "stdlib/mmap.html#Mmap.sync!",
-    "page": "Memory-mapped I/O",
-    "title": "Mmap.sync!",
-    "category": "Function",
-    "text": "Mmap.sync!(array)\n\nForces synchronization between the in-memory version of a memory-mapped Array or BitArray and the on-disk version.\n\n\n\n"
-},
-
-{
-    "location": "stdlib/mmap.html#Memory-mapped-I/O-1",
-    "page": "Memory-mapped I/O",
-    "title": "Memory-mapped I/O",
-    "category": "section",
-    "text": "Mmap.Anonymous\nMmap.mmap\nMmap.sync!"
-},
-
-{
-    "location": "stdlib/sharedarrays.html#",
-    "page": "Shared Arrays",
-    "title": "Shared Arrays",
-    "category": "page",
-    "text": ""
-},
-
-{
-    "location": "stdlib/sharedarrays.html#SharedArrays.SharedArray",
-    "page": "Shared Arrays",
-    "title": "SharedArrays.SharedArray",
-    "category": "Type",
-    "text": "SharedArray{T}(dims::NTuple; init=false, pids=Int[])\nSharedArray{T,N}(...)\n\nConstruct a SharedArray of a bits type T and size dims across the processes specified by pids - all of which have to be on the same host.  If N is specified by calling SharedArray{T,N}(dims), then N must match the length of dims.\n\nIf pids is left unspecified, the shared array will be mapped across all processes on the current host, including the master. But, localindices and indexpids will only refer to worker processes. This facilitates work distribution code to use workers for actual computation with the master process acting as a driver.\n\nIf an init function of the type initfn(S::SharedArray) is specified, it is called on all the participating workers.\n\nThe shared array is valid as long as a reference to the SharedArray object exists on the node which created the mapping.\n\nSharedArray{T}(filename::AbstractString, dims::NTuple, [offset=0]; mode=nothing, init=false, pids=Int[])\nSharedArray{T,N}(...)\n\nConstruct a SharedArray backed by the file filename, with element type T (must be a bits type) and size dims, across the processes specified by pids - all of which have to be on the same host. This file is mmapped into the host memory, with the following consequences:\n\nThe array data must be represented in binary format (e.g., an ASCII format like CSV cannot be supported)\nAny changes you make to the array values (e.g., A[3] = 0) will also change the values on disk\n\nIf pids is left unspecified, the shared array will be mapped across all processes on the current host, including the master. But, localindices and indexpids will only refer to worker processes. This facilitates work distribution code to use workers for actual computation with the master process acting as a driver.\n\nmode must be one of \"r\", \"r+\", \"w+\", or \"a+\", and defaults to \"r+\" if the file specified by filename already exists, or \"w+\" if not. If an init function of the type initfn(S::SharedArray) is specified, it is called on all the participating workers. You cannot specify an init function if the file is not writable.\n\noffset allows you to skip the specified number of bytes at the beginning of the file.\n\n\n\n"
-},
-
-{
-    "location": "stdlib/sharedarrays.html#Distributed.procs-Tuple{SharedArray}",
-    "page": "Shared Arrays",
-    "title": "Distributed.procs",
-    "category": "Method",
-    "text": "procs(S::SharedArray)\n\nGet the vector of processes mapping the shared array.\n\n\n\n"
-},
-
-{
-    "location": "stdlib/sharedarrays.html#SharedArrays.sdata",
-    "page": "Shared Arrays",
-    "title": "SharedArrays.sdata",
-    "category": "Function",
-    "text": "sdata(S::SharedArray)\n\nReturns the actual Array object backing S.\n\n\n\n"
-},
-
-{
-    "location": "stdlib/sharedarrays.html#SharedArrays.indexpids",
-    "page": "Shared Arrays",
-    "title": "SharedArrays.indexpids",
-    "category": "Function",
-    "text": "indexpids(S::SharedArray)\n\nReturns the current worker's index in the list of workers mapping the SharedArray (i.e. in the same list returned by procs(S)), or 0 if the SharedArray is not mapped locally.\n\n\n\n"
-},
-
-{
-    "location": "stdlib/sharedarrays.html#SharedArrays.localindices",
-    "page": "Shared Arrays",
-    "title": "SharedArrays.localindices",
-    "category": "Function",
-    "text": "localindices(S::SharedArray)\n\nReturns a range describing the \"default\" indices to be handled by the current process.  This range should be interpreted in the sense of linear indexing, i.e., as a sub-range of 1:length(S).  In multi-process contexts, returns an empty range in the parent process (or any process for which indexpids returns 0).\n\nIt's worth emphasizing that localindices exists purely as a convenience, and you can partition work on the array among workers any way you wish. For a SharedArray, all indices should be equally fast for each worker process.\n\n\n\n"
-},
-
-{
-    "location": "stdlib/sharedarrays.html#Shared-Arrays-1",
-    "page": "Shared Arrays",
-    "title": "Shared Arrays",
-    "category": "section",
-    "text": "SharedArrays.SharedArray\nSharedArrays.procs(::SharedArray)\nSharedArrays.sdata\nSharedArrays.indexpids\nSharedArrays.localindices"
-},
-
-{
-    "location": "stdlib/filewatching.html#",
-    "page": "File Events",
-    "title": "File Events",
-    "category": "page",
-    "text": ""
-},
-
-{
-    "location": "stdlib/filewatching.html#FileWatching.poll_fd",
-    "page": "File Events",
-    "title": "FileWatching.poll_fd",
-    "category": "Function",
-    "text": "poll_fd(fd, timeout_s::Real=-1; readable=false, writable=false)\n\nMonitor a file descriptor fd for changes in the read or write availability, and with a timeout given by timeout_s seconds.\n\nThe keyword arguments determine which of read and/or write status should be monitored; at least one of them must be set to true.\n\nThe returned value is an object with boolean fields readable, writable, and timedout, giving the result of the polling.\n\n\n\n"
-},
-
-{
-    "location": "stdlib/filewatching.html#FileWatching.poll_file",
-    "page": "File Events",
-    "title": "FileWatching.poll_file",
-    "category": "Function",
-    "text": "poll_file(path::AbstractString, interval_s::Real=5.007, timeout_s::Real=-1) -> (previous::StatStruct, current)\n\nMonitor a file for changes by polling every interval_s seconds until a change occurs or timeout_s seconds have elapsed. The interval_s should be a long period; the default is 5.007 seconds.\n\nReturns a pair of status objects (previous, current) when a change is detected. The previous status is always a StatStruct, but it may have all of the fields zeroed (indicating the file didn't previously exist, or wasn't previously accessible).\n\nThe current status object may be a StatStruct, an EOFError (indicating the timeout elapsed), or some other Exception subtype (if the stat operation failed - for example, if the path does not exist).\n\nTo determine when a file was modified, compare current isa StatStruct && mtime(prev) != mtime(current) to detect notification of changes. However, using watch_file for this operation is preferred, since it is more reliable and efficient, although in some situations it may not be available.\n\n\n\n"
-},
-
-{
-    "location": "stdlib/filewatching.html#FileWatching.watch_file",
-    "page": "File Events",
-    "title": "FileWatching.watch_file",
-    "category": "Function",
-    "text": "watch_file(path::AbstractString, timeout_s::Real=-1)\n\nWatch file or directory path for changes until a change occurs or timeout_s seconds have elapsed.\n\nThe returned value is an object with boolean fields changed, renamed, and timedout, giving the result of watching the file.\n\nThis behavior of this function varies slightly across platforms. See https://nodejs.org/api/fs.html#fs_caveats for more detailed information.\n\n\n\n"
-},
-
-{
-    "location": "stdlib/filewatching.html#lib-filewatching-1",
-    "page": "File Events",
-    "title": "File Events",
-    "category": "section",
-    "text": "FileWatching.poll_fd\nFileWatching.poll_file\nFileWatching.watch_file"
-},
-
-{
-    "location": "stdlib/crc32c.html#",
-    "page": "CRC32c",
-    "title": "CRC32c",
-    "category": "page",
-    "text": ""
-},
-
-{
-    "location": "stdlib/crc32c.html#CRC32c.crc32c",
-    "page": "CRC32c",
-    "title": "CRC32c.crc32c",
-    "category": "Function",
-    "text": "crc32c(data, crc::UInt32=0x00000000)\n\nCompute the CRC-32c checksum of the given data, which can be an Array{UInt8}, a contiguous subarray thereof, or a String.  Optionally, you can pass a starting crc integer to be mixed in with the checksum.  The crc parameter can be used to compute a checksum on data divided into chunks: performing crc32c(data2, crc32c(data1)) is equivalent to the checksum of [data1; data2]. (Technically, a little-endian checksum is computed.)\n\nThere is also a method crc32c(io, nb, crc) to checksum nb bytes from a stream io, or crc32c(io, crc) to checksum all the remaining bytes. Hence you can do open(crc32c, filename) to checksum an entire file, or crc32c(seekstart(buf)) to checksum an IOBuffer without calling take!.\n\nFor a String, note that the result is specific to the UTF-8 encoding (a different checksum would be obtained from a different Unicode encoding). To checksum an a::Array of some other bitstype, you can do crc32c(reinterpret(UInt8,a)), but note that the result may be endian-dependent.\n\n\n\n"
-},
-
-{
-    "location": "stdlib/crc32c.html#CRC32c.crc32c-Tuple{IO,Integer,UInt32}",
-    "page": "CRC32c",
-    "title": "CRC32c.crc32c",
-    "category": "Method",
-    "text": "crc32c(io::IO, [nb::Integer,] crc::UInt32=0x00000000)\n\nRead up to nb bytes from io and return the CRC-32c checksum, optionally mixed with a starting crc integer.  If nb is not supplied, then io will be read until the end of the stream.\n\n\n\n"
-},
-
-{
-    "location": "stdlib/crc32c.html#CRC32c-1",
-    "page": "CRC32c",
-    "title": "CRC32c",
-    "category": "section",
-    "text": "CRC32c.crc32c\nCRC32c.crc32c(::IO, ::Integer, ::UInt32)"
-},
-
-{
-    "location": "stdlib/iterativeeigensolvers.html#",
-    "page": "Iterative Eigensolvers",
-    "title": "Iterative Eigensolvers",
-    "category": "page",
-    "text": ""
-},
-
-{
-    "location": "stdlib/iterativeeigensolvers.html#IterativeEigensolvers.eigs-Tuple{Any}",
-    "page": "Iterative Eigensolvers",
-    "title": "IterativeEigensolvers.eigs",
-    "category": "Method",
-    "text": "eigs(A; nev=6, ncv=max(20,2*nev+1), which=:LM, tol=0.0, maxiter=300, sigma=nothing, ritzvec=true, v0=zeros((0,))) -> (d,[v,],nconv,niter,nmult,resid)\n\nComputes eigenvalues d of A using implicitly restarted Lanczos or Arnoldi iterations for real symmetric or general nonsymmetric matrices respectively. See the manual for more information.\n\neigs returns the nev requested eigenvalues in d, the corresponding Ritz vectors v (only if ritzvec=true), the number of converged eigenvalues nconv, the number of iterations niter and the number of matrix vector multiplications nmult, as well as the final residual vector resid.\n\nExamples\n\njulia> using IterativeEigensolvers\n\njulia> A = Diagonal(1:4);\n\njulia> λ, ϕ = eigs(A, nev = 2);\n\njulia> λ\n2-element Array{Float64,1}:\n 4.0\n 3.0\n\n\n\n"
-},
-
-{
-    "location": "stdlib/iterativeeigensolvers.html#IterativeEigensolvers.eigs-Tuple{Any,Any}",
-    "page": "Iterative Eigensolvers",
-    "title": "IterativeEigensolvers.eigs",
-    "category": "Method",
-    "text": "eigs(A, B; nev=6, ncv=max(20,2*nev+1), which=:LM, tol=0.0, maxiter=300, sigma=nothing, ritzvec=true, v0=zeros((0,))) -> (d,[v,],nconv,niter,nmult,resid)\n\nComputes generalized eigenvalues d of A and B using implicitly restarted Lanczos or Arnoldi iterations for real symmetric or general nonsymmetric matrices respectively. See the manual for more information.\n\n\n\n"
-},
-
-{
-    "location": "stdlib/iterativeeigensolvers.html#IterativeEigensolvers.svds",
-    "page": "Iterative Eigensolvers",
-    "title": "IterativeEigensolvers.svds",
-    "category": "Function",
-    "text": "svds(A; nsv=6, ritzvec=true, tol=0.0, maxiter=1000, ncv=2*nsv, v0=zeros((0,))) -> (SVD([left_sv,] s, [right_sv,]), nconv, niter, nmult, resid)\n\nComputes the largest singular values s of A using implicitly restarted Lanczos iterations derived from eigs.\n\nInputs\n\nA: Linear operator whose singular values are desired. A may be represented as a subtype of AbstractArray, e.g., a sparse matrix, or any other type supporting the four methods size(A), eltype(A), A * vector, and A' * vector.\nnsv: Number of singular values. Default: 6.\nritzvec: If true, return the left and right singular vectors left_sv and right_sv.  If false, omit the singular vectors. Default: true.\ntol: tolerance, see eigs.\nmaxiter: Maximum number of iterations, see eigs. Default: 1000.\nncv: Maximum size of the Krylov subspace, see eigs (there called nev). Default: 2*nsv.\nv0: Initial guess for the first Krylov vector. It may have length min(size(A)...), or 0.\n\nOutputs\n\nsvd: An SVD object containing the left singular vectors, the requested values, and the right singular vectors. If ritzvec = false, the left and right singular vectors will be empty.\nnconv: Number of converged singular values.\nniter: Number of iterations.\nnmult: Number of matrix–vector products used.\nresid: Final residual vector.\n\nExamples\n\njulia> A = Diagonal(1:4);\n\njulia> s = svds(A, nsv = 2)[1];\n\njulia> s.S\n2-element Array{Float64,1}:\n 4.0\n 2.9999999999999996\n\nnote: Implementation\nsvds(A) is formally equivalent to calling eigs to perform implicitly restarted Lanczos tridiagonalization on the Hermitian matrix A^prime A or AA^prime such that the size is smallest.\n\n\n\n"
-},
-
-{
-    "location": "stdlib/iterativeeigensolvers.html#lib-itereigen-1",
-    "page": "Iterative Eigensolvers",
-    "title": "Iterative Eigensolvers",
-    "category": "section",
-    "text": "Julia provides bindings to ARPACK, which can be used to perform iterative solutions for eigensystems (using eigs) or singular value decompositions (using svds).eigs calculates the eigenvalues and, optionally, eigenvectors of its input(s) using implicitly restarted Lanczos or Arnoldi iterations for real symmetric or general nonsymmetric matrices respectively.For the single matrix version,eigs(A; nev=6, ncv=max(20,2*nev+1), which=:LM, tol=0.0, maxiter=300, sigma=nothing, ritzvec=true, v0=zeros((0,))) -> (d,[v,],nconv,niter,nmult,resid)the following keyword arguments are supported:nev: Number of eigenvalues\nncv: Number of Krylov vectors used in the computation; should satisfy nev+1 <= ncv <= n for real symmetric problems and nev+2 <= ncv <= n for other problems, where n is the size of the input matrix A. The default is ncv = max(20,2*nev+1). Note that these restrictions limit the input matrix A to be of dimension at least 2.\nwhich: type of eigenvalues to compute. See the note below.which type of eigenvalues\n:LM eigenvalues of largest magnitude (default)\n:SM eigenvalues of smallest magnitude\n:LR eigenvalues of largest real part\n:SR eigenvalues of smallest real part\n:LI eigenvalues of largest imaginary part (nonsymmetric or complex A only)\n:SI eigenvalues of smallest imaginary part (nonsymmetric or complex A only)\n:BE compute half of the eigenvalues from each end of the spectrum, biased in favor of the high end. (real symmetric A only)tol: parameter defining the relative tolerance for convergence of Ritz values (eigenvalue estimates).    A Ritz value  is considered converged when its associated residual    is less than or equal to the product of tol and max(^23 ),    where ɛ = eps(real(eltype(A)))/2 is LAPACK's machine epsilon.    The residual associated with  and its corresponding Ritz vector v    is defined as the norm Av - v.    The specified value of tol should be positive; otherwise, it is ignored    and  is used instead.    Default: .\nmaxiter: Maximum number of iterations (default = 300)\nsigma: Specifies the level shift used in inverse iteration. If nothing (default), defaults to ordinary (forward) iterations. Otherwise, find eigenvalues close to sigma using shift and invert iterations.\nritzvec: Returns the Ritz vectors v (eigenvectors) if true\nv0: starting vector from which to start the iterationsWe can see the various keywords in action in the following examples:julia> using IterativeEigensolvers\n\njulia> A = Diagonal(1:4);\n\njulia> λ, ϕ = eigs(A, nev = 2, which=:SM);\n\njulia> λ\n2-element Array{Float64,1}:\n 1.0000000000000002\n 2.0\n\njulia> B = Diagonal([1., 2., -3im, 4im])\n4×4 Diagonal{Complex{Float64},Array{Complex{Float64},1}}:\n 1.0+0.0im      ⋅          ⋅          ⋅\n     ⋅      2.0+0.0im      ⋅          ⋅\n     ⋅          ⋅      0.0-3.0im      ⋅\n     ⋅          ⋅          ⋅      0.0+4.0im\n\njulia> λ, ϕ = eigs(B, nev=1, which=:LI);\n\njulia> λ\n1-element Array{Complex{Float64},1}:\n -4.440892098500626e-16 + 3.999999999999998im\n\njulia> λ, ϕ = eigs(B, nev=1, which=:SI);\n\njulia> λ\n1-element Array{Complex{Float64},1}:\n 1.3877787807814457e-16 - 2.999999999999999im\n\njulia> λ, ϕ = eigs(B, nev=1, which=:LR);\n\njulia> λ\n1-element Array{Complex{Float64},1}:\n 2.0 + 4.242754940683747e-17im\n\njulia> λ, ϕ = eigs(B, nev=1, which=:SR);\n\njulia> λ\n1-element Array{Complex{Float64},1}:\n 4.440892098500626e-16 + 4.0000000000000036im\n\njulia> λ, ϕ = eigs(B, nev=1, sigma=1.5);\n\njulia> λ\n1-element Array{Complex{Float64},1}:\n 1.9999999999999996 + 2.4290457684137336e-17imnote: Note\nThe sigma and which keywords interact: the description of eigenvalues searched for by which do not necessarily refer to the eigenvalues of A, but rather the linear operator constructed by the specification of the iteration mode implied by sigma.sigma iteration mode which refers to eigenvalues of\nnothing ordinary (forward) A\nreal or complex inverse with level shift sigma (A - sigma I )^-1note: Note\nAlthough tol has a default value, the best choice depends strongly on the matrix A. We recommend that users _always_ specify a value for tol which suits their specific needs.For details of how the errors in the computed eigenvalues are estimated, see:B. N. Parlett, \"The Symmetric Eigenvalue Problem\", SIAM: Philadelphia, 2/e (1998), Ch. 13.2, \"Accessing Accuracy in Lanczos Problems\", pp. 290-292 ff.\nR. B. Lehoucq and D. C. Sorensen, \"Deflation Techniques for an Implicitly Restarted Arnoldi Iteration\", SIAM Journal on Matrix Analysis and Applications (1996), 17(4), 789–821.  doi:10.1137/S0895479895281484For the two-input generalized eigensolution version,eigs(A, B; nev=6, ncv=max(20,2*nev+1), which=:LM, tol=0.0, maxiter=300, sigma=nothing, ritzvec=true, v0=zeros((0,))) -> (d,[v,],nconv,niter,nmult,resid)the following keyword arguments are supported:nev: Number of eigenvalues\nncv: Number of Krylov vectors used in the computation; should satisfy nev+1 <= ncv <= n for real symmetric problems and nev+2 <= ncv <= n for other problems, where n is the size of the input matrices A and B. The default is ncv = max(20,2*nev+1). Note that these restrictions limit the input matrix A to be of dimension at least 2.\nwhich: type of eigenvalues to compute. See the note below.which type of eigenvalues\n:LM eigenvalues of largest magnitude (default)\n:SM eigenvalues of smallest magnitude\n:LR eigenvalues of largest real part\n:SR eigenvalues of smallest real part\n:LI eigenvalues of largest imaginary part (nonsymmetric or complex A only)\n:SI eigenvalues of smallest imaginary part (nonsymmetric or complex A only)\n:BE compute half of the eigenvalues from each end of the spectrum, biased in favor of the high end. (real symmetric A only)tol: relative tolerance used in the convergence criterion for eigenvalues, similar to    tol in the eigs(A) method for the ordinary eigenvalue    problem, but effectively for the eigenvalues of B^-1 A instead of A.    See the documentation for the ordinary eigenvalue problem in    eigs(A) and the accompanying note about tol.\nmaxiter: Maximum number of iterations (default = 300)\nsigma: Specifies the level shift used in inverse iteration. If nothing (default), defaults to ordinary (forward) iterations. Otherwise, find eigenvalues close to sigma using shift and invert iterations.\nritzvec: Returns the Ritz vectors v (eigenvectors) if true\nv0: starting vector from which to start the iterationseigs returns the nev requested eigenvalues in d, the corresponding Ritz vectors v (only if ritzvec=true), the number of converged eigenvalues nconv, the number of iterations niter and the number of matrix vector multiplications nmult, as well as the final residual vector resid.We can see the various keywords in action in the following examples:julia> using IterativeEigensolvers\n\njulia> A = sparse(1.0I, 4, 4); B = Diagonal(1:4);\n\njulia> λ, ϕ = eigs(A, B, nev = 2);\n\njulia> λ\n2-element Array{Float64,1}:\n 1.0\n 0.4999999999999999\n\njulia> A = sparse(1.0I, 4, 4); B = Diagonal([1, -2im, 3, 4im]);\n\njulia> λ, ϕ = eigs(A, B, nev=1, which=:SI);\n\njulia> λ\n1-element Array{Complex{Float64},1}:\n 0.03291282838780993 - 2.0627621271174514im\n\njulia> λ, ϕ = eigs(A, B, nev=1, which=:LI);\n\njulia> λ\n1-element Array{Complex{Float64},1}:\n -0.6428551411711136 + 2.1820633510068994imnote: Note\nThe sigma and which keywords interact: the description of eigenvalues searched for by which do not necessarily refer to the eigenvalue problem Av = Bvlambda, but rather the linear operator constructed by the specification of the iteration mode implied by sigma.sigma iteration mode which refers to the problem\nnothing ordinary (forward) Av = Bvlambda\nreal or complex inverse with level shift sigma (A - sigma B )^-1B = vnuIterativeEigensolvers.eigs(::Any)\nIterativeEigensolvers.eigs(::Any, ::Any)\nIterativeEigensolvers.svds"
-},
-
-{
     "location": "stdlib/unicode.html#",
     "page": "Unicode",
     "title": "Unicode",
@@ -19374,38 +19446,6 @@ var documenterSearchIndex = {"docs": [
     "title": "Unicode",
     "category": "section",
     "text": "Unicode.isassigned\nUnicode.normalize\nUnicode.graphemes\nUnicode.uppercase\nUnicode.lowercase\nUnicode.titlecase\nUnicode.ucfirst\nUnicode.lcfirst\nUnicode.textwidth\nUnicode.isalnum\nUnicode.isalpha\nUnicode.iscntrl\nUnicode.isdigit\nUnicode.isgraph\nUnicode.islower\nUnicode.isnumeric\nUnicode.isprint\nUnicode.ispunct\nUnicode.isspace\nUnicode.isupper\nUnicode.isxdigit"
-},
-
-{
-    "location": "stdlib/printf.html#",
-    "page": "Printf",
-    "title": "Printf",
-    "category": "page",
-    "text": ""
-},
-
-{
-    "location": "stdlib/printf.html#Printf.@printf",
-    "page": "Printf",
-    "title": "Printf.@printf",
-    "category": "Macro",
-    "text": "@printf([io::IOStream], \"%Fmt\", args...)\n\nPrint args using C printf style format specification string, with some caveats: Inf and NaN are printed consistently as Inf and NaN for flags %a, %A, %e, %E, %f, %F, %g, and %G. Furthermore, if a floating point number is equally close to the numeric values of two possible output strings, the output string further away from zero is chosen.\n\nOptionally, an IOStream may be passed as the first argument to redirect output.\n\nExamples\n\njulia> @printf(\"%f %F %f %F\\n\", Inf, Inf, NaN, NaN)\nInf Inf NaN NaN\n\n\njulia> @printf \"%.0f %.1f %f\\n\" 0.5 0.025 -0.0078125\n1 0.0 -0.007813\n\n\n\n"
-},
-
-{
-    "location": "stdlib/printf.html#Printf.@sprintf",
-    "page": "Printf",
-    "title": "Printf.@sprintf",
-    "category": "Macro",
-    "text": "@sprintf(\"%Fmt\", args...)\n\nReturn @printf formatted output as string.\n\nExamples\n\njulia> s = @sprintf \"this is a %s %15.1f\" \"test\" 34.567;\n\njulia> println(s)\nthis is a test            34.6\n\n\n\n"
-},
-
-{
-    "location": "stdlib/printf.html#Printf-1",
-    "page": "Printf",
-    "title": "Printf",
-    "category": "section",
-    "text": "Printf.@printf\nPrintf.@sprintf"
 },
 
 {
