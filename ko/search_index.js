@@ -21,7 +21,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Home",
     "title": "Manual",
     "category": "section",
-    "text": "Introduction\nGetting Started\nVariables\nIntegers and Floating-Point Numbers\nMathematical Operations and Elementary Functions\nComplex and Rational Numbers\nStrings\nFunctions\nControl Flow\nScope of Variables\nTypes\nMethods\nConstructors\nConversion and Promotion\nInterfaces\nModules\nDocumentation\nMetaprogramming\nMulti-dimensional Arrays\nMissing Values\nNetworking and Streams\nParallel Computing\nDate and DateTime\nRunning External Programs\nCalling C and Fortran Code\nHandling Operating System Variation\nEnvironment Variables\nInteracting With Julia\nEmbedding Julia\nPackages\nProfiling\nStack Traces\nPerformance Tips\nWorkflow Tips\nStyle Guide\nFrequently Asked Questions\nNoteworthy Differences from other Languages\nUnicode Input"
+    "text": "Introduction\nGetting Started\nVariables\nIntegers and Floating-Point Numbers\nMathematical Operations and Elementary Functions\nComplex and Rational Numbers\nStrings\nFunctions\nControl Flow\nScope of Variables\nTypes\nMethods\nConstructors\nConversion and Promotion\nInterfaces\nModules\nDocumentation\nMetaprogramming\nMulti-dimensional Arrays\nMissing Values\nNetworking and Streams\nParallel Computing\nDate and DateTime\nRunning External Programs\nCalling C and Fortran Code\nHandling Operating System Variation\nEnvironment Variables\nEmbedding Julia\nPackages\nProfiling\nStack Traces\nPerformance Tips\nWorkflow Tips\nStyle Guide\nFrequently Asked Questions\nNoteworthy Differences from other Languages\nUnicode Input"
 },
 
 {
@@ -37,7 +37,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Home",
     "title": "Standard Library",
     "category": "section",
-    "text": "Base64\nCRC32c\nDates and Time\nDelimited Files\nDistributed Computing\nFile Events\nIterative Eigensolvers\nMemory-mapped I/O\nPrintf\nProfiling\nRandom Numbers\nShared Arrays\nLinear Algebra\nSparse Arrays\nUnicode\nUnit Testing"
+    "text": "The Julia REPL\nBase64\nCRC32c\nDates and Time\nDelimited Files\nDistributed Computing\nFile Events\nIterative Eigensolvers\nMemory-mapped I/O\nPrintf\nProfiling\nRandom Numbers\nShared Arrays\nLinear Algebra\nSparse Arrays\nUnicode\nUnit Testing"
 },
 
 {
@@ -109,7 +109,7 @@ var documenterSearchIndex = {"docs": [
     "page": "줄리아 v0.7.0 릴리즈 노트",
     "title": "Deprecated or removed",
     "category": "section",
-    "text": "The JULIA_HOME environment variable has been renamed to JULIA_BINDIR and Base.JULIA_HOME has been moved to Sys.BINDIR (#20899).\nThe keyword immutable is fully deprecated to struct, and type is fully deprecated to mutable struct (#19157, #20418).\nIndexing into multidimensional arrays with more than one index but fewer indices than there are dimensions is no longer permitted when those trailing dimensions have lengths greater than 1. Instead, reshape the array or add trailing indices so the dimensionality and number of indices match (#14770, #23628).\nindices(a) and indices(a,d) have been deprecated in favor of axes(a) and axes(a, d) (#25057).\nEnvHash has been renamed to EnvDict (#24167).\nUninitialized Array constructors of the form Array[{T,N}](shape...) have been deprecated in favor of equivalents accepting uninitialized (an alias for Uninitialized()) as their first argument, as in Array[{T,N}](uninitialized, shape...). For example, Vector(3) is now Vector(uninitialized, 3), Matrix{Int}((2, 4)) is now, Matrix{Int}(uninitialized, (2, 4)), and Array{Float32,3}(11, 13, 17) is now Array{Float32,3}(uninitialized, 11, 13, 17) (#24781).\nLinAlg.fillslots! has been renamed LinAlg.fillstored! (#25030).\nfill!(A::Diagonal, x) and fill!(A::AbstractTriangular, x) have been deprecated in favor of Base.LinAlg.fillstored!(A, x) (#24413).\neye has been deprecated in favor of I and Matrix constructors. Please see the deprecation warnings for replacement details (#24438).\nzeros(D::Diagonal[, opts...]) has been deprecated (#24654).\nUsing Bool values directly as indices is now deprecated and will be an error in the future. Convert them to Int before indexing if you intend to access index 1 for true and 0 for false.\nwhos has been renamed varinfo, and now returns a markdown table instead of printing output (#12131).\nUninitialized RowVector constructors of the form RowVector{T}(shape...) have been deprecated in favor of equivalents accepting uninitialized (an alias for Uninitialized()) as their first argument, as in RowVector{T}(uninitialized, shape...). For example, RowVector{Int}(3) is now RowVector{Int}(uninitialized, 3), and RowVector{Float32}((1, 4)) is now RowVector{Float32}(uninitialized, (1, 4)) (#24786).\nwritecsv(io, a; opts...) has been deprecated in favor of writedlm(io, a, ','; opts...) (#23529).\nThe method srand(rng, filename, n=4) has been deprecated (#21359).\nreadcsv(io[, T::Type]; opts...) has been deprecated in favor of readdlm(io, ','[, T]; opts...) (#23530).\nsparse(s::UniformScaling, m::Integer) has been deprecated in favor of the three-argument equivalent sparse(s::UniformScaling, m, n) (#24472).\nThe cholfact/cholfact! methods that accepted an uplo symbol have been deprecated in favor of using Hermitian (or Symmetric) views (#22187, #22188).\nThe thin keyword argument for orthogonal decomposition methods has been deprecated in favor of full, which has the opposite meaning: thin == true if and only if full == false (#24279).\nisposdef(A::AbstractMatrix, UL::Symbol) and isposdef!(A::AbstractMatrix, UL::Symbol) have been deprecated in favor of isposdef(Hermitian(A, UL)) and isposdef!(Hermitian(A, UL)) respectively (#22245).\nThe bkfact/bkfact! methods that accepted uplo and issymmetric symbols have been deprecated in favor of using Hermitian (or Symmetric) views (#22605).\nThe function current_module is deprecated and replaced with @__MODULE__. This caused the deprecation of some reflection methods (such as macroexpand and isconst), which now require a module argument. And it caused the bugfix of other default arguments to use the Main module (including whos, which)  (#22064).\nexpand(ex) and expand(module, ex) have been deprecated in favor of Meta.lower(module, ex) (#22064, #24278).\nones(A::AbstractArray[, opts...]) and zeros(A::AbstractArray[, opts...]) methods have been deprecated. For zeros(A), consider zero(A). For ones(A) or zeros(A), consider ones(size(A)), zeros(size(A)), fill(v, size(A)) for v an appropriate one or zero, fill!(copy(A), {1|0}), fill!(similar(A), {1|0}), or any of the preceding with different element type and/or shape depending on opts.... Where strictly necessary, consider fill!(similar(A[, opts...]), {one(eltype(A)) | zero(eltype(A))}). For an algebraic multiplicative identity, consider one(A) (#24656).\nThe Operators module is deprecated. Instead, import required operators explicitly from Base, e.g. import Base: +, -, *, / (#22251).\nBindings to the FFTW library have been removed from Base. The DFT framework for building FFT implementations is now in AbstractFFTs.jl, the bindings to the FFTW library are in FFTW.jl, and the Base signal processing functions which used FFTs are now in DSP.jl (#21956).\nThe corrected positional argument to cov has been deprecated in favor of a keyword argument with the same name (#21709).\nOmitting spaces around the ? and the : tokens in a ternary expression has been deprecated. Ternaries must now include some amount of whitespace, e.g. x ? a : b rather than x?a:b (#22523 and #22712).\n? can no longer be used as an identifier name (#22712)\nThe method replace(s::AbstractString, pat, r, [count]) is deprecated in favor of replace(s::AbstractString, pat => r; [count]) (#25165). Moreover, count cannot be negative anymore (use typemax(Int) instead (#22325).\nread(io, type, dims) is deprecated to read!(io, Array{type}(dims)) (#21450).\nread(::IO, ::Ref) is now a method of read!, since it mutates its Ref argument (#21592).\nBidiagonal constructors now use a Symbol (:U or :L) for the upper/lower argument, instead of a Bool or a Char (#22703).\nBidiagonal, Tridiagonal and SymTridiagonal constructors that automatically converted the input vectors to the same type are deprecated in favor of explicit conversion (#22925, #23035, #23154.\nCalling nfields on a type to find out how many fields its instances have is deprecated. Use fieldcount instead. Use nfields only to get the number of fields in a specific object (#22350).\nfieldnames now operates only on types. To get the names of fields in an object, use fieldnames(typeof(x)) (#22350).\nInexactError, DomainError, and OverflowError now take arguments. InexactError(func::Symbol, type, -3) now prints as \"ERROR: InexactError: func(type, -3)\", DomainError(val, [msg]) prints as \"ERROR: DomainError with val:\\nmsg\", and OverflowError(msg) prints as \"ERROR: OverflowError: msg\". (#20005, #22751, #22761)\nThe operating system identification functions: is_linux, is_bsd, is_apple, is_unix, and is_windows, have been deprecated in favor of Sys.islinux, Sys.isbsd, Sys.isapple, Sys.isunix, and Sys.iswindows, respectively (#22182).\nThe forms of read, readstring, and eachline that accepted both a Cmd object and an input stream are deprecated. Use e.g. read(pipeline(stdin, cmd)) instead (#22762).\nThe unexported type AbstractIOBuffer has been renamed to GenericIOBuffer (#17360 #22796).\nDisplay has been renamed to AbstractDisplay (#24831).\nRemaining vectorized methods over SparseVectors, particularly floor, ceil, trunc, round, and most common transcendental functions such as exp, log, and sin variants, have been deprecated in favor of dot-syntax (#22961).\nThe method String(io::IOBuffer) is deprecated to String(take!(copy(io))) (#21438).\nThe function readstring is deprecated in favor of read(io, String) (#22793)\nThe function showall is deprecated. Showing entire values is the default, unless an IOContext specifying :limit=>true is in use (#22847).\nissubtype has been deprecated in favor of <: (which used to be an alias for issubtype).\nCalling write on non-isbits arrays is deprecated in favor of explicit loops or serialize (#6466).\nThe default juliarc.jl file on Windows has been removed. Now must explicitly include the full path if you need access to executables or libraries in the Sys.BINDIR directory, e.g. joinpath(Sys.BINDIR, \"7z.exe\") for 7z.exe (#21540).\nsqrtm has been deprecated in favor of sqrt (#23504).\nexpm has been deprecated in favor of exp (#23233).\nlogm has been deprecated in favor of log (#23505).\nfull has been deprecated in favor of more specific, better defined alternatives. On structured matrices A, consider instead Matrix(A), Array(A), SparseMatrixCSC(A), or sparse(A). On sparse arrays S, consider instead Vector(S), Matrix(S), or Array(S) as appropriate. On factorizations F, consider instead Matrix(F), Array(F), AbstractMatrix(F), or AbstractArray(F). On implicit orthogonal factors Q, consider instead Matrix(Q) or Array(Q); for implicit orthogonal factors that can be recovered in square or truncated form, see the deprecation message for square recovery instructions. On Symmetric, Hermitian, or AbstractTriangular matrices A, consider instead Matrix(S), Array(S), SparseMatrixCSC(S), or sparse(S). On Symmetric matrices A particularly, consider instead LinAlg.copytri!(copy(parent(A)), A.uplo). On Hermitian matrices A particularly, consider instead LinAlg.copytri!(copy(parent(A)), A.uplo, true). On UpperTriangular matrices A particularly, consider instead triu!(copy(parent(A))). On LowerTriangular matrices A particularly, consider instead tril!(copy(parent(A))) (#24250).\nspeye has been deprecated in favor of I, sparse, and SparseMatrixCSC constructor methods (#24356).\nCalling union with no arguments is deprecated; construct an empty set with an appropriate element type using Set{T}() instead (#23144).\nVectorized DateTime, Date, and format methods have been deprecated in favor of dot-syntax (#23207).\nBase.cpad has been removed; use an appropriate combination of rpad and lpad instead (#23187).\nctranspose and ctranspose! have been deprecated in favor of adjoint and adjoint!, respectively (#23235).\nfilter and filter! on dictionaries now pass a single key=>value pair to the argument function, instead of two arguments (#17886).\nrol, rol!, ror, and ror! have been deprecated in favor of specialized methods for circshift/circshift! (#23404).\nBase.SparseArrays.SpDiagIterator has been removed (#23261).\nThe tuple-of-types form of cfunction, cfunction(f, returntype, (types...)), has been deprecated in favor of the tuple-type form cfunction(f, returntype, Tuple{types...}) (#23066).\ndiagm(v::AbstractVector, k::Integer=0) has been deprecated in favor of diagm(k => v) (#24047).\ndiagm(x::Number) has been deprecated in favor of fill(x, 1, 1) (#24047).\ndiagm(A::SparseMatrixCSC) has been deprecated in favor of spdiagm(sparsevec(A)) (#23341).\ndiagm(A::BitMatrix) has been deprecated, use diagm(0 => vec(A)) or BitMatrix(Diagonal(vec(A))) instead (#23373, #24047).\nℯ (written as \\mscre<TAB> or \\euler<TAB>) is now the only (by default) exported name for Euler's number, and the type has changed from Irrational{:e} to Irrational{:ℯ} (#23427).\nThe mathematical constants π, pi, ℯ, e, γ, eulergamma, catalan, φ and golden have been moved from Base to a new module; Base.MathConstants. Only π, pi and ℯ are now exported by default from Base (#23427).\neu (previously an alias for ℯ) has been deprecated in favor of ℯ (or MathConstants.e) (#23427).\nGMP.gmp_version(), GMP.GMP_VERSION, GMP.gmp_bits_per_limb(), and GMP.GMP_BITS_PER_LIBM have been renamed to GMP.version(), GMP.VERSION, GMP.bits_per_libm(), and GMP.BITS_PER_LIBM, respectively. Similarly, MPFR.get_version(), has been renamed to MPFR.version() (#23323). Also, LinAlg.LAPACK.laver() has been renamed to LinAlg.LAPACK.version() and now returns a VersionNumber.\nselect, select!, selectperm and selectperm! have been renamed respectively to partialsort, partialsort!, partialsortperm and partialsortperm! (#23051).\nThe Range abstract type has been renamed to AbstractRange (#23570).\nmap on dictionaries previously operated on key=>value pairs. This behavior is deprecated, and in the future map will operate only on values (#5794).\nAutomatically broadcasted + and - for array + scalar, scalar - array, and so-on have been deprecated due to inconsistency with linear algebra. Use .+ and .- for these operations instead (#22880, #22932).\nisleaftype is deprecated in favor of the simpler predicates isconcretetype and isdispatchtuple. Concrete types are those that might equal typeof(x) for some x; isleaftype included some types for which this is not true. Those are now categorized more precisely as \"dispatch tuple types\" and \"!hasfreetypevars\" (not exported). (#17086, #25496)\ncontains(eq, itr, item) is deprecated in favor of any with a predicate (#23716).\nspdiagm(x::AbstractVector) has been deprecated in favor of sparse(Diagonal(x)) alternatively spdiagm(0 => x) (#23757).\nspdiagm(x::AbstractVector, d::Integer) and spdiagm(x::Tuple{<:AbstractVector}, d::Tuple{<:Integer}) have been deprecated in favor of spdiagm(d => x) and spdiagm(d[1] => x[1], d[2] => x[2], ...) respectively. The new spdiagm implementation now always returns a square matrix (#23757).\nspones(A::AbstractSparseArray) has been deprecated in favor of LinAlg.fillstored!(copy(A), 1) (#25037).\nConstructors for LibGit2.UserPasswordCredentials and LibGit2.SSHCredentials which take a prompt_if_incorrect argument are deprecated. Instead, prompting behavior is controlled using the allow_prompt keyword in the LibGit2.CredentialPayload constructor (#23690).\ngradient is deprecated and will be removed in the next release (#23816).\nThe timing functions tic, toc, and toq are deprecated in favor of @time and @elapsed (#17046).\nMethods of findfirst, findnext, findlast, and findprev that accept a value to search for are deprecated in favor of passing a predicate (#19186, #10593).\nfind functions now operate only on booleans by default. To look for non-zeros, use x->x!=0 or !iszero (#23120).\nThe ability of reinterpret to yield Arrays of different type than the underlying storage has been removed. The reinterpret function is still available, but now returns a ReinterpretArray. The three argument form of reinterpret that implicitly reshapes has been deprecated (#23750).\nbits has been deprecated in favor of bitstring (#24281, #24263).\nnum2hex and hex2num have been deprecated in favor of reinterpret combined with parse/hex (#22088).\ncopy! is deprecated for AbstractSet and AbstractDict, with the intention to re-enable it with a cleaner meaning in a future version (#24844).\ncopy! (resp. unsafe_copy!) is deprecated for AbstractArray and is renamed copyto! (resp. unsafe_copyto!); it will be re-introduced with a different meaning in a future version (#24808).\na:b is deprecated for constructing a StepRange when a and b have physical units (Dates and Times). Use a:s:b, where s = Dates.Day(1) or s = Dates.Second(1).\ntrues(A::AbstractArray) and falses(A::AbstractArray) are deprecated in favor of trues(size(A)) and falses(size(A)) respectively (#24595).\nworkspace is discontinued, check out Revise.jl for an alternative workflow (#25046).\ncumsum, cumprod, accumulate, their mutating versions, and diff all now require a dim argument instead of defaulting to using the first dimension unless there is only one dimension (#24684, #25457).\nThe sum_kbn and cumsum_kbn functions have been moved to the KahanSummation package (#24869).\nisnumber has been renamed to isnumeric (#25021).\nis_assigned_char and normalize_string have been renamed to isassigned and normalize, and moved to the new Unicode standard library module. graphemes has also been moved to that module (#25021).\nThe functions eigs and svds have been moved to the IterativeEigensolvers standard library module (#24714).\nSparse array functionality has moved to the SparseArrays standard library module (#25249).\nLinear algebra functionality, and specifically the LinAlg module has moved to the LinearAlgebra standard library module (#25571).\n@printf and @sprintf have been moved to the Printf standard library (#23929,#25056).\nThe aliases Complex32, Complex64 and Complex128 have been deprecated in favor of ComplexF16, ComplexF32 and ComplexF64 respectively (#24647).\nBase.parentindexes and SharedArrays.localindexes have been renamed to parentindices and localindices, respectively. Similarly, the indexes field in the SubArray type has been renamed to indices without deprecation (#25088).\nAssociative has been deprecated in favor of AbstractDict (#25012).\nVoid has been renamed back to Nothing with an alias Cvoid for use when calling C with a return type of Cvoid or a return or argument type of Ptr{Cvoid} (#25162).\nNullable{T} has been deprecated and moved to the Nullables package (#23642). Use Union{T, Nothing} instead, or Union{Some{T}, Nothing} if nothing is a possible value (i.e. Nothing <: T). isnull(x) can be replaced with x === nothing and unsafe_get/get can be dropped or replaced with coalesce. NullException has been removed.\nunshift! and shift! have been renamed to pushfirst! and popfirst! (#23902)\nipermute! has been deprecated in favor of invpermute! (#25168).\nCartesianRange has been renamed CartesianIndices (#24715).\nsub2ind and ind2sub are deprecated in favor of using CartesianIndices and LinearIndices (#24715).\ngetindex(F::Factorization, s::Symbol) (usually seen as e.g. F[:Q]) is deprecated in favor of dot overloading (getproperty) so factors should now be accessed as e.g. F.Q instead of F[:Q] (#25184).\nsearch and rsearch have been deprecated in favor of findfirst/findnext and findlast/findprev respectively, in combination with the new equalto and occursin predicates for some methods (#24673\nismatch(regex, str) has been deprecated in favor of contains(str, regex) (#24673).\nlinspace and logspace now require an explicit number of elements to be supplied rather than defaulting to 50(#24794, #24805).\nsimilar(::Associative) has been deprecated in favor of empty(::Associative), and similar(::Associative, ::Pair{K, V}) has been deprecated in favour of empty(::Associative, K, V) (#24390).\nfindin(a, b) has been deprecated in favor of findall(occursin(b), a) (#24673).\nThe module Random.dSFMT is renamed Random.DSFMT (#25567).\nThe generic implementations of strides(::AbstractArray) and stride(::AbstractArray, ::Int)  have been deprecated. Subtypes of AbstractArray that implement the newly introduced strided  array interface should define their own strides method (#25321).\nmodule_parent, Base.datatype_module, and Base.function_module have been deprecated in favor of parentmodule ([#TODO]).\nrand(t::Tuple{Vararg{Int}}) is deprecated in favor of rand(Float64, t) or rand(t...); rand(::Tuple) will have another meaning in the future (#25429, #25278).\nObjectIdDict has been deprecated in favor of IdDict{Any,Any} (#25210).\ngc and gc_enable have been deprecated in favor of GC.gc and GC.enable (#25616).\nBase.@gc_preserve has been deprecated in favor of GC.@preserve (#25616)."
+    "text": "The JULIA_HOME environment variable has been renamed to JULIA_BINDIR and Base.JULIA_HOME has been moved to Sys.BINDIR (#20899).\nThe keyword immutable is fully deprecated to struct, and type is fully deprecated to mutable struct (#19157, #20418).\nIndexing into multidimensional arrays with more than one index but fewer indices than there are dimensions is no longer permitted when those trailing dimensions have lengths greater than 1. Instead, reshape the array or add trailing indices so the dimensionality and number of indices match (#14770, #23628).\nindices(a) and indices(a,d) have been deprecated in favor of axes(a) and axes(a, d) (#25057).\nEnvHash has been renamed to EnvDict (#24167).\nUninitialized Array constructors of the form Array[{T,N}](shape...) have been deprecated in favor of equivalents accepting uninitialized (an alias for Uninitialized()) as their first argument, as in Array[{T,N}](uninitialized, shape...). For example, Vector(3) is now Vector(uninitialized, 3), Matrix{Int}((2, 4)) is now, Matrix{Int}(uninitialized, (2, 4)), and Array{Float32,3}(11, 13, 17) is now Array{Float32,3}(uninitialized, 11, 13, 17) (#24781).\nLinAlg.fillslots! has been renamed LinAlg.fillstored! (#25030).\nfill!(A::Diagonal, x) and fill!(A::AbstractTriangular, x) have been deprecated in favor of Base.LinAlg.fillstored!(A, x) (#24413).\neye has been deprecated in favor of I and Matrix constructors. Please see the deprecation warnings for replacement details (#24438).\nzeros(D::Diagonal[, opts...]) has been deprecated (#24654).\nUsing Bool values directly as indices is now deprecated and will be an error in the future. Convert them to Int before indexing if you intend to access index 1 for true and 0 for false.\nwhos has been renamed varinfo, and now returns a markdown table instead of printing output (#12131).\nUninitialized RowVector constructors of the form RowVector{T}(shape...) have been deprecated in favor of equivalents accepting uninitialized (an alias for Uninitialized()) as their first argument, as in RowVector{T}(uninitialized, shape...). For example, RowVector{Int}(3) is now RowVector{Int}(uninitialized, 3), and RowVector{Float32}((1, 4)) is now RowVector{Float32}(uninitialized, (1, 4)) (#24786).\nwritecsv(io, a; opts...) has been deprecated in favor of writedlm(io, a, ','; opts...) (#23529).\nThe method srand(rng, filename, n=4) has been deprecated (#21359).\nreadcsv(io[, T::Type]; opts...) has been deprecated in favor of readdlm(io, ','[, T]; opts...) (#23530).\nsparse(s::UniformScaling, m::Integer) has been deprecated in favor of the three-argument equivalent sparse(s::UniformScaling, m, n) (#24472).\nThe cholfact/cholfact! methods that accepted an uplo symbol have been deprecated in favor of using Hermitian (or Symmetric) views (#22187, #22188).\nThe thin keyword argument for orthogonal decomposition methods has been deprecated in favor of full, which has the opposite meaning: thin == true if and only if full == false (#24279).\nisposdef(A::AbstractMatrix, UL::Symbol) and isposdef!(A::AbstractMatrix, UL::Symbol) have been deprecated in favor of isposdef(Hermitian(A, UL)) and isposdef!(Hermitian(A, UL)) respectively (#22245).\nThe bkfact/bkfact! methods that accepted uplo and issymmetric symbols have been deprecated in favor of using Hermitian (or Symmetric) views (#22605).\nThe function current_module is deprecated and replaced with @__MODULE__. This caused the deprecation of some reflection methods (such as macroexpand and isconst), which now require a module argument. And it caused the bugfix of other default arguments to use the Main module (including whos, which)  (#22064).\nexpand(ex) and expand(module, ex) have been deprecated in favor of Meta.lower(module, ex) (#22064, #24278).\nones(A::AbstractArray[, opts...]) and zeros(A::AbstractArray[, opts...]) methods have been deprecated. For zeros(A), consider zero(A). For ones(A) or zeros(A), consider ones(size(A)), zeros(size(A)), fill(v, size(A)) for v an appropriate one or zero, fill!(copy(A), {1|0}), fill!(similar(A), {1|0}), or any of the preceding with different element type and/or shape depending on opts.... Where strictly necessary, consider fill!(similar(A[, opts...]), {one(eltype(A)) | zero(eltype(A))}). For an algebraic multiplicative identity, consider one(A) (#24656).\nThe Operators module is deprecated. Instead, import required operators explicitly from Base, e.g. import Base: +, -, *, / (#22251).\nBindings to the FFTW library have been removed from Base. The DFT framework for building FFT implementations is now in AbstractFFTs.jl, the bindings to the FFTW library are in FFTW.jl, and the Base signal processing functions which used FFTs are now in DSP.jl (#21956).\nThe corrected positional argument to cov has been deprecated in favor of a keyword argument with the same name (#21709).\nOmitting spaces around the ? and the : tokens in a ternary expression has been deprecated. Ternaries must now include some amount of whitespace, e.g. x ? a : b rather than x?a:b (#22523 and #22712).\n? can no longer be used as an identifier name (#22712)\nThe method replace(s::AbstractString, pat, r, [count]) is deprecated in favor of replace(s::AbstractString, pat => r; [count]) (#25165). Moreover, count cannot be negative anymore (use typemax(Int) instead (#22325).\nread(io, type, dims) is deprecated to read!(io, Array{type}(dims)) (#21450).\nread(::IO, ::Ref) is now a method of read!, since it mutates its Ref argument (#21592).\nnb_available is now bytesavailable (#25634).\nskipchars(io::IO, predicate; linecomment=nothing) is deprecated in favor of skipchars(predicate, io::IO; linecomment=nothing) (#25667).\nBidiagonal constructors now use a Symbol (:U or :L) for the upper/lower argument, instead of a Bool or a Char (#22703).\nBidiagonal, Tridiagonal and SymTridiagonal constructors that automatically converted the input vectors to the same type are deprecated in favor of explicit conversion (#22925, #23035, #23154.\nCalling nfields on a type to find out how many fields its instances have is deprecated. Use fieldcount instead. Use nfields only to get the number of fields in a specific object (#22350).\nfieldnames now operates only on types. To get the names of fields in an object, use fieldnames(typeof(x)) (#22350).\nInexactError, DomainError, and OverflowError now take arguments. InexactError(func::Symbol, type, -3) now prints as \"ERROR: InexactError: func(type, -3)\", DomainError(val, [msg]) prints as \"ERROR: DomainError with val:\\nmsg\", and OverflowError(msg) prints as \"ERROR: OverflowError: msg\". (#20005, #22751, #22761)\nThe operating system identification functions: is_linux, is_bsd, is_apple, is_unix, and is_windows, have been deprecated in favor of Sys.islinux, Sys.isbsd, Sys.isapple, Sys.isunix, and Sys.iswindows, respectively (#22182).\nThe forms of read, readstring, and eachline that accepted both a Cmd object and an input stream are deprecated. Use e.g. read(pipeline(stdin, cmd)) instead (#22762).\nThe unexported type AbstractIOBuffer has been renamed to GenericIOBuffer (#17360 #22796).\nDisplay has been renamed to AbstractDisplay (#24831).\nRemaining vectorized methods over SparseVectors, particularly floor, ceil, trunc, round, and most common transcendental functions such as exp, log, and sin variants, have been deprecated in favor of dot-syntax (#22961).\nThe method String(io::IOBuffer) is deprecated to String(take!(copy(io))) (#21438).\nThe function readstring is deprecated in favor of read(io, String) (#22793)\nThe function showall is deprecated. Showing entire values is the default, unless an IOContext specifying :limit=>true is in use (#22847).\nissubtype has been deprecated in favor of <: (which used to be an alias for issubtype).\nCalling write on non-isbits arrays is deprecated in favor of explicit loops or serialize (#6466).\nThe default juliarc.jl file on Windows has been removed. Now must explicitly include the full path if you need access to executables or libraries in the Sys.BINDIR directory, e.g. joinpath(Sys.BINDIR, \"7z.exe\") for 7z.exe (#21540).\nsqrtm has been deprecated in favor of sqrt (#23504).\nexpm has been deprecated in favor of exp (#23233).\nlogm has been deprecated in favor of log (#23505).\nfull has been deprecated in favor of more specific, better defined alternatives. On structured matrices A, consider instead Matrix(A), Array(A), SparseMatrixCSC(A), or sparse(A). On sparse arrays S, consider instead Vector(S), Matrix(S), or Array(S) as appropriate. On factorizations F, consider instead Matrix(F), Array(F), AbstractMatrix(F), or AbstractArray(F). On implicit orthogonal factors Q, consider instead Matrix(Q) or Array(Q); for implicit orthogonal factors that can be recovered in square or truncated form, see the deprecation message for square recovery instructions. On Symmetric, Hermitian, or AbstractTriangular matrices A, consider instead Matrix(S), Array(S), SparseMatrixCSC(S), or sparse(S). On Symmetric matrices A particularly, consider instead LinAlg.copytri!(copy(parent(A)), A.uplo). On Hermitian matrices A particularly, consider instead LinAlg.copytri!(copy(parent(A)), A.uplo, true). On UpperTriangular matrices A particularly, consider instead triu!(copy(parent(A))). On LowerTriangular matrices A particularly, consider instead tril!(copy(parent(A))) (#24250).\nspeye has been deprecated in favor of I, sparse, and SparseMatrixCSC constructor methods (#24356).\nCalling union with no arguments is deprecated; construct an empty set with an appropriate element type using Set{T}() instead (#23144).\nVectorized DateTime, Date, and format methods have been deprecated in favor of dot-syntax (#23207).\nBase.cpad has been removed; use an appropriate combination of rpad and lpad instead (#23187).\nctranspose and ctranspose! have been deprecated in favor of adjoint and adjoint!, respectively (#23235).\nfilter and filter! on dictionaries now pass a single key=>value pair to the argument function, instead of two arguments (#17886).\nrol, rol!, ror, and ror! have been deprecated in favor of specialized methods for circshift/circshift! (#23404).\nBase.SparseArrays.SpDiagIterator has been removed (#23261).\nThe tuple-of-types form of cfunction, cfunction(f, returntype, (types...)), has been deprecated in favor of the tuple-type form cfunction(f, returntype, Tuple{types...}) (#23066).\ndiagm(v::AbstractVector, k::Integer=0) has been deprecated in favor of diagm(k => v) (#24047).\ndiagm(x::Number) has been deprecated in favor of fill(x, 1, 1) (#24047).\ndiagm(A::SparseMatrixCSC) has been deprecated in favor of spdiagm(sparsevec(A)) (#23341).\ndiagm(A::BitMatrix) has been deprecated, use diagm(0 => vec(A)) or BitMatrix(Diagonal(vec(A))) instead (#23373, #24047).\nℯ (written as \\mscre<TAB> or \\euler<TAB>) is now the only (by default) exported name for Euler's number, and the type has changed from Irrational{:e} to Irrational{:ℯ} (#23427).\nThe mathematical constants π, pi, ℯ, e, γ, eulergamma, catalan, φ and golden have been moved from Base to a new module; Base.MathConstants. Only π, pi and ℯ are now exported by default from Base (#23427).\neu (previously an alias for ℯ) has been deprecated in favor of ℯ (or MathConstants.e) (#23427).\nGMP.gmp_version(), GMP.GMP_VERSION, GMP.gmp_bits_per_limb(), and GMP.GMP_BITS_PER_LIBM have been renamed to GMP.version(), GMP.VERSION, GMP.bits_per_libm(), and GMP.BITS_PER_LIBM, respectively. Similarly, MPFR.get_version(), has been renamed to MPFR.version() (#23323). Also, LinAlg.LAPACK.laver() has been renamed to LinAlg.LAPACK.version() and now returns a VersionNumber.\nselect, select!, selectperm and selectperm! have been renamed respectively to partialsort, partialsort!, partialsortperm and partialsortperm! (#23051).\nThe Range abstract type has been renamed to AbstractRange (#23570).\nmap on dictionaries previously operated on key=>value pairs. This behavior is deprecated, and in the future map will operate only on values (#5794).\nAutomatically broadcasted + and - for array + scalar, scalar - array, and so-on have been deprecated due to inconsistency with linear algebra. Use .+ and .- for these operations instead (#22880, #22932).\nisleaftype is deprecated in favor of the simpler predicates isconcretetype and isdispatchtuple. Concrete types are those that might equal typeof(x) for some x; isleaftype included some types for which this is not true. Those are now categorized more precisely as \"dispatch tuple types\" and \"!hasfreetypevars\" (not exported). (#17086, #25496)\ncontains(eq, itr, item) is deprecated in favor of any with a predicate (#23716).\nspdiagm(x::AbstractVector) has been deprecated in favor of sparse(Diagonal(x)) alternatively spdiagm(0 => x) (#23757).\nspdiagm(x::AbstractVector, d::Integer) and spdiagm(x::Tuple{<:AbstractVector}, d::Tuple{<:Integer}) have been deprecated in favor of spdiagm(d => x) and spdiagm(d[1] => x[1], d[2] => x[2], ...) respectively. The new spdiagm implementation now always returns a square matrix (#23757).\nspones(A::AbstractSparseArray) has been deprecated in favor of LinAlg.fillstored!(copy(A), 1) (#25037).\nConstructors for LibGit2.UserPasswordCredentials and LibGit2.SSHCredentials which take a prompt_if_incorrect argument are deprecated. Instead, prompting behavior is controlled using the allow_prompt keyword in the LibGit2.CredentialPayload constructor (#23690).\ngradient is deprecated and will be removed in the next release (#23816).\nThe timing functions tic, toc, and toq are deprecated in favor of @time and @elapsed (#17046).\nMethods of findfirst, findnext, findlast, and findprev that accept a value to search for are deprecated in favor of passing a predicate (#19186, #10593).\nfind functions now operate only on booleans by default. To look for non-zeros, use x->x!=0 or !iszero (#23120).\nThe ability of reinterpret to yield Arrays of different type than the underlying storage has been removed. The reinterpret function is still available, but now returns a ReinterpretArray. The three argument form of reinterpret that implicitly reshapes has been deprecated (#23750).\nbits has been deprecated in favor of bitstring (#24281, #24263).\nnum2hex and hex2num have been deprecated in favor of reinterpret combined with parse/hex (#22088).\ncopy! is deprecated for AbstractSet and AbstractDict, with the intention to re-enable it with a cleaner meaning in a future version (#24844).\ncopy! (resp. unsafe_copy!) is deprecated for AbstractArray and is renamed copyto! (resp. unsafe_copyto!); it will be re-introduced with a different meaning in a future version (#24808).\na:b is deprecated for constructing a StepRange when a and b have physical units (Dates and Times). Use a:s:b, where s = Dates.Day(1) or s = Dates.Second(1).\ntrues(A::AbstractArray) and falses(A::AbstractArray) are deprecated in favor of trues(size(A)) and falses(size(A)) respectively (#24595).\nworkspace is discontinued, check out Revise.jl for an alternative workflow (#25046).\ncumsum, cumprod, accumulate, their mutating versions, and diff all now require a dim argument instead of defaulting to using the first dimension unless there is only one dimension (#24684, #25457).\nThe sum_kbn and cumsum_kbn functions have been moved to the KahanSummation package (#24869).\nisnumber has been renamed to isnumeric (#25021).\nis_assigned_char and normalize_string have been renamed to isassigned and normalize, and moved to the new Unicode standard library module. graphemes has also been moved to that module (#25021).\nThe functions eigs and svds have been moved to the IterativeEigensolvers standard library module (#24714).\nSparse array functionality has moved to the SparseArrays standard library module (#25249).\nLinear algebra functionality, and specifically the LinAlg module has moved to the LinearAlgebra standard library module (#25571).\n@printf and @sprintf have been moved to the Printf standard library (#23929,#25056).\nThe Libdl module has moved to the Libdl standard library module (#25459).\nThe aliases Complex32, Complex64 and Complex128 have been deprecated in favor of ComplexF16, ComplexF32 and ComplexF64 respectively (#24647).\nBase.parentindexes and SharedArrays.localindexes have been renamed to parentindices and localindices, respectively. Similarly, the indexes field in the SubArray type has been renamed to indices without deprecation (#25088).\nAssociative has been deprecated in favor of AbstractDict (#25012).\nVoid has been renamed back to Nothing with an alias Cvoid for use when calling C with a return type of Cvoid or a return or argument type of Ptr{Cvoid} (#25162).\nNullable{T} has been deprecated and moved to the Nullables package (#23642). Use Union{T, Nothing} instead, or Union{Some{T}, Nothing} if nothing is a possible value (i.e. Nothing <: T). isnull(x) can be replaced with x === nothing and unsafe_get/get can be dropped or replaced with coalesce. NullException has been removed.\nunshift! and shift! have been renamed to pushfirst! and popfirst! (#23902)\nipermute! has been deprecated in favor of invpermute! (#25168).\nCartesianRange has been renamed CartesianIndices (#24715).\nsub2ind and ind2sub are deprecated in favor of using CartesianIndices and LinearIndices (#24715).\ngetindex(F::Factorization, s::Symbol) (usually seen as e.g. F[:Q]) is deprecated in favor of dot overloading (getproperty) so factors should now be accessed as e.g. F.Q instead of F[:Q] (#25184).\nsearch and rsearch have been deprecated in favor of findfirst/findnext and findlast/findprev respectively, in combination with the new equalto and occursin predicates for some methods (#24673\nismatch(regex, str) has been deprecated in favor of contains(str, regex) (#24673).\nlinspace and logspace now require an explicit number of elements to be supplied rather than defaulting to 50(#24794, #24805).\nsimilar(::Associative) has been deprecated in favor of empty(::Associative), and similar(::Associative, ::Pair{K, V}) has been deprecated in favour of empty(::Associative, K, V) (#24390).\nfindin(a, b) has been deprecated in favor of findall(occursin(b), a) (#24673).\nThe module Random.dSFMT is renamed Random.DSFMT (#25567).\nThe generic implementations of strides(::AbstractArray) and stride(::AbstractArray, ::Int)  have been deprecated. Subtypes of AbstractArray that implement the newly introduced strided  array interface should define their own strides method (#25321).\nmodule_parent, Base.datatype_module, and Base.function_module have been deprecated in favor of parentmodule ([#TODO]).\nrand(t::Tuple{Vararg{Int}}) is deprecated in favor of rand(Float64, t) or rand(t...); rand(::Tuple) will have another meaning in the future (#25429, #25278).\nObjectIdDict has been deprecated in favor of IdDict{Any,Any} (#25210).\ngc and gc_enable have been deprecated in favor of GC.gc and GC.enable (#25616).\nBase.@gc_preserve has been deprecated in favor of GC.@preserve (#25616)."
 },
 
 {
@@ -2649,94 +2649,6 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "manual/interacting-with-julia.html#",
-    "page": "Interacting With Julia",
-    "title": "Interacting With Julia",
-    "category": "page",
-    "text": ""
-},
-
-{
-    "location": "manual/interacting-with-julia.html#Interacting-With-Julia-1",
-    "page": "Interacting With Julia",
-    "title": "Interacting With Julia",
-    "category": "section",
-    "text": "Julia comes with a full-featured interactive command-line REPL (read-eval-print loop) built into the julia executable. In addition to allowing quick and easy evaluation of Julia statements, it has a searchable history, tab-completion, many helpful keybindings, and dedicated help and shell modes. The REPL can be started by simply calling julia with no arguments or double-clicking on the executable:$ julia\n               _\n   _       _ _(_)_     |  A fresh approach to technical computing\n  (_)     | (_) (_)    |  Documentation: https://docs.julialang.org\n   _ _   _| |_  __ _   |  Type \"?help\" for help.\n  | | | | | | |/ _` |  |\n  | | |_| | | | (_| |  |  Version 0.6.0-dev.2493 (2017-01-31 18:53 UTC)\n _/ |\\__'_|_|_|\\__'_|  |  Commit c99e12c* (0 days old master)\n|__/                   |  x86_64-linux-gnu\n\njulia>To exit the interactive session, type ^D – the control key together with the d key on a blank line – or type quit() followed by the return or enter key. The REPL greets you with a banner and a julia> prompt."
-},
-
-{
-    "location": "manual/interacting-with-julia.html#The-different-prompt-modes-1",
-    "page": "Interacting With Julia",
-    "title": "The different prompt modes",
-    "category": "section",
-    "text": ""
-},
-
-{
-    "location": "manual/interacting-with-julia.html#The-Julian-mode-1",
-    "page": "Interacting With Julia",
-    "title": "The Julian mode",
-    "category": "section",
-    "text": "The REPL has four main modes of operation. The first and most common is the Julian prompt. It is the default mode of operation; each new line initially starts with julia>. It is here that you can enter Julia expressions. Hitting return or enter after a complete expression has been entered will evaluate the entry and show the result of the last expression.julia> string(1 + 2)\n\"3\"There are a number useful features unique to interactive work. In addition to showing the result, the REPL also binds the result to the variable ans. A trailing semicolon on the line can be used as a flag to suppress showing the result.julia> string(3 * 4);\n\njulia> ans\n\"12\"In Julia mode, the REPL supports something called prompt pasting. This activates when pasting text that starts with julia>  into the REPL. In that case, only expressions starting with julia>  are parsed, others are removed. This makes it is possible to paste a chunk of code that has been copied from a REPL session without having to scrub away prompts and outputs. This feature is enabled by default but can be disabled or enabled at will with Base.REPL.enable_promptpaste(::Bool). If it is enabled, you can try it out by pasting the code block above this paragraph straight into the REPL. This feature does not work on the standard Windows command prompt due to its limitation at detecting when a paste occurs."
-},
-
-{
-    "location": "manual/interacting-with-julia.html#Help-mode-1",
-    "page": "Interacting With Julia",
-    "title": "Help mode",
-    "category": "section",
-    "text": "When the cursor is at the beginning of the line, the prompt can be changed to a help mode by typing ?. Julia will attempt to print help or documentation for anything entered in help mode:julia> ? # upon typing ?, the prompt changes (in place) to: help?>\n\nhelp?> string\nsearch: string String stringmime Cstring Cwstring RevString randstring bytestring SubString\n\n  string(xs...)\n\n  Create a string from any values using the print function.Macros, types and variables can also be queried:help?> @time\n  @time\n\n  A macro to execute an expression, printing the time it took to execute, the number of allocations,\n  and the total number of bytes its execution caused to be allocated, before returning the value of the\n  expression.\n\n  See also @timev, @timed, @elapsed, and @allocated.\n\nhelp?> AbstractString\nsearch: AbstractString AbstractSparseMatrix AbstractSparseVector AbstractSet\n\n  No documentation found.\n\n  Summary\n  ≡≡≡≡≡≡≡≡≡\n\n  abstract type AbstractString <: Any\n\n  Subtypes\n  ≡≡≡≡≡≡≡≡≡≡\n\n  Base.SubstitutionString\n  String\n  SubString\n  Test.GenericStringHelp mode can be exited by pressing backspace at the beginning of the line."
-},
-
-{
-    "location": "manual/interacting-with-julia.html#man-shell-mode-1",
-    "page": "Interacting With Julia",
-    "title": "Shell mode",
-    "category": "section",
-    "text": "Just as help mode is useful for quick access to documentation, another common task is to use the system shell to execute system commands. Just as ? entered help mode when at the beginning of the line, a semicolon (;) will enter the shell mode. And it can be exited by pressing backspace at the beginning of the line.julia> ; # upon typing ;, the prompt changes (in place) to: shell>\n\nshell> echo hello\nhello"
-},
-
-{
-    "location": "manual/interacting-with-julia.html#Search-modes-1",
-    "page": "Interacting With Julia",
-    "title": "Search modes",
-    "category": "section",
-    "text": "In all of the above modes, the executed lines get saved to a history file, which can be searched.  To initiate an incremental search through the previous history, type ^R – the control key together with the r key. The prompt will change to (reverse-i-search)`':, and as you type the search query will appear in the quotes. The most recent result that matches the query will dynamically update to the right of the colon as more is typed. To find an older result using the same query, simply type ^R again.Just as ^R is a reverse search, ^S is a forward search, with the prompt (i-search)`':.  The two may be used in conjunction with each other to move through the previous or next matching results, respectively."
-},
-
-{
-    "location": "manual/interacting-with-julia.html#Key-bindings-1",
-    "page": "Interacting With Julia",
-    "title": "Key bindings",
-    "category": "section",
-    "text": "The Julia REPL makes great use of key bindings. Several control-key bindings were already introduced above (^D to exit, ^R and ^S for searching), but there are many more. In addition to the control-key, there are also meta-key bindings. These vary more by platform, but most terminals default to using alt- or option- held down with a key to send the meta-key (or can be configured to do so).Keybinding Description\nProgram control  \n^D Exit (when buffer is empty)\n^C Interrupt or cancel\n^L Clear console screen\nReturn/Enter, ^J New line, executing if it is complete\nmeta-Return/Enter Insert new line without executing it\n? or ; Enter help or shell mode (when at start of a line)\n^R, ^S Incremental history search, described above\nCursor movement  \nRight arrow, ^F Move right one character\nLeft arrow, ^B Move left one character\nctrl-Right, meta-F Move right one word\nctrl-Left, meta-B Move left one word\nHome, ^A Move to beginning of line\nEnd, ^E Move to end of line\nUp arrow, ^P Move up one line (or change to the previous history entry that matches the text before the cursor)\nDown arrow, ^N Move down one line (or change to the next history entry that matches the text before the cursor)\nShift-Arrow Key Move cursor according to the direction of the Arrow key, while activating the region (\"shift selection\")\nPage-up, meta-P Change to the previous history entry\nPage-down, meta-N Change to the next history entry\nmeta-< Change to the first history entry (of the current session if it is before the current position in history)\nmeta-> Change to the last history entry\n^-Space Set the \"mark\" in the editing region (and de-activate the region if it's active)\n^-Space ^-Space Set the \"mark\" in the editing region and make the region \"active\", i.e. highlighted\n^G De-activate the region (i.e. make it not highlighted)\n^X^X Exchange the current position with the mark\nEditing  \nBackspace, ^H Delete the previous character, or the whole region when it's active\nDelete, ^D Forward delete one character (when buffer has text)\nmeta-Backspace Delete the previous word\nmeta-d Forward delete the next word\n^W Delete previous text up to the nearest whitespace\nmeta-w Copy the current region in the kill ring\nmeta-W \"Kill\" the current region, placing the text in the kill ring\n^K \"Kill\" to end of line, placing the text in the kill ring\n^Y \"Yank\" insert the text from the kill ring\nmeta-y Replace a previously yanked text with an older entry from the kill ring\n^T Transpose the characters about the cursor\nmeta-Up arrow Transpose current line with line above\nmeta-Down arrow Transpose current line with line below\nmeta-u Change the next word to uppercase\nmeta-c Change the next word to titlecase\nmeta-l Change the next word to lowercase\n^/, ^_ Undo previous editing action\n^Q Write a number in REPL and press ^Q to open editor at corresponding stackframe or method\nmeta-Left Arrow indent the current line on the left\nmeta-Right Arrow indent the current line on the right"
-},
-
-{
-    "location": "manual/interacting-with-julia.html#Customizing-keybindings-1",
-    "page": "Interacting With Julia",
-    "title": "Customizing keybindings",
-    "category": "section",
-    "text": "Julia's REPL keybindings may be fully customized to a user's preferences by passing a dictionary to REPL.setup_interface(). The keys of this dictionary may be characters or strings. The key '*' refers to the default action. Control plus character x bindings are indicated with \"^x\". Meta plus x can be written \"\\\\Mx\". The values of the custom keymap must be nothing (indicating that the input should be ignored) or functions that accept the signature (PromptState, AbstractREPL, Char). The REPL.setup_interface() function must be called before the REPL is initialized, by registering the operation with atreplinit(). For example, to bind the up and down arrow keys to move through history without prefix search, one could put the following code in .juliarc.jl:import Base: LineEdit, REPL\n\nconst mykeys = Dict{Any,Any}(\n    # Up Arrow\n    \"\\e[A\" => (s,o...)->(LineEdit.edit_move_up(s) || LineEdit.history_prev(s, LineEdit.mode(s).hist)),\n    # Down Arrow\n    \"\\e[B\" => (s,o...)->(LineEdit.edit_move_up(s) || LineEdit.history_next(s, LineEdit.mode(s).hist))\n)\n\nfunction customize_keys(repl)\n    repl.interface = REPL.setup_interface(repl; extra_repl_keymap = mykeys)\nend\n\natreplinit(customize_keys)Users should refer to LineEdit.jl to discover the available actions on key input."
-},
-
-{
-    "location": "manual/interacting-with-julia.html#Tab-completion-1",
-    "page": "Interacting With Julia",
-    "title": "Tab completion",
-    "category": "section",
-    "text": "In both the Julian and help modes of the REPL, one can enter the first few characters of a function or type and then press the tab key to get a list all matches:julia> stri[TAB]\nstride     strides     string      stringmime  strip\n\njulia> Stri[TAB]\nStridedArray    StridedMatrix    StridedVecOrMat  StridedVector    StringThe tab key can also be used to substitute LaTeX math symbols with their Unicode equivalents, and get a list of LaTeX matches as well:julia> \\pi[TAB]\njulia> π\nπ = 3.1415926535897...\n\njulia> e\\_1[TAB] = [1,0]\njulia> e₁ = [1,0]\n2-element Array{Int64,1}:\n 1\n 0\n\njulia> e\\^1[TAB] = [1 0]\njulia> e¹ = [1 0]\n1×2 Array{Int64,2}:\n 1  0\n\njulia> \\sqrt[TAB]2     # √ is equivalent to the sqrt() function\njulia> √2\n1.4142135623730951\n\njulia> \\hbar[TAB](h) = h / 2\\pi[TAB]\njulia> ħ(h) = h / 2π\nħ (generic function with 1 method)\n\njulia> \\h[TAB]\n\\hat              \\hermitconjmatrix  \\hkswarow          \\hrectangle\n\\hatapprox        \\hexagon           \\hookleftarrow     \\hrectangleblack\n\\hbar             \\hexagonblack      \\hookrightarrow    \\hslash\n\\heartsuit        \\hksearow          \\house             \\hspace\n\njulia> α=\"\\alpha[TAB]\"   # LaTeX completion also works in strings\njulia> α=\"α\"A full list of tab-completions can be found in the Unicode Input section of the manual.Completion of paths works for strings and julia's shell mode:julia> path=\"/[TAB]\"\n.dockerenv  .juliabox/   boot/        etc/         lib/         media/       opt/         root/        sbin/        sys/         usr/\n.dockerinit bin/         dev/         home/        lib64/       mnt/         proc/        run/         srv/         tmp/         var/\nshell> /[TAB]\n.dockerenv  .juliabox/   boot/        etc/         lib/         media/       opt/         root/        sbin/        sys/         usr/\n.dockerinit bin/         dev/         home/        lib64/       mnt/         proc/        run/         srv/         tmp/         var/Tab completion can help with investigation of the available methods matching the input arguments:julia> max([TAB] # All methods are displayed, not shown here due to size of the list\n\njulia> max([1, 2], [TAB] # All methods where `Vector{Int}` matches as first argument\nmax(x, y) in Base at operators.jl:215\nmax(a, b, c, xs...) in Base at operators.jl:281\n\njulia> max([1, 2], max(1, 2), [TAB] # All methods matching the arguments.\nmax(x, y) in Base at operators.jl:215\nmax(a, b, c, xs...) in Base at operators.jl:281Keywords are also displayed in the suggested methods, see second line after ; where limit and keep are keyword arguments:julia> split(\"1 1 1\", [TAB]\nsplit(str::AbstractString) in Base at strings/util.jl:302\nsplit(str::T, splitter; limit, keep) where T<:AbstractString in Base at strings/util.jl:277The completion of the methods uses type inference and can therefore see if the arguments match even if the arguments are output from functions. The function needs to be type stable for the completion to be able to remove non-matching methods.Tab completion can also help completing fields:julia> Pkg.a[TAB]\nadd       availableFields for output from functions can also be completed:julia> split(\"\",\"\")[1].[TAB]\nendof  offset  stringThe completion of fields for output from functions uses type inference, and it can only suggest fields if the function is type stable."
-},
-
-{
-    "location": "manual/interacting-with-julia.html#Customizing-Colors-1",
-    "page": "Interacting With Julia",
-    "title": "Customizing Colors",
-    "category": "section",
-    "text": "The colors used by Julia and the REPL can be customized, as well. To change the color of the Julia prompt you can add something like the following to your .juliarc.jl file, which is to be placed inside your home directory:function customize_colors(repl)\n    repl.prompt_color = Base.text_colors[:cyan]\nend\n\natreplinit(customize_colors)The available color keys can be seen by typing Base.text_colors in the help mode of the REPL. In addition, the integers 0 to 255 can be used as color keys for terminals with 256 color support.You can also change the colors for the help and shell prompts and input and answer text by setting the appropriate field of repl in the customize_colors function above (respectively, help_color, shell_color, input_color, and answer_color). For the latter two, be sure that the envcolors field is also set to false.It is also possible to apply boldface formatting by using Base.text_colors[:bold] as a color. For instance, to print answers in boldface font, one can use the following as a .juliarc.jl:function customize_colors(repl)\n    repl.envcolors = false\n    repl.answer_color = Base.text_colors[:bold]\nend\n\natreplinit(customize_colors)You can also customize the color used to render warning and informational messages by setting the appropriate environment variables. For instance, to render error, warning, and informational messages respectively in magenta, yellow, and cyan you can add the following to your .juliarc.jl file:ENV[\"JULIA_ERROR_COLOR\"] = :magenta\nENV[\"JULIA_WARN_COLOR\"] = :yellow\nENV[\"JULIA_INFO_COLOR\"] = :cyan"
-},
-
-{
     "location": "manual/running-external-programs.html#",
     "page": "Running External Programs",
     "title": "Running External Programs",
@@ -3173,7 +3085,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Environment Variables",
     "title": "REPL formatting",
     "category": "section",
-    "text": "Environment variables that determine how REPL output should be formatted at the terminal. Generally, these variables should be set to ANSI terminal escape sequences. Julia provides a high-level interface with much of the same functionality: see the section on Interacting With Julia."
+    "text": "Environment variables that determine how REPL output should be formatted at the terminal. Generally, these variables should be set to ANSI terminal escape sequences. Julia provides a high-level interface with much of the same functionality: see the section on The Julia REPL."
 },
 
 {
@@ -4005,7 +3917,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Workflow Tips",
     "title": "REPL-based workflow",
     "category": "section",
-    "text": "As already elaborated in Interacting With Julia, Julia's REPL provides rich functionality that facilitates an efficient interactive workflow. Here are some tips that might further enhance your experience at the command line."
+    "text": "As already elaborated in The Julia REPL, Julia's REPL provides rich functionality that facilitates an efficient interactive workflow. Here are some tips that might further enhance your experience at the command line."
 },
 
 {
@@ -4509,7 +4421,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Unicode Input",
     "title": "Unicode Input",
     "category": "section",
-    "text": "The following table lists Unicode characters that can be entered via tab completion of LaTeX-like abbreviations in the Julia REPL (and in various other editing environments).  You can also get information on how to type a symbol by entering it in the REPL help, i.e. by typing ? and then entering the symbol in the REPL (e.g., by copy-paste from somewhere you saw the symbol).warning: Warning\nThis table may appear to contain missing characters in the second column, or even show characters that are inconsistent with the characters as they are rendered in the Julia REPL. In these cases, users are strongly advised to check their choice of fonts in their browser and REPL environment, as there are known issues with glyphs in many fonts.#\n# Generate a table containing all LaTeX and Emoji tab completions available in the REPL.\n#\n\nconst NBSP = '\\u00A0'\n\nfunction tab_completions(symbols...)\n    completions = Dict{String, Vector{String}}()\n    for each in symbols, (k, v) in each\n        completions[v] = push!(get!(completions, v, String[]), k)\n    end\n    return completions\nend\n\nfunction unicode_data()\n    file = normpath(@__DIR__, \"..\", \"..\", \"..\", \"..\", \"UnicodeData.txt\")\n    names = Dict{UInt32, String}()\n    open(file) do unidata\n        for line in readlines(unidata)\n            id, name, desc = split(line, \";\")[[1, 2, 11]]\n            codepoint = parse(UInt32, \"0x$id\")\n            names[codepoint] = titlecase(lowercase(\n                name == \"\" ? desc : desc == \"\" ? name : \"$name / $desc\"))\n        end\n    end\n    return names\nend\n\n# Surround combining characters with no-break spaces (i.e '\\u00A0'). Follows the same format\n# for how unicode is displayed on the unicode.org website:\n# http://unicode.org/cldr/utility/character.jsp?a=0300\nfunction fix_combining_chars(char)\n    cat = Base.Unicode.category_code(char)\n    return cat == 6 || cat == 8 ? \"$NBSP$char$NBSP\" : \"$char\"\nend\n\n\nfunction table_entries(completions, unicode_dict)\n    entries = [[\n        \"Code point(s)\", \"Character(s)\",\n        \"Tab completion sequence(s)\", \"Unicode name(s)\"\n    ]]\n    for (chars, inputs) in sort!(collect(completions), by = first)\n        code_points, unicode_names, characters = String[], String[], String[]\n        for char in chars\n            push!(code_points, \"U+$(uppercase(hex(char, 5)))\")\n            push!(unicode_names, get(unicode_dict, UInt32(char), \"(No Unicode name)\"))\n            push!(characters, isempty(characters) ? fix_combining_chars(char) : \"$char\")\n        end\n        push!(entries, [\n            join(code_points, \" + \"), join(characters),\n            join(inputs, \", \"), join(unicode_names, \" + \")\n        ])\n    end\n    return Markdown.Table(entries, [:l, :l, :l, :l])\nend\n\ntable_entries(\n    tab_completions(\n        Base.REPLCompletions.latex_symbols,\n        Base.REPLCompletions.emoji_symbols\n    ),\n    unicode_data()\n)"
+    "text": "The following table lists Unicode characters that can be entered via tab completion of LaTeX-like abbreviations in the Julia REPL (and in various other editing environments).  You can also get information on how to type a symbol by entering it in the REPL help, i.e. by typing ? and then entering the symbol in the REPL (e.g., by copy-paste from somewhere you saw the symbol).warning: Warning\nThis table may appear to contain missing characters in the second column, or even show characters that are inconsistent with the characters as they are rendered in the Julia REPL. In these cases, users are strongly advised to check their choice of fonts in their browser and REPL environment, as there are known issues with glyphs in many fonts.#\n# Generate a table containing all LaTeX and Emoji tab completions available in the REPL.\n#\n\nimport REPL\nconst NBSP = '\\u00A0'\n\nfunction tab_completions(symbols...)\n    completions = Dict{String, Vector{String}}()\n    for each in symbols, (k, v) in each\n        completions[v] = push!(get!(completions, v, String[]), k)\n    end\n    return completions\nend\n\nfunction unicode_data()\n    file = normpath(@__DIR__, \"..\", \"..\", \"..\", \"..\", \"UnicodeData.txt\")\n    names = Dict{UInt32, String}()\n    open(file) do unidata\n        for line in readlines(unidata)\n            id, name, desc = split(line, \";\")[[1, 2, 11]]\n            codepoint = parse(UInt32, \"0x$id\")\n            names[codepoint] = titlecase(lowercase(\n                name == \"\" ? desc : desc == \"\" ? name : \"$name / $desc\"))\n        end\n    end\n    return names\nend\n\n# Surround combining characters with no-break spaces (i.e '\\u00A0'). Follows the same format\n# for how unicode is displayed on the unicode.org website:\n# http://unicode.org/cldr/utility/character.jsp?a=0300\nfunction fix_combining_chars(char)\n    cat = Base.Unicode.category_code(char)\n    return cat == 6 || cat == 8 ? \"$NBSP$char$NBSP\" : \"$char\"\nend\n\n\nfunction table_entries(completions, unicode_dict)\n    entries = [[\n        \"Code point(s)\", \"Character(s)\",\n        \"Tab completion sequence(s)\", \"Unicode name(s)\"\n    ]]\n    for (chars, inputs) in sort!(collect(completions), by = first)\n        code_points, unicode_names, characters = String[], String[], String[]\n        for char in chars\n            push!(code_points, \"U+$(uppercase(hex(char, 5)))\")\n            push!(unicode_names, get(unicode_dict, UInt32(char), \"(No Unicode name)\"))\n            push!(characters, isempty(characters) ? fix_combining_chars(char) : \"$char\")\n        end\n        push!(entries, [\n            join(code_points, \" + \"), join(characters),\n            join(inputs, \", \"), join(unicode_names, \" + \")\n        ])\n    end\n    return Markdown.Table(entries, [:l, :l, :l, :l])\nend\n\ntable_entries(\n    tab_completions(\n        REPL.REPLCompletions.latex_symbols,\n        REPL.REPLCompletions.emoji_symbols\n    ),\n    unicode_data()\n)"
 },
 
 {
@@ -4558,14 +4470,6 @@ var documenterSearchIndex = {"docs": [
     "title": "Base.atexit",
     "category": "Function",
     "text": "atexit(f)\n\nRegister a zero-argument function f() to be called at process exit. atexit() hooks are called in last in first out (LIFO) order and run before object finalizers.\n\n\n\n"
-},
-
-{
-    "location": "base/base.html#Base.atreplinit",
-    "page": "Essentials",
-    "title": "Base.atreplinit",
-    "category": "Function",
-    "text": "atreplinit(f)\n\nRegister a one-argument function to be called before the REPL interface is initialized in interactive sessions; this is useful to customize the interface. The argument of f is the REPL object. This function should be called from within the .juliarc.jl initialization file.\n\n\n\n"
 },
 
 {
@@ -4669,7 +4573,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Essentials",
     "title": "Base.compilecache",
     "category": "Function",
-    "text": "Base.compilecache(module::String)\n\nCreates a precompiled cache file for a module and all of its dependencies. This can be used to reduce package load times. Cache files are stored in LOAD_CACHE_PATH[1], which defaults to ~/.julia/lib/VERSION. See Module initialization and precompilation for important notes.\n\n\n\n"
+    "text": "Base.compilecache(module::PkgId)\n\nCreates a precompiled cache file for a module and all of its dependencies. This can be used to reduce package load times. Cache files are stored in LOAD_CACHE_PATH[1], which defaults to ~/.julia/lib/VERSION. See Module initialization and precompilation for important notes.\n\n\n\n"
 },
 
 {
@@ -4781,7 +4685,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Essentials",
     "title": "Getting Around",
     "category": "section",
-    "text": "Base.exit\nBase.quit\nBase.atexit\nBase.atreplinit\nBase.isinteractive\nBase.varinfo\nBase.summarysize\nBase.edit(::AbstractString, ::Integer)\nBase.edit(::Any)\nBase.@edit\nBase.less(::AbstractString)\nBase.less(::Any)\nBase.@less\nBase.clipboard(::Any)\nBase.clipboard()\nBase.require\nBase.compilecache\nBase.__precompile__\nBase.include\nBase.include_string\nBase.include_dependency\nBase.Docs.apropos\nBase.which(::Any, ::Any)\nBase.which(::Symbol)\nBase.@which\nBase.methods\nBase.methodswith\nBase.@show\nBase.versioninfo\nans"
+    "text": "Base.exit\nBase.quit\nBase.atexit\nBase.isinteractive\nBase.varinfo\nBase.summarysize\nBase.edit(::AbstractString, ::Integer)\nBase.edit(::Any)\nBase.@edit\nBase.less(::AbstractString)\nBase.less(::Any)\nBase.@less\nBase.clipboard(::Any)\nBase.clipboard()\nBase.require\nBase.compilecache\nBase.__precompile__\nBase.include\nBase.include_string\nBase.include_dependency\nBase.Docs.apropos\nBase.which(::Any, ::Any)\nBase.which(::Symbol)\nBase.@which\nBase.methods\nBase.methodswith\nBase.@show\nBase.versioninfo\nans"
 },
 
 {
@@ -5221,7 +5125,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Essentials",
     "title": "Base.copy",
     "category": "Function",
-    "text": "copy(x)\n\nCreate a shallow copy of x: the outer structure is copied, but not all internal values. For example, copying an array produces a new array with identically-same elements as the original.\n\n\n\ntranspose(A::AbstractMatrix)\n\nEager matrix transpose. Note that the transposition is applied recursively to elements.\n\nThis operation is intended for linear algebra usage - for general data manipulation see permutedims, which is non-recursive.\n\nExamples\n\njulia> A = [1 2 3; 4 5 6; 7 8 9]\n3×3 Array{Int64,2}:\n 1  2  3\n 4  5  6\n 7  8  9\n\njulia> transpose(A)\n3×3 Array{Int64,2}:\n 1  4  7\n 2  5  8\n 3  6  9\n\n\n\n"
+    "text": "transpose(A::AbstractMatrix)\n\nEager matrix transpose. Note that the transposition is applied recursively to elements.\n\nThis operation is intended for linear algebra usage - for general data manipulation see permutedims, which is non-recursive.\n\nExamples\n\njulia> A = [1 2 3; 4 5 6; 7 8 9]\n3×3 Array{Int64,2}:\n 1  2  3\n 4  5  6\n 7  8  9\n\njulia> transpose(A)\n3×3 Array{Int64,2}:\n 1  4  7\n 2  5  8\n 3  6  9\n\n\n\ncopy(x)\n\nCreate a shallow copy of x: the outer structure is copied, but not all internal values. For example, copying an array produces a new array with identically-same elements as the original.\n\n\n\n"
 },
 
 {
@@ -9093,7 +8997,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Mathematics",
     "title": "Base.conj",
     "category": "Function",
-    "text": "conj(z)\n\nCompute the complex conjugate of a complex number z.\n\nExamples\n\njulia> conj(1 + 3im)\n1 - 3im\n\n\n\nconj(v::RowVector)\n\nReturn a ConjArray lazy view of the input, where each element is conjugated.\n\nExamples\n\njulia> v = RowVector([1+im, 1-im])\n1×2 RowVector{Complex{Int64},Array{Complex{Int64},1}}:\n 1+1im  1-1im\n\njulia> conj(v)\n1×2 RowVector{Complex{Int64},ConjArray{Complex{Int64},1,Array{Complex{Int64},1}}}:\n 1-1im  1+1im\n\n\n\n"
+    "text": "conj(v::RowVector)\n\nReturn a ConjArray lazy view of the input, where each element is conjugated.\n\nExamples\n\njulia> v = RowVector([1+im, 1-im])\n1×2 RowVector{Complex{Int64},Array{Complex{Int64},1}}:\n 1+1im  1-1im\n\njulia> conj(v)\n1×2 RowVector{Complex{Int64},ConjArray{Complex{Int64},1,Array{Complex{Int64},1}}}:\n 1-1im  1+1im\n\n\n\nconj(z)\n\nCompute the complex conjugate of a complex number z.\n\nExamples\n\njulia> conj(1 + 3im)\n1 - 3im\n\n\n\n"
 },
 
 {
@@ -10317,7 +10221,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Strings",
     "title": "Base.repr",
     "category": "Function",
-    "text": "repr(x)\n\nCreate a string from any value using the show function.\n\nExamples\n\njulia> repr(1)\n\"1\"\n\njulia> repr(zeros(3))\n\"[0.0, 0.0, 0.0]\"\n\n\n\n\n"
+    "text": "repr(x)\nrepr(x, context::Pair{Symbol,<:Any}...)\n\nCreate a string from any value using the show function. If context pairs are given, the IO buffer used to capture show output is wrapped in an IOContext object with those context pairs.\n\nExamples\n\njulia> repr(1)\n\"1\"\n\njulia> repr(zeros(3))\n\"[0.0, 0.0, 0.0]\"\n\n\n\n\n"
 },
 
 {
@@ -13309,7 +13213,7 @@ var documenterSearchIndex = {"docs": [
     "page": "I/O and Network",
     "title": "Base.skipchars",
     "category": "Function",
-    "text": "skipchars(io::IO, predicate; linecomment=nothing)\n\nAdvance the stream io such that the next-read character will be the first remaining for which predicate returns false. If the keyword argument linecomment is specified, all characters from that character until the start of the next line are ignored.\n\nExamples\n\njulia> buf = IOBuffer(\"    text\")\nIOBuffer(data=UInt8[...], readable=true, writable=false, seekable=true, append=false, size=8, maxsize=Inf, ptr=1, mark=-1)\n\njulia> skipchars(buf, isspace)\nIOBuffer(data=UInt8[...], readable=true, writable=false, seekable=true, append=false, size=8, maxsize=Inf, ptr=5, mark=-1)\n\njulia> String(readavailable(buf))\n\"text\"\n\n\n\n"
+    "text": "skipchars(predicate, io::IO; linecomment=nothing)\n\nAdvance the stream io such that the next-read character will be the first remaining for which predicate returns false. If the keyword argument linecomment is specified, all characters from that character until the start of the next line are ignored.\n\nExamples\n\njulia> buf = IOBuffer(\"    text\")\nIOBuffer(data=UInt8[...], readable=true, writable=false, seekable=true, append=false, size=8, maxsize=Inf, ptr=1, mark=-1)\n\njulia> skipchars(isspace, buf)\nIOBuffer(data=UInt8[...], readable=true, writable=false, seekable=true, append=false, size=8, maxsize=Inf, ptr=5, mark=-1)\n\njulia> String(readavailable(buf))\n\"text\"\n\n\n\n"
 },
 
 {
@@ -13681,11 +13585,11 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "base/io-network.html#Base.nb_available",
+    "location": "base/io-network.html#Base.bytesavailable",
     "page": "I/O and Network",
-    "title": "Base.nb_available",
+    "title": "Base.bytesavailable",
     "category": "Function",
-    "text": "nb_available(io)\n\nReturn the number of bytes available for reading before a read from this stream or buffer will block.\n\nExamples\n\njulia> io = IOBuffer(\"JuliaLang is a GitHub organization\");\n\njulia> nb_available(io)\n34\n\n\n\n"
+    "text": "bytesavailable(io)\n\nReturn the number of bytes available for reading before a read from this stream or buffer will block.\n\nExamples\n\njulia> io = IOBuffer(\"JuliaLang is a GitHub organization\");\n\njulia> bytesavailable(io)\n34\n\n\n\n"
 },
 
 {
@@ -13789,7 +13693,7 @@ var documenterSearchIndex = {"docs": [
     "page": "I/O and Network",
     "title": "Network I/O",
     "category": "section",
-    "text": "Base.connect(::TCPSocket, ::Integer)\nBase.connect(::AbstractString)\nBase.listen(::Any)\nBase.listen(::AbstractString)\nBase.getaddrinfo\nBase.getalladdrinfo\nBase.getnameinfo\nBase.getsockname\nBase.getpeername\nBase.IPv4\nBase.IPv6\nBase.nb_available\nBase.accept\nBase.listenany\nBase.bind\nBase.send\nBase.recv\nBase.recvfrom\nBase.setopt\nBase.ntoh\nBase.hton\nBase.ltoh\nBase.htol\nBase.ENDIAN_BOM"
+    "text": "Base.connect(::TCPSocket, ::Integer)\nBase.connect(::AbstractString)\nBase.listen(::Any)\nBase.listen(::AbstractString)\nBase.getaddrinfo\nBase.getalladdrinfo\nBase.getnameinfo\nBase.getsockname\nBase.getpeername\nBase.IPv4\nBase.IPv6\nBase.bytesavailable\nBase.accept\nBase.listenany\nBase.bind\nBase.send\nBase.recv\nBase.recvfrom\nBase.setopt\nBase.ntoh\nBase.hton\nBase.ltoh\nBase.htol\nBase.ENDIAN_BOM"
 },
 
 {
@@ -14761,7 +14665,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/base64.html#",
+    "location": "stdlib/Base64.html#",
     "page": "Base64",
     "title": "Base64",
     "category": "page",
@@ -14769,7 +14673,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/base64.html#Base64.Base64EncodePipe",
+    "location": "stdlib/Base64.html#Base64.Base64EncodePipe",
     "page": "Base64",
     "title": "Base64.Base64EncodePipe",
     "category": "Type",
@@ -14777,7 +14681,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/base64.html#Base64.base64encode",
+    "location": "stdlib/Base64.html#Base64.base64encode",
     "page": "Base64",
     "title": "Base64.base64encode",
     "category": "Function",
@@ -14785,7 +14689,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/base64.html#Base64.Base64DecodePipe",
+    "location": "stdlib/Base64.html#Base64.Base64DecodePipe",
     "page": "Base64",
     "title": "Base64.Base64DecodePipe",
     "category": "Type",
@@ -14793,7 +14697,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/base64.html#Base64.base64decode",
+    "location": "stdlib/Base64.html#Base64.base64decode",
     "page": "Base64",
     "title": "Base64.base64decode",
     "category": "Function",
@@ -14801,7 +14705,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/base64.html#Base64-1",
+    "location": "stdlib/Base64.html#Base64-1",
     "page": "Base64",
     "title": "Base64",
     "category": "section",
@@ -14809,7 +14713,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/crc32c.html#",
+    "location": "stdlib/CRC32c.html#",
     "page": "CRC32c",
     "title": "CRC32c",
     "category": "page",
@@ -14817,7 +14721,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/crc32c.html#CRC32c.crc32c",
+    "location": "stdlib/CRC32c.html#CRC32c.crc32c",
     "page": "CRC32c",
     "title": "CRC32c.crc32c",
     "category": "Function",
@@ -14825,7 +14729,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/crc32c.html#CRC32c.crc32c-Tuple{IO,Integer,UInt32}",
+    "location": "stdlib/CRC32c.html#CRC32c.crc32c-Tuple{IO,Integer,UInt32}",
     "page": "CRC32c",
     "title": "CRC32c.crc32c",
     "category": "Method",
@@ -14833,7 +14737,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/crc32c.html#CRC32c-1",
+    "location": "stdlib/CRC32c.html#CRC32c-1",
     "page": "CRC32c",
     "title": "CRC32c",
     "category": "section",
@@ -14841,7 +14745,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/dates.html#",
+    "location": "stdlib/Dates.html#",
     "page": "Dates and Time",
     "title": "Dates and Time",
     "category": "page",
@@ -14849,7 +14753,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/dates.html#stdlib-dates-1",
+    "location": "stdlib/Dates.html#stdlib-dates-1",
     "page": "Dates and Time",
     "title": "Dates and Time",
     "category": "section",
@@ -14857,7 +14761,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/dates.html#Dates.Period",
+    "location": "stdlib/Dates.html#Dates.Period",
     "page": "Dates and Time",
     "title": "Dates.Period",
     "category": "Type",
@@ -14865,7 +14769,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/dates.html#Dates.CompoundPeriod",
+    "location": "stdlib/Dates.html#Dates.CompoundPeriod",
     "page": "Dates and Time",
     "title": "Dates.CompoundPeriod",
     "category": "Type",
@@ -14873,7 +14777,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/dates.html#Dates.Instant",
+    "location": "stdlib/Dates.html#Dates.Instant",
     "page": "Dates and Time",
     "title": "Dates.Instant",
     "category": "Type",
@@ -14881,7 +14785,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/dates.html#Dates.UTInstant",
+    "location": "stdlib/Dates.html#Dates.UTInstant",
     "page": "Dates and Time",
     "title": "Dates.UTInstant",
     "category": "Type",
@@ -14889,7 +14793,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/dates.html#Dates.TimeType",
+    "location": "stdlib/Dates.html#Dates.TimeType",
     "page": "Dates and Time",
     "title": "Dates.TimeType",
     "category": "Type",
@@ -14897,7 +14801,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/dates.html#Dates.DateTime",
+    "location": "stdlib/Dates.html#Dates.DateTime",
     "page": "Dates and Time",
     "title": "Dates.DateTime",
     "category": "Type",
@@ -14905,7 +14809,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/dates.html#Dates.Date",
+    "location": "stdlib/Dates.html#Dates.Date",
     "page": "Dates and Time",
     "title": "Dates.Date",
     "category": "Type",
@@ -14913,7 +14817,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/dates.html#Dates.Time",
+    "location": "stdlib/Dates.html#Dates.Time",
     "page": "Dates and Time",
     "title": "Dates.Time",
     "category": "Type",
@@ -14921,7 +14825,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/dates.html#Dates-and-Time-Types-1",
+    "location": "stdlib/Dates.html#Dates-and-Time-Types-1",
     "page": "Dates and Time",
     "title": "Dates and Time Types",
     "category": "section",
@@ -14929,7 +14833,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/dates.html#Dates.DateTime-NTuple{7,Int64}",
+    "location": "stdlib/Dates.html#Dates.DateTime-NTuple{7,Int64}",
     "page": "Dates and Time",
     "title": "Dates.DateTime",
     "category": "Method",
@@ -14937,7 +14841,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/dates.html#Dates.DateTime-Tuple{Vararg{Period,N} where N}",
+    "location": "stdlib/Dates.html#Dates.DateTime-Tuple{Vararg{Period,N} where N}",
     "page": "Dates and Time",
     "title": "Dates.DateTime",
     "category": "Method",
@@ -14945,7 +14849,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/dates.html#Dates.DateTime-Tuple{Function,Vararg{Any,N} where N}",
+    "location": "stdlib/Dates.html#Dates.DateTime-Tuple{Function,Vararg{Any,N} where N}",
     "page": "Dates and Time",
     "title": "Dates.DateTime",
     "category": "Method",
@@ -14953,7 +14857,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/dates.html#Dates.DateTime-Tuple{TimeType}",
+    "location": "stdlib/Dates.html#Dates.DateTime-Tuple{TimeType}",
     "page": "Dates and Time",
     "title": "Dates.DateTime",
     "category": "Method",
@@ -14961,7 +14865,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/dates.html#Dates.DateTime-Tuple{AbstractString,AbstractString}",
+    "location": "stdlib/Dates.html#Dates.DateTime-Tuple{AbstractString,AbstractString}",
     "page": "Dates and Time",
     "title": "Dates.DateTime",
     "category": "Method",
@@ -14969,7 +14873,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/dates.html#Dates.format",
+    "location": "stdlib/Dates.html#Dates.format",
     "page": "Dates and Time",
     "title": "Dates.format",
     "category": "Function",
@@ -14977,7 +14881,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/dates.html#Dates.DateFormat",
+    "location": "stdlib/Dates.html#Dates.DateFormat",
     "page": "Dates and Time",
     "title": "Dates.DateFormat",
     "category": "Type",
@@ -14985,7 +14889,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/dates.html#Dates.@dateformat_str",
+    "location": "stdlib/Dates.html#Dates.@dateformat_str",
     "page": "Dates and Time",
     "title": "Dates.@dateformat_str",
     "category": "Macro",
@@ -14993,7 +14897,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/dates.html#Dates.DateTime-Tuple{AbstractString,DateFormat}",
+    "location": "stdlib/Dates.html#Dates.DateTime-Tuple{AbstractString,DateFormat}",
     "page": "Dates and Time",
     "title": "Dates.DateTime",
     "category": "Method",
@@ -15001,7 +14905,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/dates.html#Dates.Date-Tuple{Int64,Int64,Int64}",
+    "location": "stdlib/Dates.html#Dates.Date-Tuple{Int64,Int64,Int64}",
     "page": "Dates and Time",
     "title": "Dates.Date",
     "category": "Method",
@@ -15009,7 +14913,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/dates.html#Dates.Date-Tuple{Vararg{Period,N} where N}",
+    "location": "stdlib/Dates.html#Dates.Date-Tuple{Vararg{Period,N} where N}",
     "page": "Dates and Time",
     "title": "Dates.Date",
     "category": "Method",
@@ -15017,7 +14921,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/dates.html#Dates.Date-Tuple{Function,Any,Any,Any}",
+    "location": "stdlib/Dates.html#Dates.Date-Tuple{Function,Any,Any,Any}",
     "page": "Dates and Time",
     "title": "Dates.Date",
     "category": "Method",
@@ -15025,7 +14929,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/dates.html#Dates.Date-Tuple{TimeType}",
+    "location": "stdlib/Dates.html#Dates.Date-Tuple{TimeType}",
     "page": "Dates and Time",
     "title": "Dates.Date",
     "category": "Method",
@@ -15033,7 +14937,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/dates.html#Dates.Date-Tuple{AbstractString,AbstractString}",
+    "location": "stdlib/Dates.html#Dates.Date-Tuple{AbstractString,AbstractString}",
     "page": "Dates and Time",
     "title": "Dates.Date",
     "category": "Method",
@@ -15041,7 +14945,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/dates.html#Dates.Date-Tuple{AbstractString,DateFormat}",
+    "location": "stdlib/Dates.html#Dates.Date-Tuple{AbstractString,DateFormat}",
     "page": "Dates and Time",
     "title": "Dates.Date",
     "category": "Method",
@@ -15049,7 +14953,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/dates.html#Dates.Time-NTuple{5,Int64}",
+    "location": "stdlib/Dates.html#Dates.Time-NTuple{5,Int64}",
     "page": "Dates and Time",
     "title": "Dates.Time",
     "category": "Method",
@@ -15057,7 +14961,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/dates.html#Dates.Time-Tuple{Vararg{TimePeriod,N} where N}",
+    "location": "stdlib/Dates.html#Dates.Time-Tuple{Vararg{TimePeriod,N} where N}",
     "page": "Dates and Time",
     "title": "Dates.Time",
     "category": "Method",
@@ -15065,7 +14969,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/dates.html#Dates.Time-Tuple{Function,Vararg{Any,N} where N}",
+    "location": "stdlib/Dates.html#Dates.Time-Tuple{Function,Vararg{Any,N} where N}",
     "page": "Dates and Time",
     "title": "Dates.Time",
     "category": "Method",
@@ -15073,7 +14977,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/dates.html#Dates.Time-Tuple{DateTime}",
+    "location": "stdlib/Dates.html#Dates.Time-Tuple{DateTime}",
     "page": "Dates and Time",
     "title": "Dates.Time",
     "category": "Method",
@@ -15081,7 +14985,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/dates.html#Dates.now-Tuple{}",
+    "location": "stdlib/Dates.html#Dates.now-Tuple{}",
     "page": "Dates and Time",
     "title": "Dates.now",
     "category": "Method",
@@ -15089,7 +14993,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/dates.html#Dates.now-Tuple{Type{UTC}}",
+    "location": "stdlib/Dates.html#Dates.now-Tuple{Type{UTC}}",
     "page": "Dates and Time",
     "title": "Dates.now",
     "category": "Method",
@@ -15097,7 +15001,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/dates.html#Base.eps",
+    "location": "stdlib/Dates.html#Base.eps",
     "page": "Dates and Time",
     "title": "Base.eps",
     "category": "Function",
@@ -15105,7 +15009,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/dates.html#Dates-Functions-1",
+    "location": "stdlib/Dates.html#Dates-Functions-1",
     "page": "Dates and Time",
     "title": "Dates Functions",
     "category": "section",
@@ -15113,7 +15017,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/dates.html#Dates.year",
+    "location": "stdlib/Dates.html#Dates.year",
     "page": "Dates and Time",
     "title": "Dates.year",
     "category": "Function",
@@ -15121,7 +15025,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/dates.html#Dates.month",
+    "location": "stdlib/Dates.html#Dates.month",
     "page": "Dates and Time",
     "title": "Dates.month",
     "category": "Function",
@@ -15129,7 +15033,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/dates.html#Dates.week",
+    "location": "stdlib/Dates.html#Dates.week",
     "page": "Dates and Time",
     "title": "Dates.week",
     "category": "Function",
@@ -15137,7 +15041,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/dates.html#Dates.day",
+    "location": "stdlib/Dates.html#Dates.day",
     "page": "Dates and Time",
     "title": "Dates.day",
     "category": "Function",
@@ -15145,7 +15049,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/dates.html#Dates.hour",
+    "location": "stdlib/Dates.html#Dates.hour",
     "page": "Dates and Time",
     "title": "Dates.hour",
     "category": "Function",
@@ -15153,7 +15057,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/dates.html#Dates.minute",
+    "location": "stdlib/Dates.html#Dates.minute",
     "page": "Dates and Time",
     "title": "Dates.minute",
     "category": "Function",
@@ -15161,7 +15065,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/dates.html#Dates.second",
+    "location": "stdlib/Dates.html#Dates.second",
     "page": "Dates and Time",
     "title": "Dates.second",
     "category": "Function",
@@ -15169,7 +15073,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/dates.html#Dates.millisecond",
+    "location": "stdlib/Dates.html#Dates.millisecond",
     "page": "Dates and Time",
     "title": "Dates.millisecond",
     "category": "Function",
@@ -15177,7 +15081,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/dates.html#Dates.microsecond",
+    "location": "stdlib/Dates.html#Dates.microsecond",
     "page": "Dates and Time",
     "title": "Dates.microsecond",
     "category": "Function",
@@ -15185,7 +15089,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/dates.html#Dates.nanosecond",
+    "location": "stdlib/Dates.html#Dates.nanosecond",
     "page": "Dates and Time",
     "title": "Dates.nanosecond",
     "category": "Function",
@@ -15193,7 +15097,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/dates.html#Dates.Year-Tuple{TimeType}",
+    "location": "stdlib/Dates.html#Dates.Year-Tuple{TimeType}",
     "page": "Dates and Time",
     "title": "Dates.Year",
     "category": "Method",
@@ -15201,7 +15105,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/dates.html#Dates.Month-Tuple{TimeType}",
+    "location": "stdlib/Dates.html#Dates.Month-Tuple{TimeType}",
     "page": "Dates and Time",
     "title": "Dates.Month",
     "category": "Method",
@@ -15209,7 +15113,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/dates.html#Dates.Week-Tuple{TimeType}",
+    "location": "stdlib/Dates.html#Dates.Week-Tuple{TimeType}",
     "page": "Dates and Time",
     "title": "Dates.Week",
     "category": "Method",
@@ -15217,7 +15121,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/dates.html#Dates.Day-Tuple{TimeType}",
+    "location": "stdlib/Dates.html#Dates.Day-Tuple{TimeType}",
     "page": "Dates and Time",
     "title": "Dates.Day",
     "category": "Method",
@@ -15225,7 +15129,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/dates.html#Dates.Hour-Tuple{DateTime}",
+    "location": "stdlib/Dates.html#Dates.Hour-Tuple{DateTime}",
     "page": "Dates and Time",
     "title": "Dates.Hour",
     "category": "Method",
@@ -15233,7 +15137,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/dates.html#Dates.Minute-Tuple{DateTime}",
+    "location": "stdlib/Dates.html#Dates.Minute-Tuple{DateTime}",
     "page": "Dates and Time",
     "title": "Dates.Minute",
     "category": "Method",
@@ -15241,7 +15145,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/dates.html#Dates.Second-Tuple{DateTime}",
+    "location": "stdlib/Dates.html#Dates.Second-Tuple{DateTime}",
     "page": "Dates and Time",
     "title": "Dates.Second",
     "category": "Method",
@@ -15249,7 +15153,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/dates.html#Dates.Millisecond-Tuple{DateTime}",
+    "location": "stdlib/Dates.html#Dates.Millisecond-Tuple{DateTime}",
     "page": "Dates and Time",
     "title": "Dates.Millisecond",
     "category": "Method",
@@ -15257,7 +15161,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/dates.html#Dates.Microsecond-Tuple{Time}",
+    "location": "stdlib/Dates.html#Dates.Microsecond-Tuple{Time}",
     "page": "Dates and Time",
     "title": "Dates.Microsecond",
     "category": "Method",
@@ -15265,7 +15169,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/dates.html#Dates.Nanosecond-Tuple{Time}",
+    "location": "stdlib/Dates.html#Dates.Nanosecond-Tuple{Time}",
     "page": "Dates and Time",
     "title": "Dates.Nanosecond",
     "category": "Method",
@@ -15273,7 +15177,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/dates.html#Dates.yearmonth",
+    "location": "stdlib/Dates.html#Dates.yearmonth",
     "page": "Dates and Time",
     "title": "Dates.yearmonth",
     "category": "Function",
@@ -15281,7 +15185,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/dates.html#Dates.monthday",
+    "location": "stdlib/Dates.html#Dates.monthday",
     "page": "Dates and Time",
     "title": "Dates.monthday",
     "category": "Function",
@@ -15289,7 +15193,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/dates.html#Dates.yearmonthday",
+    "location": "stdlib/Dates.html#Dates.yearmonthday",
     "page": "Dates and Time",
     "title": "Dates.yearmonthday",
     "category": "Function",
@@ -15297,7 +15201,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/dates.html#Accessor-Functions-1",
+    "location": "stdlib/Dates.html#Accessor-Functions-1",
     "page": "Dates and Time",
     "title": "Accessor Functions",
     "category": "section",
@@ -15305,7 +15209,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/dates.html#Dates.dayname",
+    "location": "stdlib/Dates.html#Dates.dayname",
     "page": "Dates and Time",
     "title": "Dates.dayname",
     "category": "Function",
@@ -15313,7 +15217,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/dates.html#Dates.dayabbr",
+    "location": "stdlib/Dates.html#Dates.dayabbr",
     "page": "Dates and Time",
     "title": "Dates.dayabbr",
     "category": "Function",
@@ -15321,7 +15225,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/dates.html#Dates.dayofweek",
+    "location": "stdlib/Dates.html#Dates.dayofweek",
     "page": "Dates and Time",
     "title": "Dates.dayofweek",
     "category": "Function",
@@ -15329,7 +15233,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/dates.html#Dates.dayofmonth",
+    "location": "stdlib/Dates.html#Dates.dayofmonth",
     "page": "Dates and Time",
     "title": "Dates.dayofmonth",
     "category": "Function",
@@ -15337,7 +15241,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/dates.html#Dates.dayofweekofmonth",
+    "location": "stdlib/Dates.html#Dates.dayofweekofmonth",
     "page": "Dates and Time",
     "title": "Dates.dayofweekofmonth",
     "category": "Function",
@@ -15345,7 +15249,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/dates.html#Dates.daysofweekinmonth",
+    "location": "stdlib/Dates.html#Dates.daysofweekinmonth",
     "page": "Dates and Time",
     "title": "Dates.daysofweekinmonth",
     "category": "Function",
@@ -15353,7 +15257,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/dates.html#Dates.monthname",
+    "location": "stdlib/Dates.html#Dates.monthname",
     "page": "Dates and Time",
     "title": "Dates.monthname",
     "category": "Function",
@@ -15361,7 +15265,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/dates.html#Dates.monthabbr",
+    "location": "stdlib/Dates.html#Dates.monthabbr",
     "page": "Dates and Time",
     "title": "Dates.monthabbr",
     "category": "Function",
@@ -15369,7 +15273,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/dates.html#Dates.daysinmonth",
+    "location": "stdlib/Dates.html#Dates.daysinmonth",
     "page": "Dates and Time",
     "title": "Dates.daysinmonth",
     "category": "Function",
@@ -15377,7 +15281,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/dates.html#Dates.isleapyear",
+    "location": "stdlib/Dates.html#Dates.isleapyear",
     "page": "Dates and Time",
     "title": "Dates.isleapyear",
     "category": "Function",
@@ -15385,7 +15289,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/dates.html#Dates.dayofyear",
+    "location": "stdlib/Dates.html#Dates.dayofyear",
     "page": "Dates and Time",
     "title": "Dates.dayofyear",
     "category": "Function",
@@ -15393,7 +15297,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/dates.html#Dates.daysinyear",
+    "location": "stdlib/Dates.html#Dates.daysinyear",
     "page": "Dates and Time",
     "title": "Dates.daysinyear",
     "category": "Function",
@@ -15401,7 +15305,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/dates.html#Dates.quarterofyear",
+    "location": "stdlib/Dates.html#Dates.quarterofyear",
     "page": "Dates and Time",
     "title": "Dates.quarterofyear",
     "category": "Function",
@@ -15409,7 +15313,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/dates.html#Dates.dayofquarter",
+    "location": "stdlib/Dates.html#Dates.dayofquarter",
     "page": "Dates and Time",
     "title": "Dates.dayofquarter",
     "category": "Function",
@@ -15417,7 +15321,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/dates.html#Query-Functions-1",
+    "location": "stdlib/Dates.html#Query-Functions-1",
     "page": "Dates and Time",
     "title": "Query Functions",
     "category": "section",
@@ -15425,7 +15329,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/dates.html#Base.trunc-Tuple{TimeType,Type{Period}}",
+    "location": "stdlib/Dates.html#Base.trunc-Tuple{TimeType,Type{Period}}",
     "page": "Dates and Time",
     "title": "Base.trunc",
     "category": "Method",
@@ -15433,7 +15337,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/dates.html#Dates.firstdayofweek",
+    "location": "stdlib/Dates.html#Dates.firstdayofweek",
     "page": "Dates and Time",
     "title": "Dates.firstdayofweek",
     "category": "Function",
@@ -15441,7 +15345,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/dates.html#Dates.lastdayofweek",
+    "location": "stdlib/Dates.html#Dates.lastdayofweek",
     "page": "Dates and Time",
     "title": "Dates.lastdayofweek",
     "category": "Function",
@@ -15449,7 +15353,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/dates.html#Dates.firstdayofmonth",
+    "location": "stdlib/Dates.html#Dates.firstdayofmonth",
     "page": "Dates and Time",
     "title": "Dates.firstdayofmonth",
     "category": "Function",
@@ -15457,7 +15361,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/dates.html#Dates.lastdayofmonth",
+    "location": "stdlib/Dates.html#Dates.lastdayofmonth",
     "page": "Dates and Time",
     "title": "Dates.lastdayofmonth",
     "category": "Function",
@@ -15465,7 +15369,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/dates.html#Dates.firstdayofyear",
+    "location": "stdlib/Dates.html#Dates.firstdayofyear",
     "page": "Dates and Time",
     "title": "Dates.firstdayofyear",
     "category": "Function",
@@ -15473,7 +15377,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/dates.html#Dates.lastdayofyear",
+    "location": "stdlib/Dates.html#Dates.lastdayofyear",
     "page": "Dates and Time",
     "title": "Dates.lastdayofyear",
     "category": "Function",
@@ -15481,7 +15385,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/dates.html#Dates.firstdayofquarter",
+    "location": "stdlib/Dates.html#Dates.firstdayofquarter",
     "page": "Dates and Time",
     "title": "Dates.firstdayofquarter",
     "category": "Function",
@@ -15489,7 +15393,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/dates.html#Dates.lastdayofquarter",
+    "location": "stdlib/Dates.html#Dates.lastdayofquarter",
     "page": "Dates and Time",
     "title": "Dates.lastdayofquarter",
     "category": "Function",
@@ -15497,7 +15401,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/dates.html#Dates.tonext-Tuple{TimeType,Int64}",
+    "location": "stdlib/Dates.html#Dates.tonext-Tuple{TimeType,Int64}",
     "page": "Dates and Time",
     "title": "Dates.tonext",
     "category": "Method",
@@ -15505,7 +15409,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/dates.html#Dates.toprev-Tuple{TimeType,Int64}",
+    "location": "stdlib/Dates.html#Dates.toprev-Tuple{TimeType,Int64}",
     "page": "Dates and Time",
     "title": "Dates.toprev",
     "category": "Method",
@@ -15513,7 +15417,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/dates.html#Dates.tofirst",
+    "location": "stdlib/Dates.html#Dates.tofirst",
     "page": "Dates and Time",
     "title": "Dates.tofirst",
     "category": "Function",
@@ -15521,7 +15425,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/dates.html#Dates.tolast",
+    "location": "stdlib/Dates.html#Dates.tolast",
     "page": "Dates and Time",
     "title": "Dates.tolast",
     "category": "Function",
@@ -15529,7 +15433,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/dates.html#Dates.tonext-Tuple{Function,TimeType}",
+    "location": "stdlib/Dates.html#Dates.tonext-Tuple{Function,TimeType}",
     "page": "Dates and Time",
     "title": "Dates.tonext",
     "category": "Method",
@@ -15537,7 +15441,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/dates.html#Dates.toprev-Tuple{Function,TimeType}",
+    "location": "stdlib/Dates.html#Dates.toprev-Tuple{Function,TimeType}",
     "page": "Dates and Time",
     "title": "Dates.toprev",
     "category": "Method",
@@ -15545,7 +15449,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/dates.html#Adjuster-Functions-1",
+    "location": "stdlib/Dates.html#Adjuster-Functions-1",
     "page": "Dates and Time",
     "title": "Adjuster Functions",
     "category": "section",
@@ -15553,7 +15457,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/dates.html#Dates.Period-Tuple{Any}",
+    "location": "stdlib/Dates.html#Dates.Period-Tuple{Any}",
     "page": "Dates and Time",
     "title": "Dates.Period",
     "category": "Method",
@@ -15561,7 +15465,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/dates.html#Dates.CompoundPeriod-Tuple{Array{#s43,1} where #s43<:Period}",
+    "location": "stdlib/Dates.html#Dates.CompoundPeriod-Tuple{Array{#s43,1} where #s43<:Period}",
     "page": "Dates and Time",
     "title": "Dates.CompoundPeriod",
     "category": "Method",
@@ -15569,7 +15473,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/dates.html#Dates.default",
+    "location": "stdlib/Dates.html#Dates.default",
     "page": "Dates and Time",
     "title": "Dates.default",
     "category": "Function",
@@ -15577,7 +15481,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/dates.html#Periods-1",
+    "location": "stdlib/Dates.html#Periods-1",
     "page": "Dates and Time",
     "title": "Periods",
     "category": "section",
@@ -15585,7 +15489,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/dates.html#Base.floor-Tuple{TimeType,Period}",
+    "location": "stdlib/Dates.html#Base.floor-Tuple{TimeType,Period}",
     "page": "Dates and Time",
     "title": "Base.floor",
     "category": "Method",
@@ -15593,7 +15497,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/dates.html#Base.ceil-Tuple{TimeType,Period}",
+    "location": "stdlib/Dates.html#Base.ceil-Tuple{TimeType,Period}",
     "page": "Dates and Time",
     "title": "Base.ceil",
     "category": "Method",
@@ -15601,7 +15505,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/dates.html#Base.round-Tuple{TimeType,Period,RoundingMode{:NearestTiesUp}}",
+    "location": "stdlib/Dates.html#Base.round-Tuple{TimeType,Period,RoundingMode{:NearestTiesUp}}",
     "page": "Dates and Time",
     "title": "Base.round",
     "category": "Method",
@@ -15609,7 +15513,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/dates.html#Base.floor-Union{Tuple{T}, Tuple{Union{Day, Week, TimePeriod},T}} where T<:Union{Day, Week, TimePeriod}",
+    "location": "stdlib/Dates.html#Base.floor-Union{Tuple{T}, Tuple{Union{Day, Week, TimePeriod},T}} where T<:Union{Day, Week, TimePeriod}",
     "page": "Dates and Time",
     "title": "Base.floor",
     "category": "Method",
@@ -15617,7 +15521,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/dates.html#Base.ceil-Tuple{Union{Day, Week, TimePeriod},Union{Day, Week, TimePeriod}}",
+    "location": "stdlib/Dates.html#Base.ceil-Tuple{Union{Day, Week, TimePeriod},Union{Day, Week, TimePeriod}}",
     "page": "Dates and Time",
     "title": "Base.ceil",
     "category": "Method",
@@ -15625,7 +15529,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/dates.html#Base.round-Tuple{Union{Day, Week, TimePeriod},Union{Day, Week, TimePeriod},RoundingMode{:NearestTiesUp}}",
+    "location": "stdlib/Dates.html#Base.round-Tuple{Union{Day, Week, TimePeriod},Union{Day, Week, TimePeriod},RoundingMode{:NearestTiesUp}}",
     "page": "Dates and Time",
     "title": "Base.round",
     "category": "Method",
@@ -15633,7 +15537,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/dates.html#Dates.floorceil",
+    "location": "stdlib/Dates.html#Dates.floorceil",
     "page": "Dates and Time",
     "title": "Dates.floorceil",
     "category": "Function",
@@ -15641,7 +15545,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/dates.html#Dates.epochdays2date",
+    "location": "stdlib/Dates.html#Dates.epochdays2date",
     "page": "Dates and Time",
     "title": "Dates.epochdays2date",
     "category": "Function",
@@ -15649,7 +15553,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/dates.html#Dates.epochms2datetime",
+    "location": "stdlib/Dates.html#Dates.epochms2datetime",
     "page": "Dates and Time",
     "title": "Dates.epochms2datetime",
     "category": "Function",
@@ -15657,7 +15561,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/dates.html#Dates.date2epochdays",
+    "location": "stdlib/Dates.html#Dates.date2epochdays",
     "page": "Dates and Time",
     "title": "Dates.date2epochdays",
     "category": "Function",
@@ -15665,7 +15569,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/dates.html#Dates.datetime2epochms",
+    "location": "stdlib/Dates.html#Dates.datetime2epochms",
     "page": "Dates and Time",
     "title": "Dates.datetime2epochms",
     "category": "Function",
@@ -15673,7 +15577,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/dates.html#Rounding-Functions-1",
+    "location": "stdlib/Dates.html#Rounding-Functions-1",
     "page": "Dates and Time",
     "title": "Rounding Functions",
     "category": "section",
@@ -15681,7 +15585,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/dates.html#Dates.today",
+    "location": "stdlib/Dates.html#Dates.today",
     "page": "Dates and Time",
     "title": "Dates.today",
     "category": "Function",
@@ -15689,7 +15593,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/dates.html#Dates.unix2datetime",
+    "location": "stdlib/Dates.html#Dates.unix2datetime",
     "page": "Dates and Time",
     "title": "Dates.unix2datetime",
     "category": "Function",
@@ -15697,7 +15601,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/dates.html#Dates.datetime2unix",
+    "location": "stdlib/Dates.html#Dates.datetime2unix",
     "page": "Dates and Time",
     "title": "Dates.datetime2unix",
     "category": "Function",
@@ -15705,7 +15609,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/dates.html#Dates.julian2datetime",
+    "location": "stdlib/Dates.html#Dates.julian2datetime",
     "page": "Dates and Time",
     "title": "Dates.julian2datetime",
     "category": "Function",
@@ -15713,7 +15617,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/dates.html#Dates.datetime2julian",
+    "location": "stdlib/Dates.html#Dates.datetime2julian",
     "page": "Dates and Time",
     "title": "Dates.datetime2julian",
     "category": "Function",
@@ -15721,7 +15625,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/dates.html#Dates.rata2datetime",
+    "location": "stdlib/Dates.html#Dates.rata2datetime",
     "page": "Dates and Time",
     "title": "Dates.rata2datetime",
     "category": "Function",
@@ -15729,7 +15633,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/dates.html#Dates.datetime2rata",
+    "location": "stdlib/Dates.html#Dates.datetime2rata",
     "page": "Dates and Time",
     "title": "Dates.datetime2rata",
     "category": "Function",
@@ -15737,7 +15641,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/dates.html#Conversion-Functions-1",
+    "location": "stdlib/Dates.html#Conversion-Functions-1",
     "page": "Dates and Time",
     "title": "Conversion Functions",
     "category": "section",
@@ -15745,7 +15649,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/dates.html#Constants-1",
+    "location": "stdlib/Dates.html#Constants-1",
     "page": "Dates and Time",
     "title": "Constants",
     "category": "section",
@@ -15753,7 +15657,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/delimitedfiles.html#",
+    "location": "stdlib/DelimitedFiles.html#",
     "page": "Delimited Files",
     "title": "Delimited Files",
     "category": "page",
@@ -15761,7 +15665,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/delimitedfiles.html#DelimitedFiles.readdlm-Tuple{Any,Char,Type,Char}",
+    "location": "stdlib/DelimitedFiles.html#DelimitedFiles.readdlm-Tuple{Any,Char,Type,Char}",
     "page": "Delimited Files",
     "title": "DelimitedFiles.readdlm",
     "category": "Method",
@@ -15769,7 +15673,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/delimitedfiles.html#DelimitedFiles.readdlm-Tuple{Any,Char,Char}",
+    "location": "stdlib/DelimitedFiles.html#DelimitedFiles.readdlm-Tuple{Any,Char,Char}",
     "page": "Delimited Files",
     "title": "DelimitedFiles.readdlm",
     "category": "Method",
@@ -15777,7 +15681,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/delimitedfiles.html#DelimitedFiles.readdlm-Tuple{Any,Char,Type}",
+    "location": "stdlib/DelimitedFiles.html#DelimitedFiles.readdlm-Tuple{Any,Char,Type}",
     "page": "Delimited Files",
     "title": "DelimitedFiles.readdlm",
     "category": "Method",
@@ -15785,7 +15689,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/delimitedfiles.html#DelimitedFiles.readdlm-Tuple{Any,Char}",
+    "location": "stdlib/DelimitedFiles.html#DelimitedFiles.readdlm-Tuple{Any,Char}",
     "page": "Delimited Files",
     "title": "DelimitedFiles.readdlm",
     "category": "Method",
@@ -15793,7 +15697,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/delimitedfiles.html#DelimitedFiles.readdlm-Tuple{Any,Type}",
+    "location": "stdlib/DelimitedFiles.html#DelimitedFiles.readdlm-Tuple{Any,Type}",
     "page": "Delimited Files",
     "title": "DelimitedFiles.readdlm",
     "category": "Method",
@@ -15801,7 +15705,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/delimitedfiles.html#DelimitedFiles.readdlm-Tuple{Any}",
+    "location": "stdlib/DelimitedFiles.html#DelimitedFiles.readdlm-Tuple{Any}",
     "page": "Delimited Files",
     "title": "DelimitedFiles.readdlm",
     "category": "Method",
@@ -15809,7 +15713,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/delimitedfiles.html#DelimitedFiles.writedlm",
+    "location": "stdlib/DelimitedFiles.html#DelimitedFiles.writedlm",
     "page": "Delimited Files",
     "title": "DelimitedFiles.writedlm",
     "category": "Function",
@@ -15817,7 +15721,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/delimitedfiles.html#Delimited-Files-1",
+    "location": "stdlib/DelimitedFiles.html#Delimited-Files-1",
     "page": "Delimited Files",
     "title": "Delimited Files",
     "category": "section",
@@ -15825,7 +15729,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/distributed.html#",
+    "location": "stdlib/Distributed.html#",
     "page": "Distributed Computing",
     "title": "Distributed Computing",
     "category": "page",
@@ -15833,7 +15737,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/distributed.html#Distributed.addprocs",
+    "location": "stdlib/Distributed.html#Distributed.addprocs",
     "page": "Distributed Computing",
     "title": "Distributed.addprocs",
     "category": "Function",
@@ -15841,7 +15745,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/distributed.html#Distributed.nprocs",
+    "location": "stdlib/Distributed.html#Distributed.nprocs",
     "page": "Distributed Computing",
     "title": "Distributed.nprocs",
     "category": "Function",
@@ -15849,7 +15753,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/distributed.html#Distributed.nworkers",
+    "location": "stdlib/Distributed.html#Distributed.nworkers",
     "page": "Distributed Computing",
     "title": "Distributed.nworkers",
     "category": "Function",
@@ -15857,7 +15761,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/distributed.html#Distributed.procs-Tuple{}",
+    "location": "stdlib/Distributed.html#Distributed.procs-Tuple{}",
     "page": "Distributed Computing",
     "title": "Distributed.procs",
     "category": "Method",
@@ -15865,7 +15769,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/distributed.html#Distributed.procs-Tuple{Integer}",
+    "location": "stdlib/Distributed.html#Distributed.procs-Tuple{Integer}",
     "page": "Distributed Computing",
     "title": "Distributed.procs",
     "category": "Method",
@@ -15873,7 +15777,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/distributed.html#Distributed.workers",
+    "location": "stdlib/Distributed.html#Distributed.workers",
     "page": "Distributed Computing",
     "title": "Distributed.workers",
     "category": "Function",
@@ -15881,7 +15785,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/distributed.html#Distributed.rmprocs",
+    "location": "stdlib/Distributed.html#Distributed.rmprocs",
     "page": "Distributed Computing",
     "title": "Distributed.rmprocs",
     "category": "Function",
@@ -15889,7 +15793,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/distributed.html#Distributed.interrupt",
+    "location": "stdlib/Distributed.html#Distributed.interrupt",
     "page": "Distributed Computing",
     "title": "Distributed.interrupt",
     "category": "Function",
@@ -15897,7 +15801,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/distributed.html#Distributed.myid",
+    "location": "stdlib/Distributed.html#Distributed.myid",
     "page": "Distributed Computing",
     "title": "Distributed.myid",
     "category": "Function",
@@ -15905,7 +15809,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/distributed.html#Distributed.pmap",
+    "location": "stdlib/Distributed.html#Distributed.pmap",
     "page": "Distributed Computing",
     "title": "Distributed.pmap",
     "category": "Function",
@@ -15913,7 +15817,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/distributed.html#Distributed.RemoteException",
+    "location": "stdlib/Distributed.html#Distributed.RemoteException",
     "page": "Distributed Computing",
     "title": "Distributed.RemoteException",
     "category": "Type",
@@ -15921,7 +15825,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/distributed.html#Distributed.Future",
+    "location": "stdlib/Distributed.html#Distributed.Future",
     "page": "Distributed Computing",
     "title": "Distributed.Future",
     "category": "Type",
@@ -15929,7 +15833,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/distributed.html#Distributed.RemoteChannel",
+    "location": "stdlib/Distributed.html#Distributed.RemoteChannel",
     "page": "Distributed Computing",
     "title": "Distributed.RemoteChannel",
     "category": "Type",
@@ -15937,7 +15841,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/distributed.html#Base.wait",
+    "location": "stdlib/Distributed.html#Base.wait",
     "page": "Distributed Computing",
     "title": "Base.wait",
     "category": "Function",
@@ -15945,7 +15849,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/distributed.html#Base.fetch-Tuple{Any}",
+    "location": "stdlib/Distributed.html#Base.fetch-Tuple{Any}",
     "page": "Distributed Computing",
     "title": "Base.fetch",
     "category": "Method",
@@ -15953,7 +15857,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/distributed.html#Distributed.remotecall-Tuple{Any,Integer,Vararg{Any,N} where N}",
+    "location": "stdlib/Distributed.html#Distributed.remotecall-Tuple{Any,Integer,Vararg{Any,N} where N}",
     "page": "Distributed Computing",
     "title": "Distributed.remotecall",
     "category": "Method",
@@ -15961,7 +15865,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/distributed.html#Distributed.remotecall_wait-Tuple{Any,Integer,Vararg{Any,N} where N}",
+    "location": "stdlib/Distributed.html#Distributed.remotecall_wait-Tuple{Any,Integer,Vararg{Any,N} where N}",
     "page": "Distributed Computing",
     "title": "Distributed.remotecall_wait",
     "category": "Method",
@@ -15969,7 +15873,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/distributed.html#Distributed.remotecall_fetch-Tuple{Any,Integer,Vararg{Any,N} where N}",
+    "location": "stdlib/Distributed.html#Distributed.remotecall_fetch-Tuple{Any,Integer,Vararg{Any,N} where N}",
     "page": "Distributed Computing",
     "title": "Distributed.remotecall_fetch",
     "category": "Method",
@@ -15977,7 +15881,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/distributed.html#Distributed.remote_do-Tuple{Any,Integer,Vararg{Any,N} where N}",
+    "location": "stdlib/Distributed.html#Distributed.remote_do-Tuple{Any,Integer,Vararg{Any,N} where N}",
     "page": "Distributed Computing",
     "title": "Distributed.remote_do",
     "category": "Method",
@@ -15985,7 +15889,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/distributed.html#Base.put!-Tuple{RemoteChannel,Vararg{Any,N} where N}",
+    "location": "stdlib/Distributed.html#Base.put!-Tuple{RemoteChannel,Vararg{Any,N} where N}",
     "page": "Distributed Computing",
     "title": "Base.put!",
     "category": "Method",
@@ -15993,7 +15897,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/distributed.html#Base.put!-Tuple{Future,Any}",
+    "location": "stdlib/Distributed.html#Base.put!-Tuple{Future,Any}",
     "page": "Distributed Computing",
     "title": "Base.put!",
     "category": "Method",
@@ -16001,7 +15905,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/distributed.html#Base.take!-Tuple{RemoteChannel,Vararg{Any,N} where N}",
+    "location": "stdlib/Distributed.html#Base.take!-Tuple{RemoteChannel,Vararg{Any,N} where N}",
     "page": "Distributed Computing",
     "title": "Base.take!",
     "category": "Method",
@@ -16009,7 +15913,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/distributed.html#Base.isready-Tuple{RemoteChannel,Vararg{Any,N} where N}",
+    "location": "stdlib/Distributed.html#Base.isready-Tuple{RemoteChannel,Vararg{Any,N} where N}",
     "page": "Distributed Computing",
     "title": "Base.isready",
     "category": "Method",
@@ -16017,7 +15921,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/distributed.html#Base.isready-Tuple{Future}",
+    "location": "stdlib/Distributed.html#Base.isready-Tuple{Future}",
     "page": "Distributed Computing",
     "title": "Base.isready",
     "category": "Method",
@@ -16025,7 +15929,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/distributed.html#Distributed.WorkerPool",
+    "location": "stdlib/Distributed.html#Distributed.WorkerPool",
     "page": "Distributed Computing",
     "title": "Distributed.WorkerPool",
     "category": "Type",
@@ -16033,7 +15937,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/distributed.html#Distributed.CachingPool",
+    "location": "stdlib/Distributed.html#Distributed.CachingPool",
     "page": "Distributed Computing",
     "title": "Distributed.CachingPool",
     "category": "Type",
@@ -16041,7 +15945,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/distributed.html#Distributed.default_worker_pool",
+    "location": "stdlib/Distributed.html#Distributed.default_worker_pool",
     "page": "Distributed Computing",
     "title": "Distributed.default_worker_pool",
     "category": "Function",
@@ -16049,7 +15953,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/distributed.html#Distributed.clear!-Tuple{CachingPool}",
+    "location": "stdlib/Distributed.html#Distributed.clear!-Tuple{CachingPool}",
     "page": "Distributed Computing",
     "title": "Distributed.clear!",
     "category": "Method",
@@ -16057,7 +15961,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/distributed.html#Distributed.remote",
+    "location": "stdlib/Distributed.html#Distributed.remote",
     "page": "Distributed Computing",
     "title": "Distributed.remote",
     "category": "Function",
@@ -16065,7 +15969,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/distributed.html#Distributed.remotecall-Tuple{Any,AbstractWorkerPool,Vararg{Any,N} where N}",
+    "location": "stdlib/Distributed.html#Distributed.remotecall-Tuple{Any,AbstractWorkerPool,Vararg{Any,N} where N}",
     "page": "Distributed Computing",
     "title": "Distributed.remotecall",
     "category": "Method",
@@ -16073,7 +15977,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/distributed.html#Distributed.remotecall_wait-Tuple{Any,AbstractWorkerPool,Vararg{Any,N} where N}",
+    "location": "stdlib/Distributed.html#Distributed.remotecall_wait-Tuple{Any,AbstractWorkerPool,Vararg{Any,N} where N}",
     "page": "Distributed Computing",
     "title": "Distributed.remotecall_wait",
     "category": "Method",
@@ -16081,7 +15985,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/distributed.html#Distributed.remotecall_fetch-Tuple{Any,AbstractWorkerPool,Vararg{Any,N} where N}",
+    "location": "stdlib/Distributed.html#Distributed.remotecall_fetch-Tuple{Any,AbstractWorkerPool,Vararg{Any,N} where N}",
     "page": "Distributed Computing",
     "title": "Distributed.remotecall_fetch",
     "category": "Method",
@@ -16089,7 +15993,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/distributed.html#Distributed.remote_do-Tuple{Any,AbstractWorkerPool,Vararg{Any,N} where N}",
+    "location": "stdlib/Distributed.html#Distributed.remote_do-Tuple{Any,AbstractWorkerPool,Vararg{Any,N} where N}",
     "page": "Distributed Computing",
     "title": "Distributed.remote_do",
     "category": "Method",
@@ -16097,7 +16001,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/distributed.html#Base.timedwait",
+    "location": "stdlib/Distributed.html#Base.timedwait",
     "page": "Distributed Computing",
     "title": "Base.timedwait",
     "category": "Function",
@@ -16105,7 +16009,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/distributed.html#Distributed.@spawn",
+    "location": "stdlib/Distributed.html#Distributed.@spawn",
     "page": "Distributed Computing",
     "title": "Distributed.@spawn",
     "category": "Macro",
@@ -16113,7 +16017,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/distributed.html#Distributed.@spawnat",
+    "location": "stdlib/Distributed.html#Distributed.@spawnat",
     "page": "Distributed Computing",
     "title": "Distributed.@spawnat",
     "category": "Macro",
@@ -16121,7 +16025,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/distributed.html#Distributed.@fetch",
+    "location": "stdlib/Distributed.html#Distributed.@fetch",
     "page": "Distributed Computing",
     "title": "Distributed.@fetch",
     "category": "Macro",
@@ -16129,7 +16033,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/distributed.html#Distributed.@fetchfrom",
+    "location": "stdlib/Distributed.html#Distributed.@fetchfrom",
     "page": "Distributed Computing",
     "title": "Distributed.@fetchfrom",
     "category": "Macro",
@@ -16137,7 +16041,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/distributed.html#Base.@async",
+    "location": "stdlib/Distributed.html#Base.@async",
     "page": "Distributed Computing",
     "title": "Base.@async",
     "category": "Macro",
@@ -16145,7 +16049,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/distributed.html#Base.@sync",
+    "location": "stdlib/Distributed.html#Base.@sync",
     "page": "Distributed Computing",
     "title": "Base.@sync",
     "category": "Macro",
@@ -16153,7 +16057,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/distributed.html#Distributed.@distributed",
+    "location": "stdlib/Distributed.html#Distributed.@distributed",
     "page": "Distributed Computing",
     "title": "Distributed.@distributed",
     "category": "Macro",
@@ -16161,7 +16065,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/distributed.html#Distributed.@everywhere",
+    "location": "stdlib/Distributed.html#Distributed.@everywhere",
     "page": "Distributed Computing",
     "title": "Distributed.@everywhere",
     "category": "Macro",
@@ -16169,7 +16073,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/distributed.html#Distributed.clear!-Tuple{Any,Any}",
+    "location": "stdlib/Distributed.html#Distributed.clear!-Tuple{Any,Any}",
     "page": "Distributed Computing",
     "title": "Distributed.clear!",
     "category": "Method",
@@ -16177,7 +16081,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/distributed.html#Distributed.remoteref_id",
+    "location": "stdlib/Distributed.html#Distributed.remoteref_id",
     "page": "Distributed Computing",
     "title": "Distributed.remoteref_id",
     "category": "Function",
@@ -16185,7 +16089,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/distributed.html#Distributed.channel_from_id",
+    "location": "stdlib/Distributed.html#Distributed.channel_from_id",
     "page": "Distributed Computing",
     "title": "Distributed.channel_from_id",
     "category": "Function",
@@ -16193,7 +16097,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/distributed.html#Distributed.worker_id_from_socket",
+    "location": "stdlib/Distributed.html#Distributed.worker_id_from_socket",
     "page": "Distributed Computing",
     "title": "Distributed.worker_id_from_socket",
     "category": "Function",
@@ -16201,7 +16105,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/distributed.html#Distributed.cluster_cookie-Tuple{}",
+    "location": "stdlib/Distributed.html#Distributed.cluster_cookie-Tuple{}",
     "page": "Distributed Computing",
     "title": "Distributed.cluster_cookie",
     "category": "Method",
@@ -16209,7 +16113,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/distributed.html#Distributed.cluster_cookie-Tuple{Any}",
+    "location": "stdlib/Distributed.html#Distributed.cluster_cookie-Tuple{Any}",
     "page": "Distributed Computing",
     "title": "Distributed.cluster_cookie",
     "category": "Method",
@@ -16217,7 +16121,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/distributed.html#Distributed-Computing-1",
+    "location": "stdlib/Distributed.html#Distributed-Computing-1",
     "page": "Distributed Computing",
     "title": "Distributed Computing",
     "category": "section",
@@ -16225,7 +16129,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/distributed.html#Distributed.launch",
+    "location": "stdlib/Distributed.html#Distributed.launch",
     "page": "Distributed Computing",
     "title": "Distributed.launch",
     "category": "Function",
@@ -16233,7 +16137,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/distributed.html#Distributed.manage",
+    "location": "stdlib/Distributed.html#Distributed.manage",
     "page": "Distributed Computing",
     "title": "Distributed.manage",
     "category": "Function",
@@ -16241,7 +16145,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/distributed.html#Base.kill-Tuple{ClusterManager,Int64,WorkerConfig}",
+    "location": "stdlib/Distributed.html#Base.kill-Tuple{ClusterManager,Int64,WorkerConfig}",
     "page": "Distributed Computing",
     "title": "Base.kill",
     "category": "Method",
@@ -16249,7 +16153,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/distributed.html#Base.connect-Tuple{ClusterManager,Int64,WorkerConfig}",
+    "location": "stdlib/Distributed.html#Base.connect-Tuple{ClusterManager,Int64,WorkerConfig}",
     "page": "Distributed Computing",
     "title": "Base.connect",
     "category": "Method",
@@ -16257,7 +16161,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/distributed.html#Distributed.init_worker",
+    "location": "stdlib/Distributed.html#Distributed.init_worker",
     "page": "Distributed Computing",
     "title": "Distributed.init_worker",
     "category": "Function",
@@ -16265,7 +16169,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/distributed.html#Distributed.start_worker",
+    "location": "stdlib/Distributed.html#Distributed.start_worker",
     "page": "Distributed Computing",
     "title": "Distributed.start_worker",
     "category": "Function",
@@ -16273,7 +16177,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/distributed.html#Distributed.process_messages",
+    "location": "stdlib/Distributed.html#Distributed.process_messages",
     "page": "Distributed Computing",
     "title": "Distributed.process_messages",
     "category": "Function",
@@ -16281,7 +16185,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/distributed.html#Cluster-Manager-Interface-1",
+    "location": "stdlib/Distributed.html#Cluster-Manager-Interface-1",
     "page": "Distributed Computing",
     "title": "Cluster Manager Interface",
     "category": "section",
@@ -16289,7 +16193,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/filewatching.html#",
+    "location": "stdlib/FileWatching.html#",
     "page": "File Events",
     "title": "File Events",
     "category": "page",
@@ -16297,7 +16201,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/filewatching.html#FileWatching.poll_fd",
+    "location": "stdlib/FileWatching.html#FileWatching.poll_fd",
     "page": "File Events",
     "title": "FileWatching.poll_fd",
     "category": "Function",
@@ -16305,7 +16209,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/filewatching.html#FileWatching.poll_file",
+    "location": "stdlib/FileWatching.html#FileWatching.poll_file",
     "page": "File Events",
     "title": "FileWatching.poll_file",
     "category": "Function",
@@ -16313,7 +16217,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/filewatching.html#FileWatching.watch_file",
+    "location": "stdlib/FileWatching.html#FileWatching.watch_file",
     "page": "File Events",
     "title": "FileWatching.watch_file",
     "category": "Function",
@@ -16321,7 +16225,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/filewatching.html#lib-filewatching-1",
+    "location": "stdlib/FileWatching.html#lib-filewatching-1",
     "page": "File Events",
     "title": "File Events",
     "category": "section",
@@ -16329,7 +16233,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/iterativeeigensolvers.html#",
+    "location": "stdlib/IterativeEigensolvers.html#",
     "page": "Iterative Eigensolvers",
     "title": "Iterative Eigensolvers",
     "category": "page",
@@ -16337,7 +16241,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/iterativeeigensolvers.html#IterativeEigensolvers.eigs-Tuple{Any}",
+    "location": "stdlib/IterativeEigensolvers.html#IterativeEigensolvers.eigs-Tuple{Any}",
     "page": "Iterative Eigensolvers",
     "title": "IterativeEigensolvers.eigs",
     "category": "Method",
@@ -16345,7 +16249,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/iterativeeigensolvers.html#IterativeEigensolvers.eigs-Tuple{Any,Any}",
+    "location": "stdlib/IterativeEigensolvers.html#IterativeEigensolvers.eigs-Tuple{Any,Any}",
     "page": "Iterative Eigensolvers",
     "title": "IterativeEigensolvers.eigs",
     "category": "Method",
@@ -16353,7 +16257,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/iterativeeigensolvers.html#IterativeEigensolvers.svds",
+    "location": "stdlib/IterativeEigensolvers.html#IterativeEigensolvers.svds",
     "page": "Iterative Eigensolvers",
     "title": "IterativeEigensolvers.svds",
     "category": "Function",
@@ -16361,7 +16265,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/iterativeeigensolvers.html#lib-itereigen-1",
+    "location": "stdlib/IterativeEigensolvers.html#lib-itereigen-1",
     "page": "Iterative Eigensolvers",
     "title": "Iterative Eigensolvers",
     "category": "section",
@@ -16369,7 +16273,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/libdl.html#",
+    "location": "stdlib/Libdl.html#",
     "page": "Dynamic Linker",
     "title": "Dynamic Linker",
     "category": "page",
@@ -16377,7 +16281,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/libdl.html#Libdl.dlopen",
+    "location": "stdlib/Libdl.html#Libdl.dlopen",
     "page": "Dynamic Linker",
     "title": "Libdl.dlopen",
     "category": "Function",
@@ -16385,7 +16289,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/libdl.html#Libdl.dlopen_e",
+    "location": "stdlib/Libdl.html#Libdl.dlopen_e",
     "page": "Dynamic Linker",
     "title": "Libdl.dlopen_e",
     "category": "Function",
@@ -16393,7 +16297,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/libdl.html#Libdl.RTLD_NOW",
+    "location": "stdlib/Libdl.html#Libdl.RTLD_NOW",
     "page": "Dynamic Linker",
     "title": "Libdl.RTLD_NOW",
     "category": "Constant",
@@ -16401,7 +16305,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/libdl.html#Libdl.dlsym",
+    "location": "stdlib/Libdl.html#Libdl.dlsym",
     "page": "Dynamic Linker",
     "title": "Libdl.dlsym",
     "category": "Function",
@@ -16409,7 +16313,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/libdl.html#Libdl.dlsym_e",
+    "location": "stdlib/Libdl.html#Libdl.dlsym_e",
     "page": "Dynamic Linker",
     "title": "Libdl.dlsym_e",
     "category": "Function",
@@ -16417,7 +16321,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/libdl.html#Libdl.dlclose",
+    "location": "stdlib/Libdl.html#Libdl.dlclose",
     "page": "Dynamic Linker",
     "title": "Libdl.dlclose",
     "category": "Function",
@@ -16425,7 +16329,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/libdl.html#Libdl.dlext",
+    "location": "stdlib/Libdl.html#Libdl.dlext",
     "page": "Dynamic Linker",
     "title": "Libdl.dlext",
     "category": "Constant",
@@ -16433,7 +16337,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/libdl.html#Libdl.find_library",
+    "location": "stdlib/Libdl.html#Libdl.find_library",
     "page": "Dynamic Linker",
     "title": "Libdl.find_library",
     "category": "Function",
@@ -16441,7 +16345,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/libdl.html#Base.DL_LOAD_PATH",
+    "location": "stdlib/Libdl.html#Base.DL_LOAD_PATH",
     "page": "Dynamic Linker",
     "title": "Base.DL_LOAD_PATH",
     "category": "Constant",
@@ -16449,7 +16353,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/libdl.html#Dynamic-Linker-1",
+    "location": "stdlib/Libdl.html#Dynamic-Linker-1",
     "page": "Dynamic Linker",
     "title": "Dynamic Linker",
     "category": "section",
@@ -16457,7 +16361,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/linearalgebra.html#",
+    "location": "stdlib/LinearAlgebra.html#",
     "page": "Linear Algebra",
     "title": "Linear Algebra",
     "category": "page",
@@ -16465,7 +16369,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/linearalgebra.html#Linear-Algebra-1",
+    "location": "stdlib/LinearAlgebra.html#Linear-Algebra-1",
     "page": "Linear Algebra",
     "title": "Linear Algebra",
     "category": "section",
@@ -16473,7 +16377,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/linearalgebra.html#Special-matrices-1",
+    "location": "stdlib/LinearAlgebra.html#Special-matrices-1",
     "page": "Linear Algebra",
     "title": "Special matrices",
     "category": "section",
@@ -16481,7 +16385,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/linearalgebra.html#Elementary-operations-1",
+    "location": "stdlib/LinearAlgebra.html#Elementary-operations-1",
     "page": "Linear Algebra",
     "title": "Elementary operations",
     "category": "section",
@@ -16489,7 +16393,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/linearalgebra.html#Matrix-factorizations-1",
+    "location": "stdlib/LinearAlgebra.html#Matrix-factorizations-1",
     "page": "Linear Algebra",
     "title": "Matrix factorizations",
     "category": "section",
@@ -16497,7 +16401,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/linearalgebra.html#The-uniform-scaling-operator-1",
+    "location": "stdlib/LinearAlgebra.html#The-uniform-scaling-operator-1",
     "page": "Linear Algebra",
     "title": "The uniform scaling operator",
     "category": "section",
@@ -16505,7 +16409,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/linearalgebra.html#man-linalg-factorizations-1",
+    "location": "stdlib/LinearAlgebra.html#man-linalg-factorizations-1",
     "page": "Linear Algebra",
     "title": "Matrix factorizations",
     "category": "section",
@@ -16513,7 +16417,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/linearalgebra.html#Base.:*-Tuple{AbstractArray{T,2} where T,AbstractArray{T,2} where T}",
+    "location": "stdlib/LinearAlgebra.html#Base.:*-Tuple{AbstractArray{T,2} where T,AbstractArray{T,2} where T}",
     "page": "Linear Algebra",
     "title": "Base.:*",
     "category": "Method",
@@ -16521,7 +16425,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/linearalgebra.html#Base.:\\-Tuple{AbstractArray{T,2} where T,Union{AbstractArray{T,1}, AbstractArray{T,2}} where T}",
+    "location": "stdlib/LinearAlgebra.html#Base.:\\-Tuple{AbstractArray{T,2} where T,Union{AbstractArray{T,1}, AbstractArray{T,2}} where T}",
     "page": "Linear Algebra",
     "title": "Base.:\\",
     "category": "Method",
@@ -16529,7 +16433,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/linearalgebra.html#LinearAlgebra.dot",
+    "location": "stdlib/LinearAlgebra.html#LinearAlgebra.dot",
     "page": "Linear Algebra",
     "title": "LinearAlgebra.dot",
     "category": "Function",
@@ -16537,7 +16441,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/linearalgebra.html#LinearAlgebra.vecdot",
+    "location": "stdlib/LinearAlgebra.html#LinearAlgebra.vecdot",
     "page": "Linear Algebra",
     "title": "LinearAlgebra.vecdot",
     "category": "Function",
@@ -16545,7 +16449,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/linearalgebra.html#LinearAlgebra.cross",
+    "location": "stdlib/LinearAlgebra.html#LinearAlgebra.cross",
     "page": "Linear Algebra",
     "title": "LinearAlgebra.cross",
     "category": "Function",
@@ -16553,7 +16457,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/linearalgebra.html#LinearAlgebra.factorize",
+    "location": "stdlib/LinearAlgebra.html#LinearAlgebra.factorize",
     "page": "Linear Algebra",
     "title": "LinearAlgebra.factorize",
     "category": "Function",
@@ -16561,7 +16465,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/linearalgebra.html#LinearAlgebra.Diagonal",
+    "location": "stdlib/LinearAlgebra.html#LinearAlgebra.Diagonal",
     "page": "Linear Algebra",
     "title": "LinearAlgebra.Diagonal",
     "category": "Type",
@@ -16569,7 +16473,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/linearalgebra.html#LinearAlgebra.Bidiagonal",
+    "location": "stdlib/LinearAlgebra.html#LinearAlgebra.Bidiagonal",
     "page": "Linear Algebra",
     "title": "LinearAlgebra.Bidiagonal",
     "category": "Type",
@@ -16577,7 +16481,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/linearalgebra.html#LinearAlgebra.SymTridiagonal",
+    "location": "stdlib/LinearAlgebra.html#LinearAlgebra.SymTridiagonal",
     "page": "Linear Algebra",
     "title": "LinearAlgebra.SymTridiagonal",
     "category": "Type",
@@ -16585,7 +16489,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/linearalgebra.html#LinearAlgebra.Tridiagonal",
+    "location": "stdlib/LinearAlgebra.html#LinearAlgebra.Tridiagonal",
     "page": "Linear Algebra",
     "title": "LinearAlgebra.Tridiagonal",
     "category": "Type",
@@ -16593,7 +16497,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/linearalgebra.html#LinearAlgebra.Symmetric",
+    "location": "stdlib/LinearAlgebra.html#LinearAlgebra.Symmetric",
     "page": "Linear Algebra",
     "title": "LinearAlgebra.Symmetric",
     "category": "Type",
@@ -16601,7 +16505,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/linearalgebra.html#LinearAlgebra.Hermitian",
+    "location": "stdlib/LinearAlgebra.html#LinearAlgebra.Hermitian",
     "page": "Linear Algebra",
     "title": "LinearAlgebra.Hermitian",
     "category": "Type",
@@ -16609,7 +16513,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/linearalgebra.html#LinearAlgebra.LowerTriangular",
+    "location": "stdlib/LinearAlgebra.html#LinearAlgebra.LowerTriangular",
     "page": "Linear Algebra",
     "title": "LinearAlgebra.LowerTriangular",
     "category": "Type",
@@ -16617,7 +16521,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/linearalgebra.html#LinearAlgebra.UpperTriangular",
+    "location": "stdlib/LinearAlgebra.html#LinearAlgebra.UpperTriangular",
     "page": "Linear Algebra",
     "title": "LinearAlgebra.UpperTriangular",
     "category": "Type",
@@ -16625,7 +16529,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/linearalgebra.html#LinearAlgebra.UniformScaling",
+    "location": "stdlib/LinearAlgebra.html#LinearAlgebra.UniformScaling",
     "page": "Linear Algebra",
     "title": "LinearAlgebra.UniformScaling",
     "category": "Type",
@@ -16633,7 +16537,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/linearalgebra.html#LinearAlgebra.lu",
+    "location": "stdlib/LinearAlgebra.html#LinearAlgebra.lu",
     "page": "Linear Algebra",
     "title": "LinearAlgebra.lu",
     "category": "Function",
@@ -16641,7 +16545,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/linearalgebra.html#LinearAlgebra.lufact",
+    "location": "stdlib/LinearAlgebra.html#LinearAlgebra.lufact",
     "page": "Linear Algebra",
     "title": "LinearAlgebra.lufact",
     "category": "Function",
@@ -16649,7 +16553,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/linearalgebra.html#LinearAlgebra.lufact!",
+    "location": "stdlib/LinearAlgebra.html#LinearAlgebra.lufact!",
     "page": "Linear Algebra",
     "title": "LinearAlgebra.lufact!",
     "category": "Function",
@@ -16657,7 +16561,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/linearalgebra.html#LinearAlgebra.chol",
+    "location": "stdlib/LinearAlgebra.html#LinearAlgebra.chol",
     "page": "Linear Algebra",
     "title": "LinearAlgebra.chol",
     "category": "Function",
@@ -16665,7 +16569,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/linearalgebra.html#LinearAlgebra.cholfact",
+    "location": "stdlib/LinearAlgebra.html#LinearAlgebra.cholfact",
     "page": "Linear Algebra",
     "title": "LinearAlgebra.cholfact",
     "category": "Function",
@@ -16673,7 +16577,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/linearalgebra.html#LinearAlgebra.cholfact!",
+    "location": "stdlib/LinearAlgebra.html#LinearAlgebra.cholfact!",
     "page": "Linear Algebra",
     "title": "LinearAlgebra.cholfact!",
     "category": "Function",
@@ -16681,7 +16585,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/linearalgebra.html#LinearAlgebra.lowrankupdate",
+    "location": "stdlib/LinearAlgebra.html#LinearAlgebra.lowrankupdate",
     "page": "Linear Algebra",
     "title": "LinearAlgebra.lowrankupdate",
     "category": "Function",
@@ -16689,7 +16593,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/linearalgebra.html#LinearAlgebra.lowrankdowndate",
+    "location": "stdlib/LinearAlgebra.html#LinearAlgebra.lowrankdowndate",
     "page": "Linear Algebra",
     "title": "LinearAlgebra.lowrankdowndate",
     "category": "Function",
@@ -16697,7 +16601,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/linearalgebra.html#LinearAlgebra.lowrankupdate!",
+    "location": "stdlib/LinearAlgebra.html#LinearAlgebra.lowrankupdate!",
     "page": "Linear Algebra",
     "title": "LinearAlgebra.lowrankupdate!",
     "category": "Function",
@@ -16705,7 +16609,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/linearalgebra.html#LinearAlgebra.lowrankdowndate!",
+    "location": "stdlib/LinearAlgebra.html#LinearAlgebra.lowrankdowndate!",
     "page": "Linear Algebra",
     "title": "LinearAlgebra.lowrankdowndate!",
     "category": "Function",
@@ -16713,7 +16617,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/linearalgebra.html#LinearAlgebra.ldltfact",
+    "location": "stdlib/LinearAlgebra.html#LinearAlgebra.ldltfact",
     "page": "Linear Algebra",
     "title": "LinearAlgebra.ldltfact",
     "category": "Function",
@@ -16721,7 +16625,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/linearalgebra.html#LinearAlgebra.ldltfact!",
+    "location": "stdlib/LinearAlgebra.html#LinearAlgebra.ldltfact!",
     "page": "Linear Algebra",
     "title": "LinearAlgebra.ldltfact!",
     "category": "Function",
@@ -16729,7 +16633,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/linearalgebra.html#LinearAlgebra.qr",
+    "location": "stdlib/LinearAlgebra.html#LinearAlgebra.qr",
     "page": "Linear Algebra",
     "title": "LinearAlgebra.qr",
     "category": "Function",
@@ -16737,7 +16641,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/linearalgebra.html#LinearAlgebra.qr!",
+    "location": "stdlib/LinearAlgebra.html#LinearAlgebra.qr!",
     "page": "Linear Algebra",
     "title": "LinearAlgebra.qr!",
     "category": "Function",
@@ -16745,7 +16649,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/linearalgebra.html#LinearAlgebra.qrfact",
+    "location": "stdlib/LinearAlgebra.html#LinearAlgebra.qrfact",
     "page": "Linear Algebra",
     "title": "LinearAlgebra.qrfact",
     "category": "Function",
@@ -16753,7 +16657,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/linearalgebra.html#LinearAlgebra.qrfact!",
+    "location": "stdlib/LinearAlgebra.html#LinearAlgebra.qrfact!",
     "page": "Linear Algebra",
     "title": "LinearAlgebra.qrfact!",
     "category": "Function",
@@ -16761,7 +16665,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/linearalgebra.html#LinearAlgebra.QR",
+    "location": "stdlib/LinearAlgebra.html#LinearAlgebra.QR",
     "page": "Linear Algebra",
     "title": "LinearAlgebra.QR",
     "category": "Type",
@@ -16769,7 +16673,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/linearalgebra.html#LinearAlgebra.QRCompactWY",
+    "location": "stdlib/LinearAlgebra.html#LinearAlgebra.QRCompactWY",
     "page": "Linear Algebra",
     "title": "LinearAlgebra.QRCompactWY",
     "category": "Type",
@@ -16777,7 +16681,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/linearalgebra.html#LinearAlgebra.QRPivoted",
+    "location": "stdlib/LinearAlgebra.html#LinearAlgebra.QRPivoted",
     "page": "Linear Algebra",
     "title": "LinearAlgebra.QRPivoted",
     "category": "Type",
@@ -16785,7 +16689,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/linearalgebra.html#LinearAlgebra.lqfact!",
+    "location": "stdlib/LinearAlgebra.html#LinearAlgebra.lqfact!",
     "page": "Linear Algebra",
     "title": "LinearAlgebra.lqfact!",
     "category": "Function",
@@ -16793,7 +16697,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/linearalgebra.html#LinearAlgebra.lqfact",
+    "location": "stdlib/LinearAlgebra.html#LinearAlgebra.lqfact",
     "page": "Linear Algebra",
     "title": "LinearAlgebra.lqfact",
     "category": "Function",
@@ -16801,7 +16705,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/linearalgebra.html#LinearAlgebra.lq",
+    "location": "stdlib/LinearAlgebra.html#LinearAlgebra.lq",
     "page": "Linear Algebra",
     "title": "LinearAlgebra.lq",
     "category": "Function",
@@ -16809,7 +16713,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/linearalgebra.html#LinearAlgebra.bkfact",
+    "location": "stdlib/LinearAlgebra.html#LinearAlgebra.bkfact",
     "page": "Linear Algebra",
     "title": "LinearAlgebra.bkfact",
     "category": "Function",
@@ -16817,7 +16721,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/linearalgebra.html#LinearAlgebra.bkfact!",
+    "location": "stdlib/LinearAlgebra.html#LinearAlgebra.bkfact!",
     "page": "Linear Algebra",
     "title": "LinearAlgebra.bkfact!",
     "category": "Function",
@@ -16825,7 +16729,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/linearalgebra.html#LinearAlgebra.eig",
+    "location": "stdlib/LinearAlgebra.html#LinearAlgebra.eig",
     "page": "Linear Algebra",
     "title": "LinearAlgebra.eig",
     "category": "Function",
@@ -16833,7 +16737,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/linearalgebra.html#LinearAlgebra.eigvals",
+    "location": "stdlib/LinearAlgebra.html#LinearAlgebra.eigvals",
     "page": "Linear Algebra",
     "title": "LinearAlgebra.eigvals",
     "category": "Function",
@@ -16841,7 +16745,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/linearalgebra.html#LinearAlgebra.eigvals!",
+    "location": "stdlib/LinearAlgebra.html#LinearAlgebra.eigvals!",
     "page": "Linear Algebra",
     "title": "LinearAlgebra.eigvals!",
     "category": "Function",
@@ -16849,7 +16753,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/linearalgebra.html#LinearAlgebra.eigmax",
+    "location": "stdlib/LinearAlgebra.html#LinearAlgebra.eigmax",
     "page": "Linear Algebra",
     "title": "LinearAlgebra.eigmax",
     "category": "Function",
@@ -16857,7 +16761,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/linearalgebra.html#LinearAlgebra.eigmin",
+    "location": "stdlib/LinearAlgebra.html#LinearAlgebra.eigmin",
     "page": "Linear Algebra",
     "title": "LinearAlgebra.eigmin",
     "category": "Function",
@@ -16865,7 +16769,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/linearalgebra.html#LinearAlgebra.eigvecs",
+    "location": "stdlib/LinearAlgebra.html#LinearAlgebra.eigvecs",
     "page": "Linear Algebra",
     "title": "LinearAlgebra.eigvecs",
     "category": "Function",
@@ -16873,7 +16777,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/linearalgebra.html#LinearAlgebra.eigfact",
+    "location": "stdlib/LinearAlgebra.html#LinearAlgebra.eigfact",
     "page": "Linear Algebra",
     "title": "LinearAlgebra.eigfact",
     "category": "Function",
@@ -16881,7 +16785,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/linearalgebra.html#LinearAlgebra.eigfact!",
+    "location": "stdlib/LinearAlgebra.html#LinearAlgebra.eigfact!",
     "page": "Linear Algebra",
     "title": "LinearAlgebra.eigfact!",
     "category": "Function",
@@ -16889,7 +16793,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/linearalgebra.html#LinearAlgebra.hessfact",
+    "location": "stdlib/LinearAlgebra.html#LinearAlgebra.hessfact",
     "page": "Linear Algebra",
     "title": "LinearAlgebra.hessfact",
     "category": "Function",
@@ -16897,7 +16801,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/linearalgebra.html#LinearAlgebra.hessfact!",
+    "location": "stdlib/LinearAlgebra.html#LinearAlgebra.hessfact!",
     "page": "Linear Algebra",
     "title": "LinearAlgebra.hessfact!",
     "category": "Function",
@@ -16905,7 +16809,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/linearalgebra.html#LinearAlgebra.schurfact",
+    "location": "stdlib/LinearAlgebra.html#LinearAlgebra.schurfact",
     "page": "Linear Algebra",
     "title": "LinearAlgebra.schurfact",
     "category": "Function",
@@ -16913,7 +16817,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/linearalgebra.html#LinearAlgebra.schurfact!",
+    "location": "stdlib/LinearAlgebra.html#LinearAlgebra.schurfact!",
     "page": "Linear Algebra",
     "title": "LinearAlgebra.schurfact!",
     "category": "Function",
@@ -16921,7 +16825,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/linearalgebra.html#LinearAlgebra.schur",
+    "location": "stdlib/LinearAlgebra.html#LinearAlgebra.schur",
     "page": "Linear Algebra",
     "title": "LinearAlgebra.schur",
     "category": "Function",
@@ -16929,7 +16833,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/linearalgebra.html#LinearAlgebra.ordschur",
+    "location": "stdlib/LinearAlgebra.html#LinearAlgebra.ordschur",
     "page": "Linear Algebra",
     "title": "LinearAlgebra.ordschur",
     "category": "Function",
@@ -16937,7 +16841,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/linearalgebra.html#LinearAlgebra.ordschur!",
+    "location": "stdlib/LinearAlgebra.html#LinearAlgebra.ordschur!",
     "page": "Linear Algebra",
     "title": "LinearAlgebra.ordschur!",
     "category": "Function",
@@ -16945,7 +16849,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/linearalgebra.html#LinearAlgebra.svdfact",
+    "location": "stdlib/LinearAlgebra.html#LinearAlgebra.svdfact",
     "page": "Linear Algebra",
     "title": "LinearAlgebra.svdfact",
     "category": "Function",
@@ -16953,7 +16857,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/linearalgebra.html#LinearAlgebra.svdfact!",
+    "location": "stdlib/LinearAlgebra.html#LinearAlgebra.svdfact!",
     "page": "Linear Algebra",
     "title": "LinearAlgebra.svdfact!",
     "category": "Function",
@@ -16961,7 +16865,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/linearalgebra.html#LinearAlgebra.svd",
+    "location": "stdlib/LinearAlgebra.html#LinearAlgebra.svd",
     "page": "Linear Algebra",
     "title": "LinearAlgebra.svd",
     "category": "Function",
@@ -16969,7 +16873,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/linearalgebra.html#LinearAlgebra.svdvals",
+    "location": "stdlib/LinearAlgebra.html#LinearAlgebra.svdvals",
     "page": "Linear Algebra",
     "title": "LinearAlgebra.svdvals",
     "category": "Function",
@@ -16977,7 +16881,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/linearalgebra.html#LinearAlgebra.svdvals!",
+    "location": "stdlib/LinearAlgebra.html#LinearAlgebra.svdvals!",
     "page": "Linear Algebra",
     "title": "LinearAlgebra.svdvals!",
     "category": "Function",
@@ -16985,7 +16889,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/linearalgebra.html#LinearAlgebra.Givens",
+    "location": "stdlib/LinearAlgebra.html#LinearAlgebra.Givens",
     "page": "Linear Algebra",
     "title": "LinearAlgebra.Givens",
     "category": "Type",
@@ -16993,7 +16897,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/linearalgebra.html#LinearAlgebra.givens",
+    "location": "stdlib/LinearAlgebra.html#LinearAlgebra.givens",
     "page": "Linear Algebra",
     "title": "LinearAlgebra.givens",
     "category": "Function",
@@ -17001,7 +16905,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/linearalgebra.html#LinearAlgebra.triu",
+    "location": "stdlib/LinearAlgebra.html#LinearAlgebra.triu",
     "page": "Linear Algebra",
     "title": "LinearAlgebra.triu",
     "category": "Function",
@@ -17009,7 +16913,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/linearalgebra.html#LinearAlgebra.triu!",
+    "location": "stdlib/LinearAlgebra.html#LinearAlgebra.triu!",
     "page": "Linear Algebra",
     "title": "LinearAlgebra.triu!",
     "category": "Function",
@@ -17017,7 +16921,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/linearalgebra.html#LinearAlgebra.tril",
+    "location": "stdlib/LinearAlgebra.html#LinearAlgebra.tril",
     "page": "Linear Algebra",
     "title": "LinearAlgebra.tril",
     "category": "Function",
@@ -17025,7 +16929,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/linearalgebra.html#LinearAlgebra.tril!",
+    "location": "stdlib/LinearAlgebra.html#LinearAlgebra.tril!",
     "page": "Linear Algebra",
     "title": "LinearAlgebra.tril!",
     "category": "Function",
@@ -17033,7 +16937,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/linearalgebra.html#LinearAlgebra.diagind",
+    "location": "stdlib/LinearAlgebra.html#LinearAlgebra.diagind",
     "page": "Linear Algebra",
     "title": "LinearAlgebra.diagind",
     "category": "Function",
@@ -17041,7 +16945,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/linearalgebra.html#LinearAlgebra.diag",
+    "location": "stdlib/LinearAlgebra.html#LinearAlgebra.diag",
     "page": "Linear Algebra",
     "title": "LinearAlgebra.diag",
     "category": "Function",
@@ -17049,7 +16953,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/linearalgebra.html#LinearAlgebra.diagm",
+    "location": "stdlib/LinearAlgebra.html#LinearAlgebra.diagm",
     "page": "Linear Algebra",
     "title": "LinearAlgebra.diagm",
     "category": "Function",
@@ -17057,7 +16961,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/linearalgebra.html#LinearAlgebra.scale!",
+    "location": "stdlib/LinearAlgebra.html#LinearAlgebra.scale!",
     "page": "Linear Algebra",
     "title": "LinearAlgebra.scale!",
     "category": "Function",
@@ -17065,7 +16969,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/linearalgebra.html#LinearAlgebra.rank",
+    "location": "stdlib/LinearAlgebra.html#LinearAlgebra.rank",
     "page": "Linear Algebra",
     "title": "LinearAlgebra.rank",
     "category": "Function",
@@ -17073,7 +16977,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/linearalgebra.html#LinearAlgebra.norm",
+    "location": "stdlib/LinearAlgebra.html#LinearAlgebra.norm",
     "page": "Linear Algebra",
     "title": "LinearAlgebra.norm",
     "category": "Function",
@@ -17081,7 +16985,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/linearalgebra.html#LinearAlgebra.vecnorm",
+    "location": "stdlib/LinearAlgebra.html#LinearAlgebra.vecnorm",
     "page": "Linear Algebra",
     "title": "LinearAlgebra.vecnorm",
     "category": "Function",
@@ -17089,7 +16993,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/linearalgebra.html#LinearAlgebra.normalize!",
+    "location": "stdlib/LinearAlgebra.html#LinearAlgebra.normalize!",
     "page": "Linear Algebra",
     "title": "LinearAlgebra.normalize!",
     "category": "Function",
@@ -17097,7 +17001,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/linearalgebra.html#LinearAlgebra.normalize",
+    "location": "stdlib/LinearAlgebra.html#LinearAlgebra.normalize",
     "page": "Linear Algebra",
     "title": "LinearAlgebra.normalize",
     "category": "Function",
@@ -17105,7 +17009,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/linearalgebra.html#LinearAlgebra.cond",
+    "location": "stdlib/LinearAlgebra.html#LinearAlgebra.cond",
     "page": "Linear Algebra",
     "title": "LinearAlgebra.cond",
     "category": "Function",
@@ -17113,7 +17017,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/linearalgebra.html#LinearAlgebra.condskeel",
+    "location": "stdlib/LinearAlgebra.html#LinearAlgebra.condskeel",
     "page": "Linear Algebra",
     "title": "LinearAlgebra.condskeel",
     "category": "Function",
@@ -17121,7 +17025,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/linearalgebra.html#LinearAlgebra.trace",
+    "location": "stdlib/LinearAlgebra.html#LinearAlgebra.trace",
     "page": "Linear Algebra",
     "title": "LinearAlgebra.trace",
     "category": "Function",
@@ -17129,7 +17033,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/linearalgebra.html#LinearAlgebra.det",
+    "location": "stdlib/LinearAlgebra.html#LinearAlgebra.det",
     "page": "Linear Algebra",
     "title": "LinearAlgebra.det",
     "category": "Function",
@@ -17137,7 +17041,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/linearalgebra.html#LinearAlgebra.logdet",
+    "location": "stdlib/LinearAlgebra.html#LinearAlgebra.logdet",
     "page": "Linear Algebra",
     "title": "LinearAlgebra.logdet",
     "category": "Function",
@@ -17145,7 +17049,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/linearalgebra.html#LinearAlgebra.logabsdet",
+    "location": "stdlib/LinearAlgebra.html#LinearAlgebra.logabsdet",
     "page": "Linear Algebra",
     "title": "LinearAlgebra.logabsdet",
     "category": "Function",
@@ -17153,7 +17057,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/linearalgebra.html#Base.inv-Tuple{AbstractArray{T,2} where T}",
+    "location": "stdlib/LinearAlgebra.html#Base.inv-Tuple{AbstractArray{T,2} where T}",
     "page": "Linear Algebra",
     "title": "Base.inv",
     "category": "Method",
@@ -17161,7 +17065,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/linearalgebra.html#LinearAlgebra.pinv",
+    "location": "stdlib/LinearAlgebra.html#LinearAlgebra.pinv",
     "page": "Linear Algebra",
     "title": "LinearAlgebra.pinv",
     "category": "Function",
@@ -17169,7 +17073,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/linearalgebra.html#LinearAlgebra.nullspace",
+    "location": "stdlib/LinearAlgebra.html#LinearAlgebra.nullspace",
     "page": "Linear Algebra",
     "title": "LinearAlgebra.nullspace",
     "category": "Function",
@@ -17177,7 +17081,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/linearalgebra.html#Base.repmat",
+    "location": "stdlib/LinearAlgebra.html#Base.repmat",
     "page": "Linear Algebra",
     "title": "Base.repmat",
     "category": "Function",
@@ -17185,7 +17089,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/linearalgebra.html#Base.kron",
+    "location": "stdlib/LinearAlgebra.html#Base.kron",
     "page": "Linear Algebra",
     "title": "Base.kron",
     "category": "Function",
@@ -17193,7 +17097,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/linearalgebra.html#LinearAlgebra.linreg",
+    "location": "stdlib/LinearAlgebra.html#LinearAlgebra.linreg",
     "page": "Linear Algebra",
     "title": "LinearAlgebra.linreg",
     "category": "Function",
@@ -17201,7 +17105,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/linearalgebra.html#Base.exp-Tuple{Union{DenseArray{#s43,2}, Base.ReinterpretArray{#s43,2,S,A} where S, Base.ReshapedArray{#s43,2,A,MI} where MI<:Tuple{Vararg{Base.MultiplicativeInverses.SignedMultiplicativeInverse{Int64},N} where N} where A<:Union{SubArray{T,N,P,I,true} where I<:Tuple{Union{Base.Slice, UnitRange},Vararg{Any,N} where N} where P where N where T, DenseArray}, SubArray{#s43,2,A,I,L} where L} where I<:Tuple{Vararg{Union{Int64, AbstractRange{Int64}, Base.AbstractCartesianIndex},N} where N} where A<:Union{Base.ReshapedArray{T,N,A,MI} where MI<:Tuple{Vararg{Base.MultiplicativeInverses.SignedMultiplicativeInverse{Int64},N} where N} where A<:Union{SubArray{T,N,P,I,true} where I<:Tuple{Union{Base.Slice, UnitRange},Vararg{Any,N} where N} where P where N where T, DenseArray} where N where T, DenseArray} where #s43<:Union{Complex{Float32}, Complex{Float64}, Float32, Float64}}",
+    "location": "stdlib/LinearAlgebra.html#Base.exp-Tuple{Union{DenseArray{#s43,2}, Base.ReinterpretArray{#s43,2,S,A} where S, Base.ReshapedArray{#s43,2,A,MI} where MI<:Tuple{Vararg{Base.MultiplicativeInverses.SignedMultiplicativeInverse{Int64},N} where N} where A<:Union{SubArray{T,N,P,I,true} where I<:Tuple{Union{Base.Slice, UnitRange},Vararg{Any,N} where N} where P where N where T, DenseArray}, SubArray{#s43,2,A,I,L} where L} where I<:Tuple{Vararg{Union{Int64, AbstractRange{Int64}, Base.AbstractCartesianIndex},N} where N} where A<:Union{Base.ReshapedArray{T,N,A,MI} where MI<:Tuple{Vararg{Base.MultiplicativeInverses.SignedMultiplicativeInverse{Int64},N} where N} where A<:Union{SubArray{T,N,P,I,true} where I<:Tuple{Union{Base.Slice, UnitRange},Vararg{Any,N} where N} where P where N where T, DenseArray} where N where T, DenseArray} where #s43<:Union{Complex{Float32}, Complex{Float64}, Float32, Float64}}",
     "page": "Linear Algebra",
     "title": "Base.exp",
     "category": "Method",
@@ -17209,7 +17113,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/linearalgebra.html#Base.log-Tuple{Union{DenseArray{T,2}, Base.ReinterpretArray{T,2,S,A} where S, Base.ReshapedArray{T,2,A,MI} where MI<:Tuple{Vararg{Base.MultiplicativeInverses.SignedMultiplicativeInverse{Int64},N} where N} where A<:Union{SubArray{T,N,P,I,true} where I<:Tuple{Union{Base.Slice, UnitRange},Vararg{Any,N} where N} where P where N where T, DenseArray}, SubArray{T,2,A,I,L} where L} where I<:Tuple{Vararg{Union{Int64, AbstractRange{Int64}, Base.AbstractCartesianIndex},N} where N} where A<:Union{Base.ReshapedArray{T,N,A,MI} where MI<:Tuple{Vararg{Base.MultiplicativeInverses.SignedMultiplicativeInverse{Int64},N} where N} where A<:Union{SubArray{T,N,P,I,true} where I<:Tuple{Union{Base.Slice, UnitRange},Vararg{Any,N} where N} where P where N where T, DenseArray} where N where T, DenseArray} where T}",
+    "location": "stdlib/LinearAlgebra.html#Base.log-Tuple{Union{DenseArray{T,2}, Base.ReinterpretArray{T,2,S,A} where S, Base.ReshapedArray{T,2,A,MI} where MI<:Tuple{Vararg{Base.MultiplicativeInverses.SignedMultiplicativeInverse{Int64},N} where N} where A<:Union{SubArray{T,N,P,I,true} where I<:Tuple{Union{Base.Slice, UnitRange},Vararg{Any,N} where N} where P where N where T, DenseArray}, SubArray{T,2,A,I,L} where L} where I<:Tuple{Vararg{Union{Int64, AbstractRange{Int64}, Base.AbstractCartesianIndex},N} where N} where A<:Union{Base.ReshapedArray{T,N,A,MI} where MI<:Tuple{Vararg{Base.MultiplicativeInverses.SignedMultiplicativeInverse{Int64},N} where N} where A<:Union{SubArray{T,N,P,I,true} where I<:Tuple{Union{Base.Slice, UnitRange},Vararg{Any,N} where N} where P where N where T, DenseArray} where N where T, DenseArray} where T}",
     "page": "Linear Algebra",
     "title": "Base.log",
     "category": "Method",
@@ -17217,7 +17121,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/linearalgebra.html#Base.sqrt-Tuple{Union{DenseArray{#s43,2}, Base.ReinterpretArray{#s43,2,S,A} where S, Base.ReshapedArray{#s43,2,A,MI} where MI<:Tuple{Vararg{Base.MultiplicativeInverses.SignedMultiplicativeInverse{Int64},N} where N} where A<:Union{SubArray{T,N,P,I,true} where I<:Tuple{Union{Base.Slice, UnitRange},Vararg{Any,N} where N} where P where N where T, DenseArray}, SubArray{#s43,2,A,I,L} where L} where I<:Tuple{Vararg{Union{Int64, AbstractRange{Int64}, Base.AbstractCartesianIndex},N} where N} where A<:Union{Base.ReshapedArray{T,N,A,MI} where MI<:Tuple{Vararg{Base.MultiplicativeInverses.SignedMultiplicativeInverse{Int64},N} where N} where A<:Union{SubArray{T,N,P,I,true} where I<:Tuple{Union{Base.Slice, UnitRange},Vararg{Any,N} where N} where P where N where T, DenseArray} where N where T, DenseArray} where #s43<:Real}",
+    "location": "stdlib/LinearAlgebra.html#Base.sqrt-Tuple{Union{DenseArray{#s43,2}, Base.ReinterpretArray{#s43,2,S,A} where S, Base.ReshapedArray{#s43,2,A,MI} where MI<:Tuple{Vararg{Base.MultiplicativeInverses.SignedMultiplicativeInverse{Int64},N} where N} where A<:Union{SubArray{T,N,P,I,true} where I<:Tuple{Union{Base.Slice, UnitRange},Vararg{Any,N} where N} where P where N where T, DenseArray}, SubArray{#s43,2,A,I,L} where L} where I<:Tuple{Vararg{Union{Int64, AbstractRange{Int64}, Base.AbstractCartesianIndex},N} where N} where A<:Union{Base.ReshapedArray{T,N,A,MI} where MI<:Tuple{Vararg{Base.MultiplicativeInverses.SignedMultiplicativeInverse{Int64},N} where N} where A<:Union{SubArray{T,N,P,I,true} where I<:Tuple{Union{Base.Slice, UnitRange},Vararg{Any,N} where N} where P where N where T, DenseArray} where N where T, DenseArray} where #s43<:Real}",
     "page": "Linear Algebra",
     "title": "Base.sqrt",
     "category": "Method",
@@ -17225,7 +17129,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/linearalgebra.html#Base.cos-Tuple{Union{DenseArray{#s43,2}, Base.ReinterpretArray{#s43,2,S,A} where S, Base.ReshapedArray{#s43,2,A,MI} where MI<:Tuple{Vararg{Base.MultiplicativeInverses.SignedMultiplicativeInverse{Int64},N} where N} where A<:Union{SubArray{T,N,P,I,true} where I<:Tuple{Union{Base.Slice, UnitRange},Vararg{Any,N} where N} where P where N where T, DenseArray}, SubArray{#s43,2,A,I,L} where L} where I<:Tuple{Vararg{Union{Int64, AbstractRange{Int64}, Base.AbstractCartesianIndex},N} where N} where A<:Union{Base.ReshapedArray{T,N,A,MI} where MI<:Tuple{Vararg{Base.MultiplicativeInverses.SignedMultiplicativeInverse{Int64},N} where N} where A<:Union{SubArray{T,N,P,I,true} where I<:Tuple{Union{Base.Slice, UnitRange},Vararg{Any,N} where N} where P where N where T, DenseArray} where N where T, DenseArray} where #s43<:Real}",
+    "location": "stdlib/LinearAlgebra.html#Base.cos-Tuple{Union{DenseArray{#s43,2}, Base.ReinterpretArray{#s43,2,S,A} where S, Base.ReshapedArray{#s43,2,A,MI} where MI<:Tuple{Vararg{Base.MultiplicativeInverses.SignedMultiplicativeInverse{Int64},N} where N} where A<:Union{SubArray{T,N,P,I,true} where I<:Tuple{Union{Base.Slice, UnitRange},Vararg{Any,N} where N} where P where N where T, DenseArray}, SubArray{#s43,2,A,I,L} where L} where I<:Tuple{Vararg{Union{Int64, AbstractRange{Int64}, Base.AbstractCartesianIndex},N} where N} where A<:Union{Base.ReshapedArray{T,N,A,MI} where MI<:Tuple{Vararg{Base.MultiplicativeInverses.SignedMultiplicativeInverse{Int64},N} where N} where A<:Union{SubArray{T,N,P,I,true} where I<:Tuple{Union{Base.Slice, UnitRange},Vararg{Any,N} where N} where P where N where T, DenseArray} where N where T, DenseArray} where #s43<:Real}",
     "page": "Linear Algebra",
     "title": "Base.cos",
     "category": "Method",
@@ -17233,7 +17137,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/linearalgebra.html#Base.sin-Tuple{Union{DenseArray{#s43,2}, Base.ReinterpretArray{#s43,2,S,A} where S, Base.ReshapedArray{#s43,2,A,MI} where MI<:Tuple{Vararg{Base.MultiplicativeInverses.SignedMultiplicativeInverse{Int64},N} where N} where A<:Union{SubArray{T,N,P,I,true} where I<:Tuple{Union{Base.Slice, UnitRange},Vararg{Any,N} where N} where P where N where T, DenseArray}, SubArray{#s43,2,A,I,L} where L} where I<:Tuple{Vararg{Union{Int64, AbstractRange{Int64}, Base.AbstractCartesianIndex},N} where N} where A<:Union{Base.ReshapedArray{T,N,A,MI} where MI<:Tuple{Vararg{Base.MultiplicativeInverses.SignedMultiplicativeInverse{Int64},N} where N} where A<:Union{SubArray{T,N,P,I,true} where I<:Tuple{Union{Base.Slice, UnitRange},Vararg{Any,N} where N} where P where N where T, DenseArray} where N where T, DenseArray} where #s43<:Real}",
+    "location": "stdlib/LinearAlgebra.html#Base.sin-Tuple{Union{DenseArray{#s43,2}, Base.ReinterpretArray{#s43,2,S,A} where S, Base.ReshapedArray{#s43,2,A,MI} where MI<:Tuple{Vararg{Base.MultiplicativeInverses.SignedMultiplicativeInverse{Int64},N} where N} where A<:Union{SubArray{T,N,P,I,true} where I<:Tuple{Union{Base.Slice, UnitRange},Vararg{Any,N} where N} where P where N where T, DenseArray}, SubArray{#s43,2,A,I,L} where L} where I<:Tuple{Vararg{Union{Int64, AbstractRange{Int64}, Base.AbstractCartesianIndex},N} where N} where A<:Union{Base.ReshapedArray{T,N,A,MI} where MI<:Tuple{Vararg{Base.MultiplicativeInverses.SignedMultiplicativeInverse{Int64},N} where N} where A<:Union{SubArray{T,N,P,I,true} where I<:Tuple{Union{Base.Slice, UnitRange},Vararg{Any,N} where N} where P where N where T, DenseArray} where N where T, DenseArray} where #s43<:Real}",
     "page": "Linear Algebra",
     "title": "Base.sin",
     "category": "Method",
@@ -17241,7 +17145,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/linearalgebra.html#Base.Math.sincos-Tuple{Union{DenseArray{#s43,2}, Base.ReinterpretArray{#s43,2,S,A} where S, Base.ReshapedArray{#s43,2,A,MI} where MI<:Tuple{Vararg{Base.MultiplicativeInverses.SignedMultiplicativeInverse{Int64},N} where N} where A<:Union{SubArray{T,N,P,I,true} where I<:Tuple{Union{Base.Slice, UnitRange},Vararg{Any,N} where N} where P where N where T, DenseArray}, SubArray{#s43,2,A,I,L} where L} where I<:Tuple{Vararg{Union{Int64, AbstractRange{Int64}, Base.AbstractCartesianIndex},N} where N} where A<:Union{Base.ReshapedArray{T,N,A,MI} where MI<:Tuple{Vararg{Base.MultiplicativeInverses.SignedMultiplicativeInverse{Int64},N} where N} where A<:Union{SubArray{T,N,P,I,true} where I<:Tuple{Union{Base.Slice, UnitRange},Vararg{Any,N} where N} where P where N where T, DenseArray} where N where T, DenseArray} where #s43<:Real}",
+    "location": "stdlib/LinearAlgebra.html#Base.Math.sincos-Tuple{Union{DenseArray{#s43,2}, Base.ReinterpretArray{#s43,2,S,A} where S, Base.ReshapedArray{#s43,2,A,MI} where MI<:Tuple{Vararg{Base.MultiplicativeInverses.SignedMultiplicativeInverse{Int64},N} where N} where A<:Union{SubArray{T,N,P,I,true} where I<:Tuple{Union{Base.Slice, UnitRange},Vararg{Any,N} where N} where P where N where T, DenseArray}, SubArray{#s43,2,A,I,L} where L} where I<:Tuple{Vararg{Union{Int64, AbstractRange{Int64}, Base.AbstractCartesianIndex},N} where N} where A<:Union{Base.ReshapedArray{T,N,A,MI} where MI<:Tuple{Vararg{Base.MultiplicativeInverses.SignedMultiplicativeInverse{Int64},N} where N} where A<:Union{SubArray{T,N,P,I,true} where I<:Tuple{Union{Base.Slice, UnitRange},Vararg{Any,N} where N} where P where N where T, DenseArray} where N where T, DenseArray} where #s43<:Real}",
     "page": "Linear Algebra",
     "title": "Base.Math.sincos",
     "category": "Method",
@@ -17249,7 +17153,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/linearalgebra.html#Base.tan-Tuple{Union{DenseArray{#s43,2}, Base.ReinterpretArray{#s43,2,S,A} where S, Base.ReshapedArray{#s43,2,A,MI} where MI<:Tuple{Vararg{Base.MultiplicativeInverses.SignedMultiplicativeInverse{Int64},N} where N} where A<:Union{SubArray{T,N,P,I,true} where I<:Tuple{Union{Base.Slice, UnitRange},Vararg{Any,N} where N} where P where N where T, DenseArray}, SubArray{#s43,2,A,I,L} where L} where I<:Tuple{Vararg{Union{Int64, AbstractRange{Int64}, Base.AbstractCartesianIndex},N} where N} where A<:Union{Base.ReshapedArray{T,N,A,MI} where MI<:Tuple{Vararg{Base.MultiplicativeInverses.SignedMultiplicativeInverse{Int64},N} where N} where A<:Union{SubArray{T,N,P,I,true} where I<:Tuple{Union{Base.Slice, UnitRange},Vararg{Any,N} where N} where P where N where T, DenseArray} where N where T, DenseArray} where #s43<:Real}",
+    "location": "stdlib/LinearAlgebra.html#Base.tan-Tuple{Union{DenseArray{#s43,2}, Base.ReinterpretArray{#s43,2,S,A} where S, Base.ReshapedArray{#s43,2,A,MI} where MI<:Tuple{Vararg{Base.MultiplicativeInverses.SignedMultiplicativeInverse{Int64},N} where N} where A<:Union{SubArray{T,N,P,I,true} where I<:Tuple{Union{Base.Slice, UnitRange},Vararg{Any,N} where N} where P where N where T, DenseArray}, SubArray{#s43,2,A,I,L} where L} where I<:Tuple{Vararg{Union{Int64, AbstractRange{Int64}, Base.AbstractCartesianIndex},N} where N} where A<:Union{Base.ReshapedArray{T,N,A,MI} where MI<:Tuple{Vararg{Base.MultiplicativeInverses.SignedMultiplicativeInverse{Int64},N} where N} where A<:Union{SubArray{T,N,P,I,true} where I<:Tuple{Union{Base.Slice, UnitRange},Vararg{Any,N} where N} where P where N where T, DenseArray} where N where T, DenseArray} where #s43<:Real}",
     "page": "Linear Algebra",
     "title": "Base.tan",
     "category": "Method",
@@ -17257,7 +17161,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/linearalgebra.html#Base.Math.sec-Tuple{Union{DenseArray{T,2}, Base.ReinterpretArray{T,2,S,A} where S, Base.ReshapedArray{T,2,A,MI} where MI<:Tuple{Vararg{Base.MultiplicativeInverses.SignedMultiplicativeInverse{Int64},N} where N} where A<:Union{SubArray{T,N,P,I,true} where I<:Tuple{Union{Base.Slice, UnitRange},Vararg{Any,N} where N} where P where N where T, DenseArray}, SubArray{T,2,A,I,L} where L} where I<:Tuple{Vararg{Union{Int64, AbstractRange{Int64}, Base.AbstractCartesianIndex},N} where N} where A<:Union{Base.ReshapedArray{T,N,A,MI} where MI<:Tuple{Vararg{Base.MultiplicativeInverses.SignedMultiplicativeInverse{Int64},N} where N} where A<:Union{SubArray{T,N,P,I,true} where I<:Tuple{Union{Base.Slice, UnitRange},Vararg{Any,N} where N} where P where N where T, DenseArray} where N where T, DenseArray} where T}",
+    "location": "stdlib/LinearAlgebra.html#Base.Math.sec-Tuple{Union{DenseArray{T,2}, Base.ReinterpretArray{T,2,S,A} where S, Base.ReshapedArray{T,2,A,MI} where MI<:Tuple{Vararg{Base.MultiplicativeInverses.SignedMultiplicativeInverse{Int64},N} where N} where A<:Union{SubArray{T,N,P,I,true} where I<:Tuple{Union{Base.Slice, UnitRange},Vararg{Any,N} where N} where P where N where T, DenseArray}, SubArray{T,2,A,I,L} where L} where I<:Tuple{Vararg{Union{Int64, AbstractRange{Int64}, Base.AbstractCartesianIndex},N} where N} where A<:Union{Base.ReshapedArray{T,N,A,MI} where MI<:Tuple{Vararg{Base.MultiplicativeInverses.SignedMultiplicativeInverse{Int64},N} where N} where A<:Union{SubArray{T,N,P,I,true} where I<:Tuple{Union{Base.Slice, UnitRange},Vararg{Any,N} where N} where P where N where T, DenseArray} where N where T, DenseArray} where T}",
     "page": "Linear Algebra",
     "title": "Base.Math.sec",
     "category": "Method",
@@ -17265,7 +17169,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/linearalgebra.html#Base.Math.csc-Tuple{Union{DenseArray{T,2}, Base.ReinterpretArray{T,2,S,A} where S, Base.ReshapedArray{T,2,A,MI} where MI<:Tuple{Vararg{Base.MultiplicativeInverses.SignedMultiplicativeInverse{Int64},N} where N} where A<:Union{SubArray{T,N,P,I,true} where I<:Tuple{Union{Base.Slice, UnitRange},Vararg{Any,N} where N} where P where N where T, DenseArray}, SubArray{T,2,A,I,L} where L} where I<:Tuple{Vararg{Union{Int64, AbstractRange{Int64}, Base.AbstractCartesianIndex},N} where N} where A<:Union{Base.ReshapedArray{T,N,A,MI} where MI<:Tuple{Vararg{Base.MultiplicativeInverses.SignedMultiplicativeInverse{Int64},N} where N} where A<:Union{SubArray{T,N,P,I,true} where I<:Tuple{Union{Base.Slice, UnitRange},Vararg{Any,N} where N} where P where N where T, DenseArray} where N where T, DenseArray} where T}",
+    "location": "stdlib/LinearAlgebra.html#Base.Math.csc-Tuple{Union{DenseArray{T,2}, Base.ReinterpretArray{T,2,S,A} where S, Base.ReshapedArray{T,2,A,MI} where MI<:Tuple{Vararg{Base.MultiplicativeInverses.SignedMultiplicativeInverse{Int64},N} where N} where A<:Union{SubArray{T,N,P,I,true} where I<:Tuple{Union{Base.Slice, UnitRange},Vararg{Any,N} where N} where P where N where T, DenseArray}, SubArray{T,2,A,I,L} where L} where I<:Tuple{Vararg{Union{Int64, AbstractRange{Int64}, Base.AbstractCartesianIndex},N} where N} where A<:Union{Base.ReshapedArray{T,N,A,MI} where MI<:Tuple{Vararg{Base.MultiplicativeInverses.SignedMultiplicativeInverse{Int64},N} where N} where A<:Union{SubArray{T,N,P,I,true} where I<:Tuple{Union{Base.Slice, UnitRange},Vararg{Any,N} where N} where P where N where T, DenseArray} where N where T, DenseArray} where T}",
     "page": "Linear Algebra",
     "title": "Base.Math.csc",
     "category": "Method",
@@ -17273,7 +17177,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/linearalgebra.html#Base.Math.cot-Tuple{Union{DenseArray{T,2}, Base.ReinterpretArray{T,2,S,A} where S, Base.ReshapedArray{T,2,A,MI} where MI<:Tuple{Vararg{Base.MultiplicativeInverses.SignedMultiplicativeInverse{Int64},N} where N} where A<:Union{SubArray{T,N,P,I,true} where I<:Tuple{Union{Base.Slice, UnitRange},Vararg{Any,N} where N} where P where N where T, DenseArray}, SubArray{T,2,A,I,L} where L} where I<:Tuple{Vararg{Union{Int64, AbstractRange{Int64}, Base.AbstractCartesianIndex},N} where N} where A<:Union{Base.ReshapedArray{T,N,A,MI} where MI<:Tuple{Vararg{Base.MultiplicativeInverses.SignedMultiplicativeInverse{Int64},N} where N} where A<:Union{SubArray{T,N,P,I,true} where I<:Tuple{Union{Base.Slice, UnitRange},Vararg{Any,N} where N} where P where N where T, DenseArray} where N where T, DenseArray} where T}",
+    "location": "stdlib/LinearAlgebra.html#Base.Math.cot-Tuple{Union{DenseArray{T,2}, Base.ReinterpretArray{T,2,S,A} where S, Base.ReshapedArray{T,2,A,MI} where MI<:Tuple{Vararg{Base.MultiplicativeInverses.SignedMultiplicativeInverse{Int64},N} where N} where A<:Union{SubArray{T,N,P,I,true} where I<:Tuple{Union{Base.Slice, UnitRange},Vararg{Any,N} where N} where P where N where T, DenseArray}, SubArray{T,2,A,I,L} where L} where I<:Tuple{Vararg{Union{Int64, AbstractRange{Int64}, Base.AbstractCartesianIndex},N} where N} where A<:Union{Base.ReshapedArray{T,N,A,MI} where MI<:Tuple{Vararg{Base.MultiplicativeInverses.SignedMultiplicativeInverse{Int64},N} where N} where A<:Union{SubArray{T,N,P,I,true} where I<:Tuple{Union{Base.Slice, UnitRange},Vararg{Any,N} where N} where P where N where T, DenseArray} where N where T, DenseArray} where T}",
     "page": "Linear Algebra",
     "title": "Base.Math.cot",
     "category": "Method",
@@ -17281,7 +17185,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/linearalgebra.html#Base.cosh-Tuple{Union{DenseArray{T,2}, Base.ReinterpretArray{T,2,S,A} where S, Base.ReshapedArray{T,2,A,MI} where MI<:Tuple{Vararg{Base.MultiplicativeInverses.SignedMultiplicativeInverse{Int64},N} where N} where A<:Union{SubArray{T,N,P,I,true} where I<:Tuple{Union{Base.Slice, UnitRange},Vararg{Any,N} where N} where P where N where T, DenseArray}, SubArray{T,2,A,I,L} where L} where I<:Tuple{Vararg{Union{Int64, AbstractRange{Int64}, Base.AbstractCartesianIndex},N} where N} where A<:Union{Base.ReshapedArray{T,N,A,MI} where MI<:Tuple{Vararg{Base.MultiplicativeInverses.SignedMultiplicativeInverse{Int64},N} where N} where A<:Union{SubArray{T,N,P,I,true} where I<:Tuple{Union{Base.Slice, UnitRange},Vararg{Any,N} where N} where P where N where T, DenseArray} where N where T, DenseArray} where T}",
+    "location": "stdlib/LinearAlgebra.html#Base.cosh-Tuple{Union{DenseArray{T,2}, Base.ReinterpretArray{T,2,S,A} where S, Base.ReshapedArray{T,2,A,MI} where MI<:Tuple{Vararg{Base.MultiplicativeInverses.SignedMultiplicativeInverse{Int64},N} where N} where A<:Union{SubArray{T,N,P,I,true} where I<:Tuple{Union{Base.Slice, UnitRange},Vararg{Any,N} where N} where P where N where T, DenseArray}, SubArray{T,2,A,I,L} where L} where I<:Tuple{Vararg{Union{Int64, AbstractRange{Int64}, Base.AbstractCartesianIndex},N} where N} where A<:Union{Base.ReshapedArray{T,N,A,MI} where MI<:Tuple{Vararg{Base.MultiplicativeInverses.SignedMultiplicativeInverse{Int64},N} where N} where A<:Union{SubArray{T,N,P,I,true} where I<:Tuple{Union{Base.Slice, UnitRange},Vararg{Any,N} where N} where P where N where T, DenseArray} where N where T, DenseArray} where T}",
     "page": "Linear Algebra",
     "title": "Base.cosh",
     "category": "Method",
@@ -17289,7 +17193,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/linearalgebra.html#Base.sinh-Tuple{Union{DenseArray{T,2}, Base.ReinterpretArray{T,2,S,A} where S, Base.ReshapedArray{T,2,A,MI} where MI<:Tuple{Vararg{Base.MultiplicativeInverses.SignedMultiplicativeInverse{Int64},N} where N} where A<:Union{SubArray{T,N,P,I,true} where I<:Tuple{Union{Base.Slice, UnitRange},Vararg{Any,N} where N} where P where N where T, DenseArray}, SubArray{T,2,A,I,L} where L} where I<:Tuple{Vararg{Union{Int64, AbstractRange{Int64}, Base.AbstractCartesianIndex},N} where N} where A<:Union{Base.ReshapedArray{T,N,A,MI} where MI<:Tuple{Vararg{Base.MultiplicativeInverses.SignedMultiplicativeInverse{Int64},N} where N} where A<:Union{SubArray{T,N,P,I,true} where I<:Tuple{Union{Base.Slice, UnitRange},Vararg{Any,N} where N} where P where N where T, DenseArray} where N where T, DenseArray} where T}",
+    "location": "stdlib/LinearAlgebra.html#Base.sinh-Tuple{Union{DenseArray{T,2}, Base.ReinterpretArray{T,2,S,A} where S, Base.ReshapedArray{T,2,A,MI} where MI<:Tuple{Vararg{Base.MultiplicativeInverses.SignedMultiplicativeInverse{Int64},N} where N} where A<:Union{SubArray{T,N,P,I,true} where I<:Tuple{Union{Base.Slice, UnitRange},Vararg{Any,N} where N} where P where N where T, DenseArray}, SubArray{T,2,A,I,L} where L} where I<:Tuple{Vararg{Union{Int64, AbstractRange{Int64}, Base.AbstractCartesianIndex},N} where N} where A<:Union{Base.ReshapedArray{T,N,A,MI} where MI<:Tuple{Vararg{Base.MultiplicativeInverses.SignedMultiplicativeInverse{Int64},N} where N} where A<:Union{SubArray{T,N,P,I,true} where I<:Tuple{Union{Base.Slice, UnitRange},Vararg{Any,N} where N} where P where N where T, DenseArray} where N where T, DenseArray} where T}",
     "page": "Linear Algebra",
     "title": "Base.sinh",
     "category": "Method",
@@ -17297,7 +17201,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/linearalgebra.html#Base.tanh-Tuple{Union{DenseArray{T,2}, Base.ReinterpretArray{T,2,S,A} where S, Base.ReshapedArray{T,2,A,MI} where MI<:Tuple{Vararg{Base.MultiplicativeInverses.SignedMultiplicativeInverse{Int64},N} where N} where A<:Union{SubArray{T,N,P,I,true} where I<:Tuple{Union{Base.Slice, UnitRange},Vararg{Any,N} where N} where P where N where T, DenseArray}, SubArray{T,2,A,I,L} where L} where I<:Tuple{Vararg{Union{Int64, AbstractRange{Int64}, Base.AbstractCartesianIndex},N} where N} where A<:Union{Base.ReshapedArray{T,N,A,MI} where MI<:Tuple{Vararg{Base.MultiplicativeInverses.SignedMultiplicativeInverse{Int64},N} where N} where A<:Union{SubArray{T,N,P,I,true} where I<:Tuple{Union{Base.Slice, UnitRange},Vararg{Any,N} where N} where P where N where T, DenseArray} where N where T, DenseArray} where T}",
+    "location": "stdlib/LinearAlgebra.html#Base.tanh-Tuple{Union{DenseArray{T,2}, Base.ReinterpretArray{T,2,S,A} where S, Base.ReshapedArray{T,2,A,MI} where MI<:Tuple{Vararg{Base.MultiplicativeInverses.SignedMultiplicativeInverse{Int64},N} where N} where A<:Union{SubArray{T,N,P,I,true} where I<:Tuple{Union{Base.Slice, UnitRange},Vararg{Any,N} where N} where P where N where T, DenseArray}, SubArray{T,2,A,I,L} where L} where I<:Tuple{Vararg{Union{Int64, AbstractRange{Int64}, Base.AbstractCartesianIndex},N} where N} where A<:Union{Base.ReshapedArray{T,N,A,MI} where MI<:Tuple{Vararg{Base.MultiplicativeInverses.SignedMultiplicativeInverse{Int64},N} where N} where A<:Union{SubArray{T,N,P,I,true} where I<:Tuple{Union{Base.Slice, UnitRange},Vararg{Any,N} where N} where P where N where T, DenseArray} where N where T, DenseArray} where T}",
     "page": "Linear Algebra",
     "title": "Base.tanh",
     "category": "Method",
@@ -17305,7 +17209,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/linearalgebra.html#Base.Math.sech-Tuple{Union{DenseArray{T,2}, Base.ReinterpretArray{T,2,S,A} where S, Base.ReshapedArray{T,2,A,MI} where MI<:Tuple{Vararg{Base.MultiplicativeInverses.SignedMultiplicativeInverse{Int64},N} where N} where A<:Union{SubArray{T,N,P,I,true} where I<:Tuple{Union{Base.Slice, UnitRange},Vararg{Any,N} where N} where P where N where T, DenseArray}, SubArray{T,2,A,I,L} where L} where I<:Tuple{Vararg{Union{Int64, AbstractRange{Int64}, Base.AbstractCartesianIndex},N} where N} where A<:Union{Base.ReshapedArray{T,N,A,MI} where MI<:Tuple{Vararg{Base.MultiplicativeInverses.SignedMultiplicativeInverse{Int64},N} where N} where A<:Union{SubArray{T,N,P,I,true} where I<:Tuple{Union{Base.Slice, UnitRange},Vararg{Any,N} where N} where P where N where T, DenseArray} where N where T, DenseArray} where T}",
+    "location": "stdlib/LinearAlgebra.html#Base.Math.sech-Tuple{Union{DenseArray{T,2}, Base.ReinterpretArray{T,2,S,A} where S, Base.ReshapedArray{T,2,A,MI} where MI<:Tuple{Vararg{Base.MultiplicativeInverses.SignedMultiplicativeInverse{Int64},N} where N} where A<:Union{SubArray{T,N,P,I,true} where I<:Tuple{Union{Base.Slice, UnitRange},Vararg{Any,N} where N} where P where N where T, DenseArray}, SubArray{T,2,A,I,L} where L} where I<:Tuple{Vararg{Union{Int64, AbstractRange{Int64}, Base.AbstractCartesianIndex},N} where N} where A<:Union{Base.ReshapedArray{T,N,A,MI} where MI<:Tuple{Vararg{Base.MultiplicativeInverses.SignedMultiplicativeInverse{Int64},N} where N} where A<:Union{SubArray{T,N,P,I,true} where I<:Tuple{Union{Base.Slice, UnitRange},Vararg{Any,N} where N} where P where N where T, DenseArray} where N where T, DenseArray} where T}",
     "page": "Linear Algebra",
     "title": "Base.Math.sech",
     "category": "Method",
@@ -17313,7 +17217,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/linearalgebra.html#Base.Math.csch-Tuple{Union{DenseArray{T,2}, Base.ReinterpretArray{T,2,S,A} where S, Base.ReshapedArray{T,2,A,MI} where MI<:Tuple{Vararg{Base.MultiplicativeInverses.SignedMultiplicativeInverse{Int64},N} where N} where A<:Union{SubArray{T,N,P,I,true} where I<:Tuple{Union{Base.Slice, UnitRange},Vararg{Any,N} where N} where P where N where T, DenseArray}, SubArray{T,2,A,I,L} where L} where I<:Tuple{Vararg{Union{Int64, AbstractRange{Int64}, Base.AbstractCartesianIndex},N} where N} where A<:Union{Base.ReshapedArray{T,N,A,MI} where MI<:Tuple{Vararg{Base.MultiplicativeInverses.SignedMultiplicativeInverse{Int64},N} where N} where A<:Union{SubArray{T,N,P,I,true} where I<:Tuple{Union{Base.Slice, UnitRange},Vararg{Any,N} where N} where P where N where T, DenseArray} where N where T, DenseArray} where T}",
+    "location": "stdlib/LinearAlgebra.html#Base.Math.csch-Tuple{Union{DenseArray{T,2}, Base.ReinterpretArray{T,2,S,A} where S, Base.ReshapedArray{T,2,A,MI} where MI<:Tuple{Vararg{Base.MultiplicativeInverses.SignedMultiplicativeInverse{Int64},N} where N} where A<:Union{SubArray{T,N,P,I,true} where I<:Tuple{Union{Base.Slice, UnitRange},Vararg{Any,N} where N} where P where N where T, DenseArray}, SubArray{T,2,A,I,L} where L} where I<:Tuple{Vararg{Union{Int64, AbstractRange{Int64}, Base.AbstractCartesianIndex},N} where N} where A<:Union{Base.ReshapedArray{T,N,A,MI} where MI<:Tuple{Vararg{Base.MultiplicativeInverses.SignedMultiplicativeInverse{Int64},N} where N} where A<:Union{SubArray{T,N,P,I,true} where I<:Tuple{Union{Base.Slice, UnitRange},Vararg{Any,N} where N} where P where N where T, DenseArray} where N where T, DenseArray} where T}",
     "page": "Linear Algebra",
     "title": "Base.Math.csch",
     "category": "Method",
@@ -17321,7 +17225,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/linearalgebra.html#Base.Math.coth-Tuple{Union{DenseArray{T,2}, Base.ReinterpretArray{T,2,S,A} where S, Base.ReshapedArray{T,2,A,MI} where MI<:Tuple{Vararg{Base.MultiplicativeInverses.SignedMultiplicativeInverse{Int64},N} where N} where A<:Union{SubArray{T,N,P,I,true} where I<:Tuple{Union{Base.Slice, UnitRange},Vararg{Any,N} where N} where P where N where T, DenseArray}, SubArray{T,2,A,I,L} where L} where I<:Tuple{Vararg{Union{Int64, AbstractRange{Int64}, Base.AbstractCartesianIndex},N} where N} where A<:Union{Base.ReshapedArray{T,N,A,MI} where MI<:Tuple{Vararg{Base.MultiplicativeInverses.SignedMultiplicativeInverse{Int64},N} where N} where A<:Union{SubArray{T,N,P,I,true} where I<:Tuple{Union{Base.Slice, UnitRange},Vararg{Any,N} where N} where P where N where T, DenseArray} where N where T, DenseArray} where T}",
+    "location": "stdlib/LinearAlgebra.html#Base.Math.coth-Tuple{Union{DenseArray{T,2}, Base.ReinterpretArray{T,2,S,A} where S, Base.ReshapedArray{T,2,A,MI} where MI<:Tuple{Vararg{Base.MultiplicativeInverses.SignedMultiplicativeInverse{Int64},N} where N} where A<:Union{SubArray{T,N,P,I,true} where I<:Tuple{Union{Base.Slice, UnitRange},Vararg{Any,N} where N} where P where N where T, DenseArray}, SubArray{T,2,A,I,L} where L} where I<:Tuple{Vararg{Union{Int64, AbstractRange{Int64}, Base.AbstractCartesianIndex},N} where N} where A<:Union{Base.ReshapedArray{T,N,A,MI} where MI<:Tuple{Vararg{Base.MultiplicativeInverses.SignedMultiplicativeInverse{Int64},N} where N} where A<:Union{SubArray{T,N,P,I,true} where I<:Tuple{Union{Base.Slice, UnitRange},Vararg{Any,N} where N} where P where N where T, DenseArray} where N where T, DenseArray} where T}",
     "page": "Linear Algebra",
     "title": "Base.Math.coth",
     "category": "Method",
@@ -17329,7 +17233,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/linearalgebra.html#Base.acos-Tuple{Union{DenseArray{T,2}, Base.ReinterpretArray{T,2,S,A} where S, Base.ReshapedArray{T,2,A,MI} where MI<:Tuple{Vararg{Base.MultiplicativeInverses.SignedMultiplicativeInverse{Int64},N} where N} where A<:Union{SubArray{T,N,P,I,true} where I<:Tuple{Union{Base.Slice, UnitRange},Vararg{Any,N} where N} where P where N where T, DenseArray}, SubArray{T,2,A,I,L} where L} where I<:Tuple{Vararg{Union{Int64, AbstractRange{Int64}, Base.AbstractCartesianIndex},N} where N} where A<:Union{Base.ReshapedArray{T,N,A,MI} where MI<:Tuple{Vararg{Base.MultiplicativeInverses.SignedMultiplicativeInverse{Int64},N} where N} where A<:Union{SubArray{T,N,P,I,true} where I<:Tuple{Union{Base.Slice, UnitRange},Vararg{Any,N} where N} where P where N where T, DenseArray} where N where T, DenseArray} where T}",
+    "location": "stdlib/LinearAlgebra.html#Base.acos-Tuple{Union{DenseArray{T,2}, Base.ReinterpretArray{T,2,S,A} where S, Base.ReshapedArray{T,2,A,MI} where MI<:Tuple{Vararg{Base.MultiplicativeInverses.SignedMultiplicativeInverse{Int64},N} where N} where A<:Union{SubArray{T,N,P,I,true} where I<:Tuple{Union{Base.Slice, UnitRange},Vararg{Any,N} where N} where P where N where T, DenseArray}, SubArray{T,2,A,I,L} where L} where I<:Tuple{Vararg{Union{Int64, AbstractRange{Int64}, Base.AbstractCartesianIndex},N} where N} where A<:Union{Base.ReshapedArray{T,N,A,MI} where MI<:Tuple{Vararg{Base.MultiplicativeInverses.SignedMultiplicativeInverse{Int64},N} where N} where A<:Union{SubArray{T,N,P,I,true} where I<:Tuple{Union{Base.Slice, UnitRange},Vararg{Any,N} where N} where P where N where T, DenseArray} where N where T, DenseArray} where T}",
     "page": "Linear Algebra",
     "title": "Base.acos",
     "category": "Method",
@@ -17337,7 +17241,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/linearalgebra.html#Base.asin-Tuple{Union{DenseArray{T,2}, Base.ReinterpretArray{T,2,S,A} where S, Base.ReshapedArray{T,2,A,MI} where MI<:Tuple{Vararg{Base.MultiplicativeInverses.SignedMultiplicativeInverse{Int64},N} where N} where A<:Union{SubArray{T,N,P,I,true} where I<:Tuple{Union{Base.Slice, UnitRange},Vararg{Any,N} where N} where P where N where T, DenseArray}, SubArray{T,2,A,I,L} where L} where I<:Tuple{Vararg{Union{Int64, AbstractRange{Int64}, Base.AbstractCartesianIndex},N} where N} where A<:Union{Base.ReshapedArray{T,N,A,MI} where MI<:Tuple{Vararg{Base.MultiplicativeInverses.SignedMultiplicativeInverse{Int64},N} where N} where A<:Union{SubArray{T,N,P,I,true} where I<:Tuple{Union{Base.Slice, UnitRange},Vararg{Any,N} where N} where P where N where T, DenseArray} where N where T, DenseArray} where T}",
+    "location": "stdlib/LinearAlgebra.html#Base.asin-Tuple{Union{DenseArray{T,2}, Base.ReinterpretArray{T,2,S,A} where S, Base.ReshapedArray{T,2,A,MI} where MI<:Tuple{Vararg{Base.MultiplicativeInverses.SignedMultiplicativeInverse{Int64},N} where N} where A<:Union{SubArray{T,N,P,I,true} where I<:Tuple{Union{Base.Slice, UnitRange},Vararg{Any,N} where N} where P where N where T, DenseArray}, SubArray{T,2,A,I,L} where L} where I<:Tuple{Vararg{Union{Int64, AbstractRange{Int64}, Base.AbstractCartesianIndex},N} where N} where A<:Union{Base.ReshapedArray{T,N,A,MI} where MI<:Tuple{Vararg{Base.MultiplicativeInverses.SignedMultiplicativeInverse{Int64},N} where N} where A<:Union{SubArray{T,N,P,I,true} where I<:Tuple{Union{Base.Slice, UnitRange},Vararg{Any,N} where N} where P where N where T, DenseArray} where N where T, DenseArray} where T}",
     "page": "Linear Algebra",
     "title": "Base.asin",
     "category": "Method",
@@ -17345,7 +17249,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/linearalgebra.html#Base.atan-Tuple{Union{DenseArray{T,2}, Base.ReinterpretArray{T,2,S,A} where S, Base.ReshapedArray{T,2,A,MI} where MI<:Tuple{Vararg{Base.MultiplicativeInverses.SignedMultiplicativeInverse{Int64},N} where N} where A<:Union{SubArray{T,N,P,I,true} where I<:Tuple{Union{Base.Slice, UnitRange},Vararg{Any,N} where N} where P where N where T, DenseArray}, SubArray{T,2,A,I,L} where L} where I<:Tuple{Vararg{Union{Int64, AbstractRange{Int64}, Base.AbstractCartesianIndex},N} where N} where A<:Union{Base.ReshapedArray{T,N,A,MI} where MI<:Tuple{Vararg{Base.MultiplicativeInverses.SignedMultiplicativeInverse{Int64},N} where N} where A<:Union{SubArray{T,N,P,I,true} where I<:Tuple{Union{Base.Slice, UnitRange},Vararg{Any,N} where N} where P where N where T, DenseArray} where N where T, DenseArray} where T}",
+    "location": "stdlib/LinearAlgebra.html#Base.atan-Tuple{Union{DenseArray{T,2}, Base.ReinterpretArray{T,2,S,A} where S, Base.ReshapedArray{T,2,A,MI} where MI<:Tuple{Vararg{Base.MultiplicativeInverses.SignedMultiplicativeInverse{Int64},N} where N} where A<:Union{SubArray{T,N,P,I,true} where I<:Tuple{Union{Base.Slice, UnitRange},Vararg{Any,N} where N} where P where N where T, DenseArray}, SubArray{T,2,A,I,L} where L} where I<:Tuple{Vararg{Union{Int64, AbstractRange{Int64}, Base.AbstractCartesianIndex},N} where N} where A<:Union{Base.ReshapedArray{T,N,A,MI} where MI<:Tuple{Vararg{Base.MultiplicativeInverses.SignedMultiplicativeInverse{Int64},N} where N} where A<:Union{SubArray{T,N,P,I,true} where I<:Tuple{Union{Base.Slice, UnitRange},Vararg{Any,N} where N} where P where N where T, DenseArray} where N where T, DenseArray} where T}",
     "page": "Linear Algebra",
     "title": "Base.atan",
     "category": "Method",
@@ -17353,7 +17257,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/linearalgebra.html#Base.Math.asec-Tuple{Union{DenseArray{T,2}, Base.ReinterpretArray{T,2,S,A} where S, Base.ReshapedArray{T,2,A,MI} where MI<:Tuple{Vararg{Base.MultiplicativeInverses.SignedMultiplicativeInverse{Int64},N} where N} where A<:Union{SubArray{T,N,P,I,true} where I<:Tuple{Union{Base.Slice, UnitRange},Vararg{Any,N} where N} where P where N where T, DenseArray}, SubArray{T,2,A,I,L} where L} where I<:Tuple{Vararg{Union{Int64, AbstractRange{Int64}, Base.AbstractCartesianIndex},N} where N} where A<:Union{Base.ReshapedArray{T,N,A,MI} where MI<:Tuple{Vararg{Base.MultiplicativeInverses.SignedMultiplicativeInverse{Int64},N} where N} where A<:Union{SubArray{T,N,P,I,true} where I<:Tuple{Union{Base.Slice, UnitRange},Vararg{Any,N} where N} where P where N where T, DenseArray} where N where T, DenseArray} where T}",
+    "location": "stdlib/LinearAlgebra.html#Base.Math.asec-Tuple{Union{DenseArray{T,2}, Base.ReinterpretArray{T,2,S,A} where S, Base.ReshapedArray{T,2,A,MI} where MI<:Tuple{Vararg{Base.MultiplicativeInverses.SignedMultiplicativeInverse{Int64},N} where N} where A<:Union{SubArray{T,N,P,I,true} where I<:Tuple{Union{Base.Slice, UnitRange},Vararg{Any,N} where N} where P where N where T, DenseArray}, SubArray{T,2,A,I,L} where L} where I<:Tuple{Vararg{Union{Int64, AbstractRange{Int64}, Base.AbstractCartesianIndex},N} where N} where A<:Union{Base.ReshapedArray{T,N,A,MI} where MI<:Tuple{Vararg{Base.MultiplicativeInverses.SignedMultiplicativeInverse{Int64},N} where N} where A<:Union{SubArray{T,N,P,I,true} where I<:Tuple{Union{Base.Slice, UnitRange},Vararg{Any,N} where N} where P where N where T, DenseArray} where N where T, DenseArray} where T}",
     "page": "Linear Algebra",
     "title": "Base.Math.asec",
     "category": "Method",
@@ -17361,7 +17265,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/linearalgebra.html#Base.Math.acsc-Tuple{Union{DenseArray{T,2}, Base.ReinterpretArray{T,2,S,A} where S, Base.ReshapedArray{T,2,A,MI} where MI<:Tuple{Vararg{Base.MultiplicativeInverses.SignedMultiplicativeInverse{Int64},N} where N} where A<:Union{SubArray{T,N,P,I,true} where I<:Tuple{Union{Base.Slice, UnitRange},Vararg{Any,N} where N} where P where N where T, DenseArray}, SubArray{T,2,A,I,L} where L} where I<:Tuple{Vararg{Union{Int64, AbstractRange{Int64}, Base.AbstractCartesianIndex},N} where N} where A<:Union{Base.ReshapedArray{T,N,A,MI} where MI<:Tuple{Vararg{Base.MultiplicativeInverses.SignedMultiplicativeInverse{Int64},N} where N} where A<:Union{SubArray{T,N,P,I,true} where I<:Tuple{Union{Base.Slice, UnitRange},Vararg{Any,N} where N} where P where N where T, DenseArray} where N where T, DenseArray} where T}",
+    "location": "stdlib/LinearAlgebra.html#Base.Math.acsc-Tuple{Union{DenseArray{T,2}, Base.ReinterpretArray{T,2,S,A} where S, Base.ReshapedArray{T,2,A,MI} where MI<:Tuple{Vararg{Base.MultiplicativeInverses.SignedMultiplicativeInverse{Int64},N} where N} where A<:Union{SubArray{T,N,P,I,true} where I<:Tuple{Union{Base.Slice, UnitRange},Vararg{Any,N} where N} where P where N where T, DenseArray}, SubArray{T,2,A,I,L} where L} where I<:Tuple{Vararg{Union{Int64, AbstractRange{Int64}, Base.AbstractCartesianIndex},N} where N} where A<:Union{Base.ReshapedArray{T,N,A,MI} where MI<:Tuple{Vararg{Base.MultiplicativeInverses.SignedMultiplicativeInverse{Int64},N} where N} where A<:Union{SubArray{T,N,P,I,true} where I<:Tuple{Union{Base.Slice, UnitRange},Vararg{Any,N} where N} where P where N where T, DenseArray} where N where T, DenseArray} where T}",
     "page": "Linear Algebra",
     "title": "Base.Math.acsc",
     "category": "Method",
@@ -17369,7 +17273,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/linearalgebra.html#Base.Math.acot-Tuple{Union{DenseArray{T,2}, Base.ReinterpretArray{T,2,S,A} where S, Base.ReshapedArray{T,2,A,MI} where MI<:Tuple{Vararg{Base.MultiplicativeInverses.SignedMultiplicativeInverse{Int64},N} where N} where A<:Union{SubArray{T,N,P,I,true} where I<:Tuple{Union{Base.Slice, UnitRange},Vararg{Any,N} where N} where P where N where T, DenseArray}, SubArray{T,2,A,I,L} where L} where I<:Tuple{Vararg{Union{Int64, AbstractRange{Int64}, Base.AbstractCartesianIndex},N} where N} where A<:Union{Base.ReshapedArray{T,N,A,MI} where MI<:Tuple{Vararg{Base.MultiplicativeInverses.SignedMultiplicativeInverse{Int64},N} where N} where A<:Union{SubArray{T,N,P,I,true} where I<:Tuple{Union{Base.Slice, UnitRange},Vararg{Any,N} where N} where P where N where T, DenseArray} where N where T, DenseArray} where T}",
+    "location": "stdlib/LinearAlgebra.html#Base.Math.acot-Tuple{Union{DenseArray{T,2}, Base.ReinterpretArray{T,2,S,A} where S, Base.ReshapedArray{T,2,A,MI} where MI<:Tuple{Vararg{Base.MultiplicativeInverses.SignedMultiplicativeInverse{Int64},N} where N} where A<:Union{SubArray{T,N,P,I,true} where I<:Tuple{Union{Base.Slice, UnitRange},Vararg{Any,N} where N} where P where N where T, DenseArray}, SubArray{T,2,A,I,L} where L} where I<:Tuple{Vararg{Union{Int64, AbstractRange{Int64}, Base.AbstractCartesianIndex},N} where N} where A<:Union{Base.ReshapedArray{T,N,A,MI} where MI<:Tuple{Vararg{Base.MultiplicativeInverses.SignedMultiplicativeInverse{Int64},N} where N} where A<:Union{SubArray{T,N,P,I,true} where I<:Tuple{Union{Base.Slice, UnitRange},Vararg{Any,N} where N} where P where N where T, DenseArray} where N where T, DenseArray} where T}",
     "page": "Linear Algebra",
     "title": "Base.Math.acot",
     "category": "Method",
@@ -17377,7 +17281,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/linearalgebra.html#Base.acosh-Tuple{Union{DenseArray{T,2}, Base.ReinterpretArray{T,2,S,A} where S, Base.ReshapedArray{T,2,A,MI} where MI<:Tuple{Vararg{Base.MultiplicativeInverses.SignedMultiplicativeInverse{Int64},N} where N} where A<:Union{SubArray{T,N,P,I,true} where I<:Tuple{Union{Base.Slice, UnitRange},Vararg{Any,N} where N} where P where N where T, DenseArray}, SubArray{T,2,A,I,L} where L} where I<:Tuple{Vararg{Union{Int64, AbstractRange{Int64}, Base.AbstractCartesianIndex},N} where N} where A<:Union{Base.ReshapedArray{T,N,A,MI} where MI<:Tuple{Vararg{Base.MultiplicativeInverses.SignedMultiplicativeInverse{Int64},N} where N} where A<:Union{SubArray{T,N,P,I,true} where I<:Tuple{Union{Base.Slice, UnitRange},Vararg{Any,N} where N} where P where N where T, DenseArray} where N where T, DenseArray} where T}",
+    "location": "stdlib/LinearAlgebra.html#Base.acosh-Tuple{Union{DenseArray{T,2}, Base.ReinterpretArray{T,2,S,A} where S, Base.ReshapedArray{T,2,A,MI} where MI<:Tuple{Vararg{Base.MultiplicativeInverses.SignedMultiplicativeInverse{Int64},N} where N} where A<:Union{SubArray{T,N,P,I,true} where I<:Tuple{Union{Base.Slice, UnitRange},Vararg{Any,N} where N} where P where N where T, DenseArray}, SubArray{T,2,A,I,L} where L} where I<:Tuple{Vararg{Union{Int64, AbstractRange{Int64}, Base.AbstractCartesianIndex},N} where N} where A<:Union{Base.ReshapedArray{T,N,A,MI} where MI<:Tuple{Vararg{Base.MultiplicativeInverses.SignedMultiplicativeInverse{Int64},N} where N} where A<:Union{SubArray{T,N,P,I,true} where I<:Tuple{Union{Base.Slice, UnitRange},Vararg{Any,N} where N} where P where N where T, DenseArray} where N where T, DenseArray} where T}",
     "page": "Linear Algebra",
     "title": "Base.acosh",
     "category": "Method",
@@ -17385,7 +17289,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/linearalgebra.html#Base.asinh-Tuple{Union{DenseArray{T,2}, Base.ReinterpretArray{T,2,S,A} where S, Base.ReshapedArray{T,2,A,MI} where MI<:Tuple{Vararg{Base.MultiplicativeInverses.SignedMultiplicativeInverse{Int64},N} where N} where A<:Union{SubArray{T,N,P,I,true} where I<:Tuple{Union{Base.Slice, UnitRange},Vararg{Any,N} where N} where P where N where T, DenseArray}, SubArray{T,2,A,I,L} where L} where I<:Tuple{Vararg{Union{Int64, AbstractRange{Int64}, Base.AbstractCartesianIndex},N} where N} where A<:Union{Base.ReshapedArray{T,N,A,MI} where MI<:Tuple{Vararg{Base.MultiplicativeInverses.SignedMultiplicativeInverse{Int64},N} where N} where A<:Union{SubArray{T,N,P,I,true} where I<:Tuple{Union{Base.Slice, UnitRange},Vararg{Any,N} where N} where P where N where T, DenseArray} where N where T, DenseArray} where T}",
+    "location": "stdlib/LinearAlgebra.html#Base.asinh-Tuple{Union{DenseArray{T,2}, Base.ReinterpretArray{T,2,S,A} where S, Base.ReshapedArray{T,2,A,MI} where MI<:Tuple{Vararg{Base.MultiplicativeInverses.SignedMultiplicativeInverse{Int64},N} where N} where A<:Union{SubArray{T,N,P,I,true} where I<:Tuple{Union{Base.Slice, UnitRange},Vararg{Any,N} where N} where P where N where T, DenseArray}, SubArray{T,2,A,I,L} where L} where I<:Tuple{Vararg{Union{Int64, AbstractRange{Int64}, Base.AbstractCartesianIndex},N} where N} where A<:Union{Base.ReshapedArray{T,N,A,MI} where MI<:Tuple{Vararg{Base.MultiplicativeInverses.SignedMultiplicativeInverse{Int64},N} where N} where A<:Union{SubArray{T,N,P,I,true} where I<:Tuple{Union{Base.Slice, UnitRange},Vararg{Any,N} where N} where P where N where T, DenseArray} where N where T, DenseArray} where T}",
     "page": "Linear Algebra",
     "title": "Base.asinh",
     "category": "Method",
@@ -17393,7 +17297,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/linearalgebra.html#Base.atanh-Tuple{Union{DenseArray{T,2}, Base.ReinterpretArray{T,2,S,A} where S, Base.ReshapedArray{T,2,A,MI} where MI<:Tuple{Vararg{Base.MultiplicativeInverses.SignedMultiplicativeInverse{Int64},N} where N} where A<:Union{SubArray{T,N,P,I,true} where I<:Tuple{Union{Base.Slice, UnitRange},Vararg{Any,N} where N} where P where N where T, DenseArray}, SubArray{T,2,A,I,L} where L} where I<:Tuple{Vararg{Union{Int64, AbstractRange{Int64}, Base.AbstractCartesianIndex},N} where N} where A<:Union{Base.ReshapedArray{T,N,A,MI} where MI<:Tuple{Vararg{Base.MultiplicativeInverses.SignedMultiplicativeInverse{Int64},N} where N} where A<:Union{SubArray{T,N,P,I,true} where I<:Tuple{Union{Base.Slice, UnitRange},Vararg{Any,N} where N} where P where N where T, DenseArray} where N where T, DenseArray} where T}",
+    "location": "stdlib/LinearAlgebra.html#Base.atanh-Tuple{Union{DenseArray{T,2}, Base.ReinterpretArray{T,2,S,A} where S, Base.ReshapedArray{T,2,A,MI} where MI<:Tuple{Vararg{Base.MultiplicativeInverses.SignedMultiplicativeInverse{Int64},N} where N} where A<:Union{SubArray{T,N,P,I,true} where I<:Tuple{Union{Base.Slice, UnitRange},Vararg{Any,N} where N} where P where N where T, DenseArray}, SubArray{T,2,A,I,L} where L} where I<:Tuple{Vararg{Union{Int64, AbstractRange{Int64}, Base.AbstractCartesianIndex},N} where N} where A<:Union{Base.ReshapedArray{T,N,A,MI} where MI<:Tuple{Vararg{Base.MultiplicativeInverses.SignedMultiplicativeInverse{Int64},N} where N} where A<:Union{SubArray{T,N,P,I,true} where I<:Tuple{Union{Base.Slice, UnitRange},Vararg{Any,N} where N} where P where N where T, DenseArray} where N where T, DenseArray} where T}",
     "page": "Linear Algebra",
     "title": "Base.atanh",
     "category": "Method",
@@ -17401,7 +17305,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/linearalgebra.html#Base.Math.asech-Tuple{Union{DenseArray{T,2}, Base.ReinterpretArray{T,2,S,A} where S, Base.ReshapedArray{T,2,A,MI} where MI<:Tuple{Vararg{Base.MultiplicativeInverses.SignedMultiplicativeInverse{Int64},N} where N} where A<:Union{SubArray{T,N,P,I,true} where I<:Tuple{Union{Base.Slice, UnitRange},Vararg{Any,N} where N} where P where N where T, DenseArray}, SubArray{T,2,A,I,L} where L} where I<:Tuple{Vararg{Union{Int64, AbstractRange{Int64}, Base.AbstractCartesianIndex},N} where N} where A<:Union{Base.ReshapedArray{T,N,A,MI} where MI<:Tuple{Vararg{Base.MultiplicativeInverses.SignedMultiplicativeInverse{Int64},N} where N} where A<:Union{SubArray{T,N,P,I,true} where I<:Tuple{Union{Base.Slice, UnitRange},Vararg{Any,N} where N} where P where N where T, DenseArray} where N where T, DenseArray} where T}",
+    "location": "stdlib/LinearAlgebra.html#Base.Math.asech-Tuple{Union{DenseArray{T,2}, Base.ReinterpretArray{T,2,S,A} where S, Base.ReshapedArray{T,2,A,MI} where MI<:Tuple{Vararg{Base.MultiplicativeInverses.SignedMultiplicativeInverse{Int64},N} where N} where A<:Union{SubArray{T,N,P,I,true} where I<:Tuple{Union{Base.Slice, UnitRange},Vararg{Any,N} where N} where P where N where T, DenseArray}, SubArray{T,2,A,I,L} where L} where I<:Tuple{Vararg{Union{Int64, AbstractRange{Int64}, Base.AbstractCartesianIndex},N} where N} where A<:Union{Base.ReshapedArray{T,N,A,MI} where MI<:Tuple{Vararg{Base.MultiplicativeInverses.SignedMultiplicativeInverse{Int64},N} where N} where A<:Union{SubArray{T,N,P,I,true} where I<:Tuple{Union{Base.Slice, UnitRange},Vararg{Any,N} where N} where P where N where T, DenseArray} where N where T, DenseArray} where T}",
     "page": "Linear Algebra",
     "title": "Base.Math.asech",
     "category": "Method",
@@ -17409,7 +17313,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/linearalgebra.html#Base.Math.acsch-Tuple{Union{DenseArray{T,2}, Base.ReinterpretArray{T,2,S,A} where S, Base.ReshapedArray{T,2,A,MI} where MI<:Tuple{Vararg{Base.MultiplicativeInverses.SignedMultiplicativeInverse{Int64},N} where N} where A<:Union{SubArray{T,N,P,I,true} where I<:Tuple{Union{Base.Slice, UnitRange},Vararg{Any,N} where N} where P where N where T, DenseArray}, SubArray{T,2,A,I,L} where L} where I<:Tuple{Vararg{Union{Int64, AbstractRange{Int64}, Base.AbstractCartesianIndex},N} where N} where A<:Union{Base.ReshapedArray{T,N,A,MI} where MI<:Tuple{Vararg{Base.MultiplicativeInverses.SignedMultiplicativeInverse{Int64},N} where N} where A<:Union{SubArray{T,N,P,I,true} where I<:Tuple{Union{Base.Slice, UnitRange},Vararg{Any,N} where N} where P where N where T, DenseArray} where N where T, DenseArray} where T}",
+    "location": "stdlib/LinearAlgebra.html#Base.Math.acsch-Tuple{Union{DenseArray{T,2}, Base.ReinterpretArray{T,2,S,A} where S, Base.ReshapedArray{T,2,A,MI} where MI<:Tuple{Vararg{Base.MultiplicativeInverses.SignedMultiplicativeInverse{Int64},N} where N} where A<:Union{SubArray{T,N,P,I,true} where I<:Tuple{Union{Base.Slice, UnitRange},Vararg{Any,N} where N} where P where N where T, DenseArray}, SubArray{T,2,A,I,L} where L} where I<:Tuple{Vararg{Union{Int64, AbstractRange{Int64}, Base.AbstractCartesianIndex},N} where N} where A<:Union{Base.ReshapedArray{T,N,A,MI} where MI<:Tuple{Vararg{Base.MultiplicativeInverses.SignedMultiplicativeInverse{Int64},N} where N} where A<:Union{SubArray{T,N,P,I,true} where I<:Tuple{Union{Base.Slice, UnitRange},Vararg{Any,N} where N} where P where N where T, DenseArray} where N where T, DenseArray} where T}",
     "page": "Linear Algebra",
     "title": "Base.Math.acsch",
     "category": "Method",
@@ -17417,7 +17321,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/linearalgebra.html#Base.Math.acoth-Tuple{Union{DenseArray{T,2}, Base.ReinterpretArray{T,2,S,A} where S, Base.ReshapedArray{T,2,A,MI} where MI<:Tuple{Vararg{Base.MultiplicativeInverses.SignedMultiplicativeInverse{Int64},N} where N} where A<:Union{SubArray{T,N,P,I,true} where I<:Tuple{Union{Base.Slice, UnitRange},Vararg{Any,N} where N} where P where N where T, DenseArray}, SubArray{T,2,A,I,L} where L} where I<:Tuple{Vararg{Union{Int64, AbstractRange{Int64}, Base.AbstractCartesianIndex},N} where N} where A<:Union{Base.ReshapedArray{T,N,A,MI} where MI<:Tuple{Vararg{Base.MultiplicativeInverses.SignedMultiplicativeInverse{Int64},N} where N} where A<:Union{SubArray{T,N,P,I,true} where I<:Tuple{Union{Base.Slice, UnitRange},Vararg{Any,N} where N} where P where N where T, DenseArray} where N where T, DenseArray} where T}",
+    "location": "stdlib/LinearAlgebra.html#Base.Math.acoth-Tuple{Union{DenseArray{T,2}, Base.ReinterpretArray{T,2,S,A} where S, Base.ReshapedArray{T,2,A,MI} where MI<:Tuple{Vararg{Base.MultiplicativeInverses.SignedMultiplicativeInverse{Int64},N} where N} where A<:Union{SubArray{T,N,P,I,true} where I<:Tuple{Union{Base.Slice, UnitRange},Vararg{Any,N} where N} where P where N where T, DenseArray}, SubArray{T,2,A,I,L} where L} where I<:Tuple{Vararg{Union{Int64, AbstractRange{Int64}, Base.AbstractCartesianIndex},N} where N} where A<:Union{Base.ReshapedArray{T,N,A,MI} where MI<:Tuple{Vararg{Base.MultiplicativeInverses.SignedMultiplicativeInverse{Int64},N} where N} where A<:Union{SubArray{T,N,P,I,true} where I<:Tuple{Union{Base.Slice, UnitRange},Vararg{Any,N} where N} where P where N where T, DenseArray} where N where T, DenseArray} where T}",
     "page": "Linear Algebra",
     "title": "Base.Math.acoth",
     "category": "Method",
@@ -17425,7 +17329,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/linearalgebra.html#LinearAlgebra.lyap",
+    "location": "stdlib/LinearAlgebra.html#LinearAlgebra.lyap",
     "page": "Linear Algebra",
     "title": "LinearAlgebra.lyap",
     "category": "Function",
@@ -17433,7 +17337,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/linearalgebra.html#LinearAlgebra.sylvester",
+    "location": "stdlib/LinearAlgebra.html#LinearAlgebra.sylvester",
     "page": "Linear Algebra",
     "title": "LinearAlgebra.sylvester",
     "category": "Function",
@@ -17441,7 +17345,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/linearalgebra.html#LinearAlgebra.issuccess",
+    "location": "stdlib/LinearAlgebra.html#LinearAlgebra.issuccess",
     "page": "Linear Algebra",
     "title": "LinearAlgebra.issuccess",
     "category": "Function",
@@ -17449,7 +17353,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/linearalgebra.html#LinearAlgebra.issymmetric",
+    "location": "stdlib/LinearAlgebra.html#LinearAlgebra.issymmetric",
     "page": "Linear Algebra",
     "title": "LinearAlgebra.issymmetric",
     "category": "Function",
@@ -17457,7 +17361,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/linearalgebra.html#LinearAlgebra.isposdef",
+    "location": "stdlib/LinearAlgebra.html#LinearAlgebra.isposdef",
     "page": "Linear Algebra",
     "title": "LinearAlgebra.isposdef",
     "category": "Function",
@@ -17465,7 +17369,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/linearalgebra.html#LinearAlgebra.isposdef!",
+    "location": "stdlib/LinearAlgebra.html#LinearAlgebra.isposdef!",
     "page": "Linear Algebra",
     "title": "LinearAlgebra.isposdef!",
     "category": "Function",
@@ -17473,7 +17377,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/linearalgebra.html#LinearAlgebra.istril",
+    "location": "stdlib/LinearAlgebra.html#LinearAlgebra.istril",
     "page": "Linear Algebra",
     "title": "LinearAlgebra.istril",
     "category": "Function",
@@ -17481,7 +17385,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/linearalgebra.html#LinearAlgebra.istriu",
+    "location": "stdlib/LinearAlgebra.html#LinearAlgebra.istriu",
     "page": "Linear Algebra",
     "title": "LinearAlgebra.istriu",
     "category": "Function",
@@ -17489,7 +17393,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/linearalgebra.html#LinearAlgebra.isdiag",
+    "location": "stdlib/LinearAlgebra.html#LinearAlgebra.isdiag",
     "page": "Linear Algebra",
     "title": "LinearAlgebra.isdiag",
     "category": "Function",
@@ -17497,7 +17401,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/linearalgebra.html#LinearAlgebra.ishermitian",
+    "location": "stdlib/LinearAlgebra.html#LinearAlgebra.ishermitian",
     "page": "Linear Algebra",
     "title": "LinearAlgebra.ishermitian",
     "category": "Function",
@@ -17505,7 +17409,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/linearalgebra.html#LinearAlgebra.RowVector",
+    "location": "stdlib/LinearAlgebra.html#LinearAlgebra.RowVector",
     "page": "Linear Algebra",
     "title": "LinearAlgebra.RowVector",
     "category": "Type",
@@ -17513,7 +17417,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/linearalgebra.html#LinearAlgebra.ConjArray",
+    "location": "stdlib/LinearAlgebra.html#LinearAlgebra.ConjArray",
     "page": "Linear Algebra",
     "title": "LinearAlgebra.ConjArray",
     "category": "Type",
@@ -17521,7 +17425,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/linearalgebra.html#Base.transpose",
+    "location": "stdlib/LinearAlgebra.html#Base.transpose",
     "page": "Linear Algebra",
     "title": "Base.transpose",
     "category": "Function",
@@ -17529,7 +17433,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/linearalgebra.html#LinearAlgebra.transpose!",
+    "location": "stdlib/LinearAlgebra.html#LinearAlgebra.transpose!",
     "page": "Linear Algebra",
     "title": "LinearAlgebra.transpose!",
     "category": "Function",
@@ -17537,7 +17441,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/linearalgebra.html#Base.adjoint",
+    "location": "stdlib/LinearAlgebra.html#Base.adjoint",
     "page": "Linear Algebra",
     "title": "Base.adjoint",
     "category": "Function",
@@ -17545,7 +17449,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/linearalgebra.html#LinearAlgebra.adjoint!",
+    "location": "stdlib/LinearAlgebra.html#LinearAlgebra.adjoint!",
     "page": "Linear Algebra",
     "title": "LinearAlgebra.adjoint!",
     "category": "Function",
@@ -17553,7 +17457,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/linearalgebra.html#LinearAlgebra.peakflops",
+    "location": "stdlib/LinearAlgebra.html#LinearAlgebra.peakflops",
     "page": "Linear Algebra",
     "title": "LinearAlgebra.peakflops",
     "category": "Function",
@@ -17561,7 +17465,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/linearalgebra.html#LinearAlgebra.stride1",
+    "location": "stdlib/LinearAlgebra.html#LinearAlgebra.stride1",
     "page": "Linear Algebra",
     "title": "LinearAlgebra.stride1",
     "category": "Function",
@@ -17569,7 +17473,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/linearalgebra.html#LinearAlgebra.checksquare",
+    "location": "stdlib/LinearAlgebra.html#LinearAlgebra.checksquare",
     "page": "Linear Algebra",
     "title": "LinearAlgebra.checksquare",
     "category": "Function",
@@ -17577,7 +17481,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/linearalgebra.html#Standard-Functions-1",
+    "location": "stdlib/LinearAlgebra.html#Standard-Functions-1",
     "page": "Linear Algebra",
     "title": "Standard Functions",
     "category": "section",
@@ -17585,7 +17489,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/linearalgebra.html#LinearAlgebra.mul!",
+    "location": "stdlib/LinearAlgebra.html#LinearAlgebra.mul!",
     "page": "Linear Algebra",
     "title": "LinearAlgebra.mul!",
     "category": "Function",
@@ -17593,7 +17497,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/linearalgebra.html#LinearAlgebra.ldiv!",
+    "location": "stdlib/LinearAlgebra.html#LinearAlgebra.ldiv!",
     "page": "Linear Algebra",
     "title": "LinearAlgebra.ldiv!",
     "category": "Function",
@@ -17601,7 +17505,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/linearalgebra.html#LinearAlgebra.rdiv!",
+    "location": "stdlib/LinearAlgebra.html#LinearAlgebra.rdiv!",
     "page": "Linear Algebra",
     "title": "LinearAlgebra.rdiv!",
     "category": "Function",
@@ -17609,7 +17513,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/linearalgebra.html#Low-level-matrix-operations-1",
+    "location": "stdlib/LinearAlgebra.html#Low-level-matrix-operations-1",
     "page": "Linear Algebra",
     "title": "Low-level matrix operations",
     "category": "section",
@@ -17617,7 +17521,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/linearalgebra.html#BLAS-Functions-1",
+    "location": "stdlib/LinearAlgebra.html#BLAS-Functions-1",
     "page": "Linear Algebra",
     "title": "BLAS Functions",
     "category": "section",
@@ -17625,7 +17529,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/linearalgebra.html#stdlib-blas-chars-1",
+    "location": "stdlib/LinearAlgebra.html#stdlib-blas-chars-1",
     "page": "Linear Algebra",
     "title": "BLAS Character Arguments",
     "category": "section",
@@ -17633,7 +17537,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/linearalgebra.html#stdlib-blas-side-1",
+    "location": "stdlib/LinearAlgebra.html#stdlib-blas-side-1",
     "page": "Linear Algebra",
     "title": "Multplication Order",
     "category": "section",
@@ -17641,7 +17545,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/linearalgebra.html#stdlib-blas-uplo-1",
+    "location": "stdlib/LinearAlgebra.html#stdlib-blas-uplo-1",
     "page": "Linear Algebra",
     "title": "Triangle Referencing",
     "category": "section",
@@ -17649,7 +17553,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/linearalgebra.html#stdlib-blas-trans-1",
+    "location": "stdlib/LinearAlgebra.html#stdlib-blas-trans-1",
     "page": "Linear Algebra",
     "title": "Transposition Operation",
     "category": "section",
@@ -17657,7 +17561,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/linearalgebra.html#LinearAlgebra.BLAS",
+    "location": "stdlib/LinearAlgebra.html#LinearAlgebra.BLAS",
     "page": "Linear Algebra",
     "title": "LinearAlgebra.BLAS",
     "category": "Module",
@@ -17665,7 +17569,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/linearalgebra.html#LinearAlgebra.BLAS.dotu",
+    "location": "stdlib/LinearAlgebra.html#LinearAlgebra.BLAS.dotu",
     "page": "Linear Algebra",
     "title": "LinearAlgebra.BLAS.dotu",
     "category": "Function",
@@ -17673,7 +17577,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/linearalgebra.html#LinearAlgebra.BLAS.dotc",
+    "location": "stdlib/LinearAlgebra.html#LinearAlgebra.BLAS.dotc",
     "page": "Linear Algebra",
     "title": "LinearAlgebra.BLAS.dotc",
     "category": "Function",
@@ -17681,7 +17585,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/linearalgebra.html#LinearAlgebra.BLAS.blascopy!",
+    "location": "stdlib/LinearAlgebra.html#LinearAlgebra.BLAS.blascopy!",
     "page": "Linear Algebra",
     "title": "LinearAlgebra.BLAS.blascopy!",
     "category": "Function",
@@ -17689,7 +17593,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/linearalgebra.html#LinearAlgebra.BLAS.nrm2",
+    "location": "stdlib/LinearAlgebra.html#LinearAlgebra.BLAS.nrm2",
     "page": "Linear Algebra",
     "title": "LinearAlgebra.BLAS.nrm2",
     "category": "Function",
@@ -17697,7 +17601,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/linearalgebra.html#LinearAlgebra.BLAS.asum",
+    "location": "stdlib/LinearAlgebra.html#LinearAlgebra.BLAS.asum",
     "page": "Linear Algebra",
     "title": "LinearAlgebra.BLAS.asum",
     "category": "Function",
@@ -17705,7 +17609,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/linearalgebra.html#LinearAlgebra.axpy!",
+    "location": "stdlib/LinearAlgebra.html#LinearAlgebra.axpy!",
     "page": "Linear Algebra",
     "title": "LinearAlgebra.axpy!",
     "category": "Function",
@@ -17713,7 +17617,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/linearalgebra.html#LinearAlgebra.BLAS.scal!",
+    "location": "stdlib/LinearAlgebra.html#LinearAlgebra.BLAS.scal!",
     "page": "Linear Algebra",
     "title": "LinearAlgebra.BLAS.scal!",
     "category": "Function",
@@ -17721,7 +17625,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/linearalgebra.html#LinearAlgebra.BLAS.scal",
+    "location": "stdlib/LinearAlgebra.html#LinearAlgebra.BLAS.scal",
     "page": "Linear Algebra",
     "title": "LinearAlgebra.BLAS.scal",
     "category": "Function",
@@ -17729,7 +17633,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/linearalgebra.html#LinearAlgebra.BLAS.ger!",
+    "location": "stdlib/LinearAlgebra.html#LinearAlgebra.BLAS.ger!",
     "page": "Linear Algebra",
     "title": "LinearAlgebra.BLAS.ger!",
     "category": "Function",
@@ -17737,7 +17641,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/linearalgebra.html#LinearAlgebra.BLAS.syr!",
+    "location": "stdlib/LinearAlgebra.html#LinearAlgebra.BLAS.syr!",
     "page": "Linear Algebra",
     "title": "LinearAlgebra.BLAS.syr!",
     "category": "Function",
@@ -17745,7 +17649,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/linearalgebra.html#LinearAlgebra.BLAS.syrk!",
+    "location": "stdlib/LinearAlgebra.html#LinearAlgebra.BLAS.syrk!",
     "page": "Linear Algebra",
     "title": "LinearAlgebra.BLAS.syrk!",
     "category": "Function",
@@ -17753,7 +17657,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/linearalgebra.html#LinearAlgebra.BLAS.syrk",
+    "location": "stdlib/LinearAlgebra.html#LinearAlgebra.BLAS.syrk",
     "page": "Linear Algebra",
     "title": "LinearAlgebra.BLAS.syrk",
     "category": "Function",
@@ -17761,7 +17665,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/linearalgebra.html#LinearAlgebra.BLAS.her!",
+    "location": "stdlib/LinearAlgebra.html#LinearAlgebra.BLAS.her!",
     "page": "Linear Algebra",
     "title": "LinearAlgebra.BLAS.her!",
     "category": "Function",
@@ -17769,7 +17673,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/linearalgebra.html#LinearAlgebra.BLAS.herk!",
+    "location": "stdlib/LinearAlgebra.html#LinearAlgebra.BLAS.herk!",
     "page": "Linear Algebra",
     "title": "LinearAlgebra.BLAS.herk!",
     "category": "Function",
@@ -17777,7 +17681,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/linearalgebra.html#LinearAlgebra.BLAS.herk",
+    "location": "stdlib/LinearAlgebra.html#LinearAlgebra.BLAS.herk",
     "page": "Linear Algebra",
     "title": "LinearAlgebra.BLAS.herk",
     "category": "Function",
@@ -17785,7 +17689,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/linearalgebra.html#LinearAlgebra.BLAS.gbmv!",
+    "location": "stdlib/LinearAlgebra.html#LinearAlgebra.BLAS.gbmv!",
     "page": "Linear Algebra",
     "title": "LinearAlgebra.BLAS.gbmv!",
     "category": "Function",
@@ -17793,7 +17697,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/linearalgebra.html#LinearAlgebra.BLAS.gbmv",
+    "location": "stdlib/LinearAlgebra.html#LinearAlgebra.BLAS.gbmv",
     "page": "Linear Algebra",
     "title": "LinearAlgebra.BLAS.gbmv",
     "category": "Function",
@@ -17801,7 +17705,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/linearalgebra.html#LinearAlgebra.BLAS.sbmv!",
+    "location": "stdlib/LinearAlgebra.html#LinearAlgebra.BLAS.sbmv!",
     "page": "Linear Algebra",
     "title": "LinearAlgebra.BLAS.sbmv!",
     "category": "Function",
@@ -17809,7 +17713,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/linearalgebra.html#LinearAlgebra.BLAS.sbmv-NTuple{5,Any}",
+    "location": "stdlib/LinearAlgebra.html#LinearAlgebra.BLAS.sbmv-NTuple{5,Any}",
     "page": "Linear Algebra",
     "title": "LinearAlgebra.BLAS.sbmv",
     "category": "Method",
@@ -17817,7 +17721,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/linearalgebra.html#LinearAlgebra.BLAS.sbmv-NTuple{4,Any}",
+    "location": "stdlib/LinearAlgebra.html#LinearAlgebra.BLAS.sbmv-NTuple{4,Any}",
     "page": "Linear Algebra",
     "title": "LinearAlgebra.BLAS.sbmv",
     "category": "Method",
@@ -17825,7 +17729,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/linearalgebra.html#LinearAlgebra.BLAS.gemm!",
+    "location": "stdlib/LinearAlgebra.html#LinearAlgebra.BLAS.gemm!",
     "page": "Linear Algebra",
     "title": "LinearAlgebra.BLAS.gemm!",
     "category": "Function",
@@ -17833,7 +17737,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/linearalgebra.html#LinearAlgebra.BLAS.gemm-NTuple{5,Any}",
+    "location": "stdlib/LinearAlgebra.html#LinearAlgebra.BLAS.gemm-NTuple{5,Any}",
     "page": "Linear Algebra",
     "title": "LinearAlgebra.BLAS.gemm",
     "category": "Method",
@@ -17841,7 +17745,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/linearalgebra.html#LinearAlgebra.BLAS.gemm-NTuple{4,Any}",
+    "location": "stdlib/LinearAlgebra.html#LinearAlgebra.BLAS.gemm-NTuple{4,Any}",
     "page": "Linear Algebra",
     "title": "LinearAlgebra.BLAS.gemm",
     "category": "Method",
@@ -17849,7 +17753,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/linearalgebra.html#LinearAlgebra.BLAS.gemv!",
+    "location": "stdlib/LinearAlgebra.html#LinearAlgebra.BLAS.gemv!",
     "page": "Linear Algebra",
     "title": "LinearAlgebra.BLAS.gemv!",
     "category": "Function",
@@ -17857,7 +17761,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/linearalgebra.html#LinearAlgebra.BLAS.gemv-NTuple{4,Any}",
+    "location": "stdlib/LinearAlgebra.html#LinearAlgebra.BLAS.gemv-NTuple{4,Any}",
     "page": "Linear Algebra",
     "title": "LinearAlgebra.BLAS.gemv",
     "category": "Method",
@@ -17865,7 +17769,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/linearalgebra.html#LinearAlgebra.BLAS.gemv-Tuple{Any,Any,Any}",
+    "location": "stdlib/LinearAlgebra.html#LinearAlgebra.BLAS.gemv-Tuple{Any,Any,Any}",
     "page": "Linear Algebra",
     "title": "LinearAlgebra.BLAS.gemv",
     "category": "Method",
@@ -17873,7 +17777,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/linearalgebra.html#LinearAlgebra.BLAS.symm!",
+    "location": "stdlib/LinearAlgebra.html#LinearAlgebra.BLAS.symm!",
     "page": "Linear Algebra",
     "title": "LinearAlgebra.BLAS.symm!",
     "category": "Function",
@@ -17881,7 +17785,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/linearalgebra.html#LinearAlgebra.BLAS.symm-NTuple{5,Any}",
+    "location": "stdlib/LinearAlgebra.html#LinearAlgebra.BLAS.symm-NTuple{5,Any}",
     "page": "Linear Algebra",
     "title": "LinearAlgebra.BLAS.symm",
     "category": "Method",
@@ -17889,7 +17793,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/linearalgebra.html#LinearAlgebra.BLAS.symm-NTuple{4,Any}",
+    "location": "stdlib/LinearAlgebra.html#LinearAlgebra.BLAS.symm-NTuple{4,Any}",
     "page": "Linear Algebra",
     "title": "LinearAlgebra.BLAS.symm",
     "category": "Method",
@@ -17897,7 +17801,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/linearalgebra.html#LinearAlgebra.BLAS.symv!",
+    "location": "stdlib/LinearAlgebra.html#LinearAlgebra.BLAS.symv!",
     "page": "Linear Algebra",
     "title": "LinearAlgebra.BLAS.symv!",
     "category": "Function",
@@ -17905,7 +17809,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/linearalgebra.html#LinearAlgebra.BLAS.symv-NTuple{4,Any}",
+    "location": "stdlib/LinearAlgebra.html#LinearAlgebra.BLAS.symv-NTuple{4,Any}",
     "page": "Linear Algebra",
     "title": "LinearAlgebra.BLAS.symv",
     "category": "Method",
@@ -17913,7 +17817,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/linearalgebra.html#LinearAlgebra.BLAS.symv-Tuple{Any,Any,Any}",
+    "location": "stdlib/LinearAlgebra.html#LinearAlgebra.BLAS.symv-Tuple{Any,Any,Any}",
     "page": "Linear Algebra",
     "title": "LinearAlgebra.BLAS.symv",
     "category": "Method",
@@ -17921,7 +17825,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/linearalgebra.html#LinearAlgebra.BLAS.trmm!",
+    "location": "stdlib/LinearAlgebra.html#LinearAlgebra.BLAS.trmm!",
     "page": "Linear Algebra",
     "title": "LinearAlgebra.BLAS.trmm!",
     "category": "Function",
@@ -17929,7 +17833,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/linearalgebra.html#LinearAlgebra.BLAS.trmm",
+    "location": "stdlib/LinearAlgebra.html#LinearAlgebra.BLAS.trmm",
     "page": "Linear Algebra",
     "title": "LinearAlgebra.BLAS.trmm",
     "category": "Function",
@@ -17937,7 +17841,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/linearalgebra.html#LinearAlgebra.BLAS.trsm!",
+    "location": "stdlib/LinearAlgebra.html#LinearAlgebra.BLAS.trsm!",
     "page": "Linear Algebra",
     "title": "LinearAlgebra.BLAS.trsm!",
     "category": "Function",
@@ -17945,7 +17849,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/linearalgebra.html#LinearAlgebra.BLAS.trsm",
+    "location": "stdlib/LinearAlgebra.html#LinearAlgebra.BLAS.trsm",
     "page": "Linear Algebra",
     "title": "LinearAlgebra.BLAS.trsm",
     "category": "Function",
@@ -17953,7 +17857,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/linearalgebra.html#LinearAlgebra.BLAS.trmv!",
+    "location": "stdlib/LinearAlgebra.html#LinearAlgebra.BLAS.trmv!",
     "page": "Linear Algebra",
     "title": "LinearAlgebra.BLAS.trmv!",
     "category": "Function",
@@ -17961,7 +17865,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/linearalgebra.html#LinearAlgebra.BLAS.trmv",
+    "location": "stdlib/LinearAlgebra.html#LinearAlgebra.BLAS.trmv",
     "page": "Linear Algebra",
     "title": "LinearAlgebra.BLAS.trmv",
     "category": "Function",
@@ -17969,7 +17873,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/linearalgebra.html#LinearAlgebra.BLAS.trsv!",
+    "location": "stdlib/LinearAlgebra.html#LinearAlgebra.BLAS.trsv!",
     "page": "Linear Algebra",
     "title": "LinearAlgebra.BLAS.trsv!",
     "category": "Function",
@@ -17977,7 +17881,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/linearalgebra.html#LinearAlgebra.BLAS.trsv",
+    "location": "stdlib/LinearAlgebra.html#LinearAlgebra.BLAS.trsv",
     "page": "Linear Algebra",
     "title": "LinearAlgebra.BLAS.trsv",
     "category": "Function",
@@ -17985,7 +17889,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/linearalgebra.html#LinearAlgebra.BLAS.set_num_threads",
+    "location": "stdlib/LinearAlgebra.html#LinearAlgebra.BLAS.set_num_threads",
     "page": "Linear Algebra",
     "title": "LinearAlgebra.BLAS.set_num_threads",
     "category": "Function",
@@ -17993,7 +17897,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/linearalgebra.html#LinearAlgebra.I",
+    "location": "stdlib/LinearAlgebra.html#LinearAlgebra.I",
     "page": "Linear Algebra",
     "title": "LinearAlgebra.I",
     "category": "Constant",
@@ -18001,7 +17905,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/linearalgebra.html#stdlib-blas-diag-1",
+    "location": "stdlib/LinearAlgebra.html#stdlib-blas-diag-1",
     "page": "Linear Algebra",
     "title": "Unit Diagonal",
     "category": "section",
@@ -18009,7 +17913,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/linearalgebra.html#LinearAlgebra.LAPACK",
+    "location": "stdlib/LinearAlgebra.html#LinearAlgebra.LAPACK",
     "page": "Linear Algebra",
     "title": "LinearAlgebra.LAPACK",
     "category": "Module",
@@ -18017,7 +17921,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/linearalgebra.html#LinearAlgebra.LAPACK.gbtrf!",
+    "location": "stdlib/LinearAlgebra.html#LinearAlgebra.LAPACK.gbtrf!",
     "page": "Linear Algebra",
     "title": "LinearAlgebra.LAPACK.gbtrf!",
     "category": "Function",
@@ -18025,7 +17929,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/linearalgebra.html#LinearAlgebra.LAPACK.gbtrs!",
+    "location": "stdlib/LinearAlgebra.html#LinearAlgebra.LAPACK.gbtrs!",
     "page": "Linear Algebra",
     "title": "LinearAlgebra.LAPACK.gbtrs!",
     "category": "Function",
@@ -18033,7 +17937,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/linearalgebra.html#LinearAlgebra.LAPACK.gebal!",
+    "location": "stdlib/LinearAlgebra.html#LinearAlgebra.LAPACK.gebal!",
     "page": "Linear Algebra",
     "title": "LinearAlgebra.LAPACK.gebal!",
     "category": "Function",
@@ -18041,7 +17945,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/linearalgebra.html#LinearAlgebra.LAPACK.gebak!",
+    "location": "stdlib/LinearAlgebra.html#LinearAlgebra.LAPACK.gebak!",
     "page": "Linear Algebra",
     "title": "LinearAlgebra.LAPACK.gebak!",
     "category": "Function",
@@ -18049,7 +17953,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/linearalgebra.html#LinearAlgebra.LAPACK.gebrd!",
+    "location": "stdlib/LinearAlgebra.html#LinearAlgebra.LAPACK.gebrd!",
     "page": "Linear Algebra",
     "title": "LinearAlgebra.LAPACK.gebrd!",
     "category": "Function",
@@ -18057,7 +17961,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/linearalgebra.html#LinearAlgebra.LAPACK.gelqf!",
+    "location": "stdlib/LinearAlgebra.html#LinearAlgebra.LAPACK.gelqf!",
     "page": "Linear Algebra",
     "title": "LinearAlgebra.LAPACK.gelqf!",
     "category": "Function",
@@ -18065,7 +17969,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/linearalgebra.html#LinearAlgebra.LAPACK.geqlf!",
+    "location": "stdlib/LinearAlgebra.html#LinearAlgebra.LAPACK.geqlf!",
     "page": "Linear Algebra",
     "title": "LinearAlgebra.LAPACK.geqlf!",
     "category": "Function",
@@ -18073,7 +17977,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/linearalgebra.html#LinearAlgebra.LAPACK.geqrf!",
+    "location": "stdlib/LinearAlgebra.html#LinearAlgebra.LAPACK.geqrf!",
     "page": "Linear Algebra",
     "title": "LinearAlgebra.LAPACK.geqrf!",
     "category": "Function",
@@ -18081,7 +17985,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/linearalgebra.html#LinearAlgebra.LAPACK.geqp3!",
+    "location": "stdlib/LinearAlgebra.html#LinearAlgebra.LAPACK.geqp3!",
     "page": "Linear Algebra",
     "title": "LinearAlgebra.LAPACK.geqp3!",
     "category": "Function",
@@ -18089,7 +17993,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/linearalgebra.html#LinearAlgebra.LAPACK.gerqf!",
+    "location": "stdlib/LinearAlgebra.html#LinearAlgebra.LAPACK.gerqf!",
     "page": "Linear Algebra",
     "title": "LinearAlgebra.LAPACK.gerqf!",
     "category": "Function",
@@ -18097,7 +18001,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/linearalgebra.html#LinearAlgebra.LAPACK.geqrt!",
+    "location": "stdlib/LinearAlgebra.html#LinearAlgebra.LAPACK.geqrt!",
     "page": "Linear Algebra",
     "title": "LinearAlgebra.LAPACK.geqrt!",
     "category": "Function",
@@ -18105,7 +18009,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/linearalgebra.html#LinearAlgebra.LAPACK.geqrt3!",
+    "location": "stdlib/LinearAlgebra.html#LinearAlgebra.LAPACK.geqrt3!",
     "page": "Linear Algebra",
     "title": "LinearAlgebra.LAPACK.geqrt3!",
     "category": "Function",
@@ -18113,7 +18017,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/linearalgebra.html#LinearAlgebra.LAPACK.getrf!",
+    "location": "stdlib/LinearAlgebra.html#LinearAlgebra.LAPACK.getrf!",
     "page": "Linear Algebra",
     "title": "LinearAlgebra.LAPACK.getrf!",
     "category": "Function",
@@ -18121,7 +18025,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/linearalgebra.html#LinearAlgebra.LAPACK.tzrzf!",
+    "location": "stdlib/LinearAlgebra.html#LinearAlgebra.LAPACK.tzrzf!",
     "page": "Linear Algebra",
     "title": "LinearAlgebra.LAPACK.tzrzf!",
     "category": "Function",
@@ -18129,7 +18033,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/linearalgebra.html#LinearAlgebra.LAPACK.ormrz!",
+    "location": "stdlib/LinearAlgebra.html#LinearAlgebra.LAPACK.ormrz!",
     "page": "Linear Algebra",
     "title": "LinearAlgebra.LAPACK.ormrz!",
     "category": "Function",
@@ -18137,7 +18041,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/linearalgebra.html#LinearAlgebra.LAPACK.gels!",
+    "location": "stdlib/LinearAlgebra.html#LinearAlgebra.LAPACK.gels!",
     "page": "Linear Algebra",
     "title": "LinearAlgebra.LAPACK.gels!",
     "category": "Function",
@@ -18145,7 +18049,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/linearalgebra.html#LinearAlgebra.LAPACK.gesv!",
+    "location": "stdlib/LinearAlgebra.html#LinearAlgebra.LAPACK.gesv!",
     "page": "Linear Algebra",
     "title": "LinearAlgebra.LAPACK.gesv!",
     "category": "Function",
@@ -18153,7 +18057,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/linearalgebra.html#LinearAlgebra.LAPACK.getrs!",
+    "location": "stdlib/LinearAlgebra.html#LinearAlgebra.LAPACK.getrs!",
     "page": "Linear Algebra",
     "title": "LinearAlgebra.LAPACK.getrs!",
     "category": "Function",
@@ -18161,7 +18065,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/linearalgebra.html#LinearAlgebra.LAPACK.getri!",
+    "location": "stdlib/LinearAlgebra.html#LinearAlgebra.LAPACK.getri!",
     "page": "Linear Algebra",
     "title": "LinearAlgebra.LAPACK.getri!",
     "category": "Function",
@@ -18169,7 +18073,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/linearalgebra.html#LinearAlgebra.LAPACK.gesvx!",
+    "location": "stdlib/LinearAlgebra.html#LinearAlgebra.LAPACK.gesvx!",
     "page": "Linear Algebra",
     "title": "LinearAlgebra.LAPACK.gesvx!",
     "category": "Function",
@@ -18177,7 +18081,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/linearalgebra.html#LinearAlgebra.LAPACK.gelsd!",
+    "location": "stdlib/LinearAlgebra.html#LinearAlgebra.LAPACK.gelsd!",
     "page": "Linear Algebra",
     "title": "LinearAlgebra.LAPACK.gelsd!",
     "category": "Function",
@@ -18185,7 +18089,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/linearalgebra.html#LinearAlgebra.LAPACK.gelsy!",
+    "location": "stdlib/LinearAlgebra.html#LinearAlgebra.LAPACK.gelsy!",
     "page": "Linear Algebra",
     "title": "LinearAlgebra.LAPACK.gelsy!",
     "category": "Function",
@@ -18193,7 +18097,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/linearalgebra.html#LinearAlgebra.LAPACK.gglse!",
+    "location": "stdlib/LinearAlgebra.html#LinearAlgebra.LAPACK.gglse!",
     "page": "Linear Algebra",
     "title": "LinearAlgebra.LAPACK.gglse!",
     "category": "Function",
@@ -18201,7 +18105,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/linearalgebra.html#LinearAlgebra.LAPACK.geev!",
+    "location": "stdlib/LinearAlgebra.html#LinearAlgebra.LAPACK.geev!",
     "page": "Linear Algebra",
     "title": "LinearAlgebra.LAPACK.geev!",
     "category": "Function",
@@ -18209,7 +18113,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/linearalgebra.html#LinearAlgebra.LAPACK.gesdd!",
+    "location": "stdlib/LinearAlgebra.html#LinearAlgebra.LAPACK.gesdd!",
     "page": "Linear Algebra",
     "title": "LinearAlgebra.LAPACK.gesdd!",
     "category": "Function",
@@ -18217,7 +18121,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/linearalgebra.html#LinearAlgebra.LAPACK.gesvd!",
+    "location": "stdlib/LinearAlgebra.html#LinearAlgebra.LAPACK.gesvd!",
     "page": "Linear Algebra",
     "title": "LinearAlgebra.LAPACK.gesvd!",
     "category": "Function",
@@ -18225,7 +18129,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/linearalgebra.html#LinearAlgebra.LAPACK.ggsvd!",
+    "location": "stdlib/LinearAlgebra.html#LinearAlgebra.LAPACK.ggsvd!",
     "page": "Linear Algebra",
     "title": "LinearAlgebra.LAPACK.ggsvd!",
     "category": "Function",
@@ -18233,7 +18137,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/linearalgebra.html#LinearAlgebra.LAPACK.ggsvd3!",
+    "location": "stdlib/LinearAlgebra.html#LinearAlgebra.LAPACK.ggsvd3!",
     "page": "Linear Algebra",
     "title": "LinearAlgebra.LAPACK.ggsvd3!",
     "category": "Function",
@@ -18241,7 +18145,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/linearalgebra.html#LinearAlgebra.LAPACK.geevx!",
+    "location": "stdlib/LinearAlgebra.html#LinearAlgebra.LAPACK.geevx!",
     "page": "Linear Algebra",
     "title": "LinearAlgebra.LAPACK.geevx!",
     "category": "Function",
@@ -18249,7 +18153,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/linearalgebra.html#LinearAlgebra.LAPACK.ggev!",
+    "location": "stdlib/LinearAlgebra.html#LinearAlgebra.LAPACK.ggev!",
     "page": "Linear Algebra",
     "title": "LinearAlgebra.LAPACK.ggev!",
     "category": "Function",
@@ -18257,7 +18161,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/linearalgebra.html#LinearAlgebra.LAPACK.gtsv!",
+    "location": "stdlib/LinearAlgebra.html#LinearAlgebra.LAPACK.gtsv!",
     "page": "Linear Algebra",
     "title": "LinearAlgebra.LAPACK.gtsv!",
     "category": "Function",
@@ -18265,7 +18169,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/linearalgebra.html#LinearAlgebra.LAPACK.gttrf!",
+    "location": "stdlib/LinearAlgebra.html#LinearAlgebra.LAPACK.gttrf!",
     "page": "Linear Algebra",
     "title": "LinearAlgebra.LAPACK.gttrf!",
     "category": "Function",
@@ -18273,7 +18177,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/linearalgebra.html#LinearAlgebra.LAPACK.gttrs!",
+    "location": "stdlib/LinearAlgebra.html#LinearAlgebra.LAPACK.gttrs!",
     "page": "Linear Algebra",
     "title": "LinearAlgebra.LAPACK.gttrs!",
     "category": "Function",
@@ -18281,7 +18185,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/linearalgebra.html#LinearAlgebra.LAPACK.orglq!",
+    "location": "stdlib/LinearAlgebra.html#LinearAlgebra.LAPACK.orglq!",
     "page": "Linear Algebra",
     "title": "LinearAlgebra.LAPACK.orglq!",
     "category": "Function",
@@ -18289,7 +18193,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/linearalgebra.html#LinearAlgebra.LAPACK.orgqr!",
+    "location": "stdlib/LinearAlgebra.html#LinearAlgebra.LAPACK.orgqr!",
     "page": "Linear Algebra",
     "title": "LinearAlgebra.LAPACK.orgqr!",
     "category": "Function",
@@ -18297,7 +18201,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/linearalgebra.html#LinearAlgebra.LAPACK.orgql!",
+    "location": "stdlib/LinearAlgebra.html#LinearAlgebra.LAPACK.orgql!",
     "page": "Linear Algebra",
     "title": "LinearAlgebra.LAPACK.orgql!",
     "category": "Function",
@@ -18305,7 +18209,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/linearalgebra.html#LinearAlgebra.LAPACK.orgrq!",
+    "location": "stdlib/LinearAlgebra.html#LinearAlgebra.LAPACK.orgrq!",
     "page": "Linear Algebra",
     "title": "LinearAlgebra.LAPACK.orgrq!",
     "category": "Function",
@@ -18313,7 +18217,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/linearalgebra.html#LinearAlgebra.LAPACK.ormlq!",
+    "location": "stdlib/LinearAlgebra.html#LinearAlgebra.LAPACK.ormlq!",
     "page": "Linear Algebra",
     "title": "LinearAlgebra.LAPACK.ormlq!",
     "category": "Function",
@@ -18321,7 +18225,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/linearalgebra.html#LinearAlgebra.LAPACK.ormqr!",
+    "location": "stdlib/LinearAlgebra.html#LinearAlgebra.LAPACK.ormqr!",
     "page": "Linear Algebra",
     "title": "LinearAlgebra.LAPACK.ormqr!",
     "category": "Function",
@@ -18329,7 +18233,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/linearalgebra.html#LinearAlgebra.LAPACK.ormql!",
+    "location": "stdlib/LinearAlgebra.html#LinearAlgebra.LAPACK.ormql!",
     "page": "Linear Algebra",
     "title": "LinearAlgebra.LAPACK.ormql!",
     "category": "Function",
@@ -18337,7 +18241,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/linearalgebra.html#LinearAlgebra.LAPACK.ormrq!",
+    "location": "stdlib/LinearAlgebra.html#LinearAlgebra.LAPACK.ormrq!",
     "page": "Linear Algebra",
     "title": "LinearAlgebra.LAPACK.ormrq!",
     "category": "Function",
@@ -18345,7 +18249,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/linearalgebra.html#LinearAlgebra.LAPACK.gemqrt!",
+    "location": "stdlib/LinearAlgebra.html#LinearAlgebra.LAPACK.gemqrt!",
     "page": "Linear Algebra",
     "title": "LinearAlgebra.LAPACK.gemqrt!",
     "category": "Function",
@@ -18353,7 +18257,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/linearalgebra.html#LinearAlgebra.LAPACK.posv!",
+    "location": "stdlib/LinearAlgebra.html#LinearAlgebra.LAPACK.posv!",
     "page": "Linear Algebra",
     "title": "LinearAlgebra.LAPACK.posv!",
     "category": "Function",
@@ -18361,7 +18265,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/linearalgebra.html#LinearAlgebra.LAPACK.potrf!",
+    "location": "stdlib/LinearAlgebra.html#LinearAlgebra.LAPACK.potrf!",
     "page": "Linear Algebra",
     "title": "LinearAlgebra.LAPACK.potrf!",
     "category": "Function",
@@ -18369,7 +18273,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/linearalgebra.html#LinearAlgebra.LAPACK.potri!",
+    "location": "stdlib/LinearAlgebra.html#LinearAlgebra.LAPACK.potri!",
     "page": "Linear Algebra",
     "title": "LinearAlgebra.LAPACK.potri!",
     "category": "Function",
@@ -18377,7 +18281,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/linearalgebra.html#LinearAlgebra.LAPACK.potrs!",
+    "location": "stdlib/LinearAlgebra.html#LinearAlgebra.LAPACK.potrs!",
     "page": "Linear Algebra",
     "title": "LinearAlgebra.LAPACK.potrs!",
     "category": "Function",
@@ -18385,7 +18289,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/linearalgebra.html#LinearAlgebra.LAPACK.pstrf!",
+    "location": "stdlib/LinearAlgebra.html#LinearAlgebra.LAPACK.pstrf!",
     "page": "Linear Algebra",
     "title": "LinearAlgebra.LAPACK.pstrf!",
     "category": "Function",
@@ -18393,7 +18297,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/linearalgebra.html#LinearAlgebra.LAPACK.ptsv!",
+    "location": "stdlib/LinearAlgebra.html#LinearAlgebra.LAPACK.ptsv!",
     "page": "Linear Algebra",
     "title": "LinearAlgebra.LAPACK.ptsv!",
     "category": "Function",
@@ -18401,7 +18305,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/linearalgebra.html#LinearAlgebra.LAPACK.pttrf!",
+    "location": "stdlib/LinearAlgebra.html#LinearAlgebra.LAPACK.pttrf!",
     "page": "Linear Algebra",
     "title": "LinearAlgebra.LAPACK.pttrf!",
     "category": "Function",
@@ -18409,7 +18313,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/linearalgebra.html#LinearAlgebra.LAPACK.pttrs!",
+    "location": "stdlib/LinearAlgebra.html#LinearAlgebra.LAPACK.pttrs!",
     "page": "Linear Algebra",
     "title": "LinearAlgebra.LAPACK.pttrs!",
     "category": "Function",
@@ -18417,7 +18321,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/linearalgebra.html#LinearAlgebra.LAPACK.trtri!",
+    "location": "stdlib/LinearAlgebra.html#LinearAlgebra.LAPACK.trtri!",
     "page": "Linear Algebra",
     "title": "LinearAlgebra.LAPACK.trtri!",
     "category": "Function",
@@ -18425,7 +18329,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/linearalgebra.html#LinearAlgebra.LAPACK.trtrs!",
+    "location": "stdlib/LinearAlgebra.html#LinearAlgebra.LAPACK.trtrs!",
     "page": "Linear Algebra",
     "title": "LinearAlgebra.LAPACK.trtrs!",
     "category": "Function",
@@ -18433,7 +18337,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/linearalgebra.html#LinearAlgebra.LAPACK.trcon!",
+    "location": "stdlib/LinearAlgebra.html#LinearAlgebra.LAPACK.trcon!",
     "page": "Linear Algebra",
     "title": "LinearAlgebra.LAPACK.trcon!",
     "category": "Function",
@@ -18441,7 +18345,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/linearalgebra.html#LinearAlgebra.LAPACK.trevc!",
+    "location": "stdlib/LinearAlgebra.html#LinearAlgebra.LAPACK.trevc!",
     "page": "Linear Algebra",
     "title": "LinearAlgebra.LAPACK.trevc!",
     "category": "Function",
@@ -18449,7 +18353,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/linearalgebra.html#LinearAlgebra.LAPACK.trrfs!",
+    "location": "stdlib/LinearAlgebra.html#LinearAlgebra.LAPACK.trrfs!",
     "page": "Linear Algebra",
     "title": "LinearAlgebra.LAPACK.trrfs!",
     "category": "Function",
@@ -18457,7 +18361,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/linearalgebra.html#LinearAlgebra.LAPACK.stev!",
+    "location": "stdlib/LinearAlgebra.html#LinearAlgebra.LAPACK.stev!",
     "page": "Linear Algebra",
     "title": "LinearAlgebra.LAPACK.stev!",
     "category": "Function",
@@ -18465,7 +18369,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/linearalgebra.html#LinearAlgebra.LAPACK.stebz!",
+    "location": "stdlib/LinearAlgebra.html#LinearAlgebra.LAPACK.stebz!",
     "page": "Linear Algebra",
     "title": "LinearAlgebra.LAPACK.stebz!",
     "category": "Function",
@@ -18473,7 +18377,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/linearalgebra.html#LinearAlgebra.LAPACK.stegr!",
+    "location": "stdlib/LinearAlgebra.html#LinearAlgebra.LAPACK.stegr!",
     "page": "Linear Algebra",
     "title": "LinearAlgebra.LAPACK.stegr!",
     "category": "Function",
@@ -18481,7 +18385,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/linearalgebra.html#LinearAlgebra.LAPACK.stein!",
+    "location": "stdlib/LinearAlgebra.html#LinearAlgebra.LAPACK.stein!",
     "page": "Linear Algebra",
     "title": "LinearAlgebra.LAPACK.stein!",
     "category": "Function",
@@ -18489,7 +18393,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/linearalgebra.html#LinearAlgebra.LAPACK.syconv!",
+    "location": "stdlib/LinearAlgebra.html#LinearAlgebra.LAPACK.syconv!",
     "page": "Linear Algebra",
     "title": "LinearAlgebra.LAPACK.syconv!",
     "category": "Function",
@@ -18497,7 +18401,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/linearalgebra.html#LinearAlgebra.LAPACK.sysv!",
+    "location": "stdlib/LinearAlgebra.html#LinearAlgebra.LAPACK.sysv!",
     "page": "Linear Algebra",
     "title": "LinearAlgebra.LAPACK.sysv!",
     "category": "Function",
@@ -18505,7 +18409,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/linearalgebra.html#LinearAlgebra.LAPACK.sytrf!",
+    "location": "stdlib/LinearAlgebra.html#LinearAlgebra.LAPACK.sytrf!",
     "page": "Linear Algebra",
     "title": "LinearAlgebra.LAPACK.sytrf!",
     "category": "Function",
@@ -18513,7 +18417,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/linearalgebra.html#LinearAlgebra.LAPACK.sytri!",
+    "location": "stdlib/LinearAlgebra.html#LinearAlgebra.LAPACK.sytri!",
     "page": "Linear Algebra",
     "title": "LinearAlgebra.LAPACK.sytri!",
     "category": "Function",
@@ -18521,7 +18425,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/linearalgebra.html#LinearAlgebra.LAPACK.sytrs!",
+    "location": "stdlib/LinearAlgebra.html#LinearAlgebra.LAPACK.sytrs!",
     "page": "Linear Algebra",
     "title": "LinearAlgebra.LAPACK.sytrs!",
     "category": "Function",
@@ -18529,7 +18433,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/linearalgebra.html#LinearAlgebra.LAPACK.hesv!",
+    "location": "stdlib/LinearAlgebra.html#LinearAlgebra.LAPACK.hesv!",
     "page": "Linear Algebra",
     "title": "LinearAlgebra.LAPACK.hesv!",
     "category": "Function",
@@ -18537,7 +18441,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/linearalgebra.html#LinearAlgebra.LAPACK.hetrf!",
+    "location": "stdlib/LinearAlgebra.html#LinearAlgebra.LAPACK.hetrf!",
     "page": "Linear Algebra",
     "title": "LinearAlgebra.LAPACK.hetrf!",
     "category": "Function",
@@ -18545,7 +18449,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/linearalgebra.html#LinearAlgebra.LAPACK.hetri!",
+    "location": "stdlib/LinearAlgebra.html#LinearAlgebra.LAPACK.hetri!",
     "page": "Linear Algebra",
     "title": "LinearAlgebra.LAPACK.hetri!",
     "category": "Function",
@@ -18553,7 +18457,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/linearalgebra.html#LinearAlgebra.LAPACK.hetrs!",
+    "location": "stdlib/LinearAlgebra.html#LinearAlgebra.LAPACK.hetrs!",
     "page": "Linear Algebra",
     "title": "LinearAlgebra.LAPACK.hetrs!",
     "category": "Function",
@@ -18561,7 +18465,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/linearalgebra.html#LinearAlgebra.LAPACK.syev!",
+    "location": "stdlib/LinearAlgebra.html#LinearAlgebra.LAPACK.syev!",
     "page": "Linear Algebra",
     "title": "LinearAlgebra.LAPACK.syev!",
     "category": "Function",
@@ -18569,7 +18473,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/linearalgebra.html#LinearAlgebra.LAPACK.syevr!",
+    "location": "stdlib/LinearAlgebra.html#LinearAlgebra.LAPACK.syevr!",
     "page": "Linear Algebra",
     "title": "LinearAlgebra.LAPACK.syevr!",
     "category": "Function",
@@ -18577,7 +18481,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/linearalgebra.html#LinearAlgebra.LAPACK.sygvd!",
+    "location": "stdlib/LinearAlgebra.html#LinearAlgebra.LAPACK.sygvd!",
     "page": "Linear Algebra",
     "title": "LinearAlgebra.LAPACK.sygvd!",
     "category": "Function",
@@ -18585,7 +18489,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/linearalgebra.html#LinearAlgebra.LAPACK.bdsqr!",
+    "location": "stdlib/LinearAlgebra.html#LinearAlgebra.LAPACK.bdsqr!",
     "page": "Linear Algebra",
     "title": "LinearAlgebra.LAPACK.bdsqr!",
     "category": "Function",
@@ -18593,7 +18497,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/linearalgebra.html#LinearAlgebra.LAPACK.bdsdc!",
+    "location": "stdlib/LinearAlgebra.html#LinearAlgebra.LAPACK.bdsdc!",
     "page": "Linear Algebra",
     "title": "LinearAlgebra.LAPACK.bdsdc!",
     "category": "Function",
@@ -18601,7 +18505,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/linearalgebra.html#LinearAlgebra.LAPACK.gecon!",
+    "location": "stdlib/LinearAlgebra.html#LinearAlgebra.LAPACK.gecon!",
     "page": "Linear Algebra",
     "title": "LinearAlgebra.LAPACK.gecon!",
     "category": "Function",
@@ -18609,7 +18513,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/linearalgebra.html#LinearAlgebra.LAPACK.gehrd!",
+    "location": "stdlib/LinearAlgebra.html#LinearAlgebra.LAPACK.gehrd!",
     "page": "Linear Algebra",
     "title": "LinearAlgebra.LAPACK.gehrd!",
     "category": "Function",
@@ -18617,7 +18521,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/linearalgebra.html#LinearAlgebra.LAPACK.orghr!",
+    "location": "stdlib/LinearAlgebra.html#LinearAlgebra.LAPACK.orghr!",
     "page": "Linear Algebra",
     "title": "LinearAlgebra.LAPACK.orghr!",
     "category": "Function",
@@ -18625,7 +18529,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/linearalgebra.html#LinearAlgebra.LAPACK.gees!",
+    "location": "stdlib/LinearAlgebra.html#LinearAlgebra.LAPACK.gees!",
     "page": "Linear Algebra",
     "title": "LinearAlgebra.LAPACK.gees!",
     "category": "Function",
@@ -18633,7 +18537,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/linearalgebra.html#LinearAlgebra.LAPACK.gges!",
+    "location": "stdlib/LinearAlgebra.html#LinearAlgebra.LAPACK.gges!",
     "page": "Linear Algebra",
     "title": "LinearAlgebra.LAPACK.gges!",
     "category": "Function",
@@ -18641,7 +18545,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/linearalgebra.html#LinearAlgebra.LAPACK.trexc!",
+    "location": "stdlib/LinearAlgebra.html#LinearAlgebra.LAPACK.trexc!",
     "page": "Linear Algebra",
     "title": "LinearAlgebra.LAPACK.trexc!",
     "category": "Function",
@@ -18649,7 +18553,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/linearalgebra.html#LinearAlgebra.LAPACK.trsen!",
+    "location": "stdlib/LinearAlgebra.html#LinearAlgebra.LAPACK.trsen!",
     "page": "Linear Algebra",
     "title": "LinearAlgebra.LAPACK.trsen!",
     "category": "Function",
@@ -18657,7 +18561,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/linearalgebra.html#LinearAlgebra.LAPACK.tgsen!",
+    "location": "stdlib/LinearAlgebra.html#LinearAlgebra.LAPACK.tgsen!",
     "page": "Linear Algebra",
     "title": "LinearAlgebra.LAPACK.tgsen!",
     "category": "Function",
@@ -18665,7 +18569,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/linearalgebra.html#LinearAlgebra.LAPACK.trsyl!",
+    "location": "stdlib/LinearAlgebra.html#LinearAlgebra.LAPACK.trsyl!",
     "page": "Linear Algebra",
     "title": "LinearAlgebra.LAPACK.trsyl!",
     "category": "Function",
@@ -18673,7 +18577,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/linearalgebra.html#LAPACK-Functions-1",
+    "location": "stdlib/LinearAlgebra.html#LAPACK-Functions-1",
     "page": "Linear Algebra",
     "title": "LAPACK Functions",
     "category": "section",
@@ -18681,7 +18585,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/mmap.html#",
+    "location": "stdlib/Mmap.html#",
     "page": "Memory-mapped I/O",
     "title": "Memory-mapped I/O",
     "category": "page",
@@ -18689,7 +18593,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/mmap.html#Mmap.Anonymous",
+    "location": "stdlib/Mmap.html#Mmap.Anonymous",
     "page": "Memory-mapped I/O",
     "title": "Mmap.Anonymous",
     "category": "Type",
@@ -18697,7 +18601,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/mmap.html#Mmap.mmap",
+    "location": "stdlib/Mmap.html#Mmap.mmap",
     "page": "Memory-mapped I/O",
     "title": "Mmap.mmap",
     "category": "Function",
@@ -18705,7 +18609,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/mmap.html#Mmap.sync!",
+    "location": "stdlib/Mmap.html#Mmap.sync!",
     "page": "Memory-mapped I/O",
     "title": "Mmap.sync!",
     "category": "Function",
@@ -18713,7 +18617,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/mmap.html#Memory-mapped-I/O-1",
+    "location": "stdlib/Mmap.html#Memory-mapped-I/O-1",
     "page": "Memory-mapped I/O",
     "title": "Memory-mapped I/O",
     "category": "section",
@@ -18721,7 +18625,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/printf.html#",
+    "location": "stdlib/Printf.html#",
     "page": "Printf",
     "title": "Printf",
     "category": "page",
@@ -18729,7 +18633,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/printf.html#Printf.@printf",
+    "location": "stdlib/Printf.html#Printf.@printf",
     "page": "Printf",
     "title": "Printf.@printf",
     "category": "Macro",
@@ -18737,7 +18641,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/printf.html#Printf.@sprintf",
+    "location": "stdlib/Printf.html#Printf.@sprintf",
     "page": "Printf",
     "title": "Printf.@sprintf",
     "category": "Macro",
@@ -18745,7 +18649,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/printf.html#Printf-1",
+    "location": "stdlib/Printf.html#Printf-1",
     "page": "Printf",
     "title": "Printf",
     "category": "section",
@@ -18753,7 +18657,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/profile.html#",
+    "location": "stdlib/Profile.html#",
     "page": "Profiling",
     "title": "Profiling",
     "category": "page",
@@ -18761,7 +18665,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/profile.html#Profile.@profile",
+    "location": "stdlib/Profile.html#Profile.@profile",
     "page": "Profiling",
     "title": "Profile.@profile",
     "category": "Macro",
@@ -18769,7 +18673,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/profile.html#Profile.clear",
+    "location": "stdlib/Profile.html#Profile.clear",
     "page": "Profiling",
     "title": "Profile.clear",
     "category": "Function",
@@ -18777,7 +18681,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/profile.html#Profile.print",
+    "location": "stdlib/Profile.html#Profile.print",
     "page": "Profiling",
     "title": "Profile.print",
     "category": "Function",
@@ -18785,7 +18689,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/profile.html#Profile.init",
+    "location": "stdlib/Profile.html#Profile.init",
     "page": "Profiling",
     "title": "Profile.init",
     "category": "Function",
@@ -18793,7 +18697,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/profile.html#Profile.fetch",
+    "location": "stdlib/Profile.html#Profile.fetch",
     "page": "Profiling",
     "title": "Profile.fetch",
     "category": "Function",
@@ -18801,7 +18705,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/profile.html#Profile.retrieve",
+    "location": "stdlib/Profile.html#Profile.retrieve",
     "page": "Profiling",
     "title": "Profile.retrieve",
     "category": "Function",
@@ -18809,7 +18713,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/profile.html#Profile.callers",
+    "location": "stdlib/Profile.html#Profile.callers",
     "page": "Profiling",
     "title": "Profile.callers",
     "category": "Function",
@@ -18817,7 +18721,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/profile.html#Profile.clear_malloc_data",
+    "location": "stdlib/Profile.html#Profile.clear_malloc_data",
     "page": "Profiling",
     "title": "Profile.clear_malloc_data",
     "category": "Function",
@@ -18825,7 +18729,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/profile.html#lib-profiling-1",
+    "location": "stdlib/Profile.html#lib-profiling-1",
     "page": "Profiling",
     "title": "Profiling",
     "category": "section",
@@ -18833,7 +18737,111 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/random.html#",
+    "location": "stdlib/REPL.html#",
+    "page": "The Julia REPL",
+    "title": "The Julia REPL",
+    "category": "page",
+    "text": ""
+},
+
+{
+    "location": "stdlib/REPL.html#The-Julia-REPL-1",
+    "page": "The Julia REPL",
+    "title": "The Julia REPL",
+    "category": "section",
+    "text": "Julia comes with a full-featured interactive command-line REPL (read-eval-print loop) built into the julia executable. In addition to allowing quick and easy evaluation of Julia statements, it has a searchable history, tab-completion, many helpful keybindings, and dedicated help and shell modes. The REPL can be started by simply calling julia with no arguments or double-clicking on the executable:$ julia\n               _\n   _       _ _(_)_     |  A fresh approach to technical computing\n  (_)     | (_) (_)    |  Documentation: https://docs.julialang.org\n   _ _   _| |_  __ _   |  Type \"?help\" for help.\n  | | | | | | |/ _` |  |\n  | | |_| | | | (_| |  |  Version 0.6.0-dev.2493 (2017-01-31 18:53 UTC)\n _/ |\\__'_|_|_|\\__'_|  |  Commit c99e12c* (0 days old master)\n|__/                   |  x86_64-linux-gnu\n\njulia>To exit the interactive session, type ^D – the control key together with the d key on a blank line – or type quit() followed by the return or enter key. The REPL greets you with a banner and a julia> prompt."
+},
+
+{
+    "location": "stdlib/REPL.html#The-different-prompt-modes-1",
+    "page": "The Julia REPL",
+    "title": "The different prompt modes",
+    "category": "section",
+    "text": ""
+},
+
+{
+    "location": "stdlib/REPL.html#The-Julian-mode-1",
+    "page": "The Julia REPL",
+    "title": "The Julian mode",
+    "category": "section",
+    "text": "The REPL has four main modes of operation. The first and most common is the Julian prompt. It is the default mode of operation; each new line initially starts with julia>. It is here that you can enter Julia expressions. Hitting return or enter after a complete expression has been entered will evaluate the entry and show the result of the last expression.julia> string(1 + 2)\n\"3\"There are a number useful features unique to interactive work. In addition to showing the result, the REPL also binds the result to the variable ans. A trailing semicolon on the line can be used as a flag to suppress showing the result.julia> string(3 * 4);\n\njulia> ans\n\"12\"In Julia mode, the REPL supports something called prompt pasting. This activates when pasting text that starts with julia>  into the REPL. In that case, only expressions starting with julia>  are parsed, others are removed. This makes it is possible to paste a chunk of code that has been copied from a REPL session without having to scrub away prompts and outputs. This feature is enabled by default but can be disabled or enabled at will with Base.REPL.enable_promptpaste(::Bool). If it is enabled, you can try it out by pasting the code block above this paragraph straight into the REPL. This feature does not work on the standard Windows command prompt due to its limitation at detecting when a paste occurs."
+},
+
+{
+    "location": "stdlib/REPL.html#Help-mode-1",
+    "page": "The Julia REPL",
+    "title": "Help mode",
+    "category": "section",
+    "text": "When the cursor is at the beginning of the line, the prompt can be changed to a help mode by typing ?. Julia will attempt to print help or documentation for anything entered in help mode:julia> ? # upon typing ?, the prompt changes (in place) to: help?>\n\nhelp?> string\nsearch: string String stringmime Cstring Cwstring RevString randstring bytestring SubString\n\n  string(xs...)\n\n  Create a string from any values using the print function.Macros, types and variables can also be queried:help?> @time\n  @time\n\n  A macro to execute an expression, printing the time it took to execute, the number of allocations,\n  and the total number of bytes its execution caused to be allocated, before returning the value of the\n  expression.\n\n  See also @timev, @timed, @elapsed, and @allocated.\n\nhelp?> AbstractString\nsearch: AbstractString AbstractSparseMatrix AbstractSparseVector AbstractSet\n\n  No documentation found.\n\n  Summary\n  ≡≡≡≡≡≡≡≡≡\n\n  abstract type AbstractString <: Any\n\n  Subtypes\n  ≡≡≡≡≡≡≡≡≡≡\n\n  Base.SubstitutionString\n  String\n  SubString\n  Test.GenericStringHelp mode can be exited by pressing backspace at the beginning of the line."
+},
+
+{
+    "location": "stdlib/REPL.html#man-shell-mode-1",
+    "page": "The Julia REPL",
+    "title": "Shell mode",
+    "category": "section",
+    "text": "Just as help mode is useful for quick access to documentation, another common task is to use the system shell to execute system commands. Just as ? entered help mode when at the beginning of the line, a semicolon (;) will enter the shell mode. And it can be exited by pressing backspace at the beginning of the line.julia> ; # upon typing ;, the prompt changes (in place) to: shell>\n\nshell> echo hello\nhello"
+},
+
+{
+    "location": "stdlib/REPL.html#Search-modes-1",
+    "page": "The Julia REPL",
+    "title": "Search modes",
+    "category": "section",
+    "text": "In all of the above modes, the executed lines get saved to a history file, which can be searched.  To initiate an incremental search through the previous history, type ^R – the control key together with the r key. The prompt will change to (reverse-i-search)`':, and as you type the search query will appear in the quotes. The most recent result that matches the query will dynamically update to the right of the colon as more is typed. To find an older result using the same query, simply type ^R again.Just as ^R is a reverse search, ^S is a forward search, with the prompt (i-search)`':.  The two may be used in conjunction with each other to move through the previous or next matching results, respectively."
+},
+
+{
+    "location": "stdlib/REPL.html#Key-bindings-1",
+    "page": "The Julia REPL",
+    "title": "Key bindings",
+    "category": "section",
+    "text": "The Julia REPL makes great use of key bindings. Several control-key bindings were already introduced above (^D to exit, ^R and ^S for searching), but there are many more. In addition to the control-key, there are also meta-key bindings. These vary more by platform, but most terminals default to using alt- or option- held down with a key to send the meta-key (or can be configured to do so).Keybinding Description\nProgram control  \n^D Exit (when buffer is empty)\n^C Interrupt or cancel\n^L Clear console screen\nReturn/Enter, ^J New line, executing if it is complete\nmeta-Return/Enter Insert new line without executing it\n? or ; Enter help or shell mode (when at start of a line)\n^R, ^S Incremental history search, described above\nCursor movement  \nRight arrow, ^F Move right one character\nLeft arrow, ^B Move left one character\nctrl-Right, meta-F Move right one word\nctrl-Left, meta-B Move left one word\nHome, ^A Move to beginning of line\nEnd, ^E Move to end of line\nUp arrow, ^P Move up one line (or change to the previous history entry that matches the text before the cursor)\nDown arrow, ^N Move down one line (or change to the next history entry that matches the text before the cursor)\nShift-Arrow Key Move cursor according to the direction of the Arrow key, while activating the region (\"shift selection\")\nPage-up, meta-P Change to the previous history entry\nPage-down, meta-N Change to the next history entry\nmeta-< Change to the first history entry (of the current session if it is before the current position in history)\nmeta-> Change to the last history entry\n^-Space Set the \"mark\" in the editing region (and de-activate the region if it's active)\n^-Space ^-Space Set the \"mark\" in the editing region and make the region \"active\", i.e. highlighted\n^G De-activate the region (i.e. make it not highlighted)\n^X^X Exchange the current position with the mark\nEditing  \nBackspace, ^H Delete the previous character, or the whole region when it's active\nDelete, ^D Forward delete one character (when buffer has text)\nmeta-Backspace Delete the previous word\nmeta-d Forward delete the next word\n^W Delete previous text up to the nearest whitespace\nmeta-w Copy the current region in the kill ring\nmeta-W \"Kill\" the current region, placing the text in the kill ring\n^K \"Kill\" to end of line, placing the text in the kill ring\n^Y \"Yank\" insert the text from the kill ring\nmeta-y Replace a previously yanked text with an older entry from the kill ring\n^T Transpose the characters about the cursor\nmeta-Up arrow Transpose current line with line above\nmeta-Down arrow Transpose current line with line below\nmeta-u Change the next word to uppercase\nmeta-c Change the next word to titlecase\nmeta-l Change the next word to lowercase\n^/, ^_ Undo previous editing action\n^Q Write a number in REPL and press ^Q to open editor at corresponding stackframe or method\nmeta-Left Arrow indent the current line on the left\nmeta-Right Arrow indent the current line on the right"
+},
+
+{
+    "location": "stdlib/REPL.html#Customizing-keybindings-1",
+    "page": "The Julia REPL",
+    "title": "Customizing keybindings",
+    "category": "section",
+    "text": "Julia's REPL keybindings may be fully customized to a user's preferences by passing a dictionary to REPL.setup_interface. The keys of this dictionary may be characters or strings. The key '*' refers to the default action. Control plus character x bindings are indicated with \"^x\". Meta plus x can be written \"\\\\Mx\". The values of the custom keymap must be nothing (indicating that the input should be ignored) or functions that accept the signature (PromptState, AbstractREPL, Char). The REPL.setup_interface function must be called before the REPL is initialized, by registering the operation with atreplinit . For example, to bind the up and down arrow keys to move through history without prefix search, one could put the following code in .juliarc.jl:import REPL\nimport REPL.LineEdit\n\nconst mykeys = Dict{Any,Any}(\n    # Up Arrow\n    \"\\e[A\" => (s,o...)->(LineEdit.edit_move_up(s) || LineEdit.history_prev(s, LineEdit.mode(s).hist)),\n    # Down Arrow\n    \"\\e[B\" => (s,o...)->(LineEdit.edit_move_up(s) || LineEdit.history_next(s, LineEdit.mode(s).hist))\n)\n\nfunction customize_keys(repl)\n    repl.interface = REPL.setup_interface(repl; extra_repl_keymap = mykeys)\nend\n\natreplinit(customize_keys)Users should refer to LineEdit.jl to discover the available actions on key input."
+},
+
+{
+    "location": "stdlib/REPL.html#Tab-completion-1",
+    "page": "The Julia REPL",
+    "title": "Tab completion",
+    "category": "section",
+    "text": "In both the Julian and help modes of the REPL, one can enter the first few characters of a function or type and then press the tab key to get a list all matches:julia> stri[TAB]\nstride     strides     string      stringmime  strip\n\njulia> Stri[TAB]\nStridedArray    StridedMatrix    StridedVecOrMat  StridedVector    StringThe tab key can also be used to substitute LaTeX math symbols with their Unicode equivalents, and get a list of LaTeX matches as well:julia> \\pi[TAB]\njulia> π\nπ = 3.1415926535897...\n\njulia> e\\_1[TAB] = [1,0]\njulia> e₁ = [1,0]\n2-element Array{Int64,1}:\n 1\n 0\n\njulia> e\\^1[TAB] = [1 0]\njulia> e¹ = [1 0]\n1×2 Array{Int64,2}:\n 1  0\n\njulia> \\sqrt[TAB]2     # √ is equivalent to the sqrt function\njulia> √2\n1.4142135623730951\n\njulia> \\hbar[TAB](h) = h / 2\\pi[TAB]\njulia> ħ(h) = h / 2π\nħ (generic function with 1 method)\n\njulia> \\h[TAB]\n\\hat              \\hermitconjmatrix  \\hkswarow          \\hrectangle\n\\hatapprox        \\hexagon           \\hookleftarrow     \\hrectangleblack\n\\hbar             \\hexagonblack      \\hookrightarrow    \\hslash\n\\heartsuit        \\hksearow          \\house             \\hspace\n\njulia> α=\"\\alpha[TAB]\"   # LaTeX completion also works in strings\njulia> α=\"α\"A full list of tab-completions can be found in the Unicode Input section of the manual.Completion of paths works for strings and julia's shell mode:julia> path=\"/[TAB]\"\n.dockerenv  .juliabox/   boot/        etc/         lib/         media/       opt/         root/        sbin/        sys/         usr/\n.dockerinit bin/         dev/         home/        lib64/       mnt/         proc/        run/         srv/         tmp/         var/\nshell> /[TAB]\n.dockerenv  .juliabox/   boot/        etc/         lib/         media/       opt/         root/        sbin/        sys/         usr/\n.dockerinit bin/         dev/         home/        lib64/       mnt/         proc/        run/         srv/         tmp/         var/Tab completion can help with investigation of the available methods matching the input arguments:julia> max([TAB] # All methods are displayed, not shown here due to size of the list\n\njulia> max([1, 2], [TAB] # All methods where `Vector{Int}` matches as first argument\nmax(x, y) in Base at operators.jl:215\nmax(a, b, c, xs...) in Base at operators.jl:281\n\njulia> max([1, 2], max(1, 2), [TAB] # All methods matching the arguments.\nmax(x, y) in Base at operators.jl:215\nmax(a, b, c, xs...) in Base at operators.jl:281Keywords are also displayed in the suggested methods, see second line after ; where limit and keep are keyword arguments:julia> split(\"1 1 1\", [TAB]\nsplit(str::AbstractString) in Base at strings/util.jl:302\nsplit(str::T, splitter; limit, keep) where T<:AbstractString in Base at strings/util.jl:277The completion of the methods uses type inference and can therefore see if the arguments match even if the arguments are output from functions. The function needs to be type stable for the completion to be able to remove non-matching methods.Tab completion can also help completing fields:julia> Pkg.a[TAB]\nadd       availableFields for output from functions can also be completed:julia> split(\"\",\"\")[1].[TAB]\nendof  offset  stringThe completion of fields for output from functions uses type inference, and it can only suggest fields if the function is type stable."
+},
+
+{
+    "location": "stdlib/REPL.html#Customizing-Colors-1",
+    "page": "The Julia REPL",
+    "title": "Customizing Colors",
+    "category": "section",
+    "text": "The colors used by Julia and the REPL can be customized, as well. To change the color of the Julia prompt you can add something like the following to your .juliarc.jl file, which is to be placed inside your home directory:function customize_colors(repl)\n    repl.prompt_color = Base.text_colors[:cyan]\nend\n\natreplinit(customize_colors)The available color keys can be seen by typing Base.text_colors in the help mode of the REPL. In addition, the integers 0 to 255 can be used as color keys for terminals with 256 color support.You can also change the colors for the help and shell prompts and input and answer text by setting the appropriate field of repl in the customize_colors function above (respectively, help_color, shell_color, input_color, and answer_color). For the latter two, be sure that the envcolors field is also set to false.It is also possible to apply boldface formatting by using Base.text_colors[:bold] as a color. For instance, to print answers in boldface font, one can use the following as a .juliarc.jl:function customize_colors(repl)\n    repl.envcolors = false\n    repl.answer_color = Base.text_colors[:bold]\nend\n\natreplinit(customize_colors)You can also customize the color used to render warning and informational messages by setting the appropriate environment variables. For instance, to render error, warning, and informational messages respectively in magenta, yellow, and cyan you can add the following to your .juliarc.jl file:ENV[\"JULIA_ERROR_COLOR\"] = :magenta\nENV[\"JULIA_WARN_COLOR\"] = :yellow\nENV[\"JULIA_INFO_COLOR\"] = :cyan"
+},
+
+{
+    "location": "stdlib/REPL.html#Base.atreplinit",
+    "page": "The Julia REPL",
+    "title": "Base.atreplinit",
+    "category": "Function",
+    "text": "atreplinit(f)\n\nRegister a one-argument function to be called before the REPL interface is initialized in interactive sessions; this is useful to customize the interface. The argument of f is the REPL object. This function should be called from within the .juliarc.jl initialization file.\n\n\n\n"
+},
+
+{
+    "location": "stdlib/REPL.html#References-1",
+    "page": "The Julia REPL",
+    "title": "References",
+    "category": "section",
+    "text": "Base.atreplinit"
+},
+
+{
+    "location": "stdlib/Random.html#",
     "page": "Random Numbers",
     "title": "Random Numbers",
     "category": "page",
@@ -18841,7 +18849,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/random.html#Random.srand",
+    "location": "stdlib/Random.html#Random.srand",
     "page": "Random Numbers",
     "title": "Random.srand",
     "category": "Function",
@@ -18849,7 +18857,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/random.html#Random.MersenneTwister",
+    "location": "stdlib/Random.html#Random.MersenneTwister",
     "page": "Random Numbers",
     "title": "Random.MersenneTwister",
     "category": "Type",
@@ -18857,7 +18865,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/random.html#Random.RandomDevice",
+    "location": "stdlib/Random.html#Random.RandomDevice",
     "page": "Random Numbers",
     "title": "Random.RandomDevice",
     "category": "Type",
@@ -18865,7 +18873,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/random.html#Base.rand",
+    "location": "stdlib/Random.html#Base.rand",
     "page": "Random Numbers",
     "title": "Base.rand",
     "category": "Function",
@@ -18873,7 +18881,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/random.html#Random.rand!",
+    "location": "stdlib/Random.html#Random.rand!",
     "page": "Random Numbers",
     "title": "Random.rand!",
     "category": "Function",
@@ -18881,7 +18889,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/random.html#Random.bitrand",
+    "location": "stdlib/Random.html#Random.bitrand",
     "page": "Random Numbers",
     "title": "Random.bitrand",
     "category": "Function",
@@ -18889,7 +18897,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/random.html#Base.randn",
+    "location": "stdlib/Random.html#Base.randn",
     "page": "Random Numbers",
     "title": "Base.randn",
     "category": "Function",
@@ -18897,7 +18905,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/random.html#Random.randn!",
+    "location": "stdlib/Random.html#Random.randn!",
     "page": "Random Numbers",
     "title": "Random.randn!",
     "category": "Function",
@@ -18905,7 +18913,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/random.html#Random.randexp",
+    "location": "stdlib/Random.html#Random.randexp",
     "page": "Random Numbers",
     "title": "Random.randexp",
     "category": "Function",
@@ -18913,7 +18921,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/random.html#Random.randexp!",
+    "location": "stdlib/Random.html#Random.randexp!",
     "page": "Random Numbers",
     "title": "Random.randexp!",
     "category": "Function",
@@ -18921,7 +18929,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/random.html#Random.randjump",
+    "location": "stdlib/Random.html#Random.randjump",
     "page": "Random Numbers",
     "title": "Random.randjump",
     "category": "Function",
@@ -18929,7 +18937,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/random.html#Random.randstring",
+    "location": "stdlib/Random.html#Random.randstring",
     "page": "Random Numbers",
     "title": "Random.randstring",
     "category": "Function",
@@ -18937,7 +18945,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/random.html#Random.randsubseq",
+    "location": "stdlib/Random.html#Random.randsubseq",
     "page": "Random Numbers",
     "title": "Random.randsubseq",
     "category": "Function",
@@ -18945,7 +18953,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/random.html#Random.randsubseq!",
+    "location": "stdlib/Random.html#Random.randsubseq!",
     "page": "Random Numbers",
     "title": "Random.randsubseq!",
     "category": "Function",
@@ -18953,7 +18961,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/random.html#Random.randperm",
+    "location": "stdlib/Random.html#Random.randperm",
     "page": "Random Numbers",
     "title": "Random.randperm",
     "category": "Function",
@@ -18961,7 +18969,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/random.html#Random.randperm!",
+    "location": "stdlib/Random.html#Random.randperm!",
     "page": "Random Numbers",
     "title": "Random.randperm!",
     "category": "Function",
@@ -18969,7 +18977,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/random.html#Random.randcycle",
+    "location": "stdlib/Random.html#Random.randcycle",
     "page": "Random Numbers",
     "title": "Random.randcycle",
     "category": "Function",
@@ -18977,7 +18985,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/random.html#Random.randcycle!",
+    "location": "stdlib/Random.html#Random.randcycle!",
     "page": "Random Numbers",
     "title": "Random.randcycle!",
     "category": "Function",
@@ -18985,7 +18993,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/random.html#Random.shuffle",
+    "location": "stdlib/Random.html#Random.shuffle",
     "page": "Random Numbers",
     "title": "Random.shuffle",
     "category": "Function",
@@ -18993,7 +19001,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/random.html#Random.shuffle!",
+    "location": "stdlib/Random.html#Random.shuffle!",
     "page": "Random Numbers",
     "title": "Random.shuffle!",
     "category": "Function",
@@ -19001,7 +19009,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/random.html#Random-Numbers-1",
+    "location": "stdlib/Random.html#Random-Numbers-1",
     "page": "Random Numbers",
     "title": "Random Numbers",
     "category": "section",
@@ -19009,7 +19017,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/serialization.html#",
+    "location": "stdlib/Serialization.html#",
     "page": "Serialization",
     "title": "Serialization",
     "category": "page",
@@ -19017,7 +19025,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/serialization.html#Serialization.serialize",
+    "location": "stdlib/Serialization.html#Serialization.serialize",
     "page": "Serialization",
     "title": "Serialization.serialize",
     "category": "Function",
@@ -19025,7 +19033,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/serialization.html#Serialization.deserialize",
+    "location": "stdlib/Serialization.html#Serialization.deserialize",
     "page": "Serialization",
     "title": "Serialization.deserialize",
     "category": "Function",
@@ -19033,7 +19041,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/serialization.html#Serialization.writeheader",
+    "location": "stdlib/Serialization.html#Serialization.writeheader",
     "page": "Serialization",
     "title": "Serialization.writeheader",
     "category": "Function",
@@ -19041,7 +19049,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/serialization.html#Serialization-1",
+    "location": "stdlib/Serialization.html#Serialization-1",
     "page": "Serialization",
     "title": "Serialization",
     "category": "section",
@@ -19049,7 +19057,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/sharedarrays.html#",
+    "location": "stdlib/SharedArrays.html#",
     "page": "Shared Arrays",
     "title": "Shared Arrays",
     "category": "page",
@@ -19057,7 +19065,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/sharedarrays.html#SharedArrays.SharedArray",
+    "location": "stdlib/SharedArrays.html#SharedArrays.SharedArray",
     "page": "Shared Arrays",
     "title": "SharedArrays.SharedArray",
     "category": "Type",
@@ -19065,7 +19073,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/sharedarrays.html#Distributed.procs-Tuple{SharedArray}",
+    "location": "stdlib/SharedArrays.html#Distributed.procs-Tuple{SharedArray}",
     "page": "Shared Arrays",
     "title": "Distributed.procs",
     "category": "Method",
@@ -19073,7 +19081,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/sharedarrays.html#SharedArrays.sdata",
+    "location": "stdlib/SharedArrays.html#SharedArrays.sdata",
     "page": "Shared Arrays",
     "title": "SharedArrays.sdata",
     "category": "Function",
@@ -19081,7 +19089,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/sharedarrays.html#SharedArrays.indexpids",
+    "location": "stdlib/SharedArrays.html#SharedArrays.indexpids",
     "page": "Shared Arrays",
     "title": "SharedArrays.indexpids",
     "category": "Function",
@@ -19089,7 +19097,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/sharedarrays.html#SharedArrays.localindices",
+    "location": "stdlib/SharedArrays.html#SharedArrays.localindices",
     "page": "Shared Arrays",
     "title": "SharedArrays.localindices",
     "category": "Function",
@@ -19097,7 +19105,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/sharedarrays.html#Shared-Arrays-1",
+    "location": "stdlib/SharedArrays.html#Shared-Arrays-1",
     "page": "Shared Arrays",
     "title": "Shared Arrays",
     "category": "section",
@@ -19105,7 +19113,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/sparsearrays.html#",
+    "location": "stdlib/SparseArrays.html#",
     "page": "Sparse Arrays",
     "title": "Sparse Arrays",
     "category": "page",
@@ -19113,7 +19121,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/sparsearrays.html#Sparse-Arrays-1",
+    "location": "stdlib/SparseArrays.html#Sparse-Arrays-1",
     "page": "Sparse Arrays",
     "title": "Sparse Arrays",
     "category": "section",
@@ -19121,7 +19129,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/sparsearrays.html#man-csc-1",
+    "location": "stdlib/SparseArrays.html#man-csc-1",
     "page": "Sparse Arrays",
     "title": "Compressed Sparse Column (CSC) Sparse Matrix Storage",
     "category": "section",
@@ -19129,7 +19137,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/sparsearrays.html#Sparse-Vector-Storage-1",
+    "location": "stdlib/SparseArrays.html#Sparse-Vector-Storage-1",
     "page": "Sparse Arrays",
     "title": "Sparse Vector Storage",
     "category": "section",
@@ -19137,7 +19145,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/sparsearrays.html#Sparse-Vector-and-Matrix-Constructors-1",
+    "location": "stdlib/SparseArrays.html#Sparse-Vector-and-Matrix-Constructors-1",
     "page": "Sparse Arrays",
     "title": "Sparse Vector and Matrix Constructors",
     "category": "section",
@@ -19145,7 +19153,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/sparsearrays.html#Sparse-matrix-operations-1",
+    "location": "stdlib/SparseArrays.html#Sparse-matrix-operations-1",
     "page": "Sparse Arrays",
     "title": "Sparse matrix operations",
     "category": "section",
@@ -19153,7 +19161,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/sparsearrays.html#Correspondence-of-dense-and-sparse-methods-1",
+    "location": "stdlib/SparseArrays.html#Correspondence-of-dense-and-sparse-methods-1",
     "page": "Sparse Arrays",
     "title": "Correspondence of dense and sparse methods",
     "category": "section",
@@ -19161,7 +19169,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/sparsearrays.html#SparseArrays.SparseVector",
+    "location": "stdlib/SparseArrays.html#SparseArrays.SparseVector",
     "page": "Sparse Arrays",
     "title": "SparseArrays.SparseVector",
     "category": "Type",
@@ -19169,7 +19177,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/sparsearrays.html#SparseArrays.SparseMatrixCSC",
+    "location": "stdlib/SparseArrays.html#SparseArrays.SparseMatrixCSC",
     "page": "Sparse Arrays",
     "title": "SparseArrays.SparseMatrixCSC",
     "category": "Type",
@@ -19177,7 +19185,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/sparsearrays.html#SparseArrays.sparse",
+    "location": "stdlib/SparseArrays.html#SparseArrays.sparse",
     "page": "Sparse Arrays",
     "title": "SparseArrays.sparse",
     "category": "Function",
@@ -19185,7 +19193,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/sparsearrays.html#SparseArrays.sparsevec",
+    "location": "stdlib/SparseArrays.html#SparseArrays.sparsevec",
     "page": "Sparse Arrays",
     "title": "SparseArrays.sparsevec",
     "category": "Function",
@@ -19193,7 +19201,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/sparsearrays.html#SparseArrays.issparse",
+    "location": "stdlib/SparseArrays.html#SparseArrays.issparse",
     "page": "Sparse Arrays",
     "title": "SparseArrays.issparse",
     "category": "Function",
@@ -19201,7 +19209,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/sparsearrays.html#SparseArrays.nnz",
+    "location": "stdlib/SparseArrays.html#SparseArrays.nnz",
     "page": "Sparse Arrays",
     "title": "SparseArrays.nnz",
     "category": "Function",
@@ -19209,7 +19217,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/sparsearrays.html#SparseArrays.spzeros",
+    "location": "stdlib/SparseArrays.html#SparseArrays.spzeros",
     "page": "Sparse Arrays",
     "title": "SparseArrays.spzeros",
     "category": "Function",
@@ -19217,7 +19225,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/sparsearrays.html#SparseArrays.spdiagm",
+    "location": "stdlib/SparseArrays.html#SparseArrays.spdiagm",
     "page": "Sparse Arrays",
     "title": "SparseArrays.spdiagm",
     "category": "Function",
@@ -19225,7 +19233,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/sparsearrays.html#SparseArrays.blkdiag",
+    "location": "stdlib/SparseArrays.html#SparseArrays.blkdiag",
     "page": "Sparse Arrays",
     "title": "SparseArrays.blkdiag",
     "category": "Function",
@@ -19233,7 +19241,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/sparsearrays.html#SparseArrays.sprand",
+    "location": "stdlib/SparseArrays.html#SparseArrays.sprand",
     "page": "Sparse Arrays",
     "title": "SparseArrays.sprand",
     "category": "Function",
@@ -19241,7 +19249,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/sparsearrays.html#SparseArrays.sprandn",
+    "location": "stdlib/SparseArrays.html#SparseArrays.sprandn",
     "page": "Sparse Arrays",
     "title": "SparseArrays.sprandn",
     "category": "Function",
@@ -19249,7 +19257,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/sparsearrays.html#SparseArrays.nonzeros",
+    "location": "stdlib/SparseArrays.html#SparseArrays.nonzeros",
     "page": "Sparse Arrays",
     "title": "SparseArrays.nonzeros",
     "category": "Function",
@@ -19257,7 +19265,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/sparsearrays.html#SparseArrays.rowvals",
+    "location": "stdlib/SparseArrays.html#SparseArrays.rowvals",
     "page": "Sparse Arrays",
     "title": "SparseArrays.rowvals",
     "category": "Function",
@@ -19265,7 +19273,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/sparsearrays.html#SparseArrays.nzrange",
+    "location": "stdlib/SparseArrays.html#SparseArrays.nzrange",
     "page": "Sparse Arrays",
     "title": "SparseArrays.nzrange",
     "category": "Function",
@@ -19273,7 +19281,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/sparsearrays.html#SparseArrays.dropzeros!-Tuple{SparseMatrixCSC,Bool}",
+    "location": "stdlib/SparseArrays.html#SparseArrays.dropzeros!-Tuple{SparseMatrixCSC,Bool}",
     "page": "Sparse Arrays",
     "title": "SparseArrays.dropzeros!",
     "category": "Method",
@@ -19281,7 +19289,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/sparsearrays.html#SparseArrays.dropzeros-Tuple{SparseMatrixCSC,Bool}",
+    "location": "stdlib/SparseArrays.html#SparseArrays.dropzeros-Tuple{SparseMatrixCSC,Bool}",
     "page": "Sparse Arrays",
     "title": "SparseArrays.dropzeros",
     "category": "Method",
@@ -19289,7 +19297,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/sparsearrays.html#SparseArrays.dropzeros!-Tuple{SparseVector,Bool}",
+    "location": "stdlib/SparseArrays.html#SparseArrays.dropzeros!-Tuple{SparseVector,Bool}",
     "page": "Sparse Arrays",
     "title": "SparseArrays.dropzeros!",
     "category": "Method",
@@ -19297,7 +19305,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/sparsearrays.html#SparseArrays.dropzeros-Tuple{SparseVector,Bool}",
+    "location": "stdlib/SparseArrays.html#SparseArrays.dropzeros-Tuple{SparseVector,Bool}",
     "page": "Sparse Arrays",
     "title": "SparseArrays.dropzeros",
     "category": "Method",
@@ -19305,7 +19313,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/sparsearrays.html#SparseArrays.permute",
+    "location": "stdlib/SparseArrays.html#SparseArrays.permute",
     "page": "Sparse Arrays",
     "title": "SparseArrays.permute",
     "category": "Function",
@@ -19313,7 +19321,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/sparsearrays.html#Base.permute!-Union{Tuple{Tq}, Tuple{Tp}, Tuple{Ti}, Tuple{Tv}, Tuple{SparseMatrixCSC{Tv,Ti},SparseMatrixCSC{Tv,Ti},AbstractArray{Tp,1},AbstractArray{Tq,1}}} where Tq<:Integer where Tp<:Integer where Ti where Tv",
+    "location": "stdlib/SparseArrays.html#Base.permute!-Union{Tuple{Tq}, Tuple{Tp}, Tuple{Ti}, Tuple{Tv}, Tuple{SparseMatrixCSC{Tv,Ti},SparseMatrixCSC{Tv,Ti},AbstractArray{Tp,1},AbstractArray{Tq,1}}} where Tq<:Integer where Tp<:Integer where Ti where Tv",
     "page": "Sparse Arrays",
     "title": "Base.permute!",
     "category": "Method",
@@ -19321,7 +19329,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/sparsearrays.html#stdlib-sparse-arrays-1",
+    "location": "stdlib/SparseArrays.html#stdlib-sparse-arrays-1",
     "page": "Sparse Arrays",
     "title": "Sparse Arrays",
     "category": "section",
@@ -19329,7 +19337,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/test.html#",
+    "location": "stdlib/Test.html#",
     "page": "Unit Testing",
     "title": "Unit Testing",
     "category": "page",
@@ -19337,7 +19345,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/test.html#Unit-Testing-1",
+    "location": "stdlib/Test.html#Unit-Testing-1",
     "page": "Unit Testing",
     "title": "Unit Testing",
     "category": "section",
@@ -19345,7 +19353,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/test.html#Base.runtests",
+    "location": "stdlib/Test.html#Base.runtests",
     "page": "Unit Testing",
     "title": "Base.runtests",
     "category": "Function",
@@ -19353,7 +19361,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/test.html#Testing-Base-Julia-1",
+    "location": "stdlib/Test.html#Testing-Base-Julia-1",
     "page": "Unit Testing",
     "title": "Testing Base Julia",
     "category": "section",
@@ -19361,7 +19369,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/test.html#Test.@test",
+    "location": "stdlib/Test.html#Test.@test",
     "page": "Unit Testing",
     "title": "Test.@test",
     "category": "Macro",
@@ -19369,7 +19377,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/test.html#Test.@test_throws",
+    "location": "stdlib/Test.html#Test.@test_throws",
     "page": "Unit Testing",
     "title": "Test.@test_throws",
     "category": "Macro",
@@ -19377,7 +19385,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/test.html#Basic-Unit-Tests-1",
+    "location": "stdlib/Test.html#Basic-Unit-Tests-1",
     "page": "Unit Testing",
     "title": "Basic Unit Tests",
     "category": "section",
@@ -19385,7 +19393,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/test.html#Test.@testset",
+    "location": "stdlib/Test.html#Test.@testset",
     "page": "Unit Testing",
     "title": "Test.@testset",
     "category": "Macro",
@@ -19393,7 +19401,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/test.html#Working-with-Test-Sets-1",
+    "location": "stdlib/Test.html#Working-with-Test-Sets-1",
     "page": "Unit Testing",
     "title": "Working with Test Sets",
     "category": "section",
@@ -19401,7 +19409,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/test.html#Test.@inferred",
+    "location": "stdlib/Test.html#Test.@inferred",
     "page": "Unit Testing",
     "title": "Test.@inferred",
     "category": "Macro",
@@ -19409,7 +19417,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/test.html#Test.@test_logs",
+    "location": "stdlib/Test.html#Test.@test_logs",
     "page": "Unit Testing",
     "title": "Test.@test_logs",
     "category": "Macro",
@@ -19417,7 +19425,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/test.html#Test.@test_deprecated",
+    "location": "stdlib/Test.html#Test.@test_deprecated",
     "page": "Unit Testing",
     "title": "Test.@test_deprecated",
     "category": "Macro",
@@ -19425,7 +19433,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/test.html#Test.@test_warn",
+    "location": "stdlib/Test.html#Test.@test_warn",
     "page": "Unit Testing",
     "title": "Test.@test_warn",
     "category": "Macro",
@@ -19433,7 +19441,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/test.html#Test.@test_nowarn",
+    "location": "stdlib/Test.html#Test.@test_nowarn",
     "page": "Unit Testing",
     "title": "Test.@test_nowarn",
     "category": "Macro",
@@ -19441,7 +19449,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/test.html#Other-Test-Macros-1",
+    "location": "stdlib/Test.html#Other-Test-Macros-1",
     "page": "Unit Testing",
     "title": "Other Test Macros",
     "category": "section",
@@ -19449,7 +19457,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/test.html#Test.@test_broken",
+    "location": "stdlib/Test.html#Test.@test_broken",
     "page": "Unit Testing",
     "title": "Test.@test_broken",
     "category": "Macro",
@@ -19457,7 +19465,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/test.html#Test.@test_skip",
+    "location": "stdlib/Test.html#Test.@test_skip",
     "page": "Unit Testing",
     "title": "Test.@test_skip",
     "category": "Macro",
@@ -19465,7 +19473,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/test.html#Broken-Tests-1",
+    "location": "stdlib/Test.html#Broken-Tests-1",
     "page": "Unit Testing",
     "title": "Broken Tests",
     "category": "section",
@@ -19473,7 +19481,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/test.html#Test.record",
+    "location": "stdlib/Test.html#Test.record",
     "page": "Unit Testing",
     "title": "Test.record",
     "category": "Function",
@@ -19481,7 +19489,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/test.html#Test.finish",
+    "location": "stdlib/Test.html#Test.finish",
     "page": "Unit Testing",
     "title": "Test.finish",
     "category": "Function",
@@ -19489,7 +19497,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/test.html#Test.get_testset",
+    "location": "stdlib/Test.html#Test.get_testset",
     "page": "Unit Testing",
     "title": "Test.get_testset",
     "category": "Function",
@@ -19497,7 +19505,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/test.html#Test.get_testset_depth",
+    "location": "stdlib/Test.html#Test.get_testset_depth",
     "page": "Unit Testing",
     "title": "Test.get_testset_depth",
     "category": "Function",
@@ -19505,7 +19513,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/test.html#Creating-Custom-AbstractTestSet-Types-1",
+    "location": "stdlib/Test.html#Creating-Custom-AbstractTestSet-Types-1",
     "page": "Unit Testing",
     "title": "Creating Custom AbstractTestSet Types",
     "category": "section",
@@ -19513,7 +19521,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/unicode.html#",
+    "location": "stdlib/Unicode.html#",
     "page": "Unicode",
     "title": "Unicode",
     "category": "page",
@@ -19521,7 +19529,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/unicode.html#Base.Unicode.isassigned",
+    "location": "stdlib/Unicode.html#Base.Unicode.isassigned",
     "page": "Unicode",
     "title": "Base.Unicode.isassigned",
     "category": "Function",
@@ -19529,7 +19537,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/unicode.html#Base.Unicode.normalize",
+    "location": "stdlib/Unicode.html#Base.Unicode.normalize",
     "page": "Unicode",
     "title": "Base.Unicode.normalize",
     "category": "Function",
@@ -19537,7 +19545,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/unicode.html#Base.Unicode.graphemes",
+    "location": "stdlib/Unicode.html#Base.Unicode.graphemes",
     "page": "Unicode",
     "title": "Base.Unicode.graphemes",
     "category": "Function",
@@ -19545,7 +19553,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/unicode.html#Unicode-1",
+    "location": "stdlib/Unicode.html#Unicode-1",
     "page": "Unicode",
     "title": "Unicode",
     "category": "section",
@@ -21705,9 +21713,9 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "devdocs/libgit2.html#Base.push!-Tuple{Base.LibGit2.GitRevWalker,Base.LibGit2.GitHash}",
+    "location": "devdocs/libgit2.html#Base.LibGit2.push!-Tuple{Base.LibGit2.GitRevWalker,Base.LibGit2.GitHash}",
     "page": "Base.LibGit2",
-    "title": "Base.push!",
+    "title": "Base.LibGit2.push!",
     "category": "Method",
     "text": "LibGit2.push!(w::GitRevWalker, cid::GitHash)\n\nStart the GitRevWalker walker at commit cid. This function can be used to apply a function to all commits since a certain year, by passing the first commit of that year as cid and then passing the resulting w to map.\n\n\n\n"
 },
