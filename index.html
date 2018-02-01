@@ -4,7 +4,7 @@
 <head>
   <meta name="viewport" content="width=device-width; initial-scale=1.0;">
   <meta http-equiv="content-type" content="text/html; charset=utf-8" />
-  <title>The Julia Language</title>
+  <title>줄리아 언어</title>
   <meta name="author" content="Jeff Bezanson, Stefan Karpinski, Viral Shah, Alan Edelman, et al." />
   <link rel="stylesheet" href="/css/syntax.css" type="text/css" />
   <link rel="stylesheet" href="/css/screen.css" type="text/css" media="screen, projection" />
@@ -126,7 +126,7 @@
       
       
       
-      <li><a href="/ko/" class="">문서</a></li>
+      <li><a href="/ko/latest/" class="">문서</a></li>
   
       
       
@@ -189,7 +189,7 @@
       
       
       
-      <li><a href="http://juliacon.org" class="">줄리아콘</a></li>
+      <li><a href="http://juliacon.org" class="">줄리아컨퍼런스</a></li>
   
 </ul>
 
@@ -234,7 +234,7 @@
 -->
 
 
-<link rel="canonical" href="http://julialang.org" />
+<link rel="canonical" href="https://juliakorea.github.io" />
 
 <!--<div style="display: flex; flex-direction: row; align-items:center; margin-bottom: 32px">
     <div style="width: 48%; text-align: center">
@@ -259,10 +259,14 @@
     </div>
 </div>-->
 
-<p><a href="http://julialang.org">줄리아</a>는 수치 컴퓨팅(numerical computing)을 다루는 고급(high-level), 고성능의 동적 프로그래밍 언어입니다.
-세련된 컴파일러, <a href="/ko/manual/parallel-computing">분산 병렬 실행</a>, 정밀한 수치 표현, 그리고 <a href="/ko/#Standard-Library-1">방대한 수학 함수 라이브러리</a>를 만나보세요.
- 줄리아의 기반(Base) 라이브러리는 대부분 줄리아로 작성되었으며, <a href="/ko/stdlib/linalg">선형 대수</a>, <a href="/ko/stdlib/numbers#Random-Numbers-1">난수 생성</a>, <a href="https://github.com/JuliaDSP/DSP.jl">신호 처리</a>, 그리고 <a href="/ko/stdlib/strings#lib-strings-1">문자열 처리</a>를 위해 C와 포트란으로 작성된 고품질의 오픈소스 라이브러리들을 통합하였습니다.
-아울러 줄리아 개발 커뮤니티는 다양한 <a href="http://pkg.julialang.org">외부 패키지들</a>을 작업하며 활기차게 기여하고 있습니다. <a href="https://github.com/JuliaLang/IJulia.jl">IJulia</a>는 <a href="http://jupyter.org">주피터 프로젝트(Jupyter)</a>와 줄리아 커뮤니티의 공동 작업으로, 브라우저에서 줄리아를 실행, 편집하는 그래픽 노트북 인터페이스를 제공합니다.</p>
+<p><a href="https://julialang.org">줄리아</a>는 수치 컴퓨팅(numerical computing)을 다루는 고급(high-level), 고성능의 동적 프로그래밍 언어입니다.
+세련된 컴파일러, <a href="/ko/latest/manual/parallel-computing">분산 병렬 실행</a>, 정밀한 수치 표현, 그리고 <a href="/ko/latest/#Standard-Library-1">방대한 수학 함수 라이브러리</a>를
+만나보세요. 줄리아의 기반(Base) 라이브러리는 대부분 줄리아로 작성되었으며, <a href="/ko/latest/stdlib/LinearAlgebra/">선형 대수</a>, <a href="/ko/latest/stdlib/Random/">난수 생성</a>,
+<a href="https://github.com/JuliaDSP/">신호 처리</a>, 그리고 <a href="/ko/latest/manual/strings/#strings">문자열 처리</a>를 위해
+C와 포트란으로 작성된 고품질의 오픈소스 라이브러리들을 통합하였습니다.
+아울러 줄리아 개발 커뮤니티는 다양한 <a href="https://pkg.julialang.org">외부 패키지들</a>을 작업하며 활기차게 기여하고 있습니다.
+<a href="https://github.com/JuliaLang/IJulia.jl">IJulia</a>는 <a href="https://jupyter.org">주피터 프로젝트(Jupyter)</a>와 줄리아 커뮤니티의 공동 작업으로,
+브라우저에서 줄리아를 실행, 편집하는 그래픽 노트북 인터페이스를 제공합니다.</p>
 
 <!--
 This keynote talk by Stefan Karpinski at [ODSC Boston](https://www.odsc.com/boston) (2016) on [the two language problem](https://www.youtube.com/watch?v=B9moDuSYzGo) explains much of the motivation behind Julia:
@@ -272,8 +276,10 @@ This keynote talk by Stefan Karpinski at [ODSC Boston](https://www.odsc.com/bost
 </div>
 -->
 
-<p>Julia programs are organized around <a href="http://docs.julialang.org/en/stable/manual/methods/#man-methods">multiple dispatch</a>; by defining functions and overloading them for different combinations of argument types, which can also be user-defined.
-For a more in-depth discussion of the rationale and advantages of Julia over other systems, see the following highlights or read the <a href="http://docs.julialang.org/en/stable/manual/introduction/">introduction</a> in the <a href="http://docs.julialang.org">online manual</a>.</p>
+<p>줄리아 프로그램은 <a href="/ko/latest/manual/methods/#man-methods">멀티플 디스패치(multiple dispatch)</a>를 중심으로 이루어 집니다.
+함수를 정의하고 인자 타입을 다양하게 조합하여 오버로딩 할 수 있습니다.
+사용자가 정의한 타입도 함수의 인자 타입으로 쓸 수 있구요.
+다른 언어와 비교한 줄리아가 필요한 이유와 그 장점에 관한 깊은 내용은 <a href="/ko/latest/">온라인 매뉴얼</a>의 <a href="/ko/latest/manual/introduction/">소개글</a>에 있습니다.</p>
 
 <p>JuliaCon 2017, the annual conference on Julia was held from June 20th to June 24th at the University of California, Berkeley. Below is a random video from our youtube playlist of the talks. Click on the playlist icon to check out the other videos.</p>
 
