@@ -85,7 +85,7 @@ var documenterSearchIndex = {"docs": [
     "page": "줄리아 v0.7.0 릴리즈 노트",
     "title": "Breaking changes",
     "category": "section",
-    "text": "This section lists changes that do not have deprecation warnings.getindex(s::String, r::UnitRange{Int}) now throws UnicodeError if last(r) is not a valid index into s (#22572).\nntuple(f, n::Integer) throws ArgumentError if n is negative. Previously an empty tuple was returned (#21697).\nJuxtaposing string literals (e.g. \"x\"y) is now a syntax error (#20575).\nfinalizer(function, object) now returns object rather than nothing (#24679).\nThe constructor of SubString now checks if the requsted view range is defined by valid indices in the parent AbstractString (#22511).\nMacro calls with for expressions are now parsed as generators inside function argument lists (#18650). Examples:\nsum(@inbounds a[i] for i = 1:n) used to give a syntax error, but is now parsed as sum(@inbounds(a[i]) for i = 1:n).\nsum(@m x for i = 1:n end) used to parse the argument to sum as a 2-argument call to macro @m, but now parses it as a generator plus a syntax error for the dangling end.\n@__DIR__ returns the current working directory rather than nothing when not run from a file (#21759).\n@__FILE__ and @__DIR__ return information relative to the file that it was parsed from, rather than from the task-local SOURCE_PATH global when it was expanded.\nAll macros receive an extra argument __source__::LineNumberNode which describes the parser location in the source file for the @ of the macro call. It can be accessed as a normal argument variable in the body of the macro. This is implemented by inserting an extra leading argument into the Expr(:macrocall, :@name, LineNumberNode(...), args...) surface syntax. (#21746)\nPassing the same keyword argument multiple times is now a syntax error (#16937).\ngetsockname on a TCPSocket now returns the locally bound address and port of the socket. Previously the address of the remote endpoint was being returned (#21825).\nUsing ARGS within the ~/.juliarc.jl or within a .jl file loaded with --load will no longer contain the script name as the first argument. Instead the script name will be assigned to PROGRAM_FILE. (#22092)\nThe format for a ClusterManager specifying the cookie on the command line is now --worker=<cookie>. --worker <cookie> will not work as it is now an optional argument.\nThe representation of CartesianRange has changed to a tuple-of-AbstractUnitRanges; the start and stop fields are no longer present. Use first(R) and last(R) to obtain start/stop. (#20974)\nThe Diagonal, Bidiagonal, Tridiagonal and SymTridiagonal type definitions have changed from Diagonal{T}, Bidiagonal{T}, Tridiagonal{T} and SymTridiagonal{T} to Diagonal{T,V<:AbstractVector{T}}, Bidiagonal{T,V<:AbstractVector{T}}, Tridiagonal{T,V<:AbstractVector{T}} and SymTridiagonal{T,V<:AbstractVector{T}} respectively (#22718, #22925, #23035, #23154).\nWhen called with an argument that contains NaN elements, findmin and findmax now return the first NaN found and its corresponding index. Previously, NaN elements were ignored. The new behavior matches that of min, max, minimum, and maximum.\nisapprox(x,y) now tests norm(x-y) <= max(atol, rtol*max(norm(x), norm(y))) rather than norm(x-y) <= atol + ..., and rtol defaults to zero if an atol > 0 is specified (#22742).\nSpaces are no longer allowed between @ and the name of a macro in a macro call (#22868).\nJuxtaposition of a non-literal with a macro call (x@macro) is no longer valid syntax (#22868).\nOn a cluster, all files are now loaded from the local file system rather than node 1 (#22588). To load the same file everywhere from node 1, one possible alternative is to broadcast a call to include_string: @everywhere include_string(Main, $(read(\"filename\", String)), \"filename\"). Improving upon this API is left as an opportunity for packages.\nrandperm(n) and randcycle(n) now always return a Vector{Int} (independent of the type of n). Use the corresponding mutating functions randperm! and randcycle! to control the array type (#22723).\nHermitian now ignores any imaginary components in the diagonal instead of checking the diagonal. (#17367)\nWorker-worker connections are setup lazily for an :all_to_all topology. Use keyword arg lazy=false to force all connections to be setup during a addprocs call. (#22814)\nIn joinpath(a, b) on Windows, if the drive specifications of a and b do not match, joinpath now returns b instead of throwing an ArgumentError. joinpath(path...) is defined to be left associative, so if any argument has a drive path which does not match the drive of the join of the preceding paths, the prior ones are dropped. (#20912)\n^(A::AbstractMatrix{<:Integer}, p::Integer) now throws a DomainError if p < 0, unless A == one(A) or A == -one(A) (same as for ^(A::Integer, p::Integer)) (#23366).\n^(A::AbstractMatrix{<:Integer}, p::Integer) now promotes the element type in the same way as ^(A::Integer, p::Integer). This means, for instance, that [1 1; 0 1]^big(1) will return a Matrix{BigInt} instead of a Matrix{Int} (#23366).\nThe element type of the input is now preserved in unique. Previously the element type of the output was shrunk to fit the union of the type of each element in the input. (#22696)\nThe promote function now raises an error if its arguments are of different types and if attempting to convert them to a common type fails to change any of their types. This avoids stack overflows in the common case of definitions like f(x, y) = f(promote(x, y)...) (#22801).\nfindmin, findmax, indmin, and indmax used to always return linear indices. They now return CartesianIndexes for all but 1-d arrays, and in general return the keys of indexed collections (e.g. dictionaries) (#22907).\nThe openspecfun library is no longer built and shipped with Julia, as it is no longer used internally (#22390).\nAll loaded packges used to have bindings in Main (e.g. Main.Package). This is no longer the case; now bindings will only exist for packages brought into scope by typing using Package or import Package (#17997).\nslicedim(b::BitVector, 1, x) now consistently returns the same thing that b[x] would, consistent with its documentation. Previously it would return a BitArray{0} for scalar x (#20233).\nThe rules for mixed-signedness integer arithmetic (e.g. Int32(1) + UInt64(1)) have been simplified: if the arguments have different sizes (in bits), then the type of the larger argument is used. If the arguments have the same size, the unsigned type is used (#9292).\nAll command line arguments passed via -e, -E, and -L will be executed in the order given on the command line (#23665).\nI now yields UniformScaling{Bool}(true) rather than UniformScaling{Int64}(1) to better preserve types in operations involving I (#24396).\nThe return type of reinterpret has changed to ReinterpretArray. reinterpret on sparse arrays has been discontinued.\nBase.find_in_path is now Base.find_package or Base.find_source_file (#24320).\nfinalizer now takes functions or pointers as its first argument, and the object being finalized as its second (rather than the reverse). For the majority of use cases deprecation warnings will be triggered. However, deprecation warnings will not trigger where (1) the callable argument is not a subtype of Function; or (2) both arguments are Functions or Ptr{Cvoid}s (#24605).\nThe kill function now throws errors on user error (e.g. on permission errors), but returns successfully if the process had previously exited. Its return value has been removed. Use the process_running function to determine if a process has already exited.\nBroadcasting has been redesigned with an extensible public interface. The new API is documented at https://docs.julialang.org/en/latest/manual/interfaces/#Interfaces-1. AbstractArray types that specialized broadcasting using the old internal API will need to switch to the new API. (#20740)\nThe logging system has been redesigned - info and warn are deprecated and replaced with the logging macros @info, @warn, @debug and @error.  The logging function is also deprecated and replaced with AbstractLogger and the functions from the new standard Logging library. (#24490)\nThe RevString type has been removed from the language; reverse(::String) returns a String with code points (or fragments thereof) in reverse order. In general, reverse(s) should return a string of the same type and encoding as s with code points in reverse order; any string type overrides reverse to return a different type of string must also override reverseind to compute reversed indices correctly.\neachindex(A, B...) now requires that all inputs have the same number of elements. When the chosen indexing is Cartesian, they must have the same axes.\nAbstractRange objects are now considered as equal to other AbstractArray objects by == and isequal if all of their elements are equal (#16401). This has required changing the hashing algorithm: ranges now use an O(N) fallback instead of a O(1) specialized method unless they define the Base.RangeStepStyle trait; see its documentation for details. Types which support subtraction (operator -) must now implement widen for hashing to work inside heterogeneous arrays.\nfindn(x::AbstractArray) has been deprecated in favor of findall(!iszero, x), which now returns cartesian indices for multidimensional arrays (see below, #25532).\nfind has been renamed to findall. findall, findfirst, findlast, findnext now take and/or return the same type of indices as keys/pairs for AbstractArray, AbstractDict, AbstractString, Tuple and NamedTuple objects (#24774, #25545). In particular, this means that they use CartesianIndex objects for matrices and higher-dimensional arrays insted of linear indices as was previously the case. Use LinearIndices(a)[findall(f, a)] and similar constructs to compute linear indices.\nAbstractSet objects are now considered equal by == and isequal if all of their elements are equal (#25368). This has required changing the hashing algorithm for BitSet.\nthe default behavior of titlecase is changed in two ways (#23393):\ncharacters not starting a word are converted to lowercase; a new keyword argument strict is added which allows to get the old behavior when it's false.\nany non-letter character is considered as a word separator; to get the old behavior (only \"space\" characters are considered as word separators), use the keyword wordsep=isspace.\nThe tempname function used to create a file on Windows but not on other platforms. It now never creates a file (#9053)."
+    "text": "This section lists changes that do not have deprecation warnings.readuntil now does not include the delimiter in its result, matching the behavior of readline. Pass keep=true to get the old behavior (#25633).\ngetindex(s::String, r::UnitRange{Int}) now throws UnicodeError if last(r) is not a valid index into s (#22572).\nntuple(f, n::Integer) throws ArgumentError if n is negative. Previously an empty tuple was returned (#21697).\nJuxtaposing string literals (e.g. \"x\"y) is now a syntax error (#20575).\nfinalizer(function, object) now returns object rather than nothing (#24679).\nThe constructor of SubString now checks if the requsted view range is defined by valid indices in the parent AbstractString (#22511).\nMacro calls with for expressions are now parsed as generators inside function argument lists (#18650). Examples:\nsum(@inbounds a[i] for i = 1:n) used to give a syntax error, but is now parsed as sum(@inbounds(a[i]) for i = 1:n).\nsum(@m x for i = 1:n end) used to parse the argument to sum as a 2-argument call to macro @m, but now parses it as a generator plus a syntax error for the dangling end.\n@__DIR__ returns the current working directory rather than nothing when not run from a file (#21759).\n@__FILE__ and @__DIR__ return information relative to the file that it was parsed from, rather than from the task-local SOURCE_PATH global when it was expanded.\nAll macros receive an extra argument __source__::LineNumberNode which describes the parser location in the source file for the @ of the macro call. It can be accessed as a normal argument variable in the body of the macro. This is implemented by inserting an extra leading argument into the Expr(:macrocall, :@name, LineNumberNode(...), args...) surface syntax. (#21746)\nPassing the same keyword argument multiple times is now a syntax error (#16937).\ngetsockname on a TCPSocket now returns the locally bound address and port of the socket. Previously the address of the remote endpoint was being returned (#21825).\nUsing ARGS within the ~/.juliarc.jl or within a .jl file loaded with --load will no longer contain the script name as the first argument. Instead the script name will be assigned to PROGRAM_FILE. (#22092)\nThe format for a ClusterManager specifying the cookie on the command line is now --worker=<cookie>. --worker <cookie> will not work as it is now an optional argument.\nThe representation of CartesianRange has changed to a tuple-of-AbstractUnitRanges; the start and stop fields are no longer present. Use first(R) and last(R) to obtain start/stop. (#20974)\nThe Diagonal, Bidiagonal, Tridiagonal and SymTridiagonal type definitions have changed from Diagonal{T}, Bidiagonal{T}, Tridiagonal{T} and SymTridiagonal{T} to Diagonal{T,V<:AbstractVector{T}}, Bidiagonal{T,V<:AbstractVector{T}}, Tridiagonal{T,V<:AbstractVector{T}} and SymTridiagonal{T,V<:AbstractVector{T}} respectively (#22718, #22925, #23035, #23154).\nWhen called with an argument that contains NaN elements, findmin and findmax now return the first NaN found and its corresponding index. Previously, NaN elements were ignored. The new behavior matches that of min, max, minimum, and maximum.\nisapprox(x,y) now tests norm(x-y) <= max(atol, rtol*max(norm(x), norm(y))) rather than norm(x-y) <= atol + ..., and rtol defaults to zero if an atol > 0 is specified (#22742).\nSpaces are no longer allowed between @ and the name of a macro in a macro call (#22868).\nJuxtaposition of a non-literal with a macro call (x@macro) is no longer valid syntax (#22868).\nOn a cluster, all files are now loaded from the local file system rather than node 1 (#22588). To load the same file everywhere from node 1, one possible alternative is to broadcast a call to include_string: @everywhere include_string(Main, $(read(\"filename\", String)), \"filename\"). Improving upon this API is left as an opportunity for packages.\nrandperm(n) and randcycle(n) now always return a Vector{Int} (independent of the type of n). Use the corresponding mutating functions randperm! and randcycle! to control the array type (#22723).\nHermitian now ignores any imaginary components in the diagonal instead of checking the diagonal. (#17367)\nWorker-worker connections are setup lazily for an :all_to_all topology. Use keyword arg lazy=false to force all connections to be setup during a addprocs call. (#22814)\nIn joinpath(a, b) on Windows, if the drive specifications of a and b do not match, joinpath now returns b instead of throwing an ArgumentError. joinpath(path...) is defined to be left associative, so if any argument has a drive path which does not match the drive of the join of the preceding paths, the prior ones are dropped. (#20912)\n^(A::AbstractMatrix{<:Integer}, p::Integer) now throws a DomainError if p < 0, unless A == one(A) or A == -one(A) (same as for ^(A::Integer, p::Integer)) (#23366).\n^(A::AbstractMatrix{<:Integer}, p::Integer) now promotes the element type in the same way as ^(A::Integer, p::Integer). This means, for instance, that [1 1; 0 1]^big(1) will return a Matrix{BigInt} instead of a Matrix{Int} (#23366).\nThe element type of the input is now preserved in unique. Previously the element type of the output was shrunk to fit the union of the type of each element in the input. (#22696)\nThe promote function now raises an error if its arguments are of different types and if attempting to convert them to a common type fails to change any of their types. This avoids stack overflows in the common case of definitions like f(x, y) = f(promote(x, y)...) (#22801).\nindmin and indmax have been renamed to argmin and argmax, respectively (#25654).\nfindmin, findmax, argmin, and argmax used to always return linear indices. They now return CartesianIndexes for all but 1-d arrays, and in general return the keys of indexed collections (e.g. dictionaries) (#22907).\nThe openspecfun library is no longer built and shipped with Julia, as it is no longer used internally (#22390).\nAll loaded packges used to have bindings in Main (e.g. Main.Package). This is no longer the case; now bindings will only exist for packages brought into scope by typing using Package or import Package (#17997).\nslicedim(b::BitVector, 1, x) now consistently returns the same thing that b[x] would, consistent with its documentation. Previously it would return a BitArray{0} for scalar x (#20233).\nThe rules for mixed-signedness integer arithmetic (e.g. Int32(1) + UInt64(1)) have been simplified: if the arguments have different sizes (in bits), then the type of the larger argument is used. If the arguments have the same size, the unsigned type is used (#9292).\nAll command line arguments passed via -e, -E, and -L will be executed in the order given on the command line (#23665).\nI now yields UniformScaling{Bool}(true) rather than UniformScaling{Int64}(1) to better preserve types in operations involving I (#24396).\nThe return type of reinterpret has changed to ReinterpretArray. reinterpret on sparse arrays has been discontinued.\nBase.find_in_path is now Base.find_package or Base.find_source_file (#24320).\nfinalizer now takes functions or pointers as its first argument, and the object being finalized as its second (rather than the reverse). For the majority of use cases deprecation warnings will be triggered. However, deprecation warnings will not trigger where (1) the callable argument is not a subtype of Function; or (2) both arguments are Functions or Ptr{Cvoid}s (#24605).\nThe kill function now throws errors on user error (e.g. on permission errors), but returns successfully if the process had previously exited. Its return value has been removed. Use the process_running function to determine if a process has already exited.\nBroadcasting has been redesigned with an extensible public interface. The new API is documented at https://docs.julialang.org/en/latest/manual/interfaces/#Interfaces-1. AbstractArray types that specialized broadcasting using the old internal API will need to switch to the new API. (#20740)\nThe logging system has been redesigned - info and warn are deprecated and replaced with the logging macros @info, @warn, @debug and @error.  The logging function is also deprecated and replaced with AbstractLogger and the functions from the new standard Logging library. (#24490)\nThe RevString type has been removed from the language; reverse(::String) returns a String with code points (or fragments thereof) in reverse order. In general, reverse(s) should return a string of the same type and encoding as s with code points in reverse order; any string type overrides reverse to return a different type of string must also override reverseind to compute reversed indices correctly.\neachindex(A, B...) now requires that all inputs have the same number of elements. When the chosen indexing is Cartesian, they must have the same axes.\nAbstractRange objects are now considered as equal to other AbstractArray objects by == and isequal if all of their elements are equal (#16401). This has required changing the hashing algorithm: ranges now use an O(N) fallback instead of a O(1) specialized method unless they define the Base.RangeStepStyle trait; see its documentation for details. Types which support subtraction (operator -) must now implement widen for hashing to work inside heterogeneous arrays.\nfindn(x::AbstractArray) has been deprecated in favor of findall(!iszero, x), which now returns cartesian indices for multidimensional arrays (see below, #25532).\nfind has been renamed to findall. findall, findfirst, findlast, findnext now take and/or return the same type of indices as keys/pairs for AbstractArray, AbstractDict, AbstractString, Tuple and NamedTuple objects (#24774, #25545). In particular, this means that they use CartesianIndex objects for matrices and higher-dimensional arrays insted of linear indices as was previously the case. Use LinearIndices(a)[findall(f, a)] and similar constructs to compute linear indices.\nThe Base.HasShape iterator trait has gained a type parameter N indicating the number of dimensions, which must correspond to the length of the tuple returned by size (#25655).\nAbstractSet objects are now considered equal by == and isequal if all of their elements are equal (#25368). This has required changing the hashing algorithm for BitSet.\nthe default behavior of titlecase is changed in two ways (#23393):\ncharacters not starting a word are converted to lowercase; a new keyword argument strict is added which allows to get the old behavior when it's false.\nany non-letter character is considered as a word separator; to get the old behavior (only \"space\" characters are considered as word separators), use the keyword wordsep=isspace.\nThe tempname function used to create a file on Windows but not on other platforms. It now never creates a file (#9053)."
 },
 
 {
@@ -93,7 +93,7 @@ var documenterSearchIndex = {"docs": [
     "page": "줄리아 v0.7.0 릴리즈 노트",
     "title": "Library improvements",
     "category": "section",
-    "text": "The function thisind(s::AbstractString, i::Integer) returns the largest valid index less or equal than i in the string s or 0 if no such index exists (#24414).\nIrrational is now a subtype of AbstractIrrational (#24245).\nIntroduced the empty function, the functional pair to empty! which returns a new, empty container (#24390).\nJump to first/last history entries in the REPL via \"Alt-<\" and \"Alt->\" (#22829).\nThe function chop now accepts two arguments head and tail allowing to specify number of characters to remove from the head and tail of the string (#24126).\nget(io, :color, false) can now be used to query whether a stream io supports ANSI color codes (#25067), rather than using the undocumented Base.have_color global flag.\nFunctions first and last now accept nchar argument for AbstractString. If this argument is used they return a string consisting of first/last nchar characters from the original string (#23960).\nExpressions x^-n where n is an integer literal now correspond to inv(x)^n. For example, x^-1 is now essentially a synonym for inv(x), and works in a type-stable way even if typeof(x) != typeof(inv(x)) (#24240).\nNew Iterators.reverse(itr) for reverse-order iteration (#24187).  Iterator types T can implement start etc. for Iterators.Reverse{T} to support this.\nThe functions nextind and prevind now accept nchar argument that indicates the number of characters to move (#23805).\nThe functions strip, lstrip and rstrip now return SubString (#22496).\nThe functions strwidth and charwidth have been merged into textwidth(#20816).\nThe functions base and digits digits now accept a negative base (like ndigits did) (#21692).\nThe function randn now accepts complex arguments (Complex{T <: AbstractFloat}) (#21973).\nparse(Complex{T}, string) can parse complex numbers in common formats (#24713).\nThe function rand can now pick up random elements from strings, associatives and sets (#22228, #21960, #18155, #22224).\nMethod lists are now printed as a numbered list. In addition, the source code of a method can be opened in an editor by entering the corresponding number in the REPL and pressing ^Q (#22007).\ngetpeername on a TCPSocket returns the address and port of the remote endpoint of the TCP connection (#21825).\nresize! and sizehint! methods no longer over-reserve memory when the requested array size is more than double of its current size (#22038).\nThe crc32c function for CRC-32c checksums is now exported (#22274).\neye(::Type{Diagonal{T}}, m::Integer) has been deprecated in favor of Diagonal{T}(I, m) (#24413).\nThe output of versioninfo is now controlled with keyword arguments (#21974).\nThe function LibGit2.set_remote_url now always sets both the fetch and push URLs for a git repo. Additionally, the argument order was changed to be consistent with the git command line tool (#22062).\nlogspace now accepts a base keyword argument to specify the base of the logarithmic range. The base defaults to 10 (#22310).\nAdded unique! which is an inplace version of unique (#20549).\n@test isequal(x, y) and @test isapprox(x, y) now prints an evaluated expression when the test fails (#22296).\nUses of Val{c} in Base has been replaced with Val{c}(), which is now easily accessible via the @pure constructor Val(c). Functions are defined as f(::Val{c}) = ... and called by f(Val(c)). Notable affected functions include: ntuple, Base.literal_pow, sqrtm, lufact, lufact!, qrfact, qrfact!, cholfact, cholfact!, _broadcast!, reshape, cat and cat_t.\nA new @macroexpand1 macro for non recursive macro expansion (#21662).\nChars can now be concatenated with Strings and/or other Chars using * (#22532).\nDiagonal, Bidiagonal, Tridiagonal and SymTridiagonal are now parameterized on the type of the wrapped vectors, allowing Diagonal, Bidiagonal, Tridiagonal and SymTridiagonal matrices with arbitrary AbstractVectors (#22718, #22925, #23035, #23154).\nMutating versions of randperm and randcycle have been added: randperm! and randcycle! (#22723).\nBigFloat random numbers can now be generated (#22720).\nREPL Undo via Ctrl-/ and Ctrl-_\ndiagm now accepts several diagonal index/vector Pairs (#24047).\nNew function equalto(x), which returns a function that compares its argument to x using isequal (#23812).\nreinterpret now works on any AbstractArray using the new ReinterpretArray type. This supersedes the old behavior of reinterpret on Arrays. As a result, reinterpreting arrays with different alignment requirements (removed in 0.6) is once again allowed (#23750).\nThe keys of an Associative are now an AbstractSet. Base.KeyIterator{<:Associative} has been changed to KeySet{K, <:Associative{K}} <: AbstractSet{K} (#24580).\nNew function ncodeunits(s::AbstractString) gives the number of code units in a string. The generic definition is constant time but calls endof(s) which may be inefficient. Therefore custom string types may want to define direct ncodeunits methods.\nreverseind(s::AbstractString, i::Integer) now has an efficient generic fallback, so custom string types do not need to provide their own efficient defintions. The generic definition relies on ncodeunits however, so for optimal performance you may need to define a custom method for that function.\nThe global RNG is being re-seeded with its own seed at the beginning of each @testset, and have its original state restored at the end (#24445). This is breaking for testsets relying implicitly on the global RNG being in a specific state.\npermutedims(m::AbstractMatrix) is now short for permutedims(m, (2,1)), and is now a more convenient way of making a \"shallow transpose\" of a 2D array. This is the recommended approach for manipulating arrays of data, rather than the recursively defined, linear-algebra function transpose. Similarly, permutedims(v::AbstractVector) will create a row matrix (#24839).\nA new replace(A, old=>new) function is introduced to replace old by new in collection A. There are also two other methods with a different API, and a mutating variant, replace! (#22324).\nCartesianRange changes (#24715):\nInherits from AbstractArray, and linear indexing can be used to provide linear-to-cartesian conversion (#24715)\nIt has a new constructor taking an array\nseveral missing set-like operations have been added (#23528): union, intersect, symdiff, setdiff are now implemented for all collections with arbitrary many arguments, as well as the mutating counterparts (union! etc.). The performance is also much better in many cases. Note that this change is slightly breaking: all the non-mutating functions always return a new object even if only one argument is passed. Moreover the semantics of intersect and symdiff is changed for vectors:\nintersect doesn't preserve the multiplicity anymore (use filter for the old behavior)\nsymdiff has been made consistent with the corresponding methods for other containers, by taking the multiplicity of the arguments into account. Use unique to get the old behavior.\nThe type LinearIndices has been added, providing conversion from cartesian incices to linear indices using the normal indexing operation. (#24715)\nIdDict{K,V} replaces ObjectIdDict.  It has type parameters like other AbstractDict subtypes and its constructors mirror the ones of Dict. (#25210)"
+    "text": "The function thisind(s::AbstractString, i::Integer) returns the largest valid index less or equal than i in the string s or 0 if no such index exists (#24414).\nIrrational is now a subtype of AbstractIrrational (#24245).\nIntroduced the empty function, the functional pair to empty! which returns a new, empty container (#24390).\nJump to first/last history entries in the REPL via \"Alt-<\" and \"Alt->\" (#22829).\nThe function chop now accepts two arguments head and tail allowing to specify number of characters to remove from the head and tail of the string (#24126).\nget(io, :color, false) can now be used to query whether a stream io supports ANSI color codes (#25067), rather than using the undocumented Base.have_color global flag.\nFunctions first and last now accept nchar argument for AbstractString. If this argument is used they return a string consisting of first/last nchar characters from the original string (#23960).\nExpressions x^-n where n is an integer literal now correspond to inv(x)^n. For example, x^-1 is now essentially a synonym for inv(x), and works in a type-stable way even if typeof(x) != typeof(inv(x)) (#24240).\nNew Iterators.reverse(itr) for reverse-order iteration (#24187).  Iterator types T can implement start etc. for Iterators.Reverse{T} to support this.\nThe functions nextind and prevind now accept nchar argument that indicates the number of characters to move (#23805).\nThe functions strip, lstrip and rstrip now return SubString (#22496).\nThe functions strwidth and charwidth have been merged into textwidth(#20816).\nThe functions base and digits digits now accept a negative base (like ndigits did) (#21692).\nThe function randn now accepts complex arguments (Complex{T <: AbstractFloat}) (#21973).\nparse(Complex{T}, string) can parse complex numbers in common formats (#24713).\nThe function rand can now pick up random elements from strings, associatives and sets (#22228, #21960, #18155, #22224).\nMethod lists are now printed as a numbered list. In addition, the source code of a method can be opened in an editor by entering the corresponding number in the REPL and pressing ^Q (#22007).\ngetpeername on a TCPSocket returns the address and port of the remote endpoint of the TCP connection (#21825).\nresize! and sizehint! methods no longer over-reserve memory when the requested array size is more than double of its current size (#22038).\nThe crc32c function for CRC-32c checksums is now exported (#22274).\neye(::Type{Diagonal{T}}, m::Integer) has been deprecated in favor of Diagonal{T}(I, m) (#24413).\nThe output of versioninfo is now controlled with keyword arguments (#21974).\nThe function LibGit2.set_remote_url now always sets both the fetch and push URLs for a git repo. Additionally, the argument order was changed to be consistent with the git command line tool (#22062).\nlogspace now accepts a base keyword argument to specify the base of the logarithmic range. The base defaults to 10 (#22310).\nAdded unique! which is an inplace version of unique (#20549).\n@test isequal(x, y) and @test isapprox(x, y) now prints an evaluated expression when the test fails (#22296).\nUses of Val{c} in Base has been replaced with Val{c}(), which is now easily accessible via the @pure constructor Val(c). Functions are defined as f(::Val{c}) = ... and called by f(Val(c)). Notable affected functions include: ntuple, Base.literal_pow, sqrtm, lufact, lufact!, qrfact, qrfact!, cholfact, cholfact!, _broadcast!, reshape, cat and cat_t.\nA new @macroexpand1 macro for non recursive macro expansion (#21662).\nChars can now be concatenated with Strings and/or other Chars using * (#22532).\nDiagonal, Bidiagonal, Tridiagonal and SymTridiagonal are now parameterized on the type of the wrapped vectors, allowing Diagonal, Bidiagonal, Tridiagonal and SymTridiagonal matrices with arbitrary AbstractVectors (#22718, #22925, #23035, #23154).\nMutating versions of randperm and randcycle have been added: randperm! and randcycle! (#22723).\nBigFloat random numbers can now be generated (#22720).\nREPL Undo via Ctrl-/ and Ctrl-_\ndiagm now accepts several diagonal index/vector Pairs (#24047).\nNew function equalto(x), which returns a function that compares its argument to x using isequal (#23812).\nreinterpret now works on any AbstractArray using the new ReinterpretArray type. This supersedes the old behavior of reinterpret on Arrays. As a result, reinterpreting arrays with different alignment requirements (removed in 0.6) is once again allowed (#23750).\nThe keys of an Associative are now an AbstractSet. Base.KeyIterator{<:Associative} has been changed to KeySet{K, <:Associative{K}} <: AbstractSet{K} (#24580).\nNew function ncodeunits(s::AbstractString) gives the number of code units in a string. The generic definition is constant time but calls lastindex(s) which may be inefficient. Therefore custom string types may want to define direct ncodeunits methods.\nreverseind(s::AbstractString, i::Integer) now has an efficient generic fallback, so custom string types do not need to provide their own efficient defintions. The generic definition relies on ncodeunits however, so for optimal performance you may need to define a custom method for that function.\nThe global RNG is being re-seeded with its own seed at the beginning of each @testset, and have its original state restored at the end (#24445). This is breaking for testsets relying implicitly on the global RNG being in a specific state.\npermutedims(m::AbstractMatrix) is now short for permutedims(m, (2,1)), and is now a more convenient way of making a \"shallow transpose\" of a 2D array. This is the recommended approach for manipulating arrays of data, rather than the recursively defined, linear-algebra function transpose. Similarly, permutedims(v::AbstractVector) will create a row matrix (#24839).\nA new replace(A, old=>new) function is introduced to replace old by new in collection A. There are also two other methods with a different API, and a mutating variant, replace! (#22324).\nCartesianRange changes (#24715):\nInherits from AbstractArray, and linear indexing can be used to provide linear-to-cartesian conversion (#24715)\nIt has a new constructor taking an array\nseveral missing set-like operations have been added (#23528): union, intersect, symdiff, setdiff are now implemented for all collections with arbitrary many arguments, as well as the mutating counterparts (union! etc.). The performance is also much better in many cases. Note that this change is slightly breaking: all the non-mutating functions always return a new object even if only one argument is passed. Moreover the semantics of intersect and symdiff is changed for vectors:\nintersect doesn't preserve the multiplicity anymore (use filter for the old behavior)\nsymdiff has been made consistent with the corresponding methods for other containers, by taking the multiplicity of the arguments into account. Use unique to get the old behavior.\nThe type LinearIndices has been added, providing conversion from cartesian incices to linear indices using the normal indexing operation. (#24715)\nIdDict{K,V} replaces ObjectIdDict.  It has type parameters like other AbstractDict subtypes and its constructors mirror the ones of Dict. (#25210)"
 },
 
 {
@@ -109,7 +109,7 @@ var documenterSearchIndex = {"docs": [
     "page": "줄리아 v0.7.0 릴리즈 노트",
     "title": "Deprecated or removed",
     "category": "section",
-    "text": "The JULIA_HOME environment variable has been renamed to JULIA_BINDIR and Base.JULIA_HOME has been moved to Sys.BINDIR (#20899).\nThe keyword immutable is fully deprecated to struct, and type is fully deprecated to mutable struct (#19157, #20418).\nIndexing into multidimensional arrays with more than one index but fewer indices than there are dimensions is no longer permitted when those trailing dimensions have lengths greater than 1. Instead, reshape the array or add trailing indices so the dimensionality and number of indices match (#14770, #23628).\nindices(a) and indices(a,d) have been deprecated in favor of axes(a) and axes(a, d) (#25057).\nEnvHash has been renamed to EnvDict (#24167).\nUninitialized Array constructors of the form Array[{T,N}](shape...) have been deprecated in favor of equivalents accepting uninitialized (an alias for Uninitialized()) as their first argument, as in Array[{T,N}](uninitialized, shape...). For example, Vector(3) is now Vector(uninitialized, 3), Matrix{Int}((2, 4)) is now, Matrix{Int}(uninitialized, (2, 4)), and Array{Float32,3}(11, 13, 17) is now Array{Float32,3}(uninitialized, 11, 13, 17) (#24781).\nLinAlg.fillslots! has been renamed LinAlg.fillstored! (#25030).\nfill!(A::Diagonal, x) and fill!(A::AbstractTriangular, x) have been deprecated in favor of Base.LinAlg.fillstored!(A, x) (#24413).\neye has been deprecated in favor of I and Matrix constructors. Please see the deprecation warnings for replacement details (#24438).\nzeros(D::Diagonal[, opts...]) has been deprecated (#24654).\nUsing Bool values directly as indices is now deprecated and will be an error in the future. Convert them to Int before indexing if you intend to access index 1 for true and 0 for false.\nwhos has been renamed varinfo, and now returns a markdown table instead of printing output (#12131).\nUninitialized RowVector constructors of the form RowVector{T}(shape...) have been deprecated in favor of equivalents accepting uninitialized (an alias for Uninitialized()) as their first argument, as in RowVector{T}(uninitialized, shape...). For example, RowVector{Int}(3) is now RowVector{Int}(uninitialized, 3), and RowVector{Float32}((1, 4)) is now RowVector{Float32}(uninitialized, (1, 4)) (#24786).\nwritecsv(io, a; opts...) has been deprecated in favor of writedlm(io, a, ','; opts...) (#23529).\nThe method srand(rng, filename, n=4) has been deprecated (#21359).\nreadcsv(io[, T::Type]; opts...) has been deprecated in favor of readdlm(io, ','[, T]; opts...) (#23530).\nsparse(s::UniformScaling, m::Integer) has been deprecated in favor of the three-argument equivalent sparse(s::UniformScaling, m, n) (#24472).\nThe cholfact/cholfact! methods that accepted an uplo symbol have been deprecated in favor of using Hermitian (or Symmetric) views (#22187, #22188).\nThe thin keyword argument for orthogonal decomposition methods has been deprecated in favor of full, which has the opposite meaning: thin == true if and only if full == false (#24279).\nisposdef(A::AbstractMatrix, UL::Symbol) and isposdef!(A::AbstractMatrix, UL::Symbol) have been deprecated in favor of isposdef(Hermitian(A, UL)) and isposdef!(Hermitian(A, UL)) respectively (#22245).\nThe bkfact/bkfact! methods that accepted uplo and issymmetric symbols have been deprecated in favor of using Hermitian (or Symmetric) views (#22605).\nThe function current_module is deprecated and replaced with @__MODULE__. This caused the deprecation of some reflection methods (such as macroexpand and isconst), which now require a module argument. And it caused the bugfix of other default arguments to use the Main module (including whos, which)  (#22064).\nexpand(ex) and expand(module, ex) have been deprecated in favor of Meta.lower(module, ex) (#22064, #24278).\nones(A::AbstractArray[, opts...]) and zeros(A::AbstractArray[, opts...]) methods have been deprecated. For zeros(A), consider zero(A). For ones(A) or zeros(A), consider ones(size(A)), zeros(size(A)), fill(v, size(A)) for v an appropriate one or zero, fill!(copy(A), {1|0}), fill!(similar(A), {1|0}), or any of the preceding with different element type and/or shape depending on opts.... Where strictly necessary, consider fill!(similar(A[, opts...]), {one(eltype(A)) | zero(eltype(A))}). For an algebraic multiplicative identity, consider one(A) (#24656).\nThe Operators module is deprecated. Instead, import required operators explicitly from Base, e.g. import Base: +, -, *, / (#22251).\nBindings to the FFTW library have been removed from Base. The DFT framework for building FFT implementations is now in AbstractFFTs.jl, the bindings to the FFTW library are in FFTW.jl, and the Base signal processing functions which used FFTs are now in DSP.jl (#21956).\nThe corrected positional argument to cov has been deprecated in favor of a keyword argument with the same name (#21709).\nOmitting spaces around the ? and the : tokens in a ternary expression has been deprecated. Ternaries must now include some amount of whitespace, e.g. x ? a : b rather than x?a:b (#22523 and #22712).\n? can no longer be used as an identifier name (#22712)\nThe method replace(s::AbstractString, pat, r, [count]) is deprecated in favor of replace(s::AbstractString, pat => r; [count]) (#25165). Moreover, count cannot be negative anymore (use typemax(Int) instead (#22325).\nread(io, type, dims) is deprecated to read!(io, Array{type}(dims)) (#21450).\nread(::IO, ::Ref) is now a method of read!, since it mutates its Ref argument (#21592).\nnb_available is now bytesavailable (#25634).\nskipchars(io::IO, predicate; linecomment=nothing) is deprecated in favor of skipchars(predicate, io::IO; linecomment=nothing) (#25667).\nBidiagonal constructors now use a Symbol (:U or :L) for the upper/lower argument, instead of a Bool or a Char (#22703).\nBidiagonal, Tridiagonal and SymTridiagonal constructors that automatically converted the input vectors to the same type are deprecated in favor of explicit conversion (#22925, #23035, #23154.\nCalling nfields on a type to find out how many fields its instances have is deprecated. Use fieldcount instead. Use nfields only to get the number of fields in a specific object (#22350).\nfieldnames now operates only on types. To get the names of fields in an object, use fieldnames(typeof(x)) (#22350).\nInexactError, DomainError, and OverflowError now take arguments. InexactError(func::Symbol, type, -3) now prints as \"ERROR: InexactError: func(type, -3)\", DomainError(val, [msg]) prints as \"ERROR: DomainError with val:\\nmsg\", and OverflowError(msg) prints as \"ERROR: OverflowError: msg\". (#20005, #22751, #22761)\nThe operating system identification functions: is_linux, is_bsd, is_apple, is_unix, and is_windows, have been deprecated in favor of Sys.islinux, Sys.isbsd, Sys.isapple, Sys.isunix, and Sys.iswindows, respectively (#22182).\nThe forms of read, readstring, and eachline that accepted both a Cmd object and an input stream are deprecated. Use e.g. read(pipeline(stdin, cmd)) instead (#22762).\nThe unexported type AbstractIOBuffer has been renamed to GenericIOBuffer (#17360 #22796).\nDisplay has been renamed to AbstractDisplay (#24831).\nRemaining vectorized methods over SparseVectors, particularly floor, ceil, trunc, round, and most common transcendental functions such as exp, log, and sin variants, have been deprecated in favor of dot-syntax (#22961).\nThe method String(io::IOBuffer) is deprecated to String(take!(copy(io))) (#21438).\nThe function readstring is deprecated in favor of read(io, String) (#22793)\nThe function showall is deprecated. Showing entire values is the default, unless an IOContext specifying :limit=>true is in use (#22847).\nissubtype has been deprecated in favor of <: (which used to be an alias for issubtype).\nCalling write on non-isbits arrays is deprecated in favor of explicit loops or serialize (#6466).\nThe default juliarc.jl file on Windows has been removed. Now must explicitly include the full path if you need access to executables or libraries in the Sys.BINDIR directory, e.g. joinpath(Sys.BINDIR, \"7z.exe\") for 7z.exe (#21540).\nsqrtm has been deprecated in favor of sqrt (#23504).\nexpm has been deprecated in favor of exp (#23233).\nlogm has been deprecated in favor of log (#23505).\nfull has been deprecated in favor of more specific, better defined alternatives. On structured matrices A, consider instead Matrix(A), Array(A), SparseMatrixCSC(A), or sparse(A). On sparse arrays S, consider instead Vector(S), Matrix(S), or Array(S) as appropriate. On factorizations F, consider instead Matrix(F), Array(F), AbstractMatrix(F), or AbstractArray(F). On implicit orthogonal factors Q, consider instead Matrix(Q) or Array(Q); for implicit orthogonal factors that can be recovered in square or truncated form, see the deprecation message for square recovery instructions. On Symmetric, Hermitian, or AbstractTriangular matrices A, consider instead Matrix(S), Array(S), SparseMatrixCSC(S), or sparse(S). On Symmetric matrices A particularly, consider instead LinAlg.copytri!(copy(parent(A)), A.uplo). On Hermitian matrices A particularly, consider instead LinAlg.copytri!(copy(parent(A)), A.uplo, true). On UpperTriangular matrices A particularly, consider instead triu!(copy(parent(A))). On LowerTriangular matrices A particularly, consider instead tril!(copy(parent(A))) (#24250).\nspeye has been deprecated in favor of I, sparse, and SparseMatrixCSC constructor methods (#24356).\nCalling union with no arguments is deprecated; construct an empty set with an appropriate element type using Set{T}() instead (#23144).\nVectorized DateTime, Date, and format methods have been deprecated in favor of dot-syntax (#23207).\nBase.cpad has been removed; use an appropriate combination of rpad and lpad instead (#23187).\nctranspose and ctranspose! have been deprecated in favor of adjoint and adjoint!, respectively (#23235).\nfilter and filter! on dictionaries now pass a single key=>value pair to the argument function, instead of two arguments (#17886).\nrol, rol!, ror, and ror! have been deprecated in favor of specialized methods for circshift/circshift! (#23404).\nBase.SparseArrays.SpDiagIterator has been removed (#23261).\nThe tuple-of-types form of cfunction, cfunction(f, returntype, (types...)), has been deprecated in favor of the tuple-type form cfunction(f, returntype, Tuple{types...}) (#23066).\ndiagm(v::AbstractVector, k::Integer=0) has been deprecated in favor of diagm(k => v) (#24047).\ndiagm(x::Number) has been deprecated in favor of fill(x, 1, 1) (#24047).\ndiagm(A::SparseMatrixCSC) has been deprecated in favor of spdiagm(sparsevec(A)) (#23341).\ndiagm(A::BitMatrix) has been deprecated, use diagm(0 => vec(A)) or BitMatrix(Diagonal(vec(A))) instead (#23373, #24047).\nℯ (written as \\mscre<TAB> or \\euler<TAB>) is now the only (by default) exported name for Euler's number, and the type has changed from Irrational{:e} to Irrational{:ℯ} (#23427).\nThe mathematical constants π, pi, ℯ, e, γ, eulergamma, catalan, φ and golden have been moved from Base to a new module; Base.MathConstants. Only π, pi and ℯ are now exported by default from Base (#23427).\neu (previously an alias for ℯ) has been deprecated in favor of ℯ (or MathConstants.e) (#23427).\nGMP.gmp_version(), GMP.GMP_VERSION, GMP.gmp_bits_per_limb(), and GMP.GMP_BITS_PER_LIBM have been renamed to GMP.version(), GMP.VERSION, GMP.bits_per_libm(), and GMP.BITS_PER_LIBM, respectively. Similarly, MPFR.get_version(), has been renamed to MPFR.version() (#23323). Also, LinAlg.LAPACK.laver() has been renamed to LinAlg.LAPACK.version() and now returns a VersionNumber.\nselect, select!, selectperm and selectperm! have been renamed respectively to partialsort, partialsort!, partialsortperm and partialsortperm! (#23051).\nThe Range abstract type has been renamed to AbstractRange (#23570).\nmap on dictionaries previously operated on key=>value pairs. This behavior is deprecated, and in the future map will operate only on values (#5794).\nAutomatically broadcasted + and - for array + scalar, scalar - array, and so-on have been deprecated due to inconsistency with linear algebra. Use .+ and .- for these operations instead (#22880, #22932).\nisleaftype is deprecated in favor of the simpler predicates isconcretetype and isdispatchtuple. Concrete types are those that might equal typeof(x) for some x; isleaftype included some types for which this is not true. Those are now categorized more precisely as \"dispatch tuple types\" and \"!hasfreetypevars\" (not exported). (#17086, #25496)\ncontains(eq, itr, item) is deprecated in favor of any with a predicate (#23716).\nspdiagm(x::AbstractVector) has been deprecated in favor of sparse(Diagonal(x)) alternatively spdiagm(0 => x) (#23757).\nspdiagm(x::AbstractVector, d::Integer) and spdiagm(x::Tuple{<:AbstractVector}, d::Tuple{<:Integer}) have been deprecated in favor of spdiagm(d => x) and spdiagm(d[1] => x[1], d[2] => x[2], ...) respectively. The new spdiagm implementation now always returns a square matrix (#23757).\nspones(A::AbstractSparseArray) has been deprecated in favor of LinAlg.fillstored!(copy(A), 1) (#25037).\nConstructors for LibGit2.UserPasswordCredentials and LibGit2.SSHCredentials which take a prompt_if_incorrect argument are deprecated. Instead, prompting behavior is controlled using the allow_prompt keyword in the LibGit2.CredentialPayload constructor (#23690).\ngradient is deprecated and will be removed in the next release (#23816).\nThe timing functions tic, toc, and toq are deprecated in favor of @time and @elapsed (#17046).\nMethods of findfirst, findnext, findlast, and findprev that accept a value to search for are deprecated in favor of passing a predicate (#19186, #10593).\nfind functions now operate only on booleans by default. To look for non-zeros, use x->x!=0 or !iszero (#23120).\nThe ability of reinterpret to yield Arrays of different type than the underlying storage has been removed. The reinterpret function is still available, but now returns a ReinterpretArray. The three argument form of reinterpret that implicitly reshapes has been deprecated (#23750).\nbits has been deprecated in favor of bitstring (#24281, #24263).\nnum2hex and hex2num have been deprecated in favor of reinterpret combined with parse/hex (#22088).\ncopy! is deprecated for AbstractSet and AbstractDict, with the intention to re-enable it with a cleaner meaning in a future version (#24844).\ncopy! (resp. unsafe_copy!) is deprecated for AbstractArray and is renamed copyto! (resp. unsafe_copyto!); it will be re-introduced with a different meaning in a future version (#24808).\na:b is deprecated for constructing a StepRange when a and b have physical units (Dates and Times). Use a:s:b, where s = Dates.Day(1) or s = Dates.Second(1).\ntrues(A::AbstractArray) and falses(A::AbstractArray) are deprecated in favor of trues(size(A)) and falses(size(A)) respectively (#24595).\nworkspace is discontinued, check out Revise.jl for an alternative workflow (#25046).\ncumsum, cumprod, accumulate, their mutating versions, and diff all now require a dim argument instead of defaulting to using the first dimension unless there is only one dimension (#24684, #25457).\nThe sum_kbn and cumsum_kbn functions have been moved to the KahanSummation package (#24869).\nisnumber has been renamed to isnumeric (#25021).\nis_assigned_char and normalize_string have been renamed to isassigned and normalize, and moved to the new Unicode standard library module. graphemes has also been moved to that module (#25021).\nThe functions eigs and svds have been moved to the IterativeEigensolvers standard library module (#24714).\nSparse array functionality has moved to the SparseArrays standard library module (#25249).\nLinear algebra functionality, and specifically the LinAlg module has moved to the LinearAlgebra standard library module (#25571).\n@printf and @sprintf have been moved to the Printf standard library (#23929,#25056).\nThe Libdl module has moved to the Libdl standard library module (#25459).\nThe aliases Complex32, Complex64 and Complex128 have been deprecated in favor of ComplexF16, ComplexF32 and ComplexF64 respectively (#24647).\nBase.parentindexes and SharedArrays.localindexes have been renamed to parentindices and localindices, respectively. Similarly, the indexes field in the SubArray type has been renamed to indices without deprecation (#25088).\nAssociative has been deprecated in favor of AbstractDict (#25012).\nVoid has been renamed back to Nothing with an alias Cvoid for use when calling C with a return type of Cvoid or a return or argument type of Ptr{Cvoid} (#25162).\nNullable{T} has been deprecated and moved to the Nullables package (#23642). Use Union{T, Nothing} instead, or Union{Some{T}, Nothing} if nothing is a possible value (i.e. Nothing <: T). isnull(x) can be replaced with x === nothing and unsafe_get/get can be dropped or replaced with coalesce. NullException has been removed.\nunshift! and shift! have been renamed to pushfirst! and popfirst! (#23902)\nipermute! has been deprecated in favor of invpermute! (#25168).\nCartesianRange has been renamed CartesianIndices (#24715).\nsub2ind and ind2sub are deprecated in favor of using CartesianIndices and LinearIndices (#24715).\ngetindex(F::Factorization, s::Symbol) (usually seen as e.g. F[:Q]) is deprecated in favor of dot overloading (getproperty) so factors should now be accessed as e.g. F.Q instead of F[:Q] (#25184).\nsearch and rsearch have been deprecated in favor of findfirst/findnext and findlast/findprev respectively, in combination with the new equalto and occursin predicates for some methods (#24673\nismatch(regex, str) has been deprecated in favor of contains(str, regex) (#24673).\nlinspace and logspace now require an explicit number of elements to be supplied rather than defaulting to 50(#24794, #24805).\nsimilar(::Associative) has been deprecated in favor of empty(::Associative), and similar(::Associative, ::Pair{K, V}) has been deprecated in favour of empty(::Associative, K, V) (#24390).\nfindin(a, b) has been deprecated in favor of findall(occursin(b), a) (#24673).\nThe module Random.dSFMT is renamed Random.DSFMT (#25567).\nThe generic implementations of strides(::AbstractArray) and stride(::AbstractArray, ::Int)  have been deprecated. Subtypes of AbstractArray that implement the newly introduced strided  array interface should define their own strides method (#25321).\nmodule_parent, Base.datatype_module, and Base.function_module have been deprecated in favor of parentmodule ([#TODO]).\nrand(t::Tuple{Vararg{Int}}) is deprecated in favor of rand(Float64, t) or rand(t...); rand(::Tuple) will have another meaning in the future (#25429, #25278).\nObjectIdDict has been deprecated in favor of IdDict{Any,Any} (#25210).\ngc and gc_enable have been deprecated in favor of GC.gc and GC.enable (#25616).\nBase.@gc_preserve has been deprecated in favor of GC.@preserve (#25616)."
+    "text": "The JULIA_HOME environment variable has been renamed to JULIA_BINDIR and Base.JULIA_HOME has been moved to Sys.BINDIR (#20899).\nThe keyword immutable is fully deprecated to struct, and type is fully deprecated to mutable struct (#19157, #20418).\nIndexing into multidimensional arrays with more than one index but fewer indices than there are dimensions is no longer permitted when those trailing dimensions have lengths greater than 1. Instead, reshape the array or add trailing indices so the dimensionality and number of indices match (#14770, #23628).\nindices(a) and indices(a,d) have been deprecated in favor of axes(a) and axes(a, d) (#25057).\nEnvHash has been renamed to EnvDict (#24167).\nUninitialized Array constructors of the form Array[{T,N}](shape...) have been deprecated in favor of equivalents accepting uninitialized (an alias for Uninitialized()) as their first argument, as in Array[{T,N}](uninitialized, shape...). For example, Vector(3) is now Vector(uninitialized, 3), Matrix{Int}((2, 4)) is now, Matrix{Int}(uninitialized, (2, 4)), and Array{Float32,3}(11, 13, 17) is now Array{Float32,3}(uninitialized, 11, 13, 17) (#24781).\nLinAlg.fillslots! has been renamed LinAlg.fillstored! (#25030).\nfill!(A::Diagonal, x) and fill!(A::AbstractTriangular, x) have been deprecated in favor of Base.LinAlg.fillstored!(A, x) (#24413).\neye has been deprecated in favor of I and Matrix constructors. Please see the deprecation warnings for replacement details (#24438).\nzeros(D::Diagonal[, opts...]) has been deprecated (#24654).\nUsing Bool values directly as indices is now deprecated and will be an error in the future. Convert them to Int before indexing if you intend to access index 1 for true and 0 for false.\nwhos has been renamed varinfo, and now returns a markdown table instead of printing output (#12131).\nUninitialized RowVector constructors of the form RowVector{T}(shape...) have been deprecated in favor of equivalents accepting uninitialized (an alias for Uninitialized()) as their first argument, as in RowVector{T}(uninitialized, shape...). For example, RowVector{Int}(3) is now RowVector{Int}(uninitialized, 3), and RowVector{Float32}((1, 4)) is now RowVector{Float32}(uninitialized, (1, 4)) (#24786).\nwritecsv(io, a; opts...) has been deprecated in favor of writedlm(io, a, ','; opts...) (#23529).\nThe method srand(rng, filename, n=4) has been deprecated (#21359).\nreadcsv(io[, T::Type]; opts...) has been deprecated in favor of readdlm(io, ','[, T]; opts...) (#23530).\nsparse(s::UniformScaling, m::Integer) has been deprecated in favor of the three-argument equivalent sparse(s::UniformScaling, m, n) (#24472).\nThe cholfact/cholfact! methods that accepted an uplo symbol have been deprecated in favor of using Hermitian (or Symmetric) views (#22187, #22188).\nThe thin keyword argument for orthogonal decomposition methods has been deprecated in favor of full, which has the opposite meaning: thin == true if and only if full == false (#24279).\nisposdef(A::AbstractMatrix, UL::Symbol) and isposdef!(A::AbstractMatrix, UL::Symbol) have been deprecated in favor of isposdef(Hermitian(A, UL)) and isposdef!(Hermitian(A, UL)) respectively (#22245).\nThe bkfact/bkfact! methods that accepted uplo and issymmetric symbols have been deprecated in favor of using Hermitian (or Symmetric) views (#22605).\nThe function current_module is deprecated and replaced with @__MODULE__. This caused the deprecation of some reflection methods (such as macroexpand and isconst), which now require a module argument. And it caused the bugfix of other default arguments to use the Main module (including whos, which)  (#22064).\nexpand(ex) and expand(module, ex) have been deprecated in favor of Meta.lower(module, ex) (#22064, #24278).\nones(A::AbstractArray[, opts...]) and zeros(A::AbstractArray[, opts...]) methods have been deprecated. For zeros(A), consider zero(A). For ones(A) or zeros(A), consider ones(size(A)), zeros(size(A)), fill(v, size(A)) for v an appropriate one or zero, fill!(copy(A), {1|0}), fill!(similar(A), {1|0}), or any of the preceding with different element type and/or shape depending on opts.... Where strictly necessary, consider fill!(similar(A[, opts...]), {one(eltype(A)) | zero(eltype(A))}). For an algebraic multiplicative identity, consider one(A) (#24656).\nThe Operators module is deprecated. Instead, import required operators explicitly from Base, e.g. import Base: +, -, *, / (#22251).\nBindings to the FFTW library have been removed from Base. The DFT framework for building FFT implementations is now in AbstractFFTs.jl, the bindings to the FFTW library are in FFTW.jl, and the Base signal processing functions which used FFTs are now in DSP.jl (#21956).\nThe corrected positional argument to cov has been deprecated in favor of a keyword argument with the same name (#21709).\nOmitting spaces around the ? and the : tokens in a ternary expression has been deprecated. Ternaries must now include some amount of whitespace, e.g. x ? a : b rather than x?a:b (#22523 and #22712).\n? can no longer be used as an identifier name (#22712)\nThe method replace(s::AbstractString, pat, r, [count]) is deprecated in favor of replace(s::AbstractString, pat => r; [count]) (#25165). Moreover, count cannot be negative anymore (use typemax(Int) instead (#22325).\nread(io, type, dims) is deprecated to read!(io, Array{type}(dims)) (#21450).\nread(::IO, ::Ref) is now a method of read!, since it mutates its Ref argument (#21592).\nnb_available is now bytesavailable (#25634).\nskipchars(io::IO, predicate; linecomment=nothing) is deprecated in favor of skipchars(predicate, io::IO; linecomment=nothing) (#25667).\nBidiagonal constructors now use a Symbol (:U or :L) for the upper/lower argument, instead of a Bool or a Char (#22703).\nBidiagonal, Tridiagonal and SymTridiagonal constructors that automatically converted the input vectors to the same type are deprecated in favor of explicit conversion (#22925, #23035, #23154.\nCalling nfields on a type to find out how many fields its instances have is deprecated. Use fieldcount instead. Use nfields only to get the number of fields in a specific object (#22350).\nfieldnames now operates only on types. To get the names of fields in an object, use fieldnames(typeof(x)) (#22350).\nInexactError, DomainError, and OverflowError now take arguments. InexactError(func::Symbol, type, -3) now prints as \"ERROR: InexactError: func(type, -3)\", DomainError(val, [msg]) prints as \"ERROR: DomainError with val:\\nmsg\", and OverflowError(msg) prints as \"ERROR: OverflowError: msg\". (#20005, #22751, #22761)\nThe operating system identification functions: is_linux, is_bsd, is_apple, is_unix, and is_windows, have been deprecated in favor of Sys.islinux, Sys.isbsd, Sys.isapple, Sys.isunix, and Sys.iswindows, respectively (#22182).\nThe forms of read, readstring, and eachline that accepted both a Cmd object and an input stream are deprecated. Use e.g. read(pipeline(stdin, cmd)) instead (#22762).\nThe unexported type AbstractIOBuffer has been renamed to GenericIOBuffer (#17360 #22796).\nDisplay has been renamed to AbstractDisplay (#24831).\nRemaining vectorized methods over SparseVectors, particularly floor, ceil, trunc, round, and most common transcendental functions such as exp, log, and sin variants, have been deprecated in favor of dot-syntax (#22961).\nThe method String(io::IOBuffer) is deprecated to String(take!(copy(io))) (#21438).\nThe function readstring is deprecated in favor of read(io, String) (#22793)\nThe function showall is deprecated. Showing entire values is the default, unless an IOContext specifying :limit=>true is in use (#22847).\nissubtype has been deprecated in favor of <: (which used to be an alias for issubtype).\nCalling write on non-isbits arrays is deprecated in favor of explicit loops or serialize (#6466).\nThe default juliarc.jl file on Windows has been removed. Now must explicitly include the full path if you need access to executables or libraries in the Sys.BINDIR directory, e.g. joinpath(Sys.BINDIR, \"7z.exe\") for 7z.exe (#21540).\nsqrtm has been deprecated in favor of sqrt (#23504).\nexpm has been deprecated in favor of exp (#23233).\nlogm has been deprecated in favor of log (#23505).\nfull has been deprecated in favor of more specific, better defined alternatives. On structured matrices A, consider instead Matrix(A), Array(A), SparseMatrixCSC(A), or sparse(A). On sparse arrays S, consider instead Vector(S), Matrix(S), or Array(S) as appropriate. On factorizations F, consider instead Matrix(F), Array(F), AbstractMatrix(F), or AbstractArray(F). On implicit orthogonal factors Q, consider instead Matrix(Q) or Array(Q); for implicit orthogonal factors that can be recovered in square or truncated form, see the deprecation message for square recovery instructions. On Symmetric, Hermitian, or AbstractTriangular matrices A, consider instead Matrix(S), Array(S), SparseMatrixCSC(S), or sparse(S). On Symmetric matrices A particularly, consider instead LinAlg.copytri!(copy(parent(A)), A.uplo). On Hermitian matrices A particularly, consider instead LinAlg.copytri!(copy(parent(A)), A.uplo, true). On UpperTriangular matrices A particularly, consider instead triu!(copy(parent(A))). On LowerTriangular matrices A particularly, consider instead tril!(copy(parent(A))) (#24250).\nspeye has been deprecated in favor of I, sparse, and SparseMatrixCSC constructor methods (#24356).\nCalling union with no arguments is deprecated; construct an empty set with an appropriate element type using Set{T}() instead (#23144).\nVectorized DateTime, Date, and format methods have been deprecated in favor of dot-syntax (#23207).\nBase.cpad has been removed; use an appropriate combination of rpad and lpad instead (#23187).\nctranspose and ctranspose! have been deprecated in favor of adjoint and adjoint!, respectively (#23235).\nfilter and filter! on dictionaries now pass a single key=>value pair to the argument function, instead of two arguments (#17886).\nrol, rol!, ror, and ror! have been deprecated in favor of specialized methods for circshift/circshift! (#23404).\nBase.SparseArrays.SpDiagIterator has been removed (#23261).\nThe tuple-of-types form of cfunction, cfunction(f, returntype, (types...)), has been deprecated in favor of the tuple-type form cfunction(f, returntype, Tuple{types...}) (#23066).\ndiagm(v::AbstractVector, k::Integer=0) has been deprecated in favor of diagm(k => v) (#24047).\ndiagm(x::Number) has been deprecated in favor of fill(x, 1, 1) (#24047).\ndiagm(A::SparseMatrixCSC) has been deprecated in favor of spdiagm(sparsevec(A)) (#23341).\ndiagm(A::BitMatrix) has been deprecated, use diagm(0 => vec(A)) or BitMatrix(Diagonal(vec(A))) instead (#23373, #24047).\nℯ (written as \\mscre<TAB> or \\euler<TAB>) is now the only (by default) exported name for Euler's number, and the type has changed from Irrational{:e} to Irrational{:ℯ} (#23427).\nThe mathematical constants π, pi, ℯ, e, γ, eulergamma, catalan, φ and golden have been moved from Base to a new module; Base.MathConstants. Only π, pi and ℯ are now exported by default from Base (#23427).\neu (previously an alias for ℯ) has been deprecated in favor of ℯ (or MathConstants.e) (#23427).\nGMP.gmp_version(), GMP.GMP_VERSION, GMP.gmp_bits_per_limb(), and GMP.GMP_BITS_PER_LIBM have been renamed to GMP.version(), GMP.VERSION, GMP.bits_per_libm(), and GMP.BITS_PER_LIBM, respectively. Similarly, MPFR.get_version(), has been renamed to MPFR.version() (#23323). Also, LinAlg.LAPACK.laver() has been renamed to LinAlg.LAPACK.version() and now returns a VersionNumber.\nselect, select!, selectperm and selectperm! have been renamed respectively to partialsort, partialsort!, partialsortperm and partialsortperm! (#23051).\nThe Range abstract type has been renamed to AbstractRange (#23570).\nmap on dictionaries previously operated on key=>value pairs. This behavior is deprecated, and in the future map will operate only on values (#5794).\nAutomatically broadcasted + and - for array + scalar, scalar - array, and so-on have been deprecated due to inconsistency with linear algebra. Use .+ and .- for these operations instead (#22880, #22932).\nisleaftype is deprecated in favor of the simpler predicates isconcretetype and isdispatchtuple. Concrete types are those that might equal typeof(x) for some x; isleaftype included some types for which this is not true. Those are now categorized more precisely as \"dispatch tuple types\" and \"!hasfreetypevars\" (not exported). (#17086, #25496)\ncontains(eq, itr, item) is deprecated in favor of any with a predicate (#23716).\nspdiagm(x::AbstractVector) has been deprecated in favor of sparse(Diagonal(x)) alternatively spdiagm(0 => x) (#23757).\nspdiagm(x::AbstractVector, d::Integer) and spdiagm(x::Tuple{<:AbstractVector}, d::Tuple{<:Integer}) have been deprecated in favor of spdiagm(d => x) and spdiagm(d[1] => x[1], d[2] => x[2], ...) respectively. The new spdiagm implementation now always returns a square matrix (#23757).\nspones(A::AbstractSparseArray) has been deprecated in favor of LinAlg.fillstored!(copy(A), 1) (#25037).\nConstructors for LibGit2.UserPasswordCredentials and LibGit2.SSHCredentials which take a prompt_if_incorrect argument are deprecated. Instead, prompting behavior is controlled using the allow_prompt keyword in the LibGit2.CredentialPayload constructor (#23690).\ngradient is deprecated and will be removed in the next release (#23816).\nThe timing functions tic, toc, and toq are deprecated in favor of @time and @elapsed (#17046).\nMethods of findfirst, findnext, findlast, and findprev that accept a value to search for are deprecated in favor of passing a predicate (#19186, #10593).\nfind functions now operate only on booleans by default. To look for non-zeros, use x->x!=0 or !iszero (#23120).\nThe ability of reinterpret to yield Arrays of different type than the underlying storage has been removed. The reinterpret function is still available, but now returns a ReinterpretArray. The three argument form of reinterpret that implicitly reshapes has been deprecated (#23750).\nbits has been deprecated in favor of bitstring (#24281, #24263).\nnum2hex and hex2num have been deprecated in favor of reinterpret combined with parse/hex (#22088).\ncopy! is deprecated for AbstractSet and AbstractDict, with the intention to re-enable it with a cleaner meaning in a future version (#24844).\ncopy! (resp. unsafe_copy!) is deprecated for AbstractArray and is renamed copyto! (resp. unsafe_copyto!); it will be re-introduced with a different meaning in a future version (#24808).\na:b is deprecated for constructing a StepRange when a and b have physical units (Dates and Times). Use a:s:b, where s = Dates.Day(1) or s = Dates.Second(1).\ntrues(A::AbstractArray) and falses(A::AbstractArray) are deprecated in favor of trues(size(A)) and falses(size(A)) respectively (#24595).\nworkspace is discontinued, check out Revise.jl for an alternative workflow (#25046).\ncumsum, cumprod, accumulate, their mutating versions, and diff all now require a dim argument instead of defaulting to using the first dimension unless there is only one dimension (#24684, #25457).\nThe sum_kbn and cumsum_kbn functions have been moved to the KahanSummation package (#24869).\nisnumber has been renamed to isnumeric (#25021).\nis_assigned_char and normalize_string have been renamed to isassigned and normalize, and moved to the new Unicode standard library module. graphemes has also been moved to that module (#25021).\nThe functions eigs and svds have been moved to the IterativeEigensolvers standard library module (#24714).\nSparse array functionality has moved to the SparseArrays standard library module (#25249).\nLinear algebra functionality, and specifically the LinAlg module has moved to the LinearAlgebra standard library module (#25571).\n@printf and @sprintf have been moved to the Printf standard library (#23929,#25056).\nThe Libdl module has moved to the Libdl standard library module (#25459).\nThe aliases Complex32, Complex64 and Complex128 have been deprecated in favor of ComplexF16, ComplexF32 and ComplexF64 respectively (#24647).\nBase.parentindexes and SharedArrays.localindexes have been renamed to parentindices and localindices, respectively. Similarly, the indexes field in the SubArray type has been renamed to indices without deprecation (#25088).\nAssociative has been deprecated in favor of AbstractDict (#25012).\nVoid has been renamed back to Nothing with an alias Cvoid for use when calling C with a return type of Cvoid or a return or argument type of Ptr{Cvoid} (#25162).\nNullable{T} has been deprecated and moved to the Nullables package (#23642). Use Union{T, Nothing} instead, or Union{Some{T}, Nothing} if nothing is a possible value (i.e. Nothing <: T). isnull(x) can be replaced with x === nothing and unsafe_get/get can be dropped or replaced with coalesce. NullException has been removed.\nunshift! and shift! have been renamed to pushfirst! and popfirst! (#23902)\nipermute! has been deprecated in favor of invpermute! (#25168).\nCartesianRange has been renamed CartesianIndices (#24715).\nsub2ind and ind2sub are deprecated in favor of using CartesianIndices and LinearIndices (#24715).\ngetindex(F::Factorization, s::Symbol) (usually seen as e.g. F[:Q]) is deprecated in favor of dot overloading (getproperty) so factors should now be accessed as e.g. F.Q instead of F[:Q] (#25184).\nsearch and rsearch have been deprecated in favor of findfirst/findnext and findlast/findprev respectively, in combination with the new equalto and occursin predicates for some methods (#24673\nismatch(regex, str) has been deprecated in favor of contains(str, regex) (#24673).\nlinspace and logspace now require an explicit number of elements to be supplied rather than defaulting to 50(#24794, #24805).\nsimilar(::Associative) has been deprecated in favor of empty(::Associative), and similar(::Associative, ::Pair{K, V}) has been deprecated in favour of empty(::Associative, K, V) (#24390).\nfindin(a, b) has been deprecated in favor of findall(occursin(b), a) (#24673).\nmodule_name has been deprecated in favor of a new, general nameof function. Similarly, the unexported Base.function_name and Base.datatype_name have been deprecated in favor of nameof methods (#25622).\nThe module Random.dSFMT is renamed Random.DSFMT (#25567).\nRandom.RandomDevice(unlimited::Bool) (on non-Windows systems) is deprecated in favor of Random.RandomDevice(; unlimited=unlimited) (#25668).\nThe generic implementations of strides(::AbstractArray) and stride(::AbstractArray, ::Int)  have been deprecated. Subtypes of AbstractArray that implement the newly introduced strided  array interface should define their own strides method (#25321).\nmodule_parent, Base.datatype_module, and Base.function_module have been deprecated in favor of parentmodule ([#TODO]).\nrand(t::Tuple{Vararg{Int}}) is deprecated in favor of rand(Float64, t) or rand(t...); rand(::Tuple) will have another meaning in the future (#25429, #25278).\nThe assert function (and @assert macro) have been documented that they are not guaranteed to run under various optimization levels and should therefore not be used to e.g. verify passwords.\nObjectIdDict has been deprecated in favor of IdDict{Any,Any} (#25210).\ngc and gc_enable have been deprecated in favor of GC.gc and GC.enable (#25616).\nBase.@gc_preserve has been deprecated in favor of GC.@preserve (#25616).\nscale! has been deprecated in favor of mul!, lmul!, and rmul! (#25701, #25812).\nendof(a) has been renamed to lastindex(a), and the end keyword in indexing expressions now lowers to either lastindex(a) (in the case with only one index) or lastindex(a, d) (in cases where there is more than one index and end appears at dimension d) (#23554, #25763).\nDateTime(), Date(), and Time() have been deprecated, instead use DateTime(1), Date(1) and Time(0) respectively (#23724)."
 },
 
 {
@@ -149,7 +149,7 @@ var documenterSearchIndex = {"docs": [
     "page": "시작하기",
     "title": "시작하기",
     "category": "section",
-    "text": "줄리아의 설치는 어렵지 않다.  미리 컴파일된 실행파일을 이용하거나, 아니면 소스로부터 직접 컴파일하는 두가지 방법이 존재한다. https://julialang.org/downloads/에서  알려주는 방법에 따라 Julia를 다운로드하고 설치하면 된다.Julia를 처음 접할 때는 대화형 실행 환경을 통해서 시작하는 것이 가장 쉽게 Julia를 익힐 수 있는 방법이다. 대화형 실행 환경은 단순히 Julia 실행파일을 더블 클릭하거나, 명령창에서 julia 명령어를 입력하여 실행할 수 있다.$ julia\n               _\n   _       _ _(_)_     |  A fresh approach to technical computing\n  (_)     | (_) (_)    |  Documentation: https://docs.julialang.org\n   _ _   _| |_  __ _   |  Type \"?help\" for help.\n  | | | | | | |/ _` |  |\n  | | |_| | | | (_| |  |  Version 0.5.0-dev+2440 (2016-02-01 02:22 UTC)\n _/ |\\__'_|_|_|\\__'_|  |  Commit 2bb94d6 (11 days old master)\n|__/                   |  x86_64-apple-darwin13.1.0\n\njulia> 1 + 2\n3\n\njulia> ans\n3대화형 실행 환경을 종료하기 위해서는 ^D(컨트롤 키와 d 키를 함께 누른다.) 를 입력하거나  quit()를 대화형 실행 환경 입력창에 타이핑한다. 대화형 실행 환경을 실행하면, 위와 같이 julia 배너가 보여지고, 커서창이 사용자의 입력을 기다리며 깜빡이고 있다. 사용자가 1 + 2, 와 같은 표현식을 입력한 뒤, 엔터 버튼을 누르는 순간, Julia는 표현식을 평가하고 그 결과를 보여준다. 만약 사용자가 입력한 표현식이 세미콜론(;)으로 끝난다면, 대화형 실행 환경은 결과를 바로 보여주지 않는다. 대신에 ans 라는 변수가 결과를 보여주든 보여주지 않든 가장 마지막으로 계산된 표현식의 결과를 저장하고 있다 ans 변수는 대화형 실행 환경에서만 존재하며, 다른 방식으로 동작하는 Julia 코드 상에서는 나타나지 않는다.file.jl라는 소스 파일에 저장되어 있는 표현식을 계산하기 위해서는, include(\"file.jl\")와 같이 입력한다.대화형 실행 환경을 이용하지 않고 파일에 저장되어 있는 소스 코드를 실행하기 위해서는, 소스 코드 파일 이름을julia 명령어의 첫번째 매개 변수로 넣어서 실행한다.명령어:$ julia script.jl arg1 arg2...예제와 같이julia 실행 명령 뒤에 오는 매개변수들은 전역 상수 ARGS라고 불리우는 script.jl라는 프로그램의 명령줄 인자로 작동한다. 이 프로그램의 이름은 전역 상수 PROGRAM_FILE 에도 설정된다. 또한 ARGS는 이 뿐만이 아니라-e 옵션을 통해서 julia 스크립트를 실행할 때도 설정할 수 있음을 알 필요가 있다. 그러나 이 경우에는 PROGRAM_FILE 은 아무것도 설정되지 않은 채로 실행될 것이다.(아래의 julia 도움말을 보도록 하자.) 예를 들어, 단순히 스크립트에 주어진 명령줄 인자를 출력할 때는 다음과 같이 입력하면 된다.$ julia -e 'println(PROGRAM_FILE); for x in ARGS; println(x); end' foo bar\n\nfoo\nbar아니면 저 코드를 스크립트 파일에 넣고 실행시켜도 가능하다.$ echo 'println(PROGRAM_FILE); for x in ARGS; println(x); end' > script.jl\n$ julia script.jl foo bar\nscript.jl\nfoo\nbar-- 구분자는 명령어와 줄리아에 넘겨줄 인자를 구분하는데 사용한다.$ julia --color=yes -O -- foo.jl arg1 arg2..Julia는 -p 옵션이나 --machine-file 옵션을 이용하여 병렬 환경에서 실행시킬 수 있다. -p n 옵션은 n개의 worker 프로세스를 생성하지만, --machine-file file 옵션은 file의 각 행에 지정된 노드마다 worker를 생성한다. file 에 지정된 노드(machine)들은 ssh 로그인을 통해 패스워드가 필요없이 실행할 수 있어야 하며, Julia는 현재 호스트와 같은 경로에 설치가 되어 있어야 한다. file 에 작성되는 노드는 [count*][user@]host[:port] [bind_addr[:port]] 와 같은 형식으로 작성한다. user 는 현재 user id를 나타내고, port 는 기본 ssh port, count 는 각 노드당 생성하는 worker의 개수 (기본값 : 1) bin-to bind_addr[:port] 은 선택적인 옵션으로 다른 worker들이 현재의 worker로 연결하기 위해 필요한 특정 ip 주소와 포트를 지정한다.만약 Julia가 실행할 때마다 실행되는 코드가 있다면, 그 코드를 ~/.juliarc.ji 에 넣으면 된다.$ echo 'println(\"Greetings! 你好! 안녕하세요?\")' > ~/.juliarc.jl\n$ julia\nGreetings! 你好! 안녕하세요?\n\n...perl 과 ruby 와 같이,  Julia 코드를 실행하고 옵션을 지정하는 방법은 다음과 같이 여러가지가 있다.julia [switches] -- [programfile] [args...]\n -v, --version             버전 정보를 표시한다.\n -h, --help                이 메세지를 표시한다.\n\n -J, --sysimage <file>     <file>이라는 시스템 이미지 파일을 로드한 뒤 실행한다.\n -H, --home <dir>          julia 실행파일의 위치를 지정한다.\n --startup-file={yes|no}   ~/.juliarc.jl를 불러온다.\n --handle-signals={yes|no} Julia의 기본 시그널 핸들러를 켜거나 끈다.\n --sysimage-native-code={yes|no}\n                           시스템 이미지의 기존 코드 사용/사용하지 않는다.\n --compiled-modules={yes|no}\n                           모듈의 사전 증분 컴파일을 활성화/비활성화 한다.\n\n -e, --eval <expr>         <expr>를 실행만 한다\n -E, --print <expr>        <expr>를 실행하고 표시한다.\n -L, --load <file>         <file>을 모든 프로세서에 로드한다.\n\n -p, --procs {N|auto}      N개의 worker 프로세스를 추가로 생성한다. \"auto\"는 현재 Julia를 실행하는 컴퓨터의 최대 코어수만큼 worker 프로세스를 생성한다.\n                           \n --machine-file <file>      <file>에 나열된 호스트에서 worker 프로세스를 실행한다.\n\n -i                        대화형 모드; PEPL을 돌리며 ininteractive()는 true이다.\n -q, --quiet               시작할 때 배너, REPL 경고를 제거한다.\n --banner={yes|no}         시작 배너 사용/사용하지 않는다.\n --color={yes|no}          모든 텍스트에 색상을 표시하거나 표시하지 않는다.\n --history-file={yes|no}   작업내역을 저장하거나 로드한다.\n\n --depwarn={yes|no|error}  문법과 함수가 폐기됐다는 경고를 활성화/비활성화 한다.(\"error\"는 경고를 에러로 바꾼다.)\n --warn-overwrite={yes|no} 메소드 오버라이딩 경고를 활성화/비활성화 한다.\n\n -C, --cpu-target <target> <target>까지의 CUPU기능만을 사용한다() 사용 가능한 옵션을 보려면 \"help\"로 설정)\n -O, --optimize={0,1,2,3}  코드 실행시간에 관련된 최적화를 실행한다.(지정되지 않을 경우 2단계 실행, 레벨 이외의 값을 사용할 경우 3단계 실행)\n -g, -g <level>            디버그 정보 생성 수준을 활성화/비활성화 합니다.(지정되지 않을 경우 레벨 1, 레벨 이외의 값을 사용할 경우 레벨 2)\n --inline={yes|no}         @inline으로 선언된 함수를 덮어쓰는 경우를 포함해서, inlining을 허용할지 결정한다.\n --check-bounds={yes|no}   배열의 경계 체크를 항상 실행/생략한다. (변수 선언을 무시)\n --math-mode={ieee,fast}   IEEE 부동소수점 표준을 쓰거나(변수 선언을 무시) 소스에서 선언된 부동소수점을 따른다.\n\n --code-coverage={none|user|all}, --code-coverage\n                           소스 코드 라인의 실행 횟수를 기록한다. (기본값:\"user\")\n --track-allocation={none|user|all}, --track-allocation\n                           각 소스 코드 라인에 의해 할당되는  바이트 수를 기록한다."
+    "text": "줄리아의 설치는 어렵지 않다.  미리 컴파일된 실행파일을 이용하거나, 아니면 소스로부터 직접 컴파일하는 두가지 방법이 존재한다. https://julialang.org/downloads/에서  알려주는 방법에 따라 Julia를 다운로드하고 설치하면 된다.Julia를 처음 접할 때는 대화형 실행 환경을 통해서 시작하는 것이 가장 쉽게 Julia를 익힐 수 있는 방법이다. 대화형 실행 환경은 단순히 Julia 실행파일을 더블 클릭하거나, 명령창에서 julia 명령어를 입력하여 실행할 수 있다.$ julia\n               _\n   _       _ _(_)_     |  A fresh approach to technical computing\n  (_)     | (_) (_)    |  Documentation: https://docs.julialang.org\n   _ _   _| |_  __ _   |  Type \"?help\" for help.\n  | | | | | | |/ _` |  |\n  | | |_| | | | (_| |  |  Version 0.5.0-dev+2440 (2016-02-01 02:22 UTC)\n _/ |\\__'_|_|_|\\__'_|  |  Commit 2bb94d6 (11 days old master)\n|__/                   |  x86_64-apple-darwin13.1.0\n\njulia> 1 + 2\n3\n\njulia> ans\n3대화형 실행 환경을 종료하기 위해서는 ^D(컨트롤 키와 d 키를 함께 누른다.) 를 입력하거나  quit()를 대화형 실행 환경 입력창에 타이핑한다. 대화형 실행 환경을 실행하면, 위와 같이 julia 배너가 보여지고, 커서창이 사용자의 입력을 기다리며 깜빡이고 있다. 사용자가 1 + 2, 와 같은 표현식을 입력한 뒤, 엔터 버튼을 누르는 순간, Julia는 표현식을 평가하고 그 결과를 보여준다. 만약 사용자가 입력한 표현식이 세미콜론(;)으로 끝난다면, 대화형 실행 환경은 결과를 바로 보여주지 않는다. 대신에 ans 라는 변수가 결과를 보여주든 보여주지 않든 가장 마지막으로 계산된 표현식의 결과를 저장하고 있다 ans 변수는 대화형 실행 환경에서만 존재하며, 다른 방식으로 동작하는 Julia 코드 상에서는 나타나지 않는다.file.jl라는 소스 파일에 저장되어 있는 표현식을 계산하기 위해서는, include(\"file.jl\")와 같이 입력한다.대화형 실행 환경을 이용하지 않고 파일에 저장되어 있는 소스 코드를 실행하기 위해서는, 소스 코드 파일 이름을julia 명령어의 첫번째 매개 변수로 넣어서 실행한다.명령어:$ julia script.jl arg1 arg2...예제와 같이julia 실행 명령 뒤에 오는 매개변수들은 전역 상수 ARGS라고 불리우는 script.jl라는 프로그램의 명령줄 인자로 작동한다. 이 프로그램의 이름은 전역 상수 PROGRAM_FILE 에도 설정된다. 또한 ARGS는 이 뿐만이 아니라-e 옵션을 통해서 julia 스크립트를 실행할 때도 설정할 수 있음을 알 필요가 있다. 그러나 이 경우에는 PROGRAM_FILE 은 아무것도 설정되지 않은 채로 실행될 것이다.(아래의 julia 도움말을 보도록 하자.) 예를 들어, 단순히 스크립트에 주어진 명령줄 인자를 출력할 때는 다음과 같이 입력하면 된다.$ julia -e 'println(PROGRAM_FILE); for x in ARGS; println(x); end' foo bar\n\nfoo\nbar아니면 저 코드를 스크립트 파일에 넣고 실행시켜도 가능하다.$ echo 'println(PROGRAM_FILE); for x in ARGS; println(x); end' > script.jl\n$ julia script.jl foo bar\nscript.jl\nfoo\nbar-- 구분자는 명령어와 줄리아에 넘겨줄 인자를 구분하는데 사용한다.$ julia --color=yes -O -- foo.jl arg1 arg2..Julia는 -p 옵션이나 --machine-file 옵션을 이용하여 병렬 환경에서 실행시킬 수 있다. -p n 옵션은 n개의 worker 프로세스를 생성하지만, --machine-file file 옵션은 file의 각 행에 지정된 노드마다 worker를 생성한다. file 에 지정된 노드(machine)들은 ssh 로그인을 통해 패스워드가 필요없이 실행할 수 있어야 하며, Julia는 현재 호스트와 같은 경로에 설치가 되어 있어야 한다. file 에 작성되는 노드는 [count*][user@]host[:port] [bind_addr[:port]] 와 같은 형식으로 작성한다. user 는 현재 user id를 나타내고, port 는 기본 ssh port, count 는 각 노드당 생성하는 worker의 개수 (기본값 : 1) bin-to bind_addr[:port] 은 선택적인 옵션으로 다른 worker들이 현재의 worker로 연결하기 위해 필요한 특정 ip 주소와 포트를 지정한다.만약 Julia가 실행할 때마다 실행되는 코드가 있다면, 그 코드를 ~/.juliarc.ji 에 넣으면 된다.$ echo 'println(\"Greetings! 你好! 안녕하세요?\")' > ~/.juliarc.jl\n$ julia\nGreetings! 你好! 안녕하세요?\n\n...perl 과 ruby 와 같이,  Julia 코드를 실행하고 옵션을 지정하는 방법은 다음과 같이 여러가지가 있다.julia [switches] -- [programfile] [args...]\n -v, --version             버전 정보를 표시한다.\n -h, --help                이 메세지를 표시한다.\n\n -J, --sysimage <file>     <file>이라는 시스템 이미지 파일을 로드한 뒤 실행한다.\n -H, --home <dir>          julia 실행파일의 위치를 지정한다.\n --startup-file={yes|no}   ~/.juliarc.jl를 불러온다.\n --handle-signals={yes|no} Julia의 기본 시그널 핸들러를 켜거나 끈다.\n --sysimage-native-code={yes|no}\n                           시스템 이미지의 기존 코드 사용/사용하지 않는다.\n --compiled-modules={yes|no}\n                           모듈의 사전 증분 컴파일을 활성화/비활성화 한다.\n\n -e, --eval <expr>         <expr>를 실행만 한다\n -E, --print <expr>        <expr>를 실행하고 표시한다.\n -L, --load <file>         <file>을 모든 프로세서에 로드한다.\n\n -p, --procs {N|auto}      N개의 worker 프로세스를 추가로 생성한다. \"auto\"는 현재 Julia를 실행하는 컴퓨터의 최대 코어수만큼 worker 프로세스를 생성한다.\n                           \n --machine-file <file>     <file>에 나열된 호스트에서 worker 프로세스를 실행한다.\n\n -i                        대화형 모드; PEPL을 돌리며 ininteractive()는 true이다.\n -q, --quiet               시작할 때 배너, REPL 경고를 제거한다.\n --banner={yes|no|auto}    시작 배너 사용/사용하지 않는다.\n --color={yes|no|auto}     모든 텍스트에 색상을 표시하거나 표시하지 않는다.\n --history-file={yes|no}   작업내역을 저장하거나 로드한다.\n\n --depwarn={yes|no|error}  문법과 함수가 폐기됐다는 경고를 활성화/비활성화 한다.(\"error\"는 경고를 에러로 바꾼다.)\n --warn-overwrite={yes|no} 메소드 오버라이딩 경고를 활성화/비활성화 한다.\n\n -C, --cpu-target <target> <target>까지의 CUPU기능만을 사용한다() 사용 가능한 옵션을 보려면 \"help\"로 설정)\n -O, --optimize={0,1,2,3}  코드 실행시간에 관련된 최적화를 실행한다.(지정되지 않을 경우 2단계 실행, 레벨 이외의 값을 사용할 경우 3단계 실행)\n -g, -g <level>            디버그 정보 생성 수준을 활성화/비활성화 합니다.(지정되지 않을 경우 레벨 1, 레벨 이외의 값을 사용할 경우 레벨 2)\n --inline={yes|no}         @inline으로 선언된 함수를 덮어쓰는 경우를 포함해서, inlining을 허용할지 결정한다.\n --check-bounds={yes|no}   배열의 경계 체크를 항상 실행/생략한다. (변수 선언을 무시)\n --math-mode={ieee,fast}   IEEE 부동소수점 표준을 쓰거나(변수 선언을 무시) 소스에서 선언된 부동소수점을 따른다.\n\n --code-coverage={none|user|all}, --code-coverage\n                           소스 코드 라인의 실행 횟수를 기록한다. (기본값:\"user\")\n --track-allocation={none|user|all}, --track-allocation\n                           각 소스 코드 라인에 의해 할당되는  바이트 수를 기록한다."
 },
 
 {
@@ -501,7 +501,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Strings",
     "title": "String Basics",
     "category": "section",
-    "text": "String literals are delimited by double quotes or triple double quotes:julia> str = \"Hello, world.\\n\"\n\"Hello, world.\\n\"\n\njulia> \"\"\"Contains \"quote\" characters\"\"\"\n\"Contains \\\"quote\\\" characters\"If you want to extract a character from a string, you index into it:julia> str[1]\n'H': ASCII/Unicode U+0048 (category Lu: Letter, uppercase)\n\njulia> str[6]\n',': ASCII/Unicode U+002c (category Po: Punctuation, other)\n\njulia> str[end]\n'\\n': ASCII/Unicode U+000a (category Cc: Other, control)All indexing in Julia is 1-based: the first element of any integer-indexed object is found at index 1. (As we will see below, this does not necessarily mean that the last element is found at index n, where n is the length of the string.)In any indexing expression, the keyword end can be used as a shorthand for the last index (computed by endof(str)). You can perform arithmetic and other operations with end, just like a normal value:julia> str[end-1]\n'.': ASCII/Unicode U+002e (category Po: Punctuation, other)\n\njulia> str[end÷2]\n' ': ASCII/Unicode U+0020 (category Zs: Separator, space)Using an index less than 1 or greater than end raises an error:julia> str[0]\nERROR: BoundsError: attempt to access \"Hello, world.\\n\"\n  at index [0]\n[...]\n\njulia> str[end+1]\nERROR: BoundsError: attempt to access \"Hello, world.\\n\"\n  at index [15]\nStacktrace:\n[...]You can also extract a substring using range indexing:julia> str[4:9]\n\"lo, wo\"Notice that the expressions str[k] and str[k:k] do not give the same result:julia> str[6]\n',': ASCII/Unicode U+002c (category Po: Punctuation, other)\n\njulia> str[6:6]\n\",\"The former is a single character value of type Char, while the latter is a string value that happens to contain only a single character. In Julia these are very different things.Range indexing makes a copy of the selected part of the original string. Alternatively, it is possible to create a view into a string using the type SubString, for example:julia> str = \"long string\"\n\"long string\"\n\njulia> substr = SubString(str, 1, 4)\n\"long\"\n\njulia> typeof(substr)\nSubString{String}Several standard functions like chop, chomp or strip return a SubString."
+    "text": "String literals are delimited by double quotes or triple double quotes:julia> str = \"Hello, world.\\n\"\n\"Hello, world.\\n\"\n\njulia> \"\"\"Contains \"quote\" characters\"\"\"\n\"Contains \\\"quote\\\" characters\"If you want to extract a character from a string, you index into it:julia> str[1]\n'H': ASCII/Unicode U+0048 (category Lu: Letter, uppercase)\n\njulia> str[6]\n',': ASCII/Unicode U+002c (category Po: Punctuation, other)\n\njulia> str[end]\n'\\n': ASCII/Unicode U+000a (category Cc: Other, control)Many Julia objects, including strings, can be indexed with integers. The index of the first element is returned by firstindex(str), and the index of the last element with lastindex(str). The keywordend can be used inside an indexing operation as shorthand for the last index along the given dimension. Most indexing in Julia is 1-based: the first element of many integer-indexed objects is found at index 1. (As we will see below, this does not necessarily mean that the last element is found at index n, where n is the length of the string.)You can perform arithmetic and other operations with end, just like a normal value:julia> str[end-1]\n'.': ASCII/Unicode U+002e (category Po: Punctuation, other)\n\njulia> str[end÷2]\n' ': ASCII/Unicode U+0020 (category Zs: Separator, space)Using an index less than 1 or greater than end raises an error:julia> str[0]\nERROR: BoundsError: attempt to access \"Hello, world.\\n\"\n  at index [0]\n[...]\n\njulia> str[end+1]\nERROR: BoundsError: attempt to access \"Hello, world.\\n\"\n  at index [15]\nStacktrace:\n[...]You can also extract a substring using range indexing:julia> str[4:9]\n\"lo, wo\"Notice that the expressions str[k] and str[k:k] do not give the same result:julia> str[6]\n',': ASCII/Unicode U+002c (category Po: Punctuation, other)\n\njulia> str[6:6]\n\",\"The former is a single character value of type Char, while the latter is a string value that happens to contain only a single character. In Julia these are very different things.Range indexing makes a copy of the selected part of the original string. Alternatively, it is possible to create a view into a string using the type SubString, for example:julia> str = \"long string\"\n\"long string\"\n\njulia> substr = SubString(str, 1, 4)\n\"long\"\n\njulia> typeof(substr)\nSubString{String}Several standard functions like chop, chomp or strip return a SubString."
 },
 
 {
@@ -509,7 +509,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Strings",
     "title": "Unicode and UTF-8",
     "category": "section",
-    "text": "Julia fully supports Unicode characters and strings. As discussed above, in character literals, Unicode code points can be represented using Unicode \\u and \\U escape sequences, as well as all the standard C escape sequences. These can likewise be used to write string literals:julia> s = \"\\u2200 x \\u2203 y\"\n\"∀ x ∃ y\"Whether these Unicode characters are displayed as escapes or shown as special characters depends on your terminal's locale settings and its support for Unicode. String literals are encoded using the UTF-8 encoding. UTF-8 is a variable-width encoding, meaning that not all characters are encoded in the same number of bytes. In UTF-8, ASCII characters – i.e. those with code points less than 0x80 (128) – are encoded as they are in ASCII, using a single byte, while code points 0x80 and above are encoded using multiple bytes – up to four per character. This means that not every byte index into a UTF-8 string is necessarily a valid index for a character. If you index into a string at such an invalid byte index, an error is thrown:julia> s[1]\n'∀': Unicode U+2200 (category Sm: Symbol, math)\n\njulia> s[2]\nERROR: UnicodeError: invalid character index\n[...]\n\njulia> s[3]\nERROR: UnicodeError: invalid character index\n[...]\n\njulia> s[4]\n' ': ASCII/Unicode U+0020 (category Zs: Separator, space)In this case, the character ∀ is a three-byte character, so the indices 2 and 3 are invalid and the next character's index is 4; this next valid index can be computed by nextind(s,1), and the next index after that by nextind(s,4) and so on.Extraction of a substring using range indexing also expects valid byte indices or an error is thrown:julia> s[1:1]\n\"∀\"\n\njulia> s[1:2]\nERROR: UnicodeError: invalid character index\n[...]\n\njulia> s[1:4]\n\"∀ \"Because of variable-length encodings, the number of characters in a string (given by length(s)) is not always the same as the last index. If you iterate through the indices 1 through endof(s) and index into s, the sequence of characters returned when errors aren't thrown is the sequence of characters comprising the string s. Thus we have the identity that length(s) <= endof(s), since each character in a string must have its own index. The following is an inefficient and verbose way to iterate through the characters of s:julia> for i = 1:endof(s)\n           try\n               println(s[i])\n           catch\n               # ignore the index error\n           end\n       end\n∀\n\nx\n\n∃\n\nyThe blank lines actually have spaces on them. Fortunately, the above awkward idiom is unnecessary for iterating through the characters in a string, since you can just use the string as an iterable object, no exception handling required:julia> for c in s\n           println(c)\n       end\n∀\n\nx\n\n∃\n\nyJulia uses the UTF-8 encoding by default, and support for new encodings can be added by packages. For example, the LegacyStrings.jl package implements UTF16String and UTF32String types. Additional discussion of other encodings and how to implement support for them is beyond the scope of this document for the time being. For further discussion of UTF-8 encoding issues, see the section below on byte array literals. The transcode function is provided to convert data between the various UTF-xx encodings, primarily for working with external data and libraries."
+    "text": "Julia fully supports Unicode characters and strings. As discussed above, in character literals, Unicode code points can be represented using Unicode \\u and \\U escape sequences, as well as all the standard C escape sequences. These can likewise be used to write string literals:julia> s = \"\\u2200 x \\u2203 y\"\n\"∀ x ∃ y\"Whether these Unicode characters are displayed as escapes or shown as special characters depends on your terminal's locale settings and its support for Unicode. String literals are encoded using the UTF-8 encoding. UTF-8 is a variable-width encoding, meaning that not all characters are encoded in the same number of bytes. In UTF-8, ASCII characters – i.e. those with code points less than 0x80 (128) – are encoded as they are in ASCII, using a single byte, while code points 0x80 and above are encoded using multiple bytes – up to four per character. This means that not every byte index into a UTF-8 string is necessarily a valid index for a character. If you index into a string at such an invalid byte index, an error is thrown:julia> s[1]\n'∀': Unicode U+2200 (category Sm: Symbol, math)\n\njulia> s[2]\nERROR: UnicodeError: invalid character index\n[...]\n\njulia> s[3]\nERROR: UnicodeError: invalid character index\n[...]\n\njulia> s[4]\n' ': ASCII/Unicode U+0020 (category Zs: Separator, space)In this case, the character ∀ is a three-byte character, so the indices 2 and 3 are invalid and the next character's index is 4; this next valid index can be computed by nextind(s,1), and the next index after that by nextind(s,4) and so on.Extraction of a substring using range indexing also expects valid byte indices or an error is thrown:julia> s[1:1]\n\"∀\"\n\njulia> s[1:2]\nERROR: UnicodeError: invalid character index\n[...]\n\njulia> s[1:4]\n\"∀ \"Because of variable-length encodings, the number of characters in a string (given by length(s)) is not always the same as the last index. If you iterate through the indices 1 through lastindex(s) and index into s, the sequence of characters returned when errors aren't thrown is the sequence of characters comprising the string s. Thus we have the identity that length(s) <= lastindex(s), since each character in a string must have its own index. The following is an inefficient and verbose way to iterate through the characters of s:julia> for i = begindex(s):lastindex(s)\n           try\n               println(s[i])\n           catch\n               # ignore the index error\n           end\n       end\n∀\n\nx\n\n∃\n\nyThe blank lines actually have spaces on them. Fortunately, the above awkward idiom is unnecessary for iterating through the characters in a string, since you can just use the string as an iterable object, no exception handling required:julia> for c in s\n           println(c)\n       end\n∀\n\nx\n\n∃\n\nyJulia uses the UTF-8 encoding by default, and support for new encodings can be added by packages. For example, the LegacyStrings.jl package implements UTF16String and UTF32String types. Additional discussion of other encodings and how to implement support for them is beyond the scope of this document for the time being. For further discussion of UTF-8 encoding issues, see the section below on byte array literals. The transcode function is provided to convert data between the various UTF-xx encodings, primarily for working with external data and libraries."
 },
 
 {
@@ -541,7 +541,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Strings",
     "title": "Common Operations",
     "category": "section",
-    "text": "You can lexicographically compare strings using the standard comparison operators:julia> \"abracadabra\" < \"xylophone\"\ntrue\n\njulia> \"abracadabra\" == \"xylophone\"\nfalse\n\njulia> \"Hello, world.\" != \"Goodbye, world.\"\ntrue\n\njulia> \"1 + 2 = 3\" == \"1 + 2 = $(1 + 2)\"\ntrueYou can search for the index of a particular character using the findfirst function:julia> findfirst(equalto('x'), \"xylophone\")\n1\n\njulia> findfirst(equalto('p'), \"xylophone\")\n5\n\njulia> findfirst(equalto('z'), \"xylophone\")You can start the search for a character at a given offset by using findnext with a third argument:julia> findnext(equalto('o'), \"xylophone\", 1)\n4\n\njulia> findnext(equalto('o'), \"xylophone\", 5)\n7\n\njulia> findnext(equalto('o'), \"xylophone\", 8)You can use the contains function to check if a substring is contained in a string:julia> contains(\"Hello, world.\", \"world\")\ntrue\n\njulia> contains(\"Xylophon\", \"o\")\ntrue\n\njulia> contains(\"Xylophon\", \"a\")\nfalse\n\njulia> contains(\"Xylophon\", 'o')\ntrueThe last example shows that contains can also look for a character literal.Two other handy string functions are repeat and join:julia> repeat(\".:Z:.\", 10)\n\".:Z:..:Z:..:Z:..:Z:..:Z:..:Z:..:Z:..:Z:..:Z:..:Z:.\"\n\njulia> join([\"apples\", \"bananas\", \"pineapples\"], \", \", \" and \")\n\"apples, bananas and pineapples\"Some other useful functions include:endof(str) gives the maximal (byte) index that can be used to index into str.\nlength(str) the number of characters in str.\nlength(str, i, j) the number of valid character indices in str from i to j.\ni = start(str) gives the first valid index at which a character can be found in str (typically 1).\nc, j = next(str,i) returns next character at or after the index i and the next valid character index following that. With start and endof, can be used to iterate through the characters in str.\nthisind(str, i) given an arbitrary index into a string find the first index of the character into which the index points.\nnextind(str, i, n=1) find the start of the nth character starting after index i.\nprevind(str, i, n=1) find the start of the nth character starting before index i."
+    "text": "You can lexicographically compare strings using the standard comparison operators:julia> \"abracadabra\" < \"xylophone\"\ntrue\n\njulia> \"abracadabra\" == \"xylophone\"\nfalse\n\njulia> \"Hello, world.\" != \"Goodbye, world.\"\ntrue\n\njulia> \"1 + 2 = 3\" == \"1 + 2 = $(1 + 2)\"\ntrueYou can search for the index of a particular character using the findfirst function:julia> findfirst(equalto('x'), \"xylophone\")\n1\n\njulia> findfirst(equalto('p'), \"xylophone\")\n5\n\njulia> findfirst(equalto('z'), \"xylophone\")You can start the search for a character at a given offset by using findnext with a third argument:julia> findnext(equalto('o'), \"xylophone\", 1)\n4\n\njulia> findnext(equalto('o'), \"xylophone\", 5)\n7\n\njulia> findnext(equalto('o'), \"xylophone\", 8)You can use the contains function to check if a substring is contained in a string:julia> contains(\"Hello, world.\", \"world\")\ntrue\n\njulia> contains(\"Xylophon\", \"o\")\ntrue\n\njulia> contains(\"Xylophon\", \"a\")\nfalse\n\njulia> contains(\"Xylophon\", 'o')\ntrueThe last example shows that contains can also look for a character literal.Two other handy string functions are repeat and join:julia> repeat(\".:Z:.\", 10)\n\".:Z:..:Z:..:Z:..:Z:..:Z:..:Z:..:Z:..:Z:..:Z:..:Z:.\"\n\njulia> join([\"apples\", \"bananas\", \"pineapples\"], \", \", \" and \")\n\"apples, bananas and pineapples\"Some other useful functions include:firstindex(str) gives the minimal (byte) index that can be used to index into str (always 1 for strings, not necessarily true for other containers).\nlastindex(str) gives the maximal (byte) index that can be used to index into str.\nlength(str) the number of characters in str.\nlength(str, i, j) the number of valid character indices in str from i to j.\ni = start(str) gives the first valid index at which a character can be found in str (typically 1).\nc, j = next(str,i) returns next character at or after the index i and the next valid character index following that. With start and lastindex, can be used to iterate through the characters in str.\nthisind(str, i) given an arbitrary index into a string find the first index of the character into which the index points.\nnextind(str, i, n=1) find the start of the nth character starting after index i.\nprevind(str, i, n=1) find the start of the nth character starting before index i."
 },
 
 {
@@ -629,7 +629,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Functions",
     "title": "Operators With Special Names",
     "category": "section",
-    "text": "A few special expressions correspond to calls to functions with non-obvious names. These are:Expression Calls\n[A B C ...] hcat\n[A; B; C; ...] vcat\n[A B; C D; ...] hvcat\nA' adjoint\nA.' transpose\n1:n colon\nA[i] getindex\nA[i] = x setindex!\nA.n getproperty\nA.n = x setproperty!"
+    "text": "A few special expressions correspond to calls to functions with non-obvious names. These are:Expression Calls\n[A B C ...] hcat\n[A; B; C; ...] vcat\n[A B; C D; ...] hvcat\nA' adjoint\n1:n colon\nA[i] getindex\nA[i] = x setindex!\nA.n getproperty\nA.n = x setproperty!"
 },
 
 {
@@ -717,7 +717,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Functions",
     "title": "Dot Syntax for Vectorizing Functions",
     "category": "section",
-    "text": "In technical-computing languages, it is common to have \"vectorized\" versions of functions, which simply apply a given function f(x) to each element of an array A to yield a new array via f(A). This kind of syntax is convenient for data processing, but in other languages vectorization is also often required for performance: if loops are slow, the \"vectorized\" version of a function can call fast library code written in a low-level language. In Julia, vectorized functions are not required for performance, and indeed it is often beneficial to write your own loops (see Performance Tips), but they can still be convenient. Therefore, any Julia function f can be applied elementwise to any array (or other collection) with the syntax f.(A). For example sin can be applied to all elements in the vector A, like so:julia> A = [1.0, 2.0, 3.0]\n3-element Array{Float64,1}:\n 1.0\n 2.0\n 3.0\n\njulia> sin.(A)\n3-element Array{Float64,1}:\n 0.8414709848078965\n 0.9092974268256817\n 0.1411200080598672Of course, you can omit the dot if you write a specialized \"vector\" method of f, e.g. via f(A::AbstractArray) = map(f, A), and this is just as efficient as f.(A). But that approach requires you to decide in advance which functions you want to vectorize.More generally, f.(args...) is actually equivalent to broadcast(f, args...), which allows you to operate on multiple arrays (even of different shapes), or a mix of arrays and scalars (see Broadcasting). For example, if you have f(x,y) = 3x + 4y, then f.(pi,A) will return a new array consisting of f(pi,a) for each a in A, and f.(vector1,vector2) will return a new vector consisting of f(vector1[i],vector2[i]) for each index i (throwing an exception if the vectors have different length).julia> f(x,y) = 3x + 4y;\n\njulia> A = [1.0, 2.0, 3.0];\n\njulia> B = [4.0, 5.0, 6.0];\n\njulia> f.(pi, A)\n3-element Array{Float64,1}:\n 13.42477796076938\n 17.42477796076938\n 21.42477796076938\n\njulia> f.(A, B)\n3-element Array{Float64,1}:\n 19.0\n 26.0\n 33.0Moreover, nested f.(args...) calls are fused into a single broadcast loop. For example, sin.(cos.(X)) is equivalent to broadcast(x -> sin(cos(x)), X), similar to [sin(cos(x)) for x in X]: there is only a single loop over X, and a single array is allocated for the result. [In contrast, sin(cos(X)) in a typical \"vectorized\" language would first allocate one temporary array for tmp=cos(X), and then compute sin(tmp) in a separate loop, allocating a second array.] This loop fusion is not a compiler optimization that may or may not occur, it is a syntactic guarantee whenever nested f.(args...) calls are encountered. Technically, the fusion stops as soon as a \"non-dot\" function call is encountered; for example, in sin.(sort(cos.(X))) the sin and cos loops cannot be merged because of the intervening sort function.Finally, the maximum efficiency is typically achieved when the output array of a vectorized operation is pre-allocated, so that repeated calls do not allocate new arrays over and over again for the results (see Pre-allocating outputs). A convenient syntax for this is X .= ..., which is equivalent to broadcast!(identity, X, ...) except that, as above, the broadcast! loop is fused with any nested \"dot\" calls. For example, X .= sin.(Y) is equivalent to broadcast!(sin, X, Y), overwriting X with sin.(Y) in-place. If the left-hand side is an array-indexing expression, e.g. X[2:end] .= sin.(Y), then it translates to broadcast! on a view, e.g. broadcast!(sin, view(X, 2:endof(X)), Y), so that the left-hand side is updated in-place.Since adding dots to many operations and function calls in an expression can be tedious and lead to code that is difficult to read, the macro @. is provided to convert every function call, operation, and assignment in an expression into the \"dotted\" version.julia> Y = [1.0, 2.0, 3.0, 4.0];\n\njulia> X = similar(Y); # pre-allocate output array\n\njulia> @. X = sin(cos(Y)) # equivalent to X .= sin.(cos.(Y))\n4-element Array{Float64,1}:\n  0.5143952585235492\n -0.4042391538522658\n -0.8360218615377305\n -0.6080830096407656Binary (or unary) operators like .+ are handled with the same mechanism: they are equivalent to broadcast calls and are fused with other nested \"dot\" calls.  X .+= Y etcetera is equivalent to X .= X .+ Y and results in a fused in-place assignment;  see also dot operators."
+    "text": "In technical-computing languages, it is common to have \"vectorized\" versions of functions, which simply apply a given function f(x) to each element of an array A to yield a new array via f(A). This kind of syntax is convenient for data processing, but in other languages vectorization is also often required for performance: if loops are slow, the \"vectorized\" version of a function can call fast library code written in a low-level language. In Julia, vectorized functions are not required for performance, and indeed it is often beneficial to write your own loops (see Performance Tips), but they can still be convenient. Therefore, any Julia function f can be applied elementwise to any array (or other collection) with the syntax f.(A). For example sin can be applied to all elements in the vector A, like so:julia> A = [1.0, 2.0, 3.0]\n3-element Array{Float64,1}:\n 1.0\n 2.0\n 3.0\n\njulia> sin.(A)\n3-element Array{Float64,1}:\n 0.8414709848078965\n 0.9092974268256817\n 0.1411200080598672Of course, you can omit the dot if you write a specialized \"vector\" method of f, e.g. via f(A::AbstractArray) = map(f, A), and this is just as efficient as f.(A). But that approach requires you to decide in advance which functions you want to vectorize.More generally, f.(args...) is actually equivalent to broadcast(f, args...), which allows you to operate on multiple arrays (even of different shapes), or a mix of arrays and scalars (see Broadcasting). For example, if you have f(x,y) = 3x + 4y, then f.(pi,A) will return a new array consisting of f(pi,a) for each a in A, and f.(vector1,vector2) will return a new vector consisting of f(vector1[i],vector2[i]) for each index i (throwing an exception if the vectors have different length).julia> f(x,y) = 3x + 4y;\n\njulia> A = [1.0, 2.0, 3.0];\n\njulia> B = [4.0, 5.0, 6.0];\n\njulia> f.(pi, A)\n3-element Array{Float64,1}:\n 13.42477796076938\n 17.42477796076938\n 21.42477796076938\n\njulia> f.(A, B)\n3-element Array{Float64,1}:\n 19.0\n 26.0\n 33.0Moreover, nested f.(args...) calls are fused into a single broadcast loop. For example, sin.(cos.(X)) is equivalent to broadcast(x -> sin(cos(x)), X), similar to [sin(cos(x)) for x in X]: there is only a single loop over X, and a single array is allocated for the result. [In contrast, sin(cos(X)) in a typical \"vectorized\" language would first allocate one temporary array for tmp=cos(X), and then compute sin(tmp) in a separate loop, allocating a second array.] This loop fusion is not a compiler optimization that may or may not occur, it is a syntactic guarantee whenever nested f.(args...) calls are encountered. Technically, the fusion stops as soon as a \"non-dot\" function call is encountered; for example, in sin.(sort(cos.(X))) the sin and cos loops cannot be merged because of the intervening sort function.Finally, the maximum efficiency is typically achieved when the output array of a vectorized operation is pre-allocated, so that repeated calls do not allocate new arrays over and over again for the results (see Pre-allocating outputs). A convenient syntax for this is X .= ..., which is equivalent to broadcast!(identity, X, ...) except that, as above, the broadcast! loop is fused with any nested \"dot\" calls. For example, X .= sin.(Y) is equivalent to broadcast!(sin, X, Y), overwriting X with sin.(Y) in-place. If the left-hand side is an array-indexing expression, e.g. X[2:end] .= sin.(Y), then it translates to broadcast! on a view, e.g. broadcast!(sin, view(X, 2:lastindex(X)), Y), so that the left-hand side is updated in-place.Since adding dots to many operations and function calls in an expression can be tedious and lead to code that is difficult to read, the macro @. is provided to convert every function call, operation, and assignment in an expression into the \"dotted\" version.julia> Y = [1.0, 2.0, 3.0, 4.0];\n\njulia> X = similar(Y); # pre-allocate output array\n\njulia> @. X = sin(cos(Y)) # equivalent to X .= sin.(cos.(Y))\n4-element Array{Float64,1}:\n  0.5143952585235492\n -0.4042391538522658\n -0.8360218615377305\n -0.6080830096407656Binary (or unary) operators like .+ are handled with the same mechanism: they are equivalent to broadcast calls and are fused with other nested \"dot\" calls.  X .+= Y etcetera is equivalent to X .= X .+ Y and results in a fused in-place assignment;  see also dot operators."
 },
 
 {
@@ -1469,7 +1469,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Interfaces",
     "title": "Iteration",
     "category": "section",
-    "text": "Required methods   Brief description\nstart(iter)   Returns the initial iteration state\nnext(iter, state)   Returns the current item and the next state\ndone(iter, state)   Tests if there are any items remaining\nImportant optional methods Default definition Brief description\nIteratorSize(IterType) HasLength() One of HasLength(), HasShape{N}(), IsInfinite(), or SizeUnknown() as appropriate\nIteratorEltype(IterType) HasEltype() Either EltypeUnknown() or HasEltype() as appropriate\neltype(IterType) Any The type of the items returned by next()\nlength(iter) (undefined) The number of items, if known\nsize(iter, [dim...]) (undefined) The number of items in each dimension, if knownValue returned by IteratorSize(IterType) Required Methods\nHasLength() length(iter)\nHasShape{N}() length(iter)  and size(iter, [dim...])\nIsInfinite() (none)\nSizeUnknown() (none)Value returned by IteratorEltype(IterType) Required Methods\nHasEltype() eltype(IterType)\nEltypeUnknown() (none)Sequential iteration is implemented by the methods start, done, and next. Instead of mutating objects as they are iterated over, Julia provides these three methods to keep track of the iteration state externally from the object. The start(iter) method returns the initial state for the iterable object iter. That state gets passed along to done(iter, state), which tests if there are any elements remaining, and next(iter, state), which returns a tuple containing the current element and an updated state. The state object can be anything, and is generally considered to be an implementation detail private to the iterable object.Any object defines these three methods is iterable and can be used in the many functions that rely upon iteration. It can also be used directly in a for loop since the syntax:for i in iter   # or  \"for i = iter\"\n    # body\nendis translated into:state = start(iter)\nwhile !done(iter, state)\n    (i, state) = next(iter, state)\n    # body\nendA simple example is an iterable sequence of square numbers with a defined length:julia> struct Squares\n           count::Int\n       end\n\njulia> Base.start(::Squares) = 1\n\njulia> Base.next(S::Squares, state) = (state*state, state+1)\n\njulia> Base.done(S::Squares, state) = state > S.count\n\njulia> Base.eltype(::Type{Squares}) = Int # Note that this is defined for the type\n\njulia> Base.length(S::Squares) = S.countWith only start, next, and done definitions, the Squares type is already pretty powerful. We can iterate over all the elements:julia> for i in Squares(7)\n           println(i)\n       end\n1\n4\n9\n16\n25\n36\n49We can use many of the builtin methods that work with iterables, like in, mean and std:julia> 25 in Squares(10)\ntrue\n\njulia> mean(Squares(100))\n3383.5\n\njulia> std(Squares(100))\n3024.355854282583There are a few more methods we can extend to give Julia more information about this iterable collection.  We know that the elements in a Squares sequence will always be Int. By extending the eltype method, we can give that information to Julia and help it make more specialized code in the more complicated methods. We also know the number of elements in our sequence, so we can extend length, too.Now, when we ask Julia to collect all the elements into an array it can preallocate a Vector{Int} of the right size instead of blindly push!ing each element into a Vector{Any}:julia> collect(Squares(10))' # transposed to save space\n1×10 RowVector{Int64,Array{Int64,1}}:\n 1  4  9  16  25  36  49  64  81  100While we can rely upon generic implementations, we can also extend specific methods where we know there is a simpler algorithm. For example, there's a formula to compute the sum of squares, so we can override the generic iterative version with a more performant solution:julia> Base.sum(S::Squares) = (n = S.count; return n*(n+1)*(2n+1)÷6)\n\njulia> sum(Squares(1803))\n1955361914This is a very common pattern throughout Julia Base: a small set of required methods define an informal interface that enable many fancier behaviors. In some cases, types will want to additionally specialize those extra behaviors when they know a more efficient algorithm can be used in their specific case.It is also often useful to allow iteration over a collection in reverse order by iterating over Iterators.reverse(iterator).  To actually support reverse-order iteration, however, an iterator type T needs to implement start, next, and done methods for Iterators.Reverse{T}. (Given r::Iterators.Reverse{T}, the underling iterator of type T is r.itr.) In our Squares example, we would implement Iterators.Reverse{Squares} methods:julia> Base.start(rS::Iterators.Reverse{Squares}) = rS.itr.count\n\njulia> Base.next(::Iterators.Reverse{Squares}, state) = (state*state, state-1)\n\njulia> Base.done(::Iterators.Reverse{Squares}, state) = state < 1\n\njulia> collect(Iterators.reverse(Squares(10)))' # transposed to save space\n1×10 RowVector{Int64,Array{Int64,1}}:\n 100  81  64  49  36  25  16  9  4  1"
+    "text": "Required methods   Brief description\nstart(iter)   Returns the initial iteration state\nnext(iter, state)   Returns the current item and the next state\ndone(iter, state)   Tests if there are any items remaining\nImportant optional methods Default definition Brief description\nIteratorSize(IterType) HasLength() One of HasLength(), HasShape{N}(), IsInfinite(), or SizeUnknown() as appropriate\nIteratorEltype(IterType) HasEltype() Either EltypeUnknown() or HasEltype() as appropriate\neltype(IterType) Any The type of the items returned by next()\nlength(iter) (undefined) The number of items, if known\nsize(iter, [dim...]) (undefined) The number of items in each dimension, if knownValue returned by IteratorSize(IterType) Required Methods\nHasLength() length(iter)\nHasShape{N}() length(iter)  and size(iter, [dim...])\nIsInfinite() (none)\nSizeUnknown() (none)Value returned by IteratorEltype(IterType) Required Methods\nHasEltype() eltype(IterType)\nEltypeUnknown() (none)Sequential iteration is implemented by the methods start, done, and next. Instead of mutating objects as they are iterated over, Julia provides these three methods to keep track of the iteration state externally from the object. The start(iter) method returns the initial state for the iterable object iter. That state gets passed along to done(iter, state), which tests if there are any elements remaining, and next(iter, state), which returns a tuple containing the current element and an updated state. The state object can be anything, and is generally considered to be an implementation detail private to the iterable object.Any object defines these three methods is iterable and can be used in the many functions that rely upon iteration. It can also be used directly in a for loop since the syntax:for i in iter   # or  \"for i = iter\"\n    # body\nendis translated into:state = start(iter)\nwhile !done(iter, state)\n    (i, state) = next(iter, state)\n    # body\nendA simple example is an iterable sequence of square numbers with a defined length:julia> struct Squares\n           count::Int\n       end\n\njulia> Base.start(::Squares) = 1\n\njulia> Base.next(S::Squares, state) = (state*state, state+1)\n\njulia> Base.done(S::Squares, state) = state > S.count\n\njulia> Base.eltype(::Type{Squares}) = Int # Note that this is defined for the type\n\njulia> Base.length(S::Squares) = S.countWith only start, next, and done definitions, the Squares type is already pretty powerful. We can iterate over all the elements:julia> for i in Squares(7)\n           println(i)\n       end\n1\n4\n9\n16\n25\n36\n49We can use many of the builtin methods that work with iterables, like in, mean and std:julia> 25 in Squares(10)\ntrue\n\njulia> mean(Squares(100))\n3383.5\n\njulia> std(Squares(100))\n3024.355854282583There are a few more methods we can extend to give Julia more information about this iterable collection.  We know that the elements in a Squares sequence will always be Int. By extending the eltype method, we can give that information to Julia and help it make more specialized code in the more complicated methods. We also know the number of elements in our sequence, so we can extend length, too.Now, when we ask Julia to collect all the elements into an array it can preallocate a Vector{Int} of the right size instead of blindly push!ing each element into a Vector{Any}:julia> collect(Squares(4))\n4-element Array{Int64,1}:\n  1\n  4\n  9\n 16While we can rely upon generic implementations, we can also extend specific methods where we know there is a simpler algorithm. For example, there's a formula to compute the sum of squares, so we can override the generic iterative version with a more performant solution:julia> Base.sum(S::Squares) = (n = S.count; return n*(n+1)*(2n+1)÷6)\n\njulia> sum(Squares(1803))\n1955361914This is a very common pattern throughout Julia Base: a small set of required methods define an informal interface that enable many fancier behaviors. In some cases, types will want to additionally specialize those extra behaviors when they know a more efficient algorithm can be used in their specific case.It is also often useful to allow iteration over a collection in reverse order by iterating over Iterators.reverse(iterator).  To actually support reverse-order iteration, however, an iterator type T needs to implement start, next, and done methods for Iterators.Reverse{T}. (Given r::Iterators.Reverse{T}, the underling iterator of type T is r.itr.) In our Squares example, we would implement Iterators.Reverse{Squares} methods:julia> Base.start(rS::Iterators.Reverse{Squares}) = rS.itr.count\n\njulia> Base.next(::Iterators.Reverse{Squares}, state) = (state*state, state-1)\n\njulia> Base.done(::Iterators.Reverse{Squares}, state) = state < 1\n\njulia> collect(Iterators.reverse(Squares(4)))\n4-element Array{Int64,1}:\n 16\n  9\n  4\n  1"
 },
 
 {
@@ -1477,7 +1477,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Interfaces",
     "title": "Indexing",
     "category": "section",
-    "text": "Methods to implement Brief description\ngetindex(X, i) X[i], indexed element access\nsetindex!(X, v, i) X[i] = v, indexed assignment\nendof(X) The last index, used in X[end]For the Squares iterable above, we can easily compute the ith element of the sequence by squaring it.  We can expose this as an indexing expression S[i]. To opt into this behavior, Squares simply needs to define getindex:julia> function Base.getindex(S::Squares, i::Int)\n           1 <= i <= S.count || throw(BoundsError(S, i))\n           return i*i\n       end\n\njulia> Squares(100)[23]\n529Additionally, to support the syntax S[end], we must define endof to specify the last valid index:julia> Base.endof(S::Squares) = length(S)\n\njulia> Squares(23)[end]\n529Note, though, that the above only defines getindex with one integer index. Indexing with anything other than an Int will throw a MethodError saying that there was no matching method. In order to support indexing with ranges or vectors of Ints, separate methods must be written:julia> Base.getindex(S::Squares, i::Number) = S[convert(Int, i)]\n\njulia> Base.getindex(S::Squares, I) = [S[i] for i in I]\n\njulia> Squares(10)[[3,4.,5]]\n3-element Array{Int64,1}:\n  9\n 16\n 25While this is starting to support more of the indexing operations supported by some of the builtin types, there's still quite a number of behaviors missing. This Squares sequence is starting to look more and more like a vector as we've added behaviors to it. Instead of defining all these behaviors ourselves, we can officially define it as a subtype of an AbstractArray."
+    "text": "Methods to implement Brief description\ngetindex(X, i) X[i], indexed element access\nsetindex!(X, v, i) X[i] = v, indexed assignment\nfirstindex(X) The first index\nlastindex(X) The last index, used in X[end]For the Squares iterable above, we can easily compute the ith element of the sequence by squaring it.  We can expose this as an indexing expression S[i]. To opt into this behavior, Squares simply needs to define getindex:julia> function Base.getindex(S::Squares, i::Int)\n           1 <= i <= S.count || throw(BoundsError(S, i))\n           return i*i\n       end\n\njulia> Squares(100)[23]\n529Additionally, to support the syntax S[end], we must define lastindex to specify the last valid index. It is recommended to also define firstindex to specify the first valid index:julia> Base.firstindex(S::Squares) = 1\njulia> Base.lastindex(S::Squares) = length(S)\n\njulia> Squares(23)[end]\n529Note, though, that the above only defines getindex with one integer index. Indexing with anything other than an Int will throw a MethodError saying that there was no matching method. In order to support indexing with ranges or vectors of Ints, separate methods must be written:julia> Base.getindex(S::Squares, i::Number) = S[convert(Int, i)]\n\njulia> Base.getindex(S::Squares, I) = [S[i] for i in I]\n\njulia> Squares(10)[[3,4.,5]]\n3-element Array{Int64,1}:\n  9\n 16\n 25While this is starting to support more of the indexing operations supported by some of the builtin types, there's still quite a number of behaviors missing. This Squares sequence is starting to look more and more like a vector as we've added behaviors to it. Instead of defining all these behaviors ourselves, we can officially define it as a subtype of an AbstractArray."
 },
 
 {
@@ -1485,7 +1485,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Interfaces",
     "title": "Abstract Arrays",
     "category": "section",
-    "text": "Methods to implement   Brief description\nsize(A)   Returns a tuple containing the dimensions of A\ngetindex(A, i::Int)   (if IndexLinear) Linear scalar indexing\ngetindex(A, I::Vararg{Int, N})   (if IndexCartesian, where N = ndims(A)) N-dimensional scalar indexing\nsetindex!(A, v, i::Int)   (if IndexLinear) Scalar indexed assignment\nsetindex!(A, v, I::Vararg{Int, N})   (if IndexCartesian, where N = ndims(A)) N-dimensional scalar indexed assignment\nOptional methods Default definition Brief description\nIndexStyle(::Type) IndexCartesian() Returns either IndexLinear() or IndexCartesian(). See the description below.\ngetindex(A, I...) defined in terms of scalar getindex Multidimensional and nonscalar indexing\nsetindex!(A, I...) defined in terms of scalar setindex! Multidimensional and nonscalar indexed assignment\nstart/next/done defined in terms of scalar getindex Iteration\nlength(A) prod(size(A)) Number of elements\nsimilar(A) similar(A, eltype(A), size(A)) Return a mutable array with the same shape and element type\nsimilar(A, ::Type{S}) similar(A, S, size(A)) Return a mutable array with the same shape and the specified element type\nsimilar(A, dims::NTuple{Int}) similar(A, eltype(A), dims) Return a mutable array with the same element type and size dims\nsimilar(A, ::Type{S}, dims::NTuple{Int}) Array{S}(uninitialized, dims) Return a mutable array with the specified element type and size\nNon-traditional indices Default definition Brief description\naxes(A) map(OneTo, size(A)) Return the AbstractUnitRange of valid indices\nBase.similar(A, ::Type{S}, inds::NTuple{Ind}) similar(A, S, Base.to_shape(inds)) Return a mutable array with the specified indices inds (see below)\nBase.similar(T::Union{Type,Function}, inds) T(Base.to_shape(inds)) Return an array similar to T with the specified indices inds (see below)If a type is defined as a subtype of AbstractArray, it inherits a very large set of rich behaviors including iteration and multidimensional indexing built on top of single-element access.  See the arrays manual page and the Julia Base section for more supported methods.A key part in defining an AbstractArray subtype is IndexStyle. Since indexing is such an important part of an array and often occurs in hot loops, it's important to make both indexing and indexed assignment as efficient as possible.  Array data structures are typically defined in one of two ways: either it most efficiently accesses its elements using just one index (linear indexing) or it intrinsically accesses the elements with indices specified for every dimension.  These two modalities are identified by Julia as IndexLinear() and IndexCartesian().  Converting a linear index to multiple indexing subscripts is typically very expensive, so this provides a traits-based mechanism to enable efficient generic code for all array types.This distinction determines which scalar indexing methods the type must define. IndexLinear() arrays are simple: just define getindex(A::ArrayType, i::Int).  When the array is subsequently indexed with a multidimensional set of indices, the fallback getindex(A::AbstractArray, I...)() efficiently converts the indices into one linear index and then calls the above method. IndexCartesian() arrays, on the other hand, require methods to be defined for each supported dimensionality with ndims(A) Int indices. For example, SparseMatrixCSC from the SparseArrays standard library module, only supports two dimensions, so it just defines getindex(A::SparseMatrixCSC, i::Int, j::Int). The same holds for setindex!.Returning to the sequence of squares from above, we could instead define it as a subtype of an AbstractArray{Int, 1}:julia> struct SquaresVector <: AbstractArray{Int, 1}\n           count::Int\n       end\n\njulia> Base.size(S::SquaresVector) = (S.count,)\n\njulia> Base.IndexStyle(::Type{<:SquaresVector}) = IndexLinear()\n\njulia> Base.getindex(S::SquaresVector, i::Int) = i*iNote that it's very important to specify the two parameters of the AbstractArray; the first defines the eltype, and the second defines the ndims. That supertype and those three methods are all it takes for SquaresVector to be an iterable, indexable, and completely functional array:julia> s = SquaresVector(7)\n7-element SquaresVector:\n  1\n  4\n  9\n 16\n 25\n 36\n 49\n\njulia> s[s .> 20]\n3-element Array{Int64,1}:\n 25\n 36\n 49\n\njulia> s \\ [1 2; 3 4; 5 6; 7 8; 9 10; 11 12; 13 14]\n1×2 RowVector{Float64,Array{Float64,1}}:\n 0.305389  0.335329\n\njulia> s ⋅ s # dot(s, s)\n4676As a more complicated example, let's define our own toy N-dimensional sparse-like array type built on top of Dict:julia> struct SparseArray{T,N} <: AbstractArray{T,N}\n           data::Dict{NTuple{N,Int}, T}\n           dims::NTuple{N,Int}\n       end\n\njulia> SparseArray(::Type{T}, dims::Int...) where {T} = SparseArray(T, dims);\n\njulia> SparseArray(::Type{T}, dims::NTuple{N,Int}) where {T,N} = SparseArray{T,N}(Dict{NTuple{N,Int}, T}(), dims);\n\njulia> Base.size(A::SparseArray) = A.dims\n\njulia> Base.similar(A::SparseArray, ::Type{T}, dims::Dims) where {T} = SparseArray(T, dims)\n\njulia> Base.getindex(A::SparseArray{T,N}, I::Vararg{Int,N}) where {T,N} = get(A.data, I, zero(T))\n\njulia> Base.setindex!(A::SparseArray{T,N}, v, I::Vararg{Int,N}) where {T,N} = (A.data[I] = v)Notice that this is an IndexCartesian array, so we must manually define getindex and setindex! at the dimensionality of the array. Unlike the SquaresVector, we are able to define setindex!, and so we can mutate the array:julia> A = SparseArray(Float64, 3, 3)\n3×3 SparseArray{Float64,2}:\n 0.0  0.0  0.0\n 0.0  0.0  0.0\n 0.0  0.0  0.0\n\njulia> fill!(A, 2)\n3×3 SparseArray{Float64,2}:\n 2.0  2.0  2.0\n 2.0  2.0  2.0\n 2.0  2.0  2.0\n\njulia> A[:] = 1:length(A); A\n3×3 SparseArray{Float64,2}:\n 1.0  4.0  7.0\n 2.0  5.0  8.0\n 3.0  6.0  9.0The result of indexing an AbstractArray can itself be an array (for instance when indexing by an AbstractRange). The AbstractArray fallback methods use similar to allocate an Array of the appropriate size and element type, which is filled in using the basic indexing method described above. However, when implementing an array wrapper you often want the result to be wrapped as well:julia> A[1:2,:]\n2×3 SparseArray{Float64,2}:\n 1.0  4.0  7.0\n 2.0  5.0  8.0In this example it is accomplished by defining Base.similar{T}(A::SparseArray, ::Type{T}, dims::Dims) to create the appropriate wrapped array. (Note that while similar supports 1- and 2-argument forms, in most case you only need to specialize the 3-argument form.) For this to work it's important that SparseArray is mutable (supports setindex!). Defining similar, getindex and setindex! for SparseArray also makes it possible to copy the array:julia> copy(A)\n3×3 SparseArray{Float64,2}:\n 1.0  4.0  7.0\n 2.0  5.0  8.0\n 3.0  6.0  9.0In addition to all the iterable and indexable methods from above, these types can also interact with each other and use most of the methods defined in Julia Base for AbstractArrays:julia> A[SquaresVector(3)]\n3-element SparseArray{Float64,1}:\n 1.0\n 4.0\n 9.0\n\njulia> dot(A[:,1],A[:,2])\n32.0If you are defining an array type that allows non-traditional indexing (indices that start at something other than 1), you should specialize indices. You should also specialize similar so that the dims argument (ordinarily a Dims size-tuple) can accept AbstractUnitRange objects, perhaps range-types Ind of your own design. For more information, see Arrays with custom indices."
+    "text": "Methods to implement   Brief description\nsize(A)   Returns a tuple containing the dimensions of A\ngetindex(A, i::Int)   (if IndexLinear) Linear scalar indexing\ngetindex(A, I::Vararg{Int, N})   (if IndexCartesian, where N = ndims(A)) N-dimensional scalar indexing\nsetindex!(A, v, i::Int)   (if IndexLinear) Scalar indexed assignment\nsetindex!(A, v, I::Vararg{Int, N})   (if IndexCartesian, where N = ndims(A)) N-dimensional scalar indexed assignment\nOptional methods Default definition Brief description\nIndexStyle(::Type) IndexCartesian() Returns either IndexLinear() or IndexCartesian(). See the description below.\ngetindex(A, I...) defined in terms of scalar getindex Multidimensional and nonscalar indexing\nsetindex!(A, I...) defined in terms of scalar setindex! Multidimensional and nonscalar indexed assignment\nstart/next/done defined in terms of scalar getindex Iteration\nlength(A) prod(size(A)) Number of elements\nsimilar(A) similar(A, eltype(A), size(A)) Return a mutable array with the same shape and element type\nsimilar(A, ::Type{S}) similar(A, S, size(A)) Return a mutable array with the same shape and the specified element type\nsimilar(A, dims::NTuple{Int}) similar(A, eltype(A), dims) Return a mutable array with the same element type and size dims\nsimilar(A, ::Type{S}, dims::NTuple{Int}) Array{S}(uninitialized, dims) Return a mutable array with the specified element type and size\nNon-traditional indices Default definition Brief description\naxes(A) map(OneTo, size(A)) Return the AbstractUnitRange of valid indices\nBase.similar(A, ::Type{S}, inds::NTuple{Ind}) similar(A, S, Base.to_shape(inds)) Return a mutable array with the specified indices inds (see below)\nBase.similar(T::Union{Type,Function}, inds) T(Base.to_shape(inds)) Return an array similar to T with the specified indices inds (see below)If a type is defined as a subtype of AbstractArray, it inherits a very large set of rich behaviors including iteration and multidimensional indexing built on top of single-element access.  See the arrays manual page and the Julia Base section for more supported methods.A key part in defining an AbstractArray subtype is IndexStyle. Since indexing is such an important part of an array and often occurs in hot loops, it's important to make both indexing and indexed assignment as efficient as possible.  Array data structures are typically defined in one of two ways: either it most efficiently accesses its elements using just one index (linear indexing) or it intrinsically accesses the elements with indices specified for every dimension.  These two modalities are identified by Julia as IndexLinear() and IndexCartesian().  Converting a linear index to multiple indexing subscripts is typically very expensive, so this provides a traits-based mechanism to enable efficient generic code for all array types.This distinction determines which scalar indexing methods the type must define. IndexLinear() arrays are simple: just define getindex(A::ArrayType, i::Int).  When the array is subsequently indexed with a multidimensional set of indices, the fallback getindex(A::AbstractArray, I...)() efficiently converts the indices into one linear index and then calls the above method. IndexCartesian() arrays, on the other hand, require methods to be defined for each supported dimensionality with ndims(A) Int indices. For example, SparseMatrixCSC from the SparseArrays standard library module, only supports two dimensions, so it just defines getindex(A::SparseMatrixCSC, i::Int, j::Int). The same holds for setindex!.Returning to the sequence of squares from above, we could instead define it as a subtype of an AbstractArray{Int, 1}:julia> struct SquaresVector <: AbstractArray{Int, 1}\n           count::Int\n       end\n\njulia> Base.size(S::SquaresVector) = (S.count,)\n\njulia> Base.IndexStyle(::Type{<:SquaresVector}) = IndexLinear()\n\njulia> Base.getindex(S::SquaresVector, i::Int) = i*iNote that it's very important to specify the two parameters of the AbstractArray; the first defines the eltype, and the second defines the ndims. That supertype and those three methods are all it takes for SquaresVector to be an iterable, indexable, and completely functional array:julia> s = SquaresVector(4)\n4-element SquaresVector:\n  1\n  4\n  9\n 16\n\njulia> s[s .> 8]\n2-element Array{Int64,1}:\n  9\n 16\n\njulia> s + s\n4-element Array{Int64,1}:\n  2\n  8\n 18\n 32\n\njulia> sin.(s)\n4-element Array{Float64,1}:\n  0.8414709848078965\n -0.7568024953079282\n  0.4121184852417566\n -0.2879033166650653As a more complicated example, let's define our own toy N-dimensional sparse-like array type built on top of Dict:julia> struct SparseArray{T,N} <: AbstractArray{T,N}\n           data::Dict{NTuple{N,Int}, T}\n           dims::NTuple{N,Int}\n       end\n\njulia> SparseArray(::Type{T}, dims::Int...) where {T} = SparseArray(T, dims);\n\njulia> SparseArray(::Type{T}, dims::NTuple{N,Int}) where {T,N} = SparseArray{T,N}(Dict{NTuple{N,Int}, T}(), dims);\n\njulia> Base.size(A::SparseArray) = A.dims\n\njulia> Base.similar(A::SparseArray, ::Type{T}, dims::Dims) where {T} = SparseArray(T, dims)\n\njulia> Base.getindex(A::SparseArray{T,N}, I::Vararg{Int,N}) where {T,N} = get(A.data, I, zero(T))\n\njulia> Base.setindex!(A::SparseArray{T,N}, v, I::Vararg{Int,N}) where {T,N} = (A.data[I] = v)Notice that this is an IndexCartesian array, so we must manually define getindex and setindex! at the dimensionality of the array. Unlike the SquaresVector, we are able to define setindex!, and so we can mutate the array:julia> A = SparseArray(Float64, 3, 3)\n3×3 SparseArray{Float64,2}:\n 0.0  0.0  0.0\n 0.0  0.0  0.0\n 0.0  0.0  0.0\n\njulia> fill!(A, 2)\n3×3 SparseArray{Float64,2}:\n 2.0  2.0  2.0\n 2.0  2.0  2.0\n 2.0  2.0  2.0\n\njulia> A[:] = 1:length(A); A\n3×3 SparseArray{Float64,2}:\n 1.0  4.0  7.0\n 2.0  5.0  8.0\n 3.0  6.0  9.0The result of indexing an AbstractArray can itself be an array (for instance when indexing by an AbstractRange). The AbstractArray fallback methods use similar to allocate an Array of the appropriate size and element type, which is filled in using the basic indexing method described above. However, when implementing an array wrapper you often want the result to be wrapped as well:julia> A[1:2,:]\n2×3 SparseArray{Float64,2}:\n 1.0  4.0  7.0\n 2.0  5.0  8.0In this example it is accomplished by defining Base.similar{T}(A::SparseArray, ::Type{T}, dims::Dims) to create the appropriate wrapped array. (Note that while similar supports 1- and 2-argument forms, in most case you only need to specialize the 3-argument form.) For this to work it's important that SparseArray is mutable (supports setindex!). Defining similar, getindex and setindex! for SparseArray also makes it possible to copy the array:julia> copy(A)\n3×3 SparseArray{Float64,2}:\n 1.0  4.0  7.0\n 2.0  5.0  8.0\n 3.0  6.0  9.0In addition to all the iterable and indexable methods from above, these types can also interact with each other and use most of the methods defined in Julia Base for AbstractArrays:julia> A[SquaresVector(3)]\n3-element SparseArray{Float64,1}:\n 1.0\n 4.0\n 9.0\n\njulia> mean(A)\n5.0If you are defining an array type that allows non-traditional indexing (indices that start at something other than 1), you should specialize indices. You should also specialize similar so that the dims argument (ordinarily a Dims size-tuple) can accept AbstractUnitRange objects, perhaps range-types Ind of your own design. For more information, see Arrays with custom indices."
 },
 
 {
@@ -1773,7 +1773,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Documentation",
     "title": "Links",
     "category": "section",
-    "text": "Links to either external or internal addresses can be written using the following syntax, where the text enclosed in square brackets, [ ], is the name of the link and the text enclosed in parentheses, ( ), is the URL.A paragraph containing a link to [Julia](http://www.julialang.org).It's also possible to add cross-references to other documented functions/methods/variables within the Julia documentation itself. For example:\"\"\"\n    eigvals!(A,[irange,][vl,][vu]) -> values\n\nSame as [`eigvals`](@ref), but saves space by overwriting the input `A`, instead of creating a copy.\n\"\"\"This will create a link in the generated docs to the eigvals documentation (which has more information about what this function actually does). It's good to include cross references to mutating/non-mutating versions of a function, or to highlight a difference between two similar-seeming functions.note: Note\nThe above cross referencing is not a Markdown feature, and relies on Documenter.jl, which is used to build base Julia's documentation."
+    "text": "Links to either external or internal addresses can be written using the following syntax, where the text enclosed in square brackets, [ ], is the name of the link and the text enclosed in parentheses, ( ), is the URL.A paragraph containing a link to [Julia](http://www.julialang.org).It's also possible to add cross-references to other documented functions/methods/variables within the Julia documentation itself. For example:\"\"\"\n    accumulate!(op, y, x)\n\nCumulative operation `op` on a vector `x`, storing the result in `y`. See also [`accumulate`](@ref).\n\"\"\"This will create a link in the generated docs to the accumulate documentation (which has more information about what this function actually does). It's good to include cross references to mutating/non-mutating versions of a function, or to highlight a difference between two similar-seeming functions.note: Note\nThe above cross referencing is not a Markdown feature, and relies on Documenter.jl, which is used to build base Julia's documentation."
 },
 
 {
@@ -2413,7 +2413,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Parallel Computing",
     "title": "Global variables",
     "category": "section",
-    "text": "Expressions executed remotely via @spawn, or closures specified for remote execution using remotecall may refer to global variables. Global bindings under module Main are treated a little differently compared to global bindings in other modules. Consider the following code snippet:A = rand(10,10)\nremotecall_fetch(()->norm(A), 2)In this case norm is a function that takes 2D array as a parameter, and MUST be defined in the remote process.  You could use any function other than norm as long as it is defined in the remote process and accepts the appropriate parameter.Note that A is a global variable defined in the local workspace. Worker 2 does not have a variable called A under Main. The act of shipping the closure ()->norm(A) to worker 2 results in Main.A being defined on 2. Main.A continues to exist on worker 2 even after the call remotecall_fetch returns. Remote calls with embedded global references (under Main module only) manage globals as follows:New global bindings are created on destination workers if they are referenced as part of a remote call.\nGlobal constants are declared as constants on remote nodes too.\nGlobals are re-sent to a destination worker only in the context of a remote call, and then only if its value has changed. Also, the cluster does not synchronize global bindings across nodes. For example:\nA = rand(10,10)\nremotecall_fetch(()->norm(A), 2) # worker 2\nA = rand(10,10)\nremotecall_fetch(()->norm(A), 3) # worker 3\nA = nothing\nExecuting the above snippet results in Main.A on worker 2 having a different value from Main.A on worker 3, while the value of Main.A on node 1 is set to nothing.As you may have realized, while memory associated with globals may be collected when they are reassigned on the master, no such action is taken on the workers as the bindings continue to be valid. clear! can be used to manually reassign specific globals on remote nodes to nothing once they are no longer required. This will release any memory associated with them as part of a regular garbage collection cycle.Thus programs should be careful referencing globals in remote calls. In fact, it is preferable to avoid them altogether if possible. If you must reference globals, consider using let blocks to localize global variables.For example:julia> A = rand(10,10);\n\njulia> remotecall_fetch(()->A, 2);\n\njulia> B = rand(10,10);\n\njulia> let B = B\n           remotecall_fetch(()->B, 2)\n       end;\n\njulia> @fetchfrom 2 varinfo()\nname           size summary\n––––––––– ––––––––– ––––––––––––––––––––––\nA         800 bytes 10×10 Array{Float64,2}\nBase                Module\nCore                Module\nMain                ModuleAs can be seen, global variable A is defined on worker 2, but B is captured as a local variable and hence a binding for B does not exist on worker 2."
+    "text": "Expressions executed remotely via @spawn, or closures specified for remote execution using remotecall may refer to global variables. Global bindings under module Main are treated a little differently compared to global bindings in other modules. Consider the following code snippet:A = rand(10,10)\nremotecall_fetch(()->sum(A), 2)In this case sum MUST be defined in the remote process. Note that A is a global variable defined in the local workspace. Worker 2 does not have a variable called A under Main. The act of shipping the closure ()->sum(A) to worker 2 results in Main.A being defined on 2. Main.A continues to exist on worker 2 even after the call remotecall_fetch returns. Remote calls with embedded global references (under Main module only) manage globals as follows:New global bindings are created on destination workers if they are referenced as part of a remote call.\nGlobal constants are declared as constants on remote nodes too.\nGlobals are re-sent to a destination worker only in the context of a remote call, and then only if its value has changed. Also, the cluster does not synchronize global bindings across nodes. For example:\nA = rand(10,10)\nremotecall_fetch(()->sum(A), 2) # worker 2\nA = rand(10,10)\nremotecall_fetch(()->sum(A), 3) # worker 3\nA = nothing\nExecuting the above snippet results in Main.A on worker 2 having a different value from Main.A on worker 3, while the value of Main.A on node 1 is set to nothing.As you may have realized, while memory associated with globals may be collected when they are reassigned on the master, no such action is taken on the workers as the bindings continue to be valid. clear! can be used to manually reassign specific globals on remote nodes to nothing once they are no longer required. This will release any memory associated with them as part of a regular garbage collection cycle.Thus programs should be careful referencing globals in remote calls. In fact, it is preferable to avoid them altogether if possible. If you must reference globals, consider using let blocks to localize global variables.For example:julia> A = rand(10,10);\n\njulia> remotecall_fetch(()->A, 2);\n\njulia> B = rand(10,10);\n\njulia> let B = B\n           remotecall_fetch(()->B, 2)\n       end;\n\njulia> @fetchfrom 2 varinfo()\nname           size summary\n––––––––– ––––––––– ––––––––––––––––––––––\nA         800 bytes 10×10 Array{Float64,2}\nBase                Module\nCore                Module\nMain                ModuleAs can be seen, global variable A is defined on worker 2, but B is captured as a local variable and hence a binding for B does not exist on worker 2."
 },
 
 {
@@ -2957,7 +2957,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Environment Variables",
     "title": "Environment Variables",
     "category": "section",
-    "text": "Julia may be configured with a number of environment variables, either in the usual way of the operating system, or in a portable way from within Julia. Suppose you want to set the environment variable JULIA_EDITOR to vim, then either type ENV[\"JULIA_EDITOR\"] = \"vim\" for instance in the REPL to make this change on a case by case basis, or add the same to the user configuration file .juliarc.jl in the user's home directory to have a permanent effect. The current value of the same environment variable is determined by evaluating ENV[\"JULIA_EDITOR\"].The environment variables that Julia uses generally start with JULIA. If Base.versioninfo is called with verbose equal to true, then the output will list defined environment variables relevant for Julia, including those for which JULIA appears in the name."
+    "text": "Julia may be configured with a number of environment variables, either in the usual way of the operating system, or in a portable way from within Julia. Suppose you want to set the environment variable JULIA_EDITOR to vim, then either type ENV[\"JULIA_EDITOR\"] = \"vim\" for instance in the REPL to make this change on a case by case basis, or add the same to the user configuration file .juliarc.jl in the user's home directory to have a permanent effect. The current value of the same environment variable is determined by evaluating ENV[\"JULIA_EDITOR\"].The environment variables that Julia uses generally start with JULIA. If InteractiveUtils.versioninfo is called with verbose equal to true, then the output will list defined environment variables relevant for Julia, including those for which JULIA appears in the name."
 },
 
 {
@@ -3029,7 +3029,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Environment Variables",
     "title": "JULIA_EDITOR",
     "category": "section",
-    "text": "The editor returned by Base.editor() and used in, e.g., Base.edit, referring to the command of the preferred editor, for instance vim.$JULIA_EDITOR takes precedence over $VISUAL, which in turn takes precedence over $EDITOR. If none of these environment variables is set, then the editor is taken to be open on Windows and OS X, or /etc/alternatives/editor if it exists, or emacs otherwise.note: Note\n$JULIA_EDITOR is not used in the determination of the editor for Base.Pkg.edit: this function checks $VISUAL and $EDITOR alone."
+    "text": "The editor returned by InteractiveUtils.editor() and used in, e.g., InteractiveUtils.edit, referring to the command of the preferred editor, for instance vim.$JULIA_EDITOR takes precedence over $VISUAL, which in turn takes precedence over $EDITOR. If none of these environment variables is set, then the editor is taken to be open on Windows and OS X, or /etc/alternatives/editor if it exists, or emacs otherwise.note: Note\n$JULIA_EDITOR is not used in the determination of the editor for Base.Pkg.edit: this function checks $VISUAL and $EDITOR alone."
 },
 
 {
@@ -3341,7 +3341,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Packages",
     "title": "Packages",
     "category": "section",
-    "text": "Julia has a built-in package manager for installing add-on functionality written in Julia. It can also install external libraries using your operating system's standard system for doing so, or by compiling from source. The list of registered Julia packages can be found at http://pkg.julialang.org. All package manager commands are found in the Pkg module, included in Julia's Base install.First we'll go over the mechanics of the Pkg family of commands and then we'll provide some guidance on how to get your package registered. Be sure to read the section below on package naming conventions, tagging versions and the importance of a REQUIRE file for when you're ready to add your code to the curated METADATA repository."
+    "text": "Julia has a built-in package manager for installing add-on functionality written in Julia. It can also install external libraries using your operating system's standard system for doing so, or by compiling from source. The list of registered Julia packages can be found at http://pkg.julialang.org. All package manager commands are found in the Pkg standard library which becomes available after using import Pkg.First we'll go over the mechanics of the Pkg family of commands and then we'll provide some guidance on how to get your package registered. Be sure to read the section below on package naming conventions, tagging versions and the importance of a REQUIRE file for when you're ready to add your code to the curated METADATA repository."
 },
 
 {
@@ -3989,7 +3989,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Style Guide",
     "title": "Append ! to names of functions that modify their arguments",
     "category": "section",
-    "text": "Instead of:function double(a::AbstractArray{<:Number})\n    for i = 1:endof(a)\n        a[i] *= 2\n    end\n    return a\nenduse:function double!(a::AbstractArray{<:Number})\n    for i = 1:endof(a)\n        a[i] *= 2\n    end\n    return a\nendJulia Base uses this convention throughout and contains examples of functions with both copying and modifying forms (e.g., sort and sort!), and others which are just modifying (e.g., push!, pop!, splice!).  It is typical for such functions to also return the modified array for convenience."
+    "text": "Instead of:function double(a::AbstractArray{<:Number})\n    for i = firstindex(a):lastindex(a)\n        a[i] *= 2\n    end\n    return a\nenduse:function double!(a::AbstractArray{<:Number})\n    for i = firstindex(a):lastindex(a)\n        a[i] *= 2\n    end\n    return a\nendJulia Base uses this convention throughout and contains examples of functions with both copying and modifying forms (e.g., sort and sort!), and others which are just modifying (e.g., push!, pop!, splice!).  It is typical for such functions to also return the modified array for convenience."
 },
 
 {
@@ -4453,15 +4453,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Essentials",
     "title": "Base.exit",
     "category": "Function",
-    "text": "exit(code=0)\n\nQuit the program with an exit code. The default exit code is zero, indicating that the program completed successfully (see also quit). In an interactive session, exit() can be called with the keyboard shorcut ^D.\n\n\n\n\n\n"
-},
-
-{
-    "location": "base/base.html#Base.quit",
-    "page": "Essentials",
-    "title": "Base.quit",
-    "category": "Function",
-    "text": "quit()\n\nQuit the program indicating successful completion. This function is equivalent to exit(0) (see exit). In an interactive session, quit() can be called with the keyboard shorcut ^D.\n\n\n\n\n\n"
+    "text": "exit(code=0)\n\nStop the program with an exit code. The default exit code is zero, indicating that the program completed successfully. In an interactive session, exit() can be called with the keyboard shortcut ^D.\n\n\n\n\n\n"
 },
 
 {
@@ -4481,67 +4473,11 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "base/base.html#Base.varinfo",
-    "page": "Essentials",
-    "title": "Base.varinfo",
-    "category": "Function",
-    "text": "varinfo(m::Module=Main, pattern::Regex=r\"\")\n\nReturn a markdown table giving information about exported global variables in a module, optionally restricted to those matching pattern.\n\nThe memory consumption estimate is an approximate lower bound on the size of the internal structure of the object.\n\n\n\n\n\n"
-},
-
-{
     "location": "base/base.html#Base.summarysize",
     "page": "Essentials",
     "title": "Base.summarysize",
     "category": "Function",
     "text": "Base.summarysize(obj; exclude=Union{...}, chargeall=Union{...}) -> Int\n\nCompute the amount of memory used by all unique objects reachable from the argument.\n\nKeyword Arguments\n\nexclude: specifies the types of objects to exclude from the traversal.\nchargeall: specifies the types of objects to always charge the size of all of their fields, even if those fields would normally be excluded.\n\n\n\n\n\n"
-},
-
-{
-    "location": "base/base.html#Base.edit-Tuple{AbstractString,Integer}",
-    "page": "Essentials",
-    "title": "Base.edit",
-    "category": "Method",
-    "text": "edit(path::AbstractString, line::Integer=0)\n\nEdit a file or directory optionally providing a line number to edit the file at. Return to the julia prompt when you quit the editor. The editor can be changed by setting JULIA_EDITOR, VISUAL or EDITOR as an environment variable.\n\n\n\n\n\n"
-},
-
-{
-    "location": "base/base.html#Base.edit-Tuple{Any}",
-    "page": "Essentials",
-    "title": "Base.edit",
-    "category": "Method",
-    "text": "edit(function, [types])\n\nEdit the definition of a function, optionally specifying a tuple of types to indicate which method to edit. The editor can be changed by setting JULIA_EDITOR, VISUAL or EDITOR as an environment variable.\n\n\n\n\n\n"
-},
-
-{
-    "location": "base/base.html#Base.@edit",
-    "page": "Essentials",
-    "title": "Base.@edit",
-    "category": "Macro",
-    "text": "@edit\n\nEvaluates the arguments to the function or macro call, determines their types, and calls the edit function on the resulting expression.\n\n\n\n\n\n"
-},
-
-{
-    "location": "base/base.html#Base.less-Tuple{AbstractString}",
-    "page": "Essentials",
-    "title": "Base.less",
-    "category": "Method",
-    "text": "less(file::AbstractString, [line::Integer])\n\nShow a file using the default pager, optionally providing a starting line number. Returns to the julia prompt when you quit the pager.\n\n\n\n\n\n"
-},
-
-{
-    "location": "base/base.html#Base.less-Tuple{Any}",
-    "page": "Essentials",
-    "title": "Base.less",
-    "category": "Method",
-    "text": "less(function, [types])\n\nShow the definition of a function using the default pager, optionally specifying a tuple of types to indicate which method to see.\n\n\n\n\n\n"
-},
-
-{
-    "location": "base/base.html#Base.@less",
-    "page": "Essentials",
-    "title": "Base.@less",
-    "category": "Macro",
-    "text": "@less\n\nEvaluates the arguments to the function or macro call, determines their types, and calls the less function on the resulting expression.\n\n\n\n\n\n"
 },
 
 {
@@ -4609,35 +4545,11 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "base/base.html#Base.Docs.apropos",
-    "page": "Essentials",
-    "title": "Base.Docs.apropos",
-    "category": "Function",
-    "text": "apropos(string)\n\nSearch through all documentation for a string, ignoring case.\n\n\n\n\n\n"
-},
-
-{
     "location": "base/base.html#Base.which-Tuple{Any,Any}",
     "page": "Essentials",
     "title": "Base.which",
     "category": "Method",
     "text": "which(f, types)\n\nReturns the method of f (a Method object) that would be called for arguments of the given types.\n\nIf types is an abstract type, then the method that would be called by invoke is returned.\n\n\n\n\n\n"
-},
-
-{
-    "location": "base/base.html#Base.which-Tuple{Symbol}",
-    "page": "Essentials",
-    "title": "Base.which",
-    "category": "Method",
-    "text": "which(symbol)\n\nReturn the module in which the binding for the variable referenced by symbol in module Main was created.\n\n\n\n\n\n"
-},
-
-{
-    "location": "base/base.html#Base.@which",
-    "page": "Essentials",
-    "title": "Base.@which",
-    "category": "Macro",
-    "text": "@which\n\nApplied to a function or macro call, it evaluates the arguments to the specified call, and returns the Method object for the method that would be called for those arguments. Applied to a variable, it returns the module in which the variable was bound. It calls out to the which function.\n\n\n\n\n\n"
 },
 
 {
@@ -4649,27 +4561,11 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "base/base.html#Base.methodswith",
-    "page": "Essentials",
-    "title": "Base.methodswith",
-    "category": "Function",
-    "text": "methodswith(typ[, module or function][, showparents::Bool=false])\n\nReturn an array of methods with an argument of type typ.\n\nThe optional second argument restricts the search to a particular module or function (the default is all top-level modules).\n\nIf optional showparents is true, also return arguments with a parent type of typ, excluding type Any.\n\n\n\n\n\n"
-},
-
-{
     "location": "base/base.html#Base.@show",
     "page": "Essentials",
     "title": "Base.@show",
     "category": "Macro",
     "text": "@show\n\nShow an expression and result, returning the result.\n\n\n\n\n\n"
-},
-
-{
-    "location": "base/base.html#Base.versioninfo",
-    "page": "Essentials",
-    "title": "Base.versioninfo",
-    "category": "Function",
-    "text": "versioninfo(io::IO=STDOUT; verbose::Bool=false, packages::Bool=false)\n\nPrint information about the version of Julia in use. The output is controlled with boolean keyword arguments:\n\npackages: print information about installed packages\nverbose: print all additional information\n\n\n\n\n\n"
 },
 
 {
@@ -4685,7 +4581,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Essentials",
     "title": "Getting Around",
     "category": "section",
-    "text": "Base.exit\nBase.quit\nBase.atexit\nBase.isinteractive\nBase.varinfo\nBase.summarysize\nBase.edit(::AbstractString, ::Integer)\nBase.edit(::Any)\nBase.@edit\nBase.less(::AbstractString)\nBase.less(::Any)\nBase.@less\nBase.clipboard(::Any)\nBase.clipboard()\nBase.require\nBase.compilecache\nBase.__precompile__\nBase.include\nBase.include_string\nBase.include_dependency\nBase.Docs.apropos\nBase.which(::Any, ::Any)\nBase.which(::Symbol)\nBase.@which\nBase.methods\nBase.methodswith\nBase.@show\nBase.versioninfo\nans"
+    "text": "Base.exit\nBase.atexit\nBase.isinteractive\nBase.summarysize\nBase.clipboard(::Any)\nBase.clipboard()\nBase.require\nBase.compilecache\nBase.__precompile__\nBase.include\nBase.include_string\nBase.include_dependency\nBase.which(::Any, ::Any)\nBase.methods\nBase.@show\nans"
 },
 
 {
@@ -4961,27 +4857,11 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "base/base.html#Base.Markdown",
-    "page": "Essentials",
-    "title": "Base.Markdown",
-    "category": "Module",
-    "text": "Tools for working with the Markdown file format. Mainly for documentation.\n\n\n\n\n\n"
-},
-
-{
     "location": "base/base.html#Base.Meta",
     "page": "Essentials",
     "title": "Base.Meta",
     "category": "Module",
     "text": "Convenience functions for metaprogramming.\n\n\n\n\n\n"
-},
-
-{
-    "location": "base/base.html#Base.Pkg",
-    "page": "Essentials",
-    "title": "Base.Pkg",
-    "category": "Module",
-    "text": "Pkg\n\nThe Pkg module provides package management for Julia. Use Pkg.status() for a list of installed packages, Pkg.add(\"<pkg name>\") to add a package, Pkg.update() to update the installed packages.\n\nPlease see the manual section on packages for more information.\n\n\n\n\n\n"
 },
 
 {
@@ -5013,7 +4893,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Essentials",
     "title": "Base Modules",
     "category": "section",
-    "text": "Base.Docs\nBase.Iterators\nBase.LibGit2\nBase.Libc\nBase.Markdown\nBase.Meta\nBase.Pkg\nBase.StackTraces\nBase.Sys\nBase.Threads"
+    "text": "Base.Docs\nBase.Iterators\nBase.LibGit2\nBase.Libc\nBase.Meta\nBase.StackTraces\nBase.Sys\nBase.Threads"
 },
 
 {
@@ -5273,19 +5153,11 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "base/base.html#Base.subtypes",
-    "page": "Essentials",
-    "title": "Base.subtypes",
-    "category": "Function",
-    "text": "subtypes(T::DataType)\n\nReturn a list of immediate subtypes of DataType T. Note that all currently loaded subtypes are included, including those not visible in the current module.\n\nExamples\n\njulia> subtypes(Integer)\n3-element Array{Union{DataType, UnionAll},1}:\n Bool\n Signed\n Unsigned\n\n\n\n\n\n"
-},
-
-{
     "location": "base/base.html#Base.typejoin",
     "page": "Essentials",
     "title": "Base.typejoin",
     "category": "Function",
-    "text": "typejoin(T, S)\n\nCompute a type that contains both T and S.\n\n\n\n\n\n"
+    "text": "typejoin(T, S)\n\nReturn the closest common ancestor of T and S, i.e. the narrowest type from which they both inherit.\n\n\n\n\n\n"
 },
 
 {
@@ -5325,7 +5197,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Essentials",
     "title": "Type relations",
     "category": "section",
-    "text": "Base.supertype\nCore.:(<:)\nBase.:(>:)\nBase.subtypes\nBase.typejoin\nBase.typeintersect\nBase.promote_type\nBase.promote_rule\nBase.isdispatchtuple"
+    "text": "Base.supertype\nCore.:(<:)\nBase.:(>:)\nBase.typejoin\nBase.typeintersect\nBase.promote_type\nBase.promote_rule\nBase.isdispatchtuple"
 },
 
 {
@@ -5373,7 +5245,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Essentials",
     "title": "Base.fieldnames",
     "category": "Function",
-    "text": "fieldnames(x::DataType)\n\nGet an array of the fields of a DataType.\n\nExamples\n\njulia> fieldnames(Hermitian)\n2-element Array{Symbol,1}:\n :data\n :uplo\n\n\n\n\n\n"
+    "text": "fieldnames(x::DataType)\n\nGet an array of the fields of a DataType.\n\nExamples\n\njulia> fieldnames(Rational)\n2-element Array{Symbol,1}:\n :num\n :den\n\n\n\n\n\n"
 },
 
 {
@@ -5585,6 +5457,14 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
+    "location": "base/base.html#Core.NamedTuple",
+    "page": "Essentials",
+    "title": "Core.NamedTuple",
+    "category": "Type",
+    "text": "NamedTuple\n\nNamedTuples are, as their name suggests, named Tuples. That is, they're a tuple-like collection of values, where each entry has a unique name, represented as a Symbol. Like Tuples, NamedTuples are immutable; neither the names nor the values can be modified in place after construction.\n\nAccessing the value associated with a name in a named tuple can be done using field access syntax, e.g. x.a, or using getindex, e.g. x[:a]. A tuple of the names can be obtained using keys, and a tuple of the values can be obtained using values.\n\nnote: Note\nIteration over NamedTuples produces the values without the names. (See example below.) To iterate over the name-value pairs, use the pairs function.\n\nExamples\n\njulia> x = (a=1, b=2)\n(a = 1, b = 2)\n\njulia> x.a\n1\n\njulia> x[:a]\n1\n\njulia> keys(x)\n(:a, :b)\n\njulia> values(x)\n(1, 2)\n\njulia> collect(x)\n2-element Array{Int64,1}:\n 1\n 2\n\njulia> collect(pairs(x))\n2-element Array{Pair{Symbol,Int64},1}:\n :a => 1\n :b => 2\n\n\n\n\n\n"
+},
+
+{
     "location": "base/base.html#Base.Val",
     "page": "Essentials",
     "title": "Base.Val",
@@ -5629,7 +5509,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Essentials",
     "title": "Special Types",
     "category": "section",
-    "text": "Core.Any\nCore.Union\nUnion{}\nCore.UnionAll\nCore.Tuple\nBase.Val\nCore.Vararg\nCore.Nothing\nBase.Some\nBase.Enums.@enum"
+    "text": "Core.Any\nCore.Union\nUnion{}\nCore.UnionAll\nCore.Tuple\nCore.NamedTuple\nBase.Val\nCore.Vararg\nCore.Nothing\nBase.Some\nBase.Enums.@enum"
 },
 
 {
@@ -6493,7 +6373,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Essentials",
     "title": "Base.nameof",
     "category": "Method",
-    "text": "nameof(m::Module) -> Symbol\n\nGet the name of a Module as a Symbol.\n\nExamples\n\njulia> nameof(Base)\n:Base\n\n\n\n\n\n"
+    "text": "nameof(m::Module) -> Symbol\n\nGet the name of a Module as a Symbol.\n\nExamples\n\njulia> nameof(Base.Broadcast)\n:Broadcast\n\n\n\n\n\n"
 },
 
 {
@@ -6501,7 +6381,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Essentials",
     "title": "Base.parentmodule",
     "category": "Function",
-    "text": "parentmodule(m::Module) -> Module\n\nGet a module's enclosing Module. Main is its own parent.\n\nExamples\n\njulia> parentmodule(Main)\nMain\n\njulia> parentmodule(Base.Sys)\nBase\n\n\n\n\n\nparentmodule(t::DataType) -> Module\n\nDetermine the module containing the definition of a (potentially UnionAll-wrapped) DataType.\n\nExamples\n\njulia> module Foo\n           struct Int end\n       end\nFoo\n\njulia> parentmodule(Int)\nCore\n\njulia> parentmodule(Foo.Int)\nFoo\n\n\n\n\n\nparentmodule(f::Function) -> Module\n\nDetermine the module containing the (first) definition of a generic function.\n\n\n\n\n\nparentmodule(f::Function, types) -> Module\n\nDetermine the module containing a given definition of a generic function.\n\n\n\n\n\n"
+    "text": "parentmodule(m::Module) -> Module\n\nGet a module's enclosing Module. Main is its own parent.\n\nExamples\n\njulia> parentmodule(Main)\nMain\n\njulia> parentmodule(Base.Broadcast)\nBase\n\n\n\n\n\nparentmodule(t::DataType) -> Module\n\nDetermine the module containing the definition of a (potentially UnionAll-wrapped) DataType.\n\nExamples\n\njulia> module Foo\n           struct Int end\n       end\nFoo\n\njulia> parentmodule(Int)\nCore\n\njulia> parentmodule(Foo.Int)\nFoo\n\n\n\n\n\nparentmodule(f::Function) -> Module\n\nDetermine the module containing the (first) definition of a generic function.\n\n\n\n\n\nparentmodule(f::Function, types) -> Module\n\nDetermine the module containing a given definition of a generic function.\n\n\n\n\n\n"
 },
 
 {
@@ -6517,7 +6397,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Essentials",
     "title": "Base.fullname",
     "category": "Function",
-    "text": "fullname(m::Module)\n\nGet the fully-qualified name of a module as a tuple of symbols. For example,\n\nExamples\n\njulia> fullname(Base.Pkg)\n(:Base, :Pkg)\n\njulia> fullname(Main)\n(:Main,)\n\n\n\n\n\n"
+    "text": "fullname(m::Module)\n\nGet the fully-qualified name of a module as a tuple of symbols. For example,\n\nExamples\n\njulia> fullname(Base.Iterators)\n(:Base, :Iterators)\n\njulia> fullname(Main)\n(:Main,)\n\n\n\n\n\n"
 },
 
 {
@@ -6569,19 +6449,11 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "base/base.html#Base.@functionloc",
-    "page": "Essentials",
-    "title": "Base.@functionloc",
-    "category": "Macro",
-    "text": "@functionloc\n\nApplied to a function or macro call, it evaluates the arguments to the specified call, and returns a tuple (filename,line) giving the location for the method that would be called for those arguments. It calls out to the functionloc function.\n\n\n\n\n\n"
-},
-
-{
     "location": "base/base.html#Reflection-1",
     "page": "Essentials",
     "title": "Reflection",
     "category": "section",
-    "text": "Base.nameof(::Module)\nBase.parentmodule\nBase.@__MODULE__\nBase.fullname\nBase.names\nCore.nfields\nBase.isconst\nBase.nameof(::Function)\nBase.functionloc(::Any, ::Any)\nBase.functionloc(::Method)\nBase.@functionloc"
+    "text": "Base.nameof(::Module)\nBase.parentmodule\nBase.@__MODULE__\nBase.fullname\nBase.names\nCore.nfields\nBase.isconst\nBase.nameof(::Function)\nBase.functionloc(::Any, ::Any)\nBase.functionloc(::Method)"
 },
 
 {
@@ -6661,15 +6533,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Essentials",
     "title": "Base.code_lowered",
     "category": "Function",
-    "text": "code_lowered(f, types, expand_generated = true)\n\nReturn an array of the lowered forms (IR) for the methods matching the given generic function and type signature.\n\nIf expand_generated is false, the returned CodeInfo instances will correspond to fallback implementations. An error is thrown if no fallback implementation exists. If expand_generated is true, these CodeInfo instances will correspond to the method bodies yielded by expanding the generators.\n\nNote that an error will be thrown if types are not leaf types when expand_generated is true and the corresponding method is a @generated method.\n\n\n\n\n\n"
-},
-
-{
-    "location": "base/base.html#Base.@code_lowered",
-    "page": "Essentials",
-    "title": "Base.@code_lowered",
-    "category": "Macro",
-    "text": "@code_lowered\n\nEvaluates the arguments to the function or macro call, determines their types, and calls code_lowered on the resulting expression.\n\n\n\n\n\n"
+    "text": "code_lowered(f, types; generated = true)\n\nReturn an array of the lowered forms (IR) for the methods matching the given generic function and type signature.\n\nIf generated is false, the returned CodeInfo instances will correspond to fallback implementations. An error is thrown if no fallback implementation exists. If generated is true, these CodeInfo instances will correspond to the method bodies yielded by expanding the generators.\n\nNote that an error will be thrown if types are not leaf types when generated is true and the corresponding method is a @generated method.\n\n\n\n\n\n"
 },
 
 {
@@ -6678,62 +6542,6 @@ var documenterSearchIndex = {"docs": [
     "title": "Base.code_typed",
     "category": "Function",
     "text": "code_typed(f, types; optimize=true)\n\nReturns an array of type-inferred lowered form (IR) for the methods matching the given generic function and type signature. The keyword argument optimize controls whether additional optimizations, such as inlining, are also applied.\n\n\n\n\n\n"
-},
-
-{
-    "location": "base/base.html#Base.@code_typed",
-    "page": "Essentials",
-    "title": "Base.@code_typed",
-    "category": "Macro",
-    "text": "@code_typed\n\nEvaluates the arguments to the function or macro call, determines their types, and calls code_typed on the resulting expression.\n\n\n\n\n\n"
-},
-
-{
-    "location": "base/base.html#Base.code_warntype",
-    "page": "Essentials",
-    "title": "Base.code_warntype",
-    "category": "Function",
-    "text": "code_warntype([io::IO], f, types)\n\nPrints lowered and type-inferred ASTs for the methods matching the given generic function and type signature to io which defaults to STDOUT. The ASTs are annotated in such a way as to cause \"non-leaf\" types to be emphasized (if color is available, displayed in red). This serves as a warning of potential type instability. Not all non-leaf types are particularly problematic for performance, so the results need to be used judiciously. In particular, unions containing either missing or nothing are displayed in yellow, since these are often intentional. See @code_warntype for more information.\n\n\n\n\n\n"
-},
-
-{
-    "location": "base/base.html#Base.@code_warntype",
-    "page": "Essentials",
-    "title": "Base.@code_warntype",
-    "category": "Macro",
-    "text": "@code_warntype\n\nEvaluates the arguments to the function or macro call, determines their types, and calls code_warntype on the resulting expression.\n\n\n\n\n\n"
-},
-
-{
-    "location": "base/base.html#Base.code_llvm",
-    "page": "Essentials",
-    "title": "Base.code_llvm",
-    "category": "Function",
-    "text": "code_llvm([io=STDOUT,], f, types)\n\nPrints the LLVM bitcodes generated for running the method matching the given generic function and type signature to io.\n\nAll metadata and dbg.* calls are removed from the printed bitcode. Use codellvmraw for the full IR.\n\n\n\n\n\n"
-},
-
-{
-    "location": "base/base.html#Base.@code_llvm",
-    "page": "Essentials",
-    "title": "Base.@code_llvm",
-    "category": "Macro",
-    "text": "@code_llvm\n\nEvaluates the arguments to the function or macro call, determines their types, and calls code_llvm on the resulting expression.\n\n\n\n\n\n"
-},
-
-{
-    "location": "base/base.html#Base.code_native",
-    "page": "Essentials",
-    "title": "Base.code_native",
-    "category": "Function",
-    "text": "code_native([io=STDOUT,], f, types; syntax = :att)\n\nPrints the native assembly instructions generated for running the method matching the given generic function and type signature to io. Switch assembly syntax using syntax symbol parameter set to :att for AT&T syntax or :intel for Intel syntax.\n\n\n\n\n\n"
-},
-
-{
-    "location": "base/base.html#Base.@code_native",
-    "page": "Essentials",
-    "title": "Base.@code_native",
-    "category": "Macro",
-    "text": "@code_native\n\nEvaluates the arguments to the function or macro call, determines their types, and calls code_native on the resulting expression.\n\n\n\n\n\n"
 },
 
 {
@@ -6749,7 +6557,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Essentials",
     "title": "Internals",
     "category": "section",
-    "text": "Base.GC.gc\nBase.GC.enable\nMeta.lower\nMeta.@lower\nMeta.parse(::AbstractString, ::Int)\nMeta.parse(::AbstractString)\nBase.macroexpand\nBase.@macroexpand\nBase.@macroexpand1\nBase.code_lowered\nBase.@code_lowered\nBase.code_typed\nBase.@code_typed\nBase.code_warntype\nBase.@code_warntype\nBase.code_llvm\nBase.@code_llvm\nBase.code_native\nBase.@code_native\nBase.precompile"
+    "text": "Base.GC.gc\nBase.GC.enable\nMeta.lower\nMeta.@lower\nMeta.parse(::AbstractString, ::Int)\nMeta.parse(::AbstractString)\nBase.macroexpand\nBase.@macroexpand\nBase.@macroexpand1\nBase.code_lowered\nBase.code_typed\nBase.precompile"
 },
 
 {
@@ -6813,7 +6621,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Collections and Data Structures",
     "title": "Iteration",
     "category": "section",
-    "text": "Sequential iteration is implemented by the methods start, done, and next. The general for loop:for i = I   # or  \"for i in I\"\n    # body\nendis translated into:state = start(I)\nwhile !done(I, state)\n    (i, state) = next(I, state)\n    # body\nendThe state object may be anything, and should be chosen appropriately for each iterable type. See the manual section on the iteration interface for more details about defining a custom iterable type.Base.start\nBase.done\nBase.next\nBase.IteratorSize\nBase.IteratorEltypeFully implemented by:AbstractRange\nUnitRange\nTuple\nNumber\nAbstractArray\nBitSet\nIdDict\nDict\nWeakKeyDict\nEachLine\nAbstractString\nSet\nPair"
+    "text": "Sequential iteration is implemented by the methods start, done, and next. The general for loop:for i = I   # or  \"for i in I\"\n    # body\nendis translated into:state = start(I)\nwhile !done(I, state)\n    (i, state) = next(I, state)\n    # body\nendThe state object may be anything, and should be chosen appropriately for each iterable type. See the manual section on the iteration interface for more details about defining a custom iterable type.Base.start\nBase.done\nBase.next\nBase.IteratorSize\nBase.IteratorEltypeFully implemented by:AbstractRange\nUnitRange\nTuple\nNumber\nAbstractArray\nBitSet\nIdDict\nDict\nWeakKeyDict\nEachLine\nAbstractString\nSet\nPair\nNamedTuple"
 },
 
 {
@@ -6837,7 +6645,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Collections and Data Structures",
     "title": "Base.length",
     "category": "Function",
-    "text": "length(collection) -> Integer\n\nReturn the number of elements in the collection.\n\nUse endof to get the last valid index of an indexable collection.\n\nExamples\n\njulia> length(1:5)\n5\n\njulia> length([1, 2, 3, 4])\n4\n\njulia> length([1 2; 3 4])\n4\n\n\n\n\n\nlength(s::AbstractString) -> Int\nlength(s::AbstractString, i::Integer, j::Integer) -> Int\n\nThe number of characters in string s from indices i through j. This is computed as the number of code unit indices from i to j which are valid character indices. Without only a single string argument, this computes the number of characters in the entire string. With i and j arguments it computes the number of indices between i and j inclusive that are valid indices in the string s. In addition to in-bounds values, i may take the out-of-bounds value ncodeunits(s) + 1 and j may take the out-of-bounds value 0.\n\nSee also: isvalid, ncodeunits, endof, thisind, nextind, prevind\n\nExamples\n\njulia> length(\"jμΛIα\")\n5\n\n\n\n\n\n"
+    "text": "length(collection) -> Integer\n\nReturn the number of elements in the collection.\n\nUse lastindex to get the last valid index of an indexable collection.\n\nExamples\n\njulia> length(1:5)\n5\n\njulia> length([1, 2, 3, 4])\n4\n\njulia> length([1 2; 3 4])\n4\n\n\n\n\n\nlength(s::AbstractString) -> Int\nlength(s::AbstractString, i::Integer, j::Integer) -> Int\n\nThe number of characters in string s from indices i through j. This is computed as the number of code unit indices from i to j which are valid character indices. Without only a single string argument, this computes the number of characters in the entire string. With i and j arguments it computes the number of indices between i and j inclusive that are valid indices in the string s. In addition to in-bounds values, i may take the out-of-bounds value ncodeunits(s) + 1 and j may take the out-of-bounds value 0.\n\nSee also: isvalid, ncodeunits, lastindex, thisind, nextind, prevind\n\nExamples\n\njulia> length(\"jμΛIα\")\n5\n\n\n\n\n\n"
 },
 
 {
@@ -6845,7 +6653,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Collections and Data Structures",
     "title": "General Collections",
     "category": "section",
-    "text": "Base.isempty\nBase.empty!\nBase.lengthFully implemented by:AbstractRange\nUnitRange\nTuple\nNumber\nAbstractArray\nBitSet\nIdDict\nDict\nWeakKeyDict\nAbstractString\nSet"
+    "text": "Base.isempty\nBase.empty!\nBase.lengthFully implemented by:AbstractRange\nUnitRange\nTuple\nNumber\nAbstractArray\nBitSet\nIdDict\nDict\nWeakKeyDict\nAbstractString\nSet\nNamedTuple"
 },
 
 {
@@ -6869,7 +6677,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Collections and Data Structures",
     "title": "Base.indexin",
     "category": "Function",
-    "text": "indexin(a, b)\n\nReturn a vector containing the highest index in b for each value in a that is a member of b . The output vector contains 0 wherever a is not a member of b.\n\nExamples\n\njulia> a = ['a', 'b', 'c', 'b', 'd', 'a'];\n\njulia> b = ['a','b','c'];\n\njulia> indexin(a,b)\n6-element Array{Int64,1}:\n 1\n 2\n 3\n 2\n 0\n 1\n\njulia> indexin(b,a)\n3-element Array{Int64,1}:\n 6\n 4\n 3\n\n\n\n\n\n"
+    "text": "indexin(a, b)\n\nReturn an array containing the highest index in b for each value in a that is a member of b. The output array contains nothing wherever a is not a member of b.\n\nExamples\n\njulia> a = ['a', 'b', 'c', 'b', 'd', 'a']\n\njulia> b = ['a', 'b', 'c']\n\njulia> indexin(a, b)\n6-element Array{Union{Nothing, Int64},1}:\n 1\n 2\n 3\n 2\n  nothing\n 1\n\njulia> indexin(b, a)\n3-element Array{Union{Nothing, Int64},1}:\n 6\n 4\n 3\n\n\n\n\n\n"
 },
 
 {
@@ -7061,7 +6869,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Collections and Data Structures",
     "title": "Base.findmax!",
     "category": "Function",
-    "text": "findmax!(rval, rind, A, [init=true]) -> (maxval, index)\n\nFind the maximum of A and the corresponding linear index along singleton dimensions of rval and rind, and store the results in rval and rind. NaN is treated as greater than all other values.\n\n\n\n\n\n"
+    "text": "findmax!(rval, rind, A) -> (maxval, index)\n\nFind the maximum of A and the corresponding linear index along singleton dimensions of rval and rind, and store the results in rval and rind. NaN is treated as greater than all other values.\n\n\n\n\n\n"
 },
 
 {
@@ -7069,7 +6877,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Collections and Data Structures",
     "title": "Base.findmin!",
     "category": "Function",
-    "text": "findmin!(rval, rind, A, [init=true]) -> (minval, index)\n\nFind the minimum of A and the corresponding linear index along singleton dimensions of rval and rind, and store the results in rval and rind. NaN is treated as less than all other values.\n\n\n\n\n\n"
+    "text": "findmin!(rval, rind, A) -> (minval, index)\n\nFind the minimum of A and the corresponding linear index along singleton dimensions of rval and rind, and store the results in rval and rind. NaN is treated as less than all other values.\n\n\n\n\n\n"
 },
 
 {
@@ -7077,7 +6885,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Collections and Data Structures",
     "title": "Base.sum",
     "category": "Function",
-    "text": "sum(A, dims)\n\nSum elements of an array over the given dimensions.\n\nExamples\n\njulia> A = [1 2; 3 4]\n2×2 Array{Int64,2}:\n 1  2\n 3  4\n\njulia> sum(A, 1)\n1×2 Array{Int64,2}:\n 4  6\n\njulia> sum(A, 2)\n2×1 Array{Int64,2}:\n 3\n 7\n\n\n\n\n\nsum(itr)\n\nReturns the sum of all elements in a collection.\n\nThe return type is Int for signed integers of less than system word size, and UInt for unsigned integers of less than system word size.  For all other arguments, a common return type is found to which all arguments are promoted.\n\njulia> sum(1:20)\n210\n\n\n\n\n\n"
+    "text": "sum(f, itr)\n\nSum the results of calling function f on each element of itr.\n\nThe return type is Int for signed integers of less than system word size, and UInt for unsigned integers of less than system word size.  For all other arguments, a common return type is found to which all arguments are promoted.\n\njulia> sum(abs2, [2; 3; 4])\n29\n\nNote the important difference between sum(A) and reduce(+, A) for arrays with small integer eltype:\n\njulia> sum(Int8[100, 28])\n128\n\njulia> reduce(+, Int8[100, 28])\n-128\n\nIn the former case, the integers are widened to system word size and therefore the result is 128. In the latter case, no such widening happens and integer overflow results in -128.\n\n\n\n\n\nsum(itr)\n\nReturns the sum of all elements in a collection.\n\nThe return type is Int for signed integers of less than system word size, and UInt for unsigned integers of less than system word size.  For all other arguments, a common return type is found to which all arguments are promoted.\n\njulia> sum(1:20)\n210\n\n\n\n\n\nsum(A::AbstractArray, dims)\n\nSum elements of an array over the given dimensions.\n\nExamples\n\njulia> A = [1 2; 3 4]\n2×2 Array{Int64,2}:\n 1  2\n 3  4\n\njulia> sum(A, 1)\n1×2 Array{Int64,2}:\n 4  6\n\njulia> sum(A, 2)\n2×1 Array{Int64,2}:\n 3\n 7\n\n\n\n\n\n"
 },
 
 {
@@ -7093,7 +6901,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Collections and Data Structures",
     "title": "Base.prod",
     "category": "Function",
-    "text": "prod(A, dims)\n\nMultiply elements of an array over the given dimensions.\n\nExamples\n\njulia> A = [1 2; 3 4]\n2×2 Array{Int64,2}:\n 1  2\n 3  4\n\njulia> prod(A, 1)\n1×2 Array{Int64,2}:\n 3  8\n\njulia> prod(A, 2)\n2×1 Array{Int64,2}:\n  2\n 12\n\n\n\n\n\nprod(itr)\n\nReturns the product of all elements of a collection.\n\nThe return type is Int for signed integers of less than system word size, and UInt for unsigned integers of less than system word size.  For all other arguments, a common return type is found to which all arguments are promoted.\n\njulia> prod(1:20)\n2432902008176640000\n\n\n\n\n\n"
+    "text": "prod(f, itr)\n\nReturns the product of f applied to each element of itr.\n\nThe return type is Int for signed integers of less than system word size, and UInt for unsigned integers of less than system word size.  For all other arguments, a common return type is found to which all arguments are promoted.\n\njulia> prod(abs2, [2; 3; 4])\n576\n\n\n\n\n\nprod(itr)\n\nReturns the product of all elements of a collection.\n\nThe return type is Int for signed integers of less than system word size, and UInt for unsigned integers of less than system word size.  For all other arguments, a common return type is found to which all arguments are promoted.\n\njulia> prod(1:20)\n2432902008176640000\n\n\n\n\n\nprod(A::AbstractArray, dims)\n\nMultiply elements of an array over the given dimensions.\n\nExamples\n\njulia> A = [1 2; 3 4]\n2×2 Array{Int64,2}:\n 1  2\n 3  4\n\njulia> prod(A, 1)\n1×2 Array{Int64,2}:\n 3  8\n\njulia> prod(A, 2)\n2×1 Array{Int64,2}:\n  2\n 12\n\n\n\n\n\n"
 },
 
 {
@@ -7157,7 +6965,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Collections and Data Structures",
     "title": "Base.count",
     "category": "Function",
-    "text": "LibGit2.count(f::Function, walker::GitRevWalker; oid::GitHash=GitHash(), by::Cint=Consts.SORT_NONE, rev::Bool=false)\n\nUsing the GitRevWalker walker to \"walk\" over every commit in the repository's history, find the number of commits which return true when f is applied to them. The keyword arguments are:     * oid: The GitHash of the commit to begin the walk from. The default is to use       push_head! and therefore the HEAD commit and all its ancestors.     * by: The sorting method. The default is not to sort. Other options are to sort by       topology (LibGit2.Consts.SORT_TOPOLOGICAL), to sort forwards in time       (LibGit2.Consts.SORT_TIME, most ancient first) or to sort backwards in time       (LibGit2.Consts.SORT_REVERSE, most recent first).     * rev: Whether to reverse the sorted order (for instance, if topological sorting is used).\n\nExamples\n\ncnt = LibGit2.with(LibGit2.GitRevWalker(repo)) do walker\n    count((oid, repo)->(oid == commit_oid1), walker, oid=commit_oid1, by=LibGit2.Consts.SORT_TIME)\nend\n\ncount finds the number of commits along the walk with a certain GitHash commit_oid1, starting the walk from that commit and moving forwards in time from it. Since the GitHash is unique to a commit, cnt will be 1.\n\n\n\n\n\ncount(p, itr) -> Integer\ncount(itr) -> Integer\n\nCount the number of elements in itr for which predicate p returns true. If p is omitted, counts the number of true elements in itr (which should be a collection of boolean values).\n\njulia> count(i->(4<=i<=6), [2,3,4,5,6])\n3\n\njulia> count([true, false, true, true])\n3\n\n\n\n\n\n"
+    "text": "count(p, itr) -> Integer\ncount(itr) -> Integer\n\nCount the number of elements in itr for which predicate p returns true. If p is omitted, counts the number of true elements in itr (which should be a collection of boolean values).\n\njulia> count(i->(4<=i<=6), [2,3,4,5,6])\n3\n\njulia> count([true, false, true, true])\n3\n\n\n\n\n\nLibGit2.count(f::Function, walker::GitRevWalker; oid::GitHash=GitHash(), by::Cint=Consts.SORT_NONE, rev::Bool=false)\n\nUsing the GitRevWalker walker to \"walk\" over every commit in the repository's history, find the number of commits which return true when f is applied to them. The keyword arguments are:     * oid: The GitHash of the commit to begin the walk from. The default is to use       push_head! and therefore the HEAD commit and all its ancestors.     * by: The sorting method. The default is not to sort. Other options are to sort by       topology (LibGit2.Consts.SORT_TOPOLOGICAL), to sort forwards in time       (LibGit2.Consts.SORT_TIME, most ancient first) or to sort backwards in time       (LibGit2.Consts.SORT_REVERSE, most recent first).     * rev: Whether to reverse the sorted order (for instance, if topological sorting is used).\n\nExamples\n\ncnt = LibGit2.with(LibGit2.GitRevWalker(repo)) do walker\n    count((oid, repo)->(oid == commit_oid1), walker, oid=commit_oid1, by=LibGit2.Consts.SORT_TIME)\nend\n\ncount finds the number of commits along the walk with a certain GitHash commit_oid1, starting the walk from that commit and moving forwards in time from it. Since the GitHash is unique to a commit, cnt will be 1.\n\n\n\n\n\n"
 },
 
 {
@@ -7189,7 +6997,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Collections and Data Structures",
     "title": "Base.map",
     "category": "Function",
-    "text": "LibGit2.map(f::Function, walker::GitRevWalker; oid::GitHash=GitHash(), range::AbstractString=\"\", by::Cint=Consts.SORT_NONE, rev::Bool=false)\n\nUsing the GitRevWalker walker to \"walk\" over every commit in the repository's history, apply f to each commit in the walk. The keyword arguments are:     * oid: The GitHash of the commit to begin the walk from. The default is to use       push_head! and therefore the HEAD commit and all its ancestors.     * range: A range of GitHashs in the format oid1..oid2. f will be       applied to all commits between the two.     * by: The sorting method. The default is not to sort. Other options are to sort by       topology (LibGit2.Consts.SORT_TOPOLOGICAL), to sort forwards in time       (LibGit2.Consts.SORT_TIME, most ancient first) or to sort backwards in time       (LibGit2.Consts.SORT_REVERSE, most recent first).     * rev: Whether to reverse the sorted order (for instance, if topological sorting is used).\n\nExamples\n\noids = LibGit2.with(LibGit2.GitRevWalker(repo)) do walker\n    LibGit2.map((oid, repo)->string(oid), walker, by=LibGit2.Consts.SORT_TIME)\nend\n\nHere, map visits each commit using the GitRevWalker and finds its GitHash.\n\n\n\n\n\nmap(f, c...) -> collection\n\nTransform collection c by applying f to each element. For multiple collection arguments, apply f elementwise.\n\nSee also: mapslices\n\nExamples\n\njulia> map(x -> x * 2, [1, 2, 3])\n3-element Array{Int64,1}:\n 2\n 4\n 6\n\njulia> map(+, [1, 2, 3], [10, 20, 30])\n3-element Array{Int64,1}:\n 11\n 22\n 33\n\n\n\n\n\n"
+    "text": "map(f, c...) -> collection\n\nTransform collection c by applying f to each element. For multiple collection arguments, apply f elementwise.\n\nSee also: mapslices\n\nExamples\n\njulia> map(x -> x * 2, [1, 2, 3])\n3-element Array{Int64,1}:\n 2\n 4\n 6\n\njulia> map(+, [1, 2, 3], [10, 20, 30])\n3-element Array{Int64,1}:\n 11\n 22\n 33\n\n\n\n\n\nLibGit2.map(f::Function, walker::GitRevWalker; oid::GitHash=GitHash(), range::AbstractString=\"\", by::Cint=Consts.SORT_NONE, rev::Bool=false)\n\nUsing the GitRevWalker walker to \"walk\" over every commit in the repository's history, apply f to each commit in the walk. The keyword arguments are:     * oid: The GitHash of the commit to begin the walk from. The default is to use       push_head! and therefore the HEAD commit and all its ancestors.     * range: A range of GitHashs in the format oid1..oid2. f will be       applied to all commits between the two.     * by: The sorting method. The default is not to sort. Other options are to sort by       topology (LibGit2.Consts.SORT_TOPOLOGICAL), to sort forwards in time       (LibGit2.Consts.SORT_TIME, most ancient first) or to sort backwards in time       (LibGit2.Consts.SORT_REVERSE, most recent first).     * rev: Whether to reverse the sorted order (for instance, if topological sorting is used).\n\nExamples\n\noids = LibGit2.with(LibGit2.GitRevWalker(repo)) do walker\n    LibGit2.map((oid, repo)->string(oid), walker, by=LibGit2.Consts.SORT_TIME)\nend\n\nHere, map visits each commit using the GitRevWalker and finds its GitHash.\n\n\n\n\n\n"
 },
 
 {
@@ -7261,7 +7069,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Collections and Data Structures",
     "title": "Base.last",
     "category": "Function",
-    "text": "last(coll)\n\nGet the last element of an ordered collection, if it can be computed in O(1) time. This is accomplished by calling endof to get the last index. Return the end point of an AbstractRange even if it is empty.\n\nExamples\n\njulia> last(1:2:10)\n9\n\njulia> last([1; 2; 3; 4])\n4\n\n\n\n\n\nlast(s::AbstractString, n::Integer)\n\nGet a string consisting of the last n characters of s.\n\njulia> last(\"∀ϵ≠0: ϵ²>0\", 0)\n\"\"\n\njulia> last(\"∀ϵ≠0: ϵ²>0\", 1)\n\"0\"\n\njulia> last(\"∀ϵ≠0: ϵ²>0\", 3)\n\"²>0\"\n\n\n\n\n\n"
+    "text": "last(coll)\n\nGet the last element of an ordered collection, if it can be computed in O(1) time. This is accomplished by calling lastindex to get the last index. Return the end point of an AbstractRange even if it is empty.\n\nExamples\n\njulia> last(1:2:10)\n9\n\njulia> last([1; 2; 3; 4])\n4\n\n\n\n\n\nlast(s::AbstractString, n::Integer)\n\nGet a string consisting of the last n characters of s.\n\njulia> last(\"∀ϵ≠0: ϵ²>0\", 0)\n\"\"\n\njulia> last(\"∀ϵ≠0: ϵ²>0\", 1)\n\"0\"\n\njulia> last(\"∀ϵ≠0: ϵ²>0\", 3)\n\"²>0\"\n\n\n\n\n\n"
 },
 
 {
@@ -7369,11 +7177,19 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "base/collections.html#Base.endof",
+    "location": "base/collections.html#Base.firstindex",
     "page": "Collections and Data Structures",
-    "title": "Base.endof",
+    "title": "Base.firstindex",
     "category": "Function",
-    "text": "endof(collection) -> Integer\n\nReturn the last index of the collection.\n\nExamples\n\njulia> endof([1,2,4])\n3\n\n\n\n\n\n"
+    "text": "firstindex(collection) -> Integer\n\nReturn the first index of the collection.\n\nExamples\n\njulia> firstindex([1,2,4])\n1\n\n\n\n\n\n"
+},
+
+{
+    "location": "base/collections.html#Base.lastindex",
+    "page": "Collections and Data Structures",
+    "title": "Base.lastindex",
+    "category": "Function",
+    "text": "lastindex(collection) -> Integer\n\nReturn the last index of the collection.\n\nExamples\n\njulia> lastindex([1,2,4])\n3\n\n\n\n\n\n"
 },
 
 {
@@ -7381,7 +7197,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Collections and Data Structures",
     "title": "Indexable Collections",
     "category": "section",
-    "text": "Base.getindex\nBase.setindex!\nBase.endofFully implemented by:Array\nBitArray\nAbstractArray\nSubArrayPartially implemented by:AbstractRange\nUnitRange\nTuple\nAbstractString\nDict\nIdDict\nWeakKeyDict"
+    "text": "Base.getindex\nBase.setindex!\nBase.firstindex\nBase.lastindexFully implemented by:Array\nBitArray\nAbstractArray\nSubArrayPartially implemented by:AbstractRange\nUnitRange\nTuple\nAbstractString\nDict\nIdDict\nWeakKeyDict\nNamedTuple"
 },
 
 {
@@ -7501,7 +7317,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Collections and Data Structures",
     "title": "Base.pairs",
     "category": "Function",
-    "text": "pairs(IndexLinear(), A)\npairs(IndexCartesian(), A)\npairs(IndexStyle(A), A)\n\nAn iterator that accesses each element of the array A, returning i => x, where i is the index for the element and x = A[i]. Identical to pairs(A), except that the style of index can be selected. Also similar to enumerate(A), except i will be a valid index for A, while enumerate always counts from 1 regardless of the indices of A.\n\nSpecifying IndexLinear() ensures that i will be an integer; specifying IndexCartesian() ensures that i will be a CartesianIndex; specifying IndexStyle(A) chooses whichever has been defined as the native indexing style for array A.\n\nMutation of the bounds of the underlying array will invalidate this iterator.\n\nExamples\n\njulia> A = [\"a\" \"d\"; \"b\" \"e\"; \"c\" \"f\"];\n\njulia> for (index, value) in pairs(IndexStyle(A), A)\n           println(\"$index $value\")\n       end\n1 a\n2 b\n3 c\n4 d\n5 e\n6 f\n\njulia> S = view(A, 1:2, :);\n\njulia> for (index, value) in pairs(IndexStyle(S), S)\n           println(\"$index $value\")\n       end\nCartesianIndex(1, 1) a\nCartesianIndex(2, 1) b\nCartesianIndex(1, 2) d\nCartesianIndex(2, 2) e\n\nSee also: IndexStyle, axes.\n\n\n\n\n\npairs(collection)\n\nReturn an iterator over key => value pairs for any collection that maps a set of keys to a set of values. This includes arrays, where the keys are the array indices.\n\n\n\n\n\n"
+    "text": "pairs(collection)\n\nReturn an iterator over key => value pairs for any collection that maps a set of keys to a set of values. This includes arrays, where the keys are the array indices.\n\n\n\n\n\npairs(IndexLinear(), A)\npairs(IndexCartesian(), A)\npairs(IndexStyle(A), A)\n\nAn iterator that accesses each element of the array A, returning i => x, where i is the index for the element and x = A[i]. Identical to pairs(A), except that the style of index can be selected. Also similar to enumerate(A), except i will be a valid index for A, while enumerate always counts from 1 regardless of the indices of A.\n\nSpecifying IndexLinear() ensures that i will be an integer; specifying IndexCartesian() ensures that i will be a CartesianIndex; specifying IndexStyle(A) chooses whichever has been defined as the native indexing style for array A.\n\nMutation of the bounds of the underlying array will invalidate this iterator.\n\nExamples\n\njulia> A = [\"a\" \"d\"; \"b\" \"e\"; \"c\" \"f\"];\n\njulia> for (index, value) in pairs(IndexStyle(A), A)\n           println(\"$index $value\")\n       end\n1 a\n2 b\n3 c\n4 d\n5 e\n6 f\n\njulia> S = view(A, 1:2, :);\n\njulia> for (index, value) in pairs(IndexStyle(S), S)\n           println(\"$index $value\")\n       end\nCartesianIndex(1, 1) a\nCartesianIndex(2, 1) b\nCartesianIndex(1, 2) d\nCartesianIndex(2, 2) e\n\nSee also: IndexStyle, axes.\n\n\n\n\n\n"
 },
 
 {
@@ -8997,7 +8813,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Mathematics",
     "title": "Base.conj",
     "category": "Function",
-    "text": "conj(v::RowVector)\n\nReturn a ConjArray lazy view of the input, where each element is conjugated.\n\nExamples\n\njulia> v = RowVector([1+im, 1-im])\n1×2 RowVector{Complex{Int64},Array{Complex{Int64},1}}:\n 1+1im  1-1im\n\njulia> conj(v)\n1×2 RowVector{Complex{Int64},ConjArray{Complex{Int64},1,Array{Complex{Int64},1}}}:\n 1-1im  1+1im\n\n\n\n\n\nconj(z)\n\nCompute the complex conjugate of a complex number z.\n\nExamples\n\njulia> conj(1 + 3im)\n1 - 3im\n\n\n\n\n\n"
+    "text": "conj(z)\n\nCompute the complex conjugate of a complex number z.\n\nExamples\n\njulia> conj(1 + 3im)\n1 - 3im\n\n\n\n\n\n"
 },
 
 {
@@ -9205,7 +9021,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Mathematics",
     "title": "Base.mean",
     "category": "Function",
-    "text": "mean(f::Function, v)\n\nApply the function f to each element of v and take the mean.\n\njulia> mean(√, [1, 2, 3])\n1.3820881233139908\n\njulia> mean([√1, √2, √3])\n1.3820881233139908\n\n\n\n\n\nmean(v[, region])\n\nCompute the mean of whole array v, or optionally along the dimensions in region.\n\nnote: Note\nJulia does not ignore NaN values in the computation. For applications requiring the handling of missing data, the DataArrays.jl package is recommended.\n\n\n\n\n\n"
+    "text": "mean(f::Function, v)\n\nApply the function f to each element of v and take the mean.\n\njulia> mean(√, [1, 2, 3])\n1.3820881233139908\n\njulia> mean([√1, √2, √3])\n1.3820881233139908\n\n\n\n\n\nmean(v[, region])\n\nCompute the mean of whole array v, or optionally along the dimensions in region.\n\nnote: Note\nJulia does not ignore NaN values in the computation. Use the missing type to represent missing values, and the skipmissing function to omit them.\n\n\n\n\n\n"
 },
 
 {
@@ -9221,7 +9037,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Mathematics",
     "title": "Base.std",
     "category": "Function",
-    "text": "std(v[, region]; corrected::Bool=true, mean=nothing)\n\nCompute the sample standard deviation of a vector or array v, optionally along dimensions in region. The algorithm returns an estimator of the generative distribution's standard deviation under the assumption that each entry of v is an IID drawn from that generative distribution. This computation is equivalent to calculating sqrt(sum((v - mean(v)).^2) / (length(v) - 1)). A pre-computed mean may be provided. If corrected is true, then the sum is scaled with n-1, whereas the sum is scaled with n if corrected is false where n = length(x).\n\nnote: Note\nJulia does not ignore NaN values in the computation. For applications requiring the handling of missing data, the DataArrays.jl package is recommended.\n\n\n\n\n\n"
+    "text": "std(v[, region]; corrected::Bool=true, mean=nothing)\n\nCompute the sample standard deviation of a vector or array v, optionally along dimensions in region. The algorithm returns an estimator of the generative distribution's standard deviation under the assumption that each entry of v is an IID drawn from that generative distribution. This computation is equivalent to calculating sqrt(sum((v - mean(v)).^2) / (length(v) - 1)). A pre-computed mean may be provided. If corrected is true, then the sum is scaled with n-1, whereas the sum is scaled with n if corrected is false where n = length(x).\n\nnote: Note\nJulia does not ignore NaN values in the computation. Use the missing type to represent missing values, and the skipmissing function to omit them.\n\n\n\n\n\n"
 },
 
 {
@@ -9229,7 +9045,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Mathematics",
     "title": "Base.stdm",
     "category": "Function",
-    "text": "stdm(v, m; corrected::Bool=true)\n\nCompute the sample standard deviation of a vector v with known mean m. If corrected is true, then the sum is scaled with n-1, whereas the sum is scaled with n if corrected is false where n = length(x).\n\nnote: Note\nJulia does not ignore NaN values in the computation. For applications requiring the handling of missing data, the DataArrays.jl package is recommended.\n\n\n\n\n\n"
+    "text": "stdm(v, m; corrected::Bool=true)\n\nCompute the sample standard deviation of a vector v with known mean m. If corrected is true, then the sum is scaled with n-1, whereas the sum is scaled with n if corrected is false where n = length(x).\n\nnote: Note\nJulia does not ignore NaN values in the computation. Use the missing type to represent missing values, and the skipmissing function to omit them.\n\n\n\n\n\n"
 },
 
 {
@@ -9237,7 +9053,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Mathematics",
     "title": "Base.var",
     "category": "Function",
-    "text": "var(v[, region]; corrected::Bool=true, mean=nothing)\n\nCompute the sample variance of a vector or array v, optionally along dimensions in region. The algorithm will return an estimator of the generative distribution's variance under the assumption that each entry of v is an IID drawn from that generative distribution. This computation is equivalent to calculating sum(abs2, v - mean(v)) / (length(v) - 1). If corrected is true, then the sum is scaled with n-1, whereas the sum is scaled with n if corrected is false where n = length(x). The mean mean over the region may be provided.\n\nnote: Note\nJulia does not ignore NaN values in the computation. For applications requiring the handling of missing data, the DataArrays.jl package is recommended.\n\n\n\n\n\n"
+    "text": "var(v[, region]; corrected::Bool=true, mean=nothing)\n\nCompute the sample variance of a vector or array v, optionally along dimensions in region. The algorithm will return an estimator of the generative distribution's variance under the assumption that each entry of v is an IID drawn from that generative distribution. This computation is equivalent to calculating sum(abs2, v - mean(v)) / (length(v) - 1). If corrected is true, then the sum is scaled with n-1, whereas the sum is scaled with n if corrected is false where n = length(x). The mean mean over the region may be provided.\n\nnote: Note\nJulia does not ignore NaN values in the computation. Use the missing type to represent missing values, and the skipmissing function to omit them.\n\n\n\n\n\n"
 },
 
 {
@@ -9245,7 +9061,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Mathematics",
     "title": "Base.varm",
     "category": "Function",
-    "text": "varm(v, m[, region]; corrected::Bool=true)\n\nCompute the sample variance of a collection v with known mean(s) m, optionally over region. m may contain means for each dimension of v. If corrected is true, then the sum is scaled with n-1, whereas the sum is scaled with n if corrected is false where n = length(x).\n\nnote: Note\nJulia does not ignore NaN values in the computation. For applications requiring the handling of missing data, the DataArrays.jl package is recommended.\n\n\n\n\n\n"
+    "text": "varm(v, m[, region]; corrected::Bool=true)\n\nCompute the sample variance of a collection v with known mean(s) m, optionally over region. m may contain means for each dimension of v. If corrected is true, then the sum is scaled with n-1, whereas the sum is scaled with n if corrected is false where n = length(x).\n\nnote: Note\nJulia does not ignore NaN values in the computation. Use the missing type to represent missing values, and the skipmissing function to omit them.\n\n\n\n\n\n"
 },
 
 {
@@ -9261,7 +9077,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Mathematics",
     "title": "Base.median",
     "category": "Function",
-    "text": "median(v[, region])\n\nCompute the median of an entire array v, or, optionally, along the dimensions in region. For an even number of elements no exact median element exists, so the result is equivalent to calculating mean of two median elements.\n\nnote: Note\nJulia does not ignore NaN values in the computation. For applications requiring the handling of missing data, the DataArrays.jl package is recommended.\n\n\n\n\n\n"
+    "text": "median(v[, region])\n\nCompute the median of an entire array v, or, optionally, along the dimensions in region. For an even number of elements no exact median element exists, so the result is equivalent to calculating mean of two median elements.\n\nnote: Note\nJulia does not ignore NaN values in the computation. Use the missing type to represent missing values, and the skipmissing function to omit them.\n\n\n\n\n\n"
 },
 
 {
@@ -9277,7 +9093,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Mathematics",
     "title": "Base.quantile",
     "category": "Function",
-    "text": "quantile(v, p; sorted=false)\n\nCompute the quantile(s) of a vector v at a specified probability or vector or tuple of probabilities p. The keyword argument sorted indicates whether v can be assumed to be sorted.\n\nThe p should be on the interval [0,1], and v should not have any NaN values.\n\nQuantiles are computed via linear interpolation between the points ((k-1)/(n-1), v[k]), for k = 1:n where n = length(v). This corresponds to Definition 7 of Hyndman and Fan (1996), and is the same as the R default.\n\nnote: Note\nJulia does not ignore NaN values in the computation. For applications requiring the handling of missing data, the DataArrays.jl package is recommended. quantile will throw an ArgumentError in the presence of NaN values in the data array.\n\nHyndman, R.J and Fan, Y. (1996) \"Sample Quantiles in Statistical Packages\", The American Statistician, Vol. 50, No. 4, pp. 361-365\n\n\n\n\n\n"
+    "text": "quantile(v, p; sorted=false)\n\nCompute the quantile(s) of a vector v at a specified probability or vector or tuple of probabilities p. The keyword argument sorted indicates whether v can be assumed to be sorted.\n\nThe p should be on the interval [0,1], and v should not have any NaN values.\n\nQuantiles are computed via linear interpolation between the points ((k-1)/(n-1), v[k]), for k = 1:n where n = length(v). This corresponds to Definition 7 of Hyndman and Fan (1996), and is the same as the R default.\n\nnote: Note\nJulia does not ignore NaN values in the computation: quantile will throw an ArgumentError in the presence of NaN values in the data array. Use the missing type to represent missing values, and the skipmissing function to omit them.\n\nHyndman, R.J and Fan, Y. (1996) \"Sample Quantiles in Statistical Packages\", The American Statistician, Vol. 50, No. 4, pp. 361-365\n\n\n\n\n\n"
 },
 
 {
@@ -9285,7 +9101,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Mathematics",
     "title": "Base.quantile!",
     "category": "Function",
-    "text": "quantile!([q, ] v, p; sorted=false)\n\nCompute the quantile(s) of a vector v at the probability or probabilities p, which can be given as a single value, a vector, or a tuple. If p is a vector, an optional output array q may also be specified. (If not provided, a new output array is created.) The keyword argument sorted indicates whether v can be assumed to be sorted; if false (the default), then the elements of v may be partially sorted.\n\nThe elements of p should be on the interval [0,1], and v should not have any NaN values.\n\nQuantiles are computed via linear interpolation between the points ((k-1)/(n-1), v[k]), for k = 1:n where n = length(v). This corresponds to Definition 7 of Hyndman and Fan (1996), and is the same as the R default.\n\nnote: Note\nJulia does not ignore NaN values in the computation. For applications requiring the handling of missing data, the DataArrays.jl package is recommended. quantile! will throw an ArgumentError in the presence of NaN values in the data array.\n\nHyndman, R.J and Fan, Y. (1996) \"Sample Quantiles in Statistical Packages\", The American Statistician, Vol. 50, No. 4, pp. 361-365\n\n\n\n\n\n"
+    "text": "quantile!([q, ] v, p; sorted=false)\n\nCompute the quantile(s) of a vector v at the probability or probabilities p, which can be given as a single value, a vector, or a tuple. If p is a vector, an optional output array q may also be specified. (If not provided, a new output array is created.) The keyword argument sorted indicates whether v can be assumed to be sorted; if false (the default), then the elements of v may be partially sorted.\n\nThe elements of p should be on the interval [0,1], and v should not have any NaN values.\n\nQuantiles are computed via linear interpolation between the points ((k-1)/(n-1), v[k]), for k = 1:n where n = length(v). This corresponds to Definition 7 of Hyndman and Fan (1996), and is the same as the R default.\n\nnote: Note\nJulia does not ignore NaN values in the computation: quantile! will throw an ArgumentError in the presence of NaN values in the data array. Use the missing type to represent missing values, and the skipmissing function to omit them.\n\nHyndman, R.J and Fan, Y. (1996) \"Sample Quantiles in Statistical Packages\", The American Statistician, Vol. 50, No. 4, pp. 361-365\n\n\n\n\n\n"
 },
 
 {
@@ -10165,7 +9981,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Strings",
     "title": "Base.length",
     "category": "Method",
-    "text": "length(s::AbstractString) -> Int\nlength(s::AbstractString, i::Integer, j::Integer) -> Int\n\nThe number of characters in string s from indices i through j. This is computed as the number of code unit indices from i to j which are valid character indices. Without only a single string argument, this computes the number of characters in the entire string. With i and j arguments it computes the number of indices between i and j inclusive that are valid indices in the string s. In addition to in-bounds values, i may take the out-of-bounds value ncodeunits(s) + 1 and j may take the out-of-bounds value 0.\n\nSee also: isvalid, ncodeunits, endof, thisind, nextind, prevind\n\nExamples\n\njulia> length(\"jμΛIα\")\n5\n\n\n\n\n\n"
+    "text": "length(s::AbstractString) -> Int\nlength(s::AbstractString, i::Integer, j::Integer) -> Int\n\nThe number of characters in string s from indices i through j. This is computed as the number of code unit indices from i to j which are valid character indices. Without only a single string argument, this computes the number of characters in the entire string. With i and j arguments it computes the number of indices between i and j inclusive that are valid indices in the string s. In addition to in-bounds values, i may take the out-of-bounds value ncodeunits(s) + 1 and j may take the out-of-bounds value 0.\n\nSee also: isvalid, ncodeunits, lastindex, thisind, nextind, prevind\n\nExamples\n\njulia> length(\"jμΛIα\")\n5\n\n\n\n\n\n"
 },
 
 {
@@ -10237,7 +10053,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Strings",
     "title": "Base.SubString",
     "category": "Type",
-    "text": "SubString(s::AbstractString, i::Integer, j::Integer=endof(s))\nSubString(s::AbstractString, r::UnitRange{<:Integer})\n\nLike getindex, but returns a view into the parent string s within range i:j or r respectively instead of making a copy.\n\nExamples\n\njulia> SubString(\"abc\", 1, 2)\n\"ab\"\n\njulia> SubString(\"abc\", 1:2)\n\"ab\"\n\njulia> SubString(\"abc\", 2)\n\"bc\"\n\n\n\n\n\n"
+    "text": "SubString(s::AbstractString, i::Integer, j::Integer=lastindex(s))\nSubString(s::AbstractString, r::UnitRange{<:Integer})\n\nLike getindex, but returns a view into the parent string s within range i:j or r respectively instead of making a copy.\n\nExamples\n\njulia> SubString(\"abc\", 1, 2)\n\"ab\"\n\njulia> SubString(\"abc\", 1:2)\n\"ab\"\n\njulia> SubString(\"abc\", 2)\n\"bc\"\n\n\n\n\n\n"
 },
 
 {
@@ -10261,7 +10077,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Strings",
     "title": "Base.ncodeunits",
     "category": "Method",
-    "text": "ncodeunits(s::AbstractString) -> Int\n\nReturn the number of code units in a string. Indices that are in bounds to access this string must satisfy 1 ≤ i ≤ ncodeunits(s). Not all such indices are valid – they may not be the start of a character, but they will return a code unit value when calling codeunit(s,i).\n\nSee also: codeunit, checkbounds, sizeof, length, endof\n\n\n\n\n\n"
+    "text": "ncodeunits(s::AbstractString) -> Int\n\nReturn the number of code units in a string. Indices that are in bounds to access this string must satisfy 1 ≤ i ≤ ncodeunits(s). Not all such indices are valid – they may not be the start of a character, but they will return a code unit value when calling codeunit(s,i).\n\nSee also: codeunit, checkbounds, sizeof, length, lastindex\n\n\n\n\n\n"
 },
 
 {
@@ -10413,7 +10229,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Strings",
     "title": "Base.findfirst",
     "category": "Method",
-    "text": "findfirst(pattern::AbstractString, string::AbstractString)\nfindfirst(pattern::Regex, string::String)\n\nFind the first occurrence of pattern in string. Equivalent to findnext(pattern, string, start(s)).\n\nExamples\n\njulia> findfirst(\"z\", \"Hello to the world\")\n0:-1\n\njulia> findfirst(\"Julia\", \"JuliaLang\")\n1:5\n\n\n\n\n\n"
+    "text": "findfirst(pattern::AbstractString, string::AbstractString)\nfindfirst(pattern::Regex, string::String)\n\nFind the first occurrence of pattern in string. Equivalent to findnext(pattern, string, firstindex(s)).\n\nExamples\n\njulia> findfirst(\"z\", \"Hello to the world\")\n0:-1\n\njulia> findfirst(\"Julia\", \"JuliaLang\")\n1:5\n\n\n\n\n\n"
 },
 
 {
@@ -10429,7 +10245,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Strings",
     "title": "Base.findlast",
     "category": "Method",
-    "text": "findlast(pattern::AbstractString, string::AbstractString)\nfindlast(pattern::Regex, string::String)\n\nFind the last occurrence of pattern in string. Equivalent to findlast(pattern, string, endof(s)).\n\nExamples\n\njulia> findlast(\"o\", \"Hello to the world\")\n15:15\n\njulia> findfirst(\"Julia\", \"JuliaLang\")\n1:5\n\n\n\n\n\n"
+    "text": "findlast(pattern::AbstractString, string::AbstractString)\nfindlast(pattern::Regex, string::String)\n\nFind the last occurrence of pattern in string. Equivalent to findlast(pattern, string, lastindex(s)).\n\nExamples\n\njulia> findlast(\"o\", \"Hello to the world\")\n15:15\n\njulia> findfirst(\"Julia\", \"JuliaLang\")\n1:5\n\n\n\n\n\n"
 },
 
 {
@@ -10613,7 +10429,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Strings",
     "title": "Base.nextind",
     "category": "Function",
-    "text": "nextind(str::AbstractString, i::Integer, n::Integer=1) -> Int\n\nIf i is in bounds in s return the index of the start of the character whose encoding starts after index i. If i is out of bounds in s return i + 1. If n == 0 return i.\n\nExamples\n\njulia> str = \"αβγdef\";\n\njulia> nextind(str, 1)\n3\n\njulia> nextind(str, 1, 2)\n5\n\njulia> endof(str)\n9\n\njulia> nextind(str, 9)\n10\n\n\n\n\n\n"
+    "text": "nextind(str::AbstractString, i::Integer, n::Integer=1) -> Int\n\nIf i is in bounds in s return the index of the start of the character whose encoding starts after index i. If i is out of bounds in s return i + 1. If n == 0 return i.\n\nExamples\n\njulia> str = \"αβγdef\";\n\njulia> nextind(str, 1)\n3\n\njulia> nextind(str, 1, 2)\n5\n\njulia> lastindex(str)\n9\n\njulia> nextind(str, 9)\n10\n\n\n\n\n\n"
 },
 
 {
@@ -11061,7 +10877,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Arrays",
     "title": "Base.length",
     "category": "Method",
-    "text": "length(collection) -> Integer\n\nReturn the number of elements in the collection.\n\nUse endof to get the last valid index of an indexable collection.\n\nExamples\n\njulia> length(1:5)\n5\n\njulia> length([1, 2, 3, 4])\n4\n\njulia> length([1 2; 3 4])\n4\n\n\n\n\n\n"
+    "text": "length(collection) -> Integer\n\nReturn the number of elements in the collection.\n\nUse lastindex to get the last valid index of an indexable collection.\n\nExamples\n\njulia> length(1:5)\n5\n\njulia> length([1, 2, 3, 4])\n4\n\njulia> length([1 2; 3 4])\n4\n\n\n\n\n\n"
 },
 
 {
@@ -11349,7 +11165,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Arrays",
     "title": "Base.parent",
     "category": "Function",
-    "text": "parent(A)\n\nReturns the \"parent array\" of an array view type (e.g., SubArray), or the array itself if it is not a view.\n\nExamples\n\njulia> a = [1 2; 3 4]\n2×2 Array{Int64,2}:\n 1  2\n 3  4\n\njulia> s_a = Symmetric(a)\n2×2 Symmetric{Int64,Array{Int64,2}}:\n 1  2\n 2  4\n\njulia> parent(s_a)\n2×2 Array{Int64,2}:\n 1  2\n 3  4\n\n\n\n\n\n"
+    "text": "parent(A)\n\nReturns the \"parent array\" of an array view type (e.g., SubArray), or the array itself if it is not a view.\n\nExamples\n\njulia> A = [1 2; 3 4]\n2×2 Array{Int64,2}:\n 1  2\n 3  4\n\njulia> V = view(A, 1:2, :)\n2×2 view(::Array{Int64,2}, 1:2, :) with eltype Int64:\n 1  2\n 3  4\n\njulia> parent(V)\n2×2 Array{Int64,2}:\n 1  2\n 3  4\n\n\n\n\n\n"
 },
 
 {
@@ -11565,7 +11381,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Arrays",
     "title": "Base.permutedims",
     "category": "Function",
-    "text": "permutedims(A::AbstractArray, perm)\n\nPermute the dimensions of array A. perm is a vector specifying a permutation of length ndims(A).\n\nSee also: PermutedDimsArray.\n\nExamples\n\njulia> A = reshape(Vector(1:8), (2,2,2))\n2×2×2 Array{Int64,3}:\n[:, :, 1] =\n 1  3\n 2  4\n\n[:, :, 2] =\n 5  7\n 6  8\n\njulia> permutedims(A, [3, 2, 1])\n2×2×2 Array{Int64,3}:\n[:, :, 1] =\n 1  3\n 5  7\n\n[:, :, 2] =\n 2  4\n 6  8\n\n\n\n\n\npermutedims(m::AbstractMatrix)\n\nPermute the dimensions of the matrix m, by flipping the elements across the diagonal of the matrix. Differs from transpose in that the operation is not recursive.\n\nExamples\n\njulia> a = [1 2; 3 4];\n\njulia> b = [5 6; 7 8];\n\njulia> c = [9 10; 11 12];\n\njulia> d = [13 14; 15 16];\n\njulia> X = [[a] [b]; [c] [d]]\n2×2 Array{Array{Int64,2},2}:\n [1 2; 3 4]     [5 6; 7 8]\n [9 10; 11 12]  [13 14; 15 16]\n\njulia> permutedims(X)\n2×2 Array{Array{Int64,2},2}:\n [1 2; 3 4]  [9 10; 11 12]\n [5 6; 7 8]  [13 14; 15 16]\n\njulia> transpose(X)\n2×2 Array{Array{Int64,2},2}:\n [1 3; 2 4]  [9 11; 10 12]\n [5 7; 6 8]  [13 15; 14 16]\n\n\n\n\n\npermutedims(v::AbstractVector)\n\nReshape vector v into a 1 × length(v) row matrix.  Differs from transpose in that the operation is not recursive.\n\nExamples\n\njulia> permutedims(v)\n1×4 Array{Int64,2}:\n 1  2  3  4\n\njulia> a = [1 2; 3 4];\n\njulia> b = [5 6; 7 8];\n\njulia> V = [[a]; [b]]\n2-element Array{Array{Int64,2},1}:\n [1 2; 3 4]\n [5 6; 7 8]\n\njulia> permutedims(V)\n1×2 Array{Array{Int64,2},2}:\n [1 2; 3 4]  [5 6; 7 8]\n\njulia> transpose(V)\n1×2 Transpose{Transpose{Int64,Array{Int64,2}},Array{Array{Int64,2},1}}:\n [1 3; 2 4]  [5 7; 6 8]\n\n\n\n\n\n"
+    "text": "permutedims(A::AbstractArray, perm)\n\nPermute the dimensions of array A. perm is a vector specifying a permutation of length ndims(A).\n\nSee also: PermutedDimsArray.\n\nExamples\n\njulia> A = reshape(Vector(1:8), (2,2,2))\n2×2×2 Array{Int64,3}:\n[:, :, 1] =\n 1  3\n 2  4\n\n[:, :, 2] =\n 5  7\n 6  8\n\njulia> permutedims(A, [3, 2, 1])\n2×2×2 Array{Int64,3}:\n[:, :, 1] =\n 1  3\n 5  7\n\n[:, :, 2] =\n 2  4\n 6  8\n\n\n\n\n\npermutedims(m::AbstractMatrix)\n\nPermute the dimensions of the matrix m, by flipping the elements across the diagonal of the matrix. Differs from LinearAlgebra's transpose in that the operation is not recursive.\n\nExamples\n\njulia> a = [1 2; 3 4];\n\njulia> b = [5 6; 7 8];\n\njulia> c = [9 10; 11 12];\n\njulia> d = [13 14; 15 16];\n\njulia> X = [[a] [b]; [c] [d]]\n2×2 Array{Array{Int64,2},2}:\n [1 2; 3 4]     [5 6; 7 8]\n [9 10; 11 12]  [13 14; 15 16]\n\njulia> permutedims(X)\n2×2 Array{Array{Int64,2},2}:\n [1 2; 3 4]  [9 10; 11 12]\n [5 6; 7 8]  [13 14; 15 16]\n\njulia> transpose(X)\n2×2 LinearAlgebra.Transpose{LinearAlgebra.Transpose{Int64,Array{Int64,2}},Array{Array{Int64,2},2}}:\n [1 3; 2 4]  [9 11; 10 12]\n [5 7; 6 8]  [13 15; 14 16]\n\n\n\n\n\npermutedims(v::AbstractVector)\n\nReshape vector v into a 1 × length(v) row matrix. Differs from LinearAlgebra's transpose in that the operation is not recursive.\n\nExamples\n\njulia> permutedims([1, 2, 3, 4])\n1×4 Array{Int64,2}:\n 1  2  3  4\n\njulia> V = [[[1 2; 3 4]]; [[5 6; 7 8]]]\n2-element Array{Array{Int64,2},1}:\n [1 2; 3 4]\n [5 6; 7 8]\n\njulia> permutedims(V)\n1×2 Array{Array{Int64,2},2}:\n [1 2; 3 4]  [5 6; 7 8]\n\njulia> transpose(V)\n1×2 LinearAlgebra.Transpose{LinearAlgebra.Transpose{Int64,Array{Int64,2}},Array{Array{Int64,2},1}}:\n [1 3; 2 4]  [5 7; 6 8]\n\n\n\n\n\n"
 },
 
 {
@@ -11813,7 +11629,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Tasks",
     "title": "Core.Task",
     "category": "Type",
-    "text": "Task(func)\n\nCreate a Task (i.e. coroutine) to execute the given function func (which must be callable with no arguments). The task exits when this function returns.\n\nExamples\n\njulia> a() = det(rand(1000, 1000));\n\njulia> b = Task(a);\n\nIn this example, b is a runnable Task that hasn't started yet.\n\n\n\n\n\n"
+    "text": "Task(func)\n\nCreate a Task (i.e. coroutine) to execute the given function func (which must be callable with no arguments). The task exits when this function returns.\n\nExamples\n\njulia> a() = sum(i for i in 1:1000);\n\njulia> b = Task(a);\n\nIn this example, b is a runnable Task that hasn't started yet.\n\n\n\n\n\n"
 },
 
 {
@@ -11829,7 +11645,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Tasks",
     "title": "Base.istaskdone",
     "category": "Function",
-    "text": "istaskdone(t::Task) -> Bool\n\nDetermine whether a task has exited.\n\njulia> a2() = det(rand(1000, 1000));\n\njulia> b = Task(a2);\n\njulia> istaskdone(b)\nfalse\n\njulia> schedule(b);\n\njulia> yield();\n\njulia> istaskdone(b)\ntrue\n\n\n\n\n\n"
+    "text": "istaskdone(t::Task) -> Bool\n\nDetermine whether a task has exited.\n\njulia> a2() = sum(i for i in 1:1000);\n\njulia> b = Task(a2);\n\njulia> istaskdone(b)\nfalse\n\njulia> schedule(b);\n\njulia> yield();\n\njulia> istaskdone(b)\ntrue\n\n\n\n\n\n"
 },
 
 {
@@ -11837,7 +11653,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Tasks",
     "title": "Base.istaskstarted",
     "category": "Function",
-    "text": "istaskstarted(t::Task) -> Bool\n\nDetermine whether a task has started executing.\n\njulia> a3() = det(rand(1000, 1000));\n\njulia> b = Task(a3);\n\njulia> istaskstarted(b)\nfalse\n\n\n\n\n\n"
+    "text": "istaskstarted(t::Task) -> Bool\n\nDetermine whether a task has started executing.\n\njulia> a3() = sum(i for i in 1:1000);\n\njulia> b = Task(a3);\n\njulia> istaskstarted(b)\nfalse\n\n\n\n\n\n"
 },
 
 {
@@ -11901,7 +11717,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Tasks",
     "title": "Base.schedule",
     "category": "Function",
-    "text": "schedule(t::Task, [val]; error=false)\n\nAdd a Task to the scheduler's queue. This causes the task to run constantly when the system is otherwise idle, unless the task performs a blocking operation such as wait.\n\nIf a second argument val is provided, it will be passed to the task (via the return value of yieldto) when it runs again. If error is true, the value is raised as an exception in the woken task.\n\njulia> a5() = det(rand(1000, 1000));\n\njulia> b = Task(a5);\n\njulia> istaskstarted(b)\nfalse\n\njulia> schedule(b);\n\njulia> yield();\n\njulia> istaskstarted(b)\ntrue\n\njulia> istaskdone(b)\ntrue\n\n\n\n\n\n"
+    "text": "schedule(t::Task, [val]; error=false)\n\nAdd a Task to the scheduler's queue. This causes the task to run constantly when the system is otherwise idle, unless the task performs a blocking operation such as wait.\n\nIf a second argument val is provided, it will be passed to the task (via the return value of yieldto) when it runs again. If error is true, the value is raised as an exception in the woken task.\n\njulia> a5() = sum(i for i in 1:1000);\n\njulia> b = Task(a5);\n\njulia> istaskstarted(b)\nfalse\n\njulia> schedule(b);\n\njulia> yield();\n\njulia> istaskstarted(b)\ntrue\n\njulia> istaskdone(b)\ntrue\n\n\n\n\n\n"
 },
 
 {
@@ -11917,7 +11733,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Tasks",
     "title": "Base.@task",
     "category": "Macro",
-    "text": "@task\n\nWrap an expression in a Task without executing it, and return the Task. This only creates a task, and does not run it.\n\njulia> a1() = det(rand(1000, 1000));\n\njulia> b = @task a1();\n\njulia> istaskstarted(b)\nfalse\n\njulia> schedule(b);\n\njulia> yield();\n\njulia> istaskdone(b)\ntrue\n\n\n\n\n\n"
+    "text": "@task\n\nWrap an expression in a Task without executing it, and return the Task. This only creates a task, and does not run it.\n\njulia> a1() = sum(i for i in 1:1000);\n\njulia> b = @task a1();\n\njulia> istaskstarted(b)\nfalse\n\njulia> schedule(b);\n\njulia> yield();\n\njulia> istaskdone(b)\ntrue\n\n\n\n\n\n"
 },
 
 {
@@ -13245,7 +13061,7 @@ var documenterSearchIndex = {"docs": [
     "page": "I/O and Network",
     "title": "Base.IOContext",
     "category": "Method",
-    "text": "IOContext(io::IO, KV::Pair...)\n\nCreate an IOContext that wraps a given stream, adding the specified key=>value pairs to the properties of that stream (note that io can itself be an IOContext).\n\nuse (key => value) in dict to see if this particular combination is in the properties set\nuse get(dict, key, default) to retrieve the most recent value for a particular key\n\nThe following properties are in common use:\n\n:compact: Boolean specifying that small values should be printed more compactly, e.g. that numbers should be printed with fewer digits. This is set when printing array elements.\n:limit: Boolean specifying that containers should be truncated, e.g. showing … in place of most elements.\n:displaysize: A Tuple{Int,Int} giving the size in rows and columns to use for text output. This can be used to override the display size for called functions, but to get the size of the screen use the displaysize function.\n:typeinfo: a Type characterizing the information already printed concerning the type of the object about to be displayed. This is mainly useful when displaying a collection of objects of the same type, so that redundant type information can be avoided (e.g. [Float16(0)] can be shown as \"Float16[0.0]\" instead of \"Float16[Float16(0.0)]\" : while displaying the elements of the array, the :typeinfo property will be set to Float16).\n:color: Boolean specifying whether ANSI color/escape codes are supported/expected. By default, this is determined by whether io is a compatible terminal and by any --color command-line flag when julia was launched.\n\nExamples\n\njulia> io = IOBuffer();\n\njulia> print_with_color(:red, IOContext(io, :color => true), \"string\")\n\njulia> String(take!(io))\n\"[31mstring[39m\"\n\njulia> print_with_color(:red, io, \"string\")\n\njulia> String(take!(io))\n\"string\"\n\njulia> print(IOContext(STDOUT, :compact => false), 1.12341234)\n1.12341234\njulia> print(IOContext(STDOUT, :compact => true), 1.12341234)\n1.12341\n\njulia> function f(io::IO)\n           if get(io, :short, false)\n               print(io, \"short\")\n           else\n               print(io, \"loooooong\")\n           end\n       end\nf (generic function with 1 method)\n\njulia> f(STDOUT)\nloooooong\njulia> f(IOContext(STDOUT, :short => true))\nshort\n\n\n\n\n\n"
+    "text": "IOContext(io::IO, KV::Pair...)\n\nCreate an IOContext that wraps a given stream, adding the specified key=>value pairs to the properties of that stream (note that io can itself be an IOContext).\n\nuse (key => value) in dict to see if this particular combination is in the properties set\nuse get(dict, key, default) to retrieve the most recent value for a particular key\n\nThe following properties are in common use:\n\n:compact: Boolean specifying that small values should be printed more compactly, e.g. that numbers should be printed with fewer digits. This is set when printing array elements.\n:limit: Boolean specifying that containers should be truncated, e.g. showing … in place of most elements.\n:displaysize: A Tuple{Int,Int} giving the size in rows and columns to use for text output. This can be used to override the display size for called functions, but to get the size of the screen use the displaysize function.\n:typeinfo: a Type characterizing the information already printed concerning the type of the object about to be displayed. This is mainly useful when displaying a collection of objects of the same type, so that redundant type information can be avoided (e.g. [Float16(0)] can be shown as \"Float16[0.0]\" instead of \"Float16[Float16(0.0)]\" : while displaying the elements of the array, the :typeinfo property will be set to Float16).\n:color: Boolean specifying whether ANSI color/escape codes are supported/expected. By default, this is determined by whether io is a compatible terminal and by any --color command-line flag when julia was launched.\n\nExamples\n\njulia> io = IOBuffer();\n\njulia> printstyled(IOContext(io, :color => true), \"string\", color=:red)\n\njulia> String(take!(io))\n\"[31mstring[39m\"\n\njulia> printstyled(io, \"string\", color=:red)\n\njulia> String(take!(io))\n\"string\"\n\njulia> print(IOContext(STDOUT, :compact => false), 1.12341234)\n1.12341234\njulia> print(IOContext(STDOUT, :compact => true), 1.12341234)\n1.12341\n\njulia> function f(io::IO)\n           if get(io, :short, false)\n               print(io, \"short\")\n           else\n               print(io, \"loooooong\")\n           end\n       end\nf (generic function with 1 method)\n\njulia> f(STDOUT)\nloooooong\njulia> f(IOContext(STDOUT, :short => true))\nshort\n\n\n\n\n\n"
 },
 
 {
@@ -13305,11 +13121,11 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "base/io-network.html#Base.print_with_color",
+    "location": "base/io-network.html#Base.printstyled",
     "page": "I/O and Network",
-    "title": "Base.print_with_color",
+    "title": "Base.printstyled",
     "category": "Function",
-    "text": "print_with_color(color::Union{Symbol, Int}, [io], xs...; bold::Bool = false)\n\nPrint xs in a color specified as a symbol.\n\ncolor may take any of the values :normal, :default, :bold, :black, :blink, :blue, :cyan, :green, :hidden, :light_black, :light_blue, :light_cyan, :light_green, :light_magenta, :light_red, :light_yellow, :magenta, :nothing, :red, :reverse, :underline, :white, or  :yellow or an integer between 0 and 255 inclusive. Note that not all terminals support 256 colors. If the keyword bold is given as true, the result will be printed in bold.\n\n\n\n\n\n"
+    "text": "printstyled([io], xs...; bold::Bool=false, color::Union{Symbol,Int}=:normal)\n\nPrint xs in a color specified as a symbol or integer, optionally in bold.\n\ncolor may take any of the values :normal, :default, :bold, :black, :blink, :blue, :cyan, :green, :hidden, :light_black, :light_blue, :light_cyan, :light_green, :light_magenta, :light_red, :light_yellow, :magenta, :nothing, :red, :reverse, :underline, :white, or  :yellow or an integer between 0 and 255 inclusive. Note that not all terminals support 256 colors. If the keyword bold is given as true, the result will be printed in bold.\n\n\n\n\n\n"
 },
 
 {
@@ -13389,7 +13205,7 @@ var documenterSearchIndex = {"docs": [
     "page": "I/O and Network",
     "title": "Text I/O",
     "category": "section",
-    "text": "Base.show(::Any)\nBase.showcompact\nBase.summary\nBase.print\nBase.println\nBase.print_with_color\nBase.sprint\nBase.showerror\nBase.dump\nMeta.@dump\nBase.readline\nBase.readuntil\nBase.readlines\nBase.eachline\nBase.displaysize"
+    "text": "Base.show(::Any)\nBase.showcompact\nBase.summary\nBase.print\nBase.println\nBase.printstyled\nBase.sprint\nBase.showerror\nBase.dump\nMeta.@dump\nBase.readline\nBase.readuntil\nBase.readlines\nBase.eachline\nBase.displaysize"
 },
 
 {
@@ -13577,6 +13393,22 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
+    "location": "base/io-network.html#Base.TCPSocket",
+    "page": "I/O and Network",
+    "title": "Base.TCPSocket",
+    "category": "Type",
+    "text": "TCPSocket(; delay=true)\n\nOpen a TCP socket using libuv. If delay is true, libuv delays creation of the socket's file descriptor till the first bind call. TCPSocket has various fields to denote the state of the socket as well as its send/receive buffers.\n\n\n\n\n\n"
+},
+
+{
+    "location": "base/io-network.html#Base.UDPSocket",
+    "page": "I/O and Network",
+    "title": "Base.UDPSocket",
+    "category": "Type",
+    "text": "UDPSocket()\n\nOpen a UDP socket using libuv. UDPSocket has various fields to denote the state of the socket.\n\n\n\n\n\n"
+},
+
+{
     "location": "base/io-network.html#Base.bytesavailable",
     "page": "I/O and Network",
     "title": "Base.bytesavailable",
@@ -13685,7 +13517,7 @@ var documenterSearchIndex = {"docs": [
     "page": "I/O and Network",
     "title": "Network I/O",
     "category": "section",
-    "text": "Base.connect(::TCPSocket, ::Integer)\nBase.connect(::AbstractString)\nBase.listen(::Any)\nBase.listen(::AbstractString)\nBase.getaddrinfo\nBase.getalladdrinfo\nBase.getnameinfo\nBase.getsockname\nBase.getpeername\nBase.IPv4\nBase.IPv6\nBase.bytesavailable\nBase.accept\nBase.listenany\nBase.bind\nBase.send\nBase.recv\nBase.recvfrom\nBase.setopt\nBase.ntoh\nBase.hton\nBase.ltoh\nBase.htol\nBase.ENDIAN_BOM"
+    "text": "Base.connect(::TCPSocket, ::Integer)\nBase.connect(::AbstractString)\nBase.listen(::Any)\nBase.listen(::AbstractString)\nBase.getaddrinfo\nBase.getalladdrinfo\nBase.getnameinfo\nBase.getsockname\nBase.getpeername\nBase.IPv4\nBase.IPv6\nBase.TCPSocket\nBase.UDPSocket\nBase.bytesavailable\nBase.accept\nBase.listenany\nBase.bind\nBase.send\nBase.recv\nBase.recvfrom\nBase.setopt\nBase.ntoh\nBase.hton\nBase.ltoh\nBase.htol\nBase.ENDIAN_BOM"
 },
 
 {
@@ -13701,7 +13533,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Punctuation",
     "title": "Punctuation",
     "category": "section",
-    "text": "Extended documentation for mathematical symbols & functions is here.symbol meaning\n@m invoke macro m; followed by space-separated expressions\n! prefix \"not\" (logical negation) operator\na!( ) at the end of a function name, ! is used as a convention to indicate that a function modifies its argument(s)\n# begin single line comment\n#= begin multi-line comment (these are nestable)\n=# end multi-line comment\n$ string and expression interpolation\n% remainder operator\n^ exponent operator\n& bitwise and\n&& short-circuiting boolean and\n| bitwise or\n|| short-circuiting boolean or\n⊻ bitwise xor operator\n* multiply, or matrix multiply\n() the empty tuple\n~ bitwise not operator\n\\ backslash operator\n' complex transpose operator Aᴴ\na[] array indexing (calling getindex or setindex!)\n[,] vector literal constructor (calling vect)\n[;] vertical concatenation (calling vcat or hvcat)\n[    ] with space-separated expressions, horizontal concatenation (calling hcat or hvcat)\nT{ } parametric type instantiation\n; statement separator\n, separate function arguments or tuple components\n? 3-argument conditional operator (used like: conditional ? if_true : if_false)\n\"\" delimit string literals\n'' delimit character literals\n` ` delimit external process (command) specifications\n... splice arguments into a function call or declare a varargs function\n. access named fields in objects/modules (calling getproperty or setproperty!), also prefixes elementwise function calls (calling broadcast)\na:b range a, a+1, a+2, ..., b (calling colon)\na:s:b range a, a+s, a+2s, ..., b (also calling colon)\n: index an entire dimension (1:endof), see Colon)\n:: type annotation or typeassert, depending on context\n:( ) quoted expression\n:a symbol a\n<: subtype operator\n>: supertype operator (reverse of subtype operator)\n=== egal comparison operator"
+    "text": "Extended documentation for mathematical symbols & functions is here.symbol meaning\n@m invoke macro m; followed by space-separated expressions\n! prefix \"not\" (logical negation) operator\na!( ) at the end of a function name, ! is used as a convention to indicate that a function modifies its argument(s)\n# begin single line comment\n#= begin multi-line comment (these are nestable)\n=# end multi-line comment\n$ string and expression interpolation\n% remainder operator\n^ exponent operator\n& bitwise and\n&& short-circuiting boolean and\n| bitwise or\n|| short-circuiting boolean or\n⊻ bitwise xor operator\n* multiply, or matrix multiply\n() the empty tuple\n~ bitwise not operator\n\\ backslash operator\n' complex transpose operator Aᴴ\na[] array indexing (calling getindex or setindex!)\n[,] vector literal constructor (calling vect)\n[;] vertical concatenation (calling vcat or hvcat)\n[    ] with space-separated expressions, horizontal concatenation (calling hcat or hvcat)\nT{ } parametric type instantiation\n; statement separator\n, separate function arguments or tuple components\n? 3-argument conditional operator (used like: conditional ? if_true : if_false)\n\"\" delimit string literals\n'' delimit character literals\n` ` delimit external process (command) specifications\n... splice arguments into a function call or declare a varargs function\n. access named fields in objects/modules (calling getproperty or setproperty!), also prefixes elementwise function calls (calling broadcast)\na:b range a, a+1, a+2, ..., b (calling colon)\na:s:b range a, a+s, a+2s, ..., b (also calling colon)\n: index an entire dimension (firstindex:lastindex), see Colon)\n:: type annotation or typeassert, depending on context\n:( ) quoted expression\n:a symbol a\n<: subtype operator\n>: supertype operator (reverse of subtype operator)\n=== egal comparison operator"
 },
 
 {
@@ -13789,7 +13621,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Sorting and Related Functions",
     "title": "Base.Sort.searchsorted",
     "category": "Function",
-    "text": "searchsorted(a, x, [by=<transform>,] [lt=<comparison>,] [rev=false])\n\nReturn the range of indices of a which compare as equal to x (using binary search) according to the order specified by the by, lt and rev keywords, assuming that a is already sorted in that order. Return an empty range located at the insertion point if a does not contain values equal to x.\n\nExamples\n\njulia> a = [4, 3, 2, 1]\n4-element Array{Int64,1}:\n 4\n 3\n 2\n 1\n\njulia> searchsorted(a, 4)\n5:4\n\njulia> searchsorted(a, 4, rev=true)\n1:1\n\n\n\n\n\n"
+    "text": "searchsorted(a, x; by=<transform>, lt=<comparison>, rev=false)\n\nReturn the range of indices of a which compare as equal to x (using binary search) according to the order specified by the by, lt and rev keywords, assuming that a is already sorted in that order. Return an empty range located at the insertion point if a does not contain values equal to x.\n\nExamples\n\njulia> a = [4, 3, 2, 1]\n4-element Array{Int64,1}:\n 4\n 3\n 2\n 1\n\njulia> searchsorted(a, 4)\n5:4\n\njulia> searchsorted(a, 4, rev=true)\n1:1\n\n\n\n\n\n"
 },
 
 {
@@ -13797,7 +13629,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Sorting and Related Functions",
     "title": "Base.Sort.searchsortedfirst",
     "category": "Function",
-    "text": "searchsortedfirst(a, x, [by=<transform>,] [lt=<comparison>,] [rev=false])\n\nReturn the index of the first value in a greater than or equal to x, according to the specified order. Return length(a) + 1 if x is greater than all values in a. a is assumed to be sorted.\n\nExamples\n\njulia> searchsortedfirst([1, 2, 4, 5, 14], 4)\n3\n\njulia> searchsortedfirst([1, 2, 4, 5, 14], 4, rev=true)\n1\n\njulia> searchsortedfirst([1, 2, 4, 5, 14], 15)\n6\n\n\n\n\n\n"
+    "text": "searchsortedfirst(a, x; by=<transform>, lt=<comparison>, rev=false)\n\nReturn the index of the first value in a greater than or equal to x, according to the specified order. Return length(a) + 1 if x is greater than all values in a. a is assumed to be sorted.\n\nExamples\n\njulia> searchsortedfirst([1, 2, 4, 5, 14], 4)\n3\n\njulia> searchsortedfirst([1, 2, 4, 5, 14], 4, rev=true)\n1\n\njulia> searchsortedfirst([1, 2, 4, 5, 14], 15)\n6\n\n\n\n\n\n"
 },
 
 {
@@ -13805,7 +13637,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Sorting and Related Functions",
     "title": "Base.Sort.searchsortedlast",
     "category": "Function",
-    "text": "searchsortedlast(a, x, [by=<transform>,] [lt=<comparison>,] [rev=false])\n\nReturn the index of the last value in a less than or equal to x, according to the specified order. Return 0 if x is less than all values in a. a is assumed to be sorted.\n\nExamples\n\njulia> searchsortedlast([1, 2, 4, 5, 14], 4)\n3\n\njulia> searchsortedlast([1, 2, 4, 5, 14], 4, rev=true)\n5\n\njulia> searchsortedlast([1, 2, 4, 5, 14], -1)\n0\n\n\n\n\n\n"
+    "text": "searchsortedlast(a, x; by=<transform>, lt=<comparison>, rev=false)\n\nReturn the index of the last value in a less than or equal to x, according to the specified order. Return 0 if x is less than all values in a. a is assumed to be sorted.\n\nExamples\n\njulia> searchsortedlast([1, 2, 4, 5, 14], 4)\n3\n\njulia> searchsortedlast([1, 2, 4, 5, 14], 4, rev=true)\n5\n\njulia> searchsortedlast([1, 2, 4, 5, 14], -1)\n0\n\n\n\n\n\n"
 },
 
 {
@@ -13813,7 +13645,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Sorting and Related Functions",
     "title": "Base.Sort.partialsort!",
     "category": "Function",
-    "text": "partialsort!(v, k, [by=<transform>,] [lt=<comparison>,] [rev=false])\n\nPartially sort the vector v in place, according to the order specified by by, lt and rev so that the value at index k (or range of adjacent values if k is a range) occurs at the position where it would appear if the array were fully sorted via a non-stable algorithm. If k is a single index, that value is returned; if k is a range, an array of values at those indices is returned. Note that partialsort! does not fully sort the input array.\n\nExamples\n\njulia> a = [1, 2, 4, 3, 4]\n5-element Array{Int64,1}:\n 1\n 2\n 4\n 3\n 4\n\njulia> partialsort!(a, 4)\n4\n\njulia> a\n5-element Array{Int64,1}:\n 1\n 2\n 3\n 4\n 4\n\njulia> a = [1, 2, 4, 3, 4]\n5-element Array{Int64,1}:\n 1\n 2\n 4\n 3\n 4\n\njulia> partialsort!(a, 4, rev=true)\n2\n\njulia> a\n5-element Array{Int64,1}:\n 4\n 4\n 3\n 2\n 1\n\n\n\n\n\n"
+    "text": "partialsort!(v, k; by=<transform>, lt=<comparison>, rev=false)\n\nPartially sort the vector v in place, according to the order specified by by, lt and rev so that the value at index k (or range of adjacent values if k is a range) occurs at the position where it would appear if the array were fully sorted via a non-stable algorithm. If k is a single index, that value is returned; if k is a range, an array of values at those indices is returned. Note that partialsort! does not fully sort the input array.\n\nExamples\n\njulia> a = [1, 2, 4, 3, 4]\n5-element Array{Int64,1}:\n 1\n 2\n 4\n 3\n 4\n\njulia> partialsort!(a, 4)\n4\n\njulia> a\n5-element Array{Int64,1}:\n 1\n 2\n 3\n 4\n 4\n\njulia> a = [1, 2, 4, 3, 4]\n5-element Array{Int64,1}:\n 1\n 2\n 4\n 3\n 4\n\njulia> partialsort!(a, 4, rev=true)\n2\n\njulia> a\n5-element Array{Int64,1}:\n 4\n 4\n 3\n 2\n 1\n\n\n\n\n\n"
 },
 
 {
@@ -13821,7 +13653,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Sorting and Related Functions",
     "title": "Base.Sort.partialsort",
     "category": "Function",
-    "text": "partialsort(v, k, [by=<transform>,] [lt=<comparison>,] [rev=false])\n\nVariant of partialsort! which copies v before partially sorting it, thereby returning the same thing as partialsort! but leaving v unmodified.\n\n\n\n\n\n"
+    "text": "partialsort(v, k, by=<transform>, lt=<comparison>, rev=false)\n\nVariant of partialsort! which copies v before partially sorting it, thereby returning the same thing as partialsort! but leaving v unmodified.\n\n\n\n\n\n"
 },
 
 {
@@ -13829,7 +13661,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Sorting and Related Functions",
     "title": "Base.Sort.partialsortperm",
     "category": "Function",
-    "text": "partialsortperm(v, k, [alg=<algorithm>,] [by=<transform>,] [lt=<comparison>,] [rev=false])\n\nReturn a partial permutation of the vector v, according to the order specified by by, lt and rev, so that v[output] returns the first k (or range of adjacent values if k is a range) values of a fully sorted version of v. If k is a single index, the index in v of the value which would be sorted at position k is returned; if k is a range, an array with the indices in v of the values which would be sorted in these positions is returned.\n\nNote that this is equivalent to, but more efficient than, calling sortperm(...)[k].\n\n\n\n\n\n"
+    "text": "partialsortperm(v, k; alg=<algorithm>, by=<transform>, lt=<comparison>, rev=false)\n\nReturn a partial permutation of the vector v, according to the order specified by by, lt and rev, so that v[output] returns the first k (or range of adjacent values if k is a range) values of a fully sorted version of v. If k is a single index, the index in v of the value which would be sorted at position k is returned; if k is a range, an array with the indices in v of the values which would be sorted in these positions is returned.\n\nNote that this is equivalent to, but more efficient than, calling sortperm(...)[k].\n\n\n\n\n\n"
 },
 
 {
@@ -13837,7 +13669,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Sorting and Related Functions",
     "title": "Base.Sort.partialsortperm!",
     "category": "Function",
-    "text": "partialsortperm!(ix, v, k, [alg=<algorithm>,] [by=<transform>,] [lt=<comparison>,] [rev=false,] [initialized=false])\n\nLike partialsortperm, but accepts a preallocated index vector ix. If initialized is false (the default), ix is initialized to contain the values 1:length(ix).\n\n\n\n\n\n"
+    "text": "partialsortperm!(ix, v, k; alg=<algorithm>, by=<transform>, lt=<comparison>, rev=false, initialized=false)\n\nLike partialsortperm, but accepts a preallocated index vector ix. If initialized is false (the default), ix is initialized to contain the values 1:length(ix).\n\n\n\n\n\n"
 },
 
 {
@@ -13854,166 +13686,6 @@ var documenterSearchIndex = {"docs": [
     "title": "Sorting Algorithms",
     "category": "section",
     "text": "There are currently four sorting algorithms available in base Julia:InsertionSort\nQuickSort\nPartialQuickSort(k)\nMergeSortInsertionSort is an O(n^2) stable sorting algorithm. It is efficient for very small n, and is used internally by QuickSort.QuickSort is an O(n log n) sorting algorithm which is in-place, very fast, but not stable – i.e. elements which are considered equal will not remain in the same order in which they originally appeared in the array to be sorted. QuickSort is the default algorithm for numeric values, including integers and floats.PartialQuickSort(k) is similar to QuickSort, but the output array is only sorted up to index k if k is an integer, or in the range of k if k is an OrdinalRange. For example:x = rand(1:500, 100)\nk = 50\nk2 = 50:100\ns = sort(x; alg=QuickSort)\nps = sort(x; alg=PartialQuickSort(k))\nqs = sort(x; alg=PartialQuickSort(k2))\nmap(issorted, (s, ps, qs))             # => (true, false, false)\nmap(x->issorted(x[1:k]), (s, ps, qs))  # => (true, true, false)\nmap(x->issorted(x[k2]), (s, ps, qs))   # => (true, false, true)\ns[1:k] == ps[1:k]                      # => true\ns[k2] == qs[k2]                        # => trueMergeSort is an O(n log n) stable sorting algorithm but is not in-place – it requires a temporary array of half the size of the input array – and is typically not quite as fast as QuickSort. It is the default algorithm for non-numeric data.The default sorting algorithms are chosen on the basis that they are fast and stable, or appear to be so. For numeric types indeed, QuickSort is selected as it is faster and indistinguishable in this case from a stable sort (unless the array records its mutations in some way). The stability property comes at a non-negligible cost, so if you don't need it, you may want to explicitly specify your preferred algorithm, e.g. sort!(v, alg=QuickSort).The mechanism by which Julia picks default sorting algorithms is implemented via the Base.Sort.defalg function. It allows a particular algorithm to be registered as the default in all sorting functions for specific arrays. For example, here are the two default methods from sort.jl:defalg(v::AbstractArray) = MergeSort\ndefalg(v::AbstractArray{<:Number}) = QuickSortAs for numeric arrays, choosing a non-stable default algorithm for array types for which the notion of a stable sort is meaningless (i.e. when two values comparing equal can not be distinguished) may make sense."
-},
-
-{
-    "location": "base/pkg.html#",
-    "page": "Package Manager Functions",
-    "title": "Package Manager Functions",
-    "category": "page",
-    "text": ""
-},
-
-{
-    "location": "base/pkg.html#Base.Pkg.dir",
-    "page": "Package Manager Functions",
-    "title": "Base.Pkg.dir",
-    "category": "Function",
-    "text": "dir() -> AbstractString\n\nReturns the absolute path of the package directory. This defaults to joinpath(homedir(),\".julia\",\"v$(VERSION.major).$(VERSION.minor)\") on all platforms (i.e. ~/.julia/v0.7 in UNIX shell syntax). If the JULIA_PKGDIR environment variable is set, then that path is used in the returned value as joinpath(ENV[\"JULIA_PKGDIR\"],\"v$(VERSION.major).$(VERSION.minor)\"). If JULIA_PKGDIR is a relative path, it is interpreted relative to whatever the current working directory is.\n\n\n\n\n\ndir(names...) -> AbstractString\n\nEquivalent to normpath(Pkg.dir(),names...) – i.e. it appends path components to the package directory and normalizes the resulting path. In particular, Pkg.dir(pkg) returns the path to the package pkg.\n\n\n\n\n\n"
-},
-
-{
-    "location": "base/pkg.html#Base.Pkg.init",
-    "page": "Package Manager Functions",
-    "title": "Base.Pkg.init",
-    "category": "Function",
-    "text": "init(meta::AbstractString=DEFAULT_META, branch::AbstractString=META_BRANCH)\n\nInitialize Pkg.dir() as a package directory. This will be done automatically when the JULIA_PKGDIR is not set and Pkg.dir() uses its default value. As part of this process, clones a local METADATA git repository from the site and branch specified by its arguments, which are typically not provided. Explicit (non-default) arguments can be used to support a custom METADATA setup.\n\n\n\n\n\n"
-},
-
-{
-    "location": "base/pkg.html#Base.Pkg.resolve",
-    "page": "Package Manager Functions",
-    "title": "Base.Pkg.resolve",
-    "category": "Function",
-    "text": "resolve()\n\nDetermines an optimal, consistent set of package versions to install or upgrade to. The optimal set of package versions is based on the contents of Pkg.dir(\"REQUIRE\") and the state of installed packages in Pkg.dir(), Packages that are no longer required are moved into Pkg.dir(\".trash\").\n\n\n\n\n\n"
-},
-
-{
-    "location": "base/pkg.html#Base.Pkg.edit",
-    "page": "Package Manager Functions",
-    "title": "Base.Pkg.edit",
-    "category": "Function",
-    "text": "edit()\n\nOpens Pkg.dir(\"REQUIRE\") in the editor specified by the VISUAL or EDITOR environment variables; when the editor command returns, it runs Pkg.resolve() to determine and install a new optimal set of installed package versions.\n\n\n\n\n\n"
-},
-
-{
-    "location": "base/pkg.html#Base.Pkg.add",
-    "page": "Package Manager Functions",
-    "title": "Base.Pkg.add",
-    "category": "Function",
-    "text": "add(pkg, vers...)\n\nAdd a requirement entry for pkg to Pkg.dir(\"REQUIRE\") and call Pkg.resolve(). If vers are given, they must be VersionNumber objects and they specify acceptable version intervals for pkg.\n\n\n\n\n\n"
-},
-
-{
-    "location": "base/pkg.html#Base.Pkg.rm",
-    "page": "Package Manager Functions",
-    "title": "Base.Pkg.rm",
-    "category": "Function",
-    "text": "rm(pkg)\n\nRemove all requirement entries for pkg from Pkg.dir(\"REQUIRE\") and call Pkg.resolve().\n\n\n\n\n\n"
-},
-
-{
-    "location": "base/pkg.html#Base.Pkg.clone",
-    "page": "Package Manager Functions",
-    "title": "Base.Pkg.clone",
-    "category": "Function",
-    "text": "clone(pkg)\n\nIf pkg has a URL registered in Pkg.dir(\"METADATA\"), clone it from that URL on the default branch. The package does not need to have any registered versions.\n\n\n\n\n\nclone(url, [pkg])\n\nClone a package directly from the git URL url. The package does not need to be registered in Pkg.dir(\"METADATA\"). The package repo is cloned by the name pkg if provided; if not provided, pkg is determined automatically from url.\n\n\n\n\n\n"
-},
-
-{
-    "location": "base/pkg.html#Base.Pkg.setprotocol!",
-    "page": "Package Manager Functions",
-    "title": "Base.Pkg.setprotocol!",
-    "category": "Function",
-    "text": "setprotocol!(proto)\n\nSet the protocol used to access GitHub-hosted packages. Defaults to 'https', with a blank proto delegating the choice to the package developer.\n\n\n\n\n\n"
-},
-
-{
-    "location": "base/pkg.html#Base.Pkg.available",
-    "page": "Package Manager Functions",
-    "title": "Base.Pkg.available",
-    "category": "Function",
-    "text": "available() -> Vector{String}\n\nReturns the names of available packages.\n\n\n\n\n\navailable(pkg) -> Vector{VersionNumber}\n\nReturns the version numbers available for package pkg.\n\n\n\n\n\n"
-},
-
-{
-    "location": "base/pkg.html#Base.Pkg.installed",
-    "page": "Package Manager Functions",
-    "title": "Base.Pkg.installed",
-    "category": "Function",
-    "text": "installed() -> Dict{String,VersionNumber}\n\nReturns a dictionary mapping installed package names to the installed version number of each package.\n\n\n\n\n\ninstalled(pkg) -> Nothing | VersionNumber\n\nIf pkg is installed, return the installed version number. If pkg is registered, but not installed, return nothing.\n\n\n\n\n\n"
-},
-
-{
-    "location": "base/pkg.html#Base.Pkg.status",
-    "page": "Package Manager Functions",
-    "title": "Base.Pkg.status",
-    "category": "Function",
-    "text": "status()\n\nPrints out a summary of what packages are installed and what version and state they're in.\n\n\n\n\n\nstatus(pkg)\n\nPrints out a summary of what version and state pkg, specifically, is in.\n\n\n\n\n\n"
-},
-
-{
-    "location": "base/pkg.html#Base.Pkg.update",
-    "page": "Package Manager Functions",
-    "title": "Base.Pkg.update",
-    "category": "Function",
-    "text": "update(pkgs...)\n\nUpdate the metadata repo – kept in Pkg.dir(\"METADATA\") – then update any fixed packages that can safely be pulled from their origin; then call Pkg.resolve() to determine a new optimal set of packages versions.\n\nWithout arguments, updates all installed packages. When one or more package names are provided as arguments, only those packages and their dependencies are updated.\n\n\n\n\n\n"
-},
-
-{
-    "location": "base/pkg.html#Base.Pkg.checkout",
-    "page": "Package Manager Functions",
-    "title": "Base.Pkg.checkout",
-    "category": "Function",
-    "text": "checkout(pkg, [branch=\"master\"]; merge=true, pull=true)\n\nCheckout the Pkg.dir(pkg) repo to the branch branch. Defaults to checking out the \"master\" branch. To go back to using the newest compatible released version, use Pkg.free(pkg). Changes are merged (fast-forward only) if the keyword argument merge == true, and the latest version is pulled from the upstream repo if pull == true.\n\n\n\n\n\n"
-},
-
-{
-    "location": "base/pkg.html#Base.Pkg.pin",
-    "page": "Package Manager Functions",
-    "title": "Base.Pkg.pin",
-    "category": "Function",
-    "text": "pin(pkg)\n\nPin pkg at the current version. To go back to using the newest compatible released version, use Pkg.free(pkg)\n\n\n\n\n\npin(pkg, version)\n\nPin pkg at registered version version.\n\n\n\n\n\n"
-},
-
-{
-    "location": "base/pkg.html#Base.Pkg.free",
-    "page": "Package Manager Functions",
-    "title": "Base.Pkg.free",
-    "category": "Function",
-    "text": "free(pkg)\n\nFree the package pkg to be managed by the package manager again. It calls Pkg.resolve() to determine optimal package versions after. This is an inverse for both Pkg.checkout and Pkg.pin.\n\nYou can also supply an iterable collection of package names, e.g., Pkg.free((\"Pkg1\", \"Pkg2\")) to free multiple packages at once.\n\n\n\n\n\n"
-},
-
-{
-    "location": "base/pkg.html#Base.Pkg.build",
-    "page": "Package Manager Functions",
-    "title": "Base.Pkg.build",
-    "category": "Function",
-    "text": "build()\n\nRun the build scripts for all installed packages in depth-first recursive order.\n\n\n\n\n\nbuild(pkgs...)\n\nRun the build script in deps/build.jl for each package in pkgs and all of their dependencies in depth-first recursive order. This is called automatically by Pkg.resolve() on all installed or updated packages.\n\n\n\n\n\n"
-},
-
-{
-    "location": "base/pkg.html#Base.Pkg.test",
-    "page": "Package Manager Functions",
-    "title": "Base.Pkg.test",
-    "category": "Function",
-    "text": "test(; coverage=false)\n\nRun the tests for all installed packages ensuring that each package's test dependencies are installed for the duration of the test. A package is tested by running its test/runtests.jl file and test dependencies are specified in test/REQUIRE. Coverage statistics for the packages may be generated by passing coverage=true. The default behavior is not to run coverage.\n\n\n\n\n\ntest(pkgs...; coverage=false)\n\nRun the tests for each package in pkgs ensuring that each package's test dependencies are installed for the duration of the test. A package is tested by running its test/runtests.jl file and test dependencies are specified in test/REQUIRE. Coverage statistics for the packages may be generated by passing coverage=true. The default behavior is not to run coverage.\n\n\n\n\n\n"
-},
-
-{
-    "location": "base/pkg.html#Base.Pkg.dependents",
-    "page": "Package Manager Functions",
-    "title": "Base.Pkg.dependents",
-    "category": "Function",
-    "text": "dependents(pkg)\n\nList the packages that have pkg as a dependency.\n\n\n\n\n\n"
-},
-
-{
-    "location": "base/pkg.html#Package-Manager-Functions-1",
-    "page": "Package Manager Functions",
-    "title": "Package Manager Functions",
-    "category": "section",
-    "text": "All package manager functions are defined in the Pkg module. None of the Pkg module's functions are exported; to use them, you'll need to prefix each function call with an explicit Pkg., e.g. Pkg.status() or Pkg.dir().Functions for package development (e.g. tag, publish, etc.) have been moved to the PkgDev package. See PkgDev README for the documentation of those functions.Base.Pkg.dir\nBase.Pkg.init\nBase.Pkg.resolve\nBase.Pkg.edit\nBase.Pkg.add\nBase.Pkg.rm\nBase.Pkg.clone\nBase.Pkg.setprotocol!\nBase.Pkg.available\nBase.Pkg.installed\nBase.Pkg.status\nBase.Pkg.update\nBase.Pkg.checkout\nBase.Pkg.pin\nBase.Pkg.free\nBase.Pkg.build\nBase.Pkg.test\nBase.Pkg.dependents"
 },
 
 {
@@ -15837,7 +15509,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Distributed Computing",
     "title": "Base.wait",
     "category": "Function",
-    "text": "wait(r::Future)\n\nWait for a value to become available for the specified future.\n\n\n\n\n\nwait(r::RemoteChannel, args...)\n\nWait for a value to become available on the specified remote channel.\n\n\n\n\n\nwait([x])\n\nBlock the current task until some event occurs, depending on the type of the argument:\n\nChannel: Wait for a value to be appended to the channel.\nCondition: Wait for notify on a condition.\nProcess: Wait for a process or process chain to exit. The exitcode field of a process can be used to determine success or failure.\nTask: Wait for a Task to finish, returning its result value. If the task fails with an exception, the exception is propagated (re-thrown in the task that called wait).\nRawFD: Wait for changes on a file descriptor (see the FileWatching package).\n\nIf no argument is passed, the task blocks for an undefined period. A task can only be restarted by an explicit call to schedule or yieldto.\n\nOften wait is called within a while loop to ensure a waited-for condition is met before proceeding.\n\n\n\n\n\n"
+    "text": "wait([x])\n\nBlock the current task until some event occurs, depending on the type of the argument:\n\nChannel: Wait for a value to be appended to the channel.\nCondition: Wait for notify on a condition.\nProcess: Wait for a process or process chain to exit. The exitcode field of a process can be used to determine success or failure.\nTask: Wait for a Task to finish, returning its result value. If the task fails with an exception, the exception is propagated (re-thrown in the task that called wait).\nRawFD: Wait for changes on a file descriptor (see the FileWatching package).\n\nIf no argument is passed, the task blocks for an undefined period. A task can only be restarted by an explicit call to schedule or yieldto.\n\nOften wait is called within a while loop to ensure a waited-for condition is met before proceeding.\n\n\n\n\n\nwait(r::Future)\n\nWait for a value to become available for the specified future.\n\n\n\n\n\nwait(r::RemoteChannel, args...)\n\nWait for a value to become available on the specified remote channel.\n\n\n\n\n\n"
 },
 
 {
@@ -16222,6 +15894,190 @@ var documenterSearchIndex = {"docs": [
     "title": "File Events",
     "category": "section",
     "text": "FileWatching.poll_fd\nFileWatching.poll_file\nFileWatching.watch_file"
+},
+
+{
+    "location": "stdlib/InteractiveUtils.html#",
+    "page": "Interactive Utilities",
+    "title": "Interactive Utilities",
+    "category": "page",
+    "text": ""
+},
+
+{
+    "location": "stdlib/InteractiveUtils.html#Base.Docs.apropos",
+    "page": "Interactive Utilities",
+    "title": "Base.Docs.apropos",
+    "category": "Function",
+    "text": "apropos(string)\n\nSearch through all documentation for a string, ignoring case.\n\n\n\n\n\n"
+},
+
+{
+    "location": "stdlib/InteractiveUtils.html#InteractiveUtils.varinfo",
+    "page": "Interactive Utilities",
+    "title": "InteractiveUtils.varinfo",
+    "category": "Function",
+    "text": "varinfo(m::Module=Main, pattern::Regex=r\"\")\n\nReturn a markdown table giving information about exported global variables in a module, optionally restricted to those matching pattern.\n\nThe memory consumption estimate is an approximate lower bound on the size of the internal structure of the object.\n\n\n\n\n\n"
+},
+
+{
+    "location": "stdlib/InteractiveUtils.html#InteractiveUtils.versioninfo",
+    "page": "Interactive Utilities",
+    "title": "InteractiveUtils.versioninfo",
+    "category": "Function",
+    "text": "versioninfo(io::IO=STDOUT; verbose::Bool=false, packages::Bool=false)\n\nPrint information about the version of Julia in use. The output is controlled with boolean keyword arguments:\n\npackages: print information about installed packages\nverbose: print all additional information\n\n\n\n\n\n"
+},
+
+{
+    "location": "stdlib/InteractiveUtils.html#InteractiveUtils.methodswith",
+    "page": "Interactive Utilities",
+    "title": "InteractiveUtils.methodswith",
+    "category": "Function",
+    "text": "methodswith(typ[, module or function]; supertypes::Bool=false])\n\nReturn an array of methods with an argument of type typ.\n\nThe optional second argument restricts the search to a particular module or function (the default is all top-level modules).\n\nIf keyword supertypes is true, also return arguments with a parent type of typ, excluding type Any.\n\n\n\n\n\n"
+},
+
+{
+    "location": "stdlib/InteractiveUtils.html#InteractiveUtils.subtypes",
+    "page": "Interactive Utilities",
+    "title": "InteractiveUtils.subtypes",
+    "category": "Function",
+    "text": "subtypes(T::DataType)\n\nReturn a list of immediate subtypes of DataType T. Note that all currently loaded subtypes are included, including those not visible in the current module.\n\nExamples\n\njulia> subtypes(Integer)\n3-element Array{Union{DataType, UnionAll},1}:\n Bool\n Signed\n Unsigned\n\n\n\n\n\n"
+},
+
+{
+    "location": "stdlib/InteractiveUtils.html#InteractiveUtils.edit-Tuple{AbstractString,Integer}",
+    "page": "Interactive Utilities",
+    "title": "InteractiveUtils.edit",
+    "category": "Method",
+    "text": "edit(path::AbstractString, line::Integer=0)\n\nEdit a file or directory optionally providing a line number to edit the file at. Return to the julia prompt when you quit the editor. The editor can be changed by setting JULIA_EDITOR, VISUAL or EDITOR as an environment variable.\n\n\n\n\n\n"
+},
+
+{
+    "location": "stdlib/InteractiveUtils.html#InteractiveUtils.edit-Tuple{Any}",
+    "page": "Interactive Utilities",
+    "title": "InteractiveUtils.edit",
+    "category": "Method",
+    "text": "edit(function, [types])\n\nEdit the definition of a function, optionally specifying a tuple of types to indicate which method to edit. The editor can be changed by setting JULIA_EDITOR, VISUAL or EDITOR as an environment variable.\n\n\n\n\n\n"
+},
+
+{
+    "location": "stdlib/InteractiveUtils.html#InteractiveUtils.@edit",
+    "page": "Interactive Utilities",
+    "title": "InteractiveUtils.@edit",
+    "category": "Macro",
+    "text": "@edit\n\nEvaluates the arguments to the function or macro call, determines their types, and calls the edit function on the resulting expression.\n\n\n\n\n\n"
+},
+
+{
+    "location": "stdlib/InteractiveUtils.html#InteractiveUtils.less-Tuple{AbstractString}",
+    "page": "Interactive Utilities",
+    "title": "InteractiveUtils.less",
+    "category": "Method",
+    "text": "less(file::AbstractString, [line::Integer])\n\nShow a file using the default pager, optionally providing a starting line number. Returns to the julia prompt when you quit the pager.\n\n\n\n\n\n"
+},
+
+{
+    "location": "stdlib/InteractiveUtils.html#InteractiveUtils.less-Tuple{Any}",
+    "page": "Interactive Utilities",
+    "title": "InteractiveUtils.less",
+    "category": "Method",
+    "text": "less(function, [types])\n\nShow the definition of a function using the default pager, optionally specifying a tuple of types to indicate which method to see.\n\n\n\n\n\n"
+},
+
+{
+    "location": "stdlib/InteractiveUtils.html#InteractiveUtils.@less",
+    "page": "Interactive Utilities",
+    "title": "InteractiveUtils.@less",
+    "category": "Macro",
+    "text": "@less\n\nEvaluates the arguments to the function or macro call, determines their types, and calls the less function on the resulting expression.\n\n\n\n\n\n"
+},
+
+{
+    "location": "stdlib/InteractiveUtils.html#InteractiveUtils.@which",
+    "page": "Interactive Utilities",
+    "title": "InteractiveUtils.@which",
+    "category": "Macro",
+    "text": "@which\n\nApplied to a function or macro call, it evaluates the arguments to the specified call, and returns the Method object for the method that would be called for those arguments. Applied to a variable, it returns the module in which the variable was bound. It calls out to the which function.\n\n\n\n\n\n"
+},
+
+{
+    "location": "stdlib/InteractiveUtils.html#InteractiveUtils.@functionloc",
+    "page": "Interactive Utilities",
+    "title": "InteractiveUtils.@functionloc",
+    "category": "Macro",
+    "text": "@functionloc\n\nApplied to a function or macro call, it evaluates the arguments to the specified call, and returns a tuple (filename,line) giving the location for the method that would be called for those arguments. It calls out to the functionloc function.\n\n\n\n\n\n"
+},
+
+{
+    "location": "stdlib/InteractiveUtils.html#InteractiveUtils.@code_lowered",
+    "page": "Interactive Utilities",
+    "title": "InteractiveUtils.@code_lowered",
+    "category": "Macro",
+    "text": "@code_lowered\n\nEvaluates the arguments to the function or macro call, determines their types, and calls code_lowered on the resulting expression.\n\n\n\n\n\n"
+},
+
+{
+    "location": "stdlib/InteractiveUtils.html#InteractiveUtils.@code_typed",
+    "page": "Interactive Utilities",
+    "title": "InteractiveUtils.@code_typed",
+    "category": "Macro",
+    "text": "@code_typed\n\nEvaluates the arguments to the function or macro call, determines their types, and calls code_typed on the resulting expression.\n\n\n\n\n\n"
+},
+
+{
+    "location": "stdlib/InteractiveUtils.html#InteractiveUtils.code_warntype",
+    "page": "Interactive Utilities",
+    "title": "InteractiveUtils.code_warntype",
+    "category": "Function",
+    "text": "code_warntype([io::IO], f, types)\n\nPrints lowered and type-inferred ASTs for the methods matching the given generic function and type signature to io which defaults to STDOUT. The ASTs are annotated in such a way as to cause \"non-leaf\" types to be emphasized (if color is available, displayed in red). This serves as a warning of potential type instability. Not all non-leaf types are particularly problematic for performance, so the results need to be used judiciously. In particular, unions containing either missing or nothing are displayed in yellow, since these are often intentional. See @code_warntype for more information.\n\n\n\n\n\n"
+},
+
+{
+    "location": "stdlib/InteractiveUtils.html#InteractiveUtils.@code_warntype",
+    "page": "Interactive Utilities",
+    "title": "InteractiveUtils.@code_warntype",
+    "category": "Macro",
+    "text": "@code_warntype\n\nEvaluates the arguments to the function or macro call, determines their types, and calls code_warntype on the resulting expression.\n\n\n\n\n\n"
+},
+
+{
+    "location": "stdlib/InteractiveUtils.html#InteractiveUtils.code_llvm",
+    "page": "Interactive Utilities",
+    "title": "InteractiveUtils.code_llvm",
+    "category": "Function",
+    "text": "code_llvm([io=STDOUT,], f, types)\n\nPrints the LLVM bitcodes generated for running the method matching the given generic function and type signature to io.\n\nAll metadata and dbg.* calls are removed from the printed bitcode. Use codellvmraw for the full IR.\n\n\n\n\n\n"
+},
+
+{
+    "location": "stdlib/InteractiveUtils.html#InteractiveUtils.@code_llvm",
+    "page": "Interactive Utilities",
+    "title": "InteractiveUtils.@code_llvm",
+    "category": "Macro",
+    "text": "@code_llvm\n\nEvaluates the arguments to the function or macro call, determines their types, and calls code_llvm on the resulting expression.\n\n\n\n\n\n"
+},
+
+{
+    "location": "stdlib/InteractiveUtils.html#InteractiveUtils.code_native",
+    "page": "Interactive Utilities",
+    "title": "InteractiveUtils.code_native",
+    "category": "Function",
+    "text": "code_native([io=STDOUT,], f, types; syntax = :att)\n\nPrints the native assembly instructions generated for running the method matching the given generic function and type signature to io. Switch assembly syntax using syntax symbol parameter set to :att for AT&T syntax or :intel for Intel syntax.\n\n\n\n\n\n"
+},
+
+{
+    "location": "stdlib/InteractiveUtils.html#InteractiveUtils.@code_native",
+    "page": "Interactive Utilities",
+    "title": "InteractiveUtils.@code_native",
+    "category": "Macro",
+    "text": "@code_native\n\nEvaluates the arguments to the function or macro call, determines their types, and calls code_native on the resulting expression.\n\n\n\n\n\n"
+},
+
+{
+    "location": "stdlib/InteractiveUtils.html#Interactive-Utilities-1",
+    "page": "Interactive Utilities",
+    "title": "Interactive Utilities",
+    "category": "section",
+    "text": "InteractiveUtils.apropos\nInteractiveUtils.varinfo\nInteractiveUtils.versioninfo\nInteractiveUtils.methodswith\nInteractiveUtils.subtypes\nInteractiveUtils.edit(::AbstractString, ::Integer)\nInteractiveUtils.edit(::Any)\nInteractiveUtils.@edit\nInteractiveUtils.less(::AbstractString)\nInteractiveUtils.less(::Any)\nInteractiveUtils.@less\nInteractiveUtils.@which\nInteractiveUtils.@functionloc\nInteractiveUtils.@code_lowered\nInteractiveUtils.@code_typed\nInteractiveUtils.code_warntype\nInteractiveUtils.@code_warntype\nInteractiveUtils.code_llvm\nInteractiveUtils.@code_llvm\nInteractiveUtils.code_native\nInteractiveUtils.@code_native"
 },
 
 {
@@ -16805,7 +16661,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Linear Algebra",
     "title": "LinearAlgebra.schurfact",
     "category": "Function",
-    "text": "schurfact(A::StridedMatrix) -> F::Schur\n\nComputes the Schur factorization of the matrix A. The (quasi) triangular Schur factor can be obtained from the Schur object F with either F.Schur or F.T and the orthogonal/unitary Schur vectors can be obtained with F.vectors or F.Z such that A = F.vectors * F.Schur * F.vectors'. The eigenvalues of A can be obtained with F.values.\n\nExamples\n\njulia> A = [5. 7.; -2. -4.]\n2×2 Array{Float64,2}:\n  5.0   7.0\n -2.0  -4.0\n\njulia> F = schurfact(A)\nLinearAlgebra.Schur{Float64,Array{Float64,2}} with factors T and Z:\n[3.0 9.0; 0.0 -2.0]\n[0.961524 0.274721; -0.274721 0.961524]\nand values:\n[3.0, -2.0]\n\njulia> F.vectors * F.Schur * F.vectors'\n2×2 Array{Float64,2}:\n  5.0   7.0\n -2.0  -4.0\n\n\n\n\n\nschurfact(A::StridedMatrix, B::StridedMatrix) -> F::GeneralizedSchur\n\nComputes the Generalized Schur (or QZ) factorization of the matrices A and B. The (quasi) triangular Schur factors can be obtained from the Schur object F with F.S and F.T, the left unitary/orthogonal Schur vectors can be obtained with F.left or F.Q and the right unitary/orthogonal Schur vectors can be obtained with F.right or F.Z such that A=F.left*F.S*F.right' and B=F.left*F.T*F.right'. The generalized eigenvalues of A and B can be obtained with F.alpha./F.beta.\n\n\n\n\n\n"
+    "text": "schurfact(A::StridedMatrix) -> F::Schur\n\nComputes the Schur factorization of the matrix A. The (quasi) triangular Schur factor can be obtained from the Schur object F with either F.Schur or F.T and the orthogonal/unitary Schur vectors can be obtained with F.vectors or F.Z such that A = F.vectors * F.Schur * F.vectors'. The eigenvalues of A can be obtained with F.values.\n\nExamples\n\njulia> A = [5. 7.; -2. -4.]\n2×2 Array{Float64,2}:\n  5.0   7.0\n -2.0  -4.0\n\njulia> F = schurfact(A)\nLinearAlgebra.Schur{Float64,Array{Float64,2}} with factors T and Z:\n[3.0 9.0; 0.0 -2.0]\n[0.961524 0.274721; -0.274721 0.961524]\nand values:\n[3.0, -2.0]\n\njulia> F.vectors * F.Schur * F.vectors'\n2×2 Array{Float64,2}:\n  5.0   7.0\n -2.0  -4.0\n\n\n\n\n\nschurfact(A::StridedMatrix, B::StridedMatrix) -> F::GeneralizedSchur\n\nComputes the Generalized Schur (or QZ) factorization of the matrices A and B. The (quasi) triangular Schur factors can be obtained from the Schur object F with F.S and F.T, the left unitary/orthogonal Schur vectors can be obtained with F.left or F.Q and the right unitary/orthogonal Schur vectors can be obtained with F.right or F.Z such that A=F.left*F.S*F.right' and B=F.left*F.T*F.right'. The generalized eigenvalues of A and B can be obtained with F.α./F.β.\n\n\n\n\n\n"
 },
 
 {
@@ -16829,7 +16685,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Linear Algebra",
     "title": "LinearAlgebra.ordschur",
     "category": "Function",
-    "text": "ordschur(F::Schur, select::Union{Vector{Bool},BitVector}) -> F::Schur\n\nReorders the Schur factorization F of a matrix A = Z*T*Z' according to the logical array select returning the reordered factorization F object. The selected eigenvalues appear in the leading diagonal of F.Schur and the corresponding leading columns of F.vectors form an orthogonal/unitary basis of the corresponding right invariant subspace. In the real case, a complex conjugate pair of eigenvalues must be either both included or both excluded via select.\n\n\n\n\n\nordschur(T::StridedMatrix, Z::StridedMatrix, select::Union{Vector{Bool},BitVector}) -> T::StridedMatrix, Z::StridedMatrix, λ::Vector\n\nReorders the Schur factorization of a real matrix A = Z*T*Z' according to the logical array select returning the reordered matrices T and Z as well as the vector of eigenvalues λ. The selected eigenvalues appear in the leading diagonal of T and the corresponding leading columns of Z form an orthogonal/unitary basis of the corresponding right invariant subspace. In the real case, a complex conjugate pair of eigenvalues must be either both included or both excluded via select.\n\n\n\n\n\nordschur(F::GeneralizedSchur, select::Union{Vector{Bool},BitVector}) -> F::GeneralizedSchur\n\nReorders the Generalized Schur factorization F of a matrix pair (A, B) = (Q*S*Z', Q*T*Z') according to the logical array select and returns a GeneralizedSchur object F. The selected eigenvalues appear in the leading diagonal of both F.S and F.T, and the left and right orthogonal/unitary Schur vectors are also reordered such that (A, B) = F.Q*(F.S, F.T)*F.Z' still holds and the generalized eigenvalues of A and B can still be obtained with F.alpha./F.beta.\n\n\n\n\n\nordschur(S::StridedMatrix, T::StridedMatrix, Q::StridedMatrix, Z::StridedMatrix, select) -> S::StridedMatrix, T::StridedMatrix, Q::StridedMatrix, Z::StridedMatrix, α::Vector, β::Vector\n\nReorders the Generalized Schur factorization of a matrix pair (A, B) = (Q*S*Z', Q*T*Z') according to the logical array select and returns the matrices S, T, Q, Z and vectors α and β.  The selected eigenvalues appear in the leading diagonal of both S and T, and the left and right unitary/orthogonal Schur vectors are also reordered such that (A, B) = Q*(S, T)*Z' still holds and the generalized eigenvalues of A and B can still be obtained with α./β.\n\n\n\n\n\n"
+    "text": "ordschur(F::Schur, select::Union{Vector{Bool},BitVector}) -> F::Schur\n\nReorders the Schur factorization F of a matrix A = Z*T*Z' according to the logical array select returning the reordered factorization F object. The selected eigenvalues appear in the leading diagonal of F.Schur and the corresponding leading columns of F.vectors form an orthogonal/unitary basis of the corresponding right invariant subspace. In the real case, a complex conjugate pair of eigenvalues must be either both included or both excluded via select.\n\n\n\n\n\nordschur(T::StridedMatrix, Z::StridedMatrix, select::Union{Vector{Bool},BitVector}) -> T::StridedMatrix, Z::StridedMatrix, λ::Vector\n\nReorders the Schur factorization of a real matrix A = Z*T*Z' according to the logical array select returning the reordered matrices T and Z as well as the vector of eigenvalues λ. The selected eigenvalues appear in the leading diagonal of T and the corresponding leading columns of Z form an orthogonal/unitary basis of the corresponding right invariant subspace. In the real case, a complex conjugate pair of eigenvalues must be either both included or both excluded via select.\n\n\n\n\n\nordschur(F::GeneralizedSchur, select::Union{Vector{Bool},BitVector}) -> F::GeneralizedSchur\n\nReorders the Generalized Schur factorization F of a matrix pair (A, B) = (Q*S*Z', Q*T*Z') according to the logical array select and returns a GeneralizedSchur object F. The selected eigenvalues appear in the leading diagonal of both F.S and F.T, and the left and right orthogonal/unitary Schur vectors are also reordered such that (A, B) = F.Q*(F.S, F.T)*F.Z' still holds and the generalized eigenvalues of A and B can still be obtained with F.α./F.β.\n\n\n\n\n\nordschur(S::StridedMatrix, T::StridedMatrix, Q::StridedMatrix, Z::StridedMatrix, select) -> S::StridedMatrix, T::StridedMatrix, Q::StridedMatrix, Z::StridedMatrix, α::Vector, β::Vector\n\nReorders the Generalized Schur factorization of a matrix pair (A, B) = (Q*S*Z', Q*T*Z') according to the logical array select and returns the matrices S, T, Q, Z and vectors α and β.  The selected eigenvalues appear in the leading diagonal of both S and T, and the left and right unitary/orthogonal Schur vectors are also reordered such that (A, B) = Q*(S, T)*Z' still holds and the generalized eigenvalues of A and B can still be obtained with α./β.\n\n\n\n\n\n"
 },
 
 {
@@ -16950,14 +16806,6 @@ var documenterSearchIndex = {"docs": [
     "title": "LinearAlgebra.diagm",
     "category": "Function",
     "text": "diagm(kv::Pair{<:Integer,<:AbstractVector}...)\n\nConstruct a square matrix from Pairs of diagonals and vectors. Vector kv.second will be placed on the kv.first diagonal. diagm constructs a full matrix; if you want storage-efficient versions with fast arithmetic, see Diagonal, Bidiagonal Tridiagonal and SymTridiagonal.\n\nExamples\n\njulia> diagm(1 => [1,2,3])\n4×4 Array{Int64,2}:\n 0  1  0  0\n 0  0  2  0\n 0  0  0  3\n 0  0  0  0\n\njulia> diagm(1 => [1,2,3], -1 => [4,5])\n4×4 Array{Int64,2}:\n 0  1  0  0\n 4  0  2  0\n 0  5  0  3\n 0  0  0  0\n\n\n\n\n\n"
-},
-
-{
-    "location": "stdlib/LinearAlgebra.html#LinearAlgebra.scale!",
-    "page": "Linear Algebra",
-    "title": "LinearAlgebra.scale!",
-    "category": "Function",
-    "text": "scale!(A, b)\nscale!(b, A)\n\nScale an array A by a scalar b overwriting A in-place.\n\nIf A is a matrix and b is a vector, then scale!(A,b) scales each column i of A by b[i] (similar to A*Diagonal(b)), while scale!(b,A) scales each row i of A by b[i] (similar to Diagonal(b)*A), again operating in-place on A. An InexactError exception is thrown if the scaling produces a number not representable by the element type of A, e.g. for integer types.\n\nExamples\n\njulia> a = [1 2; 3 4]\n2×2 Array{Int64,2}:\n 1  2\n 3  4\n\njulia> b = [1; 2]\n2-element Array{Int64,1}:\n 1\n 2\n\njulia> scale!(a,b)\n2×2 Array{Int64,2}:\n 1  4\n 3  8\n\njulia> a = [1 2; 3 4];\n\njulia> b = [1; 2];\n\njulia> scale!(b,a)\n2×2 Array{Int64,2}:\n 1  2\n 6  8\n\n\n\n\n\n"
 },
 
 {
@@ -17401,27 +17249,11 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/LinearAlgebra.html#LinearAlgebra.RowVector",
-    "page": "Linear Algebra",
-    "title": "LinearAlgebra.RowVector",
-    "category": "Type",
-    "text": "RowVector(vector)\n\nA lazy-view wrapper of an AbstractVector, which turns a length-n vector into a 1×n shaped row vector and represents the transpose of a vector (the elements are also transposed recursively).\n\nBy convention, a vector can be multiplied by a matrix on its left (A * v) whereas a row vector can be multiplied by a matrix on its right (such that RowVector(v) * A = RowVector(transpose(A) * v)). It differs from a 1×n-sized matrix by the facts that its transpose returns a vector and the inner product RowVector(v1) * v2 returns a scalar, but will otherwise behave similarly.\n\nExamples\n\njulia> a = [1; 2; 3; 4]\n4-element Array{Int64,1}:\n 1\n 2\n 3\n 4\n\njulia> RowVector(a)\n1×4 RowVector{Int64,Array{Int64,1}}:\n 1  2  3  4\n\njulia> RowVector(a)[3]\n3\n\njulia> RowVector(a)[1,3]\n3\n\njulia> RowVector(a)[3,1]\nERROR: BoundsError: attempt to access 1×4 RowVector{Int64,Array{Int64,1}} at index [3, 1]\n[...]\n\njulia> RowVector(a)*a\n30\n\njulia> B = [1 2; 3 4; 5 6; 7 8]\n4×2 Array{Int64,2}:\n 1  2\n 3  4\n 5  6\n 7  8\n\njulia> RowVector(a)*B\n1×2 RowVector{Int64,Array{Int64,1}}:\n 50  60\n\n\n\n\n\n"
-},
-
-{
-    "location": "stdlib/LinearAlgebra.html#LinearAlgebra.ConjArray",
-    "page": "Linear Algebra",
-    "title": "LinearAlgebra.ConjArray",
-    "category": "Type",
-    "text": "ConjArray(array)\n\nA lazy-view wrapper of an AbstractArray, taking the elementwise complex conjugate. This type is usually constructed (and unwrapped) via the conj function (or related adjoint), but currently this is the default behavior for RowVector only. For other arrays, the ConjArray constructor can be used directly.\n\nExamples\n\njulia> ConjArray([1+im 0; 0 1-im])\n2×2 ConjArray{Complex{Int64},2,Array{Complex{Int64},2}}:\n 1-1im  0+0im\n 0+0im  1+1im\n\n\n\n\n\n"
-},
-
-{
     "location": "stdlib/LinearAlgebra.html#Base.transpose",
     "page": "Linear Algebra",
     "title": "Base.transpose",
     "category": "Function",
-    "text": "transpose(A::AbstractMatrix)\n\nLazy matrix transpose. Mutating the returned object should appropriately mutate A. Often, but not always, yields Transpose(A), where Transpose is a lazy transpose wrapper. Note that this operation is recursive.\n\nThis operation is intended for linear algebra usage - for general data manipulation see permutedims, which is non-recursive.\n\nExamples\n\njulia> A = [1 2 3; 4 5 6; 7 8 9]\n3×3 Array{Int64,2}:\n 1  2  3\n 4  5  6\n 7  8  9\n\njulia> transpose(A)\n3×3 Transpose{Int64,Array{Int64,2}}:\n 1  4  7\n 2  5  8\n 3  6  9\n\n\n\n\n\n"
+    "text": "transpose(A)\n\nLazy transpose. Mutating the returned object should appropriately mutate A. Often, but not always, yields Transpose(A), where Transpose is a lazy transpose wrapper. Note that this operation is recursive.\n\nThis operation is intended for linear algebra usage - for general data manipulation see permutedims, which is non-recursive.\n\nExamples\n\njulia> A = [3+2im 9+2im; 8+7im  4+6im]\n2×2 Array{Complex{Int64},2}:\n 3+2im  9+2im\n 8+7im  4+6im\n\njulia> transpose(A)\n2×2 Transpose{Complex{Int64},Array{Complex{Int64},2}}:\n 3+2im  8+7im\n 9+2im  4+6im\n\n\n\n\n\n"
 },
 
 {
@@ -17477,7 +17309,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Linear Algebra",
     "title": "Standard Functions",
     "category": "section",
-    "text": "Linear algebra functions in Julia are largely implemented by calling functions from LAPACK.  Sparse factorizations call functions from SuiteSparse.Base.:*(::AbstractMatrix, ::AbstractMatrix)\nBase.:\\(::AbstractMatrix, ::AbstractVecOrMat)\nLinearAlgebra.dot\nLinearAlgebra.vecdot\nLinearAlgebra.cross\nLinearAlgebra.factorize\nLinearAlgebra.Diagonal\nLinearAlgebra.Bidiagonal\nLinearAlgebra.SymTridiagonal\nLinearAlgebra.Tridiagonal\nLinearAlgebra.Symmetric\nLinearAlgebra.Hermitian\nLinearAlgebra.LowerTriangular\nLinearAlgebra.UpperTriangular\nLinearAlgebra.UniformScaling\nLinearAlgebra.lu\nLinearAlgebra.lufact\nLinearAlgebra.lufact!\nLinearAlgebra.chol\nLinearAlgebra.cholfact\nLinearAlgebra.cholfact!\nLinearAlgebra.lowrankupdate\nLinearAlgebra.lowrankdowndate\nLinearAlgebra.lowrankupdate!\nLinearAlgebra.lowrankdowndate!\nLinearAlgebra.ldltfact\nLinearAlgebra.ldltfact!\nLinearAlgebra.qr\nLinearAlgebra.qr!\nLinearAlgebra.qrfact\nLinearAlgebra.qrfact!\nLinearAlgebra.QR\nLinearAlgebra.QRCompactWY\nLinearAlgebra.QRPivoted\nLinearAlgebra.lqfact!\nLinearAlgebra.lqfact\nLinearAlgebra.lq\nLinearAlgebra.bkfact\nLinearAlgebra.bkfact!\nLinearAlgebra.eig\nLinearAlgebra.eigvals\nLinearAlgebra.eigvals!\nLinearAlgebra.eigmax\nLinearAlgebra.eigmin\nLinearAlgebra.eigvecs\nLinearAlgebra.eigfact\nLinearAlgebra.eigfact!\nLinearAlgebra.hessfact\nLinearAlgebra.hessfact!\nLinearAlgebra.schurfact\nLinearAlgebra.schurfact!\nLinearAlgebra.schur\nLinearAlgebra.ordschur\nLinearAlgebra.ordschur!\nLinearAlgebra.svdfact\nLinearAlgebra.svdfact!\nLinearAlgebra.svd\nLinearAlgebra.svdvals\nLinearAlgebra.svdvals!\nLinearAlgebra.Givens\nLinearAlgebra.givens\nLinearAlgebra.triu\nLinearAlgebra.triu!\nLinearAlgebra.tril\nLinearAlgebra.tril!\nLinearAlgebra.diagind\nLinearAlgebra.diag\nLinearAlgebra.diagm\nLinearAlgebra.scale!\nLinearAlgebra.rank\nLinearAlgebra.norm\nLinearAlgebra.vecnorm\nLinearAlgebra.normalize!\nLinearAlgebra.normalize\nLinearAlgebra.cond\nLinearAlgebra.condskeel\nLinearAlgebra.trace\nLinearAlgebra.det\nLinearAlgebra.logdet\nLinearAlgebra.logabsdet\nBase.inv(::AbstractMatrix)\nLinearAlgebra.pinv\nLinearAlgebra.nullspace\nBase.repmat\nBase.kron\nLinearAlgebra.linreg\nLinearAlgebra.exp(::StridedMatrix{<:LinearAlgebra.BlasFloat})\nLinearAlgebra.log(::StridedMatrix)\nLinearAlgebra.sqrt(::StridedMatrix{<:Real})\nLinearAlgebra.cos(::StridedMatrix{<:Real})\nLinearAlgebra.sin(::StridedMatrix{<:Real})\nLinearAlgebra.sincos(::StridedMatrix{<:Real})\nLinearAlgebra.tan(::StridedMatrix{<:Real})\nLinearAlgebra.sec(::StridedMatrix)\nLinearAlgebra.csc(::StridedMatrix)\nLinearAlgebra.cot(::StridedMatrix)\nLinearAlgebra.cosh(::StridedMatrix)\nLinearAlgebra.sinh(::StridedMatrix)\nLinearAlgebra.tanh(::StridedMatrix)\nLinearAlgebra.sech(::StridedMatrix)\nLinearAlgebra.csch(::StridedMatrix)\nLinearAlgebra.coth(::StridedMatrix)\nLinearAlgebra.acos(::StridedMatrix)\nLinearAlgebra.asin(::StridedMatrix)\nLinearAlgebra.atan(::StridedMatrix)\nLinearAlgebra.asec(::StridedMatrix)\nLinearAlgebra.acsc(::StridedMatrix)\nLinearAlgebra.acot(::StridedMatrix)\nLinearAlgebra.acosh(::StridedMatrix)\nLinearAlgebra.asinh(::StridedMatrix)\nLinearAlgebra.atanh(::StridedMatrix)\nLinearAlgebra.asech(::StridedMatrix)\nLinearAlgebra.acsch(::StridedMatrix)\nLinearAlgebra.acoth(::StridedMatrix)\nLinearAlgebra.lyap\nLinearAlgebra.sylvester\nLinearAlgebra.issuccess\nLinearAlgebra.issymmetric\nLinearAlgebra.isposdef\nLinearAlgebra.isposdef!\nLinearAlgebra.istril\nLinearAlgebra.istriu\nLinearAlgebra.isdiag\nLinearAlgebra.ishermitian\nLinearAlgebra.RowVector\nLinearAlgebra.ConjArray\nBase.transpose\nLinearAlgebra.transpose!\nBase.adjoint\nLinearAlgebra.adjoint!\nLinearAlgebra.peakflops\nLinearAlgebra.stride1\nLinearAlgebra.checksquare"
+    "text": "Linear algebra functions in Julia are largely implemented by calling functions from LAPACK.  Sparse factorizations call functions from SuiteSparse.Base.:*(::AbstractMatrix, ::AbstractMatrix)\nBase.:\\(::AbstractMatrix, ::AbstractVecOrMat)\nLinearAlgebra.dot\nLinearAlgebra.vecdot\nLinearAlgebra.cross\nLinearAlgebra.factorize\nLinearAlgebra.Diagonal\nLinearAlgebra.Bidiagonal\nLinearAlgebra.SymTridiagonal\nLinearAlgebra.Tridiagonal\nLinearAlgebra.Symmetric\nLinearAlgebra.Hermitian\nLinearAlgebra.LowerTriangular\nLinearAlgebra.UpperTriangular\nLinearAlgebra.UniformScaling\nLinearAlgebra.lu\nLinearAlgebra.lufact\nLinearAlgebra.lufact!\nLinearAlgebra.chol\nLinearAlgebra.cholfact\nLinearAlgebra.cholfact!\nLinearAlgebra.lowrankupdate\nLinearAlgebra.lowrankdowndate\nLinearAlgebra.lowrankupdate!\nLinearAlgebra.lowrankdowndate!\nLinearAlgebra.ldltfact\nLinearAlgebra.ldltfact!\nLinearAlgebra.qr\nLinearAlgebra.qr!\nLinearAlgebra.qrfact\nLinearAlgebra.qrfact!\nLinearAlgebra.QR\nLinearAlgebra.QRCompactWY\nLinearAlgebra.QRPivoted\nLinearAlgebra.lqfact!\nLinearAlgebra.lqfact\nLinearAlgebra.lq\nLinearAlgebra.bkfact\nLinearAlgebra.bkfact!\nLinearAlgebra.eig\nLinearAlgebra.eigvals\nLinearAlgebra.eigvals!\nLinearAlgebra.eigmax\nLinearAlgebra.eigmin\nLinearAlgebra.eigvecs\nLinearAlgebra.eigfact\nLinearAlgebra.eigfact!\nLinearAlgebra.hessfact\nLinearAlgebra.hessfact!\nLinearAlgebra.schurfact\nLinearAlgebra.schurfact!\nLinearAlgebra.schur\nLinearAlgebra.ordschur\nLinearAlgebra.ordschur!\nLinearAlgebra.svdfact\nLinearAlgebra.svdfact!\nLinearAlgebra.svd\nLinearAlgebra.svdvals\nLinearAlgebra.svdvals!\nLinearAlgebra.Givens\nLinearAlgebra.givens\nLinearAlgebra.triu\nLinearAlgebra.triu!\nLinearAlgebra.tril\nLinearAlgebra.tril!\nLinearAlgebra.diagind\nLinearAlgebra.diag\nLinearAlgebra.diagm\nLinearAlgebra.rank\nLinearAlgebra.norm\nLinearAlgebra.vecnorm\nLinearAlgebra.normalize!\nLinearAlgebra.normalize\nLinearAlgebra.cond\nLinearAlgebra.condskeel\nLinearAlgebra.trace\nLinearAlgebra.det\nLinearAlgebra.logdet\nLinearAlgebra.logabsdet\nBase.inv(::AbstractMatrix)\nLinearAlgebra.pinv\nLinearAlgebra.nullspace\nBase.repmat\nBase.kron\nLinearAlgebra.linreg\nLinearAlgebra.exp(::StridedMatrix{<:LinearAlgebra.BlasFloat})\nLinearAlgebra.log(::StridedMatrix)\nLinearAlgebra.sqrt(::StridedMatrix{<:Real})\nLinearAlgebra.cos(::StridedMatrix{<:Real})\nLinearAlgebra.sin(::StridedMatrix{<:Real})\nLinearAlgebra.sincos(::StridedMatrix{<:Real})\nLinearAlgebra.tan(::StridedMatrix{<:Real})\nLinearAlgebra.sec(::StridedMatrix)\nLinearAlgebra.csc(::StridedMatrix)\nLinearAlgebra.cot(::StridedMatrix)\nLinearAlgebra.cosh(::StridedMatrix)\nLinearAlgebra.sinh(::StridedMatrix)\nLinearAlgebra.tanh(::StridedMatrix)\nLinearAlgebra.sech(::StridedMatrix)\nLinearAlgebra.csch(::StridedMatrix)\nLinearAlgebra.coth(::StridedMatrix)\nLinearAlgebra.acos(::StridedMatrix)\nLinearAlgebra.asin(::StridedMatrix)\nLinearAlgebra.atan(::StridedMatrix)\nLinearAlgebra.asec(::StridedMatrix)\nLinearAlgebra.acsc(::StridedMatrix)\nLinearAlgebra.acot(::StridedMatrix)\nLinearAlgebra.acosh(::StridedMatrix)\nLinearAlgebra.asinh(::StridedMatrix)\nLinearAlgebra.atanh(::StridedMatrix)\nLinearAlgebra.asech(::StridedMatrix)\nLinearAlgebra.acsch(::StridedMatrix)\nLinearAlgebra.acoth(::StridedMatrix)\nLinearAlgebra.lyap\nLinearAlgebra.sylvester\nLinearAlgebra.issuccess\nLinearAlgebra.issymmetric\nLinearAlgebra.isposdef\nLinearAlgebra.isposdef!\nLinearAlgebra.istril\nLinearAlgebra.istriu\nLinearAlgebra.isdiag\nLinearAlgebra.ishermitian\nBase.transpose\nLinearAlgebra.transpose!\nBase.adjoint\nLinearAlgebra.adjoint!\nLinearAlgebra.peakflops\nLinearAlgebra.stride1\nLinearAlgebra.checksquare"
 },
 
 {
@@ -17486,6 +17318,22 @@ var documenterSearchIndex = {"docs": [
     "title": "LinearAlgebra.mul!",
     "category": "Function",
     "text": "mul!(Y, A, B) -> Y\n\nCalculates the matrix-matrix or matrix-vector product AB and stores the result in Y, overwriting the existing value of Y. Note that Y must not be aliased with either A or B.\n\nExamples\n\njulia> A=[1.0 2.0; 3.0 4.0]; B=[1.0 1.0; 1.0 1.0]; Y = similar(B); mul!(Y, A, B);\n\njulia> Y\n2×2 Array{Float64,2}:\n 3.0  3.0\n 7.0  7.0\n\n\n\n\n\n"
+},
+
+{
+    "location": "stdlib/LinearAlgebra.html#LinearAlgebra.lmul!",
+    "page": "Linear Algebra",
+    "title": "LinearAlgebra.lmul!",
+    "category": "Function",
+    "text": "lmul!(a::Number, B::AbstractArray)\n\nScale an array B by a scalar a overwriting B in-place.\n\nExamples\n\njulia> B = [1 2; 3 4]\n2×2 Array{Int64,2}:\n 1  2\n 3  4\n\njulia> lmul!(2, B)\n2×2 Array{Int64,2}:\n 2  4\n 6  8\n\n\n\n\n\nlmul!(A, B)\n\nCalculate the matrix-matrix product AB, overwriting B, and return the result.\n\n\n\n\n\n"
+},
+
+{
+    "location": "stdlib/LinearAlgebra.html#LinearAlgebra.rmul!",
+    "page": "Linear Algebra",
+    "title": "LinearAlgebra.rmul!",
+    "category": "Function",
+    "text": "rmul!(A::AbstractArray, b::Number)\n\nScale an array A by a scalar b overwriting A in-place.\n\nExamples\n\njulia> A = [1 2; 3 4]\n2×2 Array{Int64,2}:\n 1  2\n 3  4\n\njulia> rmul!(A, 2)\n2×2 Array{Int64,2}:\n 2  4\n 6  8\n\n\n\n\n\nrmul!(A, B)\n\nCalculate the matrix-matrix product AB, overwriting A, and return the result.\n\n\n\n\n\n"
 },
 
 {
@@ -17509,7 +17357,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Linear Algebra",
     "title": "Low-level matrix operations",
     "category": "section",
-    "text": "In many cases there are in-place versions of matrix operations that allow you to supply a pre-allocated output vector or matrix.  This is useful when optimizing critical code in order to avoid the overhead of repeated allocations. These in-place operations are suffixed with ! below (e.g. mul!) according to the usual Julia convention.LinearAlgebra.mul!\nLinearAlgebra.ldiv!\nLinearAlgebra.rdiv!"
+    "text": "In many cases there are in-place versions of matrix operations that allow you to supply a pre-allocated output vector or matrix.  This is useful when optimizing critical code in order to avoid the overhead of repeated allocations. These in-place operations are suffixed with ! below (e.g. mul!) according to the usual Julia convention.LinearAlgebra.mul!\nLinearAlgebra.lmul!\nLinearAlgebra.rmul!\nLinearAlgebra.ldiv!\nLinearAlgebra.rdiv!"
 },
 
 {
@@ -18577,6 +18425,22 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
+    "location": "stdlib/Markdown.html#",
+    "page": "Markdown",
+    "title": "Markdown",
+    "category": "page",
+    "text": ""
+},
+
+{
+    "location": "stdlib/Markdown.html#Markdown-1",
+    "page": "Markdown",
+    "title": "Markdown",
+    "category": "section",
+    "text": ""
+},
+
+{
     "location": "stdlib/Mmap.html#",
     "page": "Memory-mapped I/O",
     "title": "Memory-mapped I/O",
@@ -18614,6 +18478,166 @@ var documenterSearchIndex = {"docs": [
     "title": "Memory-mapped I/O",
     "category": "section",
     "text": "Mmap.Anonymous\nMmap.mmap\nMmap.sync!"
+},
+
+{
+    "location": "stdlib/Pkg.html#",
+    "page": "Package Manager Functions",
+    "title": "Package Manager Functions",
+    "category": "page",
+    "text": ""
+},
+
+{
+    "location": "stdlib/Pkg.html#Pkg.dir",
+    "page": "Package Manager Functions",
+    "title": "Pkg.dir",
+    "category": "Function",
+    "text": "dir() -> AbstractString\n\nReturns the absolute path of the package directory. This defaults to joinpath(homedir(),\".julia\",\"v$(VERSION.major).$(VERSION.minor)\") on all platforms (i.e. ~/.julia/v0.7 in UNIX shell syntax). If the JULIA_PKGDIR environment variable is set, then that path is used in the returned value as joinpath(ENV[\"JULIA_PKGDIR\"],\"v$(VERSION.major).$(VERSION.minor)\"). If JULIA_PKGDIR is a relative path, it is interpreted relative to whatever the current working directory is.\n\n\n\n\n\ndir(names...) -> AbstractString\n\nEquivalent to normpath(Pkg.dir(),names...) – i.e. it appends path components to the package directory and normalizes the resulting path. In particular, Pkg.dir(pkg) returns the path to the package pkg.\n\n\n\n\n\n"
+},
+
+{
+    "location": "stdlib/Pkg.html#Pkg.init",
+    "page": "Package Manager Functions",
+    "title": "Pkg.init",
+    "category": "Function",
+    "text": "init(meta::AbstractString=DEFAULT_META, branch::AbstractString=META_BRANCH)\n\nInitialize Pkg.dir() as a package directory. This will be done automatically when the JULIA_PKGDIR is not set and Pkg.dir() uses its default value. As part of this process, clones a local METADATA git repository from the site and branch specified by its arguments, which are typically not provided. Explicit (non-default) arguments can be used to support a custom METADATA setup.\n\n\n\n\n\n"
+},
+
+{
+    "location": "stdlib/Pkg.html#Pkg.resolve",
+    "page": "Package Manager Functions",
+    "title": "Pkg.resolve",
+    "category": "Function",
+    "text": "resolve()\n\nDetermines an optimal, consistent set of package versions to install or upgrade to. The optimal set of package versions is based on the contents of Pkg.dir(\"REQUIRE\") and the state of installed packages in Pkg.dir(), Packages that are no longer required are moved into Pkg.dir(\".trash\").\n\n\n\n\n\n"
+},
+
+{
+    "location": "stdlib/Pkg.html#Pkg.edit",
+    "page": "Package Manager Functions",
+    "title": "Pkg.edit",
+    "category": "Function",
+    "text": "edit()\n\nOpens Pkg.dir(\"REQUIRE\") in the editor specified by the VISUAL or EDITOR environment variables; when the editor command returns, it runs Pkg.resolve() to determine and install a new optimal set of installed package versions.\n\n\n\n\n\n"
+},
+
+{
+    "location": "stdlib/Pkg.html#Pkg.add",
+    "page": "Package Manager Functions",
+    "title": "Pkg.add",
+    "category": "Function",
+    "text": "add(pkg, vers...)\n\nAdd a requirement entry for pkg to Pkg.dir(\"REQUIRE\") and call Pkg.resolve(). If vers are given, they must be VersionNumber objects and they specify acceptable version intervals for pkg.\n\n\n\n\n\n"
+},
+
+{
+    "location": "stdlib/Pkg.html#Pkg.rm",
+    "page": "Package Manager Functions",
+    "title": "Pkg.rm",
+    "category": "Function",
+    "text": "rm(pkg)\n\nRemove all requirement entries for pkg from Pkg.dir(\"REQUIRE\") and call Pkg.resolve().\n\n\n\n\n\n"
+},
+
+{
+    "location": "stdlib/Pkg.html#Pkg.clone",
+    "page": "Package Manager Functions",
+    "title": "Pkg.clone",
+    "category": "Function",
+    "text": "clone(pkg)\n\nIf pkg has a URL registered in Pkg.dir(\"METADATA\"), clone it from that URL on the default branch. The package does not need to have any registered versions.\n\n\n\n\n\nclone(url, [pkg])\n\nClone a package directly from the git URL url. The package does not need to be registered in Pkg.dir(\"METADATA\"). The package repo is cloned by the name pkg if provided; if not provided, pkg is determined automatically from url.\n\n\n\n\n\n"
+},
+
+{
+    "location": "stdlib/Pkg.html#Pkg.setprotocol!",
+    "page": "Package Manager Functions",
+    "title": "Pkg.setprotocol!",
+    "category": "Function",
+    "text": "setprotocol!(proto)\n\nSet the protocol used to access GitHub-hosted packages. Defaults to 'https', with a blank proto delegating the choice to the package developer.\n\n\n\n\n\n"
+},
+
+{
+    "location": "stdlib/Pkg.html#Pkg.available",
+    "page": "Package Manager Functions",
+    "title": "Pkg.available",
+    "category": "Function",
+    "text": "available() -> Vector{String}\n\nReturns the names of available packages.\n\n\n\n\n\navailable(pkg) -> Vector{VersionNumber}\n\nReturns the version numbers available for package pkg.\n\n\n\n\n\n"
+},
+
+{
+    "location": "stdlib/Pkg.html#Pkg.installed",
+    "page": "Package Manager Functions",
+    "title": "Pkg.installed",
+    "category": "Function",
+    "text": "installed() -> Dict{String,VersionNumber}\n\nReturns a dictionary mapping installed package names to the installed version number of each package.\n\n\n\n\n\ninstalled(pkg) -> Nothing | VersionNumber\n\nIf pkg is installed, return the installed version number. If pkg is registered, but not installed, return nothing.\n\n\n\n\n\n"
+},
+
+{
+    "location": "stdlib/Pkg.html#Pkg.status",
+    "page": "Package Manager Functions",
+    "title": "Pkg.status",
+    "category": "Function",
+    "text": "status()\n\nPrints out a summary of what packages are installed and what version and state they're in.\n\n\n\n\n\nstatus(pkg)\n\nPrints out a summary of what version and state pkg, specifically, is in.\n\n\n\n\n\n"
+},
+
+{
+    "location": "stdlib/Pkg.html#Pkg.update",
+    "page": "Package Manager Functions",
+    "title": "Pkg.update",
+    "category": "Function",
+    "text": "update(pkgs...)\n\nUpdate the metadata repo – kept in Pkg.dir(\"METADATA\") – then update any fixed packages that can safely be pulled from their origin; then call Pkg.resolve() to determine a new optimal set of packages versions.\n\nWithout arguments, updates all installed packages. When one or more package names are provided as arguments, only those packages and their dependencies are updated.\n\n\n\n\n\n"
+},
+
+{
+    "location": "stdlib/Pkg.html#Pkg.checkout",
+    "page": "Package Manager Functions",
+    "title": "Pkg.checkout",
+    "category": "Function",
+    "text": "checkout(pkg, [branch=\"master\"]; merge=true, pull=true)\n\nCheckout the Pkg.dir(pkg) repo to the branch branch. Defaults to checking out the \"master\" branch. To go back to using the newest compatible released version, use Pkg.free(pkg). Changes are merged (fast-forward only) if the keyword argument merge == true, and the latest version is pulled from the upstream repo if pull == true.\n\n\n\n\n\n"
+},
+
+{
+    "location": "stdlib/Pkg.html#Pkg.pin",
+    "page": "Package Manager Functions",
+    "title": "Pkg.pin",
+    "category": "Function",
+    "text": "pin(pkg)\n\nPin pkg at the current version. To go back to using the newest compatible released version, use Pkg.free(pkg)\n\n\n\n\n\npin(pkg, version)\n\nPin pkg at registered version version.\n\n\n\n\n\n"
+},
+
+{
+    "location": "stdlib/Pkg.html#Pkg.free",
+    "page": "Package Manager Functions",
+    "title": "Pkg.free",
+    "category": "Function",
+    "text": "free(pkg)\n\nFree the package pkg to be managed by the package manager again. It calls Pkg.resolve() to determine optimal package versions after. This is an inverse for both Pkg.checkout and Pkg.pin.\n\nYou can also supply an iterable collection of package names, e.g., Pkg.free((\"Pkg1\", \"Pkg2\")) to free multiple packages at once.\n\n\n\n\n\n"
+},
+
+{
+    "location": "stdlib/Pkg.html#Pkg.build",
+    "page": "Package Manager Functions",
+    "title": "Pkg.build",
+    "category": "Function",
+    "text": "build()\n\nRun the build scripts for all installed packages in depth-first recursive order.\n\n\n\n\n\nbuild(pkgs...)\n\nRun the build script in deps/build.jl for each package in pkgs and all of their dependencies in depth-first recursive order. This is called automatically by Pkg.resolve() on all installed or updated packages.\n\n\n\n\n\n"
+},
+
+{
+    "location": "stdlib/Pkg.html#Pkg.test",
+    "page": "Package Manager Functions",
+    "title": "Pkg.test",
+    "category": "Function",
+    "text": "test(; coverage=false)\n\nRun the tests for all installed packages ensuring that each package's test dependencies are installed for the duration of the test. A package is tested by running its test/runtests.jl file and test dependencies are specified in test/REQUIRE. Coverage statistics for the packages may be generated by passing coverage=true. The default behavior is not to run coverage.\n\n\n\n\n\ntest(pkgs...; coverage=false)\n\nRun the tests for each package in pkgs ensuring that each package's test dependencies are installed for the duration of the test. A package is tested by running its test/runtests.jl file and test dependencies are specified in test/REQUIRE. Coverage statistics for the packages may be generated by passing coverage=true. The default behavior is not to run coverage.\n\n\n\n\n\n"
+},
+
+{
+    "location": "stdlib/Pkg.html#Pkg.dependents",
+    "page": "Package Manager Functions",
+    "title": "Pkg.dependents",
+    "category": "Function",
+    "text": "dependents(pkg)\n\nList the packages that have pkg as a dependency.\n\n\n\n\n\n"
+},
+
+{
+    "location": "stdlib/Pkg.html#Package-Manager-Functions-1",
+    "page": "Package Manager Functions",
+    "title": "Package Manager Functions",
+    "category": "section",
+    "text": "All package manager functions are defined in the Pkg module. None of the Pkg module's functions are exported; to use them, you'll need to prefix each function call with an explicit Pkg., e.g. Pkg.status() or Pkg.dir().Functions for package development (e.g. tag, publish, etc.) have been moved to the PkgDev package. See PkgDev README for the documentation of those functions.Pkg.dir\nPkg.init\nPkg.resolve\nPkg.edit\nPkg.add\nPkg.rm\nPkg.clone\nPkg.setprotocol!\nPkg.available\nPkg.installed\nPkg.status\nPkg.update\nPkg.checkout\nPkg.pin\nPkg.free\nPkg.build\nPkg.test\nPkg.dependents"
 },
 
 {
@@ -18805,7 +18829,7 @@ var documenterSearchIndex = {"docs": [
     "page": "The Julia REPL",
     "title": "Tab completion",
     "category": "section",
-    "text": "In both the Julian and help modes of the REPL, one can enter the first few characters of a function or type and then press the tab key to get a list all matches:julia> stri[TAB]\nstride     strides     string      stringmime  strip\n\njulia> Stri[TAB]\nStridedArray    StridedMatrix    StridedVecOrMat  StridedVector    StringThe tab key can also be used to substitute LaTeX math symbols with their Unicode equivalents, and get a list of LaTeX matches as well:julia> \\pi[TAB]\njulia> π\nπ = 3.1415926535897...\n\njulia> e\\_1[TAB] = [1,0]\njulia> e₁ = [1,0]\n2-element Array{Int64,1}:\n 1\n 0\n\njulia> e\\^1[TAB] = [1 0]\njulia> e¹ = [1 0]\n1×2 Array{Int64,2}:\n 1  0\n\njulia> \\sqrt[TAB]2     # √ is equivalent to the sqrt function\njulia> √2\n1.4142135623730951\n\njulia> \\hbar[TAB](h) = h / 2\\pi[TAB]\njulia> ħ(h) = h / 2π\nħ (generic function with 1 method)\n\njulia> \\h[TAB]\n\\hat              \\hermitconjmatrix  \\hkswarow          \\hrectangle\n\\hatapprox        \\hexagon           \\hookleftarrow     \\hrectangleblack\n\\hbar             \\hexagonblack      \\hookrightarrow    \\hslash\n\\heartsuit        \\hksearow          \\house             \\hspace\n\njulia> α=\"\\alpha[TAB]\"   # LaTeX completion also works in strings\njulia> α=\"α\"A full list of tab-completions can be found in the Unicode Input section of the manual.Completion of paths works for strings and julia's shell mode:julia> path=\"/[TAB]\"\n.dockerenv  .juliabox/   boot/        etc/         lib/         media/       opt/         root/        sbin/        sys/         usr/\n.dockerinit bin/         dev/         home/        lib64/       mnt/         proc/        run/         srv/         tmp/         var/\nshell> /[TAB]\n.dockerenv  .juliabox/   boot/        etc/         lib/         media/       opt/         root/        sbin/        sys/         usr/\n.dockerinit bin/         dev/         home/        lib64/       mnt/         proc/        run/         srv/         tmp/         var/Tab completion can help with investigation of the available methods matching the input arguments:julia> max([TAB] # All methods are displayed, not shown here due to size of the list\n\njulia> max([1, 2], [TAB] # All methods where `Vector{Int}` matches as first argument\nmax(x, y) in Base at operators.jl:215\nmax(a, b, c, xs...) in Base at operators.jl:281\n\njulia> max([1, 2], max(1, 2), [TAB] # All methods matching the arguments.\nmax(x, y) in Base at operators.jl:215\nmax(a, b, c, xs...) in Base at operators.jl:281Keywords are also displayed in the suggested methods, see second line after ; where limit and keep are keyword arguments:julia> split(\"1 1 1\", [TAB]\nsplit(str::AbstractString) in Base at strings/util.jl:302\nsplit(str::T, splitter; limit, keep) where T<:AbstractString in Base at strings/util.jl:277The completion of the methods uses type inference and can therefore see if the arguments match even if the arguments are output from functions. The function needs to be type stable for the completion to be able to remove non-matching methods.Tab completion can also help completing fields:julia> Pkg.a[TAB]\nadd       availableFields for output from functions can also be completed:julia> split(\"\",\"\")[1].[TAB]\nendof  offset  stringThe completion of fields for output from functions uses type inference, and it can only suggest fields if the function is type stable."
+    "text": "In both the Julian and help modes of the REPL, one can enter the first few characters of a function or type and then press the tab key to get a list all matches:julia> stri[TAB]\nstride     strides     string      stringmime  strip\n\njulia> Stri[TAB]\nStridedArray    StridedMatrix    StridedVecOrMat  StridedVector    StringThe tab key can also be used to substitute LaTeX math symbols with their Unicode equivalents, and get a list of LaTeX matches as well:julia> \\pi[TAB]\njulia> π\nπ = 3.1415926535897...\n\njulia> e\\_1[TAB] = [1,0]\njulia> e₁ = [1,0]\n2-element Array{Int64,1}:\n 1\n 0\n\njulia> e\\^1[TAB] = [1 0]\njulia> e¹ = [1 0]\n1×2 Array{Int64,2}:\n 1  0\n\njulia> \\sqrt[TAB]2     # √ is equivalent to the sqrt function\njulia> √2\n1.4142135623730951\n\njulia> \\hbar[TAB](h) = h / 2\\pi[TAB]\njulia> ħ(h) = h / 2π\nħ (generic function with 1 method)\n\njulia> \\h[TAB]\n\\hat              \\hermitconjmatrix  \\hkswarow          \\hrectangle\n\\hatapprox        \\hexagon           \\hookleftarrow     \\hrectangleblack\n\\hbar             \\hexagonblack      \\hookrightarrow    \\hslash\n\\heartsuit        \\hksearow          \\house             \\hspace\n\njulia> α=\"\\alpha[TAB]\"   # LaTeX completion also works in strings\njulia> α=\"α\"A full list of tab-completions can be found in the Unicode Input section of the manual.Completion of paths works for strings and julia's shell mode:julia> path=\"/[TAB]\"\n.dockerenv  .juliabox/   boot/        etc/         lib/         media/       opt/         root/        sbin/        sys/         usr/\n.dockerinit bin/         dev/         home/        lib64/       mnt/         proc/        run/         srv/         tmp/         var/\nshell> /[TAB]\n.dockerenv  .juliabox/   boot/        etc/         lib/         media/       opt/         root/        sbin/        sys/         usr/\n.dockerinit bin/         dev/         home/        lib64/       mnt/         proc/        run/         srv/         tmp/         var/Tab completion can help with investigation of the available methods matching the input arguments:julia> max([TAB] # All methods are displayed, not shown here due to size of the list\n\njulia> max([1, 2], [TAB] # All methods where `Vector{Int}` matches as first argument\nmax(x, y) in Base at operators.jl:215\nmax(a, b, c, xs...) in Base at operators.jl:281\n\njulia> max([1, 2], max(1, 2), [TAB] # All methods matching the arguments.\nmax(x, y) in Base at operators.jl:215\nmax(a, b, c, xs...) in Base at operators.jl:281Keywords are also displayed in the suggested methods, see second line after ; where limit and keep are keyword arguments:julia> split(\"1 1 1\", [TAB]\nsplit(str::AbstractString) in Base at strings/util.jl:302\nsplit(str::T, splitter; limit, keep) where T<:AbstractString in Base at strings/util.jl:277The completion of the methods uses type inference and can therefore see if the arguments match even if the arguments are output from functions. The function needs to be type stable for the completion to be able to remove non-matching methods.Tab completion can also help completing fields:julia> Pkg.a[TAB]\nadd       availableFields for output from functions can also be completed:julia> split(\"\",\"\")[1].[TAB]\nlastindex  offset  stringThe completion of fields for output from functions uses type inference, and it can only suggest fields if the function is type stable."
 },
 
 {
@@ -19341,7 +19365,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Unit Testing",
     "title": "Base.runtests",
     "category": "Function",
-    "text": "Base.runtests(tests=[\"all\"], numcores=ceil(Int, Sys.CPU_CORES / 2);\n              exit_on_error=false, [seed])\n\nRun the Julia unit tests listed in tests, which can be either a string or an array of strings, using numcores processors. If exit_on_error is false, when one test fails, all remaining tests in other files will still be run; they are otherwise discarded, when exit_on_error == true. If a seed is provided via the keyword argument, it is used to seed the global RNG in the context where the tests are run; otherwise the seed is chosen randomly.\n\n\n\n\n\n"
+    "text": "Base.runtests(tests=[\"all\"]; ncores=ceil(Int, Sys.CPU_CORES / 2),\n              exit_on_error=false, [seed])\n\nRun the Julia unit tests listed in tests, which can be either a string or an array of strings, using ncores processors. If exit_on_error is false, when one test fails, all remaining tests in other files will still be run; they are otherwise discarded, when exit_on_error == true. If a seed is provided via the keyword argument, it is used to seed the global RNG in the context where the tests are run; otherwise the seed is chosen randomly.\n\n\n\n\n\n"
 },
 
 {
@@ -19502,6 +19526,46 @@ var documenterSearchIndex = {"docs": [
     "title": "Creating Custom AbstractTestSet Types",
     "category": "section",
     "text": "Packages can create their own AbstractTestSet subtypes by implementing the record and finish methods. The subtype should have a one-argument constructor taking a description string, with any options passed in as keyword arguments.Test.record\nTest.finishTest takes responsibility for maintaining a stack of nested testsets as they are executed, but any result accumulation is the responsibility of the AbstractTestSet subtype. You can access this stack with the get_testset and get_testset_depth methods. Note that these functions are not exported.Test.get_testset\nTest.get_testset_depthTest also makes sure that nested @testset invocations use the same AbstractTestSet subtype as their parent unless it is set explicitly. It does not propagate any properties of the testset. Option inheritance behavior can be implemented by packages using the stack infrastructure that Test provides.Defining a basic AbstractTestSet subtype might look like:import Test: record, finish\nusing Test: AbstractTestSet, Result, Pass, Fail, Error\nusing Test: get_testset_depth, get_testset\nstruct CustomTestSet <: Test.AbstractTestSet\n    description::AbstractString\n    foo::Int\n    results::Vector\n    # constructor takes a description string and options keyword arguments\n    CustomTestSet(desc; foo=1) = new(desc, foo, [])\nend\n\nrecord(ts::CustomTestSet, child::AbstractTestSet) = push!(ts.results, child)\nrecord(ts::CustomTestSet, res::Result) = push!(ts.results, res)\nfunction finish(ts::CustomTestSet)\n    # just record if we're not the top-level parent\n    if get_testset_depth() > 0\n        record(get_testset(), ts)\n    end\n    ts\nendAnd using that testset looks like:@testset CustomTestSet foo=4 \"custom testset inner 2\" begin\n    # this testset should inherit the type, but not the argument.\n    @testset \"custom testset inner\" begin\n        @test true\n    end\nendDocTestSetup = nothing"
+},
+
+{
+    "location": "stdlib/UUIDs.html#",
+    "page": "UUIDs",
+    "title": "UUIDs",
+    "category": "page",
+    "text": ""
+},
+
+{
+    "location": "stdlib/UUIDs.html#UUIDs.uuid1",
+    "page": "UUIDs",
+    "title": "UUIDs.uuid1",
+    "category": "Function",
+    "text": "uuid1([rng::AbstractRNG=GLOBAL_RNG]) -> UUID\n\nGenerates a version 1 (time-based) universally unique identifier (UUID), as specified by RFC 4122. Note that the Node ID is randomly generated (does not identify the host) according to section 4.5 of the RFC.\n\nExamples\n\njulia> rng = MersenneTwister(1234);\n\njulia> uuid1(rng)\n2cc938da-5937-11e7-196e-0f4ef71aa64b\n\n\n\n\n\n"
+},
+
+{
+    "location": "stdlib/UUIDs.html#UUIDs.uuid4",
+    "page": "UUIDs",
+    "title": "UUIDs.uuid4",
+    "category": "Function",
+    "text": "uuid4([rng::AbstractRNG=GLOBAL_RNG]) -> UUID\n\nGenerates a version 4 (random or pseudo-random) universally unique identifier (UUID), as specified by RFC 4122.\n\nExamples\n\njulia> rng = MersenneTwister(1234);\n\njulia> uuid4(rng)\n82015f10-44cc-4827-996e-0f4ef71aa64b\n\n\n\n\n\n"
+},
+
+{
+    "location": "stdlib/UUIDs.html#UUIDs.uuid_version",
+    "page": "UUIDs",
+    "title": "UUIDs.uuid_version",
+    "category": "Function",
+    "text": "uuid_version(u::UUID) -> Int\n\nInspects the given UUID and returns its version (see RFC 4122).\n\nExamples\n\njulia> uuid_version(uuid4())\n4\n\n\n\n\n\n"
+},
+
+{
+    "location": "stdlib/UUIDs.html#UUIDs-1",
+    "page": "UUIDs",
+    "title": "UUIDs",
+    "category": "section",
+    "text": "UUIDs.uuid1\nUUIDs.uuid4\nUUIDs.uuid_version"
 },
 
 {
