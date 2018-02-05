@@ -45,7 +45,7 @@ var documenterSearchIndex = {"docs": [
     "page": "홈",
     "title": "Developer Documentation",
     "category": "section",
-    "text": "Reflection and introspection\nDocumentation of Julia's Internals\nInitialization of the Julia runtime\nJulia ASTs\nMore about types\nMemory layout of Julia Objects\nEval of Julia code\nCalling Conventions\nHigh-level Overview of the Native-Code Generation Process\nJulia Functions\nBase.Cartesian\nTalking to the compiler (the :meta mechanism)\nSubArrays\nSystem Image Building\nWorking with LLVM\nprintf() and stdio in the Julia runtime\nBounds checking\nProper maintenance and care of multi-threading locks\nArrays with custom indices\nBase.LibGit2\nModule loading\nInference\nDeveloping/debugging Julia's C code\nReporting and analyzing crashes (segfaults)\ngdb debugging tips\nUsing Valgrind with Julia\nSanitizer support"
+    "text": "Reflection and introspection\nDocumentation of Julia's Internals\nInitialization of the Julia runtime\nJulia ASTs\nMore about types\nMemory layout of Julia Objects\nEval of Julia code\nCalling Conventions\nHigh-level Overview of the Native-Code Generation Process\nJulia Functions\nBase.Cartesian\nTalking to the compiler (the :meta mechanism)\nSubArrays\nSystem Image Building\nWorking with LLVM\nprintf() and stdio in the Julia runtime\nBounds checking\nProper maintenance and care of multi-threading locks\nArrays with custom indices\nModule loading\nInference\nDeveloping/debugging Julia's C code\nReporting and analyzing crashes (segfaults)\ngdb debugging tips\nUsing Valgrind with Julia\nSanitizer support"
 },
 
 {
@@ -69,7 +69,7 @@ var documenterSearchIndex = {"docs": [
     "page": "줄리아 v0.7.0 릴리즈 노트",
     "title": "새로 추가된 기능",
     "category": "section",
-    "text": "지역 변수가 정의되었는지 알아볼 때 @isdefined 변수이름 매크로를 사용합니다 (#22281).\n함수 인자에서 터플 배분(destructuring): (x, y)와 같은 표현을 함수 인자 이름에 사용하면, x와 y라는 지역 변수로 인자를 배분합니다. 할당문 (x, y) = arg 처럼요 (#6614).\n네임드 터플(이름을 갖는 터플, named tuples). 문법은 (a=1, b=2) 이런 식입니다. 터플처럼 쓰면 되는데 .이름 t.a 이런 식으로 해당 요소에 접근할 수 있습니다 (#22194).\n키워드 인자 컨테이너(f(; kw...) 에서 kw)는 네임드 터플입니다. haskey와 같은 딕셔너리 함수로 인덱싱할 수 있고, 이름-값 쌍은 pairs(kw)를 사용하여 차례대로 접근할 수 있습니다. kw는 더 이상 같은 인자 이름을 중복하여 쓸 수 없습니다 (#4916).\n사용자 정의 infix 연산자를 유니코드 결합 기호, 부호, 윗/아래 첨자로 정의할 수 있습니다. 예를 들어 +̂ₐ″는 +와 같은 우선순위의 infix 연산자로 파싱 됩니다 (#22089).\n매크로 호출 문법 @macroname[args]은 이제 @macroname([args])로 파싱 합니다 (#23519).\nif @generated ...; else ...; end 문은 @generated 처리한 것과 보통 구현을 모두 제공합니다. 둘러 싼 코드는 공통으로 이들에 적용됩니다 (#23168).\n⟂ (\\perp) 연산자가 비교 우위를 갖습니다 (#24404).\nmissing 싱글턴 객체(Missing 타입)는 누락된 값을 표현하는데 씁니다 (#24653). 표준 연산자와 수학 함수를 통해 전달되며, 이를 통해 SQL의 NULL이나 R의 NA와 같은 세개의 상태를 갖는 로직을 구현합니다.\n점(.)을 사용한 필드 접근은 Base.getproperty와 Base.setproperty!를 오버로딩하여 확장할 수 있습니다 (#1974).\n@enum 매크로를 쓸 때 begin 블럭으로 Enum 값을 특정할 수 있습니다 (#25424)."
+    "text": "지역 변수가 정의되었는지 알아볼 때 @isdefined 변수이름 매크로를 사용합니다 (#22281).\n함수 인자에서 터플 배분(destructuring): (x, y)와 같은 표현을 함수 인자 이름에 사용하면, x와 y라는 지역 변수로 인자를 배분합니다. 할당문 (x, y) = arg 처럼요 (#6614).\n네임드 터플(이름을 갖는 터플, named tuples). 문법은 (a=1, b=2) 이런 식입니다. 터플처럼 쓰면 되는데 .이름 t.a 이런 식으로 해당 요소에 접근할 수 있습니다 (#22194).\n키워드 인자 컨테이너(f(; kw...) 에서 kw)는 네임드 터플입니다. haskey와 같은 딕셔너리 함수로 인덱싱할 수 있고, 이름-값 쌍은 pairs(kw)를 사용하여 차례대로 접근할 수 있습니다. kw는 더 이상 같은 인자 이름을 중복하여 쓸 수 없습니다 (#4916).\n사용자 정의 infix 연산자를 유니코드 결합 기호, 부호, 윗/아래 첨자로 정의할 수 있습니다. 예를 들어 +̂ₐ″는 +와 같은 우선순위의 infix 연산자로 파싱 됩니다 (#22089).\n매크로 호출 문법 @macroname[args]은 이제 @macroname([args])로 파싱 합니다 (#23519).\nif @generated ...; else ...; end 문은 @generated 처리한 것과 보통 구현을 모두 제공합니다. 둘러 싼 코드는 공통으로 이들에 적용됩니다 (#23168).\n⟂ (\\perp) 연산자가 비교 우위를 갖습니다 (#24404).\nmissing 싱글턴 객체(Missing 타입)는 누락된 값을 표현하는데 씁니다 (#24653). 표준 연산자와 수학 함수를 통해 전달되며, 이를 통해 SQL의 NULL이나 R의 NA와 같은 세개의 상태를 갖는 로직을 구현합니다.\n점(.)을 사용한 필드 접근은 Base.getproperty와 Base.setproperty!를 오버로딩하여 확장할 수 있습니다 (#1974).\n@enum 매크로를 쓸 때 begin 블럭으로 Enum 값을 특정할 수 있습니다 (#25424).\n키워드 인자를 요구할 수 있습니다: 기본값을 생략한 경우, 호출하는 쪽에서 키워드 값을 지정하지 않으면 예외를 던집니다 (#25830)."
 },
 
 {
@@ -77,7 +77,7 @@ var documenterSearchIndex = {"docs": [
     "page": "줄리아 v0.7.0 릴리즈 노트",
     "title": "Language changes",
     "category": "section",
-    "text": "The syntax for parametric methods, function f{T}(x::T), has been changed to function f(x::T) where {T} (#11310).\nThe fallback constructor that calls convert is deprecated. Instead, new types should prefer to define constructors, and add convert methods that call those constructors only as necessary (#15120).\nThe syntax 1.+2 is deprecated, since it is ambiguous: it could mean either 1 .+ 2 (the current meaning) or 1. + 2 (#19089).\nIn string and character literals, backslash \\ may no longer precede unrecognized escape characters (#22800).\nJuxtaposing binary, octal, and hexadecimal literals is deprecated, since it can lead to confusing code such as 0xapi == 0xa * pi (#16356).\nDeclaring arguments as x::ANY to avoid specialization has been replaced by @nospecialize x. (#22666).\nKeyword argument default values are now evaluated in successive scopes –- the scope for each expression includes only previous keyword arguments, in left-to-right order (#17240).\nThe parsing of 1<<2*3 as 1<<(2*3) is deprecated, and will change to (1<<2)*3 in a future version (#13079).\nThe parsing of <| is now right associative. |> remains left associative (#24153).\n{ } expressions now use braces and bracescat as expression heads instead of cell1d and cell2d, and parse similarly to vect and vcat (#8470).\nNested if expressions that arise from the keyword elseif now use elseif as their expression head instead of if (#21774).\nlet blocks now parse the same as for loops; the first argument is either an assignment or block of assignments, and the second argument is a block of statements (#21774).\ndo syntax now parses to an expression with head :do, instead of as a function call (#21774).\nParsed and lowered forms of type definitions have been synchronized with their new keywords (#23157). Expression heads are renamed as follows:\ntype           => struct\nbitstype       => primitive (order of arguments is also reversed, to match syntax)\ncomposite_type => struct_type\nbits_type      => primitive_type\nThe global keyword now only introduces a new binding if one doesn't already exist in the module. This means that assignment to a global (global sin = 3) may now throw the error: \"cannot assign variable Base.sin from module Main\", rather than emitting a warning. Additionally, the new bindings are now created before the statement is executed. For example, f() = (global sin = \"gluttony\"; nothing) will now resolve which module contains sin eagerly, rather than delaying that decision until f is run. (#22984).\nglobal const declarations may no longer appear inside functions (#12010).\nUninitialized BitArray constructors of the form BitArray[{N}](shape...) have been deprecated in favor of equivalents accepting uninitialized (an alias for Uninitialized()) as their first argument, as in BitArray[{N}](uninitialized, shape...). For example, BitVector(3) is now BitVector(uninitialized, 3), BitMatrix((2, 4)) is now BitMatrix(uninitialized, (2, 4)), and BitArray{3}(11, 13, 17) is now BitArray{3}(uninitialized, 11, 14, 17) (#24785).\nDispatch rules have been simplified: method matching is now determined exclusively by subtyping; the rule that method type parameters must also be captured has been removed. Instead, attempting to access the unconstrained parameters will throw an UndefVarError. Linting in package tests is recommended to confirm that the set of methods which might throw UndefVarError when accessing the static parameters (need_to_handle_undef_sparam = Set{Any}(m.sig for m in Test.detect_unbound_args(Base, recursive=true))) is equal (==) to some known set (expected = Set()). (#23117)\nconst declarations on local variables were previously ignored. They now give a warning, so that this syntax can be disallowed or given a new meaning in a future version (#5148).\nPlacing an expression after catch, as in catch f(x), is deprecated. Use catch; f(x) instead (#19987).\nIn for i = ..., if a local variable i already existed it would be overwritten during the loop. This behavior is deprecated, and in the future for loop variables will always be new variables local to the loop (#22314). The old behavior of overwriting an existing variable is available via for outer i = ....\nIn for i in x, x used to be evaluated in a new scope enclosing the for loop. Now it is evaluated in the scope outside the for loop.\nVariable bindings local to while loop bodies are now freshly allocated on each loop iteration, matching the behavior of for loops.\nPrefix & for by-reference arguments to ccall has been deprecated in favor of Ref argument types (#6080).\nThe constructor Ref(x::T) now always returns a Ref{T} (#21527).\nAll line numbers in ASTs are represented by LineNumberNodes; the :line expression head is no longer used. QuoteNodes are also consistently used for quoted symbols instead of the :quote expression head (though :quote Exprs are still used for quoted expressions) (#23885).\nThe + and - methods for Number and UniformScaling are not ambiguous anymore since + and - no longer do automatic broadcasting. Hence the methods for UniformScaling and Number are no longer deprecated (#23923).\nThe keyword importall is deprecated. Use using and/or individual import statements instead (#22789).\nreduce(+, [...]) and reduce(*, [...]) no longer widen the iterated over arguments to system word size. sum and prod still preserve this behavior. (#22825)\nLike _, variable names consisting only of underscores can be assigned, but accessing their values is deprecated (#24221).\nRaw string literal escaping rules have been changed to make it possible to write all strings. The rule is that backslashes escape both quotes and other backslashes, but only when a sequence of backslashes precedes a quote character. Thus, 2n backslashes followed by a quote encodes n backslashes and the end of the literal while 2n+1 backslashes followed by a quote encodes n backslashes followed by a quote character (#22926).\nThe syntax (x...) for constructing a tuple is deprecated; use (x...,) instead (#24452).\nNon-parenthesized interpolated variables in strings, e.g. \"$x\", must be followed by a character that will never be an allowed identifier character (currently operators, space/control characters, or common punctuation characters) (#25231).\nThe syntax using A.B can now only be used when A.B is a module, and the syntax using A: B can only be used for adding single bindings (#8000).\n=> now has its own precedence level, giving it strictly higher precedence than = and , (#25391).\nbegin is disallowed inside indexing expressions, in order to enable the syntax a[begin] (for selecting the first element) in the future (#23354).\nUnderscores for _italics_ and __bold__ are now supported by the Base Markdown parser. (#25564)"
+    "text": "The syntax for parametric methods, function f{T}(x::T), has been changed to function f(x::T) where {T} (#11310).\nThe fallback constructor that calls convert is deprecated. Instead, new types should prefer to define constructors, and add convert methods that call those constructors only as necessary (#15120).\nThe syntax 1.+2 is deprecated, since it is ambiguous: it could mean either 1 .+ 2 (the current meaning) or 1. + 2 (#19089).\nMutable structs with no fields are no longer singletons; it is now possible to make multiple instances of them that can be distinguished by === (#25854). Zero-size immutable structs are still singletons.\nIn string and character literals, backslash \\ may no longer precede unrecognized escape characters (#22800).\nJuxtaposing binary, octal, and hexadecimal literals is deprecated, since it can lead to confusing code such as 0xapi == 0xa * pi (#16356).\nDeclaring arguments as x::ANY to avoid specialization has been replaced by @nospecialize x. (#22666).\nKeyword argument default values are now evaluated in successive scopes –- the scope for each expression includes only previous keyword arguments, in left-to-right order (#17240).\nThe parsing of 1<<2*3 as 1<<(2*3) is deprecated, and will change to (1<<2)*3 in a future version (#13079).\nThe parsing of <| is now right associative. |> remains left associative (#24153).\n{ } expressions now use braces and bracescat as expression heads instead of cell1d and cell2d, and parse similarly to vect and vcat (#8470).\nNested if expressions that arise from the keyword elseif now use elseif as their expression head instead of if (#21774).\nlet blocks now parse the same as for loops; the first argument is either an assignment or block of assignments, and the second argument is a block of statements (#21774).\ndo syntax now parses to an expression with head :do, instead of as a function call (#21774).\nParsed and lowered forms of type definitions have been synchronized with their new keywords (#23157). Expression heads are renamed as follows:\ntype           => struct\nbitstype       => primitive (order of arguments is also reversed, to match syntax)\ncomposite_type => struct_type\nbits_type      => primitive_type\nThe global keyword now only introduces a new binding if one doesn't already exist in the module. This means that assignment to a global (global sin = 3) may now throw the error: \"cannot assign variable Base.sin from module Main\", rather than emitting a warning. Additionally, the new bindings are now created before the statement is executed. For example, f() = (global sin = \"gluttony\"; nothing) will now resolve which module contains sin eagerly, rather than delaying that decision until f is run. (#22984).\nglobal const declarations may no longer appear inside functions (#12010).\nUninitialized BitArray constructors of the form BitArray[{N}](shape...) have been deprecated in favor of equivalents accepting uninitialized (an alias for Uninitialized()) as their first argument, as in BitArray[{N}](uninitialized, shape...). For example, BitVector(3) is now BitVector(uninitialized, 3), BitMatrix((2, 4)) is now BitMatrix(uninitialized, (2, 4)), and BitArray{3}(11, 13, 17) is now BitArray{3}(uninitialized, 11, 14, 17) (#24785).\nDispatch rules have been simplified: method matching is now determined exclusively by subtyping; the rule that method type parameters must also be captured has been removed. Instead, attempting to access the unconstrained parameters will throw an UndefVarError. Linting in package tests is recommended to confirm that the set of methods which might throw UndefVarError when accessing the static parameters (need_to_handle_undef_sparam = Set{Any}(m.sig for m in Test.detect_unbound_args(Base, recursive=true))) is equal (==) to some known set (expected = Set()). (#23117)\nconst declarations on local variables were previously ignored. They now give a warning, so that this syntax can be disallowed or given a new meaning in a future version (#5148).\nPlacing an expression after catch, as in catch f(x), is deprecated. Use catch; f(x) instead (#19987).\nIn for i = ..., if a local variable i already existed it would be overwritten during the loop. This behavior is deprecated, and in the future for loop variables will always be new variables local to the loop (#22314). The old behavior of overwriting an existing variable is available via for outer i = ....\nIn for i in x, x used to be evaluated in a new scope enclosing the for loop. Now it is evaluated in the scope outside the for loop.\nVariable bindings local to while loop bodies are now freshly allocated on each loop iteration, matching the behavior of for loops.\nPrefix & for by-reference arguments to ccall has been deprecated in favor of Ref argument types (#6080).\nThe constructor Ref(x::T) now always returns a Ref{T} (#21527).\nAll line numbers in ASTs are represented by LineNumberNodes; the :line expression head is no longer used. QuoteNodes are also consistently used for quoted symbols instead of the :quote expression head (though :quote Exprs are still used for quoted expressions) (#23885).\nThe + and - methods for Number and UniformScaling are not ambiguous anymore since + and - no longer do automatic broadcasting. Hence the methods for UniformScaling and Number are no longer deprecated (#23923).\nThe keyword importall is deprecated. Use using and/or individual import statements instead (#22789).\nreduce(+, [...]) and reduce(*, [...]) no longer widen the iterated over arguments to system word size. sum and prod still preserve this behavior. (#22825)\nLike _, variable names consisting only of underscores can be assigned, but accessing their values is deprecated (#24221).\nRaw string literal escaping rules have been changed to make it possible to write all strings. The rule is that backslashes escape both quotes and other backslashes, but only when a sequence of backslashes precedes a quote character. Thus, 2n backslashes followed by a quote encodes n backslashes and the end of the literal while 2n+1 backslashes followed by a quote encodes n backslashes followed by a quote character (#22926).\nThe syntax (x...) for constructing a tuple is deprecated; use (x...,) instead (#24452).\nNon-parenthesized interpolated variables in strings, e.g. \"$x\", must be followed by a character that will never be an allowed identifier character (currently operators, space/control characters, or common punctuation characters) (#25231).\nThe syntax using A.B can now only be used when A.B is a module, and the syntax using A: B can only be used for adding single bindings (#8000).\n=> now has its own precedence level, giving it strictly higher precedence than = and , (#25391).\nbegin is disallowed inside indexing expressions, in order to enable the syntax a[begin] (for selecting the first element) in the future (#23354).\nUnderscores for _italics_ and __bold__ are now supported by the Base Markdown parser. (#25564)"
 },
 
 {
@@ -85,7 +85,7 @@ var documenterSearchIndex = {"docs": [
     "page": "줄리아 v0.7.0 릴리즈 노트",
     "title": "Breaking changes",
     "category": "section",
-    "text": "This section lists changes that do not have deprecation warnings.readuntil now does not include the delimiter in its result, matching the behavior of readline. Pass keep=true to get the old behavior (#25633).\ngetindex(s::String, r::UnitRange{Int}) now throws UnicodeError if last(r) is not a valid index into s (#22572).\nntuple(f, n::Integer) throws ArgumentError if n is negative. Previously an empty tuple was returned (#21697).\nJuxtaposing string literals (e.g. \"x\"y) is now a syntax error (#20575).\nfinalizer(function, object) now returns object rather than nothing (#24679).\nThe constructor of SubString now checks if the requsted view range is defined by valid indices in the parent AbstractString (#22511).\nMacro calls with for expressions are now parsed as generators inside function argument lists (#18650). Examples:\nsum(@inbounds a[i] for i = 1:n) used to give a syntax error, but is now parsed as sum(@inbounds(a[i]) for i = 1:n).\nsum(@m x for i = 1:n end) used to parse the argument to sum as a 2-argument call to macro @m, but now parses it as a generator plus a syntax error for the dangling end.\n@__DIR__ returns the current working directory rather than nothing when not run from a file (#21759).\n@__FILE__ and @__DIR__ return information relative to the file that it was parsed from, rather than from the task-local SOURCE_PATH global when it was expanded.\nAll macros receive an extra argument __source__::LineNumberNode which describes the parser location in the source file for the @ of the macro call. It can be accessed as a normal argument variable in the body of the macro. This is implemented by inserting an extra leading argument into the Expr(:macrocall, :@name, LineNumberNode(...), args...) surface syntax. (#21746)\nPassing the same keyword argument multiple times is now a syntax error (#16937).\ngetsockname on a TCPSocket now returns the locally bound address and port of the socket. Previously the address of the remote endpoint was being returned (#21825).\nUsing ARGS within the ~/.juliarc.jl or within a .jl file loaded with --load will no longer contain the script name as the first argument. Instead the script name will be assigned to PROGRAM_FILE. (#22092)\nThe format for a ClusterManager specifying the cookie on the command line is now --worker=<cookie>. --worker <cookie> will not work as it is now an optional argument.\nThe representation of CartesianRange has changed to a tuple-of-AbstractUnitRanges; the start and stop fields are no longer present. Use first(R) and last(R) to obtain start/stop. (#20974)\nThe Diagonal, Bidiagonal, Tridiagonal and SymTridiagonal type definitions have changed from Diagonal{T}, Bidiagonal{T}, Tridiagonal{T} and SymTridiagonal{T} to Diagonal{T,V<:AbstractVector{T}}, Bidiagonal{T,V<:AbstractVector{T}}, Tridiagonal{T,V<:AbstractVector{T}} and SymTridiagonal{T,V<:AbstractVector{T}} respectively (#22718, #22925, #23035, #23154).\nWhen called with an argument that contains NaN elements, findmin and findmax now return the first NaN found and its corresponding index. Previously, NaN elements were ignored. The new behavior matches that of min, max, minimum, and maximum.\nisapprox(x,y) now tests norm(x-y) <= max(atol, rtol*max(norm(x), norm(y))) rather than norm(x-y) <= atol + ..., and rtol defaults to zero if an atol > 0 is specified (#22742).\nSpaces are no longer allowed between @ and the name of a macro in a macro call (#22868).\nJuxtaposition of a non-literal with a macro call (x@macro) is no longer valid syntax (#22868).\nOn a cluster, all files are now loaded from the local file system rather than node 1 (#22588). To load the same file everywhere from node 1, one possible alternative is to broadcast a call to include_string: @everywhere include_string(Main, $(read(\"filename\", String)), \"filename\"). Improving upon this API is left as an opportunity for packages.\nrandperm(n) and randcycle(n) now always return a Vector{Int} (independent of the type of n). Use the corresponding mutating functions randperm! and randcycle! to control the array type (#22723).\nHermitian now ignores any imaginary components in the diagonal instead of checking the diagonal. (#17367)\nWorker-worker connections are setup lazily for an :all_to_all topology. Use keyword arg lazy=false to force all connections to be setup during a addprocs call. (#22814)\nIn joinpath(a, b) on Windows, if the drive specifications of a and b do not match, joinpath now returns b instead of throwing an ArgumentError. joinpath(path...) is defined to be left associative, so if any argument has a drive path which does not match the drive of the join of the preceding paths, the prior ones are dropped. (#20912)\n^(A::AbstractMatrix{<:Integer}, p::Integer) now throws a DomainError if p < 0, unless A == one(A) or A == -one(A) (same as for ^(A::Integer, p::Integer)) (#23366).\n^(A::AbstractMatrix{<:Integer}, p::Integer) now promotes the element type in the same way as ^(A::Integer, p::Integer). This means, for instance, that [1 1; 0 1]^big(1) will return a Matrix{BigInt} instead of a Matrix{Int} (#23366).\nThe element type of the input is now preserved in unique. Previously the element type of the output was shrunk to fit the union of the type of each element in the input. (#22696)\nThe promote function now raises an error if its arguments are of different types and if attempting to convert them to a common type fails to change any of their types. This avoids stack overflows in the common case of definitions like f(x, y) = f(promote(x, y)...) (#22801).\nindmin and indmax have been renamed to argmin and argmax, respectively (#25654).\nfindmin, findmax, argmin, and argmax used to always return linear indices. They now return CartesianIndexes for all but 1-d arrays, and in general return the keys of indexed collections (e.g. dictionaries) (#22907).\nThe openspecfun library is no longer built and shipped with Julia, as it is no longer used internally (#22390).\nAll loaded packges used to have bindings in Main (e.g. Main.Package). This is no longer the case; now bindings will only exist for packages brought into scope by typing using Package or import Package (#17997).\nslicedim(b::BitVector, 1, x) now consistently returns the same thing that b[x] would, consistent with its documentation. Previously it would return a BitArray{0} for scalar x (#20233).\nThe rules for mixed-signedness integer arithmetic (e.g. Int32(1) + UInt64(1)) have been simplified: if the arguments have different sizes (in bits), then the type of the larger argument is used. If the arguments have the same size, the unsigned type is used (#9292).\nAll command line arguments passed via -e, -E, and -L will be executed in the order given on the command line (#23665).\nI now yields UniformScaling{Bool}(true) rather than UniformScaling{Int64}(1) to better preserve types in operations involving I (#24396).\nThe return type of reinterpret has changed to ReinterpretArray. reinterpret on sparse arrays has been discontinued.\nBase.find_in_path is now Base.find_package or Base.find_source_file (#24320).\nfinalizer now takes functions or pointers as its first argument, and the object being finalized as its second (rather than the reverse). For the majority of use cases deprecation warnings will be triggered. However, deprecation warnings will not trigger where (1) the callable argument is not a subtype of Function; or (2) both arguments are Functions or Ptr{Cvoid}s (#24605).\nThe kill function now throws errors on user error (e.g. on permission errors), but returns successfully if the process had previously exited. Its return value has been removed. Use the process_running function to determine if a process has already exited.\nBroadcasting has been redesigned with an extensible public interface. The new API is documented at https://docs.julialang.org/en/latest/manual/interfaces/#Interfaces-1. AbstractArray types that specialized broadcasting using the old internal API will need to switch to the new API. (#20740)\nThe logging system has been redesigned - info and warn are deprecated and replaced with the logging macros @info, @warn, @debug and @error.  The logging function is also deprecated and replaced with AbstractLogger and the functions from the new standard Logging library. (#24490)\nThe RevString type has been removed from the language; reverse(::String) returns a String with code points (or fragments thereof) in reverse order. In general, reverse(s) should return a string of the same type and encoding as s with code points in reverse order; any string type overrides reverse to return a different type of string must also override reverseind to compute reversed indices correctly.\neachindex(A, B...) now requires that all inputs have the same number of elements. When the chosen indexing is Cartesian, they must have the same axes.\nAbstractRange objects are now considered as equal to other AbstractArray objects by == and isequal if all of their elements are equal (#16401). This has required changing the hashing algorithm: ranges now use an O(N) fallback instead of a O(1) specialized method unless they define the Base.RangeStepStyle trait; see its documentation for details. Types which support subtraction (operator -) must now implement widen for hashing to work inside heterogeneous arrays.\nfindn(x::AbstractArray) has been deprecated in favor of findall(!iszero, x), which now returns cartesian indices for multidimensional arrays (see below, #25532).\nfind has been renamed to findall. findall, findfirst, findlast, findnext now take and/or return the same type of indices as keys/pairs for AbstractArray, AbstractDict, AbstractString, Tuple and NamedTuple objects (#24774, #25545). In particular, this means that they use CartesianIndex objects for matrices and higher-dimensional arrays insted of linear indices as was previously the case. Use LinearIndices(a)[findall(f, a)] and similar constructs to compute linear indices.\nThe Base.HasShape iterator trait has gained a type parameter N indicating the number of dimensions, which must correspond to the length of the tuple returned by size (#25655).\nAbstractSet objects are now considered equal by == and isequal if all of their elements are equal (#25368). This has required changing the hashing algorithm for BitSet.\nthe default behavior of titlecase is changed in two ways (#23393):\ncharacters not starting a word are converted to lowercase; a new keyword argument strict is added which allows to get the old behavior when it's false.\nany non-letter character is considered as a word separator; to get the old behavior (only \"space\" characters are considered as word separators), use the keyword wordsep=isspace.\nThe tempname function used to create a file on Windows but not on other platforms. It now never creates a file (#9053)."
+    "text": "This section lists changes that do not have deprecation warnings.readuntil now does not include the delimiter in its result, matching the behavior of readline. Pass keep=true to get the old behavior (#25633).\ncountlines now always counts the last non-empty line even if it does not end with EOL, matching the behavior of eachline and readlines (#25845).\ngetindex(s::String, r::UnitRange{Int}) now throws UnicodeError if last(r) is not a valid index into s (#22572).\nntuple(f, n::Integer) throws ArgumentError if n is negative. Previously an empty tuple was returned (#21697).\nJuxtaposing string literals (e.g. \"x\"y) is now a syntax error (#20575).\nfinalizer(function, object) now returns object rather than nothing (#24679).\nThe constructor of SubString now checks if the requsted view range is defined by valid indices in the parent AbstractString (#22511).\nMacro calls with for expressions are now parsed as generators inside function argument lists (#18650). Examples:\nsum(@inbounds a[i] for i = 1:n) used to give a syntax error, but is now parsed as sum(@inbounds(a[i]) for i = 1:n).\nsum(@m x for i = 1:n end) used to parse the argument to sum as a 2-argument call to macro @m, but now parses it as a generator plus a syntax error for the dangling end.\n@__DIR__ returns the current working directory rather than nothing when not run from a file (#21759).\n@__FILE__ and @__DIR__ return information relative to the file that it was parsed from, rather than from the task-local SOURCE_PATH global when it was expanded.\nAll macros receive an extra argument __source__::LineNumberNode which describes the parser location in the source file for the @ of the macro call. It can be accessed as a normal argument variable in the body of the macro. This is implemented by inserting an extra leading argument into the Expr(:macrocall, :@name, LineNumberNode(...), args...) surface syntax. (#21746)\nPassing the same keyword argument multiple times is now a syntax error (#16937).\ngetsockname on a TCPSocket now returns the locally bound address and port of the socket. Previously the address of the remote endpoint was being returned (#21825).\nUsing ARGS within the ~/.juliarc.jl or within a .jl file loaded with --load will no longer contain the script name as the first argument. Instead the script name will be assigned to PROGRAM_FILE. (#22092)\nThe format for a ClusterManager specifying the cookie on the command line is now --worker=<cookie>. --worker <cookie> will not work as it is now an optional argument.\nThe representation of CartesianRange has changed to a tuple-of-AbstractUnitRanges; the start and stop fields are no longer present. Use first(R) and last(R) to obtain start/stop. (#20974)\nThe Diagonal, Bidiagonal, Tridiagonal and SymTridiagonal type definitions have changed from Diagonal{T}, Bidiagonal{T}, Tridiagonal{T} and SymTridiagonal{T} to Diagonal{T,V<:AbstractVector{T}}, Bidiagonal{T,V<:AbstractVector{T}}, Tridiagonal{T,V<:AbstractVector{T}} and SymTridiagonal{T,V<:AbstractVector{T}} respectively (#22718, #22925, #23035, #23154).\nWhen called with an argument that contains NaN elements, findmin and findmax now return the first NaN found and its corresponding index. Previously, NaN elements were ignored. The new behavior matches that of min, max, minimum, and maximum.\nisapprox(x,y) now tests norm(x-y) <= max(atol, rtol*max(norm(x), norm(y))) rather than norm(x-y) <= atol + ..., and rtol defaults to zero if an atol > 0 is specified (#22742).\nSpaces are no longer allowed between @ and the name of a macro in a macro call (#22868).\nJuxtaposition of a non-literal with a macro call (x@macro) is no longer valid syntax (#22868).\nOn a cluster, all files are now loaded from the local file system rather than node 1 (#22588). To load the same file everywhere from node 1, one possible alternative is to broadcast a call to include_string: @everywhere include_string(Main, $(read(\"filename\", String)), \"filename\"). Improving upon this API is left as an opportunity for packages.\nrandperm(n) and randcycle(n) now always return a Vector{Int} (independent of the type of n). Use the corresponding mutating functions randperm! and randcycle! to control the array type (#22723).\nHermitian now ignores any imaginary components in the diagonal instead of checking the diagonal. (#17367)\nWorker-worker connections are setup lazily for an :all_to_all topology. Use keyword arg lazy=false to force all connections to be setup during a addprocs call. (#22814)\nIn joinpath(a, b) on Windows, if the drive specifications of a and b do not match, joinpath now returns b instead of throwing an ArgumentError. joinpath(path...) is defined to be left associative, so if any argument has a drive path which does not match the drive of the join of the preceding paths, the prior ones are dropped. (#20912)\n^(A::AbstractMatrix{<:Integer}, p::Integer) now throws a DomainError if p < 0, unless A == one(A) or A == -one(A) (same as for ^(A::Integer, p::Integer)) (#23366).\n^(A::AbstractMatrix{<:Integer}, p::Integer) now promotes the element type in the same way as ^(A::Integer, p::Integer). This means, for instance, that [1 1; 0 1]^big(1) will return a Matrix{BigInt} instead of a Matrix{Int} (#23366).\nThe element type of the input is now preserved in unique. Previously the element type of the output was shrunk to fit the union of the type of each element in the input. (#22696)\nThe promote function now raises an error if its arguments are of different types and if attempting to convert them to a common type fails to change any of their types. This avoids stack overflows in the common case of definitions like f(x, y) = f(promote(x, y)...) (#22801).\nindmin and indmax have been renamed to argmin and argmax, respectively (#25654).\nfindmin, findmax, argmin, and argmax used to always return linear indices. They now return CartesianIndexes for all but 1-d arrays, and in general return the keys of indexed collections (e.g. dictionaries) (#22907).\nThe openspecfun library is no longer built and shipped with Julia, as it is no longer used internally (#22390).\nAll loaded packges used to have bindings in Main (e.g. Main.Package). This is no longer the case; now bindings will only exist for packages brought into scope by typing using Package or import Package (#17997).\nslicedim(b::BitVector, 1, x) now consistently returns the same thing that b[x] would, consistent with its documentation. Previously it would return a BitArray{0} for scalar x (#20233).\nThe rules for mixed-signedness integer arithmetic (e.g. Int32(1) + UInt64(1)) have been simplified: if the arguments have different sizes (in bits), then the type of the larger argument is used. If the arguments have the same size, the unsigned type is used (#9292).\nAll command line arguments passed via -e, -E, and -L will be executed in the order given on the command line (#23665).\nI now yields UniformScaling{Bool}(true) rather than UniformScaling{Int64}(1) to better preserve types in operations involving I (#24396).\nThe return type of reinterpret has changed to ReinterpretArray. reinterpret on sparse arrays has been discontinued.\nBase.find_in_path is now Base.find_package or Base.find_source_file (#24320).\nfinalizer now takes functions or pointers as its first argument, and the object being finalized as its second (rather than the reverse). For the majority of use cases deprecation warnings will be triggered. However, deprecation warnings will not trigger where (1) the callable argument is not a subtype of Function; or (2) both arguments are Functions or Ptr{Cvoid}s (#24605).\nThe kill function now throws errors on user error (e.g. on permission errors), but returns successfully if the process had previously exited. Its return value has been removed. Use the process_running function to determine if a process has already exited.\nBroadcasting has been redesigned with an extensible public interface. The new API is documented at https://docs.julialang.org/en/latest/manual/interfaces/#Interfaces-1. AbstractArray types that specialized broadcasting using the old internal API will need to switch to the new API. (#20740)\nThe logging system has been redesigned - info and warn are deprecated and replaced with the logging macros @info, @warn, @debug and @error.  The logging function is also deprecated and replaced with AbstractLogger and the functions from the new standard Logging library. (#24490)\nThe RevString type has been removed from the language; reverse(::String) returns a String with code points (or fragments thereof) in reverse order. In general, reverse(s) should return a string of the same type and encoding as s with code points in reverse order; any string type overrides reverse to return a different type of string must also override reverseind to compute reversed indices correctly.\neachindex(A, B...) now requires that all inputs have the same number of elements. When the chosen indexing is Cartesian, they must have the same axes.\nAbstractRange objects are now considered as equal to other AbstractArray objects by == and isequal if all of their elements are equal (#16401). This has required changing the hashing algorithm: ranges now use an O(N) fallback instead of a O(1) specialized method unless they define the Base.RangeStepStyle trait; see its documentation for details. Types which support subtraction (operator -) must now implement widen for hashing to work inside heterogeneous arrays.\nfindn(x::AbstractArray) has been deprecated in favor of findall(!iszero, x), which now returns cartesian indices for multidimensional arrays (see below, #25532).\nfind has been renamed to findall. findall, findfirst, findlast, findnext now take and/or return the same type of indices as keys/pairs for AbstractArray, AbstractDict, AbstractString, Tuple and NamedTuple objects (#24774, #25545). In particular, this means that they use CartesianIndex objects for matrices and higher-dimensional arrays insted of linear indices as was previously the case. Use LinearIndices(a)[findall(f, a)] and similar constructs to compute linear indices.\nThe Base.HasShape iterator trait has gained a type parameter N indicating the number of dimensions, which must correspond to the length of the tuple returned by size (#25655).\nAbstractSet objects are now considered equal by == and isequal if all of their elements are equal (#25368). This has required changing the hashing algorithm for BitSet.\nthe default behavior of titlecase is changed in two ways (#23393):\ncharacters not starting a word are converted to lowercase; a new keyword argument strict is added which allows to get the old behavior when it's false.\nany non-letter character is considered as a word separator; to get the old behavior (only \"space\" characters are considered as word separators), use the keyword wordsep=isspace.\nwritedlm in the standard library module DelimitedFiles now writes numeric values using print rather than print_shortest (#25745).\nThe tempname function used to create a file on Windows but not on other platforms. It now never creates a file (#9053)."
 },
 
 {
@@ -93,7 +93,7 @@ var documenterSearchIndex = {"docs": [
     "page": "줄리아 v0.7.0 릴리즈 노트",
     "title": "Library improvements",
     "category": "section",
-    "text": "The function thisind(s::AbstractString, i::Integer) returns the largest valid index less or equal than i in the string s or 0 if no such index exists (#24414).\nIrrational is now a subtype of AbstractIrrational (#24245).\nIntroduced the empty function, the functional pair to empty! which returns a new, empty container (#24390).\nJump to first/last history entries in the REPL via \"Alt-<\" and \"Alt->\" (#22829).\nThe function chop now accepts two arguments head and tail allowing to specify number of characters to remove from the head and tail of the string (#24126).\nget(io, :color, false) can now be used to query whether a stream io supports ANSI color codes (#25067), rather than using the undocumented Base.have_color global flag.\nFunctions first and last now accept nchar argument for AbstractString. If this argument is used they return a string consisting of first/last nchar characters from the original string (#23960).\nExpressions x^-n where n is an integer literal now correspond to inv(x)^n. For example, x^-1 is now essentially a synonym for inv(x), and works in a type-stable way even if typeof(x) != typeof(inv(x)) (#24240).\nNew Iterators.reverse(itr) for reverse-order iteration (#24187).  Iterator types T can implement start etc. for Iterators.Reverse{T} to support this.\nThe functions nextind and prevind now accept nchar argument that indicates the number of characters to move (#23805).\nThe functions strip, lstrip and rstrip now return SubString (#22496).\nThe functions strwidth and charwidth have been merged into textwidth(#20816).\nThe functions base and digits digits now accept a negative base (like ndigits did) (#21692).\nThe function randn now accepts complex arguments (Complex{T <: AbstractFloat}) (#21973).\nparse(Complex{T}, string) can parse complex numbers in common formats (#24713).\nThe function rand can now pick up random elements from strings, associatives and sets (#22228, #21960, #18155, #22224).\nMethod lists are now printed as a numbered list. In addition, the source code of a method can be opened in an editor by entering the corresponding number in the REPL and pressing ^Q (#22007).\ngetpeername on a TCPSocket returns the address and port of the remote endpoint of the TCP connection (#21825).\nresize! and sizehint! methods no longer over-reserve memory when the requested array size is more than double of its current size (#22038).\nThe crc32c function for CRC-32c checksums is now exported (#22274).\neye(::Type{Diagonal{T}}, m::Integer) has been deprecated in favor of Diagonal{T}(I, m) (#24413).\nThe output of versioninfo is now controlled with keyword arguments (#21974).\nThe function LibGit2.set_remote_url now always sets both the fetch and push URLs for a git repo. Additionally, the argument order was changed to be consistent with the git command line tool (#22062).\nlogspace now accepts a base keyword argument to specify the base of the logarithmic range. The base defaults to 10 (#22310).\nAdded unique! which is an inplace version of unique (#20549).\n@test isequal(x, y) and @test isapprox(x, y) now prints an evaluated expression when the test fails (#22296).\nUses of Val{c} in Base has been replaced with Val{c}(), which is now easily accessible via the @pure constructor Val(c). Functions are defined as f(::Val{c}) = ... and called by f(Val(c)). Notable affected functions include: ntuple, Base.literal_pow, sqrtm, lufact, lufact!, qrfact, qrfact!, cholfact, cholfact!, _broadcast!, reshape, cat and cat_t.\nA new @macroexpand1 macro for non recursive macro expansion (#21662).\nChars can now be concatenated with Strings and/or other Chars using * (#22532).\nDiagonal, Bidiagonal, Tridiagonal and SymTridiagonal are now parameterized on the type of the wrapped vectors, allowing Diagonal, Bidiagonal, Tridiagonal and SymTridiagonal matrices with arbitrary AbstractVectors (#22718, #22925, #23035, #23154).\nMutating versions of randperm and randcycle have been added: randperm! and randcycle! (#22723).\nBigFloat random numbers can now be generated (#22720).\nREPL Undo via Ctrl-/ and Ctrl-_\ndiagm now accepts several diagonal index/vector Pairs (#24047).\nNew function equalto(x), which returns a function that compares its argument to x using isequal (#23812).\nreinterpret now works on any AbstractArray using the new ReinterpretArray type. This supersedes the old behavior of reinterpret on Arrays. As a result, reinterpreting arrays with different alignment requirements (removed in 0.6) is once again allowed (#23750).\nThe keys of an Associative are now an AbstractSet. Base.KeyIterator{<:Associative} has been changed to KeySet{K, <:Associative{K}} <: AbstractSet{K} (#24580).\nNew function ncodeunits(s::AbstractString) gives the number of code units in a string. The generic definition is constant time but calls lastindex(s) which may be inefficient. Therefore custom string types may want to define direct ncodeunits methods.\nreverseind(s::AbstractString, i::Integer) now has an efficient generic fallback, so custom string types do not need to provide their own efficient defintions. The generic definition relies on ncodeunits however, so for optimal performance you may need to define a custom method for that function.\nThe global RNG is being re-seeded with its own seed at the beginning of each @testset, and have its original state restored at the end (#24445). This is breaking for testsets relying implicitly on the global RNG being in a specific state.\npermutedims(m::AbstractMatrix) is now short for permutedims(m, (2,1)), and is now a more convenient way of making a \"shallow transpose\" of a 2D array. This is the recommended approach for manipulating arrays of data, rather than the recursively defined, linear-algebra function transpose. Similarly, permutedims(v::AbstractVector) will create a row matrix (#24839).\nA new replace(A, old=>new) function is introduced to replace old by new in collection A. There are also two other methods with a different API, and a mutating variant, replace! (#22324).\nCartesianRange changes (#24715):\nInherits from AbstractArray, and linear indexing can be used to provide linear-to-cartesian conversion (#24715)\nIt has a new constructor taking an array\nseveral missing set-like operations have been added (#23528): union, intersect, symdiff, setdiff are now implemented for all collections with arbitrary many arguments, as well as the mutating counterparts (union! etc.). The performance is also much better in many cases. Note that this change is slightly breaking: all the non-mutating functions always return a new object even if only one argument is passed. Moreover the semantics of intersect and symdiff is changed for vectors:\nintersect doesn't preserve the multiplicity anymore (use filter for the old behavior)\nsymdiff has been made consistent with the corresponding methods for other containers, by taking the multiplicity of the arguments into account. Use unique to get the old behavior.\nThe type LinearIndices has been added, providing conversion from cartesian incices to linear indices using the normal indexing operation. (#24715)\nIdDict{K,V} replaces ObjectIdDict.  It has type parameters like other AbstractDict subtypes and its constructors mirror the ones of Dict. (#25210)"
+    "text": "The function thisind(s::AbstractString, i::Integer) returns the largest valid index less or equal than i in the string s or 0 if no such index exists (#24414).\nIrrational is now a subtype of AbstractIrrational (#24245).\nIntroduced the empty function, the functional pair to empty! which returns a new, empty container (#24390).\nJump to first/last history entries in the REPL via \"Alt-<\" and \"Alt->\" (#22829).\nThe function chop now accepts two arguments head and tail allowing to specify number of characters to remove from the head and tail of the string (#24126).\nget(io, :color, false) can now be used to query whether a stream io supports ANSI color codes (#25067), rather than using the undocumented Base.have_color global flag.\nFunctions first and last now accept nchar argument for AbstractString. If this argument is used they return a string consisting of first/last nchar characters from the original string (#23960).\nExpressions x^-n where n is an integer literal now correspond to inv(x)^n. For example, x^-1 is now essentially a synonym for inv(x), and works in a type-stable way even if typeof(x) != typeof(inv(x)) (#24240).\nNew Iterators.reverse(itr) for reverse-order iteration (#24187).  Iterator types T can implement start etc. for Iterators.Reverse{T} to support this.\nThe functions nextind and prevind now accept nchar argument that indicates the number of characters to move (#23805).\nThe functions strip, lstrip and rstrip now return SubString (#22496).\nThe functions strwidth and charwidth have been merged into textwidth(#20816).\nThe functions base and digits digits now accept a negative base (like ndigits did) (#21692).\nThe function randn now accepts complex arguments (Complex{T <: AbstractFloat}) (#21973).\nparse(Complex{T}, string) can parse complex numbers in some common formats (#24713).\nThe function rand can now pick up random elements from strings, associatives and sets (#22228, #21960, #18155, #22224).\nMethod lists are now printed as a numbered list. In addition, the source code of a method can be opened in an editor by entering the corresponding number in the REPL and pressing ^Q (#22007).\ngetpeername on a TCPSocket returns the address and port of the remote endpoint of the TCP connection (#21825).\nresize! and sizehint! methods no longer over-reserve memory when the requested array size is more than double of its current size (#22038).\nThe crc32c function for CRC-32c checksums is now exported (#22274).\neye(::Type{Diagonal{T}}, m::Integer) has been deprecated in favor of Diagonal{T}(I, m) (#24413).\nThe output of versioninfo is now controlled with keyword arguments (#21974).\nThe function LibGit2.set_remote_url now always sets both the fetch and push URLs for a git repo. Additionally, the argument order was changed to be consistent with the git command line tool (#22062).\nlogspace now accepts a base keyword argument to specify the base of the logarithmic range. The base defaults to 10 (#22310).\nAdded unique! which is an inplace version of unique (#20549).\n@test isequal(x, y) and @test isapprox(x, y) now prints an evaluated expression when the test fails (#22296).\nUses of Val{c} in Base has been replaced with Val{c}(), which is now easily accessible via the @pure constructor Val(c). Functions are defined as f(::Val{c}) = ... and called by f(Val(c)). Notable affected functions include: ntuple, Base.literal_pow, sqrtm, lufact, lufact!, qrfact, qrfact!, cholfact, cholfact!, _broadcast!, reshape, cat and cat_t.\nA new @macroexpand1 macro for non recursive macro expansion (#21662).\nChars can now be concatenated with Strings and/or other Chars using * (#22532).\nDiagonal, Bidiagonal, Tridiagonal and SymTridiagonal are now parameterized on the type of the wrapped vectors, allowing Diagonal, Bidiagonal, Tridiagonal and SymTridiagonal matrices with arbitrary AbstractVectors (#22718, #22925, #23035, #23154).\nMutating versions of randperm and randcycle have been added: randperm! and randcycle! (#22723).\nBigFloat random numbers can now be generated (#22720).\nREPL Undo via Ctrl-/ and Ctrl-_\ndiagm now accepts several diagonal index/vector Pairs (#24047).\nNew function equalto(x), which returns a function that compares its argument to x using isequal (#23812).\nreinterpret now works on any AbstractArray using the new ReinterpretArray type. This supersedes the old behavior of reinterpret on Arrays. As a result, reinterpreting arrays with different alignment requirements (removed in 0.6) is once again allowed (#23750).\nThe keys of an Associative are now an AbstractSet. Base.KeyIterator{<:Associative} has been changed to KeySet{K, <:Associative{K}} <: AbstractSet{K} (#24580).\nNew function ncodeunits(s::AbstractString) gives the number of code units in a string. The generic definition is constant time but calls lastindex(s) which may be inefficient. Therefore custom string types may want to define direct ncodeunits methods.\nreverseind(s::AbstractString, i::Integer) now has an efficient generic fallback, so custom string types do not need to provide their own efficient defintions. The generic definition relies on ncodeunits however, so for optimal performance you may need to define a custom method for that function.\nThe global RNG is being re-seeded with its own seed at the beginning of each @testset, and have its original state restored at the end (#24445). This is breaking for testsets relying implicitly on the global RNG being in a specific state.\npermutedims(m::AbstractMatrix) is now short for permutedims(m, (2,1)), and is now a more convenient way of making a \"shallow transpose\" of a 2D array. This is the recommended approach for manipulating arrays of data, rather than the recursively defined, linear-algebra function transpose. Similarly, permutedims(v::AbstractVector) will create a row matrix (#24839).\nA new replace(A, old=>new) function is introduced to replace old by new in collection A. There are also two other methods with a different API, and a mutating variant, replace! (#22324).\nCartesianRange changes (#24715):\nInherits from AbstractArray, and linear indexing can be used to provide linear-to-cartesian conversion (#24715)\nIt has a new constructor taking an array\nseveral missing set-like operations have been added (#23528): union, intersect, symdiff, setdiff are now implemented for all collections with arbitrary many arguments, as well as the mutating counterparts (union! etc.). The performance is also much better in many cases. Note that this change is slightly breaking: all the non-mutating functions always return a new object even if only one argument is passed. Moreover the semantics of intersect and symdiff is changed for vectors:\nintersect doesn't preserve the multiplicity anymore (use filter for the old behavior)\nsymdiff has been made consistent with the corresponding methods for other containers, by taking the multiplicity of the arguments into account. Use unique to get the old behavior.\nThe type LinearIndices has been added, providing conversion from cartesian incices to linear indices using the normal indexing operation. (#24715)\nIdDict{K,V} replaces ObjectIdDict.  It has type parameters like other AbstractDict subtypes and its constructors mirror the ones of Dict. (#25210)"
 },
 
 {
@@ -109,7 +109,7 @@ var documenterSearchIndex = {"docs": [
     "page": "줄리아 v0.7.0 릴리즈 노트",
     "title": "Deprecated or removed",
     "category": "section",
-    "text": "The JULIA_HOME environment variable has been renamed to JULIA_BINDIR and Base.JULIA_HOME has been moved to Sys.BINDIR (#20899).\nThe keyword immutable is fully deprecated to struct, and type is fully deprecated to mutable struct (#19157, #20418).\nIndexing into multidimensional arrays with more than one index but fewer indices than there are dimensions is no longer permitted when those trailing dimensions have lengths greater than 1. Instead, reshape the array or add trailing indices so the dimensionality and number of indices match (#14770, #23628).\nindices(a) and indices(a,d) have been deprecated in favor of axes(a) and axes(a, d) (#25057).\nEnvHash has been renamed to EnvDict (#24167).\nUninitialized Array constructors of the form Array[{T,N}](shape...) have been deprecated in favor of equivalents accepting uninitialized (an alias for Uninitialized()) as their first argument, as in Array[{T,N}](uninitialized, shape...). For example, Vector(3) is now Vector(uninitialized, 3), Matrix{Int}((2, 4)) is now, Matrix{Int}(uninitialized, (2, 4)), and Array{Float32,3}(11, 13, 17) is now Array{Float32,3}(uninitialized, 11, 13, 17) (#24781).\nLinAlg.fillslots! has been renamed LinAlg.fillstored! (#25030).\nfill!(A::Diagonal, x) and fill!(A::AbstractTriangular, x) have been deprecated in favor of Base.LinAlg.fillstored!(A, x) (#24413).\neye has been deprecated in favor of I and Matrix constructors. Please see the deprecation warnings for replacement details (#24438).\nzeros(D::Diagonal[, opts...]) has been deprecated (#24654).\nUsing Bool values directly as indices is now deprecated and will be an error in the future. Convert them to Int before indexing if you intend to access index 1 for true and 0 for false.\nwhos has been renamed varinfo, and now returns a markdown table instead of printing output (#12131).\nUninitialized RowVector constructors of the form RowVector{T}(shape...) have been deprecated in favor of equivalents accepting uninitialized (an alias for Uninitialized()) as their first argument, as in RowVector{T}(uninitialized, shape...). For example, RowVector{Int}(3) is now RowVector{Int}(uninitialized, 3), and RowVector{Float32}((1, 4)) is now RowVector{Float32}(uninitialized, (1, 4)) (#24786).\nwritecsv(io, a; opts...) has been deprecated in favor of writedlm(io, a, ','; opts...) (#23529).\nThe method srand(rng, filename, n=4) has been deprecated (#21359).\nreadcsv(io[, T::Type]; opts...) has been deprecated in favor of readdlm(io, ','[, T]; opts...) (#23530).\nsparse(s::UniformScaling, m::Integer) has been deprecated in favor of the three-argument equivalent sparse(s::UniformScaling, m, n) (#24472).\nThe cholfact/cholfact! methods that accepted an uplo symbol have been deprecated in favor of using Hermitian (or Symmetric) views (#22187, #22188).\nThe thin keyword argument for orthogonal decomposition methods has been deprecated in favor of full, which has the opposite meaning: thin == true if and only if full == false (#24279).\nisposdef(A::AbstractMatrix, UL::Symbol) and isposdef!(A::AbstractMatrix, UL::Symbol) have been deprecated in favor of isposdef(Hermitian(A, UL)) and isposdef!(Hermitian(A, UL)) respectively (#22245).\nThe bkfact/bkfact! methods that accepted uplo and issymmetric symbols have been deprecated in favor of using Hermitian (or Symmetric) views (#22605).\nThe function current_module is deprecated and replaced with @__MODULE__. This caused the deprecation of some reflection methods (such as macroexpand and isconst), which now require a module argument. And it caused the bugfix of other default arguments to use the Main module (including whos, which)  (#22064).\nexpand(ex) and expand(module, ex) have been deprecated in favor of Meta.lower(module, ex) (#22064, #24278).\nones(A::AbstractArray[, opts...]) and zeros(A::AbstractArray[, opts...]) methods have been deprecated. For zeros(A), consider zero(A). For ones(A) or zeros(A), consider ones(size(A)), zeros(size(A)), fill(v, size(A)) for v an appropriate one or zero, fill!(copy(A), {1|0}), fill!(similar(A), {1|0}), or any of the preceding with different element type and/or shape depending on opts.... Where strictly necessary, consider fill!(similar(A[, opts...]), {one(eltype(A)) | zero(eltype(A))}). For an algebraic multiplicative identity, consider one(A) (#24656).\nThe Operators module is deprecated. Instead, import required operators explicitly from Base, e.g. import Base: +, -, *, / (#22251).\nBindings to the FFTW library have been removed from Base. The DFT framework for building FFT implementations is now in AbstractFFTs.jl, the bindings to the FFTW library are in FFTW.jl, and the Base signal processing functions which used FFTs are now in DSP.jl (#21956).\nThe corrected positional argument to cov has been deprecated in favor of a keyword argument with the same name (#21709).\nOmitting spaces around the ? and the : tokens in a ternary expression has been deprecated. Ternaries must now include some amount of whitespace, e.g. x ? a : b rather than x?a:b (#22523 and #22712).\n? can no longer be used as an identifier name (#22712)\nThe method replace(s::AbstractString, pat, r, [count]) is deprecated in favor of replace(s::AbstractString, pat => r; [count]) (#25165). Moreover, count cannot be negative anymore (use typemax(Int) instead (#22325).\nread(io, type, dims) is deprecated to read!(io, Array{type}(dims)) (#21450).\nread(::IO, ::Ref) is now a method of read!, since it mutates its Ref argument (#21592).\nnb_available is now bytesavailable (#25634).\nskipchars(io::IO, predicate; linecomment=nothing) is deprecated in favor of skipchars(predicate, io::IO; linecomment=nothing) (#25667).\nBidiagonal constructors now use a Symbol (:U or :L) for the upper/lower argument, instead of a Bool or a Char (#22703).\nBidiagonal, Tridiagonal and SymTridiagonal constructors that automatically converted the input vectors to the same type are deprecated in favor of explicit conversion (#22925, #23035, #23154.\nCalling nfields on a type to find out how many fields its instances have is deprecated. Use fieldcount instead. Use nfields only to get the number of fields in a specific object (#22350).\nfieldnames now operates only on types. To get the names of fields in an object, use fieldnames(typeof(x)) (#22350).\nInexactError, DomainError, and OverflowError now take arguments. InexactError(func::Symbol, type, -3) now prints as \"ERROR: InexactError: func(type, -3)\", DomainError(val, [msg]) prints as \"ERROR: DomainError with val:\\nmsg\", and OverflowError(msg) prints as \"ERROR: OverflowError: msg\". (#20005, #22751, #22761)\nThe operating system identification functions: is_linux, is_bsd, is_apple, is_unix, and is_windows, have been deprecated in favor of Sys.islinux, Sys.isbsd, Sys.isapple, Sys.isunix, and Sys.iswindows, respectively (#22182).\nThe forms of read, readstring, and eachline that accepted both a Cmd object and an input stream are deprecated. Use e.g. read(pipeline(stdin, cmd)) instead (#22762).\nThe unexported type AbstractIOBuffer has been renamed to GenericIOBuffer (#17360 #22796).\nDisplay has been renamed to AbstractDisplay (#24831).\nRemaining vectorized methods over SparseVectors, particularly floor, ceil, trunc, round, and most common transcendental functions such as exp, log, and sin variants, have been deprecated in favor of dot-syntax (#22961).\nThe method String(io::IOBuffer) is deprecated to String(take!(copy(io))) (#21438).\nThe function readstring is deprecated in favor of read(io, String) (#22793)\nThe function showall is deprecated. Showing entire values is the default, unless an IOContext specifying :limit=>true is in use (#22847).\nissubtype has been deprecated in favor of <: (which used to be an alias for issubtype).\nCalling write on non-isbits arrays is deprecated in favor of explicit loops or serialize (#6466).\nThe default juliarc.jl file on Windows has been removed. Now must explicitly include the full path if you need access to executables or libraries in the Sys.BINDIR directory, e.g. joinpath(Sys.BINDIR, \"7z.exe\") for 7z.exe (#21540).\nsqrtm has been deprecated in favor of sqrt (#23504).\nexpm has been deprecated in favor of exp (#23233).\nlogm has been deprecated in favor of log (#23505).\nfull has been deprecated in favor of more specific, better defined alternatives. On structured matrices A, consider instead Matrix(A), Array(A), SparseMatrixCSC(A), or sparse(A). On sparse arrays S, consider instead Vector(S), Matrix(S), or Array(S) as appropriate. On factorizations F, consider instead Matrix(F), Array(F), AbstractMatrix(F), or AbstractArray(F). On implicit orthogonal factors Q, consider instead Matrix(Q) or Array(Q); for implicit orthogonal factors that can be recovered in square or truncated form, see the deprecation message for square recovery instructions. On Symmetric, Hermitian, or AbstractTriangular matrices A, consider instead Matrix(S), Array(S), SparseMatrixCSC(S), or sparse(S). On Symmetric matrices A particularly, consider instead LinAlg.copytri!(copy(parent(A)), A.uplo). On Hermitian matrices A particularly, consider instead LinAlg.copytri!(copy(parent(A)), A.uplo, true). On UpperTriangular matrices A particularly, consider instead triu!(copy(parent(A))). On LowerTriangular matrices A particularly, consider instead tril!(copy(parent(A))) (#24250).\nspeye has been deprecated in favor of I, sparse, and SparseMatrixCSC constructor methods (#24356).\nCalling union with no arguments is deprecated; construct an empty set with an appropriate element type using Set{T}() instead (#23144).\nVectorized DateTime, Date, and format methods have been deprecated in favor of dot-syntax (#23207).\nBase.cpad has been removed; use an appropriate combination of rpad and lpad instead (#23187).\nctranspose and ctranspose! have been deprecated in favor of adjoint and adjoint!, respectively (#23235).\nfilter and filter! on dictionaries now pass a single key=>value pair to the argument function, instead of two arguments (#17886).\nrol, rol!, ror, and ror! have been deprecated in favor of specialized methods for circshift/circshift! (#23404).\nBase.SparseArrays.SpDiagIterator has been removed (#23261).\nThe tuple-of-types form of cfunction, cfunction(f, returntype, (types...)), has been deprecated in favor of the tuple-type form cfunction(f, returntype, Tuple{types...}) (#23066).\ndiagm(v::AbstractVector, k::Integer=0) has been deprecated in favor of diagm(k => v) (#24047).\ndiagm(x::Number) has been deprecated in favor of fill(x, 1, 1) (#24047).\ndiagm(A::SparseMatrixCSC) has been deprecated in favor of spdiagm(sparsevec(A)) (#23341).\ndiagm(A::BitMatrix) has been deprecated, use diagm(0 => vec(A)) or BitMatrix(Diagonal(vec(A))) instead (#23373, #24047).\nℯ (written as \\mscre<TAB> or \\euler<TAB>) is now the only (by default) exported name for Euler's number, and the type has changed from Irrational{:e} to Irrational{:ℯ} (#23427).\nThe mathematical constants π, pi, ℯ, e, γ, eulergamma, catalan, φ and golden have been moved from Base to a new module; Base.MathConstants. Only π, pi and ℯ are now exported by default from Base (#23427).\neu (previously an alias for ℯ) has been deprecated in favor of ℯ (or MathConstants.e) (#23427).\nGMP.gmp_version(), GMP.GMP_VERSION, GMP.gmp_bits_per_limb(), and GMP.GMP_BITS_PER_LIBM have been renamed to GMP.version(), GMP.VERSION, GMP.bits_per_libm(), and GMP.BITS_PER_LIBM, respectively. Similarly, MPFR.get_version(), has been renamed to MPFR.version() (#23323). Also, LinAlg.LAPACK.laver() has been renamed to LinAlg.LAPACK.version() and now returns a VersionNumber.\nselect, select!, selectperm and selectperm! have been renamed respectively to partialsort, partialsort!, partialsortperm and partialsortperm! (#23051).\nThe Range abstract type has been renamed to AbstractRange (#23570).\nmap on dictionaries previously operated on key=>value pairs. This behavior is deprecated, and in the future map will operate only on values (#5794).\nAutomatically broadcasted + and - for array + scalar, scalar - array, and so-on have been deprecated due to inconsistency with linear algebra. Use .+ and .- for these operations instead (#22880, #22932).\nisleaftype is deprecated in favor of the simpler predicates isconcretetype and isdispatchtuple. Concrete types are those that might equal typeof(x) for some x; isleaftype included some types for which this is not true. Those are now categorized more precisely as \"dispatch tuple types\" and \"!hasfreetypevars\" (not exported). (#17086, #25496)\ncontains(eq, itr, item) is deprecated in favor of any with a predicate (#23716).\nspdiagm(x::AbstractVector) has been deprecated in favor of sparse(Diagonal(x)) alternatively spdiagm(0 => x) (#23757).\nspdiagm(x::AbstractVector, d::Integer) and spdiagm(x::Tuple{<:AbstractVector}, d::Tuple{<:Integer}) have been deprecated in favor of spdiagm(d => x) and spdiagm(d[1] => x[1], d[2] => x[2], ...) respectively. The new spdiagm implementation now always returns a square matrix (#23757).\nspones(A::AbstractSparseArray) has been deprecated in favor of LinAlg.fillstored!(copy(A), 1) (#25037).\nConstructors for LibGit2.UserPasswordCredentials and LibGit2.SSHCredentials which take a prompt_if_incorrect argument are deprecated. Instead, prompting behavior is controlled using the allow_prompt keyword in the LibGit2.CredentialPayload constructor (#23690).\ngradient is deprecated and will be removed in the next release (#23816).\nThe timing functions tic, toc, and toq are deprecated in favor of @time and @elapsed (#17046).\nMethods of findfirst, findnext, findlast, and findprev that accept a value to search for are deprecated in favor of passing a predicate (#19186, #10593).\nfind functions now operate only on booleans by default. To look for non-zeros, use x->x!=0 or !iszero (#23120).\nThe ability of reinterpret to yield Arrays of different type than the underlying storage has been removed. The reinterpret function is still available, but now returns a ReinterpretArray. The three argument form of reinterpret that implicitly reshapes has been deprecated (#23750).\nbits has been deprecated in favor of bitstring (#24281, #24263).\nnum2hex and hex2num have been deprecated in favor of reinterpret combined with parse/hex (#22088).\ncopy! is deprecated for AbstractSet and AbstractDict, with the intention to re-enable it with a cleaner meaning in a future version (#24844).\ncopy! (resp. unsafe_copy!) is deprecated for AbstractArray and is renamed copyto! (resp. unsafe_copyto!); it will be re-introduced with a different meaning in a future version (#24808).\na:b is deprecated for constructing a StepRange when a and b have physical units (Dates and Times). Use a:s:b, where s = Dates.Day(1) or s = Dates.Second(1).\ntrues(A::AbstractArray) and falses(A::AbstractArray) are deprecated in favor of trues(size(A)) and falses(size(A)) respectively (#24595).\nworkspace is discontinued, check out Revise.jl for an alternative workflow (#25046).\ncumsum, cumprod, accumulate, their mutating versions, and diff all now require a dim argument instead of defaulting to using the first dimension unless there is only one dimension (#24684, #25457).\nThe sum_kbn and cumsum_kbn functions have been moved to the KahanSummation package (#24869).\nisnumber has been renamed to isnumeric (#25021).\nis_assigned_char and normalize_string have been renamed to isassigned and normalize, and moved to the new Unicode standard library module. graphemes has also been moved to that module (#25021).\nThe functions eigs and svds have been moved to the IterativeEigensolvers standard library module (#24714).\nSparse array functionality has moved to the SparseArrays standard library module (#25249).\nLinear algebra functionality, and specifically the LinAlg module has moved to the LinearAlgebra standard library module (#25571).\n@printf and @sprintf have been moved to the Printf standard library (#23929,#25056).\nThe Libdl module has moved to the Libdl standard library module (#25459).\nThe aliases Complex32, Complex64 and Complex128 have been deprecated in favor of ComplexF16, ComplexF32 and ComplexF64 respectively (#24647).\nBase.parentindexes and SharedArrays.localindexes have been renamed to parentindices and localindices, respectively. Similarly, the indexes field in the SubArray type has been renamed to indices without deprecation (#25088).\nAssociative has been deprecated in favor of AbstractDict (#25012).\nVoid has been renamed back to Nothing with an alias Cvoid for use when calling C with a return type of Cvoid or a return or argument type of Ptr{Cvoid} (#25162).\nNullable{T} has been deprecated and moved to the Nullables package (#23642). Use Union{T, Nothing} instead, or Union{Some{T}, Nothing} if nothing is a possible value (i.e. Nothing <: T). isnull(x) can be replaced with x === nothing and unsafe_get/get can be dropped or replaced with coalesce. NullException has been removed.\nunshift! and shift! have been renamed to pushfirst! and popfirst! (#23902)\nipermute! has been deprecated in favor of invpermute! (#25168).\nCartesianRange has been renamed CartesianIndices (#24715).\nsub2ind and ind2sub are deprecated in favor of using CartesianIndices and LinearIndices (#24715).\ngetindex(F::Factorization, s::Symbol) (usually seen as e.g. F[:Q]) is deprecated in favor of dot overloading (getproperty) so factors should now be accessed as e.g. F.Q instead of F[:Q] (#25184).\nsearch and rsearch have been deprecated in favor of findfirst/findnext and findlast/findprev respectively, in combination with the new equalto and occursin predicates for some methods (#24673\nismatch(regex, str) has been deprecated in favor of contains(str, regex) (#24673).\nlinspace and logspace now require an explicit number of elements to be supplied rather than defaulting to 50(#24794, #24805).\nsimilar(::Associative) has been deprecated in favor of empty(::Associative), and similar(::Associative, ::Pair{K, V}) has been deprecated in favour of empty(::Associative, K, V) (#24390).\nfindin(a, b) has been deprecated in favor of findall(occursin(b), a) (#24673).\nmodule_name has been deprecated in favor of a new, general nameof function. Similarly, the unexported Base.function_name and Base.datatype_name have been deprecated in favor of nameof methods (#25622).\nThe module Random.dSFMT is renamed Random.DSFMT (#25567).\nRandom.RandomDevice(unlimited::Bool) (on non-Windows systems) is deprecated in favor of Random.RandomDevice(; unlimited=unlimited) (#25668).\nThe generic implementations of strides(::AbstractArray) and stride(::AbstractArray, ::Int)  have been deprecated. Subtypes of AbstractArray that implement the newly introduced strided  array interface should define their own strides method (#25321).\nmodule_parent, Base.datatype_module, and Base.function_module have been deprecated in favor of parentmodule ([#TODO]).\nrand(t::Tuple{Vararg{Int}}) is deprecated in favor of rand(Float64, t) or rand(t...); rand(::Tuple) will have another meaning in the future (#25429, #25278).\nThe assert function (and @assert macro) have been documented that they are not guaranteed to run under various optimization levels and should therefore not be used to e.g. verify passwords.\nObjectIdDict has been deprecated in favor of IdDict{Any,Any} (#25210).\ngc and gc_enable have been deprecated in favor of GC.gc and GC.enable (#25616).\nBase.@gc_preserve has been deprecated in favor of GC.@preserve (#25616).\nscale! has been deprecated in favor of mul!, lmul!, and rmul! (#25701, #25812).\nendof(a) has been renamed to lastindex(a), and the end keyword in indexing expressions now lowers to either lastindex(a) (in the case with only one index) or lastindex(a, d) (in cases where there is more than one index and end appears at dimension d) (#23554, #25763).\nDateTime(), Date(), and Time() have been deprecated, instead use DateTime(1), Date(1) and Time(0) respectively (#23724)."
+    "text": "The JULIA_HOME environment variable has been renamed to JULIA_BINDIR and Base.JULIA_HOME has been moved to Sys.BINDIR (#20899).\nThe keyword immutable is fully deprecated to struct, and type is fully deprecated to mutable struct (#19157, #20418).\nIndexing into multidimensional arrays with more than one index but fewer indices than there are dimensions is no longer permitted when those trailing dimensions have lengths greater than 1. Instead, reshape the array or add trailing indices so the dimensionality and number of indices match (#14770, #23628).\nindices(a) and indices(a,d) have been deprecated in favor of axes(a) and axes(a, d) (#25057).\nEnvHash has been renamed to EnvDict (#24167).\nUninitialized Array constructors of the form Array[{T,N}](shape...) have been deprecated in favor of equivalents accepting uninitialized (an alias for Uninitialized()) as their first argument, as in Array[{T,N}](uninitialized, shape...). For example, Vector(3) is now Vector(uninitialized, 3), Matrix{Int}((2, 4)) is now, Matrix{Int}(uninitialized, (2, 4)), and Array{Float32,3}(11, 13, 17) is now Array{Float32,3}(uninitialized, 11, 13, 17) (#24781).\nLinAlg.fillslots! has been renamed LinAlg.fillstored! (#25030).\nfill!(A::Diagonal, x) and fill!(A::AbstractTriangular, x) have been deprecated in favor of Base.LinAlg.fillstored!(A, x) (#24413).\neye has been deprecated in favor of I and Matrix constructors. Please see the deprecation warnings for replacement details (#24438).\nzeros(D::Diagonal[, opts...]) has been deprecated (#24654).\nUsing Bool values directly as indices is now deprecated and will be an error in the future. Convert them to Int before indexing if you intend to access index 1 for true and 0 for false.\nwhos has been renamed varinfo, and now returns a markdown table instead of printing output (#12131).\nUninitialized RowVector constructors of the form RowVector{T}(shape...) have been deprecated in favor of equivalents accepting uninitialized (an alias for Uninitialized()) as their first argument, as in RowVector{T}(uninitialized, shape...). For example, RowVector{Int}(3) is now RowVector{Int}(uninitialized, 3), and RowVector{Float32}((1, 4)) is now RowVector{Float32}(uninitialized, (1, 4)) (#24786).\nwritecsv(io, a; opts...) has been deprecated in favor of writedlm(io, a, ','; opts...) (#23529).\nThe method srand(rng, filename, n=4) has been deprecated (#21359).\nreadcsv(io[, T::Type]; opts...) has been deprecated in favor of readdlm(io, ','[, T]; opts...) (#23530).\nsparse(s::UniformScaling, m::Integer) has been deprecated in favor of the three-argument equivalent sparse(s::UniformScaling, m, n) (#24472).\nThe cholfact/cholfact! methods that accepted an uplo symbol have been deprecated in favor of using Hermitian (or Symmetric) views (#22187, #22188).\nThe thin keyword argument for orthogonal decomposition methods has been deprecated in favor of full, which has the opposite meaning: thin == true if and only if full == false (#24279).\nisposdef(A::AbstractMatrix, UL::Symbol) and isposdef!(A::AbstractMatrix, UL::Symbol) have been deprecated in favor of isposdef(Hermitian(A, UL)) and isposdef!(Hermitian(A, UL)) respectively (#22245).\nThe bkfact/bkfact! methods that accepted uplo and issymmetric symbols have been deprecated in favor of using Hermitian (or Symmetric) views (#22605).\nThe function current_module is deprecated and replaced with @__MODULE__. This caused the deprecation of some reflection methods (such as macroexpand and isconst), which now require a module argument. And it caused the bugfix of other default arguments to use the Main module (including whos, which)  (#22064).\nexpand(ex) and expand(module, ex) have been deprecated in favor of Meta.lower(module, ex) (#22064, #24278).\nones(A::AbstractArray[, opts...]) and zeros(A::AbstractArray[, opts...]) methods have been deprecated. For zeros(A), consider zero(A). For ones(A) or zeros(A), consider ones(size(A)), zeros(size(A)), fill(v, size(A)) for v an appropriate one or zero, fill!(copy(A), {1|0}), fill!(similar(A), {1|0}), or any of the preceding with different element type and/or shape depending on opts.... Where strictly necessary, consider fill!(similar(A[, opts...]), {one(eltype(A)) | zero(eltype(A))}). For an algebraic multiplicative identity, consider one(A) (#24656).\nThe Operators module is deprecated. Instead, import required operators explicitly from Base, e.g. import Base: +, -, *, / (#22251).\nBindings to the FFTW library have been removed from Base. The DFT framework for building FFT implementations is now in AbstractFFTs.jl, the bindings to the FFTW library are in FFTW.jl, and the Base signal processing functions which used FFTs are now in DSP.jl (#21956).\nThe corrected positional argument to cov has been deprecated in favor of a keyword argument with the same name (#21709).\nOmitting spaces around the ? and the : tokens in a ternary expression has been deprecated. Ternaries must now include some amount of whitespace, e.g. x ? a : b rather than x?a:b (#22523 and #22712).\n? can no longer be used as an identifier name (#22712)\nThe method replace(s::AbstractString, pat, r, [count]) is deprecated in favor of replace(s::AbstractString, pat => r; [count]) (#25165). Moreover, count cannot be negative anymore (use typemax(Int) instead (#22325).\nread(io, type, dims) is deprecated to read!(io, Array{type}(uninitialized, dims)) (#21450).\nread(::IO, ::Ref) is now a method of read!, since it mutates its Ref argument (#21592).\nnb_available is now bytesavailable (#25634).\nskipchars(io::IO, predicate; linecomment=nothing) is deprecated in favor of skipchars(predicate, io::IO; linecomment=nothing) (#25667).\nBidiagonal constructors now use a Symbol (:U or :L) for the upper/lower argument, instead of a Bool or a Char (#22703).\nBidiagonal, Tridiagonal and SymTridiagonal constructors that automatically converted the input vectors to the same type are deprecated in favor of explicit conversion (#22925, #23035, #23154.\nCalling nfields on a type to find out how many fields its instances have is deprecated. Use fieldcount instead. Use nfields only to get the number of fields in a specific object (#22350).\nfieldnames now operates only on types. To get the names of fields in an object, use fieldnames(typeof(x)) (#22350).\nInexactError, DomainError, and OverflowError now take arguments. InexactError(func::Symbol, type, -3) now prints as \"ERROR: InexactError: func(type, -3)\", DomainError(val, [msg]) prints as \"ERROR: DomainError with val:\\nmsg\", and OverflowError(msg) prints as \"ERROR: OverflowError: msg\". (#20005, #22751, #22761)\nThe operating system identification functions: is_linux, is_bsd, is_apple, is_unix, and is_windows, have been deprecated in favor of Sys.islinux, Sys.isbsd, Sys.isapple, Sys.isunix, and Sys.iswindows, respectively (#22182).\nThe forms of read, readstring, and eachline that accepted both a Cmd object and an input stream are deprecated. Use e.g. read(pipeline(stdin, cmd)) instead (#22762).\nThe unexported type AbstractIOBuffer has been renamed to GenericIOBuffer (#17360 #22796).\nDisplay has been renamed to AbstractDisplay (#24831).\nRemaining vectorized methods over SparseVectors, particularly floor, ceil, trunc, round, and most common transcendental functions such as exp, log, and sin variants, have been deprecated in favor of dot-syntax (#22961).\nThe method String(io::IOBuffer) is deprecated to String(take!(copy(io))) (#21438).\nThe function readstring is deprecated in favor of read(io, String) (#22793)\nThe function showall is deprecated. Showing entire values is the default, unless an IOContext specifying :limit=>true is in use (#22847).\nissubtype has been deprecated in favor of <: (which used to be an alias for issubtype).\nCalling write on non-isbits arrays is deprecated in favor of explicit loops or serialize (#6466).\nThe default juliarc.jl file on Windows has been removed. Now must explicitly include the full path if you need access to executables or libraries in the Sys.BINDIR directory, e.g. joinpath(Sys.BINDIR, \"7z.exe\") for 7z.exe (#21540).\nsqrtm has been deprecated in favor of sqrt (#23504).\nexpm has been deprecated in favor of exp (#23233).\nlogm has been deprecated in favor of log (#23505).\nfull has been deprecated in favor of more specific, better defined alternatives. On structured matrices A, consider instead Matrix(A), Array(A), SparseMatrixCSC(A), or sparse(A). On sparse arrays S, consider instead Vector(S), Matrix(S), or Array(S) as appropriate. On factorizations F, consider instead Matrix(F), Array(F), AbstractMatrix(F), or AbstractArray(F). On implicit orthogonal factors Q, consider instead Matrix(Q) or Array(Q); for implicit orthogonal factors that can be recovered in square or truncated form, see the deprecation message for square recovery instructions. On Symmetric, Hermitian, or AbstractTriangular matrices A, consider instead Matrix(S), Array(S), SparseMatrixCSC(S), or sparse(S). On Symmetric matrices A particularly, consider instead LinAlg.copytri!(copy(parent(A)), A.uplo). On Hermitian matrices A particularly, consider instead LinAlg.copytri!(copy(parent(A)), A.uplo, true). On UpperTriangular matrices A particularly, consider instead triu!(copy(parent(A))). On LowerTriangular matrices A particularly, consider instead tril!(copy(parent(A))) (#24250).\nspeye has been deprecated in favor of I, sparse, and SparseMatrixCSC constructor methods (#24356).\nCalling union with no arguments is deprecated; construct an empty set with an appropriate element type using Set{T}() instead (#23144).\nVectorized DateTime, Date, and format methods have been deprecated in favor of dot-syntax (#23207).\nBase.cpad has been removed; use an appropriate combination of rpad and lpad instead (#23187).\nctranspose and ctranspose! have been deprecated in favor of adjoint and adjoint!, respectively (#23235).\nfilter and filter! on dictionaries now pass a single key=>value pair to the argument function, instead of two arguments (#17886).\nrol, rol!, ror, and ror! have been deprecated in favor of specialized methods for circshift/circshift! (#23404).\nBase.SparseArrays.SpDiagIterator has been removed (#23261).\nThe tuple-of-types form of cfunction, cfunction(f, returntype, (types...)), has been deprecated in favor of the tuple-type form cfunction(f, returntype, Tuple{types...}) (#23066).\ndiagm(v::AbstractVector, k::Integer=0) has been deprecated in favor of diagm(k => v) (#24047).\ndiagm(x::Number) has been deprecated in favor of fill(x, 1, 1) (#24047).\ndiagm(A::SparseMatrixCSC) has been deprecated in favor of spdiagm(sparsevec(A)) (#23341).\ndiagm(A::BitMatrix) has been deprecated, use diagm(0 => vec(A)) or BitMatrix(Diagonal(vec(A))) instead (#23373, #24047).\nℯ (written as \\mscre<TAB> or \\euler<TAB>) is now the only (by default) exported name for Euler's number, and the type has changed from Irrational{:e} to Irrational{:ℯ} (#23427).\nThe mathematical constants π, pi, ℯ, e, γ, eulergamma, catalan, φ and golden have been moved from Base to a new module; Base.MathConstants. Only π, pi and ℯ are now exported by default from Base (#23427).\neu (previously an alias for ℯ) has been deprecated in favor of ℯ (or MathConstants.e) (#23427).\nGMP.gmp_version(), GMP.GMP_VERSION, GMP.gmp_bits_per_limb(), and GMP.GMP_BITS_PER_LIBM have been renamed to GMP.version(), GMP.VERSION, GMP.bits_per_libm(), and GMP.BITS_PER_LIBM, respectively. Similarly, MPFR.get_version(), has been renamed to MPFR.version() (#23323). Also, LinAlg.LAPACK.laver() has been renamed to LinAlg.LAPACK.version() and now returns a VersionNumber.\nselect, select!, selectperm and selectperm! have been renamed respectively to partialsort, partialsort!, partialsortperm and partialsortperm! (#23051).\nThe Range abstract type has been renamed to AbstractRange (#23570).\nmap on dictionaries previously operated on key=>value pairs. This behavior is deprecated, and in the future map will operate only on values (#5794).\nAutomatically broadcasted + and - for array + scalar, scalar - array, and so-on have been deprecated due to inconsistency with linear algebra. Use .+ and .- for these operations instead (#22880, #22932).\nisleaftype is deprecated in favor of the simpler predicates isconcretetype and isdispatchtuple. Concrete types are those that might equal typeof(x) for some x; isleaftype included some types for which this is not true. Those are now categorized more precisely as \"dispatch tuple types\" and \"!hasfreetypevars\" (not exported). (#17086, #25496)\ncontains(eq, itr, item) is deprecated in favor of any with a predicate (#23716).\nspdiagm(x::AbstractVector) has been deprecated in favor of sparse(Diagonal(x)) alternatively spdiagm(0 => x) (#23757).\nspdiagm(x::AbstractVector, d::Integer) and spdiagm(x::Tuple{<:AbstractVector}, d::Tuple{<:Integer}) have been deprecated in favor of spdiagm(d => x) and spdiagm(d[1] => x[1], d[2] => x[2], ...) respectively. The new spdiagm implementation now always returns a square matrix (#23757).\nspones(A::AbstractSparseArray) has been deprecated in favor of LinAlg.fillstored!(copy(A), 1) (#25037).\nConstructors for LibGit2.UserPasswordCredentials and LibGit2.SSHCredentials which take a prompt_if_incorrect argument are deprecated. Instead, prompting behavior is controlled using the allow_prompt keyword in the LibGit2.CredentialPayload constructor (#23690).\ngradient is deprecated and will be removed in the next release (#23816).\nThe timing functions tic, toc, and toq are deprecated in favor of @time and @elapsed (#17046).\nMethods of findfirst, findnext, findlast, and findprev that accept a value to search for are deprecated in favor of passing a predicate (#19186, #10593).\nfind functions now operate only on booleans by default. To look for non-zeros, use x->x!=0 or !iszero (#23120).\nThe ability of reinterpret to yield Arrays of different type than the underlying storage has been removed. The reinterpret function is still available, but now returns a ReinterpretArray. The three argument form of reinterpret that implicitly reshapes has been deprecated (#23750).\nbits has been deprecated in favor of bitstring (#24281, #24263).\nnum2hex and hex2num have been deprecated in favor of reinterpret combined with parse/hex (#22088).\ncopy! is deprecated for AbstractSet and AbstractDict, with the intention to re-enable it with a cleaner meaning in a future version (#24844).\ncopy! (resp. unsafe_copy!) is deprecated for AbstractArray and is renamed copyto! (resp. unsafe_copyto!); it will be re-introduced with a different meaning in a future version (#24808).\na:b is deprecated for constructing a StepRange when a and b have physical units (Dates and Times). Use a:s:b, where s = Dates.Day(1) or s = Dates.Second(1).\ntrues(A::AbstractArray) and falses(A::AbstractArray) are deprecated in favor of trues(size(A)) and falses(size(A)) respectively (#24595).\nworkspace is discontinued, check out Revise.jl for an alternative workflow (#25046).\ncumsum, cumprod, accumulate, their mutating versions, and diff all now require a dim argument instead of defaulting to using the first dimension unless there is only one dimension (#24684, #25457).\nThe sum_kbn and cumsum_kbn functions have been moved to the KahanSummation package (#24869).\nisnumber has been renamed to isnumeric (#25021).\nis_assigned_char and normalize_string have been renamed to isassigned and normalize, and moved to the new Unicode standard library module. graphemes has also been moved to that module (#25021).\nThe functions eigs and svds have been moved to the IterativeEigensolvers standard library module (#24714).\nSparse array functionality has moved to the SparseArrays standard library module (#25249).\nLinear algebra functionality, and specifically the LinAlg module has moved to the LinearAlgebra standard library module (#25571).\n@printf and @sprintf have been moved to the Printf standard library (#23929,#25056).\nThe Libdl module has moved to the Libdl standard library module (#25459).\nThe aliases Complex32, Complex64 and Complex128 have been deprecated in favor of ComplexF16, ComplexF32 and ComplexF64 respectively (#24647).\nBase.parentindexes and SharedArrays.localindexes have been renamed to parentindices and localindices, respectively. Similarly, the indexes field in the SubArray type has been renamed to indices without deprecation (#25088).\nAssociative has been deprecated in favor of AbstractDict (#25012).\nVoid has been renamed back to Nothing with an alias Cvoid for use when calling C with a return type of Cvoid or a return or argument type of Ptr{Cvoid} (#25162).\nNullable{T} has been deprecated and moved to the Nullables package (#23642). Use Union{T, Nothing} instead, or Union{Some{T}, Nothing} if nothing is a possible value (i.e. Nothing <: T). isnull(x) can be replaced with x === nothing and unsafe_get/get can be dropped or replaced with coalesce. NullException has been removed.\nunshift! and shift! have been renamed to pushfirst! and popfirst! (#23902)\nipermute! has been deprecated in favor of invpermute! (#25168).\nCartesianRange has been renamed CartesianIndices (#24715).\nsub2ind and ind2sub are deprecated in favor of using CartesianIndices and LinearIndices (#24715).\ngetindex(F::Factorization, s::Symbol) (usually seen as e.g. F[:Q]) is deprecated in favor of dot overloading (getproperty) so factors should now be accessed as e.g. F.Q instead of F[:Q] (#25184).\nsearch and rsearch have been deprecated in favor of findfirst/findnext and findlast/findprev respectively, in combination with the new equalto and occursin predicates for some methods (#24673\nismatch(regex, str) has been deprecated in favor of contains(str, regex) (#24673).\nlinspace and logspace now require an explicit number of elements to be supplied rather than defaulting to 50(#24794, #24805).\nsimilar(::Associative) has been deprecated in favor of empty(::Associative), and similar(::Associative, ::Pair{K, V}) has been deprecated in favour of empty(::Associative, K, V) (#24390).\nfindin(a, b) has been deprecated in favor of findall(occursin(b), a) (#24673).\nmodule_name has been deprecated in favor of a new, general nameof function. Similarly, the unexported Base.function_name and Base.datatype_name have been deprecated in favor of nameof methods (#25622).\nThe module Random.dSFMT is renamed Random.DSFMT (#25567).\nRandom.RandomDevice(unlimited::Bool) (on non-Windows systems) is deprecated in favor of Random.RandomDevice(; unlimited=unlimited) (#25668).\nThe generic implementations of strides(::AbstractArray) and stride(::AbstractArray, ::Int)  have been deprecated. Subtypes of AbstractArray that implement the newly introduced strided  array interface should define their own strides method (#25321).\nmodule_parent, Base.datatype_module, and Base.function_module have been deprecated in favor of parentmodule ([#TODO]).\nrand(t::Tuple{Vararg{Int}}) is deprecated in favor of rand(Float64, t) or rand(t...); rand(::Tuple) will have another meaning in the future (#25429, #25278).\nThe assert function (and @assert macro) have been documented that they are not guaranteed to run under various optimization levels and should therefore not be used to e.g. verify passwords.\nObjectIdDict has been deprecated in favor of IdDict{Any,Any} (#25210).\ngc and gc_enable have been deprecated in favor of GC.gc and GC.enable (#25616).\nBase.@gc_preserve has been deprecated in favor of GC.@preserve (#25616).\nprint_shortest has been discontinued, but is still available in the Base.Grisu submodule (#25745).\nscale! has been deprecated in favor of mul!, lmul!, and rmul! (#25701, #25812).\nendof(a) has been renamed to lastindex(a), and the end keyword in indexing expressions now lowers to either lastindex(a) (in the case with only one index) or lastindex(a, d) (in cases where there is more than one index and end appears at dimension d) (#23554, #25763).\nDateTime(), Date(), and Time() have been deprecated, instead use DateTime(1), Date(1) and Time(0) respectively (#23724)."
 },
 
 {
@@ -693,7 +693,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Functions",
     "title": "Keyword Arguments",
     "category": "section",
-    "text": "Some functions need a large number of arguments, or have a large number of behaviors. Remembering how to call such functions can be difficult. Keyword arguments can make these complex interfaces easier to use and extend by allowing arguments to be identified by name instead of only by position.For example, consider a function plot that plots a line. This function might have many options, for controlling line style, width, color, and so on. If it accepts keyword arguments, a possible call might look like plot(x, y, width=2), where we have chosen to specify only line width. Notice that this serves two purposes. The call is easier to read, since we can label an argument with its meaning. It also becomes possible to pass any subset of a large number of arguments, in any order.Functions with keyword arguments are defined using a semicolon in the signature:function plot(x, y; style=\"solid\", width=1, color=\"black\")\n    ###\nendWhen the function is called, the semicolon is optional: one can either call plot(x, y, width=2) or plot(x, y; width=2), but the former style is more common. An explicit semicolon is required only for passing varargs or computed keywords as described below.Keyword argument default values are evaluated only when necessary (when a corresponding keyword argument is not passed), and in left-to-right order. Therefore default expressions may refer to prior keyword arguments.The types of keyword arguments can be made explicit as follows:function f(;x::Int=1)\n    ###\nendExtra keyword arguments can be collected using ..., as in varargs functions:function f(x; y=0, kwargs...)\n    ###\nendInside f, kwargs will be a named tuple. Named tuples (as well as dictionaries) can be passed as keyword arguments using a semicolon in a call, e.g. f(x, z=1; kwargs...).One can also pass key => value expressions after a semicolon. For example, plot(x, y; :width => 2) is equivalent to plot(x, y, width=2). This is useful in situations where the keyword name is computed at runtime.The nature of keyword arguments makes it possible to specify the same argument more than once. For example, in the call plot(x, y; options..., width=2) it is possible that the options structure also contains a value for width. In such a case the rightmost occurrence takes precedence; in this example, width is certain to have the value 2."
+    "text": "Some functions need a large number of arguments, or have a large number of behaviors. Remembering how to call such functions can be difficult. Keyword arguments can make these complex interfaces easier to use and extend by allowing arguments to be identified by name instead of only by position.For example, consider a function plot that plots a line. This function might have many options, for controlling line style, width, color, and so on. If it accepts keyword arguments, a possible call might look like plot(x, y, width=2), where we have chosen to specify only line width. Notice that this serves two purposes. The call is easier to read, since we can label an argument with its meaning. It also becomes possible to pass any subset of a large number of arguments, in any order.Functions with keyword arguments are defined using a semicolon in the signature:function plot(x, y; style=\"solid\", width=1, color=\"black\")\n    ###\nendWhen the function is called, the semicolon is optional: one can either call plot(x, y, width=2) or plot(x, y; width=2), but the former style is more common. An explicit semicolon is required only for passing varargs or computed keywords as described below.Keyword argument default values are evaluated only when necessary (when a corresponding keyword argument is not passed), and in left-to-right order. Therefore default expressions may refer to prior keyword arguments.The types of keyword arguments can be made explicit as follows:function f(;x::Int=1)\n    ###\nendExtra keyword arguments can be collected using ..., as in varargs functions:function f(x; y=0, kwargs...)\n    ###\nendIf a keyword argument is not assigned a default value in the method definition, then it is required: an UndefKeywordError exception will be thrown if the caller does not assign it a value:function f(x; y)\n    ###\nend\nf(3, y=5) # ok, y is assigned\nf(3)      # throws UndefKeywordError(:y)Inside f, kwargs will be a named tuple. Named tuples (as well as dictionaries) can be passed as keyword arguments using a semicolon in a call, e.g. f(x, z=1; kwargs...).One can also pass key => value expressions after a semicolon. For example, plot(x, y; :width => 2) is equivalent to plot(x, y, width=2). This is useful in situations where the keyword name is computed at runtime.The nature of keyword arguments makes it possible to specify the same argument more than once. For example, in the call plot(x, y; options..., width=2) it is possible that the options structure also contains a value for width. In such a case the rightmost occurrence takes precedence; in this example, width is certain to have the value 2."
 },
 
 {
@@ -965,7 +965,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Types",
     "title": "Composite Types",
     "category": "section",
-    "text": "Composite types are called records, structs, or objects in various languages. A composite type is a collection of named fields, an instance of which can be treated as a single value. In many languages, composite types are the only kind of user-definable type, and they are by far the most commonly used user-defined type in Julia as well.In mainstream object oriented languages, such as C++, Java, Python and Ruby, composite types also have named functions associated with them, and the combination is called an \"object\". In purer object-oriented languages, such as Ruby or Smalltalk, all values are objects whether they are composites or not. In less pure object oriented languages, including C++ and Java, some values, such as integers and floating-point values, are not objects, while instances of user-defined composite types are true objects with associated methods. In Julia, all values are objects, but functions are not bundled with the objects they operate on. This is necessary since Julia chooses which method of a function to use by multiple dispatch, meaning that the types of all of a function's arguments are considered when selecting a method, rather than just the first one (see Methods for more information on methods and dispatch). Thus, it would be inappropriate for functions to \"belong\" to only their first argument. Organizing methods into function objects rather than having named bags of methods \"inside\" each object ends up being a highly beneficial aspect of the language design.Composite types are introduced with the struct keyword followed by a block of field names, optionally annotated with types using the :: operator:julia> struct Foo\n           bar\n           baz::Int\n           qux::Float64\n       endFields with no type annotation default to Any, and can accordingly hold any type of value.New objects of type Foo are created by applying the Foo type object like a function to values for its fields:julia> foo = Foo(\"Hello, world.\", 23, 1.5)\nFoo(\"Hello, world.\", 23, 1.5)\n\njulia> typeof(foo)\nFooWhen a type is applied like a function it is called a constructor. Two constructors are generated automatically (these are called default constructors). One accepts any arguments and calls convert to convert them to the types of the fields, and the other accepts arguments that match the field types exactly. The reason both of these are generated is that this makes it easier to add new definitions without inadvertently replacing a default constructor.Since the bar field is unconstrained in type, any value will do. However, the value for baz must be convertible to Int:julia> Foo((), 23.5, 1)\nERROR: InexactError: convert(Int64, 23.5)\nStacktrace:\n [1] convert at ./float.jl:703 [inlined]\n [2] Foo(::Tuple{}, ::Float64, ::Int64) at ./none:2You may find a list of field names using the fieldnames function.julia> fieldnames(Foo)\n3-element Array{Symbol,1}:\n :bar\n :baz\n :quxYou can access the field values of a composite object using the traditional foo.bar notation:julia> foo.bar\n\"Hello, world.\"\n\njulia> foo.baz\n23\n\njulia> foo.qux\n1.5Composite objects declared with struct are immutable; they cannot be modified after construction. This may seem odd at first, but it has several advantages:It can be more efficient. Some structs can be packed efficiently into arrays, and in some cases the compiler is able to avoid allocating immutable objects entirely.\nIt is not possible to violate the invariants provided by the type's constructors.\nCode using immutable objects can be easier to reason about.An immutable object might contain mutable objects, such as arrays, as fields. Those contained objects will remain mutable; only the fields of the immutable object itself cannot be changed to point to different objects.Where required, mutable composite objects can be declared with the keyword mutable struct, to be discussed in the next section.Composite types with no fields are singletons; there can be only one instance of such types:julia> struct NoFields\n       end\n\njulia> NoFields() === NoFields()\ntrueThe === function confirms that the \"two\" constructed instances of NoFields are actually one and the same. Singleton types are described in further detail below.There is much more to say about how instances of composite types are created, but that discussion depends on both Parametric Types and on Methods, and is sufficiently important to be addressed in its own section: Constructors."
+    "text": "Composite types are called records, structs, or objects in various languages. A composite type is a collection of named fields, an instance of which can be treated as a single value. In many languages, composite types are the only kind of user-definable type, and they are by far the most commonly used user-defined type in Julia as well.In mainstream object oriented languages, such as C++, Java, Python and Ruby, composite types also have named functions associated with them, and the combination is called an \"object\". In purer object-oriented languages, such as Ruby or Smalltalk, all values are objects whether they are composites or not. In less pure object oriented languages, including C++ and Java, some values, such as integers and floating-point values, are not objects, while instances of user-defined composite types are true objects with associated methods. In Julia, all values are objects, but functions are not bundled with the objects they operate on. This is necessary since Julia chooses which method of a function to use by multiple dispatch, meaning that the types of all of a function's arguments are considered when selecting a method, rather than just the first one (see Methods for more information on methods and dispatch). Thus, it would be inappropriate for functions to \"belong\" to only their first argument. Organizing methods into function objects rather than having named bags of methods \"inside\" each object ends up being a highly beneficial aspect of the language design.Composite types are introduced with the struct keyword followed by a block of field names, optionally annotated with types using the :: operator:julia> struct Foo\n           bar\n           baz::Int\n           qux::Float64\n       endFields with no type annotation default to Any, and can accordingly hold any type of value.New objects of type Foo are created by applying the Foo type object like a function to values for its fields:julia> foo = Foo(\"Hello, world.\", 23, 1.5)\nFoo(\"Hello, world.\", 23, 1.5)\n\njulia> typeof(foo)\nFooWhen a type is applied like a function it is called a constructor. Two constructors are generated automatically (these are called default constructors). One accepts any arguments and calls convert to convert them to the types of the fields, and the other accepts arguments that match the field types exactly. The reason both of these are generated is that this makes it easier to add new definitions without inadvertently replacing a default constructor.Since the bar field is unconstrained in type, any value will do. However, the value for baz must be convertible to Int:julia> Foo((), 23.5, 1)\nERROR: InexactError: convert(Int64, 23.5)\nStacktrace:\n [1] convert at ./float.jl:703 [inlined]\n [2] Foo(::Tuple{}, ::Float64, ::Int64) at ./none:2You may find a list of field names using the fieldnames function.julia> fieldnames(Foo)\n3-element Array{Symbol,1}:\n :bar\n :baz\n :quxYou can access the field values of a composite object using the traditional foo.bar notation:julia> foo.bar\n\"Hello, world.\"\n\njulia> foo.baz\n23\n\njulia> foo.qux\n1.5Composite objects declared with struct are immutable; they cannot be modified after construction. This may seem odd at first, but it has several advantages:It can be more efficient. Some structs can be packed efficiently into arrays, and in some cases the compiler is able to avoid allocating immutable objects entirely.\nIt is not possible to violate the invariants provided by the type's constructors.\nCode using immutable objects can be easier to reason about.An immutable object might contain mutable objects, such as arrays, as fields. Those contained objects will remain mutable; only the fields of the immutable object itself cannot be changed to point to different objects.Where required, mutable composite objects can be declared with the keyword mutable struct, to be discussed in the next section.Immutable composite types with no fields are singletons; there can be only one instance of such types:julia> struct NoFields\n       end\n\njulia> NoFields() === NoFields()\ntrueThe === function confirms that the \"two\" constructed instances of NoFields are actually one and the same. Singleton types are described in further detail below.There is much more to say about how instances of composite types are created, but that discussion depends on both Parametric Types and on Methods, and is sufficiently important to be addressed in its own section: Constructors."
 },
 
 {
@@ -4841,14 +4841,6 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "base/base/#Base.LibGit2",
-    "page": "Essentials",
-    "title": "Base.LibGit2",
-    "category": "Module",
-    "text": "Interface to libgit2.\n\n\n\n\n\n"
-},
-
-{
     "location": "base/base/#Base.Libc",
     "page": "Essentials",
     "title": "Base.Libc",
@@ -4893,7 +4885,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Essentials",
     "title": "Base Modules",
     "category": "section",
-    "text": "Base.Docs\nBase.Iterators\nBase.LibGit2\nBase.Libc\nBase.Meta\nBase.StackTraces\nBase.Sys\nBase.Threads"
+    "text": "Base.Docs\nBase.Iterators\nBase.Libc\nBase.Meta\nBase.StackTraces\nBase.Sys\nBase.Threads"
 },
 
 {
@@ -6281,6 +6273,14 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
+    "location": "base/base/#Core.UndefKeywordError",
+    "page": "Essentials",
+    "title": "Core.UndefKeywordError",
+    "category": "Type",
+    "text": "UndefKeywordError(var::Symbol)\n\nThe required keyword argument var was not assigned in a function call.\n\n\n\n\n\n"
+},
+
+{
     "location": "base/base/#Core.UndefRefError",
     "page": "Essentials",
     "title": "Core.UndefRefError",
@@ -6325,7 +6325,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Essentials",
     "title": "Errors",
     "category": "section",
-    "text": "Base.error\nCore.throw\nBase.rethrow\nBase.backtrace\nBase.catch_backtrace\nBase.assert\nBase.@assert\nBase.ArgumentError\nBase.AssertionError\nCore.BoundsError\nBase.DimensionMismatch\nCore.DivideError\nCore.DomainError\nBase.EOFError\nCore.ErrorException\nCore.InexactError\nCore.InterruptException\nBase.KeyError\nBase.LoadError\nBase.MethodError\nBase.MissingException\nCore.OutOfMemoryError\nCore.ReadOnlyMemoryError\nCore.OverflowError\nBase.ParseError\nCore.StackOverflowError\nBase.SystemError\nCore.TypeError\nCore.UndefRefError\nCore.UndefVarError\nBase.InitError\nBase.retry\nBase.ExponentialBackOff"
+    "text": "Base.error\nCore.throw\nBase.rethrow\nBase.backtrace\nBase.catch_backtrace\nBase.assert\nBase.@assert\nBase.ArgumentError\nBase.AssertionError\nCore.BoundsError\nBase.DimensionMismatch\nCore.DivideError\nCore.DomainError\nBase.EOFError\nCore.ErrorException\nCore.InexactError\nCore.InterruptException\nBase.KeyError\nBase.LoadError\nBase.MethodError\nBase.MissingException\nCore.OutOfMemoryError\nCore.ReadOnlyMemoryError\nCore.OverflowError\nBase.ParseError\nCore.StackOverflowError\nBase.SystemError\nCore.TypeError\nCore.UndefKeywordError\nCore.UndefRefError\nCore.UndefVarError\nBase.InitError\nBase.retry\nBase.ExponentialBackOff"
 },
 
 {
@@ -7141,7 +7141,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Collections and Data Structures",
     "title": "Base.replace",
     "category": "Method",
-    "text": "replace(prednew::Function, A; [count::Integer])\n\nReturn a copy of A where for each value x in A, prednew(x) is called and must return  either nothing, in which case no replacement occurs, or a value, possibly wrapped as a Some object, which will be used as a replacement for x.\n\nExamples\n\njulia> replace(x -> isodd(x) ? 2x : nothing, [1, 2, 3, 4])\n4-element Array{Int64,1}:\n 2\n 2\n 6\n 4\n\njulia> replace(Union{Int,Nothing}[0, 1, 2, nothing, 4], count=2) do x\n           x !== nothing && iseven(x) ? Some(nothing) : nothing\n       end\n5-element Array{Union{Nothing,Int64},1}:\n  nothing\n 1\n  nothing\n  nothing\n 4\n\njulia> replace(Dict(1=>2, 3=>4)) do kv\n           if first(kv) < 3; first(kv)=>3 end\n       end\nDict{Int64,Int64} with 2 entries:\n  3 => 4\n  1 => 3\n\n\n\n\n\n"
+    "text": "replace(new::Function, A; [count::Integer])\n\nReturn a copy of A where each value x in A is replaced by new(x)\n\nExamples\n\njulia> replace(x -> isodd(x) ? 2x : x, [1, 2, 3, 4])\n4-element Array{Int64,1}:\n 2\n 2\n 6\n 4\n\njulia> replace(Dict(1=>2, 3=>4)) do kv\n           first(kv) < 3 ? first(kv)=>3 : kv\n       end\nDict{Int64,Int64} with 2 entries:\n  3 => 4\n  1 => 3\n\n\n\n\n\n"
 },
 
 {
@@ -7149,7 +7149,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Collections and Data Structures",
     "title": "Base.replace!",
     "category": "Function",
-    "text": "replace!(A, old_new::Pair...; [count::Integer])\n\nFor each pair old=>new in old_new, replace all occurrences of old in collection A by new. If count is specified, then replace at most count occurrences in total. See also replace.\n\nExamples\n\njulia> replace!([1, 2, 1, 3], 1=>0, 2=>4, count=2)\n4-element Array{Int64,1}:\n 0\n 4\n 1\n 3\n\njulia> replace!(Set([1, 2, 3]), 1=>0)\nSet([0, 2, 3])\n\n\n\n\n\nreplace!(pred::Function, A, new; [count::Integer])\n\nReplace all occurrences x in collection A for which pred(x) is true by new.\n\nExamples\n\njulia> A = [1, 2, 3, 1];\n\njulia> replace!(isodd, A, 0, count=2)\n4-element Array{Int64,1}:\n 0\n 2\n 0\n 1\n\n\n\n\n\nreplace!(prednew::Function, A; [count::Integer])\n\nFor each value x in A, prednew(x) is called and must return either nothing, in which case no replacement occurs, or a value, possibly wrapped as a Some object, which will be used as a replacement for x.\n\nExamples\n\njulia> replace!(x -> isodd(x) ? 2x : nothing, [1, 2, 3, 4])\n4-element Array{Int64,1}:\n 2\n 2\n 6\n 4\n\njulia> replace!(Union{Int,Nothing}[0, 1, 2, nothing, 4], count=2) do x\n           x !== nothing && iseven(x) ? Some(nothing) : nothing\n       end\n5-element Array{Union{Nothing,Int64},1}:\n  nothing\n 1\n  nothing\n  nothing\n 4\n\njulia> replace!(Dict(1=>2, 3=>4)) do kv\n           if first(kv) < 3; first(kv)=>3 end\n       end\nDict{Int64,Int64} with 2 entries:\n  3 => 4\n  1 => 3\n\njulia> replace!(x->2x, Set([3, 6]))\nSet([6, 12])\n\n\n\n\n\n"
+    "text": "replace!(A, old_new::Pair...; [count::Integer])\n\nFor each pair old=>new in old_new, replace all occurrences of old in collection A by new. If count is specified, then replace at most count occurrences in total. See also replace.\n\nExamples\n\njulia> replace!([1, 2, 1, 3], 1=>0, 2=>4, count=2)\n4-element Array{Int64,1}:\n 0\n 4\n 1\n 3\n\njulia> replace!(Set([1, 2, 3]), 1=>0)\nSet([0, 2, 3])\n\n\n\n\n\nreplace!(pred::Function, A, new; [count::Integer])\n\nReplace all occurrences x in collection A for which pred(x) is true by new.\n\nExamples\n\njulia> A = [1, 2, 3, 1];\n\njulia> replace!(isodd, A, 0, count=2)\n4-element Array{Int64,1}:\n 0\n 2\n 0\n 1\n\n\n\n\n\nreplace!(new::Function, A; [count::Integer])\n\nReplace each element x in collection A by new(x). If count is specified, then replace at most count values in total (replacements being defined as new(x) !== x).\n\nExamples\n\njulia> replace!(x -> isodd(x) ? 2x : x, [1, 2, 3, 4])\n4-element Array{Int64,1}:\n 2\n 2\n 6\n 4\n\njulia> replace!(Dict(1=>2, 3=>4)) do kv\n           first(kv) < 3 ? first(kv)=>3 : kv\n       end\nDict{Int64,Int64} with 2 entries:\n  3 => 4\n  1 => 3\n\njulia> replace!(x->2x, Set([3, 6]))\nSet([6, 12])\n\n\n\n\n\n"
 },
 
 {
@@ -7373,7 +7373,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Collections and Data Structures",
     "title": "Dictionaries",
     "category": "section",
-    "text": "Dict is the standard dictionary. Its implementation uses hash as the hashing function for the key, and isequal to determine equality. Define these two functions for custom types to override how they are stored in a hash table.IdDict is a special hash table where the keys are always object identities.WeakKeyDict is a hash table implementation where the keys are weak references to objects, and thus may be garbage collected even when referenced in a hash table.Dicts can be created by passing pair objects constructed with => to a Dict constructor: Dict(\"A\"=>1, \"B\"=>2). This call will attempt to infer type information from the keys and values (i.e. this example creates a Dict{String, Int64}). To explicitly specify types use the syntax Dict{KeyType,ValueType}(...). For example, Dict{String,Int32}(\"A\"=>1, \"B\"=>2).Dictionaries may also be created with generators. For example, Dict(i => f(i) for i = 1:10).Given a dictionary D, the syntax D[x] returns the value of key x (if it exists) or throws an error, and D[x] = y stores the key-value pair x => y in D (replacing any existing value for the key x).  Multiple arguments to D[...] are converted to tuples; for example, the syntax D[x,y]  is equivalent to D[(x,y)], i.e. it refers to the value keyed by the tuple (x,y).Base.Dict\nBase.IdDict\nBase.WeakKeyDict\nBase.ImmutableDict\nBase.haskey\nBase.get(::Any, ::Any, ::Any)\nBase.get\nBase.get!(::Any, ::Any, ::Any)\nBase.get!(::Function, ::Any, ::Any)\nBase.getkey\nBase.delete!\nBase.pop!(::Any, ::Any, ::Any)\nBase.keys\nBase.values\nBase.pairs\nBase.merge\nBase.merge!(::Associative, ::Associative...)\nBase.merge!(::Function, ::Associative, ::Associative...)\nBase.sizehint!\nBase.keytype\nBase.valtypeFully implemented by:IdDict\nDict\nWeakKeyDictPartially implemented by:BitSet\nSet\nEnvDict\nArray\nBitArray\nImmutableDict\nIterators.IndexValue"
+    "text": "Dict is the standard dictionary. Its implementation uses hash as the hashing function for the key, and isequal to determine equality. Define these two functions for custom types to override how they are stored in a hash table.IdDict is a special hash table where the keys are always object identities.WeakKeyDict is a hash table implementation where the keys are weak references to objects, and thus may be garbage collected even when referenced in a hash table.Dicts can be created by passing pair objects constructed with => to a Dict constructor: Dict(\"A\"=>1, \"B\"=>2). This call will attempt to infer type information from the keys and values (i.e. this example creates a Dict{String, Int64}). To explicitly specify types use the syntax Dict{KeyType,ValueType}(...). For example, Dict{String,Int32}(\"A\"=>1, \"B\"=>2).Dictionaries may also be created with generators. For example, Dict(i => f(i) for i = 1:10).Given a dictionary D, the syntax D[x] returns the value of key x (if it exists) or throws an error, and D[x] = y stores the key-value pair x => y in D (replacing any existing value for the key x).  Multiple arguments to D[...] are converted to tuples; for example, the syntax D[x,y]  is equivalent to D[(x,y)], i.e. it refers to the value keyed by the tuple (x,y).Base.Dict\nBase.IdDict\nBase.WeakKeyDict\nBase.ImmutableDict\nBase.haskey\nBase.get(::Any, ::Any, ::Any)\nBase.get\nBase.get!(::Any, ::Any, ::Any)\nBase.get!(::Function, ::Any, ::Any)\nBase.getkey\nBase.delete!\nBase.pop!(::Any, ::Any, ::Any)\nBase.keys\nBase.values\nBase.pairs\nBase.merge\nBase.merge!(::Associative, ::Associative...)\nBase.merge!(::Function, ::Associative, ::Associative...)\nBase.sizehint!\nBase.keytype\nBase.valtypeFully implemented by:IdDict\nDict\nWeakKeyDictPartially implemented by:BitSet\nSet\nEnvDict\nArray\nBitArray\nImmutableDict\nIterators.Pairs"
 },
 
 {
@@ -7569,11 +7569,11 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "base/collections/#Base.Iterators.IndexValue",
+    "location": "base/collections/#Base.Iterators.Pairs",
     "page": "Collections and Data Structures",
-    "title": "Base.Iterators.IndexValue",
+    "title": "Base.Iterators.Pairs",
     "category": "Type",
-    "text": "Iterators.IndexValue(values, keys) <: AbstractDict{eltype(keys), eltype(values)}\n\nTransforms an indexable container into an Dictionary-view of the same data. Modifying the key-space of the underlying data may invalidate this object.\n\n\n\n\n\n"
+    "text": "Iterators.Pairs(values, keys) <: AbstractDict{eltype(keys), eltype(values)}\n\nTransforms an indexable container into an Dictionary-view of the same data. Modifying the key-space of the underlying data may invalidate this object.\n\n\n\n\n\n"
 },
 
 {
@@ -7581,7 +7581,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Collections and Data Structures",
     "title": "Utility Collections",
     "category": "section",
-    "text": "Base.Pair\nIterators.IndexValue"
+    "text": "Base.Pair\nIterators.Pairs"
 },
 
 {
@@ -7613,7 +7613,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Mathematics",
     "title": "Base.:+",
     "category": "Function",
-    "text": "dt::Date + t::Time -> DateTime\n\nThe addition of a Date with a Time produces a DateTime. The hour, minute, second, and millisecond parts of the Time are used along with the year, month, and day of the Date to create the new DateTime. Non-zero microseconds or nanoseconds in the Time type will result in an InexactError being thrown.\n\n\n\n\n\n+(x, y...)\n\nAddition operator. x+y+z+... calls this function with all arguments, i.e. +(x, y, z, ...).\n\nExamples\n\njulia> 1 + 20 + 4\n25\n\njulia> +(1, 20, 4)\n25\n\n\n\n\n\n"
+    "text": "+(x, y...)\n\nAddition operator. x+y+z+... calls this function with all arguments, i.e. +(x, y, z, ...).\n\nExamples\n\njulia> 1 + 20 + 4\n25\n\njulia> +(1, 20, 4)\n25\n\n\n\n\n\ndt::Date + t::Time -> DateTime\n\nThe addition of a Date with a Time produces a DateTime. The hour, minute, second, and millisecond parts of the Time are used along with the year, month, and day of the Date to create the new DateTime. Non-zero microseconds or nanoseconds in the Time type will result in an InexactError being thrown.\n\n\n\n\n\n"
 },
 
 {
@@ -13029,7 +13029,7 @@ var documenterSearchIndex = {"docs": [
     "page": "I/O and Network",
     "title": "Base.countlines",
     "category": "Function",
-    "text": "countlines(io::IO; eol::Char = '\\n')\n\nRead io until the end of the stream/file and count the number of lines. To specify a file pass the filename as the first argument. EOL markers other than '\\n' are supported by passing them as the second argument.\n\nExamples\n\njulia> io = IOBuffer(\"JuliaLang is a GitHub organization.\n\");\n\njulia> countlines(io)\n1\n\njulia> io = IOBuffer(\"JuliaLang is a GitHub organization.\");\n\njulia> countlines(io)\n0\n\njulia> countlines(io, eol = '.')\n1\n\n\n\n\n\n"
+    "text": "countlines(io::IO; eol::Char = '\\n')\n\nRead io until the end of the stream/file and count the number of lines. To specify a file pass the filename as the first argument. EOL markers other than '\\n' are supported by passing them as the second argument.  The last non-empty line of io is counted even if it does not end with the EOL, matching the length returned by eachline and readlines.\n\nExamples\n\njulia> io = IOBuffer(\"JuliaLang is a GitHub organization.\n\");\n\njulia> countlines(io)\n1\n\njulia> io = IOBuffer(\"JuliaLang is a GitHub organization.\");\n\njulia> countlines(io)\n1\n\njulia> countlines(io, eol = '.')\n1\n\n\n\n\n\n"
 },
 
 {
@@ -20910,1190 +20910,6 @@ var documenterSearchIndex = {"docs": [
     "title": "Summary",
     "category": "section",
     "text": "Writing code that doesn't make assumptions about indexing requires a few extra abstractions, but hopefully the necessary changes are relatively straightforward.As a reminder, this support is still experimental. While much of Julia's base code has been updated to support unconventional indexing, without a doubt there are many omissions that will be discovered only through usage.  Moreover, at the time of this writing, most packages do not support unconventional indexing.  As a consequence, early adopters should be prepared to identify and/or fix bugs.  On the other hand, only through practical usage will it become clear whether this experimental feature should be retained in future versions of Julia; consequently, interested parties are encouraged to accept some ownership for putting it through its paces."
-},
-
-{
-    "location": "devdocs/libgit2/#",
-    "page": "Base.LibGit2",
-    "title": "Base.LibGit2",
-    "category": "page",
-    "text": ""
-},
-
-{
-    "location": "devdocs/libgit2/#Base.LibGit2-1",
-    "page": "Base.LibGit2",
-    "title": "Base.LibGit2",
-    "category": "section",
-    "text": "The LibGit2 module provides bindings to libgit2, a portable C library that implements core functionality for the Git version control system. These bindings are currently used to power Julia's package manager. It is expected that this module will eventually be moved into a separate package."
-},
-
-{
-    "location": "devdocs/libgit2/#Base.LibGit2.Buffer",
-    "page": "Base.LibGit2",
-    "title": "Base.LibGit2.Buffer",
-    "category": "Type",
-    "text": "LibGit2.Buffer\n\nA data buffer for exporting data from libgit2. Matches the git_buf struct.\n\nWhen fetching data from LibGit2, a typical usage would look like:\n\nbuf_ref = Ref(Buffer())\n@check ccall(..., (Ptr{Buffer},), buf_ref)\n# operation on buf_ref\nfree(buf_ref)\n\nIn particular, note that LibGit2.free should be called afterward on the Ref object.\n\n\n\n\n\n"
-},
-
-{
-    "location": "devdocs/libgit2/#Base.LibGit2.CheckoutOptions",
-    "page": "Base.LibGit2",
-    "title": "Base.LibGit2.CheckoutOptions",
-    "category": "Type",
-    "text": "LibGit2.CheckoutOptions\n\nMatches the git_checkout_options struct.\n\nThe fields represent:\n\nversion: version of the struct in use, in case this changes later. For now, always 1.\ncheckout_strategy: determine how to handle conflicts and whether to force the  checkout/recreate missing files.\ndisable_filters: if nonzero, do not apply filters like CLRF (to convert file newlines between UNIX and DOS).\ndir_mode: read/write/access mode for any directories involved in the checkout. Default is 0755.\nfile_mode: read/write/access mode for any files involved in the checkout.  Default is 0755 or 0644, depending on the blob.\nfile_open_flags: bitflags used to open any files during the checkout.\nnotify_flags: Flags for what sort of conflicts the user should be notified about.\nnotify_cb: An optional callback function to notify the user if a checkout conflict occurs.  If this function returns a non-zero value, the checkout will be cancelled.\nnotify_payload: Payload for the notify callback function.\nprogress_cb: An optional callback function to display checkout progress.\nprogress_payload: Payload for the progress callback.\npaths: If not empty, describes which paths to search during the checkout.  If empty, the checkout will occur over all files in the repository.\nbaseline: Expected content of the workdir, captured in a (pointer to a)  GitTree. Defaults to the state of the tree at HEAD.\nbaseline_index: Expected content of the workdir, captured in a (pointer to a)  GitIndex. Defaults to the state of the index at HEAD.\ntarget_directory: If not empty, checkout to this directory instead of the workdir.\nancestor_label: In case of conflicts, the name of the common ancestor side.\nour_label: In case of conflicts, the name of \"our\" side.\ntheir_label: In case of conflicts, the name of \"their\" side.\nperfdata_cb: An optional callback function to display performance data.\nperfdata_payload: Payload for the performance callback.\n\n\n\n\n\n"
-},
-
-{
-    "location": "devdocs/libgit2/#Base.LibGit2.CloneOptions",
-    "page": "Base.LibGit2",
-    "title": "Base.LibGit2.CloneOptions",
-    "category": "Type",
-    "text": "LibGit2.CloneOptions\n\nMatches the git_clone_options struct.\n\nThe fields represent:\n\nversion: version of the struct in use, in case this changes later. For now, always 1.\ncheckout_opts: The options for performing the checkout of the remote as part of the clone.\nfetch_opts: The options for performing the pre-checkout fetch of the remote as part of the clone.\nbare: If 0, clone the full remote repository. If non-zero, perform a bare clone, in which  there is no local copy of the source files in the repository and the gitdir and workdir  are the same.\nlocalclone: Flag whether to clone a local object database or do a fetch. The default is to let git decide.  It will not use the git-aware transport for a local clone, but will use it for URLs which begin with file://.\ncheckout_branch: The name of the branch to checkout. If an empty string, the default branch of the  remote will be checked out.\nrepository_cb: An optional callback which will be used to create the new repository into which  the clone is made.\nrepository_cb_payload: The payload for the repository callback.\nremote_cb: An optional callback used to create the GitRemote before making the clone from it.\nremote_cb_payload: The payload for the remote callback.\n\n\n\n\n\n"
-},
-
-{
-    "location": "devdocs/libgit2/#Base.LibGit2.DescribeOptions",
-    "page": "Base.LibGit2",
-    "title": "Base.LibGit2.DescribeOptions",
-    "category": "Type",
-    "text": "LibGit2.DescribeOptions\n\nMatches the git_describe_options struct.\n\nThe fields represent:\n\nversion: version of the struct in use, in case this changes later. For now, always 1.\nmax_candidates_tags: consider this many most recent tags in refs/tags to describe a commit.  Defaults to 10 (so that the 10 most recent tags would be examined to see if they describe a commit).\ndescribe_strategy: whether to consider all entries in refs/tags (equivalent to git-describe --tags)  or all entries in refs/ (equivalent to git-describe --all). The default is to only show annotated tags.  If Consts.DESCRIBE_TAGS is passed, all tags, annotated or not, will be considered.  If Consts.DESCRIBE_ALL is passed, any ref in refs/ will be considered.\npattern: only consider tags which match pattern. Supports glob expansion.\nonly_follow_first_parent: when finding the distance from a matching reference to the described  object, only consider the distance from the first parent.\nshow_commit_oid_as_fallback: if no matching reference can be found which describes a commit, show the  commit's GitHash instead of throwing an error (the default behavior).\n\n\n\n\n\n"
-},
-
-{
-    "location": "devdocs/libgit2/#Base.LibGit2.DescribeFormatOptions",
-    "page": "Base.LibGit2",
-    "title": "Base.LibGit2.DescribeFormatOptions",
-    "category": "Type",
-    "text": "LibGit2.DescribeFormatOptions\n\nMatches the git_describe_format_options struct.\n\nThe fields represent:\n\nversion: version of the struct in use, in case this changes later. For now, always 1.\nabbreviated_size: lower bound on the size of the abbreviated GitHash to use, defaulting to 7.\nalways_use_long_format: set to 1 to use the long format for strings even if a short format can be used.\ndirty_suffix: if set, this will be appended to the end of the description string if the workdir is dirty.\n\n\n\n\n\n"
-},
-
-{
-    "location": "devdocs/libgit2/#Base.LibGit2.DiffDelta",
-    "page": "Base.LibGit2",
-    "title": "Base.LibGit2.DiffDelta",
-    "category": "Type",
-    "text": "LibGit2.DiffDelta\n\nDescription of changes to one entry. Matches the git_diff_delta struct.\n\nThe fields represent:\n\nstatus: One of Consts.DELTA_STATUS, indicating whether the file has been added/modified/deleted.\nflags: Flags for the delta and the objects on each side. Determines whether to treat the file(s)  as binary/text, whether they exist on each side of the diff, and whether the object ids are known  to be correct.\nsimilarity: Used to indicate if a file has been renamed or copied.\nnfiles: The number of files in the delta (for instance, if the delta  was run on a submodule commit id, it may contain more than one file).\nold_file: A DiffFile containing information about the file(s) before the changes.\nnew_file: A DiffFile containing information about the file(s) after the changes.\n\n\n\n\n\n"
-},
-
-{
-    "location": "devdocs/libgit2/#Base.LibGit2.DiffFile",
-    "page": "Base.LibGit2",
-    "title": "Base.LibGit2.DiffFile",
-    "category": "Type",
-    "text": "LibGit2.DiffFile\n\nDescription of one side of a delta. Matches the git_diff_file struct.\n\nThe fields represent:\n\nid: the GitHash of the item in the diff. If the item is empty on this  side of the diff (for instance, if the diff is of the removal of a file), this will  be GitHash(0).\npath: a NULL terminated path to the item relative to the working directory of the repository.\nsize: the size of the item in bytes.\nflags: a combination of the git_diff_flag_t  flags. The ith bit of this integer sets the ith flag.\nmode: the stat mode for the item.\nid_abbrev: only present in LibGit2 versions newer than or equal to 0.25.0.  The length of the id field when converted using hex. Usually equal to OID_HEXSZ (40).\n\n\n\n\n\n"
-},
-
-{
-    "location": "devdocs/libgit2/#Base.LibGit2.DiffOptionsStruct",
-    "page": "Base.LibGit2",
-    "title": "Base.LibGit2.DiffOptionsStruct",
-    "category": "Type",
-    "text": "LibGit2.DiffOptionsStruct\n\nMatches the git_diff_options struct.\n\nThe fields represent:\n\nversion: version of the struct in use, in case this changes later. For now, always 1.\nflags: flags controlling which files will appear in the diff. Defaults to DIFF_NORMAL.\nignore_submodules: whether to look at files in submodules or not. Defaults to SUBMODULE_IGNORE_UNSPECIFIED, which means the submodule's configuration will control  whether it appears in the diff or not.\npathspec: path to files to include in the diff. Default is to use all files in the repository.\nnotify_cb: optional callback which will notify the user of changes to the diff as file deltas are  added to it.\nprogress_cb: optional callback which will display diff progress. Only relevant on libgit2 versions  at least as new as 0.24.0.\npayload: the payload to pass to notify_cb and progress_cb.\ncontext_lines: the number of unchanged lines used to define the edges of a hunk.  This is also the number of lines which will be shown before/after a hunk to provide  context. Default is 3.\ninterhunk_lines: the maximum number of unchanged lines between two separate  hunks allowed before the hunks will be combined. Default is 0.\nid_abbrev: sets the length of the abbreviated GitHash to print.  Default is 7.\nmax_size: the maximum file size of a blob. Above this size, it will be treated  as a binary blob. The default is 512 MB.\nold_prefix: the virtual file directory in which to place old files on one side  of the diff. Default is \"a\".\nnew_prefix: the virtual file directory in which to place new files on one side  of the diff. Default is \"b\".\n\n\n\n\n\n"
-},
-
-{
-    "location": "devdocs/libgit2/#Base.LibGit2.FetchHead",
-    "page": "Base.LibGit2",
-    "title": "Base.LibGit2.FetchHead",
-    "category": "Type",
-    "text": "LibGit2.FetchHead\n\nContains the information about HEAD during a fetch, including the name and URL of the branch fetched from, the oid of the HEAD, and whether the fetched HEAD has been merged locally.\n\nThe fields represent:\n\nname: The name in the local reference database of the fetch head, for example,  \"refs/heads/master\".\nurl: The URL of the fetch head.\noid: The GitHash of the tip of the fetch head.\nismerge: Boolean flag indicating whether the changes at the  remote have been merged into the local copy yet or not. If true, the local  copy is up to date with the remote fetch head.\n\n\n\n\n\n"
-},
-
-{
-    "location": "devdocs/libgit2/#Base.LibGit2.FetchOptions",
-    "page": "Base.LibGit2",
-    "title": "Base.LibGit2.FetchOptions",
-    "category": "Type",
-    "text": "LibGit2.FetchOptions\n\nMatches the git_fetch_options struct.\n\nThe fields represent:\n\nversion: version of the struct in use, in case this changes later. For now, always 1.\ncallbacks: remote callbacks to use during the fetch.\nprune: whether to perform a prune after the fetch or not. The default is to  use the setting from the GitConfig.\nupdate_fetchhead: whether to update the FetchHead after the fetch.  The default is to perform the update, which is the normal git behavior.\ndownload_tags: whether to download tags present at the remote or not. The default  is to request the tags for objects which are being downloaded anyway from the server.\nproxy_opts: options for connecting to the remote through a proxy. See ProxyOptions.  Only present on libgit2 versions newer than or equal to 0.25.0.\ncustom_headers: any extra headers needed for the fetch. Only present on libgit2 versions  newer than or equal to 0.24.0.\n\n\n\n\n\n"
-},
-
-{
-    "location": "devdocs/libgit2/#Base.LibGit2.GitAnnotated",
-    "page": "Base.LibGit2",
-    "title": "Base.LibGit2.GitAnnotated",
-    "category": "Type",
-    "text": "GitAnnotated(repo::GitRepo, commit_id::GitHash)\nGitAnnotated(repo::GitRepo, ref::GitReference)\nGitAnnotated(repo::GitRepo, fh::FetchHead)\nGitAnnotated(repo::GitRepo, comittish::AbstractString)\n\nAn annotated git commit carries with it information about how it was looked up and why, so that rebase or merge operations have more information about the context of the commit. Conflict files contain information about the source/target branches in the merge which are conflicting, for instance. An annotated commit can refer to the tip of a remote branch, for instance when a FetchHead is passed, or to a branch head described using GitReference.\n\n\n\n\n\n"
-},
-
-{
-    "location": "devdocs/libgit2/#Base.LibGit2.GitBlame",
-    "page": "Base.LibGit2",
-    "title": "Base.LibGit2.GitBlame",
-    "category": "Type",
-    "text": "GitBlame(repo::GitRepo, path::AbstractString; options::BlameOptions=BlameOptions())\n\nConstruct a GitBlame object for the file at path, using change information gleaned from the history of repo. The GitBlame object records who changed which chunks of the file when, and how. options controls how to separate the contents of the file and which commits to probe - see BlameOptions for more information.\n\n\n\n\n\n"
-},
-
-{
-    "location": "devdocs/libgit2/#Base.LibGit2.GitBlob",
-    "page": "Base.LibGit2",
-    "title": "Base.LibGit2.GitBlob",
-    "category": "Type",
-    "text": "GitBlob(repo::GitRepo, hash::AbstractGitHash)\nGitBlob(repo::GitRepo, spec::AbstractString)\n\nReturn a GitBlob object from repo specified by hash/spec.\n\nhash is a full (GitHash) or partial (GitShortHash) hash.\nspec is a textual specification: see the git docs for a full list.\n\n\n\n\n\n"
-},
-
-{
-    "location": "devdocs/libgit2/#Base.LibGit2.GitCommit",
-    "page": "Base.LibGit2",
-    "title": "Base.LibGit2.GitCommit",
-    "category": "Type",
-    "text": "GitCommit(repo::GitRepo, hash::AbstractGitHash)\nGitCommit(repo::GitRepo, spec::AbstractString)\n\nReturn a GitCommit object from repo specified by hash/spec.\n\nhash is a full (GitHash) or partial (GitShortHash) hash.\nspec is a textual specification: see the git docs for a full list.\n\n\n\n\n\n"
-},
-
-{
-    "location": "devdocs/libgit2/#Base.LibGit2.GitHash",
-    "page": "Base.LibGit2",
-    "title": "Base.LibGit2.GitHash",
-    "category": "Type",
-    "text": "GitHash\n\nA git object identifier, based on the sha-1 hash. It is a 20 byte string (40 hex digits) used to identify a GitObject in a repository.\n\n\n\n\n\n"
-},
-
-{
-    "location": "devdocs/libgit2/#Base.LibGit2.GitObject",
-    "page": "Base.LibGit2",
-    "title": "Base.LibGit2.GitObject",
-    "category": "Type",
-    "text": "GitObject(repo::GitRepo, hash::AbstractGitHash)\nGitObject(repo::GitRepo, spec::AbstractString)\n\nReturn the specified object (GitCommit, GitBlob, GitTree or GitTag) from repo specified by hash/spec.\n\nhash is a full (GitHash) or partial (GitShortHash) hash.\nspec is a textual specification: see the git docs for a full list.\n\n\n\n\n\n"
-},
-
-{
-    "location": "devdocs/libgit2/#Base.LibGit2.GitRemote",
-    "page": "Base.LibGit2",
-    "title": "Base.LibGit2.GitRemote",
-    "category": "Type",
-    "text": "GitRemote(repo::GitRepo, rmt_name::AbstractString, rmt_url::AbstractString) -> GitRemote\n\nLook up a remote git repository using its name and URL. Uses the default fetch refspec.\n\nExamples\n\nrepo = LibGit2.init(repo_path)\nremote = LibGit2.GitRemote(repo, \"upstream\", repo_url)\n\n\n\n\n\nGitRemote(repo::GitRepo, rmt_name::AbstractString, rmt_url::AbstractString, fetch_spec::AbstractString) -> GitRemote\n\nLook up a remote git repository using the repository's name and URL, as well as specifications for how to fetch from the remote (e.g. which remote branch to fetch from).\n\nExamples\n\nrepo = LibGit2.init(repo_path)\nrefspec = \"+refs/heads/mybranch:refs/remotes/origin/mybranch\"\nremote = LibGit2.GitRemote(repo, \"upstream\", repo_url, refspec)\n\n\n\n\n\n"
-},
-
-{
-    "location": "devdocs/libgit2/#Base.LibGit2.GitRemoteAnon",
-    "page": "Base.LibGit2",
-    "title": "Base.LibGit2.GitRemoteAnon",
-    "category": "Function",
-    "text": "GitRemoteAnon(repo::GitRepo, url::AbstractString) -> GitRemote\n\nLook up a remote git repository using only its URL, not its name.\n\nExamples\n\nrepo = LibGit2.init(repo_path)\nremote = LibGit2.GitRemoteAnon(repo, repo_url)\n\n\n\n\n\n"
-},
-
-{
-    "location": "devdocs/libgit2/#Base.LibGit2.GitRepo",
-    "page": "Base.LibGit2",
-    "title": "Base.LibGit2.GitRepo",
-    "category": "Type",
-    "text": "LibGit2.GitRepo(path::AbstractString)\n\nOpen a git repository at path.\n\n\n\n\n\n"
-},
-
-{
-    "location": "devdocs/libgit2/#Base.LibGit2.GitRepoExt",
-    "page": "Base.LibGit2",
-    "title": "Base.LibGit2.GitRepoExt",
-    "category": "Function",
-    "text": "LibGit2.GitRepoExt(path::AbstractString, flags::Cuint = Cuint(Consts.REPOSITORY_OPEN_DEFAULT))\n\nOpen a git repository at path with extended controls (for instance, if the current user must be a member of a special access group to read path).\n\n\n\n\n\n"
-},
-
-{
-    "location": "devdocs/libgit2/#Base.LibGit2.GitRevWalker",
-    "page": "Base.LibGit2",
-    "title": "Base.LibGit2.GitRevWalker",
-    "category": "Type",
-    "text": "GitRevWalker(repo::GitRepo)\n\nA GitRevWalker walks through the revisions (i.e. commits) of a git repository repo. It is a collection of the commits in the repository, and supports iteration and calls to map and count (for instance, count could be used to determine what percentage of commits in a repository were made by a certain author).\n\ncnt = LibGit2.with(LibGit2.GitRevWalker(repo)) do walker\n    count((oid,repo)->(oid == commit_oid1), walker, oid=commit_oid1, by=LibGit2.Consts.SORT_TIME)\nend\n\nHere, count finds the number of commits along the walk with a certain GitHash. Since the GitHash is unique to a commit, cnt will be 1.\n\n\n\n\n\n"
-},
-
-{
-    "location": "devdocs/libgit2/#Base.LibGit2.GitShortHash",
-    "page": "Base.LibGit2",
-    "title": "Base.LibGit2.GitShortHash",
-    "category": "Type",
-    "text": "GitShortHash(hash::GitHash, len::Integer)\n\nA shortened git object identifier, which can be used to identify a git object when it is unique, consisting of the initial len hexadecimal digits of hash (the remaining digits are ignored).\n\n\n\n\n\n"
-},
-
-{
-    "location": "devdocs/libgit2/#Base.LibGit2.GitSignature",
-    "page": "Base.LibGit2",
-    "title": "Base.LibGit2.GitSignature",
-    "category": "Type",
-    "text": "LibGit2.GitSignature\n\nThis is a Julia wrapper around a pointer to a git_signature object.\n\n\n\n\n\n"
-},
-
-{
-    "location": "devdocs/libgit2/#Base.LibGit2.GitStatus",
-    "page": "Base.LibGit2",
-    "title": "Base.LibGit2.GitStatus",
-    "category": "Type",
-    "text": "LibGit2.GitStatus(repo::GitRepo; status_opts=StatusOptions())\n\nCollect information about the status of each file in the git repository repo (e.g. is the file modified, staged, etc.). status_opts can be used to set various options, for instance whether or not to look at untracked files or whether to include submodules or not. See StatusOptions for more information.\n\n\n\n\n\n"
-},
-
-{
-    "location": "devdocs/libgit2/#Base.LibGit2.GitTag",
-    "page": "Base.LibGit2",
-    "title": "Base.LibGit2.GitTag",
-    "category": "Type",
-    "text": "GitTag(repo::GitRepo, hash::AbstractGitHash)\nGitTag(repo::GitRepo, spec::AbstractString)\n\nReturn a GitTag object from repo specified by hash/spec.\n\nhash is a full (GitHash) or partial (GitShortHash) hash.\nspec is a textual specification: see the git docs for a full list.\n\n\n\n\n\n"
-},
-
-{
-    "location": "devdocs/libgit2/#Base.LibGit2.GitTree",
-    "page": "Base.LibGit2",
-    "title": "Base.LibGit2.GitTree",
-    "category": "Type",
-    "text": "GitTree(repo::GitRepo, hash::AbstractGitHash)\nGitTree(repo::GitRepo, spec::AbstractString)\n\nReturn a GitTree object from repo specified by hash/spec.\n\nhash is a full (GitHash) or partial (GitShortHash) hash.\nspec is a textual specification: see the git docs for a full list.\n\n\n\n\n\n"
-},
-
-{
-    "location": "devdocs/libgit2/#Base.LibGit2.IndexEntry",
-    "page": "Base.LibGit2",
-    "title": "Base.LibGit2.IndexEntry",
-    "category": "Type",
-    "text": "LibGit2.IndexEntry\n\nIn-memory representation of a file entry in the index. Matches the git_index_entry struct.\n\n\n\n\n\n"
-},
-
-{
-    "location": "devdocs/libgit2/#Base.LibGit2.IndexTime",
-    "page": "Base.LibGit2",
-    "title": "Base.LibGit2.IndexTime",
-    "category": "Type",
-    "text": "LibGit2.IndexTime\n\nMatches the git_index_time struct.\n\n\n\n\n\n"
-},
-
-{
-    "location": "devdocs/libgit2/#Base.LibGit2.BlameOptions",
-    "page": "Base.LibGit2",
-    "title": "Base.LibGit2.BlameOptions",
-    "category": "Type",
-    "text": "LibGit2.BlameOptions\n\nMatches the git_blame_options struct.\n\nThe fields represent:\n\nversion: version of the struct in use, in case this changes later. For now, always 1.\nflags: one of Consts.BLAME_NORMAL or Consts.BLAME_FIRST_PARENT (the other blame flags  are not yet implemented by libgit2).\nmin_match_characters: the minimum number of alphanumeric characters which much change in a commit in order for the change to be associated with that commit. The default is 20. Only takes effect if one of the Consts.BLAME_*_COPIES flags are used, which libgit2 does not implement yet.\nnewest_commit: the GitHash of the newest commit from which to look at changes.\noldest_commit: the GitHash of the oldest commit from which to look at changes.\nmin_line: the first line of the file from which to starting blaming. The default is 1.\nmax_line: the last line of the file to which to blame. The default is 0, meaning the last line of the file.\n\n\n\n\n\n"
-},
-
-{
-    "location": "devdocs/libgit2/#Base.LibGit2.MergeOptions",
-    "page": "Base.LibGit2",
-    "title": "Base.LibGit2.MergeOptions",
-    "category": "Type",
-    "text": "LibGit2.MergeOptions\n\nMatches the git_merge_options struct.\n\nThe fields represent:\n\nversion: version of the struct in use, in case this changes later. For now, always 1.\nflags: an enum for flags describing merge behavior.  Defined in git_merge_flag_t.  The corresponding Julia enum is GIT_MERGE and has values:\nMERGE_FIND_RENAMES: detect if a file has been renamed between the common ancestor and the \"ours\" or \"theirs\" side of the merge. Allows merges where a file has been renamed.\nMERGE_FAIL_ON_CONFLICT: exit immediately if a conflict is found rather than trying to resolve it.\nMERGE_SKIP_REUC: do not write the REUC extension on the index resulting from the merge.\nMERGE_NO_RECURSIVE: if the commits being merged have multiple merge bases, use the first one, rather than trying to recursively merge the bases.\nrename_threshold: how similar two files must to consider one a rename of the other. This is an integer that sets the percentage similarity. The default is 50.\ntarget_limit: the maximum number of files to compare with to look for renames. The default is 200.\nmetric: optional custom function to use to determine the similarity between two files for rename detection.\nrecursion_limit: the upper limit on the number of merges of common ancestors to perform to try to build a new virtual merge base for the merge. The default is no limit. This field is only present on libgit2 versions newer than 0.24.0.\ndefault_driver: the merge driver to use if both sides have changed. This field is only present on libgit2 versions newer than 0.25.0.\nfile_favor: how to handle conflicting file contents for the text driver.\nMERGE_FILE_FAVOR_NORMAL: if both sides of the merge have changes to a section,  make a note of the conflict in the index which git checkout will use to create  a merge file, which the user can then reference to resolve the conflicts. This is  the default.\nMERGE_FILE_FAVOR_OURS: if both sides of the merge have changes to a section,  use the version in the \"ours\" side of the merge in the index.\nMERGE_FILE_FAVOR_THEIRS: if both sides of the merge have changes to a section,  use the version in the \"theirs\" side of the merge in the index.\nMERGE_FILE_FAVOR_UNION: if both sides of the merge have changes to a section,  include each unique line from both sides in the file which is put into the index.\nfile_flags: guidelines for merging files.\n\n\n\n\n\n"
-},
-
-{
-    "location": "devdocs/libgit2/#Base.LibGit2.ProxyOptions",
-    "page": "Base.LibGit2",
-    "title": "Base.LibGit2.ProxyOptions",
-    "category": "Type",
-    "text": "LibGit2.ProxyOptions\n\nOptions for connecting through a proxy.\n\nMatches the git_proxy_options struct.\n\nThe fields represent:\n\nversion: version of the struct in use, in case this changes later. For now, always 1.\nproxytype: an enum for the type of proxy to use.  Defined in git_proxy_t.  The corresponding Julia enum is GIT_PROXY and has values:\nPROXY_NONE: do not attempt the connection through a proxy.\nPROXY_AUTO: attempt to figure out the proxy configuration from the git configuration.\nPROXY_SPECIFIED: connect using the URL given in the url field of this struct.\nDefault is to auto-detect the proxy type.\nurl: the URL of the proxy.\ncredential_cb: a pointer to a callback function which will be called if the remote requires authentication to connect.\ncertificate_cb: a pointer to a callback function which will be called if certificate verification fails. This lets the user decide whether or not to keep connecting. If the function returns 1, connecting will be allowed. If it returns 0, the connection will not be allowed. A negative value can be used to return errors.\npayload: the payload to be provided to the two callback functions.\n\nExamples\n\njulia> fo = LibGit2.FetchOptions(\n           proxy_opts = LibGit2.ProxyOptions(url = Cstring(\"https://my_proxy_url.com\")))\n\njulia> fetch(remote, \"master\", options=fo)\n\n\n\n\n\n"
-},
-
-{
-    "location": "devdocs/libgit2/#Base.LibGit2.PushOptions",
-    "page": "Base.LibGit2",
-    "title": "Base.LibGit2.PushOptions",
-    "category": "Type",
-    "text": "LibGit2.PushOptions\n\nMatches the git_push_options struct.\n\nThe fields represent:\n\nversion: version of the struct in use, in case this changes later. For now, always 1.\nparallelism: if a pack file must be created, this variable sets the number of worker  threads which will be spawned by the packbuilder. If 0, the packbuilder will auto-set  the number of threads to use. The default is 1.\ncallbacks: the callbacks (e.g. for authentication with the remote) to use for the push.\nproxy_opts: only relevant if the LibGit2 version is greater than or equal to 0.25.0.  Sets options for using a proxy to communicate with a remote. See ProxyOptions  for more information.\ncustom_headers: only relevant if the LibGit2 version is greater than or equal to 0.24.0.  Extra headers needed for the push operation.\n\n\n\n\n\n"
-},
-
-{
-    "location": "devdocs/libgit2/#Base.LibGit2.RebaseOperation",
-    "page": "Base.LibGit2",
-    "title": "Base.LibGit2.RebaseOperation",
-    "category": "Type",
-    "text": "LibGit2.RebaseOperation\n\nDescribes a single instruction/operation to be performed during the rebase. Matches the git_rebase_operation struct.\n\nThe fields represent:\n\noptype: the type of rebase operation currently being performed. The options are:\nREBASE_OPERATION_PICK: cherry-pick the commit in question.\nREBASE_OPERATION_REWORD: cherry-pick the commit in question, but rewrite its message using the prompt.\nREBASE_OPERATION_EDIT: cherry-pick the commit in question, but allow the user to edit the commit's contents and its message.\nREBASE_OPERATION_SQUASH: squash the commit in question into the previous commit. The commit messages of the two commits will be merged.\nREBASE_OPERATION_FIXUP: squash the commit in question into the previous commit. Only the commit message of the previous commit will be used.\nREBASE_OPERATION_EXEC: do not cherry-pick a commit. Run a command and continue if the command exits successfully.\nid: the GitHash of the commit being worked on during this rebase step.\nexec: in case REBASE_OPERATION_EXEC is used, the command to run during this step (for instance, running the test suite after each commit).\n\n\n\n\n\n"
-},
-
-{
-    "location": "devdocs/libgit2/#Base.LibGit2.RebaseOptions",
-    "page": "Base.LibGit2",
-    "title": "Base.LibGit2.RebaseOptions",
-    "category": "Type",
-    "text": "LibGit2.RebaseOptions\n\nMatches the git_rebase_options struct.\n\nThe fields represent:\n\nversion: version of the struct in use, in case this changes later. For now, always 1.\nquiet: inform other git clients helping with/working on the rebase that the rebase should be done \"quietly\". Used for interoperability. The default is 1.\ninmemory: start an in-memory rebase. Callers working on the rebase can go through its steps and commit any changes, but cannot rewind HEAD or update the repository. The workdir will not be modified. Only present on libgit2 versions newer than or equal to 0.24.0.\nrewrite_notes_ref: name of the reference to notes to use to rewrite the commit notes as the rebase is finished.\nmerge_opts: merge options controlling how the trees will be merged at each rebase step.  Only present on libgit2 versions newer than or equal to 0.24.0.\ncheckout_opts: checkout options for writing files when initializing the rebase, stepping through it, and aborting it. See CheckoutOptions for more information.\n\n\n\n\n\n"
-},
-
-{
-    "location": "devdocs/libgit2/#Base.LibGit2.RemoteCallbacks",
-    "page": "Base.LibGit2",
-    "title": "Base.LibGit2.RemoteCallbacks",
-    "category": "Type",
-    "text": "LibGit2.RemoteCallbacks\n\nCallback settings. Matches the git_remote_callbacks struct.\n\n\n\n\n\n"
-},
-
-{
-    "location": "devdocs/libgit2/#Base.LibGit2.SignatureStruct",
-    "page": "Base.LibGit2",
-    "title": "Base.LibGit2.SignatureStruct",
-    "category": "Type",
-    "text": "LibGit2.SignatureStruct\n\nAn action signature (e.g. for committers, taggers, etc). Matches the git_signature struct.\n\nThe fields represent:\n\nname: The full name of the committer or author of the commit.\nemail: The email at which the committer/author can be contacted.\nwhen: a TimeStruct indicating when the commit was  authored/committed into the repository.\n\n\n\n\n\n"
-},
-
-{
-    "location": "devdocs/libgit2/#Base.LibGit2.StatusEntry",
-    "page": "Base.LibGit2",
-    "title": "Base.LibGit2.StatusEntry",
-    "category": "Type",
-    "text": "LibGit2.StatusEntry\n\nProviding the differences between the file as it exists in HEAD and the index, and providing the differences between the index and the working directory. Matches the git_status_entry struct.\n\nThe fields represent:\n\nstatus: contains the status flags for the file, indicating if it is current, or has been changed in some way in the index or work tree.\nhead_to_index: a pointer to a DiffDelta which encapsulates the difference(s) between the file as it exists in HEAD and in the index.\nindex_to_workdir: a pointer to a DiffDelta which encapsulates the difference(s) between the file as it exists in the index and in the workdir.\n\n\n\n\n\n"
-},
-
-{
-    "location": "devdocs/libgit2/#Base.LibGit2.StatusOptions",
-    "page": "Base.LibGit2",
-    "title": "Base.LibGit2.StatusOptions",
-    "category": "Type",
-    "text": "LibGit2.StatusOptions\n\nOptions to control how git_status_foreach_ext() will issue callbacks. Matches the git_status_opt_t struct.\n\nThe fields represent:\n\nversion: version of the struct in use, in case this changes later. For now, always 1.\nshow: a flag for which files to examine and in which order. The default is Consts.STATUS_SHOW_INDEX_AND_WORKDIR.\nflags: flags for controlling any callbacks used in a status call.\npathspec: an array of paths to use for path-matching. The behavior of the path-matching will vary depending on the values of show and flags.\n\n\n\n\n\n"
-},
-
-{
-    "location": "devdocs/libgit2/#Base.LibGit2.StrArrayStruct",
-    "page": "Base.LibGit2",
-    "title": "Base.LibGit2.StrArrayStruct",
-    "category": "Type",
-    "text": "LibGit2.StrArrayStruct\n\nA LibGit2 representation of an array of strings. Matches the git_strarray struct.\n\nWhen fetching data from LibGit2, a typical usage would look like:\n\nsa_ref = Ref(StrArrayStruct())\n@check ccall(..., (Ptr{StrArrayStruct},), sa_ref)\nres = convert(Vector{String}, sa_ref[])\nfree(sa_ref)\n\nIn particular, note that LibGit2.free should be called afterward on the Ref object.\n\nConversely, when passing a vector of strings to LibGit2, it is generally simplest to rely on implicit conversion:\n\nstrs = String[...]\n@check ccall(..., (Ptr{StrArrayStruct},), strs)\n\nNote that no call to free is required as the data is allocated by Julia.\n\n\n\n\n\n"
-},
-
-{
-    "location": "devdocs/libgit2/#Base.LibGit2.TimeStruct",
-    "page": "Base.LibGit2",
-    "title": "Base.LibGit2.TimeStruct",
-    "category": "Type",
-    "text": "LibGit2.TimeStruct\n\nTime in a signature. Matches the git_time struct.\n\n\n\n\n\n"
-},
-
-{
-    "location": "devdocs/libgit2/#Base.LibGit2.add!",
-    "page": "Base.LibGit2",
-    "title": "Base.LibGit2.add!",
-    "category": "Function",
-    "text": "add!(repo::GitRepo, files::AbstractString...; flags::Cuint = Consts.INDEX_ADD_DEFAULT)\nadd!(idx::GitIndex, files::AbstractString...; flags::Cuint = Consts.INDEX_ADD_DEFAULT)\n\nAdd all the files with paths specified by files to the index idx (or the index of the repo). If the file already exists, the index entry will be updated. If the file does not exist already, it will be newly added into the index. files may contain glob patterns which will be expanded and any matching files will be added (unless INDEX_ADD_DISABLE_PATHSPEC_MATCH is set, see below). If a file has been ignored (in .gitignore or in the config), it will not be added, unless it is already being tracked in the index, in which case it will be updated. The keyword argument flags is a set of bit-flags which control the behavior with respect to ignored files:\n\nConsts.INDEX_ADD_DEFAULT - default, described above.\nConsts.INDEX_ADD_FORCE - disregard the existing ignore rules and force addition of the file to the index even if it is already ignored.\nConsts.INDEX_ADD_CHECK_PATHSPEC - cannot be used at the same time as INDEX_ADD_FORCE. Check that each file in files which exists on disk is not in the ignore list. If one of the files is ignored, the function will return EINVALIDSPEC.\nConsts.INDEX_ADD_DISABLE_PATHSPEC_MATCH - turn off glob matching, and only add files to the index which exactly match the paths specified in files.\n\n\n\n\n\n"
-},
-
-{
-    "location": "devdocs/libgit2/#Base.LibGit2.add_fetch!",
-    "page": "Base.LibGit2",
-    "title": "Base.LibGit2.add_fetch!",
-    "category": "Function",
-    "text": "add_fetch!(repo::GitRepo, rmt::GitRemote, fetch_spec::String)\n\nAdd a fetch refspec for the specified rmt. This refspec will contain information about which branch(es) to fetch from.\n\nExamples\n\njulia> LibGit2.add_fetch!(repo, remote, \"upstream\");\n\njulia> LibGit2.fetch_refspecs(remote)\nString[\"+refs/heads/*:refs/remotes/upstream/*\"]\n\n\n\n\n\n"
-},
-
-{
-    "location": "devdocs/libgit2/#Base.LibGit2.add_push!",
-    "page": "Base.LibGit2",
-    "title": "Base.LibGit2.add_push!",
-    "category": "Function",
-    "text": "add_push!(repo::GitRepo, rmt::GitRemote, push_spec::String)\n\nAdd a push refspec for the specified rmt. This refspec will contain information about which branch(es) to push to.\n\nExamples\n\njulia> LibGit2.add_push!(repo, remote, \"refs/heads/master\");\n\njulia> remote = LibGit2.get(LibGit2.GitRemote, repo, branch);\n\njulia> LibGit2.push_refspecs(remote)\nString[\"refs/heads/master\"]\n\nnote: Note\nYou may need to close and reopen the GitRemote in question after updating its push refspecs in order for the change to take effect and for calls to push to work.\n\n\n\n\n\n"
-},
-
-{
-    "location": "devdocs/libgit2/#Base.LibGit2.addblob!",
-    "page": "Base.LibGit2",
-    "title": "Base.LibGit2.addblob!",
-    "category": "Function",
-    "text": "LibGit2.addblob!(repo::GitRepo, path::AbstractString)\n\nRead the file at path and adds it to the object database of repo as a loose blob. Return the GitHash of the resulting blob.\n\nExamples\n\nhash_str = hex(commit_oid)\nblob_file = joinpath(repo_path, \".git\", \"objects\", hash_str[1:2], hash_str[3:end])\nid = LibGit2.addblob!(repo, blob_file)\n\n\n\n\n\n"
-},
-
-{
-    "location": "devdocs/libgit2/#Base.LibGit2.author",
-    "page": "Base.LibGit2",
-    "title": "Base.LibGit2.author",
-    "category": "Function",
-    "text": "author(c::GitCommit)\n\nReturn the Signature of the author of the commit c. The author is the person who made changes to the relevant file(s). See also committer.\n\n\n\n\n\n"
-},
-
-{
-    "location": "devdocs/libgit2/#Base.LibGit2.authors",
-    "page": "Base.LibGit2",
-    "title": "Base.LibGit2.authors",
-    "category": "Function",
-    "text": "authors(repo::GitRepo) -> Vector{Signature}\n\nReturn all authors of commits to the repo repository.\n\nExamples\n\nrepo = LibGit2.GitRepo(repo_path)\nrepo_file = open(joinpath(repo_path, test_file), \"a\")\n\nprintln(repo_file, commit_msg)\nflush(repo_file)\nLibGit2.add!(repo, test_file)\nsig = LibGit2.Signature(\"TEST\", \"TEST@TEST.COM\", round(time(), 0), 0)\ncommit_oid1 = LibGit2.commit(repo, \"commit1\"; author=sig, committer=sig)\nprintln(repo_file, randstring(10))\nflush(repo_file)\nLibGit2.add!(repo, test_file)\ncommit_oid2 = LibGit2.commit(repo, \"commit2\"; author=sig, committer=sig)\n\n# will be a Vector of [sig, sig]\nauths = LibGit2.authors(repo)\n\n\n\n\n\n"
-},
-
-{
-    "location": "devdocs/libgit2/#Base.LibGit2.branch",
-    "page": "Base.LibGit2",
-    "title": "Base.LibGit2.branch",
-    "category": "Function",
-    "text": "branch(repo::GitRepo)\n\nEquivalent to git branch. Create a new branch from the current HEAD.\n\n\n\n\n\n"
-},
-
-{
-    "location": "devdocs/libgit2/#Base.LibGit2.branch!",
-    "page": "Base.LibGit2",
-    "title": "Base.LibGit2.branch!",
-    "category": "Function",
-    "text": "branch!(repo::GitRepo, branch_name::AbstractString, commit::AbstractString=\"\"; kwargs...)\n\nCheckout a new git branch in the repo repository. commit is the GitHash, in string form, which will be the start of the new branch. If commit is an empty string, the current HEAD will be used.\n\nThe keyword arguments are:\n\ntrack::AbstractString=\"\": the name of the remote branch this new branch should track, if any. If empty (the default), no remote branch will be tracked.\nforce::Bool=false: if true, branch creation will be forced.\nset_head::Bool=true: if true, after the branch creation finishes the branch head will be set as the HEAD of repo.\n\nEquivalent to git checkout [-b|-B] <branch_name> [<commit>] [--track <track>].\n\nExamples\n\nrepo = LibGit2.GitRepo(repo_path)\nLibGit2.branch!(repo, \"new_branch\", set_head=false)\n\n\n\n\n\n"
-},
-
-{
-    "location": "devdocs/libgit2/#Base.LibGit2.checkout!",
-    "page": "Base.LibGit2",
-    "title": "Base.LibGit2.checkout!",
-    "category": "Function",
-    "text": "checkout!(repo::GitRepo, commit::AbstractString=\"\"; force::Bool=true)\n\nEquivalent to git checkout [-f] --detach <commit>. Checkout the git commit commit (a GitHash in string form) in repo. If force is true, force the checkout and discard any current changes. Note that this detaches the current HEAD.\n\nExamples\n\nrepo = LibGit2.init(repo_path)\nopen(joinpath(LibGit2.path(repo), \"file1\"), \"w\") do f\n    write(f, \"111\n\")\nend\nLibGit2.add!(repo, \"file1\")\ncommit_oid = LibGit2.commit(repo, \"add file1\")\nopen(joinpath(LibGit2.path(repo), \"file1\"), \"w\") do f\n    write(f, \"112\n\")\nend\n# would fail without the force=true\n# since there are modifications to the file\nLibGit2.checkout!(repo, string(commit_oid), force=true)\n\n\n\n\n\n"
-},
-
-{
-    "location": "devdocs/libgit2/#Base.LibGit2.clone",
-    "page": "Base.LibGit2",
-    "title": "Base.LibGit2.clone",
-    "category": "Function",
-    "text": "clone(repo_url::AbstractString, repo_path::AbstractString, clone_opts::CloneOptions)\n\nClone the remote repository at repo_url (which can be a remote URL or a path on the local filesystem) to repo_path (which must be a path on the local filesystem). Options for the clone, such as whether to perform a bare clone or not, are set by CloneOptions.\n\nExamples\n\nrepo_url = \"https://github.com/JuliaLang/Example.jl\"\nrepo = LibGit2.clone(repo_url, \"/home/me/projects/Example\")\n\n\n\n\n\nclone(repo_url::AbstractString, repo_path::AbstractString; kwargs...)\n\nClone a remote repository located at repo_url to the local filesystem location repo_path.\n\nThe keyword arguments are:\n\nbranch::AbstractString=\"\": which branch of the remote to clone, if not the default repository branch (usually master).\nisbare::Bool=false: if true, clone the remote as a bare repository, which will make repo_path itself the git directory instead of repo_path/.git. This means that a working tree cannot be checked out. Plays the role of the git CLI argument --bare.\nremote_cb::Ptr{Cvoid}=C_NULL: a callback which will be used to create the remote before it is cloned. If C_NULL (the default), no attempt will be made to create the remote - it will be assumed to already exist.\npayload::CredentialPayload=CredentialPayload(): provides credentials and/or settings when authenticating against a private repository.\n\nEquivalent to git clone [-b <branch>] [--bare] <repo_url> <repo_path>.\n\nExamples\n\nrepo_url = \"https://github.com/JuliaLang/Example.jl\"\nrepo1 = LibGit2.clone(repo_url, \"test_path\")\nrepo2 = LibGit2.clone(repo_url, \"test_path\", isbare=true)\njulia_url = \"https://github.com/JuliaLang/julia\"\njulia_repo = LibGit2.clone(julia_url, \"julia_path\", branch=\"release-0.6\")\n\n\n\n\n\n"
-},
-
-{
-    "location": "devdocs/libgit2/#Base.LibGit2.commit",
-    "page": "Base.LibGit2",
-    "title": "Base.LibGit2.commit",
-    "category": "Function",
-    "text": "commit(repo::GitRepo, msg::AbstractString; kwargs...) -> GitHash\n\nWrapper around git_commit_create. Create a commit in the repository repo. msg is the commit message. Return the OID of the new commit.\n\nThe keyword arguments are:\n\nrefname::AbstractString=Consts.HEAD_FILE: if not NULL, the name of the reference to update to point to the new commit. For example, \"HEAD\" will update the HEAD of the current branch. If the reference does not yet exist, it will be created.\nauthor::Signature = Signature(repo) is a Signature containing information about the person who authored the commit.\ncommitter::Signature = Signature(repo) is a Signature containing information about the person who commited the commit to the repository. Not necessarily the same as author, for instance if author emailed a patch to committer who committed it.\ntree_id::GitHash = GitHash() is a git tree to use to create the commit, showing its ancestry and relationship with any other history. tree must belong to repo.\nparent_ids::Vector{GitHash}=GitHash[] is a list of commits by GitHash to use as parent commits for the new one, and may be empty. A commit might have multiple parents if it is a merge commit, for example.\n\n\n\n\n\nLibGit2.commit(rb::GitRebase, sig::GitSignature)\n\nCommit the current patch to the rebase rb, using sig as the committer. Is silent if the commit has already been applied.\n\n\n\n\n\n"
-},
-
-{
-    "location": "devdocs/libgit2/#Base.LibGit2.committer",
-    "page": "Base.LibGit2",
-    "title": "Base.LibGit2.committer",
-    "category": "Function",
-    "text": "committer(c::GitCommit)\n\nReturn the Signature of the committer of the commit c. The committer is the person who committed the changes originally authored by the author, but need not be the same as the author, for example, if the author emailed a patch to a committer who committed it.\n\n\n\n\n\n"
-},
-
-{
-    "location": "devdocs/libgit2/#Base.count-Tuple{Function,Base.LibGit2.GitRevWalker}",
-    "page": "Base.LibGit2",
-    "title": "Base.count",
-    "category": "Method",
-    "text": "LibGit2.count(f::Function, walker::GitRevWalker; oid::GitHash=GitHash(), by::Cint=Consts.SORT_NONE, rev::Bool=false)\n\nUsing the GitRevWalker walker to \"walk\" over every commit in the repository's history, find the number of commits which return true when f is applied to them. The keyword arguments are:     * oid: The GitHash of the commit to begin the walk from. The default is to use       push_head! and therefore the HEAD commit and all its ancestors.     * by: The sorting method. The default is not to sort. Other options are to sort by       topology (LibGit2.Consts.SORT_TOPOLOGICAL), to sort forwards in time       (LibGit2.Consts.SORT_TIME, most ancient first) or to sort backwards in time       (LibGit2.Consts.SORT_REVERSE, most recent first).     * rev: Whether to reverse the sorted order (for instance, if topological sorting is used).\n\nExamples\n\ncnt = LibGit2.with(LibGit2.GitRevWalker(repo)) do walker\n    count((oid, repo)->(oid == commit_oid1), walker, oid=commit_oid1, by=LibGit2.Consts.SORT_TIME)\nend\n\ncount finds the number of commits along the walk with a certain GitHash commit_oid1, starting the walk from that commit and moving forwards in time from it. Since the GitHash is unique to a commit, cnt will be 1.\n\n\n\n\n\n"
-},
-
-{
-    "location": "devdocs/libgit2/#Base.LibGit2.counthunks",
-    "page": "Base.LibGit2",
-    "title": "Base.LibGit2.counthunks",
-    "category": "Function",
-    "text": "counthunks(blame::GitBlame)\n\nReturn the number of distinct \"hunks\" with a file. A hunk may contain multiple lines. A hunk is usually a piece of a file that was added/changed/removed together, for example, a function added to a source file or an inner loop that was optimized out of that function later.\n\n\n\n\n\n"
-},
-
-{
-    "location": "devdocs/libgit2/#Base.LibGit2.create_branch",
-    "page": "Base.LibGit2",
-    "title": "Base.LibGit2.create_branch",
-    "category": "Function",
-    "text": "LibGit2.create_branch(repo::GitRepo, bname::AbstractString, commit_obj::GitCommit; force::Bool=false)\n\nCreate a new branch in the repository repo with name bname, which points to commit commit_obj (which has to be part of repo). If force is true, overwrite an existing branch named bname if it exists. If force is false and a branch already exists named bname, this function will throw an error.\n\n\n\n\n\n"
-},
-
-{
-    "location": "devdocs/libgit2/#Base.LibGit2.credentials_callback",
-    "page": "Base.LibGit2",
-    "title": "Base.LibGit2.credentials_callback",
-    "category": "Function",
-    "text": "credential_callback(...) -> Cint\n\nA LibGit2 credential callback function which provides different credential acquisition functionality w.r.t. a connection protocol. The payload_ptr is required to contain a LibGit2.CredentialPayload object which will keep track of state and settings.\n\nThe allowed_types contains a bitmask of LibGit2.Consts.GIT_CREDTYPE values specifying which authentication methods should be attempted.\n\nCredential authentication is done in the following order (if supported):\n\nSSH agent\nSSH private/public key pair\nUsername/password plain text\n\nIf a user is presented with a credential prompt they can abort the prompt by typing ^D (pressing the control key together with the d key).\n\nNote: Due to the specifics of the libgit2 authentication procedure, when authentication fails, this function is called again without any indication whether authentication was successful or not. To avoid an infinite loop from repeatedly using the same faulty credentials, we will keep track of state using the payload.\n\nFor addition details see the LibGit2 guide on authenticating against a server.\n\n\n\n\n\n"
-},
-
-{
-    "location": "devdocs/libgit2/#Base.LibGit2.credentials_cb",
-    "page": "Base.LibGit2",
-    "title": "Base.LibGit2.credentials_cb",
-    "category": "Function",
-    "text": "C function pointer for credentials_callback\n\n\n\n\n\n"
-},
-
-{
-    "location": "devdocs/libgit2/#Base.LibGit2.default_signature",
-    "page": "Base.LibGit2",
-    "title": "Base.LibGit2.default_signature",
-    "category": "Function",
-    "text": "Return signature object. Free it after use.\n\n\n\n\n\n"
-},
-
-{
-    "location": "devdocs/libgit2/#Base.LibGit2.delete_branch",
-    "page": "Base.LibGit2",
-    "title": "Base.LibGit2.delete_branch",
-    "category": "Function",
-    "text": "LibGit2.delete_branch(branch::GitReference)\n\nDelete the branch pointed to by branch.\n\n\n\n\n\n"
-},
-
-{
-    "location": "devdocs/libgit2/#Base.LibGit2.diff_files",
-    "page": "Base.LibGit2",
-    "title": "Base.LibGit2.diff_files",
-    "category": "Function",
-    "text": "diff_files(repo::GitRepo, branch1::AbstractString, branch2::AbstractString; kwarg...) -> Vector{AbstractString}\n\nShow which files have changed in the git repository repo between branches branch1 and branch2.\n\nThe keyword argument is:\n\nfilter::Set{Consts.DELTA_STATUS}=Set([Consts.DELTA_ADDED, Consts.DELTA_MODIFIED, Consts.DELTA_DELETED])), and it sets options for the diff. The default is to show files added, modified, or deleted.\n\nReturn only the names of the files which have changed, not their contents.\n\nExamples\n\nLibGit2.branch!(repo, \"branch/a\")\nLibGit2.branch!(repo, \"branch/b\")\n# add a file to repo\nopen(joinpath(LibGit2.path(repo),\"file\"),\"w\") do f\n    write(f, \"hello repo\n\")\nend\nLibGit2.add!(repo, \"file\")\nLibGit2.commit(repo, \"add file\")\n# returns [\"file\"]\nfilt = Set([LibGit2.Consts.DELTA_ADDED])\nfiles = LibGit2.diff_files(repo, \"branch/a\", \"branch/b\", filter=filt)\n# returns [] because existing files weren't modified\nfilt = Set([LibGit2.Consts.DELTA_MODIFIED])\nfiles = LibGit2.diff_files(repo, \"branch/a\", \"branch/b\", filter=filt)\n\nEquivalent to git diff --name-only --diff-filter=<filter> <branch1> <branch2>.\n\n\n\n\n\n"
-},
-
-{
-    "location": "devdocs/libgit2/#Base.LibGit2.entryid",
-    "page": "Base.LibGit2",
-    "title": "Base.LibGit2.entryid",
-    "category": "Function",
-    "text": "entryid(te::GitTreeEntry)\n\nReturn the GitHash of the object to which te refers.\n\n\n\n\n\n"
-},
-
-{
-    "location": "devdocs/libgit2/#Base.LibGit2.entrytype",
-    "page": "Base.LibGit2",
-    "title": "Base.LibGit2.entrytype",
-    "category": "Function",
-    "text": "entrytype(te::GitTreeEntry)\n\nReturn the type of the object to which te refers. The result will be one of the types which objtype returns, e.g. a GitTree or GitBlob.\n\n\n\n\n\n"
-},
-
-{
-    "location": "devdocs/libgit2/#Base.LibGit2.fetch",
-    "page": "Base.LibGit2",
-    "title": "Base.LibGit2.fetch",
-    "category": "Function",
-    "text": "fetch(rmt::GitRemote, refspecs; options::FetchOptions=FetchOptions(), msg=\"\")\n\nFetch from the specified rmt remote git repository, using refspecs to determine which remote branch(es) to fetch. The keyword arguments are:\n\noptions: determines the options for the fetch, e.g. whether to prune afterwards. See FetchOptions for more information.\nmsg: a message to insert into the reflogs.\n\n\n\n\n\nfetch(repo::GitRepo; kwargs...)\n\nFetches updates from an upstream of the repository repo.\n\nThe keyword arguments are:\n\nremote::AbstractString=\"origin\": which remote, specified by name, of repo to fetch from. If this is empty, the URL will be used to construct an anonymous remote.\nremoteurl::AbstractString=\"\": the URL of remote. If not specified, will be assumed based on the given name of remote.\nrefspecs=AbstractString[]: determines properties of the fetch.\npayload=CredentialPayload(): provides credentials and/or settings when authenticating against a private remote.\n\nEquivalent to git fetch [<remoteurl>|<repo>] [<refspecs>].\n\n\n\n\n\n"
-},
-
-{
-    "location": "devdocs/libgit2/#Base.LibGit2.fetchheads",
-    "page": "Base.LibGit2",
-    "title": "Base.LibGit2.fetchheads",
-    "category": "Function",
-    "text": "fetchheads(repo::GitRepo) -> Vector{FetchHead}\n\nReturn the list of all the fetch heads for repo, each represented as a FetchHead, including their names, URLs, and merge statuses.\n\nExamples\n\njulia> fetch_heads = LibGit2.fetchheads(repo);\n\njulia> fetch_heads[1].name\n\"refs/heads/master\"\n\njulia> fetch_heads[1].ismerge\ntrue\n\njulia> fetch_heads[2].name\n\"refs/heads/test_branch\"\n\njulia> fetch_heads[2].ismerge\nfalse\n\n\n\n\n\n"
-},
-
-{
-    "location": "devdocs/libgit2/#Base.LibGit2.fetch_refspecs",
-    "page": "Base.LibGit2",
-    "title": "Base.LibGit2.fetch_refspecs",
-    "category": "Function",
-    "text": "fetch_refspecs(rmt::GitRemote) -> Vector{String}\n\nGet the fetch refspecs for the specified rmt. These refspecs contain information about which branch(es) to fetch from.\n\nExamples\n\njulia> remote = LibGit2.get(LibGit2.GitRemote, repo, \"upstream\");\n\njulia> LibGit2.add_fetch!(repo, remote, \"upstream\");\n\njulia> LibGit2.fetch_refspecs(remote)\nString[\"+refs/heads/*:refs/remotes/upstream/*\"]\n\n\n\n\n\n"
-},
-
-{
-    "location": "devdocs/libgit2/#Base.LibGit2.fetchhead_foreach_cb",
-    "page": "Base.LibGit2",
-    "title": "Base.LibGit2.fetchhead_foreach_cb",
-    "category": "Function",
-    "text": "C function pointer for fetchhead_foreach_callback\n\n\n\n\n\n"
-},
-
-{
-    "location": "devdocs/libgit2/#Base.LibGit2.merge_base",
-    "page": "Base.LibGit2",
-    "title": "Base.LibGit2.merge_base",
-    "category": "Function",
-    "text": "merge_base(repo::GitRepo, one::AbstractString, two::AbstractString) -> GitHash\n\nFind a merge base (a common ancestor) between the commits one and two. one and two may both be in string form. Return the GitHash of the merge base.\n\n\n\n\n\n"
-},
-
-{
-    "location": "devdocs/libgit2/#Base.LibGit2.merge!-Tuple{Base.LibGit2.GitRepo}",
-    "page": "Base.LibGit2",
-    "title": "Base.LibGit2.merge!",
-    "category": "Method",
-    "text": "merge!(repo::GitRepo; kwargs...) -> Bool\n\nPerform a git merge on the repository repo, merging commits with diverging history into the current branch. Return true if the merge succeeded, false if not.\n\nThe keyword arguments are:\n\ncommittish::AbstractString=\"\": Merge the named commit(s) in committish.\nbranch::AbstractString=\"\": Merge the branch branch and all its commits since it diverged from the current branch.\nfastforward::Bool=false: If fastforward is true, only merge if the merge is a fast-forward (the current branch head is an ancestor of the commits to be merged), otherwise refuse to merge and return false. This is equivalent to the git CLI option --ff-only.\nmerge_opts::MergeOptions=MergeOptions(): merge_opts specifies options for the merge, such as merge strategy in case of conflicts.\ncheckout_opts::CheckoutOptions=CheckoutOptions(): checkout_opts specifies options for the checkout step.\n\nEquivalent to git merge [--ff-only] [<committish> | <branch>].\n\nnote: Note\nIf you specify a branch, this must be done in reference format, since the string will be turned into a GitReference. For example, if you wanted to merge branch branch_a, you would call merge!(repo, branch=\"refs/heads/branch_a\").\n\n\n\n\n\n"
-},
-
-{
-    "location": "devdocs/libgit2/#Base.LibGit2.merge!-Tuple{Base.LibGit2.GitRepo,Array{Base.LibGit2.GitAnnotated,1}}",
-    "page": "Base.LibGit2",
-    "title": "Base.LibGit2.merge!",
-    "category": "Method",
-    "text": "merge!(repo::GitRepo, anns::Vector{GitAnnotated}; kwargs...) -> Bool\n\nMerge changes from the annotated commits (captured as GitAnnotated objects) anns into the HEAD of the repository repo. The keyword arguments are:\n\nmerge_opts::MergeOptions = MergeOptions(): options for how to perform the merge, including whether fastforwarding is allowed. See MergeOptions for more information.\ncheckout_opts::CheckoutOptions = CheckoutOptions(): options for how to perform the checkout. See CheckoutOptions for more information.\n\nanns may refer to remote or local branch heads. Return true if the merge is successful, otherwise return false (for instance, if no merge is possible because the branches have no common ancestor).\n\nExamples\n\nupst_ann = LibGit2.GitAnnotated(repo, \"branch/a\")\n\n# merge the branch in\nLibGit2.merge!(repo, [upst_ann])\n\n\n\n\n\n"
-},
-
-{
-    "location": "devdocs/libgit2/#Base.LibGit2.merge!-Tuple{Base.LibGit2.GitRepo,Array{Base.LibGit2.GitAnnotated,1},Bool}",
-    "page": "Base.LibGit2",
-    "title": "Base.LibGit2.merge!",
-    "category": "Method",
-    "text": "merge!(repo::GitRepo, anns::Vector{GitAnnotated}, fastforward::Bool; kwargs...) -> Bool\n\nMerge changes from the annotated commits (captured as GitAnnotated objects) anns into the HEAD of the repository repo. If fastforward is true, only a fastforward merge is allowed. In this case, if conflicts occur, the merge will fail. Otherwise, if fastforward is false, the merge may produce a conflict file which the user will need to resolve.\n\nThe keyword arguments are:\n\nmerge_opts::MergeOptions = MergeOptions(): options for how to perform the merge, including whether fastforwarding is allowed. See MergeOptions for more information.\ncheckout_opts::CheckoutOptions = CheckoutOptions(): options for how to perform the checkout. See CheckoutOptions for more information.\n\nanns may refer to remote or local branch heads. Return true if the merge is successful, otherwise return false (for instance, if no merge is possible because the branches have no common ancestor).\n\nExamples\n\nupst_ann_1 = LibGit2.GitAnnotated(repo, \"branch/a\")\n\n# merge the branch in, fastforward\nLibGit2.merge!(repo, [upst_ann_1], true)\n\n# merge conflicts!\nupst_ann_2 = LibGit2.GitAnnotated(repo, \"branch/b\")\n# merge the branch in, try to fastforward\nLibGit2.merge!(repo, [upst_ann_2], true) # will return false\nLibGit2.merge!(repo, [upst_ann_2], false) # will return true\n\n\n\n\n\n"
-},
-
-{
-    "location": "devdocs/libgit2/#Base.LibGit2.ffmerge!",
-    "page": "Base.LibGit2",
-    "title": "Base.LibGit2.ffmerge!",
-    "category": "Function",
-    "text": "ffmerge!(repo::GitRepo, ann::GitAnnotated)\n\nFastforward merge changes into current HEAD. This is only possible if the commit referred to by ann is descended from the current HEAD (e.g. if pulling changes from a remote branch which is simply ahead of the local branch tip).\n\n\n\n\n\n"
-},
-
-{
-    "location": "devdocs/libgit2/#Base.LibGit2.fullname",
-    "page": "Base.LibGit2",
-    "title": "Base.LibGit2.fullname",
-    "category": "Function",
-    "text": "LibGit2.fullname(ref::GitReference)\n\nReturn the name of the reference pointed to by the symbolic reference ref. If ref is not a symbolic reference, return an empty string.\n\n\n\n\n\n"
-},
-
-{
-    "location": "devdocs/libgit2/#Base.LibGit2.features",
-    "page": "Base.LibGit2",
-    "title": "Base.LibGit2.features",
-    "category": "Function",
-    "text": "features()\n\nReturn a list of git features the current version of libgit2 supports, such as threading or using HTTPS or SSH.\n\n\n\n\n\n"
-},
-
-{
-    "location": "devdocs/libgit2/#Base.LibGit2.filename",
-    "page": "Base.LibGit2",
-    "title": "Base.LibGit2.filename",
-    "category": "Function",
-    "text": "filename(te::GitTreeEntry)\n\nReturn the filename of the object on disk to which te refers.\n\n\n\n\n\n"
-},
-
-{
-    "location": "devdocs/libgit2/#Base.LibGit2.filemode",
-    "page": "Base.LibGit2",
-    "title": "Base.LibGit2.filemode",
-    "category": "Function",
-    "text": "filemode(te::GitTreeEntry) -> Cint\n\nReturn the UNIX filemode of the object on disk to which te refers as an integer.\n\n\n\n\n\n"
-},
-
-{
-    "location": "devdocs/libgit2/#Base.LibGit2.gitdir",
-    "page": "Base.LibGit2",
-    "title": "Base.LibGit2.gitdir",
-    "category": "Function",
-    "text": "LibGit2.gitdir(repo::GitRepo)\n\nReturn the location of the \"git\" files of repo:\n\nfor normal repositories, this is the location of the .git folder.\nfor bare repositories, this is the location of the repository itself.\n\nSee also workdir, path.\n\n\n\n\n\n"
-},
-
-{
-    "location": "devdocs/libgit2/#Base.LibGit2.git_url",
-    "page": "Base.LibGit2",
-    "title": "Base.LibGit2.git_url",
-    "category": "Function",
-    "text": "LibGit2.git_url(; kwargs...) -> String\n\nCreate a string based upon the URL components provided. When the scheme keyword is not provided the URL produced will use the alternative scp-like syntax.\n\nKeywords\n\nscheme::AbstractString=\"\": the URL scheme which identifies the protocol to be used. For HTTP use \"http\", SSH use \"ssh\", etc. When scheme is not provided the output format will be \"ssh\" but using the scp-like syntax.\nusername::AbstractString=\"\": the username to use in the output if provided.\npassword::AbstractString=\"\": the password to use in the output if provided.\nhost::AbstractString=\"\": the hostname to use in the output. A hostname is required to be specified.\nport::Union{AbstractString,Integer}=\"\": the port number to use in the output if provided. Cannot be specified when using the scp-like syntax.\npath::AbstractString=\"\": the path to use in the output if provided.\n\nExamples\n\njulia> LibGit2.git_url(username=\"git\", host=\"github.com\", path=\"JuliaLang/julia.git\")\n\"git@github.com:JuliaLang/julia.git\"\n\njulia> LibGit2.git_url(scheme=\"https\", host=\"github.com\", path=\"/JuliaLang/julia.git\")\n\"https://github.com/JuliaLang/julia.git\"\n\njulia> LibGit2.git_url(scheme=\"ssh\", username=\"git\", host=\"github.com\", port=2222, path=\"JuliaLang/julia.git\")\n\"ssh://git@github.com:2222/JuliaLang/julia.git\"\n\n\n\n\n\n"
-},
-
-{
-    "location": "devdocs/libgit2/#Base.LibGit2.@githash_str",
-    "page": "Base.LibGit2",
-    "title": "Base.LibGit2.@githash_str",
-    "category": "Macro",
-    "text": "@githash_str -> AbstractGitHash\n\nConstruct a git hash object from the given string, returning a GitShortHash if the string is shorter than 40 hexadecimal digits, otherwise a GitHash.\n\nExamples\n\njulia> LibGit2.githash\"d114feb74ce633\"\nGitShortHash(\"d114feb74ce633\")\n\njulia> LibGit2.githash\"d114feb74ce63307afe878a5228ad014e0289a85\"\nGitHash(\"d114feb74ce63307afe878a5228ad014e0289a85\")\n\n\n\n\n\n"
-},
-
-{
-    "location": "devdocs/libgit2/#Base.LibGit2.head",
-    "page": "Base.LibGit2",
-    "title": "Base.LibGit2.head",
-    "category": "Function",
-    "text": "LibGit2.head(repo::GitRepo) -> GitReference\n\nReturn a GitReference to the current HEAD of repo.\n\n\n\n\n\nhead(pkg::AbstractString) -> String\n\nReturn current HEAD GitHash of the pkg repo as a string.\n\n\n\n\n\n"
-},
-
-{
-    "location": "devdocs/libgit2/#Base.LibGit2.head!",
-    "page": "Base.LibGit2",
-    "title": "Base.LibGit2.head!",
-    "category": "Function",
-    "text": "LibGit2.head!(repo::GitRepo, ref::GitReference) -> GitReference\n\nSet the HEAD of repo to the object pointed to by ref.\n\n\n\n\n\n"
-},
-
-{
-    "location": "devdocs/libgit2/#Base.LibGit2.head_oid",
-    "page": "Base.LibGit2",
-    "title": "Base.LibGit2.head_oid",
-    "category": "Function",
-    "text": "LibGit2.head_oid(repo::GitRepo) -> GitHash\n\nLookup the object id of the current HEAD of git repository repo.\n\n\n\n\n\n"
-},
-
-{
-    "location": "devdocs/libgit2/#Base.LibGit2.headname",
-    "page": "Base.LibGit2",
-    "title": "Base.LibGit2.headname",
-    "category": "Function",
-    "text": "LibGit2.headname(repo::GitRepo)\n\nLookup the name of the current HEAD of git repository repo. If repo is currently detached, return the name of the HEAD it's detached from.\n\n\n\n\n\n"
-},
-
-{
-    "location": "devdocs/libgit2/#Base.LibGit2.init",
-    "page": "Base.LibGit2",
-    "title": "Base.LibGit2.init",
-    "category": "Function",
-    "text": "LibGit2.init(path::AbstractString, bare::Bool=false) -> GitRepo\n\nOpen a new git repository at path. If bare is false, the working tree will be created in path/.git. If bare is true, no working directory will be created.\n\n\n\n\n\n"
-},
-
-{
-    "location": "devdocs/libgit2/#Base.LibGit2.is_ancestor_of",
-    "page": "Base.LibGit2",
-    "title": "Base.LibGit2.is_ancestor_of",
-    "category": "Function",
-    "text": "is_ancestor_of(a::AbstractString, b::AbstractString, repo::GitRepo) -> Bool\n\nReturn true if a, a GitHash in string form, is an ancestor of b, a GitHash in string form.\n\nExamples\n\njulia> repo = LibGit2.GitRepo(repo_path);\n\njulia> LibGit2.add!(repo, test_file1);\n\njulia> commit_oid1 = LibGit2.commit(repo, \"commit1\");\n\njulia> LibGit2.add!(repo, test_file2);\n\njulia> commit_oid2 = LibGit2.commit(repo, \"commit2\");\n\njulia> LibGit2.is_ancestor_of(string(commit_oid1), string(commit_oid2), repo)\ntrue\n\n\n\n\n\n"
-},
-
-{
-    "location": "devdocs/libgit2/#Base.LibGit2.isbinary",
-    "page": "Base.LibGit2",
-    "title": "Base.LibGit2.isbinary",
-    "category": "Function",
-    "text": "isbinary(blob::GitBlob) -> Bool\n\nUse a heuristic to guess if a file is binary: searching for NULL bytes and looking for a reasonable ratio of printable to non-printable characters among the first 8000 bytes.\n\n\n\n\n\n"
-},
-
-{
-    "location": "devdocs/libgit2/#Base.LibGit2.iscommit",
-    "page": "Base.LibGit2",
-    "title": "Base.LibGit2.iscommit",
-    "category": "Function",
-    "text": "iscommit(id::AbstractString, repo::GitRepo) -> Bool\n\nCheck if commit id (which is a GitHash in string form) is in the repository.\n\nExamples\n\njulia> repo = LibGit2.GitRepo(repo_path);\n\njulia> LibGit2.add!(repo, test_file);\n\njulia> commit_oid = LibGit2.commit(repo, \"add test_file\");\n\njulia> LibGit2.iscommit(string(commit_oid), repo)\ntrue\n\n\n\n\n\n"
-},
-
-{
-    "location": "devdocs/libgit2/#Base.LibGit2.isdiff",
-    "page": "Base.LibGit2",
-    "title": "Base.LibGit2.isdiff",
-    "category": "Function",
-    "text": "LibGit2.isdiff(repo::GitRepo, treeish::AbstractString, pathspecs::AbstractString=\"\"; cached::Bool=false)\n\nChecks if there are any differences between the tree specified by treeish and the tracked files in the working tree (if cached=false) or the index (if cached=true). pathspecs are the specifications for options for the diff.\n\nExamples\n\nrepo = LibGit2.GitRepo(repo_path)\nLibGit2.isdiff(repo, \"HEAD\") # should be false\nopen(joinpath(repo_path, new_file), \"a\") do f\n    println(f, \"here's my cool new file\")\nend\nLibGit2.isdiff(repo, \"HEAD\") # now true\n\nEquivalent to git diff-index <treeish> [-- <pathspecs>].\n\n\n\n\n\n"
-},
-
-{
-    "location": "devdocs/libgit2/#Base.LibGit2.isdirty",
-    "page": "Base.LibGit2",
-    "title": "Base.LibGit2.isdirty",
-    "category": "Function",
-    "text": "LibGit2.isdirty(repo::GitRepo, pathspecs::AbstractString=\"\"; cached::Bool=false) -> Bool\n\nCheck if there have been any changes to tracked files in the working tree (if cached=false) or the index (if cached=true). pathspecs are the specifications for options for the diff.\n\nExamples\n\nrepo = LibGit2.GitRepo(repo_path)\nLibGit2.isdirty(repo) # should be false\nopen(joinpath(repo_path, new_file), \"a\") do f\n    println(f, \"here's my cool new file\")\nend\nLibGit2.isdirty(repo) # now true\nLibGit2.isdirty(repo, new_file) # now true\n\nEquivalent to git diff-index HEAD [-- <pathspecs>].\n\n\n\n\n\n"
-},
-
-{
-    "location": "devdocs/libgit2/#Base.LibGit2.isorphan",
-    "page": "Base.LibGit2",
-    "title": "Base.LibGit2.isorphan",
-    "category": "Function",
-    "text": "LibGit2.isorphan(repo::GitRepo)\n\nCheck if the current branch is an \"orphan\" branch, i.e. has no commits. The first commit to this branch will have no parents.\n\n\n\n\n\n"
-},
-
-{
-    "location": "devdocs/libgit2/#Base.LibGit2.isset",
-    "page": "Base.LibGit2",
-    "title": "Base.LibGit2.isset",
-    "category": "Function",
-    "text": "isset(val::Integer, flag::Integer)\n\nTest whether the bits of val indexed by flag are set (1) or unset (0).\n\n\n\n\n\n"
-},
-
-{
-    "location": "devdocs/libgit2/#Base.LibGit2.iszero",
-    "page": "Base.LibGit2",
-    "title": "Base.LibGit2.iszero",
-    "category": "Function",
-    "text": "iszero(id::GitHash) -> Bool\n\nDetermine whether all hexadecimal digits of the given GitHash are zero.\n\n\n\n\n\n"
-},
-
-{
-    "location": "devdocs/libgit2/#Base.LibGit2.lookup_branch",
-    "page": "Base.LibGit2",
-    "title": "Base.LibGit2.lookup_branch",
-    "category": "Function",
-    "text": "lookup_branch(repo::GitRepo, branch_name::AbstractString, remote::Bool=false) -> Union{GitReference, Nothing}\n\nDetermine if the branch specified by branch_name exists in the repository repo. If remote is true, repo is assumed to be a remote git repository. Otherwise, it is part of the local filesystem.\n\nReturn either a GitReference to the requested branch if it exists, or nothing if not.\n\n\n\n\n\n"
-},
-
-{
-    "location": "devdocs/libgit2/#Base.map-Tuple{Function,Base.LibGit2.GitRevWalker}",
-    "page": "Base.LibGit2",
-    "title": "Base.map",
-    "category": "Method",
-    "text": "LibGit2.map(f::Function, walker::GitRevWalker; oid::GitHash=GitHash(), range::AbstractString=\"\", by::Cint=Consts.SORT_NONE, rev::Bool=false)\n\nUsing the GitRevWalker walker to \"walk\" over every commit in the repository's history, apply f to each commit in the walk. The keyword arguments are:     * oid: The GitHash of the commit to begin the walk from. The default is to use       push_head! and therefore the HEAD commit and all its ancestors.     * range: A range of GitHashs in the format oid1..oid2. f will be       applied to all commits between the two.     * by: The sorting method. The default is not to sort. Other options are to sort by       topology (LibGit2.Consts.SORT_TOPOLOGICAL), to sort forwards in time       (LibGit2.Consts.SORT_TIME, most ancient first) or to sort backwards in time       (LibGit2.Consts.SORT_REVERSE, most recent first).     * rev: Whether to reverse the sorted order (for instance, if topological sorting is used).\n\nExamples\n\noids = LibGit2.with(LibGit2.GitRevWalker(repo)) do walker\n    LibGit2.map((oid, repo)->string(oid), walker, by=LibGit2.Consts.SORT_TIME)\nend\n\nHere, map visits each commit using the GitRevWalker and finds its GitHash.\n\n\n\n\n\n"
-},
-
-{
-    "location": "devdocs/libgit2/#Base.LibGit2.mirror_callback",
-    "page": "Base.LibGit2",
-    "title": "Base.LibGit2.mirror_callback",
-    "category": "Function",
-    "text": "Mirror callback function\n\nFunction sets +refs/*:refs/* refspecs and mirror flag for remote reference.\n\n\n\n\n\n"
-},
-
-{
-    "location": "devdocs/libgit2/#Base.LibGit2.mirror_cb",
-    "page": "Base.LibGit2",
-    "title": "Base.LibGit2.mirror_cb",
-    "category": "Function",
-    "text": "C function pointer for mirror_callback\n\n\n\n\n\n"
-},
-
-{
-    "location": "devdocs/libgit2/#Base.LibGit2.message",
-    "page": "Base.LibGit2",
-    "title": "Base.LibGit2.message",
-    "category": "Function",
-    "text": "message(c::GitCommit, raw::Bool=false)\n\nReturn the commit message describing the changes made in commit c. If raw is false, return a slightly \"cleaned up\" message (which has any leading newlines removed). If raw is true, the message is not stripped of any such newlines.\n\n\n\n\n\n"
-},
-
-{
-    "location": "devdocs/libgit2/#Base.LibGit2.merge_analysis",
-    "page": "Base.LibGit2",
-    "title": "Base.LibGit2.merge_analysis",
-    "category": "Function",
-    "text": "merge_analysis(repo::GitRepo, anns::Vector{GitAnnotated}) -> analysis, preference\n\nRun analysis on the branches pointed to by the annotated branch tips anns and determine under what circumstances they can be merged. For instance, if anns[1] is simply an ancestor of ann[2], then merge_analysis will report that a fast-forward merge is possible.\n\nReturn two outputs, analysis and preference. analysis has several possible values:     * MERGE_ANALYSIS_NONE: it is not possible to merge the elements of anns.     * MERGE_ANALYSIS_NORMAL: a regular merge, when HEAD and the commits that the       user wishes to merge have all diverged from a common ancestor. In this case the       changes have to be resolved and conflicts may occur.     * MERGE_ANALYSIS_UP_TO_DATE: all the input commits the user wishes to merge can       be reached from HEAD, so no merge needs to be performed.     * MERGE_ANALYSIS_FASTFORWARD: the input commit is a descendant of HEAD and so no       merge needs to be performed - instead, the user can simply checkout the       input commit(s).     * MERGE_ANALYSIS_UNBORN: the HEAD of the repository refers to a commit which does not       exist. It is not possible to merge, but it may be possible to checkout the input       commits. preference also has several possible values:     * MERGE_PREFERENCE_NONE: the user has no preference.     * MERGE_PREFERENCE_NO_FASTFORWARD: do not allow any fast-forward merges.     * MERGE_PREFERENCE_FASTFORWARD_ONLY: allow only fast-forward merges and no       other type (which may introduce conflicts). preference can be controlled through the repository or global git configuration.\n\n\n\n\n\n"
-},
-
-{
-    "location": "devdocs/libgit2/#Base.LibGit2.name",
-    "page": "Base.LibGit2",
-    "title": "Base.LibGit2.name",
-    "category": "Function",
-    "text": "LibGit2.name(ref::GitReference)\n\nReturn the full name of ref.\n\n\n\n\n\nname(rmt::GitRemote)\n\nGet the name of a remote repository, for instance \"origin\". If the remote is anonymous (see GitRemoteAnon) the name will be an empty string \"\".\n\nExamples\n\njulia> repo_url = \"https://github.com/JuliaLang/Example.jl\";\n\njulia> repo = LibGit2.clone(cache_repo, \"test_directory\");\n\njulia> remote = LibGit2.GitRemote(repo, \"origin\", repo_url);\n\njulia> name(remote)\n\"origin\"\n\n\n\n\n\nLibGit2.name(tag::GitTag)\n\nThe name of tag (e.g. \"v0.5\").\n\n\n\n\n\n"
-},
-
-{
-    "location": "devdocs/libgit2/#Base.LibGit2.need_update",
-    "page": "Base.LibGit2",
-    "title": "Base.LibGit2.need_update",
-    "category": "Function",
-    "text": "need_update(repo::GitRepo)\n\nEquivalent to git update-index. Return true if repo needs updating.\n\n\n\n\n\n"
-},
-
-{
-    "location": "devdocs/libgit2/#Base.LibGit2.objtype",
-    "page": "Base.LibGit2",
-    "title": "Base.LibGit2.objtype",
-    "category": "Function",
-    "text": "objtype(obj_type::Consts.OBJECT)\n\nReturn the type corresponding to the enum value.\n\n\n\n\n\n"
-},
-
-{
-    "location": "devdocs/libgit2/#Base.LibGit2.path",
-    "page": "Base.LibGit2",
-    "title": "Base.LibGit2.path",
-    "category": "Function",
-    "text": "LibGit2.path(repo::GitRepo)\n\nReturn the base file path of the repository repo.\n\nfor normal repositories, this will typically be the parent directory of the \".git\" directory (note: this may be different than the working directory, see workdir for more details).\nfor bare repositories, this is the location of the \"git\" files.\n\nSee also gitdir, workdir.\n\n\n\n\n\n"
-},
-
-{
-    "location": "devdocs/libgit2/#Base.LibGit2.peel",
-    "page": "Base.LibGit2",
-    "title": "Base.LibGit2.peel",
-    "category": "Function",
-    "text": "peel([T,] ref::GitReference)\n\nRecursively peel ref until an object of type T is obtained. If no T is provided, then ref will be peeled until an object other than a GitTag is obtained.\n\nA GitTag will be peeled to the object it references.\nA GitCommit will be peeled to a GitTree.\n\nnote: Note\nOnly annotated tags can be peeled to GitTag objects. Lightweight tags (the default) are references under refs/tags/ which point directly to GitCommit objects.\n\n\n\n\n\npeel([T,] obj::GitObject)\n\nRecursively peel obj until an object of type T is obtained. If no T is provided, then obj will be peeled until the type changes.\n\nA GitTag will be peeled to the object it references.\nA GitCommit will be peeled to a GitTree.\n\n\n\n\n\n"
-},
-
-{
-    "location": "devdocs/libgit2/#Base.LibGit2.posixpath",
-    "page": "Base.LibGit2",
-    "title": "Base.LibGit2.posixpath",
-    "category": "Function",
-    "text": "LibGit2.posixpath(path)\n\nStandardise the path string path to use POSIX separators.\n\n\n\n\n\n"
-},
-
-{
-    "location": "devdocs/libgit2/#Base.LibGit2.push",
-    "page": "Base.LibGit2",
-    "title": "Base.LibGit2.push",
-    "category": "Function",
-    "text": "push(rmt::GitRemote, refspecs; force::Bool=false, options::PushOptions=PushOptions())\n\nPush to the specified rmt remote git repository, using refspecs to determine which remote branch(es) to push to. The keyword arguments are:\n\nforce: if true, a force-push will occur, disregarding conflicts.\noptions: determines the options for the push, e.g. which proxy headers to use. See PushOptions for more information.\n\nnote: Note\nYou can add information about the push refspecs in two other ways: by setting an option in the repository's GitConfig (with push.default as the key) or by calling add_push!. Otherwise you will need to explicitly specify a push refspec in the call to push for it to have any effect, like so: LibGit2.push(repo, refspecs=[\"refs/heads/master\"]).\n\n\n\n\n\npush(repo::GitRepo; kwargs...)\n\nPushes updates to an upstream of repo.\n\nThe keyword arguments are:\n\nremote::AbstractString=\"origin\": the name of the upstream remote to push to.\nremoteurl::AbstractString=\"\": the URL of remote.\nrefspecs=AbstractString[]: determines properties of the push.\nforce::Bool=false: determines if the push will be a force push,  overwriting the remote branch.\npayload=CredentialPayload(): provides credentials and/or settings when authenticating against a private remote.\n\nEquivalent to git push [<remoteurl>|<repo>] [<refspecs>].\n\n\n\n\n\n"
-},
-
-{
-    "location": "devdocs/libgit2/#Base.LibGit2.push!-Tuple{Base.LibGit2.GitRevWalker,Base.LibGit2.GitHash}",
-    "page": "Base.LibGit2",
-    "title": "Base.LibGit2.push!",
-    "category": "Method",
-    "text": "LibGit2.push!(w::GitRevWalker, cid::GitHash)\n\nStart the GitRevWalker walker at commit cid. This function can be used to apply a function to all commits since a certain year, by passing the first commit of that year as cid and then passing the resulting w to map.\n\n\n\n\n\n"
-},
-
-{
-    "location": "devdocs/libgit2/#Base.LibGit2.push_head!",
-    "page": "Base.LibGit2",
-    "title": "Base.LibGit2.push_head!",
-    "category": "Function",
-    "text": "LibGit2.push_head!(w::GitRevWalker)\n\nPush the HEAD commit and its ancestors onto the GitRevWalker w. This ensures that HEAD and all its ancestor commits will be encountered during the walk.\n\n\n\n\n\n"
-},
-
-{
-    "location": "devdocs/libgit2/#Base.LibGit2.push_refspecs",
-    "page": "Base.LibGit2",
-    "title": "Base.LibGit2.push_refspecs",
-    "category": "Function",
-    "text": "push_refspecs(rmt::GitRemote) -> Vector{String}\n\nGet the push refspecs for the specified rmt. These refspecs contain information about which branch(es) to push to.\n\nExamples\n\njulia> remote = LibGit2.get(LibGit2.GitRemote, repo, \"upstream\");\n\njulia> LibGit2.add_push!(repo, remote, \"refs/heads/master\");\n\njulia> close(remote);\n\njulia> remote = LibGit2.get(LibGit2.GitRemote, repo, \"upstream\");\n\njulia> LibGit2.push_refspecs(remote)\nString[\"refs/heads/master\"]\n\n\n\n\n\n"
-},
-
-{
-    "location": "devdocs/libgit2/#Base.LibGit2.raw",
-    "page": "Base.LibGit2",
-    "title": "Base.LibGit2.raw",
-    "category": "Function",
-    "text": "raw(id::GitHash) -> Vector{UInt8}\n\nObtain the raw bytes of the GitHash as a vector of length 20.\n\n\n\n\n\n"
-},
-
-{
-    "location": "devdocs/libgit2/#Base.LibGit2.read_tree!",
-    "page": "Base.LibGit2",
-    "title": "Base.LibGit2.read_tree!",
-    "category": "Function",
-    "text": "LibGit2.read_tree!(idx::GitIndex, tree::GitTree)\nLibGit2.read_tree!(idx::GitIndex, treehash::AbstractGitHash)\n\nRead the tree tree (or the tree pointed to by treehash in the repository owned by idx) into the index idx. The current index contents will be replaced.\n\n\n\n\n\n"
-},
-
-{
-    "location": "devdocs/libgit2/#Base.LibGit2.rebase!",
-    "page": "Base.LibGit2",
-    "title": "Base.LibGit2.rebase!",
-    "category": "Function",
-    "text": "LibGit2.rebase!(repo::GitRepo, upstream::AbstractString=\"\", newbase::AbstractString=\"\")\n\nAttempt an automatic merge rebase of the current branch, from upstream if provided, or otherwise from the upstream tracking branch. newbase is the branch to rebase onto. By default this is upstream.\n\nIf any conflicts arise which cannot be automatically resolved, the rebase will abort, leaving the repository and working tree in its original state, and the function will throw a GitError. This is roughly equivalent to the following command line statement:\n\ngit rebase --merge [<upstream>]\nif [ -d \".git/rebase-merge\" ]; then\n    git rebase --abort\nfi\n\n\n\n\n\n"
-},
-
-{
-    "location": "devdocs/libgit2/#Base.LibGit2.ref_list",
-    "page": "Base.LibGit2",
-    "title": "Base.LibGit2.ref_list",
-    "category": "Function",
-    "text": "LibGit2.ref_list(repo::GitRepo) -> Vector{String}\n\nGet a list of all reference names in the repo repository.\n\n\n\n\n\n"
-},
-
-{
-    "location": "devdocs/libgit2/#Base.LibGit2.reftype",
-    "page": "Base.LibGit2",
-    "title": "Base.LibGit2.reftype",
-    "category": "Function",
-    "text": "LibGit2.reftype(ref::GitReference) -> Cint\n\nReturn a Cint corresponding to the type of ref:\n\n0 if the reference is invalid\n1 if the reference is an object id\n2 if the reference is symbolic\n\n\n\n\n\n"
-},
-
-{
-    "location": "devdocs/libgit2/#Base.LibGit2.remotes",
-    "page": "Base.LibGit2",
-    "title": "Base.LibGit2.remotes",
-    "category": "Function",
-    "text": "LibGit2.remotes(repo::GitRepo)\n\nReturn a vector of the names of the remotes of repo.\n\n\n\n\n\n"
-},
-
-{
-    "location": "devdocs/libgit2/#Base.LibGit2.remove!",
-    "page": "Base.LibGit2",
-    "title": "Base.LibGit2.remove!",
-    "category": "Function",
-    "text": "remove!(repo::GitRepo, files::AbstractString...)\nremove!(idx::GitIndex, files::AbstractString...)\n\nRemove all the files with paths specified by files in the index idx (or the index of the repo).\n\n\n\n\n\n"
-},
-
-{
-    "location": "devdocs/libgit2/#Base.LibGit2.reset",
-    "page": "Base.LibGit2",
-    "title": "Base.LibGit2.reset",
-    "category": "Function",
-    "text": "reset(val::Integer, flag::Integer)\n\nUnset the bits of val indexed by flag, returning them to 0.\n\n\n\n\n\n"
-},
-
-{
-    "location": "devdocs/libgit2/#Base.LibGit2.reset!",
-    "page": "Base.LibGit2",
-    "title": "Base.LibGit2.reset!",
-    "category": "Function",
-    "text": "reset!(payload, [config]) -> CredentialPayload\n\nReset the payload state back to the initial values so that it can be used again within the credential callback. If a config is provided the configuration will also be updated.\n\n\n\n\n\nUpdates some entries, determined by the pathspecs, in the index from the target commit tree.\n\n\n\n\n\nSets the current head to the specified commit oid and optionally resets the index and working tree to match.\n\n\n\n\n\ngit reset [<committish>] [–] <pathspecs>... \n\n\n\n\n\nreset!(repo::GitRepo, id::GitHash, mode::Cint=Consts.RESET_MIXED)\n\nReset the repository repo to its state at id, using one of three modes set by mode:\n\nConsts.RESET_SOFT - move HEAD to id.\nConsts.RESET_MIXED - default, move HEAD to id and reset the index to id.\nConsts.RESET_HARD - move HEAD to id, reset the index to id, and discard all working changes.\n\nExamples\n\n# fetch changes\nLibGit2.fetch(repo)\nisfile(joinpath(repo_path, our_file)) # will be false\n\n# fastforward merge the changes\nLibGit2.merge!(repo, fastforward=true)\n\n# because there was not any file locally, but there is\n# a file remotely, we need to reset the branch\nhead_oid = LibGit2.head_oid(repo)\nnew_head = LibGit2.reset!(repo, head_oid, LibGit2.Consts.RESET_HARD)\n\nIn this example, the remote which is being fetched from does have a file called our_file in its index, which is why we must reset.\n\nEquivalent to git reset [--soft | --mixed | --hard] <id>.\n\nExamples\n\nrepo = LibGit2.GitRepo(repo_path)\nhead_oid = LibGit2.head_oid(repo)\nopen(joinpath(repo_path, \"file1\"), \"w\") do f\n    write(f, \"111\n\")\nend\nLibGit2.add!(repo, \"file1\")\nmode = LibGit2.Consts.RESET_HARD\n# will discard the changes to file1\n# and unstage it\nnew_head = LibGit2.reset!(repo, head_oid, mode)\n\n\n\n\n\n"
-},
-
-{
-    "location": "devdocs/libgit2/#Base.LibGit2.restore",
-    "page": "Base.LibGit2",
-    "title": "Base.LibGit2.restore",
-    "category": "Function",
-    "text": "restore(s::State, repo::GitRepo)\n\nReturn a repository repo to a previous State s, for example the HEAD of a branch before a merge attempt. s can be generated using the snapshot function.\n\n\n\n\n\n"
-},
-
-{
-    "location": "devdocs/libgit2/#Base.LibGit2.revcount",
-    "page": "Base.LibGit2",
-    "title": "Base.LibGit2.revcount",
-    "category": "Function",
-    "text": "LibGit2.revcount(repo::GitRepo, commit1::AbstractString, commit2::AbstractString)\n\nList the number of revisions between commit1 and commit2 (committish OIDs in string form). Since commit1 and commit2 may be on different branches, revcount performs a \"left-right\" revision list (and count), returning a tuple of Ints - the number of left and right commits, respectively. A left (or right) commit refers to which side of a symmetric difference in a tree the commit is reachable from.\n\nEquivalent to git rev-list --left-right --count <commit1> <commit2>.\n\nExamples\n\nrepo = LibGit2.GitRepo(repo_path)\nrepo_file = open(joinpath(repo_path, test_file), \"a\")\nprintln(repo_file, \"hello world\")\nflush(repo_file)\nLibGit2.add!(repo, test_file)\ncommit_oid1 = LibGit2.commit(repo, \"commit 1\")\nprintln(repo_file, \"hello world again\")\nflush(repo_file)\nLibGit2.add!(repo, test_file)\ncommit_oid2 = LibGit2.commit(repo, \"commit 2\")\nLibGit2.revcount(repo, string(commit_oid1), string(commit_oid2))\n\nThis will return (-1, 0).\n\n\n\n\n\n"
-},
-
-{
-    "location": "devdocs/libgit2/#Base.LibGit2.set_remote_url",
-    "page": "Base.LibGit2",
-    "title": "Base.LibGit2.set_remote_url",
-    "category": "Function",
-    "text": "set_remote_url(repo::GitRepo, remote_name, url)\nset_remote_url(repo::String, remote_name, url)\n\nSet both the fetch and push url for remote_name for the GitRepo or the git repository located at path. Typically git repos use \"origin\" as the remote name.\n\nExamples\n\nrepo_path = joinpath(tempdir(), \"Example\")\nrepo = LibGit2.init(repo_path)\nLibGit2.set_remote_url(repo, \"upstream\", \"https://github.com/JuliaLang/Example.jl\")\nLibGit2.set_remote_url(repo_path, \"upstream2\", \"https://github.com/JuliaLang/Example2.jl\")\n\n\n\n\n\n"
-},
-
-{
-    "location": "devdocs/libgit2/#Base.LibGit2.shortname",
-    "page": "Base.LibGit2",
-    "title": "Base.LibGit2.shortname",
-    "category": "Function",
-    "text": "LibGit2.shortname(ref::GitReference)\n\nReturn a shortened version of the name of ref that's \"human-readable\".\n\njulia> repo = LibGit2.GitRepo(path_to_repo);\n\njulia> branch_ref = LibGit2.head(repo);\n\njulia> LibGit2.name(branch_ref)\n\"refs/heads/master\"\n\njulia> LibGit2.shortname(branch_ref)\n\"master\"\n\n\n\n\n\n"
-},
-
-{
-    "location": "devdocs/libgit2/#Base.LibGit2.snapshot",
-    "page": "Base.LibGit2",
-    "title": "Base.LibGit2.snapshot",
-    "category": "Function",
-    "text": "snapshot(repo::GitRepo) -> State\n\nTake a snapshot of the current state of the repository repo, storing the current HEAD, index, and any uncommitted work. The output State can be used later during a call to restore to return the repository to the snapshotted state.\n\n\n\n\n\n"
-},
-
-{
-    "location": "devdocs/libgit2/#Base.LibGit2.status",
-    "page": "Base.LibGit2",
-    "title": "Base.LibGit2.status",
-    "category": "Function",
-    "text": "LibGit2.status(repo::GitRepo, path::String) -> Union{Cuint, Cvoid}\n\nLookup the status of the file at path in the git repository repo. For instance, this can be used to check if the file at path has been modified and needs to be staged and committed.\n\n\n\n\n\n"
-},
-
-{
-    "location": "devdocs/libgit2/#Base.LibGit2.stage",
-    "page": "Base.LibGit2",
-    "title": "Base.LibGit2.stage",
-    "category": "Function",
-    "text": "stage(ie::IndexEntry) -> Cint\n\nGet the stage number of ie. The stage number 0 represents the current state of the working tree, but other numbers can be used in the case of a merge conflict. In such a case, the various stage numbers on an IndexEntry describe which side(s) of the conflict the current state of the file belongs to. Stage 0 is the state before the attempted merge, stage 1 is the changes which have been made locally, stages 2 and larger are for changes from other branches (for instance, in the case of a multi-branch \"octopus\" merge, stages 2, 3, and 4 might be used).\n\n\n\n\n\n"
-},
-
-{
-    "location": "devdocs/libgit2/#Base.LibGit2.tag_create",
-    "page": "Base.LibGit2",
-    "title": "Base.LibGit2.tag_create",
-    "category": "Function",
-    "text": "LibGit2.tag_create(repo::GitRepo, tag::AbstractString, commit; kwargs...)\n\nCreate a new git tag tag (e.g. \"v0.5\") in the repository repo, at the commit commit.\n\nThe keyword arguments are:\n\nmsg::AbstractString=\"\": the message for the tag.\nforce::Bool=false: if true, existing references will be overwritten.\nsig::Signature=Signature(repo): the tagger's signature.\n\n\n\n\n\n"
-},
-
-{
-    "location": "devdocs/libgit2/#Base.LibGit2.tag_delete",
-    "page": "Base.LibGit2",
-    "title": "Base.LibGit2.tag_delete",
-    "category": "Function",
-    "text": "LibGit2.tag_delete(repo::GitRepo, tag::AbstractString)\n\nRemove the git tag tag from the repository repo.\n\n\n\n\n\n"
-},
-
-{
-    "location": "devdocs/libgit2/#Base.LibGit2.tag_list",
-    "page": "Base.LibGit2",
-    "title": "Base.LibGit2.tag_list",
-    "category": "Function",
-    "text": "LibGit2.tag_list(repo::GitRepo) -> Vector{String}\n\nGet a list of all tags in the git repository repo.\n\n\n\n\n\n"
-},
-
-{
-    "location": "devdocs/libgit2/#Base.LibGit2.target",
-    "page": "Base.LibGit2",
-    "title": "Base.LibGit2.target",
-    "category": "Function",
-    "text": "LibGit2.target(tag::GitTag)\n\nThe GitHash of the target object of tag.\n\n\n\n\n\n"
-},
-
-{
-    "location": "devdocs/libgit2/#Base.LibGit2.toggle",
-    "page": "Base.LibGit2",
-    "title": "Base.LibGit2.toggle",
-    "category": "Function",
-    "text": "toggle(val::Integer, flag::Integer)\n\nFlip the bits of val indexed by flag, so that if a bit is 0 it will be 1 after the toggle, and vice-versa.\n\n\n\n\n\n"
-},
-
-{
-    "location": "devdocs/libgit2/#Base.LibGit2.transact",
-    "page": "Base.LibGit2",
-    "title": "Base.LibGit2.transact",
-    "category": "Function",
-    "text": "transact(f::Function, repo::GitRepo)\n\nApply function f to the git repository repo, taking a snapshot before applying f. If an error occurs within f, repo will be returned to its snapshot state using restore. The error which occurred will be rethrown, but the state of repo will not be corrupted.\n\n\n\n\n\n"
-},
-
-{
-    "location": "devdocs/libgit2/#Base.LibGit2.treewalk",
-    "page": "Base.LibGit2",
-    "title": "Base.LibGit2.treewalk",
-    "category": "Function",
-    "text": "treewalk(f::Function, tree::GitTree, payload=Any[], post::Bool=false)\n\nTraverse the entries in tree and its subtrees in post or pre order. Preorder means beginning at the root and then traversing the leftmost subtree (and recursively on down through that subtree's leftmost subtrees) and moving right through the subtrees. Postorder means beginning at the bottom of the leftmost subtree, traversing upwards through it, then traversing the next right subtree (again beginning at the bottom) and finally visiting the tree root last of all.\n\nThe function parameter f should have following signature:\n\n(Cstring, Ptr{Cvoid}, Ptr{Cvoid}) -> Cint\n\nA negative value returned from f stops the tree walk. A positive value means that the entry will be skipped if post is false.\n\n\n\n\n\n"
-},
-
-{
-    "location": "devdocs/libgit2/#Base.LibGit2.upstream",
-    "page": "Base.LibGit2",
-    "title": "Base.LibGit2.upstream",
-    "category": "Function",
-    "text": "upstream(ref::GitReference) -> Union{GitReference, Nothing}\n\nDetermine if the branch containing ref has a specified upstream branch.\n\nReturn either a GitReference to the upstream branch if it exists, or nothing if the requested branch does not have an upstream counterpart.\n\n\n\n\n\n"
-},
-
-{
-    "location": "devdocs/libgit2/#Base.LibGit2.update!",
-    "page": "Base.LibGit2",
-    "title": "Base.LibGit2.update!",
-    "category": "Function",
-    "text": "update!(repo::GitRepo, files::AbstractString...)\nupdate!(idx::GitIndex, files::AbstractString...)\n\nUpdate all the files with paths specified by files in the index idx (or the index of the repo). Match the state of each file in the index with the current state on disk, removing it if it has been removed on disk, or updating its entry in the object database.\n\n\n\n\n\n"
-},
-
-{
-    "location": "devdocs/libgit2/#Base.LibGit2.url",
-    "page": "Base.LibGit2",
-    "title": "Base.LibGit2.url",
-    "category": "Function",
-    "text": "url(rmt::GitRemote)\n\nGet the fetch URL of a remote git repository.\n\nExamples\n\njulia> repo_url = \"https://github.com/JuliaLang/Example.jl\";\n\njulia> repo = LibGit2.init(mktempdir());\n\njulia> remote = LibGit2.GitRemote(repo, \"origin\", repo_url);\n\njulia> LibGit2.url(remote)\n\"https://github.com/JuliaLang/Example.jl\"\n\n\n\n\n\n"
-},
-
-{
-    "location": "devdocs/libgit2/#Base.LibGit2.version",
-    "page": "Base.LibGit2",
-    "title": "Base.LibGit2.version",
-    "category": "Function",
-    "text": "version() -> VersionNumber\n\nReturn the version of libgit2 in use, as a VersionNumber.\n\n\n\n\n\n"
-},
-
-{
-    "location": "devdocs/libgit2/#Base.LibGit2.with",
-    "page": "Base.LibGit2",
-    "title": "Base.LibGit2.with",
-    "category": "Function",
-    "text": "with(f::Function, obj)\n\nResource management helper function. Applies f to obj, making sure to call close on obj after f successfully returns or throws an error. Ensures that allocated git resources are finalized as soon as they are no longer needed.\n\n\n\n\n\n"
-},
-
-{
-    "location": "devdocs/libgit2/#Base.LibGit2.with_warn",
-    "page": "Base.LibGit2",
-    "title": "Base.LibGit2.with_warn",
-    "category": "Function",
-    "text": "with_warn(f::Function, ::Type{T}, args...)\n\nResource management helper function. Apply f to args, first constructing an instance of type T from args. Makes sure to call close on the resulting object after f successfully returns or throws an error. Ensures that allocated git resources are finalized as soon as they are no longer needed. If an error is thrown by f, a warning is shown containing the error.\n\n\n\n\n\n"
-},
-
-{
-    "location": "devdocs/libgit2/#Base.LibGit2.workdir",
-    "page": "Base.LibGit2",
-    "title": "Base.LibGit2.workdir",
-    "category": "Function",
-    "text": "LibGit2.workdir(repo::GitRepo)\n\nReturn the location of the working directory of repo. This will throw an error for bare repositories.\n\nnote: Note\nThis will typically be the parent directory of gitdir(repo), but can be different in some cases: e.g. if either the core.worktree configuration variable or the GIT_WORK_TREE environment variable is set.\n\nSee also gitdir, path.\n\n\n\n\n\n"
-},
-
-{
-    "location": "devdocs/libgit2/#Base.LibGit2.GitObject-Tuple{Base.LibGit2.GitTreeEntry}",
-    "page": "Base.LibGit2",
-    "title": "Base.LibGit2.GitObject",
-    "category": "Method",
-    "text": "(::Type{T})(te::GitTreeEntry) where T<:GitObject\n\nGet the git object to which te refers and return it as its actual type (the type entrytype would show), for instance a GitBlob or GitTag.\n\nExamples\n\ntree = LibGit2.GitTree(repo, \"HEAD^{tree}\")\ntree_entry = tree[1]\nblob = LibGit2.GitBlob(tree_entry)\n\n\n\n\n\n"
-},
-
-{
-    "location": "devdocs/libgit2/#Base.LibGit2.UserPasswordCredential",
-    "page": "Base.LibGit2",
-    "title": "Base.LibGit2.UserPasswordCredential",
-    "category": "Type",
-    "text": "Credential that support only user and password parameters\n\n\n\n\n\n"
-},
-
-{
-    "location": "devdocs/libgit2/#Base.LibGit2.SSHCredential",
-    "page": "Base.LibGit2",
-    "title": "Base.LibGit2.SSHCredential",
-    "category": "Type",
-    "text": "SSH credential type\n\n\n\n\n\n"
-},
-
-{
-    "location": "devdocs/libgit2/#Base.LibGit2.isfilled",
-    "page": "Base.LibGit2",
-    "title": "Base.LibGit2.isfilled",
-    "category": "Function",
-    "text": "isfilled(cred::AbstractCredential) -> Bool\n\nVerifies that a credential is ready for use in authentication.\n\n\n\n\n\n"
-},
-
-{
-    "location": "devdocs/libgit2/#Base.LibGit2.CachedCredentials",
-    "page": "Base.LibGit2",
-    "title": "Base.LibGit2.CachedCredentials",
-    "category": "Type",
-    "text": "Caches credential information for re-use\n\n\n\n\n\n"
-},
-
-{
-    "location": "devdocs/libgit2/#Base.LibGit2.CredentialPayload",
-    "page": "Base.LibGit2",
-    "title": "Base.LibGit2.CredentialPayload",
-    "category": "Type",
-    "text": "LibGit2.CredentialPayload\n\nRetains the state between multiple calls to the credential callback for the same URL. A CredentialPayload instance is expected to be reset! whenever it will be used with a different URL.\n\n\n\n\n\n"
-},
-
-{
-    "location": "devdocs/libgit2/#Base.LibGit2.approve",
-    "page": "Base.LibGit2",
-    "title": "Base.LibGit2.approve",
-    "category": "Function",
-    "text": "approve(payload::CredentialPayload; shred::Bool=true) -> Nothing\n\nStore the payload credential for re-use in a future authentication. Should only be called when authentication was successful.\n\nThe shred keyword controls whether sensitive information in the payload credential field should be destroyed. Should only be set to false during testing.\n\n\n\n\n\n"
-},
-
-{
-    "location": "devdocs/libgit2/#Base.LibGit2.reject",
-    "page": "Base.LibGit2",
-    "title": "Base.LibGit2.reject",
-    "category": "Function",
-    "text": "reject(payload::CredentialPayload; shred::Bool=true) -> Nothing\n\nDiscard the payload credential from begin re-used in future authentication. Should only be called when authentication was unsuccessful.\n\nThe shred keyword controls whether sensitive information in the payload credential field should be destroyed. Should only be set to false during testing.\n\n\n\n\n\n"
-},
-
-{
-    "location": "devdocs/libgit2/#Functionality-1",
-    "page": "Base.LibGit2",
-    "title": "Functionality",
-    "category": "section",
-    "text": "Some of this documentation assumes some prior knowledge of the libgit2 API. For more information on some of the objects and methods referenced here, consult the upstream libgit2 API reference.Base.LibGit2.Buffer\nBase.LibGit2.CheckoutOptions\nBase.LibGit2.CloneOptions\nBase.LibGit2.DescribeOptions\nBase.LibGit2.DescribeFormatOptions\nBase.LibGit2.DiffDelta\nBase.LibGit2.DiffFile\nBase.LibGit2.DiffOptionsStruct\nBase.LibGit2.FetchHead\nBase.LibGit2.FetchOptions\nBase.LibGit2.GitAnnotated\nBase.LibGit2.GitBlame\nBase.LibGit2.GitBlob\nBase.LibGit2.GitCommit\nBase.LibGit2.GitHash\nBase.LibGit2.GitObject\nBase.LibGit2.GitRemote\nBase.LibGit2.GitRemoteAnon\nBase.LibGit2.GitRepo\nBase.LibGit2.GitRepoExt\nBase.LibGit2.GitRevWalker\nBase.LibGit2.GitShortHash\nBase.LibGit2.GitSignature\nBase.LibGit2.GitStatus\nBase.LibGit2.GitTag\nBase.LibGit2.GitTree\nBase.LibGit2.IndexEntry\nBase.LibGit2.IndexTime\nBase.LibGit2.BlameOptions\nBase.LibGit2.MergeOptions\nBase.LibGit2.ProxyOptions\nBase.LibGit2.PushOptions\nBase.LibGit2.RebaseOperation\nBase.LibGit2.RebaseOptions\nBase.LibGit2.RemoteCallbacks\nBase.LibGit2.SignatureStruct\nBase.LibGit2.StatusEntry\nBase.LibGit2.StatusOptions\nBase.LibGit2.StrArrayStruct\nBase.LibGit2.TimeStruct\nBase.LibGit2.add!\nBase.LibGit2.add_fetch!\nBase.LibGit2.add_push!\nBase.LibGit2.addblob!\nBase.LibGit2.author\nBase.LibGit2.authors\nBase.LibGit2.branch\nBase.LibGit2.branch!\nBase.LibGit2.checkout!\nBase.LibGit2.clone\nBase.LibGit2.commit\nBase.LibGit2.committer\nBase.LibGit2.count(::Function, ::Base.LibGit2.GitRevWalker; ::Base.LibGit2.GitHash, ::Cint, ::Bool)\nBase.LibGit2.counthunks\nBase.LibGit2.create_branch\nBase.LibGit2.credentials_callback\nBase.LibGit2.credentials_cb\nBase.LibGit2.default_signature\nBase.LibGit2.delete_branch\nBase.LibGit2.diff_files\nBase.LibGit2.entryid\nBase.LibGit2.entrytype\nBase.LibGit2.fetch\nBase.LibGit2.fetchheads\nBase.LibGit2.fetch_refspecs\nBase.LibGit2.fetchhead_foreach_cb\nBase.LibGit2.merge_base\nBase.LibGit2.merge!(::Base.LibGit2.GitRepo; ::Any...)\nBase.LibGit2.merge!(::Base.LibGit2.GitRepo, ::Vector{Base.LibGit2.GitAnnotated}; ::Base.LibGit2.MergeOptions, ::Base.LibGit2.CheckoutOptions)\nBase.LibGit2.merge!(::Base.LibGit2.GitRepo, ::Vector{Base.LibGit2.GitAnnotated}, ::Bool; ::Base.LibGit2.MergeOptions, ::Base.LibGit2.CheckoutOptions)\nBase.LibGit2.ffmerge!\nBase.LibGit2.fullname\nBase.LibGit2.features\nBase.LibGit2.filename\nBase.LibGit2.filemode\nBase.LibGit2.gitdir\nBase.LibGit2.git_url\nBase.LibGit2.@githash_str\nBase.LibGit2.head\nBase.LibGit2.head!\nBase.LibGit2.head_oid\nBase.LibGit2.headname\nBase.LibGit2.init\nBase.LibGit2.is_ancestor_of\nBase.LibGit2.isbinary\nBase.LibGit2.iscommit\nBase.LibGit2.isdiff\nBase.LibGit2.isdirty\nBase.LibGit2.isorphan\nBase.LibGit2.isset\nBase.LibGit2.iszero\nBase.LibGit2.lookup_branch\nBase.LibGit2.map(::Function, ::Base.LibGit2.GitRevWalker; ::Base.LibGit2.GitHash, ::AbstractString, ::Cint, ::Bool)\nBase.LibGit2.mirror_callback\nBase.LibGit2.mirror_cb\nBase.LibGit2.message\nBase.LibGit2.merge_analysis\nBase.LibGit2.name\nBase.LibGit2.need_update\nBase.LibGit2.objtype\nBase.LibGit2.path\nBase.LibGit2.peel\nBase.LibGit2.posixpath\nBase.LibGit2.push\nBase.LibGit2.push!(::Base.LibGit2.GitRevWalker, ::Base.LibGit2.GitHash)\nBase.LibGit2.push_head!\nBase.LibGit2.push_refspecs\nBase.LibGit2.raw\nBase.LibGit2.read_tree!\nBase.LibGit2.rebase!\nBase.LibGit2.ref_list\nBase.LibGit2.reftype\nBase.LibGit2.remotes\nBase.LibGit2.remove!\nBase.LibGit2.reset\nBase.LibGit2.reset!\nBase.LibGit2.restore\nBase.LibGit2.revcount\nBase.LibGit2.set_remote_url\nBase.LibGit2.shortname\nBase.LibGit2.snapshot\nBase.LibGit2.status\nBase.LibGit2.stage\nBase.LibGit2.tag_create\nBase.LibGit2.tag_delete\nBase.LibGit2.tag_list\nBase.LibGit2.target\nBase.LibGit2.toggle\nBase.LibGit2.transact\nBase.LibGit2.treewalk\nBase.LibGit2.upstream\nBase.LibGit2.update!\nBase.LibGit2.url\nBase.LibGit2.version\nBase.LibGit2.with\nBase.LibGit2.with_warn\nBase.LibGit2.workdir\nBase.LibGit2.GitObject(::Base.LibGit2.GitTreeEntry)\nBase.LibGit2.UserPasswordCredential\nBase.LibGit2.SSHCredential\nBase.LibGit2.isfilled\nBase.LibGit2.CachedCredentials\nBase.LibGit2.CredentialPayload\nBase.LibGit2.approve\nBase.LibGit2.reject"
 },
 
 {
