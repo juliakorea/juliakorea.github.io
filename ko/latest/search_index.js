@@ -77,7 +77,7 @@ var documenterSearchIndex = {"docs": [
     "page": "줄리아 v0.7.0 릴리즈 노트",
     "title": "Language changes",
     "category": "section",
-    "text": "The syntax for parametric methods, function f{T}(x::T), has been changed to function f(x::T) where {T} (#11310).\nThe fallback constructor that calls convert is deprecated. Instead, new types should prefer to define constructors, and add convert methods that call those constructors only as necessary (#15120).\nThe syntax 1.+2 is deprecated, since it is ambiguous: it could mean either 1 .+ 2 (the current meaning) or 1. + 2 (#19089).\nMutable structs with no fields are no longer singletons; it is now possible to make multiple instances of them that can be distinguished by === (#25854). Zero-size immutable structs are still singletons.\nIn string and character literals, backslash \\ may no longer precede unrecognized escape characters (#22800).\nJuxtaposing binary, octal, and hexadecimal literals is deprecated, since it can lead to confusing code such as 0xapi == 0xa * pi (#16356).\nDeclaring arguments as x::ANY to avoid specialization has been replaced by @nospecialize x. (#22666).\nKeyword argument default values are now evaluated in successive scopes –- the scope for each expression includes only previous keyword arguments, in left-to-right order (#17240).\nThe parsing of 1<<2*3 as 1<<(2*3) is deprecated, and will change to (1<<2)*3 in a future version (#13079).\nThe parsing of <| is now right associative. |> remains left associative (#24153).\n: now parses like other operators, as a call to a function named :, instead of calling colon (#25947).\n{ } expressions now use braces and bracescat as expression heads instead of cell1d and cell2d, and parse similarly to vect and vcat (#8470).\nNested if expressions that arise from the keyword elseif now use elseif as their expression head instead of if (#21774).\nlet blocks now parse the same as for loops; the first argument is either an assignment or block of assignments, and the second argument is a block of statements (#21774).\ndo syntax now parses to an expression with head :do, instead of as a function call (#21774).\nParsed and lowered forms of type definitions have been synchronized with their new keywords (#23157). Expression heads are renamed as follows:\ntype           => struct\nbitstype       => primitive (order of arguments is also reversed, to match syntax)\ncomposite_type => struct_type\nbits_type      => primitive_type\nThe global keyword now only introduces a new binding if one doesn\'t already exist in the module. This means that assignment to a global (global sin = 3) may now throw the error: \"cannot assign variable Base.sin from module Main\", rather than emitting a warning. Additionally, the new bindings are now created before the statement is executed. For example, f() = (global sin = \"gluttony\"; nothing) will now resolve which module contains sin eagerly, rather than delaying that decision until f is run. (#22984).\nglobal const declarations may no longer appear inside functions (#12010).\nUninitialized BitArray constructors of the form BitArray[{N}](shape...) have been deprecated in favor of equivalents accepting uninitialized (an alias for Uninitialized()) as their first argument, as in BitArray[{N}](uninitialized, shape...). For example, BitVector(3) is now BitVector(uninitialized, 3), BitMatrix((2, 4)) is now BitMatrix(uninitialized, (2, 4)), and BitArray{3}(11, 13, 17) is now BitArray{3}(uninitialized, 11, 14, 17) (#24785).\nDispatch rules have been simplified: method matching is now determined exclusively by subtyping; the rule that method type parameters must also be captured has been removed. Instead, attempting to access the unconstrained parameters will throw an UndefVarError. Linting in package tests is recommended to confirm that the set of methods which might throw UndefVarError when accessing the static parameters (need_to_handle_undef_sparam = Set{Any}(m.sig for m in Test.detect_unbound_args(Base, recursive=true))) is equal (==) to some known set (expected = Set()). (#23117)\nconst declarations on local variables were previously ignored. They now give a warning, so that this syntax can be disallowed or given a new meaning in a future version (#5148).\nPlacing an expression after catch, as in catch f(x), is deprecated. Use catch; f(x) instead (#19987).\nIn for i = ..., if a local variable i already existed it would be overwritten during the loop. This behavior is deprecated, and in the future for loop variables will always be new variables local to the loop (#22314). The old behavior of overwriting an existing variable is available via for outer i = ....\nIn for i in x, x used to be evaluated in a new scope enclosing the for loop. Now it is evaluated in the scope outside the for loop.\nVariable bindings local to while loop bodies are now freshly allocated on each loop iteration, matching the behavior of for loops.\nPrefix & for by-reference arguments to ccall has been deprecated in favor of Ref argument types (#6080).\nThe constructor Ref(x::T) now always returns a Ref{T} (#21527).\nAll line numbers in ASTs are represented by LineNumberNodes; the :line expression head is no longer used. QuoteNodes are also consistently used for quoted symbols instead of the :quote expression head (though :quote Exprs are still used for quoted expressions) (#23885).\nThe + and - methods for Number and UniformScaling are not ambiguous anymore since + and - no longer do automatic broadcasting. Hence, the methods for UniformScaling and Number are no longer deprecated (#23923).\nThe keyword importall is deprecated. Use using and/or individual import statements instead (#22789).\nreduce(+, [...]) and reduce(*, [...]) no longer widen the iterated over arguments to system word size. sum and prod still preserve this behavior. (#22825)\nLike _, variable names consisting only of underscores can be assigned, but accessing their values is deprecated (#24221).\nRaw string literal escaping rules have been changed to make it possible to write all strings. The rule is that backslashes escape both quotes and other backslashes, but only when a sequence of backslashes precedes a quote character. Thus, 2n backslashes followed by a quote encodes n backslashes and the end of the literal while 2n+1 backslashes followed by a quote encodes n backslashes followed by a quote character (#22926).\nreprmime(mime, x) has been renamed to repr(mime, x), and along with repr(x) and sprint it now accepts an optional context keyword for IOContext attributes. stringmime has been moved to the Base64 stdlib package (#25990).\nThe syntax (x...) for constructing a tuple is deprecated; use (x...,) instead (#24452).\nNon-parenthesized interpolated variables in strings, e.g. \"$x\", must be followed by a character that will never be an allowed identifier character (currently operators, space/control characters, or common punctuation characters) (#25231).\nThe syntax using A.B can now only be used when A.B is a module, and the syntax using A: B can only be used for adding single bindings (#8000).\n=> now has its own precedence level, giving it strictly higher precedence than = and , (#25391).\nThe conditions under which unary operators followed by ( are parsed as prefix function calls have changed (#26154).\nbegin is disallowed inside indexing expressions, in order to enable the syntax a[begin] (for selecting the first element) in the future (#23354).\nUnderscores for _italics_ and __bold__ are now supported by the Base Markdown parser. (#25564)"
+    "text": "The syntax for parametric methods, function f{T}(x::T), has been changed to function f(x::T) where {T} (#11310).\nThe fallback constructor that calls convert is deprecated. Instead, new types should prefer to define constructors, and add convert methods that call those constructors only as necessary (#15120).\nThe syntax 1.+2 is deprecated, since it is ambiguous: it could mean either 1 .+ 2 (the current meaning) or 1. + 2 (#19089).\nMutable structs with no fields are no longer singletons; it is now possible to make multiple instances of them that can be distinguished by === (#25854). Zero-size immutable structs are still singletons.\nIn string and character literals, backslash \\ may no longer precede unrecognized escape characters (#22800).\nJuxtaposing binary, octal, and hexadecimal literals is deprecated, since it can lead to confusing code such as 0xapi == 0xa * pi (#16356).\nDeclaring arguments as x::ANY to avoid specialization has been replaced by @nospecialize x. (#22666).\nKeyword argument default values are now evaluated in successive scopes –- the scope for each expression includes only previous keyword arguments, in left-to-right order (#17240).\nThe parsing of 1<<2*3 as 1<<(2*3) is deprecated, and will change to (1<<2)*3 in a future version (#13079).\nThe parsing of <| is now right associative. |> remains left associative (#24153).\n: now parses like other operators, as a call to a function named :, instead of calling colon (#25947).\n{ } expressions now use braces and bracescat as expression heads instead of cell1d and cell2d, and parse similarly to vect and vcat (#8470).\nNested if expressions that arise from the keyword elseif now use elseif as their expression head instead of if (#21774).\nlet blocks now parse the same as for loops; the first argument is either an assignment or block of assignments, and the second argument is a block of statements (#21774).\ndo syntax now parses to an expression with head :do, instead of as a function call (#21774).\nParsed and lowered forms of type definitions have been synchronized with their new keywords (#23157). Expression heads are renamed as follows:\ntype           => struct\nbitstype       => primitive (order of arguments is also reversed, to match syntax)\ncomposite_type => struct_type\nbits_type      => primitive_type\nThe global keyword now only introduces a new binding if one doesn\'t already exist in the module. This means that assignment to a global (global sin = 3) may now throw the error: \"cannot assign variable Base.sin from module Main\", rather than emitting a warning. Additionally, the new bindings are now created before the statement is executed. For example, f() = (global sin = \"gluttony\"; nothing) will now resolve which module contains sin eagerly, rather than delaying that decision until f is run. (#22984).\nglobal const declarations may no longer appear inside functions (#12010).\nUninitialized BitArray constructors of the form BitArray[{N}](shape...) have been deprecated in favor of equivalents accepting uninitialized (an alias for Uninitialized()) as their first argument, as in BitArray[{N}](uninitialized, shape...). For example, BitVector(3) is now BitVector(uninitialized, 3), BitMatrix((2, 4)) is now BitMatrix(uninitialized, (2, 4)), and BitArray{3}(11, 13, 17) is now BitArray{3}(uninitialized, 11, 14, 17) (#24785).\nDispatch rules have been simplified: method matching is now determined exclusively by subtyping; the rule that method type parameters must also be captured has been removed. Instead, attempting to access the unconstrained parameters will throw an UndefVarError. Linting in package tests is recommended to confirm that the set of methods which might throw UndefVarError when accessing the static parameters (need_to_handle_undef_sparam = Set{Any}(m.sig for m in Test.detect_unbound_args(Base, recursive=true))) is equal (==) to some known set (expected = Set()). (#23117)\nconst declarations on local variables were previously ignored. They now give a warning, so that this syntax can be disallowed or given a new meaning in a future version (#5148).\nPlacing an expression after catch, as in catch f(x), is deprecated. Use catch; f(x) instead (#19987).\nIn for i = ..., if a local variable i already existed it would be overwritten during the loop. This behavior is deprecated, and in the future for loop variables will always be new variables local to the loop (#22314). The old behavior of overwriting an existing variable is available via for outer i = ....\nIn for i in x, x used to be evaluated in a new scope enclosing the for loop. Now it is evaluated in the scope outside the for loop.\nVariable bindings local to while loop bodies are now freshly allocated on each loop iteration, matching the behavior of for loops.\nPrefix & for by-reference arguments to ccall has been deprecated in favor of Ref argument types (#6080).\nThe constructor Ref(x::T) now always returns a Ref{T} (#21527).\nAll line numbers in ASTs are represented by LineNumberNodes; the :line expression head is no longer used. QuoteNodes are also consistently used for quoted symbols instead of the :quote expression head (though :quote Exprs are still used for quoted expressions) (#23885).\nThe + and - methods for Number and UniformScaling are not ambiguous anymore since + and - no longer do automatic broadcasting. Hence, the methods for UniformScaling and Number are no longer deprecated (#23923).\nThe keyword importall is deprecated. Use using and/or individual import statements instead (#22789).\nreduce(+, [...]) and reduce(*, [...]) no longer widen the iterated over arguments to system word size. sum and prod still preserve this behavior. (#22825)\nLike _, variable names consisting only of underscores can be assigned, but accessing their values is deprecated (#24221).\nRaw string literal escaping rules have been changed to make it possible to write all strings. The rule is that backslashes escape both quotes and other backslashes, but only when a sequence of backslashes precedes a quote character. Thus, 2n backslashes followed by a quote encodes n backslashes and the end of the literal while 2n+1 backslashes followed by a quote encodes n backslashes followed by a quote character (#22926).\nreprmime(mime, x) has been renamed to repr(mime, x), and along with repr(x) and sprint it now accepts an optional context keyword for IOContext attributes. stringmime has been moved to the Base64 stdlib package (#25990).\nThe syntax (x...) for constructing a tuple is deprecated; use (x...,) instead (#24452).\nNon-parenthesized interpolated variables in strings, e.g. \"$x\", must be followed by a character that will never be an allowed identifier character (currently operators, space/control characters, or common punctuation characters) (#25231).\nThe syntax using A.B can now only be used when A.B is a module, and the syntax using A: B can only be used for adding single bindings (#8000).\n=> now has its own precedence level, giving it strictly higher precedence than = and , (#25391).\nThe conditions under which unary operators followed by ( are parsed as prefix function calls have changed (#26154).\nbegin is disallowed inside indexing expressions, in order to enable the syntax a[begin] (for selecting the first element) in the future (#23354).\nUnderscores for _italics_ and __bold__ are now supported by the Base Markdown parser. (#25564)\n… (\\dots) and ⁝ (\\tricolon) are now parsed as binary operators (#26262)."
 },
 
 {
@@ -85,7 +85,7 @@ var documenterSearchIndex = {"docs": [
     "page": "줄리아 v0.7.0 릴리즈 노트",
     "title": "Breaking changes",
     "category": "section",
-    "text": "This section lists changes that do not have deprecation warnings.replace(s::AbstractString, pat=>repl) for function repl arguments formerly passed a substring to repl in all cases.  It now passes substrings for string patterns pat, but a Char for character patterns (when pat is a Char, collection of Char, or a character predicate) (#25815).\nreaduntil now does not include the delimiter in its result, matching the behavior of readline. Pass keep=true to get the old behavior (#25633).\ncountlines now always counts the last non-empty line even if it does not end with EOL, matching the behavior of eachline and readlines (#25845).\ngetindex(s::String, r::UnitRange{Int}) now throws UnicodeError if last(r) is not a valid index into s (#22572).\nntuple(f, n::Integer) throws ArgumentError if n is negative. Previously an empty tuple was returned (#21697).\nJuxtaposing string literals (e.g. \"x\"y) is now a syntax error (#20575).\nfinalizer(function, object) now returns object rather than nothing (#24679).\nThe constructor of SubString now checks if the requested view range is defined by valid indices in the parent AbstractString (#22511).\nMacro calls with for expressions are now parsed as generators inside function argument lists (#18650). Examples:\nsum(@inbounds a[i] for i = 1:n) used to give a syntax error, but is now parsed as sum(@inbounds(a[i]) for i = 1:n).\nsum(@m x for i = 1:n end) used to parse the argument to sum as a 2-argument call to macro @m, but now parses it as a generator plus a syntax error for the dangling end.\n@__DIR__ returns the current working directory rather than nothing when not run from a file (#21759).\n@__FILE__ and @__DIR__ return information relative to the file that it was parsed from, rather than from the task-local SOURCE_PATH global when it was expanded.\nAll macros receive an extra argument __source__::LineNumberNode which describes the parser location in the source file for the @ of the macro call. It can be accessed as a normal argument variable in the body of the macro. This is implemented by inserting an extra leading argument into the Expr(:macrocall, :@name, LineNumberNode(...), args...) surface syntax. (#21746)\nPassing the same keyword argument multiple times is now a syntax error (#16937).\ngetsockname on a TCPSocket now returns the locally bound address and port of the socket. Previously the address of the remote endpoint was being returned (#21825).\nThe ~/.juliarc.jl file has been moved to ~/.julia/config/startup.jl and /etc/julia/juliarc.jl file has been renamed to /etc/julia/startup.jl (#26161).\nUsing ARGS within startup.jl files or within a .jl file loaded with --load will no longer contain the script name as the first argument. Instead, the script name will be assigned to PROGRAM_FILE. (#22092)\nThe format for a ClusterManager specifying the cookie on the command line is now --worker=<cookie>. --worker <cookie> will not work as it is now an optional argument.\nThe representation of CartesianRange has changed to a tuple-of-AbstractUnitRanges; the start and stop fields are no longer present. Use first(R) and last(R) to obtain start/stop. (#20974)\nThe Diagonal, Bidiagonal, Tridiagonal and SymTridiagonal type definitions have changed from Diagonal{T}, Bidiagonal{T}, Tridiagonal{T} and SymTridiagonal{T} to Diagonal{T,V<:AbstractVector{T}}, Bidiagonal{T,V<:AbstractVector{T}}, Tridiagonal{T,V<:AbstractVector{T}} and SymTridiagonal{T,V<:AbstractVector{T}} respectively (#22718, #22925, #23035, #23154).\nThe immediate supertype of BitArray is now simply AbstractArray. BitArray is no longer considered a subtype of DenseArray and StridedArray (#25858).\nWhen called with an argument that contains NaN elements, findmin and findmax now return the first NaN found and its corresponding index. Previously, NaN elements were ignored. The new behavior matches that of min, max, minimum, and maximum.\nisapprox(x,y) now tests norm(x-y) <= max(atol, rtol*max(norm(x), norm(y))) rather than norm(x-y) <= atol + ..., and rtol defaults to zero if an atol > 0 is specified (#22742).\nSpaces are no longer allowed between @ and the name of a macro in a macro call (#22868).\nJuxtaposition of a non-literal with a macro call (x@macro) is no longer valid syntax (#22868).\nOn a cluster, all files are now loaded from the local file system rather than node 1 (#22588). To load the same file everywhere from node 1, one possible alternative is to broadcast a call to include_string: @everywhere include_string(Main, $(read(\"filename\", String)), \"filename\"). Improving upon this API is left as an opportunity for packages.\nrandperm(n) and randcycle(n) now always return a Vector{Int} (independent of the type of n). Use the corresponding mutating functions randperm! and randcycle! to control the array type (#22723).\nHermitian now ignores any imaginary components in the diagonal instead of checking the diagonal. (#17367)\nWorker-worker connections are setup lazily for an :all_to_all topology. Use keyword arg lazy=false to force all connections to be setup during a addprocs call. (#22814)\nIn joinpath(a, b) on Windows, if the drive specifications of a and b do not match, joinpath now returns b instead of throwing an ArgumentError. joinpath(path...) is defined to be left associative, so if any argument has a drive path which does not match the drive of the join of the preceding paths, the prior ones are dropped. (#20912)\n^(A::AbstractMatrix{<:Integer}, p::Integer) now throws a DomainError if p < 0, unless A == one(A) or A == -one(A) (same as for ^(A::Integer, p::Integer)) (#23366).\n^(A::AbstractMatrix{<:Integer}, p::Integer) now promotes the element type in the same way as ^(A::Integer, p::Integer). This means, for instance, that [1 1; 0 1]^big(1) will return a Matrix{BigInt} instead of a Matrix{Int} (#23366).\nThe element type of the input is now preserved in unique. Previously the element type of the output was shrunk to fit the union of the type of each element in the input. (#22696)\nThe promote function now raises an error if its arguments are of different types and if attempting to convert them to a common type fails to change any of their types. This avoids stack overflows in the common case of definitions like f(x, y) = f(promote(x, y)...) (#22801).\nindmin and indmax have been renamed to argmin and argmax, respectively (#25654).\nfindmin, findmax, argmin, and argmax used to always return linear indices. They now return CartesianIndexes for all but 1-d arrays, and in general return the keys of indexed collections (e.g. dictionaries) (#22907).\nThe openspecfun library is no longer built and shipped with Julia, as it is no longer used internally (#22390).\nAll loaded packages used to have bindings in Main (e.g. Main.Package). This is no longer the case; now bindings will only exist for packages brought into scope by typing using Package or import Package (#17997).\nThe rules for mixed-signedness integer arithmetic (e.g. Int32(1) + UInt64(1)) have been simplified: if the arguments have different sizes (in bits), then the type of the larger argument is used. If the arguments have the same size, the unsigned type is used (#9292).\nAll command line arguments passed via -e, -E, and -L will be executed in the order given on the command line (#23665).\nI now yields UniformScaling{Bool}(true) rather than UniformScaling{Int64}(1) to better preserve types in operations involving I (#24396).\nThe return type of reinterpret has changed to ReinterpretArray. reinterpret on sparse arrays has been discontinued.\nBase.find_in_path is now Base.find_package or Base.find_source_file (#24320).\nfinalizer now takes functions or pointers as its first argument, and the object being finalized as its second (rather than the reverse). For the majority of use cases deprecation warnings will be triggered. However, deprecation warnings will not trigger where (1) the callable argument is not a subtype of Function; or (2) both arguments are Functions or Ptr{Cvoid}s (#24605).\nThe kill function now throws errors on user error (e.g. on permission errors), but returns successfully if the process had previously exited. Its return value has been removed. Use the process_running function to determine if a process has already exited.\nBroadcasting has been redesigned with an extensible public interface. The new API is documented at https://docs.julialang.org/en/latest/manual/interfaces/#Interfaces-1. AbstractArray types that specialized broadcasting using the old internal API will need to switch to the new API. (#20740)\nThe logging system has been redesigned - info and warn are deprecated and replaced with the logging macros @info, @warn, @debug and @error.  The logging function is also deprecated and replaced with AbstractLogger and the functions from the new standard Logging library. (#24490)\nThe RevString type has been removed from the language; reverse(::String) returns a String with code points (or fragments thereof) in reverse order. In general, reverse(s) should return a string of the same type and encoding as s with code points in reverse order; any string type overrides reverse to return a different type of string must also override reverseind to compute reversed indices correctly.\neachindex(A, B...) now requires that all inputs have the same number of elements. When the chosen indexing is Cartesian, they must have the same axes.\nAbstractRange objects are now considered as equal to other AbstractArray objects by == and isequal if all of their elements are equal (#16401). This has required changing the hashing algorithm: ranges now use an O(N) fallback instead of a O(1) specialized method unless they define the Base.RangeStepStyle trait; see its documentation for details. Types which support subtraction (operator -) must now implement widen for hashing to work inside heterogeneous arrays.\nfindn(x::AbstractArray) has been deprecated in favor of findall(!iszero, x), which now returns cartesian indices for multidimensional arrays (see below, #25532).\nfind has been renamed to findall. findall, findfirst, findlast, findnext now take and/or return the same type of indices as keys/pairs for AbstractArray, AbstractDict, AbstractString, Tuple and NamedTuple objects (#24774, #25545). In particular, this means that they use CartesianIndex objects for matrices and higher-dimensional arrays instead of linear indices as was previously the case. Use LinearIndices(a)[findall(f, a)] and similar constructs to compute linear indices.\nThe find* functions which return scalars, i.e. findnext, findprev, findfirst, and findlast, as well as indexin, now return nothing when no match is found rather than 0 (#25472, #25662).\nThe Base.HasShape iterator trait has gained a type parameter N indicating the number of dimensions, which must correspond to the length of the tuple returned by size (#25655).\nAbstractSet objects are now considered equal by == and isequal if all of their elements are equal (#25368). This has required changing the hashing algorithm for BitSet.\nthe default behavior of titlecase is changed in two ways (#23393):\ncharacters not starting a word are converted to lowercase; a new keyword argument strict is added which allows to get the old behavior when it\'s false.\nany non-letter character is considered as a word separator; to get the old behavior (only \"space\" characters are considered as word separators), use the keyword wordsep=isspace.\nwritedlm in the standard library module DelimitedFiles now writes numeric values using print rather than print_shortest (#25745).\nThe tempname function used to create a file on Windows but not on other platforms. It now never creates a file (#9053).\nThe fieldnames and propertynames functions now return a tuple rather than an array (#25725).\nindexin now returns the first rather than the last matching index (#25998)."
+    "text": "This section lists changes that do not have deprecation warnings.replace(s::AbstractString, pat=>repl) for function repl arguments formerly passed a substring to repl in all cases.  It now passes substrings for string patterns pat, but a Char for character patterns (when pat is a Char, collection of Char, or a character predicate) (#25815).\nreaduntil now does not include the delimiter in its result, matching the behavior of readline. Pass keep=true to get the old behavior (#25633).\ncountlines now always counts the last non-empty line even if it does not end with EOL, matching the behavior of eachline and readlines (#25845).\ngetindex(s::String, r::UnitRange{Int}) now throws UnicodeError if last(r) is not a valid index into s (#22572).\nntuple(f, n::Integer) throws ArgumentError if n is negative. Previously an empty tuple was returned (#21697).\n⋮, ⋱, ⋰, and ⋯ are now parsed as binary operators, not ordinary identifiers.  ≔, ≕, and ⩴ now parse with assignment rather than comparison precedence (#26262).\nJuxtaposing string literals (e.g. \"x\"y) is now a syntax error (#20575).\nfinalizer(function, object) now returns object rather than nothing (#24679).\nThe constructor of SubString now checks if the requested view range is defined by valid indices in the parent AbstractString (#22511).\nMacro calls with for expressions are now parsed as generators inside function argument lists (#18650). Examples:\nsum(@inbounds a[i] for i = 1:n) used to give a syntax error, but is now parsed as sum(@inbounds(a[i]) for i = 1:n).\nsum(@m x for i = 1:n end) used to parse the argument to sum as a 2-argument call to macro @m, but now parses it as a generator plus a syntax error for the dangling end.\n@__DIR__ returns the current working directory rather than nothing when not run from a file (#21759).\n@__FILE__ and @__DIR__ return information relative to the file that it was parsed from, rather than from the task-local SOURCE_PATH global when it was expanded.\nAll macros receive an extra argument __source__::LineNumberNode which describes the parser location in the source file for the @ of the macro call. It can be accessed as a normal argument variable in the body of the macro. This is implemented by inserting an extra leading argument into the Expr(:macrocall, :@name, LineNumberNode(...), args...) surface syntax. (#21746)\nPassing the same keyword argument multiple times is now a syntax error (#16937).\ngetsockname on a TCPSocket now returns the locally bound address and port of the socket. Previously the address of the remote endpoint was being returned (#21825).\nThe ~/.juliarc.jl file has been moved to ~/.julia/config/startup.jl and /etc/julia/juliarc.jl file has been renamed to /etc/julia/startup.jl (#26161).\nUsing ARGS within startup.jl files or within a .jl file loaded with --load will no longer contain the script name as the first argument. Instead, the script name will be assigned to PROGRAM_FILE. (#22092)\nThe format for a ClusterManager specifying the cookie on the command line is now --worker=<cookie>. --worker <cookie> will not work as it is now an optional argument.\nThe representation of CartesianRange has changed to a tuple-of-AbstractUnitRanges; the start and stop fields are no longer present. Use first(R) and last(R) to obtain start/stop. (#20974)\nThe Diagonal, Bidiagonal, Tridiagonal and SymTridiagonal type definitions have changed from Diagonal{T}, Bidiagonal{T}, Tridiagonal{T} and SymTridiagonal{T} to Diagonal{T,V<:AbstractVector{T}}, Bidiagonal{T,V<:AbstractVector{T}}, Tridiagonal{T,V<:AbstractVector{T}} and SymTridiagonal{T,V<:AbstractVector{T}} respectively (#22718, #22925, #23035, #23154).\nThe immediate supertype of BitArray is now simply AbstractArray. BitArray is no longer considered a subtype of DenseArray and StridedArray (#25858).\nWhen called with an argument that contains NaN elements, findmin and findmax now return the first NaN found and its corresponding index. Previously, NaN elements were ignored. The new behavior matches that of min, max, minimum, and maximum.\nisapprox(x,y) now tests norm(x-y) <= max(atol, rtol*max(norm(x), norm(y))) rather than norm(x-y) <= atol + ..., and rtol defaults to zero if an atol > 0 is specified (#22742).\nSpaces are no longer allowed between @ and the name of a macro in a macro call (#22868).\nJuxtaposition of a non-literal with a macro call (x@macro) is no longer valid syntax (#22868).\nOn a cluster, all files are now loaded from the local file system rather than node 1 (#22588). To load the same file everywhere from node 1, one possible alternative is to broadcast a call to include_string: @everywhere include_string(Main, $(read(\"filename\", String)), \"filename\"). Improving upon this API is left as an opportunity for packages.\nrandperm(n) and randcycle(n) now always return a Vector{Int} (independent of the type of n). Use the corresponding mutating functions randperm! and randcycle! to control the array type (#22723).\nHermitian now ignores any imaginary components in the diagonal instead of checking the diagonal. (#17367)\nWorker-worker connections are setup lazily for an :all_to_all topology. Use keyword arg lazy=false to force all connections to be setup during a addprocs call. (#22814)\nIn joinpath(a, b) on Windows, if the drive specifications of a and b do not match, joinpath now returns b instead of throwing an ArgumentError. joinpath(path...) is defined to be left associative, so if any argument has a drive path which does not match the drive of the join of the preceding paths, the prior ones are dropped. (#20912)\n^(A::AbstractMatrix{<:Integer}, p::Integer) now throws a DomainError if p < 0, unless A == one(A) or A == -one(A) (same as for ^(A::Integer, p::Integer)) (#23366).\n^(A::AbstractMatrix{<:Integer}, p::Integer) now promotes the element type in the same way as ^(A::Integer, p::Integer). This means, for instance, that [1 1; 0 1]^big(1) will return a Matrix{BigInt} instead of a Matrix{Int} (#23366).\nThe element type of the input is now preserved in unique. Previously the element type of the output was shrunk to fit the union of the type of each element in the input. (#22696)\nThe promote function now raises an error if its arguments are of different types and if attempting to convert them to a common type fails to change any of their types. This avoids stack overflows in the common case of definitions like f(x, y) = f(promote(x, y)...) (#22801).\nindmin and indmax have been renamed to argmin and argmax, respectively (#25654).\nfindmin, findmax, argmin, and argmax used to always return linear indices. They now return CartesianIndexes for all but 1-d arrays, and in general return the keys of indexed collections (e.g. dictionaries) (#22907).\nThe openspecfun library is no longer built and shipped with Julia, as it is no longer used internally (#22390).\nAll loaded packages used to have bindings in Main (e.g. Main.Package). This is no longer the case; now bindings will only exist for packages brought into scope by typing using Package or import Package (#17997).\nThe rules for mixed-signedness integer arithmetic (e.g. Int32(1) + UInt64(1)) have been simplified: if the arguments have different sizes (in bits), then the type of the larger argument is used. If the arguments have the same size, the unsigned type is used (#9292).\nAll command line arguments passed via -e, -E, and -L will be executed in the order given on the command line (#23665).\nI now yields UniformScaling{Bool}(true) rather than UniformScaling{Int64}(1) to better preserve types in operations involving I (#24396).\nThe return type of reinterpret has changed to ReinterpretArray. reinterpret on sparse arrays has been discontinued.\nBase.find_in_path is now Base.find_package or Base.find_source_file (#24320).\nfinalizer now takes functions or pointers as its first argument, and the object being finalized as its second (rather than the reverse). For the majority of use cases deprecation warnings will be triggered. However, deprecation warnings will not trigger where (1) the callable argument is not a subtype of Function; or (2) both arguments are Functions or Ptr{Cvoid}s (#24605).\nThe kill function now throws errors on user error (e.g. on permission errors), but returns successfully if the process had previously exited. Its return value has been removed. Use the process_running function to determine if a process has already exited.\nBroadcasting has been redesigned with an extensible public interface. The new API is documented at https://docs.julialang.org/en/latest/manual/interfaces/#Interfaces-1. AbstractArray types that specialized broadcasting using the old internal API will need to switch to the new API. (#20740)\nThe logging system has been redesigned - info and warn are deprecated and replaced with the logging macros @info, @warn, @debug and @error.  The logging function is also deprecated and replaced with AbstractLogger and the functions from the new standard Logging library. (#24490)\nThe RevString type has been removed from the language; reverse(::String) returns a String with code points (or fragments thereof) in reverse order. In general, reverse(s) should return a string of the same type and encoding as s with code points in reverse order; any string type overrides reverse to return a different type of string must also override reverseind to compute reversed indices correctly.\neachindex(A, B...) now requires that all inputs have the same number of elements. When the chosen indexing is Cartesian, they must have the same axes.\nAbstractRange objects are now considered as equal to other AbstractArray objects by == and isequal if all of their elements are equal (#16401). This has required changing the hashing algorithm: ranges now use an O(N) fallback instead of a O(1) specialized method unless they define the Base.RangeStepStyle trait; see its documentation for details. Types which support subtraction (operator -) must now implement widen for hashing to work inside heterogeneous arrays.\nfindn(x::AbstractArray) has been deprecated in favor of findall(!iszero, x), which now returns cartesian indices for multidimensional arrays (see below, #25532).\nfind has been renamed to findall. findall, findfirst, findlast, findnext now take and/or return the same type of indices as keys/pairs for AbstractArray, AbstractDict, AbstractString, Tuple and NamedTuple objects (#24774, #25545). In particular, this means that they use CartesianIndex objects for matrices and higher-dimensional arrays instead of linear indices as was previously the case. Use LinearIndices(a)[findall(f, a)] and similar constructs to compute linear indices.\nThe find* functions which return scalars, i.e. findnext, findprev, findfirst, and findlast, as well as indexin, now return nothing when no match is found rather than 0 (#25472, #25662).\nThe Base.HasShape iterator trait has gained a type parameter N indicating the number of dimensions, which must correspond to the length of the tuple returned by size (#25655).\nAbstractSet objects are now considered equal by == and isequal if all of their elements are equal (#25368). This has required changing the hashing algorithm for BitSet.\nthe default behavior of titlecase is changed in two ways (#23393):\ncharacters not starting a word are converted to lowercase; a new keyword argument strict is added which allows to get the old behavior when it\'s false.\nany non-letter character is considered as a word separator; to get the old behavior (only \"space\" characters are considered as word separators), use the keyword wordsep=isspace.\nwritedlm in the standard library module DelimitedFiles now writes numeric values using print rather than print_shortest (#25745).\nThe tempname function used to create a file on Windows but not on other platforms. It now never creates a file (#9053).\nThe fieldnames and propertynames functions now return a tuple rather than an array (#25725).\nindexin now returns the first rather than the last matching index (#25998)."
 },
 
 {
@@ -501,7 +501,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Strings",
     "title": "String Basics",
     "category": "section",
-    "text": "String literals are delimited by double quotes or triple double quotes:julia> str = \"Hello, world.\\n\"\n\"Hello, world.\\n\"\n\njulia> \"\"\"Contains \"quote\" characters\"\"\"\n\"Contains \\\"quote\\\" characters\"If you want to extract a character from a string, you index into it:julia> str[1]\n\'H\': ASCII/Unicode U+0048 (category Lu: Letter, uppercase)\n\njulia> str[6]\n\',\': ASCII/Unicode U+002c (category Po: Punctuation, other)\n\njulia> str[end]\n\'\\n\': ASCII/Unicode U+000a (category Cc: Other, control)Many Julia objects, including strings, can be indexed with integers. The index of the first element is returned by firstindex(str), and the index of the last element with lastindex(str). The keywordend can be used inside an indexing operation as shorthand for the last index along the given dimension. Most indexing in Julia is 1-based: the first element of many integer-indexed objects is found at index 1. (As we will see below, this does not necessarily mean that the last element is found at index n, where n is the length of the string.)You can perform arithmetic and other operations with end, just like a normal value:julia> str[end-1]\n\'.\': ASCII/Unicode U+002e (category Po: Punctuation, other)\n\njulia> str[end÷2]\n\' \': ASCII/Unicode U+0020 (category Zs: Separator, space)Using an index less than 1 or greater than end raises an error:julia> str[0]\nERROR: BoundsError: attempt to access \"Hello, world.\\n\"\n  at index [0]\n[...]\n\njulia> str[end+1]\nERROR: BoundsError: attempt to access \"Hello, world.\\n\"\n  at index [15]\nStacktrace:\n[...]You can also extract a substring using range indexing:julia> str[4:9]\n\"lo, wo\"Notice that the expressions str[k] and str[k:k] do not give the same result:julia> str[6]\n\',\': ASCII/Unicode U+002c (category Po: Punctuation, other)\n\njulia> str[6:6]\n\",\"The former is a single character value of type Char, while the latter is a string value that happens to contain only a single character. In Julia these are very different things.Range indexing makes a copy of the selected part of the original string. Alternatively, it is possible to create a view into a string using the type SubString, for example:julia> str = \"long string\"\n\"long string\"\n\njulia> substr = SubString(str, 1, 4)\n\"long\"\n\njulia> typeof(substr)\nSubString{String}Several standard functions like chop, chomp or strip return a SubString."
+    "text": "String literals are delimited by double quotes or triple double quotes:julia> str = \"Hello, world.\\n\"\n\"Hello, world.\\n\"\n\njulia> \"\"\"Contains \"quote\" characters\"\"\"\n\"Contains \\\"quote\\\" characters\"If you want to extract a character from a string, you index into it:julia> str[1]\n\'H\': ASCII/Unicode U+0048 (category Lu: Letter, uppercase)\n\njulia> str[6]\n\',\': ASCII/Unicode U+002c (category Po: Punctuation, other)\n\njulia> str[end]\n\'\\n\': ASCII/Unicode U+000a (category Cc: Other, control)Many Julia objects, including strings, can be indexed with integers. The index of the first element is returned by firstindex(str), and the index of the last element with lastindex(str). The keyword end can be used inside an indexing operation as shorthand for the last index along the given dimension. Most indexing in Julia is 1-based: the first element of many integer-indexed objects is found at index 1. (As we will see below, this does not necessarily mean that the last element is found at index n, where n is the length of the string.)You can perform arithmetic and other operations with end, just like a normal value:julia> str[end-1]\n\'.\': ASCII/Unicode U+002e (category Po: Punctuation, other)\n\njulia> str[end÷2]\n\' \': ASCII/Unicode U+0020 (category Zs: Separator, space)Using an index less than 1 or greater than end raises an error:julia> str[0]\nERROR: BoundsError: attempt to access \"Hello, world.\\n\"\n  at index [0]\n[...]\n\njulia> str[end+1]\nERROR: BoundsError: attempt to access \"Hello, world.\\n\"\n  at index [15]\nStacktrace:\n[...]You can also extract a substring using range indexing:julia> str[4:9]\n\"lo, wo\"Notice that the expressions str[k] and str[k:k] do not give the same result:julia> str[6]\n\',\': ASCII/Unicode U+002c (category Po: Punctuation, other)\n\njulia> str[6:6]\n\",\"The former is a single character value of type Char, while the latter is a string value that happens to contain only a single character. In Julia these are very different things.Range indexing makes a copy of the selected part of the original string. Alternatively, it is possible to create a view into a string using the type SubString, for example:julia> str = \"long string\"\n\"long string\"\n\njulia> substr = SubString(str, 1, 4)\n\"long\"\n\njulia> typeof(substr)\nSubString{String}Several standard functions like chop, chomp or strip return a SubString."
 },
 
 {
@@ -1613,7 +1613,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Documentation",
     "title": "Documentation",
     "category": "section",
-    "text": "Julia enables package developers and users to document functions, types and other objects easily via a built-in documentation system since Julia 0.4.The basic syntax is simple: any string appearing at the top-level right before an object (function, macro, type or instance) will be interpreted as documenting it (these are called docstrings). Note that no blank lines or comments may intervene between a docstring and the documented object. Here is a basic example:\"Tell whether there are too foo items in the array.\"\nfoo(xs::Array) = ...Documentation is interpreted as Markdown, so you can use indentation and code fences to delimit code examples from text. Technically, any object can be associated with any other as metadata; Markdown happens to be the default, but one can construct other string macros and pass them to the @doc macro just as well.Here is a more complex example, still using Markdown:\"\"\"\n    bar(x[, y])\n\nCompute the Bar index between `x` and `y`. If `y` is missing, compute\nthe Bar index between all pairs of columns of `x`.\n\n# Examples\n```julia-repl\njulia> bar([1, 2], [1, 2])\n1\n```\n\"\"\"\nfunction bar(x, y) ...As in the example above, we recommend following some simple conventions when writing documentation:Always show the signature of a function at the top of the documentation, with a four-space indent so that it is printed as Julia code.\nThis can be identical to the signature present in the Julia code (like mean(x::AbstractArray)), or a simplified form. Optional arguments should be represented with their default values (i.e. f(x, y=1)) when possible, following the actual Julia syntax. Optional arguments which do not have a default value should be put in brackets (i.e. f(x[, y]) and f(x[, y[, z]])). An alternative solution is to use several lines: one without optional arguments, the other(s) with them. This solution can also be used to document several related methods of a given function. When a function accepts many keyword arguments, only include a <keyword arguments> placeholder in the signature (i.e. f(x; <keyword arguments>)), and give the complete list under an # Arguments section (see point 4 below).\nInclude a single one-line sentence describing what the function does or what the object represents after the simplified signature block. If needed, provide more details in a second paragraph, after a blank line.\nThe one-line sentence should use the imperative form (\"Do this\", \"Return that\") instead of the third person (do not write \"Returns the length...\") when documenting functions. It should end with a period. If the meaning of a function cannot be summarized easily, splitting it into separate composable parts could be beneficial (this should not be taken as an absolute requirement for every single case though).\nDo not repeat yourself.\nSince the function name is given by the signature, there is no need to start the documentation with \"The function bar...\": go straight to the point. Similarly, if the signature specifies the types of the arguments, mentioning them in the description is redundant.\nOnly provide an argument list when really necessary.\nFor simple functions, it is often clearer to mention the role of the arguments directly in the description of the function\'s purpose. An argument list would only repeat information already provided elsewhere. However, providing an argument list can be a good idea for complex functions with many arguments (in particular keyword arguments). In that case, insert it after the general description of the function, under an # Arguments header, with one - bullet for each argument. The list should mention the types and default values (if any) of the arguments:\n\"\"\"\n...\n# Arguments\n- `n::Integer`: the number of elements to compute.\n- `dim::Integer=1`: the dimensions along which to perform the computation.\n...\n\"\"\"\nProvide hints to related functions.\nSometimes there are functions of related functionality. To increase discoverability please provide a short list of these in a See also: paragraph.\nSee also: [`bar!`](@ref), [`baz`](@ref), [`baaz`](@ref)\nInclude any code examples in an # Examples section.\nExamples should, whenever possible, be written as doctests. A doctest is a fenced code block (see Code blocks) starting with ```jldoctest and contains any number of julia> prompts together with inputs and expected outputs that mimic the Julia REPL.\nFor example in the following docstring a variable a is defined and the expected result, as printed in a Julia REPL, appears afterwards:\n\"\"\"\nSome nice documentation here.\n\n# Examples\n```jldoctest\njulia> a = [1 2; 3 4]\n2×2 Array{Int64,2}:\n 1  2\n 3  4\n```\n\"\"\"\nwarning: Warning\nCalling rand and other RNG-related functions should be avoided in doctests since they will not produce consistent outputs during different Julia sessions. If you would like to show some random number generation related functionality, one option is to explicitly construct and seed your own MersenneTwister (or other pseudorandom number generator) and pass it to the functions you are doctesting.Operating system word size (Int32 or Int64) as well as path separator differences (/ or \\) will also affect the reproducibility of some doctests.Note that whitespace in your doctest is significant! The doctest will fail if you misalign the output of pretty-printing an array, for example.\nYou can then run make -C doc doctest to run all the doctests in the Julia Manual, which will ensure that your example works.\nTo indicate that the output result is truncated, you may write [...] at the line where checking should stop. This is useful to hide a stacktrace (which contains non-permanent references to lines of julia code) when the doctest shows that an exception is thrown, for example:\n```jldoctest\njulia> div(1, 0)\nERROR: DivideError: integer division error\n[...]\n```\nExamples that are untestable should be written within fenced code blocks starting with ```julia so that they are highlighted correctly in the generated documentation.\ntip: Tip\nWherever possible examples should be self-contained and runnable so that readers are able to try them out without having to include any dependencies.\nUse backticks to identify code and equations.\nJulia identifiers and code excerpts should always appear between backticks ` to enable highlighting. Equations in the LaTeX syntax can be inserted between double backticks ``. Use Unicode characters rather than their LaTeX escape sequence, i.e. ``α = 1`` rather than ``\\\\alpha = 1``.\nPlace the starting and ending \"\"\" characters on lines by themselves.\nThat is, write:\n\"\"\"\n...\n\n...\n\"\"\"\nf(x, y) = ...\nrather than:\n\"\"\"...\n\n...\"\"\"\nf(x, y) = ...\nThis makes it more clear where docstrings start and end.\nRespect the line length limit used in the surrounding code.\nDocstrings are edited using the same tools as code. Therefore, the same conventions should apply. It it advised to add line breaks after 92 characters."
+    "text": "Julia enables package developers and users to document functions, types and other objects easily via a built-in documentation system since Julia 0.4.The basic syntax is simple: any string appearing at the top-level right before an object (function, macro, type or instance) will be interpreted as documenting it (these are called docstrings). Note that no blank lines or comments may intervene between a docstring and the documented object. Here is a basic example:\"Tell whether there are too foo items in the array.\"\nfoo(xs::Array) = ...Documentation is interpreted as Markdown, so you can use indentation and code fences to delimit code examples from text. Technically, any object can be associated with any other as metadata; Markdown happens to be the default, but one can construct other string macros and pass them to the @doc macro just as well.Here is a more complex example, still using Markdown:\"\"\"\n    bar(x[, y])\n\nCompute the Bar index between `x` and `y`. If `y` is missing, compute\nthe Bar index between all pairs of columns of `x`.\n\n# Examples\n```julia-repl\njulia> bar([1, 2], [1, 2])\n1\n```\n\"\"\"\nfunction bar(x, y) ...As in the example above, we recommend following some simple conventions when writing documentation:Always show the signature of a function at the top of the documentation, with a four-space indent so that it is printed as Julia code.\nThis can be identical to the signature present in the Julia code (like mean(x::AbstractArray)), or a simplified form. Optional arguments should be represented with their default values (i.e. f(x, y=1)) when possible, following the actual Julia syntax. Optional arguments which do not have a default value should be put in brackets (i.e. f(x[, y]) and f(x[, y[, z]])). An alternative solution is to use several lines: one without optional arguments, the other(s) with them. This solution can also be used to document several related methods of a given function. When a function accepts many keyword arguments, only include a <keyword arguments> placeholder in the signature (i.e. f(x; <keyword arguments>)), and give the complete list under an # Arguments section (see point 4 below).\nInclude a single one-line sentence describing what the function does or what the object represents after the simplified signature block. If needed, provide more details in a second paragraph, after a blank line.\nThe one-line sentence should use the imperative form (\"Do this\", \"Return that\") instead of the third person (do not write \"Returns the length...\") when documenting functions. It should end with a period. If the meaning of a function cannot be summarized easily, splitting it into separate composable parts could be beneficial (this should not be taken as an absolute requirement for every single case though).\nDo not repeat yourself.\nSince the function name is given by the signature, there is no need to start the documentation with \"The function bar...\": go straight to the point. Similarly, if the signature specifies the types of the arguments, mentioning them in the description is redundant.\nOnly provide an argument list when really necessary.\nFor simple functions, it is often clearer to mention the role of the arguments directly in the description of the function\'s purpose. An argument list would only repeat information already provided elsewhere. However, providing an argument list can be a good idea for complex functions with many arguments (in particular keyword arguments). In that case, insert it after the general description of the function, under an # Arguments header, with one - bullet for each argument. The list should mention the types and default values (if any) of the arguments:\n\"\"\"\n...\n# Arguments\n- `n::Integer`: the number of elements to compute.\n- `dim::Integer=1`: the dimensions along which to perform the computation.\n...\n\"\"\"\nProvide hints to related functions.\nSometimes there are functions of related functionality. To increase discoverability please provide a short list of these in a See also: paragraph.\nSee also: [`bar!`](@ref), [`baz`](@ref), [`baaz`](@ref)\nInclude any code examples in an # Examples section.\nExamples should, whenever possible, be written as doctests. A doctest is a fenced code block (see Code blocks) starting with ```jldoctest and contains any number of julia> prompts together with inputs and expected outputs that mimic the Julia REPL.\nFor example in the following docstring a variable a is defined and the expected result, as printed in a Julia REPL, appears afterwards:\n\"\"\"\nSome nice documentation here.\n\n# Examples\n```jldoctest\njulia> a = [1 2; 3 4]\n2×2 Array{Int64,2}:\n 1  2\n 3  4\n```\n\"\"\"\nwarning: Warning\nCalling rand and other RNG-related functions should be avoided in doctests since they will not produce consistent outputs during different Julia sessions. If you would like to show some random number generation related functionality, one option is to explicitly construct and seed your own MersenneTwister (or other pseudorandom number generator) and pass it to the functions you are doctesting.Operating system word size (Int32 or Int64) as well as path separator differences (/ or \\) will also affect the reproducibility of some doctests.Note that whitespace in your doctest is significant! The doctest will fail if you misalign the output of pretty-printing an array, for example.\nYou can then run make -C doc doctest to run all the doctests in the Julia Manual, which will ensure that your example works.\nTo indicate that the output result is truncated, you may write [...] at the line where checking should stop. This is useful to hide a stacktrace (which contains non-permanent references to lines of julia code) when the doctest shows that an exception is thrown, for example:\n```jldoctest\njulia> div(1, 0)\nERROR: DivideError: integer division error\n[...]\n```\nExamples that are untestable should be written within fenced code blocks starting with ```julia so that they are highlighted correctly in the generated documentation.\ntip: Tip\nWherever possible examples should be self-contained and runnable so that readers are able to try them out without having to include any dependencies.\nUse backticks to identify code and equations.\nJulia identifiers and code excerpts should always appear between backticks ` to enable highlighting. Equations in the LaTeX syntax can be inserted between double backticks ``. Use Unicode characters rather than their LaTeX escape sequence, i.e. ``α = 1`` rather than ``\\\\alpha = 1``.\nPlace the starting and ending \"\"\" characters on lines by themselves.\nThat is, write:\n\"\"\"\n...\n\n...\n\"\"\"\nf(x, y) = ...\nrather than:\n\"\"\"...\n\n...\"\"\"\nf(x, y) = ...\nThis makes it more clear where docstrings start and end.\nRespect the line length limit used in the surrounding code.\nDocstrings are edited using the same tools as code. Therefore, the same conventions should apply. It it advised to add line breaks after 92 characters.\nProvide information allowing custom types to implement the function in an # Implementation section. These implementation details intended for developers rather than users, explaining e.g. which functions should be overridden and which functions automatically use appropriate fallbacks, are better kept separate from the main description of the function\'s behavior."
 },
 
 {
@@ -4333,7 +4333,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Unicode Input",
     "title": "Unicode Input",
     "category": "section",
-    "text": "The following table lists Unicode characters that can be entered via tab completion of LaTeX-like abbreviations in the Julia REPL (and in various other editing environments).  You can also get information on how to type a symbol by entering it in the REPL help, i.e. by typing ? and then entering the symbol in the REPL (e.g., by copy-paste from somewhere you saw the symbol).warning: Warning\nThis table may appear to contain missing characters in the second column, or even show characters that are inconsistent with the characters as they are rendered in the Julia REPL. In these cases, users are strongly advised to check their choice of fonts in their browser and REPL environment, as there are known issues with glyphs in many fonts.#\n# Generate a table containing all LaTeX and Emoji tab completions available in the REPL.\n#\n\nimport REPL\nconst NBSP = \'\\u00A0\'\n\nfunction tab_completions(symbols...)\n    completions = Dict{String, Vector{String}}()\n    for each in symbols, (k, v) in each\n        completions[v] = push!(get!(completions, v, String[]), k)\n    end\n    return completions\nend\n\nfunction unicode_data()\n    file = normpath(@__DIR__, \"..\", \"..\", \"..\", \"..\", \"..\", \"UnicodeData.txt\")\n    names = Dict{UInt32, String}()\n    open(file) do unidata\n        for line in readlines(unidata)\n            id, name, desc = split(line, \";\")[[1, 2, 11]]\n            codepoint = parse(UInt32, \"0x$id\")\n            names[codepoint] = titlecase(lowercase(\n                name == \"\" ? desc : desc == \"\" ? name : \"$name / $desc\"))\n        end\n    end\n    return names\nend\n\n# Surround combining characters with no-break spaces (i.e \'\\u00A0\'). Follows the same format\n# for how unicode is displayed on the unicode.org website:\n# http://unicode.org/cldr/utility/character.jsp?a=0300\nfunction fix_combining_chars(char)\n    cat = Base.Unicode.category_code(char)\n    return cat == 6 || cat == 8 ? \"$NBSP$char$NBSP\" : \"$char\"\nend\n\n\nfunction table_entries(completions, unicode_dict)\n    entries = [[\n        \"Code point(s)\", \"Character(s)\",\n        \"Tab completion sequence(s)\", \"Unicode name(s)\"\n    ]]\n    for (chars, inputs) in sort!(collect(completions), by = first)\n        code_points, unicode_names, characters = String[], String[], String[]\n        for char in chars\n            push!(code_points, \"U+$(uppercase(hex(char, 5)))\")\n            push!(unicode_names, get(unicode_dict, UInt32(char), \"(No Unicode name)\"))\n            push!(characters, isempty(characters) ? fix_combining_chars(char) : \"$char\")\n        end\n        push!(entries, [\n            join(code_points, \" + \"), join(characters),\n            join(inputs, \", \"), join(unicode_names, \" + \")\n        ])\n    end\n    return Markdown.Table(entries, [:l, :l, :l, :l])\nend\n\ntable_entries(\n    tab_completions(\n        REPL.REPLCompletions.latex_symbols,\n        REPL.REPLCompletions.emoji_symbols\n    ),\n    unicode_data()\n)"
+    "text": "The following table lists Unicode characters that can be entered via tab completion of LaTeX-like abbreviations in the Julia REPL (and in various other editing environments).  You can also get information on how to type a symbol by entering it in the REPL help, i.e. by typing ? and then entering the symbol in the REPL (e.g., by copy-paste from somewhere you saw the symbol).warning: Warning\nThis table may appear to contain missing characters in the second column, or even show characters that are inconsistent with the characters as they are rendered in the Julia REPL. In these cases, users are strongly advised to check their choice of fonts in their browser and REPL environment, as there are known issues with glyphs in many fonts.#\n# Generate a table containing all LaTeX and Emoji tab completions available in the REPL.\n#\n\nimport REPL\nconst NBSP = \'\\u00A0\'\n\nfunction tab_completions(symbols...)\n    completions = Dict{String, Vector{String}}()\n    for each in symbols, (k, v) in each\n        completions[v] = push!(get!(completions, v, String[]), k)\n    end\n    return completions\nend\n\nfunction unicode_data()\n    file = normpath(@__DIR__, \"..\", \"..\", \"..\", \"..\", \"..\", \"UnicodeData.txt\")\n    names = Dict{UInt32, String}()\n    open(file) do unidata\n        for line in readlines(unidata)\n            id, name, desc = split(line, \";\")[[1, 2, 11]]\n            codepoint = parse(UInt32, \"0x$id\")\n            names[codepoint] = titlecase(lowercase(\n                name == \"\" ? desc : desc == \"\" ? name : \"$name / $desc\"))\n        end\n    end\n    return names\nend\n\n# Surround combining characters with no-break spaces (i.e \'\\u00A0\'). Follows the same format\n# for how unicode is displayed on the unicode.org website:\n# http://unicode.org/cldr/utility/character.jsp?a=0300\nfunction fix_combining_chars(char)\n    cat = Base.Unicode.category_code(char)\n    return cat == 6 || cat == 8 ? \"$NBSP$char$NBSP\" : \"$char\"\nend\n\n\nfunction table_entries(completions, unicode_dict)\n    entries = [[\n        \"Code point(s)\", \"Character(s)\",\n        \"Tab completion sequence(s)\", \"Unicode name(s)\"\n    ]]\n    for (chars, inputs) in sort!(collect(completions), by = first)\n        code_points, unicode_names, characters = String[], String[], String[]\n        for char in chars\n            push!(code_points, \"U+$(uppercase(string(UInt32(char), base = 16, pad = 5)))\")\n            push!(unicode_names, get(unicode_dict, UInt32(char), \"(No Unicode name)\"))\n            push!(characters, isempty(characters) ? fix_combining_chars(char) : \"$char\")\n        end\n        push!(entries, [\n            join(code_points, \" + \"), join(characters),\n            join(inputs, \", \"), join(unicode_names, \" + \")\n        ])\n    end\n    return Markdown.Table(entries, [:l, :l, :l, :l])\nend\n\ntable_entries(\n    tab_completions(\n        REPL.REPLCompletions.latex_symbols,\n        REPL.REPLCompletions.emoji_symbols\n    ),\n    unicode_data()\n)"
 },
 
 {
@@ -4805,7 +4805,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Essentials",
     "title": "Core.:===",
     "category": "Function",
-    "text": "===(x,y) -> Bool\n≡(x,y) -> Bool\n\nDetermine whether x and y are identical, in the sense that no program could distinguish them. First the types of x and y are compared. If those are identical, mutable objects are compared by address in memory and immutable objects (such as numbers) are compared by contents at the bit level. This function is sometimes called \"egal\".\n\nExamples\n\njulia> a = [1, 2]; b = [1, 2];\n\njulia> a == b\ntrue\n\njulia> a === b\nfalse\n\njulia> a === a\ntrue\n\n\n\n\n\n"
+    "text": "===(x,y) -> Bool\n≡(x,y) -> Bool\n\nDetermine whether x and y are identical, in the sense that no program could distinguish them. First the types of x and y are compared. If those are identical, mutable objects are compared by address in memory and immutable objects (such as numbers) are compared by contents at the bit level. This function is sometimes called \"egal\". It always returns a Bool value.\n\nExamples\n\njulia> a = [1, 2]; b = [1, 2];\n\njulia> a == b\ntrue\n\njulia> a === b\nfalse\n\njulia> a === a\ntrue\n\n\n\n\n\n"
 },
 
 {
@@ -4821,7 +4821,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Essentials",
     "title": "Base.isequal",
     "category": "Function",
-    "text": "isequal(x, y)\n\nSimilar to ==, except treats all floating-point NaN values as equal to each other, and treats -0.0 as unequal to 0.0. The default implementation of isequal calls ==, so if you have a type that doesn\'t have these floating-point subtleties then you probably only need to define ==.\n\nisequal is the comparison function used by hash tables (Dict). isequal(x,y) must imply that hash(x) == hash(y).\n\nThis typically means that if you define your own == function then you must define a corresponding hash (and vice versa). Collections typically implement isequal by calling isequal recursively on all contents.\n\nScalar types generally do not need to implement isequal separate from ==, unless they represent floating-point numbers amenable to a more efficient implementation than that provided as a generic fallback (based on isnan, signbit, and ==).\n\nExamples\n\njulia> isequal([1., NaN], [1., NaN])\ntrue\n\njulia> [1., NaN] == [1., NaN]\nfalse\n\njulia> 0.0 == -0.0\ntrue\n\njulia> isequal(0.0, -0.0)\nfalse\n\n\n\n\n\n"
+    "text": "isequal(x, y)\n\nSimilar to ==, except for the treatment of floating point numbers and of missing values. isequal treats all floating-point NaN values as equal to each other, treats -0.0 as unequal to 0.0, and missing as equal to missing. Always returns a Bool value.\n\nImplementation\n\nThe default implementation of isequal calls ==, so a type that does not involve floating-point values generally only needs to define ==.\n\nisequal is the comparison function used by hash tables (Dict). isequal(x,y) must imply that hash(x) == hash(y).\n\nThis typically means that types for which a custom == or isequal method exists must implement a corresponding hash method (and vice versa). Collections typically implement isequal by calling isequal recursively on all contents.\n\nScalar types generally do not need to implement isequal separate from ==, unless they represent floating-point numbers amenable to a more efficient implementation than that provided as a generic fallback (based on isnan, signbit, and ==).\n\nExamples\n\njulia> isequal([1., NaN], [1., NaN])\ntrue\n\njulia> [1., NaN] == [1., NaN]\nfalse\n\njulia> 0.0 == -0.0\ntrue\n\njulia> isequal(0.0, -0.0)\nfalse\n\n\n\n\n\n"
 },
 
 {
@@ -4829,7 +4829,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Essentials",
     "title": "Base.isless",
     "category": "Function",
-    "text": "isless(x, y)\n\nTest whether x is less than y, according to a canonical total order. Values that are normally unordered, such as NaN, are ordered in an arbitrary but consistent fashion. This is the default comparison used by sort. Non-numeric types with a canonical total order should implement this function. Numeric types only need to implement it if they have special values such as NaN.\n\n\n\n\n\n"
+    "text": "isless(x, y)\n\nTest whether x is less than y, according to a canonical total order. Values that are normally unordered, such as NaN, are ordered in an arbitrary but consistent fashion. missing values are ordered last.\n\nThis is the default comparison used by sort.\n\nImplementation\n\nNon-numeric types with a canonical total order should implement this function. Numeric types only need to implement it if they have special values such as NaN. Types with a canonical partial order should implement <.\n\n\n\n\n\n"
 },
 
 {
@@ -5477,7 +5477,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Essentials",
     "title": "Base.:∘",
     "category": "Function",
-    "text": "f ∘ g\n\nCompose functions: i.e. (f ∘ g)(args...) means f(g(args...)). The ∘ symbol can be entered in the Julia REPL (and most editors, appropriately configured) by typing \\circ<tab>.\n\nExamples\n\njulia> map(uppercase∘hex, 250:255)\n6-element Array{String,1}:\n \"FA\"\n \"FB\"\n \"FC\"\n \"FD\"\n \"FE\"\n \"FF\"\n\n\n\n\n\n"
+    "text": "f ∘ g\n\nCompose functions: i.e. (f ∘ g)(args...) means f(g(args...)). The ∘ symbol can be entered in the Julia REPL (and most editors, appropriately configured) by typing \\circ<tab>.\n\nExamples\n\njulia> map(uppercase∘first, [\"apple\", \"banana\", \"carrot\"])\n3-element Array{Char,1}:\n \'A\'\n \'B\'\n \'C\'\n\n\n\n\n\n"
 },
 
 {
@@ -5669,15 +5669,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Essentials",
     "title": "Base.run",
     "category": "Function",
-    "text": "run(command, args...)\n\nRun a command object, constructed with backticks. Throws an error if anything goes wrong, including the process exiting with a non-zero status.\n\n\n\n\n\n"
-},
-
-{
-    "location": "base/base/#Base.spawn",
-    "page": "Essentials",
-    "title": "Base.spawn",
-    "category": "Function",
-    "text": "spawn(command)\n\nRun a command object asynchronously, returning the resulting Process object.\n\n\n\n\n\n"
+    "text": "run(command, args...; wait::Bool = true)\n\nRun a command object, constructed with backticks. Throws an error if anything goes wrong, including the process exiting with a non-zero status (when wait is true).\n\nIf wait is false, the process runs asynchronously. You can later wait for it and check its exit status by calling success on the returned process object.\n\nWhen wait is false, the process\' I/O streams are directed to devnull. When wait is true, I/O streams are shared with the parent process. Use pipeline to control I/O redirection.\n\n\n\n\n\n"
 },
 
 {
@@ -5957,7 +5949,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Essentials",
     "title": "System",
     "category": "section",
-    "text": "Base.run\nBase.spawn\nBase.devnull\nBase.success\nBase.process_running\nBase.process_exited\nBase.kill(::Base.Process, ::Integer)\nBase.Sys.set_process_title\nBase.Sys.get_process_title\nBase.readandwrite\nBase.ignorestatus\nBase.detach\nBase.Cmd\nBase.setenv\nBase.withenv\nBase.pipeline(::Any, ::Any, ::Any, ::Any...)\nBase.pipeline(::Base.AbstractCmd)\nBase.Libc.gethostname\nBase.getipaddr\nBase.Libc.getpid\nBase.Libc.time()\nBase.time_ns\nBase.@time\nBase.@timev\nBase.@timed\nBase.@elapsed\nBase.@allocated\nBase.EnvDict\nBase.ENV\nBase.Sys.isunix\nBase.Sys.isapple\nBase.Sys.islinux\nBase.Sys.isbsd\nBase.Sys.iswindows\nBase.Sys.windows_version\nBase.@static"
+    "text": "Base.run\nBase.devnull\nBase.success\nBase.process_running\nBase.process_exited\nBase.kill(::Base.Process, ::Integer)\nBase.Sys.set_process_title\nBase.Sys.get_process_title\nBase.readandwrite\nBase.ignorestatus\nBase.detach\nBase.Cmd\nBase.setenv\nBase.withenv\nBase.pipeline(::Any, ::Any, ::Any, ::Any...)\nBase.pipeline(::Base.AbstractCmd)\nBase.Libc.gethostname\nBase.getipaddr\nBase.Libc.getpid\nBase.Libc.time()\nBase.time_ns\nBase.@time\nBase.@timev\nBase.@timed\nBase.@elapsed\nBase.@allocated\nBase.EnvDict\nBase.ENV\nBase.Sys.isunix\nBase.Sys.isapple\nBase.Sys.islinux\nBase.Sys.isbsd\nBase.Sys.iswindows\nBase.Sys.windows_version\nBase.@static"
 },
 
 {
@@ -6509,7 +6501,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Collections and Data Structures",
     "title": "Base.IteratorSize",
     "category": "Type",
-    "text": "IteratorSize(itertype::Type) -> IteratorSize\n\nGiven the type of an iterator, return one of the following values:\n\nSizeUnknown() if the length (number of elements) cannot be determined in advance.\nHasLength() if there is a fixed, finite length.\nHasShape{N}() if there is a known length plus a notion of multidimensional shape (as for an array).  In this case N should give the number of dimensions, and the size function is valid  for the iterator.\nIsInfinite() if the iterator yields values forever.\n\nThe default value (for iterators that do not define this function) is HasLength(). This means that most iterators are assumed to implement length.\n\nThis trait is generally used to select between algorithms that pre-allocate space for their result, and algorithms that resize their result incrementally.\n\njulia> Base.IteratorSize(1:5)\nBase.HasShape{1}()\n\njulia> Base.IteratorSize((2,3))\nBase.HasLength()\n\n\n\n\n\n"
+    "text": "IteratorSize(itertype::Type) -> IteratorSize\n\nGiven the type of an iterator, return one of the following values:\n\nSizeUnknown() if the length (number of elements) cannot be determined in advance.\nHasLength() if there is a fixed, finite length.\nHasShape{N}() if there is a known length plus a notion of multidimensional shape (as for an array).  In this case N should give the number of dimensions, and the axes function is valid  for the iterator.\nIsInfinite() if the iterator yields values forever.\n\nThe default value (for iterators that do not define this function) is HasLength(). This means that most iterators are assumed to implement length.\n\nThis trait is generally used to select between algorithms that pre-allocate space for their result, and algorithms that resize their result incrementally.\n\njulia> Base.IteratorSize(1:5)\nBase.HasShape{1}()\n\njulia> Base.IteratorSize((2,3))\nBase.HasLength()\n\n\n\n\n\n"
 },
 
 {
@@ -6725,7 +6717,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Collections and Data Structures",
     "title": "Base.pairs",
     "category": "Function",
-    "text": "pairs(IndexLinear(), A)\npairs(IndexCartesian(), A)\npairs(IndexStyle(A), A)\n\nAn iterator that accesses each element of the array A, returning i => x, where i is the index for the element and x = A[i]. Identical to pairs(A), except that the style of index can be selected. Also similar to enumerate(A), except i will be a valid index for A, while enumerate always counts from 1 regardless of the indices of A.\n\nSpecifying IndexLinear() ensures that i will be an integer; specifying IndexCartesian() ensures that i will be a CartesianIndex; specifying IndexStyle(A) chooses whichever has been defined as the native indexing style for array A.\n\nMutation of the bounds of the underlying array will invalidate this iterator.\n\nExamples\n\njulia> A = [\"a\" \"d\"; \"b\" \"e\"; \"c\" \"f\"];\n\njulia> for (index, value) in pairs(IndexStyle(A), A)\n           println(\"$index $value\")\n       end\n1 a\n2 b\n3 c\n4 d\n5 e\n6 f\n\njulia> S = view(A, 1:2, :);\n\njulia> for (index, value) in pairs(IndexStyle(S), S)\n           println(\"$index $value\")\n       end\nCartesianIndex(1, 1) a\nCartesianIndex(2, 1) b\nCartesianIndex(1, 2) d\nCartesianIndex(2, 2) e\n\nSee also: IndexStyle, axes.\n\n\n\n\n\npairs(collection)\n\nReturn an iterator over key => value pairs for any collection that maps a set of keys to a set of values. This includes arrays, where the keys are the array indices.\n\n\n\n\n\n"
+    "text": "pairs(collection)\n\nReturn an iterator over key => value pairs for any collection that maps a set of keys to a set of values. This includes arrays, where the keys are the array indices.\n\n\n\n\n\npairs(IndexLinear(), A)\npairs(IndexCartesian(), A)\npairs(IndexStyle(A), A)\n\nAn iterator that accesses each element of the array A, returning i => x, where i is the index for the element and x = A[i]. Identical to pairs(A), except that the style of index can be selected. Also similar to enumerate(A), except i will be a valid index for A, while enumerate always counts from 1 regardless of the indices of A.\n\nSpecifying IndexLinear() ensures that i will be an integer; specifying IndexCartesian() ensures that i will be a CartesianIndex; specifying IndexStyle(A) chooses whichever has been defined as the native indexing style for array A.\n\nMutation of the bounds of the underlying array will invalidate this iterator.\n\nExamples\n\njulia> A = [\"a\" \"d\"; \"b\" \"e\"; \"c\" \"f\"];\n\njulia> for (index, value) in pairs(IndexStyle(A), A)\n           println(\"$index $value\")\n       end\n1 a\n2 b\n3 c\n4 d\n5 e\n6 f\n\njulia> S = view(A, 1:2, :);\n\njulia> for (index, value) in pairs(IndexStyle(S), S)\n           println(\"$index $value\")\n       end\nCartesianIndex(1, 1) a\nCartesianIndex(2, 1) b\nCartesianIndex(1, 2) d\nCartesianIndex(2, 2) e\n\nSee also: IndexStyle, axes.\n\n\n\n\n\n"
 },
 
 {
@@ -7021,7 +7013,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Mathematics",
     "title": "Base.:+",
     "category": "Function",
-    "text": "dt::Date + t::Time -> DateTime\n\nThe addition of a Date with a Time produces a DateTime. The hour, minute, second, and millisecond parts of the Time are used along with the year, month, and day of the Date to create the new DateTime. Non-zero microseconds or nanoseconds in the Time type will result in an InexactError being thrown.\n\n\n\n\n\n+(x, y...)\n\nAddition operator. x+y+z+... calls this function with all arguments, i.e. +(x, y, z, ...).\n\nExamples\n\njulia> 1 + 20 + 4\n25\n\njulia> +(1, 20, 4)\n25\n\n\n\n\n\n"
+    "text": "+(x, y...)\n\nAddition operator. x+y+z+... calls this function with all arguments, i.e. +(x, y, z, ...).\n\nExamples\n\njulia> 1 + 20 + 4\n25\n\njulia> +(1, 20, 4)\n25\n\n\n\n\n\ndt::Date + t::Time -> DateTime\n\nThe addition of a Date with a Time produces a DateTime. The hour, minute, second, and millisecond parts of the Time are used along with the year, month, and day of the Date to create the new DateTime. Non-zero microseconds or nanoseconds in the Time type will result in an InexactError being thrown.\n\n\n\n\n\n"
 },
 
 {
@@ -7277,7 +7269,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Mathematics",
     "title": "Base.:==",
     "category": "Function",
-    "text": "==(x, y)\n\nGeneric equality operator, giving a single Bool result. Falls back to ===. Should be implemented for all types with a notion of equality, based on the abstract value that an instance represents. For example, all numeric types are compared by numeric value, ignoring type. Strings are compared as sequences of characters, ignoring encoding.\n\nFollows IEEE semantics for floating-point numbers.\n\nCollections should generally implement == by calling == recursively on all contents.\n\nNew numeric types should implement this function for two arguments of the new type, and handle comparison to other types via promotion rules where possible.\n\n\n\n\n\n==(a::AbstractString, b::AbstractString) -> Bool\n\nTest whether two strings are equal character by character (technically, Unicode code point by code point).\n\nExamples\n\njulia> \"abc\" == \"abc\"\ntrue\n\njulia> \"abc\" == \"αβγ\"\nfalse\n\n\n\n\n\n"
+    "text": "==(x, y)\n\nGeneric equality operator. Falls back to ===. Should be implemented for all types with a notion of equality, based on the abstract value that an instance represents. For example, all numeric types are compared by numeric value, ignoring type. Strings are compared as sequences of characters, ignoring encoding. For collections, == is generally called recursively on all contents, though other properties (like the shape for arrays) may also be taken into account.\n\nThis operator follows IEEE semantics for floating-point numbers: 0.0 == -0.0 and NaN != NaN.\n\nThe result is of type Bool, except when one of the operands is missing, in which case missing is returned (three-valued logic). For collections, missing is returned if at least one of the operands contains a missing value and all non-missing values are equal. Use isequal or === to always get a Bool result.\n\nImplementation\n\nNew numeric types should implement this function for two arguments of the new type, and handle comparison to other types via promotion rules where possible.\n\n\n\n\n\n==(a::AbstractString, b::AbstractString) -> Bool\n\nTest whether two strings are equal character by character (technically, Unicode code point by code point).\n\nExamples\n\njulia> \"abc\" == \"abc\"\ntrue\n\njulia> \"abc\" == \"αβγ\"\nfalse\n\n\n\n\n\n"
 },
 
 {
@@ -7285,7 +7277,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Mathematics",
     "title": "Base.:!=",
     "category": "Function",
-    "text": "!=(x, y)\n≠(x,y)\n\nNot-equals comparison operator. Always gives the opposite answer as ==. New types should generally not implement this, and rely on the fallback definition !=(x,y) = !(x==y) instead.\n\nExamples\n\njulia> 3 != 2\ntrue\n\njulia> \"foo\" ≠ \"foo\"\nfalse\n\n\n\n\n\n"
+    "text": "!=(x, y)\n≠(x,y)\n\nNot-equals comparison operator. Always gives the opposite answer as ==.\n\nImplementation\n\nNew types should generally not implement this, and rely on the fallback definition !=(x,y) = !(x==y) instead.\n\nExamples\n\njulia> 3 != 2\ntrue\n\njulia> \"foo\" ≠ \"foo\"\nfalse\n\n\n\n\n\n"
 },
 
 {
@@ -7293,7 +7285,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Mathematics",
     "title": "Base.:!==",
     "category": "Function",
-    "text": "!==(x, y)\n≢(x,y)\n\nEquivalent to !(x === y).\n\nExamples\n\njulia> a = [1, 2]; b = [1, 2];\n\njulia> a ≢ b\ntrue\n\njulia> a ≢ a\nfalse\n\n\n\n\n\n"
+    "text": "!==(x, y)\n≢(x,y)\n\nAlways gives the opposite answer as ===.\n\nExamples\n\njulia> a = [1, 2]; b = [1, 2];\n\njulia> a ≢ b\ntrue\n\njulia> a ≢ a\nfalse\n\n\n\n\n\n"
 },
 
 {
@@ -7301,7 +7293,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Mathematics",
     "title": "Base.:<",
     "category": "Function",
-    "text": "<(x, y)\n\nLess-than comparison operator. New numeric types should implement this function for two arguments of the new type. Because of the behavior of floating-point NaN values, < implements a partial order. Types with a canonical partial order should implement <, and types with a canonical total order should implement isless.\n\nExamples\n\njulia> \'a\' < \'b\'\ntrue\n\njulia> \"abc\" < \"abd\"\ntrue\n\njulia> 5 < 3\nfalse\n\n\n\n\n\n"
+    "text": "<(x, y)\n\nLess-than comparison operator. Falls back to isless. Because of the behavior of floating-point NaN values, this operator implements a partial order.\n\nImplementation\n\nNew numeric types with a canonical partial order should implement this function for two arguments of the new type. Types with a canonical total order should implement isless instead. (x < y) | (x == y)\n\nExamples\n\njulia> \'a\' < \'b\'\ntrue\n\njulia> \"abc\" < \"abd\"\ntrue\n\njulia> 5 < 3\nfalse\n\n\n\n\n\n"
 },
 
 {
@@ -7309,7 +7301,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Mathematics",
     "title": "Base.:<=",
     "category": "Function",
-    "text": "<=(x, y)\n≤(x,y)\n\nLess-than-or-equals comparison operator.\n\nExamples\n\njulia> \'a\' <= \'b\'\ntrue\n\njulia> 7 ≤ 7 ≤ 9\ntrue\n\njulia> \"abc\" ≤ \"abc\"\ntrue\n\njulia> 5 <= 3\nfalse\n\n\n\n\n\n"
+    "text": "<=(x, y)\n≤(x,y)\n\nLess-than-or-equals comparison operator. Falls back to (x < y) | (x == y).\n\nExamples\n\njulia> \'a\' <= \'b\'\ntrue\n\njulia> 7 ≤ 7 ≤ 9\ntrue\n\njulia> \"abc\" ≤ \"abc\"\ntrue\n\njulia> 5 <= 3\nfalse\n\n\n\n\n\n"
 },
 
 {
@@ -7317,7 +7309,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Mathematics",
     "title": "Base.:>",
     "category": "Function",
-    "text": ">(x, y)\n\nGreater-than comparison operator. Generally, new types should implement < instead of this function, and rely on the fallback definition >(x, y) = y < x.\n\nExamples\n\njulia> \'a\' > \'b\'\nfalse\n\njulia> 7 > 3 > 1\ntrue\n\njulia> \"abc\" > \"abd\"\nfalse\n\njulia> 5 > 3\ntrue\n\n\n\n\n\n"
+    "text": ">(x, y)\n\nGreater-than comparison operator. Falls back to y < x.\n\nImplementation\n\nGenerally, new types should implement < instead of this function, and rely on the fallback definition >(x, y) = y < x.\n\nExamples\n\njulia> \'a\' > \'b\'\nfalse\n\njulia> 7 > 3 > 1\ntrue\n\njulia> \"abc\" > \"abd\"\nfalse\n\njulia> 5 > 3\ntrue\n\n\n\n\n\n"
 },
 
 {
@@ -7325,7 +7317,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Mathematics",
     "title": "Base.:>=",
     "category": "Function",
-    "text": ">=(x, y)\n≥(x,y)\n\nGreater-than-or-equals comparison operator.\n\nExamples\n\njulia> \'a\' >= \'b\'\nfalse\n\njulia> 7 ≥ 7 ≥ 3\ntrue\n\njulia> \"abc\" ≥ \"abc\"\ntrue\n\njulia> 5 >= 3\ntrue\n\n\n\n\n\n"
+    "text": ">=(x, y)\n≥(x,y)\n\nGreater-than-or-equals comparison operator. Falls back to y <= x.\n\nExamples\n\njulia> \'a\' >= \'b\'\nfalse\n\njulia> 7 ≥ 7 ≥ 3\ntrue\n\njulia> \"abc\" ≥ \"abc\"\ntrue\n\njulia> 5 >= 3\ntrue\n\n\n\n\n\n"
 },
 
 {
@@ -7349,7 +7341,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Mathematics",
     "title": "Base.:&",
     "category": "Function",
-    "text": "&(x, y)\n\nBitwise and.\n\nExamples\n\njulia> 4 & 10\n0\n\njulia> 4 & 12\n4\n\n\n\n\n\n"
+    "text": "&(x, y)\n\nBitwise and. Implements three-valued logic, returning missing if one operand is missing and the other is true.\n\nExamples\n\njulia> 4 & 10\n0\n\njulia> 4 & 12\n4\n\njulia> true & missing\nmissing\n\njulia> false & missing\nfalse\n\n\n\n\n\n"
 },
 
 {
@@ -7357,7 +7349,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Mathematics",
     "title": "Base.:|",
     "category": "Function",
-    "text": "|(x, y)\n\nBitwise or.\n\nExamples\n\njulia> 4 | 10\n14\n\njulia> 4 | 1\n5\n\n\n\n\n\n"
+    "text": "|(x, y)\n\nBitwise or. Implements three-valued logic, returning missing if one operand is missing and the other is false.\n\nExamples\n\njulia> 4 | 10\n14\n\njulia> 4 | 1\n5\n\njulia> true | missing\ntrue\n\njulia> false | missing\nmissing\n\n\n\n\n\n"
 },
 
 {
@@ -7365,7 +7357,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Mathematics",
     "title": "Base.xor",
     "category": "Function",
-    "text": "xor(x, y)\n⊻(x, y)\n\nBitwise exclusive or of x and y.  The infix operation a ⊻ b is a synonym for xor(a,b), and ⊻ can be typed by tab-completing \\xor or \\veebar in the Julia REPL.\n\nExamples\n\njulia> [true; true; false] .⊻ [true; false; false]\n3-element BitArray{1}:\n false\n  true\n false\n\n\n\n\n\n"
+    "text": "xor(x, y)\n⊻(x, y)\n\nBitwise exclusive or of x and y. Implements three-valued logic, returning missing if one of the arguments is missing.\n\nThe infix operation a ⊻ b is a synonym for xor(a,b), and ⊻ can be typed by tab-completing \\xor or \\veebar in the Julia REPL.\n\nExamples\n\njulia> xor(true, false)\ntrue\n\njulia> xor(true, true)\nfalse\n\njulia> xor(true, missing)\nmissing\n\njulia> false ⊻ false\nfalse\n\njulia> [true; true; false] .⊻ [true; false; false]\n3-element BitArray{1}:\n false\n  true\n false\n\n\n\n\n\n"
 },
 
 {
@@ -7373,7 +7365,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Mathematics",
     "title": "Base.:!",
     "category": "Function",
-    "text": "!(x)\n\nBoolean not.\n\nExamples\n\njulia> !true\nfalse\n\njulia> !false\ntrue\n\njulia> .![true false true]\n1×3 BitArray{2}:\n false  true  false\n\n\n\n\n\n!f::Function\n\nPredicate function negation: when the argument of ! is a function, it returns a function which computes the boolean negation of f.\n\nExamples\n\njulia> str = \"∀ ε > 0, ∃ δ > 0: |x-y| < δ ⇒ |f(x)-f(y)| < ε\"\n\"∀ ε > 0, ∃ δ > 0: |x-y| < δ ⇒ |f(x)-f(y)| < ε\"\n\njulia> filter(isalpha, str)\n\"εδxyδfxfyε\"\n\njulia> filter(!isalpha, str)\n\"∀  > 0, ∃  > 0: |-| <  ⇒ |()-()| < \"\n\n\n\n\n\n"
+    "text": "!(x)\n\nBoolean not. Implements three-valued logic, returning missing if x is missing.\n\nExamples\n\njulia> !true\nfalse\n\njulia> !false\ntrue\n\njulia> !missing\nmissing\n\njulia> .![true false true]\n1×3 BitArray{2}:\n false  true  false\n\n\n\n\n\n!f::Function\n\nPredicate function negation: when the argument of ! is a function, it returns a function which computes the boolean negation of f.\n\nExamples\n\njulia> str = \"∀ ε > 0, ∃ δ > 0: |x-y| < δ ⇒ |f(x)-f(y)| < ε\"\n\"∀ ε > 0, ∃ δ > 0: |x-y| < δ ⇒ |f(x)-f(y)| < ε\"\n\njulia> filter(isalpha, str)\n\"εδxyδfxfyε\"\n\njulia> filter(!isalpha, str)\n\"∀  > 0, ∃  > 0: |-| <  ⇒ |()-()| < \"\n\n\n\n\n\n"
 },
 
 {
@@ -8389,7 +8381,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Mathematics",
     "title": "Base.ndigits",
     "category": "Function",
-    "text": "ndigits(n::Integer, b::Integer=10)\n\nCompute the number of digits in integer n written in base b. The base b must not be in [-1, 0, 1].\n\nExamples\n\njulia> ndigits(12345)\n5\n\njulia> ndigits(1022, 16)\n3\n\njulia> base(16, 1022)\n\"3fe\"\n\n\n\n\n\n"
+    "text": "ndigits(n::Integer, b::Integer=10)\n\nCompute the number of digits in integer n written in base b. The base b must not be in [-1, 0, 1].\n\nExamples\n\njulia> ndigits(12345)\n5\n\njulia> ndigits(1022, 16)\n3\n\njulia> string(1022, base = 16)\n\"3fe\"\n\n\n\n\n\n"
 },
 
 {
@@ -8785,46 +8777,6 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "base/numbers/#Base.bin",
-    "page": "Numbers",
-    "title": "Base.bin",
-    "category": "Function",
-    "text": "bin(n, pad::Int=1)\n\nConvert an integer to a binary string, optionally specifying a number of digits to pad to.\n\njulia> bin(10,2)\n\"1010\"\n\njulia> bin(10,8)\n\"00001010\"\n\n\n\n\n\n"
-},
-
-{
-    "location": "base/numbers/#Base.hex",
-    "page": "Numbers",
-    "title": "Base.hex",
-    "category": "Function",
-    "text": "hex(n, pad::Int=1)\n\nConvert an integer to a hexadecimal string, optionally specifying a number of digits to pad to.\n\njulia> hex(20)\n\"14\"\n\njulia> hex(20, 3)\n\"014\"\n\n\n\n\n\n"
-},
-
-{
-    "location": "base/numbers/#Base.dec",
-    "page": "Numbers",
-    "title": "Base.dec",
-    "category": "Function",
-    "text": "dec(n, pad::Int=1)\n\nConvert an integer to a decimal string, optionally specifying a number of digits to pad to.\n\nExamples\n\njulia> dec(20)\n\"20\"\n\njulia> dec(20, 3)\n\"020\"\n\n\n\n\n\n"
-},
-
-{
-    "location": "base/numbers/#Base.oct",
-    "page": "Numbers",
-    "title": "Base.oct",
-    "category": "Function",
-    "text": "oct(n, pad::Int=1)\n\nConvert an integer to an octal string, optionally specifying a number of digits to pad to.\n\njulia> oct(20)\n\"24\"\n\njulia> oct(20, 3)\n\"024\"\n\n\n\n\n\n"
-},
-
-{
-    "location": "base/numbers/#Base.base",
-    "page": "Numbers",
-    "title": "Base.base",
-    "category": "Function",
-    "text": "base(base::Integer, n::Integer, pad::Integer=1)\n\nConvert an integer n to a string in the given base, optionally specifying a number of digits to pad to.\n\njulia> base(13,5,4)\n\"0005\"\n\njulia> base(5,13,4)\n\"0023\"\n\n\n\n\n\n"
-},
-
-{
     "location": "base/numbers/#Base.digits",
     "page": "Numbers",
     "title": "Base.digits",
@@ -8925,7 +8877,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Numbers",
     "title": "Base.bswap",
     "category": "Function",
-    "text": "bswap(n)\n\nByte-swap an integer. Flip the bits of its binary representation.\n\nExamples\n\njulia> a = bswap(4)\n288230376151711744\n\njulia> bswap(a)\n4\n\njulia> bin(1)\n\"1\"\n\njulia> bin(bswap(1))\n\"100000000000000000000000000000000000000000000000000000000\"\n\n\n\n\n\n"
+    "text": "bswap(n)\n\nByte-swap an integer. Flip the bits of its binary representation.\n\nExamples\n\njulia> a = bswap(4)\n288230376151711744\n\njulia> bswap(a)\n4\n\njulia> string(1, base = 2)\n\"1\"\n\njulia> string(bswap(1), base = 2)\n\"100000000000000000000000000000000000000000000000000000000\"\n\n\n\n\n\n"
 },
 
 {
@@ -8933,7 +8885,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Numbers",
     "title": "Base.hex2bytes",
     "category": "Function",
-    "text": "hex2bytes(s::Union{AbstractString,AbstractVector{UInt8}})\n\nGiven a string or array s of ASCII codes for a sequence of hexadecimal digits, returns a Vector{UInt8} of bytes  corresponding to the binary representation: each successive pair of hexadecimal digits in s gives the value of one byte in the return vector.\n\nThe length of s must be even, and the returned array has half of the length of s. See also hex2bytes! for an in-place version, and bytes2hex for the inverse.\n\nExamples\n\njulia> s = hex(12345)\n\"3039\"\n\njulia> hex2bytes(s)\n2-element Array{UInt8,1}:\n 0x30\n 0x39\n\njulia> a = b\"01abEF\"\n6-element Array{UInt8,1}:\n 0x30\n 0x31\n 0x61\n 0x62\n 0x45\n 0x46\n\njulia> hex2bytes(a)\n3-element Array{UInt8,1}:\n 0x01\n 0xab\n 0xef\n\n\n\n\n\n"
+    "text": "hex2bytes(s::Union{AbstractString,AbstractVector{UInt8}})\n\nGiven a string or array s of ASCII codes for a sequence of hexadecimal digits, returns a Vector{UInt8} of bytes  corresponding to the binary representation: each successive pair of hexadecimal digits in s gives the value of one byte in the return vector.\n\nThe length of s must be even, and the returned array has half of the length of s. See also hex2bytes! for an in-place version, and bytes2hex for the inverse.\n\nExamples\n\njulia> s = string(12345, base = 16)\n\"3039\"\n\njulia> hex2bytes(s)\n2-element Array{UInt8,1}:\n 0x30\n 0x39\n\njulia> a = b\"01abEF\"\n6-element Array{UInt8,1}:\n 0x30\n 0x31\n 0x61\n 0x62\n 0x45\n 0x46\n\njulia> hex2bytes(a)\n3-element Array{UInt8,1}:\n 0x01\n 0xab\n 0xef\n\n\n\n\n\n"
 },
 
 {
@@ -8949,7 +8901,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Numbers",
     "title": "Base.bytes2hex",
     "category": "Function",
-    "text": "bytes2hex(bin_arr::Array{UInt8, 1}) -> String\n\nConvert an array of bytes to its hexadecimal representation. All characters are in lower-case.\n\nExamples\n\njulia> a = hex(12345)\n\"3039\"\n\njulia> b = hex2bytes(a)\n2-element Array{UInt8,1}:\n 0x30\n 0x39\n\njulia> bytes2hex(b)\n\"3039\"\n\n\n\n\n\n"
+    "text": "bytes2hex(bin_arr::Array{UInt8, 1}) -> String\n\nConvert an array of bytes to its hexadecimal representation. All characters are in lower-case.\n\nExamples\n\njulia> a = string(12345, base = 16)\n\"3039\"\n\njulia> b = hex2bytes(a)\n2-element Array{UInt8,1}:\n 0x30\n 0x39\n\njulia> bytes2hex(b)\n\"3039\"\n\n\n\n\n\n"
 },
 
 {
@@ -8957,7 +8909,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Numbers",
     "title": "Data Formats",
     "category": "section",
-    "text": "Base.bin\nBase.hex\nBase.dec\nBase.oct\nBase.base\nBase.digits\nBase.digits!\nBase.bitstring\nBase.parse\nBase.tryparse\nBase.big\nBase.signed\nBase.unsigned\nBase.float(::Any)\nBase.Math.significand\nBase.Math.exponent\nBase.complex(::Complex)\nBase.bswap\nBase.hex2bytes\nBase.hex2bytes!\nBase.bytes2hex"
+    "text": "Base.digits\nBase.digits!\nBase.bitstring\nBase.parse\nBase.tryparse\nBase.big\nBase.signed\nBase.unsigned\nBase.float(::Any)\nBase.Math.significand\nBase.Math.exponent\nBase.complex(::Complex)\nBase.bswap\nBase.hex2bytes\nBase.hex2bytes!\nBase.bytes2hex"
 },
 
 {
@@ -9421,7 +9373,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Strings",
     "title": "Base.string",
     "category": "Function",
-    "text": "string(xs...)\n\nCreate a string from any values using the print function.\n\nExamples\n\njulia> string(\"a\", 1, true)\n\"a1true\"\n\n\n\n\n\n"
+    "text": "string(n::Integer; base::Integer = 10, pad::Integer = 1)\n\nConvert an integer n to a string in the given base, optionally specifying a number of digits to pad to.\n\njulia> string(5, base = 13, pad = 4)\n\"0005\"\n\njulia> string(13, base = 5, pad = 4)\n\"0023\"\n\n\n\n\n\nstring(xs...)\n\nCreate a string from any values using the print function.\n\nExamples\n\njulia> string(\"a\", 1, true)\n\"a1true\"\n\n\n\n\n\n"
 },
 
 {
@@ -10237,7 +10189,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Arrays",
     "title": "Base.size",
     "category": "Function",
-    "text": "size(A::AbstractArray, [dim...])\n\nReturn a tuple containing the dimensions of A. Optionally you can specify the dimension(s) you want the length of, and get the length of that dimension, or a tuple of the lengths of dimensions you asked for.\n\nExamples\n\njulia> A = fill(1, (2,3,4));\n\njulia> size(A, 2)\n3\n\njulia> size(A, 3, 2)\n(4, 3)\n\n\n\n\n\n"
+    "text": "size(A::AbstractArray, [dim...])\n\nReturn a tuple containing the dimensions of A. Optionally you can specify the dimension(s) you want the length of, and get the length of that dimension, or a tuple of the lengths of dimensions you asked for.\n\nNote that size may not be defined for arrays with non-standard indices, in which case axes may be useful. See the manual chapter on arrays with custom indices.\n\nExamples\n\njulia> A = fill(1, (2,3,4));\n\njulia> size(A, 2)\n3\n\njulia> size(A, 3, 2)\n(4, 3)\n\n\n\n\n\n"
 },
 
 {
@@ -10253,7 +10205,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Arrays",
     "title": "Base.axes",
     "category": "Method",
-    "text": "axes(A, d)\n\nReturn the valid range of indices for array A along dimension d.\n\nExamples\n\njulia> A = fill(1, (5,6,7));\n\njulia> axes(A, 2)\nBase.OneTo(6)\n\n\n\n\n\n"
+    "text": "axes(A, d)\n\nReturn the valid range of indices for array A along dimension d.\n\nSee also size, and the manual chapter on arrays with custom indices.\n\nExamples\n\njulia> A = fill(1, (5,6,7));\n\njulia> axes(A, 2)\nBase.OneTo(6)\n\n\n\n\n\n"
 },
 
 {
@@ -10805,7 +10757,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Arrays",
     "title": "Array functions",
     "category": "section",
-    "text": "Base.accumulate(::Any, ::Any, ::Integer)\nBase.accumulate!\nBase.cumprod\nBase.cumprod!\nBase.cumsum\nBase.cumsum!\nLinearAlgebra.diff\nBase.repeat\nBase.rot180\nBase.rotl90\nBase.rotr90\nBase.reducedim\nBase.mapreducedim\nBase.mapslices"
+    "text": "Base.accumulate(::Any, ::Any, ::Integer)\nBase.accumulate!\nBase.cumprod\nBase.cumprod!\nBase.cumsum\nBase.cumsum!\nBase.diff\nBase.repeat\nBase.rot180\nBase.rotl90\nBase.rotr90\nBase.reducedim\nBase.mapreducedim\nBase.mapslices"
 },
 
 {
@@ -12005,7 +11957,7 @@ var documenterSearchIndex = {"docs": [
     "page": "I/O and Network",
     "title": "Base.open",
     "category": "Function",
-    "text": "open(filename::AbstractString; keywords...) -> IOStream\n\nOpen a file in a mode specified by five boolean keyword arguments:\n\nKeyword Desciption Default\nread open for reading !write\nwrite open for writing truncate | append\ncreate create if non-existent !read & write | truncate | append\ntruncate truncate to zero size !read & write\nappend seek to end false\n\nThe default when no keywords are passed is to open files for reading only. Returns a stream for accessing the opened file.\n\n\n\n\n\nopen(filename::AbstractString, [mode::AbstractString]) -> IOStream\n\nAlternate syntax for open, where a string-based mode specifier is used instead of the five booleans. The values of mode correspond to those from fopen(3) or Perl open, and are equivalent to setting the following boolean groups:\n\nMode Description Keywords\nr read none\nw write, create, truncate write = true\na write, create, append append = true\nr+ read, write read = true, write = true\nw+ read, write, create, truncate truncate = true, read = true\na+ read, write, create, append append = true, read = true\n\nExamples\n\njulia> io = open(\"myfile.txt\", \"w\");\n\njulia> write(io, \"Hello world!\");\n\njulia> close(io);\n\njulia> io = open(\"myfile.txt\", \"r\");\n\njulia> read(io, String)\n\"Hello world!\"\n\njulia> write(io, \"This file is read only\")\nERROR: ArgumentError: write failed, IOStream is not writeable\n[...]\n\njulia> close(io)\n\njulia> io = open(\"myfile.txt\", \"a\");\n\njulia> write(io, \"This stream is not read only\")\n28\n\njulia> close(io)\n\njulia> rm(\"myfile.txt\")\n\n\n\n\n\nopen(f::Function, args...; kwargs....)\n\nApply the function f to the result of open(args...; kwargs...) and close the resulting file descriptor upon completion.\n\nExamples\n\njulia> open(\"myfile.txt\", \"w\") do io\n           write(io, \"Hello world!\");\n       end\n\njulia> open(f->read(f, String), \"myfile.txt\")\n\"Hello world!\"\n\njulia> rm(\"myfile.txt\")\n\n\n\n\n\nopen(command, mode::AbstractString=\"r\", stdio=devnull)\n\nStart running command asynchronously, and return a tuple (stream,process).  If mode is \"r\", then stream reads from the process\'s standard output and stdio optionally specifies the process\'s standard input stream.  If mode is \"w\", then stream writes to the process\'s standard input and stdio optionally specifies the process\'s standard output stream.\n\n\n\n\n\nopen(f::Function, command, mode::AbstractString=\"r\", stdio=devnull)\n\nSimilar to open(command, mode, stdio), but calls f(stream) on the resulting process stream, then closes the input stream and waits for the process to complete. Returns the value returned by f.\n\n\n\n\n\n"
+    "text": "open(filename::AbstractString; keywords...) -> IOStream\n\nOpen a file in a mode specified by five boolean keyword arguments:\n\nKeyword Desciption Default\nread open for reading !write\nwrite open for writing truncate | append\ncreate create if non-existent !read & write | truncate | append\ntruncate truncate to zero size !read & write\nappend seek to end false\n\nThe default when no keywords are passed is to open files for reading only. Returns a stream for accessing the opened file.\n\n\n\n\n\nopen(filename::AbstractString, [mode::AbstractString]) -> IOStream\n\nAlternate syntax for open, where a string-based mode specifier is used instead of the five booleans. The values of mode correspond to those from fopen(3) or Perl open, and are equivalent to setting the following boolean groups:\n\nMode Description Keywords\nr read none\nw write, create, truncate write = true\na write, create, append append = true\nr+ read, write read = true, write = true\nw+ read, write, create, truncate truncate = true, read = true\na+ read, write, create, append append = true, read = true\n\nExamples\n\njulia> io = open(\"myfile.txt\", \"w\");\n\njulia> write(io, \"Hello world!\");\n\njulia> close(io);\n\njulia> io = open(\"myfile.txt\", \"r\");\n\njulia> read(io, String)\n\"Hello world!\"\n\njulia> write(io, \"This file is read only\")\nERROR: ArgumentError: write failed, IOStream is not writeable\n[...]\n\njulia> close(io)\n\njulia> io = open(\"myfile.txt\", \"a\");\n\njulia> write(io, \"This stream is not read only\")\n28\n\njulia> close(io)\n\njulia> rm(\"myfile.txt\")\n\n\n\n\n\nopen(f::Function, args...; kwargs....)\n\nApply the function f to the result of open(args...; kwargs...) and close the resulting file descriptor upon completion.\n\nExamples\n\njulia> open(\"myfile.txt\", \"w\") do io\n           write(io, \"Hello world!\");\n       end\n\njulia> open(f->read(f, String), \"myfile.txt\")\n\"Hello world!\"\n\njulia> rm(\"myfile.txt\")\n\n\n\n\n\nopen(command, stdio=devnull; write::Bool = false, read::Bool = !write)\n\nStart running command asynchronously, and return a tuple (stream,process).  If read is true, then stream reads from the process\'s standard output and stdio optionally specifies the process\'s standard input stream.  If write is true, then stream writes to the process\'s standard input and stdio optionally specifies the process\'s standard output stream.\n\n\n\n\n\nopen(f::Function, command, mode::AbstractString=\"r\", stdio=devnull)\n\nSimilar to open(command, mode, stdio), but calls f(stream) on the resulting process stream, then closes the input stream and waits for the process to complete. Returns the value returned by f.\n\n\n\n\n\n"
 },
 
 {
@@ -12521,171 +12473,11 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "base/io-network/#Base.connect-Tuple{TCPSocket,Integer}",
-    "page": "I/O and Network",
-    "title": "Base.connect",
-    "category": "Method",
-    "text": "connect([host], port::Integer) -> TCPSocket\n\nConnect to the host host on port port.\n\n\n\n\n\n"
-},
-
-{
-    "location": "base/io-network/#Base.connect-Tuple{AbstractString}",
-    "page": "I/O and Network",
-    "title": "Base.connect",
-    "category": "Method",
-    "text": "connect(path::AbstractString) -> PipeEndpoint\n\nConnect to the named pipe / UNIX domain socket at path.\n\n\n\n\n\n"
-},
-
-{
-    "location": "base/io-network/#Base.listen-Tuple{Any}",
-    "page": "I/O and Network",
-    "title": "Base.listen",
-    "category": "Method",
-    "text": "listen([addr, ]port::Integer; backlog::Integer=BACKLOG_DEFAULT) -> TCPServer\n\nListen on port on the address specified by addr. By default this listens on localhost only. To listen on all interfaces pass IPv4(0) or IPv6(0) as appropriate. backlog determines how many connections can be pending (not having called accept) before the server will begin to reject them. The default value of backlog is 511.\n\n\n\n\n\n"
-},
-
-{
-    "location": "base/io-network/#Base.listen-Tuple{AbstractString}",
-    "page": "I/O and Network",
-    "title": "Base.listen",
-    "category": "Method",
-    "text": "listen(path::AbstractString) -> PipeServer\n\nCreate and listen on a named pipe / UNIX domain socket.\n\n\n\n\n\n"
-},
-
-{
-    "location": "base/io-network/#Base.getaddrinfo",
-    "page": "I/O and Network",
-    "title": "Base.getaddrinfo",
-    "category": "Function",
-    "text": "getalladdrinfo(host::AbstractString, IPAddr=IPv4) -> IPAddr\n\nGets the first IP address of the host of the specified IPAddr type. Uses the operating system\'s underlying getaddrinfo implementation, which may do a DNS lookup.\n\n\n\n\n\n"
-},
-
-{
-    "location": "base/io-network/#Base.getalladdrinfo",
-    "page": "I/O and Network",
-    "title": "Base.getalladdrinfo",
-    "category": "Function",
-    "text": "getalladdrinfo(host::AbstractString) -> Vector{IPAddr}\n\nGets all of the IP addresses of the host. Uses the operating system\'s underlying getaddrinfo implementation, which may do a DNS lookup.\n\n\n\n\n\n"
-},
-
-{
-    "location": "base/io-network/#Base.getnameinfo",
-    "page": "I/O and Network",
-    "title": "Base.getnameinfo",
-    "category": "Function",
-    "text": "getnameinfo(host::IPAddr) -> String\n\nPerforms a reverse-lookup for IP address to return a hostname and service using the operating system\'s underlying getnameinfo implementation.\n\n\n\n\n\n"
-},
-
-{
-    "location": "base/io-network/#Base.getsockname",
-    "page": "I/O and Network",
-    "title": "Base.getsockname",
-    "category": "Function",
-    "text": "getsockname(sock::Union{TCPServer, TCPSocket}) -> (IPAddr, UInt16)\n\nGet the IP address and port that the given socket is bound to.\n\n\n\n\n\n"
-},
-
-{
-    "location": "base/io-network/#Base.getpeername",
-    "page": "I/O and Network",
-    "title": "Base.getpeername",
-    "category": "Function",
-    "text": "getpeername(sock::TCPSocket) -> (IPAddr, UInt16)\n\nGet the IP address and port of the remote endpoint that the given socket is connected to. Valid only for connected TCP sockets.\n\n\n\n\n\n"
-},
-
-{
-    "location": "base/io-network/#Base.IPv4",
-    "page": "I/O and Network",
-    "title": "Base.IPv4",
-    "category": "Type",
-    "text": "IPv4(host::Integer) -> IPv4\n\nReturns an IPv4 object from ip address host formatted as an Integer.\n\njulia> IPv4(3223256218)\nip\"192.30.252.154\"\n\n\n\n\n\n"
-},
-
-{
-    "location": "base/io-network/#Base.IPv6",
-    "page": "I/O and Network",
-    "title": "Base.IPv6",
-    "category": "Type",
-    "text": "IPv6(host::Integer) -> IPv6\n\nReturns an IPv6 object from ip address host formatted as an Integer.\n\njulia> IPv6(3223256218)\nip\"::c01e:fc9a\"\n\n\n\n\n\n"
-},
-
-{
-    "location": "base/io-network/#Base.TCPSocket",
-    "page": "I/O and Network",
-    "title": "Base.TCPSocket",
-    "category": "Type",
-    "text": "TCPSocket(; delay=true)\n\nOpen a TCP socket using libuv. If delay is true, libuv delays creation of the socket\'s file descriptor till the first bind call. TCPSocket has various fields to denote the state of the socket as well as its send/receive buffers.\n\n\n\n\n\n"
-},
-
-{
-    "location": "base/io-network/#Base.UDPSocket",
-    "page": "I/O and Network",
-    "title": "Base.UDPSocket",
-    "category": "Type",
-    "text": "UDPSocket()\n\nOpen a UDP socket using libuv. UDPSocket has various fields to denote the state of the socket.\n\n\n\n\n\n"
-},
-
-{
     "location": "base/io-network/#Base.bytesavailable",
     "page": "I/O and Network",
     "title": "Base.bytesavailable",
     "category": "Function",
     "text": "bytesavailable(io)\n\nReturn the number of bytes available for reading before a read from this stream or buffer will block.\n\nExamples\n\njulia> io = IOBuffer(\"JuliaLang is a GitHub organization\");\n\njulia> bytesavailable(io)\n34\n\n\n\n\n\n"
-},
-
-{
-    "location": "base/io-network/#Base.accept",
-    "page": "I/O and Network",
-    "title": "Base.accept",
-    "category": "Function",
-    "text": "accept(server[,client])\n\nAccepts a connection on the given server and returns a connection to the client. An uninitialized client stream may be provided, in which case it will be used instead of creating a new stream.\n\n\n\n\n\n"
-},
-
-{
-    "location": "base/io-network/#Base.listenany",
-    "page": "I/O and Network",
-    "title": "Base.listenany",
-    "category": "Function",
-    "text": "listenany([host::IPAddr,] port_hint) -> (UInt16, TCPServer)\n\nCreate a TCPServer on any port, using hint as a starting point. Returns a tuple of the actual port that the server was created on and the server itself.\n\n\n\n\n\n"
-},
-
-{
-    "location": "base/io-network/#Base.bind",
-    "page": "I/O and Network",
-    "title": "Base.bind",
-    "category": "Function",
-    "text": "bind(socket::Union{UDPSocket, TCPSocket}, host::IPAddr, port::Integer; ipv6only=false, reuseaddr=false, kws...)\n\nBind socket to the given host:port. Note that 0.0.0.0 will listen on all devices.\n\nThe ipv6only parameter disables dual stack mode. If ipv6only=true, only an IPv6 stack is created.\nIf reuseaddr=true, multiple threads or processes can bind to the same address without error if they all set reuseaddr=true, but only the last to bind will receive any traffic.\n\n\n\n\n\nbind(chnl::Channel, task::Task)\n\nAssociate the lifetime of chnl with a task. Channel chnl is automatically closed when the task terminates. Any uncaught exception in the task is propagated to all waiters on chnl.\n\nThe chnl object can be explicitly closed independent of task termination. Terminating tasks have no effect on already closed Channel objects.\n\nWhen a channel is bound to multiple tasks, the first task to terminate will close the channel. When multiple channels are bound to the same task, termination of the task will close all of the bound channels.\n\nExamples\n\njulia> c = Channel(0);\n\njulia> task = @schedule foreach(i->put!(c, i), 1:4);\n\njulia> bind(c,task);\n\njulia> for i in c\n           @show i\n       end;\ni = 1\ni = 2\ni = 3\ni = 4\n\njulia> isopen(c)\nfalse\n\njulia> c = Channel(0);\n\njulia> task = @schedule (put!(c,1);error(\"foo\"));\n\njulia> bind(c,task);\n\njulia> take!(c)\n1\n\njulia> put!(c,1);\nERROR: foo\nStacktrace:\n[...]\n\n\n\n\n\n"
-},
-
-{
-    "location": "base/io-network/#Base.send",
-    "page": "I/O and Network",
-    "title": "Base.send",
-    "category": "Function",
-    "text": "send(socket::UDPSocket, host, port::Integer, msg)\n\nSend msg over socket to host:port.\n\n\n\n\n\n"
-},
-
-{
-    "location": "base/io-network/#Base.recv",
-    "page": "I/O and Network",
-    "title": "Base.recv",
-    "category": "Function",
-    "text": "recv(socket::UDPSocket)\n\nRead a UDP packet from the specified socket, and return the bytes received. This call blocks.\n\n\n\n\n\n"
-},
-
-{
-    "location": "base/io-network/#Base.recvfrom",
-    "page": "I/O and Network",
-    "title": "Base.recvfrom",
-    "category": "Function",
-    "text": "recvfrom(socket::UDPSocket) -> (address, data)\n\nRead a UDP packet from the specified socket, returning a tuple of (address, data), where address will be either IPv4 or IPv6 as appropriate.\n\n\n\n\n\n"
-},
-
-{
-    "location": "base/io-network/#Base.setopt",
-    "page": "I/O and Network",
-    "title": "Base.setopt",
-    "category": "Function",
-    "text": "setopt(sock::UDPSocket; multicast_loop = nothing, multicast_ttl=nothing, enable_broadcast=nothing, ttl=nothing)\n\nSet UDP socket options.\n\nmulticast_loop: loopback for multicast packets (default: true).\nmulticast_ttl: TTL for multicast packets (default: nothing).\nenable_broadcast: flag must be set to true if socket will be used for broadcast messages, or else the UDP system will return an access error (default: false).\nttl: Time-to-live of packets sent on the socket (default: nothing).\n\n\n\n\n\n"
 },
 
 {
@@ -12733,7 +12525,7 @@ var documenterSearchIndex = {"docs": [
     "page": "I/O and Network",
     "title": "Network I/O",
     "category": "section",
-    "text": "Base.connect(::TCPSocket, ::Integer)\nBase.connect(::AbstractString)\nBase.listen(::Any)\nBase.listen(::AbstractString)\nBase.getaddrinfo\nBase.getalladdrinfo\nBase.getnameinfo\nBase.getsockname\nBase.getpeername\nBase.IPv4\nBase.IPv6\nBase.TCPSocket\nBase.UDPSocket\nBase.bytesavailable\nBase.accept\nBase.listenany\nBase.bind\nBase.send\nBase.recv\nBase.recvfrom\nBase.setopt\nBase.ntoh\nBase.hton\nBase.ltoh\nBase.htol\nBase.ENDIAN_BOM"
+    "text": "Base.bytesavailable\nBase.ntoh\nBase.hton\nBase.ltoh\nBase.htol\nBase.ENDIAN_BOM"
 },
 
 {
@@ -14813,7 +14605,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Distributed Computing",
     "title": "Base.wait",
     "category": "Function",
-    "text": "wait(r::Future)\n\nWait for a value to become available for the specified future.\n\n\n\n\n\nwait(r::RemoteChannel, args...)\n\nWait for a value to become available on the specified remote channel.\n\n\n\n\n\nwait([x])\n\nBlock the current task until some event occurs, depending on the type of the argument:\n\nChannel: Wait for a value to be appended to the channel.\nCondition: Wait for notify on a condition.\nProcess: Wait for a process or process chain to exit. The exitcode field of a process can be used to determine success or failure.\nTask: Wait for a Task to finish. If the task fails with an exception, the exception is propagated (re-thrown in the task that called wait).\nRawFD: Wait for changes on a file descriptor (see the FileWatching package).\n\nIf no argument is passed, the task blocks for an undefined period. A task can only be restarted by an explicit call to schedule or yieldto.\n\nOften wait is called within a while loop to ensure a waited-for condition is met before proceeding.\n\n\n\n\n\n"
+    "text": "wait([x])\n\nBlock the current task until some event occurs, depending on the type of the argument:\n\nChannel: Wait for a value to be appended to the channel.\nCondition: Wait for notify on a condition.\nProcess: Wait for a process or process chain to exit. The exitcode field of a process can be used to determine success or failure.\nTask: Wait for a Task to finish. If the task fails with an exception, the exception is propagated (re-thrown in the task that called wait).\nRawFD: Wait for changes on a file descriptor (see the FileWatching package).\n\nIf no argument is passed, the task blocks for an undefined period. A task can only be restarted by an explicit call to schedule or yieldto.\n\nOften wait is called within a while loop to ensure a waited-for condition is met before proceeding.\n\n\n\n\n\nwait(r::Future)\n\nWait for a value to become available for the specified future.\n\n\n\n\n\nwait(r::RemoteChannel, args...)\n\nWait for a value to become available on the specified remote channel.\n\n\n\n\n\n"
 },
 
 {
@@ -15121,9 +14913,9 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/Distributed/#Base.connect-Tuple{ClusterManager,Int64,WorkerConfig}",
+    "location": "stdlib/Distributed/#Sockets.connect-Tuple{ClusterManager,Int64,WorkerConfig}",
     "page": "Distributed Computing",
-    "title": "Base.connect",
+    "title": "Sockets.connect",
     "category": "Method",
     "text": "connect(manager::ClusterManager, pid::Int, config::WorkerConfig) -> (instrm::IO, outstrm::IO)\n\nImplemented by cluster managers using custom transports. It should establish a logical connection to worker with id pid, specified by config and return a pair of IO objects. Messages from pid to current process will be read off instrm, while messages to be sent to pid will be written to outstrm. The custom transport implementation must ensure that messages are delivered and received completely and in order. connect(manager::ClusterManager.....) sets up TCP/IP socket connections in-between workers.\n\n\n\n\n\n"
 },
@@ -18497,6 +18289,190 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
+    "location": "stdlib/Sockets/#",
+    "page": "-",
+    "title": "-",
+    "category": "page",
+    "text": ""
+},
+
+{
+    "location": "stdlib/Sockets/#Sockets.connect-Tuple{TCPSocket,Integer}",
+    "page": "-",
+    "title": "Sockets.connect",
+    "category": "Method",
+    "text": "connect([host], port::Integer) -> TCPSocket\n\nConnect to the host host on port port.\n\n\n\n\n\n"
+},
+
+{
+    "location": "stdlib/Sockets/#Sockets.connect-Tuple{AbstractString}",
+    "page": "-",
+    "title": "Sockets.connect",
+    "category": "Method",
+    "text": "connect(path::AbstractString) -> PipeEndpoint\n\nConnect to the named pipe / UNIX domain socket at path.\n\n\n\n\n\n"
+},
+
+{
+    "location": "stdlib/Sockets/#Sockets.listen-Tuple{Any}",
+    "page": "-",
+    "title": "Sockets.listen",
+    "category": "Method",
+    "text": "listen([addr, ]port::Integer; backlog::Integer=BACKLOG_DEFAULT) -> TCPServer\n\nListen on port on the address specified by addr. By default this listens on localhost only. To listen on all interfaces pass IPv4(0) or IPv6(0) as appropriate. backlog determines how many connections can be pending (not having called accept) before the server will begin to reject them. The default value of backlog is 511.\n\n\n\n\n\n"
+},
+
+{
+    "location": "stdlib/Sockets/#Sockets.listen-Tuple{AbstractString}",
+    "page": "-",
+    "title": "Sockets.listen",
+    "category": "Method",
+    "text": "listen(path::AbstractString) -> PipeServer\n\nCreate and listen on a named pipe / UNIX domain socket.\n\n\n\n\n\n"
+},
+
+{
+    "location": "stdlib/Sockets/#Sockets.getaddrinfo",
+    "page": "-",
+    "title": "Sockets.getaddrinfo",
+    "category": "Function",
+    "text": "getalladdrinfo(host::AbstractString, IPAddr=IPv4) -> IPAddr\n\nGets the first IP address of the host of the specified IPAddr type. Uses the operating system\'s underlying getaddrinfo implementation, which may do a DNS lookup.\n\n\n\n\n\n"
+},
+
+{
+    "location": "stdlib/Sockets/#Sockets.getipaddr",
+    "page": "-",
+    "title": "Sockets.getipaddr",
+    "category": "Function",
+    "text": "getipaddr() -> IPAddr\n\nGet the IP address of the local machine.\n\n\n\n\n\n"
+},
+
+{
+    "location": "stdlib/Sockets/#Sockets.getalladdrinfo",
+    "page": "-",
+    "title": "Sockets.getalladdrinfo",
+    "category": "Function",
+    "text": "getalladdrinfo(host::AbstractString) -> Vector{IPAddr}\n\nGets all of the IP addresses of the host. Uses the operating system\'s underlying getaddrinfo implementation, which may do a DNS lookup.\n\n\n\n\n\n"
+},
+
+{
+    "location": "stdlib/Sockets/#Sockets.getnameinfo",
+    "page": "-",
+    "title": "Sockets.getnameinfo",
+    "category": "Function",
+    "text": "getnameinfo(host::IPAddr) -> String\n\nPerforms a reverse-lookup for IP address to return a hostname and service using the operating system\'s underlying getnameinfo implementation.\n\n\n\n\n\n"
+},
+
+{
+    "location": "stdlib/Sockets/#Sockets.getsockname",
+    "page": "-",
+    "title": "Sockets.getsockname",
+    "category": "Function",
+    "text": "getsockname(sock::Union{TCPServer, TCPSocket}) -> (IPAddr, UInt16)\n\nGet the IP address and port that the given socket is bound to.\n\n\n\n\n\n"
+},
+
+{
+    "location": "stdlib/Sockets/#Sockets.getpeername",
+    "page": "-",
+    "title": "Sockets.getpeername",
+    "category": "Function",
+    "text": "getpeername(sock::TCPSocket) -> (IPAddr, UInt16)\n\nGet the IP address and port of the remote endpoint that the given socket is connected to. Valid only for connected TCP sockets.\n\n\n\n\n\n"
+},
+
+{
+    "location": "stdlib/Sockets/#Sockets.IPv4",
+    "page": "-",
+    "title": "Sockets.IPv4",
+    "category": "Type",
+    "text": "IPv4(host::Integer) -> IPv4\n\nReturns an IPv4 object from ip address host formatted as an Integer.\n\njulia> IPv4(3223256218)\nip\"192.30.252.154\"\n\n\n\n\n\n"
+},
+
+{
+    "location": "stdlib/Sockets/#Sockets.IPv6",
+    "page": "-",
+    "title": "Sockets.IPv6",
+    "category": "Type",
+    "text": "IPv6(host::Integer) -> IPv6\n\nReturns an IPv6 object from ip address host formatted as an Integer.\n\njulia> IPv6(3223256218)\nip\"::c01e:fc9a\"\n\n\n\n\n\n"
+},
+
+{
+    "location": "stdlib/Sockets/#Sockets.TCPSocket",
+    "page": "-",
+    "title": "Sockets.TCPSocket",
+    "category": "Type",
+    "text": "TCPSocket(; delay=true)\n\nOpen a TCP socket using libuv. If delay is true, libuv delays creation of the socket\'s file descriptor till the first bind call. TCPSocket has various fields to denote the state of the socket as well as its send/receive buffers.\n\n\n\n\n\n"
+},
+
+{
+    "location": "stdlib/Sockets/#Sockets.UDPSocket",
+    "page": "-",
+    "title": "Sockets.UDPSocket",
+    "category": "Type",
+    "text": "UDPSocket()\n\nOpen a UDP socket using libuv. UDPSocket has various fields to denote the state of the socket.\n\n\n\n\n\n"
+},
+
+{
+    "location": "stdlib/Sockets/#Sockets.accept",
+    "page": "-",
+    "title": "Sockets.accept",
+    "category": "Function",
+    "text": "accept(server[,client])\n\nAccepts a connection on the given server and returns a connection to the client. An uninitialized client stream may be provided, in which case it will be used instead of creating a new stream.\n\n\n\n\n\n"
+},
+
+{
+    "location": "stdlib/Sockets/#Sockets.listenany",
+    "page": "-",
+    "title": "Sockets.listenany",
+    "category": "Function",
+    "text": "listenany([host::IPAddr,] port_hint) -> (UInt16, TCPServer)\n\nCreate a TCPServer on any port, using hint as a starting point. Returns a tuple of the actual port that the server was created on and the server itself.\n\n\n\n\n\n"
+},
+
+{
+    "location": "stdlib/Sockets/#Base.bind",
+    "page": "-",
+    "title": "Base.bind",
+    "category": "Function",
+    "text": "bind(chnl::Channel, task::Task)\n\nAssociate the lifetime of chnl with a task. Channel chnl is automatically closed when the task terminates. Any uncaught exception in the task is propagated to all waiters on chnl.\n\nThe chnl object can be explicitly closed independent of task termination. Terminating tasks have no effect on already closed Channel objects.\n\nWhen a channel is bound to multiple tasks, the first task to terminate will close the channel. When multiple channels are bound to the same task, termination of the task will close all of the bound channels.\n\nExamples\n\njulia> c = Channel(0);\n\njulia> task = @schedule foreach(i->put!(c, i), 1:4);\n\njulia> bind(c,task);\n\njulia> for i in c\n           @show i\n       end;\ni = 1\ni = 2\ni = 3\ni = 4\n\njulia> isopen(c)\nfalse\n\njulia> c = Channel(0);\n\njulia> task = @schedule (put!(c,1);error(\"foo\"));\n\njulia> bind(c,task);\n\njulia> take!(c)\n1\n\njulia> put!(c,1);\nERROR: foo\nStacktrace:\n[...]\n\n\n\n\n\nbind(socket::Union{UDPSocket, TCPSocket}, host::IPAddr, port::Integer; ipv6only=false, reuseaddr=false, kws...)\n\nBind socket to the given host:port. Note that 0.0.0.0 will listen on all devices.\n\nThe ipv6only parameter disables dual stack mode. If ipv6only=true, only an IPv6 stack is created.\nIf reuseaddr=true, multiple threads or processes can bind to the same address without error if they all set reuseaddr=true, but only the last to bind will receive any traffic.\n\n\n\n\n\n"
+},
+
+{
+    "location": "stdlib/Sockets/#Sockets.send",
+    "page": "-",
+    "title": "Sockets.send",
+    "category": "Function",
+    "text": "send(socket::UDPSocket, host, port::Integer, msg)\n\nSend msg over socket to host:port.\n\n\n\n\n\n"
+},
+
+{
+    "location": "stdlib/Sockets/#Sockets.recv",
+    "page": "-",
+    "title": "Sockets.recv",
+    "category": "Function",
+    "text": "recv(socket::UDPSocket)\n\nRead a UDP packet from the specified socket, and return the bytes received. This call blocks.\n\n\n\n\n\n"
+},
+
+{
+    "location": "stdlib/Sockets/#Sockets.recvfrom",
+    "page": "-",
+    "title": "Sockets.recvfrom",
+    "category": "Function",
+    "text": "recvfrom(socket::UDPSocket) -> (address, data)\n\nRead a UDP packet from the specified socket, returning a tuple of (address, data), where address will be either IPv4 or IPv6 as appropriate.\n\n\n\n\n\n"
+},
+
+{
+    "location": "stdlib/Sockets/#Sockets.setopt",
+    "page": "-",
+    "title": "Sockets.setopt",
+    "category": "Function",
+    "text": "setopt(sock::UDPSocket; multicast_loop = nothing, multicast_ttl=nothing, enable_broadcast=nothing, ttl=nothing)\n\nSet UDP socket options.\n\nmulticast_loop: loopback for multicast packets (default: true).\nmulticast_ttl: TTL for multicast packets (default: nothing).\nenable_broadcast: flag must be set to true if socket will be used for broadcast messages, or else the UDP system will return an access error (default: false).\nttl: Time-to-live of packets sent on the socket (default: nothing).\n\n\n\n\n\n"
+},
+
+{
+    "location": "stdlib/Sockets/#Sockets-1",
+    "page": "-",
+    "title": "Sockets",
+    "category": "section",
+    "text": "Sockets.connect(::TCPSocket, ::Integer)\nSockets.connect(::AbstractString)\nSockets.listen(::Any)\nSockets.listen(::AbstractString)\nSockets.getaddrinfo\nSockets.getipaddr\nSockets.getalladdrinfo\nSockets.getnameinfo\nSockets.getsockname\nSockets.getpeername\nSockets.IPv4\nSockets.IPv6\nSockets.TCPSocket\nSockets.UDPSocket\nSockets.accept\nSockets.listenany\nSockets.bind\nSockets.send\nSockets.recv\nSockets.recvfrom\nSockets.setopt"
+},
+
+{
     "location": "stdlib/SparseArrays/#",
     "page": "Sparse Arrays",
     "title": "Sparse Arrays",
@@ -20161,7 +20137,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "devdocs/offset-arrays/#Arrays-with-custom-indices-1",
+    "location": "devdocs/offset-arrays/#man-custom-indices-1",
     "page": "Arrays with custom indices",
     "title": "Arrays with custom indices",
     "category": "section",
@@ -20350,6 +20326,46 @@ var documenterSearchIndex = {"docs": [
     "title": "The inlining algorithm (inline_worthy)",
     "category": "section",
     "text": "Much of the hardest work for inlining runs in inlining_pass. However, if your question is \"why didn\'t my function inline?\" then you will most likely be interested in isinlineable and its primary callee, inline_worthy. isinlineable handles a number of special cases (e.g., critical functions like next and done, incorporating a bonus for functions that return tuples, etc.). The main decision-making happens in inline_worthy, which returns true if the function should be inlined.inline_worthy implements a cost-model, where \"cheap\" functions get inlined; more specifically, we inline functions if their anticipated run-time is not large compared to the time it would take to issue a call to them if they were not inlined. The cost-model is extremely simple and ignores many important details: for example, all for loops are analyzed as if they will be executed once, and the cost of an if...else...end includes the summed cost of all branches. It\'s also worth acknowledging that we currently lack a suite of functions suitable for testing how well the cost model predicts the actual run-time cost, although BaseBenchmarks provides a great deal of indirect information about the successes and failures of any modification to the inlining algorithm.The foundation of the cost-model is a lookup table, implemented in add_tfunc and its callers, that assigns an estimated cost (measured in CPU cycles) to each of Julia\'s intrinsic functions. These costs are based on standard ranges for common architectures (see Agner Fog\'s analysis for more detail).We supplement this low-level lookup table with a number of special cases. For example, an :invoke expression (a call for which all input and output types were inferred in advance) is assigned a fixed cost (currently 20 cycles). In contrast, a :call expression, for functions other than intrinsics/builtins, indicates that the call will require dynamic dispatch, in which case we assign a cost set by Params.inline_nonleaf_penalty (currently set at 1000). Note that this is not a \"first-principles\" estimate of the raw cost of dynamic dispatch, but a mere heuristic indicating that dynamic dispatch is extremely expensive.Each statement gets analyzed for its total cost in a function called statement_cost. You can run this yourself by following this example:params = Core.Compiler.Params(typemax(UInt))\n# Get the CodeInfo object\nci = (@code_typed fill(3, (5, 5)))[1]  # we\'ll try this on the code for `fill(3, (5, 5))`\n# Calculate cost of each statement\ncost(stmt) = Core.Compiler.statement_cost(stmt, ci, Base, params)\ncst = map(cost, ci.code)The output is a Vector{Int} holding the estimated cost of each statement in ci.code.  Note that ci includes the consequences of inlining callees, and consequently the costs do too."
+},
+
+{
+    "location": "devdocs/ssair/#",
+    "page": "Julia SSA-form IR",
+    "title": "Julia SSA-form IR",
+    "category": "page",
+    "text": ""
+},
+
+{
+    "location": "devdocs/ssair/#Julia-SSA-form-IR-1",
+    "page": "Julia SSA-form IR",
+    "title": "Julia SSA-form IR",
+    "category": "section",
+    "text": ""
+},
+
+{
+    "location": "devdocs/ssair/#Background-1",
+    "page": "Julia SSA-form IR",
+    "title": "Background",
+    "category": "section",
+    "text": "Beginning in Julia 0.7, parts of the compiler use a new SSA-form intermediate representation. Historically, the compiler used to directly generate LLVM IR, from a lowered form of the Julia AST. This form had most syntactic abstractions removed, but still looked a lot like an abstract syntax tree. Over time, in order to facilitate optimizations, SSA values were introduced to this IR and the IR was linearized (i.e. a form where function arguments may only be SSA values or constants). However, non-ssa values (slots) remained in the IR due to the lack of Phi nodes in the IR (necessary for back-edges and re-merging of conditional control flow), negating much of the usefulfulness of the SSA form representation to perform middle end optimizations. Some heroic effort was put into making these optimizations work without a complete SSA form representation, but the lack of such a representation ultimately proved prohibitive."
+},
+
+{
+    "location": "devdocs/ssair/#New-IR-nodes-1",
+    "page": "Julia SSA-form IR",
+    "title": "New IR nodes",
+    "category": "section",
+    "text": "With the new IR representation, the compiler learned to handle two new IR nodes, Phi nodes and Pi nodes. Phi nodes are part of generic SSA abstraction (see the link above if you\'re not familar with the concept). In the Julia IR, these nodes are represented as:struct PhiNode\n    edges::Vector{Int}\n    values::Vector{Any}\nendwhere we ensure that both vectors always have the same length. In the canonical representation (the one handles by codegen and the interpreter), the edge values indicate come-from statement numbers (i.e. if edge has an entry of 15, there must be a goto, gotoifnot or implicit fall through from statement 15 that targets this phi node). Values are either SSA values or constants. It is also possible for a value to be unassigned if the variable was not defined on this path. However, undefinedness checks get explicitly inserted and represented as booleans after middle end optimizations, so code generators may assume that any use of a phi node will have an assigned value in the corresponding slot. It is also legal for the mapping to be incomplete, i.e. for a phi node to have missing incoming edges. In that case, it must be dynamically guaranteed that the corresponding value will not be used.PiNodes encode statically proven information that may be implicitly assumed in basic blocks dominated by a given phi node. They are conceptually equivalent to the technique introduced in the paper \"ABCD: Eliminating Array Bounds Checks on Demand\" or the predicate info nodes in LLVM. To see how they work, consider, e.g.%x::Union{Int, Float64} # %x is some Union{Int, Float64} typed ssa value\nif isa(x, Int)\n    # use x\nelse\n    # use x\nendwe can perform predicate insertion and turn this into:%x::Union{Int, Float64} # %x is some Union{Int, Float64} typed ssa value\nif isa(x, Int)\n    %x_int = PiNode(x, Int)\n    # use %x_int\nelse\n    %x_float = PiNode(x, Float64)\n    # use %x_float\nendPi nodes are generally ignored in the interpreter, since they don\'t have any effect on the values, but they may sometimes lead to code generation in the compiler (e.g. to change from an implicitly union split representation to a plain unboxed representation). The main usefulness of PiNodes stems from the fact that path conditions of the values can be accumulated simply by def-use chain walking that is generally done for most optimizations that care about these conditions anyway."
+},
+
+{
+    "location": "devdocs/ssair/#Main-SSA-data-structure-1",
+    "page": "Julia SSA-form IR",
+    "title": "Main SSA data structure",
+    "category": "section",
+    "text": "The main SSAIR data structure is worthy of discussion. It draws inspiration from LLVM and Webkit\'s B3 IR. The core of the data structure is a flat vector of statements. Each statement is implicitly assigned an SSA values based on its position in the vector (i.e. the result of the statement at idx 1 can be accessed using SSAValue(1) etc). For each SSA value, we additionally maintain its type. Since, SSA values are definitionally assigned only once, this type is also the result type of the expression at the corresponding index. However, while this representation is rather efficient (since the assignments don\'t need to be explicitly) encoded, if of course carries the drawback that order is semantically significant, so reorderings and insertions change statement numbers. Additionally, we do not keep use lists (i.e. it is impossible to walk from a def to all its uses without explicitly computing this map - def lists however are trivial since you can lookup the corresponding statement from the index), so the LLVM-style RAUW (replace-all-uses-with) operation is unavailable.Instead, we do the following:We keep a separate buffer of nodes to insert (including the position to insert them at, the type of the corresponding value and the node itself). These nodes are numbered by their occurrence in the insertion buffer, allowing their values to be immediately used elesewhere in the IR (i.e. if there is 12 statements in the original statement list, the first new statement will be accessible as SSAValue(13))\nRAUW style operations are performed by setting the corresponding statement index to the replacement value.\nStatements are erased by setting the corresponding statement to nothing (this is essentially just a special-case convention of the above\nif there are any uses of the statement being erased they will be set to nothing)There is a compact! function that compacts the above data structure by performing the insertion of nodes in the appropriate place, trivial copy propagation and renaming of uses to any changed SSA values. However, the clever part of this scheme is that this compaction can be done lazily as part of the subsequent pass. Most optimization passes need to walk over the entire list of statements, performing analysis or modifications along the way. We provide an IncrementalCompact iterator that can be used to iterate over the statement list. It will perform any necessary compaction, and return the new index of the node, as well as the node itself. It is legal at this point to walk def-use chains, as well as make any modifications or deletions to the IR (insertions are disallowed however).The idea behind this arrangement is that, since the optimization passes need to touch the corresponding memory anyway, and incur the corresponding memory access penalty, performing the extra housekeeping should have comparitively little overhead (and save the overhead of maintaining these data structures during IR modification)."
 },
 
 {
