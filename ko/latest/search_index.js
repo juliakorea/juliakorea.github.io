@@ -37,7 +37,7 @@ var documenterSearchIndex = {"docs": [
     "page": "홈",
     "title": "Standard Library",
     "category": "section",
-    "text": "The Julia REPL\nBase64\nCRC32c\nSHA\nDates\nDelimited Files\nDistributed Computing\nFile Events\nIterative Eigensolvers\nMemory-mapped I/O\nPrintf\nProfiling\nRandom Numbers\nShared Arrays\nLinear Algebra\nSparse Arrays\nUnicode\nUnit Testing"
+    "text": "The Julia REPL\nBase64\nCRC32c\nSHA\nDates\nDelimited Files\nDistributed Computing\nFile Events\nIterative Eigensolvers\nMemory-mapped I/O\nPrintf\nProfiling\nRandom Numbers\nShared Arrays\nLinear Algebra\nLogging\nSparse Arrays\nUnicode\nUnit Testing"
 },
 
 {
@@ -93,7 +93,7 @@ var documenterSearchIndex = {"docs": [
     "page": "줄리아 v0.7.0 릴리즈 노트",
     "title": "Library improvements",
     "category": "section",
-    "text": "The function thisind(s::AbstractString, i::Integer) returns the largest valid index less or equal than i in the string s or 0 if no such index exists (#24414).\nChar is now a subtype of AbstractChar, and most of the functions that take character arguments now accept any AbstractChar (#26286).\nString(array) now accepts an arbitrary AbstractVector{UInt8}. For Vector inputs, it \"steals\" the memory buffer, leaving them with an empty buffer which is guaranteed not to be shared with the String object. For other types of vectors (in particular immutable vectors), a copy is made and the input is not truncated (#26093).\nIrrational is now a subtype of AbstractIrrational (#24245).\nIntroduced the empty function, the functional pair to empty! which returns a new, empty container (#24390).\nJump to first/last history entries in the REPL via \"Alt-<\" and \"Alt->\" (#22829).\nREPL LaTeX-like tab completions have been simplified for several Unicode characters, e.g. 𝔸 is now \\bbA rather than \\BbbA (#25980).\nThe function chop now accepts two arguments head and tail allowing to specify number of characters to remove from the head and tail of the string (#24126).\nget(io, :color, false) can now be used to query whether a stream io supports ANSI color codes (#25067), rather than using the undocumented Base.have_color global flag.\nFunctions first and last now accept nchar argument for AbstractString. If this argument is used they return a string consisting of first/last nchar characters from the original string (#23960).\nExpressions x^-n where n is an integer literal now correspond to inv(x)^n. For example, x^-1 is now essentially a synonym for inv(x), and works in a type-stable way even if typeof(x) != typeof(inv(x)) (#24240).\nNew Iterators.reverse(itr) for reverse-order iteration (#24187).  Iterator types T can implement start etc. for Iterators.Reverse{T} to support this.\nThe functions nextind and prevind now accept nchar argument that indicates the number of characters to move (#23805).\nThe functions strip, lstrip and rstrip now return SubString (#22496).\nThe functions strwidth and charwidth have been merged into textwidth(#20816).\nThe functions base and digits digits now accept a negative base (like ndigits did) (#21692).\nThe function randn now accepts complex arguments (Complex{T <: AbstractFloat}) (#21973).\nparse(Complex{T}, string) can parse complex numbers in some common formats (#24713).\nThe function rand can now pick up random elements from strings, associatives and sets (#22228, #21960, #18155, #22224).\nMethod lists are now printed as a numbered list. In addition, the source code of a method can be opened in an editor by entering the corresponding number in the REPL and pressing ^Q (#22007).\ngetpeername on a TCPSocket returns the address and port of the remote endpoint of the TCP connection (#21825).\nresize! and sizehint! methods no longer over-reserve memory when the requested array size is more than double of its current size (#22038).\nThe crc32c function for CRC-32c checksums is now exported (#22274).\neye(::Type{Diagonal{T}}, m::Integer) has been deprecated in favor of Diagonal{T}(I, m) (#24413).\nThe output of versioninfo is now controlled with keyword arguments (#21974).\nThe function LibGit2.set_remote_url now always sets both the fetch and push URLs for a git repo. Additionally, the argument order was changed to be consistent with the git command line tool (#22062).\nAdded unique! which is an inplace version of unique (#20549).\n@test isequal(x, y) and @test isapprox(x, y) now prints an evaluated expression when the test fails (#22296).\nUses of Val{c} in Base has been replaced with Val{c}(), which is now easily accessible via the @pure constructor Val(c). Functions are defined as f(::Val{c}) = ... and called by f(Val(c)). Notable affected functions include: ntuple, Base.literal_pow, sqrtm, lufact, lufact!, qrfact, qrfact!, cholfact, cholfact!, _broadcast!, reshape, cat and cat_t.\nA new @macroexpand1 macro for non recursive macro expansion (#21662).\nChars can now be concatenated with Strings and/or other Chars using * (#22532).\nDiagonal, Bidiagonal, Tridiagonal and SymTridiagonal are now parameterized on the type of the wrapped vectors, allowing Diagonal, Bidiagonal, Tridiagonal and SymTridiagonal matrices with arbitrary AbstractVectors (#22718, #22925, #23035, #23154).\nMutating versions of randperm and randcycle have been added: randperm! and randcycle! (#22723).\nBigFloat random numbers can now be generated (#22720).\nREPL Undo via Ctrl-/ and Ctrl-_\ndiagm now accepts several diagonal index/vector Pairs (#24047).\nisequal, ==, and in have one argument \"curried\" forms. For example isequal(x) returns a function that compares its argument to x using isequal (#26436).\nreinterpret now works on any AbstractArray using the new ReinterpretArray type. This supersedes the old behavior of reinterpret on Arrays. As a result, reinterpreting arrays with different alignment requirements (removed in 0.6) is once again allowed (#23750).\nThe keys of an Associative are now an AbstractSet. Base.KeyIterator{<:Associative} has been changed to KeySet{K, <:Associative{K}} <: AbstractSet{K} (#24580).\nNew function ncodeunits(s::AbstractString) gives the number of code units in a string. The generic definition is constant time but calls lastindex(s) which may be inefficient. Therefore custom string types may want to define direct ncodeunits methods.\nreverseind(s::AbstractString, i::Integer) now has an efficient generic fallback, so custom string types do not need to provide their own efficient defintions. The generic definition relies on ncodeunits however, so for optimal performance you may need to define a custom method for that function.\nThe global RNG is being re-seeded with its own seed at the beginning of each @testset, and have its original state restored at the end (#24445). This is breaking for testsets relying implicitly on the global RNG being in a specific state.\npermutedims(m::AbstractMatrix) is now short for permutedims(m, (2,1)), and is now a more convenient way of making a \"shallow transpose\" of a 2D array. This is the recommended approach for manipulating arrays of data, rather than the recursively defined, linear-algebra function transpose. Similarly, permutedims(v::AbstractVector) will create a row matrix (#24839).\nA new replace(A, old=>new) function is introduced to replace old by new in collection A. There are also two other methods with a different API, and a mutating variant, replace! (#22324).\nAdding integers to CartesianIndex objects is now deprecated. Instead of i::Int + x::CartesianIndex, use i*one(x) + x (#26284).\nCartesianRange changes (#24715):\nInherits from AbstractArray, and linear indexing can be used to provide linear-to-cartesian conversion (#24715)\nIt has a new constructor taking an array\nseveral missing set-like operations have been added (#23528): union, intersect, symdiff, setdiff are now implemented for all collections with arbitrary many arguments, as well as the mutating counterparts (union! etc.). The performance is also much better in many cases. Note that this change is slightly breaking: all the non-mutating functions always return a new object even if only one argument is passed. Moreover the semantics of intersect and symdiff is changed for vectors:\nintersect doesn\'t preserve the multiplicity anymore (use filter for the old behavior)\nsymdiff has been made consistent with the corresponding methods for other containers, by taking the multiplicity of the arguments into account. Use unique to get the old behavior.\nThe type LinearIndices has been added, providing conversion from cartesian indices to linear indices using the normal indexing operation. (#24715)\nIdDict{K,V} replaces ObjectIdDict.  It has type parameters like other AbstractDict subtypes and its constructors mirror the ones of Dict. (#25210)\nIOBuffer can take the sizehint keyword argument to suggest a capacity of the buffer (#25944).\ntrunc, floor, ceil, round, and signif specify base using a keyword argument. (#26156)"
+    "text": "The function thisind(s::AbstractString, i::Integer) returns the largest valid index less or equal than i in the string s or 0 if no such index exists (#24414).\nChar is now a subtype of AbstractChar, and most of the functions that take character arguments now accept any AbstractChar (#26286).\nString(array) now accepts an arbitrary AbstractVector{UInt8}. For Vector inputs, it \"steals\" the memory buffer, leaving them with an empty buffer which is guaranteed not to be shared with the String object. For other types of vectors (in particular immutable vectors), a copy is made and the input is not truncated (#26093).\nIrrational is now a subtype of AbstractIrrational (#24245).\nIntroduced the empty function, the functional pair to empty! which returns a new, empty container (#24390).\nJump to first/last history entries in the REPL via \"Alt-<\" and \"Alt->\" (#22829).\nREPL LaTeX-like tab completions have been simplified for several Unicode characters, e.g. 𝔸 is now \\bbA rather than \\BbbA (#25980).\nThe function chop now accepts two arguments head and tail allowing to specify number of characters to remove from the head and tail of the string (#24126).\nget(io, :color, false) can now be used to query whether a stream io supports ANSI color codes (#25067), rather than using the undocumented Base.have_color global flag.\nFunctions first and last now accept nchar argument for AbstractString. If this argument is used they return a string consisting of first/last nchar characters from the original string (#23960).\nExpressions x^-n where n is an integer literal now correspond to inv(x)^n. For example, x^-1 is now essentially a synonym for inv(x), and works in a type-stable way even if typeof(x) != typeof(inv(x)) (#24240).\nNew Iterators.reverse(itr) for reverse-order iteration (#24187).  Iterator types T can implement start etc. for Iterators.Reverse{T} to support this.\nThe functions nextind and prevind now accept nchar argument that indicates the number of characters to move (#23805).\nThe functions strip, lstrip and rstrip now return SubString (#22496).\nThe functions strwidth and charwidth have been merged into textwidth(#20816).\nThe functions base and digits digits now accept a negative base (like ndigits did) (#21692).\nThe function randn now accepts complex arguments (Complex{T <: AbstractFloat}) (#21973).\nparse(Complex{T}, string) can parse complex numbers in some common formats (#24713).\nThe function rand can now pick up random elements from strings, associatives and sets (#22228, #21960, #18155, #22224).\nMethod lists are now printed as a numbered list. In addition, the source code of a method can be opened in an editor by entering the corresponding number in the REPL and pressing ^Q (#22007).\ngetpeername on a TCPSocket returns the address and port of the remote endpoint of the TCP connection (#21825).\nresize! and sizehint! methods no longer over-reserve memory when the requested array size is more than double of its current size (#22038).\nThe crc32c function for CRC-32c checksums is now exported (#22274).\neye(::Type{Diagonal{T}}, m::Integer) has been deprecated in favor of Diagonal{T}(I, m) (#24413).\nThe output of versioninfo is now controlled with keyword arguments (#21974).\nThe function LibGit2.set_remote_url now always sets both the fetch and push URLs for a git repo. Additionally, the argument order was changed to be consistent with the git command line tool (#22062).\nAdded unique! which is an inplace version of unique (#20549).\n@test isequal(x, y) and @test isapprox(x, y) now prints an evaluated expression when the test fails (#22296).\nUses of Val{c} in Base has been replaced with Val{c}(), which is now easily accessible via the @pure constructor Val(c). Functions are defined as f(::Val{c}) = ... and called by f(Val(c)). Notable affected functions include: ntuple, Base.literal_pow, sqrtm, lufact, lufact!, qrfact, qrfact!, cholfact, cholfact!, _broadcast!, reshape, cat and cat_t.\nA new @macroexpand1 macro for non recursive macro expansion (#21662).\nChars can now be concatenated with Strings and/or other Chars using * (#22532).\nDiagonal, Bidiagonal, Tridiagonal and SymTridiagonal are now parameterized on the type of the wrapped vectors, allowing Diagonal, Bidiagonal, Tridiagonal and SymTridiagonal matrices with arbitrary AbstractVectors (#22718, #22925, #23035, #23154).\nMutating versions of randperm and randcycle have been added: randperm! and randcycle! (#22723).\nBigFloat random numbers can now be generated (#22720).\nREPL Undo via Ctrl-/ and Ctrl-_\ndiagm now accepts several diagonal index/vector Pairs (#24047).\nisequal, ==, and in have one argument \"curried\" forms. For example isequal(x) returns a function that compares its argument to x using isequal (#26436).\nreinterpret now works on any AbstractArray using the new ReinterpretArray type. This supersedes the old behavior of reinterpret on Arrays. As a result, reinterpreting arrays with different alignment requirements (removed in 0.6) is once again allowed (#23750).\nThe keys of an Associative are now an AbstractSet. Base.KeyIterator{<:Associative} has been changed to KeySet{K, <:Associative{K}} <: AbstractSet{K} (#24580).\nNew function ncodeunits(s::AbstractString) gives the number of code units in a string. The generic definition is constant time but calls lastindex(s) which may be inefficient. Therefore custom string types may want to define direct ncodeunits methods.\nreverseind(s::AbstractString, i::Integer) now has an efficient generic fallback, so custom string types do not need to provide their own efficient defintions. The generic definition relies on ncodeunits however, so for optimal performance you may need to define a custom method for that function.\nThe global RNG is being re-seeded with its own seed at the beginning of each @testset, and have its original state restored at the end (#24445). This is breaking for testsets relying implicitly on the global RNG being in a specific state.\npermutedims(m::AbstractMatrix) is now short for permutedims(m, (2,1)), and is now a more convenient way of making a \"shallow transpose\" of a 2D array. This is the recommended approach for manipulating arrays of data, rather than the recursively defined, linear-algebra function transpose. Similarly, permutedims(v::AbstractVector) will create a row matrix (#24839).\nA new replace(A, old=>new) function is introduced to replace old by new in collection A. There are also two other methods with a different API, and a mutating variant, replace! (#22324).\nAdding integers to CartesianIndex objects is now deprecated. Instead of i::Int + x::CartesianIndex, use i*one(x) + x (#26284).\nCartesianRange changes (#24715):\nInherits from AbstractArray, and linear indexing can be used to provide linear-to-cartesian conversion (#24715)\nIt has a new constructor taking an array\nseveral missing set-like operations have been added (#23528): union, intersect, symdiff, setdiff are now implemented for all collections with arbitrary many arguments, as well as the mutating counterparts (union! etc.). The performance is also much better in many cases. Note that this change is slightly breaking: all the non-mutating functions always return a new object even if only one argument is passed. Moreover the semantics of intersect and symdiff is changed for vectors:\nintersect doesn\'t preserve the multiplicity anymore (use filter for the old behavior)\nsymdiff has been made consistent with the corresponding methods for other containers, by taking the multiplicity of the arguments into account. Use unique to get the old behavior.\nThe type LinearIndices has been added, providing conversion from cartesian indices to linear indices using the normal indexing operation. (#24715)\nIdDict{K,V} replaces ObjectIdDict.  It has type parameters like other AbstractDict subtypes and its constructors mirror the ones of Dict. (#25210)\nIOBuffer can take the sizehint keyword argument to suggest a capacity of the buffer (#25944).\ntrunc, floor, ceil, and round specify digits, sigdigits and base using keyword arguments. (#26156, #26670)"
 },
 
 {
@@ -109,7 +109,7 @@ var documenterSearchIndex = {"docs": [
     "page": "줄리아 v0.7.0 릴리즈 노트",
     "title": "Deprecated or removed",
     "category": "section",
-    "text": "The JULIA_HOME environment variable has been renamed to JULIA_BINDIR and Base.JULIA_HOME has been moved to Sys.BINDIR (#20899).\nThe keyword immutable is fully deprecated to struct, and type is fully deprecated to mutable struct (#19157, #20418).\nIndexing into multidimensional arrays with more than one index but fewer indices than there are dimensions is no longer permitted when those trailing dimensions have lengths greater than 1. Instead, reshape the array or add trailing indices so the dimensionality and number of indices match (#14770, #23628).\nThe use of a positional dimension argument has largely been deprecated in favor of a dims keyword argument. This includes the functions sum, prod, maximum, minimum, all, any, findmax, findmin, mean, varm, std, var, cov, cor, median, mapreducedim, reducedim, sort, accumulate, accumulate!, cumsum, cumsum!, cumprod, cumprod!, flipdim, and squeeze (#25501).\nindices(a) and indices(a,d) have been deprecated in favor of axes(a) and axes(a, d) (#25057).\nEnvHash has been renamed to EnvDict (#24167).\nUninitialized Array constructors of the form Array[{T,N}](shape...) have been deprecated in favor of equivalents accepting undef (an alias for UndefInitializer()) as their first argument, as in Array[{T,N}](undef, shape...). For example, Vector(3) is now Vector(undef, 3), Matrix{Int}((2, 4)) is now, Matrix{Int}(undef, (2, 4)), and Array{Float32,3}(11, 13, 17) is now Array{Float32,3}(undef, 11, 13, 17) (#24781).\nLinAlg.fillslots! has been renamed LinAlg.fillstored! (#25030).\nfill!(A::Diagonal, x) and fill!(A::AbstractTriangular, x) have been deprecated in favor of Base.LinAlg.fillstored!(A, x) (#24413).\neye has been deprecated in favor of I and Matrix constructors. Please see the deprecation warnings for replacement details (#24438).\nzeros(D::Diagonal[, opts...]) has been deprecated (#24654).\nUsing Bool values directly as indices is now deprecated and will be an error in the future. Convert them to Int before indexing if you intend to access index 1 for true and 0 for false.\nslicedim(A, d, i) has been deprecated in favor of copy(selectdim(A, d, i)). The new selectdim function now always returns a view into A; in many cases the copy is not necessary. Previously, slicedim on a vector V over dimension d=1 and scalarindex `i` would return the just selected element (unless `V` was a `BitVector`). This\nhas now been made consistent: `selectdim` now always returns a view into the original\narray, with a zero-dimensional view in this specific case ([#26009](https://github.com/JuliaLang/julia/issues/26009)).whos has been renamed varinfo, and now returns a markdown table instead of printing output (#12131).\nUninitialized RowVector constructors of the form RowVector{T}(shape...) have been deprecated in favor of equivalents accepting undef (an alias for UndefInitializer()) as their first argument, as in RowVector{T}(undef, shape...). For example, RowVector{Int}(3) is now RowVector{Int}(undef, 3), and RowVector{Float32}((1, 4)) is now RowVector{Float32}(undef, (1, 4)) (#24786).\nwritecsv(io, a; opts...) has been deprecated in favor of writedlm(io, a, \',\'; opts...) (#23529).\nThe method srand(rng, filename, n=4) has been deprecated (#21359).\nreadcsv(io[, T::Type]; opts...) has been deprecated in favor of readdlm(io, \',\'[, T]; opts...) (#23530).\nsparse(s::UniformScaling, m::Integer) has been deprecated in favor of the three-argument equivalent sparse(s::UniformScaling, m, n) (#24472).\nThe cholfact/cholfact! methods that accepted an uplo symbol have been deprecated in favor of using Hermitian (or Symmetric) views (#22187, #22188).\nThe thin keyword argument for orthogonal decomposition methods has been deprecated in favor of full, which has the opposite meaning: thin == true if and only if full == false (#24279).\nisposdef(A::AbstractMatrix, UL::Symbol) and isposdef!(A::AbstractMatrix, UL::Symbol) have been deprecated in favor of isposdef(Hermitian(A, UL)) and isposdef!(Hermitian(A, UL)) respectively (#22245).\nThe bkfact/bkfact! methods that accepted uplo and issymmetric symbols have been deprecated in favor of using Hermitian (or Symmetric) views (#22605).\nThe function current_module is deprecated and replaced with @__MODULE__. This caused the deprecation of some reflection methods (such as macroexpand and isconst), which now require a module argument. And it caused the bugfix of other default arguments to use the Main module (including whos, which)  (#22064).\nexpand(ex) and expand(module, ex) have been deprecated in favor of Meta.lower(module, ex) (#22064, #24278).\nones(A::AbstractArray[, opts...]) and zeros(A::AbstractArray[, opts...]) methods have been deprecated. For zeros(A), consider zero(A). For ones(A) or zeros(A), consider ones(size(A)), zeros(size(A)), fill(v, size(A)) for v an appropriate one or zero, fill!(copy(A), {1|0}), fill!(similar(A), {1|0}), or any of the preceding with different element type and/or shape depending on opts.... Where strictly necessary, consider fill!(similar(A[, opts...]), {one(eltype(A)) | zero(eltype(A))}). For an algebraic multiplicative identity, consider one(A) (#24656).\nThe Operators module is deprecated. Instead, import required operators explicitly from Base, e.g. import Base: +, -, *, / (#22251).\nBindings to the FFTW library have been removed from Base. The DFT framework for building FFT implementations is now in AbstractFFTs.jl, the bindings to the FFTW library are in FFTW.jl, and the Base signal processing functions which used FFTs are now in DSP.jl (#21956).\nThe corrected positional argument to cov has been deprecated in favor of a keyword argument with the same name (#21709).\nOmitting spaces around the ? and the : tokens in a ternary expression has been deprecated. Ternaries must now include some amount of whitespace, e.g. x ? a : b rather than x?a:b (#22523 and #22712).\n? can no longer be used as an identifier name (#22712)\nThe method replace(s::AbstractString, pat, r, [count]) is deprecated in favor of replace(s::AbstractString, pat => r; [count]) (#25165). Moreover, count cannot be negative anymore (use typemax(Int) instead (#22325).\nread(io, type, dims) is deprecated to read!(io, Array{type}(undef, dims)) (#21450).\nread(::IO, ::Ref) is now a method of read!, since it mutates its Ref argument (#21592).\nnb_available is now bytesavailable (#25634).\nskipchars(io::IO, predicate; linecomment=nothing) is deprecated in favor of skipchars(predicate, io::IO; linecomment=nothing) (#25667).\nBidiagonal constructors now use a Symbol (:U or :L) for the upper/lower argument, instead of a Bool or a Char (#22703).\nBidiagonal, Tridiagonal and SymTridiagonal constructors that automatically converted the input vectors to the same type are deprecated in favor of explicit conversion (#22925, #23035, #23154.\nCalling nfields on a type to find out how many fields its instances have is deprecated. Use fieldcount instead. Use nfields only to get the number of fields in a specific object (#22350).\nfieldnames now operates only on types. To get the names of fields in an object, use fieldnames(typeof(x)) (#22350).\nInexactError, DomainError, and OverflowError now take arguments. InexactError(func::Symbol, type, -3) now prints as \"ERROR: InexactError: func(type, -3)\", DomainError(val, [msg]) prints as \"ERROR: DomainError with val:\\nmsg\", and OverflowError(msg) prints as \"ERROR: OverflowError: msg\". (#20005, #22751, #22761)\nThe operating system identification functions: is_linux, is_bsd, is_apple, is_unix, and is_windows, have been deprecated in favor of Sys.islinux, Sys.isbsd, Sys.isapple, Sys.isunix, and Sys.iswindows, respectively (#22182).\nThe forms of read, readstring, and eachline that accepted both a Cmd object and an input stream are deprecated. Use e.g. read(pipeline(stdin, cmd)) instead (#22762).\nThe unexported type AbstractIOBuffer has been renamed to GenericIOBuffer (#17360 #22796).\nIOBuffer(data::AbstractVector{UInt8}, read::Bool, write::Bool, maxsize::Integer), IOBuffer(read::Bool, write::Bool), and IOBuffer(maxsize::Integer) are deprecated in favor of constructors taking keyword arguments (#25872).\nDisplay has been renamed to AbstractDisplay (#24831).\nRemaining vectorized methods over SparseVectors, particularly floor, ceil, trunc, round, and most common transcendental functions such as exp, log, and sin variants, have been deprecated in favor of dot-syntax (#22961).\nThe method String(io::IOBuffer) is deprecated to String(take!(copy(io))) (#21438).\nThe function readstring is deprecated in favor of read(io, String) (#22793)\nThe function showall is deprecated. Showing entire values is the default, unless an IOContext specifying :limit=>true is in use (#22847).\nissubtype has been deprecated in favor of <: (which used to be an alias for issubtype).\nCalling write on non-isbits arrays is deprecated in favor of explicit loops or serialize (#6466).\nThe default startup.jl file on Windows has been removed. Now must explicitly include the full path if you need access to executables or libraries in the Sys.BINDIR directory, e.g. joinpath(Sys.BINDIR, \"7z.exe\") for 7z.exe (#21540).\nsqrtm has been deprecated in favor of sqrt (#23504).\nexpm has been deprecated in favor of exp (#23233).\nlogm has been deprecated in favor of log (#23505).\nfull has been deprecated in favor of more specific, better defined alternatives. On structured matrices A, consider instead Matrix(A), Array(A), SparseMatrixCSC(A), or sparse(A). On sparse arrays S, consider instead Vector(S), Matrix(S), or Array(S) as appropriate. On factorizations F, consider instead Matrix(F), Array(F), AbstractMatrix(F), or AbstractArray(F). On implicit orthogonal factors Q, consider instead Matrix(Q) or Array(Q); for implicit orthogonal factors that can be recovered in square or truncated form, see the deprecation message for square recovery instructions. On Symmetric, Hermitian, or AbstractTriangular matrices A, consider instead Matrix(S), Array(S), SparseMatrixCSC(S), or sparse(S). On Symmetric matrices A particularly, consider instead LinAlg.copytri!(copy(parent(A)), A.uplo). On Hermitian matrices A particularly, consider instead LinAlg.copytri!(copy(parent(A)), A.uplo, true). On UpperTriangular matrices A particularly, consider instead triu!(copy(parent(A))). On LowerTriangular matrices A particularly, consider instead tril!(copy(parent(A))) (#24250).\nspeye has been deprecated in favor of I, sparse, and SparseMatrixCSC constructor methods (#24356).\nCalling union with no arguments is deprecated; construct an empty set with an appropriate element type using Set{T}() instead (#23144).\nVectorized DateTime, Date, and format methods have been deprecated in favor of dot-syntax (#23207).\nBase.cpad has been removed; use an appropriate combination of rpad and lpad instead (#23187).\nctranspose and ctranspose! have been deprecated in favor of adjoint and adjoint!, respectively (#23235).\nfilter and filter! on dictionaries now pass a single key=>value pair to the argument function, instead of two arguments (#17886).\nrol, rol!, ror, and ror! have been deprecated in favor of specialized methods for circshift/circshift! (#23404).\nBase.SparseArrays.SpDiagIterator has been removed (#23261).\nThe tuple-of-types form of cfunction, cfunction(f, returntype, (types...)), has been deprecated in favor of the tuple-type form cfunction(f, returntype, Tuple{types...}) (#23066).\ndiagm(v::AbstractVector, k::Integer=0) has been deprecated in favor of diagm(k => v) (#24047).\ndiagm(x::Number) has been deprecated in favor of fill(x, 1, 1) (#24047).\ndiagm(A::SparseMatrixCSC) has been deprecated in favor of spdiagm(sparsevec(A)) (#23341).\ndiagm(A::BitMatrix) has been deprecated, use diagm(0 => vec(A)) or BitMatrix(Diagonal(vec(A))) instead (#23373, #24047).\nℯ (written as \\mscre<TAB> or \\euler<TAB>) is now the only (by default) exported name for Euler\'s number, and the type has changed from Irrational{:e} to Irrational{:ℯ} (#23427).\nThe mathematical constants π, pi, ℯ, e, γ, eulergamma, catalan, φ and golden have been moved from Base to a new module; Base.MathConstants. Only π, pi and ℯ are now exported by default from Base (#23427).\neu (previously an alias for ℯ) has been deprecated in favor of ℯ (or MathConstants.e) (#23427).\nGMP.gmp_version(), GMP.GMP_VERSION, GMP.gmp_bits_per_limb(), and GMP.GMP_BITS_PER_LIBM have been renamed to GMP.version(), GMP.VERSION, GMP.bits_per_libm(), and GMP.BITS_PER_LIBM, respectively. Similarly, MPFR.get_version(), has been renamed to MPFR.version() (#23323). Also, LinAlg.LAPACK.laver() has been renamed to LinAlg.LAPACK.version() and now returns a VersionNumber.\nselect, select!, selectperm and selectperm! have been renamed respectively to partialsort, partialsort!, partialsortperm and partialsortperm! (#23051).\nThe Range abstract type has been renamed to AbstractRange (#23570).\nmap on dictionaries previously operated on key=>value pairs. This behavior is deprecated, and in the future map will operate only on values (#5794).\nPreviously, broadcast defaulted to treating its arguments as scalars if they were not arrays. This behavior is deprecated, and in the future broadcast will default to iterating over all its arguments. Wrap arguments you wish to be treated as scalars with Ref() or a 1-tuple. Package developers can choose to allow a non-iterable type T to always behave as a scalar by implementing broadcastable(x::T) = Ref(x) (#26212).\nAutomatically broadcasted + and - for array + scalar, scalar - array, and so-on have been deprecated due to inconsistency with linear algebra. Use .+ and .- for these operations instead (#22880, #22932).\nisleaftype is deprecated in favor of the simpler predicates isconcretetype and isdispatchtuple. Concrete types are those that might equal typeof(x) for some x; isleaftype included some types for which this is not true. Those are now categorized more precisely as \"dispatch tuple types\" and \"!hasfreetypevars\" (not exported). (#17086, #25496)\ncontains(eq, itr, item) is deprecated in favor of any with a predicate (#23716).\nspdiagm(x::AbstractVector) has been deprecated in favor of sparse(Diagonal(x)) alternatively spdiagm(0 => x) (#23757).\nspdiagm(x::AbstractVector, d::Integer) and spdiagm(x::Tuple{<:AbstractVector}, d::Tuple{<:Integer}) have been deprecated in favor of spdiagm(d => x) and spdiagm(d[1] => x[1], d[2] => x[2], ...) respectively. The new spdiagm implementation now always returns a square matrix (#23757).\nspones(A::AbstractSparseArray) has been deprecated in favor of LinAlg.fillstored!(copy(A), 1) (#25037).\nConstructors for LibGit2.UserPasswordCredentials and LibGit2.SSHCredentials which take a prompt_if_incorrect argument are deprecated. Instead, prompting behavior is controlled using the allow_prompt keyword in the LibGit2.CredentialPayload constructor (#23690).\ngradient is deprecated and will be removed in the next release (#23816).\nThe timing functions tic, toc, and toq are deprecated in favor of @time and @elapsed (#17046).\nMethods of findfirst, findnext, findlast, and findprev that accept a value to search for are deprecated in favor of passing a predicate (#19186, #10593).\nfind functions now operate only on booleans by default. To look for non-zeros, use x->x!=0 or !iszero (#23120).\nThe ability of reinterpret to yield Arrays of different type than the underlying storage has been removed. The reinterpret function is still available, but now returns a ReinterpretArray. The three argument form of reinterpret that implicitly reshapes has been deprecated (#23750).\nbits has been deprecated in favor of bitstring (#24281, #24263).\nnum2hex and hex2num have been deprecated in favor of reinterpret combined with parse/hex (#22088).\ncopy! is deprecated for AbstractSet and AbstractDict, with the intention to re-enable it with a cleaner meaning in a future version (#24844).\ncopy! (resp. unsafe_copy!) is deprecated for AbstractArray and is renamed copyto! (resp. unsafe_copyto!); it will be re-introduced with a different meaning in a future version (#24808).\na:b is deprecated for constructing a StepRange when a and b have physical units (Dates and Times). Use a:s:b, where s = Dates.Day(1) or s = Dates.Second(1).\ntrues(A::AbstractArray) and falses(A::AbstractArray) are deprecated in favor of trues(size(A)) and falses(size(A)) respectively (#24595).\nworkspace is discontinued, check out Revise.jl for an alternative workflow (#25046).\ncumsum, cumprod, accumulate, their mutating versions, and diff all now require a dim argument instead of defaulting to using the first dimension unless there is only one dimension (#24684, #25457).\nThe sum_kbn and cumsum_kbn functions have been moved to the KahanSummation package (#24869).\nisnumber has been renamed to isnumeric (#25021).\nis_assigned_char and normalize_string have been renamed to isassigned and normalize, and moved to the new Unicode standard library module. graphemes has also been moved to that module (#25021).\nThe functions eigs and svds have been moved to the IterativeEigensolvers standard library module (#24714).\nSparse array functionality has moved to the SparseArrays standard library module (#25249).\nLinear algebra functionality, and specifically the LinAlg module has moved to the LinearAlgebra standard library module (#25571).\n@printf and @sprintf have been moved to the Printf standard library (#23929,#25056).\nThe Libdl module has moved to the Libdl standard library module (#25459).\nThe aliases Complex32, Complex64 and Complex128 have been deprecated in favor of ComplexF16, ComplexF32 and ComplexF64 respectively (#24647).\nBase.parentindexes and SharedArrays.localindexes have been renamed to parentindices and localindices, respectively. Similarly, the indexes field in the SubArray type has been renamed to indices without deprecation (#25088).\nAssociative has been deprecated in favor of AbstractDict (#25012).\nVoid has been renamed back to Nothing with an alias Cvoid for use when calling C with a return type of Cvoid or a return or argument type of Ptr{Cvoid} (#25162).\nNullable{T} has been deprecated and moved to the Nullables package (#23642). Use Union{T, Nothing} instead, or Union{Some{T}, Nothing} if nothing is a possible value (i.e. Nothing <: T). isnull(x) can be replaced with x === nothing and unsafe_get/get can be dropped or replaced with coalesce. NullException has been removed.\nunshift! and shift! have been renamed to pushfirst! and popfirst! (#23902)\nipermute! has been deprecated in favor of invpermute! (#25168).\nCartesianRange has been renamed CartesianIndices (#24715).\nsub2ind and ind2sub are deprecated in favor of using CartesianIndices and LinearIndices (#24715).\ngetindex(F::Factorization, s::Symbol) (usually seen as e.g. F[:Q]) is deprecated in favor of dot overloading (getproperty) so factors should now be accessed as e.g. F.Q instead of F[:Q] (#25184).\nsearch and rsearch have been deprecated in favor of findfirst/findnext and findlast/findprev respectively, in combination with curried isequal and in predicates for some methods (#24673).\nsearch(buf::IOBuffer, delim::UInt8) has been deprecated in favor of either occursin(delim, buf) (to test containment) or readuntil(buf, delim) (to read data up to delim) (#26600).\nismatch(regex, str) has been deprecated in favor of contains(str, regex) (#24673).\nmatchall has been deprecated in favor of collect(m.match for m in eachmatch(r, s)) (#26071).\nsimilar(::Associative) has been deprecated in favor of empty(::Associative), and similar(::Associative, ::Pair{K, V}) has been deprecated in favour of empty(::Associative, K, V) (#24390).\nfindin(a, b) has been deprecated in favor of findall(in(b), a) (#24673).\nmodule_name has been deprecated in favor of a new, general nameof function. Similarly, the unexported Base.function_name and Base.datatype_name have been deprecated in favor of nameof methods (#25622).\nThe module Random.dSFMT is renamed Random.DSFMT (#25567).\nRandom.RandomDevice(unlimited::Bool) (on non-Windows systems) is deprecated in favor of Random.RandomDevice(; unlimited=unlimited) (#25668).\nThe generic implementations of strides(::AbstractArray) and stride(::AbstractArray, ::Int)  have been deprecated. Subtypes of AbstractArray that implement the newly introduced strided  array interface should define their own strides method (#25321).\nmodule_parent, Base.datatype_module, and Base.function_module have been deprecated in favor of parentmodule ([#TODO]).\nrand(t::Tuple{Vararg{Int}}) is deprecated in favor of rand(Float64, t) or rand(t...); rand(::Tuple) will have another meaning in the future (#25429, #25278).\nThe assert function (and @assert macro) have been documented that they are not guaranteed to run under various optimization levels and should therefore not be used to e.g. verify passwords.\nObjectIdDict has been deprecated in favor of IdDict{Any,Any} (#25210).\ngc and gc_enable have been deprecated in favor of GC.gc and GC.enable (#25616).\nBase.@gc_preserve has been deprecated in favor of GC.@preserve (#25616).\nprint_shortest has been discontinued, but is still available in the Base.Grisu submodule (#25745).\nscale! has been deprecated in favor of mul!, lmul!, and rmul! (#25701, #25812).\nThe remove_destination keyword argument to cp, mv, and the unexported cptree has been renamed to force (#25979).\ncontains has been deprecated in favor of a more general occursin function, which takes its arguments in reverse order from contains (#26283).\nRegex objects are no longer callable. Use occursin instead (#26283).\nThe methods of range based on positional arguments have been deprecated in favor of keyword arguments (#25896).\nlinspace has been deprecated in favor of range with stop and length keyword arguments (#25896).\nLinSpace has been renamed to LinRange (#25896).\nlogspace has been deprecated to its definition (#25896).\nendof(a) has been renamed to lastindex(a), and the end keyword in indexing expressions now lowers to either lastindex(a) (in the case with only one index) or lastindex(a, d) (in cases where there is more than one index and end appears at dimension d) (#23554, #25763).\nDateTime(), Date(), and Time() have been deprecated, instead use DateTime(1), Date(1) and Time(0) respectively (#23724).\nThe fallback method ^(x, p::Integer) is deprecated. If your type relied on this definition, add a method such as ^(x::MyType, p::Integer) = Base.power_by_squaring(x, p) (#23332).\nDevNull, STDIN, STDOUT, and STDERR have been renamed to devnull, stdin, stdout, and stderr, respectively (#25786).\nwait and fetch on Task now resemble the interface of Future.\nshowcompact(io, x...) has been deprecated in favor of show(IOContext(io, :compact => true), x...) (#26080). Use sprint(show, x..., context=:compact => true) instead of sprint(showcompact, x...).\nisupper, islower, ucfirst and lcfirst have been deprecated in favor of isuppercase, islowercase, uppercasefirst and lowercasefirst, respectively (#26442)."
+    "text": "The JULIA_HOME environment variable has been renamed to JULIA_BINDIR and Base.JULIA_HOME has been moved to Sys.BINDIR (#20899).\nThe keyword immutable is fully deprecated to struct, and type is fully deprecated to mutable struct (#19157, #20418).\nIndexing into multidimensional arrays with more than one index but fewer indices than there are dimensions is no longer permitted when those trailing dimensions have lengths greater than 1. Instead, reshape the array or add trailing indices so the dimensionality and number of indices match (#14770, #23628).\nThe use of a positional dimension argument has largely been deprecated in favor of a dims keyword argument. This includes the functions sum, prod, maximum, minimum, all, any, findmax, findmin, mean, varm, std, var, cov, cor, median, mapreducedim, reducedim, sort, accumulate, accumulate!, cumsum, cumsum!, cumprod, cumprod!, flipdim, and squeeze (#25501).\nindices(a) and indices(a,d) have been deprecated in favor of axes(a) and axes(a, d) (#25057).\nEnvHash has been renamed to EnvDict (#24167).\nUninitialized Array constructors of the form Array[{T,N}](shape...) have been deprecated in favor of equivalents accepting undef (an alias for UndefInitializer()) as their first argument, as in Array[{T,N}](undef, shape...). For example, Vector(3) is now Vector(undef, 3), Matrix{Int}((2, 4)) is now, Matrix{Int}(undef, (2, 4)), and Array{Float32,3}(11, 13, 17) is now Array{Float32,3}(undef, 11, 13, 17) (#24781).\nLinAlg.fillslots! has been renamed LinAlg.fillstored! (#25030).\nfill!(A::Diagonal, x) and fill!(A::AbstractTriangular, x) have been deprecated in favor of Base.LinAlg.fillstored!(A, x) (#24413).\neye has been deprecated in favor of I and Matrix constructors. Please see the deprecation warnings for replacement details (#24438).\nzeros(D::Diagonal[, opts...]) has been deprecated (#24654).\nUsing Bool values directly as indices is now deprecated and will be an error in the future. Convert them to Int before indexing if you intend to access index 1 for true and 0 for false.\nslicedim(A, d, i) has been deprecated in favor of copy(selectdim(A, d, i)). The new selectdim function now always returns a view into A; in many cases the copy is not necessary. Previously, slicedim on a vector V over dimension d=1 and scalarindex `i` would return the just selected element (unless `V` was a `BitVector`). This\nhas now been made consistent: `selectdim` now always returns a view into the original\narray, with a zero-dimensional view in this specific case ([#26009](https://github.com/JuliaLang/julia/issues/26009)).whos has been renamed varinfo, and now returns a markdown table instead of printing output (#12131).\nUninitialized RowVector constructors of the form RowVector{T}(shape...) have been deprecated in favor of equivalents accepting undef (an alias for UndefInitializer()) as their first argument, as in RowVector{T}(undef, shape...). For example, RowVector{Int}(3) is now RowVector{Int}(undef, 3), and RowVector{Float32}((1, 4)) is now RowVector{Float32}(undef, (1, 4)) (#24786).\nwritecsv(io, a; opts...) has been deprecated in favor of writedlm(io, a, \',\'; opts...) (#23529).\nThe method srand(rng, filename, n=4) has been deprecated (#21359).\nreadcsv(io[, T::Type]; opts...) has been deprecated in favor of readdlm(io, \',\'[, T]; opts...) (#23530).\nsparse(s::UniformScaling, m::Integer) has been deprecated in favor of the three-argument equivalent sparse(s::UniformScaling, m, n) (#24472).\nThe cholfact/cholfact! methods that accepted an uplo symbol have been deprecated in favor of using Hermitian (or Symmetric) views (#22187, #22188).\nThe thin keyword argument for orthogonal decomposition methods has been deprecated in favor of full, which has the opposite meaning: thin == true if and only if full == false (#24279).\nisposdef(A::AbstractMatrix, UL::Symbol) and isposdef!(A::AbstractMatrix, UL::Symbol) have been deprecated in favor of isposdef(Hermitian(A, UL)) and isposdef!(Hermitian(A, UL)) respectively (#22245).\nThe bkfact/bkfact! methods that accepted uplo and issymmetric symbols have been deprecated in favor of using Hermitian (or Symmetric) views (#22605).\nThe function current_module is deprecated and replaced with @__MODULE__. This caused the deprecation of some reflection methods (such as macroexpand and isconst), which now require a module argument. And it caused the bugfix of other default arguments to use the Main module (including whos, which)  (#22064).\nexpand(ex) and expand(module, ex) have been deprecated in favor of Meta.lower(module, ex) (#22064, #24278).\nones(A::AbstractArray[, opts...]) and zeros(A::AbstractArray[, opts...]) methods have been deprecated. For zeros(A), consider zero(A). For ones(A) or zeros(A), consider ones(size(A)), zeros(size(A)), fill(v, size(A)) for v an appropriate one or zero, fill!(copy(A), {1|0}), fill!(similar(A), {1|0}), or any of the preceding with different element type and/or shape depending on opts.... Where strictly necessary, consider fill!(similar(A[, opts...]), {one(eltype(A)) | zero(eltype(A))}). For an algebraic multiplicative identity, consider one(A) (#24656).\nThe Operators module is deprecated. Instead, import required operators explicitly from Base, e.g. import Base: +, -, *, / (#22251).\nBindings to the FFTW library have been removed from Base. The DFT framework for building FFT implementations is now in AbstractFFTs.jl, the bindings to the FFTW library are in FFTW.jl, and the Base signal processing functions which used FFTs are now in DSP.jl (#21956).\nThe corrected positional argument to cov has been deprecated in favor of a keyword argument with the same name (#21709).\nOmitting spaces around the ? and the : tokens in a ternary expression has been deprecated. Ternaries must now include some amount of whitespace, e.g. x ? a : b rather than x?a:b (#22523 and #22712).\n? can no longer be used as an identifier name (#22712)\nThe method replace(s::AbstractString, pat, r, [count]) is deprecated in favor of replace(s::AbstractString, pat => r; [count]) (#25165). Moreover, count cannot be negative anymore (use typemax(Int) instead (#22325).\nread(io, type, dims) is deprecated to read!(io, Array{type}(undef, dims)) (#21450).\nread(::IO, ::Ref) is now a method of read!, since it mutates its Ref argument (#21592).\nnb_available is now bytesavailable (#25634).\nskipchars(io::IO, predicate; linecomment=nothing) is deprecated in favor of skipchars(predicate, io::IO; linecomment=nothing) (#25667).\nBidiagonal constructors now use a Symbol (:U or :L) for the upper/lower argument, instead of a Bool or a Char (#22703).\nBidiagonal, Tridiagonal and SymTridiagonal constructors that automatically converted the input vectors to the same type are deprecated in favor of explicit conversion (#22925, #23035, #23154.\nCalling nfields on a type to find out how many fields its instances have is deprecated. Use fieldcount instead. Use nfields only to get the number of fields in a specific object (#22350).\nfieldnames now operates only on types. To get the names of fields in an object, use fieldnames(typeof(x)) (#22350).\nInexactError, DomainError, and OverflowError now take arguments. InexactError(func::Symbol, type, -3) now prints as \"ERROR: InexactError: func(type, -3)\", DomainError(val, [msg]) prints as \"ERROR: DomainError with val:\\nmsg\", and OverflowError(msg) prints as \"ERROR: OverflowError: msg\". (#20005, #22751, #22761)\nThe operating system identification functions: is_linux, is_bsd, is_apple, is_unix, and is_windows, have been deprecated in favor of Sys.islinux, Sys.isbsd, Sys.isapple, Sys.isunix, and Sys.iswindows, respectively (#22182).\nThe forms of read, readstring, and eachline that accepted both a Cmd object and an input stream are deprecated. Use e.g. read(pipeline(stdin, cmd)) instead (#22762).\nThe unexported type AbstractIOBuffer has been renamed to GenericIOBuffer (#17360 #22796).\nIOBuffer(data::AbstractVector{UInt8}, read::Bool, write::Bool, maxsize::Integer), IOBuffer(read::Bool, write::Bool), and IOBuffer(maxsize::Integer) are deprecated in favor of constructors taking keyword arguments (#25872).\nDisplay has been renamed to AbstractDisplay (#24831).\nRemaining vectorized methods over SparseVectors, particularly floor, ceil, trunc, round, and most common transcendental functions such as exp, log, and sin variants, have been deprecated in favor of dot-syntax (#22961).\nThe method String(io::IOBuffer) is deprecated to String(take!(copy(io))) (#21438).\nThe function readstring is deprecated in favor of read(io, String) (#22793)\nThe function showall is deprecated. Showing entire values is the default, unless an IOContext specifying :limit=>true is in use (#22847).\nissubtype has been deprecated in favor of <: (which used to be an alias for issubtype).\nCalling write on non-isbits arrays is deprecated in favor of explicit loops or serialize (#6466).\nThe default startup.jl file on Windows has been removed. Now must explicitly include the full path if you need access to executables or libraries in the Sys.BINDIR directory, e.g. joinpath(Sys.BINDIR, \"7z.exe\") for 7z.exe (#21540).\nsqrtm has been deprecated in favor of sqrt (#23504).\nexpm has been deprecated in favor of exp (#23233).\nlogm has been deprecated in favor of log (#23505).\nfull has been deprecated in favor of more specific, better defined alternatives. On structured matrices A, consider instead Matrix(A), Array(A), SparseMatrixCSC(A), or sparse(A). On sparse arrays S, consider instead Vector(S), Matrix(S), or Array(S) as appropriate. On factorizations F, consider instead Matrix(F), Array(F), AbstractMatrix(F), or AbstractArray(F). On implicit orthogonal factors Q, consider instead Matrix(Q) or Array(Q); for implicit orthogonal factors that can be recovered in square or truncated form, see the deprecation message for square recovery instructions. On Symmetric, Hermitian, or AbstractTriangular matrices A, consider instead Matrix(S), Array(S), SparseMatrixCSC(S), or sparse(S). On Symmetric matrices A particularly, consider instead LinAlg.copytri!(copy(parent(A)), A.uplo). On Hermitian matrices A particularly, consider instead LinAlg.copytri!(copy(parent(A)), A.uplo, true). On UpperTriangular matrices A particularly, consider instead triu!(copy(parent(A))). On LowerTriangular matrices A particularly, consider instead tril!(copy(parent(A))) (#24250).\nspeye has been deprecated in favor of I, sparse, and SparseMatrixCSC constructor methods (#24356).\nCalling union with no arguments is deprecated; construct an empty set with an appropriate element type using Set{T}() instead (#23144).\nVectorized DateTime, Date, and format methods have been deprecated in favor of dot-syntax (#23207).\nBase.cpad has been removed; use an appropriate combination of rpad and lpad instead (#23187).\nctranspose and ctranspose! have been deprecated in favor of adjoint and adjoint!, respectively (#23235).\nfilter and filter! on dictionaries now pass a single key=>value pair to the argument function, instead of two arguments (#17886).\nrol, rol!, ror, and ror! have been deprecated in favor of specialized methods for circshift/circshift! (#23404).\nBase.SparseArrays.SpDiagIterator has been removed (#23261).\nThe tuple-of-types form of cfunction, cfunction(f, returntype, (types...)), has been deprecated in favor of the tuple-type form cfunction(f, returntype, Tuple{types...}) (#23066).\ndiagm(v::AbstractVector, k::Integer=0) has been deprecated in favor of diagm(k => v) (#24047).\ndiagm(x::Number) has been deprecated in favor of fill(x, 1, 1) (#24047).\ndiagm(A::SparseMatrixCSC) has been deprecated in favor of spdiagm(sparsevec(A)) (#23341).\ndiagm(A::BitMatrix) has been deprecated, use diagm(0 => vec(A)) or BitMatrix(Diagonal(vec(A))) instead (#23373, #24047).\nℯ (written as \\mscre<TAB> or \\euler<TAB>) is now the only (by default) exported name for Euler\'s number, and the type has changed from Irrational{:e} to Irrational{:ℯ} (#23427).\nThe mathematical constants π, pi, ℯ, e, γ, eulergamma, catalan, φ and golden have been moved from Base to a new module; Base.MathConstants. Only π, pi and ℯ are now exported by default from Base (#23427).\neu (previously an alias for ℯ) has been deprecated in favor of ℯ (or MathConstants.e) (#23427).\nGMP.gmp_version(), GMP.GMP_VERSION, GMP.gmp_bits_per_limb(), and GMP.GMP_BITS_PER_LIBM have been renamed to GMP.version(), GMP.VERSION, GMP.bits_per_libm(), and GMP.BITS_PER_LIBM, respectively. Similarly, MPFR.get_version(), has been renamed to MPFR.version() (#23323). Also, LinAlg.LAPACK.laver() has been renamed to LinAlg.LAPACK.version() and now returns a VersionNumber.\nselect, select!, selectperm and selectperm! have been renamed respectively to partialsort, partialsort!, partialsortperm and partialsortperm! (#23051).\nThe Range abstract type has been renamed to AbstractRange (#23570).\nmap on dictionaries previously operated on key=>value pairs. This behavior is deprecated, and in the future map will operate only on values (#5794).\nPreviously, broadcast defaulted to treating its arguments as scalars if they were not arrays. This behavior is deprecated, and in the future broadcast will default to iterating over all its arguments. Wrap arguments you wish to be treated as scalars with Ref() or a 1-tuple. Package developers can choose to allow a non-iterable type T to always behave as a scalar by implementing broadcastable(x::T) = Ref(x) (#26212).\nAutomatically broadcasted + and - for array + scalar, scalar - array, and so-on have been deprecated due to inconsistency with linear algebra. Use .+ and .- for these operations instead (#22880, #22932).\nisleaftype is deprecated in favor of the simpler predicates isconcretetype and isdispatchtuple. Concrete types are those that might equal typeof(x) for some x; isleaftype included some types for which this is not true. Those are now categorized more precisely as \"dispatch tuple types\" and \"!hasfreetypevars\" (not exported). (#17086, #25496)\ncontains(eq, itr, item) is deprecated in favor of any with a predicate (#23716).\nspdiagm(x::AbstractVector) has been deprecated in favor of sparse(Diagonal(x)) alternatively spdiagm(0 => x) (#23757).\nspdiagm(x::AbstractVector, d::Integer) and spdiagm(x::Tuple{<:AbstractVector}, d::Tuple{<:Integer}) have been deprecated in favor of spdiagm(d => x) and spdiagm(d[1] => x[1], d[2] => x[2], ...) respectively. The new spdiagm implementation now always returns a square matrix (#23757).\nspones(A::AbstractSparseArray) has been deprecated in favor of LinAlg.fillstored!(copy(A), 1) (#25037).\nConstructors for LibGit2.UserPasswordCredentials and LibGit2.SSHCredentials which take a prompt_if_incorrect argument are deprecated. Instead, prompting behavior is controlled using the allow_prompt keyword in the LibGit2.CredentialPayload constructor (#23690).\ngradient is deprecated and will be removed in the next release (#23816).\nThe timing functions tic, toc, and toq are deprecated in favor of @time and @elapsed (#17046).\nMethods of findfirst, findnext, findlast, and findprev that accept a value to search for are deprecated in favor of passing a predicate (#19186, #10593).\nfind functions now operate only on booleans by default. To look for non-zeros, use x->x!=0 or !iszero (#23120).\nThe ability of reinterpret to yield Arrays of different type than the underlying storage has been removed. The reinterpret function is still available, but now returns a ReinterpretArray. The three argument form of reinterpret that implicitly reshapes has been deprecated (#23750).\nbits has been deprecated in favor of bitstring (#24281, #24263).\nnum2hex and hex2num have been deprecated in favor of reinterpret combined with parse/hex (#22088).\ncopy! is deprecated for AbstractSet and AbstractDict, with the intention to re-enable it with a cleaner meaning in a future version (#24844).\ncopy! (resp. unsafe_copy!) is deprecated for AbstractArray and is renamed copyto! (resp. unsafe_copyto!); it will be re-introduced with a different meaning in a future version (#24808).\na:b is deprecated for constructing a StepRange when a and b have physical units (Dates and Times). Use a:s:b, where s = Dates.Day(1) or s = Dates.Second(1).\ntrues(A::AbstractArray) and falses(A::AbstractArray) are deprecated in favor of trues(size(A)) and falses(size(A)) respectively (#24595).\nworkspace is discontinued, check out Revise.jl for an alternative workflow (#25046).\ncumsum, cumprod, accumulate, their mutating versions, and diff all now require a dim argument instead of defaulting to using the first dimension unless there is only one dimension (#24684, #25457).\nThe sum_kbn and cumsum_kbn functions have been moved to the KahanSummation package (#24869).\nisnumber has been renamed to isnumeric (#25021).\nis_assigned_char and normalize_string have been renamed to isassigned and normalize, and moved to the new Unicode standard library module. graphemes has also been moved to that module (#25021).\nThe functions eigs and svds have been moved to the IterativeEigensolvers standard library module (#24714).\nSparse array functionality has moved to the SparseArrays standard library module (#25249).\nLinear algebra functionality, and specifically the LinAlg module has moved to the LinearAlgebra standard library module (#25571).\n@printf and @sprintf have been moved to the Printf standard library (#23929,#25056).\nThe Libdl module has moved to the Libdl standard library module (#25459).\nThe aliases Complex32, Complex64 and Complex128 have been deprecated in favor of ComplexF16, ComplexF32 and ComplexF64 respectively (#24647).\nBase.parentindexes and SharedArrays.localindexes have been renamed to parentindices and localindices, respectively. Similarly, the indexes field in the SubArray type has been renamed to indices without deprecation (#25088).\nAssociative has been deprecated in favor of AbstractDict (#25012).\nVoid has been renamed back to Nothing with an alias Cvoid for use when calling C with a return type of Cvoid or a return or argument type of Ptr{Cvoid} (#25162).\nNullable{T} has been deprecated and moved to the Nullables package (#23642). Use Union{T, Nothing} instead, or Union{Some{T}, Nothing} if nothing is a possible value (i.e. Nothing <: T). isnull(x) can be replaced with x === nothing and unsafe_get/get can be dropped or replaced with coalesce. NullException has been removed.\nunshift! and shift! have been renamed to pushfirst! and popfirst! (#23902)\nipermute! has been deprecated in favor of invpermute! (#25168).\nCartesianRange has been renamed CartesianIndices (#24715).\nsub2ind and ind2sub are deprecated in favor of using CartesianIndices and LinearIndices (#24715).\ngetindex(F::Factorization, s::Symbol) (usually seen as e.g. F[:Q]) is deprecated in favor of dot overloading (getproperty) so factors should now be accessed as e.g. F.Q instead of F[:Q] (#25184).\nsearch and rsearch have been deprecated in favor of findfirst/findnext and findlast/findprev respectively, in combination with curried isequal and in predicates for some methods (#24673).\nsearch(buf::IOBuffer, delim::UInt8) has been deprecated in favor of either occursin(delim, buf) (to test containment) or readuntil(buf, delim) (to read data up to delim) (#26600).\nismatch(regex, str) has been deprecated in favor of contains(str, regex) (#24673).\nmatchall has been deprecated in favor of collect(m.match for m in eachmatch(r, s)) (#26071).\nsimilar(::Associative) has been deprecated in favor of empty(::Associative), and similar(::Associative, ::Pair{K, V}) has been deprecated in favour of empty(::Associative, K, V) (#24390).\nfindin(a, b) has been deprecated in favor of findall(in(b), a) (#24673).\nmodule_name has been deprecated in favor of a new, general nameof function. Similarly, the unexported Base.function_name and Base.datatype_name have been deprecated in favor of nameof methods (#25622).\nThe module Random.dSFMT is renamed Random.DSFMT (#25567).\nRandom.RandomDevice(unlimited::Bool) (on non-Windows systems) is deprecated in favor of Random.RandomDevice(; unlimited=unlimited) (#25668).\nThe generic implementations of strides(::AbstractArray) and stride(::AbstractArray, ::Int)  have been deprecated. Subtypes of AbstractArray that implement the newly introduced strided  array interface should define their own strides method (#25321).\nmodule_parent, Base.datatype_module, and Base.function_module have been deprecated in favor of parentmodule ([#TODO]).\nrand(t::Tuple{Vararg{Int}}) is deprecated in favor of rand(Float64, t) or rand(t...); rand(::Tuple) will have another meaning in the future (#25429, #25278).\nThe assert function (and @assert macro) have been documented that they are not guaranteed to run under various optimization levels and should therefore not be used to e.g. verify passwords.\nObjectIdDict has been deprecated in favor of IdDict{Any,Any} (#25210).\ngc and gc_enable have been deprecated in favor of GC.gc and GC.enable (#25616).\nBase.@gc_preserve has been deprecated in favor of GC.@preserve (#25616).\nprint_shortest has been discontinued, but is still available in the Base.Grisu submodule (#25745).\nscale! has been deprecated in favor of mul!, lmul!, and rmul! (#25701, #25812).\nThe remove_destination keyword argument to cp, mv, and the unexported cptree has been renamed to force (#25979).\ncontains has been deprecated in favor of a more general occursin function, which takes its arguments in reverse order from contains (#26283).\nRegex objects are no longer callable. Use occursin instead (#26283).\nThe methods of range based on positional arguments have been deprecated in favor of keyword arguments (#25896).\nlinspace has been deprecated in favor of range with stop and length keyword arguments (#25896).\nLinSpace has been renamed to LinRange (#25896).\nlogspace has been deprecated to its definition (#25896).\nendof(a) has been renamed to lastindex(a), and the end keyword in indexing expressions now lowers to either lastindex(a) (in the case with only one index) or lastindex(a, d) (in cases where there is more than one index and end appears at dimension d) (#23554, #25763).\nDateTime(), Date(), and Time() have been deprecated, instead use DateTime(1), Date(1) and Time(0) respectively (#23724).\nThe fallback method ^(x, p::Integer) is deprecated. If your type relied on this definition, add a method such as ^(x::MyType, p::Integer) = Base.power_by_squaring(x, p) (#23332).\nDevNull, STDIN, STDOUT, and STDERR have been renamed to devnull, stdin, stdout, and stderr, respectively (#25786).\nwait and fetch on Task now resemble the interface of Future.\nshowcompact(io, x...) has been deprecated in favor of show(IOContext(io, :compact => true), x...) (#26080). Use sprint(show, x..., context=:compact => true) instead of sprint(showcompact, x...).\nisupper, islower, ucfirst and lcfirst have been deprecated in favor of isuppercase, islowercase, uppercasefirst and lowercasefirst, respectively (#26442).\nsignif has been deprecated in favor of the sigdigits keyword argument to round."
 },
 
 {
@@ -533,7 +533,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Strings",
     "title": "Triple-Quoted String Literals",
     "category": "section",
-    "text": "When strings are created using triple-quotes (\"\"\"...\"\"\") they have some special behavior that can be useful for creating longer blocks of text. First, if the opening \"\"\" is followed by a newline, the newline is stripped from the resulting string.\"\"\"hello\"\"\"is equivalent to\"\"\"\nhello\"\"\"but\"\"\"\n\nhello\"\"\"will contain a literal newline at the beginning. Trailing whitespace is left unaltered. They can contain \" symbols without escaping. Triple-quoted strings are also dedented to the level of the least-indented line. This is useful for defining strings within code that is indented. For example:julia> str = \"\"\"\n           Hello,\n           world.\n         \"\"\"\n\"  Hello,\\n  world.\\n\"In this case the final (empty) line before the closing \"\"\" sets the indentation level.Note that line breaks in literal strings, whether single- or triple-quoted, result in a newline (LF) character \\n in the string, even if your editor uses a carriage return \\r (CR) or CRLF combination to end lines. To include a CR in a string, use an explicit escape \\r; for example, you can enter the literal string \"a CRLF line ending\\r\\n\"."
+    "text": "When strings are created using triple-quotes (\"\"\"...\"\"\") they have some special behavior that can be useful for creating longer blocks of text.First, triple-quoted strings are also dedented to the level of the least-indented line. This is useful for defining strings within code that is indented. For example:julia> str = \"\"\"\n           Hello,\n           world.\n         \"\"\"\n\"  Hello,\\n  world.\\n\"In this case the final (empty) line before the closing \"\"\" sets the indentation level.The dedentation level is determined as the longest common starting sequence of spaces or tabs in all lines, excluding the line following the opening \"\"\" and lines containing only spaces or tabs (the line containing the closing \"\"\" is always included). Then for all lines, excluding the text following the opening \"\"\", the common starting sequence is removed (including lines containing only spaces and tabs if they start with this sequence), e.g.:julia> \"\"\"    This\n         is\n           a test\"\"\"\n\"    This\\nis\\n  a test\"Next, if the opening \"\"\" is followed by a newline, the newline is stripped from the resulting string.\"\"\"hello\"\"\"is equivalent to\"\"\"\nhello\"\"\"but\"\"\"\n\nhello\"\"\"will contain a literal newline at the beginning.Stripping of the newline is performed after the dedentation for example:julia> \"\"\"\n         Hello,\n         world.\"\"\"\n\"Hello,\\nworld.\"Trailing whitespace is left unaltered.Triple-quoted string literals can contain \" symbols without escaping.Note that line breaks in literal strings, whether single- or triple-quoted, result in a newline (LF) character \\n in the string, even if your editor uses a carriage return \\r (CR) or CRLF combination to end lines. To include a CR in a string, use an explicit escape \\r; for example, you can enter the literal string \"a CRLF line ending\\r\\n\"."
 },
 
 {
@@ -693,7 +693,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Functions",
     "title": "Keyword Arguments",
     "category": "section",
-    "text": "Some functions need a large number of arguments, or have a large number of behaviors. Remembering how to call such functions can be difficult. Keyword arguments can make these complex interfaces easier to use and extend by allowing arguments to be identified by name instead of only by position.For example, consider a function plot that plots a line. This function might have many options, for controlling line style, width, color, and so on. If it accepts keyword arguments, a possible call might look like plot(x, y, width=2), where we have chosen to specify only line width. Notice that this serves two purposes. The call is easier to read, since we can label an argument with its meaning. It also becomes possible to pass any subset of a large number of arguments, in any order.Functions with keyword arguments are defined using a semicolon in the signature:function plot(x, y; style=\"solid\", width=1, color=\"black\")\n    ###\nendWhen the function is called, the semicolon is optional: one can either call plot(x, y, width=2) or plot(x, y; width=2), but the former style is more common. An explicit semicolon is required only for passing varargs or computed keywords as described below.Keyword argument default values are evaluated only when necessary (when a corresponding keyword argument is not passed), and in left-to-right order. Therefore default expressions may refer to prior keyword arguments.The types of keyword arguments can be made explicit as follows:function f(;x::Int=1)\n    ###\nendExtra keyword arguments can be collected using ..., as in varargs functions:function f(x; y=0, kwargs...)\n    ###\nendIf a keyword argument is not assigned a default value in the method definition, then it is required: an UndefKeywordError exception will be thrown if the caller does not assign it a value:function f(x; y)\n    ###\nend\nf(3, y=5) # ok, y is assigned\nf(3)      # throws UndefKeywordError(:y)Inside f, kwargs will be a named tuple. Named tuples (as well as dictionaries) can be passed as keyword arguments using a semicolon in a call, e.g. f(x, z=1; kwargs...).One can also pass key => value expressions after a semicolon. For example, plot(x, y; :width => 2) is equivalent to plot(x, y, width=2). This is useful in situations where the keyword name is computed at runtime.The nature of keyword arguments makes it possible to specify the same argument more than once. For example, in the call plot(x, y; options..., width=2) it is possible that the options structure also contains a value for width. In such a case the rightmost occurrence takes precedence; in this example, width is certain to have the value 2."
+    "text": "Some functions need a large number of arguments, or have a large number of behaviors. Remembering how to call such functions can be difficult. Keyword arguments can make these complex interfaces easier to use and extend by allowing arguments to be identified by name instead of only by position.For example, consider a function plot that plots a line. This function might have many options, for controlling line style, width, color, and so on. If it accepts keyword arguments, a possible call might look like plot(x, y, width=2), where we have chosen to specify only line width. Notice that this serves two purposes. The call is easier to read, since we can label an argument with its meaning. It also becomes possible to pass any subset of a large number of arguments, in any order.Functions with keyword arguments are defined using a semicolon in the signature:function plot(x, y; style=\"solid\", width=1, color=\"black\")\n    ###\nendWhen the function is called, the semicolon is optional: one can either call plot(x, y, width=2) or plot(x, y; width=2), but the former style is more common. An explicit semicolon is required only for passing varargs or computed keywords as described below.Keyword argument default values are evaluated only when necessary (when a corresponding keyword argument is not passed), and in left-to-right order. Therefore default expressions may refer to prior keyword arguments.The types of keyword arguments can be made explicit as follows:function f(;x::Int=1)\n    ###\nendExtra keyword arguments can be collected using ..., as in varargs functions:function f(x; y=0, kwargs...)\n    ###\nendIf a keyword argument is not assigned a default value in the method definition, then it is required: an UndefKeywordError exception will be thrown if the caller does not assign it a value:function f(x; y)\n    ###\nend\nf(3, y=5) # ok, y is assigned\nf(3)      # throws UndefKeywordError(:y)Inside f, kwargs will be a named tuple. Named tuples (as well as dictionaries) can be passed as keyword arguments using a semicolon in a call, e.g. f(x, z=1; kwargs...).One can also pass key => value expressions after a semicolon. For example, plot(x, y; :width => 2) is equivalent to plot(x, y, width=2). This is useful in situations where the keyword name is computed at runtime.The nature of keyword arguments makes it possible to specify the same argument more than once. For example, in the call plot(x, y; options..., width=2) it is possible that the options structure also contains a value for width. In such a case the rightmost occurrence takes precedence; in this example, width is certain to have the value 2. However, explicitly specifying the same keyword argument multiple times, for example plot(x, y, width=2, width=3), is not allowed and results in a syntax error."
 },
 
 {
@@ -1501,7 +1501,31 @@ var documenterSearchIndex = {"docs": [
     "page": "Interfaces",
     "title": "Broadcasting",
     "category": "section",
-    "text": "Methods to implement Brief description\nBase.BroadcastStyle(::Type{SrcType}) = SrcStyle() Broadcasting behavior of SrcType\nBase.broadcast_similar(f, ::DestStyle, ::Type{ElType}, inds, As...) Allocation of output container\nOptional methods \nBase.BroadcastStyle(::Style1, ::Style2) = Style12() Precedence rules for mixing styles\nBase.broadcast_indices(::StyleA, A) Declaration of the indices of A for broadcasting purposes (for AbstractArrays, defaults to axes(A))\nBypassing default machinery \nbroadcast(f, As...) Complete bypass of broadcasting machinery\nbroadcast(f, ::DestStyle, ::Nothing, ::Nothing, As...) Bypass after container type is computed\nbroadcast(f, ::DestStyle, ::Type{ElType}, inds::Tuple, As...) Bypass after container type, eltype, and indices are computed\nbroadcast!(f, dest::DestType, ::Nothing, As...) Bypass in-place broadcast, specialization on destination type\nbroadcast!(f, dest, ::BroadcastStyle, As...) Bypass in-place broadcast, specialization on BroadcastStyleBroadcasting is triggered by an explicit call to broadcast or broadcast!, or implicitly by \"dot\" operations like A .+ b. Any AbstractArray type supports broadcasting, but the default result (output) type is Array. To specialize the result for specific input type(s), the main task is the allocation of an appropriate result object. (This is not an issue for broadcast!, where the result object is passed as an argument.) This process is split into two stages: computation of the behavior and type from the arguments (Base.BroadcastStyle), and allocation of the object given the resulting type with Base.broadcast_similar.Base.BroadcastStyle is an abstract type from which all styles are derived. When used as a function it has two possible forms, unary (single-argument) and binary. The unary variant states that you intend to implement specific broadcasting behavior and/or output type, and do not wish to rely on the default fallback (Broadcast.Scalar or Broadcast.DefaultArrayStyle). To achieve this, you can define a custom BroadcastStyle for your object:struct MyStyle <: Broadcast.BroadcastStyle end\nBase.BroadcastStyle(::Type{<:MyType}) = MyStyle()In some cases it might be convenient not to have to define MyStyle, in which case you can leverage one of the general broadcast wrappers:Base.BroadcastStyle(::Type{<:MyType}) = Broadcast.Style{MyType}() can be used for arbitrary types.\nBase.BroadcastStyle(::Type{<:MyType}) = Broadcast.ArrayStyle{MyType}() is preferred if MyType is an AbstractArray.\nFor AbstractArrays that only support a certain dimensionality, create a subtype of Broadcast.AbstractArrayStyle{N} (see below).When your broadcast operation involves several arguments, individual argument styles get combined to determine a single DestStyle that controls the type of the output container. For more detail, see below.The actual allocation of the result array is handled by Base.broadcast_similar:Base.broadcast_similar(f, ::DestStyle, ::Type{ElType}, inds, As...)f is the operation being performed and DestStyle signals the final result from combining the input styles. As... is the list of input objects. You may not need to use f or As... unless they help you build the appropriate object; the fallback definition isbroadcast_similar(f, ::DefaultArrayStyle{N}, ::Type{ElType}, inds::Indices{N}, As...) where {N,ElType} =\n    similar(Array{ElType}, inds)However, if needed you can specialize on any or all of these arguments.For a complete example, let\'s say you have created a type, ArrayAndChar, that stores an array and a single character:struct ArrayAndChar{T,N} <: AbstractArray{T,N}\n    data::Array{T,N}\n    char::Char\nend\nBase.size(A::ArrayAndChar) = size(A.data)\nBase.getindex(A::ArrayAndChar{T,N}, inds::Vararg{Int,N}) where {T,N} = A.data[inds...]\nBase.setindex!(A::ArrayAndChar{T,N}, val, inds::Vararg{Int,N}) where {T,N} = A.data[inds...] = val\nBase.showarg(io::IO, A::ArrayAndChar, toplevel) = print(io, typeof(A), \" with char \'\", A.char, \"\'\")\n# output\nYou might want broadcasting to preserve the char \"metadata.\" First we defineBase.BroadcastStyle(::Type{<:ArrayAndChar}) = Broadcast.ArrayStyle{ArrayAndChar}()\n# output\nThis forces us to also define a broadcast_similar method:function Base.broadcast_similar(f, ::Broadcast.ArrayStyle{ArrayAndChar}, ::Type{ElType}, inds, As...) where ElType\n    # Scan the inputs for the ArrayAndChar:\n    A = find_aac(As...)\n    # Use the char field of A to create the output\n    ArrayAndChar(similar(Array{ElType}, inds), A.char)\nend\n\n\"`A = find_aac(As...)` returns the first ArrayAndChar among the arguments.\"\nfind_aac(A::ArrayAndChar, B...) = A\nfind_aac(A, B...) = find_aac(B...);\n# output\nFrom these definitions, one obtains the following behavior:julia> a = ArrayAndChar([1 2; 3 4], \'x\')\n2×2 ArrayAndChar{Int64,2} with char \'x\':\n 1  2\n 3  4\n\njulia> a .+ 1\n2×2 ArrayAndChar{Int64,2} with char \'x\':\n 2  3\n 4  5\n\njulia> a .+ [5,10]\n2×2 ArrayAndChar{Int64,2} with char \'x\':\n  6   7\n 13  14Finally, it\'s worth noting that sometimes it\'s easier simply to bypass the machinery for computing result types and container sizes, and just do everything manually. For example, you can convert a UnitRange{Int} r to a UnitRange{BigInt} with big.(r); the definition of this method is approximatelyBroadcast.broadcast(::typeof(big), r::UnitRange) = big(first(r)):big(last(r))This exploits Julia\'s ability to dispatch on a particular function type. (This kind of explicit definition can indeed be necessary if the output container does not support setindex!.) You can optionally choose to implement the actual broadcasting yourself, but allow the internal machinery to compute the container type, element type, and indices by specializingBroadcast.broadcast(::typeof(somefunction), ::MyStyle, ::Type{ElType}, inds, As...)"
+    "text": "Methods to implement Brief description\nBase.BroadcastStyle(::Type{SrcType}) = SrcStyle() Broadcasting behavior of SrcType\nBase.broadcast_similar(f, ::DestStyle, ::Type{ElType}, inds, As...) Allocation of output container\nOptional methods \nBase.BroadcastStyle(::Style1, ::Style2) = Style12() Precedence rules for mixing styles\nBase.broadcast_indices(::StyleA, A) Declaration of the indices of A for broadcasting purposes (defaults to axes(A))\nBase.broadcastable(x) Convert x to an object that has axes and supports indexing\nBypassing default machinery \nbroadcast(f, As...) Complete bypass of broadcasting machinery\nbroadcast(f, ::DestStyle, ::Nothing, ::Nothing, As...) Bypass after container type is computed\nbroadcast(f, ::DestStyle, ::Type{ElType}, inds::Tuple, As...) Bypass after container type, eltype, and indices are computed\nbroadcast!(f, dest::DestType, ::Nothing, As...) Bypass in-place broadcast, specialization on destination type\nbroadcast!(f, dest, ::BroadcastStyle, As...) Bypass in-place broadcast, specialization on BroadcastStyleBroadcasting is triggered by an explicit call to broadcast or broadcast!, or implicitly by \"dot\" operations like A .+ b or f.(x, y). Any object that has axes and supports indexing can participate as an argument in broadcasting, and by default the result is stored in an Array. This basic framework is extensible in three major ways:Ensuring that all arguments support broadcast\nSelecting an appropriate output array for the given set of arguments\nSelecting an efficient implementation for the given set of argumentsNot all types support axes and indexing, but many are convenient to allow in broadcast. The Base.broadcastable function is called on each argument to broadcast, allowing it to return something different that supports axes and indexing if it does not. By default, this is the identity function for all AbstractArrays and Numbers — they already support axes and indexing. For a handful of other types (including but not limited to types themselves, functions, special singletons like missing and nothing, and dates), Base.broadcastable returns the argument wrapped in a Ref to act as a 0-dimensional \"scalar\" for the purposes of broadcasting. Custom types can similarly specialize Base.broadcastable to define their shape, but they should follow the convention that collect(Base.broadcastable(x)) == collect(x). A notable exception are AbstractStrings; they are special-cased to behave as scalars for the purposes of broadcast even though they are iterable collections of their characters.The next two steps (selecting the output array and implementation) are dependent upon determining a single answer for a given set of arguments. Broadcast must take all the varied types of its arguments and collapse them down to just one output array and one implementation. Broadcast calls this single answer a \"style.\" Every broadcastable object each has its own preferred style, and a promotion-like system is used to combine these styles into a single answer — the \"destination style\"."
+},
+
+{
+    "location": "manual/interfaces/#Broadcast-Styles-1",
+    "page": "Interfaces",
+    "title": "Broadcast Styles",
+    "category": "section",
+    "text": "Base.BroadcastStyle is the abstract type from which all styles are derived. When used as a function it has two possible forms, unary (single-argument) and binary. The unary variant states that you intend to implement specific broadcasting behavior and/or output type, and do not wish to rely on the default fallback (Broadcast.DefaultArrayStyle). To override these defaults, you can define a custom BroadcastStyle for your object:struct MyStyle <: Broadcast.BroadcastStyle end\nBase.BroadcastStyle(::Type{<:MyType}) = MyStyle()In some cases it might be convenient not to have to define MyStyle, in which case you can leverage one of the general broadcast wrappers:Base.BroadcastStyle(::Type{<:MyType}) = Broadcast.Style{MyType}() can be used for arbitrary types.\nBase.BroadcastStyle(::Type{<:MyType}) = Broadcast.ArrayStyle{MyType}() is preferred if MyType is an AbstractArray.\nFor AbstractArrays that only support a certain dimensionality, create a subtype of Broadcast.AbstractArrayStyle{N} (see below).When your broadcast operation involves several arguments, individual argument styles get combined to determine a single DestStyle that controls the type of the output container. For more detail, see below."
+},
+
+{
+    "location": "manual/interfaces/#Selecting-an-appropriate-output-array-1",
+    "page": "Interfaces",
+    "title": "Selecting an appropriate output array",
+    "category": "section",
+    "text": "The actual allocation of the result array is handled by Base.broadcast_similar:Base.broadcast_similar(f, ::DestStyle, ::Type{ElType}, inds, As...)f is the operation being performed and DestStyle signals the final result from combining the input styles. As... is the list of input objects. You may not need to use f or As... unless they help you build the appropriate object; the fallback definition isbroadcast_similar(f, ::DefaultArrayStyle{N}, ::Type{ElType}, inds::Indices{N}, As...) where {N,ElType} =\n    similar(Array{ElType}, inds)However, if needed you can specialize on any or all of these arguments.For a complete example, let\'s say you have created a type, ArrayAndChar, that stores an array and a single character:struct ArrayAndChar{T,N} <: AbstractArray{T,N}\n    data::Array{T,N}\n    char::Char\nend\nBase.size(A::ArrayAndChar) = size(A.data)\nBase.getindex(A::ArrayAndChar{T,N}, inds::Vararg{Int,N}) where {T,N} = A.data[inds...]\nBase.setindex!(A::ArrayAndChar{T,N}, val, inds::Vararg{Int,N}) where {T,N} = A.data[inds...] = val\nBase.showarg(io::IO, A::ArrayAndChar, toplevel) = print(io, typeof(A), \" with char \'\", A.char, \"\'\")\n# output\nYou might want broadcasting to preserve the char \"metadata.\" First we defineBase.BroadcastStyle(::Type{<:ArrayAndChar}) = Broadcast.ArrayStyle{ArrayAndChar}()\n# output\nThis forces us to also define a broadcast_similar method:function Base.broadcast_similar(f, ::Broadcast.ArrayStyle{ArrayAndChar}, ::Type{ElType}, inds, As...) where ElType\n    # Scan the inputs for the ArrayAndChar:\n    A = find_aac(As...)\n    # Use the char field of A to create the output\n    ArrayAndChar(similar(Array{ElType}, inds), A.char)\nend\n\n\"`A = find_aac(As...)` returns the first ArrayAndChar among the arguments.\"\nfind_aac(A::ArrayAndChar, B...) = A\nfind_aac(A, B...) = find_aac(B...);\n# output\nFrom these definitions, one obtains the following behavior:julia> a = ArrayAndChar([1 2; 3 4], \'x\')\n2×2 ArrayAndChar{Int64,2} with char \'x\':\n 1  2\n 3  4\n\njulia> a .+ 1\n2×2 ArrayAndChar{Int64,2} with char \'x\':\n 2  3\n 4  5\n\njulia> a .+ [5,10]\n2×2 ArrayAndChar{Int64,2} with char \'x\':\n  6   7\n 13  14"
+},
+
+{
+    "location": "manual/interfaces/#extending-in-place-broadcast-1",
+    "page": "Interfaces",
+    "title": "Extending broadcast with custom implementations",
+    "category": "section",
+    "text": "Finally, it\'s worth noting that sometimes it\'s easier simply to bypass the machinery for computing result types and container sizes, and just do everything manually. For example, you can convert a UnitRange{Int} r to a UnitRange{BigInt} with big.(r); the definition of this method is approximatelyBroadcast.broadcast(::typeof(big), r::UnitRange) = big(first(r)):big(last(r))This exploits Julia\'s ability to dispatch on a particular function type. (This kind of explicit definition can indeed be necessary if the output container does not support setindex!.) You can optionally choose to implement the actual broadcasting yourself, but allow the internal machinery to compute the container type, element type, and indices by specializingBroadcast.broadcast(::typeof(somefunction), ::MyStyle, ::Type{ElType}, inds, As...)Extending broadcast! (in-place broadcast) should be done with care, as it is easy to introduce ambiguities between packages. To avoid these ambiguities, we adhere to the following conventions.First, if you want to specialize on the destination type, say DestType, then you should define a method with the following signature:broadcast!(f, dest::DestType, ::Nothing, As...)Note that no bounds should be placed on the types of f and As....Second, if specialized broadcast! behavior is desired depending on the input types, you should write binary broadcasting rules to determine a custom BroadcastStyle given the input types, say MyBroadcastStyle, and you should define a method with the following signature:broadcast!(f, dest, ::MyBroadcastStyle, As...)Note the lack of bounds on f, dest, and As....Third, simultaneously specializing on both the type of dest and the BroadcastStyle is fine. In this case, it is also allowed to specialize on the types of the source arguments (As...). For example, these method signatures are OK:broadcast!(f, dest::DestType, ::MyBroadcastStyle, As...)\nbroadcast!(f, dest::DestType, ::MyBroadcastStyle, As::AbstractArray...)\nbroadcast!(f, dest::DestType, ::Broadcast.DefaultArrayStyle{0}, As::Number...)"
 },
 
 {
@@ -1509,15 +1533,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Interfaces",
     "title": "Writing binary broadcasting rules",
     "category": "section",
-    "text": "The precedence rules are defined by binary BroadcastStyle calls:Base.BroadcastStyle(::Style1, ::Style2) = Style12()where Style12 is the BroadcastStyle you want to choose for outputs involving arguments of Style1 and Style2. For example,Base.BroadcastStyle(::Broadcast.Style{Tuple}, ::Broadcast.Scalar) = Broadcast.Style{Tuple}()indicates that Tuple \"wins\" over scalars (the output container will be a tuple). It is worth noting that you do not need to (and should not) define both argument orders of this call; defining one is sufficient no matter what order the user supplies the arguments in.For AbstractArray types, defining a BroadcastStyle supersedes the fallback choice, Broadcast.DefaultArrayStyle. DefaultArrayStyle and the abstract supertype, AbstractArrayStyle, store the dimensionality as a type parameter to support specialized array types that have fixed dimensionality requirements.DefaultArrayStyle \"loses\" to any other AbstractArrayStyle that has been defined because of the following methods:BroadcastStyle(a::AbstractArrayStyle{Any}, ::DefaultArrayStyle) = a\nBroadcastStyle(a::AbstractArrayStyle{N}, ::DefaultArrayStyle{N}) where N = a\nBroadcastStyle(a::AbstractArrayStyle{M}, ::DefaultArrayStyle{N}) where {M,N} =\n    typeof(a)(_max(Val(M),Val(N)))You do not need to write binary BroadcastStyle rules unless you want to establish precedence for two or more non-DefaultArrayStyle types.If your array type does have fixed dimensionality requirements, then you should subtype AbstractArrayStyle. For example, the sparse array code has the following definitions:struct SparseVecStyle <: Broadcast.AbstractArrayStyle{1} end\nstruct SparseMatStyle <: Broadcast.AbstractArrayStyle{2} end\nBase.BroadcastStyle(::Type{<:SparseVector}) = SparseVecStyle()\nBase.BroadcastStyle(::Type{<:SparseMatrixCSC}) = SparseMatStyle()Whenever you subtype AbstractArrayStyle, you also need to define rules for combining dimensionalities, by creating a constructor for your style that takes a Val(N) argument. For example:SparseVecStyle(::Val{0}) = SparseVecStyle()\nSparseVecStyle(::Val{1}) = SparseVecStyle()\nSparseVecStyle(::Val{2}) = SparseMatStyle()\nSparseVecStyle(::Val{N}) where N = Broadcast.DefaultArrayStyle{N}()These rules indicate that the combination of a SparseVecStyle with 0- or 1-dimensional arrays yields another SparseVecStyle, that its combination with a 2-dimensional array yields a SparseMatStyle, and anything of higher dimensionality falls back to the dense arbitrary-dimensional framework. These rules allow broadcasting to keep the sparse representation for operations that result in one or two dimensional outputs, but produce an Array for any other dimensionality."
-},
-
-{
-    "location": "manual/interfaces/#extending-in-place-broadcast-1",
-    "page": "Interfaces",
-    "title": "Extending broadcast!",
-    "category": "section",
-    "text": "Extending broadcast! (in-place broadcast) should be done with care, as it is easy to introduce ambiguities between packages. To avoid these ambiguities, we adhere to the following conventions.First, if you want to specialize on the destination type, say DestType, then you should define a method with the following signature:broadcast!(f, dest::DestType, ::Nothing, As...)Note that no bounds should be placed on the types of f and As....Second, if specialized broadcast! behavior is desired depending on the input types, you should write binary broadcasting rules to determine a custom BroadcastStyle given the input types, say MyBroadcastStyle, and you should define a method with the following signature:broadcast!(f, dest, ::MyBroadcastStyle, As...)Note the lack of bounds on f, dest, and As....Third, simultaneously specializing on both the type of dest and the BroadcastStyle is fine. In this case, it is also allowed to specialize on the types of the source arguments (As...). For example, these method signatures are OK:broadcast!(f, dest::DestType, ::MyBroadcastStyle, As...)\nbroadcast!(f, dest::DestType, ::MyBroadcastStyle, As::AbstractArray...)\nbroadcast!(f, dest::DestType, ::Broadcast.Scalar, As::Number...)"
+    "text": "The precedence rules are defined by binary BroadcastStyle calls:Base.BroadcastStyle(::Style1, ::Style2) = Style12()where Style12 is the BroadcastStyle you want to choose for outputs involving arguments of Style1 and Style2. For example,Base.BroadcastStyle(::Broadcast.Style{Tuple}, ::Broadcast.AbstractArrayStyle{0}) = Broadcast.Style{Tuple}()indicates that Tuple \"wins\" over zero-dimensional arrays (the output container will be a tuple). It is worth noting that you do not need to (and should not) define both argument orders of this call; defining one is sufficient no matter what order the user supplies the arguments in.For AbstractArray types, defining a BroadcastStyle supersedes the fallback choice, Broadcast.DefaultArrayStyle. DefaultArrayStyle and the abstract supertype, AbstractArrayStyle, store the dimensionality as a type parameter to support specialized array types that have fixed dimensionality requirements.DefaultArrayStyle \"loses\" to any other AbstractArrayStyle that has been defined because of the following methods:BroadcastStyle(a::AbstractArrayStyle{Any}, ::DefaultArrayStyle) = a\nBroadcastStyle(a::AbstractArrayStyle{N}, ::DefaultArrayStyle{N}) where N = a\nBroadcastStyle(a::AbstractArrayStyle{M}, ::DefaultArrayStyle{N}) where {M,N} =\n    typeof(a)(_max(Val(M),Val(N)))You do not need to write binary BroadcastStyle rules unless you want to establish precedence for two or more non-DefaultArrayStyle types.If your array type does have fixed dimensionality requirements, then you should subtype AbstractArrayStyle. For example, the sparse array code has the following definitions:struct SparseVecStyle <: Broadcast.AbstractArrayStyle{1} end\nstruct SparseMatStyle <: Broadcast.AbstractArrayStyle{2} end\nBase.BroadcastStyle(::Type{<:SparseVector}) = SparseVecStyle()\nBase.BroadcastStyle(::Type{<:SparseMatrixCSC}) = SparseMatStyle()Whenever you subtype AbstractArrayStyle, you also need to define rules for combining dimensionalities, by creating a constructor for your style that takes a Val(N) argument. For example:SparseVecStyle(::Val{0}) = SparseVecStyle()\nSparseVecStyle(::Val{1}) = SparseVecStyle()\nSparseVecStyle(::Val{2}) = SparseMatStyle()\nSparseVecStyle(::Val{N}) where N = Broadcast.DefaultArrayStyle{N}()These rules indicate that the combination of a SparseVecStyle with 0- or 1-dimensional arrays yields another SparseVecStyle, that its combination with a 2-dimensional array yields a SparseMatStyle, and anything of higher dimensionality falls back to the dense arbitrary-dimensional framework. These rules allow broadcasting to keep the sparse representation for operations that result in one or two dimensional outputs, but produce an Array for any other dimensionality."
 },
 
 {
@@ -2637,7 +2653,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Calling C and Fortran Code",
     "title": "Creating C-Compatible Julia Function Pointers",
     "category": "section",
-    "text": "It is possible to pass Julia functions to native C functions that accept function pointer arguments. For example, to match C prototypes of the form:typedef returntype (*functiontype)(argumenttype,...)The function cfunction generates the C-compatible function pointer for a call to a Julia function. Arguments to cfunction are as follows:A Julia Function\nReturn type\nA tuple type of input typesOnly platform-default C calling convention is supported. cfunction-generated pointers cannot be used in calls where WINAPI expects stdcall function on 32-bit windows, but can be used on WIN64 (where stdcall is unified with C calling convention).A classic example is the standard C library qsort function, declared as:void qsort(void *base, size_t nmemb, size_t size,\n           int(*compare)(const void *a, const void *b));The base argument is a pointer to an array of length nmemb, with elements of size bytes each. compare is a callback function which takes pointers to two elements a and b and returns an integer less/greater than zero if a should appear before/after b (or zero if any order is permitted). Now, suppose that we have a 1d array A of values in Julia that we want to sort using the qsort function (rather than Julia\'s built-in sort function). Before we worry about calling qsort and passing arguments, we need to write a comparison function that works for some arbitrary type T:julia> function mycompare(a::T, b::T) where T\n           return convert(Cint, a < b ? -1 : a > b ? +1 : 0)::Cint\n       end\nmycompare (generic function with 1 method)Notice that we have to be careful about the return type: qsort expects a function returning a C int, so we must be sure to return Cint via a call to convert and a typeassert.In order to pass this function to C, we obtain its address using the function cfunction:julia> const mycompare_c = cfunction(mycompare, Cint, Tuple{Ref{Cdouble}, Ref{Cdouble}});cfunction accepts three arguments: the Julia function (mycompare), the return type (Cint), and a tuple type of the input argument types, in this case to sort an array of Cdouble (Float64) elements.The final call to qsort looks like this:julia> A = [1.3, -2.7, 4.4, 3.1]\n4-element Array{Float64,1}:\n  1.3\n -2.7\n  4.4\n  3.1\n\njulia> ccall(:qsort, Cvoid, (Ptr{Cdouble}, Csize_t, Csize_t, Ptr{Cvoid}),\n             A, length(A), sizeof(eltype(A)), mycompare_c)\n\njulia> A\n4-element Array{Float64,1}:\n -2.7\n  1.3\n  3.1\n  4.4As can be seen, A is changed to the sorted array [-2.7, 1.3, 3.1, 4.4]. Note that Julia knows how to convert an array into a Ptr{Cdouble}, how to compute the size of a type in bytes (identical to C\'s sizeof operator), and so on. For fun, try inserting a println(\"mycompare($a,$b)\") line into mycompare, which will allow you to see the comparisons that qsort is performing (and to verify that it is really calling the Julia function that you passed to it)."
+    "text": "It is possible to pass Julia functions to native C functions that accept function pointer arguments. For example, to match C prototypes of the form:typedef returntype (*functiontype)(argumenttype, ...)The macro @cfunction generates the C-compatible function pointer for a call to a Julia function. Arguments to @cfunction are as follows:A Julia Function\nReturn type\nA literal tuple of input typesLike ccall, all of these arguments will be evaluated at compile-time, when the containing method is defined.Currently, only the platform-default C calling convention is supported. This means that @cfunction-generated pointers cannot be used in calls where WINAPI expects stdcall function on 32-bit windows, but can be used on WIN64 (where stdcall is unified with the C calling convention).A classic example is the standard C library qsort function, declared as:void qsort(void *base, size_t nmemb, size_t size,\n           int (*compare)(const void*, const void*));The base argument is a pointer to an array of length nmemb, with elements of size bytes each. compare is a callback function which takes pointers to two elements a and b and returns an integer less/greater than zero if a should appear before/after b (or zero if any order is permitted). Now, suppose that we have a 1d array A of values in Julia that we want to sort using the qsort function (rather than Julia\'s built-in sort function). Before we worry about calling qsort and passing arguments, we need to write a comparison function that works for some arbitrary objects (which define <):julia> function mycompare(a, b)::Cint\n           return (a < b) ? -1 : ((a > b) ? +1 : 0)\n       end\nmycompare (generic function with 1 method)Notice that we have to be careful about the return type: qsort expects a function returning a C int, so we annotate the return type of the function to be sure it returns a Cint.In order to pass this function to C, we obtain its address using the macro @cfunction:julia> mycompare_c = @cfunction(mycompare, Cint, (Ref{Cdouble}, Ref{Cdouble}));@cfunction requires three arguments: the Julia function (mycompare), the return type (Cint), and a literal tuple of the input argument types, in this case to sort an array of Cdouble (Float64) elements.The final call to qsort looks like this:julia> A = [1.3, -2.7, 4.4, 3.1]\n4-element Array{Float64,1}:\n  1.3\n -2.7\n  4.4\n  3.1\n\njulia> ccall(:qsort, Cvoid, (Ptr{Cdouble}, Csize_t, Csize_t, Ptr{Cvoid}),\n             A, length(A), sizeof(eltype(A)), mycompare_c)\n\njulia> A\n4-element Array{Float64,1}:\n -2.7\n  1.3\n  3.1\n  4.4As can be seen, A is changed to the sorted array [-2.7, 1.3, 3.1, 4.4]. Note that Julia knows how to convert an array into a Ptr{Cdouble}, how to compute the size of a type in bytes (identical to C\'s sizeof operator), and so on. For fun, try inserting a println(\"mycompare($a, $b)\") line into mycompare, which will allow you to see the comparisons that qsort is performing (and to verify that it is really calling the Julia function that you passed to it)."
 },
 
 {
@@ -2685,7 +2701,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Calling C and Fortran Code",
     "title": "Type Parameters",
     "category": "section",
-    "text": "The type arguments to ccall are evaluated statically, when the method containing the ccall is defined. They therefore must take the form of a literal tuple, not a variable, and cannot reference local variables.This may sound like a strange restriction, but remember that since C is not a dynamic language like Julia, its functions can only accept argument types with a statically-known, fixed signature.However, while the type layout must be known statically to compute the ccall ABI, the static parameters of the function are considered to be part of this static environment. The static parameters of the function may be used as type parameters in the ccall signature, as long as they don\'t affect the layout of the type. For example, f(x::T) where {T} = ccall(:valid, Ptr{T}, (Ptr{T},), x) is valid, since Ptr is always a word-size primitive type. But, g(x::T) where {T} = ccall(:notvalid, T, (T,), x) is not valid, since the type layout of T is not known statically."
+    "text": "The type arguments to ccall and @cfunction are evaluated statically, when the method containing the usage is defined. They therefore must take the form of a literal tuple, not a variable, and cannot reference local variables.This may sound like a strange restriction, but remember that since C is not a dynamic language like Julia, its functions can only accept argument types with a statically-known, fixed signature.However, while the type layout must be known statically to compute the intended C ABI, the static parameters of the function are considered to be part of this static environment. The static parameters of the function may be used as type parameters in the call signature, as long as they don\'t affect the layout of the type. For example, f(x::T) where {T} = ccall(:valid, Ptr{T}, (Ptr{T},), x) is valid, since Ptr is always a word-size primitive type. But, g(x::T) where {T} = ccall(:notvalid, T, (T,), x) is not valid, since the type layout of T is not known statically."
 },
 
 {
@@ -2721,19 +2737,19 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "manual/calling-c-and-fortran-code/#ccall/cfunction-argument-translation-guide-1",
+    "location": "manual/calling-c-and-fortran-code/#ccall-/-@cfunction-argument-translation-guide-1",
     "page": "Calling C and Fortran Code",
-    "title": "ccall/cfunction argument translation guide",
+    "title": "ccall / @cfunction argument translation guide",
     "category": "section",
-    "text": "For translating a C argument list to Julia:T, where T is one of the primitive types: char, int, long, short, float, double, complex, enum or any of their typedef equivalents\nT, where T is an equivalent Julia Bits Type (per the table above)\nif T is an enum, the argument type should be equivalent to Cint or Cuint\nargument value will be copied (passed by value)\nstruct T (including typedef to a struct)\nT, where T is a Julia leaf type\nargument value will be copied (passed by value)\nvoid*\ndepends on how this parameter is used, first translate this to the intended pointer type, then determine the Julia equivalent using the remaining rules in this list\nthis argument may be declared as Ptr{Cvoid}, if it really is just an unknown pointer\njl_value_t*\nAny\nargument value must be a valid Julia object\ncurrently unsupported by cfunction\njl_value_t**\nRef{Any}\nargument value must be a valid Julia object (or C_NULL)\ncurrently unsupported by cfunction\nT*\nRef{T}, where T is the Julia type corresponding to T\nargument value will be copied if it is an isbits type otherwise, the value must be a valid Julia object\n(T*)(...) (e.g. a pointer to a function)\nPtr{Cvoid} (you may need to use cfunction explicitly to create this pointer)\n... (e.g. a vararg)\nT..., where T is the Julia type\nva_arg\nnot supported"
+    "text": "For translating a C argument list to Julia:T, where T is one of the primitive types: char, int, long, short, float, double, complex, enum or any of their typedef equivalents\nT, where T is an equivalent Julia Bits Type (per the table above)\nif T is an enum, the argument type should be equivalent to Cint or Cuint\nargument value will be copied (passed by value)\nstruct T (including typedef to a struct)\nT, where T is a Julia leaf type\nargument value will be copied (passed by value)\nvoid*\ndepends on how this parameter is used, first translate this to the intended pointer type, then determine the Julia equivalent using the remaining rules in this list\nthis argument may be declared as Ptr{Cvoid}, if it really is just an unknown pointer\njl_value_t*\nAny\nargument value must be a valid Julia object\njl_value_t**\nRef{Any}\nargument value must be a valid Julia object (or C_NULL)\nT*\nRef{T}, where T is the Julia type corresponding to T\nargument value will be copied if it is an isbits type otherwise, the value must be a valid Julia object\nT (*)(...) (e.g. a pointer to a function)\nPtr{Cvoid} (you may need to use @cfunction explicitly to create this pointer)\n... (e.g. a vararg)\nT..., where T is the Julia type\ncurrently unsupported by @cfunction\nva_arg\nnot supported by ccall or @cfunction"
 },
 
 {
-    "location": "manual/calling-c-and-fortran-code/#ccall/cfunction-return-type-translation-guide-1",
+    "location": "manual/calling-c-and-fortran-code/#ccall-/-@cfunction-return-type-translation-guide-1",
     "page": "Calling C and Fortran Code",
-    "title": "ccall/cfunction return type translation guide",
+    "title": "ccall / @cfunction return type translation guide",
     "category": "section",
-    "text": "For translating a C return type to Julia:void\nCvoid (this will return the singleton instance nothing::Cvoid)\nT, where T is one of the primitive types: char, int, long, short, float, double, complex, enum or any of their typedef equivalents\nT, where T is an equivalent Julia Bits Type (per the table above)\nif T is an enum, the argument type should be equivalent to Cint or Cuint\nargument value will be copied (returned by-value)\nstruct T (including typedef to a struct)\nT, where T is a Julia Leaf Type\nargument value will be copied (returned by-value)\nvoid*\ndepends on how this parameter is used, first translate this to the intended pointer type, then determine the Julia equivalent using the remaining rules in this list\nthis argument may be declared as Ptr{Cvoid}, if it really is just an unknown pointer\njl_value_t*\nAny\nargument value must be a valid Julia object\njl_value_t**\nRef{Any}\nargument value must be a valid Julia object (or C_NULL)\nT*\nIf the memory is already owned by Julia, or is an isbits type, and is known to be non-null:\nRef{T}, where T is the Julia type corresponding to T\na return type of Ref{Any} is invalid, it should either be Any (corresponding to jl_value_t*) or Ptr{Any} (corresponding to Ptr{Any})\nC MUST NOT modify the memory returned via Ref{T} if T is an isbits type\nIf the memory is owned by C:\nPtr{T}, where T is the Julia type corresponding to T\n(T*)(...) (e.g. a pointer to a function)\nPtr{Cvoid} (you may need to use cfunction explicitly to create this pointer)"
+    "text": "For translating a C return type to Julia:void\nCvoid (this will return the singleton instance nothing::Cvoid)\nT, where T is one of the primitive types: char, int, long, short, float, double, complex, enum or any of their typedef equivalents\nT, where T is an equivalent Julia Bits Type (per the table above)\nif T is an enum, the argument type should be equivalent to Cint or Cuint\nargument value will be copied (returned by-value)\nstruct T (including typedef to a struct)\nT, where T is a Julia Leaf Type\nargument value will be copied (returned by-value)\nvoid*\ndepends on how this parameter is used, first translate this to the intended pointer type, then determine the Julia equivalent using the remaining rules in this list\nthis argument may be declared as Ptr{Cvoid}, if it really is just an unknown pointer\njl_value_t*\nAny\nargument value must be a valid Julia object\njl_value_t**\nPtr{Any} (Ref{Any} is invalid as a return type)\nargument value must be a valid Julia object (or C_NULL)\nT*\nIf the memory is already owned by Julia, or is an isbits type, and is known to be non-null:\nRef{T}, where T is the Julia type corresponding to T\na return type of Ref{Any} is invalid, it should either be Any (corresponding to jl_value_t*) or Ptr{Any} (corresponding to jl_value_t**)\nC MUST NOT modify the memory returned via Ref{T} if T is an isbits type\nIf the memory is owned by C:\nPtr{T}, where T is the Julia type corresponding to T\nT (*)(...) (e.g. a pointer to a function)\nPtr{Cvoid} (you may need to use @cfunction explicitly to create this pointer)"
 },
 
 {
@@ -2773,7 +2789,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Calling C and Fortran Code",
     "title": "Non-constant Function Specifications",
     "category": "section",
-    "text": "A (name, library) function specification must be a constant expression. However, it is possible to use computed values as function names by staging through eval as follows:@eval ccall(($(string(\"a\", \"b\")), \"lib\"), ...This expression constructs a name using string, then substitutes this name into a new ccall expression, which is then evaluated. Keep in mind that eval only operates at the top level, so within this expression local variables will not be available (unless their values are substituted with $). For this reason, eval is typically only used to form top-level definitions, for example when wrapping libraries that contain many similar functions.If your usage is more dynamic, use indirect calls as described in the next section."
+    "text": "A (name, library) function specification must be a constant expression. However, it is possible to use computed values as function names by staging through eval as follows:@eval ccall(($(string(\"a\", \"b\")), \"lib\"), ...This expression constructs a name using string, then substitutes this name into a new ccall expression, which is then evaluated. Keep in mind that eval only operates at the top level, so within this expression local variables will not be available (unless their values are substituted with $). For this reason, eval is typically only used to form top-level definitions, for example when wrapping libraries that contain many similar functions. A similar example can be constructed for @cfunction.However, doing this will also be very slow and leak memory, so you should usually avoid this and instead keep reading. The next section discusses how to use indirect calls to efficiently accomplish a similar effect."
 },
 
 {
@@ -2785,11 +2801,19 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
+    "location": "manual/calling-c-and-fortran-code/#Closure-cfunctions-1",
+    "page": "Calling C and Fortran Code",
+    "title": "Closure cfunctions",
+    "category": "section",
+    "text": "The first argument to @cfunction can be marked with a $, in which case the return value will instead be a struct CFunction which closes over the argument. You must ensure that this return object is kept alive until all uses of it are done. The contents and code at the cfunction pointer will be erased via a finalizer when this reference is dropped and atexit. This is not usually needed, since this functionality is not present in C, but can be useful for dealing with ill-designed APIs which don\'t provide a separate closure environment parameter.function qsort(a::Vector{T}, cmp) where T\n    isbits(T) || throw(ArgumentError(\"this method can only qsort isbits arrays\"))\n    callback = @cfunction $cmp Cint (Ref{T}, Ref{T})\n    # Here, `callback` isa Base.CFunction, which will be converted to Ptr{Cvoid}\n    # (and protected against finalization) by the ccall\n    ccall(:qsort, Cvoid, (Ptr{T}, Csize_t, Csize_t, Ptr{Cvoid}),\n        a, length(A), Base.elsize(A), callback)\n    # We could instead use:\n    #    GC.@preserve callback begin\n    #        use(Base.unsafe_convert(Ptr{Cvoid}, callback))\n    #    end\n    # if we needed to use it outside of a `ccall`\n    return a\nend"
+},
+
+{
     "location": "manual/calling-c-and-fortran-code/#Closing-a-Library-1",
     "page": "Calling C and Fortran Code",
     "title": "Closing a Library",
     "category": "section",
-    "text": "It is sometimes useful to close (unload) a library so that it can be reloaded. For instance, when developing C code for use with Julia, one may need to compile, call the C code from Julia, then close the library, make an edit, recompile, and load in the new changes. One can either restart Julia or use the Libdl functions to manage the library explicitly, such as:lib = Libdl.dlopen(\"./my_lib.so\") # Open the library explicitly.\nsym = Libdl.dlsym(lib, :my_fcn)   # Get a symbol for the function to call.\nccall(sym, ...) # Use the symbol instead of the (symbol, library) tuple (remaining arguments are the same).\nLibdl.dlclose(lib) # Close the library explicitly.Note that when using ccall with the tuple input (e.g., ccall((:my_fcn, \"./my_lib.so\"), ...)), the library is opened implicitly and it may not be explicitly closed."
+    "text": "It is sometimes useful to close (unload) a library so that it can be reloaded. For instance, when developing C code for use with Julia, one may need to compile, call the C code from Julia, then close the library, make an edit, recompile, and load in the new changes. One can either restart Julia or use the Libdl functions to manage the library explicitly, such as:lib = Libdl.dlopen(\"./my_lib.so\") # Open the library explicitly.\nsym = Libdl.dlsym(lib, :my_fcn)   # Get a symbol for the function to call.\nccall(sym, ...) # Use the pointer `sym` instead of the (symbol, library) tuple (remaining arguments are the same).\nLibdl.dlclose(lib) # Close the library explicitly.Note that when using ccall with the tuple input (e.g., ccall((:my_fcn, \"./my_lib.so\"), ...)), the library is opened implicitly and it may not be explicitly closed."
 },
 
 {
@@ -3101,7 +3125,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Environment Variables",
     "title": "JULIA_LLVM_ARGS",
     "category": "section",
-    "text": "Arguments to be passed to the LLVM backend.note: Note\nThis environment variable has an effect only if Julia was compiled with JL_DEBUG_BUILD set — in particular, the julia-debug executable is always compiled with this build variable."
+    "text": "Arguments to be passed to the LLVM backend."
 },
 
 {
@@ -7841,1022 +7865,6 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "base/math/#Base.isapprox",
-    "page": "Mathematics",
-    "title": "Base.isapprox",
-    "category": "function",
-    "text": "isapprox(x, y; rtol::Real=atol>0 ? 0 : √eps, atol::Real=0, nans::Bool=false, norm::Function)\n\nInexact equality comparison: true if norm(x-y) <= max(atol, rtol*max(norm(x), norm(y))). The default atol is zero and the default rtol depends on the types of x and y. The keyword argument nans determines whether or not NaN values are considered equal (defaults to false).\n\nFor real or complex floating-point values, if an atol > 0 is not specified, rtol defaults to the square root of eps of the type of x or y, whichever is bigger (least precise). This corresponds to requiring equality of about half of the significand digits. Otherwise, e.g. for integer arguments or if an atol > 0 is supplied, rtol defaults to zero.\n\nx and y may also be arrays of numbers, in which case norm defaults to vecnorm but may be changed by passing a norm::Function keyword argument. (For numbers, norm is the same thing as abs.) When x and y are arrays, if norm(x-y) is not finite (i.e. ±Inf or NaN), the comparison falls back to checking whether all elements of x and y are approximately equal component-wise.\n\nThe binary operator ≈ is equivalent to isapprox with the default arguments, and x ≉ y is equivalent to !isapprox(x,y).\n\nNote that x ≈ 0 (i.e., comparing to zero with the default tolerances) is equivalent to x == 0 since the default atol is 0.  In such cases, you should either supply an appropriate atol (or use norm(x) ≤ atol) or rearrange your code (e.g. use x ≈ y rather than x - y ≈ 0).   It is not possible to pick a nonzero atol automatically because it depends on the overall scaling (the \"units\") of your problem: for example, in x - y ≈ 0, atol=1e-9 is an absurdly small tolerance if x is the radius of the Earth in meters, but an absurdly large tolerance if x is the radius of a Hydrogen atom in meters.\n\nExamples\n\njulia> 0.1 ≈ (0.1 - 1e-10)\ntrue\n\njulia> isapprox(10, 11; atol = 2)\ntrue\n\njulia> isapprox([10.0^9, 1.0], [10.0^9, 2.0])\ntrue\n\njulia> 1e-10 ≈ 0\nfalse\n\njulia> isapprox(1e-10, 0, atol=1e-8)\ntrue\n\n\n\n\n\n"
-},
-
-{
-    "location": "base/math/#Base.sin-Tuple{Number}",
-    "page": "Mathematics",
-    "title": "Base.sin",
-    "category": "method",
-    "text": "sin(x)\n\nCompute sine of x, where x is in radians.\n\n\n\n\n\n"
-},
-
-{
-    "location": "base/math/#Base.cos-Tuple{Number}",
-    "page": "Mathematics",
-    "title": "Base.cos",
-    "category": "method",
-    "text": "cos(x)\n\nCompute cosine of x, where x is in radians.\n\n\n\n\n\n"
-},
-
-{
-    "location": "base/math/#Base.Math.sincos-Tuple{Float64}",
-    "page": "Mathematics",
-    "title": "Base.Math.sincos",
-    "category": "method",
-    "text": "sincos(x)\n\nSimultaneously compute the sine and cosine of x, where the x is in radians.\n\n\n\n\n\n"
-},
-
-{
-    "location": "base/math/#Base.tan-Tuple{Number}",
-    "page": "Mathematics",
-    "title": "Base.tan",
-    "category": "method",
-    "text": "tan(x)\n\nCompute tangent of x, where x is in radians.\n\n\n\n\n\n"
-},
-
-{
-    "location": "base/math/#Base.Math.sind",
-    "page": "Mathematics",
-    "title": "Base.Math.sind",
-    "category": "function",
-    "text": "sind(x)\n\nCompute sine of x, where x is in degrees. \n\n\n\n\n\n"
-},
-
-{
-    "location": "base/math/#Base.Math.cosd",
-    "page": "Mathematics",
-    "title": "Base.Math.cosd",
-    "category": "function",
-    "text": "cosd(x)\n\nCompute cosine of x, where x is in degrees. \n\n\n\n\n\n"
-},
-
-{
-    "location": "base/math/#Base.Math.tand",
-    "page": "Mathematics",
-    "title": "Base.Math.tand",
-    "category": "function",
-    "text": "tand(x)\n\nCompute tangent of x, where x is in degrees. \n\n\n\n\n\n"
-},
-
-{
-    "location": "base/math/#Base.Math.sinpi",
-    "page": "Mathematics",
-    "title": "Base.Math.sinpi",
-    "category": "function",
-    "text": "sinpi(x)\n\nCompute sin(pi x) more accurately than sin(pi*x), especially for large x.\n\n\n\n\n\n"
-},
-
-{
-    "location": "base/math/#Base.Math.cospi",
-    "page": "Mathematics",
-    "title": "Base.Math.cospi",
-    "category": "function",
-    "text": "cospi(x)\n\nCompute cos(pi x) more accurately than cos(pi*x), especially for large x.\n\n\n\n\n\n"
-},
-
-{
-    "location": "base/math/#Base.sinh-Tuple{Number}",
-    "page": "Mathematics",
-    "title": "Base.sinh",
-    "category": "method",
-    "text": "sinh(x)\n\nCompute hyperbolic sine of x.\n\n\n\n\n\n"
-},
-
-{
-    "location": "base/math/#Base.cosh-Tuple{Number}",
-    "page": "Mathematics",
-    "title": "Base.cosh",
-    "category": "method",
-    "text": "cosh(x)\n\nCompute hyperbolic cosine of x.\n\n\n\n\n\n"
-},
-
-{
-    "location": "base/math/#Base.tanh-Tuple{Number}",
-    "page": "Mathematics",
-    "title": "Base.tanh",
-    "category": "method",
-    "text": "tanh(x)\n\nCompute hyperbolic tangent of x.\n\n\n\n\n\n"
-},
-
-{
-    "location": "base/math/#Base.asin-Tuple{Number}",
-    "page": "Mathematics",
-    "title": "Base.asin",
-    "category": "method",
-    "text": "asin(x)\n\nCompute the inverse sine of x, where the output is in radians.\n\n\n\n\n\n"
-},
-
-{
-    "location": "base/math/#Base.acos-Tuple{Number}",
-    "page": "Mathematics",
-    "title": "Base.acos",
-    "category": "method",
-    "text": "acos(x)\n\nCompute the inverse cosine of x, where the output is in radians\n\n\n\n\n\n"
-},
-
-{
-    "location": "base/math/#Base.atan-Tuple{Number}",
-    "page": "Mathematics",
-    "title": "Base.atan",
-    "category": "method",
-    "text": "atan(x)\n\nCompute the inverse tangent of x, where the output is in radians.\n\n\n\n\n\n"
-},
-
-{
-    "location": "base/math/#Base.Math.atan2",
-    "page": "Mathematics",
-    "title": "Base.Math.atan2",
-    "category": "function",
-    "text": "atan2(y, x)\n\nCompute the inverse tangent of y/x, using the signs of both x and y to determine the quadrant of the return value.\n\n\n\n\n\n"
-},
-
-{
-    "location": "base/math/#Base.Math.asind",
-    "page": "Mathematics",
-    "title": "Base.Math.asind",
-    "category": "function",
-    "text": "asind(x)\n\nCompute the inverse sine of x, where the output is in degrees. \n\n\n\n\n\n"
-},
-
-{
-    "location": "base/math/#Base.Math.acosd",
-    "page": "Mathematics",
-    "title": "Base.Math.acosd",
-    "category": "function",
-    "text": "acosd(x)\n\nCompute the inverse cosine of x, where the output is in degrees. \n\n\n\n\n\n"
-},
-
-{
-    "location": "base/math/#Base.Math.atand",
-    "page": "Mathematics",
-    "title": "Base.Math.atand",
-    "category": "function",
-    "text": "atand(x)\n\nCompute the inverse tangent of x, where the output is in degrees. \n\n\n\n\n\n"
-},
-
-{
-    "location": "base/math/#Base.Math.sec-Tuple{Number}",
-    "page": "Mathematics",
-    "title": "Base.Math.sec",
-    "category": "method",
-    "text": "sec(x)\n\nCompute the secant of x, where x is in radians.\n\n\n\n\n\n"
-},
-
-{
-    "location": "base/math/#Base.Math.csc-Tuple{Number}",
-    "page": "Mathematics",
-    "title": "Base.Math.csc",
-    "category": "method",
-    "text": "csc(x)\n\nCompute the cosecant of x, where x is in radians.\n\n\n\n\n\n"
-},
-
-{
-    "location": "base/math/#Base.Math.cot-Tuple{Number}",
-    "page": "Mathematics",
-    "title": "Base.Math.cot",
-    "category": "method",
-    "text": "cot(x)\n\nCompute the cotangent of x, where x is in radians.\n\n\n\n\n\n"
-},
-
-{
-    "location": "base/math/#Base.Math.secd",
-    "page": "Mathematics",
-    "title": "Base.Math.secd",
-    "category": "function",
-    "text": "secd(x)\n\nCompute the secant of x, where x is in degrees.\n\n\n\n\n\n"
-},
-
-{
-    "location": "base/math/#Base.Math.cscd",
-    "page": "Mathematics",
-    "title": "Base.Math.cscd",
-    "category": "function",
-    "text": "cscd(x)\n\nCompute the cosecant of x, where x is in degrees.\n\n\n\n\n\n"
-},
-
-{
-    "location": "base/math/#Base.Math.cotd",
-    "page": "Mathematics",
-    "title": "Base.Math.cotd",
-    "category": "function",
-    "text": "cotd(x)\n\nCompute the cotangent of x, where x is in degrees.\n\n\n\n\n\n"
-},
-
-{
-    "location": "base/math/#Base.Math.asec-Tuple{Number}",
-    "page": "Mathematics",
-    "title": "Base.Math.asec",
-    "category": "method",
-    "text": "asec(x)\n\nCompute the inverse secant of x, where the output is in radians. \n\n\n\n\n\n"
-},
-
-{
-    "location": "base/math/#Base.Math.acsc-Tuple{Number}",
-    "page": "Mathematics",
-    "title": "Base.Math.acsc",
-    "category": "method",
-    "text": "acsc(x)\n\nCompute the inverse cosecant of x, where the output is in radians. \n\n\n\n\n\n"
-},
-
-{
-    "location": "base/math/#Base.Math.acot-Tuple{Number}",
-    "page": "Mathematics",
-    "title": "Base.Math.acot",
-    "category": "method",
-    "text": "acot(x)\n\nCompute the inverse cotangent of x, where the output is in radians. \n\n\n\n\n\n"
-},
-
-{
-    "location": "base/math/#Base.Math.asecd",
-    "page": "Mathematics",
-    "title": "Base.Math.asecd",
-    "category": "function",
-    "text": "asecd(x)\n\nCompute the inverse secant of x, where the output is in degrees. \n\n\n\n\n\n"
-},
-
-{
-    "location": "base/math/#Base.Math.acscd",
-    "page": "Mathematics",
-    "title": "Base.Math.acscd",
-    "category": "function",
-    "text": "acscd(x)\n\nCompute the inverse cosecant of x, where the output is in degrees. \n\n\n\n\n\n"
-},
-
-{
-    "location": "base/math/#Base.Math.acotd",
-    "page": "Mathematics",
-    "title": "Base.Math.acotd",
-    "category": "function",
-    "text": "acotd(x)\n\nCompute the inverse cotangent of x, where the output is in degrees. \n\n\n\n\n\n"
-},
-
-{
-    "location": "base/math/#Base.Math.sech-Tuple{Number}",
-    "page": "Mathematics",
-    "title": "Base.Math.sech",
-    "category": "method",
-    "text": "sech(x)\n\nCompute the hyperbolic secant of x.\n\n\n\n\n\n"
-},
-
-{
-    "location": "base/math/#Base.Math.csch-Tuple{Number}",
-    "page": "Mathematics",
-    "title": "Base.Math.csch",
-    "category": "method",
-    "text": "csch(x)\n\nCompute the hyperbolic cosecant of x.\n\n\n\n\n\n"
-},
-
-{
-    "location": "base/math/#Base.Math.coth-Tuple{Number}",
-    "page": "Mathematics",
-    "title": "Base.Math.coth",
-    "category": "method",
-    "text": "coth(x)\n\nCompute the hyperbolic cotangent of x.\n\n\n\n\n\n"
-},
-
-{
-    "location": "base/math/#Base.asinh-Tuple{Number}",
-    "page": "Mathematics",
-    "title": "Base.asinh",
-    "category": "method",
-    "text": "asinh(x)\n\nCompute the inverse hyperbolic sine of x.\n\n\n\n\n\n"
-},
-
-{
-    "location": "base/math/#Base.acosh-Tuple{Number}",
-    "page": "Mathematics",
-    "title": "Base.acosh",
-    "category": "method",
-    "text": "acosh(x)\n\nCompute the inverse hyperbolic cosine of x.\n\n\n\n\n\n"
-},
-
-{
-    "location": "base/math/#Base.atanh-Tuple{Number}",
-    "page": "Mathematics",
-    "title": "Base.atanh",
-    "category": "method",
-    "text": "atanh(x)\n\nCompute the inverse hyperbolic tangent of x.\n\n\n\n\n\n"
-},
-
-{
-    "location": "base/math/#Base.Math.asech-Tuple{Number}",
-    "page": "Mathematics",
-    "title": "Base.Math.asech",
-    "category": "method",
-    "text": "asech(x)\n\nCompute the inverse hyperbolic secant of x. \n\n\n\n\n\n"
-},
-
-{
-    "location": "base/math/#Base.Math.acsch-Tuple{Number}",
-    "page": "Mathematics",
-    "title": "Base.Math.acsch",
-    "category": "method",
-    "text": "acsch(x)\n\nCompute the inverse hyperbolic cosecant of x. \n\n\n\n\n\n"
-},
-
-{
-    "location": "base/math/#Base.Math.acoth-Tuple{Number}",
-    "page": "Mathematics",
-    "title": "Base.Math.acoth",
-    "category": "method",
-    "text": "acoth(x)\n\nCompute the inverse hyperbolic cotangent of x. \n\n\n\n\n\n"
-},
-
-{
-    "location": "base/math/#Base.Math.sinc",
-    "page": "Mathematics",
-    "title": "Base.Math.sinc",
-    "category": "function",
-    "text": "sinc(x)\n\nCompute sin(pi x)  (pi x) if x neq 0, and 1 if x = 0.\n\n\n\n\n\n"
-},
-
-{
-    "location": "base/math/#Base.Math.cosc",
-    "page": "Mathematics",
-    "title": "Base.Math.cosc",
-    "category": "function",
-    "text": "cosc(x)\n\nCompute cos(pi x)  x - sin(pi x)  (pi x^2) if x neq 0, and 0 if x = 0. This is the derivative of sinc(x).\n\n\n\n\n\n"
-},
-
-{
-    "location": "base/math/#Base.Math.deg2rad",
-    "page": "Mathematics",
-    "title": "Base.Math.deg2rad",
-    "category": "function",
-    "text": "deg2rad(x)\n\nConvert x from degrees to radians.\n\njulia> deg2rad(90)\n1.5707963267948966\n\n\n\n\n\n"
-},
-
-{
-    "location": "base/math/#Base.Math.rad2deg",
-    "page": "Mathematics",
-    "title": "Base.Math.rad2deg",
-    "category": "function",
-    "text": "rad2deg(x)\n\nConvert x from radians to degrees.\n\njulia> rad2deg(pi)\n180.0\n\n\n\n\n\n"
-},
-
-{
-    "location": "base/math/#Base.Math.hypot",
-    "page": "Mathematics",
-    "title": "Base.Math.hypot",
-    "category": "function",
-    "text": "hypot(x, y)\n\nCompute the hypotenuse sqrtx^2+y^2 avoiding overflow and underflow.\n\nExamples\n\njulia> a = 10^10;\n\njulia> hypot(a, a)\n1.4142135623730951e10\n\njulia> √(a^2 + a^2) # a^2 overflows\nERROR: DomainError with -2.914184810805068e18:\nsqrt will only return a complex result if called with a complex argument. Try sqrt(Complex(x)).\nStacktrace:\n[...]\n\n\n\n\n\nhypot(x...)\n\nCompute the hypotenuse sqrtsum x_i^2 avoiding overflow and underflow.\n\n\n\n\n\n"
-},
-
-{
-    "location": "base/math/#Base.log-Tuple{Number}",
-    "page": "Mathematics",
-    "title": "Base.log",
-    "category": "method",
-    "text": "log(x)\n\nCompute the natural logarithm of x. Throws DomainError for negative Real arguments. Use complex negative arguments to obtain complex results.\n\n\n\n\n\n"
-},
-
-{
-    "location": "base/math/#Base.log-Tuple{Number,Number}",
-    "page": "Mathematics",
-    "title": "Base.log",
-    "category": "method",
-    "text": "log(b,x)\n\nCompute the base b logarithm of x. Throws DomainError for negative Real arguments.\n\njulia> log(4,8)\n1.5\n\njulia> log(4,2)\n0.5\n\nnote: Note\nIf b is a power of 2 or 10, log2 or log10 should be used, as these will typically be faster and more accurate. For example,julia> log(100,1000000)\n2.9999999999999996\n\njulia> log10(1000000)/2\n3.0\n\n\n\n\n\n"
-},
-
-{
-    "location": "base/math/#Base.log2",
-    "page": "Mathematics",
-    "title": "Base.log2",
-    "category": "function",
-    "text": "log2(x)\n\nCompute the logarithm of x to base 2. Throws DomainError for negative Real arguments.\n\nExamples\n\njulia> log2(4)\n2.0\n\njulia> log2(10)\n3.321928094887362\n\n\n\n\n\n"
-},
-
-{
-    "location": "base/math/#Base.log10",
-    "page": "Mathematics",
-    "title": "Base.log10",
-    "category": "function",
-    "text": "log10(x)\n\nCompute the logarithm of x to base 10. Throws DomainError for negative Real arguments.\n\nExamples\n\njulia> log10(100)\n2.0\n\njulia> log10(2)\n0.3010299956639812\n\n\n\n\n\n"
-},
-
-{
-    "location": "base/math/#Base.log1p",
-    "page": "Mathematics",
-    "title": "Base.log1p",
-    "category": "function",
-    "text": "log1p(x)\n\nAccurate natural logarithm of 1+x. Throws DomainError for Real arguments less than -1.\n\nExamples\n\njulia> log1p(-0.5)\n-0.6931471805599453\n\njulia> log1p(0)\n0.0\n\n\n\n\n\n"
-},
-
-{
-    "location": "base/math/#Base.Math.frexp",
-    "page": "Mathematics",
-    "title": "Base.Math.frexp",
-    "category": "function",
-    "text": "frexp(val)\n\nReturn (x,exp) such that x has a magnitude in the interval 12 1) or 0, and val is equal to x times 2^exp.\n\n\n\n\n\n"
-},
-
-{
-    "location": "base/math/#Base.exp-Tuple{Float64}",
-    "page": "Mathematics",
-    "title": "Base.exp",
-    "category": "method",
-    "text": "exp(x)\n\nCompute the natural base exponential of x, in other words e^x.\n\njulia> exp(1.0)\n2.718281828459045\n\n\n\n\n\n"
-},
-
-{
-    "location": "base/math/#Base.exp2",
-    "page": "Mathematics",
-    "title": "Base.exp2",
-    "category": "function",
-    "text": "exp2(x)\n\nCompute the base 2 exponential of x, in other words 2^x.\n\nExamples\n\njulia> exp2(5)\n32.0\n\n\n\n\n\n"
-},
-
-{
-    "location": "base/math/#Base.exp10",
-    "page": "Mathematics",
-    "title": "Base.exp10",
-    "category": "function",
-    "text": "exp10(x)\n\nCompute the base 10 exponential of x, in other words 10^x.\n\nExamples\n\njulia> exp10(2)\n100.0\n\n\n\n\n\nexp10(x)\n\nCompute 10^x.\n\nExamples\n\njulia> exp10(2)\n100.0\n\njulia> exp10(0.2)\n1.5848931924611136\n\n\n\n\n\n"
-},
-
-{
-    "location": "base/math/#Base.Math.ldexp",
-    "page": "Mathematics",
-    "title": "Base.Math.ldexp",
-    "category": "function",
-    "text": "ldexp(x, n)\n\nCompute x times 2^n.\n\nExamples\n\njulia> ldexp(5., 2)\n20.0\n\n\n\n\n\n"
-},
-
-{
-    "location": "base/math/#Base.Math.modf",
-    "page": "Mathematics",
-    "title": "Base.Math.modf",
-    "category": "function",
-    "text": "modf(x)\n\nReturn a tuple (fpart,ipart) of the fractional and integral parts of a number. Both parts have the same sign as the argument.\n\nExamples\n\njulia> modf(3.5)\n(0.5, 3.0)\n\n\n\n\n\n"
-},
-
-{
-    "location": "base/math/#Base.expm1",
-    "page": "Mathematics",
-    "title": "Base.expm1",
-    "category": "function",
-    "text": "expm1(x)\n\nAccurately compute e^x-1.\n\n\n\n\n\n"
-},
-
-{
-    "location": "base/math/#Base.round-Tuple{Type,Any}",
-    "page": "Mathematics",
-    "title": "Base.round",
-    "category": "method",
-    "text": "round([T,] x, [r::RoundingMode])\nround(x, [digits; base = 10])\n\nRounds x to an integer value according to the provided RoundingMode, returning a value of the same type as x. When not specifying a rounding mode the global mode will be used (see rounding), which by default is round to the nearest integer (RoundNearest mode), with ties (fractional values of 0.5) being rounded to the nearest even integer.\n\nExamples\n\njulia> round(1.7)\n2.0\n\njulia> round(1.5)\n2.0\n\njulia> round(2.5)\n2.0\n\nThe optional RoundingMode argument will change how the number gets rounded.\n\nround(T, x, [r::RoundingMode]) converts the result to type T, throwing an InexactError if the value is not representable.\n\nround(x, digits) rounds to the specified number of digits after the decimal place (or before if negative). round(x, digits, base = base) rounds using a base other than 10.\n\nExamples\n\njulia> round(pi, 2)\n3.14\n\njulia> round(pi, 3, base = 2)\n3.125\n\nnote: Note\nRounding to specified digits in bases other than 2 can be inexact when operating on binary floating point numbers. For example, the Float64 value represented by 1.15 is actually less than 1.15, yet will be rounded to 1.2.Examplesjulia> x = 1.15\n1.15\n\njulia> @sprintf \"%.20f\" x\n\"1.14999999999999991118\"\n\njulia> x < 115//100\ntrue\n\njulia> round(x, 1)\n1.2\n\nSee also signif for rounding to significant digits.\n\n\n\n\n\n"
-},
-
-{
-    "location": "base/math/#Base.Rounding.RoundingMode",
-    "page": "Mathematics",
-    "title": "Base.Rounding.RoundingMode",
-    "category": "type",
-    "text": "RoundingMode\n\nA type used for controlling the rounding mode of floating point operations (via rounding/setrounding functions), or as optional arguments for rounding to the nearest integer (via the round function).\n\nCurrently supported rounding modes are:\n\nRoundNearest (default)\nRoundNearestTiesAway\nRoundNearestTiesUp\nRoundToZero\nRoundFromZero (BigFloat only)\nRoundUp\nRoundDown\n\n\n\n\n\n"
-},
-
-{
-    "location": "base/math/#Base.Rounding.RoundNearest",
-    "page": "Mathematics",
-    "title": "Base.Rounding.RoundNearest",
-    "category": "constant",
-    "text": "RoundNearest\n\nThe default rounding mode. Rounds to the nearest integer, with ties (fractional values of 0.5) being rounded to the nearest even integer.\n\n\n\n\n\n"
-},
-
-{
-    "location": "base/math/#Base.Rounding.RoundNearestTiesAway",
-    "page": "Mathematics",
-    "title": "Base.Rounding.RoundNearestTiesAway",
-    "category": "constant",
-    "text": "RoundNearestTiesAway\n\nRounds to nearest integer, with ties rounded away from zero (C/C++ round behaviour).\n\n\n\n\n\n"
-},
-
-{
-    "location": "base/math/#Base.Rounding.RoundNearestTiesUp",
-    "page": "Mathematics",
-    "title": "Base.Rounding.RoundNearestTiesUp",
-    "category": "constant",
-    "text": "RoundNearestTiesUp\n\nRounds to nearest integer, with ties rounded toward positive infinity (Java/JavaScript round behaviour).\n\n\n\n\n\n"
-},
-
-{
-    "location": "base/math/#Base.Rounding.RoundToZero",
-    "page": "Mathematics",
-    "title": "Base.Rounding.RoundToZero",
-    "category": "constant",
-    "text": "RoundToZero\n\nround using this rounding mode is an alias for trunc.\n\n\n\n\n\n"
-},
-
-{
-    "location": "base/math/#Base.Rounding.RoundUp",
-    "page": "Mathematics",
-    "title": "Base.Rounding.RoundUp",
-    "category": "constant",
-    "text": "RoundUp\n\nround using this rounding mode is an alias for ceil.\n\n\n\n\n\n"
-},
-
-{
-    "location": "base/math/#Base.Rounding.RoundDown",
-    "page": "Mathematics",
-    "title": "Base.Rounding.RoundDown",
-    "category": "constant",
-    "text": "RoundDown\n\nround using this rounding mode is an alias for floor.\n\n\n\n\n\n"
-},
-
-{
-    "location": "base/math/#Base.round-Union{Tuple{MI}, Tuple{MR}, Tuple{T}, Tuple{Complex{T},RoundingMode{MR},RoundingMode{MI}}} where MI where MR where T<:AbstractFloat",
-    "page": "Mathematics",
-    "title": "Base.round",
-    "category": "method",
-    "text": "round(z, RoundingModeReal, RoundingModeImaginary)\n\nReturn the nearest integral value of the same type as the complex-valued z to z, breaking ties using the specified RoundingModes. The first RoundingMode is used for rounding the real components while the second is used for rounding the imaginary components.\n\nExample\n\njulia> round(3.14 + 4.5im)\n3.0 + 4.0im\n\n\n\n\n\n"
-},
-
-{
-    "location": "base/math/#Base.ceil",
-    "page": "Mathematics",
-    "title": "Base.ceil",
-    "category": "function",
-    "text": "ceil([T,] x, [digits; base = 10])\n\nceil(x) returns the nearest integral value of the same type as x that is greater than or equal to x.\n\nceil(T, x) converts the result to type T, throwing an InexactError if the value is not representable.\n\ndigits and base work as for round.\n\n\n\n\n\n"
-},
-
-{
-    "location": "base/math/#Base.floor",
-    "page": "Mathematics",
-    "title": "Base.floor",
-    "category": "function",
-    "text": "floor([T,] x, [digits; base = 10])\n\nfloor(x) returns the nearest integral value of the same type as x that is less than or equal to x.\n\nfloor(T, x) converts the result to type T, throwing an InexactError if the value is not representable.\n\ndigits and base work as for round.\n\n\n\n\n\n"
-},
-
-{
-    "location": "base/math/#Base.trunc",
-    "page": "Mathematics",
-    "title": "Base.trunc",
-    "category": "function",
-    "text": "trunc([T,] x, [digits; base = 10])\n\ntrunc(x) returns the nearest integral value of the same type as x whose absolute value is less than or equal to x.\n\ntrunc(T, x) converts the result to type T, throwing an InexactError if the value is not representable.\n\ndigits and base work as for round.\n\n\n\n\n\n"
-},
-
-{
-    "location": "base/math/#Base.unsafe_trunc",
-    "page": "Mathematics",
-    "title": "Base.unsafe_trunc",
-    "category": "function",
-    "text": "unsafe_trunc(T, x)\n\nReturn the nearest integral value of type T whose absolute value is less than or equal to x. If the value is not representable by T, an arbitrary value will be returned.\n\n\n\n\n\n"
-},
-
-{
-    "location": "base/math/#Base.signif",
-    "page": "Mathematics",
-    "title": "Base.signif",
-    "category": "function",
-    "text": "signif(x, digits; base = 10)\n\nRounds (in the sense of round) x so that there are digits significant digits, under a base base representation, default 10.\n\nExamples\n\njulia> signif(123.456, 2)\n120.0\n\njulia> signif(357.913, 4, base = 2)\n352.0\n\n\n\n\n\n"
-},
-
-{
-    "location": "base/math/#Base.min",
-    "page": "Mathematics",
-    "title": "Base.min",
-    "category": "function",
-    "text": "min(x, y, ...)\n\nReturn the minimum of the arguments. See also the minimum function to take the minimum element from a collection.\n\nExamples\n\njulia> min(2, 5, 1)\n1\n\n\n\n\n\n"
-},
-
-{
-    "location": "base/math/#Base.max",
-    "page": "Mathematics",
-    "title": "Base.max",
-    "category": "function",
-    "text": "max(x, y, ...)\n\nReturn the maximum of the arguments. See also the maximum function to take the maximum element from a collection.\n\nExamples\n\njulia> max(2, 5, 1)\n5\n\n\n\n\n\n"
-},
-
-{
-    "location": "base/math/#Base.minmax",
-    "page": "Mathematics",
-    "title": "Base.minmax",
-    "category": "function",
-    "text": "minmax(x, y)\n\nReturn (min(x,y), max(x,y)). See also: extrema that returns (minimum(x), maximum(x)).\n\nExamples\n\njulia> minmax(\'c\',\'b\')\n(\'b\', \'c\')\n\n\n\n\n\n"
-},
-
-{
-    "location": "base/math/#Base.Math.clamp",
-    "page": "Mathematics",
-    "title": "Base.Math.clamp",
-    "category": "function",
-    "text": "clamp(x, lo, hi)\n\nReturn x if lo <= x <= hi. If x > hi, return hi. If x < lo, return lo. Arguments are promoted to a common type.\n\njulia> clamp.([pi, 1.0, big(10.)], 2., 9.)\n3-element Array{BigFloat,1}:\n 3.141592653589793238462643383279502884197169399375105820974944592307816406286198\n 2.0\n 9.0\n\njulia> clamp.([11,8,5],10,6) # an example where lo > hi\n3-element Array{Int64,1}:\n  6\n  6\n 10\n\n\n\n\n\n"
-},
-
-{
-    "location": "base/math/#Base.Math.clamp!",
-    "page": "Mathematics",
-    "title": "Base.Math.clamp!",
-    "category": "function",
-    "text": "clamp!(array::AbstractArray, lo, hi)\n\nRestrict values in array to the specified range, in-place. See also clamp.\n\n\n\n\n\n"
-},
-
-{
-    "location": "base/math/#Base.abs",
-    "page": "Mathematics",
-    "title": "Base.abs",
-    "category": "function",
-    "text": "abs(x)\n\nThe absolute value of x.\n\nWhen abs is applied to signed integers, overflow may occur, resulting in the return of a negative value. This overflow occurs only when abs is applied to the minimum representable value of a signed integer. That is, when x == typemin(typeof(x)), abs(x) == x < 0, not -x as might be expected.\n\njulia> abs(-3)\n3\n\njulia> abs(1 + im)\n1.4142135623730951\n\njulia> abs(typemin(Int64))\n-9223372036854775808\n\n\n\n\n\n"
-},
-
-{
-    "location": "base/math/#Base.Checked.checked_abs",
-    "page": "Mathematics",
-    "title": "Base.Checked.checked_abs",
-    "category": "function",
-    "text": "Base.checked_abs(x)\n\nCalculates abs(x), checking for overflow errors where applicable. For example, standard two\'s complement signed integers (e.g. Int) cannot represent abs(typemin(Int)), thus leading to an overflow.\n\nThe overflow protection may impose a perceptible performance penalty.\n\n\n\n\n\n"
-},
-
-{
-    "location": "base/math/#Base.Checked.checked_neg",
-    "page": "Mathematics",
-    "title": "Base.Checked.checked_neg",
-    "category": "function",
-    "text": "Base.checked_neg(x)\n\nCalculates -x, checking for overflow errors where applicable. For example, standard two\'s complement signed integers (e.g. Int) cannot represent -typemin(Int), thus leading to an overflow.\n\nThe overflow protection may impose a perceptible performance penalty.\n\n\n\n\n\n"
-},
-
-{
-    "location": "base/math/#Base.Checked.checked_add",
-    "page": "Mathematics",
-    "title": "Base.Checked.checked_add",
-    "category": "function",
-    "text": "Base.checked_add(x, y)\n\nCalculates x+y, checking for overflow errors where applicable.\n\nThe overflow protection may impose a perceptible performance penalty.\n\n\n\n\n\n"
-},
-
-{
-    "location": "base/math/#Base.Checked.checked_sub",
-    "page": "Mathematics",
-    "title": "Base.Checked.checked_sub",
-    "category": "function",
-    "text": "Base.checked_sub(x, y)\n\nCalculates x-y, checking for overflow errors where applicable.\n\nThe overflow protection may impose a perceptible performance penalty.\n\n\n\n\n\n"
-},
-
-{
-    "location": "base/math/#Base.Checked.checked_mul",
-    "page": "Mathematics",
-    "title": "Base.Checked.checked_mul",
-    "category": "function",
-    "text": "Base.checked_mul(x, y)\n\nCalculates x*y, checking for overflow errors where applicable.\n\nThe overflow protection may impose a perceptible performance penalty.\n\n\n\n\n\n"
-},
-
-{
-    "location": "base/math/#Base.Checked.checked_div",
-    "page": "Mathematics",
-    "title": "Base.Checked.checked_div",
-    "category": "function",
-    "text": "Base.checked_div(x, y)\n\nCalculates div(x,y), checking for overflow errors where applicable.\n\nThe overflow protection may impose a perceptible performance penalty.\n\n\n\n\n\n"
-},
-
-{
-    "location": "base/math/#Base.Checked.checked_rem",
-    "page": "Mathematics",
-    "title": "Base.Checked.checked_rem",
-    "category": "function",
-    "text": "Base.checked_rem(x, y)\n\nCalculates x%y, checking for overflow errors where applicable.\n\nThe overflow protection may impose a perceptible performance penalty.\n\n\n\n\n\n"
-},
-
-{
-    "location": "base/math/#Base.Checked.checked_fld",
-    "page": "Mathematics",
-    "title": "Base.Checked.checked_fld",
-    "category": "function",
-    "text": "Base.checked_fld(x, y)\n\nCalculates fld(x,y), checking for overflow errors where applicable.\n\nThe overflow protection may impose a perceptible performance penalty.\n\n\n\n\n\n"
-},
-
-{
-    "location": "base/math/#Base.Checked.checked_mod",
-    "page": "Mathematics",
-    "title": "Base.Checked.checked_mod",
-    "category": "function",
-    "text": "Base.checked_mod(x, y)\n\nCalculates mod(x,y), checking for overflow errors where applicable.\n\nThe overflow protection may impose a perceptible performance penalty.\n\n\n\n\n\n"
-},
-
-{
-    "location": "base/math/#Base.Checked.checked_cld",
-    "page": "Mathematics",
-    "title": "Base.Checked.checked_cld",
-    "category": "function",
-    "text": "Base.checked_cld(x, y)\n\nCalculates cld(x,y), checking for overflow errors where applicable.\n\nThe overflow protection may impose a perceptible performance penalty.\n\n\n\n\n\n"
-},
-
-{
-    "location": "base/math/#Base.Checked.add_with_overflow",
-    "page": "Mathematics",
-    "title": "Base.Checked.add_with_overflow",
-    "category": "function",
-    "text": "Base.add_with_overflow(x, y) -> (r, f)\n\nCalculates r = x+y, with the flag f indicating whether overflow has occurred.\n\n\n\n\n\n"
-},
-
-{
-    "location": "base/math/#Base.Checked.sub_with_overflow",
-    "page": "Mathematics",
-    "title": "Base.Checked.sub_with_overflow",
-    "category": "function",
-    "text": "Base.sub_with_overflow(x, y) -> (r, f)\n\nCalculates r = x-y, with the flag f indicating whether overflow has occurred.\n\n\n\n\n\n"
-},
-
-{
-    "location": "base/math/#Base.Checked.mul_with_overflow",
-    "page": "Mathematics",
-    "title": "Base.Checked.mul_with_overflow",
-    "category": "function",
-    "text": "Base.mul_with_overflow(x, y) -> (r, f)\n\nCalculates r = x*y, with the flag f indicating whether overflow has occurred.\n\n\n\n\n\n"
-},
-
-{
-    "location": "base/math/#Base.abs2",
-    "page": "Mathematics",
-    "title": "Base.abs2",
-    "category": "function",
-    "text": "abs2(x)\n\nSquared absolute value of x.\n\njulia> abs2(-3)\n9\n\n\n\n\n\n"
-},
-
-{
-    "location": "base/math/#Base.copysign",
-    "page": "Mathematics",
-    "title": "Base.copysign",
-    "category": "function",
-    "text": "copysign(x, y) -> z\n\nReturn z which has the magnitude of x and the same sign as y.\n\nExamples\n\njulia> copysign(1, -2)\n-1\n\njulia> copysign(-1, 2)\n1\n\n\n\n\n\n"
-},
-
-{
-    "location": "base/math/#Base.sign",
-    "page": "Mathematics",
-    "title": "Base.sign",
-    "category": "function",
-    "text": "sign(x)\n\nReturn zero if x==0 and xx otherwise (i.e., ±1 for real x).\n\n\n\n\n\n"
-},
-
-{
-    "location": "base/math/#Base.signbit",
-    "page": "Mathematics",
-    "title": "Base.signbit",
-    "category": "function",
-    "text": "signbit(x)\n\nReturns true if the value of the sign of x is negative, otherwise false.\n\nExamples\n\njulia> signbit(-4)\ntrue\n\njulia> signbit(5)\nfalse\n\njulia> signbit(5.5)\nfalse\n\njulia> signbit(-4.1)\ntrue\n\n\n\n\n\n"
-},
-
-{
-    "location": "base/math/#Base.flipsign",
-    "page": "Mathematics",
-    "title": "Base.flipsign",
-    "category": "function",
-    "text": "flipsign(x, y)\n\nReturn x with its sign flipped if y is negative. For example abs(x) = flipsign(x,x).\n\njulia> flipsign(5, 3)\n5\n\njulia> flipsign(5, -3)\n-5\n\n\n\n\n\n"
-},
-
-{
-    "location": "base/math/#Base.sqrt-Tuple{Real}",
-    "page": "Mathematics",
-    "title": "Base.sqrt",
-    "category": "method",
-    "text": "sqrt(x)\n\nReturn sqrtx. Throws DomainError for negative Real arguments. Use complex negative arguments instead. The prefix operator √ is equivalent to sqrt.\n\n\n\n\n\n"
-},
-
-{
-    "location": "base/math/#Base.isqrt",
-    "page": "Mathematics",
-    "title": "Base.isqrt",
-    "category": "function",
-    "text": "isqrt(n::Integer)\n\nInteger square root: the largest integer m such that m*m <= n.\n\njulia> isqrt(5)\n2\n\n\n\n\n\n"
-},
-
-{
-    "location": "base/math/#Base.Math.cbrt",
-    "page": "Mathematics",
-    "title": "Base.Math.cbrt",
-    "category": "function",
-    "text": "cbrt(x::Real)\n\nReturn the cube root of x, i.e. x^13. Negative values are accepted (returning the negative real root when x  0).\n\nThe prefix operator ∛ is equivalent to cbrt.\n\njulia> cbrt(big(27))\n3.0\n\n\n\n\n\n"
-},
-
-{
-    "location": "base/math/#Base.real-Tuple{Complex}",
-    "page": "Mathematics",
-    "title": "Base.real",
-    "category": "method",
-    "text": "real(z)\n\nReturn the real part of the complex number z.\n\nExamples\n\njulia> real(1 + 3im)\n1\n\n\n\n\n\n"
-},
-
-{
-    "location": "base/math/#Base.imag",
-    "page": "Mathematics",
-    "title": "Base.imag",
-    "category": "function",
-    "text": "imag(z)\n\nReturn the imaginary part of the complex number z.\n\nExamples\n\njulia> imag(1 + 3im)\n3\n\n\n\n\n\n"
-},
-
-{
-    "location": "base/math/#Base.reim",
-    "page": "Mathematics",
-    "title": "Base.reim",
-    "category": "function",
-    "text": "reim(z)\n\nReturn both the real and imaginary parts of the complex number z.\n\nExamples\n\njulia> reim(1 + 3im)\n(1, 3)\n\n\n\n\n\n"
-},
-
-{
-    "location": "base/math/#Base.conj",
-    "page": "Mathematics",
-    "title": "Base.conj",
-    "category": "function",
-    "text": "conj(z)\n\nCompute the complex conjugate of a complex number z.\n\nExamples\n\njulia> conj(1 + 3im)\n1 - 3im\n\n\n\n\n\n"
-},
-
-{
-    "location": "base/math/#Base.angle",
-    "page": "Mathematics",
-    "title": "Base.angle",
-    "category": "function",
-    "text": "angle(z)\n\nCompute the phase angle in radians of a complex number z.\n\nExamples\n\njulia> rad2deg(angle(1 + im))\n45.0\n\njulia> rad2deg(angle(1 - im))\n-45.0\n\njulia> rad2deg(angle(-1 - im))\n-135.0\n\n\n\n\n\n"
-},
-
-{
-    "location": "base/math/#Base.cis",
-    "page": "Mathematics",
-    "title": "Base.cis",
-    "category": "function",
-    "text": "cis(z)\n\nReturn exp(iz).\n\nExamples\n\njulia> cis(π) ≈ -1\ntrue\n\n\n\n\n\n"
-},
-
-{
-    "location": "base/math/#Base.binomial",
-    "page": "Mathematics",
-    "title": "Base.binomial",
-    "category": "function",
-    "text": "binomial(n, k)\n\nNumber of ways to choose k out of n items.\n\nExamples\n\njulia> binomial(5, 3)\n10\n\njulia> factorial(5) ÷ (factorial(5-3) * factorial(3))\n10\n\n\n\n\n\n"
-},
-
-{
-    "location": "base/math/#Base.factorial",
-    "page": "Mathematics",
-    "title": "Base.factorial",
-    "category": "function",
-    "text": "factorial(n)\n\nFactorial of n. If n is an Integer, the factorial is computed as an integer (promoted to at least 64 bits). Note that this may overflow if n is not small, but you can use factorial(big(n)) to compute the result exactly in arbitrary precision. If n is not an Integer, factorial(n) is equivalent to gamma(n+1).\n\njulia> factorial(6)\n720\n\njulia> factorial(21)\nERROR: OverflowError: 21 is too large to look up in the table\nStacktrace:\n[...]\n\njulia> factorial(21.0)\n5.109094217170944e19\n\njulia> factorial(big(21))\n51090942171709440000\n\n\n\n\n\n"
-},
-
-{
-    "location": "base/math/#Base.gcd",
-    "page": "Mathematics",
-    "title": "Base.gcd",
-    "category": "function",
-    "text": "gcd(x,y)\n\nGreatest common (positive) divisor (or zero if x and y are both zero).\n\nExamples\n\njulia> gcd(6,9)\n3\n\njulia> gcd(6,-9)\n3\n\n\n\n\n\n"
-},
-
-{
-    "location": "base/math/#Base.lcm",
-    "page": "Mathematics",
-    "title": "Base.lcm",
-    "category": "function",
-    "text": "lcm(x,y)\n\nLeast common (non-negative) multiple.\n\nExamples\n\njulia> lcm(2,3)\n6\n\njulia> lcm(-2,3)\n6\n\n\n\n\n\n"
-},
-
-{
-    "location": "base/math/#Base.gcdx",
-    "page": "Mathematics",
-    "title": "Base.gcdx",
-    "category": "function",
-    "text": "gcdx(x,y)\n\nComputes the greatest common (positive) divisor of x and y and their Bézout coefficients, i.e. the integer coefficients u and v that satisfy ux+vy = d = gcd(xy). gcdx(xy) returns (duv).\n\nExamples\n\njulia> gcdx(12, 42)\n(6, -3, 1)\n\njulia> gcdx(240, 46)\n(2, -9, 47)\n\nnote: Note\nBézout coefficients are not uniquely defined. gcdx returns the minimal Bézout coefficients that are computed by the extended Euclidean algorithm. (Ref: D. Knuth, TAoCP, 2/e, p. 325, Algorithm X.) For signed integers, these coefficients u and v are minimal in the sense that u  yd and v  xd. Furthermore, the signs of u and v are chosen so that d is positive. For unsigned integers, the coefficients u and v might be near their typemax, and the identity then holds only via the unsigned integers\' modulo arithmetic.\n\n\n\n\n\n"
-},
-
-{
-    "location": "base/math/#Base.ispow2",
-    "page": "Mathematics",
-    "title": "Base.ispow2",
-    "category": "function",
-    "text": "ispow2(n::Integer) -> Bool\n\nTest whether n is a power of two.\n\nExamples\n\njulia> ispow2(4)\ntrue\n\njulia> ispow2(5)\nfalse\n\n\n\n\n\n"
-},
-
-{
-    "location": "base/math/#Base.nextpow2",
-    "page": "Mathematics",
-    "title": "Base.nextpow2",
-    "category": "function",
-    "text": "nextpow2(n::Integer)\n\nThe smallest power of two not less than n. Returns 0 for n==0, and returns -nextpow2(-n) for negative arguments.\n\nExamples\n\njulia> nextpow2(16)\n16\n\njulia> nextpow2(17)\n32\n\n\n\n\n\n"
-},
-
-{
-    "location": "base/math/#Base.prevpow2",
-    "page": "Mathematics",
-    "title": "Base.prevpow2",
-    "category": "function",
-    "text": "prevpow2(n::Integer)\n\nThe largest power of two not greater than n. Returns 0 for n==0, and returns -prevpow2(-n) for negative arguments.\n\nExamples\n\njulia> prevpow2(5)\n4\n\njulia> prevpow2(0)\n0\n\n\n\n\n\n"
-},
-
-{
-    "location": "base/math/#Base.nextpow",
-    "page": "Mathematics",
-    "title": "Base.nextpow",
-    "category": "function",
-    "text": "nextpow(a, x)\n\nThe smallest a^n not less than x, where n is a non-negative integer. a must be greater than 1, and x must be greater than 0.\n\nExamples\n\njulia> nextpow(2, 7)\n8\n\njulia> nextpow(2, 9)\n16\n\njulia> nextpow(5, 20)\n25\n\njulia> nextpow(4, 16)\n16\n\nSee also prevpow.\n\n\n\n\n\n"
-},
-
-{
-    "location": "base/math/#Base.prevpow",
-    "page": "Mathematics",
-    "title": "Base.prevpow",
-    "category": "function",
-    "text": "prevpow(a, x)\n\nThe largest a^n not greater than x, where n is a non-negative integer. a must be greater than 1, and x must not be less than 1.\n\nExamples\n\njulia> prevpow(2, 7)\n4\n\njulia> prevpow(2, 9)\n8\n\njulia> prevpow(5, 20)\n5\n\njulia> prevpow(4, 16)\n16\n\nSee also nextpow.\n\n\n\n\n\n"
-},
-
-{
-    "location": "base/math/#Base.nextprod",
-    "page": "Mathematics",
-    "title": "Base.nextprod",
-    "category": "function",
-    "text": "nextprod([k_1, k_2,...], n)\n\nNext integer greater than or equal to n that can be written as prod k_i^p_i for integers p_1, p_2, etc.\n\nExamples\n\njulia> nextprod([2, 3], 105)\n108\n\njulia> 2^2 * 3^3\n108\n\n\n\n\n\n"
-},
-
-{
-    "location": "base/math/#Base.invmod",
-    "page": "Mathematics",
-    "title": "Base.invmod",
-    "category": "function",
-    "text": "invmod(x,m)\n\nTake the inverse of x modulo m: y such that x y = 1 pmod m, with div(xy) = 0. This is undefined for m = 0, or if gcd(xm) neq 1.\n\nExamples\n\njulia> invmod(2,5)\n3\n\njulia> invmod(2,3)\n2\n\njulia> invmod(5,6)\n5\n\n\n\n\n\n"
-},
-
-{
-    "location": "base/math/#Base.powermod",
-    "page": "Mathematics",
-    "title": "Base.powermod",
-    "category": "function",
-    "text": "powermod(x::Integer, p::Integer, m)\n\nCompute x^p pmod m.\n\nExamples\n\njulia> powermod(2, 6, 5)\n4\n\njulia> mod(2^6, 5)\n4\n\njulia> powermod(5, 2, 20)\n5\n\njulia> powermod(5, 2, 19)\n6\n\njulia> powermod(5, 3, 19)\n11\n\n\n\n\n\n"
-},
-
-{
-    "location": "base/math/#Base.Math.gamma",
-    "page": "Mathematics",
-    "title": "Base.Math.gamma",
-    "category": "function",
-    "text": "gamma(x)\n\nCompute the gamma function of x.\n\n\n\n\n\n"
-},
-
-{
-    "location": "base/math/#Base.Math.lgamma",
-    "page": "Mathematics",
-    "title": "Base.Math.lgamma",
-    "category": "function",
-    "text": "lgamma(x)\n\nCompute the logarithm of the absolute value of gamma for Real x, while for Complex x compute the principal branch cut of the logarithm of gamma(x) (defined for negative real(x) by analytic continuation from positive real(x)).\n\n\n\n\n\n"
-},
-
-{
-    "location": "base/math/#Base.Math.lfact",
-    "page": "Mathematics",
-    "title": "Base.Math.lfact",
-    "category": "function",
-    "text": "lfact(x)\n\nCompute the logarithmic factorial of a nonnegative integer x. Equivalent to lgamma of x + 1, but lgamma extends this function to non-integer x.\n\n\n\n\n\n"
-},
-
-{
-    "location": "base/math/#Base.Math.beta",
-    "page": "Mathematics",
-    "title": "Base.Math.beta",
-    "category": "function",
-    "text": "beta(x, y)\n\nEuler integral of the first kind operatornameB(xy) = Gamma(x)Gamma(y)Gamma(x+y).\n\n\n\n\n\n"
-},
-
-{
-    "location": "base/math/#Base.Math.lbeta",
-    "page": "Mathematics",
-    "title": "Base.Math.lbeta",
-    "category": "function",
-    "text": "lbeta(x, y)\n\nNatural logarithm of the absolute value of the beta function log(operatornameB(xy)).\n\n\n\n\n\n"
-},
-
-{
-    "location": "base/math/#Base.ndigits",
-    "page": "Mathematics",
-    "title": "Base.ndigits",
-    "category": "function",
-    "text": "ndigits(n::Integer, b::Integer=10)\n\nCompute the number of digits in integer n written in base b. The base b must not be in [-1, 0, 1].\n\nExamples\n\njulia> ndigits(12345)\n5\n\njulia> ndigits(1022, 16)\n3\n\njulia> string(1022, base = 16)\n\"3fe\"\n\n\n\n\n\n"
-},
-
-{
-    "location": "base/math/#Base.widemul",
-    "page": "Mathematics",
-    "title": "Base.widemul",
-    "category": "function",
-    "text": "widemul(x, y)\n\nMultiply x and y, giving the result as a larger type.\n\njulia> widemul(Float32(3.), 4.)\n1.2e+01\n\n\n\n\n\n"
-},
-
-{
-    "location": "base/math/#Base.Math.@evalpoly",
-    "page": "Mathematics",
-    "title": "Base.Math.@evalpoly",
-    "category": "macro",
-    "text": "@evalpoly(z, c...)\n\nEvaluate the polynomial sum_k ck z^k-1 for the coefficients c[1], c[2], ...; that is, the coefficients are given in ascending order by power of z.  This macro expands to efficient inline code that uses either Horner\'s method or, for complex z, a more efficient Goertzel-like algorithm.\n\njulia> @evalpoly(3, 1, 0, 1)\n10\n\njulia> @evalpoly(2, 1, 0, 1)\n5\n\njulia> @evalpoly(2, 1, 1, 1)\n7\n\n\n\n\n\n"
-},
-
-{
-    "location": "base/math/#Base.FastMath.@fastmath",
-    "page": "Mathematics",
-    "title": "Base.FastMath.@fastmath",
-    "category": "macro",
-    "text": "@fastmath expr\n\nExecute a transformed version of the expression, which calls functions that may violate strict IEEE semantics. This allows the fastest possible operation, but results are undefined – be careful when doing this, as it may change numerical results.\n\nThis sets the LLVM Fast-Math flags, and corresponds to the -ffast-math option in clang. See the notes on performance annotations for more details.\n\nExamples\n\njulia> @fastmath 1+2\n3\n\njulia> @fastmath(sin(3))\n0.1411200080598672\n\n\n\n\n\n"
-},
-
-{
     "location": "base/math/#Mathematical-Functions-1",
     "page": "Mathematics",
     "title": "Mathematical Functions",
@@ -10749,7 +9757,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Arrays",
     "title": "Base.broadcast",
     "category": "function",
-    "text": "broadcast(f, As...)\n\nBroadcast the function f over the arrays, tuples, collections, Refs and/or scalars As.\n\nBroadcasting applies the function f over the elements of the container arguments and the scalars themselves in As. Singleton and missing dimensions are expanded to match the extents of the other arguments by virtually repeating the value. By default, only a limited number of types are considered scalars, including Numbers, Strings, Symbols, Types, Functions and some common singletons like missing and nothing. All other arguments are iterated over or indexed into elementwise.\n\nThe resulting container type is established by the following rules:\n\nIf all the arguments are scalars or zero-dimensional arrays, it returns an unwrapped scalar.\nIf at least one argument is a tuple and all others are scalars or zero-dimensional arrays, it returns a tuple.\nAll other combinations of arguments default to returning an Array, but custom container types can define their own implementation and promotion-like rules to customize the result when they appear as arguments.\n\nA special syntax exists for broadcasting: f.(args...) is equivalent to broadcast(f, args...), and nested f.(g.(args...)) calls are fused into a single broadcast loop.\n\nExamples\n\njulia> A = [1, 2, 3, 4, 5]\n5-element Array{Int64,1}:\n 1\n 2\n 3\n 4\n 5\n\njulia> B = [1 2; 3 4; 5 6; 7 8; 9 10]\n5×2 Array{Int64,2}:\n 1   2\n 3   4\n 5   6\n 7   8\n 9  10\n\njulia> broadcast(+, A, B)\n5×2 Array{Int64,2}:\n  2   3\n  5   6\n  8   9\n 11  12\n 14  15\n\njulia> parse.(Int, [\"1\", \"2\"])\n2-element Array{Int64,1}:\n 1\n 2\n\njulia> abs.((1, -2))\n(1, 2)\n\njulia> broadcast(+, 1.0, (0, -2.0))\n(1.0, -1.0)\n\njulia> broadcast(+, 1.0, (0, -2.0), Ref(1))\n2-element Array{Float64,1}:\n 2.0\n 0.0\n\njulia> (+).([[0,2], [1,3]], Ref{Vector{Int}}([1,-1]))\n2-element Array{Array{Int64,1},1}:\n [1, 1]\n [2, 2]\n\njulia> string.((\"one\",\"two\",\"three\",\"four\"), \": \", 1:4)\n4-element Array{String,1}:\n \"one: 1\"\n \"two: 2\"\n \"three: 3\"\n \"four: 4\"\n\n\n\n\n\n\n"
+    "text": "broadcast(f, As...)\n\nBroadcast the function f over the arrays, tuples, collections, Refs and/or scalars As.\n\nBroadcasting applies the function f over the elements of the container arguments and the scalars themselves in As. Singleton and missing dimensions are expanded to match the extents of the other arguments by virtually repeating the value. By default, only a limited number of types are considered scalars, including Numbers, Strings, Symbols, Types, Functions and some common singletons like missing and nothing. All other arguments are iterated over or indexed into elementwise.\n\nThe resulting container type is established by the following rules:\n\nIf all the arguments are scalars or zero-dimensional arrays, it returns an unwrapped scalar.\nIf at least one argument is a tuple and all others are scalars or zero-dimensional arrays, it returns a tuple.\nAll other combinations of arguments default to returning an Array, but custom container types can define their own implementation and promotion-like rules to customize the result when they appear as arguments.\n\nA special syntax exists for broadcasting: f.(args...) is equivalent to broadcast(f, args...), and nested f.(g.(args...)) calls are fused into a single broadcast loop.\n\nExamples\n\njulia> A = [1, 2, 3, 4, 5]\n5-element Array{Int64,1}:\n 1\n 2\n 3\n 4\n 5\n\njulia> B = [1 2; 3 4; 5 6; 7 8; 9 10]\n5×2 Array{Int64,2}:\n 1   2\n 3   4\n 5   6\n 7   8\n 9  10\n\njulia> broadcast(+, A, B)\n5×2 Array{Int64,2}:\n  2   3\n  5   6\n  8   9\n 11  12\n 14  15\n\njulia> parse.(Int, [\"1\", \"2\"])\n2-element Array{Int64,1}:\n 1\n 2\n\njulia> abs.((1, -2))\n(1, 2)\n\njulia> broadcast(+, 1.0, (0, -2.0))\n(1.0, -1.0)\n\njulia> (+).([[0,2], [1,3]], Ref{Vector{Int}}([1,-1]))\n2-element Array{Array{Int64,1},1}:\n [1, 1]\n [2, 2]\n\njulia> string.((\"one\",\"two\",\"three\",\"four\"), \": \", 1:4)\n4-element Array{String,1}:\n \"one: 1\"\n \"two: 2\"\n \"three: 3\"\n \"four: 4\"\n\n\n\n\n\n\n"
 },
 
 {
@@ -10809,14 +9817,6 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "base/arrays/#Base.Broadcast.Scalar",
-    "page": "Arrays",
-    "title": "Base.Broadcast.Scalar",
-    "category": "type",
-    "text": "Broadcast.DefaultArrayStyle{N}() is a BroadcastStyle indicating that an object behaves as an N-dimensional array for broadcasting. Specifically, DefaultArrayStyle is used for any AbstractArray type that hasn\'t defined a specialized style, and in the absence of overrides from other broadcast arguments the resulting output type is Array. When there are multiple inputs to broadcast, DefaultArrayStyle \"loses\" to any other Broadcast.ArrayStyle.\n\n\n\n\n\n"
-},
-
-{
     "location": "base/arrays/#Base.Broadcast.AbstractArrayStyle",
     "page": "Arrays",
     "title": "Base.Broadcast.AbstractArrayStyle",
@@ -10841,11 +9841,19 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
+    "location": "base/arrays/#Base.Broadcast.broadcastable",
+    "page": "Arrays",
+    "title": "Base.Broadcast.broadcastable",
+    "category": "function",
+    "text": "broadcastable(x)\n\nReturn either x or an object like x such that it supports axes, indexing, and its type supports ndims.\n\nIf x supports iteration, the returned value should have the same axes and indexing behaviors as collect(x).\n\nIf x is not an AbstractArray but it supports axes, indexing, and its type supports ndims, then broadcastable(::typeof(x)) may be implemented to just return itself. Further, if x defines its own BroadcastStyle, then it must define its broadcastable method to return itself for the custom style to have any effect.\n\nExamples\n\njulia> broadcastable([1,2,3]) # like `identity` since arrays already support axes and indexing\n3-element Array{Int64,1}:\n 1\n 2\n 3\n\njulia> broadcastable(Int) # Types don\'t support axes, indexing, or iteration but are commonly used as scalars\nBase.RefValue{Type{Int64}}(Int64)\n\njulia> broadcastable(\"hello\") # Strings break convention of matching iteration and act like a scalar instead\nBase.RefValue{String}(\"hello\")\n\n\n\n\n\n"
+},
+
+{
     "location": "base/arrays/#Broadcast-and-vectorization-1",
     "page": "Arrays",
     "title": "Broadcast and vectorization",
     "category": "section",
-    "text": "See also the dot syntax for vectorizing functions; for example, f.(args...) implicitly calls broadcast(f, args...). Rather than relying on \"vectorized\" methods of functions like sin to operate on arrays, you should use sin.(a) to vectorize via broadcast.Base.broadcast\nBase.Broadcast.broadcast!\nBase.@__dot__\nBase.Broadcast.broadcast_getindex\nBase.Broadcast.broadcast_setindex!For specializing broadcast on custom types, seeBase.BroadcastStyle\nBase.broadcast_similar\nBase.broadcast_indices\nBase.Broadcast.Scalar\nBase.Broadcast.AbstractArrayStyle\nBase.Broadcast.ArrayStyle\nBase.Broadcast.DefaultArrayStyle"
+    "text": "See also the dot syntax for vectorizing functions; for example, f.(args...) implicitly calls broadcast(f, args...). Rather than relying on \"vectorized\" methods of functions like sin to operate on arrays, you should use sin.(a) to vectorize via broadcast.Base.broadcast\nBase.Broadcast.broadcast!\nBase.@__dot__\nBase.Broadcast.broadcast_getindex\nBase.Broadcast.broadcast_setindex!For specializing broadcast on custom types, seeBase.BroadcastStyle\nBase.broadcast_similar\nBase.broadcast_indices\nBase.Broadcast.AbstractArrayStyle\nBase.Broadcast.ArrayStyle\nBase.Broadcast.DefaultArrayStyle\nBase.Broadcast.broadcastable"
 },
 
 {
@@ -13441,11 +12449,11 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "base/c/#Base.cfunction",
+    "location": "base/c/#Base.@cfunction",
     "page": "C Interface",
-    "title": "Base.cfunction",
-    "category": "function",
-    "text": "cfunction(f::Function, returntype::Type, argtypes::Type) -> Ptr{Cvoid}\n\nGenerate C-callable function pointer from the Julia function f. Type annotation of the return value in the callback function is a must for situations where Julia cannot infer the return type automatically.\n\nExamples\n\njulia> function foo(x::Int, y::Int)\n           return x + y\n       end\n\njulia> cfunction(foo, Int, Tuple{Int,Int})\nPtr{Cvoid} @0x000000001b82fcd0\n\n\n\n\n\n"
+    "title": "Base.@cfunction",
+    "category": "macro",
+    "text": "@cfunction(callable, ReturnType, (ArgumentTypes...,)) -> Ptr{Cvoid}\n@cfunction($callable, ReturnType, (ArgumentTypes...,)) -> CFunction\n\nGenerate a C-callable function pointer from the Julia function closure for the given type signature.\n\nNote that the argument type tuple must be a literal tuple, and not a tuple-valued variable or expression (although it can include a splat expression). And that these arguments will be evaluated in global scope during compile-time (not deferred until runtime). Adding a $ in front of the function argument changes this to instead create a runtime closure over the local variable callable.\n\nSee manual section on ccall and cfunction usage.\n\nExamples\n\njulia> function foo(x::Int, y::Int)\n           return x + y\n       end\n\njulia> @cfunction(foo, Int, (Int, Int))\nPtr{Cvoid} @0x000000001b82fcd0\n\n\n\n\n\n"
 },
 
 {
@@ -13725,7 +12733,7 @@ var documenterSearchIndex = {"docs": [
     "page": "C Interface",
     "title": "C Interface",
     "category": "section",
-    "text": "ccall\nCore.Intrinsics.cglobal\nBase.cfunction\nBase.unsafe_convert\nBase.cconvert\nBase.unsafe_load\nBase.unsafe_store!\nBase.unsafe_copyto!{T}(::Ptr{T}, ::Ptr{T}, ::Any)\nBase.unsafe_copyto!{T}(::Array{T}, ::Any, ::Array{T}, ::Any, ::Any)\nBase.copyto!\nBase.pointer\nBase.unsafe_wrap{T,N}(::Union{Type{Array},Type{Array{T}},Type{Array{T,N}}}, ::Ptr{T}, ::NTuple{N,Int})\nBase.pointer_from_objref\nBase.unsafe_pointer_to_objref\nBase.disable_sigint\nBase.reenable_sigint\nBase.systemerror\nCore.Ptr\nCore.Ref\nBase.Cchar\nBase.Cuchar\nBase.Cshort\nBase.Cushort\nBase.Cint\nBase.Cuint\nBase.Clong\nBase.Culong\nBase.Clonglong\nBase.Culonglong\nBase.Cintmax_t\nBase.Cuintmax_t\nBase.Csize_t\nBase.Cssize_t\nBase.Cptrdiff_t\nBase.Cwchar_t\nBase.Cfloat\nBase.Cdouble"
+    "text": "ccall\nCore.Intrinsics.cglobal\nBase.@cfunction\nBase.unsafe_convert\nBase.cconvert\nBase.unsafe_load\nBase.unsafe_store!\nBase.unsafe_copyto!{T}(::Ptr{T}, ::Ptr{T}, ::Any)\nBase.unsafe_copyto!{T}(::Array{T}, ::Any, ::Array{T}, ::Any, ::Any)\nBase.copyto!\nBase.pointer\nBase.unsafe_wrap{T,N}(::Union{Type{Array},Type{Array{T}},Type{Array{T,N}}}, ::Ptr{T}, ::NTuple{N,Int})\nBase.pointer_from_objref\nBase.unsafe_pointer_to_objref\nBase.disable_sigint\nBase.reenable_sigint\nBase.systemerror\nCore.Ptr\nCore.Ref\nBase.Cchar\nBase.Cuchar\nBase.Cshort\nBase.Cushort\nBase.Cint\nBase.Cuint\nBase.Clong\nBase.Culong\nBase.Clonglong\nBase.Culonglong\nBase.Cintmax_t\nBase.Cuintmax_t\nBase.Csize_t\nBase.Cssize_t\nBase.Cptrdiff_t\nBase.Cwchar_t\nBase.Cfloat\nBase.Cdouble"
 },
 
 {
@@ -16649,7 +15657,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/LinearAlgebra/#Base.exp-Tuple{Union{DenseArray{#s43,2}, Base.ReinterpretArray{#s43,2,S,A} where S where A<:Union{SubArray{T,N,A,I,true} where I<:Tuple{AbstractUnitRange,Vararg{Any,N} where N} where A<:DenseArray where N where T, DenseArray}, Base.ReshapedArray{#s43,2,A,MI} where MI<:Tuple{Vararg{Base.MultiplicativeInverses.SignedMultiplicativeInverse{Int64},N} where N} where A<:Union{SubArray{T,N,A,I,true} where I<:Tuple{AbstractUnitRange,Vararg{Any,N} where N} where A<:DenseArray where N where T, DenseArray}, SubArray{#s43,2,A,I,L} where L where I<:Tuple{Vararg{Union{Int64, AbstractRange{Int64}, Base.AbstractCartesianIndex},N} where N} where A<:Union{Base.ReshapedArray{T,N,A,MI} where MI<:Tuple{Vararg{Base.MultiplicativeInverses.SignedMultiplicativeInverse{Int64},N} where N} where A<:Union{SubArray{T,N,A,I,true} where I<:Tuple{AbstractUnitRange,Vararg{Any,N} where N} where A<:DenseArray where N where T, DenseArray} where N where T, DenseArray}} where #s43<:Union{Complex{Float32}, Complex{Float64}, Float32, Float64}}",
+    "location": "stdlib/LinearAlgebra/#Base.exp-Tuple{Union{DenseArray{#s43,2}, Base.ReinterpretArray{#s43,2,S,A} where S where A<:Union{SubArray{T,N,A,I,true} where I<:Tuple{AbstractUnitRange,Vararg{Any,N} where N} where A<:DenseArray where N where T, DenseArray}, Base.ReshapedArray{#s43,2,A,MI} where MI<:Tuple{Vararg{Base.MultiplicativeInverses.SignedMultiplicativeInverse{Int64},N} where N} where A<:Union{Base.ReinterpretArray{T,N,S,A} where S where A<:Union{SubArray{T,N,A,I,true} where I<:Tuple{AbstractUnitRange,Vararg{Any,N} where N} where A<:DenseArray where N where T, DenseArray} where N where T, SubArray{T,N,A,I,true} where I<:Tuple{AbstractUnitRange,Vararg{Any,N} where N} where A<:DenseArray where N where T, DenseArray}, SubArray{#s43,2,A,I,L} where L where I<:Tuple{Vararg{Union{Int64, AbstractRange{Int64}, Base.AbstractCartesianIndex},N} where N} where A<:Union{Base.ReinterpretArray{T,N,S,A} where S where A<:Union{SubArray{T,N,A,I,true} where I<:Tuple{AbstractUnitRange,Vararg{Any,N} where N} where A<:DenseArray where N where T, DenseArray} where N where T, Base.ReshapedArray{T,N,A,MI} where MI<:Tuple{Vararg{Base.MultiplicativeInverses.SignedMultiplicativeInverse{Int64},N} where N} where A<:Union{Base.ReinterpretArray{T,N,S,A} where S where A<:Union{SubArray{T,N,A,I,true} where I<:Tuple{AbstractUnitRange,Vararg{Any,N} where N} where A<:DenseArray where N where T, DenseArray} where N where T, SubArray{T,N,A,I,true} where I<:Tuple{AbstractUnitRange,Vararg{Any,N} where N} where A<:DenseArray where N where T, DenseArray} where N where T, DenseArray}} where #s43<:Union{Complex{Float32}, Complex{Float64}, Float32, Float64}}",
     "page": "Linear Algebra",
     "title": "Base.exp",
     "category": "method",
@@ -16657,7 +15665,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/LinearAlgebra/#Base.log-Tuple{Union{DenseArray{T,2}, Base.ReinterpretArray{T,2,S,A} where S where A<:Union{SubArray{T,N,A,I,true} where I<:Tuple{AbstractUnitRange,Vararg{Any,N} where N} where A<:DenseArray where N where T, DenseArray}, Base.ReshapedArray{T,2,A,MI} where MI<:Tuple{Vararg{Base.MultiplicativeInverses.SignedMultiplicativeInverse{Int64},N} where N} where A<:Union{SubArray{T,N,A,I,true} where I<:Tuple{AbstractUnitRange,Vararg{Any,N} where N} where A<:DenseArray where N where T, DenseArray}, SubArray{T,2,A,I,L} where L where I<:Tuple{Vararg{Union{Int64, AbstractRange{Int64}, Base.AbstractCartesianIndex},N} where N} where A<:Union{Base.ReshapedArray{T,N,A,MI} where MI<:Tuple{Vararg{Base.MultiplicativeInverses.SignedMultiplicativeInverse{Int64},N} where N} where A<:Union{SubArray{T,N,A,I,true} where I<:Tuple{AbstractUnitRange,Vararg{Any,N} where N} where A<:DenseArray where N where T, DenseArray} where N where T, DenseArray}} where T}",
+    "location": "stdlib/LinearAlgebra/#Base.log-Tuple{Union{DenseArray{T,2}, Base.ReinterpretArray{T,2,S,A} where S where A<:Union{SubArray{T,N,A,I,true} where I<:Tuple{AbstractUnitRange,Vararg{Any,N} where N} where A<:DenseArray where N where T, DenseArray}, Base.ReshapedArray{T,2,A,MI} where MI<:Tuple{Vararg{Base.MultiplicativeInverses.SignedMultiplicativeInverse{Int64},N} where N} where A<:Union{Base.ReinterpretArray{T,N,S,A} where S where A<:Union{SubArray{T,N,A,I,true} where I<:Tuple{AbstractUnitRange,Vararg{Any,N} where N} where A<:DenseArray where N where T, DenseArray} where N where T, SubArray{T,N,A,I,true} where I<:Tuple{AbstractUnitRange,Vararg{Any,N} where N} where A<:DenseArray where N where T, DenseArray}, SubArray{T,2,A,I,L} where L where I<:Tuple{Vararg{Union{Int64, AbstractRange{Int64}, Base.AbstractCartesianIndex},N} where N} where A<:Union{Base.ReinterpretArray{T,N,S,A} where S where A<:Union{SubArray{T,N,A,I,true} where I<:Tuple{AbstractUnitRange,Vararg{Any,N} where N} where A<:DenseArray where N where T, DenseArray} where N where T, Base.ReshapedArray{T,N,A,MI} where MI<:Tuple{Vararg{Base.MultiplicativeInverses.SignedMultiplicativeInverse{Int64},N} where N} where A<:Union{Base.ReinterpretArray{T,N,S,A} where S where A<:Union{SubArray{T,N,A,I,true} where I<:Tuple{AbstractUnitRange,Vararg{Any,N} where N} where A<:DenseArray where N where T, DenseArray} where N where T, SubArray{T,N,A,I,true} where I<:Tuple{AbstractUnitRange,Vararg{Any,N} where N} where A<:DenseArray where N where T, DenseArray} where N where T, DenseArray}} where T}",
     "page": "Linear Algebra",
     "title": "Base.log",
     "category": "method",
@@ -16665,7 +15673,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/LinearAlgebra/#Base.sqrt-Tuple{Union{DenseArray{#s43,2}, Base.ReinterpretArray{#s43,2,S,A} where S where A<:Union{SubArray{T,N,A,I,true} where I<:Tuple{AbstractUnitRange,Vararg{Any,N} where N} where A<:DenseArray where N where T, DenseArray}, Base.ReshapedArray{#s43,2,A,MI} where MI<:Tuple{Vararg{Base.MultiplicativeInverses.SignedMultiplicativeInverse{Int64},N} where N} where A<:Union{SubArray{T,N,A,I,true} where I<:Tuple{AbstractUnitRange,Vararg{Any,N} where N} where A<:DenseArray where N where T, DenseArray}, SubArray{#s43,2,A,I,L} where L where I<:Tuple{Vararg{Union{Int64, AbstractRange{Int64}, Base.AbstractCartesianIndex},N} where N} where A<:Union{Base.ReshapedArray{T,N,A,MI} where MI<:Tuple{Vararg{Base.MultiplicativeInverses.SignedMultiplicativeInverse{Int64},N} where N} where A<:Union{SubArray{T,N,A,I,true} where I<:Tuple{AbstractUnitRange,Vararg{Any,N} where N} where A<:DenseArray where N where T, DenseArray} where N where T, DenseArray}} where #s43<:Real}",
+    "location": "stdlib/LinearAlgebra/#Base.sqrt-Tuple{Union{DenseArray{#s43,2}, Base.ReinterpretArray{#s43,2,S,A} where S where A<:Union{SubArray{T,N,A,I,true} where I<:Tuple{AbstractUnitRange,Vararg{Any,N} where N} where A<:DenseArray where N where T, DenseArray}, Base.ReshapedArray{#s43,2,A,MI} where MI<:Tuple{Vararg{Base.MultiplicativeInverses.SignedMultiplicativeInverse{Int64},N} where N} where A<:Union{Base.ReinterpretArray{T,N,S,A} where S where A<:Union{SubArray{T,N,A,I,true} where I<:Tuple{AbstractUnitRange,Vararg{Any,N} where N} where A<:DenseArray where N where T, DenseArray} where N where T, SubArray{T,N,A,I,true} where I<:Tuple{AbstractUnitRange,Vararg{Any,N} where N} where A<:DenseArray where N where T, DenseArray}, SubArray{#s43,2,A,I,L} where L where I<:Tuple{Vararg{Union{Int64, AbstractRange{Int64}, Base.AbstractCartesianIndex},N} where N} where A<:Union{Base.ReinterpretArray{T,N,S,A} where S where A<:Union{SubArray{T,N,A,I,true} where I<:Tuple{AbstractUnitRange,Vararg{Any,N} where N} where A<:DenseArray where N where T, DenseArray} where N where T, Base.ReshapedArray{T,N,A,MI} where MI<:Tuple{Vararg{Base.MultiplicativeInverses.SignedMultiplicativeInverse{Int64},N} where N} where A<:Union{Base.ReinterpretArray{T,N,S,A} where S where A<:Union{SubArray{T,N,A,I,true} where I<:Tuple{AbstractUnitRange,Vararg{Any,N} where N} where A<:DenseArray where N where T, DenseArray} where N where T, SubArray{T,N,A,I,true} where I<:Tuple{AbstractUnitRange,Vararg{Any,N} where N} where A<:DenseArray where N where T, DenseArray} where N where T, DenseArray}} where #s43<:Real}",
     "page": "Linear Algebra",
     "title": "Base.sqrt",
     "category": "method",
@@ -16673,7 +15681,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/LinearAlgebra/#Base.cos-Tuple{Union{DenseArray{#s43,2}, Base.ReinterpretArray{#s43,2,S,A} where S where A<:Union{SubArray{T,N,A,I,true} where I<:Tuple{AbstractUnitRange,Vararg{Any,N} where N} where A<:DenseArray where N where T, DenseArray}, Base.ReshapedArray{#s43,2,A,MI} where MI<:Tuple{Vararg{Base.MultiplicativeInverses.SignedMultiplicativeInverse{Int64},N} where N} where A<:Union{SubArray{T,N,A,I,true} where I<:Tuple{AbstractUnitRange,Vararg{Any,N} where N} where A<:DenseArray where N where T, DenseArray}, SubArray{#s43,2,A,I,L} where L where I<:Tuple{Vararg{Union{Int64, AbstractRange{Int64}, Base.AbstractCartesianIndex},N} where N} where A<:Union{Base.ReshapedArray{T,N,A,MI} where MI<:Tuple{Vararg{Base.MultiplicativeInverses.SignedMultiplicativeInverse{Int64},N} where N} where A<:Union{SubArray{T,N,A,I,true} where I<:Tuple{AbstractUnitRange,Vararg{Any,N} where N} where A<:DenseArray where N where T, DenseArray} where N where T, DenseArray}} where #s43<:Real}",
+    "location": "stdlib/LinearAlgebra/#Base.cos-Tuple{Union{DenseArray{#s43,2}, Base.ReinterpretArray{#s43,2,S,A} where S where A<:Union{SubArray{T,N,A,I,true} where I<:Tuple{AbstractUnitRange,Vararg{Any,N} where N} where A<:DenseArray where N where T, DenseArray}, Base.ReshapedArray{#s43,2,A,MI} where MI<:Tuple{Vararg{Base.MultiplicativeInverses.SignedMultiplicativeInverse{Int64},N} where N} where A<:Union{Base.ReinterpretArray{T,N,S,A} where S where A<:Union{SubArray{T,N,A,I,true} where I<:Tuple{AbstractUnitRange,Vararg{Any,N} where N} where A<:DenseArray where N where T, DenseArray} where N where T, SubArray{T,N,A,I,true} where I<:Tuple{AbstractUnitRange,Vararg{Any,N} where N} where A<:DenseArray where N where T, DenseArray}, SubArray{#s43,2,A,I,L} where L where I<:Tuple{Vararg{Union{Int64, AbstractRange{Int64}, Base.AbstractCartesianIndex},N} where N} where A<:Union{Base.ReinterpretArray{T,N,S,A} where S where A<:Union{SubArray{T,N,A,I,true} where I<:Tuple{AbstractUnitRange,Vararg{Any,N} where N} where A<:DenseArray where N where T, DenseArray} where N where T, Base.ReshapedArray{T,N,A,MI} where MI<:Tuple{Vararg{Base.MultiplicativeInverses.SignedMultiplicativeInverse{Int64},N} where N} where A<:Union{Base.ReinterpretArray{T,N,S,A} where S where A<:Union{SubArray{T,N,A,I,true} where I<:Tuple{AbstractUnitRange,Vararg{Any,N} where N} where A<:DenseArray where N where T, DenseArray} where N where T, SubArray{T,N,A,I,true} where I<:Tuple{AbstractUnitRange,Vararg{Any,N} where N} where A<:DenseArray where N where T, DenseArray} where N where T, DenseArray}} where #s43<:Real}",
     "page": "Linear Algebra",
     "title": "Base.cos",
     "category": "method",
@@ -16681,7 +15689,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/LinearAlgebra/#Base.sin-Tuple{Union{DenseArray{#s43,2}, Base.ReinterpretArray{#s43,2,S,A} where S where A<:Union{SubArray{T,N,A,I,true} where I<:Tuple{AbstractUnitRange,Vararg{Any,N} where N} where A<:DenseArray where N where T, DenseArray}, Base.ReshapedArray{#s43,2,A,MI} where MI<:Tuple{Vararg{Base.MultiplicativeInverses.SignedMultiplicativeInverse{Int64},N} where N} where A<:Union{SubArray{T,N,A,I,true} where I<:Tuple{AbstractUnitRange,Vararg{Any,N} where N} where A<:DenseArray where N where T, DenseArray}, SubArray{#s43,2,A,I,L} where L where I<:Tuple{Vararg{Union{Int64, AbstractRange{Int64}, Base.AbstractCartesianIndex},N} where N} where A<:Union{Base.ReshapedArray{T,N,A,MI} where MI<:Tuple{Vararg{Base.MultiplicativeInverses.SignedMultiplicativeInverse{Int64},N} where N} where A<:Union{SubArray{T,N,A,I,true} where I<:Tuple{AbstractUnitRange,Vararg{Any,N} where N} where A<:DenseArray where N where T, DenseArray} where N where T, DenseArray}} where #s43<:Real}",
+    "location": "stdlib/LinearAlgebra/#Base.sin-Tuple{Union{DenseArray{#s43,2}, Base.ReinterpretArray{#s43,2,S,A} where S where A<:Union{SubArray{T,N,A,I,true} where I<:Tuple{AbstractUnitRange,Vararg{Any,N} where N} where A<:DenseArray where N where T, DenseArray}, Base.ReshapedArray{#s43,2,A,MI} where MI<:Tuple{Vararg{Base.MultiplicativeInverses.SignedMultiplicativeInverse{Int64},N} where N} where A<:Union{Base.ReinterpretArray{T,N,S,A} where S where A<:Union{SubArray{T,N,A,I,true} where I<:Tuple{AbstractUnitRange,Vararg{Any,N} where N} where A<:DenseArray where N where T, DenseArray} where N where T, SubArray{T,N,A,I,true} where I<:Tuple{AbstractUnitRange,Vararg{Any,N} where N} where A<:DenseArray where N where T, DenseArray}, SubArray{#s43,2,A,I,L} where L where I<:Tuple{Vararg{Union{Int64, AbstractRange{Int64}, Base.AbstractCartesianIndex},N} where N} where A<:Union{Base.ReinterpretArray{T,N,S,A} where S where A<:Union{SubArray{T,N,A,I,true} where I<:Tuple{AbstractUnitRange,Vararg{Any,N} where N} where A<:DenseArray where N where T, DenseArray} where N where T, Base.ReshapedArray{T,N,A,MI} where MI<:Tuple{Vararg{Base.MultiplicativeInverses.SignedMultiplicativeInverse{Int64},N} where N} where A<:Union{Base.ReinterpretArray{T,N,S,A} where S where A<:Union{SubArray{T,N,A,I,true} where I<:Tuple{AbstractUnitRange,Vararg{Any,N} where N} where A<:DenseArray where N where T, DenseArray} where N where T, SubArray{T,N,A,I,true} where I<:Tuple{AbstractUnitRange,Vararg{Any,N} where N} where A<:DenseArray where N where T, DenseArray} where N where T, DenseArray}} where #s43<:Real}",
     "page": "Linear Algebra",
     "title": "Base.sin",
     "category": "method",
@@ -16689,7 +15697,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/LinearAlgebra/#Base.Math.sincos-Tuple{Union{DenseArray{#s43,2}, Base.ReinterpretArray{#s43,2,S,A} where S where A<:Union{SubArray{T,N,A,I,true} where I<:Tuple{AbstractUnitRange,Vararg{Any,N} where N} where A<:DenseArray where N where T, DenseArray}, Base.ReshapedArray{#s43,2,A,MI} where MI<:Tuple{Vararg{Base.MultiplicativeInverses.SignedMultiplicativeInverse{Int64},N} where N} where A<:Union{SubArray{T,N,A,I,true} where I<:Tuple{AbstractUnitRange,Vararg{Any,N} where N} where A<:DenseArray where N where T, DenseArray}, SubArray{#s43,2,A,I,L} where L where I<:Tuple{Vararg{Union{Int64, AbstractRange{Int64}, Base.AbstractCartesianIndex},N} where N} where A<:Union{Base.ReshapedArray{T,N,A,MI} where MI<:Tuple{Vararg{Base.MultiplicativeInverses.SignedMultiplicativeInverse{Int64},N} where N} where A<:Union{SubArray{T,N,A,I,true} where I<:Tuple{AbstractUnitRange,Vararg{Any,N} where N} where A<:DenseArray where N where T, DenseArray} where N where T, DenseArray}} where #s43<:Real}",
+    "location": "stdlib/LinearAlgebra/#Base.Math.sincos-Tuple{Union{DenseArray{#s43,2}, Base.ReinterpretArray{#s43,2,S,A} where S where A<:Union{SubArray{T,N,A,I,true} where I<:Tuple{AbstractUnitRange,Vararg{Any,N} where N} where A<:DenseArray where N where T, DenseArray}, Base.ReshapedArray{#s43,2,A,MI} where MI<:Tuple{Vararg{Base.MultiplicativeInverses.SignedMultiplicativeInverse{Int64},N} where N} where A<:Union{Base.ReinterpretArray{T,N,S,A} where S where A<:Union{SubArray{T,N,A,I,true} where I<:Tuple{AbstractUnitRange,Vararg{Any,N} where N} where A<:DenseArray where N where T, DenseArray} where N where T, SubArray{T,N,A,I,true} where I<:Tuple{AbstractUnitRange,Vararg{Any,N} where N} where A<:DenseArray where N where T, DenseArray}, SubArray{#s43,2,A,I,L} where L where I<:Tuple{Vararg{Union{Int64, AbstractRange{Int64}, Base.AbstractCartesianIndex},N} where N} where A<:Union{Base.ReinterpretArray{T,N,S,A} where S where A<:Union{SubArray{T,N,A,I,true} where I<:Tuple{AbstractUnitRange,Vararg{Any,N} where N} where A<:DenseArray where N where T, DenseArray} where N where T, Base.ReshapedArray{T,N,A,MI} where MI<:Tuple{Vararg{Base.MultiplicativeInverses.SignedMultiplicativeInverse{Int64},N} where N} where A<:Union{Base.ReinterpretArray{T,N,S,A} where S where A<:Union{SubArray{T,N,A,I,true} where I<:Tuple{AbstractUnitRange,Vararg{Any,N} where N} where A<:DenseArray where N where T, DenseArray} where N where T, SubArray{T,N,A,I,true} where I<:Tuple{AbstractUnitRange,Vararg{Any,N} where N} where A<:DenseArray where N where T, DenseArray} where N where T, DenseArray}} where #s43<:Real}",
     "page": "Linear Algebra",
     "title": "Base.Math.sincos",
     "category": "method",
@@ -16697,7 +15705,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/LinearAlgebra/#Base.tan-Tuple{Union{DenseArray{#s43,2}, Base.ReinterpretArray{#s43,2,S,A} where S where A<:Union{SubArray{T,N,A,I,true} where I<:Tuple{AbstractUnitRange,Vararg{Any,N} where N} where A<:DenseArray where N where T, DenseArray}, Base.ReshapedArray{#s43,2,A,MI} where MI<:Tuple{Vararg{Base.MultiplicativeInverses.SignedMultiplicativeInverse{Int64},N} where N} where A<:Union{SubArray{T,N,A,I,true} where I<:Tuple{AbstractUnitRange,Vararg{Any,N} where N} where A<:DenseArray where N where T, DenseArray}, SubArray{#s43,2,A,I,L} where L where I<:Tuple{Vararg{Union{Int64, AbstractRange{Int64}, Base.AbstractCartesianIndex},N} where N} where A<:Union{Base.ReshapedArray{T,N,A,MI} where MI<:Tuple{Vararg{Base.MultiplicativeInverses.SignedMultiplicativeInverse{Int64},N} where N} where A<:Union{SubArray{T,N,A,I,true} where I<:Tuple{AbstractUnitRange,Vararg{Any,N} where N} where A<:DenseArray where N where T, DenseArray} where N where T, DenseArray}} where #s43<:Real}",
+    "location": "stdlib/LinearAlgebra/#Base.tan-Tuple{Union{DenseArray{#s43,2}, Base.ReinterpretArray{#s43,2,S,A} where S where A<:Union{SubArray{T,N,A,I,true} where I<:Tuple{AbstractUnitRange,Vararg{Any,N} where N} where A<:DenseArray where N where T, DenseArray}, Base.ReshapedArray{#s43,2,A,MI} where MI<:Tuple{Vararg{Base.MultiplicativeInverses.SignedMultiplicativeInverse{Int64},N} where N} where A<:Union{Base.ReinterpretArray{T,N,S,A} where S where A<:Union{SubArray{T,N,A,I,true} where I<:Tuple{AbstractUnitRange,Vararg{Any,N} where N} where A<:DenseArray where N where T, DenseArray} where N where T, SubArray{T,N,A,I,true} where I<:Tuple{AbstractUnitRange,Vararg{Any,N} where N} where A<:DenseArray where N where T, DenseArray}, SubArray{#s43,2,A,I,L} where L where I<:Tuple{Vararg{Union{Int64, AbstractRange{Int64}, Base.AbstractCartesianIndex},N} where N} where A<:Union{Base.ReinterpretArray{T,N,S,A} where S where A<:Union{SubArray{T,N,A,I,true} where I<:Tuple{AbstractUnitRange,Vararg{Any,N} where N} where A<:DenseArray where N where T, DenseArray} where N where T, Base.ReshapedArray{T,N,A,MI} where MI<:Tuple{Vararg{Base.MultiplicativeInverses.SignedMultiplicativeInverse{Int64},N} where N} where A<:Union{Base.ReinterpretArray{T,N,S,A} where S where A<:Union{SubArray{T,N,A,I,true} where I<:Tuple{AbstractUnitRange,Vararg{Any,N} where N} where A<:DenseArray where N where T, DenseArray} where N where T, SubArray{T,N,A,I,true} where I<:Tuple{AbstractUnitRange,Vararg{Any,N} where N} where A<:DenseArray where N where T, DenseArray} where N where T, DenseArray}} where #s43<:Real}",
     "page": "Linear Algebra",
     "title": "Base.tan",
     "category": "method",
@@ -16705,7 +15713,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/LinearAlgebra/#Base.Math.sec-Tuple{Union{DenseArray{T,2}, Base.ReinterpretArray{T,2,S,A} where S where A<:Union{SubArray{T,N,A,I,true} where I<:Tuple{AbstractUnitRange,Vararg{Any,N} where N} where A<:DenseArray where N where T, DenseArray}, Base.ReshapedArray{T,2,A,MI} where MI<:Tuple{Vararg{Base.MultiplicativeInverses.SignedMultiplicativeInverse{Int64},N} where N} where A<:Union{SubArray{T,N,A,I,true} where I<:Tuple{AbstractUnitRange,Vararg{Any,N} where N} where A<:DenseArray where N where T, DenseArray}, SubArray{T,2,A,I,L} where L where I<:Tuple{Vararg{Union{Int64, AbstractRange{Int64}, Base.AbstractCartesianIndex},N} where N} where A<:Union{Base.ReshapedArray{T,N,A,MI} where MI<:Tuple{Vararg{Base.MultiplicativeInverses.SignedMultiplicativeInverse{Int64},N} where N} where A<:Union{SubArray{T,N,A,I,true} where I<:Tuple{AbstractUnitRange,Vararg{Any,N} where N} where A<:DenseArray where N where T, DenseArray} where N where T, DenseArray}} where T}",
+    "location": "stdlib/LinearAlgebra/#Base.Math.sec-Tuple{Union{DenseArray{T,2}, Base.ReinterpretArray{T,2,S,A} where S where A<:Union{SubArray{T,N,A,I,true} where I<:Tuple{AbstractUnitRange,Vararg{Any,N} where N} where A<:DenseArray where N where T, DenseArray}, Base.ReshapedArray{T,2,A,MI} where MI<:Tuple{Vararg{Base.MultiplicativeInverses.SignedMultiplicativeInverse{Int64},N} where N} where A<:Union{Base.ReinterpretArray{T,N,S,A} where S where A<:Union{SubArray{T,N,A,I,true} where I<:Tuple{AbstractUnitRange,Vararg{Any,N} where N} where A<:DenseArray where N where T, DenseArray} where N where T, SubArray{T,N,A,I,true} where I<:Tuple{AbstractUnitRange,Vararg{Any,N} where N} where A<:DenseArray where N where T, DenseArray}, SubArray{T,2,A,I,L} where L where I<:Tuple{Vararg{Union{Int64, AbstractRange{Int64}, Base.AbstractCartesianIndex},N} where N} where A<:Union{Base.ReinterpretArray{T,N,S,A} where S where A<:Union{SubArray{T,N,A,I,true} where I<:Tuple{AbstractUnitRange,Vararg{Any,N} where N} where A<:DenseArray where N where T, DenseArray} where N where T, Base.ReshapedArray{T,N,A,MI} where MI<:Tuple{Vararg{Base.MultiplicativeInverses.SignedMultiplicativeInverse{Int64},N} where N} where A<:Union{Base.ReinterpretArray{T,N,S,A} where S where A<:Union{SubArray{T,N,A,I,true} where I<:Tuple{AbstractUnitRange,Vararg{Any,N} where N} where A<:DenseArray where N where T, DenseArray} where N where T, SubArray{T,N,A,I,true} where I<:Tuple{AbstractUnitRange,Vararg{Any,N} where N} where A<:DenseArray where N where T, DenseArray} where N where T, DenseArray}} where T}",
     "page": "Linear Algebra",
     "title": "Base.Math.sec",
     "category": "method",
@@ -16713,7 +15721,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/LinearAlgebra/#Base.Math.csc-Tuple{Union{DenseArray{T,2}, Base.ReinterpretArray{T,2,S,A} where S where A<:Union{SubArray{T,N,A,I,true} where I<:Tuple{AbstractUnitRange,Vararg{Any,N} where N} where A<:DenseArray where N where T, DenseArray}, Base.ReshapedArray{T,2,A,MI} where MI<:Tuple{Vararg{Base.MultiplicativeInverses.SignedMultiplicativeInverse{Int64},N} where N} where A<:Union{SubArray{T,N,A,I,true} where I<:Tuple{AbstractUnitRange,Vararg{Any,N} where N} where A<:DenseArray where N where T, DenseArray}, SubArray{T,2,A,I,L} where L where I<:Tuple{Vararg{Union{Int64, AbstractRange{Int64}, Base.AbstractCartesianIndex},N} where N} where A<:Union{Base.ReshapedArray{T,N,A,MI} where MI<:Tuple{Vararg{Base.MultiplicativeInverses.SignedMultiplicativeInverse{Int64},N} where N} where A<:Union{SubArray{T,N,A,I,true} where I<:Tuple{AbstractUnitRange,Vararg{Any,N} where N} where A<:DenseArray where N where T, DenseArray} where N where T, DenseArray}} where T}",
+    "location": "stdlib/LinearAlgebra/#Base.Math.csc-Tuple{Union{DenseArray{T,2}, Base.ReinterpretArray{T,2,S,A} where S where A<:Union{SubArray{T,N,A,I,true} where I<:Tuple{AbstractUnitRange,Vararg{Any,N} where N} where A<:DenseArray where N where T, DenseArray}, Base.ReshapedArray{T,2,A,MI} where MI<:Tuple{Vararg{Base.MultiplicativeInverses.SignedMultiplicativeInverse{Int64},N} where N} where A<:Union{Base.ReinterpretArray{T,N,S,A} where S where A<:Union{SubArray{T,N,A,I,true} where I<:Tuple{AbstractUnitRange,Vararg{Any,N} where N} where A<:DenseArray where N where T, DenseArray} where N where T, SubArray{T,N,A,I,true} where I<:Tuple{AbstractUnitRange,Vararg{Any,N} where N} where A<:DenseArray where N where T, DenseArray}, SubArray{T,2,A,I,L} where L where I<:Tuple{Vararg{Union{Int64, AbstractRange{Int64}, Base.AbstractCartesianIndex},N} where N} where A<:Union{Base.ReinterpretArray{T,N,S,A} where S where A<:Union{SubArray{T,N,A,I,true} where I<:Tuple{AbstractUnitRange,Vararg{Any,N} where N} where A<:DenseArray where N where T, DenseArray} where N where T, Base.ReshapedArray{T,N,A,MI} where MI<:Tuple{Vararg{Base.MultiplicativeInverses.SignedMultiplicativeInverse{Int64},N} where N} where A<:Union{Base.ReinterpretArray{T,N,S,A} where S where A<:Union{SubArray{T,N,A,I,true} where I<:Tuple{AbstractUnitRange,Vararg{Any,N} where N} where A<:DenseArray where N where T, DenseArray} where N where T, SubArray{T,N,A,I,true} where I<:Tuple{AbstractUnitRange,Vararg{Any,N} where N} where A<:DenseArray where N where T, DenseArray} where N where T, DenseArray}} where T}",
     "page": "Linear Algebra",
     "title": "Base.Math.csc",
     "category": "method",
@@ -16721,7 +15729,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/LinearAlgebra/#Base.Math.cot-Tuple{Union{DenseArray{T,2}, Base.ReinterpretArray{T,2,S,A} where S where A<:Union{SubArray{T,N,A,I,true} where I<:Tuple{AbstractUnitRange,Vararg{Any,N} where N} where A<:DenseArray where N where T, DenseArray}, Base.ReshapedArray{T,2,A,MI} where MI<:Tuple{Vararg{Base.MultiplicativeInverses.SignedMultiplicativeInverse{Int64},N} where N} where A<:Union{SubArray{T,N,A,I,true} where I<:Tuple{AbstractUnitRange,Vararg{Any,N} where N} where A<:DenseArray where N where T, DenseArray}, SubArray{T,2,A,I,L} where L where I<:Tuple{Vararg{Union{Int64, AbstractRange{Int64}, Base.AbstractCartesianIndex},N} where N} where A<:Union{Base.ReshapedArray{T,N,A,MI} where MI<:Tuple{Vararg{Base.MultiplicativeInverses.SignedMultiplicativeInverse{Int64},N} where N} where A<:Union{SubArray{T,N,A,I,true} where I<:Tuple{AbstractUnitRange,Vararg{Any,N} where N} where A<:DenseArray where N where T, DenseArray} where N where T, DenseArray}} where T}",
+    "location": "stdlib/LinearAlgebra/#Base.Math.cot-Tuple{Union{DenseArray{T,2}, Base.ReinterpretArray{T,2,S,A} where S where A<:Union{SubArray{T,N,A,I,true} where I<:Tuple{AbstractUnitRange,Vararg{Any,N} where N} where A<:DenseArray where N where T, DenseArray}, Base.ReshapedArray{T,2,A,MI} where MI<:Tuple{Vararg{Base.MultiplicativeInverses.SignedMultiplicativeInverse{Int64},N} where N} where A<:Union{Base.ReinterpretArray{T,N,S,A} where S where A<:Union{SubArray{T,N,A,I,true} where I<:Tuple{AbstractUnitRange,Vararg{Any,N} where N} where A<:DenseArray where N where T, DenseArray} where N where T, SubArray{T,N,A,I,true} where I<:Tuple{AbstractUnitRange,Vararg{Any,N} where N} where A<:DenseArray where N where T, DenseArray}, SubArray{T,2,A,I,L} where L where I<:Tuple{Vararg{Union{Int64, AbstractRange{Int64}, Base.AbstractCartesianIndex},N} where N} where A<:Union{Base.ReinterpretArray{T,N,S,A} where S where A<:Union{SubArray{T,N,A,I,true} where I<:Tuple{AbstractUnitRange,Vararg{Any,N} where N} where A<:DenseArray where N where T, DenseArray} where N where T, Base.ReshapedArray{T,N,A,MI} where MI<:Tuple{Vararg{Base.MultiplicativeInverses.SignedMultiplicativeInverse{Int64},N} where N} where A<:Union{Base.ReinterpretArray{T,N,S,A} where S where A<:Union{SubArray{T,N,A,I,true} where I<:Tuple{AbstractUnitRange,Vararg{Any,N} where N} where A<:DenseArray where N where T, DenseArray} where N where T, SubArray{T,N,A,I,true} where I<:Tuple{AbstractUnitRange,Vararg{Any,N} where N} where A<:DenseArray where N where T, DenseArray} where N where T, DenseArray}} where T}",
     "page": "Linear Algebra",
     "title": "Base.Math.cot",
     "category": "method",
@@ -16729,7 +15737,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/LinearAlgebra/#Base.cosh-Tuple{Union{DenseArray{T,2}, Base.ReinterpretArray{T,2,S,A} where S where A<:Union{SubArray{T,N,A,I,true} where I<:Tuple{AbstractUnitRange,Vararg{Any,N} where N} where A<:DenseArray where N where T, DenseArray}, Base.ReshapedArray{T,2,A,MI} where MI<:Tuple{Vararg{Base.MultiplicativeInverses.SignedMultiplicativeInverse{Int64},N} where N} where A<:Union{SubArray{T,N,A,I,true} where I<:Tuple{AbstractUnitRange,Vararg{Any,N} where N} where A<:DenseArray where N where T, DenseArray}, SubArray{T,2,A,I,L} where L where I<:Tuple{Vararg{Union{Int64, AbstractRange{Int64}, Base.AbstractCartesianIndex},N} where N} where A<:Union{Base.ReshapedArray{T,N,A,MI} where MI<:Tuple{Vararg{Base.MultiplicativeInverses.SignedMultiplicativeInverse{Int64},N} where N} where A<:Union{SubArray{T,N,A,I,true} where I<:Tuple{AbstractUnitRange,Vararg{Any,N} where N} where A<:DenseArray where N where T, DenseArray} where N where T, DenseArray}} where T}",
+    "location": "stdlib/LinearAlgebra/#Base.cosh-Tuple{Union{DenseArray{T,2}, Base.ReinterpretArray{T,2,S,A} where S where A<:Union{SubArray{T,N,A,I,true} where I<:Tuple{AbstractUnitRange,Vararg{Any,N} where N} where A<:DenseArray where N where T, DenseArray}, Base.ReshapedArray{T,2,A,MI} where MI<:Tuple{Vararg{Base.MultiplicativeInverses.SignedMultiplicativeInverse{Int64},N} where N} where A<:Union{Base.ReinterpretArray{T,N,S,A} where S where A<:Union{SubArray{T,N,A,I,true} where I<:Tuple{AbstractUnitRange,Vararg{Any,N} where N} where A<:DenseArray where N where T, DenseArray} where N where T, SubArray{T,N,A,I,true} where I<:Tuple{AbstractUnitRange,Vararg{Any,N} where N} where A<:DenseArray where N where T, DenseArray}, SubArray{T,2,A,I,L} where L where I<:Tuple{Vararg{Union{Int64, AbstractRange{Int64}, Base.AbstractCartesianIndex},N} where N} where A<:Union{Base.ReinterpretArray{T,N,S,A} where S where A<:Union{SubArray{T,N,A,I,true} where I<:Tuple{AbstractUnitRange,Vararg{Any,N} where N} where A<:DenseArray where N where T, DenseArray} where N where T, Base.ReshapedArray{T,N,A,MI} where MI<:Tuple{Vararg{Base.MultiplicativeInverses.SignedMultiplicativeInverse{Int64},N} where N} where A<:Union{Base.ReinterpretArray{T,N,S,A} where S where A<:Union{SubArray{T,N,A,I,true} where I<:Tuple{AbstractUnitRange,Vararg{Any,N} where N} where A<:DenseArray where N where T, DenseArray} where N where T, SubArray{T,N,A,I,true} where I<:Tuple{AbstractUnitRange,Vararg{Any,N} where N} where A<:DenseArray where N where T, DenseArray} where N where T, DenseArray}} where T}",
     "page": "Linear Algebra",
     "title": "Base.cosh",
     "category": "method",
@@ -16737,7 +15745,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/LinearAlgebra/#Base.sinh-Tuple{Union{DenseArray{T,2}, Base.ReinterpretArray{T,2,S,A} where S where A<:Union{SubArray{T,N,A,I,true} where I<:Tuple{AbstractUnitRange,Vararg{Any,N} where N} where A<:DenseArray where N where T, DenseArray}, Base.ReshapedArray{T,2,A,MI} where MI<:Tuple{Vararg{Base.MultiplicativeInverses.SignedMultiplicativeInverse{Int64},N} where N} where A<:Union{SubArray{T,N,A,I,true} where I<:Tuple{AbstractUnitRange,Vararg{Any,N} where N} where A<:DenseArray where N where T, DenseArray}, SubArray{T,2,A,I,L} where L where I<:Tuple{Vararg{Union{Int64, AbstractRange{Int64}, Base.AbstractCartesianIndex},N} where N} where A<:Union{Base.ReshapedArray{T,N,A,MI} where MI<:Tuple{Vararg{Base.MultiplicativeInverses.SignedMultiplicativeInverse{Int64},N} where N} where A<:Union{SubArray{T,N,A,I,true} where I<:Tuple{AbstractUnitRange,Vararg{Any,N} where N} where A<:DenseArray where N where T, DenseArray} where N where T, DenseArray}} where T}",
+    "location": "stdlib/LinearAlgebra/#Base.sinh-Tuple{Union{DenseArray{T,2}, Base.ReinterpretArray{T,2,S,A} where S where A<:Union{SubArray{T,N,A,I,true} where I<:Tuple{AbstractUnitRange,Vararg{Any,N} where N} where A<:DenseArray where N where T, DenseArray}, Base.ReshapedArray{T,2,A,MI} where MI<:Tuple{Vararg{Base.MultiplicativeInverses.SignedMultiplicativeInverse{Int64},N} where N} where A<:Union{Base.ReinterpretArray{T,N,S,A} where S where A<:Union{SubArray{T,N,A,I,true} where I<:Tuple{AbstractUnitRange,Vararg{Any,N} where N} where A<:DenseArray where N where T, DenseArray} where N where T, SubArray{T,N,A,I,true} where I<:Tuple{AbstractUnitRange,Vararg{Any,N} where N} where A<:DenseArray where N where T, DenseArray}, SubArray{T,2,A,I,L} where L where I<:Tuple{Vararg{Union{Int64, AbstractRange{Int64}, Base.AbstractCartesianIndex},N} where N} where A<:Union{Base.ReinterpretArray{T,N,S,A} where S where A<:Union{SubArray{T,N,A,I,true} where I<:Tuple{AbstractUnitRange,Vararg{Any,N} where N} where A<:DenseArray where N where T, DenseArray} where N where T, Base.ReshapedArray{T,N,A,MI} where MI<:Tuple{Vararg{Base.MultiplicativeInverses.SignedMultiplicativeInverse{Int64},N} where N} where A<:Union{Base.ReinterpretArray{T,N,S,A} where S where A<:Union{SubArray{T,N,A,I,true} where I<:Tuple{AbstractUnitRange,Vararg{Any,N} where N} where A<:DenseArray where N where T, DenseArray} where N where T, SubArray{T,N,A,I,true} where I<:Tuple{AbstractUnitRange,Vararg{Any,N} where N} where A<:DenseArray where N where T, DenseArray} where N where T, DenseArray}} where T}",
     "page": "Linear Algebra",
     "title": "Base.sinh",
     "category": "method",
@@ -16745,7 +15753,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/LinearAlgebra/#Base.tanh-Tuple{Union{DenseArray{T,2}, Base.ReinterpretArray{T,2,S,A} where S where A<:Union{SubArray{T,N,A,I,true} where I<:Tuple{AbstractUnitRange,Vararg{Any,N} where N} where A<:DenseArray where N where T, DenseArray}, Base.ReshapedArray{T,2,A,MI} where MI<:Tuple{Vararg{Base.MultiplicativeInverses.SignedMultiplicativeInverse{Int64},N} where N} where A<:Union{SubArray{T,N,A,I,true} where I<:Tuple{AbstractUnitRange,Vararg{Any,N} where N} where A<:DenseArray where N where T, DenseArray}, SubArray{T,2,A,I,L} where L where I<:Tuple{Vararg{Union{Int64, AbstractRange{Int64}, Base.AbstractCartesianIndex},N} where N} where A<:Union{Base.ReshapedArray{T,N,A,MI} where MI<:Tuple{Vararg{Base.MultiplicativeInverses.SignedMultiplicativeInverse{Int64},N} where N} where A<:Union{SubArray{T,N,A,I,true} where I<:Tuple{AbstractUnitRange,Vararg{Any,N} where N} where A<:DenseArray where N where T, DenseArray} where N where T, DenseArray}} where T}",
+    "location": "stdlib/LinearAlgebra/#Base.tanh-Tuple{Union{DenseArray{T,2}, Base.ReinterpretArray{T,2,S,A} where S where A<:Union{SubArray{T,N,A,I,true} where I<:Tuple{AbstractUnitRange,Vararg{Any,N} where N} where A<:DenseArray where N where T, DenseArray}, Base.ReshapedArray{T,2,A,MI} where MI<:Tuple{Vararg{Base.MultiplicativeInverses.SignedMultiplicativeInverse{Int64},N} where N} where A<:Union{Base.ReinterpretArray{T,N,S,A} where S where A<:Union{SubArray{T,N,A,I,true} where I<:Tuple{AbstractUnitRange,Vararg{Any,N} where N} where A<:DenseArray where N where T, DenseArray} where N where T, SubArray{T,N,A,I,true} where I<:Tuple{AbstractUnitRange,Vararg{Any,N} where N} where A<:DenseArray where N where T, DenseArray}, SubArray{T,2,A,I,L} where L where I<:Tuple{Vararg{Union{Int64, AbstractRange{Int64}, Base.AbstractCartesianIndex},N} where N} where A<:Union{Base.ReinterpretArray{T,N,S,A} where S where A<:Union{SubArray{T,N,A,I,true} where I<:Tuple{AbstractUnitRange,Vararg{Any,N} where N} where A<:DenseArray where N where T, DenseArray} where N where T, Base.ReshapedArray{T,N,A,MI} where MI<:Tuple{Vararg{Base.MultiplicativeInverses.SignedMultiplicativeInverse{Int64},N} where N} where A<:Union{Base.ReinterpretArray{T,N,S,A} where S where A<:Union{SubArray{T,N,A,I,true} where I<:Tuple{AbstractUnitRange,Vararg{Any,N} where N} where A<:DenseArray where N where T, DenseArray} where N where T, SubArray{T,N,A,I,true} where I<:Tuple{AbstractUnitRange,Vararg{Any,N} where N} where A<:DenseArray where N where T, DenseArray} where N where T, DenseArray}} where T}",
     "page": "Linear Algebra",
     "title": "Base.tanh",
     "category": "method",
@@ -16753,7 +15761,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/LinearAlgebra/#Base.Math.sech-Tuple{Union{DenseArray{T,2}, Base.ReinterpretArray{T,2,S,A} where S where A<:Union{SubArray{T,N,A,I,true} where I<:Tuple{AbstractUnitRange,Vararg{Any,N} where N} where A<:DenseArray where N where T, DenseArray}, Base.ReshapedArray{T,2,A,MI} where MI<:Tuple{Vararg{Base.MultiplicativeInverses.SignedMultiplicativeInverse{Int64},N} where N} where A<:Union{SubArray{T,N,A,I,true} where I<:Tuple{AbstractUnitRange,Vararg{Any,N} where N} where A<:DenseArray where N where T, DenseArray}, SubArray{T,2,A,I,L} where L where I<:Tuple{Vararg{Union{Int64, AbstractRange{Int64}, Base.AbstractCartesianIndex},N} where N} where A<:Union{Base.ReshapedArray{T,N,A,MI} where MI<:Tuple{Vararg{Base.MultiplicativeInverses.SignedMultiplicativeInverse{Int64},N} where N} where A<:Union{SubArray{T,N,A,I,true} where I<:Tuple{AbstractUnitRange,Vararg{Any,N} where N} where A<:DenseArray where N where T, DenseArray} where N where T, DenseArray}} where T}",
+    "location": "stdlib/LinearAlgebra/#Base.Math.sech-Tuple{Union{DenseArray{T,2}, Base.ReinterpretArray{T,2,S,A} where S where A<:Union{SubArray{T,N,A,I,true} where I<:Tuple{AbstractUnitRange,Vararg{Any,N} where N} where A<:DenseArray where N where T, DenseArray}, Base.ReshapedArray{T,2,A,MI} where MI<:Tuple{Vararg{Base.MultiplicativeInverses.SignedMultiplicativeInverse{Int64},N} where N} where A<:Union{Base.ReinterpretArray{T,N,S,A} where S where A<:Union{SubArray{T,N,A,I,true} where I<:Tuple{AbstractUnitRange,Vararg{Any,N} where N} where A<:DenseArray where N where T, DenseArray} where N where T, SubArray{T,N,A,I,true} where I<:Tuple{AbstractUnitRange,Vararg{Any,N} where N} where A<:DenseArray where N where T, DenseArray}, SubArray{T,2,A,I,L} where L where I<:Tuple{Vararg{Union{Int64, AbstractRange{Int64}, Base.AbstractCartesianIndex},N} where N} where A<:Union{Base.ReinterpretArray{T,N,S,A} where S where A<:Union{SubArray{T,N,A,I,true} where I<:Tuple{AbstractUnitRange,Vararg{Any,N} where N} where A<:DenseArray where N where T, DenseArray} where N where T, Base.ReshapedArray{T,N,A,MI} where MI<:Tuple{Vararg{Base.MultiplicativeInverses.SignedMultiplicativeInverse{Int64},N} where N} where A<:Union{Base.ReinterpretArray{T,N,S,A} where S where A<:Union{SubArray{T,N,A,I,true} where I<:Tuple{AbstractUnitRange,Vararg{Any,N} where N} where A<:DenseArray where N where T, DenseArray} where N where T, SubArray{T,N,A,I,true} where I<:Tuple{AbstractUnitRange,Vararg{Any,N} where N} where A<:DenseArray where N where T, DenseArray} where N where T, DenseArray}} where T}",
     "page": "Linear Algebra",
     "title": "Base.Math.sech",
     "category": "method",
@@ -16761,7 +15769,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/LinearAlgebra/#Base.Math.csch-Tuple{Union{DenseArray{T,2}, Base.ReinterpretArray{T,2,S,A} where S where A<:Union{SubArray{T,N,A,I,true} where I<:Tuple{AbstractUnitRange,Vararg{Any,N} where N} where A<:DenseArray where N where T, DenseArray}, Base.ReshapedArray{T,2,A,MI} where MI<:Tuple{Vararg{Base.MultiplicativeInverses.SignedMultiplicativeInverse{Int64},N} where N} where A<:Union{SubArray{T,N,A,I,true} where I<:Tuple{AbstractUnitRange,Vararg{Any,N} where N} where A<:DenseArray where N where T, DenseArray}, SubArray{T,2,A,I,L} where L where I<:Tuple{Vararg{Union{Int64, AbstractRange{Int64}, Base.AbstractCartesianIndex},N} where N} where A<:Union{Base.ReshapedArray{T,N,A,MI} where MI<:Tuple{Vararg{Base.MultiplicativeInverses.SignedMultiplicativeInverse{Int64},N} where N} where A<:Union{SubArray{T,N,A,I,true} where I<:Tuple{AbstractUnitRange,Vararg{Any,N} where N} where A<:DenseArray where N where T, DenseArray} where N where T, DenseArray}} where T}",
+    "location": "stdlib/LinearAlgebra/#Base.Math.csch-Tuple{Union{DenseArray{T,2}, Base.ReinterpretArray{T,2,S,A} where S where A<:Union{SubArray{T,N,A,I,true} where I<:Tuple{AbstractUnitRange,Vararg{Any,N} where N} where A<:DenseArray where N where T, DenseArray}, Base.ReshapedArray{T,2,A,MI} where MI<:Tuple{Vararg{Base.MultiplicativeInverses.SignedMultiplicativeInverse{Int64},N} where N} where A<:Union{Base.ReinterpretArray{T,N,S,A} where S where A<:Union{SubArray{T,N,A,I,true} where I<:Tuple{AbstractUnitRange,Vararg{Any,N} where N} where A<:DenseArray where N where T, DenseArray} where N where T, SubArray{T,N,A,I,true} where I<:Tuple{AbstractUnitRange,Vararg{Any,N} where N} where A<:DenseArray where N where T, DenseArray}, SubArray{T,2,A,I,L} where L where I<:Tuple{Vararg{Union{Int64, AbstractRange{Int64}, Base.AbstractCartesianIndex},N} where N} where A<:Union{Base.ReinterpretArray{T,N,S,A} where S where A<:Union{SubArray{T,N,A,I,true} where I<:Tuple{AbstractUnitRange,Vararg{Any,N} where N} where A<:DenseArray where N where T, DenseArray} where N where T, Base.ReshapedArray{T,N,A,MI} where MI<:Tuple{Vararg{Base.MultiplicativeInverses.SignedMultiplicativeInverse{Int64},N} where N} where A<:Union{Base.ReinterpretArray{T,N,S,A} where S where A<:Union{SubArray{T,N,A,I,true} where I<:Tuple{AbstractUnitRange,Vararg{Any,N} where N} where A<:DenseArray where N where T, DenseArray} where N where T, SubArray{T,N,A,I,true} where I<:Tuple{AbstractUnitRange,Vararg{Any,N} where N} where A<:DenseArray where N where T, DenseArray} where N where T, DenseArray}} where T}",
     "page": "Linear Algebra",
     "title": "Base.Math.csch",
     "category": "method",
@@ -16769,7 +15777,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/LinearAlgebra/#Base.Math.coth-Tuple{Union{DenseArray{T,2}, Base.ReinterpretArray{T,2,S,A} where S where A<:Union{SubArray{T,N,A,I,true} where I<:Tuple{AbstractUnitRange,Vararg{Any,N} where N} where A<:DenseArray where N where T, DenseArray}, Base.ReshapedArray{T,2,A,MI} where MI<:Tuple{Vararg{Base.MultiplicativeInverses.SignedMultiplicativeInverse{Int64},N} where N} where A<:Union{SubArray{T,N,A,I,true} where I<:Tuple{AbstractUnitRange,Vararg{Any,N} where N} where A<:DenseArray where N where T, DenseArray}, SubArray{T,2,A,I,L} where L where I<:Tuple{Vararg{Union{Int64, AbstractRange{Int64}, Base.AbstractCartesianIndex},N} where N} where A<:Union{Base.ReshapedArray{T,N,A,MI} where MI<:Tuple{Vararg{Base.MultiplicativeInverses.SignedMultiplicativeInverse{Int64},N} where N} where A<:Union{SubArray{T,N,A,I,true} where I<:Tuple{AbstractUnitRange,Vararg{Any,N} where N} where A<:DenseArray where N where T, DenseArray} where N where T, DenseArray}} where T}",
+    "location": "stdlib/LinearAlgebra/#Base.Math.coth-Tuple{Union{DenseArray{T,2}, Base.ReinterpretArray{T,2,S,A} where S where A<:Union{SubArray{T,N,A,I,true} where I<:Tuple{AbstractUnitRange,Vararg{Any,N} where N} where A<:DenseArray where N where T, DenseArray}, Base.ReshapedArray{T,2,A,MI} where MI<:Tuple{Vararg{Base.MultiplicativeInverses.SignedMultiplicativeInverse{Int64},N} where N} where A<:Union{Base.ReinterpretArray{T,N,S,A} where S where A<:Union{SubArray{T,N,A,I,true} where I<:Tuple{AbstractUnitRange,Vararg{Any,N} where N} where A<:DenseArray where N where T, DenseArray} where N where T, SubArray{T,N,A,I,true} where I<:Tuple{AbstractUnitRange,Vararg{Any,N} where N} where A<:DenseArray where N where T, DenseArray}, SubArray{T,2,A,I,L} where L where I<:Tuple{Vararg{Union{Int64, AbstractRange{Int64}, Base.AbstractCartesianIndex},N} where N} where A<:Union{Base.ReinterpretArray{T,N,S,A} where S where A<:Union{SubArray{T,N,A,I,true} where I<:Tuple{AbstractUnitRange,Vararg{Any,N} where N} where A<:DenseArray where N where T, DenseArray} where N where T, Base.ReshapedArray{T,N,A,MI} where MI<:Tuple{Vararg{Base.MultiplicativeInverses.SignedMultiplicativeInverse{Int64},N} where N} where A<:Union{Base.ReinterpretArray{T,N,S,A} where S where A<:Union{SubArray{T,N,A,I,true} where I<:Tuple{AbstractUnitRange,Vararg{Any,N} where N} where A<:DenseArray where N where T, DenseArray} where N where T, SubArray{T,N,A,I,true} where I<:Tuple{AbstractUnitRange,Vararg{Any,N} where N} where A<:DenseArray where N where T, DenseArray} where N where T, DenseArray}} where T}",
     "page": "Linear Algebra",
     "title": "Base.Math.coth",
     "category": "method",
@@ -16777,7 +15785,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/LinearAlgebra/#Base.acos-Tuple{Union{DenseArray{T,2}, Base.ReinterpretArray{T,2,S,A} where S where A<:Union{SubArray{T,N,A,I,true} where I<:Tuple{AbstractUnitRange,Vararg{Any,N} where N} where A<:DenseArray where N where T, DenseArray}, Base.ReshapedArray{T,2,A,MI} where MI<:Tuple{Vararg{Base.MultiplicativeInverses.SignedMultiplicativeInverse{Int64},N} where N} where A<:Union{SubArray{T,N,A,I,true} where I<:Tuple{AbstractUnitRange,Vararg{Any,N} where N} where A<:DenseArray where N where T, DenseArray}, SubArray{T,2,A,I,L} where L where I<:Tuple{Vararg{Union{Int64, AbstractRange{Int64}, Base.AbstractCartesianIndex},N} where N} where A<:Union{Base.ReshapedArray{T,N,A,MI} where MI<:Tuple{Vararg{Base.MultiplicativeInverses.SignedMultiplicativeInverse{Int64},N} where N} where A<:Union{SubArray{T,N,A,I,true} where I<:Tuple{AbstractUnitRange,Vararg{Any,N} where N} where A<:DenseArray where N where T, DenseArray} where N where T, DenseArray}} where T}",
+    "location": "stdlib/LinearAlgebra/#Base.acos-Tuple{Union{DenseArray{T,2}, Base.ReinterpretArray{T,2,S,A} where S where A<:Union{SubArray{T,N,A,I,true} where I<:Tuple{AbstractUnitRange,Vararg{Any,N} where N} where A<:DenseArray where N where T, DenseArray}, Base.ReshapedArray{T,2,A,MI} where MI<:Tuple{Vararg{Base.MultiplicativeInverses.SignedMultiplicativeInverse{Int64},N} where N} where A<:Union{Base.ReinterpretArray{T,N,S,A} where S where A<:Union{SubArray{T,N,A,I,true} where I<:Tuple{AbstractUnitRange,Vararg{Any,N} where N} where A<:DenseArray where N where T, DenseArray} where N where T, SubArray{T,N,A,I,true} where I<:Tuple{AbstractUnitRange,Vararg{Any,N} where N} where A<:DenseArray where N where T, DenseArray}, SubArray{T,2,A,I,L} where L where I<:Tuple{Vararg{Union{Int64, AbstractRange{Int64}, Base.AbstractCartesianIndex},N} where N} where A<:Union{Base.ReinterpretArray{T,N,S,A} where S where A<:Union{SubArray{T,N,A,I,true} where I<:Tuple{AbstractUnitRange,Vararg{Any,N} where N} where A<:DenseArray where N where T, DenseArray} where N where T, Base.ReshapedArray{T,N,A,MI} where MI<:Tuple{Vararg{Base.MultiplicativeInverses.SignedMultiplicativeInverse{Int64},N} where N} where A<:Union{Base.ReinterpretArray{T,N,S,A} where S where A<:Union{SubArray{T,N,A,I,true} where I<:Tuple{AbstractUnitRange,Vararg{Any,N} where N} where A<:DenseArray where N where T, DenseArray} where N where T, SubArray{T,N,A,I,true} where I<:Tuple{AbstractUnitRange,Vararg{Any,N} where N} where A<:DenseArray where N where T, DenseArray} where N where T, DenseArray}} where T}",
     "page": "Linear Algebra",
     "title": "Base.acos",
     "category": "method",
@@ -16785,7 +15793,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/LinearAlgebra/#Base.asin-Tuple{Union{DenseArray{T,2}, Base.ReinterpretArray{T,2,S,A} where S where A<:Union{SubArray{T,N,A,I,true} where I<:Tuple{AbstractUnitRange,Vararg{Any,N} where N} where A<:DenseArray where N where T, DenseArray}, Base.ReshapedArray{T,2,A,MI} where MI<:Tuple{Vararg{Base.MultiplicativeInverses.SignedMultiplicativeInverse{Int64},N} where N} where A<:Union{SubArray{T,N,A,I,true} where I<:Tuple{AbstractUnitRange,Vararg{Any,N} where N} where A<:DenseArray where N where T, DenseArray}, SubArray{T,2,A,I,L} where L where I<:Tuple{Vararg{Union{Int64, AbstractRange{Int64}, Base.AbstractCartesianIndex},N} where N} where A<:Union{Base.ReshapedArray{T,N,A,MI} where MI<:Tuple{Vararg{Base.MultiplicativeInverses.SignedMultiplicativeInverse{Int64},N} where N} where A<:Union{SubArray{T,N,A,I,true} where I<:Tuple{AbstractUnitRange,Vararg{Any,N} where N} where A<:DenseArray where N where T, DenseArray} where N where T, DenseArray}} where T}",
+    "location": "stdlib/LinearAlgebra/#Base.asin-Tuple{Union{DenseArray{T,2}, Base.ReinterpretArray{T,2,S,A} where S where A<:Union{SubArray{T,N,A,I,true} where I<:Tuple{AbstractUnitRange,Vararg{Any,N} where N} where A<:DenseArray where N where T, DenseArray}, Base.ReshapedArray{T,2,A,MI} where MI<:Tuple{Vararg{Base.MultiplicativeInverses.SignedMultiplicativeInverse{Int64},N} where N} where A<:Union{Base.ReinterpretArray{T,N,S,A} where S where A<:Union{SubArray{T,N,A,I,true} where I<:Tuple{AbstractUnitRange,Vararg{Any,N} where N} where A<:DenseArray where N where T, DenseArray} where N where T, SubArray{T,N,A,I,true} where I<:Tuple{AbstractUnitRange,Vararg{Any,N} where N} where A<:DenseArray where N where T, DenseArray}, SubArray{T,2,A,I,L} where L where I<:Tuple{Vararg{Union{Int64, AbstractRange{Int64}, Base.AbstractCartesianIndex},N} where N} where A<:Union{Base.ReinterpretArray{T,N,S,A} where S where A<:Union{SubArray{T,N,A,I,true} where I<:Tuple{AbstractUnitRange,Vararg{Any,N} where N} where A<:DenseArray where N where T, DenseArray} where N where T, Base.ReshapedArray{T,N,A,MI} where MI<:Tuple{Vararg{Base.MultiplicativeInverses.SignedMultiplicativeInverse{Int64},N} where N} where A<:Union{Base.ReinterpretArray{T,N,S,A} where S where A<:Union{SubArray{T,N,A,I,true} where I<:Tuple{AbstractUnitRange,Vararg{Any,N} where N} where A<:DenseArray where N where T, DenseArray} where N where T, SubArray{T,N,A,I,true} where I<:Tuple{AbstractUnitRange,Vararg{Any,N} where N} where A<:DenseArray where N where T, DenseArray} where N where T, DenseArray}} where T}",
     "page": "Linear Algebra",
     "title": "Base.asin",
     "category": "method",
@@ -16793,7 +15801,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/LinearAlgebra/#Base.atan-Tuple{Union{DenseArray{T,2}, Base.ReinterpretArray{T,2,S,A} where S where A<:Union{SubArray{T,N,A,I,true} where I<:Tuple{AbstractUnitRange,Vararg{Any,N} where N} where A<:DenseArray where N where T, DenseArray}, Base.ReshapedArray{T,2,A,MI} where MI<:Tuple{Vararg{Base.MultiplicativeInverses.SignedMultiplicativeInverse{Int64},N} where N} where A<:Union{SubArray{T,N,A,I,true} where I<:Tuple{AbstractUnitRange,Vararg{Any,N} where N} where A<:DenseArray where N where T, DenseArray}, SubArray{T,2,A,I,L} where L where I<:Tuple{Vararg{Union{Int64, AbstractRange{Int64}, Base.AbstractCartesianIndex},N} where N} where A<:Union{Base.ReshapedArray{T,N,A,MI} where MI<:Tuple{Vararg{Base.MultiplicativeInverses.SignedMultiplicativeInverse{Int64},N} where N} where A<:Union{SubArray{T,N,A,I,true} where I<:Tuple{AbstractUnitRange,Vararg{Any,N} where N} where A<:DenseArray where N where T, DenseArray} where N where T, DenseArray}} where T}",
+    "location": "stdlib/LinearAlgebra/#Base.atan-Tuple{Union{DenseArray{T,2}, Base.ReinterpretArray{T,2,S,A} where S where A<:Union{SubArray{T,N,A,I,true} where I<:Tuple{AbstractUnitRange,Vararg{Any,N} where N} where A<:DenseArray where N where T, DenseArray}, Base.ReshapedArray{T,2,A,MI} where MI<:Tuple{Vararg{Base.MultiplicativeInverses.SignedMultiplicativeInverse{Int64},N} where N} where A<:Union{Base.ReinterpretArray{T,N,S,A} where S where A<:Union{SubArray{T,N,A,I,true} where I<:Tuple{AbstractUnitRange,Vararg{Any,N} where N} where A<:DenseArray where N where T, DenseArray} where N where T, SubArray{T,N,A,I,true} where I<:Tuple{AbstractUnitRange,Vararg{Any,N} where N} where A<:DenseArray where N where T, DenseArray}, SubArray{T,2,A,I,L} where L where I<:Tuple{Vararg{Union{Int64, AbstractRange{Int64}, Base.AbstractCartesianIndex},N} where N} where A<:Union{Base.ReinterpretArray{T,N,S,A} where S where A<:Union{SubArray{T,N,A,I,true} where I<:Tuple{AbstractUnitRange,Vararg{Any,N} where N} where A<:DenseArray where N where T, DenseArray} where N where T, Base.ReshapedArray{T,N,A,MI} where MI<:Tuple{Vararg{Base.MultiplicativeInverses.SignedMultiplicativeInverse{Int64},N} where N} where A<:Union{Base.ReinterpretArray{T,N,S,A} where S where A<:Union{SubArray{T,N,A,I,true} where I<:Tuple{AbstractUnitRange,Vararg{Any,N} where N} where A<:DenseArray where N where T, DenseArray} where N where T, SubArray{T,N,A,I,true} where I<:Tuple{AbstractUnitRange,Vararg{Any,N} where N} where A<:DenseArray where N where T, DenseArray} where N where T, DenseArray}} where T}",
     "page": "Linear Algebra",
     "title": "Base.atan",
     "category": "method",
@@ -16801,7 +15809,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/LinearAlgebra/#Base.Math.asec-Tuple{Union{DenseArray{T,2}, Base.ReinterpretArray{T,2,S,A} where S where A<:Union{SubArray{T,N,A,I,true} where I<:Tuple{AbstractUnitRange,Vararg{Any,N} where N} where A<:DenseArray where N where T, DenseArray}, Base.ReshapedArray{T,2,A,MI} where MI<:Tuple{Vararg{Base.MultiplicativeInverses.SignedMultiplicativeInverse{Int64},N} where N} where A<:Union{SubArray{T,N,A,I,true} where I<:Tuple{AbstractUnitRange,Vararg{Any,N} where N} where A<:DenseArray where N where T, DenseArray}, SubArray{T,2,A,I,L} where L where I<:Tuple{Vararg{Union{Int64, AbstractRange{Int64}, Base.AbstractCartesianIndex},N} where N} where A<:Union{Base.ReshapedArray{T,N,A,MI} where MI<:Tuple{Vararg{Base.MultiplicativeInverses.SignedMultiplicativeInverse{Int64},N} where N} where A<:Union{SubArray{T,N,A,I,true} where I<:Tuple{AbstractUnitRange,Vararg{Any,N} where N} where A<:DenseArray where N where T, DenseArray} where N where T, DenseArray}} where T}",
+    "location": "stdlib/LinearAlgebra/#Base.Math.asec-Tuple{Union{DenseArray{T,2}, Base.ReinterpretArray{T,2,S,A} where S where A<:Union{SubArray{T,N,A,I,true} where I<:Tuple{AbstractUnitRange,Vararg{Any,N} where N} where A<:DenseArray where N where T, DenseArray}, Base.ReshapedArray{T,2,A,MI} where MI<:Tuple{Vararg{Base.MultiplicativeInverses.SignedMultiplicativeInverse{Int64},N} where N} where A<:Union{Base.ReinterpretArray{T,N,S,A} where S where A<:Union{SubArray{T,N,A,I,true} where I<:Tuple{AbstractUnitRange,Vararg{Any,N} where N} where A<:DenseArray where N where T, DenseArray} where N where T, SubArray{T,N,A,I,true} where I<:Tuple{AbstractUnitRange,Vararg{Any,N} where N} where A<:DenseArray where N where T, DenseArray}, SubArray{T,2,A,I,L} where L where I<:Tuple{Vararg{Union{Int64, AbstractRange{Int64}, Base.AbstractCartesianIndex},N} where N} where A<:Union{Base.ReinterpretArray{T,N,S,A} where S where A<:Union{SubArray{T,N,A,I,true} where I<:Tuple{AbstractUnitRange,Vararg{Any,N} where N} where A<:DenseArray where N where T, DenseArray} where N where T, Base.ReshapedArray{T,N,A,MI} where MI<:Tuple{Vararg{Base.MultiplicativeInverses.SignedMultiplicativeInverse{Int64},N} where N} where A<:Union{Base.ReinterpretArray{T,N,S,A} where S where A<:Union{SubArray{T,N,A,I,true} where I<:Tuple{AbstractUnitRange,Vararg{Any,N} where N} where A<:DenseArray where N where T, DenseArray} where N where T, SubArray{T,N,A,I,true} where I<:Tuple{AbstractUnitRange,Vararg{Any,N} where N} where A<:DenseArray where N where T, DenseArray} where N where T, DenseArray}} where T}",
     "page": "Linear Algebra",
     "title": "Base.Math.asec",
     "category": "method",
@@ -16809,7 +15817,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/LinearAlgebra/#Base.Math.acsc-Tuple{Union{DenseArray{T,2}, Base.ReinterpretArray{T,2,S,A} where S where A<:Union{SubArray{T,N,A,I,true} where I<:Tuple{AbstractUnitRange,Vararg{Any,N} where N} where A<:DenseArray where N where T, DenseArray}, Base.ReshapedArray{T,2,A,MI} where MI<:Tuple{Vararg{Base.MultiplicativeInverses.SignedMultiplicativeInverse{Int64},N} where N} where A<:Union{SubArray{T,N,A,I,true} where I<:Tuple{AbstractUnitRange,Vararg{Any,N} where N} where A<:DenseArray where N where T, DenseArray}, SubArray{T,2,A,I,L} where L where I<:Tuple{Vararg{Union{Int64, AbstractRange{Int64}, Base.AbstractCartesianIndex},N} where N} where A<:Union{Base.ReshapedArray{T,N,A,MI} where MI<:Tuple{Vararg{Base.MultiplicativeInverses.SignedMultiplicativeInverse{Int64},N} where N} where A<:Union{SubArray{T,N,A,I,true} where I<:Tuple{AbstractUnitRange,Vararg{Any,N} where N} where A<:DenseArray where N where T, DenseArray} where N where T, DenseArray}} where T}",
+    "location": "stdlib/LinearAlgebra/#Base.Math.acsc-Tuple{Union{DenseArray{T,2}, Base.ReinterpretArray{T,2,S,A} where S where A<:Union{SubArray{T,N,A,I,true} where I<:Tuple{AbstractUnitRange,Vararg{Any,N} where N} where A<:DenseArray where N where T, DenseArray}, Base.ReshapedArray{T,2,A,MI} where MI<:Tuple{Vararg{Base.MultiplicativeInverses.SignedMultiplicativeInverse{Int64},N} where N} where A<:Union{Base.ReinterpretArray{T,N,S,A} where S where A<:Union{SubArray{T,N,A,I,true} where I<:Tuple{AbstractUnitRange,Vararg{Any,N} where N} where A<:DenseArray where N where T, DenseArray} where N where T, SubArray{T,N,A,I,true} where I<:Tuple{AbstractUnitRange,Vararg{Any,N} where N} where A<:DenseArray where N where T, DenseArray}, SubArray{T,2,A,I,L} where L where I<:Tuple{Vararg{Union{Int64, AbstractRange{Int64}, Base.AbstractCartesianIndex},N} where N} where A<:Union{Base.ReinterpretArray{T,N,S,A} where S where A<:Union{SubArray{T,N,A,I,true} where I<:Tuple{AbstractUnitRange,Vararg{Any,N} where N} where A<:DenseArray where N where T, DenseArray} where N where T, Base.ReshapedArray{T,N,A,MI} where MI<:Tuple{Vararg{Base.MultiplicativeInverses.SignedMultiplicativeInverse{Int64},N} where N} where A<:Union{Base.ReinterpretArray{T,N,S,A} where S where A<:Union{SubArray{T,N,A,I,true} where I<:Tuple{AbstractUnitRange,Vararg{Any,N} where N} where A<:DenseArray where N where T, DenseArray} where N where T, SubArray{T,N,A,I,true} where I<:Tuple{AbstractUnitRange,Vararg{Any,N} where N} where A<:DenseArray where N where T, DenseArray} where N where T, DenseArray}} where T}",
     "page": "Linear Algebra",
     "title": "Base.Math.acsc",
     "category": "method",
@@ -16817,7 +15825,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/LinearAlgebra/#Base.Math.acot-Tuple{Union{DenseArray{T,2}, Base.ReinterpretArray{T,2,S,A} where S where A<:Union{SubArray{T,N,A,I,true} where I<:Tuple{AbstractUnitRange,Vararg{Any,N} where N} where A<:DenseArray where N where T, DenseArray}, Base.ReshapedArray{T,2,A,MI} where MI<:Tuple{Vararg{Base.MultiplicativeInverses.SignedMultiplicativeInverse{Int64},N} where N} where A<:Union{SubArray{T,N,A,I,true} where I<:Tuple{AbstractUnitRange,Vararg{Any,N} where N} where A<:DenseArray where N where T, DenseArray}, SubArray{T,2,A,I,L} where L where I<:Tuple{Vararg{Union{Int64, AbstractRange{Int64}, Base.AbstractCartesianIndex},N} where N} where A<:Union{Base.ReshapedArray{T,N,A,MI} where MI<:Tuple{Vararg{Base.MultiplicativeInverses.SignedMultiplicativeInverse{Int64},N} where N} where A<:Union{SubArray{T,N,A,I,true} where I<:Tuple{AbstractUnitRange,Vararg{Any,N} where N} where A<:DenseArray where N where T, DenseArray} where N where T, DenseArray}} where T}",
+    "location": "stdlib/LinearAlgebra/#Base.Math.acot-Tuple{Union{DenseArray{T,2}, Base.ReinterpretArray{T,2,S,A} where S where A<:Union{SubArray{T,N,A,I,true} where I<:Tuple{AbstractUnitRange,Vararg{Any,N} where N} where A<:DenseArray where N where T, DenseArray}, Base.ReshapedArray{T,2,A,MI} where MI<:Tuple{Vararg{Base.MultiplicativeInverses.SignedMultiplicativeInverse{Int64},N} where N} where A<:Union{Base.ReinterpretArray{T,N,S,A} where S where A<:Union{SubArray{T,N,A,I,true} where I<:Tuple{AbstractUnitRange,Vararg{Any,N} where N} where A<:DenseArray where N where T, DenseArray} where N where T, SubArray{T,N,A,I,true} where I<:Tuple{AbstractUnitRange,Vararg{Any,N} where N} where A<:DenseArray where N where T, DenseArray}, SubArray{T,2,A,I,L} where L where I<:Tuple{Vararg{Union{Int64, AbstractRange{Int64}, Base.AbstractCartesianIndex},N} where N} where A<:Union{Base.ReinterpretArray{T,N,S,A} where S where A<:Union{SubArray{T,N,A,I,true} where I<:Tuple{AbstractUnitRange,Vararg{Any,N} where N} where A<:DenseArray where N where T, DenseArray} where N where T, Base.ReshapedArray{T,N,A,MI} where MI<:Tuple{Vararg{Base.MultiplicativeInverses.SignedMultiplicativeInverse{Int64},N} where N} where A<:Union{Base.ReinterpretArray{T,N,S,A} where S where A<:Union{SubArray{T,N,A,I,true} where I<:Tuple{AbstractUnitRange,Vararg{Any,N} where N} where A<:DenseArray where N where T, DenseArray} where N where T, SubArray{T,N,A,I,true} where I<:Tuple{AbstractUnitRange,Vararg{Any,N} where N} where A<:DenseArray where N where T, DenseArray} where N where T, DenseArray}} where T}",
     "page": "Linear Algebra",
     "title": "Base.Math.acot",
     "category": "method",
@@ -16825,7 +15833,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/LinearAlgebra/#Base.acosh-Tuple{Union{DenseArray{T,2}, Base.ReinterpretArray{T,2,S,A} where S where A<:Union{SubArray{T,N,A,I,true} where I<:Tuple{AbstractUnitRange,Vararg{Any,N} where N} where A<:DenseArray where N where T, DenseArray}, Base.ReshapedArray{T,2,A,MI} where MI<:Tuple{Vararg{Base.MultiplicativeInverses.SignedMultiplicativeInverse{Int64},N} where N} where A<:Union{SubArray{T,N,A,I,true} where I<:Tuple{AbstractUnitRange,Vararg{Any,N} where N} where A<:DenseArray where N where T, DenseArray}, SubArray{T,2,A,I,L} where L where I<:Tuple{Vararg{Union{Int64, AbstractRange{Int64}, Base.AbstractCartesianIndex},N} where N} where A<:Union{Base.ReshapedArray{T,N,A,MI} where MI<:Tuple{Vararg{Base.MultiplicativeInverses.SignedMultiplicativeInverse{Int64},N} where N} where A<:Union{SubArray{T,N,A,I,true} where I<:Tuple{AbstractUnitRange,Vararg{Any,N} where N} where A<:DenseArray where N where T, DenseArray} where N where T, DenseArray}} where T}",
+    "location": "stdlib/LinearAlgebra/#Base.acosh-Tuple{Union{DenseArray{T,2}, Base.ReinterpretArray{T,2,S,A} where S where A<:Union{SubArray{T,N,A,I,true} where I<:Tuple{AbstractUnitRange,Vararg{Any,N} where N} where A<:DenseArray where N where T, DenseArray}, Base.ReshapedArray{T,2,A,MI} where MI<:Tuple{Vararg{Base.MultiplicativeInverses.SignedMultiplicativeInverse{Int64},N} where N} where A<:Union{Base.ReinterpretArray{T,N,S,A} where S where A<:Union{SubArray{T,N,A,I,true} where I<:Tuple{AbstractUnitRange,Vararg{Any,N} where N} where A<:DenseArray where N where T, DenseArray} where N where T, SubArray{T,N,A,I,true} where I<:Tuple{AbstractUnitRange,Vararg{Any,N} where N} where A<:DenseArray where N where T, DenseArray}, SubArray{T,2,A,I,L} where L where I<:Tuple{Vararg{Union{Int64, AbstractRange{Int64}, Base.AbstractCartesianIndex},N} where N} where A<:Union{Base.ReinterpretArray{T,N,S,A} where S where A<:Union{SubArray{T,N,A,I,true} where I<:Tuple{AbstractUnitRange,Vararg{Any,N} where N} where A<:DenseArray where N where T, DenseArray} where N where T, Base.ReshapedArray{T,N,A,MI} where MI<:Tuple{Vararg{Base.MultiplicativeInverses.SignedMultiplicativeInverse{Int64},N} where N} where A<:Union{Base.ReinterpretArray{T,N,S,A} where S where A<:Union{SubArray{T,N,A,I,true} where I<:Tuple{AbstractUnitRange,Vararg{Any,N} where N} where A<:DenseArray where N where T, DenseArray} where N where T, SubArray{T,N,A,I,true} where I<:Tuple{AbstractUnitRange,Vararg{Any,N} where N} where A<:DenseArray where N where T, DenseArray} where N where T, DenseArray}} where T}",
     "page": "Linear Algebra",
     "title": "Base.acosh",
     "category": "method",
@@ -16833,7 +15841,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/LinearAlgebra/#Base.asinh-Tuple{Union{DenseArray{T,2}, Base.ReinterpretArray{T,2,S,A} where S where A<:Union{SubArray{T,N,A,I,true} where I<:Tuple{AbstractUnitRange,Vararg{Any,N} where N} where A<:DenseArray where N where T, DenseArray}, Base.ReshapedArray{T,2,A,MI} where MI<:Tuple{Vararg{Base.MultiplicativeInverses.SignedMultiplicativeInverse{Int64},N} where N} where A<:Union{SubArray{T,N,A,I,true} where I<:Tuple{AbstractUnitRange,Vararg{Any,N} where N} where A<:DenseArray where N where T, DenseArray}, SubArray{T,2,A,I,L} where L where I<:Tuple{Vararg{Union{Int64, AbstractRange{Int64}, Base.AbstractCartesianIndex},N} where N} where A<:Union{Base.ReshapedArray{T,N,A,MI} where MI<:Tuple{Vararg{Base.MultiplicativeInverses.SignedMultiplicativeInverse{Int64},N} where N} where A<:Union{SubArray{T,N,A,I,true} where I<:Tuple{AbstractUnitRange,Vararg{Any,N} where N} where A<:DenseArray where N where T, DenseArray} where N where T, DenseArray}} where T}",
+    "location": "stdlib/LinearAlgebra/#Base.asinh-Tuple{Union{DenseArray{T,2}, Base.ReinterpretArray{T,2,S,A} where S where A<:Union{SubArray{T,N,A,I,true} where I<:Tuple{AbstractUnitRange,Vararg{Any,N} where N} where A<:DenseArray where N where T, DenseArray}, Base.ReshapedArray{T,2,A,MI} where MI<:Tuple{Vararg{Base.MultiplicativeInverses.SignedMultiplicativeInverse{Int64},N} where N} where A<:Union{Base.ReinterpretArray{T,N,S,A} where S where A<:Union{SubArray{T,N,A,I,true} where I<:Tuple{AbstractUnitRange,Vararg{Any,N} where N} where A<:DenseArray where N where T, DenseArray} where N where T, SubArray{T,N,A,I,true} where I<:Tuple{AbstractUnitRange,Vararg{Any,N} where N} where A<:DenseArray where N where T, DenseArray}, SubArray{T,2,A,I,L} where L where I<:Tuple{Vararg{Union{Int64, AbstractRange{Int64}, Base.AbstractCartesianIndex},N} where N} where A<:Union{Base.ReinterpretArray{T,N,S,A} where S where A<:Union{SubArray{T,N,A,I,true} where I<:Tuple{AbstractUnitRange,Vararg{Any,N} where N} where A<:DenseArray where N where T, DenseArray} where N where T, Base.ReshapedArray{T,N,A,MI} where MI<:Tuple{Vararg{Base.MultiplicativeInverses.SignedMultiplicativeInverse{Int64},N} where N} where A<:Union{Base.ReinterpretArray{T,N,S,A} where S where A<:Union{SubArray{T,N,A,I,true} where I<:Tuple{AbstractUnitRange,Vararg{Any,N} where N} where A<:DenseArray where N where T, DenseArray} where N where T, SubArray{T,N,A,I,true} where I<:Tuple{AbstractUnitRange,Vararg{Any,N} where N} where A<:DenseArray where N where T, DenseArray} where N where T, DenseArray}} where T}",
     "page": "Linear Algebra",
     "title": "Base.asinh",
     "category": "method",
@@ -16841,7 +15849,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/LinearAlgebra/#Base.atanh-Tuple{Union{DenseArray{T,2}, Base.ReinterpretArray{T,2,S,A} where S where A<:Union{SubArray{T,N,A,I,true} where I<:Tuple{AbstractUnitRange,Vararg{Any,N} where N} where A<:DenseArray where N where T, DenseArray}, Base.ReshapedArray{T,2,A,MI} where MI<:Tuple{Vararg{Base.MultiplicativeInverses.SignedMultiplicativeInverse{Int64},N} where N} where A<:Union{SubArray{T,N,A,I,true} where I<:Tuple{AbstractUnitRange,Vararg{Any,N} where N} where A<:DenseArray where N where T, DenseArray}, SubArray{T,2,A,I,L} where L where I<:Tuple{Vararg{Union{Int64, AbstractRange{Int64}, Base.AbstractCartesianIndex},N} where N} where A<:Union{Base.ReshapedArray{T,N,A,MI} where MI<:Tuple{Vararg{Base.MultiplicativeInverses.SignedMultiplicativeInverse{Int64},N} where N} where A<:Union{SubArray{T,N,A,I,true} where I<:Tuple{AbstractUnitRange,Vararg{Any,N} where N} where A<:DenseArray where N where T, DenseArray} where N where T, DenseArray}} where T}",
+    "location": "stdlib/LinearAlgebra/#Base.atanh-Tuple{Union{DenseArray{T,2}, Base.ReinterpretArray{T,2,S,A} where S where A<:Union{SubArray{T,N,A,I,true} where I<:Tuple{AbstractUnitRange,Vararg{Any,N} where N} where A<:DenseArray where N where T, DenseArray}, Base.ReshapedArray{T,2,A,MI} where MI<:Tuple{Vararg{Base.MultiplicativeInverses.SignedMultiplicativeInverse{Int64},N} where N} where A<:Union{Base.ReinterpretArray{T,N,S,A} where S where A<:Union{SubArray{T,N,A,I,true} where I<:Tuple{AbstractUnitRange,Vararg{Any,N} where N} where A<:DenseArray where N where T, DenseArray} where N where T, SubArray{T,N,A,I,true} where I<:Tuple{AbstractUnitRange,Vararg{Any,N} where N} where A<:DenseArray where N where T, DenseArray}, SubArray{T,2,A,I,L} where L where I<:Tuple{Vararg{Union{Int64, AbstractRange{Int64}, Base.AbstractCartesianIndex},N} where N} where A<:Union{Base.ReinterpretArray{T,N,S,A} where S where A<:Union{SubArray{T,N,A,I,true} where I<:Tuple{AbstractUnitRange,Vararg{Any,N} where N} where A<:DenseArray where N where T, DenseArray} where N where T, Base.ReshapedArray{T,N,A,MI} where MI<:Tuple{Vararg{Base.MultiplicativeInverses.SignedMultiplicativeInverse{Int64},N} where N} where A<:Union{Base.ReinterpretArray{T,N,S,A} where S where A<:Union{SubArray{T,N,A,I,true} where I<:Tuple{AbstractUnitRange,Vararg{Any,N} where N} where A<:DenseArray where N where T, DenseArray} where N where T, SubArray{T,N,A,I,true} where I<:Tuple{AbstractUnitRange,Vararg{Any,N} where N} where A<:DenseArray where N where T, DenseArray} where N where T, DenseArray}} where T}",
     "page": "Linear Algebra",
     "title": "Base.atanh",
     "category": "method",
@@ -16849,7 +15857,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/LinearAlgebra/#Base.Math.asech-Tuple{Union{DenseArray{T,2}, Base.ReinterpretArray{T,2,S,A} where S where A<:Union{SubArray{T,N,A,I,true} where I<:Tuple{AbstractUnitRange,Vararg{Any,N} where N} where A<:DenseArray where N where T, DenseArray}, Base.ReshapedArray{T,2,A,MI} where MI<:Tuple{Vararg{Base.MultiplicativeInverses.SignedMultiplicativeInverse{Int64},N} where N} where A<:Union{SubArray{T,N,A,I,true} where I<:Tuple{AbstractUnitRange,Vararg{Any,N} where N} where A<:DenseArray where N where T, DenseArray}, SubArray{T,2,A,I,L} where L where I<:Tuple{Vararg{Union{Int64, AbstractRange{Int64}, Base.AbstractCartesianIndex},N} where N} where A<:Union{Base.ReshapedArray{T,N,A,MI} where MI<:Tuple{Vararg{Base.MultiplicativeInverses.SignedMultiplicativeInverse{Int64},N} where N} where A<:Union{SubArray{T,N,A,I,true} where I<:Tuple{AbstractUnitRange,Vararg{Any,N} where N} where A<:DenseArray where N where T, DenseArray} where N where T, DenseArray}} where T}",
+    "location": "stdlib/LinearAlgebra/#Base.Math.asech-Tuple{Union{DenseArray{T,2}, Base.ReinterpretArray{T,2,S,A} where S where A<:Union{SubArray{T,N,A,I,true} where I<:Tuple{AbstractUnitRange,Vararg{Any,N} where N} where A<:DenseArray where N where T, DenseArray}, Base.ReshapedArray{T,2,A,MI} where MI<:Tuple{Vararg{Base.MultiplicativeInverses.SignedMultiplicativeInverse{Int64},N} where N} where A<:Union{Base.ReinterpretArray{T,N,S,A} where S where A<:Union{SubArray{T,N,A,I,true} where I<:Tuple{AbstractUnitRange,Vararg{Any,N} where N} where A<:DenseArray where N where T, DenseArray} where N where T, SubArray{T,N,A,I,true} where I<:Tuple{AbstractUnitRange,Vararg{Any,N} where N} where A<:DenseArray where N where T, DenseArray}, SubArray{T,2,A,I,L} where L where I<:Tuple{Vararg{Union{Int64, AbstractRange{Int64}, Base.AbstractCartesianIndex},N} where N} where A<:Union{Base.ReinterpretArray{T,N,S,A} where S where A<:Union{SubArray{T,N,A,I,true} where I<:Tuple{AbstractUnitRange,Vararg{Any,N} where N} where A<:DenseArray where N where T, DenseArray} where N where T, Base.ReshapedArray{T,N,A,MI} where MI<:Tuple{Vararg{Base.MultiplicativeInverses.SignedMultiplicativeInverse{Int64},N} where N} where A<:Union{Base.ReinterpretArray{T,N,S,A} where S where A<:Union{SubArray{T,N,A,I,true} where I<:Tuple{AbstractUnitRange,Vararg{Any,N} where N} where A<:DenseArray where N where T, DenseArray} where N where T, SubArray{T,N,A,I,true} where I<:Tuple{AbstractUnitRange,Vararg{Any,N} where N} where A<:DenseArray where N where T, DenseArray} where N where T, DenseArray}} where T}",
     "page": "Linear Algebra",
     "title": "Base.Math.asech",
     "category": "method",
@@ -16857,7 +15865,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/LinearAlgebra/#Base.Math.acsch-Tuple{Union{DenseArray{T,2}, Base.ReinterpretArray{T,2,S,A} where S where A<:Union{SubArray{T,N,A,I,true} where I<:Tuple{AbstractUnitRange,Vararg{Any,N} where N} where A<:DenseArray where N where T, DenseArray}, Base.ReshapedArray{T,2,A,MI} where MI<:Tuple{Vararg{Base.MultiplicativeInverses.SignedMultiplicativeInverse{Int64},N} where N} where A<:Union{SubArray{T,N,A,I,true} where I<:Tuple{AbstractUnitRange,Vararg{Any,N} where N} where A<:DenseArray where N where T, DenseArray}, SubArray{T,2,A,I,L} where L where I<:Tuple{Vararg{Union{Int64, AbstractRange{Int64}, Base.AbstractCartesianIndex},N} where N} where A<:Union{Base.ReshapedArray{T,N,A,MI} where MI<:Tuple{Vararg{Base.MultiplicativeInverses.SignedMultiplicativeInverse{Int64},N} where N} where A<:Union{SubArray{T,N,A,I,true} where I<:Tuple{AbstractUnitRange,Vararg{Any,N} where N} where A<:DenseArray where N where T, DenseArray} where N where T, DenseArray}} where T}",
+    "location": "stdlib/LinearAlgebra/#Base.Math.acsch-Tuple{Union{DenseArray{T,2}, Base.ReinterpretArray{T,2,S,A} where S where A<:Union{SubArray{T,N,A,I,true} where I<:Tuple{AbstractUnitRange,Vararg{Any,N} where N} where A<:DenseArray where N where T, DenseArray}, Base.ReshapedArray{T,2,A,MI} where MI<:Tuple{Vararg{Base.MultiplicativeInverses.SignedMultiplicativeInverse{Int64},N} where N} where A<:Union{Base.ReinterpretArray{T,N,S,A} where S where A<:Union{SubArray{T,N,A,I,true} where I<:Tuple{AbstractUnitRange,Vararg{Any,N} where N} where A<:DenseArray where N where T, DenseArray} where N where T, SubArray{T,N,A,I,true} where I<:Tuple{AbstractUnitRange,Vararg{Any,N} where N} where A<:DenseArray where N where T, DenseArray}, SubArray{T,2,A,I,L} where L where I<:Tuple{Vararg{Union{Int64, AbstractRange{Int64}, Base.AbstractCartesianIndex},N} where N} where A<:Union{Base.ReinterpretArray{T,N,S,A} where S where A<:Union{SubArray{T,N,A,I,true} where I<:Tuple{AbstractUnitRange,Vararg{Any,N} where N} where A<:DenseArray where N where T, DenseArray} where N where T, Base.ReshapedArray{T,N,A,MI} where MI<:Tuple{Vararg{Base.MultiplicativeInverses.SignedMultiplicativeInverse{Int64},N} where N} where A<:Union{Base.ReinterpretArray{T,N,S,A} where S where A<:Union{SubArray{T,N,A,I,true} where I<:Tuple{AbstractUnitRange,Vararg{Any,N} where N} where A<:DenseArray where N where T, DenseArray} where N where T, SubArray{T,N,A,I,true} where I<:Tuple{AbstractUnitRange,Vararg{Any,N} where N} where A<:DenseArray where N where T, DenseArray} where N where T, DenseArray}} where T}",
     "page": "Linear Algebra",
     "title": "Base.Math.acsch",
     "category": "method",
@@ -16865,7 +15873,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/LinearAlgebra/#Base.Math.acoth-Tuple{Union{DenseArray{T,2}, Base.ReinterpretArray{T,2,S,A} where S where A<:Union{SubArray{T,N,A,I,true} where I<:Tuple{AbstractUnitRange,Vararg{Any,N} where N} where A<:DenseArray where N where T, DenseArray}, Base.ReshapedArray{T,2,A,MI} where MI<:Tuple{Vararg{Base.MultiplicativeInverses.SignedMultiplicativeInverse{Int64},N} where N} where A<:Union{SubArray{T,N,A,I,true} where I<:Tuple{AbstractUnitRange,Vararg{Any,N} where N} where A<:DenseArray where N where T, DenseArray}, SubArray{T,2,A,I,L} where L where I<:Tuple{Vararg{Union{Int64, AbstractRange{Int64}, Base.AbstractCartesianIndex},N} where N} where A<:Union{Base.ReshapedArray{T,N,A,MI} where MI<:Tuple{Vararg{Base.MultiplicativeInverses.SignedMultiplicativeInverse{Int64},N} where N} where A<:Union{SubArray{T,N,A,I,true} where I<:Tuple{AbstractUnitRange,Vararg{Any,N} where N} where A<:DenseArray where N where T, DenseArray} where N where T, DenseArray}} where T}",
+    "location": "stdlib/LinearAlgebra/#Base.Math.acoth-Tuple{Union{DenseArray{T,2}, Base.ReinterpretArray{T,2,S,A} where S where A<:Union{SubArray{T,N,A,I,true} where I<:Tuple{AbstractUnitRange,Vararg{Any,N} where N} where A<:DenseArray where N where T, DenseArray}, Base.ReshapedArray{T,2,A,MI} where MI<:Tuple{Vararg{Base.MultiplicativeInverses.SignedMultiplicativeInverse{Int64},N} where N} where A<:Union{Base.ReinterpretArray{T,N,S,A} where S where A<:Union{SubArray{T,N,A,I,true} where I<:Tuple{AbstractUnitRange,Vararg{Any,N} where N} where A<:DenseArray where N where T, DenseArray} where N where T, SubArray{T,N,A,I,true} where I<:Tuple{AbstractUnitRange,Vararg{Any,N} where N} where A<:DenseArray where N where T, DenseArray}, SubArray{T,2,A,I,L} where L where I<:Tuple{Vararg{Union{Int64, AbstractRange{Int64}, Base.AbstractCartesianIndex},N} where N} where A<:Union{Base.ReinterpretArray{T,N,S,A} where S where A<:Union{SubArray{T,N,A,I,true} where I<:Tuple{AbstractUnitRange,Vararg{Any,N} where N} where A<:DenseArray where N where T, DenseArray} where N where T, Base.ReshapedArray{T,N,A,MI} where MI<:Tuple{Vararg{Base.MultiplicativeInverses.SignedMultiplicativeInverse{Int64},N} where N} where A<:Union{Base.ReinterpretArray{T,N,S,A} where S where A<:Union{SubArray{T,N,A,I,true} where I<:Tuple{AbstractUnitRange,Vararg{Any,N} where N} where A<:DenseArray where N where T, DenseArray} where N where T, SubArray{T,N,A,I,true} where I<:Tuple{AbstractUnitRange,Vararg{Any,N} where N} where A<:DenseArray where N where T, DenseArray} where N where T, DenseArray}} where T}",
     "page": "Linear Algebra",
     "title": "Base.Math.acoth",
     "category": "method",
@@ -18129,6 +17137,214 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
+    "location": "stdlib/Logging/#",
+    "page": "Logging",
+    "title": "Logging",
+    "category": "page",
+    "text": ""
+},
+
+{
+    "location": "stdlib/Logging/#Logging-1",
+    "page": "Logging",
+    "title": "Logging",
+    "category": "section",
+    "text": "The Logging module provides a way to record the history and progress of a computation as a log of events.  Events are created by inserting a logging statement into the source code, for example:@warn \"Abandon printf debugging, all ye who enter here!\"\n┌ Warning: Abandon printf debugging, all ye who enter here!\n└ @ Main REPL[1]:1The system provides several advantages over peppering your source code with calls to println().  First, it allows you to control the visibility and presentation of messages without editing the source code.  For example, in contrast to the @warn above@debug \"The sum of some values $(sum(rand(100)))\"will produce no output by default.  Furthermore, it\'s very cheap to leave debug statements like this in the source code because the system avoids evaluating the message if it would later be ignored.  In this case sum(rand(100)) and the associated string processing will never be executed unless debug logging is enabled.Second, the logging tools allow you to attach arbitrary data to each event as a set of key–value pairs. This allows you to capture local variables and other program state for later analysis. For example, to attach the local array variable A and the sum of a vector v as the key s you can useA = ones(Int, 4, 4)\nv = ones(100)\n@info \"Some variables\"  A  s=sum(v)\n\n# Output\n┌ Info: Some variables\n│   A =\n│    4×4 Array{Int64,2}:\n│     1  1  1  1\n│     1  1  1  1\n│     1  1  1  1\n│     1  1  1  1\n└   s = 100.0All of the logging macros @debug, @info, @warn and @error share common features that are described in detail in the documentation for the more general macro @logmsg."
+},
+
+{
+    "location": "stdlib/Logging/#Log-event-structure-1",
+    "page": "Logging",
+    "title": "Log event structure",
+    "category": "section",
+    "text": "Each event generates several pieces of data, some provided by the user and some automatically extracted. Let\'s examine the user-defined data first:The log level is a broad category for the message that is used for early filtering. There are several standard levels of type LogLevel; user-defined levels are also possible.\nUse Debug for verbose information that could be useful when debugging an application or module. These events are disabled by default.\nUse Info to inform the user about the normal operation of the program.\nUse Warn when a potential problem is detected.\nUse Error to report errors where the code has enough context to recover and continue.  (When the code doesn\'t have enough context, an exception or early return is more appropriate.)\nThe message  is an object describing the event. By convention AbstractStrings passed as messages are assumed to be in markdown format. Other types will be displayed using show(io,mime,obj) according to the display capabilities of the installed logger.\nOptional key–value pairs allow arbitrary data to be attached to each event. Some keys have conventional meaning that can affect the way an event is interpreted (see @logmsg).The system also generates some standard information for each event:The module in which the logging macro was expanded.\nThe file and line where the logging macro occurs in the source code.\nA message id that is unique for each logging macro invocation. This is very useful as a key for caching information or actions associated with an event. For instance, it can be used to limit the number of times a message is presented to the user.\nA group for the event, which is set to the base name of the file by default, without extension.  This can be used to group messages into categories more finely than the log level (for example, all deprecation warnings have group :depwarn), or into logical groupings across or within modules.Notice that some useful information such as the event time is not included by default. This is because such information can be expensive to extract and is also dynamically available to the current logger. It\'s simple to define a custom logger to augment event data with the time, backtrace, values of global variables and other useful information as required."
+},
+
+{
+    "location": "stdlib/Logging/#Processing-log-events-1",
+    "page": "Logging",
+    "title": "Processing log events",
+    "category": "section",
+    "text": "As you can see in the examples, logging statements make no mention of where log events go or how they are processed. This is a key design feature that makes the system composable and natural for concurrent use. It does this by separating two different concerns:Creating log events is the concern of the module author who needs to decide where events are triggered and which information to include.\nProcessing of log events — that is, display, filtering, aggregation and recording — is the concern of the application author who needs to bring multiple modules together into a cooperating application."
+},
+
+{
+    "location": "stdlib/Logging/#Loggers-1",
+    "page": "Logging",
+    "title": "Loggers",
+    "category": "section",
+    "text": "Processing of events is performed by a logger, which is the first piece of user configurable code to see the event. All loggers must be subtypes of AbstractLogger.When an event is triggered, the appropriate logger is found by looking for a task-local logger with the global logger as fallback.  The idea here is that the application code knows how log events should be processed and exists somewhere at the top of the call stack. So we should look up through the call stack to discover the logger — that is, the logger should be dynamically scoped. (This is a point of contrast with logging frameworks where the logger is lexically scoped; provided explicitly by the module author or as a simple global variable. In such a system it\'s awkward to control logging while composing functionality from multiple modules.)The global logger may be set with global_logger, and task-local loggers controlled using with_logger.  Newly spawned tasks inherit the logger of the parent task.There are three logger types provided by the library.  ConsoleLogger is the default logger you see when starting the REPL.  It displays events in a readable text format and tries to give simple but user friendly control over formatting and filtering.  NullLogger is a convenient way to drop all messages where necessary; it is the logging equivalent of the DevNull stream.  SimpleLogger is a very simplistic text formatting logger, mainly useful for debugging the logging system itself.Custom loggers should come with overloads for the functions described in the reference section."
+},
+
+{
+    "location": "stdlib/Logging/#Early-filtering-and-message-handling-1",
+    "page": "Logging",
+    "title": "Early filtering and message handling",
+    "category": "section",
+    "text": "When an event occurs, a few steps of early filtering occur to avoid generating messages that will be discarded:The message log level is checked against a global minimum level (set via disable_logging).  This is a crude but extremely cheap global setting.\nThe current logger state is looked up and the message level checked against the logger\'s cached minimum level, as found by calling min_enabled_level. This behavior can be overridden via environment variables (more on this later).\nThe shouldlog function is called with the current logger, taking some minimal information (level, module, group, id) which can be computed statically.  Most usefully, shouldlog is passed an event id which can be used to discard events early based on a cached predicate.If all these checks pass, the message and key–value pairs are evaluated in full and passed to the current logger via the handle_message function. handle_message() may perform additional filtering as required and display the event to the screen, save it to a file, etc.Exceptions that occur while generating the log event are captured and logged by default.  This prevents individual broken events from crashing the application, which is helpful when enabling little-used debug events in a production system.  This behavior can be customized per logger type by extending catch_exceptions."
+},
+
+{
+    "location": "stdlib/Logging/#Testing-log-events-1",
+    "page": "Logging",
+    "title": "Testing log events",
+    "category": "section",
+    "text": "Log events are a side effect of running normal code, but you might find yourself wanting to test particular informational messages and warnings. The Test module provides a @test_logs macro that can be used to pattern match against the log event stream."
+},
+
+{
+    "location": "stdlib/Logging/#Environment-variables-1",
+    "page": "Logging",
+    "title": "Environment variables",
+    "category": "section",
+    "text": "Message filtering can be influenced through the JULIA_DEBUG environment variable, and serves as an easy way to enable debug logging for a file or module. For example, loading julia with JULIA_DEBUG=loading will activate @debug log messages in loading.jl:$ JULIA_DEBUG=loading julia -e \'using OhMyREPL\'\n┌ Debug: Rejecting cache file /home/user/.julia/compiled/v0.7/OhMyREPL.ji due to it containing an invalid cache header\n└ @ Base loading.jl:1328\n[ Info: Recompiling stale cache file /home/user/.julia/compiled/v0.7/OhMyREPL.ji for module OhMyREPL\n┌ Debug: Rejecting cache file /home/user/.julia/compiled/v0.7/Tokenize.ji due to it containing an invalid cache header\n└ @ Base loading.jl:1328\n...Similarly, the environment variable can be used to enable debug logging of modules, such as Pkg, or module roots (see Base.moduleroot). To enable all debug logging, use the special value all."
+},
+
+{
+    "location": "stdlib/Logging/#Reference-1",
+    "page": "Logging",
+    "title": "Reference",
+    "category": "section",
+    "text": ""
+},
+
+{
+    "location": "stdlib/Logging/#Base.CoreLogging.@logmsg",
+    "page": "Logging",
+    "title": "Base.CoreLogging.@logmsg",
+    "category": "macro",
+    "text": "@debug message  [key=value | value ...]\n@info  message  [key=value | value ...]\n@warn  message  [key=value | value ...]\n@error message  [key=value | value ...]\n\n@logmsg level message [key=value | value ...]\n\nCreate a log record with an informational message.  For convenience, four logging macros @debug, @info, @warn and @error are defined which log at the standard severity levels Debug, Info, Warn and Error.  @logmsg allows level to be set programmatically to any LogLevel or custom log level types.\n\nmessage should be an expression which evaluates to a string which is a human readable description of the log event.  By convention, this string will be formatted as markdown when presented.\n\nThe optional list of key=value pairs supports arbitrary user defined metadata which will be passed through to the logging backend as part of the log record.  If only a value expression is supplied, a key representing the expression will be generated using Symbol. For example, x becomes x=x, and foo(10) becomes Symbol(\"foo(10)\")=foo(10).  For splatting a list of key value pairs, use the normal splatting syntax, @info \"blah\" kws....\n\nThere are some keys which allow automatically generated log data to be overridden:\n\n_module=mod can be used to specify a different originating module from the source location of the message.\n_group=symbol can be used to override the message group (this is normally derived from the base name of the source file).\n_id=symbol can be used to override the automatically generated unique message identifier.  This is useful if you need to very closely associate messages generated on different source lines.\n_file=string and _line=integer can be used to override the apparent source location of a log message.\n\nThere\'s also some key value pairs which have conventional meaning:\n\nmaxlog=integer should be used as a hint to the backend that the message should be displayed no more than maxlog times.\nexception=ex should be used to transport an exception with a log message, often used with @error. An associated backtrace bt may be attached using the tuple exception=(ex,bt).\n\nExamples\n\n@debug \"Verbose debugging information.  Invisible by default\"\n@info  \"An informational message\"\n@warn  \"Something was odd.  You should pay attention\"\n@error \"A non fatal error occurred\"\n\nx = 10\n@info \"Some variables attached to the message\" x a=42.0\n\n@debug begin\n    sA = sum(A)\n    \"sum(A) = $sA is an expensive operation, evaluated only when `shouldlog` returns true\"\nend\n\nfor i=1:10000\n    @info \"With the default backend, you will only see (i = $i) ten times\"  maxlog=10\n    @debug \"Algorithm1\" i progress=i/10000\nend\n\n\n\n\n\n"
+},
+
+{
+    "location": "stdlib/Logging/#Base.CoreLogging.LogLevel",
+    "page": "Logging",
+    "title": "Base.CoreLogging.LogLevel",
+    "category": "type",
+    "text": "LogLevel(level)\n\nSeverity/verbosity of a log record.\n\nThe log level provides a key against which potential log records may be filtered, before any other work is done to construct the log record data structure itself.\n\n\n\n\n\n"
+},
+
+{
+    "location": "stdlib/Logging/#Creating-events-1",
+    "page": "Logging",
+    "title": "Creating events",
+    "category": "section",
+    "text": "Logging.@logmsg\nLogging.LogLevel"
+},
+
+{
+    "location": "stdlib/Logging/#Base.CoreLogging.AbstractLogger",
+    "page": "Logging",
+    "title": "Base.CoreLogging.AbstractLogger",
+    "category": "type",
+    "text": "A logger controls how log records are filtered and dispatched.  When a log record is generated, the logger is the first piece of user configurable code which gets to inspect the record and decide what to do with it.\n\n\n\n\n\n"
+},
+
+{
+    "location": "stdlib/Logging/#Base.CoreLogging.handle_message",
+    "page": "Logging",
+    "title": "Base.CoreLogging.handle_message",
+    "category": "function",
+    "text": "handle_message(logger, level, message, _module, group, id, file, line; key1=val1, ...)\n\nLog a message to logger at level.  The logical location at which the message was generated is given by module _module and group; the source location by file and line. id is an arbitrary unique Symbol to be used as a key to identify the log statement when filtering.\n\n\n\n\n\n"
+},
+
+{
+    "location": "stdlib/Logging/#Base.CoreLogging.shouldlog",
+    "page": "Logging",
+    "title": "Base.CoreLogging.shouldlog",
+    "category": "function",
+    "text": "shouldlog(logger, level, _module, group, id)\n\nReturn true when logger accepts a message at level, generated for _module, group and with unique log identifier id.\n\n\n\n\n\n"
+},
+
+{
+    "location": "stdlib/Logging/#Base.CoreLogging.min_enabled_level",
+    "page": "Logging",
+    "title": "Base.CoreLogging.min_enabled_level",
+    "category": "function",
+    "text": "min_enabled_level(logger)\n\nReturn the maximum disabled level for logger for early filtering.  That is, the log level below or equal to which all messages are filtered.\n\n\n\n\n\n"
+},
+
+{
+    "location": "stdlib/Logging/#Base.CoreLogging.catch_exceptions",
+    "page": "Logging",
+    "title": "Base.CoreLogging.catch_exceptions",
+    "category": "function",
+    "text": "catch_exceptions(logger)\n\nReturn true if the logger should catch exceptions which happen during log record construction.  By default, messages are caught\n\nBy default all exceptions are caught to prevent log message generation from crashing the program.  This lets users confidently toggle little-used functionality - such as debug logging - in a production system.\n\nIf you want to use logging as an audit trail you should disable this for your logger type.\n\n\n\n\n\n"
+},
+
+{
+    "location": "stdlib/Logging/#Base.CoreLogging.disable_logging",
+    "page": "Logging",
+    "title": "Base.CoreLogging.disable_logging",
+    "category": "function",
+    "text": "disable_logging(level)\n\nDisable all log messages at log levels equal to or less than level.  This is a global setting, intended to make debug logging extremely cheap when disabled.\n\n\n\n\n\n"
+},
+
+{
+    "location": "stdlib/Logging/#AbstractLogger-interface-1",
+    "page": "Logging",
+    "title": "Processing events with AbstractLogger",
+    "category": "section",
+    "text": "Event processing is controlled by overriding functions associated with AbstractLogger:Methods to implement   Brief description\nhandle_message  Handle a log event\nshouldlog  Early filtering of events\nmin_enabled_level  Lower bound for log level of accepted events\nOptional methods Default definition Brief description\ncatch_exceptions true Catch exceptions during event evaluationLogging.AbstractLogger\nLogging.handle_message\nLogging.shouldlog\nLogging.min_enabled_level\nLogging.catch_exceptions\nLogging.disable_logging"
+},
+
+{
+    "location": "stdlib/Logging/#Base.CoreLogging.global_logger",
+    "page": "Logging",
+    "title": "Base.CoreLogging.global_logger",
+    "category": "function",
+    "text": "global_logger()\n\nReturn the global logger, used to receive messages when no specific logger exists for the current task.\n\nglobal_logger(logger)\n\nSet the global logger to logger, and return the previous global logger.\n\n\n\n\n\n"
+},
+
+{
+    "location": "stdlib/Logging/#Base.CoreLogging.with_logger",
+    "page": "Logging",
+    "title": "Base.CoreLogging.with_logger",
+    "category": "function",
+    "text": "with_logger(function, logger)\n\nExecute function, directing all log messages to logger.\n\nExample\n\nfunction test(x)\n    @info \"x = $x\"\nend\n\nwith_logger(logger) do\n    test(1)\n    test([1,2])\nend\n\n\n\n\n\n"
+},
+
+{
+    "location": "stdlib/Logging/#Base.CoreLogging.current_logger",
+    "page": "Logging",
+    "title": "Base.CoreLogging.current_logger",
+    "category": "function",
+    "text": "current_logger()\n\nReturn the logger for the current task, or the global logger if none is is attached to the task.\n\n\n\n\n\n"
+},
+
+{
+    "location": "stdlib/Logging/#Base.CoreLogging.NullLogger",
+    "page": "Logging",
+    "title": "Base.CoreLogging.NullLogger",
+    "category": "type",
+    "text": "NullLogger()\n\nLogger which disables all messages and produces no output - the logger equivalent of /dev/null.\n\n\n\n\n\n"
+},
+
+{
+    "location": "stdlib/Logging/#Logging.ConsoleLogger",
+    "page": "Logging",
+    "title": "Logging.ConsoleLogger",
+    "category": "type",
+    "text": "ConsoleLogger(stream=stderr, min_level=Info; meta_formatter=default_metafmt,\n              show_limited=true, right_justify=0)\n\nLogger with formatting optimized for readability in a text console, for example interactive work with the Julia REPL.\n\nLog levels less than min_level are filtered out.\n\nMessage formatting can be controlled by setting keyword arguments:\n\nmeta_formatter is a function which takes the log event metadata (level, _module, group, id, file, line) and returns a color (as would be passed to printstyled), prefix and suffix for the log message.  The default is to prefix with the log level and a suffix containing the module, file and line location.\nshow_limited limits the printing of large data structures to something which can fit on the screen by setting the :limit IOContext key during formatting.\nright_justify is the integer column which log metadata is right justified at. The default is zero (metadata goes on its own line).\n\n\n\n\n\n"
+},
+
+{
+    "location": "stdlib/Logging/#Base.CoreLogging.SimpleLogger",
+    "page": "Logging",
+    "title": "Base.CoreLogging.SimpleLogger",
+    "category": "type",
+    "text": "SimpleLogger(stream=stderr, min_level=Info)\n\nSimplistic logger for logging all messages with level greater than or equal to min_level to stream.\n\n\n\n\n\n"
+},
+
+{
+    "location": "stdlib/Logging/#Using-Loggers-1",
+    "page": "Logging",
+    "title": "Using Loggers",
+    "category": "section",
+    "text": "Logger installation and inspection:Logging.global_logger\nLogging.with_logger\nLogging.current_loggerLoggers that are supplied with the system:Logging.NullLogger\nLogging.ConsoleLogger\nLogging.SimpleLogger"
+},
+
+{
     "location": "stdlib/Markdown/#",
     "page": "Markdown",
     "title": "Markdown",
@@ -18373,7 +17589,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Pkg3.jl",
     "title": "Glossary",
     "category": "section",
-    "text": "Project: a source tree with a standard layout, including a src directory for the main body of Julia code, a test directory for testing the project, docs for documentation files, and optionally a build directory for a build script and its outputs. A project will typically also have a project file and may optionally have a manifest file:Project file: a file in the root directory of a project, named Project.toml (or JuliaProject.toml) describing metadata about the project, including its name, UUID (for packages), authors, license, and the names and UUIDs of packages and libraries that it depends on.\nManifest file: a file in the root directory of a project, named Manifest.toml (or JuliaManifest.toml) describing a complete dependency graph and exact versions of each package and library used by a project.Package: a project which provides reusable functionality that can be used by other Julia projects via import X or using X. A package should have a project file with a uuid entry giving its package UUID. This UUID is used to identify the package in projects that depend on it.note: Note\nFor legacy reasons it is possible to load a package without a project file or UUID from the REPL or the top-level of a script. It is not possible, however, to load a package with a project file or UUID from a project with them. Once you\'ve loaded from a project file, everything needs a project file and UUID.Application: a project which provides standalone functionality not intended to be reused by other Julia projects. For example a web application or a commmand-line utility. An application may have a UUID but does not need one. An application may also provide global configuration options for packages it depends on. Packages, on the other hand, may not provide global configuration since that could conflict with the configuration of the main application.note: Note\nProjects vs. Packages vs. Applications:Project is an umbrella term: packages and applications are kinds of projects.\nPackages should have UUIDs, applications can have a UUIDs but don\'t need them.\nApplications can provide global configuration, whereas packages cannot.Library (future work): a compiled binary dependency (not written in Julia) packaged to be used by a Julia project. These are currently typically built in- place by a deps/build.jl script in a project’s source tree, but in the future we plan to make libraries first-class entities directly installed and upgraded by the package manager.Environment: the combination of the top-level name map provided by a project file combined with the dependency graph and map from packages to their entry points provided by a manifest file. For more detail see the manual section on code loading.Explicit environment: an environment in the form of an explicit project file and an optional corresponding manifest file together in a directory. If the manifest file is absent then the implied dependency graph and location maps are empty.\nImplicit environment: an environment provided as a directory (without a project file or manifest file) containing packages with entry points of the form X.jl, X.jl/src/X.jl or X/src/X.jl. The top-level name map is implied by these entry points. The dependency graph is implied by the existence of project files inside of these package directories, e.g. X.jl/Project.toml or X/Project.toml. The dependencies of the X package are the dependencies in the corresponding project file if there is one. The location map is implied by the entry points themselves.Registry: a source tree with a standard layout recording metadata about a registered set of packages, the tagged versions of them which are available, and which versions of packages are compatible or incompatible with each other. A registry is indexed by package name and UUID, and has a directory for each registered package providing the following metadata about it:name – e.g. DataFrames\nUUID – e.g. a93c6f00-e57d-5684-b7b6-d8193f3e46c0\nauthors – e.g. Jane Q. Developer <jane@example.com>\nlicense – e.g. MIT, BSD3, or GPLv2\nrepository – e.g. https://github.com/JuliaData/DataFrames.jl.git\ndescription – a block of text summarizing the functionality of a package\nkeywords – e.g. data, tabular, analysis, statistics\nversions – a list of all registered version tagsFor each registered version of a package, the following information is provided:its semantic version number – e.g. v1.2.3\nits git tree SHA-1 hash – e.g. 7ffb18ea3245ef98e368b02b81e8a86543a11103\na map from names to UUIDs of dependencies\nwhich versions of other packages it is compatible/incompatible withDependencies and compatiblity are stored in a compressed but human-readable format using ranges of package verions.Depot: a directory on a system where various package-related resources live, including:environments: shared named environments (e.g. v0.7, devtools)\nclones: bare clones of package repositories\ncompiled: cached compiled package images (.ji files)\nconfig: global configuration files (e.g. startup.jl)\ndev: default directory for package development\nlogs: log files (e.g. manifest_usage.toml, repl_history.jl)\npackages: installed package versions\nregistries: clones of registries (e.g. Uncurated)Load path: a stack of environments where package identities, their dependencies, and entry-points are searched for. The load path is controlled in Julia by the LOAD_PATH global variable which is populated at startup based on the value of the JULIA_LOAD_PATH environment variable. The first entry is your primary environment, often the current project, while later entries provide additional packages one may want to use from the REPL or top-level scripts.Depot path: a stack of depot locations where the package manager, as well as Julia\'s code loading mechanisms, look for registries, installed packages, named environments, repo clones, cached compiled package images, and configuration files. The depot path is controlled by the Julia DEPOT_PATH global variable which is populated at startup based on the value of the JULIA_DEPOT_PATH environment variable. The first entry is the “user depot” and should be writable by and owned by the current user. The user depot is where: registries are cloned, new package versions are installed, named environments are created and updated, package repos are cloned, new compiled package image files are saved, log files are written, development packages are checked out by default, and global configuration data is saved. Later entries in the depot path are treated as read-only and are appropriate for registries, packages, etc. installed and managed by system administrators."
+    "text": "Project: a source tree with a standard layout, including a src directory for the main body of Julia code, a test directory for testing the project, docs for documentation files, and optionally a build directory for a build script and its outputs. A project will typically also have a project file and may optionally have a manifest file:Project file: a file in the root directory of a project, named Project.toml (or JuliaProject.toml) describing metadata about the project, including its name, UUID (for packages), authors, license, and the names and UUIDs of packages and libraries that it depends on.\nManifest file: a file in the root directory of a project, named Manifest.toml (or JuliaManifest.toml) describing a complete dependency graph and exact versions of each package and library used by a project.Package: a project which provides reusable functionality that can be used by other Julia projects via import X or using X. A package should have a project file with a uuid entry giving its package UUID. This UUID is used to identify the package in projects that depend on it.note: Note\nFor legacy reasons it is possible to load a package without a project file or UUID from the REPL or the top-level of a script. It is not possible, however, to load a package without a project file or UUID from a project with them. Once you\'ve loaded from a project file, everything needs a project file and UUID.Application: a project which provides standalone functionality not intended to be reused by other Julia projects. For example a web application or a commmand-line utility. An application may have a UUID but does not need one. An application may also provide global configuration options for packages it depends on. Packages, on the other hand, may not provide global configuration since that could conflict with the configuration of the main application.note: Note\nProjects vs. Packages vs. Applications:Project is an umbrella term: packages and applications are kinds of projects.\nPackages should have UUIDs, applications can have a UUIDs but don\'t need them.\nApplications can provide global configuration, whereas packages cannot.Library (future work): a compiled binary dependency (not written in Julia) packaged to be used by a Julia project. These are currently typically built in- place by a deps/build.jl script in a project’s source tree, but in the future we plan to make libraries first-class entities directly installed and upgraded by the package manager.Environment: the combination of the top-level name map provided by a project file combined with the dependency graph and map from packages to their entry points provided by a manifest file. For more detail see the manual section on code loading.Explicit environment: an environment in the form of an explicit project file and an optional corresponding manifest file together in a directory. If the manifest file is absent then the implied dependency graph and location maps are empty.\nImplicit environment: an environment provided as a directory (without a project file or manifest file) containing packages with entry points of the form X.jl, X.jl/src/X.jl or X/src/X.jl. The top-level name map is implied by these entry points. The dependency graph is implied by the existence of project files inside of these package directories, e.g. X.jl/Project.toml or X/Project.toml. The dependencies of the X package are the dependencies in the corresponding project file if there is one. The location map is implied by the entry points themselves.Registry: a source tree with a standard layout recording metadata about a registered set of packages, the tagged versions of them which are available, and which versions of packages are compatible or incompatible with each other. A registry is indexed by package name and UUID, and has a directory for each registered package providing the following metadata about it:name – e.g. DataFrames\nUUID – e.g. a93c6f00-e57d-5684-b7b6-d8193f3e46c0\nauthors – e.g. Jane Q. Developer <jane@example.com>\nlicense – e.g. MIT, BSD3, or GPLv2\nrepository – e.g. https://github.com/JuliaData/DataFrames.jl.git\ndescription – a block of text summarizing the functionality of a package\nkeywords – e.g. data, tabular, analysis, statistics\nversions – a list of all registered version tagsFor each registered version of a package, the following information is provided:its semantic version number – e.g. v1.2.3\nits git tree SHA-1 hash – e.g. 7ffb18ea3245ef98e368b02b81e8a86543a11103\na map from names to UUIDs of dependencies\nwhich versions of other packages it is compatible/incompatible withDependencies and compatibility are stored in a compressed but human-readable format using ranges of package versions.Depot: a directory on a system where various package-related resources live, including:environments: shared named environments (e.g. v0.7, devtools)\nclones: bare clones of package repositories\ncompiled: cached compiled package images (.ji files)\nconfig: global configuration files (e.g. startup.jl)\ndev: default directory for package development\nlogs: log files (e.g. manifest_usage.toml, repl_history.jl)\npackages: installed package versions\nregistries: clones of registries (e.g. Uncurated)Load path: a stack of environments where package identities, their dependencies, and entry-points are searched for. The load path is controlled in Julia by the LOAD_PATH global variable which is populated at startup based on the value of the JULIA_LOAD_PATH environment variable. The first entry is your primary environment, often the current project, while later entries provide additional packages one may want to use from the REPL or top-level scripts.Depot path: a stack of depot locations where the package manager, as well as Julia\'s code loading mechanisms, look for registries, installed packages, named environments, repo clones, cached compiled package images, and configuration files. The depot path is controlled by the Julia DEPOT_PATH global variable which is populated at startup based on the value of the JULIA_DEPOT_PATH environment variable. The first entry is the “user depot” and should be writable by and owned by the current user. The user depot is where: registries are cloned, new package versions are installed, named environments are created and updated, package repos are cloned, new compiled package image files are saved, log files are written, development packages are checked out by default, and global configuration data is saved. Later entries in the depot path are treated as read-only and are appropriate for registries, packages, etc. installed and managed by system administrators."
 },
 
 {
@@ -18381,7 +17597,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Pkg3.jl",
     "title": "Getting Started",
     "category": "section",
-    "text": "The Pkg REPL-mode is entered using from the Julia REPL using the key ]. To return to the julia> prompt, either press backspace when the input line is empty or press Ctrl+C. Help is available by calling pkg> help.To generate files for a new project, use pkg> generate.pkg> generate HelloWorldThis creates a new project HelloWorld with the following files (visualized with the external tree command):julia> cd(\"HelloWorld\")\nshell> tree .\n.\n├── Project.toml\n└── src\n    └── HelloWorld.jl\n\n1 directory, 2 filesThe Project.toml file contains the name of the package, its unique UUID, its version, the author and eventual dependencies:name = \"HelloWorld\"\nuuid = \"b4cd1eb8-1e24-11e8-3319-93036a3eb9f3\"\nversion = \"0.1.0\"\nauthor = [\"Some One <someone@email.com>\"]\n\n[deps]The content of src/HelloWorld.jl is:module HelloWorld\n\ngreet() = print(\"Hello World!\")\n\nend # moduleWe can now load the project and use it:julia> import HelloWorld\n\njulia> HelloWorld.greet()\nHello World!"
+    "text": "The Pkg REPL-mode is entered from the Julia REPL using the key ].(v0.7) pkg>The part inside the parenthesis of the prompt shows the name of the current project. Since we haven\'t created our own project yet, we are in the default project, located at ~/.julia/environments/v0.7 (or whatever version of Julia you happen to run).To return to the julia> prompt, either press backspace when the input line is empty or press Ctrl+C. Help is available by calling pkg> help.To generate files for a new project, use pkg> generate.(v0.7) pkg> generate HelloWorldThis creates a new project HelloWorld with the following files (visualized with the external tree command):julia> cd(\"HelloWorld\")\nshell> tree .\n.\n├── Project.toml\n└── src\n    └── HelloWorld.jl\n\n1 directory, 2 filesThe Project.toml file contains the name of the package, its unique UUID, its version, the author and eventual dependencies:name = \"HelloWorld\"\nuuid = \"b4cd1eb8-1e24-11e8-3319-93036a3eb9f3\"\nversion = \"0.1.0\"\nauthor = [\"Some One <someone@email.com>\"]\n\n[deps]The content of src/HelloWorld.jl is:module HelloWorld\n\ngreet() = print(\"Hello World!\")\n\nend # moduleWe can now load the project and use it:julia> import HelloWorld\n\njulia> HelloWorld.greet()\nHello World!"
 },
 
 {
@@ -18389,7 +17605,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Pkg3.jl",
     "title": "Adding packages to the project",
     "category": "section",
-    "text": "Let’s say we want to use the standard library package Random and the registered package JSON in our project. We simply add these packages:pkg> add Random JSON\n Resolving package versions...\n  Updating \"~/Documents/HelloWorld/Project.toml\"\n [682c06a0] + JSON v0.17.1\n [9a3f8284] + Random\n  Updating \"~/Documents/HelloWorld/Manifest.toml\"\n [34da2185] + Compat v0.57.0\n [682c06a0] + JSON v0.17.1\n [4d1e1d77] + Nullables v0.0.4\n ...Both Random and JSON got added to the project’s Project.toml file, and the resulting dependencies got added to the Manifest.toml file. The resolver has installed each package with the highest possible version, while still respecting the compatibility that each package enforce on its dependencies.We can now use both Random and JSON in our project. Changing src/HelloWorld.jl tomodule HelloWorld\n\nimport Random\nimport JSON\n\ngreet() = print(\"Hello World!\")\ngreet_alien() = print(\"Hello \", Random.randstring(8))\n\nend # moduleand reloading the package, the new greet_alien function that uses Random can be used:julia> HelloWorld.greet_alien()\nHello aT157rHVSometimes we might want to use the very latest, unreleased version of a package, or perhaps a specific branch in the package git repository. We can use e.g. the master branch of JSON by specifying the branch after a # when adding the package:pkg> add JSON#master\n   Cloning package from https://github.com/JuliaIO/JSON.jl.git\n Resolving package versions...\n  Updating \"~/Documents/HelloWorld/Project.toml\"\n [682c06a0] ~ JSON v0.17.1 ⇒ v0.17.1+ #master\n  Updating \"~/Documents/HelloWorld/Manifest.toml\"\n [682c06a0] ~ JSON v0.17.1 ⇒ v0.17.1+ #masterIf we want to use a package that has not been registered in a registry, we can add its git repository url:pkg> add https://github.com/fredrikekre/ImportMacros.jl\n  Cloning package from https://github.com/fredrikekre/ImportMacros.jl\n Resolving package versions...\nDownloaded MacroTools ─ v0.4.0\n  Updating \"~/Documents/HelloWorld/Project.toml\"\n [5adcef86] + ImportMacros v0.1.0 #master\n   Updating \"~/Documents/HelloWorld/Manifest.toml\"\n [5adcef86] + ImportMacros v0.1.0 #master\n [1914dd2f] + MacroTools v0.4.0The dependencies of the unregistered package (here MacroTools) got installed. For unregistered packages we could have given a branch (or commit SHA) to track using #, just like for registered packages."
+    "text": "Let’s say we want to use the standard library package Random and the registered package JSON in our project. We simply add these packages (note how the prompt now shows the name of the newly generated project, since we are inside the HelloWorld project directory):(HelloWorld) pkg> add Random JSON\n Resolving package versions...\n  Updating \"~/Documents/HelloWorld/Project.toml\"\n [682c06a0] + JSON v0.17.1\n [9a3f8284] + Random\n  Updating \"~/Documents/HelloWorld/Manifest.toml\"\n [34da2185] + Compat v0.57.0\n [682c06a0] + JSON v0.17.1\n [4d1e1d77] + Nullables v0.0.4\n ...Both Random and JSON got added to the project’s Project.toml file, and the resulting dependencies got added to the Manifest.toml file. The resolver has installed each package with the highest possible version, while still respecting the compatibility that each package enforce on its dependencies.We can now use both Random and JSON in our project. Changing src/HelloWorld.jl tomodule HelloWorld\n\nimport Random\nimport JSON\n\ngreet() = print(\"Hello World!\")\ngreet_alien() = print(\"Hello \", Random.randstring(8))\n\nend # moduleand reloading the package, the new greet_alien function that uses Random can be used:julia> HelloWorld.greet_alien()\nHello aT157rHVSometimes we might want to use the very latest, unreleased version of a package, or perhaps a specific branch in the package git repository. We can use e.g. the master branch of JSON by specifying the branch after a # when adding the package:(HelloWorld) pkg> add JSON#master\n   Cloning package from https://github.com/JuliaIO/JSON.jl.git\n Resolving package versions...\n  Updating \"~/Documents/HelloWorld/Project.toml\"\n [682c06a0] ~ JSON v0.17.1 ⇒ v0.17.1+ #master\n  Updating \"~/Documents/HelloWorld/Manifest.toml\"\n [682c06a0] ~ JSON v0.17.1 ⇒ v0.17.1+ #masterIf we want to use a package that has not been registered in a registry, we can add its git repository url:(HelloWorld) pkg> add https://github.com/fredrikekre/ImportMacros.jl\n  Cloning package from https://github.com/fredrikekre/ImportMacros.jl\n Resolving package versions...\nDownloaded MacroTools ─ v0.4.0\n  Updating \"~/Documents/HelloWorld/Project.toml\"\n [5adcef86] + ImportMacros v0.1.0 #master\n   Updating \"~/Documents/HelloWorld/Manifest.toml\"\n [5adcef86] + ImportMacros v0.1.0 #master\n [1914dd2f] + MacroTools v0.4.0The dependencies of the unregistered package (here MacroTools) got installed. For unregistered packages we could have given a branch (or commit SHA) to track using #, just like for registered packages."
 },
 
 {
@@ -18397,7 +17613,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Pkg3.jl",
     "title": "Developing packages",
     "category": "section",
-    "text": "Let’s say we found a bug in JSON that we want to fix. We can get the full git-repo using the develop commandpkg> develop JSON\n    Cloning package from https://github.com/JuliaIO/JSON.jl.git\n  Resolving package versions...\n   Updating \"~/Documents/HelloWorld/Project.toml\"\n [682c06a0] + JSON v0.17.1+ [~/.julia/dev/JSON]\n...By default, the package get cloned to the ~/.julia/dev folder but can also be set by the JULIA_PKG_DEVDIR environment variable. When we have fixed the bug and checked that JSON now works correctly with out project, we can make a PR to the JSON repository. When a new release of JSON is made, we can go back to using the versioned JSON using the command free and update (see next section):pkg> free JSON\n Resolving package versions...\n  Updating \"~/Documents/HelloWorld/Project.toml\"\n [682c06a0] ~ JSON v0.17.1+ #master ⇒ v0.17.1\n  Updating \"~/Documents/HelloWorld/Manifest.toml\"\n [682c06a0] ~ JSON v0.17.1+ #master ⇒ v0.17.1It is also possible to give a local path as the argument to develop which will not clone anything but simply use that directory for the package.Developing a non registered package is done by giving the git-repo url as an argument to develop."
+    "text": "Let’s say we found a bug in one of our dependencies, e.g. JSON that we want to fix. We can get the full git-repo using the develop command(HelloWorld) pkg> develop JSON\n    Cloning package from https://github.com/JuliaIO/JSON.jl.git\n  Resolving package versions...\n   Updating \"~/Documents/HelloWorld/Project.toml\"\n [682c06a0] + JSON v0.17.1+ [~/.julia/dev/JSON]\n...By default, the package get cloned to the ~/.julia/dev folder but can also be set by the JULIA_PKG_DEVDIR environment variable. When we have fixed the bug and checked that JSON now works correctly with our project, we can make a PR to the JSON repository. When the PR has been merged we can go over to track the master branch and finally, when a new release of JSON is made, we can go back to using the versioned JSON using the command free and update (see next section):(HelloWorld) pkg> free JSON\n Resolving package versions...\n  Updating \"~/Documents/HelloWorld/Project.toml\"\n [682c06a0] ~ JSON v0.17.1+ #master ⇒ v0.17.1\n  Updating \"~/Documents/HelloWorld/Manifest.toml\"\n [682c06a0] ~ JSON v0.17.1+ #master ⇒ v0.17.1It is also possible to give a local path as the argument to develop which will not clone anything but simply use that directory for the package.Overriding the dependency path for a non registered package is done by giving the git-repo url as an argument to develop."
 },
 
 {
@@ -18405,7 +17621,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Pkg3.jl",
     "title": "Updating dependencies",
     "category": "section",
-    "text": "When new versions of packages the project is using  are released, it is a good idea to update. Simply calling up will try to update all the dependencies of the project. Sometimes this is not what you want. You can specify a subset of the dependencies to upgrade by giving them as arguments to up, e.g:pkg> up JSONThe version of all other dependencies will stay the same. If you only want to update the minor version of packages, to reduce the risk that your project breaks, you can give the --minor flag, e.g:pkg> up --minor JSONPackages that track a branch are not updated when a minor upgrade is done. Developed packages are never touched by the package manager.If you just want install the packages that are given by the current Manifest.toml usepkg> up --manifest --fixed"
+    "text": "When new versions of packages the project is using  are released, it is a good idea to update. Simply calling up will try to update all the dependencies of the project. Sometimes this is not what you want. You can specify a subset of the dependencies to upgrade by giving them as arguments to up, e.g:(HelloWorld) pkg> up JSONThe version of all other direct dependencies will stay the same. If you only want to update the minor version of packages, to reduce the risk that your project breaks, you can give the --minor flag, e.g:(HelloWorld) pkg> up --minor JSONPackages that track a branch are not updated when a minor upgrade is done. Developed packages are never touched by the package manager.If you just want install the packages that are given by the current Manifest.toml use(HelloWorld) pkg> up --manifest --fixed"
 },
 
 {
@@ -18413,15 +17629,15 @@ var documenterSearchIndex = {"docs": [
     "page": "Pkg3.jl",
     "title": "Preview mode",
     "category": "section",
-    "text": "If you just want to see the effects of running a command, but not change your state you can preview a command. For example:pkg> preview add Plotorpkg> preview upwill show you the effects adding Plots, or doing a full upgrade, respectively, would have on your project. However, nothing would be installed and your Project.toml and Manfiest.toml are untouched."
+    "text": "If you just want to see the effects of running a command, but not change your state you can preview a command. For example:(HelloWorld) pkg> preview add Plotsor(HelloWorld) pkg> preview upwill show you the effects adding Plots, or doing a full upgrade, respectively, would have on your project. However, nothing would be installed and your Project.toml and Manfiest.toml are untouched."
 },
 
 {
-    "location": "stdlib/Pkg3/#Using-someone-elses-project.-1",
+    "location": "stdlib/Pkg3/#Using-someone-elses-project-1",
     "page": "Pkg3.jl",
-    "title": "Using someone elses project.",
+    "title": "Using someone elses project",
     "category": "section",
-    "text": "Simple clone their project using e.g. git clone, cd to the project directory and callpkg> up --manifest --fixedThis will install the packages at the same state that the project you cloned was using."
+    "text": "Simple clone their project using e.g. git clone, cd to the project directory and call(SomeProject) pkg> up --manifest --fixedThis will install the packages at the same state that the project you cloned was using."
 },
 
 {
@@ -20613,7 +19829,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Working with LLVM",
     "title": "Building Julia with a different version of LLVM",
     "category": "section",
-    "text": "The default version of LLVM is specified in deps/Versions.make. You can override it by creating a file called Make.user in the top-level directory and adding a line to it such as:LLVM_VER = 3.5.0Besides the LLVM release numerals, you can also use LLVM_VER = svn to bulid against the latest development version of LLVM."
+    "text": "The default version of LLVM is specified in deps/Versions.make. You can override it by creating a file called Make.user in the top-level directory and adding a line to it such as:LLVM_VER = 3.5.0Besides the LLVM release numerals, you can also use LLVM_VER = svn to bulid against the latest development version of LLVM.You can also specify to build a debug version of LLVM, by setting either LLVM_DEBUG = 1 or LLVM_DEBUG = Release in your Make.user file. The former will be a fully unoptimized build of LLVM and the latter will produce an optimized build of LLVM. Depending on your needs the latter will suffice and it quite a bit faster. If you use LLVM_DEBUG = Release you will also want to set LLVM_ASSERTIONS = 1 to enable diagonstics for different passes. Only LLVM_DEBUG = 1 implies that option by default."
 },
 
 {
@@ -20621,7 +19837,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Working with LLVM",
     "title": "Passing options to LLVM",
     "category": "section",
-    "text": "You can pass options to LLVM using debug builds of Julia. To create a debug build, run make debug. The resulting executable is usr/bin/julia-debug. You can pass LLVM options to this executable via the environment variable JULIA_LLVM_ARGS. Here are example settings using bash syntax:export JULIA_LLVM_ARGS = -print-after-all dumps IR after each pass.\nexport JULIA_LLVM_ARGS = -debug-only=loop-vectorize dumps LLVM DEBUG(...) diagnostics for loop vectorizer if you built Julia with LLVM_ASSERTIONS=1. Otherwise you will get warnings about \"Unknown command line argument\". Counter-intuitively, building Julia with LLVM_DEBUG=1 is not enough to dump DEBUG diagnostics from a pass."
+    "text": "You can pass options to LLVM via the environment variable JULIA_LLVM_ARGS. Here are example settings using bash syntax:export JULIA_LLVM_ARGS = -print-after-all dumps IR after each pass.\nexport JULIA_LLVM_ARGS = -debug-only=loop-vectorize dumps LLVM DEBUG(...) diagnostics for loop vectorizer. If you get warnings about \"Unknown command line argument\", rebuild LLVM with LLVM_ASSERTIONS = 1."
 },
 
 {
@@ -21053,7 +20269,23 @@ var documenterSearchIndex = {"docs": [
     "page": "Julia SSA-form IR",
     "title": "New IR nodes",
     "category": "section",
-    "text": "With the new IR representation, the compiler learned to handle two new IR nodes, Phi nodes and Pi nodes. Phi nodes are part of generic SSA abstraction (see the link above if you\'re not familar with the concept). In the Julia IR, these nodes are represented as:struct PhiNode\n    edges::Vector{Int}\n    values::Vector{Any}\nendwhere we ensure that both vectors always have the same length. In the canonical representation (the one handles by codegen and the interpreter), the edge values indicate come-from statement numbers (i.e. if edge has an entry of 15, there must be a goto, gotoifnot or implicit fall through from statement 15 that targets this phi node). Values are either SSA values or constants. It is also possible for a value to be unassigned if the variable was not defined on this path. However, undefinedness checks get explicitly inserted and represented as booleans after middle end optimizations, so code generators may assume that any use of a phi node will have an assigned value in the corresponding slot. It is also legal for the mapping to be incomplete, i.e. for a phi node to have missing incoming edges. In that case, it must be dynamically guaranteed that the corresponding value will not be used.PiNodes encode statically proven information that may be implicitly assumed in basic blocks dominated by a given phi node. They are conceptually equivalent to the technique introduced in the paper \"ABCD: Eliminating Array Bounds Checks on Demand\" or the predicate info nodes in LLVM. To see how they work, consider, e.g.%x::Union{Int, Float64} # %x is some Union{Int, Float64} typed ssa value\nif isa(x, Int)\n    # use x\nelse\n    # use x\nendwe can perform predicate insertion and turn this into:%x::Union{Int, Float64} # %x is some Union{Int, Float64} typed ssa value\nif isa(x, Int)\n    %x_int = PiNode(x, Int)\n    # use %x_int\nelse\n    %x_float = PiNode(x, Float64)\n    # use %x_float\nendPi nodes are generally ignored in the interpreter, since they don\'t have any effect on the values, but they may sometimes lead to code generation in the compiler (e.g. to change from an implicitly union split representation to a plain unboxed representation). The main usefulness of PiNodes stems from the fact that path conditions of the values can be accumulated simply by def-use chain walking that is generally done for most optimizations that care about these conditions anyway."
+    "text": "With the new IR representation, the compiler learned to handle four new IR nodes, Phi nodes, Pi nodes as well as PhiC nodes and Upsilon nodes (the latter two are only used for exception handling)."
+},
+
+{
+    "location": "devdocs/ssair/#Phi-nodes-and-Pi-nodes-1",
+    "page": "Julia SSA-form IR",
+    "title": "Phi nodes and Pi nodes",
+    "category": "section",
+    "text": "Phi nodes are part of generic SSA abstraction (see the link above if you\'re not familar with the concept). In the Julia IR, these nodes are represented as:struct PhiNode\n    edges::Vector{Int}\n    values::Vector{Any}\nendwhere we ensure that both vectors always have the same length. In the canonical representation (the one handles by codegen and the interpreter), the edge values indicate come-from statement numbers (i.e. if edge has an entry of 15, there must be a goto, gotoifnot or implicit fall through from statement 15 that targets this phi node). Values are either SSA values or constants. It is also possible for a value to be unassigned if the variable was not defined on this path. However, undefinedness checks get explicitly inserted and represented as booleans after middle end optimizations, so code generators may assume that any use of a phi node will have an assigned value in the corresponding slot. It is also legal for the mapping to be incomplete, i.e. for a phi node to have missing incoming edges. In that case, it must be dynamically guaranteed that the corresponding value will not be used.PiNodes encode statically proven information that may be implicitly assumed in basic blocks dominated by a given pi node. They are conceptually equivalent to the technique introduced in the paper \"ABCD: Eliminating Array Bounds Checks on Demand\" or the predicate info nodes in LLVM. To see how they work, consider, e.g.%x::Union{Int, Float64} # %x is some Union{Int, Float64} typed ssa value\nif isa(x, Int)\n    # use x\nelse\n    # use x\nendwe can perform predicate insertion and turn this into:%x::Union{Int, Float64} # %x is some Union{Int, Float64} typed ssa value\nif isa(x, Int)\n    %x_int = PiNode(x, Int)\n    # use %x_int\nelse\n    %x_float = PiNode(x, Float64)\n    # use %x_float\nendPi nodes are generally ignored in the interpreter, since they don\'t have any effect on the values, but they may sometimes lead to code generation in the compiler (e.g. to change from an implicitly union split representation to a plain unboxed representation). The main usefulness of PiNodes stems from the fact that path conditions of the values can be accumulated simply by def-use chain walking that is generally done for most optimizations that care about these conditions anyway."
+},
+
+{
+    "location": "devdocs/ssair/#PhiC-nodes-and-Upsilon-nodes-1",
+    "page": "Julia SSA-form IR",
+    "title": "PhiC nodes and Upsilon nodes",
+    "category": "section",
+    "text": "Exception handling complicates the SSA story moderately, because exception handling introduces additional control flow edges into the IR across which values must be tracked. One approach to do so, which is followed by LLVM is to make calls which may throw exceptions into basic block terminators and add an explicit control flow edge to the catch handler:invoke @function_that_may_throw() to label %regular unwind to %catch\n\nregular:\n# Control flow continues here\n\ncatch:\n# Exceptions go hereHowever, this is problematic in a language like julia where at the start of the optimization pipeline, we do not now which calls throw. We would have to conservatively assume that every call (which in julia is every statement) throws. This would have several negative effects. On the one hand, it would essentially recuce the scope of every basic block to a single call, defeating the purpose of having operations be performed at the basic block level. On the other hand, every catch basic block would have n*m phi node arguments (n, the number of statements in the critical region, m the number of live values through the catch block). To work around this, we use a combination of Upsilon and PhiC (the C standing for catch, written φᶜ in the IR pretty printer, because unicode subscript c is not available) nodes. There is several ways to think of these nodes, but perhaps the easiest is to think of each PhiC as a load from a unique store-many, read-once slot, with Upsilon being the corresponding store operation. The PhiC has an operand list of all the upsilon nodes that store to its implicit slot. The Upsilon nodes however, do not record which PhiC node they store to. This is done for more natural integration with the rest of the SSA IR. E.g. if there are no more uses of a PhiC node, it is safe to delete is and the same is true of an Upsilon node. In most IR passes, PhiC nodes can be treated similar to Phi nodes. One can follow use-def chains through them, and they can be lifted to new PhiC nodes and new Upsilon nodes (in the same places as the original Upsilon nodes). The result of this scheme is that the number of Upsilon nodes (and PhiC arguments) is proportional to the number of assigned values to a particular variable (before SSA conversion), rather than the number of statements in the critical region.To see this scheme in action, consider the functionfunction foo()\n    x = 1\n    try\n        y = 2\n        error()\n    catch\n    end\n    (x, y)\nendThe corresponding IR (with irrelevant types stripped) is:ir = Code\n1 ─       nothing\n2 ─       $(Expr(:enter, 5))\n3 ─ %3  = ϒ (#undef)\n│   %4  = ϒ (1)\n│   %5  = ϒ (2)\n│         Main.bar()\n│   %7  = ϒ (3)\n└──       $(Expr(:leave, 1))\n4 ─       goto 6\n5 ─ %10 = φᶜ (%3, %5)\n│   %11 = φᶜ (%4, %7)\n└──       $(Expr(:leave, 1))\n6 ┄ %13 = φ (4 => 2, 5 => %10)::NotInferenceDontLookHere.MaybeUndef(NotInferenceDontLookHere.Const(2, false))\n│   %14 = φ (4 => 3, 5 => %11)::Int64\n│         $(Expr(:undefcheck, :y, Core.SSAValue(13)))\n│   %16 = Core.tuple(%14, %13)\n└──       return %17Note in particular that every value live into the critical region gets an upsilon node at the top of the critical region. This is because catch blocks are considered to have an invisible control flow edge from outside the function. As a result, no SSA value dominates the catch blocks, and all incoming values have to come through a φᶜ node."
 },
 
 {
