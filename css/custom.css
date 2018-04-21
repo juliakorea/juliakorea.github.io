@@ -5,13 +5,25 @@
 @import url('//cdn.jsdelivr.net/font-iropke-batang/1.2/font-iropke-batang.css');
 
 body {
-  font-family: 'Iropke Batang', serif;
+    font-family: 'Iropke Batang', serif;
 }
 
 p {
-  line-height: 1.9em;
+    line-height: 1.9em;
 }
 
 li {
-  line-height: 1.8em;
+    line-height: 1.8em;
+}
+
+@media only screen and (max-width: 768px) {
+    div#site {
+        padding: 0; 
+    }
+}
+
+@media only screen and (max-width: 320px) {
+    div#site {
+        padding: 0; 
+    }
 }
