@@ -17,7 +17,19 @@ li {
 }
 
 ul.links li a.docs {
-    font-size: 1.2em;
+    font-size: 1.3em;
+}
+
+iframe {
+    max-width: 100%;
+}
+
+img {
+    max-width: 100%;
+}
+
+svg {
+    max-width: 100%;
 }
 
 @media only screen and (max-width: 768px) {
