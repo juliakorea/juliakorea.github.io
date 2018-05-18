@@ -42,7 +42,7 @@ julia&gt; test(2, 1)
 x is greater than y
 
 julia&gt; test(1, 1)
-x is equal to y</code></pre><p><code>elseif</code>와 <code>else</code> 블록은 선택 사항이며, 원하는 만큼 많은 <code>elseif</code> 블록을 사용할 수 있습니다. <code>if</code>-<code>elseif</code>-<code>else</code> 구문 안의 조건식은 어느 한 식이 처음으로 <code>true</code>로 평가될 때까지 평가되고, 그 후에 관련 블록이 실행되며, 이후로는 어떤 식이나 블록도 실행되지 않습니다.</p><p><code>if</code> 블록은 지역 범위를 만들지 않기 때문에 한 마디로 &quot;구멍이 났다&quot;고 할 수 있습니다. 이는 <code>if</code> 절 안에서 정의된 새로운 변수가 <code>if</code> 블록 다음에도 사용될 수 있음을 의미합니다. 따라서, 위에서 정의한 <code>test</code> 함수를 다음과 같이 정의할 수도 있습니다.</p><pre><code class="language-jldoctest">julia&gt; function test(x,y)
+x is equal to y</code></pre><p><code>elseif</code>와 <code>else</code> 블록은 선택 사항이며, 원하는 만큼 많은 <code>elseif</code> 블록을 사용할 수 있습니다. <code>if</code>-<code>elseif</code>-<code>else</code> 구문 안의 조건식은 어느 한 식이 처음으로 <code>true</code>로 평가될 때까지 평가되고, 그 후에 관련 블록이 실행되며, 이후로는 어떤 식이나 블록도 실행되지 않습니다.</p><p><code>if</code> 블록은 지역 범위를 만들지 않기 때문에 한 마디로 &quot;구멍이 났다&quot;고 할 수 있습니다. 이는 <code>if</code> 절 안에서 정의된 새로운 변수가 <code>if</code> 블록 다음에도 사용될 수 있음을 의미합니다. 따라서, 위에서 정의한 <code>test</code> 함수를 다음과 같이 정의할 수도 있습니다.</p><pre><code class="language-julia-repl">julia&gt; function test(x,y)
            if x &lt; y
                relation = &quot;less than&quot;
            elseif x == y
@@ -150,7 +150,7 @@ true
 julia&gt; f(1) || f(2)
 1
 2
-false</code></pre><p><code>&amp;&amp;</code> 및 <code>||</code> 연산자의 다양한 조합의 연관성과 우선 순위를 통해 같은 방식으로 쉽게 실험할 수 있습니다.</p><p>이 동작은 Julia에서 매우 짧은 <code>if</code> 문의 대용으로 자주 사용됩니다. <code>if &lt;조건&gt; &lt;문장&gt; end</code> 대신에, <code>&lt;조건&gt;</code> 그리고 나서 <code>&lt;문장&gt;</code>이라고 읽을 수 있는 <code>&lt;조건&gt; &amp;&amp; &lt;문장&gt;</code>을 쓸 수 있습니다. 비슷하게, <code>if ! &lt;조건&gt; &lt;문장&gt; end</code> 대신에, <code>&lt;조건&gt;</code> 아니면 <code>&lt;문장&gt;</code>이라고 읽을 수 있는 <code>&lt;조건&gt; || &lt;문장&gt;</code>을 쓸 수 있습니다.</p><p>예제로 재귀적 팩토리얼 함수를 다음과 같이 선언할 수 있습니다.</p><pre><code class="language-jldoctest">julia&gt; function fact(n::Int)
+false</code></pre><p><code>&amp;&amp;</code> 및 <code>||</code> 연산자의 다양한 조합의 연관성과 우선 순위를 통해 같은 방식으로 쉽게 실험할 수 있습니다.</p><p>이 동작은 Julia에서 매우 짧은 <code>if</code> 문의 대용으로 자주 사용됩니다. <code>if &lt;조건&gt; &lt;문장&gt; end</code> 대신에, <code>&lt;조건&gt;</code> 그리고 나서 <code>&lt;문장&gt;</code>이라고 읽을 수 있는 <code>&lt;조건&gt; &amp;&amp; &lt;문장&gt;</code>을 쓸 수 있습니다. 비슷하게, <code>if ! &lt;조건&gt; &lt;문장&gt; end</code> 대신에, <code>&lt;조건&gt;</code> 아니면 <code>&lt;문장&gt;</code>이라고 읽을 수 있는 <code>&lt;조건&gt; || &lt;문장&gt;</code>을 쓸 수 있습니다.</p><p>예제로 재귀적 팩토리얼 함수를 다음과 같이 선언할 수 있습니다.</p><pre><code class="language-julia-repl">julia&gt; function fact(n::Int)
            n &gt;= 0 || error(&quot;n must be non-negative&quot;)
            n == 0 &amp;&amp; return 1
            n * fact(n-1)
@@ -270,7 +270,7 @@ julia&gt; for j = 1:1000
 ERROR: DomainError with -1.0:
 sqrt will only return a complex result if called with a complex argument. Try sqrt(Complex(x)).
 Stacktrace:
-[...]</code></pre><p>다음과 같은 방법으로 사용자 정의 예외를 직접 만들 수 있습니다.</p><pre><code class="language-julia-repl">julia&gt; struct MyCustomException &lt;: Exception end</code></pre><h3><a class="nav-anchor" id="throw-함수-1" href="#throw-함수-1"><code>throw</code> 함수</a></h3><p>예외는 <code>throw</code>를 사용하여 명시적으로 만들 수 있습니다. 예를 들어, 인수가 음수이면 인수가 음수가 아닌 숫자로만 정의된 함수를 작성하여 <code>DomainError</code>를 <code>throw</code>할 수 있습니다.</p><pre><code class="language-jldoctest">julia&gt; f(x) = x&gt;=0 ? exp(-x) : throw(DomainError(x, &quot;argument must be nonnegative&quot;))
+[...]</code></pre><p>다음과 같은 방법으로 사용자 정의 예외를 직접 만들 수 있습니다.</p><pre><code class="language-julia-repl">julia&gt; struct MyCustomException &lt;: Exception end</code></pre><h3><a class="nav-anchor" id="throw-함수-1" href="#throw-함수-1"><code>throw</code> 함수</a></h3><p>예외는 <code>throw</code>를 사용하여 명시적으로 만들 수 있습니다. 예를 들어, 인수가 음수이면 인수가 음수가 아닌 숫자로만 정의된 함수를 작성하여 <code>DomainError</code>를 <code>throw</code>할 수 있습니다.</p><pre><code class="language-julia-repl">julia&gt; f(x) = x&gt;=0 ? exp(-x) : throw(DomainError(x, &quot;argument must be nonnegative&quot;))
 f (generic function with 1 method)
 
 julia&gt; f(1)
