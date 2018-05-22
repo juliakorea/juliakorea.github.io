@@ -13,39 +13,15 @@ var documenterSearchIndex = {"docs": [
     "page": "홈",
     "title": "줄리아 0.7 문서",
     "category": "section",
-    "text": "환영합니다. 줄리아 0.7 문서입니다.지난 버전에 이어, 새롭게 바뀐 점은 릴리즈 노트에서 확인하세요.한글 문서 번역은 깃헙에서 누구나 참여하실 수 있습니다.매뉴얼\nBase\nStandard Library\nDeveloper Documentation"
+    "text": "환영합니다. 줄리아 0.7 문서입니다.지난 버전에 이어, 새롭게 바뀐 점은 릴리즈 노트에서 확인하세요.note: Note\n한글 문서 번역은 깃헙에서 누구나 참여하실 수 있습니다."
 },
 
 {
-    "location": "#매뉴얼-1",
+    "location": "#man-introduction-1",
     "page": "홈",
-    "title": "매뉴얼",
+    "title": "소개글",
     "category": "section",
-    "text": "소개글\n시작하기\n변수\n정수와 부동 소수점 수\nMathematical Operations and Elementary Functions\nComplex and Rational Numbers\nStrings\nFunctions\nControl Flow\nScope of Variables\nTypes\n메서드\nConstructors\nConversion and Promotion\nInterfaces\nModules\nDocumentation\nMetaprogramming\nMulti-dimensional Arrays\nMissing Values\nNetworking and Streams\nParallel Computing\nRunning External Programs\nCalling C and Fortran Code\nHandling Operating System Variation\nEnvironment Variables\nEmbedding Julia\nPackages\nProfiling\nStack Traces\nPerformance Tips\nWorkflow Tips\nStyle Guide\nFrequently Asked Questions\nNoteworthy Differences from other Languages\nUnicode Input"
-},
-
-{
-    "location": "#Base-1",
-    "page": "홈",
-    "title": "Base",
-    "category": "section",
-    "text": "Essentials\nCollections and Data Structures\nMathematics\nNumbers\nStrings\nArrays\nTasks\nDistributed Computing\nMulti-Threading\nShared Arrays\nConstants\nFilesystem\nI/O and Network\nPunctuation\nSorting and Related Functions\nPackage Manager Functions\nIteration utilities\nC Interface\nC Standard Library\nDynamic Linker\nStackTraces\nSIMD Support"
-},
-
-{
-    "location": "#Standard-Library-1",
-    "page": "홈",
-    "title": "Standard Library",
-    "category": "section",
-    "text": "The Julia REPL\nBase64\nCRC32c\nSHA\nDates\nDelimited Files\nDistributed Computing\nFile Events\nIterative Eigensolvers\nMemory-mapped I/O\nPrintf\nProfiling\nRandom Numbers\nShared Arrays\nLinear Algebra\nLogging\nSparse Arrays\nUnicode\nUnit Testing"
-},
-
-{
-    "location": "#Developer-Documentation-1",
-    "page": "홈",
-    "title": "Developer Documentation",
-    "category": "section",
-    "text": "Reflection and introspection\nDocumentation of Julia\'s Internals\nInitialization of the Julia runtime\nJulia ASTs\nMore about types\nMemory layout of Julia Objects\nEval of Julia code\nCalling Conventions\nHigh-level Overview of the Native-Code Generation Process\nJulia Functions\nBase.Cartesian\nTalking to the compiler (the :meta mechanism)\nSubArrays\nSystem Image Building\nWorking with LLVM\nprintf() and stdio in the Julia runtime\nBounds checking\nProper maintenance and care of multi-threading locks\nArrays with custom indices\nModule loading\nInference\nDeveloping/debugging Julia\'s C code\nReporting and analyzing crashes (segfaults)\ngdb debugging tips\nUsing Valgrind with Julia\nSanitizer support"
+    "text": "과학 분야 컴퓨팅은 전통적으로 최고의 성능을 요구하지만, 당사자인 전문 연구자들은 속도가 느리더라도 동적인 언어로서 그들의 업무를 처리한다. 동적 언어를 즐겨쓰는 여러가지 이유로 보건데, 이러한 추세가 쉽게 사그러들지는 않아 보인다. 다행히 근래의 언어 디자인과 컴파일러 기법의 발달은, 미뤄두었던 성능 문제를 해결함으로서 프로토타이핑 작업에 요구되는 개별 환경의 생산성과, 성능이 중요한 애플리케이션의 구축에서 그 효용을 충분히 발휘한다. 줄리아 프로그래밍 언어는 다음과 같은 역할을 수행한다: 과학과 수학 분야 컴퓨팅에 적합한, 기존의 정적 타입 언어에 견줄만한 성능을 갖춘 유연한 동적 언어.줄리아 컴파일러는 파이썬, R과 같은 언어의 해석 방식과 다르다. 줄리아가 뽑아내는 성능이 아마도 처음에는 의아할 것이다. 그럼에도 작성한 코드가 느리다면 성능 팁을 읽어보길 권한다. 줄리아가 어떤 식으로 작동하는지 이해한 뒤라면, C에 근접하는 성능의 코드를 짜는 건 쉽다.줄리아는 타입 추론과 LLVM으로 구현한 적시 컴파일 (JIT)을 사용해 선택적 타입, 멀티플 디스패치, 좋은 성능을 이뤄내고 있다. 그리고 명령형, 함수형, 객체 지향 프로그래밍의 특징을 포괄하는 다양한 패러다임을 추구한다. 줄리아는 고급 단계의 수치 계산에 있어 R, 매트랩, 파이썬처럼 간편하고 표현력이 우수하다. 뿐만 아니라 일반적인 형태의 프로그래밍 또한 가능하다. 이를 위해 줄리아는 수학 프로그래밍 언어를 근간으로 해서 구축하였고 리스프, 펄, 파이썬, 루아, 루비와 같은 인기있는 동적 언어의 기능을 취합하고 있다.기존에 있는 동적 언어와 비교해 보는 줄리아만의 독특한 점은:핵심 언어는 최소한으로 꾸린다; 정수를 다루는 프리미티브 연산자(+ - * 같은)를 포함하는, 줄리아 Base와 표준 라이브러리는 줄리아 코드로 짜여져 있다.\n객체를 구성하고 서술하는 타입(types)을 풍부하게 지원하며, 타입 선언을 만들 때도 선택적으로 사용된다.\n인자 타입을 조합함으로서 함수의 작동 행위를 정의하는 멀티플 디스패치(multiple dispatch)\n인자 타입에 따라 효율적이고 특화된 코드를 자동으로 생성\nC와 같은 정적으로 컴파일되는 언어에 근접하는 훌륭한 성능동적 언어에 대해 \"타입이 없다\"는 식으로 말하곤 하는데 사실은 그렇지 않다: 프리미티브(숫자와 같은 기본 타입의)이거나 별도 정의를 통틀어 모든 객체는 타입을 가진다. 그러나 대부분의 동적 언어는 타입 선언의 부족으로 컴파일러가 해당 값의 타입을 인지하지 못한다거나 타입에 대해 무엇인지 명시적으로 밝힐 수 없는 상태가 되곤 한다. 한편 정적 언어는 타입 정보를 – 대개 – 컴파일러용으로서 달기에, 타입은 오직 컴파일 시점에만 존재하여 실행시에는 이를 다루거나 표현할 수 없다. 줄리아에서 타입은 그 자체로 런타임 객체이며 컴파일러가 요하는 정보를 알려주는 데에도 쓰인다.보통의 프로그래머라면 개의치 않을 타입과 멀티플 디스패치는 줄리아의 핵심 개념이다: 함수들은 서로 다른 인자 타입들을 조합함으로서 정의되고 가장 그 정의와 맞물리는 타입을 찾아 디스패치하여 실행된다. 이 모델은 수학 프로그래밍과 잘 맞는데, 전통적인 객체 지향 디스패치라면 첫번째 인자로 연산자를 \"갖는\" 것은 자연스럽지 않다. 연산자는 단지 특별히 표기한 함수일 뿐이다 – + 함수에 엮일 새로운 데이터 타입을 정의하려면, 해당하는 메서드 정의만 추가하면 된다. 기존 코드는 새로운 데이터 타입과 더불어 원할하게 작동한다.런타임 타입 추론(타입 지정을 점진적으로 늘려가며)을 이유로, 또 이 프로젝트를 시작할 때 무엇보다도 성능을 강조하였기에 줄리아의 계산 효율은 다른 동적 언어들에 비해 우월하며 심지어 정적으로 컴파일하는 경쟁 언어들마저 능가한다. 거대 규모의 수치 해석 문제에 있어 속도는 매번 그리고 앞으로도, 아마 항상 결정적 요소일 것이다: 처리되는 데이터의 양이 지난 수십년간 무어의 법칙을 따르고 있지 않은가.사용하기 편하면서도 강력하고 효율적인 언어를 줄리아는 목표하고 있다. 다른 시스템과 견주어 줄리아를 씀으로 좋은 점은 다음과 같다:자유롭게 사용 가능하며 오픈 소스이다 (MIT 라이센스)\n사용자가 정의한 타입 또한 내장한 타입처럼 빠르고 간결하다\n성능을 위해 코드를 벡터화할 필요가 없다; 벡터화하지 않은 코드도 빠르다\n병렬과 분산 처리를 위해 고안되었다\n가벼운 \"그린\" 쓰레딩 (코루틴)\n거슬리지 않는 강력한 타입 시스템\n숫자와 다른 타입을 위한 우아하고 확장 가능한 컨버젼 및 프로모션(타입 변환)\n효율적인 유니코드 와 UTF-8 지원\nC 함수 직접 호출(별도의 래퍼나 특정한 API가 필요하지 않음)\n다른 프로세스를 관리하는 쉘과 비슷한 강력한 기능\n리스프와 비슷한 매크로, 메타프로그래밍을 위한 장치들"
 },
 
 {
@@ -118,22 +94,6 @@ var documenterSearchIndex = {"docs": [
     "title": "Command-line option changes",
     "category": "section",
     "text": "New option --warn-overwrite={yes|no} to control the warning for overwriting method definitions. The default is no (#23002).\nNew option --banner={yes,no} allows suppressing or forcing the printing of the startup banner, overriding the default behavior (banner in REPL, no banner otherwise). The --quiet option implies --banner=no even in REPL mode but can be overridden by passing --quiet together with --banner=yes (#23342).\nThe option --precompiled has been renamed to --sysimage-native-code (#23054).\nThe option --compilecache has been renamed to --compiled-modules (#23054)."
-},
-
-{
-    "location": "manual/introduction/#",
-    "page": "소개글",
-    "title": "소개글",
-    "category": "page",
-    "text": ""
-},
-
-{
-    "location": "manual/introduction/#man-introduction-1",
-    "page": "소개글",
-    "title": "소개글",
-    "category": "section",
-    "text": "과학 분야 컴퓨팅은 전통적으로 최고의 성능을 요구하지만, 당사자인 전문 연구자들은 속도가 느리더라도 동적인 언어로서 그들의 업무를 처리한다. 동적 언어를 즐겨쓰는 여러가지 이유로 보건데, 이러한 추세가 쉽게 사그러들지는 않아 보인다. 다행히 근래의 언어 디자인과 컴파일러 기법의 발달은, 미뤄두었던 성능 문제를 해결함으로서 프로토타이핑 작업에 요구되는 개별 환경의 생산성과, 성능이 중요한 애플리케이션의 구축에서 그 효용을 충분히 발휘한다. 줄리아 프로그래밍 언어는 다음과 같은 역할을 수행한다: 과학과 수학 분야 컴퓨팅에 적합한, 기존의 정적 타입 언어에 견줄만한 성능을 갖춘 유연한 동적 언어.줄리아 컴파일러는 파이썬, R과 같은 언어의 해석 방식과 다르다. 줄리아가 뽑아내는 성능이 아마도 처음에는 의아할 것이다. 그럼에도 작성한 코드가 느리다면 성능 팁을 읽어보길 권한다. 줄리아가 어떤 식으로 작동하는지 이해한 뒤라면, C에 근접하는 성능의 코드를 짜는 건 쉽다.줄리아는 타입 추론과 LLVM으로 구현한 적시 컴파일 (JIT)을 사용해 선택적 타입, 멀티플 디스패치, 좋은 성능을 이뤄내고 있다. 그리고 명령형, 함수형, 객체 지향 프로그래밍의 특징을 포괄하는 다양한 패러다임을 추구한다. 줄리아는 고급 단계의 수치 계산에 있어 R, 매트랩, 파이썬처럼 간편하고 표현력이 우수하다. 뿐만 아니라 일반적인 형태의 프로그래밍 또한 가능하다. 이를 위해 줄리아는 수학 프로그래밍 언어를 근간으로 해서 구축하였고 리스프, 펄, 파이썬, 루아, 루비와 같은 인기있는 동적 언어의 기능을 취합하고 있다.기존에 있는 동적 언어와 비교해 보는 줄리아만의 독특한 점은:핵심 언어는 최소한으로 꾸린다; 정수를 다루는 프리미티브 연산자(+ - * 같은)를 포함하는, 줄리아 Base와 표준 라이브러리는 줄리아 코드로 짜여져 있다.\n객체를 구성하고 서술하는 타입(types)을 풍부하게 지원하며, 타입 선언을 만들 때도 선택적으로 사용된다.\n인자 타입을 조합함으로서 함수의 작동 행위를 정의하는 멀티플 디스패치(multiple dispatch)\n인자 타입에 따라 효율적이고 특화된 코드를 자동으로 생성\nC와 같은 정적으로 컴파일되는 언어에 근접하는 훌륭한 성능동적 언어에 대해 \"타입이 없다\"는 식으로 말하곤 하는데 사실은 그렇지 않다: 프리미티브(숫자와 같은 기본 타입의)이거나 별도 정의를 통틀어 모든 객체는 타입을 가진다. 그러나 대부분의 동적 언어는 타입 선언의 부족으로 컴파일러가 해당 값의 타입을 인지하지 못한다거나 타입에 대해 무엇인지 명시적으로 밝힐 수 없는 상태가 되곤 한다. 한편 정적 언어는 타입 정보를 – 대개 – 컴파일러용으로서 달기에, 타입은 오직 컴파일 시점에만 존재하여 실행시에는 이를 다루거나 표현할 수 없다. 줄리아에서 타입은 그 자체로 런타임 객체이며 컴파일러가 요하는 정보를 알려주는 데에도 쓰인다.보통의 프로그래머라면 개의치 않을 타입과 멀티플 디스패치는 줄리아의 핵심 개념이다: 함수들은 서로 다른 인자 타입들을 조합함으로서 정의되고 가장 그 정의와 맞물리는 타입을 찾아 디스패치하여 실행된다. 이 모델은 수학 프로그래밍과 잘 맞는데, 전통적인 객체 지향 디스패치라면 첫번째 인자로 연산자를 \"갖는\" 것은 자연스럽지 않다. 연산자는 단지 특별히 표기한 함수일 뿐이다 – + 함수에 엮일 새로운 데이터 타입을 정의하려면, 해당하는 메서드 정의만 추가하면 된다. 기존 코드는 새로운 데이터 타입과 더불어 원할하게 작동한다.런타임 타입 추론(타입 지정을 점진적으로 늘려가며)을 이유로, 또 이 프로젝트를 시작할 때 무엇보다도 성능을 강조하였기에 줄리아의 계산 효율은 다른 동적 언어들에 비해 우월하며 심지어 정적으로 컴파일하는 경쟁 언어들마저 능가한다. 거대 규모의 수치 해석 문제에 있어 속도는 매번 그리고 앞으로도, 아마 항상 결정적 요소일 것이다: 처리되는 데이터의 양이 지난 수십년간 무어의 법칙을 따르고 있지 않은가.사용하기 편하면서도 강력하고 효율적인 언어를 줄리아는 목표하고 있다. 다른 시스템과 견주어 줄리아를 씀으로 좋은 점은 다음과 같다:자유롭게 사용 가능하며 오픈 소스이다 (MIT 라이센스)\n사용자가 정의한 타입 또한 내장한 타입처럼 빠르고 간결하다\n성능을 위해 코드를 벡터화할 필요가 없다; 벡터화하지 않은 코드도 빠르다\n병렬과 분산 처리를 위해 고안되었다\n가벼운 \"그린\" 쓰레딩 (코루틴)\n거슬리지 않는 강력한 타입 시스템\n숫자와 다른 타입을 위한 우아하고 확장 가능한 컨버젼 및 프로모션(타입 변환)\n효율적인 유니코드 와 UTF-8 지원\nC 함수 직접 호출(별도의 래퍼나 특정한 API가 필요하지 않음)\n다른 프로세스를 관리하는 쉘과 비슷한 강력한 기능\n리스프와 비슷한 매크로, 메타프로그래밍을 위한 장치들"
 },
 
 {
@@ -1597,7 +1557,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Modules",
     "title": "Default top-level definitions and bare modules",
     "category": "section",
-    "text": "In addition to using Base, modules also automatically contain definitions of the eval and include functions, which evaluate expressions/files within the global scope of that module.If these default definitions are not wanted, modules can be defined using the keyword baremodule instead (note: Core is still imported, as per above). In terms of baremodule, a standard module looks like this:baremodule Mod\n\nusing Base\n\neval(x) = Core.eval(Mod, x)\neval(m,x) = Core.eval(m, x)\ninclude(p) = Base.include(Mod, p)\n\n...\n\nend"
+    "text": "In addition to using Base, modules also automatically contain definitions of the eval and include functions, which evaluate expressions/files within the global scope of that module.If these default definitions are not wanted, modules can be defined using the keyword baremodule instead (note: Core is still imported, as per above). In terms of baremodule, a standard module looks like this:baremodule Mod\n\nusing Base\n\neval(x) = Core.eval(Mod, x)\ninclude(p) = Base.include(Mod, p)\n\n...\n\nend"
 },
 
 {
@@ -4541,7 +4501,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Essentials",
     "title": "Base.include",
     "category": "function",
-    "text": "Base.include([m::Module,] path::AbstractString)\n\nEvaluate the contents of the input source file in the global scope of module m, or, for the one argument call, in the global scope of the Base module. Note that every Module (except those defined with baremodule) has its own 1-argument definition of include, which evaluates the file in that module. Returns the result of the last evaluated expression of the input file. During including, a task-local include path is set to the directory containing the file. Nested calls to include will search relative to that path. This function is typically used to load source interactively, or to combine files in packages that are broken into multiple source files.\n\n\n\n\n\n"
+    "text": "Base.include([m::Module,] path::AbstractString)\n\nEvaluate the contents of the input source file in the global scope of module m. Every module (except those defined with baremodule) has its own 1-argument definition of include, which evaluates the file in that module. Returns the result of the last evaluated expression of the input file. During including, a task-local include path is set to the directory containing the file. Nested calls to include will search relative to that path. This function is typically used to load source interactively, or to combine files in packages that are broken into multiple source files.\n\n\n\n\n\n"
 },
 
 {
@@ -4549,7 +4509,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Essentials",
     "title": "Base.MainInclude.include",
     "category": "function",
-    "text": "include(path::AbstractString)\n\nEvaluate the contents of the input source file into the global scope of the containing module. Every Module (except those defined with baremodule) has its own 1-argument definition of include, which evaluates the file in that module. Returns the result of the last evaluated expression of the input file. During including, a task-local include path is set to the directory containing the file. Nested calls to include will search relative to that path. This function is typically used to load source interactively, or to combine files in packages that are broken into multiple source files.\n\nUse Base.include to evaluate a file into another module.\n\n\n\n\n\n"
+    "text": "include(path::AbstractString)\n\nEvaluate the contents of the input source file in the global scope of the containing module. Every module (except those defined with baremodule) has its own 1-argument definition of include, which evaluates the file in that module. Returns the result of the last evaluated expression of the input file. During including, a task-local include path is set to the directory containing the file. Nested calls to include will search relative to that path. This function is typically used to load source interactively, or to combine files in packages that are broken into multiple source files.\n\nUse Base.include to evaluate a file into another module.\n\n\n\n\n\n"
 },
 
 {
@@ -5637,7 +5597,15 @@ var documenterSearchIndex = {"docs": [
     "page": "Essentials",
     "title": "Core.eval",
     "category": "function",
-    "text": "eval([m::Module], expr::Expr)\n\nEvaluate an expression in the given module and return the result. Every Module (except those defined with baremodule) has its own 1-argument definition of eval, which evaluates expressions in that module.\n\n\n\n\n\n"
+    "text": "Core.eval(m::Module, expr)\n\nEvaluate an expression in the given module and return the result.\n\n\n\n\n\n"
+},
+
+{
+    "location": "base/base/#Base.MainInclude.eval",
+    "page": "Essentials",
+    "title": "Base.MainInclude.eval",
+    "category": "function",
+    "text": "eval(expr)\n\nEvaluate an expression in the global scope of the containing module. Every Module (except those defined with baremodule) has its own 1-argument definition of eval, which evaluates expressions in that module.\n\n\n\n\n\n"
 },
 
 {
@@ -5749,7 +5717,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Essentials",
     "title": "Syntax",
     "category": "section",
-    "text": "Core.eval\nBase.@eval\nBase.evalfile\nBase.esc\nBase.@inbounds\nBase.@boundscheck\nBase.@inline\nBase.@noinline\nBase.@nospecialize\nBase.gensym\nBase.@gensym\nBase.@goto\nBase.@label\nBase.@polly"
+    "text": "Core.eval\nBase.MainInclude.eval\nBase.@eval\nBase.evalfile\nBase.esc\nBase.@inbounds\nBase.@boundscheck\nBase.@inline\nBase.@noinline\nBase.@nospecialize\nBase.gensym\nBase.@gensym\nBase.@goto\nBase.@label\nBase.@polly"
 },
 
 {
@@ -7341,7 +7309,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Collections and Data Structures",
     "title": "Base.pairs",
     "category": "function",
-    "text": "pairs(collection)\n\nReturn an iterator over key => value pairs for any collection that maps a set of keys to a set of values. This includes arrays, where the keys are the array indices.\n\n\n\n\n\npairs(IndexLinear(), A)\npairs(IndexCartesian(), A)\npairs(IndexStyle(A), A)\n\nAn iterator that accesses each element of the array A, returning i => x, where i is the index for the element and x = A[i]. Identical to pairs(A), except that the style of index can be selected. Also similar to enumerate(A), except i will be a valid index for A, while enumerate always counts from 1 regardless of the indices of A.\n\nSpecifying IndexLinear() ensures that i will be an integer; specifying IndexCartesian() ensures that i will be a CartesianIndex; specifying IndexStyle(A) chooses whichever has been defined as the native indexing style for array A.\n\nMutation of the bounds of the underlying array will invalidate this iterator.\n\nExamples\n\njulia> A = [\"a\" \"d\"; \"b\" \"e\"; \"c\" \"f\"];\n\njulia> for (index, value) in pairs(IndexStyle(A), A)\n           println(\"$index $value\")\n       end\n1 a\n2 b\n3 c\n4 d\n5 e\n6 f\n\njulia> S = view(A, 1:2, :);\n\njulia> for (index, value) in pairs(IndexStyle(S), S)\n           println(\"$index $value\")\n       end\nCartesianIndex(1, 1) a\nCartesianIndex(2, 1) b\nCartesianIndex(1, 2) d\nCartesianIndex(2, 2) e\n\nSee also: IndexStyle, axes.\n\n\n\n\n\n"
+    "text": "pairs(IndexLinear(), A)\npairs(IndexCartesian(), A)\npairs(IndexStyle(A), A)\n\nAn iterator that accesses each element of the array A, returning i => x, where i is the index for the element and x = A[i]. Identical to pairs(A), except that the style of index can be selected. Also similar to enumerate(A), except i will be a valid index for A, while enumerate always counts from 1 regardless of the indices of A.\n\nSpecifying IndexLinear() ensures that i will be an integer; specifying IndexCartesian() ensures that i will be a CartesianIndex; specifying IndexStyle(A) chooses whichever has been defined as the native indexing style for array A.\n\nMutation of the bounds of the underlying array will invalidate this iterator.\n\nExamples\n\njulia> A = [\"a\" \"d\"; \"b\" \"e\"; \"c\" \"f\"];\n\njulia> for (index, value) in pairs(IndexStyle(A), A)\n           println(\"$index $value\")\n       end\n1 a\n2 b\n3 c\n4 d\n5 e\n6 f\n\njulia> S = view(A, 1:2, :);\n\njulia> for (index, value) in pairs(IndexStyle(S), S)\n           println(\"$index $value\")\n       end\nCartesianIndex(1, 1) a\nCartesianIndex(2, 1) b\nCartesianIndex(1, 2) d\nCartesianIndex(2, 2) e\n\nSee also: IndexStyle, axes.\n\n\n\n\n\npairs(collection)\n\nReturn an iterator over key => value pairs for any collection that maps a set of keys to a set of values. This includes arrays, where the keys are the array indices.\n\n\n\n\n\n"
 },
 
 {
@@ -15357,7 +15325,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Distributed Computing",
     "title": "Base.wait",
     "category": "function",
-    "text": "wait([x])\n\nBlock the current task until some event occurs, depending on the type of the argument:\n\nChannel: Wait for a value to be appended to the channel.\nCondition: Wait for notify on a condition.\nProcess: Wait for a process or process chain to exit. The exitcode field of a process can be used to determine success or failure.\nTask: Wait for a Task to finish. If the task fails with an exception, the exception is propagated (re-thrown in the task that called wait).\nRawFD: Wait for changes on a file descriptor (see the FileWatching package).\n\nIf no argument is passed, the task blocks for an undefined period. A task can only be restarted by an explicit call to schedule or yieldto.\n\nOften wait is called within a while loop to ensure a waited-for condition is met before proceeding.\n\n\n\n\n\nwait(r::Future)\n\nWait for a value to become available for the specified future.\n\n\n\n\n\nwait(r::RemoteChannel, args...)\n\nWait for a value to become available on the specified remote channel.\n\n\n\n\n\n"
+    "text": "wait(r::Future)\n\nWait for a value to become available for the specified future.\n\n\n\n\n\nwait(r::RemoteChannel, args...)\n\nWait for a value to become available on the specified remote channel.\n\n\n\n\n\nwait([x])\n\nBlock the current task until some event occurs, depending on the type of the argument:\n\nChannel: Wait for a value to be appended to the channel.\nCondition: Wait for notify on a condition.\nProcess: Wait for a process or process chain to exit. The exitcode field of a process can be used to determine success or failure.\nTask: Wait for a Task to finish. If the task fails with an exception, the exception is propagated (re-thrown in the task that called wait).\nRawFD: Wait for changes on a file descriptor (see the FileWatching package).\n\nIf no argument is passed, the task blocks for an undefined period. A task can only be restarted by an explicit call to schedule or yieldto.\n\nOften wait is called within a while loop to ensure a waited-for condition is met before proceeding.\n\n\n\n\n\n"
 },
 
 {
@@ -22577,62 +22545,6 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "devdocs/ssair/#",
-    "page": "Julia SSA-form IR",
-    "title": "Julia SSA-form IR",
-    "category": "page",
-    "text": ""
-},
-
-{
-    "location": "devdocs/ssair/#Julia-SSA-form-IR-1",
-    "page": "Julia SSA-form IR",
-    "title": "Julia SSA-form IR",
-    "category": "section",
-    "text": ""
-},
-
-{
-    "location": "devdocs/ssair/#Background-1",
-    "page": "Julia SSA-form IR",
-    "title": "Background",
-    "category": "section",
-    "text": "Beginning in Julia 0.7, parts of the compiler use a new SSA-form intermediate representation. Historically, the compiler used to directly generate LLVM IR, from a lowered form of the Julia AST. This form had most syntactic abstractions removed, but still looked a lot like an abstract syntax tree. Over time, in order to facilitate optimizations, SSA values were introduced to this IR and the IR was linearized (i.e. a form where function arguments may only be SSA values or constants). However, non-ssa values (slots) remained in the IR due to the lack of Phi nodes in the IR (necessary for back-edges and re-merging of conditional control flow), negating much of the usefulfulness of the SSA form representation to perform middle end optimizations. Some heroic effort was put into making these optimizations work without a complete SSA form representation, but the lack of such a representation ultimately proved prohibitive."
-},
-
-{
-    "location": "devdocs/ssair/#New-IR-nodes-1",
-    "page": "Julia SSA-form IR",
-    "title": "New IR nodes",
-    "category": "section",
-    "text": "With the new IR representation, the compiler learned to handle four new IR nodes, Phi nodes, Pi nodes as well as PhiC nodes and Upsilon nodes (the latter two are only used for exception handling)."
-},
-
-{
-    "location": "devdocs/ssair/#Phi-nodes-and-Pi-nodes-1",
-    "page": "Julia SSA-form IR",
-    "title": "Phi nodes and Pi nodes",
-    "category": "section",
-    "text": "Phi nodes are part of generic SSA abstraction (see the link above if you\'re not familar with the concept). In the Julia IR, these nodes are represented as:struct PhiNode\n    edges::Vector{Int}\n    values::Vector{Any}\nendwhere we ensure that both vectors always have the same length. In the canonical representation (the one handles by codegen and the interpreter), the edge values indicate come-from statement numbers (i.e. if edge has an entry of 15, there must be a goto, gotoifnot or implicit fall through from statement 15 that targets this phi node). Values are either SSA values or constants. It is also possible for a value to be unassigned if the variable was not defined on this path. However, undefinedness checks get explicitly inserted and represented as booleans after middle end optimizations, so code generators may assume that any use of a phi node will have an assigned value in the corresponding slot. It is also legal for the mapping to be incomplete, i.e. for a phi node to have missing incoming edges. In that case, it must be dynamically guaranteed that the corresponding value will not be used.PiNodes encode statically proven information that may be implicitly assumed in basic blocks dominated by a given pi node. They are conceptually equivalent to the technique introduced in the paper \"ABCD: Eliminating Array Bounds Checks on Demand\" or the predicate info nodes in LLVM. To see how they work, consider, e.g.%x::Union{Int, Float64} # %x is some Union{Int, Float64} typed ssa value\nif isa(x, Int)\n    # use x\nelse\n    # use x\nendwe can perform predicate insertion and turn this into:%x::Union{Int, Float64} # %x is some Union{Int, Float64} typed ssa value\nif isa(x, Int)\n    %x_int = PiNode(x, Int)\n    # use %x_int\nelse\n    %x_float = PiNode(x, Float64)\n    # use %x_float\nendPi nodes are generally ignored in the interpreter, since they don\'t have any effect on the values, but they may sometimes lead to code generation in the compiler (e.g. to change from an implicitly union split representation to a plain unboxed representation). The main usefulness of PiNodes stems from the fact that path conditions of the values can be accumulated simply by def-use chain walking that is generally done for most optimizations that care about these conditions anyway."
-},
-
-{
-    "location": "devdocs/ssair/#PhiC-nodes-and-Upsilon-nodes-1",
-    "page": "Julia SSA-form IR",
-    "title": "PhiC nodes and Upsilon nodes",
-    "category": "section",
-    "text": "Exception handling complicates the SSA story moderately, because exception handling introduces additional control flow edges into the IR across which values must be tracked. One approach to do so, which is followed by LLVM is to make calls which may throw exceptions into basic block terminators and add an explicit control flow edge to the catch handler:invoke @function_that_may_throw() to label %regular unwind to %catch\n\nregular:\n# Control flow continues here\n\ncatch:\n# Exceptions go hereHowever, this is problematic in a language like julia where at the start of the optimization pipeline, we do not now which calls throw. We would have to conservatively assume that every call (which in julia is every statement) throws. This would have several negative effects. On the one hand, it would essentially recuce the scope of every basic block to a single call, defeating the purpose of having operations be performed at the basic block level. On the other hand, every catch basic block would have n*m phi node arguments (n, the number of statements in the critical region, m the number of live values through the catch block). To work around this, we use a combination of Upsilon and PhiC (the C standing for catch, written φᶜ in the IR pretty printer, because unicode subscript c is not available) nodes. There is several ways to think of these nodes, but perhaps the easiest is to think of each PhiC as a load from a unique store-many, read-once slot, with Upsilon being the corresponding store operation. The PhiC has an operand list of all the upsilon nodes that store to its implicit slot. The Upsilon nodes however, do not record which PhiC node they store to. This is done for more natural integration with the rest of the SSA IR. E.g. if there are no more uses of a PhiC node, it is safe to delete is and the same is true of an Upsilon node. In most IR passes, PhiC nodes can be treated similar to Phi nodes. One can follow use-def chains through them, and they can be lifted to new PhiC nodes and new Upsilon nodes (in the same places as the original Upsilon nodes). The result of this scheme is that the number of Upsilon nodes (and PhiC arguments) is proportional to the number of assigned values to a particular variable (before SSA conversion), rather than the number of statements in the critical region.To see this scheme in action, consider the functionfunction foo()\n    x = 1\n    try\n        y = 2\n        error()\n    catch\n    end\n    (x, y)\nendThe corresponding IR (with irrelevant types stripped) is:ir = Code\n1 ─       nothing\n2 ─       $(Expr(:enter, 5))\n3 ─ %3  = ϒ (#undef)\n│   %4  = ϒ (1)\n│   %5  = ϒ (2)\n│         Main.bar()\n│   %7  = ϒ (3)\n└──       $(Expr(:leave, 1))\n4 ─       goto 6\n5 ─ %10 = φᶜ (%3, %5)\n│   %11 = φᶜ (%4, %7)\n└──       $(Expr(:leave, 1))\n6 ┄ %13 = φ (4 => 2, 5 => %10)::NotInferenceDontLookHere.MaybeUndef(NotInferenceDontLookHere.Const(2, false))\n│   %14 = φ (4 => 3, 5 => %11)::Int64\n│         $(Expr(:undefcheck, :y, Core.SSAValue(13)))\n│   %16 = Core.tuple(%14, %13)\n└──       return %17Note in particular that every value live into the critical region gets an upsilon node at the top of the critical region. This is because catch blocks are considered to have an invisible control flow edge from outside the function. As a result, no SSA value dominates the catch blocks, and all incoming values have to come through a φᶜ node."
-},
-
-{
-    "location": "devdocs/ssair/#Main-SSA-data-structure-1",
-    "page": "Julia SSA-form IR",
-    "title": "Main SSA data structure",
-    "category": "section",
-    "text": "The main SSAIR data structure is worthy of discussion. It draws inspiration from LLVM and Webkit\'s B3 IR. The core of the data structure is a flat vector of statements. Each statement is implicitly assigned an SSA values based on its position in the vector (i.e. the result of the statement at idx 1 can be accessed using SSAValue(1) etc). For each SSA value, we additionally maintain its type. Since, SSA values are definitionally assigned only once, this type is also the result type of the expression at the corresponding index. However, while this representation is rather efficient (since the assignments don\'t need to be explicitly) encoded, if of course carries the drawback that order is semantically significant, so reorderings and insertions change statement numbers. Additionally, we do not keep use lists (i.e. it is impossible to walk from a def to all its uses without explicitly computing this map - def lists however are trivial since you can lookup the corresponding statement from the index), so the LLVM-style RAUW (replace-all-uses-with) operation is unavailable.Instead, we do the following:We keep a separate buffer of nodes to insert (including the position to insert them at, the type of the corresponding value and the node itself). These nodes are numbered by their occurrence in the insertion buffer, allowing their values to be immediately used elesewhere in the IR (i.e. if there is 12 statements in the original statement list, the first new statement will be accessible as SSAValue(13))\nRAUW style operations are performed by setting the corresponding statement index to the replacement value.\nStatements are erased by setting the corresponding statement to nothing (this is essentially just a special-case convention of the above\nif there are any uses of the statement being erased they will be set to nothing)There is a compact! function that compacts the above data structure by performing the insertion of nodes in the appropriate place, trivial copy propagation and renaming of uses to any changed SSA values. However, the clever part of this scheme is that this compaction can be done lazily as part of the subsequent pass. Most optimization passes need to walk over the entire list of statements, performing analysis or modifications along the way. We provide an IncrementalCompact iterator that can be used to iterate over the statement list. It will perform any necessary compaction, and return the new index of the node, as well as the node itself. It is legal at this point to walk def-use chains, as well as make any modifications or deletions to the IR (insertions are disallowed however).The idea behind this arrangement is that, since the optimization passes need to touch the corresponding memory anyway, and incur the corresponding memory access penalty, performing the extra housekeeping should have comparitively little overhead (and save the overhead of maintaining these data structures during IR modification)."
-},
-
-{
     "location": "devdocs/backtraces/#",
     "page": "Reporting and analyzing crashes (segfaults)",
     "title": "Reporting and analyzing crashes (segfaults)",
@@ -22878,6 +22790,62 @@ var documenterSearchIndex = {"docs": [
     "title": "Memory Sanitizer (MSAN)",
     "category": "section",
     "text": "For detecting use of uninitialized memory, you can use Clang\'s memory sanitizer (MSAN) by compiling with SANITIZE_MEMORY=1."
+},
+
+{
+    "location": "devdocs/ssair/#",
+    "page": "Julia SSA-form IR",
+    "title": "Julia SSA-form IR",
+    "category": "page",
+    "text": ""
+},
+
+{
+    "location": "devdocs/ssair/#Julia-SSA-form-IR-1",
+    "page": "Julia SSA-form IR",
+    "title": "Julia SSA-form IR",
+    "category": "section",
+    "text": ""
+},
+
+{
+    "location": "devdocs/ssair/#Background-1",
+    "page": "Julia SSA-form IR",
+    "title": "Background",
+    "category": "section",
+    "text": "Beginning in Julia 0.7, parts of the compiler use a new SSA-form intermediate representation. Historically, the compiler used to directly generate LLVM IR, from a lowered form of the Julia AST. This form had most syntactic abstractions removed, but still looked a lot like an abstract syntax tree. Over time, in order to facilitate optimizations, SSA values were introduced to this IR and the IR was linearized (i.e. a form where function arguments may only be SSA values or constants). However, non-ssa values (slots) remained in the IR due to the lack of Phi nodes in the IR (necessary for back-edges and re-merging of conditional control flow), negating much of the usefulfulness of the SSA form representation to perform middle end optimizations. Some heroic effort was put into making these optimizations work without a complete SSA form representation, but the lack of such a representation ultimately proved prohibitive."
+},
+
+{
+    "location": "devdocs/ssair/#New-IR-nodes-1",
+    "page": "Julia SSA-form IR",
+    "title": "New IR nodes",
+    "category": "section",
+    "text": "With the new IR representation, the compiler learned to handle four new IR nodes, Phi nodes, Pi nodes as well as PhiC nodes and Upsilon nodes (the latter two are only used for exception handling)."
+},
+
+{
+    "location": "devdocs/ssair/#Phi-nodes-and-Pi-nodes-1",
+    "page": "Julia SSA-form IR",
+    "title": "Phi nodes and Pi nodes",
+    "category": "section",
+    "text": "Phi nodes are part of generic SSA abstraction (see the link above if you\'re not familar with the concept). In the Julia IR, these nodes are represented as:struct PhiNode\n    edges::Vector{Int}\n    values::Vector{Any}\nendwhere we ensure that both vectors always have the same length. In the canonical representation (the one handles by codegen and the interpreter), the edge values indicate come-from statement numbers (i.e. if edge has an entry of 15, there must be a goto, gotoifnot or implicit fall through from statement 15 that targets this phi node). Values are either SSA values or constants. It is also possible for a value to be unassigned if the variable was not defined on this path. However, undefinedness checks get explicitly inserted and represented as booleans after middle end optimizations, so code generators may assume that any use of a phi node will have an assigned value in the corresponding slot. It is also legal for the mapping to be incomplete, i.e. for a phi node to have missing incoming edges. In that case, it must be dynamically guaranteed that the corresponding value will not be used.PiNodes encode statically proven information that may be implicitly assumed in basic blocks dominated by a given pi node. They are conceptually equivalent to the technique introduced in the paper \"ABCD: Eliminating Array Bounds Checks on Demand\" or the predicate info nodes in LLVM. To see how they work, consider, e.g.%x::Union{Int, Float64} # %x is some Union{Int, Float64} typed ssa value\nif isa(x, Int)\n    # use x\nelse\n    # use x\nendwe can perform predicate insertion and turn this into:%x::Union{Int, Float64} # %x is some Union{Int, Float64} typed ssa value\nif isa(x, Int)\n    %x_int = PiNode(x, Int)\n    # use %x_int\nelse\n    %x_float = PiNode(x, Float64)\n    # use %x_float\nendPi nodes are generally ignored in the interpreter, since they don\'t have any effect on the values, but they may sometimes lead to code generation in the compiler (e.g. to change from an implicitly union split representation to a plain unboxed representation). The main usefulness of PiNodes stems from the fact that path conditions of the values can be accumulated simply by def-use chain walking that is generally done for most optimizations that care about these conditions anyway."
+},
+
+{
+    "location": "devdocs/ssair/#PhiC-nodes-and-Upsilon-nodes-1",
+    "page": "Julia SSA-form IR",
+    "title": "PhiC nodes and Upsilon nodes",
+    "category": "section",
+    "text": "Exception handling complicates the SSA story moderately, because exception handling introduces additional control flow edges into the IR across which values must be tracked. One approach to do so, which is followed by LLVM is to make calls which may throw exceptions into basic block terminators and add an explicit control flow edge to the catch handler:invoke @function_that_may_throw() to label %regular unwind to %catch\n\nregular:\n# Control flow continues here\n\ncatch:\n# Exceptions go hereHowever, this is problematic in a language like julia where at the start of the optimization pipeline, we do not now which calls throw. We would have to conservatively assume that every call (which in julia is every statement) throws. This would have several negative effects. On the one hand, it would essentially recuce the scope of every basic block to a single call, defeating the purpose of having operations be performed at the basic block level. On the other hand, every catch basic block would have n*m phi node arguments (n, the number of statements in the critical region, m the number of live values through the catch block). To work around this, we use a combination of Upsilon and PhiC (the C standing for catch, written φᶜ in the IR pretty printer, because unicode subscript c is not available) nodes. There is several ways to think of these nodes, but perhaps the easiest is to think of each PhiC as a load from a unique store-many, read-once slot, with Upsilon being the corresponding store operation. The PhiC has an operand list of all the upsilon nodes that store to its implicit slot. The Upsilon nodes however, do not record which PhiC node they store to. This is done for more natural integration with the rest of the SSA IR. E.g. if there are no more uses of a PhiC node, it is safe to delete is and the same is true of an Upsilon node. In most IR passes, PhiC nodes can be treated similar to Phi nodes. One can follow use-def chains through them, and they can be lifted to new PhiC nodes and new Upsilon nodes (in the same places as the original Upsilon nodes). The result of this scheme is that the number of Upsilon nodes (and PhiC arguments) is proportional to the number of assigned values to a particular variable (before SSA conversion), rather than the number of statements in the critical region.To see this scheme in action, consider the functionfunction foo()\n    x = 1\n    try\n        y = 2\n        error()\n    catch\n    end\n    (x, y)\nendThe corresponding IR (with irrelevant types stripped) is:ir = Code\n1 ─       nothing\n2 ─       $(Expr(:enter, 5))\n3 ─ %3  = ϒ (#undef)\n│   %4  = ϒ (1)\n│   %5  = ϒ (2)\n│         Main.bar()\n│   %7  = ϒ (3)\n└──       $(Expr(:leave, 1))\n4 ─       goto 6\n5 ─ %10 = φᶜ (%3, %5)\n│   %11 = φᶜ (%4, %7)\n└──       $(Expr(:leave, 1))\n6 ┄ %13 = φ (4 => 2, 5 => %10)::NotInferenceDontLookHere.MaybeUndef(NotInferenceDontLookHere.Const(2, false))\n│   %14 = φ (4 => 3, 5 => %11)::Int64\n│         $(Expr(:undefcheck, :y, Core.SSAValue(13)))\n│   %16 = Core.tuple(%14, %13)\n└──       return %17Note in particular that every value live into the critical region gets an upsilon node at the top of the critical region. This is because catch blocks are considered to have an invisible control flow edge from outside the function. As a result, no SSA value dominates the catch blocks, and all incoming values have to come through a φᶜ node."
+},
+
+{
+    "location": "devdocs/ssair/#Main-SSA-data-structure-1",
+    "page": "Julia SSA-form IR",
+    "title": "Main SSA data structure",
+    "category": "section",
+    "text": "The main SSAIR data structure is worthy of discussion. It draws inspiration from LLVM and Webkit\'s B3 IR. The core of the data structure is a flat vector of statements. Each statement is implicitly assigned an SSA values based on its position in the vector (i.e. the result of the statement at idx 1 can be accessed using SSAValue(1) etc). For each SSA value, we additionally maintain its type. Since, SSA values are definitionally assigned only once, this type is also the result type of the expression at the corresponding index. However, while this representation is rather efficient (since the assignments don\'t need to be explicitly) encoded, if of course carries the drawback that order is semantically significant, so reorderings and insertions change statement numbers. Additionally, we do not keep use lists (i.e. it is impossible to walk from a def to all its uses without explicitly computing this map - def lists however are trivial since you can lookup the corresponding statement from the index), so the LLVM-style RAUW (replace-all-uses-with) operation is unavailable.Instead, we do the following:We keep a separate buffer of nodes to insert (including the position to insert them at, the type of the corresponding value and the node itself). These nodes are numbered by their occurrence in the insertion buffer, allowing their values to be immediately used elesewhere in the IR (i.e. if there is 12 statements in the original statement list, the first new statement will be accessible as SSAValue(13))\nRAUW style operations are performed by setting the corresponding statement index to the replacement value.\nStatements are erased by setting the corresponding statement to nothing (this is essentially just a special-case convention of the above\nif there are any uses of the statement being erased they will be set to nothing)There is a compact! function that compacts the above data structure by performing the insertion of nodes in the appropriate place, trivial copy propagation and renaming of uses to any changed SSA values. However, the clever part of this scheme is that this compaction can be done lazily as part of the subsequent pass. Most optimization passes need to walk over the entire list of statements, performing analysis or modifications along the way. We provide an IncrementalCompact iterator that can be used to iterate over the statement list. It will perform any necessary compaction, and return the new index of the node, as well as the node itself. It is legal at this point to walk def-use chains, as well as make any modifications or deletions to the IR (insertions are disallowed however).The idea behind this arrangement is that, since the optimization passes need to touch the corresponding memory anyway, and incur the corresponding memory access penalty, performing the extra housekeeping should have comparitively little overhead (and save the overhead of maintaining these data structures during IR modification)."
 },
 
 ]}
