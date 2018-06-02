@@ -253,7 +253,7 @@ var documenterSearchIndex = {"docs": [
     "page": "정수와 부동 소수점 수",
     "title": "문법적 충돌",
     "category": "section",
-    "text": "리터럴 계수를 병치하는 문법은 16진수 정수 리터럴과 부동 소수점의 공학적 표현이라는 두 수치형 리터럴 문법과 충돌이 생길 수 있다. 다음은 문법적 충돌이 발생하는 예이다:16진수 리터럴 표현식 0xff는 수치형 리터럴 0과 변수 xff의 곱셈으로 해석될 수 있다.\n부동 소수점 리터럴 표현식 1e10은 수치형 리터럴 1이 변수 e10에 곱해지는 걸로 해석될 수 있고 이는 e가 아닌 E를 쓸 때에도 마찬가지이다.이 두 가지 경우에, 우리는 수치형 리터러를 해석하는데 있어서 다음과 같은 방식으로 모호함을 해결했다:0x로 시작하는 표현식은 항상 16진수 리터럴이다.\n수치형 리터럴으로 시작하는 표현식에서 수치형 리터럴 다음에 e또는 E가 뒤따라오면 항상 부동소수점 리터럴이다."
+    "text": "리터럴 계수를 병치하는 문법은 16진수 정수 리터럴과 부동 소수점의 공학적 표현이라는 두 수치형 리터럴 문법과 충돌이 생길 수 있다. 다음은 문법적 충돌이 발생하는 예이다:16진수 리터럴 표현식 0xff는 수치형 리터럴 0과 변수 xff의 곱셈으로 해석될 수 있다.\n부동 소수점 리터럴 표현식 1e10은 수치형 리터럴 1이 변수 e10에 곱해지는 걸로 해석될 수 있고 이는 e가 아닌 E를 쓸 때에도 마찬가지이다.\nThe 32-bit floating-point literal expression 1.5f22 could be interpreted as the numeric literal 1.5 multiplied by the variable f22.이와 같은 경우에, 우리는 수치형 리터러를 해석하는데 있어서 다음과 같은 방식으로 모호함을 해결했다:0x로 시작하는 표현식은 항상 16진수 리터럴이다.\n수치형 리터럴으로 시작하는 표현식에서 수치형 리터럴 다음에 e또는 E가 뒤따라오면 항상 부동소수점 리터럴이다.\nExpressions starting with a numeric literal followed by f are always 32-bit floating-point literals.Unlike E, which is equivalent to e in numeric literals for historical reasons, F is just another letter and does not behave like f in numeric literals. Hence, expressions starting with a numeric literal followed by F are interpreted as the numerical literal multiplied by a variable, which means that, for example, 1.5F22 is equal to 1.5 * F22."
 },
 
 {
@@ -6605,7 +6605,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Collections and Data Structures",
     "title": "Base.argmax",
     "category": "function",
-    "text": "argmax(itr) -> Integer\n\nReturn the index of the maximum element in a collection. If there are multiple maximal elements, then the first one will be returned.\n\nThe collection must not be empty.\n\nExamples\n\njulia> argmax([8,0.1,-9,pi])\n1\n\njulia> argmax([1,7,7,6])\n2\n\njulia> argmax([1,7,7,NaN])\n4\n\n\n\n\n\n"
+    "text": "argmax(itr) -> Integer\n\nReturn the index of the maximum element in a collection. If there are multiple maximal elements, then the first one will be returned.\n\nThe collection must not be empty.\n\nExamples\n\njulia> argmax([8,0.1,-9,pi])\n1\n\njulia> argmax([1,7,7,6])\n2\n\njulia> argmax([1,7,7,NaN])\n4\n\n\n\n\n\nargmax(A; dims) -> indices\n\nFor an array input, return the indices of the maximum elements over the given dimensions. NaN is treated as greater than all other values.\n\nExamples\n\njulia> A = [1.0 2; 3 4]\n2×2 Array{Float64,2}:\n 1.0  2.0\n 3.0  4.0\n\njulia> argmax(A, dims=1)\n1×2 Array{CartesianIndex{2},2}:\n CartesianIndex(2, 1)  CartesianIndex(2, 2)\n\njulia> argmax(A, dims=2)\n2×1 Array{CartesianIndex{2},2}:\n CartesianIndex(1, 2)\n CartesianIndex(2, 2)\n\n\n\n\n\n"
 },
 
 {
@@ -6613,7 +6613,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Collections and Data Structures",
     "title": "Base.argmin",
     "category": "function",
-    "text": "argmin(itr) -> Integer\n\nReturn the index of the minimum element in a collection. If there are multiple minimal elements, then the first one will be returned.\n\nThe collection must not be empty.\n\nExamples\n\njulia> argmin([8,0.1,-9,pi])\n3\n\njulia> argmin([7,1,1,6])\n2\n\njulia> argmin([7,1,1,NaN])\n4\n\n\n\n\n\n"
+    "text": "argmin(itr) -> Integer\n\nReturn the index of the minimum element in a collection. If there are multiple minimal elements, then the first one will be returned.\n\nThe collection must not be empty.\n\nExamples\n\njulia> argmin([8,0.1,-9,pi])\n3\n\njulia> argmin([7,1,1,6])\n2\n\njulia> argmin([7,1,1,NaN])\n4\n\n\n\n\n\nargmin(A; dims) -> indices\n\nFor an array input, return the indices of the minimum elements over the given dimensions. NaN is treated as less than all other values.\n\nExamples\n\njulia> A = [1.0 2; 3 4]\n2×2 Array{Float64,2}:\n 1.0  2.0\n 3.0  4.0\n\njulia> argmin(A, dims=1)\n1×2 Array{CartesianIndex{2},2}:\n CartesianIndex(1, 1)  CartesianIndex(1, 2)\n\njulia> argmin(A, dims=2)\n2×1 Array{CartesianIndex{2},2}:\n CartesianIndex(1, 1)\n CartesianIndex(2, 1)\n\n\n\n\n\n"
 },
 
 {
@@ -7077,7 +7077,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Collections and Data Structures",
     "title": "Base.pairs",
     "category": "function",
-    "text": "pairs(collection)\n\nReturn an iterator over key => value pairs for any collection that maps a set of keys to a set of values. This includes arrays, where the keys are the array indices.\n\n\n\n\n\npairs(IndexLinear(), A)\npairs(IndexCartesian(), A)\npairs(IndexStyle(A), A)\n\nAn iterator that accesses each element of the array A, returning i => x, where i is the index for the element and x = A[i]. Identical to pairs(A), except that the style of index can be selected. Also similar to enumerate(A), except i will be a valid index for A, while enumerate always counts from 1 regardless of the indices of A.\n\nSpecifying IndexLinear() ensures that i will be an integer; specifying IndexCartesian() ensures that i will be a CartesianIndex; specifying IndexStyle(A) chooses whichever has been defined as the native indexing style for array A.\n\nMutation of the bounds of the underlying array will invalidate this iterator.\n\nExamples\n\njulia> A = [\"a\" \"d\"; \"b\" \"e\"; \"c\" \"f\"];\n\njulia> for (index, value) in pairs(IndexStyle(A), A)\n           println(\"$index $value\")\n       end\n1 a\n2 b\n3 c\n4 d\n5 e\n6 f\n\njulia> S = view(A, 1:2, :);\n\njulia> for (index, value) in pairs(IndexStyle(S), S)\n           println(\"$index $value\")\n       end\nCartesianIndex(1, 1) a\nCartesianIndex(2, 1) b\nCartesianIndex(1, 2) d\nCartesianIndex(2, 2) e\n\nSee also: IndexStyle, axes.\n\n\n\n\n\n"
+    "text": "pairs(IndexLinear(), A)\npairs(IndexCartesian(), A)\npairs(IndexStyle(A), A)\n\nAn iterator that accesses each element of the array A, returning i => x, where i is the index for the element and x = A[i]. Identical to pairs(A), except that the style of index can be selected. Also similar to enumerate(A), except i will be a valid index for A, while enumerate always counts from 1 regardless of the indices of A.\n\nSpecifying IndexLinear() ensures that i will be an integer; specifying IndexCartesian() ensures that i will be a CartesianIndex; specifying IndexStyle(A) chooses whichever has been defined as the native indexing style for array A.\n\nMutation of the bounds of the underlying array will invalidate this iterator.\n\nExamples\n\njulia> A = [\"a\" \"d\"; \"b\" \"e\"; \"c\" \"f\"];\n\njulia> for (index, value) in pairs(IndexStyle(A), A)\n           println(\"$index $value\")\n       end\n1 a\n2 b\n3 c\n4 d\n5 e\n6 f\n\njulia> S = view(A, 1:2, :);\n\njulia> for (index, value) in pairs(IndexStyle(S), S)\n           println(\"$index $value\")\n       end\nCartesianIndex(1, 1) a\nCartesianIndex(2, 1) b\nCartesianIndex(1, 2) d\nCartesianIndex(2, 2) e\n\nSee also: IndexStyle, axes.\n\n\n\n\n\npairs(collection)\n\nReturn an iterator over key => value pairs for any collection that maps a set of keys to a set of values. This includes arrays, where the keys are the array indices.\n\n\n\n\n\n"
 },
 
 {
@@ -15045,7 +15045,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Distributed Computing",
     "title": "Base.wait",
     "category": "function",
-    "text": "wait([x])\n\nBlock the current task until some event occurs, depending on the type of the argument:\n\nChannel: Wait for a value to be appended to the channel.\nCondition: Wait for notify on a condition.\nProcess: Wait for a process or process chain to exit. The exitcode field of a process can be used to determine success or failure.\nTask: Wait for a Task to finish. If the task fails with an exception, the exception is propagated (re-thrown in the task that called wait).\nRawFD: Wait for changes on a file descriptor (see the FileWatching package).\n\nIf no argument is passed, the task blocks for an undefined period. A task can only be restarted by an explicit call to schedule or yieldto.\n\nOften wait is called within a while loop to ensure a waited-for condition is met before proceeding.\n\n\n\n\n\nwait(r::Future)\n\nWait for a value to become available for the specified future.\n\n\n\n\n\nwait(r::RemoteChannel, args...)\n\nWait for a value to become available on the specified remote channel.\n\n\n\n\n\n"
+    "text": "wait(r::Future)\n\nWait for a value to become available for the specified future.\n\n\n\n\n\nwait(r::RemoteChannel, args...)\n\nWait for a value to become available on the specified remote channel.\n\n\n\n\n\nwait([x])\n\nBlock the current task until some event occurs, depending on the type of the argument:\n\nChannel: Wait for a value to be appended to the channel.\nCondition: Wait for notify on a condition.\nProcess: Wait for a process or process chain to exit. The exitcode field of a process can be used to determine success or failure.\nTask: Wait for a Task to finish. If the task fails with an exception, the exception is propagated (re-thrown in the task that called wait).\nRawFD: Wait for changes on a file descriptor (see the FileWatching package).\n\nIf no argument is passed, the task blocks for an undefined period. A task can only be restarted by an explicit call to schedule or yieldto.\n\nOften wait is called within a while loop to ensure a waited-for condition is met before proceeding.\n\n\n\n\n\n"
 },
 
 {
@@ -20133,7 +20133,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Sockets",
     "title": "Base.bind",
     "category": "function",
-    "text": "bind(chnl::Channel, task::Task)\n\nAssociate the lifetime of chnl with a task. Channel chnl is automatically closed when the task terminates. Any uncaught exception in the task is propagated to all waiters on chnl.\n\nThe chnl object can be explicitly closed independent of task termination. Terminating tasks have no effect on already closed Channel objects.\n\nWhen a channel is bound to multiple tasks, the first task to terminate will close the channel. When multiple channels are bound to the same task, termination of the task will close all of the bound channels.\n\nExamples\n\njulia> c = Channel(0);\n\njulia> task = @async foreach(i->put!(c, i), 1:4);\n\njulia> bind(c,task);\n\njulia> for i in c\n           @show i\n       end;\ni = 1\ni = 2\ni = 3\ni = 4\n\njulia> isopen(c)\nfalse\n\njulia> c = Channel(0);\n\njulia> task = @async (put!(c,1);error(\"foo\"));\n\njulia> bind(c,task);\n\njulia> take!(c)\n1\n\njulia> put!(c,1);\nERROR: foo\nStacktrace:\n[...]\n\n\n\n\n\nbind(socket::Union{UDPSocket, TCPSocket}, host::IPAddr, port::Integer; ipv6only=false, reuseaddr=false, kws...)\n\nBind socket to the given host:port. Note that 0.0.0.0 will listen on all devices.\n\nThe ipv6only parameter disables dual stack mode. If ipv6only=true, only an IPv6 stack is created.\nIf reuseaddr=true, multiple threads or processes can bind to the same address without error if they all set reuseaddr=true, but only the last to bind will receive any traffic.\n\n\n\n\n\n"
+    "text": "bind(socket::Union{UDPSocket, TCPSocket}, host::IPAddr, port::Integer; ipv6only=false, reuseaddr=false, kws...)\n\nBind socket to the given host:port. Note that 0.0.0.0 will listen on all devices.\n\nThe ipv6only parameter disables dual stack mode. If ipv6only=true, only an IPv6 stack is created.\nIf reuseaddr=true, multiple threads or processes can bind to the same address without error if they all set reuseaddr=true, but only the last to bind will receive any traffic.\n\n\n\n\n\nbind(chnl::Channel, task::Task)\n\nAssociate the lifetime of chnl with a task. Channel chnl is automatically closed when the task terminates. Any uncaught exception in the task is propagated to all waiters on chnl.\n\nThe chnl object can be explicitly closed independent of task termination. Terminating tasks have no effect on already closed Channel objects.\n\nWhen a channel is bound to multiple tasks, the first task to terminate will close the channel. When multiple channels are bound to the same task, termination of the task will close all of the bound channels.\n\nExamples\n\njulia> c = Channel(0);\n\njulia> task = @async foreach(i->put!(c, i), 1:4);\n\njulia> bind(c,task);\n\njulia> for i in c\n           @show i\n       end;\ni = 1\ni = 2\ni = 3\ni = 4\n\njulia> isopen(c)\nfalse\n\njulia> c = Channel(0);\n\njulia> task = @async (put!(c,1);error(\"foo\"));\n\njulia> bind(c,task);\n\njulia> take!(c)\n1\n\njulia> put!(c,1);\nERROR: foo\nStacktrace:\n[...]\n\n\n\n\n\n"
 },
 
 {
@@ -20942,6 +20942,14 @@ var documenterSearchIndex = {"docs": [
     "title": "Line numbers",
     "category": "section",
     "text": "Source location information is represented as (line line_num file_name) where the third component is optional (and omitted when the current line number, but not file name, changes).These expressions are represented as LineNumberNodes in Julia."
+},
+
+{
+    "location": "devdocs/ast/#Macros-2",
+    "page": "Julia ASTs",
+    "title": "Macros",
+    "category": "section",
+    "text": "Macro hygiene is represented through the expression head pair escape and hygienic-scope. The result of a macro expansion is automatically wrapped in (hygienic-scope block module), to represent the result of the new scope. The user can insert (escape block) inside to interpolate code from the caller."
 },
 
 {
@@ -22033,6 +22041,62 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
+    "location": "devdocs/ssair/#",
+    "page": "Julia SSA-form IR",
+    "title": "Julia SSA-form IR",
+    "category": "page",
+    "text": ""
+},
+
+{
+    "location": "devdocs/ssair/#Julia-SSA-form-IR-1",
+    "page": "Julia SSA-form IR",
+    "title": "Julia SSA-form IR",
+    "category": "section",
+    "text": ""
+},
+
+{
+    "location": "devdocs/ssair/#Background-1",
+    "page": "Julia SSA-form IR",
+    "title": "Background",
+    "category": "section",
+    "text": "Beginning in Julia 0.7, parts of the compiler use a new SSA-form intermediate representation. Historically, the compiler used to directly generate LLVM IR, from a lowered form of the Julia AST. This form had most syntactic abstractions removed, but still looked a lot like an abstract syntax tree. Over time, in order to facilitate optimizations, SSA values were introduced to this IR and the IR was linearized (i.e. a form where function arguments may only be SSA values or constants). However, non-ssa values (slots) remained in the IR due to the lack of Phi nodes in the IR (necessary for back-edges and re-merging of conditional control flow), negating much of the usefulness of the SSA form representation to perform middle end optimizations. Some heroic effort was put into making these optimizations work without a complete SSA form representation, but the lack of such a representation ultimately proved prohibitive."
+},
+
+{
+    "location": "devdocs/ssair/#New-IR-nodes-1",
+    "page": "Julia SSA-form IR",
+    "title": "New IR nodes",
+    "category": "section",
+    "text": "With the new IR representation, the compiler learned to handle four new IR nodes, Phi nodes, Pi nodes as well as PhiC nodes and Upsilon nodes (the latter two are only used for exception handling)."
+},
+
+{
+    "location": "devdocs/ssair/#Phi-nodes-and-Pi-nodes-1",
+    "page": "Julia SSA-form IR",
+    "title": "Phi nodes and Pi nodes",
+    "category": "section",
+    "text": "Phi nodes are part of generic SSA abstraction (see the link above if you\'re not familar with the concept). In the Julia IR, these nodes are represented as:struct PhiNode\n    edges::Vector{Int}\n    values::Vector{Any}\nendwhere we ensure that both vectors always have the same length. In the canonical representation (the one handles by codegen and the interpreter), the edge values indicate come-from statement numbers (i.e. if edge has an entry of 15, there must be a goto, gotoifnot or implicit fall through from statement 15 that targets this phi node). Values are either SSA values or constants. It is also possible for a value to be unassigned if the variable was not defined on this path. However, undefinedness checks get explicitly inserted and represented as booleans after middle end optimizations, so code generators may assume that any use of a phi node will have an assigned value in the corresponding slot. It is also legal for the mapping to be incomplete, i.e. for a phi node to have missing incoming edges. In that case, it must be dynamically guaranteed that the corresponding value will not be used.PiNodes encode statically proven information that may be implicitly assumed in basic blocks dominated by a given pi node. They are conceptually equivalent to the technique introduced in the paper \"ABCD: Eliminating Array Bounds Checks on Demand\" or the predicate info nodes in LLVM. To see how they work, consider, e.g.%x::Union{Int, Float64} # %x is some Union{Int, Float64} typed ssa value\nif isa(x, Int)\n    # use x\nelse\n    # use x\nendwe can perform predicate insertion and turn this into:%x::Union{Int, Float64} # %x is some Union{Int, Float64} typed ssa value\nif isa(x, Int)\n    %x_int = PiNode(x, Int)\n    # use %x_int\nelse\n    %x_float = PiNode(x, Float64)\n    # use %x_float\nendPi nodes are generally ignored in the interpreter, since they don\'t have any effect on the values, but they may sometimes lead to code generation in the compiler (e.g. to change from an implicitly union split representation to a plain unboxed representation). The main usefulness of PiNodes stems from the fact that path conditions of the values can be accumulated simply by def-use chain walking that is generally done for most optimizations that care about these conditions anyway."
+},
+
+{
+    "location": "devdocs/ssair/#PhiC-nodes-and-Upsilon-nodes-1",
+    "page": "Julia SSA-form IR",
+    "title": "PhiC nodes and Upsilon nodes",
+    "category": "section",
+    "text": "Exception handling complicates the SSA story moderately, because exception handling introduces additional control flow edges into the IR across which values must be tracked. One approach to do so, which is followed by LLVM is to make calls which may throw exceptions into basic block terminators and add an explicit control flow edge to the catch handler:invoke @function_that_may_throw() to label %regular unwind to %catch\n\nregular:\n# Control flow continues here\n\ncatch:\n# Exceptions go hereHowever, this is problematic in a language like julia where at the start of the optimization pipeline, we do not now which calls throw. We would have to conservatively assume that every call (which in julia is every statement) throws. This would have several negative effects. On the one hand, it would essentially reduce the scope of every basic block to a single call, defeating the purpose of having operations be performed at the basic block level. On the other hand, every catch basic block would have n*m phi node arguments (n, the number of statements in the critical region, m the number of live values through the catch block). To work around this, we use a combination of Upsilon and PhiC (the C standing for catch, written φᶜ in the IR pretty printer, because unicode subscript c is not available) nodes. There is several ways to think of these nodes, but perhaps the easiest is to think of each PhiC as a load from a unique store-many, read-once slot, with Upsilon being the corresponding store operation. The PhiC has an operand list of all the upsilon nodes that store to its implicit slot. The Upsilon nodes however, do not record which PhiC node they store to. This is done for more natural integration with the rest of the SSA IR. E.g. if there are no more uses of a PhiC node, it is safe to delete is and the same is true of an Upsilon node. In most IR passes, PhiC nodes can be treated similar to Phi nodes. One can follow use-def chains through them, and they can be lifted to new PhiC nodes and new Upsilon nodes (in the same places as the original Upsilon nodes). The result of this scheme is that the number of Upsilon nodes (and PhiC arguments) is proportional to the number of assigned values to a particular variable (before SSA conversion), rather than the number of statements in the critical region.To see this scheme in action, consider the functionfunction foo()\n    x = 1\n    try\n        y = 2\n        error()\n    catch\n    end\n    (x, y)\nendThe corresponding IR (with irrelevant types stripped) is:ir = Code\n1 ─       nothing\n2 ─       $(Expr(:enter, 5))\n3 ─ %3  = ϒ (#undef)\n│   %4  = ϒ (1)\n│   %5  = ϒ (2)\n│         Main.bar()\n│   %7  = ϒ (3)\n└──       $(Expr(:leave, 1))\n4 ─       goto 6\n5 ─ %10 = φᶜ (%3, %5)\n│   %11 = φᶜ (%4, %7)\n└──       $(Expr(:leave, 1))\n6 ┄ %13 = φ (4 => 2, 5 => %10)::NotInferenceDontLookHere.MaybeUndef(NotInferenceDontLookHere.Const(2, false))\n│   %14 = φ (4 => 3, 5 => %11)::Int64\n│         $(Expr(:undefcheck, :y, Core.SSAValue(13)))\n│   %16 = Core.tuple(%14, %13)\n└──       return %17Note in particular that every value live into the critical region gets an upsilon node at the top of the critical region. This is because catch blocks are considered to have an invisible control flow edge from outside the function. As a result, no SSA value dominates the catch blocks, and all incoming values have to come through a φᶜ node."
+},
+
+{
+    "location": "devdocs/ssair/#Main-SSA-data-structure-1",
+    "page": "Julia SSA-form IR",
+    "title": "Main SSA data structure",
+    "category": "section",
+    "text": "The main SSAIR data structure is worthy of discussion. It draws inspiration from LLVM and Webkit\'s B3 IR. The core of the data structure is a flat vector of statements. Each statement is implicitly assigned an SSA values based on its position in the vector (i.e. the result of the statement at idx 1 can be accessed using SSAValue(1) etc). For each SSA value, we additionally maintain its type. Since, SSA values are definitionally assigned only once, this type is also the result type of the expression at the corresponding index. However, while this representation is rather efficient (since the assignments don\'t need to be explicitly) encoded, if of course carries the drawback that order is semantically significant, so reorderings and insertions change statement numbers. Additionally, we do not keep use lists (i.e. it is impossible to walk from a def to all its uses without explicitly computing this map - def lists however are trivial since you can lookup the corresponding statement from the index), so the LLVM-style RAUW (replace-all-uses-with) operation is unavailable.Instead, we do the following:We keep a separate buffer of nodes to insert (including the position to insert them at, the type of the corresponding value and the node itself). These nodes are numbered by their occurrence in the insertion buffer, allowing their values to be immediately used elsewhere in the IR (i.e. if there is 12 statements in the original statement list, the first new statement will be accessible as SSAValue(13))\nRAUW style operations are performed by setting the corresponding statement index to the replacement value.\nStatements are erased by setting the corresponding statement to nothing (this is essentially just a special-case convention of the above\nif there are any uses of the statement being erased they will be set to nothing)There is a compact! function that compacts the above data structure by performing the insertion of nodes in the appropriate place, trivial copy propagation and renaming of uses to any changed SSA values. However, the clever part of this scheme is that this compaction can be done lazily as part of the subsequent pass. Most optimization passes need to walk over the entire list of statements, performing analysis or modifications along the way. We provide an IncrementalCompact iterator that can be used to iterate over the statement list. It will perform any necessary compaction, and return the new index of the node, as well as the node itself. It is legal at this point to walk def-use chains, as well as make any modifications or deletions to the IR (insertions are disallowed however).The idea behind this arrangement is that, since the optimization passes need to touch the corresponding memory anyway, and incur the corresponding memory access penalty, performing the extra housekeeping should have comparitively little overhead (and save the overhead of maintaining these data structures during IR modification)."
+},
+
+{
     "location": "devdocs/backtraces/#",
     "page": "Reporting and analyzing crashes (segfaults)",
     "title": "Reporting and analyzing crashes (segfaults)",
@@ -22278,62 +22342,6 @@ var documenterSearchIndex = {"docs": [
     "title": "Memory Sanitizer (MSAN)",
     "category": "section",
     "text": "For detecting use of uninitialized memory, you can use Clang\'s memory sanitizer (MSAN) by compiling with SANITIZE_MEMORY=1."
-},
-
-{
-    "location": "devdocs/ssair/#",
-    "page": "Julia SSA-form IR",
-    "title": "Julia SSA-form IR",
-    "category": "page",
-    "text": ""
-},
-
-{
-    "location": "devdocs/ssair/#Julia-SSA-form-IR-1",
-    "page": "Julia SSA-form IR",
-    "title": "Julia SSA-form IR",
-    "category": "section",
-    "text": ""
-},
-
-{
-    "location": "devdocs/ssair/#Background-1",
-    "page": "Julia SSA-form IR",
-    "title": "Background",
-    "category": "section",
-    "text": "Beginning in Julia 0.7, parts of the compiler use a new SSA-form intermediate representation. Historically, the compiler used to directly generate LLVM IR, from a lowered form of the Julia AST. This form had most syntactic abstractions removed, but still looked a lot like an abstract syntax tree. Over time, in order to facilitate optimizations, SSA values were introduced to this IR and the IR was linearized (i.e. a form where function arguments may only be SSA values or constants). However, non-ssa values (slots) remained in the IR due to the lack of Phi nodes in the IR (necessary for back-edges and re-merging of conditional control flow), negating much of the usefulfulness of the SSA form representation to perform middle end optimizations. Some heroic effort was put into making these optimizations work without a complete SSA form representation, but the lack of such a representation ultimately proved prohibitive."
-},
-
-{
-    "location": "devdocs/ssair/#New-IR-nodes-1",
-    "page": "Julia SSA-form IR",
-    "title": "New IR nodes",
-    "category": "section",
-    "text": "With the new IR representation, the compiler learned to handle four new IR nodes, Phi nodes, Pi nodes as well as PhiC nodes and Upsilon nodes (the latter two are only used for exception handling)."
-},
-
-{
-    "location": "devdocs/ssair/#Phi-nodes-and-Pi-nodes-1",
-    "page": "Julia SSA-form IR",
-    "title": "Phi nodes and Pi nodes",
-    "category": "section",
-    "text": "Phi nodes are part of generic SSA abstraction (see the link above if you\'re not familar with the concept). In the Julia IR, these nodes are represented as:struct PhiNode\n    edges::Vector{Int}\n    values::Vector{Any}\nendwhere we ensure that both vectors always have the same length. In the canonical representation (the one handles by codegen and the interpreter), the edge values indicate come-from statement numbers (i.e. if edge has an entry of 15, there must be a goto, gotoifnot or implicit fall through from statement 15 that targets this phi node). Values are either SSA values or constants. It is also possible for a value to be unassigned if the variable was not defined on this path. However, undefinedness checks get explicitly inserted and represented as booleans after middle end optimizations, so code generators may assume that any use of a phi node will have an assigned value in the corresponding slot. It is also legal for the mapping to be incomplete, i.e. for a phi node to have missing incoming edges. In that case, it must be dynamically guaranteed that the corresponding value will not be used.PiNodes encode statically proven information that may be implicitly assumed in basic blocks dominated by a given pi node. They are conceptually equivalent to the technique introduced in the paper \"ABCD: Eliminating Array Bounds Checks on Demand\" or the predicate info nodes in LLVM. To see how they work, consider, e.g.%x::Union{Int, Float64} # %x is some Union{Int, Float64} typed ssa value\nif isa(x, Int)\n    # use x\nelse\n    # use x\nendwe can perform predicate insertion and turn this into:%x::Union{Int, Float64} # %x is some Union{Int, Float64} typed ssa value\nif isa(x, Int)\n    %x_int = PiNode(x, Int)\n    # use %x_int\nelse\n    %x_float = PiNode(x, Float64)\n    # use %x_float\nendPi nodes are generally ignored in the interpreter, since they don\'t have any effect on the values, but they may sometimes lead to code generation in the compiler (e.g. to change from an implicitly union split representation to a plain unboxed representation). The main usefulness of PiNodes stems from the fact that path conditions of the values can be accumulated simply by def-use chain walking that is generally done for most optimizations that care about these conditions anyway."
-},
-
-{
-    "location": "devdocs/ssair/#PhiC-nodes-and-Upsilon-nodes-1",
-    "page": "Julia SSA-form IR",
-    "title": "PhiC nodes and Upsilon nodes",
-    "category": "section",
-    "text": "Exception handling complicates the SSA story moderately, because exception handling introduces additional control flow edges into the IR across which values must be tracked. One approach to do so, which is followed by LLVM is to make calls which may throw exceptions into basic block terminators and add an explicit control flow edge to the catch handler:invoke @function_that_may_throw() to label %regular unwind to %catch\n\nregular:\n# Control flow continues here\n\ncatch:\n# Exceptions go hereHowever, this is problematic in a language like julia where at the start of the optimization pipeline, we do not now which calls throw. We would have to conservatively assume that every call (which in julia is every statement) throws. This would have several negative effects. On the one hand, it would essentially recuce the scope of every basic block to a single call, defeating the purpose of having operations be performed at the basic block level. On the other hand, every catch basic block would have n*m phi node arguments (n, the number of statements in the critical region, m the number of live values through the catch block). To work around this, we use a combination of Upsilon and PhiC (the C standing for catch, written φᶜ in the IR pretty printer, because unicode subscript c is not available) nodes. There is several ways to think of these nodes, but perhaps the easiest is to think of each PhiC as a load from a unique store-many, read-once slot, with Upsilon being the corresponding store operation. The PhiC has an operand list of all the upsilon nodes that store to its implicit slot. The Upsilon nodes however, do not record which PhiC node they store to. This is done for more natural integration with the rest of the SSA IR. E.g. if there are no more uses of a PhiC node, it is safe to delete is and the same is true of an Upsilon node. In most IR passes, PhiC nodes can be treated similar to Phi nodes. One can follow use-def chains through them, and they can be lifted to new PhiC nodes and new Upsilon nodes (in the same places as the original Upsilon nodes). The result of this scheme is that the number of Upsilon nodes (and PhiC arguments) is proportional to the number of assigned values to a particular variable (before SSA conversion), rather than the number of statements in the critical region.To see this scheme in action, consider the functionfunction foo()\n    x = 1\n    try\n        y = 2\n        error()\n    catch\n    end\n    (x, y)\nendThe corresponding IR (with irrelevant types stripped) is:ir = Code\n1 ─       nothing\n2 ─       $(Expr(:enter, 5))\n3 ─ %3  = ϒ (#undef)\n│   %4  = ϒ (1)\n│   %5  = ϒ (2)\n│         Main.bar()\n│   %7  = ϒ (3)\n└──       $(Expr(:leave, 1))\n4 ─       goto 6\n5 ─ %10 = φᶜ (%3, %5)\n│   %11 = φᶜ (%4, %7)\n└──       $(Expr(:leave, 1))\n6 ┄ %13 = φ (4 => 2, 5 => %10)::NotInferenceDontLookHere.MaybeUndef(NotInferenceDontLookHere.Const(2, false))\n│   %14 = φ (4 => 3, 5 => %11)::Int64\n│         $(Expr(:undefcheck, :y, Core.SSAValue(13)))\n│   %16 = Core.tuple(%14, %13)\n└──       return %17Note in particular that every value live into the critical region gets an upsilon node at the top of the critical region. This is because catch blocks are considered to have an invisible control flow edge from outside the function. As a result, no SSA value dominates the catch blocks, and all incoming values have to come through a φᶜ node."
-},
-
-{
-    "location": "devdocs/ssair/#Main-SSA-data-structure-1",
-    "page": "Julia SSA-form IR",
-    "title": "Main SSA data structure",
-    "category": "section",
-    "text": "The main SSAIR data structure is worthy of discussion. It draws inspiration from LLVM and Webkit\'s B3 IR. The core of the data structure is a flat vector of statements. Each statement is implicitly assigned an SSA values based on its position in the vector (i.e. the result of the statement at idx 1 can be accessed using SSAValue(1) etc). For each SSA value, we additionally maintain its type. Since, SSA values are definitionally assigned only once, this type is also the result type of the expression at the corresponding index. However, while this representation is rather efficient (since the assignments don\'t need to be explicitly) encoded, if of course carries the drawback that order is semantically significant, so reorderings and insertions change statement numbers. Additionally, we do not keep use lists (i.e. it is impossible to walk from a def to all its uses without explicitly computing this map - def lists however are trivial since you can lookup the corresponding statement from the index), so the LLVM-style RAUW (replace-all-uses-with) operation is unavailable.Instead, we do the following:We keep a separate buffer of nodes to insert (including the position to insert them at, the type of the corresponding value and the node itself). These nodes are numbered by their occurrence in the insertion buffer, allowing their values to be immediately used elesewhere in the IR (i.e. if there is 12 statements in the original statement list, the first new statement will be accessible as SSAValue(13))\nRAUW style operations are performed by setting the corresponding statement index to the replacement value.\nStatements are erased by setting the corresponding statement to nothing (this is essentially just a special-case convention of the above\nif there are any uses of the statement being erased they will be set to nothing)There is a compact! function that compacts the above data structure by performing the insertion of nodes in the appropriate place, trivial copy propagation and renaming of uses to any changed SSA values. However, the clever part of this scheme is that this compaction can be done lazily as part of the subsequent pass. Most optimization passes need to walk over the entire list of statements, performing analysis or modifications along the way. We provide an IncrementalCompact iterator that can be used to iterate over the statement list. It will perform any necessary compaction, and return the new index of the node, as well as the node itself. It is legal at this point to walk def-use chains, as well as make any modifications or deletions to the IR (insertions are disallowed however).The idea behind this arrangement is that, since the optimization passes need to touch the corresponding memory anyway, and incur the corresponding memory access penalty, performing the extra housekeeping should have comparitively little overhead (and save the overhead of maintaining these data structures during IR modification)."
 },
 
 ]}
