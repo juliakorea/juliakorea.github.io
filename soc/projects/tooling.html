@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="ko" lang="ko">
 
 <head>
-  <meta name="viewport" content="width=device-width; initial-scale=1.0;">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="content-type" content="text/html; charset=utf-8" />
   <title>Tooling Projects – Summer of Code</title>
   <meta name="author" content="Jeff Bezanson, Stefan Karpinski, Viral Shah, Alan Edelman, et al." />
@@ -258,6 +258,8 @@ ready(function () {
 
 <h1 id="tooling">Tooling</h1>
 
+<h2 id="ide-tooling">IDE Tooling</h2>
+
 <p>The <a href="http://junolab.org">Juno</a> is open to general project ideas (from here or not); feel free to get in contact via the <a href="http://discourse.julialang.org/">forum</a> to discuss!</p>
 
 <h2 id="progress-meter-improvements">Progress Meter Improvements</h2>
@@ -317,6 +319,63 @@ ready(function () {
 
 <p><strong>Mentors</strong>: <a href="https://github.com/MikeInnes">Mike Innes</a></p>
 
+<h2 id="live-editing-for-weave-files-in-vs-code">Live editing for Weave files in VS Code</h2>
+
+<p>This project would add an interactive UI for <a href="https://github.com/mpastell/Weave.jl">Weave.jl</a>
+documents to the <a href="https://github.com/JuliaEditorSupport/julia-vscode">julia VS Code extension</a>.</p>
+
+<p><strong>Required Skills</strong>: Good understanding of TypeScript, web UI development,
+strong general julia skills.</p>
+
+<p><strong>Expected Results</strong>: A highly interactive UI for julia markdown files in
+VS Code.</p>
+
+<p><strong>Mentors</strong>: <a href="https://github.com/davidanthoff">David Anthoff</a></p>
+
+<h2 id="vs-code-extension">VS Code extension</h2>
+
+<p>We are generally looking for folks that want to help with the <a href="https://github.com/JuliaEditorSupport/julia-vscode">julia VS Code extension</a>.
+We have a long list of open issues, and some of them amount to significant
+projects.</p>
+
+<p><strong>Required Skills</strong>: TypeScript, julia, web development.</p>
+
+<p><strong>Expected Results</strong>: Depends on the specific projects we would agree on.</p>
+
+<p><strong>Mentors</strong>: <a href="https://github.com/davidanthoff">David Anthoff</a></p>
+
+<h1 id="graphical-user-interfaces">Graphical user interfaces</h1>
+
+<h2 id="interactive-ui-libraries-and-tooling">Interactive UI libraries and tooling</h2>
+
+<p><a href="https://github.com/JuliaGizmos/WebIO.jl">WebIO.jl</a> is an exciting new library that enables two-way interaction between julia and web technologies (html/css/js). We are looking for project proposals in, possibly a combination of the following areas:</p>
+
+<ul>
+  <li>Tools for building dashboards, and easily deploying them to the web, ala R’s Shiny, and Plotly’s dash</li>
+  <li>Wrapping js libraries such as D3, interact.js, Plotly’s dash?</li>
+  <li>Reliability/Testing - (tools to) enable browser based automated tests for WebIO, InteractNext, and other projects built on WebIO</li>
+</ul>
+
+<p>We’re open to your project ideas. Join us on the <a href="https://julialang.slack.com/messages/gizmos/">#gizmos slack channel</a> to discuss or ping <code class="highlighter-rouge">@shashi</code> or <code class="highlighter-rouge">@JobJob</code> in a <a href="http://discourse.julialang.org/">discourse post</a>.</p>
+
+<p><strong>Required Skills</strong>: Experience with JavaScript front-end development, some familiarity with Julia</p>
+
+<p><strong>Mentors</strong>: <a href="https://github.com/shashi">Shashi Gowda</a>, <a href="https://github.com/JobJob">Joel Mason</a></p>
+
+<h2 id="gui-library-integration">GUI library integration</h2>
+
+<p><a href="https://github.com/barche/QML.jl">QML.jl</a> provides an interface to connect a <a href="https://doc.qt.io/qt-5.10/qmlapplications.html">QML</a> GUI to a Julia backend. Some ideas for improvement here are:</p>
+<ul>
+  <li>Use <a href="https://github.com/JuliaGizmos/Observables.jl">Observables.jl</a> to provide a more “Julian” way to pass data between the GUI and Julia. Work on this has already started on the <a href="https://github.com/barche/QML.jl/tree/observables">observables branch</a> in QML.jl. Discussion: https://github.com/barche/QML.jl/issues/43</li>
+  <li>Support <a href="https://github.com/JuliaData/DataFrames.jl">DataFrames.jl</a> directly for creating an editable TableView. Inspiration: https://discourse.julialang.org/t/visual-workflow-tool-for-julia-lets-build-one/9384/4</li>
+  <li>Make one <a href="https://github.com/JuliaPlots/Plots.jl">Plots.jl</a> GUI to rule them all. Inspiration: https://discourse.julialang.org/t/best-plot-package/7458 and https://discourse.julialang.org/t/where-is-actual-development-in-plotting/6224</li>
+  <li>Build QmlReactive (but using Observables maybe). Inspiration: https://github.com/JuliaGizmos/GtkReactive.jl</li>
+</ul>
+
+<p><strong>Required Skills</strong>: Some familarity with Julia, prior QML experience would also help.</p>
+
+<p><strong>Mentors</strong>: <a href="https://github.com/barche">Bart Janssens</a>, <a href="https://github.com/shashi">Shashi Gowda</a> for the Observables part</p>
+
 
     <div class="footer">
       Julia is a <a href="https://numfocus.org/projects/index.html">NumFocus project</a>.
@@ -326,7 +385,7 @@ ready(function () {
     </div>
 
     <!-- Add "contribute" link to the Transifex language dropdown -->
-    <script>
+    <!--<script>
       // Create a link element for the translation prompt
       var txPromptLink = document.createElement( "a" );
       txPromptLink.href = "https://www.transifex.com/julialang-i18n/julialang-web/";
@@ -339,7 +398,7 @@ ready(function () {
 
       // Add the translation prompt list item to the list of languages
       document.getElementById( "tx-live-lang-picker" ).appendChild( txPrompt );
-    </script>
+    </script>-->
 
 <!--Flipcause Integration v3.0// Flipcause Integration Instructions:
     Install the following code block once in the website Header (after <head> tag) -->

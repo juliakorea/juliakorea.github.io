@@ -2,9 +2,9 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="ko" lang="ko">
 
 <head>
-  <meta name="viewport" content="width=device-width; initial-scale=1.0;">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="content-type" content="text/html; charset=utf-8" />
-  <title>Machine Learning General Projects – Summer of Code</title>
+  <title>Data Science and Machine Learning Projects – Summer of Code</title>
   <meta name="author" content="Jeff Bezanson, Stefan Karpinski, Viral Shah, Alan Edelman, et al." />
   <link rel="stylesheet" href="/css/syntax.css" type="text/css" />
   <link rel="stylesheet" href="/css/screen.css" type="text/css" media="screen, projection" />
@@ -254,46 +254,261 @@ ready(function () {
 })
 </script>
 
-<h2 id="model-loading-for-fluxjl">Model Loading for Flux.jl</h2>
+<p>Note that for any of these projects you should have code samples as part of your application, ideally as patches to one of the ML or GPU libraries or in the form of working ML models.</p>
 
-<p>It would be useful to load existing trained models created with other frameworks – say Caffe, TensorFlow or MXNet – into Flux. This project would involve investigating the model formats and building readers so that those models can be run in native Julia.</p>
+<h2 id="model-zoo-examples">Model Zoo Examples</h2>
 
-<p><strong>Expected Results</strong>: A package which can load external model files into Flux data structures.</p>
+<p><a href="https://github.com/FluxML/Flux.jl">Flux</a>’s <a href="https://github.com/FluxML/model-zoo/">model zoo</a> contains examples of a wide range of deep learning models and techniques. This project would involve adding new models, showing how to recreate state-of-the-art results (e.g. AlphaGo) or interesting and unusual model architectures (e.g. transformer networks). We’d be particularly interested in any models involving reinforcement learning, or anything with images, sound or speech.</p>
 
-<p><strong>Recommended Skills</strong>: Familiarity with neural network libraries.</p>
+<p>Some experience with implementing deep learning models would be ideal for this project, but is not essential for a student willing to pick up the skills and read ML papers. It’s up to you whether you implement a single ambitious model, or multiple small ones. A good source of inspiration might be the <a href="https://nurture.ai/nips-challenge">NIPS Challenge</a>.</p>
 
-<p><strong>Mentors</strong>: Mike Innes</p>
+<p><strong>Mentors</strong>: <a href="https://github.com/MikeInnes/">Mike Innes</a></p>
 
-<h2 id="standardized-dataset-packaging">Standardized dataset packaging</h2>
+<h2 id="fluxjs-demos">Flux.JS demos</h2>
 
-<p>Scientific and technical computing often makes use of publicly available datasets. Often, there’s a lot of overhead to finding these data sets and coercing them into a usable format. Packages like <a href="https://github.com/johnmyleswhite/RDatasets.jl/">RDatasets.jl</a> and <a href="https://github.com/johnmyleswhite/MNIST.jl">MNIST.jl</a> attempt to make this easier by downloading data automatically and providing it as a Julia data structure.</p>
+<p><a href="https://github.com/FluxML/FluxJS.jl">Flux.JS</a> enables export of <a href="https://github.com/FluxML/Flux.jl">Flux</a> models to the browser. However, just porting a numerical function to JavaScript is rarely exciting on its own; you need to build an interface to give input to the model (say, via a webcam) and see output (say, by displaying an annotated image) in order to see what the model is thinking.</p>
 
-<p>This project involves building a “<a href="https://github.com/JuliaLang/BinDeps.jl">BinDeps.jl</a> for data” which would make the creation of data-providing packages easier. The package would make it easy to download / unzip large files and check their integrity them in a cross-platform way. Facilities for downloading specific datasets can then be built on top of this.</p>
+<p>This project would involve creating new demos that show interesting models running in the browser. Examples could include:</p>
 
-<p><strong>Expected Results</strong>: A BinDeps-like package for downloading and managing data, as well as examples of this package used with specific data sets.</p>
+<ul>
+  <li>An MNIST digit classify running on hand-drawn images;</li>
+  <li><a href="https://www.cs.toronto.edu/~graves/handwriting.html">Handwriting generation</a>;</li>
+  <li>Live speech recognition or production;</li>
+  <li>An autoencoder that allows moving sliders to generate images, and explore “digit space”;</li>
+  <li>A Chess or Go AI that plays against the user;</li>
+  <li>A language analysis tool that classifies user-written text.</li>
+</ul>
 
-<p><strong>Recommended Skills</strong>: Only standard programming skills are needed for this project. Familiarity with Julia is a plus.</p>
+<p>The possibilities are pretty much endless here. This project will require a pretty solid handle on web technologies, and we’d expect much of the components created to be reusable between demos.</p>
 
-<p><strong>Mentors</strong>: <a href="https://github.com/orgs/JuliaML/people">JuliaML Members</a></p>
+<p><strong>Mentors</strong>: <a href="https://github.com/MikeInnes/">Mike Innes</a>, <a href="https://github.com/shashi">Shashi Gowda</a>.</p>
 
-<h2 id="machine-learning-tools-for-classification-of-qualitative-traits-of-differential-equation-models">Machine learning tools for classification of qualitative traits of differential equation models</h2>
+<h2 id="model-import-and-export">Model Import and Export</h2>
+
+<p>Sharing models with other frameworks would enables us to both export models (say to JavaScript for the browser, or TensorFlow Lite for mobile, or NNVM for optimised training) and to take advantage of the large set of <a href="https://github.com/BVLC/caffe/wiki/Model-Zoo">trained models in the wild</a> in Julia code.</p>
+
+<p>This involves several stages, some or all of which could be tackled over the course of a project.</p>
+
+<ul>
+  <li>Reading and writing the raw model formats. For formats like <a href="https://github.com/onnx/onnx">ONNX</a> this should be relatively easy, as one can use the <a href="https://github.com/JuliaIO/ProtoBuf.jl">ProtoBuf.jl</a> library.</li>
+  <li>For model import:
+    <ul>
+      <li>Converting the raw model format to a more general graph format, such as a <a href="https://github.com/MikeInnes/DataFlow.jl">DataFlow.jl</a> graph.</li>
+      <li>Dumping the model graph as Julia code.</li>
+    </ul>
+  </li>
+  <li>For model export:
+    <ul>
+      <li>Converting a general graph format to the raw model constructs.</li>
+      <li>Tracing Julia code to produce a dataflow graph, as in <a href="https://github.com/FluxML/FluxJS.jl">FluxJS.jl</a>.</li>
+    </ul>
+  </li>
+</ul>
+
+<p><strong>Mentors</strong>: <a href="https://github.com/MikeInnes/">Mike Innes</a></p>
+
+<h2 id="benchmarks">Benchmarks</h2>
+
+<p>A benchmark suite would help us to keep Julia’s performance for ML models in shape, as well as revealing opportunities for improvement. Like the model-zoo project, this would involve contributing standard models that exercise common ML use case (images, text etc) and profiles them. The project could extend to include improving performance where possible, or creating a “benchmarking CI” like Julia’s own <a href="https://github.com/JuliaCI/Nanosoldier.jl">nanosoldier</a>.</p>
+
+<p><strong>Mentors</strong>: <a href="https://github.com/MikeInnes/">Mike Innes</a></p>
+
+<h2 id="compiler-optimisations">Compiler Optimisations</h2>
+
+<p>Julia opens up many interesting opportunities for applying new optimisations to ML models, and exploring <a href="https://julialang.org/blog/2017/12/ml&amp;pl">language design for ML</a>. As part of this project you’d help us apply novel optimisation strategies to Julia code, with immediate benefits to Flux and other Julia users.</p>
+
+<p>Possible projects could include:</p>
+
+<ul>
+  <li>Auto-parallelisation and vectorisation in the vain of <a href="http://dynet.readthedocs.io/en/latest/tutorials_notebooks/Autobatching.html">DyNet autobatch</a>, <a href="https://github.com/tensorflow/fold">TensorFlow Fold</a> and <a href="https://github.com/jekbradbury/Minibatch.jl">Matchbox</a>.</li>
+  <li>Using <a href="https://github.com/jrevels/Cassette.jl/">Cassette</a> and techniques similar to <a href="https://github.com/FluxML/FluxJS.jl">Flux.JS</a> to extract dataflow computation graphs from imperative Julia code.</li>
+  <li>Applying optimisations to computation graphs, such as eliding memory allocations, reusing memory and fusing operations, or enabling model parallelism.</li>
+  <li>Applying <a href="http://halide-lang.org/">Halide</a> or <a href="https://futhark-lang.org/">Futhark</a>-like optimisations to array expressions, as in <a href="https://github.com/MikeInnes/Tokamak">Tokamak</a></li>
+  <li>Improving Julia’s GPU support, including tuning memory management and supporting CUDA streams.</li>
+</ul>
+
+<p><strong>Mentors</strong>: <a href="https://github.com/MikeInnes/">Mike Innes</a></p>
+
+<h2 id="sparse-gpu-and-ml-support">Sparse GPU and ML support</h2>
+
+<p>While Julia supports dense GPU arrays well via <a href="https://github.com/JuliaGPU/CUSPARSE.jl">CuArrays</a>, we lack up-to-date wrappers for sparse operations. This project would involve wrapping CUDA’s sparse support, with <a href="https://github.com/JuliaGPU/CUSPARSE.jl">CUSPARSE.jl</a> as a starting point, adding them to CuArrays.jl, and perhaps demonstrating their use via a sparse machine learning model.</p>
+
+<p><strong>Mentors</strong>: <a href="https://github.com/MikeInnes/">Mike Innes</a></p>
+
+<h2 id="parquetjl-enhancements">Parquet.jl enhancements</h2>
+
+<p>Efficient storage of tabular data is an important component of the data analysis story in the ecosystem. Julia has many options here – JLD, JuliaDB’s built-in serialization, CSV.write. These either suffer from lack of performance or lack of standardization. Parquet is a format for efficient storage of tabular data used in the Hadoop world. It has compression techniques which reduce disk usage as well as speed up reads. A well-rounded Parquet implementation in Julia will solve the current issues with storage formats and let Julia interoperate with software from the Hadoop world.</p>
+
+<p>Parquet.jl currently contains a reader for Parquet files. This project involves implementing the writer for Parquet files, as well as some enhancements to the reading functionality.</p>
+
+<p><strong>Deliverables:</strong></p>
+
+<p><em>Reader enhancements:</em></p>
+
+<p>Read a file as a NamedTuple of vectors (using NamedTuples.jl on Julia 0.6). This is on similar lines, but different from the current cursor-based reader. Probably as an implementation of <code class="highlighter-rouge">AbstractBuilder</code> that returns NamedTuple of column vectors, combined with a new iterator/cursor that returns a bunch of records instead of individual records.</p>
+
+<p><em>Writer support:</em></p>
+
+<ul>
+  <li>Write a table (in the form of a NamedTuple of vectors) to disk.
+Note: we will use NamedTuple of vectors as a minimal table which can be converted back into DataFrames or IndexedTables</li>
+  <li>Implement the compression features provided in the Parquet spec-
+Optionally auto detect compression scheme based on the data.</li>
+</ul>
+
+<p><strong>Mentors</strong>: <a href="https://github.com/tanmaykm">Tanmay Mohapatra</a></p>
+
+<h2 id="gpu-support-in-juliadb">GPU support in JuliaDB</h2>
+
+<p>JuliaDB is a distributed analytical database. It uses Julia’s multi-processing for parallelism at the moment. GPU implementations of some operations may allow relational algebra with low latency. In this project, you will be required to add basic GPU support in JuliaDB.</p>
+
+<ul>
+  <li>Copy a table to GPU – this may be as simple as converting every column into a CuArray or GPUArray</li>
+  <li><code class="highlighter-rouge">map</code>, <code class="highlighter-rouge">reduce</code> and <code class="highlighter-rouge">filter</code> operation – apply simple functions on a large table that is on the GPU
+    <ul>
+      <li>Ensure that columnar storage format is made use of in the lower level code generated.</li>
+    </ul>
+  </li>
+  <li>The <code class="highlighter-rouge">groupby</code> and <code class="highlighter-rouge">join</code> operations may involve first implementing an efficient <a href="https://docs.julialang.org/en/stable/stdlib/sort/#Base.sortperm"><code class="highlighter-rouge">sortperm</code></a> that utilize the GPU, or an efficient hash table on the GPU</li>
+  <li><code class="highlighter-rouge">groupby</code> kernel on GPU</li>
+  <li><code class="highlighter-rouge">join</code> kernel on GPU (stretch goal)</li>
+</ul>
+
+<p><strong>Mentors</strong>: <a href="https://shashi.github.io">Shashi Gowda</a>, <a href="http://mikeinnes.github.io/">Mike Innes</a></p>
+
+<h2 id="making-aquiring-open-data-easy">Making Aquiring Open-Data Easy</h2>
+
+<p>Goverments and Universities are releasing huge amounts of data under Open Data policies.
+Web portals such as:</p>
+<ul>
+  <li>http://data.gov</li>
+  <li>http://data.gov.au</li>
+  <li>https://dataverse.harvard.edu/</li>
+  <li>http://datadryad.org/</li>
+  <li>https://figshare.com/</li>
+</ul>
+
+<p>Expose great quanities of data just wating to be used.</p>
+
+<p><a href="https://github.com/oxinabox/DataDeps.jl">DataDeps.jl</a> is a package that helps data scientists ensures that anyone running their code has all the data it needs, no matter when or where it is run.
+To do this it needs a registration block, which is a chunk of julia code which says where the data can be download, who created it, what terms and conditions are on its use etc.
+For a simple dataset that is all in one file writing this is pretty easy – copy and paste the info from the website hosting the data.
+When you want to dozens of datasets, some of which have dozens of files (and no easy way to download a .zip of all of them), writing this registration block is a bit more work.</p>
+
+<p><a href="https://github.com/oxinabox/DataDepsGenerators.jl">DataDepsGenerators.jl</a> exists to solve that.
+Give it a URL (or other identifier) for a page describing a dataset, and outputs all the code for a registration block, that you can copy and paste straight into your julia project.
+Right now DataDepsGenerators only supports a couple of sites: GitHub (for https://github.com/BuzzFeedNews/ and https://github.com/fivethirtyeight/data/ and others) and the <a href="https://archive.ics.uci.edu/ml/datasets/">UCI ML Repository</a>.
+This project aims to change that by adding support for the <a href="http://docs.ckan.org/en/latest/api/index.html">CKAN</a> and the <a href="https://www.openarchives.org/OAI/openarchivesprotocol.html">OA-PMH</a> APIs.</p>
+
+<p>The <a href="http://docs.ckan.org/en/latest/api/index.html">CKAN</a> and the <a href="https://www.openarchives.org/OAI/openarchivesprotocol.html">OA-PMH</a> APIs allow the automated extraction of metadata for a dataset.
+They are primarily used by goverment “data.gov.*” sites and research repositories respectively.
+Together they host millions of datasets, furfilling those institutions open data policies.</p>
+
+<p>This project is to leverage those APIs, to allow others to leaverage those data repositories to produce easily repeatable, data driven research.</p>
+
+<p><strong>Expected Results</strong>: a series of patches to <a href="https://github.com/oxinabox/DataDepsGenerators.jl">DataDepsGenerators.jl</a>, giving it the capacity to generate a DataDeps registration block for any dataset hosted on site exposing a CRAN, or OAI-PMH API.</p>
+
+<p><strong>Recommended Skills</strong>: Familarity with web APIs and related technolgies (e.g. REST, JSON, XML (Probably not OAUTH, but if you’ve done OAUTH then your more than familar enough)). Some practice with webscraping is likely to be useful. A love of data and of doing cool things with it, is a big plus.</p>
+
+<p><strong>Mentors</strong>: <a href="https://github.com/oxinabox/">Lyndon White (oxinabox)</a></p>
+
+<h2 id="parameter-estimation-for-nonlinear-dynamical-models">Parameter estimation for nonlinear dynamical models</h2>
 
 <p>Machine learning has become a popular tool for understanding data, but scientists
-typically want to use this data to better understand their differential
-equation-based models. Differential equations usually have parameters which are
-unknown but when changed can cause qualitative differences to the results. By
-pairing machine learning tooling with data generation from differential equation
-models, tools can be developed which can classify when behaviors are to be
-expected in the solution.</p>
+typically understand the world through the lens of physical laws and their
+resulting dynamical models. These models are generally differential equations
+given by physical first principles, where the constants in the equations such
+as chemical reaction rates and planetary masses determine the overall dynamics.
+The inverse problem to simulation, known as parameter estimation, is the process
+of utilizing data to determine these model parameters.</p>
 
-<p><strong>Recommended Skills</strong>: Background knowledge of standard machine learning
-techniques. It’s recommended but not required that one has basic knowledge of
-differential equations and DifferentialEquations.jl.</p>
+<p>The purpose of this project is to utilize the growing array of statistical,
+optimization, and machine learning tools in the Julia ecosystem to build
+library functions that make it easy for scientists to perform this parameter
+estimation with the most high-powered and robust methodologies. Possible projects
+include investigating methods for Bayesian estimation of parameters via Stan.jl
+and Julia-based libraries like Turing.jl, or global optimization-based approaches.
+Novel techniques like classifying model outcomes via support vector machines
+and deep neural networks is can also be considered. Research and benchmarking
+to attempt to find the most robust methods will take place in this project.</p>
 
-<p><strong>Expected Results</strong>: Tools for easily classifying parameters using machine
-learning tooling for users inexperienced with machine learning.</p>
+<p>Some work in this area can be found in
+<a href="https://github.com/JuliaDiffEq/DiffEqParamEstim.jl">DiffEqParamEstim.jl</a>
+and <a href="https://github.com/JuliaDiffEq/DiffEqBayes.jl">DiffEqBayes.jl</a>. Examples
+can be found <a href="http://docs.juliadiffeq.org/latest/analysis/parameter_estimation.html">in the DifferentialEquations.jl documentation</a>.</p>
+
+<p><strong>Recommended Skills</strong>: Background knowledge of standard machine learning,
+statistical, or optimization techniques. It’s recommended but not required that
+one has basic knowledge of differential equations and DifferentialEquations.jl.
+Using the differential equation solver to get outputs from parameters can
+be learned on the job, but you should already be familiar (but not necessarily
+an expert) with the estimation techniques you are looking to employ.</p>
+
+<p><strong>Expected Results</strong>: Library functions for performing parameter estimation
+and inferring properties of differential equation solutions from parameters.
+Notebooks containing benchmarks determining the effectiveness of various methods
+and classifying when specific approaches are appropriate will be developed
+simultaneously.</p>
 
 <p><strong>Mentors</strong>: <a href="https://github.com/ChrisRackauckas">Chris Rackauckas</a></p>
+
+<h2 id="artificial-intelligence-library-package-based-on-artificial-intelligence---a-modern-approach-aima">Artificial Intelligence Library Package based on Artificial Intelligence - A Modern Approach (AIMA)</h2>
+
+<p>AIMA is a seminal text on representation of agents to solve AI problems. Most packages 
+available today as AI libraries tend to focus on ML only and not the architectural
+aspect of AI. The scope of the project is to create a library with a clean API 
+(following AIMA) to easily allow the application of core algorithms to AI problems. 
+The student will implement a package that brings together implementations of algorithms 
+like depth-first search and simulated annealing, both from other Julia packages and 
+from sample code in the AIMA book, and build sample programs to demonstrate AI 
+applications. Starter code can be found at [AIMACore]
+(https://github.com/sambitdash/AIMACore.jl) along with [AIMASamples]
+(https://github.com/sambitdash/AIMASamples.jl).</p>
+
+<p><strong>Recommended Skills</strong>: Previous experience with AI or the ability to quickly pick up on 
+the AI algorithms in AIMA</p>
+
+<p><strong>Expected Results</strong>: A well-documented library of functions derived from the AIMA book.</p>
+
+<p><strong>Mentors</strong> <a href="https://github.com/sambitdash">Sambit Kumar Dash</a>.</p>
+
+<h2 id="a-sql-backend-for-queryjl">A SQL backend for Query.jl</h2>
+
+<p><a href="https://github.com/davidanthoff/Query.jl">Query.jl</a> is designed to work
+with multiple backends. This project would add a SQL backend, so that queries
+that are formulated with the query commands in <a href="https://github.com/davidanthoff/Query.jl">Query.jl</a>
+get translated into an equivalent SQL query that can be run within a
+SQL database engine. Both LINQ and dplyr support a similar feature set,
+and this project would enable the same scenario for julia. There is also
+a small academic literature on this topic that we need to understand and
+incorporate.</p>
+
+<p><strong>Recommended Skills</strong>: Very strong database and SQL skills, previous
+experience with compilers (this project is essentially a compiler that
+translates a query AST into SQL) and a strong familiarity with the julia
+data stack.</p>
+
+<p><strong>Expected Results</strong>: A new version of <a href="https://github.com/davidanthoff/Query.jl">Query.jl</a>
+that runs queries as SQL in a database.</p>
+
+<p><strong>Mentors</strong>: <a href="https://github.com/davidanthoff">David Anthoff</a></p>
+
+<h2 id="tabular-file-io">Tabular file IO</h2>
+
+<p>The Queryverse has a large number of file IO packages: <a href="https://github.com/davidanthoff/CSVFiles.jl">CSVFiles.jl</a>,
+<a href="https://github.com/davidanthoff/ExcelFiles.jl">ExcelFiles.jl</a>, <a href="https://github.com/davidanthoff/FeatherFiles.jl">FeatherFiles.jl</a>,
+<a href="https://github.com/davidanthoff/StatFiles.jl">StatFiles.jl</a>, <a href="https://github.com/davidanthoff/ParquetFiles.jl">ParquetFiles</a>
+and <a href="https://github.com/davidanthoff/FstFiles.jl">FstFiles.jl</a>. This project
+will a) do serious performance work across all of the existing packages and
+b) add write capabilities  to a number of them.</p>
+
+<p><strong>Recommended Skills</strong>: Experience with file formats, writing performant
+julia code.</p>
+
+<p><strong>Expected Results</strong>: Write capabilities across the packages listed above,
+competitive performance for all the packages listed above.</p>
+
+<p><strong>Mentors</strong>: <a href="https://github.com/davidanthoff">David Anthoff</a></p>
 
 
     <div class="footer">
@@ -304,7 +519,7 @@ learning tooling for users inexperienced with machine learning.</p>
     </div>
 
     <!-- Add "contribute" link to the Transifex language dropdown -->
-    <script>
+    <!--<script>
       // Create a link element for the translation prompt
       var txPromptLink = document.createElement( "a" );
       txPromptLink.href = "https://www.transifex.com/julialang-i18n/julialang-web/";
@@ -317,7 +532,7 @@ learning tooling for users inexperienced with machine learning.</p>
 
       // Add the translation prompt list item to the list of languages
       document.getElementById( "tx-live-lang-picker" ).appendChild( txPrompt );
-    </script>
+    </script>-->
 
 <!--Flipcause Integration v3.0// Flipcause Integration Instructions:
     Install the following code block once in the website Header (after <head> tag) -->

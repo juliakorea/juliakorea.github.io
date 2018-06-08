@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="ko" lang="ko">
 
 <head>
-  <meta name="viewport" content="width=device-width; initial-scale=1.0;">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="content-type" content="text/html; charset=utf-8" />
   <title>Compiler Projects – Summer of Code</title>
   <meta name="author" content="Jeff Bezanson, Stefan Karpinski, Viral Shah, Alan Edelman, et al." />
@@ -272,16 +272,6 @@ ready(function () {
 
 <p><strong>Mentors</strong>: <a href="https://github.com/vtjnash">Jameson Nash</a></p>
 
-<h2 id="better-nullables">Better Nullables</h2>
-
-<p>The starting point should likely be https://github.com/JuliaLang/Juleps/pull/21. This will need further elaboration and study to identify any areas that are likely to be problematic under the new approach. Also will require new code and testing to demonstrate the performance and usability of the new code patterns; and to begin deprecation and replacement of the existing code pattern with Nullables.</p>
-
-<p><strong>Expected Results</strong>: Initiate replacement of the <code class="highlighter-rouge">Nullable{T}</code> with an implementation based around <code class="highlighter-rouge">Union{T, Void}</code> and <code class="highlighter-rouge">Union{Some{T}, Void}</code>.</p>
-
-<p><strong>Recommended Skills</strong>: Experience with performance testing and Julia. Experience with data analysis involving missing values also a big advantage.</p>
-
-<p><strong>Mentors</strong>: <a href="https://github.com/vtjnash">Jameson Nash</a></p>
-
 <h2 id="thread-safety">Thread-safety</h2>
 
 <p>There are many remaining components that need to be updated to use thread-safe algorithms before Julia’s threading will be stable for general usage. Some basic data-structures (such as the TypeMap) are missing correct RCU and memory barriers to ensure race-free answers. IO is also currently unavailable for multi-threaded code. The <code class="highlighter-rouge">realloc</code> operation for arrays (i.e. <code class="highlighter-rouge">resize!</code>) may be more reliable if it was implemented using RCU <code class="highlighter-rouge">malloc</code> (delaying the free until a gc-safepoint has been reached on all threads).</p>
@@ -294,9 +284,9 @@ ready(function () {
 
 <h2 id="c-linter">C Linter</h2>
 
-<p>Memory errors in Julia’s underlying C code are sometimes difficult to trace, and missing garbage-collector “roots” (GC roots) can lead to segfaults and other problems. One potential way to make it easier to find such errors would be to write a package that checks Julia’s <code class="highlighter-rouge">src/</code> directory for missing GC roots. A Julia-based solution might leverage the <a href="https://github.com/ihnorton/Clang.jl">Clang.jl</a> package to parse the C code, determine which call chains can trigger garbage collection, and then look for objects that lack GC root protection. Alternatively, the same strategy might be implemented in C++ by writing a plugin for <a href="http://clang-analyzer.llvm.org/">Clang’s static analyzer</a>. Another attractive approach is to leverage <a href="http://coccinelle.lip6.fr/">coccinelle</a>.</p>
+<p>Memory errors in Julia’s underlying C code are sometimes difficult to trace, and missing garbage-collector “roots” (GC roots) can lead to segfaults and other problems. One way to find such errors is to check Julia’s <code class="highlighter-rouge">src/</code> directory for missing GC roots by determining which call chains can trigger garbage collection, and then looking for objects that lack GC root protection. Toward this end, a tool called <a href="https://github.com/Keno/ClangSA.jl">ClangSA.jl</a> was developed using <a href="http://clang-analyzer.llvm.org/">Clang’s static analyzer</a> (as well as the <a href="https://github.com/Keno/Cxx.jl">Cxx</a> package) and has been used to find some GC bugs. (alternatively, <a href="http://coccinelle.lip6.fr/">coccinelle</a> could be investigated)</p>
 
-<p><strong>Expected Results</strong>: A tool that, when run against Julia’s <code class="highlighter-rouge">src/</code> directory, highlights lines that need to have additional GC roots added.</p>
+<p><strong>Expected Results</strong>: Expand and improve the ClangSA tool; potentially provide continuous integration support (for example, a <a href="https://github.com/JuliaCI/Nanosoldier.jl">Nanosoldier</a> command).</p>
 
 <p><strong>Required Skills</strong>: Familiarity with C, runtimes, and experience with (or interest in) static analysis.</p>
 
@@ -313,7 +303,7 @@ ready(function () {
     </div>
 
     <!-- Add "contribute" link to the Transifex language dropdown -->
-    <script>
+    <!--<script>
       // Create a link element for the translation prompt
       var txPromptLink = document.createElement( "a" );
       txPromptLink.href = "https://www.transifex.com/julialang-i18n/julialang-web/";
@@ -326,7 +316,7 @@ ready(function () {
 
       // Add the translation prompt list item to the list of languages
       document.getElementById( "tx-live-lang-picker" ).appendChild( txPrompt );
-    </script>
+    </script>-->
 
 <!--Flipcause Integration v3.0// Flipcause Integration Instructions:
     Install the following code block once in the website Header (after <head> tag) -->

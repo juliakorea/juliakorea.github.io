@@ -2,10 +2,15 @@
     이롭게 바탕체
     https://www.iropke.com/archive/iropke-batang-css.html
 */
-@import url('//cdn.jsdelivr.net/font-iropke-batang/1.2/font-iropke-batang.css');
+@import url('font-iropke-batang.css');
+
+html {
+    font-size: 1.1em;
+}
 
 body {
-    font-family: 'Iropke Batang', serif;
+    font-family: Georgia, 'Iropke Batang';
+    font-weight: 400;
 }
 
 p {
@@ -32,13 +37,17 @@ svg {
     max-width: 100%;
 }
 
+pre {
+    padding: 0.5em 1.0em;
+}
+
 @media only screen and (max-width: 768px) {
     div#site {
         padding: 0; 
     }
 }
 
-@media only screen and (max-width: 320px) {
+@media only screen and (max-width: 480px) {
     div#site {
         padding: 0; 
     }

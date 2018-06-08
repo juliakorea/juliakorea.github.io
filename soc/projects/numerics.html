@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="ko" lang="ko">
 
 <head>
-  <meta name="viewport" content="width=device-width; initial-scale=1.0;">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="content-type" content="text/html; charset=utf-8" />
   <title>Numerical Projects – Summer of Code</title>
   <meta name="author" content="Jeff Bezanson, Stefan Karpinski, Viral Shah, Alan Edelman, et al." />
@@ -260,15 +260,27 @@ ready(function () {
 
 <h1 id="numerical-linear-algebra">Numerical Linear Algebra</h1>
 
-<h2 id="native-julia-implementations-of-iterative-solvers-for-numerical-linear-algebra">Native Julia implementations of iterative solvers for numerical linear algebra</h2>
+<h2 id="implementing-eigenvalue-problem-solvers-for-sparse-matrices">Implementing eigenvalue problem solvers for sparse matrices</h2>
 
-<p>Iterative methods for solving numerical linear algebraic problems are crucial for big data applications, which often involve matrices that are too large to store in memory or even to compute its matrix elements explicitly. Iterative Krylov methods such as conjugate gradients (CG) and the generalized minimal residual (GMRES) methods have proven to be particular valuable for a wide variety of applications such as eigenvalue finding, convex optimization, and even systems control. This project proposes to implement a comprehensive suite of iterative solver algorithms in Julia’s native <a href="https://github.com/JuliaLang/IterativeSolvers.jl">IterativeSolvers.jl</a> package, as described in the <a href="https://github.com/JuliaLang/IterativeSolvers.jl/issues/1">implementation roadmap</a>. Students will be encouraged to refactor the codebase to better expose the mathematical structure of the underlying Arnoldi and Lanczos iterations, thus promoting code composability without sacrificing performance.</p>
+<p>The <a href="https://github.com/JuliaLang/IterativeSolvers.jl">IterativeSolvers.jl</a> package is lacking iterative methods for the (generalized) eigenvalue problem Ax = λBx. The goal of this project is to implement the Arnoldi or Lanczos method as a solver for the eigenvalue problem and to compare its performance with the <code class="highlighter-rouge">eigs</code> function.</p>
+
+<p>For instance, the student can start by implementing the Arnoldi method for non-Hermitian eigenvalue problems Ax = λx. The method should then be improved with the implicit restart procedure (IRAM) and finally extended to the generalized eigenvalue problem Ax = λBx.</p>
+
+<p><strong>Recommended Skills</strong>: familiarity with numerical linear algebra.</p>
+
+<p><strong>Expected Results</strong>: a fast and native eigenvalue problem solver.</p>
+
+<p><strong>Mentors:</strong> <a href="https://github.com/haampie/">Harmen Stoppels</a></p>
+
+<h2 id="implementing-iterative-methods-for-linear-systems-of-equations">Implementing iterative methods for linear systems of equations</h2>
+
+<p>High-dimensional linear systems of equations Ax = b need often to be solved by preconditioned iterative methods, simply because direct methods are too expensive. The <a href="https://github.com/JuliaLang/IterativeSolvers.jl">IterativeSolvers.jl</a> package provides a variety of these iterative methods already, such as GMRES, BiCGStab and Conjugate Gradients. There are still methods to be implemented, including (variations of) QMR and Conjugate Residuals. Furthermore, the package itself can be improved by: solving the issue of the return types of solvers (<a href="https://github.com/JuliaMath/IterativeSolvers.jl/issues/6">#6</a>, <a href="https://github.com/JuliaMath/IterativeSolvers.jl/issues/185">#185</a>) and allowing custom array types.</p>
 
 <p><strong>Recommended Skills</strong>: Strong linear algebra background. Familiarity with numerical linear algebra.</p>
 
-<p><strong>Expected Results</strong>: New high-performance backend native iterative solvers.</p>
+<p><strong>Expected Results</strong>: New iterative methods and an improved API of the IterativeSolvers.jl package.</p>
 
-<p><strong>Mentors:</strong> <a href="https://jiahao.github.io/">Jiahao Chen</a></p>
+<p><strong>Mentors:</strong> <a href="https://github.com/haampie/">Harmen Stoppels</a></p>
 
 <h2 id="petsc-integration-for-scalable-technical-computing">PETSc integration for scalable technical computing</h2>
 
@@ -360,23 +372,43 @@ wrapping each operand in an interval. <a href="https://github.com/dpsanders/Vali
 
 <p><strong>Expected results</strong>: A library that fulfills the IEEE 1788-2015 standard.</p>
 
+<p><strong>Mentors:</strong> <a href="https://github.com/dpsanders">David P. Sanders</a></p>
+
+<h2 id="guaranteed-root-finding-with-intervals">Guaranteed root finding with intervals</h2>
+
+<p>Interval arithmetic provides a way to perform computations with continuous sets of real  numbers or vectors, for example to bound the range of a function over a given set.</p>
+
+<p>This can be used to find roots (zeros) of functions in a <em>guaranteed</em> way, by excluding regions where there are no roots and zooming in on roots, but always within a given interval.</p>
+
+<p>A basic branch-and-prune algorithm has been implemented in  <a href="https://github.com/JuliaIntervals/IntervalRootFinding.jl"><code class="highlighter-rouge">IntervalRootFinding.jl</code></a>.</p>
+
+<p>This project proposes to significantly improve these methods using techniques found in the interval arithmetic literature.</p>
+
+<p><strong>Recommended skills</strong>: Multivariable calculus and linear algebra; a basic understanding of floating-point arithmetic.</p>
+
+<p><strong>Expected results</strong>: A state-of-the-art root finding library in pure Julia.</p>
+
 <p><strong>Mentors:</strong> <a href="https://github.com/dpsanders">David P. Sanders</a>, <a href="https://github.com/lbenet">Luis Benet</a></p>
-<h2 id="inverse-or-backward-functions-and-contractors-for-interval-constraint-propagation">Inverse (or “backward”) functions and contractors for interval constraint propagation</h2>
 
-<p>One important application of interval arithmetic is to the characterization of sets that satisfy certain inequalities (“set inversion”), as used, for example, in optimization, robotics, and the proof of mathematical theorems via rigorous numerical calculation. The state-of-the-art technique for this is interval constraint propagation, in particular the concept of “contractors”.
-The package <a href="https://github.com/dpsanders/IntervalConstraintProgramming.jl"><code class="highlighter-rouge">IntervalConstraintProgramming.jl</code></a> contains basic interval constraint propagation tools for polynomials.</p>
+<h2 id="global-optimization-with-intervals">Global optimization with intervals</h2>
 
-<p>This project will develop a package <code class="highlighter-rouge">IntervalContractors.jl</code> to refactor out the part of the package dealing with contractors and inverse functions, which will enable the inversion of functions involving transcendental functions such as <code class="highlighter-rouge">sin</code> and <code class="highlighter-rouge">exp</code>.</p>
+<p>Interval arithmetic provides a way to perform computations with continuous sets of real  numbers or vectors, for example to bound the range of a function over a given set.</p>
 
-<p>To do so, it will be necessary to implement inverse functions for the standard functions, such as <code class="highlighter-rouge">sin</code>, <code class="highlighter-rouge">exp</code>, etc, as well as the corresponding contractors. These inverse functions return sets, expressed as intervals, that contain the inverse image of a given set. Two versions of these functions will be produced: one that returns an interval, and the other that may return the union of several disjoint intervals.</p>
+<p>This can be used to do global optimization of functions in a deterministic way, that is, find the global minimum of a non-convex, nonlinear function $f:\mathbb{R}^n \to \mathbb{R}$.
+Interval methods for global optimization provide a guaranteed bound for the global optimum, and sets that contain the optimizers.</p>
 
-<p><strong>Recommended Skills</strong>: Mathematical background including basic set theory.</p>
+<p>A basic branch-and-bound algorithm has already been implemented in  <a href="https://github.com/JuliaIntervals/IntervalOptimization.jl"><code class="highlighter-rouge">IntervalOptimization.jl</code></a>, but it can be significantly improved.</p>
 
-<p><strong>Expected results</strong>: A library of interval contractors for interval constraint propagation.</p>
+<p>This project proposes to develop a state-of-the-art global optimization routine in Julia, by applying techniques found in the interval arithmetic and global optimization literature.
+This may involve developing code for McCormick relaxations and/or affine arithmetic.</p>
 
-<p><strong>Mentors:</strong> <a href="https://github.com/dpsanders">David P. Sanders</a>, <a href="https://github.com/lbenet">Luis Benet</a></p>
+<p><strong>Recommended skills</strong>: Multivariable calculus and linear algebra; a basic understanding of floating-point arithmetic.</p>
 
-<h2 id="native-bignums">Native Bignums</h2>
+<p><strong>Expected results</strong>: A state-of-the-art global optimization library in pure Julia.</p>
+
+<p><strong>Mentors:</strong> <a href="https://github.com/dpsanders">David P. Sanders</a></p>
+
+<h1 id="native-bignums">Native Bignums</h1>
 
 <p>Julia currently supports big integers, rationals and floats, making use of the GMP and MPFR libraries. However, the current implementation is very basic, performance is far from optimal compared to hand-written GMP code, and the GMP license is GPL 3.</p>
 
@@ -406,7 +438,7 @@ The package <a href="https://github.com/dpsanders/IntervalConstraintProgramming.
     </div>
 
     <!-- Add "contribute" link to the Transifex language dropdown -->
-    <script>
+    <!--<script>
       // Create a link element for the translation prompt
       var txPromptLink = document.createElement( "a" );
       txPromptLink.href = "https://www.transifex.com/julialang-i18n/julialang-web/";
@@ -419,7 +451,7 @@ The package <a href="https://github.com/dpsanders/IntervalConstraintProgramming.
 
       // Add the translation prompt list item to the list of languages
       document.getElementById( "tx-live-lang-picker" ).appendChild( txPrompt );
-    </script>
+    </script>-->
 
 <!--Flipcause Integration v3.0// Flipcause Integration Instructions:
     Install the following code block once in the website Header (after <head> tag) -->

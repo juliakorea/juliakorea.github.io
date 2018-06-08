@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="ko" lang="ko">
 
 <head>
-  <meta name="viewport" content="width=device-width; initial-scale=1.0;">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="content-type" content="text/html; charset=utf-8" />
   <title>DiffEq Projects – Summer of Code</title>
   <meta name="author" content="Jeff Bezanson, Stefan Karpinski, Viral Shah, Alan Edelman, et al." />
@@ -262,10 +262,10 @@ ready(function () {
 in order to be efficiently solved. However, implicit methods are inherently
 more costly and thus inefficient when they are not needed. This is an issue
 because many problems are not always stiff, and instead switch from stiff
-and nonstiff modes. The purpose of this project would be to develop functionality
+and non-stiff modes. The purpose of this project would be to develop functionality
 for detecting stiffness during integration and testing algorithms for automatic
 switching between appropriate algorithms. These would not only be more efficient
-on a large class of problems, but also decrease the cognative burden on the
+on a large class of problems, but also decrease the cognitive burden on the
 user by being efficient for a large class of algorithms and likely become the
 new default methods.</p>
 
@@ -291,11 +291,18 @@ methods. Possible families of methods to implement are:</p>
 
 <ul>
   <li>High Order Exponential Runge-Kutta Methods, including efficient expmv methods</li>
-  <li>Implicit-Explicit (IMEX) Runge-Kutta Methods</li>
+  <li>Implicit-Explicit (IMEX) Methods</li>
+  <li>Parallel ODE Methods</li>
+  <li>Runge-Kutta-Chebyschev Methods</li>
+  <li>Boundary value problem (BVP) solvers like MIRK and collocation methods</li>
 </ul>
 
+<p>These methods are the basis of high-efficiency partial differential equation (PDE)
+solvers and are thus important to many communities like computational fluid
+dynamics, mathematical biology, and quantum mechanics.</p>
+
 <p><strong>Recommended Skills</strong>: Background knowledge in numerical analysis, numerical
-linear algebra, and the ability to write fast code.</p>
+linear algebra, and the ability (or eagerness to learn) to write fast code.</p>
 
 <p><strong>Expected Results</strong>: Contributions of production-quality ODE/DAE solver methods.</p>
 
@@ -321,6 +328,27 @@ examples which show the usage of such tools.</p>
 
 <p><strong>Mentors</strong>: <a href="https://github.com/ChrisRackauckas">Chris Rackauckas</a>,
 <a href="https://github.com/dpsanders">David Sanders</a></p>
+
+<h2 id="parallelization-of-the-sundials-solver-library">Parallelization of the Sundials Solver Library</h2>
+
+<p>The Sundials set of solvers is a popular library for performing the time stepping
+portion of large-scale partial differential equation (PDE) solvers. This library
+has the ability to be internally parallelized, supporting threading, multi-node
+distributed parallelism, and GPUs. The Julia package
+<a href="https://github.com/JuliaDiffEq/Sundials.jl">Sundials.jl</a> is a wrapper for the
+Sundials library which is almost feature-complete with the wrapped code. However,
+the functionality that it does not make use of is the parallelization. The purpose
+of this project is to build the tooling to be able to utilize the parallelization
+parts from within Julia, and benchmarking their effectiveness on large PDEs.</p>
+
+<p><strong>Recommended Skills</strong>: Background knowledge in C++. Some knowledge of parallel
+computing is preferred.</p>
+
+<p><strong>Expected Results</strong>: Examples showing how to utilize the direct wrappers to
+perform calculations in parallel and the ability to “flip a switch” to turn on
+parallelism in high-level APIs.</p>
+
+<p><strong>Mentors</strong>: <a href="https://github.com/ChrisRackauckas">Chris Rackauckas</a></p>
 
 <h2 id="tools-for-global-and-adjoint-sensitivity-analysis">Tools for global and adjoint sensitivity analysis</h2>
 
@@ -356,19 +384,21 @@ of numerical PDE methods, or one can build “full-stop” PDE solvers for speci
 PDEs. There are many different ways solving PDEs could be approached, and here
 are some ideas for potential projects:</p>
 
-<p>1) Enhancement of existing tools for discretizing PDEs. The finite differencing
-   (FDM) library <a href="https://github.com/JuliaDiffEq/DiffEqOperators.jl">DiffEqOperators.jl</a>
-   could be enahnced to allow non-uniform grids or composition of operators. The
-   finite element method (FEM) library <a href="https://github.com/JuliaDiffEq/FEniCS.jl">FEniCS.jl</a>
-   could wrap more of the FEniCS library.
-2) Full stop solvers of common fluid dynamical equations, such as diffusion-advection-
-   convection equations, or of hyperbolic PDEs such as the Hamilton-Jacobi-Bellman
-   equations would be useful to many users.
-3) Using stochastic differential equation (SDE) solvers to efficiently (and
-   highly parallel) approximate certain PDEs.
-4) Development of ODE solvers for more efficiently solving specific types of
-   PDE discretizations. See the “Native Julia solvers for ordinary differential
-   equations” project.</p>
+<ol>
+  <li>Enhancement of existing tools for discretizing PDEs. The finite differencing
+(FDM) library <a href="https://github.com/JuliaDiffEq/DiffEqOperators.jl">DiffEqOperators.jl</a>
+could be enahnced to allow non-uniform grids or composition of operators. The
+finite element method (FEM) library <a href="https://github.com/JuliaDiffEq/FEniCS.jl">FEniCS.jl</a>
+could wrap more of the FEniCS library.</li>
+  <li>Full stop solvers of common fluid dynamical equations, such as diffusion-advection-
+convection equations, or of hyperbolic PDEs such as the Hamilton-Jacobi-Bellman
+equations would be useful to many users.</li>
+  <li>Using stochastic differential equation (SDE) solvers to efficiently (and
+highly parallel) approximate certain PDEs.</li>
+  <li>Development of ODE solvers for more efficiently solving specific types of
+PDE discretizations. See the “Native Julia solvers for ordinary differential
+equations” project.</li>
+</ol>
 
 <p><strong>Recommended Skills</strong>: Background knowledge in numerical methods for solving
 differential equations. Some basic knowledge of PDEs, but mostly a willingness
@@ -387,7 +417,7 @@ to learn and a strong understanding of calculus and linear algebra.</p>
     </div>
 
     <!-- Add "contribute" link to the Transifex language dropdown -->
-    <script>
+    <!--<script>
       // Create a link element for the translation prompt
       var txPromptLink = document.createElement( "a" );
       txPromptLink.href = "https://www.transifex.com/julialang-i18n/julialang-web/";
@@ -400,7 +430,7 @@ to learn and a strong understanding of calculus and linear algebra.</p>
 
       // Add the translation prompt list item to the list of languages
       document.getElementById( "tx-live-lang-picker" ).appendChild( txPrompt );
-    </script>
+    </script>-->
 
 <!--Flipcause Integration v3.0// Flipcause Integration Instructions:
     Install the following code block once in the website Header (after <head> tag) -->

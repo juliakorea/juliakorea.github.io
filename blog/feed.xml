@@ -4,13 +4,762 @@
  <title>The Julia Blog</title>
  <link href="http://julialang.org/blog/feed.xml" rel="self"/>
  <link href="http://julialang.org/blog"/>
- <updated>2018-04-23T22:58:27+09:00</updated>
+ <updated>2018-06-08T13:40:29+09:00</updated>
  <id>http://julialang.org/blog</id>
  <author>
    <name>Julia Developers</name>
    <email>julia-dev@googlegroups.com</email>
  </author>
 
+ 
+ <entry>
+   <title>Extensible broadcast fusion</title>
+   <link href="http://julialang.org/blog/2018/05/extensible-broadcast-fusion"/>
+   <updated>2018-05-11T00:00:00+09:00</updated>
+   <id>http://julialang.org/blog/2018/05/extensible-broadcast-fusion</id>
+   <content type="html">&lt;p&gt;Julia version 0.7 brings with it an exciting new feature: the ability to customize broadcast
+fusion! This recently-merged change is the culmination of a long iterative design process
+that involved many members of the community. We have converged on a highly extensible
+interface that should satisfy many use-cases. In this blog post I’ll explain why this is a
+big deal by reviewing some of the key features and just scratch the surface of all that is
+possible with this new design. I’m quite certain that our enterprising community will come
+up with many more clever ways to exploit this new structure in the future.&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://docs.julialang.org/en/latest/manual/arrays/#Broadcasting-1&quot; title=&quot;Julia documentation for Broadcasting&quot;&gt;Broadcasting&lt;/a&gt; is a core feature of Julia: it allows you to compactly and efficiently
+express an elementwise operation over containers and scalars by annotating operators and
+function calls with a &lt;code class=&quot;highlighter-rouge&quot;&gt;.&lt;/code&gt;. In cases where the sizes don’t match, broadcasting will virtually
+extend missing dimensions or “singleton” dimensions (which contain only one value) by
+repeating them to fill the outer shape. For example, the expression &lt;code class=&quot;highlighter-rouge&quot;&gt;([1, 2, 3] .+ [10 20 30
+40]) ./ 10&lt;/code&gt; combines a 3-element column vector, a 1x4 matrix, and a scalar to compute a 3x4
+result. I imagine this as “extruding” the vector across the columns of the one-row matrix
+and spreading the division by 10 across the entire result:&lt;/p&gt;
+
+&lt;div class=&quot;language-julia highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;julia&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;x&quot;&gt;([&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;x&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;x&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;3&lt;/span&gt;&lt;span class=&quot;x&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;.+&lt;/span&gt; &lt;span class=&quot;x&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;10&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;20&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;30&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;40&lt;/span&gt;&lt;span class=&quot;x&quot;&gt;])&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;./&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;10&lt;/span&gt;
+&lt;span class=&quot;mi&quot;&gt;3&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;×4&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Array&lt;/span&gt;&lt;span class=&quot;x&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;Float64&lt;/span&gt;&lt;span class=&quot;x&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;x&quot;&gt;}:&lt;/span&gt;
+ &lt;span class=&quot;mf&quot;&gt;1.1&lt;/span&gt;  &lt;span class=&quot;mf&quot;&gt;2.1&lt;/span&gt;  &lt;span class=&quot;mf&quot;&gt;3.1&lt;/span&gt;  &lt;span class=&quot;mf&quot;&gt;4.1&lt;/span&gt;
+ &lt;span class=&quot;mf&quot;&gt;1.2&lt;/span&gt;  &lt;span class=&quot;mf&quot;&gt;2.2&lt;/span&gt;  &lt;span class=&quot;mf&quot;&gt;3.2&lt;/span&gt;  &lt;span class=&quot;mf&quot;&gt;4.2&lt;/span&gt;
+ &lt;span class=&quot;mf&quot;&gt;1.3&lt;/span&gt;  &lt;span class=&quot;mf&quot;&gt;2.3&lt;/span&gt;  &lt;span class=&quot;mf&quot;&gt;3.3&lt;/span&gt;  &lt;span class=&quot;mf&quot;&gt;4.3&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Since version 0.6, Julia has executed this expression by &lt;a href=&quot;https://julialang.org/blog/2017/01/moredots&quot; title=&quot;More Dots: Syntactic Loop Fusion in Julia&quot;&gt;“fusing”&lt;/a&gt; the two operations
+into a single kernel. That is, instead of first constructing an integer matrix resulting
+from the addition (&lt;code class=&quot;highlighter-rouge&quot;&gt;[11 21 31 41; 12 22 ...]&lt;/code&gt;) and then subsequently using a second loop to
+divide each element by 10, Julia does both the addition and division for each element at the
+same time, making just one pass through the output array and skipping intermediate array(s)
+entirely. This fusion optimization happens as a syntax-level transformation so it is
+guaranteed to occur and easy to reason about. Version 0.7 adds an extensible API on top of
+this feature that allows arrays to customize precisely how this operates.&lt;/p&gt;
+
+&lt;p&gt;Julia now uses a first-class data structure to “lazily” represent a fused broadcast
+expression before executing it. If you’re not a package developer this may not mean all that
+much to you, but you’ll still reap the many rewards. In Base Julia and its standard
+libraries alone, this means:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;a href=&quot;https://docs.julialang.org/en/latest/base/arrays/#Base.BitArray&quot; title=&quot;Julia documentation for BitArray&quot;&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;BitArray&lt;/code&gt;s&lt;/a&gt; can identify cases where they can operate on 64 boolean elements at once,
+yielding huge performance gains — often two orders of magnitude or more! For an easy
+example, I’ll just use random data with a simple &lt;code class=&quot;highlighter-rouge&quot;&gt;A&lt;/code&gt; and not &lt;code class=&quot;highlighter-rouge&quot;&gt;B&lt;/code&gt; predicate:&lt;/p&gt;
+
+    &lt;div class=&quot;language-julia highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;  &lt;span class=&quot;n&quot;&gt;julia&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;using&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;BenchmarkTools&lt;/span&gt;&lt;span class=&quot;x&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Random&lt;/span&gt;
+         &lt;span class=&quot;n&quot;&gt;srand&lt;/span&gt;&lt;span class=&quot;x&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;x&quot;&gt;)&lt;/span&gt;
+         &lt;span class=&quot;n&quot;&gt;A&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;bitrand&lt;/span&gt;&lt;span class=&quot;x&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;10&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;^&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;6&lt;/span&gt;&lt;span class=&quot;x&quot;&gt;)&lt;/span&gt;
+         &lt;span class=&quot;n&quot;&gt;B&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;bitrand&lt;/span&gt;&lt;span class=&quot;x&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;10&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;^&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;6&lt;/span&gt;&lt;span class=&quot;x&quot;&gt;)&lt;/span&gt;
+         &lt;span class=&quot;nd&quot;&gt;@benchmark&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;$&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;A&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;.&amp;amp;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;.!$&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;B&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;BenchmarkTools&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Trial&lt;/span&gt;&lt;span class=&quot;x&quot;&gt;:&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;memory&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;estimate&lt;/span&gt;&lt;span class=&quot;x&quot;&gt;:&lt;/span&gt;  &lt;span class=&quot;mf&quot;&gt;122.23&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;KiB&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;allocs&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;estimate&lt;/span&gt;&lt;span class=&quot;x&quot;&gt;:&lt;/span&gt;  &lt;span class=&quot;mi&quot;&gt;3&lt;/span&gt;
+    &lt;span class=&quot;o&quot;&gt;--------------&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;minimum&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;time&lt;/span&gt;&lt;span class=&quot;x&quot;&gt;:&lt;/span&gt;     &lt;span class=&quot;mf&quot;&gt;7.891&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;μs&lt;/span&gt; &lt;span class=&quot;x&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mf&quot;&gt;0.00&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;%&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;GC&lt;/span&gt;&lt;span class=&quot;x&quot;&gt;)&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;median&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;time&lt;/span&gt;&lt;span class=&quot;x&quot;&gt;:&lt;/span&gt;      &lt;span class=&quot;mf&quot;&gt;13.152&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;μs&lt;/span&gt; &lt;span class=&quot;x&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mf&quot;&gt;0.00&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;%&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;GC&lt;/span&gt;&lt;span class=&quot;x&quot;&gt;)&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;mean&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;time&lt;/span&gt;&lt;span class=&quot;x&quot;&gt;:&lt;/span&gt;        &lt;span class=&quot;mf&quot;&gt;17.826&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;μs&lt;/span&gt; &lt;span class=&quot;x&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mf&quot;&gt;9.62&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;%&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;GC&lt;/span&gt;&lt;span class=&quot;x&quot;&gt;)&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;maximum&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;time&lt;/span&gt;&lt;span class=&quot;x&quot;&gt;:&lt;/span&gt;     &lt;span class=&quot;mf&quot;&gt;591.497&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;μs&lt;/span&gt; &lt;span class=&quot;x&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mf&quot;&gt;95.73&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;%&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;GC&lt;/span&gt;&lt;span class=&quot;x&quot;&gt;)&lt;/span&gt;
+    &lt;span class=&quot;o&quot;&gt;--------------&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;samples&lt;/span&gt;&lt;span class=&quot;x&quot;&gt;:&lt;/span&gt;          &lt;span class=&quot;mi&quot;&gt;10000&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;evals&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;sample&lt;/span&gt;&lt;span class=&quot;x&quot;&gt;:&lt;/span&gt;     &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
+
+    &lt;p&gt;Compare this to previously on 0.6:&lt;/p&gt;
+
+    &lt;div class=&quot;language-julia highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;  &lt;span class=&quot;n&quot;&gt;BenchmarkTools&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Trial&lt;/span&gt;&lt;span class=&quot;x&quot;&gt;:&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;memory&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;estimate&lt;/span&gt;&lt;span class=&quot;x&quot;&gt;:&lt;/span&gt;  &lt;span class=&quot;mf&quot;&gt;126.45&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;KiB&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;allocs&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;estimate&lt;/span&gt;&lt;span class=&quot;x&quot;&gt;:&lt;/span&gt;  &lt;span class=&quot;mi&quot;&gt;6&lt;/span&gt;
+    &lt;span class=&quot;o&quot;&gt;--------------&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;minimum&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;time&lt;/span&gt;&lt;span class=&quot;x&quot;&gt;:&lt;/span&gt;     &lt;span class=&quot;mf&quot;&gt;3.615&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;ms&lt;/span&gt; &lt;span class=&quot;x&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mf&quot;&gt;0.00&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;%&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;GC&lt;/span&gt;&lt;span class=&quot;x&quot;&gt;)&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;median&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;time&lt;/span&gt;&lt;span class=&quot;x&quot;&gt;:&lt;/span&gt;      &lt;span class=&quot;mf&quot;&gt;3.741&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;ms&lt;/span&gt; &lt;span class=&quot;x&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mf&quot;&gt;0.00&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;%&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;GC&lt;/span&gt;&lt;span class=&quot;x&quot;&gt;)&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;mean&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;time&lt;/span&gt;&lt;span class=&quot;x&quot;&gt;:&lt;/span&gt;        &lt;span class=&quot;mf&quot;&gt;3.764&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;ms&lt;/span&gt; &lt;span class=&quot;x&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mf&quot;&gt;0.18&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;%&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;GC&lt;/span&gt;&lt;span class=&quot;x&quot;&gt;)&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;maximum&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;time&lt;/span&gt;&lt;span class=&quot;x&quot;&gt;:&lt;/span&gt;     &lt;span class=&quot;mf&quot;&gt;7.744&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;ms&lt;/span&gt; &lt;span class=&quot;x&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mf&quot;&gt;50.18&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;%&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;GC&lt;/span&gt;&lt;span class=&quot;x&quot;&gt;)&lt;/span&gt;
+    &lt;span class=&quot;o&quot;&gt;--------------&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;samples&lt;/span&gt;&lt;span class=&quot;x&quot;&gt;:&lt;/span&gt;          &lt;span class=&quot;mi&quot;&gt;1328&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;evals&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;sample&lt;/span&gt;&lt;span class=&quot;x&quot;&gt;:&lt;/span&gt;     &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
+
+    &lt;p&gt;That’s upwards of a &lt;strong&gt;450x performance gain&lt;/strong&gt;.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Broadcasted operations over ranges can now simply re-compute a new range instead of
+working element-wise if it’s possible. For example, the expression &lt;code class=&quot;highlighter-rouge&quot;&gt;((1:10000) .+ 20) .* 7&lt;/code&gt;
+doesn’t need to allocate a vector for 10,000 elements — it doesn’t even need to do 10,000
+computations. It can instead operate in terms of the start, stop, and step and return a
+new range that represents the result: &lt;code class=&quot;highlighter-rouge&quot;&gt;147:7:70140&lt;/code&gt;. This new feature allows them to
+&lt;strong&gt;transform &lt;em&gt;O(N)&lt;/em&gt; computations into &lt;em&gt;O(1)&lt;/em&gt;&lt;/strong&gt;. On version 0.6, ranges were in this strange
+place where &lt;code class=&quot;highlighter-rouge&quot;&gt;(1:10000) + 20&lt;/code&gt; implemented the fast &lt;em&gt;O(1)&lt;/em&gt; computation of a new range, but
+all other array types had deprecated addition with numbers in favor of explicit &lt;code class=&quot;highlighter-rouge&quot;&gt;.+&lt;/code&gt;
+broadcasting for clearer semantics and improved performance. Thanks to this new API,
+ranges can now identify these cases and fully support broadcasting in an efficient manner.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;The &lt;a href=&quot;https://docs.julialang.org/en/latest/stdlib/LinearAlgebra/#Special-matrices-1&quot; title=&quot;Special matrices in LinearAlgebra&quot;&gt;structured matrices&lt;/a&gt; in the &lt;a href=&quot;https://docs.julialang.org/en/latest/stdlib/LinearAlgebra/#Linear-Algebra-1&quot; title=&quot;Julia documentation for LinearAlgebra&quot;&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;LinearAlgebra&lt;/code&gt; standard library&lt;/a&gt; no longer return
+sparse arrays as the result of a broadcasted operation. They’ll now either maintain an
+appropriate structure or return a dense array. For example:&lt;/p&gt;
+
+    &lt;div class=&quot;language-julia highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;  &lt;span class=&quot;n&quot;&gt;julia&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;using&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;LinearAlgebra&lt;/span&gt;
+         &lt;span class=&quot;n&quot;&gt;d&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Diagonal&lt;/span&gt;&lt;span class=&quot;x&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;x&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;3&lt;/span&gt;&lt;span class=&quot;x&quot;&gt;)&lt;/span&gt;
+  &lt;span class=&quot;mi&quot;&gt;3&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;×3&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Diagonal&lt;/span&gt;&lt;span class=&quot;x&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;Int64&lt;/span&gt;&lt;span class=&quot;x&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;UnitRange&lt;/span&gt;&lt;span class=&quot;x&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;Int64&lt;/span&gt;&lt;span class=&quot;x&quot;&gt;}}:&lt;/span&gt;
+   &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;  &lt;span class=&quot;n&quot;&gt;⋅&lt;/span&gt;  &lt;span class=&quot;n&quot;&gt;⋅&lt;/span&gt;
+   &lt;span class=&quot;n&quot;&gt;⋅&lt;/span&gt;  &lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;  &lt;span class=&quot;n&quot;&gt;⋅&lt;/span&gt;
+   &lt;span class=&quot;n&quot;&gt;⋅&lt;/span&gt;  &lt;span class=&quot;n&quot;&gt;⋅&lt;/span&gt;  &lt;span class=&quot;mi&quot;&gt;3&lt;/span&gt;
+
+  &lt;span class=&quot;n&quot;&gt;julia&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;d&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;./&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;10&lt;/span&gt;
+  &lt;span class=&quot;mi&quot;&gt;3&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;×3&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Diagonal&lt;/span&gt;&lt;span class=&quot;x&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;Float64&lt;/span&gt;&lt;span class=&quot;x&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Array&lt;/span&gt;&lt;span class=&quot;x&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;Float64&lt;/span&gt;&lt;span class=&quot;x&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;x&quot;&gt;}}:&lt;/span&gt;
+   &lt;span class=&quot;mf&quot;&gt;0.1&lt;/span&gt;   &lt;span class=&quot;n&quot;&gt;⋅&lt;/span&gt;    &lt;span class=&quot;n&quot;&gt;⋅&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;⋅&lt;/span&gt;   &lt;span class=&quot;mf&quot;&gt;0.2&lt;/span&gt;   &lt;span class=&quot;n&quot;&gt;⋅&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;⋅&lt;/span&gt;    &lt;span class=&quot;n&quot;&gt;⋅&lt;/span&gt;   &lt;span class=&quot;mf&quot;&gt;0.3&lt;/span&gt;
+
+  &lt;span class=&quot;n&quot;&gt;julia&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;t&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;d&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;.+&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;LowerTriangular&lt;/span&gt;&lt;span class=&quot;x&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;rand&lt;/span&gt;&lt;span class=&quot;x&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;3&lt;/span&gt;&lt;span class=&quot;x&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;3&lt;/span&gt;&lt;span class=&quot;x&quot;&gt;))&lt;/span&gt;
+  &lt;span class=&quot;mi&quot;&gt;3&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;×3&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;LowerTriangular&lt;/span&gt;&lt;span class=&quot;x&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;Float64&lt;/span&gt;&lt;span class=&quot;x&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Array&lt;/span&gt;&lt;span class=&quot;x&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;Float64&lt;/span&gt;&lt;span class=&quot;x&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;x&quot;&gt;}}:&lt;/span&gt;
+   &lt;span class=&quot;mf&quot;&gt;1.5446&lt;/span&gt;     &lt;span class=&quot;n&quot;&gt;⋅&lt;/span&gt;         &lt;span class=&quot;n&quot;&gt;⋅&lt;/span&gt;
+   &lt;span class=&quot;mf&quot;&gt;0.529211&lt;/span&gt;  &lt;span class=&quot;mf&quot;&gt;2.26095&lt;/span&gt;    &lt;span class=&quot;n&quot;&gt;⋅&lt;/span&gt;
+   &lt;span class=&quot;mf&quot;&gt;0.533674&lt;/span&gt;  &lt;span class=&quot;mf&quot;&gt;0.373702&lt;/span&gt;  &lt;span class=&quot;mf&quot;&gt;3.88408&lt;/span&gt;
+
+  &lt;span class=&quot;n&quot;&gt;julia&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;t&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;.+&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;100&lt;/span&gt;
+  &lt;span class=&quot;mi&quot;&gt;3&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;×3&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Array&lt;/span&gt;&lt;span class=&quot;x&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;Float64&lt;/span&gt;&lt;span class=&quot;x&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;x&quot;&gt;}:&lt;/span&gt;
+   &lt;span class=&quot;mf&quot;&gt;101.327&lt;/span&gt;  &lt;span class=&quot;mf&quot;&gt;100.0&lt;/span&gt;    &lt;span class=&quot;mf&quot;&gt;100.0&lt;/span&gt;
+   &lt;span class=&quot;mf&quot;&gt;100.85&lt;/span&gt;   &lt;span class=&quot;mf&quot;&gt;102.138&lt;/span&gt;  &lt;span class=&quot;mf&quot;&gt;100.0&lt;/span&gt;
+   &lt;span class=&quot;mf&quot;&gt;100.575&lt;/span&gt;  &lt;span class=&quot;mf&quot;&gt;100.129&lt;/span&gt;  &lt;span class=&quot;mf&quot;&gt;103.839&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
+
+    &lt;p&gt;Previously, Julia 0.6 would have returned a &lt;code class=&quot;highlighter-rouge&quot;&gt;SparseMatrixCSC&lt;/code&gt; for &lt;code class=&quot;highlighter-rouge&quot;&gt;d ./ 10&lt;/code&gt; and an &lt;code class=&quot;highlighter-rouge&quot;&gt;Array&lt;/code&gt; for &lt;code class=&quot;highlighter-rouge&quot;&gt;d .+ LowerTriangular(rand(3,3))&lt;/code&gt;.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Finally, broadcasting at the global scope is now pre-compilable, and you can use
+dot-broadcast inside generated functions. This wasn’t a huge limitation in the past, but
+it did surprise folks timing an in-place broadcast like &lt;code class=&quot;highlighter-rouge&quot;&gt;@time y .*= 2&lt;/code&gt; and seeing thousands of allocations:&lt;/p&gt;
+
+    &lt;div class=&quot;language-julia highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;  &lt;span class=&quot;c&quot;&gt;# Previously:&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;julia&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;y&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;rand&lt;/span&gt;&lt;span class=&quot;x&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1000&lt;/span&gt;&lt;span class=&quot;x&quot;&gt;);&lt;/span&gt;
+
+  &lt;span class=&quot;n&quot;&gt;julia&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;nd&quot;&gt;@time&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;y&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;.*=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;x&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;mf&quot;&gt;0.032775&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;seconds&lt;/span&gt; &lt;span class=&quot;x&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mf&quot;&gt;17.43&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;k&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;allocations&lt;/span&gt;&lt;span class=&quot;x&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;mf&quot;&gt;947.671&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;KiB&lt;/span&gt;&lt;span class=&quot;x&quot;&gt;)&lt;/span&gt;
+
+  &lt;span class=&quot;n&quot;&gt;julia&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;nd&quot;&gt;@time&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;y&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;.*=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;x&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;mf&quot;&gt;0.020790&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;seconds&lt;/span&gt; &lt;span class=&quot;x&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mf&quot;&gt;4.27&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;k&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;allocations&lt;/span&gt;&lt;span class=&quot;x&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;mf&quot;&gt;233.457&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;KiB&lt;/span&gt;&lt;span class=&quot;x&quot;&gt;)&lt;/span&gt;
+
+  &lt;span class=&quot;c&quot;&gt;# Now on Julia 0.7:&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;julia&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;y&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;rand&lt;/span&gt;&lt;span class=&quot;x&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1000&lt;/span&gt;&lt;span class=&quot;x&quot;&gt;);&lt;/span&gt;
+
+  &lt;span class=&quot;n&quot;&gt;julia&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;nd&quot;&gt;@time&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;y&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;.*=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;x&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;mf&quot;&gt;0.060494&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;seconds&lt;/span&gt; &lt;span class=&quot;x&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mf&quot;&gt;90.41&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;k&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;allocations&lt;/span&gt;&lt;span class=&quot;x&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;mf&quot;&gt;5.529&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;MiB&lt;/span&gt;&lt;span class=&quot;x&quot;&gt;)&lt;/span&gt;
+
+  &lt;span class=&quot;n&quot;&gt;julia&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;nd&quot;&gt;@time&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;y&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;.*=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;x&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;mf&quot;&gt;0.000020&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;seconds&lt;/span&gt; &lt;span class=&quot;x&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;6&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;allocations&lt;/span&gt;&lt;span class=&quot;x&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;208&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;bytes&lt;/span&gt;&lt;span class=&quot;x&quot;&gt;)&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;I’ll now dive deeper into exactly how this new API works.&lt;/p&gt;
+
+&lt;h3 id=&quot;the-representation-of-a-fused-broadcast&quot;&gt;The representation of a fused broadcast&lt;/h3&gt;
+
+&lt;p&gt;You can see precisely how a fused broadcast is represented with &lt;a href=&quot;https://docs.julialang.org/en/latest/base/base/#Base.Meta.@lower&quot; title=&quot;Julia documentation: `Meta.@lower`&quot;&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;Meta.@lower&lt;/code&gt;&lt;/a&gt;, but in
+simpler terms the expression &lt;code class=&quot;highlighter-rouge&quot;&gt;([1, 2, 3] .+ [10 20 30 40]) ./ 10&lt;/code&gt; is effectively a syntax
+transformation for:&lt;/p&gt;
+
+&lt;div class=&quot;language-julia highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;julia&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;using&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Broadcast&lt;/span&gt;&lt;span class=&quot;x&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;materialize&lt;/span&gt;&lt;span class=&quot;x&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;broadcasted&lt;/span&gt;
+       &lt;span class=&quot;n&quot;&gt;bc&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;broadcasted&lt;/span&gt;&lt;span class=&quot;x&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;x&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;broadcasted&lt;/span&gt;&lt;span class=&quot;x&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;+&lt;/span&gt;&lt;span class=&quot;x&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;x&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;x&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;x&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;3&lt;/span&gt;&lt;span class=&quot;x&quot;&gt;],&lt;/span&gt; &lt;span class=&quot;x&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;10&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;20&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;30&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;40&lt;/span&gt;&lt;span class=&quot;x&quot;&gt;]),&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;10&lt;/span&gt;&lt;span class=&quot;x&quot;&gt;)&lt;/span&gt;
+       &lt;span class=&quot;n&quot;&gt;materialize&lt;/span&gt;&lt;span class=&quot;x&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;bc&lt;/span&gt;&lt;span class=&quot;x&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;mi&quot;&gt;3&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;×4&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Array&lt;/span&gt;&lt;span class=&quot;x&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;Float64&lt;/span&gt;&lt;span class=&quot;x&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;x&quot;&gt;}:&lt;/span&gt;
+ &lt;span class=&quot;mf&quot;&gt;1.1&lt;/span&gt;  &lt;span class=&quot;mf&quot;&gt;2.1&lt;/span&gt;  &lt;span class=&quot;mf&quot;&gt;3.1&lt;/span&gt;  &lt;span class=&quot;mf&quot;&gt;4.1&lt;/span&gt;
+ &lt;span class=&quot;mf&quot;&gt;1.2&lt;/span&gt;  &lt;span class=&quot;mf&quot;&gt;2.2&lt;/span&gt;  &lt;span class=&quot;mf&quot;&gt;3.2&lt;/span&gt;  &lt;span class=&quot;mf&quot;&gt;4.2&lt;/span&gt;
+ &lt;span class=&quot;mf&quot;&gt;1.3&lt;/span&gt;  &lt;span class=&quot;mf&quot;&gt;2.3&lt;/span&gt;  &lt;span class=&quot;mf&quot;&gt;3.3&lt;/span&gt;  &lt;span class=&quot;mf&quot;&gt;4.3&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;In this case, that &lt;code class=&quot;highlighter-rouge&quot;&gt;bc&lt;/code&gt; object is an instance of a &lt;code class=&quot;highlighter-rouge&quot;&gt;Broadcasted&lt;/code&gt; struct. It just holds onto
+the function and its arguments — and its arguments may include other nested &lt;code class=&quot;highlighter-rouge&quot;&gt;Broadcasted&lt;/code&gt;
+structs. The &lt;code class=&quot;highlighter-rouge&quot;&gt;materialize&lt;/code&gt; function does a bit of pre-processing and then calls &lt;code class=&quot;highlighter-rouge&quot;&gt;copy(bc)&lt;/code&gt;,
+which allocates the result and then finally loops over the result and executes the functions.&lt;/p&gt;
+
+&lt;p&gt;Each step along the way is extensible, leveraging the power of Julia’s multiple dispatch,
+inlining and argument specialization for near-zero overhead. With this basic framework in
+mind, you can begin to see how the built-in and standard library arrays are able to
+implement all those new features mentioned above:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;When broadcasting into a &lt;code class=&quot;highlighter-rouge&quot;&gt;BitArray&lt;/code&gt;, it can first introspect the functions and their
+arguments in the expression tree to see if it can operate at the level of the packed
+64-bit chunks as &lt;code class=&quot;highlighter-rouge&quot;&gt;UInt64&lt;/code&gt;s instead of working bit-by-bit. It can even convert boolean-only
+operators like &lt;code class=&quot;highlighter-rouge&quot;&gt;!&lt;/code&gt; to their equivalent bitwise operators like &lt;code class=&quot;highlighter-rouge&quot;&gt;~&lt;/code&gt;.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Ranges are able to “opt-out” of fusion by defining specialized &lt;code class=&quot;highlighter-rouge&quot;&gt;Broadcast.broadcasted&lt;/code&gt;
+methods that immediately return those re-computed ranges. This means that they do not fuse
+multiple operations at all, but in exchange they get an &lt;em&gt;O(1)&lt;/em&gt; algorithm.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;When &lt;code class=&quot;highlighter-rouge&quot;&gt;LinearAlgebra&lt;/code&gt;’s structured matrices are asked to allocate the result, their
+specialized &lt;code class=&quot;highlighter-rouge&quot;&gt;broadcast_similar&lt;/code&gt; methods can walk through the &lt;code class=&quot;highlighter-rouge&quot;&gt;Broadcasted&lt;/code&gt; expression tree
+and identify if any structure will remain.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Fused broadcast expressions no longer construct an anonymous function behind your back;
+they just construct new instances of a Julia data structure that simply call functions
+that are already defined. This is what allows them to be precompiled and work in generated
+functions.&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;looking-to-the-future&quot;&gt;Looking to the future&lt;/h3&gt;
+
+&lt;p&gt;Of course, this is all &lt;a href=&quot;https://docs.julialang.org/en/latest/manual/interfaces/#man-interfaces-broadcasting-1&quot; title=&quot;Julia manual: Customizing broadcast&quot;&gt;documented and available to packages&lt;/a&gt;. There’s no secret sauce that
+we’re hoarding for ourselves. It’ll be exciting to see how the many creative minds in the
+package ecosystem manage to take advantage of all this new functionality. Some of the places
+where I see this yielding a significant benefit include machine learning applications and
+computation on GPUs.&lt;/p&gt;
+
+&lt;p&gt;Historically, some of the machine learning libraries have put in place &lt;a href=&quot;https://github.com/MikeInnes/TakingBroadcastSeriously.jl&quot; title=&quot;TakingBroadcastSeriously.jl&quot;&gt;hacks&lt;/a&gt; to allow their arrays to
+opt-out of fusion. The new broadcasting API instead allows them to opt-out of fusion with a first-class and fully
+supported mechanism that is much simpler to implement. Further, many deep learning
+techniques are heavily dependent upon differentiation; in some cases introspecting a
+broadcasted kernel will allow them to use an exact analytical result instead of computing
+differentials.&lt;/p&gt;
+
+&lt;p&gt;Finally, fusing a complicated broadcast expression into a single kernel has already been a
+huge boon to the performance of arrays on GPUs. Most GPU programming packages won’t
+necessarily need to introspect or customize the broadcasted expression, but they’re looking
+to the future to a potential extension that would allow fusing &lt;em&gt;a reduction&lt;/em&gt; with the
+broadcasted expression. While not possible yet, the bulk of the machinery is in place to
+operate directly upon the &lt;code class=&quot;highlighter-rouge&quot;&gt;Broadcasted&lt;/code&gt; lazy wrapper instead of allocating the intermediate
+array in an expression like &lt;code class=&quot;highlighter-rouge&quot;&gt;sum(X.^2 .+ Y.^2)&lt;/code&gt;.&lt;/p&gt;
+
+</content>
+ </entry>
+ 
+ <entry>
+   <title>Tetris coming to Julia language for v1.0</title>
+   <link href="http://julialang.org/blog/2018/04/tetris-and-you"/>
+   <updated>2018-04-01T00:00:00+09:00</updated>
+   <id>http://julialang.org/blog/2018/04/tetris-and-you</id>
+   <content type="html">&lt;p&gt;Good news, everyone! Starting v1.0, Tetris will be included in the standard library. This will allow you to play a round of Tetris while your code is busy running.&lt;/p&gt;
+
+&lt;p&gt;Until Julia v1.0 drops next Wednesday, though, you can play online at:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;http://www.juliatetris.com&quot;&gt;JuliaTetris.com&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Example footage below.&lt;/p&gt;
+
+&lt;style&gt;
+
+  .cs-tetris-div {
+    text-align: center;
+    padding-top: 4px;
+    padding-bottom: 6px;
+  }
+
+  .cs-tetris-div a {
+    transition: all 0.5s ease;
+  }
+
+  .cs-tetris-div a:hover {
+    -webkit-filter: brightness(125%);
+    opacity: 0.95;
+  }
+
+  .cs-tetris-div img {
+    border-radius: 6px;
+    max-height: 42vh;
+  }
+
+  .cs-tetris-div a:hover img {
+    border: solid 2.5px;
+  }
+
+  .cs-tetris-div a:not(:hover) img {
+    border: solid 2.5px transparent;
+  }
+
+&lt;/style&gt;
+
+&lt;div class=&quot;cs-tetris-div&quot;&gt;
+  &lt;a href=&quot;http://www.juliatetris.com&quot;&gt;
+    &lt;img src=&quot;/images/blog/2018-04-01-tetris-and-you/green_tetris.gif&quot; alt=&quot;tetris game&quot; /&gt;
+  &lt;/a&gt;
+&lt;/div&gt;
+</content>
+ </entry>
+ 
+ <entry>
+   <title>Some &pi;-ography</title>
+   <link href="http://julialang.org/blog/2018/03/pifonts"/>
+   <updated>2018-03-14T00:00:00+09:00</updated>
+   <id>http://julialang.org/blog/2018/03/pifonts</id>
+   <content type="html">&lt;p&gt;Although we’ve known about “Archimedes’ constant” for a few millennia, we’ve been referring to it as the Greek letter π only since the 1700s. Patricia Rothman &lt;a href=&quot;https://www.historytoday.com/patricia-rothman/william-jones-and-his-circle-man-who-invented-pi&quot;&gt;suggested&lt;/a&gt; that the following page &lt;em&gt;could&lt;/em&gt; contain one of the earliest uses of the Greek character to indicate the concept. It’s from a mathematics text book written by William Jones and published in 1706:&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/images/blog/2018-04-13-pifonts/jones.png&quot; alt=&quot;William Jones 1706&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Jones used the Greek letter in various places both to indicate the number and, like some of his predecessors, to refer to the periphery or perimeter (Greek περιφέρεια) of a circle, and to label points in diagrams, as we would use &lt;code class=&quot;highlighter-rouge&quot;&gt;P&lt;/code&gt; and &lt;code class=&quot;highlighter-rouge&quot;&gt;Q&lt;/code&gt; today. Jones also refers to it as &lt;em&gt;Van Ceulen’s Number&lt;/em&gt;, after the Dutch mathematician Ludolph van Ceulen, who spent a major part of his life calculating the value. (He managed 35 decimal places, and asked for it to be engraved on his tombstone.)&lt;/p&gt;
+
+&lt;p&gt;Jones, like all mathematicians, used a lot of symbols. His &lt;em&gt;Synopsis Palmariorum Matheseos, or A New Introduction to the Mathematics&lt;/em&gt; has been digitized and can be viewed  &lt;a href=&quot;https://archive.org/stream/SynopsisPalmariorumMatheseosOrANewIntroductionToTheMathematics/Synopsis_Palmariorum_Matheseos#page/n21/mode/2up&quot;&gt;here&lt;/a&gt;. It’s an impressive achievement, not least by his typesetter, and it might make you appreciate your next LATEX session more than usual.&lt;/p&gt;
+
+&lt;p&gt;But although Jones was one of the first, he wasn’t influential enough to inspire many followers, and it was the more famous Leonhard Euler and his use of the π symbol later in the century that did more to establish the Greek letter’s primary mathematical meaning for posterity:&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/images/blog/2018-04-13-pifonts/euler.png&quot; alt=&quot;Euler 1746&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;(Original online &lt;a href=&quot;https://archive.org/details/euler-e059&quot;&gt;here&lt;/a&gt;.)&lt;/p&gt;
+
+&lt;p&gt;Julia embraces the Unicode standard &lt;a href=&quot;https://docs.julialang.org/en/latest/manual/unicode-input/&quot;&gt;enthusiastically&lt;/a&gt;, so it’s very easy to use the appropriate Greek (and other Unicode) letters in your code. In the REPL, for example, type &lt;code class=&quot;highlighter-rouge&quot;&gt;\pi TAB&lt;/code&gt; to insert the Unicode character &lt;code class=&quot;highlighter-rouge&quot;&gt;U+03C0&lt;/code&gt;:&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;julia&amp;gt; π
+π = 3.1415926535897...
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;and you can use it freely in expressions:&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;@test kepler_solver.([π/4, π/6, 8π/3], 0) ≈ [π/4, π/6, 2π/3]
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;(although &lt;code class=&quot;highlighter-rouge&quot;&gt;pi&lt;/code&gt; will still work, if you’d prefer). In Julia version 0.7, π and other mathematical constants such as Euler’s ℯ (2.7182818284590) live in the &lt;code class=&quot;highlighter-rouge&quot;&gt;Base.MathConstants&lt;/code&gt; module.&lt;/p&gt;
+
+&lt;p&gt;As always in Julia, you can usually see how the magic is performed:&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;julia&amp;gt; Base.REPLCompletions.latex_symbols[&quot;\\pi&quot;]
+&quot;π&quot;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;more-π&quot;&gt;More π&lt;/h3&gt;
+
+&lt;p&gt;We usually use the &lt;code class=&quot;highlighter-rouge&quot;&gt;U+03C0&lt;/code&gt; π from the Unicode block for Greek and Coptic text glyphs (Coptic was the Greek-based script adopted by the Egyptians to replace hieroglyphs), but there are other π symbols intended mainly for mathematical use. The following snippet of Julia code tries to show all the lower-case Unicode π symbols:&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;morepi = [
+(0x3c0,    &quot;\\pi&quot;,           &quot;GREEK SMALL LETTER PI&quot;)
+(0x213c,   &quot;\\bbpi&quot;,         &quot;DOUBLE-STRUCK SMALL PI&quot;) # v0.7
+(0x1d6d1,  &quot;\\mbfpi&quot;,        &quot;MATHEMATICAL BOLD SMALL PI&quot;)
+(0x1D70B,  &quot;\\mitpi&quot;,        &quot;MATHEMATICAL ITALIC SMALL PI&quot;)
+(0x1d745,  &quot;\\mbfitpi&quot;,      &quot;MATHEMATICAL BOLD ITALIC SMALL PI&quot;)
+(0x1d77f,  &quot;\\bsanspi&quot;,      &quot;MATHEMATICAL SANS-SERIF BOLD SMALL PI&quot;) # v0.7
+(0x1d7b9,   &quot;\\mbfitsanspi&quot;, &quot;MATHEMATICAL SANS-SERIF BOLD ITALIC SMALL PI&quot;)];
+
+foreach(p -&amp;gt; println(&quot; $(Char(p[1])) U+$(lpad(hex(p[1]), 5, &quot;0&quot;)) $(rpad(p[2], 15)) $(p[3])&quot;), morepi)
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;The two tab completions commented as &lt;code class=&quot;highlighter-rouge&quot;&gt;v0.7&lt;/code&gt; have been added for Julia version 0.7.&lt;/p&gt;
+
+&lt;p&gt;The output you see will depend a lot on your computer, operating system, and various other settings. This is a good introduction to the adventure game that is the Wonderful World of Fonts. Here, for example, is what I see if I evaluate this snippet in my Julia REPL today (version 0.6.2), using the Terminal app on macOS:&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/images/blog/2018-04-13-pifonts/terminal-1.png&quot; alt=&quot;Terminal app before&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;As you can see, not all the π symbols were rendered. The OS looks in the current font (I’m trying out &lt;a href=&quot;https://github.com/tonsky/FiraCode&quot;&gt;Fira Code&lt;/a&gt;) for the Unicode characters &lt;code class=&quot;highlighter-rouge&quot;&gt;U+3c0&lt;/code&gt;, &lt;code class=&quot;highlighter-rouge&quot;&gt;U+213c&lt;/code&gt;, &lt;code class=&quot;highlighter-rouge&quot;&gt;U+1d6d1&lt;/code&gt;, &lt;code class=&quot;highlighter-rouge&quot;&gt;U+1d70b&lt;/code&gt;, &lt;code class=&quot;highlighter-rouge&quot;&gt;U+1d745&lt;/code&gt;, &lt;code class=&quot;highlighter-rouge&quot;&gt;U+1d77f&lt;/code&gt;, and &lt;code class=&quot;highlighter-rouge&quot;&gt;U+1d7b9&lt;/code&gt;. For each one it fails to find, it searches through other activated fonts looking for one that has a symbol at that code point. The OS doesn’t check to see whether the symbol it finds is suitable.&lt;/p&gt;
+
+&lt;p&gt;In the example above, the Greek π at &lt;code class=&quot;highlighter-rouge&quot;&gt;U+3c0&lt;/code&gt; was already available in Fira Code. &lt;code class=&quot;highlighter-rouge&quot;&gt;\mitpi&lt;/code&gt; (the maths italic π at &lt;code class=&quot;highlighter-rouge&quot;&gt;U+1d70b&lt;/code&gt;) was eventually found in Microsoft’s Segoe UI Symbol, so that font was used for that one character. For &lt;code class=&quot;highlighter-rouge&quot;&gt;\bbpi&lt;/code&gt;, the double-struck or blackboard π, the font Code2000 yielded a symbol at &lt;code class=&quot;highlighter-rouge&quot;&gt;U+213c&lt;/code&gt; which was duly used, although to me it looks more like a backwards single-struck epsilon than any sort of π. The others weren’t found in any active font, so they’ve been displayed using a question mark in a box.&lt;/p&gt;
+
+&lt;p&gt;Now, if I activate a font such as &lt;a href=&quot;https://en.wikipedia.org/wiki/Asana-Math&quot;&gt;Asana-Math&lt;/a&gt;, &lt;a href=&quot;http://evertype.com/emono/&quot;&gt;Everson Mono&lt;/a&gt;, or &lt;a href=&quot;http://stixfonts.org/&quot;&gt;STIX&lt;/a&gt;, or some other mathematically-endowed font, the OS will immediately start to find matches and update the display, constantly switching between fonts as necessary to satisfy demands for Unicode code points:&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/images/blog/2018-04-13-pifonts/terminal-2.png&quot; alt=&quot;Terminal app after&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;With Asana Math installed, all the other πs can be found, and now the double-struck small π looks more like the blackboard-written character it’s supposed to resemble, although it’s difficult to see at small point sizes. And I think there are better designs:&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/images/blog/2018-04-13-pifonts/double-struck.png&quot; alt=&quot;double-struck pi&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Some tedious experimentation suggests that the search is to some extent alphabetic, because if Asana Math is unavailable, the OS moves on and tries Code2000, then Deja Vu, then Everson, then FreeSans, and so on. This at least is what I &lt;em&gt;think&lt;/em&gt; happens on the current macOS with my particular setup. I suspect that it would be different on yours. And similar (but different) things will happen in your browser.&lt;/p&gt;
+
+&lt;p&gt;By the way, these alternative symbols for π such as &lt;code class=&quot;highlighter-rouge&quot;&gt;\mitpi&lt;/code&gt; don’t evaluate as 3.14…, so you can use them—as William Jones did—as general purpose symbols. For example, if you work with prime numbers you could use one of them to indicate the &lt;a href=&quot;https://en.wikipedia.org/wiki/Prime-counting_function&quot;&gt;prime-counting function&lt;/a&gt;. Or you could just confuse yourself with the following:&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;julia&amp;gt; 𝜋 = 3
+julia&amp;gt; 2𝜋
+6
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;the-phonogram-symbol-ⓟ&quot;&gt;The phonogram symbol Ⓟ&lt;/h3&gt;
+
+&lt;p&gt;Not all fonts contain a suitable Greek π at &lt;code class=&quot;highlighter-rouge&quot;&gt;U+03C0&lt;/code&gt;. A few expensive fonts such as &lt;a href=&quot;https://www.typography.com/fonts/gotham/overview/&quot;&gt;Gotham&lt;/a&gt; offer the circled P symbol at &lt;code class=&quot;highlighter-rouge&quot;&gt;U+03c0&lt;/code&gt; instead of π. This is the “phonogram” (or “phonorecord”) symbol, which usually lives at &lt;code class=&quot;highlighter-rouge&quot;&gt;U+2117&lt;/code&gt; (the one at &lt;code class=&quot;highlighter-rouge&quot;&gt;U+24C5&lt;/code&gt; is also used), and it’s like the copyright symbol © but for sound recordings. The story behind this is that, particularly before the days of Unicode standardization, font companies sometimes favoured pragmatism over correctness. According to &lt;a href=&quot;http://www.typophile.com/node/45116&quot;&gt;David Berlow&lt;/a&gt;:&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;we at Font Bureau understand how users work, and so we put the p in a circle, a “must-have” glyph that is very difficult for a user to make on the fly, in the slot of a glyph (math pi) that most people really don’t need (because even if they do, it’s in the Symbol font on every single computer on earth).&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h3 id=&quot;designs-on-π&quot;&gt;Designs on π&lt;/h3&gt;
+
+&lt;p&gt;Can we use Julia to find all the different designs of π? My first attempt at this challenge uses &lt;a href=&quot;https://github.com/JuliaGraphics/Fontconfig.jl&quot;&gt;Fontconfig.jl&lt;/a&gt; to produce a list of installed fonts, and &lt;a href=&quot;https://github.com/JuliaGraphics/Luxor.jl&quot;&gt;Luxor.jl&lt;/a&gt; to draw them in a table. It at least gives a glimpse of the variety of designs available, and illustrates some of the issues. Fonts that provide a zero-width glyph are skipped, meaning the table winds up being smaller than originally planned.&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;using Fontconfig, Luxor
+
+function buildfontlist()
+    fonts = []
+    for font in Fontconfig.list()
+        families = Fontconfig.format(font, &quot;%{family}&quot;)
+        for family in split(families, &quot;,&quot;)
+            push!(fonts, family)
+        end
+    end
+    filter!(f -&amp;gt; !ismatch(r&quot;.LastResort|Agenda|Topaz|Bodoni Ornaments|System&quot;,
+        f), fonts)
+    return sort(unique(fonts))
+end
+
+function tabulatepi()
+    fonts = buildfontlist()
+    ncols = 25
+    nrows = convert(Int, ceil(length(fonts))) ÷ ncols
+    @svg begin
+        background(&quot;ivory&quot;)
+        setopacity(1)
+        t = Table(nrows, ncols, 30, 25)
+        sethue(&quot;black&quot;)
+        cellnumber = 1
+        for n in 1:length(fonts)
+            fontface(fonts[n])
+            te = textextents(&quot;π&quot;)
+            if te[3] &amp;gt; 0.0
+                fontsize(18)
+                text(&quot;π&quot;, t[cellnumber], halign=:center)
+                setfont(&quot;Lucida-Sans&quot;, 3)
+                settext(fonts[n], t[cellnumber] + (0, isodd(cellnumber) ? 6 : 10), halign=&quot;center&quot;)
+                cellnumber += 1
+            end
+        end
+    end 800 1200
+end
+
+tabulatepi()
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;You probably won’t have to manually remove oddments like Bodoni Ornaments or Topaz from the font list as I had to…&lt;/p&gt;
+
+&lt;!-- ![tabulating pi - PNG fallback](/images/blog/2018-04-13-pifonts/tabulate-pi.png) --&gt;
+
+&lt;p&gt;&lt;img src=&quot;/images/blog/2018-04-13-pifonts/tabulate-pi.svg&quot; alt=&quot;tabulating pi - SVG image&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;It would be better if I manually curated the candidates rather than used this automatically-generated font list: there are way too many “default” designs from various system and language-specific fonts that simply fill the slot with a basic design, rather than interpret the shape according to the font’s theme. And the font list produced by &lt;code class=&quot;highlighter-rouge&quot;&gt;fontconfig&lt;/code&gt; doesn’t look in all the font libraries, so it’s an incomplete list.&lt;/p&gt;
+
+&lt;p&gt;Here are a few of the more interesting designs: the portly Cooper Black and Tiffany Heavy, the minimalist Verdana and Tahoma (looking almost like “n”s?), the eccentric Gill “Kayo” Sans, and the silly Chalkduster.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/images/blog/2018-04-13-pifonts/piversity.png&quot; alt=&quot;piversity&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;I like the small version from Dalliance; it’s nicely old-school, where “old-school” here means based on an original from 1799, not long after Euler’s death.&lt;/p&gt;
+
+&lt;h3 id=&quot;the-average-π&quot;&gt;The average π&lt;/h3&gt;
+
+&lt;p&gt;It occurred to me to ask “what is the average of π?”, or “what would it look like if all the πs were displayed at the same time?”. Using the same font list generation as before, I ran this:&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;function textstroke(s, pos, action)
+    @layer begin
+        translate(pos)
+        te = textextents(s)
+        move(-te[3]/2, te[4]/2)
+        textpath(s)
+        tp = pathtopoly()
+        poly.(tp, action, close=true)
+    end
+end
+
+function accumulatepi()
+    fonts = buildfontlist()
+    @png begin
+        background(&quot;midnightblue&quot;)
+        sethue(&quot;lightgoldenrod2&quot;)
+        setline(0.2)
+        fontsize(560)
+        setopacity(0.3)
+        for n in 1:length(fonts)
+            fontface(fonts[n])
+            te = textextents(&quot;π&quot;)
+            if te[3] &amp;gt; 0.0
+                textstroke(&quot;π&quot;, O, :stroke)
+            end
+        end
+    end
+end
+accumulatepi()
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;&lt;img src=&quot;/images/blog/2018-04-13-pifonts/accumulate-pi.png&quot; alt=&quot;accumulating pi&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;For a complete font based on the average shapes of many other fonts, have a look at &lt;a href=&quot;http://www.iotic.com/averia/&quot;&gt;Averia&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;I haven’t yet found a way to list all the fonts that contain the full set of Unicode π symbols. In theory I think I can use &lt;a href=&quot;https://github.com/juliagraphics/FreeType.jl&quot;&gt;Freetype.jl&lt;/a&gt; to inspect a font to see whether it contains code points for particular character glyphs. Perhaps I’ll report back on 3-14-19 with any progress…&lt;/p&gt;
+</content>
+ </entry>
+ 
+ <entry>
+   <title>Julia joins NumFOCUS in Google Summer of Code 2018</title>
+   <link href="http://julialang.org/blog/2018/02/gsoc2018-numfocus"/>
+   <updated>2018-02-21T00:00:00+09:00</updated>
+   <id>http://julialang.org/blog/2018/02/gsoc2018-numfocus</id>
+   <content type="html">&lt;p&gt;The Julia project has participated in summer of code events since 2014, just two
+years after the language made its public debut.
+In 2014, 2016, and 2017, we participated in &lt;a href=&quot;https://summerofcode.withgoogle.com/&quot;&gt;Google Summer of Code&lt;/a&gt;, and in 2015
+we held our own summer of code event.
+This year we’re doing things a little differently.
+As a &lt;a href=&quot;https://www.numfocus.org&quot;&gt;NumFOCUS&lt;/a&gt; sponsored project, we’re excited to announce that we’re participating
+in Google Summer of Code 2018 under the NumFOCUS umbrella.
+We hope that this will further broaden our reach to potential students and encourage
+even greater engagement than in previous years.&lt;/p&gt;
+
+&lt;p&gt;For participants, things will look pretty much the same as they did in previous years,
+except that students and mentors will be signing up through NumFOCUS.
+We encourage interested students to check out our current &lt;a href=&quot;https://julialang.org/soc/ideas-page.html&quot;&gt;project ideas&lt;/a&gt;
+and &lt;a href=&quot;https://julialang.org/soc/guidelines/&quot;&gt;application guidelines&lt;/a&gt;, as well as the &lt;a href=&quot;https://www.numfocus.org/blog/applications-are-open-for-google-summer-of-code-with-numfocus/&quot;&gt;NumFOCUS announcement&lt;/a&gt;,
+which has more information about participating through NumFOCUS.
+If you have any questions, feel free to post a question on &lt;a href=&quot;https://discourse.julialang.org&quot;&gt;Discourse&lt;/a&gt; or
+join us in the &lt;code class=&quot;highlighter-rouge&quot;&gt;#jsoc&lt;/code&gt; channel in the Julia &lt;a href=&quot;https://slackinvite.julialang.org&quot;&gt;Slack&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;We look forward to seeing you this summer.
+Happy coding!&lt;/p&gt;
+
+</content>
+ </entry>
+ 
+ <entry>
+   <title>機器學習以及程式語言(Traditional Chinese)</title>
+   <link href="http://julialang.org/blog/2017/12/ml&pl-zh_tw"/>
+   <updated>2017-12-25T00:00:00+09:00</updated>
+   <id>http://julialang.org/blog/2017/12/ml&pl-zh_tw</id>
+   <content type="html">&lt;blockquote&gt;
+  &lt;p&gt;任何足夠複雜的機器學習系統都包含一個特別設置、不符規範、充滿 bug 又緩慢實作的程式語言半成品。&lt;sup id=&quot;fnref:greenspun&quot;&gt;&lt;a href=&quot;#fn:greenspun&quot; class=&quot;footnote&quot;&gt;1&lt;/a&gt;&lt;/sup&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;div style=&quot;font-size:75%&quot;&gt;
+作者：By Mike Innes (Julia Computing), David Barber (UCL), Tim Besard (UGent), James Bradbury (Salesforce Research), Valentin Churavy (MIT), Simon Danisch (MIT), Alan Edelman (MIT), Stefan Karpinski (Julia Computing), Jon Malmaud (MIT), Jarrett Revels (MIT), Viral Shah (Julia Computing), Pontus Stenetorp (UCL) and Deniz Yuret (Koç University)，譯者:鄭景文，杜岳華，林峻頤（Iblis Lin）
+&lt;/div&gt;
+
+&lt;p&gt;作為一個設計程式語言（PL）的人，我們抱持莫大的興趣看著機器學習（ML）迅速竄升 - 而且有了它，人們用來建立更複雜的 ML 模型與框架。極致（State-of-the-art）的模型正不斷增加，有了程式的構造元素像是迴圈及遞迴，這為我們的建造工具帶來了很多有趣的議題 - 那也就是，程式語言。&lt;/p&gt;
+
+&lt;p&gt;然而機器學習還沒有一個可靠的語言，許多人正在努力有效地創造隱藏在 Python API 底下的新語言（像是 TensorFlow），也有其他則是再利用 Python 當作一個建模語言（像是 PyTorch）。於是我們想問 —— 一個為機器學習量身定做的新語言是否有其必要的？如果是，為什麼？還有更重要的是，一個理想中未來的機器學習語言會是長什麼樣子？&lt;/p&gt;
+
+&lt;h2 id=&quot;兒童暗語pig-latin及其他隱藏語言&quot;&gt;兒童暗語（Pig Latin），及其他隱藏語言&lt;/h2&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;譯者註：Pig Latin 是指是在英語上加上一點規則使發音改變的暗語。由在德國的英國戰俘發明來瞞混德軍守衛的，多半被兒童用來瞞著大人秘密溝通，有時則只是說著好玩。&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;TensorFlow (TF) 家族&lt;sup id=&quot;fnref:tf&quot;&gt;&lt;a href=&quot;#fn:tf&quot; class=&quot;footnote&quot;&gt;2&lt;/a&gt;&lt;/sup&gt;&lt;a href=&quot;https://dl.acm.org/citation.cfm?doid=3088525.3088527&quot;&gt;儼然成為程式語言&lt;/a&gt;，儘管有些限制。這對那些用Python 來寫 TF 的人來說會有點震驚。不過，想想 TF 需要你用 Python 語法來&lt;a href=&quot;https://www.tensorflow.org/programmers_guide/graphs&quot;&gt;建構表達式&lt;/a&gt;，並且在他的內部語言運算求值。&lt;/p&gt;
+
+&lt;p&gt;事實上，你可以用任何語言寫出 TensorFlow 的“惰性(lazy)”風格。參考底下的 JavaScript 程式，用這種風格實作了簡單的加法：&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-javascript&quot; data-lang=&quot;javascript&quot;&gt;&lt;span class=&quot;kd&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;add&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;a&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;b&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+  &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;`&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;${&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;a&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;+&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;${&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;b&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;`&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;nx&quot;&gt;x&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;y&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;
+&lt;span class=&quot;nx&quot;&gt;z&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;add&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'x'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'y'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// 'x+y'&lt;/span&gt;
+&lt;span class=&quot;kr&quot;&gt;eval&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;z&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// 3&lt;/span&gt;
+&lt;span class=&quot;nx&quot;&gt;x&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;4&lt;/span&gt;
+&lt;span class=&quot;kr&quot;&gt;eval&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;z&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// 6&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;在這邊我們用了 &lt;em&gt;metaprogramming&lt;/em&gt; —— 用程式碼產生程式碼。在這種情況下模板語言與目標語言都是相同的(JavaScript)，但他們也可以是不同的（就像是 C 的前置處理器(preprocessor) 對應到 C），或者我們也可以用一個資料結構（一個語法樹(&lt;a href=&quot;https://en.wikipedia.org/wiki/Abstract_syntax_tree&quot;&gt;AST&lt;/a&gt;)）來代替字串 —— 原則是相同的。在 TensorFlow 中，Python 作為一個模板語言用來編寫 TF 的 graph-based laguage&lt;sup id=&quot;fnref:ast&quot;&gt;&lt;a href=&quot;#fn:ast&quot; class=&quot;footnote&quot;&gt;3&lt;/a&gt;&lt;/sup&gt;。如果你不相信，思考看看 TensorFlow 的 graph 甚至支援像是&lt;a href=&quot;https://www.tensorflow.org/programmers_guide/variables&quot;&gt;變數作用域&lt;/a&gt;跟&lt;a href=&quot;https://www.tensorflow.org/api_docs/python/tf/cond&quot;&gt;控制流程&lt;/a&gt;的構造元素 —— 而不是利用 Python 本身的語法，你正在透過 API 操作這些構造元素。&lt;/p&gt;
+
+&lt;p&gt;TensorFlow 以及其他相似的工具表示他們只是套件而已，但是他們是非常不尋常的一類，大多數的套件只提供一個簡單的函數及資料結構的集合而不是整個程式系統以及 runtime。
+為什麼會需要這麼一個複雜的方式？&lt;/p&gt;
+
+&lt;h2 id=&quot;為什麼要創造新語言&quot;&gt;為什麼要創造新語言？&lt;/h2&gt;
+
+&lt;p&gt;這個理由的核心是非常的簡單的：機器學習研究員有著非常高的計算需求，而簡化建模語言讓他們比較容易加入對不同領域的優化以及功能。訓練模型需要極好的硬體支援、好的數值系統、較低的直譯器 overhead 以及許多類型的平行。而對於像是 Python 這樣的一個通用型程式語言很難去提供這樣的功能，但 TensorFlow 就可以無縫地處理這些需求。&lt;/p&gt;
+
+&lt;p&gt;儘管這樣還是有個障礙，這些令人印象深刻的優化建立在簡化的假設上面(ML 模型不會有遞迴或是需要特別計算梯度, 對吧？)，而這些假設讓他比較容易去加入優化或是部署到小裝置上面。不幸的是，對於工程師來說模型得複雜度越來越高，而研究員又喜歡去違反這些假設。現在的模型需要條件分支（OK，很簡單可以修改）、重複的迴圈（不簡單但仍可能），或甚至&lt;a href=&quot;https://arxiv.org/pdf/1503.00075.pdf&quot;&gt;遞迴整個樹&lt;/a&gt;（理論上不可能）。在很多機器學習的領域，包含&lt;a href=&quot;https://blog.keras.io/the-future-of-deep-learning.html&quot;&gt;神經網路&lt;/a&gt;和&lt;a href=&quot;https://eng.uber.com/pyro/&quot;&gt;機率性程式設計&lt;/a&gt;，模型變得越來越像程式，包括一類會去推論&lt;em&gt;其他&lt;/em&gt;程式的程式（也就是&lt;a href=&quot;https://arxiv.org/pdf/1705.03633.pdf&quot;&gt;程式產生器&lt;/a&gt;和&lt;a href=&quot;https://arxiv.org/abs/1605.06640&quot;&gt;直譯器&lt;/a&gt;），以及不可微分的部分像是蒙地卡羅樹搜尋。這是個巨大的挑戰，來建構一個 runtime 具有完全的彈性同時達成最佳性能，然而不斷增加地多數強大的模型，以及不斷突破的結果需要兩者。&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/images/sentiment-treebank.png&quot; /&gt;&lt;/p&gt;
+&lt;div class=&quot;desc&quot;&gt;
+使用 ML 在複雜的樹狀結構資料上（像是 &lt;a href=&quot;https://nlp.stanford.edu/sentiment/treebank.html&quot;&gt;Stanford Sentiment Treebank&lt;/a&gt;）需要可微分的遞迴演算法。
+&lt;/div&gt;
+
+&lt;p&gt;這種作法的另一個實際缺點，至少是目前的典型，是需要上面討論的這種 metaprogramming。建造並執行樹會施加可觀的重擔在程式設計師以及編譯器上。因為現在程式有兩個執行期，他變得非常難以理解，每個都有各自語言的語意，而像是逐步除錯就變得更加困難。這個問題可以透過創造一個有句法結構的語言給新的 runtime， 但這件事情不亞於創造一個全新完整的程式語言。當我們已經有一個受歡迎的數值語言，這件事會是值得的嗎？&lt;/p&gt;
+
+&lt;h2 id=&quot;我們可以只用-python-嗎&quot;&gt;我們可以只用 Python 嗎？&lt;/h2&gt;
+
+&lt;p&gt;當 ML 模型開始需要一個程式語言的完整能力， Chainer 以及其他開闢了一種 “&lt;a href=&quot;https://arxiv.org/pdf/1701.03980.pdf&quot;&gt;define-by-run&lt;/a&gt;” 的新方式，而在其中一個 Python 程式本身就是一個模型，透過執行期間的自動微分來計算導數。從一個可用性的觀點來看這是非常棒的：如果你想要一個模型來處理樹，單純寫下來就好，然後看 AD 變魔法！ 感覺上這樣的差別是&lt;a href=&quot;https://twitter.com/karpathy/status/868178954032513024?lang=en&quot;&gt;毋庸置疑的&lt;/a&gt;，畢竟能有個輕鬆的方式去玩轉新想法對研究來說是無價的。&lt;/p&gt;
+
+&lt;p&gt;然而，要讓 Python 達到 ML 的沈重計算需求是超乎你想像的困難。重複不斷的最佳化是個&lt;a href=&quot;https://www.youtube.com/watch?v=DBVLcgq2Eg0&quot;&gt;巨大的工作量&lt;/a&gt;，對於一個高效能的程式語言卻可以很輕鬆的達到，然而在 PL 的墓園中充斥著&lt;a href=&quot;https://arstechnica.com/information-technology/2009/03/google-launches-project-to-boost-python-performance-by-5x/&quot;&gt;漂亮的評測&lt;/a&gt;卻&lt;a href=&quot;https://blog.pyston.org/2017/01/31/pyston-0-6-1-released-and-future-plans/&quot;&gt;未能成功&lt;/a&gt;讓 Python 變快的專案。&lt;a href=&quot;http://blog.kevmod.com/2017/02/personal-thoughts-about-pystons-outcome/&quot;&gt;Python 的語意&lt;/a&gt;讓他從本質上就很難去提供模型等級的平行化或是將模型編譯給小型裝置使用。&lt;/p&gt;
+
+&lt;p&gt;MXNet 的 &lt;a href=&quot;https://mxnet.incubator.apache.org/api/python/gluon.html&quot;&gt;Gluon&lt;/a&gt; 就是在努力找到一個方式對兩邊都最好，至少到一定程度上。這個想法是透過結合基本的動態自動微分及程式碼追蹤方式，這個方式會製造可優化的”static sub-graphs”。不幸的是，這是某種完全不同的實做以及 API 的混合體。他也同樣有侷限性。MXNet 使用他的 graph 不只在核心層級的優化還有高階的 graph 排程，像是&lt;a href=&quot;https://mxnet.incubator.apache.org/how_to/multi_devices.html&quot;&gt;將一個模型分散到數個 GPU 上&lt;/a&gt;。這個混合體要如何處理這些並不清楚，除了加入其他新的 API 讓 graph 容器可以被運算節點動態計算。&lt;/p&gt;
+
+&lt;h2 id=&quot;那量身訂製的-ml-語言長什麼樣子&quot;&gt;那量身訂製的 ML 語言長什麼樣子？&lt;/h2&gt;
+
+&lt;p&gt;除了 ML 外，還有其他領域也碰到需要語言層級的設計問題，但這並非是史無前例的。在像是&lt;a href=&quot;https://coq.inria.fr/&quot;&gt;形式化推論及驗證&lt;/a&gt;或是&lt;a href=&quot;https://chapel-lang.org/&quot;&gt;叢集運算&lt;/a&gt;的領域上，新量身訂做的語言已經證實了是有效的解決方案。同樣的，我們期望看到一個新的或是現存的語言對 ML 的數值系統，可微分，可平行且甚至是機率計算的需求做客製化。&lt;/p&gt;
+
+&lt;p&gt;對於 ML 語言，一個明顯的挑戰是同時達到通用性以及高效能，而提早混合的方式將會需要更大量的開發工作。我們希望未來的 ML runtimes 將會需要支援隨心所欲的混合各種方法(靜態的 computational graph 中嵌入動態的當中又嵌入靜態…）以及在部屬環境讓編譯動態程式碼做的更好。理想上，只會剩下單一種彈性的”graph format”（或是 AST)。這個 AST 需要有能夠靜態描述動態行為的語法（比如：一個 &lt;code class=&quot;highlighter-rouge&quot;&gt;for&lt;/code&gt; loop) ― 換句話說，他應該看起來更像是個標準的程式語言。&lt;/p&gt;
+
+&lt;p&gt;&lt;em&gt;可程式化語意&lt;/em&gt;將會開啟彈性的新階段， 而且可以提供一個類似 macros 的功能。 這將會允許類似多 GPU　訓練功能可以被建立在核心系統上，並且指定純資料流語意的程式碼（相對的是標準命令式語意，雖然較為彈性但是容易有負作用，對於優化來說較為不安全)。他同樣可以用來操作 probailistic programming ，或是自然語言處理模型常手動實作的&lt;a href=&quot;https://www.cs.cmu.edu/~guyb/papers/Ble90.pdf&quot;&gt;向量化&lt;/a&gt;(批量處理）傳遞。&lt;/p&gt;
+
+&lt;p&gt;同樣的在 PL 社群裡， ML 工程師應該要花更多時間注意傳統的自動微分（AD）社群。 ML 語言可以從頂尖的程式語言設計上得到&lt;a href=&quot;https://arxiv.org/pdf/1611.03416.pdf&quot;&gt;支援微分為真的第一公民（first-class）&lt;/a&gt;的靈感。這樣的語言可以簡單地混合符號和 runtime 技術（這可以幫忙以上提到的取捨）、混合前向及反向模式的 AD （以增進效能及記憶體使用），以及&lt;a href=&quot;http://mikeinnes.github.io/2017/08/24/cudanative.html&quot;&gt;區別不同的 GPU kernels&lt;/a&gt; ― 以上都沒有任何效能流失。&lt;/p&gt;
+
+&lt;p&gt;ML 研究將會不斷地需要更多強大的型別系統，使用者定義型別及更多延伸意義。滿足於 NVIDIA GPUs 上寫死的 strided array 的日子已經過去了；尖端技術相關的&lt;a href=&quot;https://people.eecs.berkeley.edu/~elghaoui/Pubs/cidu2011_final.pdf&quot;&gt;稀疏機器學習&lt;/a&gt;，新硬體像是 &lt;a href=&quot;https://cloud.google.com/tpu/&quot;&gt;TPU&lt;/a&gt;、&lt;a href=&quot;https://www.intelnervana.com/&quot;&gt;Nervana&lt;/a&gt; 和 &lt;a href=&quot;https://www.forbes.com/sites/moorinsights/2017/08/28/microsoft-fpga-wins-versus-google-tpus-for-ai/#53b33c373904&quot;&gt;FPGA&lt;/a&gt;，以及多樣的部署目標像是 &lt;a href=&quot;http://www.wired.co.uk/article/google-raspberry-pi-ai&quot;&gt;ARM 晶片&lt;/a&gt;或是 &lt;a href=&quot;https://developer.apple.com/documentation/coreml&quot;&gt;iPhone 的 CoreML 晶片&lt;/a&gt;都渴望更高層級的彈性。為每個新的開發項目&lt;a href=&quot;https://github.com/tensorflow/tensorflow/pull/5267/files&quot;&gt;大規模重構 C++ 的核心程式碼&lt;/a&gt;是不會有幫助的。&lt;/p&gt;
+
+&lt;p&gt;想像一個世界，在一個加入新硬體資源(或是新的資料表示法)可以簡單地被使用者透過高階語言達成，不需要改變原本的系統。這邊我們期望 ML 系統可以從現存已經可以輕鬆&lt;a href=&quot;https://arxiv.org/pdf/1604.03410.pdf&quot;&gt;處理這些問題&lt;/a&gt;的數值計算語言借鏡。&lt;/p&gt;
+
+&lt;p&gt;型別系統也可以有安全性好處，但目前的不適合在重度使用陣列的程式碼，而其中陣列的維度是有意義的（舉例來說，影像中的空間維度 vs RGB 維度 vs 批次維度）。這些差別只被視為&lt;a href=&quot;https://github.com/pytorch/pytorch/issues/1220&quot;&gt;純粹的使用慣例&lt;/a&gt;，粗魯的維度排列程式碼並沒有去避免錯誤，給關注陣列的型別系統留下很大的空間。我們期待動態型別的趨勢繼續&lt;sup id=&quot;fnref:types&quot;&gt;&lt;a href=&quot;#fn:types&quot; class=&quot;footnote&quot;&gt;4&lt;/a&gt;&lt;/sup&gt;，主要是因為從業人員偏好互動性以及撰寫腳本，但希望看到更多創新像是 &lt;a href=&quot;https://cntk.ai/pythondocs/sequence.html&quot;&gt;CNTK 的選擇性動態維度&lt;/a&gt;。&lt;/p&gt;
+
+&lt;p&gt;ML 工程師對傳統&lt;a href=&quot;https://papers.nips.cc/paper/5656-hidden-technical-debt-in-machine-learning-systems.pdf&quot;&gt;軟體工程的問題&lt;/a&gt;(像是維護性以及產品系統的擴展性)的興趣正在提升。 &lt;a href=&quot;https://medium.com/@karpathy/software-2-0-a64152b37c35&quot;&gt;ML 程式模型&lt;/a&gt;讓他很難去創造抽象化以及元件之間的界面，而重新訓練模型可能輕易的打破向後相容性。 ML 語言可能可以整合正常語言對這些問題的解法，不過這依然是個設計上的開放問題。&lt;/p&gt;
+
+&lt;div style=&quot;text-align:center&quot;&gt;
+&lt;a href=&quot;https://xkcd.com/1838/&quot;&gt;
+&lt;img height=&quot;350px&quot; src=&quot;https://imgs.xkcd.com/comics/machine_learning_2x.png&quot; /&gt;
+&lt;/a&gt;
+&lt;/div&gt;
+&lt;div class=&quot;desc&quot;&gt;
+  軟體工程 2.0? &lt;i&gt;(自 XKCD)&lt;/i&gt;
+&lt;/div&gt;
+
+&lt;p&gt;任何的新語言的缺點就是需要一個新的套件生態系統，因為只有為新 runtime 寫的程式會受惠於新語言。舉例來說，TensorFlow 開發者需要在 graph language 中為了像是&lt;a href=&quot;https://www.tensorflow.org/api_guides/python/image&quot;&gt;影像處理&lt;/a&gt;以及&lt;a href=&quot;https://www.tensorflow.org/api_docs/python/tf/TextLineReader&quot;&gt;檔案讀寫&lt;/a&gt;這類事情重寫函式庫，而不是去再利用 Python 的生態，不考慮類似 SciPy 專案背後巨大的努力。這可能是前進的唯一道路，但是 ML 的從業者不應該跟廣大的數值運算跟高效能運算（HPC）社群分離。一個理想的 ML 生態系是一個理想的數值運算生態系，反之亦然，並且與這些社群攜手合作將會讓大家的努力成果有加成效應。&lt;/p&gt;
+
+&lt;p&gt;我們期待看到這些開發者們從各種觀點而來。 Graph 的 IR 以及格式（像是 &lt;a href=&quot;https://www.tensorflow.org/performance/xla/&quot;&gt;XLA&lt;/a&gt;, &lt;a href=&quot;https://github.com/onnx/onnx&quot;&gt;ONNX&lt;/a&gt; 以及 &lt;a href=&quot;https://github.com/dmlc/nnvm&quot;&gt;NNVM&lt;/a&gt;）的發展變得更加的複雜且將很可能會從傳統語言設計&lt;sup id=&quot;fnref:chris&quot;&gt;&lt;a href=&quot;#fn:chris&quot; class=&quot;footnote&quot;&gt;5&lt;/a&gt;&lt;/sup&gt;上借鏡更多，也許甚至是加入表面的語法變成一個完整的程式語言。 TensorFlow 的 XLA 已經開始朝向一個特殊目的的編譯器堆包含 &lt;a href=&quot;http://tvmlang.org/&quot;&gt;TVM&lt;/a&gt;, &lt;a href=&quot;http://dlvm.org/&quot;&gt;DLVM&lt;/a&gt;, &lt;a href=&quot;https://github.com/google/sling/tree/master/myelin&quot;&gt;myelin&lt;/a&gt; 以及其他的進行中的專案。 同時間，像是 &lt;a href=&quot;https://github.com/pytorch/pytorch/tree/master/torch/csrc/jit&quot;&gt;PyTorch JIT&lt;/a&gt;, &lt;a href=&quot;https://mxnet.incubator.apache.org/api/python/gluon.html&quot;&gt;Gluon&lt;/a&gt; 以及 &lt;a href=&quot;https://github.com/google/tangent&quot;&gt;Tangent&lt;/a&gt; 的專案正在努力讓 Python 本身變成一個更好的建模語言，儘管有這些巨大的挑戰。我們已經討論過 ML 是一個數值程式語言問題，所以對 Julia 社群的我們來說感覺這是一個絕佳的素材讓我們來實驗這些語言層級的問題，並且會繼續在像是 &lt;a href=&quot;https://github.com/denizyuret/Knet.jl&quot;&gt;Knet&lt;/a&gt;, &lt;a href=&quot;https://fluxml.github.io/&quot;&gt;Flux&lt;/a&gt;, &lt;a href=&quot;https://github.com/jrevels/Cassette.jl&quot;&gt;Cassette&lt;/a&gt;, &lt;a href=&quot;https://github.com/JuliaGPU/CUDAnative.jl&quot;&gt;CUDAnative&lt;/a&gt;, &lt;a href=&quot;https://github.com/MikeInnes/DataFlow.jl&quot;&gt;DataFlow.jl&lt;/a&gt;,…… 等這些專案中挑戰極限。&lt;/p&gt;
+
+&lt;h2 id=&quot;結論an-inference-about-machine-learning&quot;&gt;結論：An Inference about Machine Learning&lt;/h2&gt;
+
+&lt;p&gt;機器學習模型已經成為了極度廣義的資訊處理系統，他建構了高階而更為複雜的抽象；重複、遞迴、高維模型，甚至 &lt;a href=&quot;https://nlp.stanford.edu/blog/hybrid-tree-sequence-neural-networks-with-spinn/&quot;&gt;stack machines&lt;/a&gt; 和&lt;a href=&quot;https://arxiv.org/abs/1605.06640&quot;&gt;語言直譯器&lt;/a&gt;，所有的實作都是這些基本元件的組合。ML 是一個新的程式典範，雖然比較奇怪的是他是重度數值的、微分的跟平行化的。就如同任何工程領域，可用的工具會深深地影響著未來工作的眼界及品質。&lt;/p&gt;
+
+&lt;p&gt;所有的這些暗示了 ML 系統的設計師有巨大的挑戰在他們面前。但是雖然這些都是千真萬確，還是有好消息的： 這些同樣的問題，如果還沒被解決，已經被語言學家在過去數十年間深入地探索過！要將這個新領域達到他的真正潛力，機器學習跟程式語言社群需要結合他們的力量，而真正的挑戰是要結合這兩群迥異領域的專家們。&lt;/p&gt;
+
+&lt;p&gt;我們能不能建立一個把數值、微分、以及平行當作是首要目標的系統，且這個系統不犧牲掉傳統程式語言的想法以及智慧？這是一個在接來十年程式語言需要去回答的更根本之問題。&lt;/p&gt;
+&lt;div class=&quot;footnotes&quot;&gt;
+  &lt;ol&gt;
+    &lt;li id=&quot;fn:greenspun&quot;&gt;
+      &lt;p&gt;出自 &lt;a href=&quot;https://en.wikipedia.org/wiki/Greenspun%27s_tenth_rule&quot;&gt;Philip Greenspun&lt;/a&gt;&amp;nbsp;&lt;a href=&quot;#fnref:greenspun&quot; class=&quot;reversefootnote&quot;&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
+    &lt;/li&gt;
+    &lt;li id=&quot;fn:tf&quot;&gt;
+      &lt;p&gt;在這邊我們使用 TensorFlow 當作例子, 但也可以用其他”執行前定義(define-before-run)”的框架替換，像是 CNTK 還有 MXNet。&amp;nbsp;&lt;a href=&quot;#fnref:tf&quot; class=&quot;reversefootnote&quot;&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
+    &lt;/li&gt;
+    &lt;li id=&quot;fn:ast&quot;&gt;
+      &lt;p&gt;TensorFlow 的 graph 實際上是一個基於資料流的語法樹（AST）。&amp;nbsp;&lt;a href=&quot;#fnref:ast&quot; class=&quot;reversefootnote&quot;&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
+    &lt;/li&gt;
+    &lt;li id=&quot;fn:types&quot;&gt;
+      &lt;p&gt;雖然我們知道現存的系統內部將整個系統從完全的動態（PyTorch 以及他的 ATen 後端）延伸到極度的靜態（在 TensorFlow 的 XLA 及 MXNet 中，在運算 graph 之前所有維度都是已知的）&amp;nbsp;&lt;a href=&quot;#fnref:types&quot; class=&quot;reversefootnote&quot;&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
+    &lt;/li&gt;
+    &lt;li id=&quot;fn:chris&quot;&gt;
+      &lt;p&gt;Google Brain 正在增加僱用像是&lt;a href=&quot;https://techcrunch.com/2017/08/14/swift-creator-chris-lattner-joins-google-brain-after-tesla-autopilot-stint/&quot;&gt;Chris Lattner&lt;/a&gt;的程式語言專家，在這時間點上是個很有趣的發展&amp;nbsp;&lt;a href=&quot;#fnref:chris&quot; class=&quot;reversefootnote&quot;&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
+    &lt;/li&gt;
+  &lt;/ol&gt;
+&lt;/div&gt;
+</content>
+ </entry>
+ 
+ <entry>
+   <title>机器学习与编程语言 (Simplified Chinese)</title>
+   <link href="http://julialang.org/blog/2017/12/ml&pl-cn"/>
+   <updated>2017-12-20T00:00:00+09:00</updated>
+   <id>http://julialang.org/blog/2017/12/ml&pl-cn</id>
+   <content type="html">&lt;blockquote&gt;
+  &lt;p&gt;任何足够复杂的机器学习系统，里面都拼凑了半个不规范，处处错误，且运行缓慢的编程语言。&lt;sup id=&quot;fnref:greenspun&quot;&gt;&lt;a href=&quot;#fn:greenspun&quot; class=&quot;footnote&quot;&gt;1&lt;/a&gt;&lt;/sup&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;div style=&quot;font-size:75%&quot;&gt;
+作者： Mike Innes (Julia Computing), David Barber (UCL), Tim Besard (UGent), James Bradbury (Salesforce Research), Valentin Churavy (MIT), Simon Danisch (MIT), Alan Edelman (MIT), Stefan Karpinski (Julia Computing), Jon Malmaud (MIT), Jarrett Revels (MIT), Viral Shah (Julia Computing), Pontus Stenetorp (UCL) 和 Deniz Yuret (Koç University) 译者：李治中（港中文），步凡（Duke）
+&lt;/div&gt;
+
+&lt;p&gt;&lt;span class=&quot;drop&quot;&gt;机&lt;/span&gt;器学习（ML）已如烈火烹油般火热。身处编程语言（PL）领域，我们饶有兴趣地关注着机器学习模型的复杂度和构造这些模型所用的框架。当今最前沿的模型越来越像&lt;em&gt;程序&lt;/em&gt;：里面有循环和递归这样的编程结构；这对制造机器学习模型的工具本身，即编程语言，提出了许多有趣的挑战。&lt;/p&gt;
+
+&lt;p&gt;虽然目前还没有一个机器学习专属的语言，但实事求是地说，已有几种新语言（比如 TensorFlow）藏身于 Python 语言接口之后；也有一些（比如 PyTorch）则直接用 Python 作为自己的建模语言。我们要问这样一个问题——需不需要专门为机器学习定制一个全新的语言？如果是，为什么？更重要地，如果将来出现一个理想的机器学习语言，它会长什么样？&lt;/p&gt;
+
+&lt;h2 id=&quot;儿童黑话及其它隐匿语言&quot;&gt;&lt;a href=&quot;https://zh.wikipedia.org/zh-hk/兒童黑話&quot;&gt;儿童黑话&lt;/a&gt;及其它隐匿语言&lt;/h2&gt;
+
+&lt;p&gt;TensorFlow（TF）等框架&lt;sup id=&quot;fnref:tf&quot;&gt;&lt;a href=&quot;#fn:tf&quot; class=&quot;footnote&quot;&gt;2&lt;/a&gt;&lt;/sup&gt;&lt;a href=&quot;https://dl.acm.org/citation.cfm?doid=3088525.3088527&quot;&gt;已被公认属于编程语言&lt;/a&gt;，尽管它们在某些方面还有局限。这多少有些意料之外，毕竟大家 TF 编程时用的是 Python。然而琢磨一下就会发现，TF 只是让你用 Python 代码&lt;a href=&quot;https://www.tensorflow.org/programmers_guide/graphs&quot;&gt;构造了一个表达式树&lt;/a&gt;，这个表达式树是用其内部语言表示的，之后再进行计算。&lt;/p&gt;
+
+&lt;p&gt;实际上，可以在任何语言上实现 TensorFlow 这种“延迟”计算的风格。如下 JavaScript 代码就用此风格写了一个 &lt;code class=&quot;highlighter-rouge&quot;&gt;add&lt;/code&gt; 函数:&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-javascript&quot; data-lang=&quot;javascript&quot;&gt;&lt;span class=&quot;kd&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;add&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;a&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;b&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+  &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;`&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;${&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;a&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;+&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;${&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;b&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;`&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;nx&quot;&gt;x&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;y&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;
+&lt;span class=&quot;nx&quot;&gt;z&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;add&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'x'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'y'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// 'x+y'&lt;/span&gt;
+&lt;span class=&quot;kr&quot;&gt;eval&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;z&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// 3&lt;/span&gt;
+&lt;span class=&quot;nx&quot;&gt;x&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;4&lt;/span&gt;
+&lt;span class=&quot;kr&quot;&gt;eval&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;z&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// 6&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;这就是&lt;em&gt;元编程&lt;/em&gt;——编写用于写代码的代码。这个例子里的元语言和目标语言是一致的（都是 JavaScript），但它们完全可以是两种不同的语言（如 C 语言预处理器之于 C 语言）。同理，元编程也可以通过某种数据结构（&lt;a href=&quot;https://en.wikipedia.org/wiki/Abstract_syntax_tree&quot;&gt;AST&lt;/a&gt;）来实现，而不仅限于字符串层面的处理。对 TensorFlow 而言，Python 就是一个用来书写 TF 基于图的编程语言&lt;sup id=&quot;fnref:ast&quot;&gt;&lt;a href=&quot;#fn:ast&quot; class=&quot;footnote&quot;&gt;3&lt;/a&gt;&lt;/sup&gt;的元语言。如果您对此还有疑虑，那么请想一想，TensorFlow 在实现图的&lt;a href=&quot;https://www.tensorflow.org/programmers_guide/variables&quot;&gt;变量作用域&lt;/a&gt;和&lt;a href=&quot;https://www.tensorflow.org/api_docs/python/tf/cond&quot;&gt;流程控制&lt;/a&gt;这些编程结构时并没有采用 Python 语法，而是利用 API 来实现的。&lt;/p&gt;
+
+&lt;p&gt;TensorFlow 及类似的工具以“我仅仅是个库”的姿态出现。然而作为库，它们却异乎寻常。大多数的库只提供简单的一组函数和数据结构，而不是给一整套新的编程系统和运行时。那么，为什么说采用这样一种复杂的方式是有必要的呢？&lt;/p&gt;
+
+&lt;h2 id=&quot;为什么要创造一个新语言&quot;&gt;为什么要创造一个新语言？&lt;/h2&gt;
+
+&lt;p&gt;根本的原因非常简单：机器学习研究对计算有极高的要求，那么简化建模语言就能让我们更轻松地加入针对于特定领域的优化与功能。训练模型需要语言对硬件有很好的支持，拥有良好的数值库，很低的解释器开销，并且支持多种并行方式。像 Python 这样的通用语言很难满足这些需求，而 TensorFlow 却能轻松胜任。&lt;/p&gt;
+
+&lt;p&gt;话虽如此，有一个小问题不能忽略。卓有成效的优化依赖于能够简化问题的假设（机器学习模型里不会出现递归，也不需要自定义梯度，对吧？）。正是这些假设使得模型的优化更简单，也更易于部署到小型设备上。可惜研究员们沉醉于破坏这些假设的乐趣中，工程师们面对的模型也越来越复杂。一个模型现在会用到条件分支（不算什么，小菜一碟），循环（不怎么容易，但应该可以搞定），甚至&lt;a href=&quot;https://arxiv.org/pdf/1503.00075.pdf&quot;&gt;树的递归&lt;/a&gt;（好吧，基本上做不到）。 在机器学习的很多分支中，包括&lt;a href=&quot;https://blog.keras.io/the-future-of-deep-learning.html&quot;&gt;神经网络&lt;/a&gt;和&lt;a href=&quot;https://eng.uber.com/pyro/&quot;&gt;概率编程&lt;/a&gt;，模型越来越像程序：有些模型可以推导&lt;em&gt;其它&lt;/em&gt;程序（例如&lt;a href=&quot;https://arxiv.org/pdf/1705.03633.pdf&quot;&gt;程序生成器&lt;/a&gt;和&lt;a href=&quot;https://arxiv.org/abs/1605.06640&quot;&gt;解释器&lt;/a&gt;）；有些则包括像蒙特卡罗树搜索这样的不可导组件。在保证最高性能的同时提供充分的灵活性，这对运行时的构建提出了极高的挑战，然而两者的兼顾却是最强大的模型和突破性的成果所越来越倚重的。&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/images/sentiment-treebank.png&quot; /&gt;&lt;/p&gt;
+&lt;div class=&quot;desc&quot;&gt;
+  用机器学习处理复杂的树结构数据，如&lt;a href=&quot;https://nlp.stanford.edu/sentiment/treebank.html&quot;&gt;斯坦福情绪树库&lt;/a&gt;，用到了可微的，递归的算法。
+&lt;/div&gt;
+
+&lt;p&gt;这种方式，至少以现在的样子，还有一个操作层面上的不利因素，就是需要引入元编程。构建和计算表达式树给程序员和编译器同时施加了很大的额外负担。推导其过程变得尤为困难，因为代码将有两个运行时间，每个都有着不同的语言语义，诸如单步调试这样的操作也是难度陡增。给新运行时创造一个句法语言可以解决这个问题，但这又何异于创造一个新的完整的编程语言！在已经有非常流行的数值语言的情况下，这么做还有意义吗？&lt;/p&gt;
+
+&lt;h2 id=&quot;直接用-python-不行吗&quot;&gt;直接用 Python 不行吗？&lt;/h2&gt;
+
+&lt;p&gt;当机器学习模型开始需要一个编程语言的全部能力，Chainer 等探索了一种
+&lt;a href=&quot;https://arxiv.org/pdf/1701.03980.pdf&quot;&gt;“运行即定义”&lt;/a&gt;的方案：Python 程序本身被看作模型，梯度则由运行时自动微分（AD）来取得。从可用性角度看这非常炫酷：想要一个处理树结构的递归模型？那么只要把这个过程写下来，然后坐看 AD 变魔术就可以啦！这种方式带来的体验上的微妙变化&lt;a href=&quot;https://twitter.com/karpathy/status/868178954032513024?lang=en&quot;&gt;怎么夸都不过分&lt;/a&gt;。这样一种可以毫无压力地试验新想法的方式对学术研究也是无价之宝。&lt;/p&gt;
+
+&lt;p&gt;然而，让 Python 满足机器学习所要求的巨大计算量比想象中的要困难的多。人们投入了&lt;a href=&quot;https://www.youtube.com/watch?v=DBVLcgq2Eg0&quot;&gt;大量的工作&lt;/a&gt;只为了复现那些在其它语言看来是轻而易举的优化。许多想让 Python 变得更快的努力已长眠于编程语言的埋骨地，有些也&lt;a href=&quot;https://arstechnica.com/information-technology/2009/03/google-launches-project-to-boost-python-performance-by-5x/&quot;&gt;很知名&lt;/a&gt;，但都&lt;a href=&quot;https://blog.pyston.org/2017/01/31/pyston-0-6-1-released-and-future-plans/&quot;&gt;失败了&lt;/a&gt;。&lt;a href=&quot;http://blog.kevmod.com/2017/02/personal-thoughts-about-pystons-outcome/&quot;&gt;Python 的语义&lt;/a&gt;从根本上让模型级别的并行化和编译到小型设备这两件事变得很困难。&lt;/p&gt;
+
+&lt;p&gt;MXNet 的 &lt;a href=&quot;https://mxnet.incubator.apache.org/api/python/gluon.html&quot;&gt;Gluon&lt;/a&gt; 正在寻求一种鱼与熊掌兼得的方式，至少在某种程度上是这样。它的想法是先把基本的动态 AD 与代码跟踪结合起来得到“静态子图”，进而进行优化。可惜这样得到的是一个把迥然不同的实现和 API 混搅在一起的东西。而且这种做法也有局限：图在 MXNet 中不仅被用于核心级别的优化，也被用于高级的图调度，比如&lt;a href=&quot;https://mxnet.incubator.apache.org/how_to/multi_devices.html&quot;&gt;把一个模型分到多个 GPU 上&lt;/a&gt;；我们不清楚除了为那些支持动态计算的图容器额外加入新 API 之外，这些混合方案还有什么办法可以做到这件事。&lt;/p&gt;
+
+&lt;h2 id=&quot;机器学习的专属语言可能长什么样&quot;&gt;机器学习的专属语言可能长什么样？&lt;/h2&gt;
+
+&lt;p&gt;没有几个领域像机器学习这样对语言层面的设计有如此苛刻的要求。当然不是说这没有先例，在&lt;a href=&quot;https://coq.inria.fr/&quot;&gt;形式推理与验证&lt;/a&gt;和&lt;a href=&quot;https://chapel-lang.org/&quot;&gt;集群计算&lt;/a&gt;中的经验就证实了，新的定制的语言是非常有效的解决方案。同样，我们也希望看到，不论是创造新的还是利用现有的，为机器学习所需的数值、微分、并行及概率计算等功能而定制的语言。&lt;/p&gt;
+
+&lt;p&gt;机器学习语言一个公认的挑战是兼顾通用性与性能，早期的混合方案在这方面还需多加努力。我们希望将来的机器学习运行时支持任意方式的混合（静态的计算图包含在一个动态的图里，继而包含在另一个静态图里……），也更好地支持编译动态代码和部署。理想情况是用单个灵活的“图格式”（或 AST）。这个 AST 应当有一种语法可以静态地描述动态行为（比如写一个 &lt;code class=&quot;highlighter-rouge&quot;&gt;for&lt;/code&gt; 循环）——换言之，它更像一个标准的编程语言。&lt;/p&gt;
+
+&lt;p&gt;&lt;em&gt;可编程语义&lt;/em&gt;开启了灵活性的新层次，而且可以用类似于宏这样的功能来实现。这样的话，只要在核心系统上指定哪些代码应该有纯数据流语义，就可以实现多 GPU 训练这样的功能（与此对照，标准的祈使语义更灵活，但有不能安全优化的副作用）。它也可以实现概率编程语言所需的操作，以及 NLP 模型中通常手动实现的&lt;a href=&quot;https://www.cs.cmu.edu/~guyb/papers/Ble90.pdf&quot;&gt;向量化处理&lt;/a&gt;（批处理）。&lt;/p&gt;
+
+&lt;p&gt;和编程语言圈子一样，机器学习工程师们也应密切关注传统的自动微分（AD）领域。机器学习语言可以从&lt;a href=&quot;https://arxiv.org/pdf/1611.03416.pdf&quot;&gt;真正内置支持微分的语言设计&lt;/a&gt;等先驱性的工作中得到启发。这类语言中，混合运用符号化与运行时技巧（便于权衡之前提到的因素），混合使用正向和反向自动微分（可以改进速度和内存占用），以及&lt;a href=&quot;http://mikeinnes.github.io/2017/08/24/cudanative.html&quot;&gt;对 GPU 核心微分&lt;/a&gt;都不费吹灰之力，而且不以损失性能为代价。&lt;/p&gt;
+
+&lt;p&gt;机器学习研究日趋依赖更强大的类型系统、用户自定义类型和更多的扩展方法。硬编码就能支持 NVIDIA GPU 上的跨数组的美好时光已一去不返；像&lt;a href=&quot;https://people.eecs.berkeley.edu/~elghaoui/Pubs/cidu2011_final.pdf&quot;&gt;稀疏机器学习&lt;/a&gt;这样的前沿技术，&lt;a href=&quot;https://cloud.google.com/tpu/&quot;&gt;TPU&lt;/a&gt;、&lt;a href=&quot;https://www.intelnervana.com/&quot;&gt;Nervana&lt;/a&gt; 和 &lt;a href=&quot;https://www.forbes.com/sites/moorinsights/2017/08/28/microsoft-fpga-wins-versus-google-tpus-for-ai/#118733643904&quot;&gt;FPGAs&lt;/a&gt; 这样的全新硬件，&lt;a href=&quot;http://www.wired.co.uk/article/google-raspberry-pi-ai&quot;&gt;ARM 芯片&lt;/a&gt; 和 &lt;a href=&quot;https://developer.apple.com/documentation/coreml&quot;&gt;iPhone 的 CoreML&lt;/a&gt; 这样形形色色的部署目标，都要求灵活性能更上一层楼。每次新发展都&lt;a href=&quot;https://github.com/tensorflow/tensorflow/pull/5267/files&quot;&gt;对核心 C++ 代码进行大规模重构&lt;/a&gt;不是一个可持续的策略。&lt;/p&gt;
+
+&lt;p&gt;让我们想象这样一个世界：增加一个新的硬件支持或数据表示可以用高层代码轻松解决，而不必对原有系统做任何更改。当前数值计算语言&lt;a href=&quot;https://arxiv.org/pdf/1604.03410.pdf&quot;&gt;已经能轻松处理这些任务&lt;/a&gt;，我们期望机器学习系统能从中汲取灵感。&lt;/p&gt;
+
+&lt;p&gt;众所周知类型系统有安全性的优点，但当前的系统却不能适应充斥着数组的代码，因为数组的维度是有意义的（例如图像中有空间、通道和批别三种维度）。维度的区分&lt;a href=&quot;https://github.com/pytorch/pytorch/issues/1220&quot;&gt;全靠约定&lt;/a&gt;，置换维度的繁杂代码无法保证正确性，所以说完美支持数组的类型系统还有很大的探索空间。鉴于实践者们对交互和脚本的偏好，我们预计动态类型的趋势仍将继续，&lt;sup id=&quot;fnref:types&quot;&gt;&lt;a href=&quot;#fn:types&quot; class=&quot;footnote&quot;&gt;4&lt;/a&gt;&lt;/sup&gt;我们也希望看到更多像 &lt;a href=&quot;https://cntk.ai/pythondocs/sequence.html&quot;&gt;CNTK 的可选动态维度&lt;/a&gt;这样的创新。&lt;/p&gt;
+
+&lt;p&gt;机器学习工程师们对传统&lt;a href=&quot;https://papers.nips.cc/paper/5656-hidden-technical-debt-in-machine-learning-systems.pdf&quot;&gt;软件工程问题&lt;/a&gt;——比如生产系统的维护与扩展——的兴趣日益增加。&lt;a href=&quot;https://medium.com/@karpathy/software-2-0-a64152b37c35&quot;&gt;机器学习编程模型&lt;/a&gt;让组件间抽象界限的区分和接口的设计更加困难，向后兼容性也可能因为重新训练一个模型就被破坏。正如普通语言要解决这些问题，机器学习语言也有希望配备相应的解决方案，虽然怎么做还是个公开的设计问题。&lt;/p&gt;
+
+&lt;div style=&quot;text-align:center&quot;&gt;
+&lt;a href=&quot;https://xkcd.com/1838/&quot;&gt;
+&lt;img height=&quot;350px&quot; src=&quot;https://imgs.xkcd.com/comics/machine_learning_2x.png&quot; /&gt;
+&lt;/a&gt;
+&lt;/div&gt;
+&lt;div class=&quot;desc&quot;&gt;
+  软件工程 2.0？ &lt;i&gt;(摘自 XKCD)&lt;/i&gt;
+&lt;/div&gt;
+
+&lt;p&gt;任何新语言不能回避的一个不利因素是要构建新的库生态系统，因为只有专为新运行时写的代码才能从中受益。举个例子，TensorFlow 开发者们必须用图语言重写&lt;a href=&quot;https://www.tensorflow.org/api_guides/python/image&quot;&gt;图像处理&lt;/a&gt;和&lt;a href=&quot;https://www.tensorflow.org/api_docs/python/tf/TextLineReader&quot;&gt;文件输入输出&lt;/a&gt;这些功能，而不是复用 Python 生态系统中已有的库，即使对 SciPy 这类投入巨大的项目也得忍痛割爱。虽说这是跨在前进路上的独木桥，但机器学习实践者们不应因此把自己孤立于广大的数值与高性能计算社区之外。理想的机器学习生态系统一定是理想的数值计算生态系统，反之亦然。社区间的通力合作能让所有人的努力事半功倍。&lt;/p&gt;
+
+&lt;p&gt;我们预计进展会来自几个方面。图 IR 及像 &lt;a href=&quot;https://www.tensorflow.org/performance/xla/&quot;&gt;XLA&lt;/a&gt;、&lt;a href=&quot;https://github.com/onnx/onnx&quot;&gt;ONNX&lt;/a&gt; 和 &lt;a href=&quot;https://github.com/dmlc/nnvm&quot;&gt;NNVM&lt;/a&gt; 等格式已变得日益复杂并可能去传统语言设计中寻求更多的灵感。&lt;sup id=&quot;fnref:chris&quot;&gt;&lt;a href=&quot;#fn:chris&quot; class=&quot;footnote&quot;&gt;5&lt;/a&gt;&lt;/sup&gt; 再加上一些表层语法，它们或许就成了完备的编程语言。TensorFlow 的 XLA 开始向专用的编译栈方向发展，现在已经有 &lt;a href=&quot;http://tvmlang.org/&quot;&gt;TVM&lt;/a&gt;、&lt;a href=&quot;http://dlvm.org/&quot;&gt;DLVM&lt;/a&gt;、&lt;a href=&quot;https://github.com/google/sling/tree/master/myelin&quot;&gt;myelin&lt;/a&gt; 和其它一些推进中的项目。与此同时，&lt;a href=&quot;https://github.com/pytorch/pytorch/tree/master/torch/csrc/jit&quot;&gt;PyTorch JIT&lt;/a&gt;、&lt;a href=&quot;https://mxnet.incubator.apache.org/api/python/gluon.html&quot;&gt;Gluon&lt;/a&gt; 和 &lt;a href=&quot;https://github.com/google/tangent&quot;&gt;Tangent&lt;/a&gt; 等正努力让 Python 本身变成一个更好的建模语言，尽管它们面对的是巨大的挑战。刚才讨论过，机器学习是一个数值计算语言的问题，我们 Julia 社区认为这个观点也为探讨语言层面的问题奠定了良好的基石。我们会继续用&lt;a href=&quot;https://github.com/denizyuret/Knet.jl&quot;&gt;Knet&lt;/a&gt;、&lt;a href=&quot;https://fluxml.github.io/&quot;&gt;Flux&lt;/a&gt;、&lt;a href=&quot;https://github.com/jrevels/Cassette.jl&quot;&gt;Cassette&lt;/a&gt;、&lt;a href=&quot;https://github.com/JuliaGPU/CUDAnative.jl&quot;&gt;CUDAnative&lt;/a&gt; 和 &lt;a href=&quot;https://github.com/MikeInnes/DataFlow.jl&quot;&gt;DataFlow.jl&lt;/a&gt; 等项目去开拓新的疆土。&lt;/p&gt;
+
+&lt;h2 id=&quot;结论一个关于机器学习的推断&quot;&gt;结论：一个关于机器学习的推断&lt;/h2&gt;
+
+&lt;p&gt;机器学习模型已是极其通用的信息处理系统，它们创建了从未有过的高层的，更复杂的抽象；通过基本组件组合，可以实现循环、递归、高阶模型，甚至&lt;a href=&quot;https://nlp.stanford.edu/blog/hybrid-tree-sequence-neural-networks-with-spinn/&quot;&gt;堆栈机&lt;/a&gt;和&lt;a href=&quot;https://arxiv.org/abs/1605.06640&quot;&gt;语言解释器&lt;/a&gt;。机器学习是一个新的编程范式，即便它满身的数值、微分和并行标签让人觉得有些奇怪。像任何工程领域一样，现有可用的工具对将来工作的广度和质量有着不可估量的影响。&lt;/p&gt;
+
+&lt;p&gt;所有这些表明，机器学习系统的设计者要面对极其严峻的挑战。诚然如是，也有好消息：相同的问题也曾困扰语言研究者们数十年！如果说离彻底解决尚远，那这些问题至少已被深入地研究过了。想要发挥这个新领域的全部潜能，机器学习和编程语言社区必须联合起来。那时真正的挑战是如何把两组完全不同的专业知识整合为一体。&lt;/p&gt;
+
+&lt;p&gt;我们能创造一个把数值、微分、并行作为基本功能，且毋须牺牲传统的编程理念和智慧的系统吗？这将是编程语言在接下来十年里需要回答的一个基本问题。&lt;/p&gt;
+&lt;div class=&quot;footnotes&quot;&gt;
+  &lt;ol&gt;
+    &lt;li id=&quot;fn:greenspun&quot;&gt;
+      &lt;p&gt;引申自 &lt;a href=&quot;https://en.wikipedia.org/wiki/Greenspun%27s_tenth_rule&quot;&gt;Philip Greenspun&lt;/a&gt;&amp;nbsp;&lt;a href=&quot;#fnref:greenspun&quot; class=&quot;reversefootnote&quot;&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
+    &lt;/li&gt;
+    &lt;li id=&quot;fn:tf&quot;&gt;
+      &lt;p&gt;本文以 TensorFlow 为例。读者可以自行替换为其它“先定义—后计算”类型的框架，比如 CNTK 或 MXNet。&amp;nbsp;&lt;a href=&quot;#fnref:tf&quot; class=&quot;reversefootnote&quot;&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
+    &lt;/li&gt;
+    &lt;li id=&quot;fn:ast&quot;&gt;
+      &lt;p&gt;TensorFlow 的图本质上是一种基于数据流的抽象语法树（AST）。&amp;nbsp;&lt;a href=&quot;#fnref:ast&quot; class=&quot;reversefootnote&quot;&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
+    &lt;/li&gt;
+    &lt;li id=&quot;fn:types&quot;&gt;
+      &lt;p&gt;不可否认，当前系统的内部已全范围覆盖从完全动态（PyTorch 和它的 ATen 后端）到异常地静态（TensorFlow 的 XLA 和 MXNet 中，所有维度在图运算之前都已知）等设计。&amp;nbsp;&lt;a href=&quot;#fnref:types&quot; class=&quot;reversefootnote&quot;&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
+    &lt;/li&gt;
+    &lt;li id=&quot;fn:chris&quot;&gt;
+      &lt;p&gt;一个有趣的佐证是，Google Brain 正加大力度雇用编程语言专家，比如 &lt;a href=&quot;https://techcrunch.com/2017/08/14/swift-creator-chris-lattner-joins-google-brain-after-tesla-autopilot-stint/&quot;&gt;Chris Lattner&lt;/a&gt;。&amp;nbsp;&lt;a href=&quot;#fnref:chris&quot; class=&quot;reversefootnote&quot;&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
+    &lt;/li&gt;
+  &lt;/ol&gt;
+&lt;/div&gt;
+</content>
+ </entry>
  
  <entry>
    <title>On Machine Learning and Programming Languages</title>

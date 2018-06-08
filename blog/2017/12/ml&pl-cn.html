@@ -1,0 +1,545 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="ko" lang="ko">
+
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+  <title>机器学习与编程语言 (Simplified Chinese)</title>
+  <meta name="author" content="Jeff Bezanson, Stefan Karpinski, Viral Shah, Alan Edelman, et al." />
+  <link rel="stylesheet" href="/css/syntax.css" type="text/css" />
+  <link rel="stylesheet" href="/css/screen.css" type="text/css" media="screen, projection" />
+  <link rel="stylesheet" href="/css/custom.css" type="text/css" media="screen, projection" />
+
+  <!-- 단어 단위 줄바꿈  -->
+  <script type="text/javascript" src="/js/jquery-1.8.3.min.js"></script>
+  <script type="text/javascript" src="/js/jquery.word-break-keep-all.min.js"></script>
+  <script type="text/javascript">
+    $(document).ready(function() {
+      $('p').wordBreakKeepAll();
+    });
+  </script>
+
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-110655381-1"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'UA-110655381-1'); // juliakorea 추적 ID
+  </script>
+</head>
+
+<body>
+  <div id="site" class="site">
+    
+    <div class="title"><a href="/">
+<svg version="1.1" id="Layer_1"
+	 xmlns="http://www.w3.org/2000/svg"
+	 xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 width="210px" height="142px" viewBox="0 0 310 216" enable-background="new 0 0 310 216"
+	 xml:space="preserve">
+
+<!-- blue dot -->
+<circle fill="#6b85dd" stroke="#4266d5" stroke-width="3" cx="50.5" cy="60" r="16.5"/>
+<!-- red dot -->
+<circle fill="#d66661" stroke="#c93d39" stroke-width="3" cx="212.459" cy="60" r="16.5"/>
+<!-- green dot -->
+<circle fill="#6bab5b" stroke="#3b972e" stroke-width="3" cx="233.834" cy="23.874" r="16.5"/>
+<!-- purple dot -->
+<circle fill="#aa7dc0" stroke="#945bb0" stroke-width="3" cx="255.209" cy="60" r="16.5"/>
+
+<!-- "j" -->
+<path fill="#252525" d="M37.216,138.427c0-15.839,0.006-31.679-0.018-47.517c-0.001-0.827,0.169-1.234,1.043-1.47
+	c7.876-2.127,15.739-4.308,23.606-6.47c1.33-0.366,1.333-0.36,1.333,1.019c0,25.758,0.015,51.517-0.012,77.274
+	c-0.006,5.514,0.245,11.032-0.272,16.543c-0.628,6.69-2.15,13.092-6.438,18.506c-3.781,4.771-8.898,7.25-14.767,8.338
+	c-6.599,1.222-13.251,1.552-19.934,0.938c-4.616-0.423-9.045-1.486-12.844-4.363c-2.863-2.168-4.454-4.935-3.745-8.603
+	c0.736-3.806,3.348-5.978,6.861-7.127c2.262-0.74,4.628-0.872,6.994-0.53c1.823,0.264,3.42,1.023,4.779,2.288
+	c1.38,1.284,2.641,2.674,3.778,4.177c0.872,1.15,1.793,2.256,2.991,3.086c2.055,1.426,4,0.965,5.213-1.216
+	c0.819-1.473,0.997-3.106,1.173-4.731c0.255-2.348,0.255-4.707,0.256-7.062C37.218,167.145,37.216,152.786,37.216,138.427z"/>
+
+<!-- "u" -->
+<path fill="#252525" d="M125.536,162.479c-2.908,2.385-5.783,4.312-8.88,5.904c-10.348,5.323-20.514,4.521-30.324-1.253
+	c-6.71-3.95-11.012-9.849-12.52-17.606c-0.236-1.213-0.363-2.438-0.363-3.688c0.01-19.797,0.017-39.593-0.02-59.39
+	c-0.002-1.102,0.285-1.357,1.363-1.351c7.798,0.049,15.597,0.044,23.396,0.003c0.95-0.005,1.177,0.25,1.175,1.183
+	c-0.027,19.356-0.025,38.713-0.018,58.07c0.002,6.34,3.599,10.934,9.672,12.42c2.13,0.521,4.19,0.396,6.173-0.6
+	c4.26-2.139,7.457-5.427,10.116-9.307c0.333-0.487,0.224-1,0.224-1.51c0.007-19.635,0.016-39.271-0.02-58.904
+	c-0.002-1.083,0.255-1.369,1.353-1.361c7.838,0.052,15.677,0.045,23.515,0.004c0.916-0.005,1.103,0.244,1.102,1.124
+	c-0.025,27.677-0.026,55.353,0.002,83.024c0.001,0.938-0.278,1.099-1.139,1.095c-7.918-0.028-15.837-0.028-23.756-0.001
+	c-0.815,0.003-1.1-0.166-1.073-1.037C125.581,167.117,125.536,164.928,125.536,162.479z"/>
+
+<!-- "l" -->
+<path fill="#252525" d="M187.423,107.08c0,20.637-0.011,41.273,0.026,61.91c0.003,1.119-0.309,1.361-1.381,1.355
+	c-7.799-0.052-15.598-0.047-23.396-0.008c-0.898,0.008-1.117-0.222-1.115-1.115c0.021-39.074,0.021-78.147,0-117.226
+	c0-0.811,0.189-1.169,1.006-1.392c7.871-2.149,15.73-4.327,23.584-6.545c1.045-0.295,1.308-0.17,1.306,0.985
+	C187.412,65.727,187.423,86.403,187.423,107.08z"/>
+
+<!-- "i" -->
+<path fill="#252525" d="M223.46,126.477c0,14.155-0.011,28.312,0.021,42.467c0.002,1.027-0.164,1.418-1.332,1.408
+	c-7.838-0.061-15.676-0.047-23.516-0.01c-0.881,0.004-1.121-0.189-1.119-1.104c0.026-26.153,0.025-52.307,0-78.458
+	c0-0.776,0.203-1.101,0.941-1.302c7.984-2.172,15.972-4.35,23.938-6.596c1.049-0.296,1.08,0.031,1.078,0.886
+	C223.454,98.004,223.46,112.239,223.46,126.477z"/>
+
+<!-- "a" -->
+<path fill="#252525" d="M277.695,163.6c-0.786,0.646-1.404,1.125-2,1.635c-4.375,3.746-9.42,5.898-15.16,6.42
+	c-5.792,0.527-11.479,0.244-16.934-2.047c-12.08-5.071-15.554-17.188-11.938-27.448c1.799-5.111,5.472-8.868,9.831-11.94
+	c5.681-4.003,12.009-6.732,18.504-9.074c5.576-2.014,11.186-3.939,16.955-5.347c0.445-0.104,0.773-0.243,0.757-0.854
+	c-0.136-4.389,0.261-8.79-0.479-13.165c-1.225-7.209-6.617-10.013-12.895-9.348c-0.516,0.055-1.029,0.129-1.536,0.241
+	c-4.877,1.081-7.312,4.413-7.374,10.127c-0.02,1.729-0.229,3.418-0.693,5.084c-0.906,3.229-2.969,5.354-6.168,6.266
+	c-3.422,0.979-6.893,0.998-10.23-0.305c-6.529-2.543-8.877-10.164-5.12-16.512c2.249-3.799,5.606-6.4,9.461-8.405
+	c6.238-3.246,12.914-4.974,19.896-5.537c7.565-0.61,15.096-0.366,22.49,1.507c4.285,1.085,8.312,2.776,11.744,5.657
+	c4.473,3.749,6.776,8.647,6.812,14.374c0.139,21.477,0.096,42.951,0.143,64.428c0.002,0.799-0.248,0.983-1.021,0.98
+	c-8.035-0.025-16.074-0.023-24.113-0.001c-0.716,0.002-0.973-0.146-0.941-0.915C277.736,167.562,277.695,165.698,277.695,163.6z
+	 M277.695,126.393c-4.793,2.104-9.25,4.373-13.287,7.408c-2.151,1.618-4.033,3.483-5.732,5.581
+	c-4.229,5.226-1.988,13.343,1.693,16.599c1.592,1.406,3.359,1.906,5.419,1.521c1.621-0.307,3.149-0.857,4.549-1.734
+	c1.521-0.951,2.949-2.072,4.539-2.887c2.31-1.18,2.97-2.861,2.894-5.445C277.561,140.484,277.695,133.527,277.695,126.393z"/>
+
+</svg>
+
+</a></div>
+
+<ul class="links">
+  
+      
+      
+      
+      
+      
+      <li><a href="/" class=" ">홈</a></li>
+  
+      
+      
+      
+      
+      
+      <li><a href="https://github.com/JuliaLang/julia" class=" ">소스코드</a></li>
+  
+      
+      
+      
+      
+      
+      <li><a href="/downloads/" class=" ">다운로드</a></li>
+  
+      
+      
+      
+      
+      
+      <li><a href="/ko/latest/" class=" docs">문서</a></li>
+  
+      
+      
+      
+      
+      
+      <li><a href="http://pkg.julialang.org/" class=" ">패키지</a></li>
+  
+      
+      
+      
+      
+      
+      <li><a href="/blog/" class="active ">블로그</a></li>
+  
+      
+      
+      
+      
+      
+      <li><a href="/community/" class=" ">커뮤니티</a></li>
+  
+      
+      
+      
+      
+      
+      <li><a href="/ecosystems" class=" ">생태계</a></li>
+  
+      
+      
+      
+      
+      
+      <li><a href="/learning/" class=" ">배우기</a></li>
+  
+      
+      
+      
+      
+      
+      <li><a href="/teaching/" class=" ">강의</a></li>
+  
+      
+      
+      
+      
+      
+      <li><a href="/publications/" class=" ">논문</a></li>
+  
+      
+      
+      
+      
+      
+      <li><a href="/soc/ideas-page.html" class=" ">GSoC</a></li>
+  
+      
+      
+      
+      
+      
+      <li><a href="http://juliacon.org" class=" ">줄리아컨퍼런스</a></li>
+  
+</ul>
+
+<!--
+
+<style>
+.banner-box .header {
+  font-size: 1.5em;
+}
+@media (min-width: 830px) {
+  .banner-box {
+    float:left;
+    width:50%;
+  }
+}
+</style>
+
+<div style="text-align:center">
+
+<div class="banner-box">
+<div class="header">JuliaCon 2016</div>
+<p>
+  Held on June 21<sup>st</sup> - 25<sup>th</sup> at MIT<br>
+  <a href="http://juliacon.org">talks</a> |
+  <a href="https://www.youtube.com/playlist?list=PLP8iPy9hna6SQPwZUDtAM59-wPzCPyD_S">videos</a>
+</p>
+</div>
+
+<div class="banner-box">
+<div class="header">Google Summer of Code</div>
+<p>
+  Julia gets 12 slots in the Google Summer of Code!<br />
+  <a href="https://summerofcode.withgoogle.com/organizations/6453977159827456/">projects</a> |
+  <a href="/soc/ideas-page.html">ideas list</a>
+</p>
+</div>
+
+<div style="clear:both; border-top: 1px solid #ddd; margin-bottom:30px;"></div>
+
+
+</div>
+-->
+
+
+<div id="blogpost">
+  <h1>机器学习与编程语言 (Simplified Chinese)</h1>
+
+  <p class="metadata">
+    <span class="timestamp">20 Dec 2017</span>
+    
+  </p>
+
+  <blockquote>
+  <p>任何足够复杂的机器学习系统，里面都拼凑了半个不规范，处处错误，且运行缓慢的编程语言。<sup id="fnref:greenspun"><a href="#fn:greenspun" class="footnote">1</a></sup></p>
+</blockquote>
+
+<div style="font-size:75%">
+作者： Mike Innes (Julia Computing), David Barber (UCL), Tim Besard (UGent), James Bradbury (Salesforce Research), Valentin Churavy (MIT), Simon Danisch (MIT), Alan Edelman (MIT), Stefan Karpinski (Julia Computing), Jon Malmaud (MIT), Jarrett Revels (MIT), Viral Shah (Julia Computing), Pontus Stenetorp (UCL) 和 Deniz Yuret (Koç University) 译者：李治中（港中文），步凡（Duke）
+</div>
+
+<p><span class="drop">机</span>器学习（ML）已如烈火烹油般火热。身处编程语言（PL）领域，我们饶有兴趣地关注着机器学习模型的复杂度和构造这些模型所用的框架。当今最前沿的模型越来越像<em>程序</em>：里面有循环和递归这样的编程结构；这对制造机器学习模型的工具本身，即编程语言，提出了许多有趣的挑战。</p>
+
+<p>虽然目前还没有一个机器学习专属的语言，但实事求是地说，已有几种新语言（比如 TensorFlow）藏身于 Python 语言接口之后；也有一些（比如 PyTorch）则直接用 Python 作为自己的建模语言。我们要问这样一个问题——需不需要专门为机器学习定制一个全新的语言？如果是，为什么？更重要地，如果将来出现一个理想的机器学习语言，它会长什么样？</p>
+
+<h2 id="儿童黑话及其它隐匿语言"><a href="https://zh.wikipedia.org/zh-hk/兒童黑話">儿童黑话</a>及其它隐匿语言</h2>
+
+<p>TensorFlow（TF）等框架<sup id="fnref:tf"><a href="#fn:tf" class="footnote">2</a></sup><a href="https://dl.acm.org/citation.cfm?doid=3088525.3088527">已被公认属于编程语言</a>，尽管它们在某些方面还有局限。这多少有些意料之外，毕竟大家 TF 编程时用的是 Python。然而琢磨一下就会发现，TF 只是让你用 Python 代码<a href="https://www.tensorflow.org/programmers_guide/graphs">构造了一个表达式树</a>，这个表达式树是用其内部语言表示的，之后再进行计算。</p>
+
+<p>实际上，可以在任何语言上实现 TensorFlow 这种“延迟”计算的风格。如下 JavaScript 代码就用此风格写了一个 <code class="highlighter-rouge">add</code> 函数:</p>
+
+<figure class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="kd">function</span> <span class="nx">add</span><span class="p">(</span><span class="nx">a</span><span class="p">,</span><span class="nx">b</span><span class="p">)</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="s2">`</span><span class="p">${</span><span class="nx">a</span><span class="p">}</span><span class="s2">+</span><span class="p">${</span><span class="nx">b</span><span class="p">}</span><span class="s2">`</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="nx">x</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span> <span class="nx">y</span> <span class="o">=</span> <span class="mi">2</span>
+<span class="nx">z</span> <span class="o">=</span> <span class="nx">add</span><span class="p">(</span><span class="s1">'x'</span><span class="p">,</span> <span class="s1">'y'</span><span class="p">)</span> <span class="c1">// 'x+y'</span>
+<span class="kr">eval</span><span class="p">(</span><span class="nx">z</span><span class="p">)</span> <span class="c1">// 3</span>
+<span class="nx">x</span> <span class="o">=</span> <span class="mi">4</span>
+<span class="kr">eval</span><span class="p">(</span><span class="nx">z</span><span class="p">)</span> <span class="c1">// 6</span></code></pre></figure>
+
+<p>这就是<em>元编程</em>——编写用于写代码的代码。这个例子里的元语言和目标语言是一致的（都是 JavaScript），但它们完全可以是两种不同的语言（如 C 语言预处理器之于 C 语言）。同理，元编程也可以通过某种数据结构（<a href="https://en.wikipedia.org/wiki/Abstract_syntax_tree">AST</a>）来实现，而不仅限于字符串层面的处理。对 TensorFlow 而言，Python 就是一个用来书写 TF 基于图的编程语言<sup id="fnref:ast"><a href="#fn:ast" class="footnote">3</a></sup>的元语言。如果您对此还有疑虑，那么请想一想，TensorFlow 在实现图的<a href="https://www.tensorflow.org/programmers_guide/variables">变量作用域</a>和<a href="https://www.tensorflow.org/api_docs/python/tf/cond">流程控制</a>这些编程结构时并没有采用 Python 语法，而是利用 API 来实现的。</p>
+
+<p>TensorFlow 及类似的工具以“我仅仅是个库”的姿态出现。然而作为库，它们却异乎寻常。大多数的库只提供简单的一组函数和数据结构，而不是给一整套新的编程系统和运行时。那么，为什么说采用这样一种复杂的方式是有必要的呢？</p>
+
+<h2 id="为什么要创造一个新语言">为什么要创造一个新语言？</h2>
+
+<p>根本的原因非常简单：机器学习研究对计算有极高的要求，那么简化建模语言就能让我们更轻松地加入针对于特定领域的优化与功能。训练模型需要语言对硬件有很好的支持，拥有良好的数值库，很低的解释器开销，并且支持多种并行方式。像 Python 这样的通用语言很难满足这些需求，而 TensorFlow 却能轻松胜任。</p>
+
+<p>话虽如此，有一个小问题不能忽略。卓有成效的优化依赖于能够简化问题的假设（机器学习模型里不会出现递归，也不需要自定义梯度，对吧？）。正是这些假设使得模型的优化更简单，也更易于部署到小型设备上。可惜研究员们沉醉于破坏这些假设的乐趣中，工程师们面对的模型也越来越复杂。一个模型现在会用到条件分支（不算什么，小菜一碟），循环（不怎么容易，但应该可以搞定），甚至<a href="https://arxiv.org/pdf/1503.00075.pdf">树的递归</a>（好吧，基本上做不到）。 在机器学习的很多分支中，包括<a href="https://blog.keras.io/the-future-of-deep-learning.html">神经网络</a>和<a href="https://eng.uber.com/pyro/">概率编程</a>，模型越来越像程序：有些模型可以推导<em>其它</em>程序（例如<a href="https://arxiv.org/pdf/1705.03633.pdf">程序生成器</a>和<a href="https://arxiv.org/abs/1605.06640">解释器</a>）；有些则包括像蒙特卡罗树搜索这样的不可导组件。在保证最高性能的同时提供充分的灵活性，这对运行时的构建提出了极高的挑战，然而两者的兼顾却是最强大的模型和突破性的成果所越来越倚重的。</p>
+
+<p><img src="/images/sentiment-treebank.png" /></p>
+<div class="desc">
+  用机器学习处理复杂的树结构数据，如<a href="https://nlp.stanford.edu/sentiment/treebank.html">斯坦福情绪树库</a>，用到了可微的，递归的算法。
+</div>
+
+<p>这种方式，至少以现在的样子，还有一个操作层面上的不利因素，就是需要引入元编程。构建和计算表达式树给程序员和编译器同时施加了很大的额外负担。推导其过程变得尤为困难，因为代码将有两个运行时间，每个都有着不同的语言语义，诸如单步调试这样的操作也是难度陡增。给新运行时创造一个句法语言可以解决这个问题，但这又何异于创造一个新的完整的编程语言！在已经有非常流行的数值语言的情况下，这么做还有意义吗？</p>
+
+<h2 id="直接用-python-不行吗">直接用 Python 不行吗？</h2>
+
+<p>当机器学习模型开始需要一个编程语言的全部能力，Chainer 等探索了一种
+<a href="https://arxiv.org/pdf/1701.03980.pdf">“运行即定义”</a>的方案：Python 程序本身被看作模型，梯度则由运行时自动微分（AD）来取得。从可用性角度看这非常炫酷：想要一个处理树结构的递归模型？那么只要把这个过程写下来，然后坐看 AD 变魔术就可以啦！这种方式带来的体验上的微妙变化<a href="https://twitter.com/karpathy/status/868178954032513024?lang=en">怎么夸都不过分</a>。这样一种可以毫无压力地试验新想法的方式对学术研究也是无价之宝。</p>
+
+<p>然而，让 Python 满足机器学习所要求的巨大计算量比想象中的要困难的多。人们投入了<a href="https://www.youtube.com/watch?v=DBVLcgq2Eg0">大量的工作</a>只为了复现那些在其它语言看来是轻而易举的优化。许多想让 Python 变得更快的努力已长眠于编程语言的埋骨地，有些也<a href="https://arstechnica.com/information-technology/2009/03/google-launches-project-to-boost-python-performance-by-5x/">很知名</a>，但都<a href="https://blog.pyston.org/2017/01/31/pyston-0-6-1-released-and-future-plans/">失败了</a>。<a href="http://blog.kevmod.com/2017/02/personal-thoughts-about-pystons-outcome/">Python 的语义</a>从根本上让模型级别的并行化和编译到小型设备这两件事变得很困难。</p>
+
+<p>MXNet 的 <a href="https://mxnet.incubator.apache.org/api/python/gluon.html">Gluon</a> 正在寻求一种鱼与熊掌兼得的方式，至少在某种程度上是这样。它的想法是先把基本的动态 AD 与代码跟踪结合起来得到“静态子图”，进而进行优化。可惜这样得到的是一个把迥然不同的实现和 API 混搅在一起的东西。而且这种做法也有局限：图在 MXNet 中不仅被用于核心级别的优化，也被用于高级的图调度，比如<a href="https://mxnet.incubator.apache.org/how_to/multi_devices.html">把一个模型分到多个 GPU 上</a>；我们不清楚除了为那些支持动态计算的图容器额外加入新 API 之外，这些混合方案还有什么办法可以做到这件事。</p>
+
+<h2 id="机器学习的专属语言可能长什么样">机器学习的专属语言可能长什么样？</h2>
+
+<p>没有几个领域像机器学习这样对语言层面的设计有如此苛刻的要求。当然不是说这没有先例，在<a href="https://coq.inria.fr/">形式推理与验证</a>和<a href="https://chapel-lang.org/">集群计算</a>中的经验就证实了，新的定制的语言是非常有效的解决方案。同样，我们也希望看到，不论是创造新的还是利用现有的，为机器学习所需的数值、微分、并行及概率计算等功能而定制的语言。</p>
+
+<p>机器学习语言一个公认的挑战是兼顾通用性与性能，早期的混合方案在这方面还需多加努力。我们希望将来的机器学习运行时支持任意方式的混合（静态的计算图包含在一个动态的图里，继而包含在另一个静态图里……），也更好地支持编译动态代码和部署。理想情况是用单个灵活的“图格式”（或 AST）。这个 AST 应当有一种语法可以静态地描述动态行为（比如写一个 <code class="highlighter-rouge">for</code> 循环）——换言之，它更像一个标准的编程语言。</p>
+
+<p><em>可编程语义</em>开启了灵活性的新层次，而且可以用类似于宏这样的功能来实现。这样的话，只要在核心系统上指定哪些代码应该有纯数据流语义，就可以实现多 GPU 训练这样的功能（与此对照，标准的祈使语义更灵活，但有不能安全优化的副作用）。它也可以实现概率编程语言所需的操作，以及 NLP 模型中通常手动实现的<a href="https://www.cs.cmu.edu/~guyb/papers/Ble90.pdf">向量化处理</a>（批处理）。</p>
+
+<p>和编程语言圈子一样，机器学习工程师们也应密切关注传统的自动微分（AD）领域。机器学习语言可以从<a href="https://arxiv.org/pdf/1611.03416.pdf">真正内置支持微分的语言设计</a>等先驱性的工作中得到启发。这类语言中，混合运用符号化与运行时技巧（便于权衡之前提到的因素），混合使用正向和反向自动微分（可以改进速度和内存占用），以及<a href="http://mikeinnes.github.io/2017/08/24/cudanative.html">对 GPU 核心微分</a>都不费吹灰之力，而且不以损失性能为代价。</p>
+
+<p>机器学习研究日趋依赖更强大的类型系统、用户自定义类型和更多的扩展方法。硬编码就能支持 NVIDIA GPU 上的跨数组的美好时光已一去不返；像<a href="https://people.eecs.berkeley.edu/~elghaoui/Pubs/cidu2011_final.pdf">稀疏机器学习</a>这样的前沿技术，<a href="https://cloud.google.com/tpu/">TPU</a>、<a href="https://www.intelnervana.com/">Nervana</a> 和 <a href="https://www.forbes.com/sites/moorinsights/2017/08/28/microsoft-fpga-wins-versus-google-tpus-for-ai/#118733643904">FPGAs</a> 这样的全新硬件，<a href="http://www.wired.co.uk/article/google-raspberry-pi-ai">ARM 芯片</a> 和 <a href="https://developer.apple.com/documentation/coreml">iPhone 的 CoreML</a> 这样形形色色的部署目标，都要求灵活性能更上一层楼。每次新发展都<a href="https://github.com/tensorflow/tensorflow/pull/5267/files">对核心 C++ 代码进行大规模重构</a>不是一个可持续的策略。</p>
+
+<p>让我们想象这样一个世界：增加一个新的硬件支持或数据表示可以用高层代码轻松解决，而不必对原有系统做任何更改。当前数值计算语言<a href="https://arxiv.org/pdf/1604.03410.pdf">已经能轻松处理这些任务</a>，我们期望机器学习系统能从中汲取灵感。</p>
+
+<p>众所周知类型系统有安全性的优点，但当前的系统却不能适应充斥着数组的代码，因为数组的维度是有意义的（例如图像中有空间、通道和批别三种维度）。维度的区分<a href="https://github.com/pytorch/pytorch/issues/1220">全靠约定</a>，置换维度的繁杂代码无法保证正确性，所以说完美支持数组的类型系统还有很大的探索空间。鉴于实践者们对交互和脚本的偏好，我们预计动态类型的趋势仍将继续，<sup id="fnref:types"><a href="#fn:types" class="footnote">4</a></sup>我们也希望看到更多像 <a href="https://cntk.ai/pythondocs/sequence.html">CNTK 的可选动态维度</a>这样的创新。</p>
+
+<p>机器学习工程师们对传统<a href="https://papers.nips.cc/paper/5656-hidden-technical-debt-in-machine-learning-systems.pdf">软件工程问题</a>——比如生产系统的维护与扩展——的兴趣日益增加。<a href="https://medium.com/@karpathy/software-2-0-a64152b37c35">机器学习编程模型</a>让组件间抽象界限的区分和接口的设计更加困难，向后兼容性也可能因为重新训练一个模型就被破坏。正如普通语言要解决这些问题，机器学习语言也有希望配备相应的解决方案，虽然怎么做还是个公开的设计问题。</p>
+
+<div style="text-align:center">
+<a href="https://xkcd.com/1838/">
+<img height="350px" src="https://imgs.xkcd.com/comics/machine_learning_2x.png" />
+</a>
+</div>
+<div class="desc">
+  软件工程 2.0？ <i>(摘自 XKCD)</i>
+</div>
+
+<p>任何新语言不能回避的一个不利因素是要构建新的库生态系统，因为只有专为新运行时写的代码才能从中受益。举个例子，TensorFlow 开发者们必须用图语言重写<a href="https://www.tensorflow.org/api_guides/python/image">图像处理</a>和<a href="https://www.tensorflow.org/api_docs/python/tf/TextLineReader">文件输入输出</a>这些功能，而不是复用 Python 生态系统中已有的库，即使对 SciPy 这类投入巨大的项目也得忍痛割爱。虽说这是跨在前进路上的独木桥，但机器学习实践者们不应因此把自己孤立于广大的数值与高性能计算社区之外。理想的机器学习生态系统一定是理想的数值计算生态系统，反之亦然。社区间的通力合作能让所有人的努力事半功倍。</p>
+
+<p>我们预计进展会来自几个方面。图 IR 及像 <a href="https://www.tensorflow.org/performance/xla/">XLA</a>、<a href="https://github.com/onnx/onnx">ONNX</a> 和 <a href="https://github.com/dmlc/nnvm">NNVM</a> 等格式已变得日益复杂并可能去传统语言设计中寻求更多的灵感。<sup id="fnref:chris"><a href="#fn:chris" class="footnote">5</a></sup> 再加上一些表层语法，它们或许就成了完备的编程语言。TensorFlow 的 XLA 开始向专用的编译栈方向发展，现在已经有 <a href="http://tvmlang.org/">TVM</a>、<a href="http://dlvm.org/">DLVM</a>、<a href="https://github.com/google/sling/tree/master/myelin">myelin</a> 和其它一些推进中的项目。与此同时，<a href="https://github.com/pytorch/pytorch/tree/master/torch/csrc/jit">PyTorch JIT</a>、<a href="https://mxnet.incubator.apache.org/api/python/gluon.html">Gluon</a> 和 <a href="https://github.com/google/tangent">Tangent</a> 等正努力让 Python 本身变成一个更好的建模语言，尽管它们面对的是巨大的挑战。刚才讨论过，机器学习是一个数值计算语言的问题，我们 Julia 社区认为这个观点也为探讨语言层面的问题奠定了良好的基石。我们会继续用<a href="https://github.com/denizyuret/Knet.jl">Knet</a>、<a href="https://fluxml.github.io/">Flux</a>、<a href="https://github.com/jrevels/Cassette.jl">Cassette</a>、<a href="https://github.com/JuliaGPU/CUDAnative.jl">CUDAnative</a> 和 <a href="https://github.com/MikeInnes/DataFlow.jl">DataFlow.jl</a> 等项目去开拓新的疆土。</p>
+
+<h2 id="结论一个关于机器学习的推断">结论：一个关于机器学习的推断</h2>
+
+<p>机器学习模型已是极其通用的信息处理系统，它们创建了从未有过的高层的，更复杂的抽象；通过基本组件组合，可以实现循环、递归、高阶模型，甚至<a href="https://nlp.stanford.edu/blog/hybrid-tree-sequence-neural-networks-with-spinn/">堆栈机</a>和<a href="https://arxiv.org/abs/1605.06640">语言解释器</a>。机器学习是一个新的编程范式，即便它满身的数值、微分和并行标签让人觉得有些奇怪。像任何工程领域一样，现有可用的工具对将来工作的广度和质量有着不可估量的影响。</p>
+
+<p>所有这些表明，机器学习系统的设计者要面对极其严峻的挑战。诚然如是，也有好消息：相同的问题也曾困扰语言研究者们数十年！如果说离彻底解决尚远，那这些问题至少已被深入地研究过了。想要发挥这个新领域的全部潜能，机器学习和编程语言社区必须联合起来。那时真正的挑战是如何把两组完全不同的专业知识整合为一体。</p>
+
+<p>我们能创造一个把数值、微分、并行作为基本功能，且毋须牺牲传统的编程理念和智慧的系统吗？这将是编程语言在接下来十年里需要回答的一个基本问题。</p>
+<div class="footnotes">
+  <ol>
+    <li id="fn:greenspun">
+      <p>引申自 <a href="https://en.wikipedia.org/wiki/Greenspun%27s_tenth_rule">Philip Greenspun</a>&nbsp;<a href="#fnref:greenspun" class="reversefootnote">&#8617;</a></p>
+    </li>
+    <li id="fn:tf">
+      <p>本文以 TensorFlow 为例。读者可以自行替换为其它“先定义—后计算”类型的框架，比如 CNTK 或 MXNet。&nbsp;<a href="#fnref:tf" class="reversefootnote">&#8617;</a></p>
+    </li>
+    <li id="fn:ast">
+      <p>TensorFlow 的图本质上是一种基于数据流的抽象语法树（AST）。&nbsp;<a href="#fnref:ast" class="reversefootnote">&#8617;</a></p>
+    </li>
+    <li id="fn:types">
+      <p>不可否认，当前系统的内部已全范围覆盖从完全动态（PyTorch 和它的 ATen 后端）到异常地静态（TensorFlow 的 XLA 和 MXNet 中，所有维度在图运算之前都已知）等设计。&nbsp;<a href="#fnref:types" class="reversefootnote">&#8617;</a></p>
+    </li>
+    <li id="fn:chris">
+      <p>一个有趣的佐证是，Google Brain 正加大力度雇用编程语言专家，比如 <a href="https://techcrunch.com/2017/08/14/swift-creator-chris-lattner-joins-google-brain-after-tesla-autopilot-stint/">Chris Lattner</a>。&nbsp;<a href="#fnref:chris" class="reversefootnote">&#8617;</a></p>
+    </li>
+  </ol>
+</div>
+
+
+</div>
+
+
+
+    <div class="footer">
+      Julia is a <a href="https://numfocus.org/projects/index.html">NumFocus project</a>.
+      We thank <a href="https://fastly.com">Fastly</a> for their generous infrastructural support.
+      
+      <a href="https://github.com/juliakorea/translate-home/edit/master/src/blog/_posts/2017-12-20-ml&pl-cn.md">Edit this page on GitHub.</a>
+    </div>
+
+    <!-- Add "contribute" link to the Transifex language dropdown -->
+    <!--<script>
+      // Create a link element for the translation prompt
+      var txPromptLink = document.createElement( "a" );
+      txPromptLink.href = "https://www.transifex.com/julialang-i18n/julialang-web/";
+      txPromptLink.appendChild( document.createTextNode( "Add your language!" ) );
+      txPromptLink.style.fontWeight = "bold";
+
+      // Wrap the translation prompt link in a list item element
+      var txPrompt = document.createElement( "li" );
+      txPrompt.appendChild( txPromptLink );
+
+      // Add the translation prompt list item to the list of languages
+      document.getElementById( "tx-live-lang-picker" ).appendChild( txPrompt );
+    </script>-->
+
+<!--Flipcause Integration v3.0// Flipcause Integration Instructions:
+    Install the following code block once in the website Header (after <head> tag) -->
+
+<style>
+
+  .fc-black_overlay{
+  display:none; position: fixed; z-index:1000001; top: 0%;left: 0%;width: 100%;height: 100%;
+  background-color: black; filter: alpha(opacity=50); cursor:pointer; opacity:0.5;
+  }
+
+  .fc-white_content {
+  opacity:1; display:none; margin-top: -320px; margin-left: -485px; width:970px; height:640px;
+  position:fixed; top:50%; left:50%; border: none;z-index:1000002;overflow: auto;
+  }
+
+  .fc-main-box{
+  opacity:1; display:none; margin:15px auto 0 auto; width:930px; position:relative; z-index:1000003;
+  }
+
+  .fc-widget_close{
+  opacity:1; content:url(http://i1338.photobucket.com/albums/o691/WeCause/X_zpse4a7e538.png);
+  position:absolute; z-index=1000004; right:-16px; top:-16px; display:block; cursor:pointer;
+  }
+
+  .floating_button{
+  display: block; margin-top: 0px; margin-left: 0px; width:auto ; height: auto;
+  position:fixed; z-index:999999; overflow: auto;
+  }
+
+  @keyframes backfadesin {
+  from { opacity:0; }
+  to {opacity:.5;}
+  }
+
+  @-moz-keyframes backfadesin {
+  from { opacity:0; }
+  to {opacity:.5;}
+  }
+
+  @-webkit-keyframes backfadesin {
+  from { opacity:0; }
+  to {opacity:.5;}
+  }
+
+  @-o-keyframes backfadesin {
+  from { opacity:0; }
+  to {opacity:.5;}
+  }
+
+
+  @-ms-keyframes backfadesin {
+  from { opacity:0; }
+  to {opacity:.5;}
+  }
+
+  @keyframes fadesin {
+  0%{ opacity:0; }
+  50%{ opacity:0; }
+  75% {opacity: 0; transform: translateY(20px);}
+  100% {opacity: 1; transform: translateY(0);}
+  }
+
+  @-moz-keyframes fadesin {
+  0%{ opacity:0; }
+  50%{ opacity:0; }
+  75% {opacity: 0; -moz-transform: translateY(20px);}
+  100% {opacity: 1; -moz-transform: translateY(0);}
+  }
+
+  @-webkit-keyframes fadesin {
+  0%{ opacity:0; }
+  50%{ opacity:0; }
+  75% {opacity: 0; -webkit-transform: translateY(20px);}
+  100% {opacity: 1; -webkit-transform: translateY(0);}
+  }
+
+  @-o-keyframes fadesin {
+  0%{ opacity:0; }
+  50%{ opacity:0; }
+  75% {opacity: 0; -o-transform: translateY(20px);}
+  100% {opacity: 1; -o-transform: translateY(0);}
+  }
+
+  @-ms-keyframes fadesin {
+  0%{ opacity:0; }
+  50%{ opacity:0; }
+  75% {opacity: 0; -ms-transform: translateY(20px);}
+  100% {opacity: 1; -ms-transform: translateY(0);}
+  }
+
+</style>
+
+<script>
+
+  function open_window(cause_id) {
+  var  protocol=String(document.location.protocol);
+  var new_url;
+  if( /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)){
+  new_url="https://www.flipcause.com/widget/"+cause_id
+  window.open(new_url);
+  }
+
+  else {
+  document.getElementById("fc-fade").style.display = "block";
+  document.getElementById("fc-fade").style.webkitAnimation = "backfadesin 1s";
+  document.getElementById("fc-fade").style.animation = "backfadesin 1s";
+  document.getElementById("fc-fade").style.mozAnimation = "backfadesin 1s";
+  document.getElementById("fc-light").style.display = "block";
+  document.getElementById("fc-light").style.webkitAnimation = "fadesin 1.5s";
+  document.getElementById("fc-light").style.animation = "fadesin 1.5s";
+  document.getElementById("fc-light").style.mozAnimation = "fadesin 1.5s";
+  document.getElementById("fc-main").style.display = "block";
+  document.getElementById("fc-main").style.webkitAnimation = "fadesin 1.5s";
+  document.getElementById("fc-main").style.animation = "fadesin 1.5s";
+  document.getElementById("fc-main").style.mozAnimation = "fadesin 1.5s";
+  document.getElementById("fc-close").style.display = "block";
+  document.getElementById("fc-close").style.webkitAnimation = "fadesin 1.5s";
+  document.getElementById("fc-close").style.animation = "fadesin 1.5s";
+  document.getElementById("fc-close").style.mozAnimation = "fadesin 1.5s";
+  document.getElementById("fc-myFrame").style.display = "block";
+  document.getElementById("fc-myFrame").style.webkitAnimation = "fadesin 1.5s";
+  document.getElementById("fc-myFrame").style.animation = "fadesin 1.5s";
+  document.getElementById("fc-myFrame").style.mozAnimation = "fadesin 1.5s";
+  document.getElementById("fc-myFrame").src="https://www.flipcause.com/widget/"+cause_id;
+  }
+  }
+
+
+  function close_window() {
+  document.getElementById("fc-fade").style.display="none";
+  document.getElementById("fc-light").style.display="none";
+  document.getElementById("fc-main").style.display="none";
+  document.getElementById("fc-close").style.display="none";
+  document.getElementById("fc-myFrame").style.display="none";
+  }
+
+</script>
+
+<div id="fc-fade" class="fc-black_overlay" onclick="close_window()"></div>
+<div id="fc-light" class="fc-white_content">
+  <div id="fc-main" class="fc-main-box">
+    <div id="fc-close" class="fc-widget_close" onclick="close_window()"></div>
+    <iframe id="fc-myFrame" iframe height="580" width="925"
+            style="border: 0; border-radius: 5px 5px 5px 5px; box-shadow: 0 0 8px rgba(0, 0, 0, 0.5);"
+            scrolling="no" src=""></iframe>
+  </div>
+</div>
+
+<!--END Flipcause Main Integration Code-->
+
+    <div style="background: #ccc; border-radius: 0px 0px 0px 0px; font-weight: normal;
+                font-family: Arial, Helvetica, sans-serif; border: none; box-shadow: none;
+                left: 50%; margin-left: -72.5px; clear: both; display: block; width: 145px;
+                height: 45px; line-height: 2.8; position: relative; font-size: 16px;
+                text-align: center; cursor: pointer; color: #fff; text-decoration: none; z-index:1"
+         onclick="open_window('MjI1Nw==')">
+      Donate Now
+    </div>
+    
+  </div><!-- main wrapper -->
+</body>
+</html>
