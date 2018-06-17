@@ -364,7 +364,7 @@ Stacktrace:
 try bad()
 catch
     x
-end</code></pre><p><code>catch</code>절은 꼭 필요한 것은 아닙니다. 생략한다면 기본 반환값은 <code>nothing</code>입니다.</p><pre><code class="language-julia-repl">julia&gt; try error() end # Returns nothing</code></pre><p><code>try/catch</code>문의 장점은 호출 함수의 스택에서 훨씬 더 높은 레벨로 깊게 중첩된 계산을 즉시 풀 수 있는 능력에 있습니다. 오류가 발생하지 않은 상황이 있지만 스택을 풀어 더 높은 레벨로 값을 전달하는 것이 바람직합니다. Julia는 고급 오류 처리를 위해 <code>rethrow</code>, <code>backtrace</code>, <code>catch_backtrace</code>와 같은 함수들을 제공합니다.</p><h3><a class="nav-anchor" id="finally문-1" href="#finally문-1"><code>finally</code>문</a></h3><p>상태 변경을 수행하거나 파일과 같은 리소스를 사용하는 코드에서는 일반적으로 코드가 끝났을 때 수행해야 하는 정리 작업(예: 파일 닫기)이 있습니다. 예외는 이 작업을 어쩌면 복잡하게 만들 수 있습니다. 왜냐하면 코드 블록이 정상적으로 끝나기 전에 종료될 수 있기 때문입니다. <code>finally</code> 키워드는 주어진 코드 블록의 종료가 정상 유무를 가리지 않고 특정 코드를 실행하게 해줍니다.</p><p>예를 들면, 열린 파일을 확실히 닫을 수 있는 방법은 다음과 같습니다.</p><pre><code class="language-julia">f = open(&quot;file&quot;)
+end</code></pre><p><code>try/catch</code>문의 장점은 호출 함수의 스택에서 훨씬 더 높은 레벨로 깊게 중첩된 계산을 즉시 풀 수 있는 능력에 있습니다. 오류가 발생하지 않은 상황이 있지만 스택을 풀어 더 높은 레벨로 값을 전달하는 것이 바람직합니다. Julia는 고급 오류 처리를 위해 <code>rethrow</code>, <code>backtrace</code>, <code>catch_backtrace</code>와 같은 함수들을 제공합니다.</p><h3><a class="nav-anchor" id="finally문-1" href="#finally문-1"><code>finally</code>문</a></h3><p>상태 변경을 수행하거나 파일과 같은 리소스를 사용하는 코드에서는 일반적으로 코드가 끝났을 때 수행해야 하는 정리 작업(예: 파일 닫기)이 있습니다. 예외는 이 작업을 어쩌면 복잡하게 만들 수 있습니다. 왜냐하면 코드 블록이 정상적으로 끝나기 전에 종료될 수 있기 때문입니다. <code>finally</code> 키워드는 주어진 코드 블록의 종료가 정상 유무를 가리지 않고 특정 코드를 실행하게 해줍니다.</p><p>예를 들면, 열린 파일을 확실히 닫을 수 있는 방법은 다음과 같습니다.</p><pre><code class="language-julia">f = open(&quot;file&quot;)
 try
     # operate on file f
 finally
