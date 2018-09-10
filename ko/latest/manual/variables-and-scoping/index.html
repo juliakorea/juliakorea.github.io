@@ -196,7 +196,7 @@ julia&gt; Fs[2]()
        end;
 
 julia&gt; f()
-0</code></pre><p>However, it is occasionally useful to reuse an existing variable as the iteration variable. This can be done conveniently by adding the keyword <code>outer</code>:</p><pre><code class="language-julia-repl">julia&gt; function f()
+0</code></pre><p>However, it is occasionally useful to reuse an existing local variable as the iteration variable. This can be done conveniently by adding the keyword <code>outer</code>:</p><pre><code class="language-julia-repl">julia&gt; function f()
            i = 0
            for outer i = 1:3
            end
@@ -244,7 +244,7 @@ julia&gt; pointer.([s1, s2], 1)
 julia&gt; a = [1]
 WARNING: redefining constant a
 1-element Array{Int64,1}:
- 1</code></pre><p>Note that although possible, changing the value of a variable that is declared as constant is strongly discouraged. For instance, if a method references a constant and is already compiled before the constant is changed then it might keep using the old value:</p><pre><code class="language-julia-repl">julia&gt; const x = 1
+ 1</code></pre><p>Note that although sometimes possible, changing the value of a <code>const</code> variable is strongly discouraged, and is intended only for convenience during interactive use. Changing constants can cause various problems or unexpected behaviors. For instance, if a method references a constant and is already compiled before the constant is changed then it might keep using the old value:</p><pre><code class="language-julia-repl">julia&gt; const x = 1
 1
 
 julia&gt; f() = x
