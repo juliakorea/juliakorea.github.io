@@ -17,6 +17,126 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
+    "location": "NEWS/#",
+    "page": "Julia v1.1 Release Notes",
+    "title": "Julia v1.1 Release Notes",
+    "category": "page",
+    "text": ""
+},
+
+{
+    "location": "NEWS/#Julia-v1.1-Release-Notes-1",
+    "page": "Julia v1.1 Release Notes",
+    "title": "Julia v1.1 Release Notes",
+    "category": "section",
+    "text": ""
+},
+
+{
+    "location": "NEWS/#New-language-features-1",
+    "page": "Julia v1.1 Release Notes",
+    "title": "New language features",
+    "category": "section",
+    "text": "An exception stack is maintained on each task to make exception handling more robust and enable root cause analysis using catch_stack (#28878).\nThe experimental macro Base.@locals returns a dictionary of current local variable names and values (#29733)."
+},
+
+{
+    "location": "NEWS/#Language-changes-1",
+    "page": "Julia v1.1 Release Notes",
+    "title": "Language changes",
+    "category": "section",
+    "text": "Parser inputs ending with a comma are now consistently treated as incomplete. Previously they were sometimes parsed as tuples, depending on whitespace (#28506).\nSpaces were accidentally allowed in broadcast call syntax, e.g. f. (x). They are now disallowed, consistent with normal function call syntax (#29781).\nBig integer literals and command syntax (backticks) are now parsed with the name of the macro (@int128_str, @uint128_str, @big_str, @cmd) qualified to refer to the Core module (#29968).\nUsing the same name for both a local variable and a static parameter is now an error instead of a warning (#29429).\nMethod signatures such as f(::Type{T}, ::T) where {T <: X} and f(::Type{X}, ::Any) are now considered ambiguous. Previously a bug caused the first one to be considered more specific (#30160)."
+},
+
+{
+    "location": "NEWS/#Command-line-option-changes-1",
+    "page": "Julia v1.1 Release Notes",
+    "title": "Command-line option changes",
+    "category": "section",
+    "text": "When a script run in interactive mode (-i) throws an error, the REPL now starts after the error is displayed. Previously the REPL only started if the script completed without error (#21233)."
+},
+
+{
+    "location": "NEWS/#New-library-functions-1",
+    "page": "Julia v1.1 Release Notes",
+    "title": "New library functions",
+    "category": "section",
+    "text": "splitpath(p::String) function, which is the opposite of joinpath(parts...): it splits a filepath into its components (#28156).\nisnothing(::Any) function, to check whether something is a Nothing, returns a Bool (#29679).\ngetpid(::Process) method (#24064).\neachrow, eachcol and eachslice functions provide efficient iterators over slices of arrays (#29749).\nfieldtypes(T::Type) which return the declared types of the field in type T (#29600).\nuuid5 has been added to the UUIDs standard library (#28761).\nPredicate functions Sys.isfreebsd, Sys.isopenbsd, Sys.isnetbsd, and Sys.isdragonfly for detecting BSD systems have been added (#30249)."
+},
+
+{
+    "location": "NEWS/#Standard-library-changes-1",
+    "page": "Julia v1.1 Release Notes",
+    "title": "Standard library changes",
+    "category": "section",
+    "text": "CartesianIndices can now be constructed from two CartesianIndexes I and J with I:J (#29440).\nCartesianIndices support broadcasting arithmetic (+ and -) with a CartesianIndex (#29890).\ncopy! support for arrays, dicts, and sets has been moved to Base from the Future package (#29173).\nChannels now convert inserted values (like containers) instead of requiring types to match (#29092).\nrange can accept the stop value as a positional argument, e.g. range(1,10,step=2) (#28708).\ndiff now supports arrays of arbitrary dimensionality and can operate over any dimension (#29827).\nThe constructor BigFloat(::BigFloat) now respects the global precision setting and always returns a BigFloat with precision equal to precision(BigFloat) (#29127). The optional precision argument to override the global setting is now a keyword instead of positional argument (#29157).\nThe use of scientific notation when printing BigFloat values is now consistent with other floating point types (#29211).\nRegex now behave like a scalar when used in broadcasting (#29913).\nChar now behaves like a read-only 0-dimensional array (#29819).\nparse now allows strings representing integer 0 and 1 for type Bool (#29980).\nBase.tail now works on named tuples (#29595).\nThe process id is appended to malloc log files in order to track memory allocations of multiple processes (#29969).\nBase.julia_cmd now propagates the --inline=(yes|no) flag (#29858).\nBase.@kwdef can now be used for parametric structs, and for structs with supertypes (#29316).\nmerge(::NamedTuple, ::NamedTuple...) can now be used with more than 2 NamedTuples (#29259).\nFuture.copy! has been moved to Base (#29178).\nNew ncodeunits(c::Char) method as a fast equivalent to ncodeunits(string(c)) (#29153).\nNew sort!(::AbstractArray; dims) method that can sort the array along the dims dimension (#28902).\nrange now accept stop as a positional argument (#28708).\nparse(Bool, str) is now supported (#29997).\ncopyto!(::AbstractMatrix, ::UniformScaling) supports rectangular matrices now (#28790).\nIn put!(c::Channel{T}, v), v now gets converted to T as put! is being called (#29092).\ncurrent_project() now searches the parent directories of a Git repository for a Project.toml file. This also affects the behavior of the --project command line option when using the default --project=@. (#29108)."
+},
+
+{
+    "location": "NEWS/#Dates-1",
+    "page": "Julia v1.1 Release Notes",
+    "title": "Dates",
+    "category": "section",
+    "text": "New DateTime(::Date, ::Time) constructor (#29754).\nTimeZone now behave like a scalar when used in broadcasting (#30159)."
+},
+
+{
+    "location": "NEWS/#InteractiveUtils-1",
+    "page": "Julia v1.1 Release Notes",
+    "title": "InteractiveUtils",
+    "category": "section",
+    "text": "edit can now be called on a module to edit the file that defines it (#29636).\nAll compiler-reflection tools (i.e. the code_ class of functions and macros) now print accurate line number and inlining information in a common style, and take an optional parameter (debuginfo=:default) to control the verbosity of the metadata shown (#29893)."
+},
+
+{
+    "location": "NEWS/#LinearAlgebra-1",
+    "page": "Julia v1.1 Release Notes",
+    "title": "LinearAlgebra",
+    "category": "section",
+    "text": "isdiag and isposdef for Diagonal and UniformScaling (#29638).\nmul!, rmul! and lmul! methods for UniformScaling (#29506).\nSymmetric and Hermitian matrices now preserve the wrapper when scaled with a number (#29469).\nExponentiation operator ^ now supports raising a Irrational to an AbstractMatrix power (#29782)."
+},
+
+{
+    "location": "NEWS/#Random-1",
+    "page": "Julia v1.1 Release Notes",
+    "title": "Random",
+    "category": "section",
+    "text": "randperm and randcycle now use the type of their argument to determine the element type of the returned array (#29670).\nA new method rand(::Tuple) implements sampling from the values of a tuple (#25278).\nserialize and deserialize now accept a filename argument, like write and read (#30151)."
+},
+
+{
+    "location": "NEWS/#SparseArrays-1",
+    "page": "Julia v1.1 Release Notes",
+    "title": "SparseArrays",
+    "category": "section",
+    "text": "sprandn now supports specifying the output element type (#30083)."
+},
+
+{
+    "location": "NEWS/#Statistics-1",
+    "page": "Julia v1.1 Release Notes",
+    "title": "Statistics",
+    "category": "section",
+    "text": "mean and var now handles the empty case (#29033)."
+},
+
+{
+    "location": "NEWS/#External-dependencies-1",
+    "page": "Julia v1.1 Release Notes",
+    "title": "External dependencies",
+    "category": "section",
+    "text": "7zip (bundled with Julia on Windows) has been upgraded from version 16.04 to 18.05 (#30035).\nBusybox is no longer bundled with Julia on Windows (#30022).\nOpenBLAS has been upgraded from 0.3.2 to 0.3.3 (#29845).\nThe source code for Pkg is no longer included in JuliaLang/julia. Pkg is instead downloaded during the build process (#29615).\nLLVM has been upgraded to 6.0.1 and support for LLVM < 6.0 has been dropped (#28745, #28696)."
+},
+
+{
+    "location": "NEWS/#Deprecated-or-removed-1",
+    "page": "Julia v1.1 Release Notes",
+    "title": "Deprecated or removed",
+    "category": "section",
+    "text": "one(i::CartesianIndex) should be replaced with oneunit(i::CartesianIndex) (#29442).\nThe internal array Base.Grisu.DIGITS is deprecated; new code should use Base.Grisu.getbuf() to get an appropriate task-local buffer and pass it to grisu() instead (#29907).\nThe internal function Base._default_type(T) has been removed. Calls to it should be replaced with just the argument T (#29739).\npeakflops has been scheduled to move from InteractiveUtils to LinearAlgebra but is already now available as LinearAlgebra.peakflops (#29978)."
+},
+
+{
     "location": "manual/getting-started/#",
     "page": "시작하기",
     "title": "시작하기",
@@ -437,7 +557,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Strings",
     "title": "Regular Expressions",
     "category": "section",
-    "text": "Julia has Perl-compatible regular expressions (regexes), as provided by the PCRE library. Regular expressions are related to strings in two ways: the obvious connection is that regular expressions are used to find regular patterns in strings; the other connection is that regular expressions are themselves input as strings, which are parsed into a state machine that can be used to efficiently search for patterns in strings. In Julia, regular expressions are input using non-standard string literals prefixed with various identifiers beginning with r. The most basic regular expression literal without any options turned on just uses r\"...\":julia> r\"^\\s*(?:#|$)\"\nr\"^\\s*(?:#|$)\"\n\njulia> typeof(ans)\nRegexTo check if a regex matches a string, use occursin:julia> occursin(r\"^\\s*(?:#|$)\", \"not a comment\")\nfalse\n\njulia> occursin(r\"^\\s*(?:#|$)\", \"# a comment\")\ntrueAs one can see here, occursin simply returns true or false, indicating whether a match for the given regex occurs in the string. Commonly, however, one wants to know not just whether a string matched, but also how it matched. To capture this information about a match, use the match function instead:julia> match(r\"^\\s*(?:#|$)\", \"not a comment\")\n\njulia> match(r\"^\\s*(?:#|$)\", \"# a comment\")\nRegexMatch(\"#\")If the regular expression does not match the given string, match returns nothing – a special value that does not print anything at the interactive prompt. Other than not printing, it is a completely normal value and you can test for it programmatically:m = match(r\"^\\s*(?:#|$)\", line)\nif m === nothing\n    println(\"not a comment\")\nelse\n    println(\"blank or comment\")\nendIf a regular expression does match, the value returned by match is a RegexMatch object. These objects record how the expression matches, including the substring that the pattern matches and any captured substrings, if there are any. This example only captures the portion of the substring that matches, but perhaps we want to capture any non-blank text after the comment character. We could do the following:julia> m = match(r\"^\\s*(?:#\\s*(.*?)\\s*$|$)\", \"# a comment \")\nRegexMatch(\"# a comment \", 1=\"a comment\")When calling match, you have the option to specify an index at which to start the search. For example:julia> m = match(r\"[0-9]\",\"aaaa1aaaa2aaaa3\",1)\nRegexMatch(\"1\")\n\njulia> m = match(r\"[0-9]\",\"aaaa1aaaa2aaaa3\",6)\nRegexMatch(\"2\")\n\njulia> m = match(r\"[0-9]\",\"aaaa1aaaa2aaaa3\",11)\nRegexMatch(\"3\")You can extract the following info from a RegexMatch object:the entire substring matched: m.match\nthe captured substrings as an array of strings: m.captures\nthe offset at which the whole match begins: m.offset\nthe offsets of the captured substrings as a vector: m.offsetsFor when a capture doesn\'t match, instead of a substring, m.captures contains nothing in that position, and m.offsets has a zero offset (recall that indices in Julia are 1-based, so a zero offset into a string is invalid). Here is a pair of somewhat contrived examples:julia> m = match(r\"(a|b)(c)?(d)\", \"acd\")\nRegexMatch(\"acd\", 1=\"a\", 2=\"c\", 3=\"d\")\n\njulia> m.match\n\"acd\"\n\njulia> m.captures\n3-element Array{Union{Nothing, SubString{String}},1}:\n \"a\"\n \"c\"\n \"d\"\n\njulia> m.offset\n1\n\njulia> m.offsets\n3-element Array{Int64,1}:\n 1\n 2\n 3\n\njulia> m = match(r\"(a|b)(c)?(d)\", \"ad\")\nRegexMatch(\"ad\", 1=\"a\", 2=nothing, 3=\"d\")\n\njulia> m.match\n\"ad\"\n\njulia> m.captures\n3-element Array{Union{Nothing, SubString{String}},1}:\n \"a\"\n nothing\n \"d\"\n\njulia> m.offset\n1\n\njulia> m.offsets\n3-element Array{Int64,1}:\n 1\n 0\n 2It is convenient to have captures returned as an array so that one can use destructuring syntax to bind them to local variables:julia> first, second, third = m.captures; first\n\"a\"Captures can also be accessed by indexing the RegexMatch object with the number or name of the capture group:julia> m=match(r\"(?<hour>\\d+):(?<minute>\\d+)\",\"12:45\")\nRegexMatch(\"12:45\", hour=\"12\", minute=\"45\")\n\njulia> m[:minute]\n\"45\"\n\njulia> m[2]\n\"45\"Captures can be referenced in a substitution string when using replace by using \\n to refer to the nth capture group and prefixing the substitution string with s. Capture group 0 refers to the entire match object. Named capture groups can be referenced in the substitution with g<groupname>. For example:julia> replace(\"first second\", r\"(\\w+) (?<agroup>\\w+)\" => s\"\\g<agroup> \\1\")\n\"second first\"Numbered capture groups can also be referenced as \\g<n> for disambiguation, as in:julia> replace(\"a\", r\".\" => s\"\\g<0>1\")\n\"a1\"You can modify the behavior of regular expressions by some combination of the flags i, m, s, and x after the closing double quote mark. These flags have the same meaning as they do in Perl, as explained in this excerpt from the perlre manpage:i   Do case-insensitive pattern matching.\n\n    If locale matching rules are in effect, the case map is taken\n    from the current locale for code points less than 255, and\n    from Unicode rules for larger code points. However, matches\n    that would cross the Unicode rules/non-Unicode rules boundary\n    (ords 255/256) will not succeed.\n\nm   Treat string as multiple lines.  That is, change \"^\" and \"$\"\n    from matching the start or end of the string to matching the\n    start or end of any line anywhere within the string.\n\ns   Treat string as single line.  That is, change \".\" to match any\n    character whatsoever, even a newline, which normally it would\n    not match.\n\n    Used together, as r\"\"ms, they let the \".\" match any character\n    whatsoever, while still allowing \"^\" and \"$\" to match,\n    respectively, just after and just before newlines within the\n    string.\n\nx   Tells the regular expression parser to ignore most whitespace\n    that is neither backslashed nor within a character class. You\n    can use this to break up your regular expression into\n    (slightly) more readable parts. The \'#\' character is also\n    treated as a metacharacter introducing a comment, just as in\n    ordinary code.For example, the following regex has all three flags turned on:julia> r\"a+.*b+.*?d$\"ism\nr\"a+.*b+.*?d$\"ims\n\njulia> match(r\"a+.*b+.*?d$\"ism, \"Goodbye,\\nOh, angry,\\nBad world\\n\")\nRegexMatch(\"angry,\\nBad world\")The r\"...\" literal is constructed without interpolation and unescaping (except for quotation mark \" which still has to be escaped). Here is an example showing the difference from standard string literals:julia> x = 10\n10\n\njulia> r\"$x\"\nr\"$x\"\n\njulia> \"$x\"\n\"10\"\n\njulia> r\"\\x\"\nr\"\\x\"\n\njulia> \"\\x\"\nERROR: syntax: invalid escape sequenceTriple-quoted regex strings, of the form r\"\"\"...\"\"\", are also supported (and may be convenient for regular expressions containing quotation marks or newlines).The Regex() constructor may be used to create a valid regex string programmatically.  This permits using the contents of string variables and other string operations when constructing the regex string. Any of the regex codes above can be used within the single string argument to Regex(). Here are some examples:julia> using Dates\n\njulia> d = Date(1962,7,10)\n1962-07-10\n\njulia> regex_d = Regex(\"Day \" * string(day(d)))\nr\"Day 10\"\n\njulia> match(regex_d, \"It happened on Day 10\")\nRegexMatch(\"Day 10\")\n\njulia> name = \"Jon\"\n\"Jon\"\n\njulia> regex_name = Regex(\"[\\\"( ]$name[\\\") ]\")  # interpolate value of name\nr\"[\\\"( ]Jon[\\\") ]\"\n\njulia> match(regex_name,\" Jon \")\nRegexMatch(\" Jon \")\n\njulia> match(regex_name,\"[Jon]\") === nothing\ntrue"
+    "text": "Julia has Perl-compatible regular expressions (regexes), as provided by the PCRE library. Regular expressions are related to strings in two ways: the obvious connection is that regular expressions are used to find regular patterns in strings; the other connection is that regular expressions are themselves input as strings, which are parsed into a state machine that can be used to efficiently search for patterns in strings. In Julia, regular expressions are input using non-standard string literals prefixed with various identifiers beginning with r. The most basic regular expression literal without any options turned on just uses r\"...\":julia> r\"^\\s*(?:#|$)\"\nr\"^\\s*(?:#|$)\"\n\njulia> typeof(ans)\nRegexTo check if a regex matches a string, use occursin:julia> occursin(r\"^\\s*(?:#|$)\", \"not a comment\")\nfalse\n\njulia> occursin(r\"^\\s*(?:#|$)\", \"# a comment\")\ntrueAs one can see here, occursin simply returns true or false, indicating whether a match for the given regex occurs in the string. Commonly, however, one wants to know not just whether a string matched, but also how it matched. To capture this information about a match, use the match function instead:julia> match(r\"^\\s*(?:#|$)\", \"not a comment\")\n\njulia> match(r\"^\\s*(?:#|$)\", \"# a comment\")\nRegexMatch(\"#\")If the regular expression does not match the given string, match returns nothing – a special value that does not print anything at the interactive prompt. Other than not printing, it is a completely normal value and you can test for it programmatically:m = match(r\"^\\s*(?:#|$)\", line)\nif m === nothing\n    println(\"not a comment\")\nelse\n    println(\"blank or comment\")\nendIf a regular expression does match, the value returned by match is a RegexMatch object. These objects record how the expression matches, including the substring that the pattern matches and any captured substrings, if there are any. This example only captures the portion of the substring that matches, but perhaps we want to capture any non-blank text after the comment character. We could do the following:julia> m = match(r\"^\\s*(?:#\\s*(.*?)\\s*$|$)\", \"# a comment \")\nRegexMatch(\"# a comment \", 1=\"a comment\")When calling match, you have the option to specify an index at which to start the search. For example:julia> m = match(r\"[0-9]\",\"aaaa1aaaa2aaaa3\",1)\nRegexMatch(\"1\")\n\njulia> m = match(r\"[0-9]\",\"aaaa1aaaa2aaaa3\",6)\nRegexMatch(\"2\")\n\njulia> m = match(r\"[0-9]\",\"aaaa1aaaa2aaaa3\",11)\nRegexMatch(\"3\")You can extract the following info from a RegexMatch object:the entire substring matched: m.match\nthe captured substrings as an array of strings: m.captures\nthe offset at which the whole match begins: m.offset\nthe offsets of the captured substrings as a vector: m.offsetsFor when a capture doesn\'t match, instead of a substring, m.captures contains nothing in that position, and m.offsets has a zero offset (recall that indices in Julia are 1-based, so a zero offset into a string is invalid). Here is a pair of somewhat contrived examples:julia> m = match(r\"(a|b)(c)?(d)\", \"acd\")\nRegexMatch(\"acd\", 1=\"a\", 2=\"c\", 3=\"d\")\n\njulia> m.match\n\"acd\"\n\njulia> m.captures\n3-element Array{Union{Nothing, SubString{String}},1}:\n \"a\"\n \"c\"\n \"d\"\n\njulia> m.offset\n1\n\njulia> m.offsets\n3-element Array{Int64,1}:\n 1\n 2\n 3\n\njulia> m = match(r\"(a|b)(c)?(d)\", \"ad\")\nRegexMatch(\"ad\", 1=\"a\", 2=nothing, 3=\"d\")\n\njulia> m.match\n\"ad\"\n\njulia> m.captures\n3-element Array{Union{Nothing, SubString{String}},1}:\n \"a\"\n nothing\n \"d\"\n\njulia> m.offset\n1\n\njulia> m.offsets\n3-element Array{Int64,1}:\n 1\n 0\n 2It is convenient to have captures returned as an array so that one can use destructuring syntax to bind them to local variables:julia> first, second, third = m.captures; first\n\"a\"Captures can also be accessed by indexing the RegexMatch object with the number or name of the capture group:julia> m=match(r\"(?<hour>\\d+):(?<minute>\\d+)\",\"12:45\")\nRegexMatch(\"12:45\", hour=\"12\", minute=\"45\")\n\njulia> m[:minute]\n\"45\"\n\njulia> m[2]\n\"45\"Captures can be referenced in a substitution string when using replace by using \\n to refer to the nth capture group and prefixing the substitution string with s. Capture group 0 refers to the entire match object. Named capture groups can be referenced in the substitution with \\g<groupname>. For example:julia> replace(\"first second\", r\"(\\w+) (?<agroup>\\w+)\" => s\"\\g<agroup> \\1\")\n\"second first\"Numbered capture groups can also be referenced as \\g<n> for disambiguation, as in:julia> replace(\"a\", r\".\" => s\"\\g<0>1\")\n\"a1\"You can modify the behavior of regular expressions by some combination of the flags i, m, s, and x after the closing double quote mark. These flags have the same meaning as they do in Perl, as explained in this excerpt from the perlre manpage:i   Do case-insensitive pattern matching.\n\n    If locale matching rules are in effect, the case map is taken\n    from the current locale for code points less than 255, and\n    from Unicode rules for larger code points. However, matches\n    that would cross the Unicode rules/non-Unicode rules boundary\n    (ords 255/256) will not succeed.\n\nm   Treat string as multiple lines.  That is, change \"^\" and \"$\"\n    from matching the start or end of the string to matching the\n    start or end of any line anywhere within the string.\n\ns   Treat string as single line.  That is, change \".\" to match any\n    character whatsoever, even a newline, which normally it would\n    not match.\n\n    Used together, as r\"\"ms, they let the \".\" match any character\n    whatsoever, while still allowing \"^\" and \"$\" to match,\n    respectively, just after and just before newlines within the\n    string.\n\nx   Tells the regular expression parser to ignore most whitespace\n    that is neither backslashed nor within a character class. You\n    can use this to break up your regular expression into\n    (slightly) more readable parts. The \'#\' character is also\n    treated as a metacharacter introducing a comment, just as in\n    ordinary code.For example, the following regex has all three flags turned on:julia> r\"a+.*b+.*?d$\"ism\nr\"a+.*b+.*?d$\"ims\n\njulia> match(r\"a+.*b+.*?d$\"ism, \"Goodbye,\\nOh, angry,\\nBad world\\n\")\nRegexMatch(\"angry,\\nBad world\")The r\"...\" literal is constructed without interpolation and unescaping (except for quotation mark \" which still has to be escaped). Here is an example showing the difference from standard string literals:julia> x = 10\n10\n\njulia> r\"$x\"\nr\"$x\"\n\njulia> \"$x\"\n\"10\"\n\njulia> r\"\\x\"\nr\"\\x\"\n\njulia> \"\\x\"\nERROR: syntax: invalid escape sequenceTriple-quoted regex strings, of the form r\"\"\"...\"\"\", are also supported (and may be convenient for regular expressions containing quotation marks or newlines).The Regex() constructor may be used to create a valid regex string programmatically.  This permits using the contents of string variables and other string operations when constructing the regex string. Any of the regex codes above can be used within the single string argument to Regex(). Here are some examples:julia> using Dates\n\njulia> d = Date(1962,7,10)\n1962-07-10\n\njulia> regex_d = Regex(\"Day \" * string(day(d)))\nr\"Day 10\"\n\njulia> match(regex_d, \"It happened on Day 10\")\nRegexMatch(\"Day 10\")\n\njulia> name = \"Jon\"\n\"Jon\"\n\njulia> regex_name = Regex(\"[\\\"( ]$name[\\\") ]\")  # interpolate value of name\nr\"[\\\"( ]Jon[\\\") ]\"\n\njulia> match(regex_name,\" Jon \")\nRegexMatch(\" Jon \")\n\njulia> match(regex_name,\"[Jon]\") === nothing\ntrue"
 },
 
 {
@@ -2389,7 +2509,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Calling C and Fortran Code",
     "title": "Calling C and Fortran Code",
     "category": "section",
-    "text": "Though most code can be written in Julia, there are many high-quality, mature libraries for numerical computing already written in C and Fortran. To allow easy use of this existing code, Julia makes it simple and efficient to call C and Fortran functions. Julia has a \"no boilerplate\" philosophy: functions can be called directly from Julia without any \"glue\" code, code generation, or compilation – even from the interactive prompt. This is accomplished just by making an appropriate call with ccall syntax, which looks like an ordinary function call.The code to be called must be available as a shared library. Most C and Fortran libraries ship compiled as shared libraries already, but if you are compiling the code yourself using GCC (or Clang), you will need to use the -shared and -fPIC options. The machine instructions generated by Julia\'s JIT are the same as a native C call would be, so the resulting overhead is the same as calling a library function from C code. (Non-library function calls in both C and Julia can be inlined and thus may have even less overhead than calls to shared library functions. When both libraries and executables are generated by LLVM, it is possible to perform whole-program optimizations that can even optimize across this boundary, but Julia does not yet support that. In the future, however, it may do so, yielding even greater performance gains.)Shared libraries and functions are referenced by a tuple of the form (:function, \"library\") or (\"function\", \"library\") where function is the C-exported function name. library refers to the shared library name: shared libraries available in the (platform-specific) load path will be resolved by name, and if necessary a direct path may be specified.A function name may be used alone in place of the tuple (just :function or \"function\"). In this case the name is resolved within the current process. This form can be used to call C library functions, functions in the Julia runtime, or functions in an application linked to Julia.By default, Fortran compilers generate mangled names (for example, converting function names to lowercase or uppercase, often appending an underscore), and so to call a Fortran function via ccall you must pass the mangled identifier corresponding to the rule followed by your Fortran compiler.  Also, when calling a Fortran function, all inputs must be passed as pointers to allocated values on the heap or stack. This applies not only to arrays and other mutable objects which are normally heap-allocated, but also to scalar values such as integers and floats which are normally stack-allocated and commonly passed in registers when using C or Julia calling conventions.Finally, you can use ccall to actually generate a call to the library function. Arguments to ccall are as follows:A (:function, \"library\") pair, which must be written as a literal constant,\nOR\na function pointer (for example, from dlsym).\nReturn type (see below for mapping the declared C type to Julia)\nThis argument will be evaluated at compile-time, when the containing method is defined.\nA tuple of input types. The input types must be written as a literal tuple, not a tuple-valued variable or expression.\nThis argument will be evaluated at compile-time, when the containing method is defined.\nThe following arguments, if any, are the actual argument values passed to the function.As a complete but simple example, the following calls the clock function from the standard C library:julia> t = ccall((:clock, \"libc\"), Int32, ())\n2292761\n\njulia> t\n2292761\n\njulia> typeof(ans)\nInt32clock takes no arguments and returns an Int32. One common gotcha is that a 1-tuple must be written with a trailing comma. For example, to call the getenv function to get a pointer to the value of an environment variable, one makes a call like this:julia> path = ccall((:getenv, \"libc\"), Cstring, (Cstring,), \"SHELL\")\nCstring(@0x00007fff5fbffc45)\n\njulia> unsafe_string(path)\n\"/bin/bash\"Note that the argument type tuple must be written as (Cstring,), rather than (Cstring). This is because (Cstring) is just the expression Cstring surrounded by parentheses, rather than a 1-tuple containing Cstring:julia> (Cstring)\nCstring\n\njulia> (Cstring,)\n(Cstring,)In practice, especially when providing reusable functionality, one generally wraps ccall uses in Julia functions that set up arguments and then check for errors in whatever manner the C or Fortran function indicates them, propagating to the Julia caller as exceptions. This is especially important since C and Fortran APIs are notoriously inconsistent about how they indicate error conditions. For example, the getenv C library function is wrapped in the following Julia function, which is a simplified version of the actual definition from env.jl:function getenv(var::AbstractString)\n    val = ccall((:getenv, \"libc\"),\n                Cstring, (Cstring,), var)\n    if val == C_NULL\n        error(\"getenv: undefined variable: \", var)\n    end\n    unsafe_string(val)\nendThe C getenv function indicates an error by returning NULL, but other standard C functions indicate errors in various different ways, including by returning -1, 0, 1 and other special values. This wrapper throws an exception clearly indicating the problem if the caller tries to get a non-existent environment variable:julia> getenv(\"SHELL\")\n\"/bin/bash\"\n\njulia> getenv(\"FOOBAR\")\ngetenv: undefined variable: FOOBARHere is a slightly more complex example that discovers the local machine\'s hostname:function gethostname()\n    hostname = Vector{UInt8}(undef, 128)\n    ccall((:gethostname, \"libc\"), Int32,\n          (Ptr{UInt8}, Csize_t),\n          hostname, sizeof(hostname))\n    hostname[end] = 0; # ensure null-termination\n    return unsafe_string(pointer(hostname))\nendThis example first allocates an array of bytes, then calls the C library function gethostname to fill the array in with the hostname, takes a pointer to the hostname buffer, and converts the pointer to a Julia string, assuming that it is a NUL-terminated C string. It is common for C libraries to use this pattern of requiring the caller to allocate memory to be passed to the callee and filled in. Allocation of memory from Julia like this is generally accomplished by creating an uninitialized array and passing a pointer to its data to the C function. This is why we don\'t use the Cstring type here: as the array is uninitialized, it could contain NUL bytes. Converting to a Cstring as part of the ccall checks for contained NUL bytes and could therefore throw a conversion error."
+    "text": "Though most code can be written in Julia, there are many high-quality, mature libraries for numerical computing already written in C and Fortran. To allow easy use of this existing code, Julia makes it simple and efficient to call C and Fortran functions. Julia has a \"no boilerplate\" philosophy: functions can be called directly from Julia without any \"glue\" code, code generation, or compilation – even from the interactive prompt. This is accomplished just by making an appropriate call with ccall syntax, which looks like an ordinary function call.The code to be called must be available as a shared library. Most C and Fortran libraries ship compiled as shared libraries already, but if you are compiling the code yourself using GCC (or Clang), you will need to use the -shared and -fPIC options. The machine instructions generated by Julia\'s JIT are the same as a native C call would be, so the resulting overhead is the same as calling a library function from C code. (Non-library function calls in both C and Julia can be inlined and thus may have even less overhead than calls to shared library functions. When both libraries and executables are generated by LLVM, it is possible to perform whole-program optimizations that can even optimize across this boundary, but Julia does not yet support that. In the future, however, it may do so, yielding even greater performance gains.)Shared libraries and functions are referenced by a tuple of the form (:function, \"library\") or (\"function\", \"library\") where function is the C-exported function name. library refers to the shared library name: shared libraries available in the (platform-specific) load path will be resolved by name, and if necessary a direct path may be specified.A function name may be used alone in place of the tuple (just :function or \"function\"). In this case the name is resolved within the current process. This form can be used to call C library functions, functions in the Julia runtime, or functions in an application linked to Julia.By default, Fortran compilers generate mangled names (for example, converting function names to lowercase or uppercase, often appending an underscore), and so to call a Fortran function via ccall you must pass the mangled identifier corresponding to the rule followed by your Fortran compiler.  Also, when calling a Fortran function, all inputs must be passed as pointers to allocated values on the heap or stack. This applies not only to arrays and other mutable objects which are normally heap-allocated, but also to scalar values such as integers and floats which are normally stack-allocated and commonly passed in registers when using C or Julia calling conventions.Finally, you can use ccall to actually generate a call to the library function. Arguments to ccall are as follows:A (:function, \"library\") pair, which must be written as a literal constant,\nOR\na :function name symbol or \"function\" name string, which is resolved in the current process,\nOR\na function pointer (for example, from dlsym).\nReturn type (see below for mapping the declared C type to Julia)\nThis argument will be evaluated at compile-time, when the containing method is defined.\nA tuple of input types. The input types must be written as a literal tuple, not a tuple-valued variable or expression.\nThis argument will be evaluated at compile-time, when the containing method is defined.\nThe following arguments, if any, are the actual argument values passed to the function.As a complete but simple example, the following calls the clock function from the standard C library:julia> t = ccall((:clock, \"libc\"), Int32, ())\n2292761\n\njulia> t\n2292761\n\njulia> typeof(ans)\nInt32clock takes no arguments and returns an Int32. One common gotcha is that a 1-tuple must be written with a trailing comma. For example, to call the getenv function to get a pointer to the value of an environment variable, one makes a call like this:julia> path = ccall((:getenv, \"libc\"), Cstring, (Cstring,), \"SHELL\")\nCstring(@0x00007fff5fbffc45)\n\njulia> unsafe_string(path)\n\"/bin/bash\"Note that the argument type tuple must be written as (Cstring,), rather than (Cstring). This is because (Cstring) is just the expression Cstring surrounded by parentheses, rather than a 1-tuple containing Cstring:julia> (Cstring)\nCstring\n\njulia> (Cstring,)\n(Cstring,)In practice, especially when providing reusable functionality, one generally wraps ccall uses in Julia functions that set up arguments and then check for errors in whatever manner the C or Fortran function indicates them, propagating to the Julia caller as exceptions. This is especially important since C and Fortran APIs are notoriously inconsistent about how they indicate error conditions. For example, the getenv C library function is wrapped in the following Julia function, which is a simplified version of the actual definition from env.jl:function getenv(var::AbstractString)\n    val = ccall((:getenv, \"libc\"),\n                Cstring, (Cstring,), var)\n    if val == C_NULL\n        error(\"getenv: undefined variable: \", var)\n    end\n    unsafe_string(val)\nendThe C getenv function indicates an error by returning NULL, but other standard C functions indicate errors in various different ways, including by returning -1, 0, 1 and other special values. This wrapper throws an exception clearly indicating the problem if the caller tries to get a non-existent environment variable:julia> getenv(\"SHELL\")\n\"/bin/bash\"\n\njulia> getenv(\"FOOBAR\")\ngetenv: undefined variable: FOOBARHere is a slightly more complex example that discovers the local machine\'s hostname:function gethostname()\n    hostname = Vector{UInt8}(undef, 128)\n    ccall((:gethostname, \"libc\"), Int32,\n          (Ptr{UInt8}, Csize_t),\n          hostname, sizeof(hostname))\n    hostname[end] = 0; # ensure null-termination\n    return unsafe_string(pointer(hostname))\nendThis example first allocates an array of bytes, then calls the C library function gethostname to fill the array in with the hostname, takes a pointer to the hostname buffer, and converts the pointer to a Julia string, assuming that it is a NUL-terminated C string. It is common for C libraries to use this pattern of requiring the caller to allocate memory to be passed to the callee and filled in. Allocation of memory from Julia like this is generally accomplished by creating an uninitialized array and passing a pointer to its data to the C function. This is why we don\'t use the Cstring type here: as the array is uninitialized, it could contain NUL bytes. Converting to a Cstring as part of the ccall checks for contained NUL bytes and could therefore throw a conversion error."
 },
 
 {
@@ -2621,7 +2741,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Handling Operating System Variation",
     "title": "Handling Operating System Variation",
     "category": "section",
-    "text": "When writing cross-platform applications or libraries, it is often necessary to allow for differences between operating systems. The variable Sys.KERNEL can be used to handle such cases. There are several functions in the Sys module intended to make this easier: isunix, islinux, isapple, isbsd, and iswindows. These may be used as follows:if Sys.iswindows()\n    windows_specific_thing(a)\nendNote that islinux and isapple are mutually exclusive subsets of isunix. Additionally, there is a macro @static which makes it possible to use these functions to conditionally hide invalid code, as demonstrated in the following examples.Simple blocks:ccall((@static Sys.iswindows() ? :_fopen : :fopen), ...)Complex blocks:@static if Sys.islinux()\n    linux_specific_thing(a)\nelse\n    generic_thing(a)\nendWhen chaining conditionals (including if/elseif/end), the @static must be repeated for each level (parentheses optional, but recommended for readability):@static Sys.iswindows() ? :a : (@static Sys.isapple() ? :b : :c)"
+    "text": "When writing cross-platform applications or libraries, it is often necessary to allow for differences between operating systems. The variable Sys.KERNEL can be used to handle such cases. There are several functions in the Sys module intended to make this easier, such as isunix, islinux, isapple, isbsd, isfreebsd, and iswindows. These may be used as follows:if Sys.iswindows()\n    windows_specific_thing(a)\nendNote that islinux, isapple, and isfreebsd are mutually exclusive subsets of isunix. Additionally, there is a macro @static which makes it possible to use these functions to conditionally hide invalid code, as demonstrated in the following examples.Simple blocks:ccall((@static Sys.iswindows() ? :_fopen : :fopen), ...)Complex blocks:@static if Sys.islinux()\n    linux_specific_thing(a)\nelse\n    generic_thing(a)\nendWhen chaining conditionals (including if/elseif/end), the @static must be repeated for each level (parentheses optional, but recommended for readability):@static Sys.iswindows() ? :a : (@static Sys.isapple() ? :b : :c)"
 },
 
 {
@@ -3189,7 +3309,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Stack Traces",
     "title": "Exception stacks and catch_stack",
     "category": "section",
-    "text": "While handling an exception further exceptions may be thrown. It can be useful to inspect all these exceptions to identify the root cause of a problem. The julia runtime supports this by pushing each exception onto an internal exception stack as it occurs. When the code exits a catch normally, any exceptions which were pushed onto the stack in the associated try are considered to be successfully handled and are removed from the stack.The stack of current exceptions can be accessed using the catch_stack function. For example,julia> try\n           error(\"(A) The root cause\")\n       catch\n           try\n               error(\"(B) An exception while handling the exception\")\n           catch\n               for (exc, bt) in catch_stack()\n                   showerror(stdout, exc, bt)\n                   println()\n               end\n           end\n       end\n(A) The root cause\nStacktrace:\n [1] error(::String) at error.jl:33\n [2] top-level scope at REPL[7]:2\n [3] eval(::Module, ::Any) at boot.jl:319\n [4] eval_user_input(::Any, ::REPL.REPLBackend) at REPL.jl:85\n [5] macro expansion at REPL.jl:117 [inlined]\n [6] (::getfield(REPL, Symbol(\"##26#27\")){REPL.REPLBackend})() at task.jl:259\n(B) An exception while handling the exception\nStacktrace:\n [1] error(::String) at error.jl:33\n [2] top-level scope at REPL[7]:5\n [3] eval(::Module, ::Any) at boot.jl:319\n [4] eval_user_input(::Any, ::REPL.REPLBackend) at REPL.jl:85\n [5] macro expansion at REPL.jl:117 [inlined]\n [6] (::getfield(REPL, Symbol(\"##26#27\")){REPL.REPLBackend})() at task.jl:259In this example the root cause exception (A) is first on the stack, with a further exception (B) following it. After exiting both catch blocks normally (i.e., without throwing a further exception) all exceptions are removed from the stack and are no longer accessible.The exception stack is stored on the Task where the exceptions occurred. When a task fails with uncaught exceptions, catch_stack(task) may be used to inspect the exception stack for that task."
+    "text": "compat: Julia 1.1\nException stacks requires at least Julia 1.1.While handling an exception further exceptions may be thrown. It can be useful to inspect all these exceptions to identify the root cause of a problem. The julia runtime supports this by pushing each exception onto an internal exception stack as it occurs. When the code exits a catch normally, any exceptions which were pushed onto the stack in the associated try are considered to be successfully handled and are removed from the stack.The stack of current exceptions can be accessed using the catch_stack function. For example,julia> try\n           error(\"(A) The root cause\")\n       catch\n           try\n               error(\"(B) An exception while handling the exception\")\n           catch\n               for (exc, bt) in catch_stack()\n                   showerror(stdout, exc, bt)\n                   println()\n               end\n           end\n       end\n(A) The root cause\nStacktrace:\n [1] error(::String) at error.jl:33\n [2] top-level scope at REPL[7]:2\n [3] eval(::Module, ::Any) at boot.jl:319\n [4] eval_user_input(::Any, ::REPL.REPLBackend) at REPL.jl:85\n [5] macro expansion at REPL.jl:117 [inlined]\n [6] (::getfield(REPL, Symbol(\"##26#27\")){REPL.REPLBackend})() at task.jl:259\n(B) An exception while handling the exception\nStacktrace:\n [1] error(::String) at error.jl:33\n [2] top-level scope at REPL[7]:5\n [3] eval(::Module, ::Any) at boot.jl:319\n [4] eval_user_input(::Any, ::REPL.REPLBackend) at REPL.jl:85\n [5] macro expansion at REPL.jl:117 [inlined]\n [6] (::getfield(REPL, Symbol(\"##26#27\")){REPL.REPLBackend})() at task.jl:259In this example the root cause exception (A) is first on the stack, with a further exception (B) following it. After exiting both catch blocks normally (i.e., without throwing a further exception) all exceptions are removed from the stack and are no longer accessible.The exception stack is stored on the Task where the exceptions occurred. When a task fails with uncaught exceptions, catch_stack(task) may be used to inspect the exception stack for that task."
 },
 
 {
@@ -4061,7 +4181,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Essentials",
     "title": "Base.require",
     "category": "function",
-    "text": "require(module::Symbol)\n\nThis function is part of the implementation of using / import, if a module is not already defined in Main. It can also be called directly to force reloading a module, regardless of whether it has been loaded before (for example, when interactively developing libraries).\n\nLoads a source file, in the context of the Main module, on every active node, searching standard locations for files. require is considered a top-level operation, so it sets the current include path but does not use it to search for files (see help for include). This function is typically used to load library code, and is implicitly called by using to load packages.\n\nWhen searching for files, require first looks for package code in the global array LOAD_PATH. require is case-sensitive on all platforms, including those with case-insensitive filesystems like macOS and Windows.\n\nFor more details regarding code loading, see the manual.\n\n\n\n\n\n"
+    "text": "require(into::Module, module::Symbol)\n\nThis function is part of the implementation of using / import, if a module is not already defined in Main. It can also be called directly to force reloading a module, regardless of whether it has been loaded before (for example, when interactively developing libraries).\n\nLoads a source file, in the context of the Main module, on every active node, searching standard locations for files. require is considered a top-level operation, so it sets the current include path but does not use it to search for files (see help for include). This function is typically used to load library code, and is implicitly called by using to load packages.\n\nWhen searching for files, require first looks for package code in the global array LOAD_PATH. require is case-sensitive on all platforms, including those with case-insensitive filesystems like macOS and Windows.\n\nFor more details regarding code loading, see the manual.\n\n\n\n\n\n"
 },
 
 {
@@ -4901,7 +5021,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Essentials",
     "title": "Base.fieldtypes",
     "category": "function",
-    "text": "fieldtypes(T::Type)\n\nThe declared types of all fields in a composite DataType T as a tuple.\n\nExamples\n\njulia> struct Foo\n           x::Int64\n           y::String\n       end\n\njulia> fieldtypes(Foo)\n(Int64, String)\n\n\n\n\n\n"
+    "text": "fieldtypes(T::Type)\n\nThe declared types of all fields in a composite DataType T as a tuple.\n\ncompat: Julia 1.1\nThis function requires at least Julia 1.1.\n\nExamples\n\njulia> struct Foo\n           x::Int64\n           y::String\n       end\n\njulia> fieldtypes(Foo)\n(Int64, String)\n\n\n\n\n\n"
 },
 
 {
@@ -5101,7 +5221,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Essentials",
     "title": "Base.isnothing",
     "category": "function",
-    "text": "isnothing(x)\n\nReturn true if x === nothing, and return false if not.\n\n\n\n\n\n"
+    "text": "isnothing(x)\n\nReturn true if x === nothing, and return false if not.\n\ncompat: Julia 1.1\nThis function requires at least Julia 1.1.\n\n\n\n\n\n"
 },
 
 {
@@ -5333,7 +5453,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Essentials",
     "title": "Base.SimdLoop.@simd",
     "category": "macro",
-    "text": "@simd\n\nAnnotate a for loop to allow the compiler to take extra liberties to allow loop re-ordering\n\nwarning: Warning\nThis feature is experimental and could change or disappear in future versions of Julia. Incorrect use of the @simd macro may cause unexpected results.\n\nThe object iterated over in a @simd for loop should be a one-dimensional range. By using @simd, you are asserting several properties of the loop:\n\n* It is safe to execute iterations in arbitrary or overlapping order, with special consideration for reduction variables.\n* Floating-point operations on reduction variables can be reordered, possibly causing different results than without `@simd`.\n\nIn many cases, Julia is able to automatically vectorize inner for loops without the use of @simd. Using @simd gives the compiler a little extra leeway to make it possible in more situations. In either case, your inner loop should have the following properties to allow vectorization:\n\n* The loop must be an innermost loop\n* The loop body must be straight-line code. Therefore, [`@inbounds`](@ref) is\n  currently needed for all array accesses. The compiler can sometimes turn\n  short `&&`, `||`, and `?:` expressions into straight-line code if it is safe\n  to evaluate all operands unconditionally. Consider using the [`ifelse`](@ref)\n  function instead of `?:` in the loop if it is safe to do so.\n* Accesses must have a stride pattern and cannot be \"gathers\" (random-index\n  reads) or \"scatters\" (random-index writes).\n* The stride should be unit stride.\n\nnote: Note\nThe @simd does not assert by default that the loop is completely free of loop-carried memory dependencies, which is an assumption that can easily be violated in generic code. If you are writing non-generic code, you can use @simd ivdep for ... end to also assert that:* There exists no loop-carried memory dependencies\n* No iteration ever waits on a previous iteration to make forward progress.\n\n\n\n\n\n"
+    "text": "@simd\n\nAnnotate a for loop to allow the compiler to take extra liberties to allow loop re-ordering\n\nwarning: Warning\nThis feature is experimental and could change or disappear in future versions of Julia. Incorrect use of the @simd macro may cause unexpected results.\n\nThe object iterated over in a @simd for loop should be a one-dimensional range. By using @simd, you are asserting several properties of the loop:\n\nIt is safe to execute iterations in arbitrary or overlapping order, with special consideration for reduction variables.\nFloating-point operations on reduction variables can be reordered, possibly causing different results than without @simd.\n\nIn many cases, Julia is able to automatically vectorize inner for loops without the use of @simd. Using @simd gives the compiler a little extra leeway to make it possible in more situations. In either case, your inner loop should have the following properties to allow vectorization:\n\nThe loop must be an innermost loop\nThe loop body must be straight-line code. Therefore, @inbounds is   currently needed for all array accesses. The compiler can sometimes turn   short &&, ||, and ?: expressions into straight-line code if it is safe   to evaluate all operands unconditionally. Consider using the ifelse   function instead of ?: in the loop if it is safe to do so.\nAccesses must have a stride pattern and cannot be \"gathers\" (random-index   reads) or \"scatters\" (random-index writes).\nThe stride should be unit stride.\n\nnote: Note\nThe @simd does not assert by default that the loop is completely free of loop-carried memory dependencies, which is an assumption that can easily be violated in generic code. If you are writing non-generic code, you can use @simd ivdep for ... end to also assert that:\n\nThere exists no loop-carried memory dependencies\nNo iteration ever waits on a previous iteration to make forward progress.\n\n\n\n\n\n"
 },
 
 {
@@ -5549,7 +5669,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Essentials",
     "title": "Base.Libc.getpid",
     "category": "function",
-    "text": "getpid(process) -> Int32\n\nGet the child process ID, if it still exists.\n\n\n\n\n\ngetpid() -> Int32\n\nGet Julia\'s process ID.\n\n\n\n\n\n"
+    "text": "getpid(process) -> Int32\n\nGet the child process ID, if it still exists.\n\ncompat: Julia 1.1\nThis function requires at least Julia 1.1.\n\n\n\n\n\ngetpid() -> Int32\n\nGet Julia\'s process ID.\n\n\n\n\n\n"
 },
 
 {
@@ -5657,6 +5777,38 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
+    "location": "base/base/#Base.Sys.isfreebsd",
+    "page": "Essentials",
+    "title": "Base.Sys.isfreebsd",
+    "category": "function",
+    "text": "Sys.isfreebsd([os])\n\nPredicate for testing if the OS is a derivative of FreeBSD. See documentation in Handling Operating System Variation.\n\nnote: Note\nNot to be confused with Sys.isbsd(), which is true on FreeBSD but also on other BSD-based systems. Sys.isfreebsd() refers only to FreeBSD.\n\ncompat: Julia 1.1\nThis function requires at least Julia 1.1.\n\n\n\n\n\n"
+},
+
+{
+    "location": "base/base/#Base.Sys.isopenbsd",
+    "page": "Essentials",
+    "title": "Base.Sys.isopenbsd",
+    "category": "function",
+    "text": "Sys.isopenbsd([os])\n\nPredicate for testing if the OS is a derivative of OpenBSD. See documentation in Handling Operating System Variation.\n\nnote: Note\nNot to be confused with Sys.isbsd(), which is true on OpenBSD but also on other BSD-based systems. Sys.isopenbsd() refers only to OpenBSD.\n\ncompat: Julia 1.1\nThis function requires at least Julia 1.1.\n\n\n\n\n\n"
+},
+
+{
+    "location": "base/base/#Base.Sys.isnetbsd",
+    "page": "Essentials",
+    "title": "Base.Sys.isnetbsd",
+    "category": "function",
+    "text": "Sys.isnetbsd([os])\n\nPredicate for testing if the OS is a derivative of NetBSD. See documentation in Handling Operating System Variation.\n\nnote: Note\nNot to be confused with Sys.isbsd(), which is true on NetBSD but also on other BSD-based systems. Sys.isnetbsd() refers only to NetBSD.\n\ncompat: Julia 1.1\nThis function requires at least Julia 1.1.\n\n\n\n\n\n"
+},
+
+{
+    "location": "base/base/#Base.Sys.isdragonfly",
+    "page": "Essentials",
+    "title": "Base.Sys.isdragonfly",
+    "category": "function",
+    "text": "Sys.isdragonfly([os])\n\nPredicate for testing if the OS is a derivative of DragonFly BSD. See documentation in Handling Operating System Variation.\n\nnote: Note\nNot to be confused with Sys.isbsd(), which is true on DragonFly but also on other BSD-based systems. Sys.isdragonfly() refers only to DragonFly.\n\ncompat: Julia 1.1\nThis function requires at least Julia 1.1.\n\n\n\n\n\n"
+},
+
+{
     "location": "base/base/#Base.Sys.iswindows",
     "page": "Essentials",
     "title": "Base.Sys.iswindows",
@@ -5685,7 +5837,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Essentials",
     "title": "System",
     "category": "section",
-    "text": "Base.run\nBase.devnull\nBase.success\nBase.process_running\nBase.process_exited\nBase.kill(::Base.Process, ::Integer)\nBase.Sys.set_process_title\nBase.Sys.get_process_title\nBase.ignorestatus\nBase.detach\nBase.Cmd\nBase.setenv\nBase.withenv\nBase.pipeline(::Any, ::Any, ::Any, ::Any...)\nBase.pipeline(::Base.AbstractCmd)\nBase.Libc.gethostname\nBase.Libc.getpid\nBase.Libc.time()\nBase.time_ns\nBase.@time\nBase.@timev\nBase.@timed\nBase.@elapsed\nBase.@allocated\nBase.EnvDict\nBase.ENV\nBase.Sys.isunix\nBase.Sys.isapple\nBase.Sys.islinux\nBase.Sys.isbsd\nBase.Sys.iswindows\nBase.Sys.windows_version\nBase.@static"
+    "text": "Base.run\nBase.devnull\nBase.success\nBase.process_running\nBase.process_exited\nBase.kill(::Base.Process, ::Integer)\nBase.Sys.set_process_title\nBase.Sys.get_process_title\nBase.ignorestatus\nBase.detach\nBase.Cmd\nBase.setenv\nBase.withenv\nBase.pipeline(::Any, ::Any, ::Any, ::Any...)\nBase.pipeline(::Base.AbstractCmd)\nBase.Libc.gethostname\nBase.Libc.getpid\nBase.Libc.time()\nBase.time_ns\nBase.@time\nBase.@timev\nBase.@timed\nBase.@elapsed\nBase.@allocated\nBase.EnvDict\nBase.ENV\nBase.Sys.isunix\nBase.Sys.isapple\nBase.Sys.islinux\nBase.Sys.isbsd\nBase.Sys.isfreebsd\nBase.Sys.isopenbsd\nBase.Sys.isnetbsd\nBase.Sys.isdragonfly\nBase.Sys.iswindows\nBase.Sys.windows_version\nBase.@static"
 },
 
 {
@@ -5757,7 +5909,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Essentials",
     "title": "Base.catch_stack",
     "category": "function",
-    "text": "catch_stack(task=current_task(); [inclue_bt=true])\n\nGet the stack of exceptions currently being handled. For nested catch blocks there may be more than one current exception in which case the most recently thrown exception is last in the stack. The stack is returned as a Vector of (exception,backtrace) pairs, or a Vector of exceptions if include_bt is false.\n\nExplicitly passing task will return the current exception stack on an arbitrary task. This is useful for inspecting tasks which have failed due to uncaught exceptions.\n\n\n\n\n\n"
+    "text": "catch_stack(task=current_task(); [inclue_bt=true])\n\nGet the stack of exceptions currently being handled. For nested catch blocks there may be more than one current exception in which case the most recently thrown exception is last in the stack. The stack is returned as a Vector of (exception,backtrace) pairs, or a Vector of exceptions if include_bt is false.\n\nExplicitly passing task will return the current exception stack on an arbitrary task. This is useful for inspecting tasks which have failed due to uncaught exceptions.\n\ncompat: Julia 1.1\nThis function requires at least Julia 1.1.\n\n\n\n\n\n"
 },
 
 {
@@ -6237,7 +6389,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Essentials",
     "title": "Base.code_lowered",
     "category": "function",
-    "text": "code_lowered(f, types; generated = true)\n\nReturn an array of the lowered forms (IR) for the methods matching the given generic function and type signature.\n\nIf generated is false, the returned CodeInfo instances will correspond to fallback implementations. An error is thrown if no fallback implementation exists. If generated is true, these CodeInfo instances will correspond to the method bodies yielded by expanding the generators.\n\nNote that an error will be thrown if types are not leaf types when generated is true and the corresponding method is a @generated method.\n\n\n\n\n\n"
+    "text": "code_lowered(f, types; generated=true, debuginfo=:default)\n\nReturn an array of the lowered forms (IR) for the methods matching the given generic function and type signature.\n\nIf generated is false, the returned CodeInfo instances will correspond to fallback implementations. An error is thrown if no fallback implementation exists. If generated is true, these CodeInfo instances will correspond to the method bodies yielded by expanding the generators.\n\nThe keyword debuginfo controls the amount of code metadata present in the output.\n\nNote that an error will be thrown if types are not leaf types when generated is true and any of the corresponding methods are an @generated method.\n\n\n\n\n\n"
 },
 
 {
@@ -6245,7 +6397,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Essentials",
     "title": "Base.code_typed",
     "category": "function",
-    "text": "code_typed(f, types; optimize=true)\n\nReturns an array of type-inferred lowered form (IR) for the methods matching the given generic function and type signature. The keyword argument optimize controls whether additional optimizations, such as inlining, are also applied.\n\n\n\n\n\n"
+    "text": "code_typed(f, types; optimize=true, debuginfo=:default)\n\nReturns an array of type-inferred lowered form (IR) for the methods matching the given generic function and type signature. The keyword argument optimize controls whether additional optimizations, such as inlining, are also applied. The keyword debuginfo controls the amount of code metadata present in the output.\n\n\n\n\n\n"
 },
 
 {
@@ -6445,7 +6597,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Collections and Data Structures",
     "title": "Base.unique!",
     "category": "function",
-    "text": "unique!(A::AbstractVector)\n\nRemove duplicate items as determined by isequal, then return the modified A. unique! will return the elements of A in the order that they occur. If you do not care about the order of the returned data, then calling (sort!(A); unique!(A)) will be much more efficient as long as the elements of A can be sorted.\n\nExamples\n\njulia> unique!([1, 1, 1])\n1-element Array{Int64,1}:\n 1\n\njulia> A = [7, 3, 2, 3, 7, 5];\n\njulia> unique!(A)\n4-element Array{Int64,1}:\n 7\n 3\n 2\n 5\n\njulia> B = [7, 6, 42, 6, 7, 42];\n\njulia> sort!(B);  # unique! is able to process sorted data much more efficiently.\n\njulia> unique!(B)\n3-element Array{Int64,1}:\n  6\n  7\n 42\n\n\n\n\n\n"
+    "text": "unique!(f, A::AbstractVector)\n\nSelects one value from A for each unique value produced by f applied to elements of A , then return the modified A.\n\nExamples\n\njulia> unique!(x -> x^2, [1, -1, 3, -3, 4])\n3-element Array{Int64,1}:\n 1\n 3\n 4\n\njulia> unique!(n -> n%3, [5, 1, 8, 9, 3, 4, 10, 7, 2, 6])\n3-element Array{Int64,1}:\n 5\n 1\n 9\n\njulia> unique!(iseven, [2, 3, 5, 7, 9])\n2-element Array{Int64,1}:\n 2\n 3\n\n\n\n\n\nunique!(A::AbstractVector)\n\nRemove duplicate items as determined by isequal, then return the modified A. unique! will return the elements of A in the order that they occur. If you do not care about the order of the returned data, then calling (sort!(A); unique!(A)) will be much more efficient as long as the elements of A can be sorted.\n\nExamples\n\njulia> unique!([1, 1, 1])\n1-element Array{Int64,1}:\n 1\n\njulia> A = [7, 3, 2, 3, 7, 5];\n\njulia> unique!(A)\n4-element Array{Int64,1}:\n 7\n 3\n 2\n 5\n\njulia> B = [7, 6, 42, 6, 7, 42];\n\njulia> sort!(B);  # unique! is able to process sorted data much more efficiently.\n\njulia> unique!(B)\n3-element Array{Int64,1}:\n  6\n  7\n 42\n\n\n\n\n\n"
 },
 
 {
@@ -6965,7 +7117,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Collections and Data Structures",
     "title": "Base.pairs",
     "category": "function",
-    "text": "pairs(collection)\n\nReturn an iterator over key => value pairs for any collection that maps a set of keys to a set of values. This includes arrays, where the keys are the array indices.\n\n\n\n\n\npairs(IndexLinear(), A)\npairs(IndexCartesian(), A)\npairs(IndexStyle(A), A)\n\nAn iterator that accesses each element of the array A, returning i => x, where i is the index for the element and x = A[i]. Identical to pairs(A), except that the style of index can be selected. Also similar to enumerate(A), except i will be a valid index for A, while enumerate always counts from 1 regardless of the indices of A.\n\nSpecifying IndexLinear() ensures that i will be an integer; specifying IndexCartesian() ensures that i will be a CartesianIndex; specifying IndexStyle(A) chooses whichever has been defined as the native indexing style for array A.\n\nMutation of the bounds of the underlying array will invalidate this iterator.\n\nExamples\n\njulia> A = [\"a\" \"d\"; \"b\" \"e\"; \"c\" \"f\"];\n\njulia> for (index, value) in pairs(IndexStyle(A), A)\n           println(\"$index $value\")\n       end\n1 a\n2 b\n3 c\n4 d\n5 e\n6 f\n\njulia> S = view(A, 1:2, :);\n\njulia> for (index, value) in pairs(IndexStyle(S), S)\n           println(\"$index $value\")\n       end\nCartesianIndex(1, 1) a\nCartesianIndex(2, 1) b\nCartesianIndex(1, 2) d\nCartesianIndex(2, 2) e\n\nSee also: IndexStyle, axes.\n\n\n\n\n\n"
+    "text": "pairs(IndexLinear(), A)\npairs(IndexCartesian(), A)\npairs(IndexStyle(A), A)\n\nAn iterator that accesses each element of the array A, returning i => x, where i is the index for the element and x = A[i]. Identical to pairs(A), except that the style of index can be selected. Also similar to enumerate(A), except i will be a valid index for A, while enumerate always counts from 1 regardless of the indices of A.\n\nSpecifying IndexLinear() ensures that i will be an integer; specifying IndexCartesian() ensures that i will be a CartesianIndex; specifying IndexStyle(A) chooses whichever has been defined as the native indexing style for array A.\n\nMutation of the bounds of the underlying array will invalidate this iterator.\n\nExamples\n\njulia> A = [\"a\" \"d\"; \"b\" \"e\"; \"c\" \"f\"];\n\njulia> for (index, value) in pairs(IndexStyle(A), A)\n           println(\"$index $value\")\n       end\n1 a\n2 b\n3 c\n4 d\n5 e\n6 f\n\njulia> S = view(A, 1:2, :);\n\njulia> for (index, value) in pairs(IndexStyle(S), S)\n           println(\"$index $value\")\n       end\nCartesianIndex(1, 1) a\nCartesianIndex(2, 1) b\nCartesianIndex(1, 2) d\nCartesianIndex(2, 2) e\n\nSee also: IndexStyle, axes.\n\n\n\n\n\npairs(collection)\n\nReturn an iterator over key => value pairs for any collection that maps a set of keys to a set of values. This includes arrays, where the keys are the array indices.\n\n\n\n\n\n"
 },
 
 {
@@ -6973,7 +7125,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Collections and Data Structures",
     "title": "Base.merge",
     "category": "function",
-    "text": "merge(d::AbstractDict, others::AbstractDict...)\n\nConstruct a merged collection from the given collections. If necessary, the types of the resulting collection will be promoted to accommodate the types of the merged collections. If the same key is present in another collection, the value for that key will be the value it has in the last collection listed.\n\nExamples\n\njulia> a = Dict(\"foo\" => 0.0, \"bar\" => 42.0)\nDict{String,Float64} with 2 entries:\n  \"bar\" => 42.0\n  \"foo\" => 0.0\n\njulia> b = Dict(\"baz\" => 17, \"bar\" => 4711)\nDict{String,Int64} with 2 entries:\n  \"bar\" => 4711\n  \"baz\" => 17\n\njulia> merge(a, b)\nDict{String,Float64} with 3 entries:\n  \"bar\" => 4711.0\n  \"baz\" => 17.0\n  \"foo\" => 0.0\n\njulia> merge(b, a)\nDict{String,Float64} with 3 entries:\n  \"bar\" => 42.0\n  \"baz\" => 17.0\n  \"foo\" => 0.0\n\n\n\n\n\nmerge(combine, d::AbstractDict, others::AbstractDict...)\n\nConstruct a merged collection from the given collections. If necessary, the types of the resulting collection will be promoted to accommodate the types of the merged collections. Values with the same key will be combined using the combiner function.\n\nExamples\n\njulia> a = Dict(\"foo\" => 0.0, \"bar\" => 42.0)\nDict{String,Float64} with 2 entries:\n  \"bar\" => 42.0\n  \"foo\" => 0.0\n\njulia> b = Dict(\"baz\" => 17, \"bar\" => 4711)\nDict{String,Int64} with 2 entries:\n  \"bar\" => 4711\n  \"baz\" => 17\n\njulia> merge(+, a, b)\nDict{String,Float64} with 3 entries:\n  \"bar\" => 4753.0\n  \"baz\" => 17.0\n  \"foo\" => 0.0\n\n\n\n\n\nmerge(a::NamedTuple, bs::NamedTuple...)\n\nConstruct a new named tuple by merging two or more existing ones, in a left-associative manner. Merging proceeds left-to-right, between pairs of named tuples, and so the order of fields present in both the leftmost and rightmost named tuples take the same position as they are found in the leftmost named tuple. However, values are taken from matching fields in the rightmost named tuple that contains that field. Fields present in only the rightmost named tuple of a pair are appended at the end. A fallback is implemented for when only a single named tuple is supplied, with signature merge(a::NamedTuple).\n\njulia> merge((a=1, b=2, c=3), (b=4, d=5))\n(a = 1, b = 4, c = 3, d = 5)\n\njulia> merge((a=1, b=2), (b=3, c=(d=1,)), (c=(d=2,),))\n(a = 1, b = 3, c = (d = 2,))\n\n\n\n\n\nmerge(a::NamedTuple, iterable)\n\nInterpret an iterable of key-value pairs as a named tuple, and perform a merge.\n\njulia> merge((a=1, b=2, c=3), [:b=>4, :d=>5])\n(a = 1, b = 4, c = 3, d = 5)\n\n\n\n\n\n"
+    "text": "merge(d::AbstractDict, others::AbstractDict...)\n\nConstruct a merged collection from the given collections. If necessary, the types of the resulting collection will be promoted to accommodate the types of the merged collections. If the same key is present in another collection, the value for that key will be the value it has in the last collection listed.\n\nExamples\n\njulia> a = Dict(\"foo\" => 0.0, \"bar\" => 42.0)\nDict{String,Float64} with 2 entries:\n  \"bar\" => 42.0\n  \"foo\" => 0.0\n\njulia> b = Dict(\"baz\" => 17, \"bar\" => 4711)\nDict{String,Int64} with 2 entries:\n  \"bar\" => 4711\n  \"baz\" => 17\n\njulia> merge(a, b)\nDict{String,Float64} with 3 entries:\n  \"bar\" => 4711.0\n  \"baz\" => 17.0\n  \"foo\" => 0.0\n\njulia> merge(b, a)\nDict{String,Float64} with 3 entries:\n  \"bar\" => 42.0\n  \"baz\" => 17.0\n  \"foo\" => 0.0\n\n\n\n\n\nmerge(combine, d::AbstractDict, others::AbstractDict...)\n\nConstruct a merged collection from the given collections. If necessary, the types of the resulting collection will be promoted to accommodate the types of the merged collections. Values with the same key will be combined using the combiner function.\n\nExamples\n\njulia> a = Dict(\"foo\" => 0.0, \"bar\" => 42.0)\nDict{String,Float64} with 2 entries:\n  \"bar\" => 42.0\n  \"foo\" => 0.0\n\njulia> b = Dict(\"baz\" => 17, \"bar\" => 4711)\nDict{String,Int64} with 2 entries:\n  \"bar\" => 4711\n  \"baz\" => 17\n\njulia> merge(+, a, b)\nDict{String,Float64} with 3 entries:\n  \"bar\" => 4753.0\n  \"baz\" => 17.0\n  \"foo\" => 0.0\n\n\n\n\n\nmerge(a::NamedTuple, bs::NamedTuple...)\n\nConstruct a new named tuple by merging two or more existing ones, in a left-associative manner. Merging proceeds left-to-right, between pairs of named tuples, and so the order of fields present in both the leftmost and rightmost named tuples take the same position as they are found in the leftmost named tuple. However, values are taken from matching fields in the rightmost named tuple that contains that field. Fields present in only the rightmost named tuple of a pair are appended at the end. A fallback is implemented for when only a single named tuple is supplied, with signature merge(a::NamedTuple).\n\ncompat: Julia 1.1\nMerging 3 or more NamedTuple requires at least Julia 1.1.\n\nExamples\n\njulia> merge((a=1, b=2, c=3), (b=4, d=5))\n(a = 1, b = 4, c = 3, d = 5)\n\njulia> merge((a=1, b=2), (b=3, c=(d=1,)), (c=(d=2,),))\n(a = 1, b = 3, c = (d = 2,))\n\n\n\n\n\nmerge(a::NamedTuple, iterable)\n\nInterpret an iterable of key-value pairs as a named tuple, and perform a merge.\n\njulia> merge((a=1, b=2, c=3), [:b=>4, :d=>5])\n(a = 1, b = 4, c = 3, d = 5)\n\n\n\n\n\n"
 },
 
 {
@@ -7509,7 +7661,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Mathematics",
     "title": "Base.::",
     "category": "function",
-    "text": "(:)(start, [step], stop)\n\nRange operator. a:b constructs a range from a to b with a step size of 1 (a UnitRange) , and a:s:b is similar but uses a step size of s (a StepRange).\n\n: is also used in indexing to select whole dimensions.\n\n\n\n\n\n"
+    "text": "(:)(I::CartesianIndex, J::CartesianIndex)\n\nConstruct CartesianIndices from two CartesianIndex.\n\ncompat: Julia 1.1\nThis method requires at least Julia 1.1.\n\nExamples\n\njulia> I = CartesianIndex(2,1);\n\njulia> J = CartesianIndex(3,3);\n\njulia> I:J\n2×3 CartesianIndices{2,Tuple{UnitRange{Int64},UnitRange{Int64}}}:\n CartesianIndex(2, 1)  CartesianIndex(2, 2)  CartesianIndex(2, 3)\n CartesianIndex(3, 1)  CartesianIndex(3, 2)  CartesianIndex(3, 3)\n\n\n\n\n\n(:)(start, [step], stop)\n\nRange operator. a:b constructs a range from a to b with a step size of 1 (a UnitRange) , and a:s:b is similar but uses a step size of s (a StepRange).\n\n: is also used in indexing to select whole dimensions.\n\n\n\n\n\n"
 },
 
 {
@@ -7517,7 +7669,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Mathematics",
     "title": "Base.range",
     "category": "function",
-    "text": "range(start[, stop]; length, stop, step=1)\n\nGiven a starting value, construct a range either by length or from start to stop, optionally with a given step (defaults to 1, a UnitRange). One of length or stop is required.  If length, stop, and step are all specified, they must agree.\n\nIf length and stop are provided and step is not, the step size will be computed automatically such that there are length linearly spaced elements in the range (a LinRange).\n\nIf step and stop are provided and length is not, the overall range length will be computed automatically such that the elements are step spaced (a StepRange).\n\nstop may be specified as either a positional or keyword argument.\n\nExamples\n\njulia> range(1, length=100)\n1:100\n\njulia> range(1, stop=100)\n1:100\n\njulia> range(1, step=5, length=100)\n1:5:496\n\njulia> range(1, step=5, stop=100)\n1:5:96\n\njulia> range(1, 10, length=101)\n1.0:0.09:10.0\n\njulia> range(1, 100, step=5)\n1:5:96\n\n\n\n\n\n"
+    "text": "range(start[, stop]; length, stop, step=1)\n\nGiven a starting value, construct a range either by length or from start to stop, optionally with a given step (defaults to 1, a UnitRange). One of length or stop is required.  If length, stop, and step are all specified, they must agree.\n\nIf length and stop are provided and step is not, the step size will be computed automatically such that there are length linearly spaced elements in the range (a LinRange).\n\nIf step and stop are provided and length is not, the overall range length will be computed automatically such that the elements are step spaced (a StepRange).\n\nstop may be specified as either a positional or keyword argument.\n\ncompat: Julia 1.1\nstop as a positional argument requires at least Julia 1.1.\n\nExamples\n\njulia> range(1, length=100)\n1:100\n\njulia> range(1, stop=100)\n1:100\n\njulia> range(1, step=5, length=100)\n1:5:496\n\njulia> range(1, step=5, stop=100)\n1:5:96\n\njulia> range(1, 10, length=101)\n1.0:0.09:10.0\n\njulia> range(1, 100, step=5)\n1:5:96\n\n\n\n\n\n"
 },
 
 {
@@ -8429,7 +8581,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Mathematics",
     "title": "Base.sqrt",
     "category": "method",
-    "text": "sqrt(x)\n\nReturn sqrtx. Throws DomainError for negative Real arguments. Use complex negative arguments instead. The prefix operator √ is equivalent to sqrt.\n\nExamples\n\njulia> sqrt(big(81))\n9.0\n\njulia> sqrt(big(-81))\nERROR: DomainError with -8.1e+01:\nNaN result for non-NaN input.\nStacktrace:\n [1] sqrt(::BigFloat) at ./mpfr.jl:501\n[...]\n\njulia> sqrt(big(complex(-81)))\n0.0 + 9.0im\n\n\n\n\n\n"
+    "text": "sqrt(x)\n\nReturn sqrtx. Throws DomainError for negative Real arguments. Use complex negative arguments instead. The prefix operator √ is equivalent to sqrt.\n\nExamples\n\njulia> sqrt(big(81))\n9.0\n\njulia> sqrt(big(-81))\nERROR: DomainError with -81.0:\nNaN result for non-NaN input.\nStacktrace:\n [1] sqrt(::BigFloat) at ./mpfr.jl:501\n[...]\n\njulia> sqrt(big(complex(-81)))\n0.0 + 9.0im\n\n\n\n\n\n"
 },
 
 {
@@ -8597,7 +8749,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Mathematics",
     "title": "Base.widemul",
     "category": "function",
-    "text": "widemul(x, y)\n\nMultiply x and y, giving the result as a larger type.\n\nExamples\n\njulia> widemul(Float32(3.), 4.)\n1.2e+01\n\n\n\n\n\n"
+    "text": "widemul(x, y)\n\nMultiply x and y, giving the result as a larger type.\n\nExamples\n\njulia> widemul(Float32(3.), 4.)\n12.0\n\n\n\n\n\n"
 },
 
 {
@@ -8901,7 +9053,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Numbers",
     "title": "Base.parse",
     "category": "function",
-    "text": "parse(type, str; base)\n\nParse a string as a number. For Integer types, a base can be specified (the default is 10). For floating-point types, the string is parsed as a decimal floating-point number.  Complex types are parsed from decimal strings of the form \"R±Iim\" as a Complex(R,I) of the requested type; \"i\" or \"j\" can also be used instead of \"im\", and \"R\" or \"Iim\" are also permitted. If the string does not contain a valid number, an error is raised.\n\nExamples\n\njulia> parse(Int, \"1234\")\n1234\n\njulia> parse(Int, \"1234\", base = 5)\n194\n\njulia> parse(Int, \"afc\", base = 16)\n2812\n\njulia> parse(Float64, \"1.2e-3\")\n0.0012\n\njulia> parse(Complex{Float64}, \"3.2e-1 + 4.5im\")\n0.32 + 4.5im\n\n\n\n\n\n"
+    "text": "parse(type, str; base)\n\nParse a string as a number. For Integer types, a base can be specified (the default is 10). For floating-point types, the string is parsed as a decimal floating-point number.  Complex types are parsed from decimal strings of the form \"R±Iim\" as a Complex(R,I) of the requested type; \"i\" or \"j\" can also be used instead of \"im\", and \"R\" or \"Iim\" are also permitted. If the string does not contain a valid number, an error is raised.\n\ncompat: Julia 1.1\nparse(Bool, str) requires at least Julia 1.1.\n\nExamples\n\njulia> parse(Int, \"1234\")\n1234\n\njulia> parse(Int, \"1234\", base = 5)\n194\n\njulia> parse(Int, \"afc\", base = 16)\n2812\n\njulia> parse(Float64, \"1.2e-3\")\n0.0012\n\njulia> parse(Complex{Float64}, \"3.2e-1 + 4.5im\")\n0.32 + 4.5im\n\n\n\n\n\n"
 },
 
 {
@@ -9337,17 +9489,17 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "base/numbers/#Base.@int128_str",
+    "location": "base/numbers/#Core.@int128_str",
     "page": "Numbers",
-    "title": "Base.@int128_str",
+    "title": "Core.@int128_str",
     "category": "macro",
     "text": "@int128_str str\n@int128_str(str)\n\n@int128_str parses a string into a Int128 Throws an ArgumentError if the string is not a valid integer\n\n\n\n\n\n"
 },
 
 {
-    "location": "base/numbers/#Base.@uint128_str",
+    "location": "base/numbers/#Core.@uint128_str",
     "page": "Numbers",
-    "title": "Base.@uint128_str",
+    "title": "Core.@uint128_str",
     "category": "macro",
     "text": "@uint128_str str\n@uint128_str(str)\n\n@uint128_str parses a string into a UInt128 Throws an ArgumentError if the string is not a valid integer\n\n\n\n\n\n"
 },
@@ -9365,7 +9517,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Numbers",
     "title": "Base.MPFR.BigFloat",
     "category": "method",
-    "text": "BigFloat(x::Union{Real, AbstractString} [, rounding::RoundingMode=rounding(BigFloat)]; [precision::Integer=precision(BigFloat)])\n\nCreate an arbitrary precision floating point number from x, with precision precision. The rounding argument specifies the direction in which the result should be rounded if the conversion cannot be done exactly. If not provided, these are set by the current global values.\n\nBigFloat(x::Real) is the same as convert(BigFloat,x), except if x itself is already BigFloat, in which case it will return a value with the precision set to the current global precision; convert will always return x.\n\nBigFloat(x::AbstractString) is identical to parse. This is provided for convenience since decimal literals are converted to Float64 when parsed, so BigFloat(2.1) may not yield what you expect.\n\njulia> BigFloat(2.1) # 2.1 here is a Float64\n2.100000000000000088817841970012523233890533447265625\n\njulia> BigFloat(\"2.1\") # the closest BigFloat to 2.1\n2.099999999999999999999999999999999999999999999999999999999999999999999999999986\n\njulia> BigFloat(\"2.1\", RoundUp)\n2.100000000000000000000000000000000000000000000000000000000000000000000000000021\n\njulia> BigFloat(\"2.1\", RoundUp, precision=128)\n2.100000000000000000000000000000000000007\n\nSee also\n\n@big_str\nrounding and setrounding\nprecision and setprecision\n\n\n\n\n\n"
+    "text": "BigFloat(x::Union{Real, AbstractString} [, rounding::RoundingMode=rounding(BigFloat)]; [precision::Integer=precision(BigFloat)])\n\nCreate an arbitrary precision floating point number from x, with precision precision. The rounding argument specifies the direction in which the result should be rounded if the conversion cannot be done exactly. If not provided, these are set by the current global values.\n\nBigFloat(x::Real) is the same as convert(BigFloat,x), except if x itself is already BigFloat, in which case it will return a value with the precision set to the current global precision; convert will always return x.\n\nBigFloat(x::AbstractString) is identical to parse. This is provided for convenience since decimal literals are converted to Float64 when parsed, so BigFloat(2.1) may not yield what you expect.\n\ncompat: Julia 1.1\nprecision as a keyword argument requires at least Julia 1.1. In Julia 1.0 precision is the second positional argument (BigFloat(x, precision)).\n\nExamples\n\njulia> BigFloat(2.1) # 2.1 here is a Float64\n2.100000000000000088817841970012523233890533447265625\n\njulia> BigFloat(\"2.1\") # the closest BigFloat to 2.1\n2.099999999999999999999999999999999999999999999999999999999999999999999999999986\n\njulia> BigFloat(\"2.1\", RoundUp)\n2.100000000000000000000000000000000000000000000000000000000000000000000000000021\n\njulia> BigFloat(\"2.1\", RoundUp, precision=128)\n2.100000000000000000000000000000000000007\n\nSee also\n\n@big_str\nrounding and setrounding\nprecision and setprecision\n\n\n\n\n\n"
 },
 
 {
@@ -9401,11 +9553,11 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "base/numbers/#Base.@big_str",
+    "location": "base/numbers/#Core.@big_str",
     "page": "Numbers",
-    "title": "Base.@big_str",
+    "title": "Core.@big_str",
     "category": "macro",
-    "text": "@big_str str\n@big_str(str)\n\nParse a string into a BigInt or BigFloat, and throw an ArgumentError if the string is not a valid number. For integers _ is allowed in the string as a separator.\n\nExamples\n\njulia> big\"123_456\"\n123456\n\njulia> big\"7891.5\"\n7.8915e+03\n\n\n\n\n\n"
+    "text": "@big_str str\n@big_str(str)\n\nParse a string into a BigInt or BigFloat, and throw an ArgumentError if the string is not a valid number. For integers _ is allowed in the string as a separator.\n\nExamples\n\njulia> big\"123_456\"\n123456\n\njulia> big\"7891.5\"\n7891.5\n\n\n\n\n\n"
 },
 
 {
@@ -9509,7 +9661,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Strings",
     "title": "Base.repr",
     "category": "method",
-    "text": "repr(x; context=nothing)\n\nCreate a string from any value using the show function.\n\nThe optional keyword argument context can be set to an IO or IOContext object whose attributes are used for the I/O stream passed to show.\n\nNote that repr(x) is usually similar to how the value of x would be entered in Julia.  See also repr(MIME(\"text/plain\"), x) to instead return a \"pretty-printed\" version of x designed more for human consumption, equivalent to the REPL display of x.\n\nExamples\n\njulia> repr(1)\n\"1\"\n\njulia> repr(zeros(3))\n\"[0.0, 0.0, 0.0]\"\n\njulia> repr(big(1/3))\n\"3.33333333333333314829616256247390992939472198486328125e-01\"\n\njulia> repr(big(1/3), context=:compact => true)\n\"3.33333e-01\"\n\n\n\n\n\n\n"
+    "text": "repr(x; context=nothing)\n\nCreate a string from any value using the show function.\n\nThe optional keyword argument context can be set to an IO or IOContext object whose attributes are used for the I/O stream passed to show.\n\nNote that repr(x) is usually similar to how the value of x would be entered in Julia.  See also repr(MIME(\"text/plain\"), x) to instead return a \"pretty-printed\" version of x designed more for human consumption, equivalent to the REPL display of x.\n\nExamples\n\njulia> repr(1)\n\"1\"\n\njulia> repr(zeros(3))\n\"[0.0, 0.0, 0.0]\"\n\njulia> repr(big(1/3))\n\"0.333333333333333314829616256247390992939472198486328125\"\n\njulia> repr(big(1/3), context=:compact => true)\n\"0.333333\"\n\n\n\n\n\n\n"
 },
 
 {
@@ -10605,7 +10757,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Arrays",
     "title": "Base.IteratorsMD.CartesianIndices",
     "category": "type",
-    "text": "CartesianIndices(sz::Dims) -> R\nCartesianIndices((istart:istop, jstart:jstop, ...)) -> R\n\nDefine a region R spanning a multidimensional rectangular range of integer indices. These are most commonly encountered in the context of iteration, where for I in R ... end will return CartesianIndex indices I equivalent to the nested loops\n\nfor j = jstart:jstop\n    for i = istart:istop\n        ...\n    end\nend\n\nConsequently these can be useful for writing algorithms that work in arbitrary dimensions.\n\nCartesianIndices(A::AbstractArray) -> R\n\nAs a convenience, constructing a CartesianIndices from an array makes a range of its indices.\n\nExamples\n\njulia> foreach(println, CartesianIndices((2, 2, 2)))\nCartesianIndex(1, 1, 1)\nCartesianIndex(2, 1, 1)\nCartesianIndex(1, 2, 1)\nCartesianIndex(2, 2, 1)\nCartesianIndex(1, 1, 2)\nCartesianIndex(2, 1, 2)\nCartesianIndex(1, 2, 2)\nCartesianIndex(2, 2, 2)\n\njulia> CartesianIndices(fill(1, (2,3)))\n2×3 CartesianIndices{2,Tuple{Base.OneTo{Int64},Base.OneTo{Int64}}}:\n CartesianIndex(1, 1)  CartesianIndex(1, 2)  CartesianIndex(1, 3)\n CartesianIndex(2, 1)  CartesianIndex(2, 2)  CartesianIndex(2, 3)\n\nConversion between linear and cartesian indices\n\nLinear index to cartesian index conversion exploits the fact that a CartesianIndices is an AbstractArray and can be indexed linearly:\n\njulia> cartesian = CartesianIndices((1:3, 1:2))\n3×2 CartesianIndices{2,Tuple{UnitRange{Int64},UnitRange{Int64}}}:\n CartesianIndex(1, 1)  CartesianIndex(1, 2)\n CartesianIndex(2, 1)  CartesianIndex(2, 2)\n CartesianIndex(3, 1)  CartesianIndex(3, 2)\n\njulia> cartesian[4]\nCartesianIndex(1, 2)\n\nFor cartesian to linear index conversion, see LinearIndices.\n\n\n\n\n\n"
+    "text": "CartesianIndices(sz::Dims) -> R\nCartesianIndices((istart:istop, jstart:jstop, ...)) -> R\n\nDefine a region R spanning a multidimensional rectangular range of integer indices. These are most commonly encountered in the context of iteration, where for I in R ... end will return CartesianIndex indices I equivalent to the nested loops\n\nfor j = jstart:jstop\n    for i = istart:istop\n        ...\n    end\nend\n\nConsequently these can be useful for writing algorithms that work in arbitrary dimensions.\n\nCartesianIndices(A::AbstractArray) -> R\n\nAs a convenience, constructing a CartesianIndices from an array makes a range of its indices.\n\nExamples\n\njulia> foreach(println, CartesianIndices((2, 2, 2)))\nCartesianIndex(1, 1, 1)\nCartesianIndex(2, 1, 1)\nCartesianIndex(1, 2, 1)\nCartesianIndex(2, 2, 1)\nCartesianIndex(1, 1, 2)\nCartesianIndex(2, 1, 2)\nCartesianIndex(1, 2, 2)\nCartesianIndex(2, 2, 2)\n\njulia> CartesianIndices(fill(1, (2,3)))\n2×3 CartesianIndices{2,Tuple{Base.OneTo{Int64},Base.OneTo{Int64}}}:\n CartesianIndex(1, 1)  CartesianIndex(1, 2)  CartesianIndex(1, 3)\n CartesianIndex(2, 1)  CartesianIndex(2, 2)  CartesianIndex(2, 3)\n\nConversion between linear and cartesian indices\n\nLinear index to cartesian index conversion exploits the fact that a CartesianIndices is an AbstractArray and can be indexed linearly:\n\njulia> cartesian = CartesianIndices((1:3, 1:2))\n3×2 CartesianIndices{2,Tuple{UnitRange{Int64},UnitRange{Int64}}}:\n CartesianIndex(1, 1)  CartesianIndex(1, 2)\n CartesianIndex(2, 1)  CartesianIndex(2, 2)\n CartesianIndex(3, 1)  CartesianIndex(3, 2)\n\njulia> cartesian[4]\nCartesianIndex(1, 2)\n\nBroadcasting\n\nCartesianIndices support broadcasting arithmetic (+ and -) with a CartesianIndex.\n\ncompat: Julia 1.1\nBroadcasting of CartesianIndices requires at least Julia 1.1.\n\njulia> CIs = CartesianIndices((2:3, 5:6))\n2×2 CartesianIndices{2,Tuple{UnitRange{Int64},UnitRange{Int64}}}:\n CartesianIndex(2, 5)  CartesianIndex(2, 6)\n CartesianIndex(3, 5)  CartesianIndex(3, 6)\n\njulia> CI = CartesianIndex(3, 4)\nCartesianIndex(3, 4)\n\njulia> CIs .+ CI\n2×2 CartesianIndices{2,Tuple{UnitRange{Int64},UnitRange{Int64}}}:\n CartesianIndex(5, 9)  CartesianIndex(5, 10)\n CartesianIndex(6, 9)  CartesianIndex(6, 10)\n\nFor cartesian to linear index conversion, see LinearIndices.\n\n\n\n\n\n"
 },
 
 {
@@ -10981,7 +11133,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Arrays",
     "title": "Base.diff",
     "category": "function",
-    "text": "diff(A::AbstractVector)\ndiff(A::AbstractArray; dims::Integer)\n\nFinite difference operator on a vector or a multidimensional array A. In the latter case the dimension to operate on needs to be specified with the dims keyword argument.\n\nExamples\n\njulia> a = [2 4; 6 16]\n2×2 Array{Int64,2}:\n 2   4\n 6  16\n\njulia> diff(a, dims=2)\n2×1 Array{Int64,2}:\n  2\n 10\n\njulia> diff(vec(a))\n3-element Array{Int64,1}:\n  4\n -2\n 12\n\n\n\n\n\n"
+    "text": "diff(A::AbstractVector)\ndiff(A::AbstractArray; dims::Integer)\n\nFinite difference operator on a vector or a multidimensional array A. In the latter case the dimension to operate on needs to be specified with the dims keyword argument.\n\ncompat: Julia 1.1\ndiff for arrays with dimension higher than 2 requires at least Julia 1.1.\n\nExamples\n\njulia> a = [2 4; 6 16]\n2×2 Array{Int64,2}:\n 2   4\n 6  16\n\njulia> diff(a, dims=2)\n2×1 Array{Int64,2}:\n  2\n 10\n\njulia> diff(vec(a))\n3-element Array{Int64,1}:\n  4\n -2\n 12\n\n\n\n\n\n"
 },
 
 {
@@ -11229,7 +11381,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Tasks",
     "title": "Base.put!",
     "category": "method",
-    "text": "put!(c::Channel, v)\n\nAppend an item v to the channel c. Blocks if the channel is full.\n\nFor unbuffered channels, blocks until a take! is performed by a different task.\n\n\n\n\n\n"
+    "text": "put!(c::Channel, v)\n\nAppend an item v to the channel c. Blocks if the channel is full.\n\nFor unbuffered channels, blocks until a take! is performed by a different task.\n\ncompat: Julia 1.1\nv now gets converted to the channel\'s type with convert as put! is called.\n\n\n\n\n\n"
 },
 
 {
@@ -12165,7 +12317,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Filesystem",
     "title": "Base.Filesystem.splitpath",
     "category": "function",
-    "text": "splitpath(path::AbstractString) -> Vector{String}\n\nSplit a file path into all its path components. This is the opposite of joinpath. Returns an array of substrings, one for each directory or file in the path, including the root directory if present.\n\nExamples\n\njulia> splitpath(\"/home/myuser/example.jl\")\n4-element Array{String,1}:\n \"/\"\n \"home\"\n \"myuser\"\n \"example.jl\"\n\n\n\n\n\n"
+    "text": "splitpath(path::AbstractString) -> Vector{String}\n\nSplit a file path into all its path components. This is the opposite of joinpath. Returns an array of substrings, one for each directory or file in the path, including the root directory if present.\n\ncompat: Julia 1.1\nThis function requires at least Julia 1.1.\n\nExamples\n\njulia> splitpath(\"/home/myuser/example.jl\")\n4-element Array{String,1}:\n \"/\"\n \"home\"\n \"myuser\"\n \"example.jl\"\n\n\n\n\n\n"
 },
 
 {
@@ -12869,7 +13021,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Sorting and Related Functions",
     "title": "Base.sort!",
     "category": "function",
-    "text": "sort!(v; alg::Algorithm=defalg(v), lt=isless, by=identity, rev::Bool=false, order::Ordering=Forward)\n\nSort the vector v in place. QuickSort is used by default for numeric arrays while MergeSort is used for other arrays. You can specify an algorithm to use via the alg keyword (see Sorting Algorithms for available algorithms). The by keyword lets you provide a function that will be applied to each element before comparison; the lt keyword allows providing a custom \"less than\" function; use rev=true to reverse the sorting order. These options are independent and can be used together in all possible combinations: if both by and lt are specified, the lt function is applied to the result of the by function; rev=true reverses whatever ordering specified via the by and lt keywords.\n\nExamples\n\njulia> v = [3, 1, 2]; sort!(v); v\n3-element Array{Int64,1}:\n 1\n 2\n 3\n\njulia> v = [3, 1, 2]; sort!(v, rev = true); v\n3-element Array{Int64,1}:\n 3\n 2\n 1\n\njulia> v = [(1, \"c\"), (3, \"a\"), (2, \"b\")]; sort!(v, by = x -> x[1]); v\n3-element Array{Tuple{Int64,String},1}:\n (1, \"c\")\n (2, \"b\")\n (3, \"a\")\n\njulia> v = [(1, \"c\"), (3, \"a\"), (2, \"b\")]; sort!(v, by = x -> x[2]); v\n3-element Array{Tuple{Int64,String},1}:\n (3, \"a\")\n (2, \"b\")\n (1, \"c\")\n\n\n\n\n\nsort!(A; dims::Integer, alg::Algorithm=defalg(v), lt=isless, by=identity, rev::Bool=false, order::Ordering=Forward)\n\nSort the multidimensional array A along dimension dims. See sort! for a description of possible keyword arguments.\n\nTo sort slices of an array, refer to sortslices.\n\nExamples\n\njulia> A = [4 3; 1 2]\n2×2 Array{Int64,2}:\n 4  3\n 1  2\n\njulia> sort!(A, dims = 1); A\n2×2 Array{Int64,2}:\n 1  2\n 4  3\n\njulia> sort!(A, dims = 2); A\n2×2 Array{Int64,2}:\n 1  2\n 3  4\n\n\n\n\n\n"
+    "text": "sort!(v; alg::Algorithm=defalg(v), lt=isless, by=identity, rev::Bool=false, order::Ordering=Forward)\n\nSort the vector v in place. QuickSort is used by default for numeric arrays while MergeSort is used for other arrays. You can specify an algorithm to use via the alg keyword (see Sorting Algorithms for available algorithms). The by keyword lets you provide a function that will be applied to each element before comparison; the lt keyword allows providing a custom \"less than\" function; use rev=true to reverse the sorting order. These options are independent and can be used together in all possible combinations: if both by and lt are specified, the lt function is applied to the result of the by function; rev=true reverses whatever ordering specified via the by and lt keywords.\n\nExamples\n\njulia> v = [3, 1, 2]; sort!(v); v\n3-element Array{Int64,1}:\n 1\n 2\n 3\n\njulia> v = [3, 1, 2]; sort!(v, rev = true); v\n3-element Array{Int64,1}:\n 3\n 2\n 1\n\njulia> v = [(1, \"c\"), (3, \"a\"), (2, \"b\")]; sort!(v, by = x -> x[1]); v\n3-element Array{Tuple{Int64,String},1}:\n (1, \"c\")\n (2, \"b\")\n (3, \"a\")\n\njulia> v = [(1, \"c\"), (3, \"a\"), (2, \"b\")]; sort!(v, by = x -> x[2]); v\n3-element Array{Tuple{Int64,String},1}:\n (3, \"a\")\n (2, \"b\")\n (1, \"c\")\n\n\n\n\n\nsort!(A; dims::Integer, alg::Algorithm=defalg(v), lt=isless, by=identity, rev::Bool=false, order::Ordering=Forward)\n\nSort the multidimensional array A along dimension dims. See sort! for a description of possible keyword arguments.\n\nTo sort slices of an array, refer to sortslices.\n\ncompat: Julia 1.1\nThis function requires at least Julia 1.1.\n\nExamples\n\njulia> A = [4 3; 1 2]\n2×2 Array{Int64,2}:\n 4  3\n 1  2\n\njulia> sort!(A, dims = 1); A\n2×2 Array{Int64,2}:\n 1  2\n 4  3\n\njulia> sort!(A, dims = 2); A\n2×2 Array{Int64,2}:\n 1  2\n 3  4\n\n\n\n\n\n"
 },
 
 {
@@ -13165,7 +13317,7 @@ var documenterSearchIndex = {"docs": [
     "page": "C Interface",
     "title": "ccall",
     "category": "keyword",
-    "text": "ccall((function_name, library), returntype, (argtype1, ...), argvalue1, ...)\nccall(function_pointer, returntype, (argtype1, ...), argvalue1, ...)\n\nCall a function in a C-exported shared library, specified by the tuple (function_name, library), where each component is either a string or symbol. Alternatively, ccall may also be used to call a function pointer function_pointer, such as one returned by dlsym.\n\nNote that the argument type tuple must be a literal tuple, and not a tuple-valued variable or expression.\n\nEach argvalue to the ccall will be converted to the corresponding argtype, by automatic insertion of calls to unsafe_convert(argtype, cconvert(argtype, argvalue)). (See also the documentation for unsafe_convert and cconvert for further details.) In most cases, this simply results in a call to convert(argtype, argvalue).\n\n\n\n\n\n"
+    "text": "ccall((function_name, library), returntype, (argtype1, ...), argvalue1, ...)\nccall(function_name, returntype, (argtype1, ...), argvalue1, ...)\nccall(function_pointer, returntype, (argtype1, ...), argvalue1, ...)\n\nCall a function in a C-exported shared library, specified by the tuple (function_name, library), where each component is either a string or symbol. Instead of specifying a library, one can also use a function_name symbol or string, which is resolved in the current process. Alternatively, ccall may also be used to call a function pointer function_pointer, such as one returned by dlsym.\n\nNote that the argument type tuple must be a literal tuple, and not a tuple-valued variable or expression.\n\nEach argvalue to the ccall will be converted to the corresponding argtype, by automatic insertion of calls to unsafe_convert(argtype, cconvert(argtype, argvalue)). (See also the documentation for unsafe_convert and cconvert for further details.) In most cases, this simply results in a call to convert(argtype, argvalue).\n\n\n\n\n\n"
 },
 
 {
@@ -13245,7 +13397,7 @@ var documenterSearchIndex = {"docs": [
     "page": "C Interface",
     "title": "Base.copyto!",
     "category": "function",
-    "text": "copyto!(dest, do, src, so, N)\n\nCopy N elements from collection src starting at offset so, to array dest starting at offset do. Return dest.\n\n\n\n\n\ncopyto!(dest::AbstractArray, src) -> dest\n\nCopy all elements from collection src to array dest, whose length must be greater than or equal to the length n of src. The first n elements of dest are overwritten, the other elements are left untouched.\n\nExamples\n\njulia> x = [1., 0., 3., 0., 5.];\n\njulia> y = zeros(7);\n\njulia> copyto!(y, x);\n\njulia> y\n7-element Array{Float64,1}:\n 1.0\n 0.0\n 3.0\n 0.0\n 5.0\n 0.0\n 0.0\n\n\n\n\n\ncopyto!(dest, Rdest::CartesianIndices, src, Rsrc::CartesianIndices) -> dest\n\nCopy the block of src in the range of Rsrc to the block of dest in the range of Rdest. The sizes of the two regions must match.\n\n\n\n\n\n"
+    "text": "copyto!(dest::AbstractMatrix, src::UniformScaling)\n\nCopies a UniformScaling onto a matrix.\n\ncompat: Julia 1.1\nIn Julia 1.0 this method only supported a square destination matrix. Julia 1.1. added support for a rectangular matrix.\n\n\n\n\n\ncopyto!(dest, do, src, so, N)\n\nCopy N elements from collection src starting at offset so, to array dest starting at offset do. Return dest.\n\n\n\n\n\ncopyto!(dest::AbstractArray, src) -> dest\n\nCopy all elements from collection src to array dest, whose length must be greater than or equal to the length n of src. The first n elements of dest are overwritten, the other elements are left untouched.\n\nExamples\n\njulia> x = [1., 0., 3., 0., 5.];\n\njulia> y = zeros(7);\n\njulia> copyto!(y, x);\n\njulia> y\n7-element Array{Float64,1}:\n 1.0\n 0.0\n 3.0\n 0.0\n 5.0\n 0.0\n 0.0\n\n\n\n\n\ncopyto!(dest, Rdest::CartesianIndices, src, Rsrc::CartesianIndices) -> dest\n\nCopy the block of src in the range of Rsrc to the block of dest in the range of Rdest. The sizes of the two regions must match.\n\n\n\n\n\n"
 },
 
 {
@@ -14973,7 +15125,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Distributed Computing",
     "title": "Base.wait",
     "category": "function",
-    "text": "wait([x])\n\nBlock the current task until some event occurs, depending on the type of the argument:\n\nChannel: Wait for a value to be appended to the channel.\nCondition: Wait for notify on a condition.\nProcess: Wait for a process or process chain to exit. The exitcode field of a process can be used to determine success or failure.\nTask: Wait for a Task to finish. If the task fails with an exception, the exception is propagated (re-thrown in the task that called wait).\nRawFD: Wait for changes on a file descriptor (see the FileWatching package).\n\nIf no argument is passed, the task blocks for an undefined period. A task can only be restarted by an explicit call to schedule or yieldto.\n\nOften wait is called within a while loop to ensure a waited-for condition is met before proceeding.\n\n\n\n\n\nwait(r::Future)\n\nWait for a value to become available for the specified Future.\n\n\n\n\n\nwait(r::RemoteChannel, args...)\n\nWait for a value to become available on the specified RemoteChannel.\n\n\n\n\n\n"
+    "text": "wait(r::Future)\n\nWait for a value to become available for the specified Future.\n\n\n\n\n\nwait(r::RemoteChannel, args...)\n\nWait for a value to become available on the specified RemoteChannel.\n\n\n\n\n\nwait([x])\n\nBlock the current task until some event occurs, depending on the type of the argument:\n\nChannel: Wait for a value to be appended to the channel.\nCondition: Wait for notify on a condition.\nProcess: Wait for a process or process chain to exit. The exitcode field of a process can be used to determine success or failure.\nTask: Wait for a Task to finish. If the task fails with an exception, the exception is propagated (re-thrown in the task that called wait).\nRawFD: Wait for changes on a file descriptor (see the FileWatching package).\n\nIf no argument is passed, the task blocks for an undefined period. A task can only be restarted by an explicit call to schedule or yieldto.\n\nOften wait is called within a while loop to ensure a waited-for condition is met before proceeding.\n\n\n\n\n\n"
 },
 
 {
@@ -15437,7 +15589,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Interactive Utilities",
     "title": "InteractiveUtils.edit",
     "category": "method",
-    "text": "edit(function, [types])\nedit(module)\n\nEdit the definition of a function, optionally specifying a tuple of types to indicate which method to edit.\n\nFor modules, open the main source file. The module needs to be loaded with using or import first.\n\nThe editor can be changed by setting JULIA_EDITOR, VISUAL or EDITOR as an environment variable.\n\n\n\n\n\n"
+    "text": "edit(function, [types])\nedit(module)\n\nEdit the definition of a function, optionally specifying a tuple of types to indicate which method to edit. For modules, open the main source file. The module needs to be loaded with using or import first.\n\ncompat: Julia 1.1\nedit on modules requires at least Julia 1.1.\n\nThe editor can be changed by setting JULIA_EDITOR, VISUAL or EDITOR as an environment variable.\n\n\n\n\n\n"
 },
 
 {
@@ -15509,7 +15661,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Interactive Utilities",
     "title": "InteractiveUtils.code_warntype",
     "category": "function",
-    "text": "code_warntype([io::IO], f, types; verbose_linetable=false)\n\nPrints lowered and type-inferred ASTs for the methods matching the given generic function and type signature to io which defaults to stdout. The ASTs are annotated in such a way as to cause \"non-leaf\" types to be emphasized (if color is available, displayed in red). This serves as a warning of potential type instability. Not all non-leaf types are particularly problematic for performance, so the results need to be used judiciously. In particular, unions containing either missing or nothing are displayed in yellow, since these are often intentional. If the verbose_linetable keyword is set, the linetable will be printed in verbose mode, showing all available information (rather than applying the usual heuristics). See @code_warntype for more information.\n\n\n\n\n\n"
+    "text": "code_warntype([io::IO], f, types; debuginfo=:default)\n\nPrints lowered and type-inferred ASTs for the methods matching the given generic function and type signature to io which defaults to stdout. The ASTs are annotated in such a way as to cause \"non-leaf\" types to be emphasized (if color is available, displayed in red). This serves as a warning of potential type instability. Not all non-leaf types are particularly problematic for performance, so the results need to be used judiciously. In particular, unions containing either missing or nothing are displayed in yellow, since these are often intentional.\n\nKeyword argument debuginfo may be one of source or none (default), to specify the verbosity of code comments.\n\nSee @code_warntype for more information.\n\n\n\n\n\n"
 },
 
 {
@@ -15525,7 +15677,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Interactive Utilities",
     "title": "InteractiveUtils.code_llvm",
     "category": "function",
-    "text": "code_llvm([io=stdout,], f, types)\n\nPrints the LLVM bitcodes generated for running the method matching the given generic function and type signature to io.\n\nIf the optimize keyword is unset, the code will be shown before LLVM optimizations. All metadata and dbg.* calls are removed from the printed bitcode. Set the raw keyword for the full IR. To dump the entire module that encapsulates the function, with debug info and metadata, set the dump_module keyword.\n\n\n\n\n\n"
+    "text": "code_llvm([io=stdout,], f, types; raw=false, dump_module=false, optimize=true, debuginfo=:default)\n\nPrints the LLVM bitcodes generated for running the method matching the given generic function and type signature to io.\n\nIf the optimize keyword is unset, the code will be shown before LLVM optimizations. All metadata and dbg.* calls are removed from the printed bitcode. For the full IR, set the raw keyword to true. To dump the entire module that encapsulates the function (with declarations), set the dump_module keyword to true. Keyword argument debuginfo may be one of source (default) or none, to specify the verbosity of code comments.\n\n\n\n\n\n"
 },
 
 {
@@ -15533,7 +15685,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Interactive Utilities",
     "title": "InteractiveUtils.@code_llvm",
     "category": "macro",
-    "text": "@code_llvm\n\nEvaluates the arguments to the function or macro call, determines their types, and calls code_llvm on the resulting expression. Set the optional keyword arguments raw, dump_module and optimize by putting them and their value before the function call, like this:\n\n@code_llvm raw=true dump_module=true f(x)\n@code_llvm optimize=false f(x)\n\noptimize controls whether additional optimizations, such as inlining, are also applied. raw makes all metadata and dbg.* calls visible. dump_module prints the entire module that encapsulates the function, with debug info and metadata.\n\n\n\n\n\n"
+    "text": "@code_llvm\n\nEvaluates the arguments to the function or macro call, determines their types, and calls code_llvm on the resulting expression. Set the optional keyword arguments raw, dump_module, debuginfo, optimize by putting them and their value before the function call, like this:\n\n@code_llvm raw=true dump_module=true debuginfo=:default f(x)\n@code_llvm optimize=false f(x)\n\noptimize controls whether additional optimizations, such as inlining, are also applied. raw makes all metadata and dbg.* calls visible. debuginfo may be one of full, source (default), none, to specify the verbosity of code comments. dump_module prints the entire module that encapsulates the function.\n\n\n\n\n\n"
 },
 
 {
@@ -15541,7 +15693,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Interactive Utilities",
     "title": "InteractiveUtils.code_native",
     "category": "function",
-    "text": "code_native([io=stdout,], f, types; syntax = :att)\n\nPrints the native assembly instructions generated for running the method matching the given generic function and type signature to io. Switch assembly syntax using syntax symbol parameter set to :att for AT&T syntax or :intel for Intel syntax.\n\n\n\n\n\n"
+    "text": "code_native([io=stdout,], f, types; syntax=:att, debuginfo=:default)\n\nPrints the native assembly instructions generated for running the method matching the given generic function and type signature to io. Switch assembly syntax using syntax symbol parameter set to :att for AT&T syntax or :intel for Intel syntax. Keyword argument debuginfo may be one of source (default) or none, to specify the verbosity of code comments.\n\n\n\n\n\n"
 },
 
 {
@@ -15549,7 +15701,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Interactive Utilities",
     "title": "InteractiveUtils.@code_native",
     "category": "macro",
-    "text": "@code_native\n\nEvaluates the arguments to the function or macro call, determines their types, and calls code_native on the resulting expression.\n\n\n\n\n\n"
+    "text": "@code_native\n\nEvaluates the arguments to the function or macro call, determines their types, and calls code_native on the resulting expression.\n\nSet the optional keyword argument debuginfo by putting it before the function call, like this:\n\n@code_native debuginfo=:default f(x)\n\ndebuginfo may be one of source (default) or none, to specify the verbosity of code comments.\n\n\n\n\n\n"
 },
 
 {
@@ -17505,6 +17657,22 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
+    "location": "stdlib/LinearAlgebra/#Base.:^-Tuple{AbstractArray{T,2} where T,Number}",
+    "page": "Linear Algebra",
+    "title": "Base.:^",
+    "category": "method",
+    "text": "^(A::AbstractMatrix, p::Number)\n\nMatrix power, equivalent to exp(plog(A))\n\nExamples\n\njulia> [1 2; 0 3]^3\n2×2 Array{Int64,2}:\n 1  26\n 0  27\n\n\n\n\n\n"
+},
+
+{
+    "location": "stdlib/LinearAlgebra/#Base.:^-Tuple{Number,AbstractArray{T,2} where T}",
+    "page": "Linear Algebra",
+    "title": "Base.:^",
+    "category": "method",
+    "text": "^(b::Number, A::AbstractMatrix)\n\nMatrix exponential, equivalent to exp(log(b)A).\n\ncompat: Julia 1.1\nSupport for raising Irrational numbers (like ℯ) to a matrix was added in Julia 1.1.\n\nExamples\n\njulia> 2^[1 2; 0 3]\n2×2 Array{Float64,2}:\n 2.0  6.0\n 0.0  8.0\n\njulia> ℯ^[1 2; 0 3]\n2×2 Array{Float64,2}:\n 2.71828  17.3673\n 0.0      20.0855\n\n\n\n\n\n"
+},
+
+{
     "location": "stdlib/LinearAlgebra/#Base.log-Tuple{Union{DenseArray{T,2}, ReinterpretArray{T,2,S,A} where S where A<:Union{SubArray{T,N,A,I,true} where I<:Union{Tuple{Vararg{Real,N} where N}, Tuple{AbstractUnitRange,Vararg{Any,N} where N}} where A<:DenseArray where N where T, DenseArray}, ReshapedArray{T,2,A,MI} where MI<:Tuple{Vararg{SignedMultiplicativeInverse{Int64},N} where N} where A<:Union{ReinterpretArray{T,N,S,A} where S where A<:Union{SubArray{T,N,A,I,true} where I<:Union{Tuple{Vararg{Real,N} where N}, Tuple{AbstractUnitRange,Vararg{Any,N} where N}} where A<:DenseArray where N where T, DenseArray} where N where T, SubArray{T,N,A,I,true} where I<:Union{Tuple{Vararg{Real,N} where N}, Tuple{AbstractUnitRange,Vararg{Any,N} where N}} where A<:DenseArray where N where T, DenseArray}, SubArray{T,2,A,I,L} where L where I<:Tuple{Vararg{Union{Int64, AbstractRange{Int64}, AbstractCartesianIndex},N} where N} where A<:Union{ReinterpretArray{T,N,S,A} where S where A<:Union{SubArray{T,N,A,I,true} where I<:Union{Tuple{Vararg{Real,N} where N}, Tuple{AbstractUnitRange,Vararg{Any,N} where N}} where A<:DenseArray where N where T, DenseArray} where N where T, ReshapedArray{T,N,A,MI} where MI<:Tuple{Vararg{SignedMultiplicativeInverse{Int64},N} where N} where A<:Union{ReinterpretArray{T,N,S,A} where S where A<:Union{SubArray{T,N,A,I,true} where I<:Union{Tuple{Vararg{Real,N} where N}, Tuple{AbstractUnitRange,Vararg{Any,N} where N}} where A<:DenseArray where N where T, DenseArray} where N where T, SubArray{T,N,A,I,true} where I<:Union{Tuple{Vararg{Real,N} where N}, Tuple{AbstractUnitRange,Vararg{Any,N} where N}} where A<:DenseArray where N where T, DenseArray} where N where T, DenseArray}} where T}",
     "page": "Linear Algebra",
     "title": "Base.log",
@@ -17861,7 +18029,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Linear Algebra",
     "title": "LinearAlgebra.peakflops",
     "category": "function",
-    "text": "LinearAlgebra.peakflops(n::Integer=2000; parallel::Bool=false)\n\npeakflops computes the peak flop rate of the computer by using double precision gemm!. By default, if no arguments are specified, it multiplies a matrix of size n x n, where n = 2000. If the underlying BLAS is using multiple threads, higher flop rates are realized. The number of BLAS threads can be set with BLAS.set_num_threads(n).\n\nIf the keyword argument parallel is set to true, peakflops is run in parallel on all the worker processors. The flop rate of the entire parallel computer is returned. When running in parallel, only 1 BLAS thread is used. The argument n still refers to the size of the problem that is solved on each processor.\n\n\n\n\n\n"
+    "text": "LinearAlgebra.peakflops(n::Integer=2000; parallel::Bool=false)\n\npeakflops computes the peak flop rate of the computer by using double precision gemm!. By default, if no arguments are specified, it multiplies a matrix of size n x n, where n = 2000. If the underlying BLAS is using multiple threads, higher flop rates are realized. The number of BLAS threads can be set with BLAS.set_num_threads(n).\n\nIf the keyword argument parallel is set to true, peakflops is run in parallel on all the worker processors. The flop rate of the entire parallel computer is returned. When running in parallel, only 1 BLAS thread is used. The argument n still refers to the size of the problem that is solved on each processor.\n\ncompat: Julia 1.1\nThis function requires at least Julia 1.1. In Julia 1.0 it is available from the standard library InteractiveUtils.\n\n\n\n\n\n"
 },
 
 {
@@ -17869,7 +18037,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Linear Algebra",
     "title": "Standard Functions",
     "category": "section",
-    "text": "Linear algebra functions in Julia are largely implemented by calling functions from LAPACK.  Sparse factorizations call functions from SuiteSparse.Base.:*(::AbstractMatrix, ::AbstractMatrix)\nBase.:\\(::AbstractMatrix, ::AbstractVecOrMat)\nLinearAlgebra.dot\nLinearAlgebra.cross\nLinearAlgebra.factorize\nLinearAlgebra.Diagonal\nLinearAlgebra.Bidiagonal\nLinearAlgebra.SymTridiagonal\nLinearAlgebra.Tridiagonal\nLinearAlgebra.Symmetric\nLinearAlgebra.Hermitian\nLinearAlgebra.LowerTriangular\nLinearAlgebra.UpperTriangular\nLinearAlgebra.UniformScaling\nLinearAlgebra.lu\nLinearAlgebra.lu!\nLinearAlgebra.cholesky\nLinearAlgebra.cholesky!\nLinearAlgebra.lowrankupdate\nLinearAlgebra.lowrankdowndate\nLinearAlgebra.lowrankupdate!\nLinearAlgebra.lowrankdowndate!\nLinearAlgebra.ldlt\nLinearAlgebra.ldlt!\nLinearAlgebra.qr\nLinearAlgebra.qr!\nLinearAlgebra.QR\nLinearAlgebra.QRCompactWY\nLinearAlgebra.QRPivoted\nLinearAlgebra.lq!\nLinearAlgebra.lq\nLinearAlgebra.bunchkaufman\nLinearAlgebra.bunchkaufman!\nLinearAlgebra.eigvals\nLinearAlgebra.eigvals!\nLinearAlgebra.eigmax\nLinearAlgebra.eigmin\nLinearAlgebra.eigvecs\nLinearAlgebra.eigen\nLinearAlgebra.eigen!\nLinearAlgebra.hessenberg\nLinearAlgebra.hessenberg!\nLinearAlgebra.schur!\nLinearAlgebra.schur\nLinearAlgebra.ordschur\nLinearAlgebra.ordschur!\nLinearAlgebra.svd\nLinearAlgebra.svd!\nLinearAlgebra.svdvals\nLinearAlgebra.svdvals!\nLinearAlgebra.Givens\nLinearAlgebra.givens\nLinearAlgebra.triu\nLinearAlgebra.triu!\nLinearAlgebra.tril\nLinearAlgebra.tril!\nLinearAlgebra.diagind\nLinearAlgebra.diag\nLinearAlgebra.diagm\nLinearAlgebra.rank\nLinearAlgebra.norm\nLinearAlgebra.opnorm\nLinearAlgebra.normalize!\nLinearAlgebra.normalize\nLinearAlgebra.cond\nLinearAlgebra.condskeel\nLinearAlgebra.tr\nLinearAlgebra.det\nLinearAlgebra.logdet\nLinearAlgebra.logabsdet\nBase.inv(::AbstractMatrix)\nLinearAlgebra.pinv\nLinearAlgebra.nullspace\nBase.kron\nLinearAlgebra.exp(::StridedMatrix{<:LinearAlgebra.BlasFloat})\nLinearAlgebra.log(::StridedMatrix)\nLinearAlgebra.sqrt(::StridedMatrix{<:Real})\nLinearAlgebra.cos(::StridedMatrix{<:Real})\nLinearAlgebra.sin(::StridedMatrix{<:Real})\nLinearAlgebra.sincos(::StridedMatrix{<:Real})\nLinearAlgebra.tan(::StridedMatrix{<:Real})\nLinearAlgebra.sec(::StridedMatrix)\nLinearAlgebra.csc(::StridedMatrix)\nLinearAlgebra.cot(::StridedMatrix)\nLinearAlgebra.cosh(::StridedMatrix)\nLinearAlgebra.sinh(::StridedMatrix)\nLinearAlgebra.tanh(::StridedMatrix)\nLinearAlgebra.sech(::StridedMatrix)\nLinearAlgebra.csch(::StridedMatrix)\nLinearAlgebra.coth(::StridedMatrix)\nLinearAlgebra.acos(::StridedMatrix)\nLinearAlgebra.asin(::StridedMatrix)\nLinearAlgebra.atan(::StridedMatrix)\nLinearAlgebra.asec(::StridedMatrix)\nLinearAlgebra.acsc(::StridedMatrix)\nLinearAlgebra.acot(::StridedMatrix)\nLinearAlgebra.acosh(::StridedMatrix)\nLinearAlgebra.asinh(::StridedMatrix)\nLinearAlgebra.atanh(::StridedMatrix)\nLinearAlgebra.asech(::StridedMatrix)\nLinearAlgebra.acsch(::StridedMatrix)\nLinearAlgebra.acoth(::StridedMatrix)\nLinearAlgebra.lyap\nLinearAlgebra.sylvester\nLinearAlgebra.issuccess\nLinearAlgebra.issymmetric\nLinearAlgebra.isposdef\nLinearAlgebra.isposdef!\nLinearAlgebra.istril\nLinearAlgebra.istriu\nLinearAlgebra.isdiag\nLinearAlgebra.ishermitian\nBase.transpose\nLinearAlgebra.transpose!\nBase.adjoint\nLinearAlgebra.adjoint!\nBase.copy(::Union{Transpose,Adjoint})\nLinearAlgebra.stride1\nLinearAlgebra.checksquare\nLinearAlgebra.peakflops"
+    "text": "Linear algebra functions in Julia are largely implemented by calling functions from LAPACK.  Sparse factorizations call functions from SuiteSparse.Base.:*(::AbstractMatrix, ::AbstractMatrix)\nBase.:\\(::AbstractMatrix, ::AbstractVecOrMat)\nLinearAlgebra.dot\nLinearAlgebra.cross\nLinearAlgebra.factorize\nLinearAlgebra.Diagonal\nLinearAlgebra.Bidiagonal\nLinearAlgebra.SymTridiagonal\nLinearAlgebra.Tridiagonal\nLinearAlgebra.Symmetric\nLinearAlgebra.Hermitian\nLinearAlgebra.LowerTriangular\nLinearAlgebra.UpperTriangular\nLinearAlgebra.UniformScaling\nLinearAlgebra.lu\nLinearAlgebra.lu!\nLinearAlgebra.cholesky\nLinearAlgebra.cholesky!\nLinearAlgebra.lowrankupdate\nLinearAlgebra.lowrankdowndate\nLinearAlgebra.lowrankupdate!\nLinearAlgebra.lowrankdowndate!\nLinearAlgebra.ldlt\nLinearAlgebra.ldlt!\nLinearAlgebra.qr\nLinearAlgebra.qr!\nLinearAlgebra.QR\nLinearAlgebra.QRCompactWY\nLinearAlgebra.QRPivoted\nLinearAlgebra.lq!\nLinearAlgebra.lq\nLinearAlgebra.bunchkaufman\nLinearAlgebra.bunchkaufman!\nLinearAlgebra.eigvals\nLinearAlgebra.eigvals!\nLinearAlgebra.eigmax\nLinearAlgebra.eigmin\nLinearAlgebra.eigvecs\nLinearAlgebra.eigen\nLinearAlgebra.eigen!\nLinearAlgebra.hessenberg\nLinearAlgebra.hessenberg!\nLinearAlgebra.schur!\nLinearAlgebra.schur\nLinearAlgebra.ordschur\nLinearAlgebra.ordschur!\nLinearAlgebra.svd\nLinearAlgebra.svd!\nLinearAlgebra.svdvals\nLinearAlgebra.svdvals!\nLinearAlgebra.Givens\nLinearAlgebra.givens\nLinearAlgebra.triu\nLinearAlgebra.triu!\nLinearAlgebra.tril\nLinearAlgebra.tril!\nLinearAlgebra.diagind\nLinearAlgebra.diag\nLinearAlgebra.diagm\nLinearAlgebra.rank\nLinearAlgebra.norm\nLinearAlgebra.opnorm\nLinearAlgebra.normalize!\nLinearAlgebra.normalize\nLinearAlgebra.cond\nLinearAlgebra.condskeel\nLinearAlgebra.tr\nLinearAlgebra.det\nLinearAlgebra.logdet\nLinearAlgebra.logabsdet\nBase.inv(::AbstractMatrix)\nLinearAlgebra.pinv\nLinearAlgebra.nullspace\nBase.kron\nLinearAlgebra.exp(::StridedMatrix{<:LinearAlgebra.BlasFloat})\nBase.:^(::AbstractMatrix, ::Number)\nBase.:^(::Number, ::AbstractMatrix)\nLinearAlgebra.log(::StridedMatrix)\nLinearAlgebra.sqrt(::StridedMatrix{<:Real})\nLinearAlgebra.cos(::StridedMatrix{<:Real})\nLinearAlgebra.sin(::StridedMatrix{<:Real})\nLinearAlgebra.sincos(::StridedMatrix{<:Real})\nLinearAlgebra.tan(::StridedMatrix{<:Real})\nLinearAlgebra.sec(::StridedMatrix)\nLinearAlgebra.csc(::StridedMatrix)\nLinearAlgebra.cot(::StridedMatrix)\nLinearAlgebra.cosh(::StridedMatrix)\nLinearAlgebra.sinh(::StridedMatrix)\nLinearAlgebra.tanh(::StridedMatrix)\nLinearAlgebra.sech(::StridedMatrix)\nLinearAlgebra.csch(::StridedMatrix)\nLinearAlgebra.coth(::StridedMatrix)\nLinearAlgebra.acos(::StridedMatrix)\nLinearAlgebra.asin(::StridedMatrix)\nLinearAlgebra.atan(::StridedMatrix)\nLinearAlgebra.asec(::StridedMatrix)\nLinearAlgebra.acsc(::StridedMatrix)\nLinearAlgebra.acot(::StridedMatrix)\nLinearAlgebra.acosh(::StridedMatrix)\nLinearAlgebra.asinh(::StridedMatrix)\nLinearAlgebra.atanh(::StridedMatrix)\nLinearAlgebra.asech(::StridedMatrix)\nLinearAlgebra.acsch(::StridedMatrix)\nLinearAlgebra.acoth(::StridedMatrix)\nLinearAlgebra.lyap\nLinearAlgebra.sylvester\nLinearAlgebra.issuccess\nLinearAlgebra.issymmetric\nLinearAlgebra.isposdef\nLinearAlgebra.isposdef!\nLinearAlgebra.istril\nLinearAlgebra.istriu\nLinearAlgebra.isdiag\nLinearAlgebra.ishermitian\nBase.transpose\nLinearAlgebra.transpose!\nBase.adjoint\nLinearAlgebra.adjoint!\nBase.copy(::Union{Transpose,Adjoint})\nLinearAlgebra.stride1\nLinearAlgebra.checksquare\nLinearAlgebra.peakflops"
 },
 
 {
@@ -19429,367 +19597,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Pkg",
     "title": "Pkg",
     "category": "section",
-    "text": ""
-},
-
-{
-    "location": "stdlib/Pkg/#Introduction-1",
-    "page": "Pkg",
-    "title": "Introduction",
-    "category": "section",
-    "text": "Pkg is the standard package manager for Julia 1.0 and newer. Unlike traditional package managers, which install and manage a single global set of packages, Pkg is designed around “environments”: independent sets of packages that can be local to an individual project or shared and selected by name. The exact set of packages and versions in an environment is captured in a manifest file which can be checked into a project repository and tracked in version control, significantly improving reproducibility of projects. If you’ve ever tried to run code you haven’t used in a while only to find that you can’t get anything to work because you’ve updated or uninstalled some of the packages your project was using, you’ll understand the motivation for this approach. In Pkg, since each project maintains its own independent set of package versions, you’ll never have this problem again. Moreover, if you check out a project on a new system, you can simply materialize the environment described by its manifest file and immediately be up and running with a known-good set of dependencies.Since environments are managed and updated independently from each other, “dependency hell” is significantly alleviated in Pkg. If you want to use the latest and greatest version of some package in a new project but you’re stuck on an older version in a different project, that’s no problem – since they have separate environments they can just use different versions, which are both installed at the same time in different locations on your system. The location of each package version is canonical, so when environments use the same versions of packages, they can share installations, avoiding unnecessary duplication of the package. Old package versions that are no longer used by any environments are periodically “garbage collected” by the package manager.Pkg’s approach to local environments may be familiar to people who have used Python’s virtualenv or Ruby’s bundler. In Julia, instead of hacking the language’s code loading mechanisms to support environments, we have the benefit that Julia natively understands them. In addition, Julia environments are “stackable”: you can overlay one environment with another and thereby have access to additional packages outside of the primary environment. This makes it easy to work on a project, which provides the primary environment, while still having access to all your usual dev tools like profilers, debuggers, and so on, just by having an environment including these dev tools later in the load path.Last but not least, Pkg is designed to support federated package registries. This means that it allows multiple registries managed by different parties to interact seamlessly. In particular, this includes private registries which can live behind corporate firewalls. You can install and update your own packages from a private registry with exactly the same tools and workflows that you use to install and manage official Julia packages. If you urgently need to apply a hotfix for a public package that’s critical to your company’s product, you can tag a private version of it in your company’s internal registry and get a fix to your developers and ops teams quickly and easily without having to wait for an upstream patch to be accepted and published. Once an official fix is published, however, you can just upgrade your dependencies and you\'ll be back on an official release again."
-},
-
-{
-    "location": "stdlib/Pkg/#Glossary-1",
-    "page": "Pkg",
-    "title": "Glossary",
-    "category": "section",
-    "text": "Project: a source tree with a standard layout, including a src directory for the main body of Julia code, a test directory for testing the project, docs for documentation files, and optionally a deps directory for a build script and its outputs. A project will typically also have a project file and may optionally have a manifest file:Project file: a file in the root directory of a project, named Project.toml (or JuliaProject.toml) describing metadata about the project, including its name, UUID (for packages), authors, license, and the names and UUIDs of packages and libraries that it depends on.\nManifest file: a file in the root directory of a project, named Manifest.toml (or JuliaManifest.toml) describing a complete dependency graph and exact versions of each package and library used by a project.Package: a project which provides reusable functionality that can be used by other Julia projects via import X or using X. A package should have a project file with a uuid entry giving its package UUID. This UUID is used to identify the package in projects that depend on it.note: Note\nFor legacy reasons it is possible to load a package without a project file or UUID from the REPL or the top-level of a script. It is not possible, however, to load a package without a project file or UUID from a project with them. Once you\'ve loaded from a project file, everything needs a project file and UUID.Application: a project which provides standalone functionality not intended to be reused by other Julia projects. For example a web application or a commmand-line utility, or simulation/analytics code accompanying a scientific paper. An application may have a UUID but does not need one. An application may also provide global configuration options for packages it depends on. Packages, on the other hand, may not provide global configuration since that could conflict with the configuration of the main application.note: Note\nProjects vs. Packages vs. Applications:Project is an umbrella term: packages and applications are kinds of projects.\nPackages should have UUIDs, applications can have a UUIDs but don\'t need them.\nApplications can provide global configuration, whereas packages cannot.Library (future work): a compiled binary dependency (not written in Julia) packaged to be used by a Julia project. These are currently typically built in- place by a deps/build.jl script in a project’s source tree, but in the future we plan to make libraries first-class entities directly installed and upgraded by the package manager.Environment: the combination of the top-level name map provided by a project file combined with the dependency graph and map from packages to their entry points provided by a manifest file. For more detail see the manual section on code loading.Explicit environment: an environment in the form of an explicit project file and an optional corresponding manifest file together in a directory. If the manifest file is absent then the implied dependency graph and location maps are empty.\nImplicit environment: an environment provided as a directory (without a project file or manifest file) containing packages with entry points of the form X.jl, X.jl/src/X.jl or X/src/X.jl. The top-level name map is implied by these entry points. The dependency graph is implied by the existence of project files inside of these package directories, e.g. X.jl/Project.toml or X/Project.toml. The dependencies of the X package are the dependencies in the corresponding project file if there is one. The location map is implied by the entry points themselves.Registry: a source tree with a standard layout recording metadata about a registered set of packages, the tagged versions of them which are available, and which versions of packages are compatible or incompatible with each other. A registry is indexed by package name and UUID, and has a directory for each registered package providing the following metadata about it:name – e.g. DataFrames\nUUID – e.g. a93c6f00-e57d-5684-b7b6-d8193f3e46c0\nauthors – e.g. Jane Q. Developer <jane@example.com>\nlicense – e.g. MIT, BSD3, or GPLv2\nrepository – e.g. https://github.com/JuliaData/DataFrames.jl.git\ndescription – a block of text summarizing the functionality of a package\nkeywords – e.g. data, tabular, analysis, statistics\nversions – a list of all registered version tagsFor each registered version of a package, the following information is provided:its semantic version number – e.g. v1.2.3\nits git tree SHA-1 hash – e.g. 7ffb18ea3245ef98e368b02b81e8a86543a11103\na map from names to UUIDs of dependencies\nwhich versions of other packages it is compatible/incompatible withDependencies and compatibility are stored in a compressed but human-readable format using ranges of package versions.Depot: a directory on a system where various package-related resources live, including:environments: shared named environments (e.g. v1.0, devtools)\nclones: bare clones of package repositories\ncompiled: cached compiled package images (.ji files)\nconfig: global configuration files (e.g. startup.jl)\ndev: default directory for package development\nlogs: log files (e.g. manifest_usage.toml, repl_history.jl)\npackages: installed package versions\nregistries: clones of registries (e.g. General)Load path: a stack of environments where package identities, their dependencies, and entry-points are searched for. The load path is controlled in Julia by the LOAD_PATH global variable which is populated at startup based on the value of the JULIA_LOAD_PATH environment variable. The first entry is your primary environment, often the current project, while later entries provide additional packages one may want to use from the REPL or top-level scripts.Depot path: a stack of depot locations where the package manager, as well as Julia\'s code loading mechanisms, look for registries, installed packages, named environments, repo clones, cached compiled package images, and configuration files. The depot path is controlled by the Julia DEPOT_PATH global variable which is populated at startup based on the value of the JULIA_DEPOT_PATH environment variable. The first entry is the “user depot” and should be writable by and owned by the current user. The user depot is where: registries are cloned, new package versions are installed, named environments are created and updated, package repos are cloned, newly compiled package image files are saved, log files are written, development packages are checked out by default, and global configuration data is saved. Later entries in the depot path are treated as read-only and are appropriate for registries, packages, etc. installed and managed by system administrators."
-},
-
-{
-    "location": "stdlib/Pkg/#Getting-Started-1",
-    "page": "Pkg",
-    "title": "Getting Started",
-    "category": "section",
-    "text": "The Pkg REPL-mode is entered from the Julia REPL using the key ].(v1.0) pkg>The part inside the parenthesis of the prompt shows the name of the current project. Since we haven\'t created our own project yet, we are in the default project, located at ~/.julia/environments/v1.0 (or whatever version of Julia you happen to run).To return to the julia> prompt, either press backspace when the input line is empty or press Ctrl+C. Help is available by calling pkg> help. If you are in an environment that does not have access to a REPL you can still use the REPL mode commands using the string macro pkg available after using Pkg. The command pkg\"cmd\" would be equivalent to executing cmd in the REPL mode.The documentation here describes using Pkg from the REPL mode. Documentation of using the Pkg API (by calling Pkg. functions) is in progress of being written."
-},
-
-{
-    "location": "stdlib/Pkg/#Adding-packages-1",
-    "page": "Pkg",
-    "title": "Adding packages",
-    "category": "section",
-    "text": "There are two ways of adding packages, either using the add command or the dev command. The most frequently used one is add and its usage is described first."
-},
-
-{
-    "location": "stdlib/Pkg/#Adding-registered-packages-1",
-    "page": "Pkg",
-    "title": "Adding registered packages",
-    "category": "section",
-    "text": "In the Pkg REPL packages can be added with the add command followed by the name of the package, for example:(v1.0) pkg> add Example\n   Cloning default registries into /Users/kristoffer/.julia/registries\n   Cloning registry General from \"https://github.com/JuliaRegistries/General.git\"\n  Updating registry at `~/.julia/registries/General`\n  Updating git-repo `https://github.com/JuliaRegistries/General.git`\n Resolving package versions...\n  Updating `~/.julia/environments/v1.0/Project.toml`\n  [7876af07] + Example v0.5.1\n  Updating `~/.julia/environments/v1.0/Manifest.toml`\n  [7876af07] + Example v0.5.1\n  [8dfed614] + TestHere we added the package Example to the current project. In this example, we are using a fresh Julia installation, and this is our first time adding a package using Pkg. By default, Pkg clones Julia\'s General registry, and uses this registry to look up packages requested for inclusion in the current environment. The status update shows a short form of the package UUID to the left, then the package name, and the version. Since standard libraries (e.g. Test) are shipped with Julia, they do not have a version. The project status contains the packages you have added yourself, in this case, Example:(v1.0) pkg> st\n    Status `Project.toml`\n  [7876af07] Example v0.5.1The manifest status, in addition, includes the dependencies of explicitly added packages.(v1.0) pkg> st --manifest\n    Status `Manifest.toml`\n  [7876af07] Example v0.5.1\n  [8dfed614] TestIt is possible to add multiple packages in one command as pkg> add A B C.After a package is added to the project, it can be loaded in Julia:julia> using Example\n\njulia> Example.hello(\"User\")\n\"Hello, User\"A specific version can be installed by appending a version after a @ symbol, e.g. @v0.4, to the package name:(v1.0) pkg> add Example@0.4\n Resolving package versions...\n  Updating `~/.julia/environments/v1.0/Project.toml`\n  [7876af07] + Example v0.4.1\n  Updating `~/.julia/environments/v1.0/Manifest.toml`\n  [7876af07] + Example v0.4.1If the master branch (or a certain commit SHA) of Example has a hotfix that has not yet included in a registered version, we can explicitly track a branch (or commit) by appending #branch (or #commit) to the package name:(v1.0) pkg> add Example#master\n  Updating git-repo `https://github.com/JuliaLang/Example.jl.git`\n Resolving package versions...\n  Updating `~/.julia/environments/v1.0/Project.toml`\n  [7876af07] ~ Example v0.5.1 ⇒ v0.5.1+ #master (https://github.com/JuliaLang/Example.jl.git)\n  Updating `~/.julia/environments/v1.0/Manifest.toml`\n  [7876af07] ~ Example v0.5.1 ⇒ v0.5.1+ #master (https://github.com/JuliaLang/Example.jl.git)The status output now shows that we are tracking the master branch of Example. When updating packages, we will pull updates from that branch.To go back to tracking the registry version of Example, the command free is used:(v1.0) pkg> free Example\n Resolving package versions...\n  Updating `~/.julia/environments/v1.0/Project.toml`\n  [7876af07] ~ Example v0.5.1+ #master (https://github.com/JuliaLang/Example.jl.git) ⇒ v0.5.1\n  Updating `~/.julia/environments/v1.0/Manifest.toml`\n  [7876af07] ~ Example v0.5.1+ #master )https://github.com/JuliaLang/Example.jl.git) ⇒ v0.5.1"
-},
-
-{
-    "location": "stdlib/Pkg/#Adding-unregistered-packages-1",
-    "page": "Pkg",
-    "title": "Adding unregistered packages",
-    "category": "section",
-    "text": "If a package is not in a registry, it can still be added by instead of the package name giving the URL to the repository to add.(v1.0) pkg> add https://github.com/fredrikekre/ImportMacros.jl\n  Updating git-repo `https://github.com/fredrikekre/ImportMacros.jl`\n Resolving package versions...\nDownloaded MacroTools ─ v0.4.1\n  Updating `~/.julia/environments/v1.0/Project.toml`\n  [e6797606] + ImportMacros v0.0.0 # (https://github.com/fredrikekre/ImportMacros.jl)\n  Updating `~/.julia/environments/v1.0/Manifest.toml`\n  [e6797606] + ImportMacros v0.0.0 # (https://github.com/fredrikekre/ImportMacros.jl)\n  [1914dd2f] + MacroTools v0.4.1The dependencies of the unregistered package (here MacroTools) got installed. For unregistered packages we could have given a branch (or commit SHA) to track using #, just like for registered packages."
-},
-
-{
-    "location": "stdlib/Pkg/#Adding-a-local-package-1",
-    "page": "Pkg",
-    "title": "Adding a local package",
-    "category": "section",
-    "text": "Instead of giving a URL of a git repo to add we could instead have given a local path to a git repo. This works similarly to adding a URL. The local repository will be tracked (at some branch) and updates from that local repo are pulled when packages are updated. Note that changes to files in the local package repository will not immediately be reflected when loading that package. The changes would have to be committed and the packages updated in order to pull in the changes."
-},
-
-{
-    "location": "stdlib/Pkg/#Developing-packages-1",
-    "page": "Pkg",
-    "title": "Developing packages",
-    "category": "section",
-    "text": "By only using add your Manifest will always have a \"reproducible state\", in other words, as long as the repositories and registries used are still accessible it is possible to retrieve the exact state of all the dependencies in the project. This has the advantage that you can send your project (Project.toml and Manifest.toml) to someone else and they can \"instantiate\" that project in the same state as you had it locally. However, when you are developing a package, it is more convenient to load packages at their current state at some path. For this reason, the dev command exists.Let\'s try to dev a registered package:(v1.0) pkg> dev Example\n  Updating git-repo `https://github.com/JuliaLang/Example.jl.git`\n Resolving package versions...\n  Updating `~/.julia/environments/v1.0/Project.toml`\n  [7876af07] + Example v0.5.1+ [`~/.julia/dev/Example`]\n  Updating `~/.julia/environments/v1.0/Manifest.toml`\n  [7876af07] + Example v0.5.1+ [`~/.julia/dev/Example`]The dev command fetches a full clone of the package to ~/.julia/dev/ (the path can be changed by setting the environment variable JULIA_PKG_DEVDIR). When importing Example julia will now import it from ~/.julia/dev/Example and whatever local changes have been made to the files in that path are consequently reflected in the code loaded. When we used add we said that we tracked the package repository, we here say that we track the path itself. Note that the package manager will never touch any of the files at a tracked path. It is therefore up to you to pull updates, change branches etc. If we try to dev a package at some branch that already exists at ~/.julia/dev/ the package manager we will simply use the existing path. For example:(v1.0) pkg> dev Example\n  Updating git-repo `https://github.com/JuliaLang/Example.jl.git`\n[ Info: Path `/Users/kristoffer/.julia/dev/Example` exists and looks like the correct package, using existing path instead of cloningNote the info message saying that it is using the existing path. As a general rule, the package manager will never touch files that are tracking a path.If dev is used on a local path, that path to that package is recorded and used when loading that package. The path will be recorded relative to the project file, unless it is given as an absolute path.To stop tracking a path and use the registered version again, use free(v1.0) pkg> free Example\n Resolving package versions...\n  Updating `~/.julia/environments/v1.0/Project.toml`\n  [7876af07] ↓ Example v0.5.1+ [`~/.julia/dev/Example`] ⇒ v0.5.1\n  Updating `~/.julia/environments/v1.0/Manifest.toml`\n  [7876af07] ↓ Example v0.5.1+ [`~/.julia/dev/Example`] ⇒ v0.5.1It should be pointed out that by using dev your project is now inherently stateful. Its state depends on the current content of the files at the path and the manifest cannot be \"instantiated\" by someone else without knowing the exact content of all the packages that are tracking a path.Note that if you add a dependency to a package that tracks a local path, the Manifest (which contains the whole dependency graph) will become out of sync with the actual dependency graph. This means that the package will not be able to load that dependency since it is not recorded in the Manifest. To update sync the Manifest, use the REPL command resolve."
-},
-
-{
-    "location": "stdlib/Pkg/#Removing-packages-1",
-    "page": "Pkg",
-    "title": "Removing packages",
-    "category": "section",
-    "text": "Packages can be removed from the current project by using pkg> rm Package. This will only remove packages that exist in the project, to remove a package that only exists as a dependency use pkg> rm --manifest DepPackage. Note that this will remove all packages that depends on DepPackage."
-},
-
-{
-    "location": "stdlib/Pkg/#Updating-packages-1",
-    "page": "Pkg",
-    "title": "Updating packages",
-    "category": "section",
-    "text": "When new versions of packages the project is using are released, it is a good idea to update. Simply calling up will try to update all the dependencies of the project to the latest compatible version. Sometimes this is not what you want. You can specify a subset of the dependencies to upgrade by giving them as arguments to up, e.g:(v1.0) pkg> up ExampleThe version of all other packages direct dependencies will stay the same. If you only want to update the minor version of packages, to reduce the risk that your project breaks, you can give the --minor flag, e.g:(v1.0) pkg> up --minor ExamplePackages that track a repository are not updated when a minor upgrade is done. Packages that track a path are never touched by the package manager."
-},
-
-{
-    "location": "stdlib/Pkg/#Pinning-a-package-1",
-    "page": "Pkg",
-    "title": "Pinning a package",
-    "category": "section",
-    "text": "A pinned package will never be updated. A package can be pinned using pin as for example(v1.0) pkg> pin Example\n Resolving package versions...\n  Updating `~/.julia/environments/v1.0/Project.toml`\n  [7876af07] ~ Example v0.5.1 ⇒ v0.5.1 ⚲\n  Updating `~/.julia/environments/v1.0/Manifest.toml`\n  [7876af07] ~ Example v0.5.1 ⇒ v0.5.1 ⚲Note the pin symbol ⚲ showing that the package is pinned. Removing the pin is done using free(v1.0) pkg> free Example\n  Updating `~/.julia/environments/v1.0/Project.toml`\n  [7876af07] ~ Example v0.5.1 ⚲ ⇒ v0.5.1\n  Updating `~/.julia/environments/v1.0/Manifest.toml`\n  [7876af07] ~ Example v0.5.1 ⚲ ⇒ v0.5.1"
-},
-
-{
-    "location": "stdlib/Pkg/#Testing-packages-1",
-    "page": "Pkg",
-    "title": "Testing packages",
-    "category": "section",
-    "text": "The tests for a package can be run using testcommand:(v1.0) pkg> test Example\n   Testing Example\n   Testing Example tests passed"
-},
-
-{
-    "location": "stdlib/Pkg/#Building-packages-1",
-    "page": "Pkg",
-    "title": "Building packages",
-    "category": "section",
-    "text": "The build step of a package is automatically run when a package is first installed. The output of the build process is directed to a file. To explicitly run the build step for a package the build command is used:(v1.0) pkg> build MbedTLS\n  Building MbedTLS → `~/.julia/packages/MbedTLS/h1Vu/deps/build.log`\n\nshell> cat ~/.julia/packages/MbedTLS/h1Vu/deps/build.log\n┌ Warning: `wait(t::Task)` is deprecated, use `fetch(t)` instead.\n│   caller = macro expansion at OutputCollector.jl:63 [inlined]\n└ @ Core OutputCollector.jl:63\n...\n[ Info: using prebuilt binaries"
-},
-
-{
-    "location": "stdlib/Pkg/#Creating-your-own-projects-1",
-    "page": "Pkg",
-    "title": "Creating your own projects",
-    "category": "section",
-    "text": "So far we have added packages to the default project at ~/.julia/environments/v1.0, it is, however, easy to create other, independent, projects. It should be pointed out if two projects uses the same package at the same version, the content of this package is not duplicated. In order to create a new project, create a directory for it and then activate that directory to make it the \"active project\" which package operations manipulate:shell> mkdir MyProject\n\nshell> cd MyProject\n/Users/kristoffer/MyProject\n\n(v1.0) pkg> activate .\n\n(MyProject) pkg> st\n    Status `Project.toml`Note that the REPL prompt changed when the new project is activated. Since this is a newly created project, the status command show it contains no packages, and in fact, it has no project or manifest file until we add a package to it:shell> ls -l\ntotal 0\n\n(MyProject) pkg> add Example\n  Updating registry at `~/.julia/registries/General`\n  Updating git-repo `https://github.com/JuliaRegistries/General.git`\n Resolving package versions...\n  Updating `Project.toml`\n  [7876af07] + Example v0.5.1\n  Updating `Manifest.toml`\n  [7876af07] + Example v0.5.1\n  [8dfed614] + Test\n\nshell> ls -l\ntotal 8\n-rw-r--r-- 1 stefan staff 207 Jul  3 16:35 Manifest.toml\n-rw-r--r-- 1 stefan staff  56 Jul  3 16:35 Project.toml\n\nshell> cat Project.toml\n[deps]\nExample = \"7876af07-990d-54b4-ab0e-23690620f79a\"\n\nshell> cat Manifest.toml\n[[Example]]\ndeps = [\"Test\"]\ngit-tree-sha1 = \"8eb7b4d4ca487caade9ba3e85932e28ce6d6e1f8\"\nuuid = \"7876af07-990d-54b4-ab0e-23690620f79a\"\nversion = \"0.5.1\"\n\n[[Test]]\nuuid = \"8dfed614-e22c-5e08-85e1-65c5234f0b40\"This new environment is completely separate from the one we used earlier."
-},
-
-{
-    "location": "stdlib/Pkg/#Garbage-collecting-old,-unused-packages-1",
-    "page": "Pkg",
-    "title": "Garbage collecting old, unused packages",
-    "category": "section",
-    "text": "As packages are updated and projects are deleted, installed packages that were once used will inevitably become old and not used from any existing project. Pkg keeps a log of all projects used so it can go through the log and see exactly which projects still exist and what packages those projects used. The rest can be deleted. This is done with the gc command:(v1.0) pkg> gc\n    Active manifests at:\n        `/Users/kristoffer/BinaryProvider/Manifest.toml`\n        ...\n        `/Users/kristoffer/Compat.jl/Manifest.toml`\n   Deleted /Users/kristoffer/.julia/packages/BenchmarkTools/1cAj: 146.302 KiB\n   Deleted /Users/kristoffer/.julia/packages/Cassette/BXVB: 795.557 KiB\n   ...\n   Deleted /Users/kristoffer/.julia/packages/WeakRefStrings/YrK6: 27.328 KiB\n   Deleted 36 package installations: 113.205 MiBNote that only packages in ~/.julia/packages are deleted."
-},
-
-{
-    "location": "stdlib/Pkg/#Creating-your-own-packages-1",
-    "page": "Pkg",
-    "title": "Creating your own packages",
-    "category": "section",
-    "text": "A package is a project with a name, uuid and version entry in the Project.toml file src/PackageName.jl file that defines the module PackageName. This file is executed when the package is loaded."
-},
-
-{
-    "location": "stdlib/Pkg/#Generating-files-for-a-package-1",
-    "page": "Pkg",
-    "title": "Generating files for a package",
-    "category": "section",
-    "text": "To generate files for a new package, use pkg> generate.(v1.0) pkg> generate HelloWorldThis creates a new project HelloWorld with the following files (visualized with the external tree command):shell> cd HelloWorld\n\nshell> tree .\n.\n├── Project.toml\n└── src\n    └── HelloWorld.jl\n\n1 directory, 2 filesThe Project.toml file contains the name of the package, its unique UUID, its version, the author and eventual dependencies:name = \"HelloWorld\"\nuuid = \"b4cd1eb8-1e24-11e8-3319-93036a3eb9f3\"\nversion = \"0.1.0\"\nauthor = [\"Some One <someone@email.com>\"]\n\n[deps]The content of src/HelloWorld.jl is:module HelloWorld\n\ngreet() = print(\"Hello World!\")\n\nend # moduleWe can now activate the project and load the package:pkg> activate .\n\njulia> import HelloWorld\n\njulia> HelloWorld.greet()\nHello World!"
-},
-
-{
-    "location": "stdlib/Pkg/#Adding-dependencies-to-the-project-1",
-    "page": "Pkg",
-    "title": "Adding dependencies to the project",
-    "category": "section",
-    "text": "Let’s say we want to use the standard library package Random and the registered package JSON in our project. We simply add these packages (note how the prompt now shows the name of the newly generated project, since we are inside the HelloWorld project directory):(HelloWorld) pkg> add Random JSON\n Resolving package versions...\n  Updating \"~/Documents/HelloWorld/Project.toml\"\n [682c06a0] + JSON v0.17.1\n [9a3f8284] + Random\n  Updating \"~/Documents/HelloWorld/Manifest.toml\"\n [34da2185] + Compat v0.57.0\n [682c06a0] + JSON v0.17.1\n [4d1e1d77] + Nullables v0.0.4\n ...Both Random and JSON got added to the project’s Project.toml file, and the resulting dependencies got added to the Manifest.toml file. The resolver has installed each package with the highest possible version, while still respecting the compatibility that each package enforce on its dependencies.We can now use both Random and JSON in our project. Changing src/HelloWorld.jl tomodule HelloWorld\n\nimport Random\nimport JSON\n\ngreet() = print(\"Hello World!\")\ngreet_alien() = print(\"Hello \", Random.randstring(8))\n\nend # moduleand reloading the package, the new greet_alien function that uses Random can be used:julia> HelloWorld.greet_alien()\nHello aT157rHV"
-},
-
-{
-    "location": "stdlib/Pkg/#Adding-a-build-step-to-the-package.-1",
-    "page": "Pkg",
-    "title": "Adding a build step to the package.",
-    "category": "section",
-    "text": "The build step is executed the first time a package is installed or when explicitly invoked with build. A package is built by executing the file deps/build.jl.shell> cat deps/build.log\nI am being built...\n\n(HelloWorld) pkg> build\n  Building HelloWorld → `deps/build.log`\n Resolving package versions...\n\nshell> cat deps/build.log\nI am being built...If the build step fails, the output of the build step is printed to the consoleshell> cat deps/build.jl\nerror(\"Ooops\")\n\n(HelloWorld) pkg> build\n  Building HelloWorld → `deps/build.log`\n Resolving package versions...\n┌ Error: Error building `HelloWorld`:\n│ ERROR: LoadError: Ooops\n│ Stacktrace:\n│  [1] error(::String) at ./error.jl:33\n│  [2] top-level scope at none:0\n│  [3] include at ./boot.jl:317 [inlined]\n│  [4] include_relative(::Module, ::String) at ./loading.jl:1071\n│  [5] include(::Module, ::String) at ./sysimg.jl:29\n│  [6] include(::String) at ./client.jl:393\n│  [7] top-level scope at none:0\n│ in expression starting at /Users/kristoffer/.julia/dev/Pkg/HelloWorld/deps/build.jl:1\n└ @ Pkg.Operations Operations.jl:938"
-},
-
-{
-    "location": "stdlib/Pkg/#Adding-tests-to-the-package-1",
-    "page": "Pkg",
-    "title": "Adding tests to the package",
-    "category": "section",
-    "text": "When a package is tested the file test/runtests.jl is executed.shell> cat test/runtests.jl\nprintln(\"Testing...\")\n(HelloWorld) pkg> test\n   Testing HelloWorld\n Resolving package versions...\nTesting...\n   Testing HelloWorld tests passed"
-},
-
-{
-    "location": "stdlib/Pkg/#Test-specific-dependencies-1",
-    "page": "Pkg",
-    "title": "Test-specific dependencies",
-    "category": "section",
-    "text": "Sometimes one might want to use some packages only at testing time but not enforce a dependency on them when the package is used. This is possible by adding dependencies to [extras] and a test target in [targets] to the Project file. Here we add the Test standard library as a test-only dependency by adding the following to the Project file:[extras]\nTest = \"8dfed614-e22c-5e08-85e1-65c5234f0b40\"\n\n[targets]\ntest = [\"Test\"]We can now use Test in the test script and we can see that it gets installed on testing:shell> cat test/runtests.jl\nusing Test\n@test 1 == 1\n\n(HelloWorld) pkg> test\n   Testing HelloWorld\n Resolving package versions...\n  Updating `/var/folders/64/76tk_g152sg6c6t0b4nkn1vw0000gn/T/tmpPzUPPw/Project.toml`\n  [d8327f2a] + HelloWorld v0.1.0 [`~/.julia/dev/Pkg/HelloWorld`]\n  [8dfed614] + Test\n  Updating `/var/folders/64/76tk_g152sg6c6t0b4nkn1vw0000gn/T/tmpPzUPPw/Manifest.toml`\n  [d8327f2a] + HelloWorld v0.1.0 [`~/.julia/dev/Pkg/HelloWorld`]\n   Testing HelloWorld tests passed```"
-},
-
-{
-    "location": "stdlib/Pkg/#Compatibility-1",
-    "page": "Pkg",
-    "title": "Compatibility",
-    "category": "section",
-    "text": "Compatibility refers to the ability to restrict what version of the dependencies that your project is compatible with. If the compatibility for a dependency is not given, the project is assumed to be compatible with all versions of that dependency.Compatibility for a dependency is entered in the Project.toml file as for example:[compat]\njulia = \"1.0\"\nExample = \"0.4.3\"After a compatibility entry is put into the project file, up can be used to apply it.The format of the version specifier is described in detail below.info: Info\nThere is currently no way to give compatibility from the Pkg REPL mode so for now, one has to manually edit the project file."
-},
-
-{
-    "location": "stdlib/Pkg/#Version-specifier-format-1",
-    "page": "Pkg",
-    "title": "Version specifier format",
-    "category": "section",
-    "text": "Similar to other package managers, the Julia package manager respects semantic versioning (semver). As an example, a version specifier is given as e.g. 1.2.3 is therefore assumed to be compatible with the versions [1.2.3 - 2.0.0) where ) is a non-inclusive upper bound. More specifically, a version specifier is either given as a caret specifier, e.g. ^1.2.3  or a tilde specifier ~1.2.3. Caret specifiers are the default and hence 1.2.3 == ^1.2.3. The difference between a caret and tilde is described in the next section. The union of multiple version specifiers can be formed by comma separating indiviual version specifiers."
-},
-
-{
-    "location": "stdlib/Pkg/#Caret-specifiers-1",
-    "page": "Pkg",
-    "title": "Caret specifiers",
-    "category": "section",
-    "text": "A caret specifier allows upgrade that would be compatible according to semver. An updated dependency is considered compatible if the new version does not modify the left-most non zero digit in the version specifier.Some examples are shown below.^1.2.3 = [1.2.3, 2.0.0)\n^1.2 = [1.2.0, 2.0.0)\n^1 =  [1.0.0, 2.0.0)\n^0.2.3 = [0.2.3, 0.3.0)\n^0.0.3 = [0.0.3, 0.0.4)\n^0.0 = [0.0.0, 0.1.0)\n^0 = [0.0.0, 1.0.0)While the semver specification says that all versions with a major version of 0 are incompatible with each other, we have made that choice that a version given as 0.a.b is considered compatible with 0.a.c if a != 0 and  c >= b."
-},
-
-{
-    "location": "stdlib/Pkg/#Tilde-specifiers-1",
-    "page": "Pkg",
-    "title": "Tilde specifiers",
-    "category": "section",
-    "text": "A tilde specifier provides more limited upgrade possibilities. When specifying major, minor and patch version, or when specifying major and minor version, only patch version is allowed to change. If you only specify a major version, then both minor and patch versions are allowed to be upgraded (~1 is thus equivalent to ^1). This gives the following example.~1.2.3 = [1.2.3, 1.3.0)\n~1.2 = [1.2.0, 1.3.0)\n~1 = [1.0.0, 2.0.0)"
-},
-
-{
-    "location": "stdlib/Pkg/#Inequality-specifiers-1",
-    "page": "Pkg",
-    "title": "Inequality specifiers",
-    "category": "section",
-    "text": "Inequalities can also be used to specify version ranges:>= 1.2.3 = [1.2.3,  ∞)\n≥ 1.2.3 = [1.2.3,  ∞)\n= 1.2.3 = [1.2.3, 1.2.3]\n< 1.2.3 = [0.0.0, 1.2.2]"
-},
-
-{
-    "location": "stdlib/Pkg/#Precompiling-a-project-1",
-    "page": "Pkg",
-    "title": "Precompiling a project",
-    "category": "section",
-    "text": "The REPL command precompile can be used to precompile all the dependencies in the project. You can for example do(HelloWorld) pkg> update; precompileto update the dependencies and then precompile them."
-},
-
-{
-    "location": "stdlib/Pkg/#Preview-mode-1",
-    "page": "Pkg",
-    "title": "Preview mode",
-    "category": "section",
-    "text": "If you just want to see the effects of running a command, but not change your state you can preview a command. For example:(HelloWorld) pkg> preview add Plotsor(HelloWorld) pkg> preview upwill show you the effects of adding Plots, or doing a full upgrade, respectively, would have on your project. However, nothing would be installed and your Project.toml and Manifest.toml are untouched."
-},
-
-{
-    "location": "stdlib/Pkg/#Using-someone-else\'s-project-1",
-    "page": "Pkg",
-    "title": "Using someone else\'s project",
-    "category": "section",
-    "text": "Simply clone their project using e.g. git clone, cd to the project directory and call(v1.0) pkg> activate .\n\n(SomeProject) pkg> instantiateIf the project contains a manifest, this will install the packages in the same state that is given by that manifest. Otherwise, it will resolve the latest versions of the dependencies compatible with the project."
-},
-
-{
-    "location": "stdlib/Pkg/#Pkg.PackageSpec",
-    "page": "Pkg",
-    "title": "Pkg.PackageSpec",
-    "category": "type",
-    "text": "PackageSpec(name::String, [uuid::UUID, version::VersionNumber])\nPackageSpec(; name, url, path, rev, version, mode, level)\n\nA PackageSpec is a representation of a package with various metadata. This includes:\n\nThe name of the package.\nThe package unique uuid.\nA version (for example when adding a package. When upgrading, can also be an instance of\n\nthe enum UpgradeLevel\n\nA url and an optional git revision. rev could be a branch name or a git commit SHA.\nA local path path. This is equivalent to using the url argument but can be more descriptive.\nA mode, which is an instance of the enum PackageMode which can be either PKGMODE_PROJECT or\n\nPKGMODE_MANIFEST, defaults to PKGMODE_PROJECT. Used in e.g. Pkg.rm.\n\nMost functions in Pkg take a Vector of PackageSpec and do the operation on all the packages in the vector.\n\nBelow is a comparison between the REPL version and the PackageSpec version:\n\nREPL API\nPackage PackageSpec(\"Package\")\nPackage@0.2 PackageSpec(name=\"Package\", version=\"0.2\")\nPackage=a67d... PackageSpec(name=\"Package\", uuid=\"a67d...\"\nPackage#master PackageSpec(name=\"Package\", rev=\"master\")\nlocal/path#feature PackageSpec(path=\"local/path\"; rev=\"feature)\nwww.mypkg.com PackageSpec(url=\"www.mypkg.com\")\n--manifest Package PackageSpec(name=\"Package\", mode=PKGSPEC_MANIFEST)\n--major Package PackageSpec(name=\"Package\", version=PKGLEVEL_MAJOR)\n\n\n\n\n\n"
-},
-
-{
-    "location": "stdlib/Pkg/#Pkg.PackageMode",
-    "page": "Pkg",
-    "title": "Pkg.PackageMode",
-    "category": "type",
-    "text": "PackageMode\n\nAn enum with the instances\n\nPKGMODE_MANIFEST\nPKGMODE_PROJECT\n\nDetermines if operations should be made on a project or manifest level. Used as an argument to  PackageSpec or as an argument to Pkg.rm.\n\n\n\n\n\n"
-},
-
-{
-    "location": "stdlib/Pkg/#Pkg.UpgradeLevel",
-    "page": "Pkg",
-    "title": "Pkg.UpgradeLevel",
-    "category": "type",
-    "text": "UpgradeLevel\n\nAn enum with the instances\n\nUPLEVEL_FIXED\nUPLEVEL_PATCH\nUPLEVEL_MINOR\nUPLEVEL_MAJOR\n\nDetermines how much a package is allowed to be updated. Used as an argument to  PackageSpec or as an argument to Pkg.update.\n\n\n\n\n\n"
-},
-
-{
-    "location": "stdlib/Pkg/#Pkg.add",
-    "page": "Pkg",
-    "title": "Pkg.add",
-    "category": "function",
-    "text": "Pkg.add(pkg::Union{String, Vector{String}})\nPkg.add(pkg::Union{PackageSpec, Vector{PackageSpec}})\n\nAdd a package to the current project. This package will be available using the import and using keywords in the Julia REPL and if the current project is a package, also inside that package.\n\nExamples\n\nPkg.add(\"Example\") # Add a package from registry\nPkg.add(PackageSpec(name=\"Example\", version=\"0.3\")) # Specify version\nPkg.add(PackageSpec(url=\"https://github.com/JuliaLang/Example.jl\", rev=\"master\")) # From url\nPkg.add(PackageSpec(url=\"/remote/mycompany/juliapackages/OurPackage\"))` # From path (has to be a gitrepo)\n\nSee also PackageSpec.\n\n\n\n\n\n"
-},
-
-{
-    "location": "stdlib/Pkg/#Pkg.develop",
-    "page": "Pkg",
-    "title": "Pkg.develop",
-    "category": "function",
-    "text": "Pkg.develop(pkg::Union{String, Vector{String}})\nPkg.develop(pkgs::Union{Packagespec, Vector{Packagespec}})\n\nMake a package available for development by tracking it by path. If pkg is given with only a name or by a URL the packages will be downloaded to the location by the environment variable JULIA_PKG_DEVDIR with .julia/dev as the default.\n\nIf pkg is given as a local path, the package at that path will be tracked.\n\nExamples\n\n# By name\nPkg.develop(\"Example\")\n\n# By url\nPkg.develop(PackageSpec(url=\"https://github.com/JuliaLang/Compat.jl\"))\n\n# By path\nPkg.develop(PackageSpec(path=\"MyJuliaPackages/Package.jl\")\n\nSee also PackageSpec\n\n\n\n\n\n"
-},
-
-{
-    "location": "stdlib/Pkg/#Pkg.activate",
-    "page": "Pkg",
-    "title": "Pkg.activate",
-    "category": "function",
-    "text": "Pkg.activate([s::String]; shared::Bool=false)\n\nActivate the environment at s. The active environment is the environment that is modified by executing package commands. The logic for what path is activated is as follows:\n\nIf shared is true, the first existing environment named s from the depots in the depot stack will be activated. If no such environment exists, create and activate that environment in the first depot.\nIf s is an existing path, then activate the environment at that path.\nIf s is a package in the current project and s is tracking a path, then activate the environment at the tracked path.\nElse, s is interpreted as a non-existing path, activate that path.\n\nIf no argument is given to activate, then activate the home project. The home project is specified by either the --project command line option to the julia executable, or the JULIA_PROJECT environment variable.\n\nExamples\n\nPkg.activate()\nPkg.activate(\"local/path\")\nPkg.activate(\"MyDependency\")\n\n\n\n\n\n"
-},
-
-{
-    "location": "stdlib/Pkg/#Pkg.rm",
-    "page": "Pkg",
-    "title": "Pkg.rm",
-    "category": "function",
-    "text": "Pkg.rm(pkg::Union{String, Vector{String}})\nPkg.rm(pkg::Union{PackageSpec, Vector{PackageSpec}})\n\nRemove a package from the current project. If the mode of pkg is PKGMODE_MANIFEST also remove it from the manifest including all recursive dependencies of pkg.\n\nSee also PackageSpec, PackageMode.\n\n\n\n\n\n"
-},
-
-{
-    "location": "stdlib/Pkg/#Pkg.update",
-    "page": "Pkg",
-    "title": "Pkg.update",
-    "category": "function",
-    "text": "Pkg.update(; level::UpgradeLevel=UPLEVEL_MAJOR, mode::PackageMode = PKGMODE_PROJECT)\nPkg.update(pkg::Union{String, Vector{String}})\nPkg.update(pkg::Union{PackageSpec, Vector{PackageSpec}})\n\nUpdate a package pkg. If no posistional argument is given, update all packages in the manifest if mode is PKGMODE_MANIFEST and packages in both manifest and project if mode is PKGMODE_PROJECT. If no positional argument is given level can be used to control what how much packages are allowed to be upgraded (major, minor, patch, fixed).\n\nSee also PackageSpec, PackageMode, UpgradeLevel.\n\n\n\n\n\n"
-},
-
-{
-    "location": "stdlib/Pkg/#Pkg.test",
-    "page": "Pkg",
-    "title": "Pkg.test",
-    "category": "function",
-    "text": "Pkg.test(; coverage::Bool=true)\nPkg.test(pkg::Union{String, Vector{String}; coverage::Bool=true)\nPkg.test(pkgs::Union{PackageSpec, Vector{PackageSpec}}; coverage::Bool=true)\n\nRun the tests for package pkg or if no positional argument is given to test, the current project is tested (which thus needs to be a package). A package is tested by running its test/runtests.jl file.\n\nThe tests are run by generating a temporary environment with only pkg and its (recursive) dependencies (recursively) in it. If a manifest exist, the versions in that manifest is used, otherwise a feasible set of package are resolved and installed.\n\nDuring the test, test-specific dependencies are active, which are given in the project file as e.g.\n\n[extras]\nTest = \"8dfed614-e22c-5e08-85e1-65c5234f0b40\"\n\n[targets]\ntest = [\"Test\"]\n\nCoverage statistics for the packages may be generated by passing coverage=true. The default behavior is not to run coverage.\n\nThe tests are executed in a new process with check-bounds=yes and by default startup-file=no. If using the startup file (~/.julia/config/startup.jl) is desired, start julia with --startup-file=yes.\n\n\n\n\n\n"
-},
-
-{
-    "location": "stdlib/Pkg/#Pkg.build",
-    "page": "Pkg",
-    "title": "Pkg.build",
-    "category": "function",
-    "text": "Pkg.build()\nPkg.build(pkg::Union{String, Vector{String}})\nPkg.build(pkgs::Union{PackageSpec, Vector{PackageSpec}})\n\nRun the build script in deps/build.jl for pkg and all of the dependencies in depth-first recursive order. If no argument is given to build, the current project is built, which thus needs to be a package. This function is called automatically one any package that gets installed for the first time.\n\n\n\n\n\n"
-},
-
-{
-    "location": "stdlib/Pkg/#Pkg.pin",
-    "page": "Pkg",
-    "title": "Pkg.pin",
-    "category": "function",
-    "text": "Pkg.pin(pkg::Union{String, Vector{String}})\nPkg.pin(pkgs::Union{Packagespec, Vector{Packagespec}})\n\nPin a package to the current version (or the one given in the packagespec or a certain git revision. A pinned package is never updated.\n\n\n\n\n\n"
-},
-
-{
-    "location": "stdlib/Pkg/#Pkg.free",
-    "page": "Pkg",
-    "title": "Pkg.free",
-    "category": "function",
-    "text": "Pkg.free(pkg::Union{String, Vector{String}})\nPkg.free(pkgs::Union{Packagespec, Vector{Packagespec}})\n\nFree a package which removes a pin if it exists, or if the package is tracking a path, e.g. after Pkg.develop, go back to tracking registered versions.\n\nExamples\n\nPkg.free(\"Package\")\nPkg.free(PackageSpec(\"Package\"))\n\n\n\n\n\n"
-},
-
-{
-    "location": "stdlib/Pkg/#Pkg.instantiate",
-    "page": "Pkg",
-    "title": "Pkg.instantiate",
-    "category": "function",
-    "text": "Pkg.instantiate()\n\nIf a Manifest.toml file exist in the current project, download all the packages declared in that manifest. Else, resolve a set of feasible packages from the Project.toml files and install them.\n\n\n\n\n\n"
-},
-
-{
-    "location": "stdlib/Pkg/#Pkg.resolve",
-    "page": "Pkg",
-    "title": "Pkg.resolve",
-    "category": "function",
-    "text": "Pkg.resolve()\n\nUpdate the current manifest with eventual changes to the dependency graph from packages that are tracking a path.\n\n\n\n\n\n"
-},
-
-{
-    "location": "stdlib/Pkg/#Pkg.setprotocol!",
-    "page": "Pkg",
-    "title": "Pkg.setprotocol!",
-    "category": "function",
-    "text": "Pkg.setprotocol!(proto::Union{Nothing, AbstractString}=nothing)\n\nSet the protocol used to access GitHub-hosted packages when adding a url or developing a package. Defaults to \'https\', with proto == nothing delegating the choice to the package developer.\n\n\n\n\n\n"
-},
-
-{
-    "location": "stdlib/Pkg/#References-1",
-    "page": "Pkg",
-    "title": "References",
-    "category": "section",
-    "text": "This section describes the \"API mode\" of interacting with Pkg.jl which is recommended for non-interactive usage, in i.e. scripts. In the REPL mode packages (with associated version, UUID, URL etc) are parsed from strings, for example, \"Package#master\",\"Package@v0.1\", \"www.mypkg.com/MyPkg#my/feature\". It is possible to use strings as arguments for simple commands in the API mode (like Pkg.add([\"PackageA\", \"PackageB\"]), more complicated commands, that e.g. specify URLs or version range, uses a more structured format over strings. This is done by creating an instance of a PackageSpec which are passed in to functions.PackageSpec\nPackageMode\nUpgradeLevel\nPkg.add\nPkg.develop\nPkg.activate\nPkg.rm\nPkg.update\nPkg.test\nPkg.build\nPkg.pin\nPkg.free\nPkg.instantiate\nPkg.resolve\nPkg.setprotocol!"
+    "text": "Pkg is Julia\'s builtin package manager, and handles operations such as installing, updating and removing packages.note: Note\nWhat follows is a very brief introduction to Pkg. It is highly recommended to read the full manual, which is available here: https://julialang.github.io/Pkg.jl/v1/.import Markdown\nfile = joinpath(Sys.STDLIB, \"Pkg\", \"docs\", \"src\", \"getting-started.md\")\nstr = read(file, String)\nstr = replace(str, r\"^#.*$\"m => \"\")\nMarkdown.parse(str)"
 },
 
 {
@@ -20085,7 +19893,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Random Numbers",
     "title": "Base.rand",
     "category": "function",
-    "text": "rand([rng=GLOBAL_RNG], [S], [dims...])\n\nPick a random element or array of random elements from the set of values specified by S; S can be\n\nan indexable collection (for example 1:n or [\'x\',\'y\',\'z\']),\nan AbstractDict or AbstractSet object,\na string (considered as a collection of characters), or\na type: the set of values to pick from is then equivalent to typemin(S):typemax(S) for integers (this is not applicable to BigInt), and to 0 1) for floating point numbers;\n\nS defaults to Float64 (except when dims is a tuple of integers, in which case S must be specified).\n\nExamples\n\njulia> rand(Int, 2)\n2-element Array{Int64,1}:\n 1339893410598768192\n 1575814717733606317\n\njulia> rand(MersenneTwister(0), Dict(1=>2, 3=>4))\n1=>2\n\nnote: Note\nThe complexity of rand(rng, s::Union{AbstractDict,AbstractSet}) is linear in the length of s, unless an optimized method with constant complexity is available, which is the case for Dict, Set and BitSet. For more than a few calls, use rand(rng, collect(s)) instead, or either rand(rng, Dict(s)) or rand(rng, Set(s)) as appropriate.\n\n\n\n\n\n"
+    "text": "rand([rng=GLOBAL_RNG], [S], [dims...])\n\nPick a random element or array of random elements from the set of values specified by S; S can be\n\nan indexable collection (for example 1:9 or (\'x\', \"y\", :z)),\nan AbstractDict or AbstractSet object,\na string (considered as a collection of characters), or\na type: the set of values to pick from is then equivalent to typemin(S):typemax(S) for integers (this is not applicable to BigInt), and to 0 1) for floating point numbers;\n\nS defaults to Float64.\n\ncompat: Julia 1.1\nSupport for S as a tuple requires at least Julia 1.1.\n\nExamples\n\njulia> rand(Int, 2)\n2-element Array{Int64,1}:\n 1339893410598768192\n 1575814717733606317\n\njulia> rand(MersenneTwister(0), Dict(1=>2, 3=>4))\n1=>2\n\nnote: Note\nThe complexity of rand(rng, s::Union{AbstractDict,AbstractSet}) is linear in the length of s, unless an optimized method with constant complexity is available, which is the case for Dict, Set and BitSet. For more than a few calls, use rand(rng, collect(s)) instead, or either rand(rng, Dict(s)) or rand(rng, Set(s)) as appropriate.\n\n\n\n\n\n"
 },
 
 {
@@ -20173,7 +19981,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Random Numbers",
     "title": "Random.randperm",
     "category": "function",
-    "text": "randperm([rng=GLOBAL_RNG,] n::Integer)\n\nConstruct a random permutation of length n. The optional rng argument specifies a random number generator (see Random Numbers). To randomly permute an arbitrary vector, see shuffle or shuffle!.\n\nExamples\n\njulia> randperm(MersenneTwister(1234), 4)\n4-element Array{Int64,1}:\n 2\n 1\n 4\n 3\n\n\n\n\n\n"
+    "text": "randperm([rng=GLOBAL_RNG,] n::Integer)\n\nConstruct a random permutation of length n. The optional rng argument specifies a random number generator (see Random Numbers). The element type of the result is the same as the type of n.\n\nTo randomly permute an arbitrary vector, see shuffle or shuffle!.\n\ncompat: Julia 1.1\nIn Julia 1.1 randperm returns a vector v with eltype(v) == typeof(n) while in Julia 1.0 eltype(v) == Int.\n\nExamples\n\njulia> randperm(MersenneTwister(1234), 4)\n4-element Array{Int64,1}:\n 2\n 1\n 4\n 3\n\n\n\n\n\n"
 },
 
 {
@@ -20189,7 +19997,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Random Numbers",
     "title": "Random.randcycle",
     "category": "function",
-    "text": "randcycle([rng=GLOBAL_RNG,] n::Integer)\n\nConstruct a random cyclic permutation of length n. The optional rng argument specifies a random number generator, see Random Numbers.\n\nExamples\n\njulia> randcycle(MersenneTwister(1234), 6)\n6-element Array{Int64,1}:\n 3\n 5\n 4\n 6\n 1\n 2\n\n\n\n\n\n"
+    "text": "randcycle([rng=GLOBAL_RNG,] n::Integer)\n\nConstruct a random cyclic permutation of length n. The optional rng argument specifies a random number generator, see Random Numbers. The element type of the result is the same as the type of n.\n\ncompat: Julia 1.1\nIn Julia 1.1 randcycle returns a vector v with eltype(v) == typeof(n) while in Julia 1.0 eltype(v) == Int.\n\nExamples\n\njulia> randcycle(MersenneTwister(1234), 6)\n6-element Array{Int64,1}:\n 3\n 5\n 4\n 6\n 1\n 2\n\n\n\n\n\n"
 },
 
 {
@@ -20357,7 +20165,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Serialization",
     "title": "Serialization.serialize",
     "category": "function",
-    "text": "serialize(stream::IO, value)\n\nWrite an arbitrary value to a stream in an opaque format, such that it can be read back by deserialize. The read-back value will be as identical as possible to the original. In general, this process will not work if the reading and writing are done by different versions of Julia, or an instance of Julia with a different system image. Ptr values are serialized as all-zero bit patterns (NULL).\n\nAn 8-byte identifying header is written to the stream first. To avoid writing the header, construct a Serializer and use it as the first argument to serialize instead. See also Serialization.writeheader.\n\n\n\n\n\n"
+    "text": "serialize(stream::IO, value)\n\nWrite an arbitrary value to a stream in an opaque format, such that it can be read back by deserialize. The read-back value will be as identical as possible to the original. In general, this process will not work if the reading and writing are done by different versions of Julia, or an instance of Julia with a different system image. Ptr values are serialized as all-zero bit patterns (NULL).\n\nAn 8-byte identifying header is written to the stream first. To avoid writing the header, construct a Serializer and use it as the first argument to serialize instead. See also Serialization.writeheader.\n\n\n\n\n\nserialize(filename::AbstractString, value)\n\nOpen a file and serialize the given value to it.\n\ncompat: Julia 1.1\nThis method is available as of Julia 1.1.\n\n\n\n\n\n"
 },
 
 {
@@ -20365,7 +20173,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Serialization",
     "title": "Serialization.deserialize",
     "category": "function",
-    "text": "deserialize(stream)\n\nRead a value written by serialize. deserialize assumes the binary data read from stream is correct and has been serialized by a compatible implementation of serialize. It has been designed with simplicity and performance as a goal and does not validate the data read. Malformed data can result in process termination. The caller has to ensure the integrity and correctness of data read from stream.\n\n\n\n\n\n"
+    "text": "deserialize(stream)\n\nRead a value written by serialize. deserialize assumes the binary data read from stream is correct and has been serialized by a compatible implementation of serialize. It has been designed with simplicity and performance as a goal and does not validate the data read. Malformed data can result in process termination. The caller has to ensure the integrity and correctness of data read from stream.\n\n\n\n\n\ndeserialize(filename::AbstractString)\n\nOpen a file and deserialize its contents.\n\ncompat: Julia 1.1\nThis method is available as of Julia 1.1.\n\n\n\n\n\n"
 },
 
 {
@@ -20773,7 +20581,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Sparse Arrays",
     "title": "SparseArrays.sprandn",
     "category": "function",
-    "text": "sprandn([rng][,Type],m[,n],p::AbstractFloat)\n\nCreate a random sparse vector of length m or sparse matrix of size m by n with the specified (independent) probability p of any entry being nonzero, where nonzero values are sampled from the normal distribution. The optional rng argument specifies a random number generator, see Random Numbers.\n\nExamples\n\njulia> sprandn(2, 2, 0.75)\n2×2 SparseMatrixCSC{Float64,Int64} with 2 stored entries:\n  [1, 1]  =  0.586617\n  [1, 2]  =  0.297336\n\n\n\n\n\n"
+    "text": "sprandn([rng][,Type],m[,n],p::AbstractFloat)\n\nCreate a random sparse vector of length m or sparse matrix of size m by n with the specified (independent) probability p of any entry being nonzero, where nonzero values are sampled from the normal distribution. The optional rng argument specifies a random number generator, see Random Numbers.\n\ncompat: Julia 1.1\nSpecifying the output element type Type requires at least Julia 1.1.\n\nExamples\n\njulia> sprandn(2, 2, 0.75)\n2×2 SparseMatrixCSC{Float64,Int64} with 2 stored entries:\n  [1, 1]  =  0.586617\n  [1, 2]  =  0.297336\n\n\n\n\n\n"
 },
 
 {
@@ -20909,7 +20717,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Statistics",
     "title": "Statistics.mean",
     "category": "function",
-    "text": "mean(itr)\n\nCompute the mean of all elements in a collection.\n\nnote: Note\nIf itr contains NaN or missing values, the result is also NaN or missing (missing takes precedence if array contains both). Use the skipmissing function to omit missing entries and compute the mean of non-missing values.\n\nExamples\n\njulia> mean(1:20)\n10.5\n\njulia> mean([1, missing, 3])\nmissing\n\njulia> mean(skipmissing([1, missing, 3]))\n2.0\n\n\n\n\n\nmean(f::Function, itr)\n\nApply the function f to each element of collection itr and take the mean.\n\njulia> mean(√, [1, 2, 3])\n1.3820881233139908\n\njulia> mean([√1, √2, √3])\n1.3820881233139908\n\n\n\n\n\nmean(A::AbstractArray; dims)\n\nCompute the mean of an array over the given dimensions.\n\nExamples\n\njulia> A = [1 2; 3 4]\n2×2 Array{Int64,2}:\n 1  2\n 3  4\n\njulia> mean(A, dims=1)\n1×2 Array{Float64,2}:\n 2.0  3.0\n\njulia> mean(A, dims=2)\n2×1 Array{Float64,2}:\n 1.5\n 3.5\n\n\n\n\n\n"
+    "text": "mean(itr)\n\nCompute the mean of all elements in a collection.\n\nnote: Note\nIf itr contains NaN or missing values, the result is also NaN or missing (missing takes precedence if array contains both). Use the skipmissing function to omit missing entries and compute the mean of non-missing values.\n\nExamples\n\njulia> mean(1:20)\n10.5\n\njulia> mean([1, missing, 3])\nmissing\n\njulia> mean(skipmissing([1, missing, 3]))\n2.0\n\n\n\n\n\nmean(f::Function, itr)\n\nApply the function f to each element of collection itr and take the mean.\n\njulia> mean(√, [1, 2, 3])\n1.3820881233139908\n\njulia> mean([√1, √2, √3])\n1.3820881233139908\n\n\n\n\n\nmean(A::AbstractArray; dims)\n\nCompute the mean of an array over the given dimensions.\n\ncompat: Julia 1.1\nmean for empty arrays requires at least Julia 1.1.\n\nExamples\n\njulia> A = [1 2; 3 4]\n2×2 Array{Int64,2}:\n 1  2\n 3  4\n\njulia> mean(A, dims=1)\n1×2 Array{Float64,2}:\n 2.0  3.0\n\njulia> mean(A, dims=2)\n2×1 Array{Float64,2}:\n 1.5\n 3.5\n\n\n\n\n\n"
 },
 
 {
@@ -21037,7 +20845,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Unit Testing",
     "title": "Test.@inferred",
     "category": "macro",
-    "text": "@inferred f(x)\n\nTests that the call expression f(x) returns a value of the same type inferred by the compiler. It is useful to check for type stability.\n\nf(x) can be any call expression. Returns the result of f(x) if the types match, and an Error Result if it finds different types.\n\njulia> f(a, b, c) = b > 1 ? 1 : 1.0\nf (generic function with 1 method)\n\njulia> typeof(f(1, 2, 3))\nInt64\n\njulia> @code_warntype f(1, 2, 3)\nBody::UNION{FLOAT64, INT64}\n1 1 ─ %1 = (Base.slt_int)(1, b)::Bool\n  └──      goto #3 if not %1\n  2 ─      return 1\n  3 ─      return 1.0\n\njulia> @inferred f(1, 2, 3)\nERROR: return type Int64 does not match inferred return type Union{Float64, Int64}\nStacktrace:\n[...]\n\njulia> @inferred max(1, 2)\n2\n\n\n\n\n\n"
+    "text": "@inferred f(x)\n\nTests that the call expression f(x) returns a value of the same type inferred by the compiler. It is useful to check for type stability.\n\nf(x) can be any call expression. Returns the result of f(x) if the types match, and an Error Result if it finds different types.\n\njulia> f(a, b, c) = b > 1 ? 1 : 1.0\nf (generic function with 1 method)\n\njulia> typeof(f(1, 2, 3))\nInt64\n\njulia> @code_warntype f(1, 2, 3)\nBody::UNION{FLOAT64, INT64}\n1 ─ %1 = (Base.slt_int)(1, b)::Bool\n└──      goto #3 if not %1\n2 ─      return 1\n3 ─      return 1.0\n\njulia> @inferred f(1, 2, 3)\nERROR: return type Int64 does not match inferred return type Union{Float64, Int64}\nStacktrace:\n[...]\n\njulia> @inferred max(1, 2)\n2\n\n\n\n\n\n"
 },
 
 {
@@ -21173,7 +20981,7 @@ var documenterSearchIndex = {"docs": [
     "page": "UUIDs",
     "title": "UUIDs.uuid5",
     "category": "function",
-    "text": "uuid5(ns::UUID, name::String) -> UUID\n\nGenerates a version 5 (namespace and domain-based) universally unique identifier (UUID), as specified by RFC 4122.\n\nExamples\n\njulia> rng = MersenneTwister(1234);\n\njulia> u4 = uuid4(rng)\nUUID(\"196f2941-2d58-45ba-9f13-43a2532b2fa8\")\n\njulia> u5 = uuid5(u4, \"julia\")\nUUID(\"b37756f8-b0c0-54cd-a466-19b3d25683bc\")\n\n\n\n\n\n"
+    "text": "uuid5(ns::UUID, name::String) -> UUID\n\nGenerates a version 5 (namespace and domain-based) universally unique identifier (UUID), as specified by RFC 4122.\n\ncompat: Julia 1.1\nThis function requires at least Julia 1.1.\n\nExamples\n\njulia> rng = MersenneTwister(1234);\n\njulia> u4 = uuid4(rng)\nUUID(\"196f2941-2d58-45ba-9f13-43a2532b2fa8\")\n\njulia> u5 = uuid5(u4, \"julia\")\nUUID(\"b37756f8-b0c0-54cd-a466-19b3d25683bc\")\n\n\n\n\n\n"
 },
 
 {
@@ -21293,7 +21101,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Reflection and introspection",
     "title": "Expansion and lowering",
     "category": "section",
-    "text": "As discussed in the Metaprogramming section, the macroexpand function gives the unquoted and interpolated expression (Expr) form for a given macro. To use macroexpand, quote the expression block itself (otherwise, the macro will be evaluated and the result will be passed instead!). For example:julia> macroexpand(@__MODULE__, :(@edit println(\"\")) )\n:((InteractiveUtils.edit)(println, (Base.typesof)(\"\")))The functions Base.Meta.show_sexpr and dump are used to display S-expr style views and depth-nested detail views for any expression.Finally, the Meta.lower function gives the lowered form of any expression and is of particular interest for understanding how language constructs map to primitive operations such as assignments, branches, and calls:julia> Meta.lower(@__MODULE__, :([1+2, sin(0.5)]) )\n:($(Expr(:thunk, CodeInfo(\n 1 ─ %1 = 1 + 2\n │   %2 = sin(0.5)\n │   %3 = (Base.vect)(%1, %2)\n └──      return %3\n))))"
+    "text": "As discussed in the Metaprogramming section, the macroexpand function gives the unquoted and interpolated expression (Expr) form for a given macro. To use macroexpand, quote the expression block itself (otherwise, the macro will be evaluated and the result will be passed instead!). For example:julia> macroexpand(@__MODULE__, :(@edit println(\"\")) )\n:((InteractiveUtils.edit)(println, (Base.typesof)(\"\")))The functions Base.Meta.show_sexpr and dump are used to display S-expr style views and depth-nested detail views for any expression.Finally, the Meta.lower function gives the lowered form of any expression and is of particular interest for understanding how language constructs map to primitive operations such as assignments, branches, and calls:julia> Meta.lower(@__MODULE__, :( [1+2, sin(0.5)] ))\n:($(Expr(:thunk, CodeInfo(\n1 ─ %1 = 1 + 2\n│   %2 = sin(0.5)\n│   %3 = (Base.vect)(%1, %2)\n└──      return %3\n))))"
 },
 
 {
@@ -21301,7 +21109,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Reflection and introspection",
     "title": "Intermediate and compiled representations",
     "category": "section",
-    "text": "Inspecting the lowered form for functions requires selection of the specific method to display, because generic functions may have many methods with different type signatures. For this purpose, method-specific code-lowering is available using code_lowered, and the type-inferred form is available using code_typed. code_warntype adds highlighting to the output of code_typed.Closer to the machine, the LLVM intermediate representation of a function may be printed using by code_llvm, and finally the compiled machine code is available using code_native (this will trigger JIT compilation/code generation for any function which has not previously been called).For convenience, there are macro versions of the above functions which take standard function calls and expand argument types automatically:julia> @code_llvm +(1,1)\n\n; Function Attrs: sspreq\ndefine i64 @\"julia_+_130862\"(i64, i64) #0 {\ntop:\n    %2 = add i64 %1, %0, !dbg !8\n    ret i64 %2, !dbg !8\n}See @code_lowered, @code_typed, @code_warntype, @code_llvm, and @code_native."
+    "text": "Inspecting the lowered form for functions requires selection of the specific method to display, because generic functions may have many methods with different type signatures. For this purpose, method-specific code-lowering is available using code_lowered, and the type-inferred form is available using code_typed. code_warntype adds highlighting to the output of code_typed.Closer to the machine, the LLVM intermediate representation of a function may be printed using by code_llvm, and finally the compiled machine code is available using code_native (this will trigger JIT compilation/code generation for any function which has not previously been called).For convenience, there are macro versions of the above functions which take standard function calls and expand argument types automatically:julia> @code_llvm +(1,1)\n\n;  @ int.jl:53 within `+\'\ndefine i64 @\"julia_+_130862\"(i64, i64) {\ntop:\n    %2 = add i64 %1, %0\n    ret i64 %2\n}See @code_lowered, @code_typed, @code_warntype, @code_llvm, and @code_native."
 },
 
 {
@@ -21405,7 +21213,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Julia ASTs",
     "title": "Expr types",
     "category": "section",
-    "text": "These symbols appear in the head field of Exprs in lowered form.call\nFunction call (dynamic dispatch). args[1] is the function to call, args[2:end] are the arguments.\ninvoke\nFunction call (static dispatch). args[1] is the MethodInstance to call, args[2:end] are the arguments (including the function that is being called, at args[2]).\nstatic_parameter\nReference a static parameter by index.\ngotoifnot\nConditional branch. If args[1] is false, goes to the index identified in args[2].\n=\nAssignment. In the IR, the first argument is always a Slot or a GlobalRef.\nmethod\nAdds a method to a generic function and assigns the result if necessary.\nHas a 1-argument form and a 4-argument form. The 1-argument form arises from the syntax function foo end. In the 1-argument form, the argument is a symbol. If this symbol already names a function in the current scope, nothing happens. If the symbol is undefined, a new function is created and assigned to the identifier specified by the symbol. If the symbol is defined but names a non-function, an error is raised. The definition of \"names a function\" is that the binding is constant, and refers to an object of singleton type. The rationale for this is that an instance of a singleton type uniquely identifies the type to add the method to. When the type has fields, it wouldn\'t be clear whether the method was being added to the instance or its type.\nThe 4-argument form has the following arguments:\nargs[1]\nA function name, or false if unknown. If a symbol, then the expression first behaves like the 1-argument form above. This argument is ignored from then on. When this is false, it means a method is being added strictly by type, (::T)(x) = x.\nargs[2]\nA SimpleVector of argument type data. args[2][1] is a SimpleVector of the argument types, and args[2][2] is a SimpleVector of type variables corresponding to the method\'s static parameters.\nargs[3]\nA CodeInfo of the method itself. For \"out of scope\" method definitions (adding a method to a function that also has methods defined in different scopes) this is an expression that evaluates to a :lambda expression.\nargs[4]\ntrue or false, identifying whether the method is staged (@generated function).\nconst\nDeclares a (global) variable as constant.\nnull\nHas no arguments; simply yields the value nothing.\nnew\nAllocates a new struct-like object. First argument is the type. The new pseudo-function is lowered to this, and the type is always inserted by the compiler.  This is very much an internal-only feature, and does no checking. Evaluating arbitrary new expressions can easily segfault.\nreturn\nReturns its argument as the value of the enclosing function.\nthe_exception\nYields the caught exception inside a catch block, as returned by jl_current_exception().\nenter\nEnters an exception handler (setjmp). args[1] is the label of the catch block to jump to on error.  Yields a token which is consumed by pop_exception.\nleave\nPop exception handlers. args[1] is the number of handlers to pop.\npop_exception\nPop the stack of current exceptions back to the state at the associated enter when leaving a catch block. args[1] contains the token from the associated enter.\ninbounds\nControls turning bounds checks on or off. A stack is maintained; if the first argument of this expression is true or false (true means bounds checks are disabled), it is pushed onto the stack. If the first argument is :pop, the stack is popped.\nboundscheck\nHas the value false if inlined into a section of code marked with @inbounds, otherwise has the value true.\ncopyast\nPart of the implementation of quasi-quote. The argument is a surface syntax AST that is simply copied recursively and returned at run time.\nmeta\nMetadata. args[1] is typically a symbol specifying the kind of metadata, and the rest of the arguments are free-form. The following kinds of metadata are commonly used:\n:inline and :noinline: Inlining hints."
+    "text": "These symbols appear in the head field of Exprs in lowered form.call\nFunction call (dynamic dispatch). args[1] is the function to call, args[2:end] are the arguments.\ninvoke\nFunction call (static dispatch). args[1] is the MethodInstance to call, args[2:end] are the arguments (including the function that is being called, at args[2]).\nstatic_parameter\nReference a static parameter by index.\ngotoifnot\nConditional branch. If args[1] is false, goes to the index identified in args[2].\n=\nAssignment. In the IR, the first argument is always a Slot or a GlobalRef.\nmethod\nAdds a method to a generic function and assigns the result if necessary.\nHas a 1-argument form and a 4-argument form. The 1-argument form arises from the syntax function foo end. In the 1-argument form, the argument is a symbol. If this symbol already names a function in the current scope, nothing happens. If the symbol is undefined, a new function is created and assigned to the identifier specified by the symbol. If the symbol is defined but names a non-function, an error is raised. The definition of \"names a function\" is that the binding is constant, and refers to an object of singleton type. The rationale for this is that an instance of a singleton type uniquely identifies the type to add the method to. When the type has fields, it wouldn\'t be clear whether the method was being added to the instance or its type.\nThe 4-argument form has the following arguments:\nargs[1]\nA function name, or false if unknown. If a symbol, then the expression first behaves like the 1-argument form above. This argument is ignored from then on. When this is false, it means a method is being added strictly by type, (::T)(x) = x.\nargs[2]\nA SimpleVector of argument type data. args[2][1] is a SimpleVector of the argument types, and args[2][2] is a SimpleVector of type variables corresponding to the method\'s static parameters.\nargs[3]\nA CodeInfo of the method itself. For \"out of scope\" method definitions (adding a method to a function that also has methods defined in different scopes) this is an expression that evaluates to a :lambda expression.\nargs[4]\ntrue or false, identifying whether the method is staged (@generated function).\nconst\nDeclares a (global) variable as constant.\nnull\nHas no arguments; simply yields the value nothing.\nnew\nAllocates a new struct-like object. First argument is the type. The new pseudo-function is lowered to this, and the type is always inserted by the compiler.  This is very much an internal-only feature, and does no checking. Evaluating arbitrary new expressions can easily segfault.\nreturn\nReturns its argument as the value of the enclosing function.\nthe_exception\nYields the caught exception inside a catch block, as returned by jl_current_exception().\nenter\nEnters an exception handler (setjmp). args[1] is the label of the catch block to jump to on error.  Yields a token which is consumed by pop_exception.\nleave\nPop exception handlers. args[1] is the number of handlers to pop.\npop_exception\nPop the stack of current exceptions back to the state at the associated enter when leaving a catch block. args[1] contains the token from the associated enter.\ncompat: Julia 1.1\npop_exception is new in Julia 1.1.\ninbounds\nControls turning bounds checks on or off. A stack is maintained; if the first argument of this expression is true or false (true means bounds checks are disabled), it is pushed onto the stack. If the first argument is :pop, the stack is popped.\nboundscheck\nHas the value false if inlined into a section of code marked with @inbounds, otherwise has the value true.\ncopyast\nPart of the implementation of quasi-quote. The argument is a surface syntax AST that is simply copied recursively and returned at run time.\nmeta\nMetadata. args[1] is typically a symbol specifying the kind of metadata, and the rest of the arguments are free-form. The following kinds of metadata are commonly used:\n:inline and :noinline: Inlining hints."
 },
 
 {
@@ -21653,7 +21461,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Memory layout of Julia Objects",
     "title": "Object allocation",
     "category": "section",
-    "text": "Most new objects are allocated by jl_new_structv():jl_value_t *jl_new_struct(jl_datatype_t *type, ...);\njl_value_t *jl_new_structv(jl_datatype_t *type, jl_value_t **args, uint32_t na);Although, isbits objects can be also constructed directly from memory:jl_value_t *jl_new_bits(jl_value_t *bt, void *data)And some objects have special constructors that must be used instead of the above functions:Types:jl_datatype_t *jl_apply_type(jl_datatype_t *tc, jl_tuple_t *params);\njl_datatype_t *jl_apply_array_type(jl_datatype_t *type, size_t dim);\njl_uniontype_t *jl_new_uniontype(jl_tuple_t *types);While these are the most commonly used options, there are more low-level constructors too, which you can find declared in julia.h. These are used in jl_init_types() to create the initial types needed to bootstrap the creation of the Julia system image.Tuples:jl_tuple_t *jl_tuple(size_t n, ...);\njl_tuple_t *jl_tuplev(size_t n, jl_value_t **v);\njl_tuple_t *jl_alloc_tuple(size_t n);The representation of tuples is highly unique in the Julia object representation ecosystem. In some cases, a Base.tuple() object may be an array of pointers to the objects contained by the tuple equivalent to:typedef struct {\n    size_t length;\n    jl_value_t *data[length];\n} jl_tuple_t;However, in other cases, the tuple may be converted to an anonymous isbits type and stored unboxed, or it may not stored at all (if it is not being used in a generic context as a jl_value_t*).Symbols:jl_sym_t *jl_symbol(const char *str);Functions and MethodInstance:jl_function_t *jl_new_generic_function(jl_sym_t *name);\njl_method_instance_t *jl_new_method_instance(jl_value_t *ast, jl_tuple_t *sparams);Arrays:jl_array_t *jl_new_array(jl_value_t *atype, jl_tuple_t *dims);\njl_array_t *jl_new_arrayv(jl_value_t *atype, ...);\njl_array_t *jl_alloc_array_1d(jl_value_t *atype, size_t nr);\njl_array_t *jl_alloc_array_2d(jl_value_t *atype, size_t nr, size_t nc);\njl_array_t *jl_alloc_array_3d(jl_value_t *atype, size_t nr, size_t nc, size_t z);\njl_array_t *jl_alloc_vec_any(size_t n);Note that many of these have alternative allocation functions for various special-purposes. The list here reflects the more common usages, but a more complete list can be found by reading the julia.h header file.Internal to Julia, storage is typically allocated by newstruct() (or newobj() for the special types):jl_value_t *newstruct(jl_value_t *type);\njl_value_t *newobj(jl_value_t *type, size_t nfields);And at the lowest level, memory is getting allocated by a call to the garbage collector (in gc.c), then tagged with its type:jl_value_t *jl_gc_allocobj(size_t nbytes);\nvoid jl_set_typeof(jl_value_t *v, jl_datatype_t *type);Note that all objects are allocated in multiples of 4 bytes and aligned to the platform pointer size. Memory is allocated from a pool for smaller objects, or directly with malloc() for large objects.sidebar: Singleton Types\nSingleton types have only one instance and no data fields. Singleton instances have a size of 0 bytes, and consist only of their metadata. e.g. nothing::Nothing.See Singleton Types and Nothingness and missing values"
+    "text": "Most new objects are allocated by jl_new_structv():jl_value_t *jl_new_struct(jl_datatype_t *type, ...);\njl_value_t *jl_new_structv(jl_datatype_t *type, jl_value_t **args, uint32_t na);Although, isbits objects can be also constructed directly from memory:jl_value_t *jl_new_bits(jl_value_t *bt, void *data)And some objects have special constructors that must be used instead of the above functions:Types:jl_datatype_t *jl_apply_type(jl_datatype_t *tc, jl_tuple_t *params);\njl_datatype_t *jl_apply_array_type(jl_datatype_t *type, size_t dim);While these are the most commonly used options, there are more low-level constructors too, which you can find declared in julia.h. These are used in jl_init_types() to create the initial types needed to bootstrap the creation of the Julia system image.Tuples:jl_tuple_t *jl_tuple(size_t n, ...);\njl_tuple_t *jl_tuplev(size_t n, jl_value_t **v);\njl_tuple_t *jl_alloc_tuple(size_t n);The representation of tuples is highly unique in the Julia object representation ecosystem. In some cases, a Base.tuple() object may be an array of pointers to the objects contained by the tuple equivalent to:typedef struct {\n    size_t length;\n    jl_value_t *data[length];\n} jl_tuple_t;However, in other cases, the tuple may be converted to an anonymous isbits type and stored unboxed, or it may not stored at all (if it is not being used in a generic context as a jl_value_t*).Symbols:jl_sym_t *jl_symbol(const char *str);Functions and MethodInstance:jl_function_t *jl_new_generic_function(jl_sym_t *name);\njl_method_instance_t *jl_new_method_instance(jl_value_t *ast, jl_tuple_t *sparams);Arrays:jl_array_t *jl_new_array(jl_value_t *atype, jl_tuple_t *dims);\njl_array_t *jl_new_arrayv(jl_value_t *atype, ...);\njl_array_t *jl_alloc_array_1d(jl_value_t *atype, size_t nr);\njl_array_t *jl_alloc_array_2d(jl_value_t *atype, size_t nr, size_t nc);\njl_array_t *jl_alloc_array_3d(jl_value_t *atype, size_t nr, size_t nc, size_t z);\njl_array_t *jl_alloc_vec_any(size_t n);Note that many of these have alternative allocation functions for various special-purposes. The list here reflects the more common usages, but a more complete list can be found by reading the julia.h header file.Internal to Julia, storage is typically allocated by newstruct() (or newobj() for the special types):jl_value_t *newstruct(jl_value_t *type);\njl_value_t *newobj(jl_value_t *type, size_t nfields);And at the lowest level, memory is getting allocated by a call to the garbage collector (in gc.c), then tagged with its type:jl_value_t *jl_gc_allocobj(size_t nbytes);\nvoid jl_set_typeof(jl_value_t *v, jl_datatype_t *type);Note that all objects are allocated in multiples of 4 bytes and aligned to the platform pointer size. Memory is allocated from a pool for smaller objects, or directly with malloc() for large objects.sidebar: Singleton Types\nSingleton types have only one instance and no data fields. Singleton instances have a size of 0 bytes, and consist only of their metadata. e.g. nothing::Nothing.See Singleton Types and Nothingness and missing values"
 },
 
 {
@@ -22133,7 +21941,7 @@ var documenterSearchIndex = {"docs": [
     "page": "isbits Union Optimizations",
     "title": "isbits Union Structs",
     "category": "section",
-    "text": "Julia now includes an optimization wherein \"isbits Union\" fields in types (mutable struct, struct, etc.) will be stored inline. This is accomplished by determining the \"inline size\" of the Union type (e.g. Union{UInt8, Int16} will have a size of 16 bytes, which represents the size needed of the largest Union type Int16), and in addition, allocating an extra \"type tag byte\" (UInt8), whose value signals the type of the actual value stored inline of the \"Union bytes\". The type tag byte value is the index of the actual value\'s type in the Union type\'s order of types. For example, a type tag value of 0x02 for a field with type Union{Nothing, UInt8, Int16} would indicate that an Int16 value is stored in the 16 bytes of the field in the structure\'s memory; a 0x01 value would indicate that a UInt8 value was stored in the first 8 bytes of the 16 bytes of the field\'s memory. Lastly, a value of 0x00 signals that the nothing value will be returned for this field, even though, as a singleton type with a single type instance, it technically has a size of 0. The type tag byte for a type\'s Union field is stored directly after the field\'s computed Union memory."
+    "text": "Julia now includes an optimization wherein \"isbits Union\" fields in types (mutable struct, struct, etc.) will be stored inline. This is accomplished by determining the \"inline size\" of the Union type (e.g. Union{UInt8, Int16} will have a size of two bytes, which represents the size needed of the largest Union type Int16), and in addition, allocating an extra \"type tag byte\" (UInt8), whose value signals the type of the actual value stored inline of the \"Union bytes\". The type tag byte value is the index of the actual value\'s type in the Union type\'s order of types. For example, a type tag value of 0x02 for a field with type Union{Nothing, UInt8, Int16} would indicate that an Int16 value is stored in the 16 bytes of the field in the structure\'s memory; a 0x01 value would indicate that a UInt8 value was stored in the first 8 bytes of the 16 bytes of the field\'s memory. Lastly, a value of 0x00 signals that the nothing value will be returned for this field, even though, as a singleton type with a single type instance, it technically has a size of 0. The type tag byte for a type\'s Union field is stored directly after the field\'s computed Union memory."
 },
 
 {
@@ -22141,7 +21949,7 @@ var documenterSearchIndex = {"docs": [
     "page": "isbits Union Optimizations",
     "title": "isbits Union Arrays",
     "category": "section",
-    "text": "Julia can now also store \"isbits Union\" values inline in an Array, as opposed to requiring an indirection box. The optimization is accomplished by storing an extra \"type tag array\" of bytes, one byte per array element, alongside the bytes of the actual array data. This type tag array serves the same function as the type field case: it\'s value signals the type of the actual stored Union value in the array. In terms of layout, a Julia Array can include extra \"buffer\" space before and after it\'s actual data values, which are tracked in the a->offset and a->maxsize fields of the jl_array_t* type. The \"type tag array\" is treated exactly as another jl_array_t*, but which shares the same a->offset, a->maxsize, and a->len fields. So the formula to access an isbits Union Array\'s type tag bytes is a->data + (a->maxsize - a->offset) * a->elsize + a->offset; i.e. the Array\'s a->data pointer is already shifted by a->offset, so correcting for that, we follow the data all the way to the max of what it can hold a->maxsize, then adjust by a->ofset more bytes to account for any present \"front buffering\" the array might be doing. This layout in particular allows for very efficient resizing operations as the type tag data only ever has to move when the actual array\'s data has to move."
+    "text": "Julia can now also store \"isbits Union\" values inline in an Array, as opposed to requiring an indirection box. The optimization is accomplished by storing an extra \"type tag array\" of bytes, one byte per array element, alongside the bytes of the actual array data. This type tag array serves the same function as the type field case: its value signals the type of the actual stored Union value in the array. In terms of layout, a Julia Array can include extra \"buffer\" space before and after its actual data values, which are tracked in the a->offset and a->maxsize fields of the jl_array_t* type. The \"type tag array\" is treated exactly as another jl_array_t*, but which shares the same a->offset, a->maxsize, and a->len fields. So the formula to access an isbits Union Array\'s type tag bytes is a->data + (a->maxsize - a->offset) * a->elsize + a->offset; i.e. the Array\'s a->data pointer is already shifted by a->offset, so correcting for that, we follow the data all the way to the max of what it can hold a->maxsize, then adjust by a->ofset more bytes to account for any present \"front buffering\" the array might be doing. This layout in particular allows for very efficient resizing operations as the type tag data only ever has to move when the actual array\'s data has to move."
 },
 
 {
