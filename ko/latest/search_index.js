@@ -5,7 +5,7 @@ var documenterSearchIndex = {"docs": [
     "page": "홈",
     "title": "홈",
     "category": "page",
-    "text": "io = IOBuffer()\nrelease = isempty(VERSION.prerelease)\nv = \"$(VERSION.major).$(VERSION.minor)\"\n!release && (v = v*\"-$(first(VERSION.prerelease))\")\nprint(io, \"\"\"\n    # 줄리아 $(v) 문서\n\n    환영합니다. 줄리아 $(v) 문서입니다.\n\n    \"\"\")\nif !release\n    print(io,\"\"\"\n        !!! warning \"작업 진행 중!\"\n            개발 버전의 줄리아 문서입니다.\n        \"\"\")\nend\nimport Markdown\nMarkdown.parse(String(take!(io)))지난 릴리즈로부터 바뀐 점은 릴리즈 노트에 있습니다.note: 번역 안내\n한글 문서 번역은 깃헙 https://github.com/juliakorea/translate-doc 에서 누구나 참여하실 수 있습니다. 많은 참여 부탁드립니다."
+    "text": "io = IOBuffer()\nrelease = isempty(VERSION.prerelease)\nv = \"$(VERSION.major).$(VERSION.minor)\"\n!release && (v = v*\"-$(first(VERSION.prerelease))\")\nprint(io, \"\"\"\n    # 줄리아 $(v) 문서\n\n    환영합니다. 줄리아 $(v) 문서입니다.\n\n    \"\"\")\nif !release\n    print(io,\"\"\"\n        !!! warning \"작업 진행 중!\"\n            개발 버전의 줄리아 문서입니다.\n        \"\"\")\nend\nimport Markdown\nMarkdown.parse(String(take!(io)))지난 릴리즈에서 부터 바뀐 점은 릴리즈 노트에 있습니다.note: 번역 안내\n한글 문서 번역은 깃헙 https://github.com/juliakorea/translate-doc 에서 누구나 참여하실 수 있습니다. 많은 참여 부탁드립니다."
 },
 
 {
@@ -18,122 +18,82 @@ var documenterSearchIndex = {"docs": [
 
 {
     "location": "NEWS/#",
-    "page": "Julia v1.1 Release Notes",
-    "title": "Julia v1.1 Release Notes",
+    "page": "Julia v1.2 Release Notes",
+    "title": "Julia v1.2 Release Notes",
     "category": "page",
     "text": ""
 },
 
 {
-    "location": "NEWS/#Julia-v1.1-Release-Notes-1",
-    "page": "Julia v1.1 Release Notes",
-    "title": "Julia v1.1 Release Notes",
+    "location": "NEWS/#Julia-v1.2-Release-Notes-1",
+    "page": "Julia v1.2 Release Notes",
+    "title": "Julia v1.2 Release Notes",
     "category": "section",
     "text": ""
 },
 
 {
     "location": "NEWS/#New-language-features-1",
-    "page": "Julia v1.1 Release Notes",
+    "page": "Julia v1.2 Release Notes",
     "title": "New language features",
     "category": "section",
-    "text": "An exception stack is maintained on each task to make exception handling more robust and enable root cause analysis. The stack may be accessed using the experimental function Base.catch_stack (#28878).\nThe experimental macro Base.@locals returns a dictionary of current local variable names and values (#29733)."
+    "text": ""
 },
 
 {
     "location": "NEWS/#Language-changes-1",
-    "page": "Julia v1.1 Release Notes",
+    "page": "Julia v1.2 Release Notes",
     "title": "Language changes",
     "category": "section",
-    "text": "Parser inputs ending with a comma are now consistently treated as incomplete. Previously they were sometimes parsed as tuples, depending on whitespace (#28506).\nSpaces were accidentally allowed in broadcast call syntax, e.g. f. (x). They are now disallowed, consistent with normal function call syntax (#29781).\nBig integer literals and command syntax (backticks) are now parsed with the name of the macro (@int128_str, @uint128_str, @big_str, @cmd) qualified to refer to the Core module (#29968).\nUsing the same name for both a local variable and a static parameter is now an error instead of a warning (#29429).\nfindall(in(b), a) now returns a CartesianIndex when a is a matrix or a higher-dimensional array, for consistency with other findall methods. Use LinearIndices(a)[findall(in(b), a)] to get the old behavior, or CartesianIndices(a)[findall(in(b), a)] to get the new behavior on previous Julia versions (#30226).\nfindmin(::BitArray) and findmax(::BitArray) now return a CartesianIndex when a is a matrix or a higher-dimensional array, for consistency with other array types. Use LinearIndices(a)[findmin(a)[2]] to get the old behavior, or CartesianIndices(a)[findmin(a)[2]] to get the new behavior on previous Julia versions (#30102).\nMethod signatures such as f(::Type{T}, ::T) where {T <: X} and f(::Type{X}, ::Any) are now considered ambiguous. Previously a bug caused the first one to be considered more specific in some cases (#30160)."
+    "text": ""
 },
 
 {
     "location": "NEWS/#Command-line-option-changes-1",
-    "page": "Julia v1.1 Release Notes",
+    "page": "Julia v1.2 Release Notes",
     "title": "Command-line option changes",
     "category": "section",
-    "text": "When a script run in interactive mode (-i) throws an error, the REPL now starts after the error is displayed. Previously the REPL only started if the script completed without error (#21233)."
+    "text": ""
 },
 
 {
     "location": "NEWS/#New-library-functions-1",
-    "page": "Julia v1.1 Release Notes",
+    "page": "Julia v1.2 Release Notes",
     "title": "New library functions",
     "category": "section",
-    "text": "splitpath(p::String) function, which is the opposite of joinpath(parts...): it splits a filepath into its components (#28156).\nisnothing(::Any) predicate, to check whether the argument is nothing. (#29679).\ngetpid(::Process) method (#24064).\neachrow, eachcol and eachslice functions provide efficient iterators over slices of arrays (#29749).\nfieldtypes(T::Type) which returns the declared types of the field in type T (#29600).\nuuid5 has been added to the UUIDs standard library (#28761).\nPredicates Sys.isfreebsd, Sys.isopenbsd, Sys.isnetbsd, and Sys.isdragonfly for detecting BSD systems have been added (#30249).\nInternal Base.disable_library_threading that sets libraries to use one thread. It executes function hooks that have been registered with Base.at_disable_library_threading (#30004)."
+    "text": ""
 },
 
 {
     "location": "NEWS/#Standard-library-changes-1",
-    "page": "Julia v1.1 Release Notes",
+    "page": "Julia v1.2 Release Notes",
     "title": "Standard library changes",
     "category": "section",
-    "text": "CartesianIndices can now be constructed from two CartesianIndexes I and J with I:J (#29440).\nCartesianIndices support broadcasting arithmetic (+ and -) with a CartesianIndex (#29890).\ncopy! support for arrays, dicts, and sets has been moved to Base from the Future package (#29173).\nChannels now convert inserted values (like containers) instead of requiring types to match (#29092).\nrange can accept the stop value as a positional argument, e.g. range(1,10,step=2) (#28708).\ndiff now supports arrays of arbitrary dimensionality and can operate over any dimension (#29827).\nThe constructor BigFloat(::BigFloat) now respects the global precision setting and always returns a BigFloat with precision equal to precision(BigFloat) (#29127). The optional precision argument to override the global setting is now a keyword instead of positional argument (#29157).\nThe use of scientific notation when printing BigFloat values is now consistent with other floating point types (#29211).\nRegex now behaves like a scalar when used in broadcasting (#29913).\nChar now behaves like a read-only 0-dimensional array (#29819).\nparse now allows strings representing integer 0 and 1 for type Bool (#29980).\nBase.tail now works on named tuples (#29595).\nThe process id is appended to malloc log files in order to track memory allocations of multiple processes (#29969).\nBase.julia_cmd now propagates the --inline=(yes|no) flag (#29858).\nBase.@kwdef can now be used for parametric structs, and for structs with supertypes (#29316).\nmerge(::NamedTuple, ::NamedTuple...) can now be used with more than 2 NamedTuples (#29259).\nNew ncodeunits(c::Char) method as a fast equivalent to ncodeunits(string(c)) (#29153).\nNew sort!(::AbstractArray; dims) method that can sort the array along the dims dimension (#28902).\nrange now accepts stop as a positional argument (#28708).\nget(A::AbstractArray, (), default) now returns A[] instead of an empty array (#30270).\nparse(Bool, str) is now supported (#29997).\ncopyto!(::AbstractMatrix, ::UniformScaling) now supports rectangular matrices (#28790).\ncurrent_project() now searches the parent directories of a Git repository for a Project.toml file. This also affects the behavior of the --project command line option when using the default --project=@. (#29108).\nThe spawn API is now more flexible and supports taking IOBuffer directly as an I/O stream, converting to a system pipe as needed (#30278)."
-},
-
-{
-    "location": "NEWS/#Dates-1",
-    "page": "Julia v1.1 Release Notes",
-    "title": "Dates",
-    "category": "section",
-    "text": "New DateTime(::Date, ::Time) constructor (#29754).\nTimeZone now behaves like a scalar when used in broadcasting (#30159)."
-},
-
-{
-    "location": "NEWS/#InteractiveUtils-1",
-    "page": "Julia v1.1 Release Notes",
-    "title": "InteractiveUtils",
-    "category": "section",
-    "text": "edit can now be called on a module to edit the file that defines it (#29636).\nAll compiler-reflection tools (i.e. the code_ class of functions and macros) now print accurate line number and inlining information in a common style, and take an optional parameter (debuginfo=:default) to control the verbosity of the metadata shown (#29893)."
+    "text": ""
 },
 
 {
     "location": "NEWS/#LinearAlgebra-1",
-    "page": "Julia v1.1 Release Notes",
+    "page": "Julia v1.2 Release Notes",
     "title": "LinearAlgebra",
     "category": "section",
-    "text": "isdiag and isposdef for Diagonal and UniformScaling (#29638).\nmul!, rmul! and lmul! methods for UniformScaling (#29506).\nSymmetric and Hermitian matrices now preserve the wrapper when scaled with a number (#29469).\nExponentiation operator ^ now supports raising an Irrational to an AbstractMatrix power (#29782)."
-},
-
-{
-    "location": "NEWS/#Random-1",
-    "page": "Julia v1.1 Release Notes",
-    "title": "Random",
-    "category": "section",
-    "text": "randperm and randcycle now use the type of their argument to determine the element type of the returned array (#29670).\nA new method rand(::Tuple) implements sampling from the values of a tuple (#25278).\nserialize and deserialize now accept a filename argument, like write and read (#30151)."
-},
-
-{
-    "location": "NEWS/#SparseArrays-1",
-    "page": "Julia v1.1 Release Notes",
-    "title": "SparseArrays",
-    "category": "section",
-    "text": "sprandn now supports specifying the output element type (#30083)."
-},
-
-{
-    "location": "NEWS/#Statistics-1",
-    "page": "Julia v1.1 Release Notes",
-    "title": "Statistics",
-    "category": "section",
-    "text": "mean and var now handle more kinds of empty inputs (#29033)."
+    "text": "Added keyword arguments rtol, atol to pinv and nullspace (#29998)."
 },
 
 {
     "location": "NEWS/#External-dependencies-1",
-    "page": "Julia v1.1 Release Notes",
+    "page": "Julia v1.2 Release Notes",
     "title": "External dependencies",
     "category": "section",
-    "text": "7zip (bundled with Julia on Windows) has been upgraded from version 16.04 to 18.05 (#30035).\nBusybox is no longer bundled with Julia on Windows (#30022).\nOpenBLAS has been upgraded from 0.3.2 to 0.3.3 (#29845).\nThe source code for Pkg is no longer included in JuliaLang/julia. Pkg is instead downloaded during the build process (#29615).\nLLVM has been upgraded to 6.0.1 and support for LLVM < 6.0 has been dropped (#28745, #28696)."
+    "text": ""
 },
 
 {
     "location": "NEWS/#Deprecated-or-removed-1",
-    "page": "Julia v1.1 Release Notes",
+    "page": "Julia v1.2 Release Notes",
     "title": "Deprecated or removed",
     "category": "section",
-    "text": "one(i::CartesianIndex) should be replaced with oneunit(i::CartesianIndex) (#29442).\nThe internal array Base.Grisu.DIGITS is deprecated; new code should use Base.Grisu.getbuf() to get an appropriate task-local buffer and pass it to grisu() instead (#29907).\nThe internal function Base._default_type(T) has been removed. Calls to it should be replaced with just the argument T (#29739).\npeakflops has been scheduled to move from InteractiveUtils to LinearAlgebra but is already now available as LinearAlgebra.peakflops (#29978)."
+    "text": ""
 },
 
 {
@@ -813,7 +773,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Control Flow",
     "title": "try/catch문",
     "category": "section",
-    "text": "try/catch문은 Exception을 테스트할 수 있습니다. 예를 들어, 사용자 정의 제곱근 함수를 Exception을 사용하여 필요에 따라 실수 또는 복소수 제곱근 방법을 자동으로 호출하도록 작성할 수 있습니다.julia> f(x) = try\n           sqrt(x)\n       catch\n           sqrt(complex(x, 0))\n       end\nf (generic function with 1 method)\n\njulia> f(1)\n1.0\n\njulia> f(-1)\n0.0 + 1.0im이 함수를 계산하는 실제 코드에서는 예외를 잡는 대신 x와 0을 비교한다는 점에 유의해야 합니다. 단순히 비교하고 분기하는 것보다 예외는 훨씬 느립니다.또한 try/catch문은 Exception이 변수에 저장되도록 합니다. 이 고안된 예제에서, 다음 예제는 x가 색인 가능한 경우 x의 두 번째 요소의 제곱근을 계산하고, 그렇지 않으면 x가 실수임을 가정하고 제곱근을 반환합니다.julia> sqrt_second(x) = try\n           sqrt(x[2])\n       catch y\n           if isa(y, DomainError)\n               sqrt(complex(x[2], 0))\n           elseif isa(y, BoundsError)\n               sqrt(x)\n           end\n       end\nsqrt_second (generic function with 1 method)\n\njulia> sqrt_second([1 4])\n2.0\n\njulia> sqrt_second([1 -4])\n0.0 + 2.0im\n\njulia> sqrt_second(9)\n3.0\n\njulia> sqrt_second(-9)\nERROR: DomainError with -9.0:\nsqrt will only return a complex result if called with a complex argument. Try sqrt(Complex(x)).\nStacktrace:\n[...]catch 다음의 기호는 항상 예외 이름으로 해석될 것이고, 때문에 한 줄로 try/catch문을 작성할 때 주의해야 합니다. 다음 코드는 오류가 발생하더라도 x의 값을 반환하지 않습니다.try bad() catch x end대신 세미콜론을 사용하거나 catch 다음에 개행 문자를 삽입하십시오.try bad() catch; x end\n\ntry bad()\ncatch\n    x\nendtry/catch문의 장점은 호출 함수의 스택에서 훨씬 더 높은 레벨로 깊게 중첩된 계산을 즉시 풀 수 있는 능력에 있습니다. 오류가 발생하지 않은 상황이 있지만 스택을 풀어 더 높은 레벨로 값을 전달하는 것이 바람직합니다. Julia는 고급 오류 처리를 위해 rethrow, backtrace, catch_backtrace 그리고 Base.catch_stack와 같은 함수들을 제공합니다."
+    "text": "The try/catch statement allows for Exceptions to be tested for, and for the graceful handling of things that may ordinarily break your application. For example, in the below code the function for square root would normally throw an exception. By placing a try/catch block around it we can mitigate that here. You may choose how you wish to handle this exception, whether logging it, return a placeholder value or as in the case below where we just printed out a statement. One thing to think about when deciding how to handle unexpected situations is that using a try/catch block is much slower than using conditional branching to handle those situations. Below there are more examples of handling exceptions with a try/catch block:julia> try\n           sqrt(\"ten\")\n       catch e\n           println(\"You should have entered a numeric value\")\n       end\nYou should have entered a numeric value또한 try/catch문은 Exception이 변수에 저장되도록 합니다. 이 고안된 예제에서, 다음 예제는 x가 색인 가능한 경우 x의 두 번째 요소의 제곱근을 계산하고, 그렇지 않으면 x가 실수임을 가정하고 제곱근을 반환합니다.julia> sqrt_second(x) = try\n           sqrt(x[2])\n       catch y\n           if isa(y, DomainError)\n               sqrt(complex(x[2], 0))\n           elseif isa(y, BoundsError)\n               sqrt(x)\n           end\n       end\nsqrt_second (generic function with 1 method)\n\njulia> sqrt_second([1 4])\n2.0\n\njulia> sqrt_second([1 -4])\n0.0 + 2.0im\n\njulia> sqrt_second(9)\n3.0\n\njulia> sqrt_second(-9)\nERROR: DomainError with -9.0:\nsqrt will only return a complex result if called with a complex argument. Try sqrt(Complex(x)).\nStacktrace:\n[...]catch 다음의 기호는 항상 예외 이름으로 해석될 것이고, 때문에 한 줄로 try/catch문을 작성할 때 주의해야 합니다. 다음 코드는 오류가 발생하더라도 x의 값을 반환하지 않습니다.try bad() catch x end대신 세미콜론을 사용하거나 catch 다음에 개행 문자를 삽입하십시오.try bad() catch; x end\n\ntry bad()\ncatch\n    x\nendtry/catch문의 장점은 호출 함수의 스택에서 훨씬 더 높은 레벨로 깊게 중첩된 계산을 즉시 풀 수 있는 능력에 있습니다. 오류가 발생하지 않은 상황이 있지만 스택을 풀어 더 높은 레벨로 값을 전달하는 것이 바람직합니다. Julia는 고급 오류 처리를 위해 rethrow, backtrace, catch_backtrace 그리고 Base.catch_stack와 같은 함수들을 제공합니다."
 },
 
 {
@@ -2377,6 +2337,14 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
+    "location": "manual/parallel-computing/#Local-invocations(@id-man-distributed-local-invocations)-1",
+    "page": "Parallel Computing",
+    "title": "Local invocations(@id man-distributed-local-invocations)",
+    "category": "section",
+    "text": "Data is necessarily copied over to the remote node for execution. This is the case for both remotecalls and when data is stored to aRemoteChannel / Future on a different node. As expected, this results in a copy of the serialized objects on the remote node. However, when the destination node is the local node, i.e. the calling process id is the same as the remote node id, it is executed as a local call. It is usually(not always) executed in a different task - but there is no serialization/deserialization of data. Consequently, the call refers to the same object instances as passed - no copies are created. This behavior is highlighted below:julia> using Distributed;\n\njulia> rc = RemoteChannel(()->Channel(3));   # RemoteChannel created on local node\n\njulia> v = [0];\n\njulia> for i in 1:3\n           v[1] = i                          # Reusing `v`\n           put!(rc, v)\n       end;\n\njulia> result = [take!(rc) for _ in 1:3];\n\njulia> println(result);\nArray{Int64,1}[[3], [3], [3]]\n\njulia> println(\"Num Unique objects : \", length(unique(map(objectid, result))));\nNum Unique objects : 1\n\njulia> addprocs(1);\n\njulia> rc = RemoteChannel(()->Channel(3), workers()[1]);   # RemoteChannel created on remote node\n\njulia> v = [0];\n\njulia> for i in 1:3\n           v[1] = i\n           put!(rc, v)\n       end;\n\njulia> result = [take!(rc) for _ in 1:3];\n\njulia> println(result);\nArray{Int64,1}[[1], [2], [3]]\n\njulia> println(\"Num Unique objects : \", length(unique(map(objectid, result))));\nNum Unique objects : 3As can be seen, put! on a locally owned RemoteChannel with the same object v modifed between calls results in the same single object instance stored. As opposed to copies of v being created when the node owning rc is a different node.It is to be noted that this is generally not an issue. It is something to be factored in only if the object is both being stored locally and modifed post the call. In such cases it may be appropriate to store a deepcopy of the object.This is also true for remotecalls on the local node as seen in the following example:julia> using Distributed; addprocs(1);\n\njulia> v = [0];\n\njulia> v2 = remotecall_fetch(x->(x[1] = 1; x), myid(), v);     # Executed on local node\n\njulia> println(\"v=$v, v2=$v2, \", v === v2);\nv=[1], v2=[1], true\n\njulia> v = [0];\n\njulia> v2 = remotecall_fetch(x->(x[1] = 1; x), workers()[1], v); # Executed on remote node\n\njulia> println(\"v=$v, v2=$v2, \", v === v2);\nv=[0], v2=[1], falseAs can be seen once again, a remote call onto the local node behaves just like a direct invocation. The call modifies local objects passed as arguments. In the remote invocation, it operates on a copy of the arguments.To repeat, in general this is not an issue. If the local node is also being used as a compute node, and the arguments used post the call, this behavior needs to be factored in and if required deep copies of arguments must be passed to the call invoked on the local node. Calls on remote nodes will always operate on copies of arguments."
+},
+
+{
     "location": "manual/parallel-computing/#man-shared-arrays-1",
     "page": "Parallel Computing",
     "title": "Shared Arrays",
@@ -2757,7 +2725,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Environment Variables",
     "title": "Environment Variables",
     "category": "section",
-    "text": "Julia may be configured with a number of environment variables, either in the usual way of the operating system, or in a portable way from within Julia. Suppose you want to set the environment variable JULIA_EDITOR to vim, then either type ENV[\"JULIA_EDITOR\"] = \"vim\" for instance in the REPL to make this change on a case by case basis, or add the same to the user configuration file ~/.julia/config/startup.jl in the user\'s home directory to have a permanent effect. The current value of the same environment variable is determined by evaluating ENV[\"JULIA_EDITOR\"].The environment variables that Julia uses generally start with JULIA. If InteractiveUtils.versioninfo is called with verbose equal to true, then the output will list defined environment variables relevant for Julia, including those for which JULIA appears in the name.note: Note\nSome variables, such as JULIA_NUM_THREADS and JULIA_PROJECT need to be set before Julia starts, therefore adding these to ~/.julia/config/startup.jl is too late in the startup process. These must either be set manually before launching Julia through bash with export JULIA_NUM_THREADS=4 etc. or added to -/.bashrc and/or ~/.bash_profile to achieve persistence."
+    "text": "Julia can be configured with a number of environment variables, set either in the usual way for each operating system, or in a portable way from within Julia. Supposing that you want to set the environment variable JULIA_EDITOR to vim, you can type ENV[\"JULIA_EDITOR\"] = \"vim\" (for instance, in the REPL) to make this change on a case by case basis, or add the same to the user configuration file ~/.julia/config/startup.jl in the user\'s home directory to have a permanent effect. The current value of the same environment variable can be determined by evaluating ENV[\"JULIA_EDITOR\"].The environment variables that Julia uses generally start with JULIA. If InteractiveUtils.versioninfo is called with the keyword verbose=true, then the output will list defined environment variables relevant for Julia, including those for which JULIA appears in the name.note: Note\nSome variables, such as JULIA_NUM_THREADS and JULIA_PROJECT, need to be set before Julia starts, therefore adding these to ~/.julia/config/startup.jl is too late in the startup process. In Bash, environment variables can either be set manually by running, e.g., export JULIA_NUM_THREADS=4 before starting Julia, or by adding the same command to -/.bashrc or ~/.bash_profile to set the variable each time Bash is started."
 },
 
 {
@@ -2781,7 +2749,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Environment Variables",
     "title": "JULIA_PROJECT",
     "category": "section",
-    "text": "A directory path that points to the current Julia project. Setting this environment variable has the same effect as specifying the --project start-up option, but --project has higher precedence.  If the variable is set to @., Julia tries to find a project directory that contains Project.toml or JuliaProject.toml file from the current directory and its parents.  See also the chapter on Code Loading.note: Note\nJULIA_PROJECT must be defined before starting julia; defining it in startup.jl is too late in the startup process."
+    "text": "A directory path that points to the current Julia project. Setting this environment variable has the same effect as specifying the --project start-up option, but --project has higher precedence.  If the variable is set to @. then Julia tries to find a project directory that contains Project.toml or JuliaProject.toml file from the current directory and its parents.  See also the chapter on Code Loading.note: Note\nJULIA_PROJECT must be defined before starting julia; defining it in startup.jl is too late in the startup process."
 },
 
 {
@@ -2789,7 +2757,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Environment Variables",
     "title": "JULIA_LOAD_PATH",
     "category": "section",
-    "text": "A separated list of absolute paths that are to be appended to the variable LOAD_PATH. (In Unix-like systems, the path separator is :; in Windows systems, the path separator is ;.) The LOAD_PATH variable is where Base.require and Base.load_in_path() look for code; it defaults to the absolute path $JULIA_HOME/../share/julia/stdlib/v$(VERSION.major).$(VERSION.minor) so that, e.g., version 0.7 of Julia on a Linux system with a Julia executable at /bin/julia will have a default LOAD_PATH of /share/julia/stdlib/v0.7."
+    "text": "A separated list of absolute paths that are to be appended to the variable LOAD_PATH. (In Unix-like systems, : is the path separator; in Windows systems, ; is the path separator.) The LOAD_PATH variable is where Base.require and Base.load_in_path() look for code; it defaults to the absolute path $JULIA_HOME/../share/julia/stdlib/v$(VERSION.major).$(VERSION.minor) so that, e.g., version 0.7 of Julia on a Linux system with a Julia executable at /bin/julia will have a default LOAD_PATH of /share/julia/stdlib/v0.7."
 },
 
 {
@@ -2885,7 +2853,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Environment Variables",
     "title": "REPL formatting",
     "category": "section",
-    "text": "Environment variables that determine how REPL output should be formatted at the terminal. Generally, these variables should be set to ANSI terminal escape sequences. Julia provides a high-level interface with much of the same functionality: see the section on The Julia REPL."
+    "text": "Environment variables that determine how REPL output should be formatted at the terminal. Generally, these variables should be set to ANSI terminal escape sequences. Julia provides a high-level interface with much of the same functionality; see the section on The Julia REPL."
 },
 
 {
@@ -2981,7 +2949,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Environment Variables",
     "title": "ENABLE_JITPROFILING",
     "category": "section",
-    "text": "If set to anything besides 0, then the compiler will create and register an event listener for just-in-time (JIT) profiling.note: Note\nThis environment variable only has an effect if Julia was compiled with JIT profiling support, using eitherIntel\'s VTune™ Amplifier   (USE_INTEL_JITEVENTS set to 1 in the build configuration), or\nOProfile (USE_OPROFILE_JITEVENTS set to 1   in the build configuration)."
+    "text": "If set to anything besides 0, then the compiler will create and register an event listener for just-in-time (JIT) profiling.note: Note\nThis environment variable only has an effect if Julia was compiled with JIT profiling support, using eitherIntel\'s VTune™ Amplifier (USE_INTEL_JITEVENTS set to 1 in the build configuration), or\nOProfile (USE_OPROFILE_JITEVENTS set to 1 in the build configuration)."
 },
 
 {
@@ -3577,11 +3545,11 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "manual/workflow-tips/#Command-line-based-basic-editor/REPL-workflow-1",
+    "location": "manual/workflow-tips/#A-basic-editor/REPL-workflow-1",
     "page": "Workflow Tips",
-    "title": "Command-line-based basic editor/REPL workflow",
+    "title": "A basic editor/REPL workflow",
     "category": "section",
-    "text": "The most basic Julia workflows involve using a text editor in conjunction with the julia command line. A common pattern includes the following elements:Generate a new project  $ julia -e \'using Pkg;Pkg.generate(\"Tmp\")\'\nGenerating project Tmp:\n    Tmp/Project.toml\n    Tmp/src/Tmp.jl\n  $ ls -R Tmp\nTmp:\nProject.toml  src\n\nTmp/src:\nTmp.jl\n  $ cat -n Tmp/src/Tmp.jl\n     1	module Tmp\n     2\n     3	greet() = print(\"Hello World!\")\n     4\n     5	end # module\n  ```\n\n  * **Create a test folder**\n  ```\n  $ mkdir Tmp/test\n  ```\n  * **Put your test code in `test/runtests.jl` file.**\n\n    ```\n    $ cat -n Tmp/test/runtests.jl\n     1	using Tmp\n     2	Tmp.greet()\n    ```\n\n  * **Run test**\n  ```\n  $ julia  -e \'using Pkg;Pkg.activate(\"Tmp\");Pkg.test()\'\n  Updating registry at `~/.julia/registries/General`\n  Updating git-repo `https://github.com/JuliaRegistries/General.git`\n Resolving package versions...\n  Updating `~/Tmp/Project.toml`\n [no changes]\n   Testing Tmp\n Resolving package versions...\nHello World!   Testing Tmp tests passed\n  ```\n  * **Lather. Rinse. Repeat.** Explore ideas at the `julia` command prompt. Save good ideas in `Tmp.jl` and test with `runtests.jl`.\n\n## Simplify initialization\n\nTo simplify restarting the REPL, put project-specific initialization code in a file, say `_init.jl`,\nwhich you can run on startup by issuing the command:\njulia -L _init.jl\nIf you further add the following to your `~/.julia/config/startup.jl` file\njulia isfile(\"init.jl\") && include(joinpath(pwd(), \"init.jl\")) ```then calling julia from that directory will run the initialization code without the additional command line argument."
+    "text": "The most basic Julia workflows involve using a text editor in conjunction with the julia command line. A common pattern includes the following elements:Put code under development in a temporary module. Create a file, say Tmp.jl, and include within it\nmodule Tmp\nexport say_hello\n\nsay_hello() = println(\"Hello!\")\n\n# your other definitions here\n\nend\nPut your test code in another file. Create another file, say tst.jl, which looks like\ninclude(\"Tmp.jl\")\nimport .Tmp\n# using .Tmp # we can use `using` to bring the exported symbols in `Tmp` into our namespace\n\nTmp.say_hello()\n# say_hello()\n\n# your other test code here\nand includes tests for the contents of Tmp. Alternatively, you can wrap the contents of your test file in a module, as\nmodule Tst\n    include(\"Tmp.jl\")\n    import .Tmp\n    #using .Tmp\n\n    Tmp.say_hello()\n    # say_hello()\n\n    # your other test code here\nend\nThe advantage is that your testing code is now contained in a module and does not use the global scope in Main for definitions, which is a bit more tidy.\ninclude the tst.jl file in the Julia REPL with include(\"tst.jl\").\nLather. Rinse. Repeat. Explore ideas at the julia command prompt. Save good ideas in tst.jl. To execute tst.jl after it has been changed, just include it again."
 },
 
 {
@@ -5113,7 +5081,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "base/base/#Base.eps-Tuple{Type{#s40} where #s40<:AbstractFloat}",
+    "location": "base/base/#Base.eps-Tuple{Type{#s8} where #s8<:AbstractFloat}",
     "page": "Essentials",
     "title": "Base.eps",
     "category": "method",
@@ -5669,7 +5637,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Essentials",
     "title": "Base.Libc.getpid",
     "category": "function",
-    "text": "getpid(process) -> Int32\n\nGet the child process ID, if it still exists.\n\ncompat: Julia 1.1\nThis function requires at least Julia 1.1.\n\n\n\n\n\ngetpid() -> Int32\n\nGet Julia\'s process ID.\n\n\n\n\n\n"
+    "text": "getpid() -> Int32\n\nGet Julia\'s process ID.\n\n\n\n\n\ngetpid(process) -> Int32\n\nGet the child process ID, if it still exists.\n\ncompat: Julia 1.1\nThis function requires at least Julia 1.1.\n\n\n\n\n\n"
 },
 
 {
@@ -8345,7 +8313,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "base/math/#Base.round-Tuple{Complex{#s40} where #s40<:AbstractFloat,RoundingMode,RoundingMode}",
+    "location": "base/math/#Base.round-Tuple{Complex{#s8} where #s8<:AbstractFloat,RoundingMode,RoundingMode}",
     "page": "Mathematics",
     "title": "Base.round",
     "category": "method",
@@ -10461,7 +10429,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Arrays",
     "title": "Base.BitArray",
     "category": "type",
-    "text": "BitArray{N} <: DenseArray{Bool, N}\n\nSpace-efficient N-dimensional boolean array, which stores one bit per boolean value.\n\n\n\n\n\n"
+    "text": "BitArray{N} <: AbstractArray{Bool, N}\n\nSpace-efficient N-dimensional boolean array, using just one bit for each boolean value.\n\nBitArrays pack up to 64 values into every 8 bytes, resulting in an 8x space efficiency over Array{Bool, N} and allowing some operations to work on 64 values at once.\n\nBy default, Julia returns BitArrays from broadcasting operations that generate boolean elements (including dotted-comparisons like .==) as well as from the functions trues and falses.\n\n\n\n\n\n"
 },
 
 {
@@ -13397,7 +13365,7 @@ var documenterSearchIndex = {"docs": [
     "page": "C Interface",
     "title": "Base.copyto!",
     "category": "function",
-    "text": "copyto!(dest, do, src, so, N)\n\nCopy N elements from collection src starting at offset so, to array dest starting at offset do. Return dest.\n\n\n\n\n\ncopyto!(dest::AbstractArray, src) -> dest\n\nCopy all elements from collection src to array dest, whose length must be greater than or equal to the length n of src. The first n elements of dest are overwritten, the other elements are left untouched.\n\nExamples\n\njulia> x = [1., 0., 3., 0., 5.];\n\njulia> y = zeros(7);\n\njulia> copyto!(y, x);\n\njulia> y\n7-element Array{Float64,1}:\n 1.0\n 0.0\n 3.0\n 0.0\n 5.0\n 0.0\n 0.0\n\n\n\n\n\ncopyto!(dest, Rdest::CartesianIndices, src, Rsrc::CartesianIndices) -> dest\n\nCopy the block of src in the range of Rsrc to the block of dest in the range of Rdest. The sizes of the two regions must match.\n\n\n\n\n\ncopyto!(dest::AbstractMatrix, src::UniformScaling)\n\nCopies a UniformScaling onto a matrix.\n\ncompat: Julia 1.1\nIn Julia 1.0 this method only supported a square destination matrix. Julia 1.1. added support for a rectangular matrix.\n\n\n\n\n\n"
+    "text": "copyto!(dest::AbstractMatrix, src::UniformScaling)\n\nCopies a UniformScaling onto a matrix.\n\ncompat: Julia 1.1\nIn Julia 1.0 this method only supported a square destination matrix. Julia 1.1. added support for a rectangular matrix.\n\n\n\n\n\ncopyto!(dest, do, src, so, N)\n\nCopy N elements from collection src starting at offset so, to array dest starting at offset do. Return dest.\n\n\n\n\n\ncopyto!(dest::AbstractArray, src) -> dest\n\nCopy all elements from collection src to array dest, whose length must be greater than or equal to the length n of src. The first n elements of dest are overwritten, the other elements are left untouched.\n\nExamples\n\njulia> x = [1., 0., 3., 0., 5.];\n\njulia> y = zeros(7);\n\njulia> copyto!(y, x);\n\njulia> y\n7-element Array{Float64,1}:\n 1.0\n 0.0\n 3.0\n 0.0\n 5.0\n 0.0\n 0.0\n\n\n\n\n\ncopyto!(dest, Rdest::CartesianIndices, src, Rsrc::CartesianIndices) -> dest\n\nCopy the block of src in the range of Rsrc to the block of dest in the range of Rdest. The sizes of the two regions must match.\n\n\n\n\n\n"
 },
 
 {
@@ -14737,7 +14705,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/Dates/#Dates.CompoundPeriod-Tuple{Array{#s40,1} where #s40<:Period}",
+    "location": "stdlib/Dates/#Dates.CompoundPeriod-Tuple{Array{#s8,1} where #s8<:Period}",
     "page": "Dates",
     "title": "Dates.CompoundPeriod",
     "category": "method",
@@ -17629,7 +17597,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Linear Algebra",
     "title": "LinearAlgebra.pinv",
     "category": "function",
-    "text": "pinv(M[, rtol::Real])\n\nComputes the Moore-Penrose pseudoinverse.\n\nFor matrices M with floating point elements, it is convenient to compute the pseudoinverse by inverting only singular values greater than rtol * maximum(svdvals(M)).\n\nThe optimal choice of rtol varies both with the value of M and the intended application of the pseudoinverse. The default value of rtol is eps(real(float(one(eltype(M)))))*minimum(size(M)), which is essentially machine epsilon for the real part of a matrix element multiplied by the larger matrix dimension. For inverting dense ill-conditioned matrices in a least-squares sense, rtol = sqrt(eps(real(float(one(eltype(M)))))) is recommended.\n\nFor more information, see [issue8859], [B96], [S84], [KY88].\n\nExamples\n\njulia> M = [1.5 1.3; 1.2 1.9]\n2×2 Array{Float64,2}:\n 1.5  1.3\n 1.2  1.9\n\njulia> N = pinv(M)\n2×2 Array{Float64,2}:\n  1.47287   -1.00775\n -0.930233   1.16279\n\njulia> M * N\n2×2 Array{Float64,2}:\n 1.0          -2.22045e-16\n 4.44089e-16   1.0\n\n[issue8859]: Issue 8859, \"Fix least squares\", https://github.com/JuliaLang/julia/pull/8859\n\n[B96]: Åke Björck, \"Numerical Methods for Least Squares Problems\",  SIAM Press, Philadelphia, 1996, \"Other Titles in Applied Mathematics\", Vol. 51. doi:10.1137/1.9781611971484\n\n[S84]: G. W. Stewart, \"Rank Degeneracy\", SIAM Journal on Scientific and Statistical Computing, 5(2), 1984, 403-413. doi:10.1137/0905030\n\n[KY88]: Konstantinos Konstantinides and Kung Yao, \"Statistical analysis of effective singular values in matrix rank determination\", IEEE Transactions on Acoustics, Speech and Signal Processing, 36(5), 1988, 757-763. doi:10.1109/29.1585\n\n\n\n\n\n"
+    "text": "pinv(M; atol::Real=0, rtol::Real=atol>0 ? 0 : n*ϵ)\npinv(M, rtol::Real) = pinv(M; rtol=rtol) # to be deprecated in Julia 2.0\n\nComputes the Moore-Penrose pseudoinverse.\n\nFor matrices M with floating point elements, it is convenient to compute the pseudoinverse by inverting only singular values greater than max(atol, rtol*σ₁) where σ₁ is the largest singular value of M.\n\nThe optimal choice of absolute (atol) and relative tolerance (rtol) varies both with the value of M and the intended application of the pseudoinverse. The default relative tolerance is n*ϵ, where n is the size of the smallest dimension of M, and ϵ is the eps of the element type of M.\n\nFor inverting dense ill-conditioned matrices in a least-squares sense, rtol = sqrt(eps(real(float(one(eltype(M)))))) is recommended.\n\nFor more information, see [issue8859], [B96], [S84], [KY88].\n\nExamples\n\njulia> M = [1.5 1.3; 1.2 1.9]\n2×2 Array{Float64,2}:\n 1.5  1.3\n 1.2  1.9\n\njulia> N = pinv(M)\n2×2 Array{Float64,2}:\n  1.47287   -1.00775\n -0.930233   1.16279\n\njulia> M * N\n2×2 Array{Float64,2}:\n 1.0          -2.22045e-16\n 4.44089e-16   1.0\n\n[issue8859]: Issue 8859, \"Fix least squares\", https://github.com/JuliaLang/julia/pull/8859\n\n[B96]: Åke Björck, \"Numerical Methods for Least Squares Problems\",  SIAM Press, Philadelphia, 1996, \"Other Titles in Applied Mathematics\", Vol. 51. doi:10.1137/1.9781611971484\n\n[S84]: G. W. Stewart, \"Rank Degeneracy\", SIAM Journal on Scientific and Statistical Computing, 5(2), 1984, 403-413. doi:10.1137/0905030\n\n[KY88]: Konstantinos Konstantinides and Kung Yao, \"Statistical analysis of effective singular values in matrix rank determination\", IEEE Transactions on Acoustics, Speech and Signal Processing, 36(5), 1988, 757-763. doi:10.1109/29.1585\n\n\n\n\n\n"
 },
 
 {
@@ -17637,7 +17605,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Linear Algebra",
     "title": "LinearAlgebra.nullspace",
     "category": "function",
-    "text": "nullspace(M[, rtol::Real])\n\nComputes a basis for the nullspace of M by including the singular vectors of A whose singular have magnitude are greater than rtol*σ₁, where σ₁ is A\'s largest singular values. By default, the value of rtol is the smallest dimension of A multiplied by the eps of the eltype of A.\n\nExamples\n\njulia> M = [1 0 0; 0 1 0; 0 0 0]\n3×3 Array{Int64,2}:\n 1  0  0\n 0  1  0\n 0  0  0\n\njulia> nullspace(M)\n3×1 Array{Float64,2}:\n 0.0\n 0.0\n 1.0\n\njulia> nullspace(M, 2)\n3×3 Array{Float64,2}:\n 0.0  1.0  0.0\n 1.0  0.0  0.0\n 0.0  0.0  1.0\n\n\n\n\n\n"
+    "text": "nullspace(M; atol::Real=0, rtol::Rea=atol>0 ? 0 : n*ϵ)\nnullspace(M, rtol::Real) = nullspace(M; rtol=rtol) # to be deprecated in Julia 2.0\n\nComputes a basis for the nullspace of M by including the singular vectors of A whose singular have magnitude are greater than max(atol, rtol*σ₁), where σ₁ is M\'s largest singularvalue.\n\nBy default, the relative tolerance rtol is n*ϵ, where n is the size of the smallest dimension of M, and ϵ is the eps of the element type of M.\n\nExamples\n\njulia> M = [1 0 0; 0 1 0; 0 0 0]\n3×3 Array{Int64,2}:\n 1  0  0\n 0  1  0\n 0  0  0\n\njulia> nullspace(M)\n3×1 Array{Float64,2}:\n 0.0\n 0.0\n 1.0\n\njulia> nullspace(M, rtol=3)\n3×3 Array{Float64,2}:\n 0.0  1.0  0.0\n 1.0  0.0  0.0\n 0.0  0.0  1.0\n\njulia> nullspace(M, atol=0.95)\n3×1 Array{Float64,2}:\n 0.0\n 0.0\n 1.0\n\n\n\n\n\n"
 },
 
 {
@@ -17649,7 +17617,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/LinearAlgebra/#Base.exp-Tuple{Union{DenseArray{#s40,2}, ReinterpretArray{#s40,2,S,A} where S where A<:Union{SubArray{T,N,A,I,true} where I<:Union{Tuple{Vararg{Real,N} where N}, Tuple{AbstractUnitRange,Vararg{Any,N} where N}} where A<:DenseArray where N where T, DenseArray}, ReshapedArray{#s40,2,A,MI} where MI<:Tuple{Vararg{SignedMultiplicativeInverse{Int64},N} where N} where A<:Union{ReinterpretArray{T,N,S,A} where S where A<:Union{SubArray{T,N,A,I,true} where I<:Union{Tuple{Vararg{Real,N} where N}, Tuple{AbstractUnitRange,Vararg{Any,N} where N}} where A<:DenseArray where N where T, DenseArray} where N where T, SubArray{T,N,A,I,true} where I<:Union{Tuple{Vararg{Real,N} where N}, Tuple{AbstractUnitRange,Vararg{Any,N} where N}} where A<:DenseArray where N where T, DenseArray}, SubArray{#s40,2,A,I,L} where L where I<:Tuple{Vararg{Union{Int64, AbstractRange{Int64}, AbstractCartesianIndex},N} where N} where A<:Union{ReinterpretArray{T,N,S,A} where S where A<:Union{SubArray{T,N,A,I,true} where I<:Union{Tuple{Vararg{Real,N} where N}, Tuple{AbstractUnitRange,Vararg{Any,N} where N}} where A<:DenseArray where N where T, DenseArray} where N where T, ReshapedArray{T,N,A,MI} where MI<:Tuple{Vararg{SignedMultiplicativeInverse{Int64},N} where N} where A<:Union{ReinterpretArray{T,N,S,A} where S where A<:Union{SubArray{T,N,A,I,true} where I<:Union{Tuple{Vararg{Real,N} where N}, Tuple{AbstractUnitRange,Vararg{Any,N} where N}} where A<:DenseArray where N where T, DenseArray} where N where T, SubArray{T,N,A,I,true} where I<:Union{Tuple{Vararg{Real,N} where N}, Tuple{AbstractUnitRange,Vararg{Any,N} where N}} where A<:DenseArray where N where T, DenseArray} where N where T, DenseArray}} where #s40<:Union{Complex{Float32}, Complex{Float64}, Float32, Float64}}",
+    "location": "stdlib/LinearAlgebra/#Base.exp-Tuple{Union{DenseArray{#s8,2}, ReinterpretArray{#s8,2,S,A} where S where A<:Union{SubArray{T,N,A,I,true} where I<:Union{Tuple{Vararg{Real,N} where N}, Tuple{AbstractUnitRange,Vararg{Any,N} where N}} where A<:DenseArray where N where T, DenseArray}, ReshapedArray{#s8,2,A,MI} where MI<:Tuple{Vararg{SignedMultiplicativeInverse{Int64},N} where N} where A<:Union{ReinterpretArray{T,N,S,A} where S where A<:Union{SubArray{T,N,A,I,true} where I<:Union{Tuple{Vararg{Real,N} where N}, Tuple{AbstractUnitRange,Vararg{Any,N} where N}} where A<:DenseArray where N where T, DenseArray} where N where T, SubArray{T,N,A,I,true} where I<:Union{Tuple{Vararg{Real,N} where N}, Tuple{AbstractUnitRange,Vararg{Any,N} where N}} where A<:DenseArray where N where T, DenseArray}, SubArray{#s8,2,A,I,L} where L where I<:Tuple{Vararg{Union{Int64, AbstractRange{Int64}, AbstractCartesianIndex},N} where N} where A<:Union{ReinterpretArray{T,N,S,A} where S where A<:Union{SubArray{T,N,A,I,true} where I<:Union{Tuple{Vararg{Real,N} where N}, Tuple{AbstractUnitRange,Vararg{Any,N} where N}} where A<:DenseArray where N where T, DenseArray} where N where T, ReshapedArray{T,N,A,MI} where MI<:Tuple{Vararg{SignedMultiplicativeInverse{Int64},N} where N} where A<:Union{ReinterpretArray{T,N,S,A} where S where A<:Union{SubArray{T,N,A,I,true} where I<:Union{Tuple{Vararg{Real,N} where N}, Tuple{AbstractUnitRange,Vararg{Any,N} where N}} where A<:DenseArray where N where T, DenseArray} where N where T, SubArray{T,N,A,I,true} where I<:Union{Tuple{Vararg{Real,N} where N}, Tuple{AbstractUnitRange,Vararg{Any,N} where N}} where A<:DenseArray where N where T, DenseArray} where N where T, DenseArray}} where #s8<:Union{Complex{Float32}, Complex{Float64}, Float32, Float64}}",
     "page": "Linear Algebra",
     "title": "Base.exp",
     "category": "method",
@@ -17681,7 +17649,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/LinearAlgebra/#Base.sqrt-Tuple{Union{DenseArray{#s40,2}, ReinterpretArray{#s40,2,S,A} where S where A<:Union{SubArray{T,N,A,I,true} where I<:Union{Tuple{Vararg{Real,N} where N}, Tuple{AbstractUnitRange,Vararg{Any,N} where N}} where A<:DenseArray where N where T, DenseArray}, ReshapedArray{#s40,2,A,MI} where MI<:Tuple{Vararg{SignedMultiplicativeInverse{Int64},N} where N} where A<:Union{ReinterpretArray{T,N,S,A} where S where A<:Union{SubArray{T,N,A,I,true} where I<:Union{Tuple{Vararg{Real,N} where N}, Tuple{AbstractUnitRange,Vararg{Any,N} where N}} where A<:DenseArray where N where T, DenseArray} where N where T, SubArray{T,N,A,I,true} where I<:Union{Tuple{Vararg{Real,N} where N}, Tuple{AbstractUnitRange,Vararg{Any,N} where N}} where A<:DenseArray where N where T, DenseArray}, SubArray{#s40,2,A,I,L} where L where I<:Tuple{Vararg{Union{Int64, AbstractRange{Int64}, AbstractCartesianIndex},N} where N} where A<:Union{ReinterpretArray{T,N,S,A} where S where A<:Union{SubArray{T,N,A,I,true} where I<:Union{Tuple{Vararg{Real,N} where N}, Tuple{AbstractUnitRange,Vararg{Any,N} where N}} where A<:DenseArray where N where T, DenseArray} where N where T, ReshapedArray{T,N,A,MI} where MI<:Tuple{Vararg{SignedMultiplicativeInverse{Int64},N} where N} where A<:Union{ReinterpretArray{T,N,S,A} where S where A<:Union{SubArray{T,N,A,I,true} where I<:Union{Tuple{Vararg{Real,N} where N}, Tuple{AbstractUnitRange,Vararg{Any,N} where N}} where A<:DenseArray where N where T, DenseArray} where N where T, SubArray{T,N,A,I,true} where I<:Union{Tuple{Vararg{Real,N} where N}, Tuple{AbstractUnitRange,Vararg{Any,N} where N}} where A<:DenseArray where N where T, DenseArray} where N where T, DenseArray}} where #s40<:Real}",
+    "location": "stdlib/LinearAlgebra/#Base.sqrt-Tuple{Union{DenseArray{#s8,2}, ReinterpretArray{#s8,2,S,A} where S where A<:Union{SubArray{T,N,A,I,true} where I<:Union{Tuple{Vararg{Real,N} where N}, Tuple{AbstractUnitRange,Vararg{Any,N} where N}} where A<:DenseArray where N where T, DenseArray}, ReshapedArray{#s8,2,A,MI} where MI<:Tuple{Vararg{SignedMultiplicativeInverse{Int64},N} where N} where A<:Union{ReinterpretArray{T,N,S,A} where S where A<:Union{SubArray{T,N,A,I,true} where I<:Union{Tuple{Vararg{Real,N} where N}, Tuple{AbstractUnitRange,Vararg{Any,N} where N}} where A<:DenseArray where N where T, DenseArray} where N where T, SubArray{T,N,A,I,true} where I<:Union{Tuple{Vararg{Real,N} where N}, Tuple{AbstractUnitRange,Vararg{Any,N} where N}} where A<:DenseArray where N where T, DenseArray}, SubArray{#s8,2,A,I,L} where L where I<:Tuple{Vararg{Union{Int64, AbstractRange{Int64}, AbstractCartesianIndex},N} where N} where A<:Union{ReinterpretArray{T,N,S,A} where S where A<:Union{SubArray{T,N,A,I,true} where I<:Union{Tuple{Vararg{Real,N} where N}, Tuple{AbstractUnitRange,Vararg{Any,N} where N}} where A<:DenseArray where N where T, DenseArray} where N where T, ReshapedArray{T,N,A,MI} where MI<:Tuple{Vararg{SignedMultiplicativeInverse{Int64},N} where N} where A<:Union{ReinterpretArray{T,N,S,A} where S where A<:Union{SubArray{T,N,A,I,true} where I<:Union{Tuple{Vararg{Real,N} where N}, Tuple{AbstractUnitRange,Vararg{Any,N} where N}} where A<:DenseArray where N where T, DenseArray} where N where T, SubArray{T,N,A,I,true} where I<:Union{Tuple{Vararg{Real,N} where N}, Tuple{AbstractUnitRange,Vararg{Any,N} where N}} where A<:DenseArray where N where T, DenseArray} where N where T, DenseArray}} where #s8<:Real}",
     "page": "Linear Algebra",
     "title": "Base.sqrt",
     "category": "method",
@@ -17689,7 +17657,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/LinearAlgebra/#Base.cos-Tuple{Union{DenseArray{#s40,2}, ReinterpretArray{#s40,2,S,A} where S where A<:Union{SubArray{T,N,A,I,true} where I<:Union{Tuple{Vararg{Real,N} where N}, Tuple{AbstractUnitRange,Vararg{Any,N} where N}} where A<:DenseArray where N where T, DenseArray}, ReshapedArray{#s40,2,A,MI} where MI<:Tuple{Vararg{SignedMultiplicativeInverse{Int64},N} where N} where A<:Union{ReinterpretArray{T,N,S,A} where S where A<:Union{SubArray{T,N,A,I,true} where I<:Union{Tuple{Vararg{Real,N} where N}, Tuple{AbstractUnitRange,Vararg{Any,N} where N}} where A<:DenseArray where N where T, DenseArray} where N where T, SubArray{T,N,A,I,true} where I<:Union{Tuple{Vararg{Real,N} where N}, Tuple{AbstractUnitRange,Vararg{Any,N} where N}} where A<:DenseArray where N where T, DenseArray}, SubArray{#s40,2,A,I,L} where L where I<:Tuple{Vararg{Union{Int64, AbstractRange{Int64}, AbstractCartesianIndex},N} where N} where A<:Union{ReinterpretArray{T,N,S,A} where S where A<:Union{SubArray{T,N,A,I,true} where I<:Union{Tuple{Vararg{Real,N} where N}, Tuple{AbstractUnitRange,Vararg{Any,N} where N}} where A<:DenseArray where N where T, DenseArray} where N where T, ReshapedArray{T,N,A,MI} where MI<:Tuple{Vararg{SignedMultiplicativeInverse{Int64},N} where N} where A<:Union{ReinterpretArray{T,N,S,A} where S where A<:Union{SubArray{T,N,A,I,true} where I<:Union{Tuple{Vararg{Real,N} where N}, Tuple{AbstractUnitRange,Vararg{Any,N} where N}} where A<:DenseArray where N where T, DenseArray} where N where T, SubArray{T,N,A,I,true} where I<:Union{Tuple{Vararg{Real,N} where N}, Tuple{AbstractUnitRange,Vararg{Any,N} where N}} where A<:DenseArray where N where T, DenseArray} where N where T, DenseArray}} where #s40<:Real}",
+    "location": "stdlib/LinearAlgebra/#Base.cos-Tuple{Union{DenseArray{#s8,2}, ReinterpretArray{#s8,2,S,A} where S where A<:Union{SubArray{T,N,A,I,true} where I<:Union{Tuple{Vararg{Real,N} where N}, Tuple{AbstractUnitRange,Vararg{Any,N} where N}} where A<:DenseArray where N where T, DenseArray}, ReshapedArray{#s8,2,A,MI} where MI<:Tuple{Vararg{SignedMultiplicativeInverse{Int64},N} where N} where A<:Union{ReinterpretArray{T,N,S,A} where S where A<:Union{SubArray{T,N,A,I,true} where I<:Union{Tuple{Vararg{Real,N} where N}, Tuple{AbstractUnitRange,Vararg{Any,N} where N}} where A<:DenseArray where N where T, DenseArray} where N where T, SubArray{T,N,A,I,true} where I<:Union{Tuple{Vararg{Real,N} where N}, Tuple{AbstractUnitRange,Vararg{Any,N} where N}} where A<:DenseArray where N where T, DenseArray}, SubArray{#s8,2,A,I,L} where L where I<:Tuple{Vararg{Union{Int64, AbstractRange{Int64}, AbstractCartesianIndex},N} where N} where A<:Union{ReinterpretArray{T,N,S,A} where S where A<:Union{SubArray{T,N,A,I,true} where I<:Union{Tuple{Vararg{Real,N} where N}, Tuple{AbstractUnitRange,Vararg{Any,N} where N}} where A<:DenseArray where N where T, DenseArray} where N where T, ReshapedArray{T,N,A,MI} where MI<:Tuple{Vararg{SignedMultiplicativeInverse{Int64},N} where N} where A<:Union{ReinterpretArray{T,N,S,A} where S where A<:Union{SubArray{T,N,A,I,true} where I<:Union{Tuple{Vararg{Real,N} where N}, Tuple{AbstractUnitRange,Vararg{Any,N} where N}} where A<:DenseArray where N where T, DenseArray} where N where T, SubArray{T,N,A,I,true} where I<:Union{Tuple{Vararg{Real,N} where N}, Tuple{AbstractUnitRange,Vararg{Any,N} where N}} where A<:DenseArray where N where T, DenseArray} where N where T, DenseArray}} where #s8<:Real}",
     "page": "Linear Algebra",
     "title": "Base.cos",
     "category": "method",
@@ -17697,7 +17665,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/LinearAlgebra/#Base.sin-Tuple{Union{DenseArray{#s40,2}, ReinterpretArray{#s40,2,S,A} where S where A<:Union{SubArray{T,N,A,I,true} where I<:Union{Tuple{Vararg{Real,N} where N}, Tuple{AbstractUnitRange,Vararg{Any,N} where N}} where A<:DenseArray where N where T, DenseArray}, ReshapedArray{#s40,2,A,MI} where MI<:Tuple{Vararg{SignedMultiplicativeInverse{Int64},N} where N} where A<:Union{ReinterpretArray{T,N,S,A} where S where A<:Union{SubArray{T,N,A,I,true} where I<:Union{Tuple{Vararg{Real,N} where N}, Tuple{AbstractUnitRange,Vararg{Any,N} where N}} where A<:DenseArray where N where T, DenseArray} where N where T, SubArray{T,N,A,I,true} where I<:Union{Tuple{Vararg{Real,N} where N}, Tuple{AbstractUnitRange,Vararg{Any,N} where N}} where A<:DenseArray where N where T, DenseArray}, SubArray{#s40,2,A,I,L} where L where I<:Tuple{Vararg{Union{Int64, AbstractRange{Int64}, AbstractCartesianIndex},N} where N} where A<:Union{ReinterpretArray{T,N,S,A} where S where A<:Union{SubArray{T,N,A,I,true} where I<:Union{Tuple{Vararg{Real,N} where N}, Tuple{AbstractUnitRange,Vararg{Any,N} where N}} where A<:DenseArray where N where T, DenseArray} where N where T, ReshapedArray{T,N,A,MI} where MI<:Tuple{Vararg{SignedMultiplicativeInverse{Int64},N} where N} where A<:Union{ReinterpretArray{T,N,S,A} where S where A<:Union{SubArray{T,N,A,I,true} where I<:Union{Tuple{Vararg{Real,N} where N}, Tuple{AbstractUnitRange,Vararg{Any,N} where N}} where A<:DenseArray where N where T, DenseArray} where N where T, SubArray{T,N,A,I,true} where I<:Union{Tuple{Vararg{Real,N} where N}, Tuple{AbstractUnitRange,Vararg{Any,N} where N}} where A<:DenseArray where N where T, DenseArray} where N where T, DenseArray}} where #s40<:Real}",
+    "location": "stdlib/LinearAlgebra/#Base.sin-Tuple{Union{DenseArray{#s8,2}, ReinterpretArray{#s8,2,S,A} where S where A<:Union{SubArray{T,N,A,I,true} where I<:Union{Tuple{Vararg{Real,N} where N}, Tuple{AbstractUnitRange,Vararg{Any,N} where N}} where A<:DenseArray where N where T, DenseArray}, ReshapedArray{#s8,2,A,MI} where MI<:Tuple{Vararg{SignedMultiplicativeInverse{Int64},N} where N} where A<:Union{ReinterpretArray{T,N,S,A} where S where A<:Union{SubArray{T,N,A,I,true} where I<:Union{Tuple{Vararg{Real,N} where N}, Tuple{AbstractUnitRange,Vararg{Any,N} where N}} where A<:DenseArray where N where T, DenseArray} where N where T, SubArray{T,N,A,I,true} where I<:Union{Tuple{Vararg{Real,N} where N}, Tuple{AbstractUnitRange,Vararg{Any,N} where N}} where A<:DenseArray where N where T, DenseArray}, SubArray{#s8,2,A,I,L} where L where I<:Tuple{Vararg{Union{Int64, AbstractRange{Int64}, AbstractCartesianIndex},N} where N} where A<:Union{ReinterpretArray{T,N,S,A} where S where A<:Union{SubArray{T,N,A,I,true} where I<:Union{Tuple{Vararg{Real,N} where N}, Tuple{AbstractUnitRange,Vararg{Any,N} where N}} where A<:DenseArray where N where T, DenseArray} where N where T, ReshapedArray{T,N,A,MI} where MI<:Tuple{Vararg{SignedMultiplicativeInverse{Int64},N} where N} where A<:Union{ReinterpretArray{T,N,S,A} where S where A<:Union{SubArray{T,N,A,I,true} where I<:Union{Tuple{Vararg{Real,N} where N}, Tuple{AbstractUnitRange,Vararg{Any,N} where N}} where A<:DenseArray where N where T, DenseArray} where N where T, SubArray{T,N,A,I,true} where I<:Union{Tuple{Vararg{Real,N} where N}, Tuple{AbstractUnitRange,Vararg{Any,N} where N}} where A<:DenseArray where N where T, DenseArray} where N where T, DenseArray}} where #s8<:Real}",
     "page": "Linear Algebra",
     "title": "Base.sin",
     "category": "method",
@@ -17705,7 +17673,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/LinearAlgebra/#Base.Math.sincos-Tuple{Union{DenseArray{#s40,2}, ReinterpretArray{#s40,2,S,A} where S where A<:Union{SubArray{T,N,A,I,true} where I<:Union{Tuple{Vararg{Real,N} where N}, Tuple{AbstractUnitRange,Vararg{Any,N} where N}} where A<:DenseArray where N where T, DenseArray}, ReshapedArray{#s40,2,A,MI} where MI<:Tuple{Vararg{SignedMultiplicativeInverse{Int64},N} where N} where A<:Union{ReinterpretArray{T,N,S,A} where S where A<:Union{SubArray{T,N,A,I,true} where I<:Union{Tuple{Vararg{Real,N} where N}, Tuple{AbstractUnitRange,Vararg{Any,N} where N}} where A<:DenseArray where N where T, DenseArray} where N where T, SubArray{T,N,A,I,true} where I<:Union{Tuple{Vararg{Real,N} where N}, Tuple{AbstractUnitRange,Vararg{Any,N} where N}} where A<:DenseArray where N where T, DenseArray}, SubArray{#s40,2,A,I,L} where L where I<:Tuple{Vararg{Union{Int64, AbstractRange{Int64}, AbstractCartesianIndex},N} where N} where A<:Union{ReinterpretArray{T,N,S,A} where S where A<:Union{SubArray{T,N,A,I,true} where I<:Union{Tuple{Vararg{Real,N} where N}, Tuple{AbstractUnitRange,Vararg{Any,N} where N}} where A<:DenseArray where N where T, DenseArray} where N where T, ReshapedArray{T,N,A,MI} where MI<:Tuple{Vararg{SignedMultiplicativeInverse{Int64},N} where N} where A<:Union{ReinterpretArray{T,N,S,A} where S where A<:Union{SubArray{T,N,A,I,true} where I<:Union{Tuple{Vararg{Real,N} where N}, Tuple{AbstractUnitRange,Vararg{Any,N} where N}} where A<:DenseArray where N where T, DenseArray} where N where T, SubArray{T,N,A,I,true} where I<:Union{Tuple{Vararg{Real,N} where N}, Tuple{AbstractUnitRange,Vararg{Any,N} where N}} where A<:DenseArray where N where T, DenseArray} where N where T, DenseArray}} where #s40<:Real}",
+    "location": "stdlib/LinearAlgebra/#Base.Math.sincos-Tuple{Union{DenseArray{#s8,2}, ReinterpretArray{#s8,2,S,A} where S where A<:Union{SubArray{T,N,A,I,true} where I<:Union{Tuple{Vararg{Real,N} where N}, Tuple{AbstractUnitRange,Vararg{Any,N} where N}} where A<:DenseArray where N where T, DenseArray}, ReshapedArray{#s8,2,A,MI} where MI<:Tuple{Vararg{SignedMultiplicativeInverse{Int64},N} where N} where A<:Union{ReinterpretArray{T,N,S,A} where S where A<:Union{SubArray{T,N,A,I,true} where I<:Union{Tuple{Vararg{Real,N} where N}, Tuple{AbstractUnitRange,Vararg{Any,N} where N}} where A<:DenseArray where N where T, DenseArray} where N where T, SubArray{T,N,A,I,true} where I<:Union{Tuple{Vararg{Real,N} where N}, Tuple{AbstractUnitRange,Vararg{Any,N} where N}} where A<:DenseArray where N where T, DenseArray}, SubArray{#s8,2,A,I,L} where L where I<:Tuple{Vararg{Union{Int64, AbstractRange{Int64}, AbstractCartesianIndex},N} where N} where A<:Union{ReinterpretArray{T,N,S,A} where S where A<:Union{SubArray{T,N,A,I,true} where I<:Union{Tuple{Vararg{Real,N} where N}, Tuple{AbstractUnitRange,Vararg{Any,N} where N}} where A<:DenseArray where N where T, DenseArray} where N where T, ReshapedArray{T,N,A,MI} where MI<:Tuple{Vararg{SignedMultiplicativeInverse{Int64},N} where N} where A<:Union{ReinterpretArray{T,N,S,A} where S where A<:Union{SubArray{T,N,A,I,true} where I<:Union{Tuple{Vararg{Real,N} where N}, Tuple{AbstractUnitRange,Vararg{Any,N} where N}} where A<:DenseArray where N where T, DenseArray} where N where T, SubArray{T,N,A,I,true} where I<:Union{Tuple{Vararg{Real,N} where N}, Tuple{AbstractUnitRange,Vararg{Any,N} where N}} where A<:DenseArray where N where T, DenseArray} where N where T, DenseArray}} where #s8<:Real}",
     "page": "Linear Algebra",
     "title": "Base.Math.sincos",
     "category": "method",
@@ -17713,7 +17681,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/LinearAlgebra/#Base.tan-Tuple{Union{DenseArray{#s40,2}, ReinterpretArray{#s40,2,S,A} where S where A<:Union{SubArray{T,N,A,I,true} where I<:Union{Tuple{Vararg{Real,N} where N}, Tuple{AbstractUnitRange,Vararg{Any,N} where N}} where A<:DenseArray where N where T, DenseArray}, ReshapedArray{#s40,2,A,MI} where MI<:Tuple{Vararg{SignedMultiplicativeInverse{Int64},N} where N} where A<:Union{ReinterpretArray{T,N,S,A} where S where A<:Union{SubArray{T,N,A,I,true} where I<:Union{Tuple{Vararg{Real,N} where N}, Tuple{AbstractUnitRange,Vararg{Any,N} where N}} where A<:DenseArray where N where T, DenseArray} where N where T, SubArray{T,N,A,I,true} where I<:Union{Tuple{Vararg{Real,N} where N}, Tuple{AbstractUnitRange,Vararg{Any,N} where N}} where A<:DenseArray where N where T, DenseArray}, SubArray{#s40,2,A,I,L} where L where I<:Tuple{Vararg{Union{Int64, AbstractRange{Int64}, AbstractCartesianIndex},N} where N} where A<:Union{ReinterpretArray{T,N,S,A} where S where A<:Union{SubArray{T,N,A,I,true} where I<:Union{Tuple{Vararg{Real,N} where N}, Tuple{AbstractUnitRange,Vararg{Any,N} where N}} where A<:DenseArray where N where T, DenseArray} where N where T, ReshapedArray{T,N,A,MI} where MI<:Tuple{Vararg{SignedMultiplicativeInverse{Int64},N} where N} where A<:Union{ReinterpretArray{T,N,S,A} where S where A<:Union{SubArray{T,N,A,I,true} where I<:Union{Tuple{Vararg{Real,N} where N}, Tuple{AbstractUnitRange,Vararg{Any,N} where N}} where A<:DenseArray where N where T, DenseArray} where N where T, SubArray{T,N,A,I,true} where I<:Union{Tuple{Vararg{Real,N} where N}, Tuple{AbstractUnitRange,Vararg{Any,N} where N}} where A<:DenseArray where N where T, DenseArray} where N where T, DenseArray}} where #s40<:Real}",
+    "location": "stdlib/LinearAlgebra/#Base.tan-Tuple{Union{DenseArray{#s8,2}, ReinterpretArray{#s8,2,S,A} where S where A<:Union{SubArray{T,N,A,I,true} where I<:Union{Tuple{Vararg{Real,N} where N}, Tuple{AbstractUnitRange,Vararg{Any,N} where N}} where A<:DenseArray where N where T, DenseArray}, ReshapedArray{#s8,2,A,MI} where MI<:Tuple{Vararg{SignedMultiplicativeInverse{Int64},N} where N} where A<:Union{ReinterpretArray{T,N,S,A} where S where A<:Union{SubArray{T,N,A,I,true} where I<:Union{Tuple{Vararg{Real,N} where N}, Tuple{AbstractUnitRange,Vararg{Any,N} where N}} where A<:DenseArray where N where T, DenseArray} where N where T, SubArray{T,N,A,I,true} where I<:Union{Tuple{Vararg{Real,N} where N}, Tuple{AbstractUnitRange,Vararg{Any,N} where N}} where A<:DenseArray where N where T, DenseArray}, SubArray{#s8,2,A,I,L} where L where I<:Tuple{Vararg{Union{Int64, AbstractRange{Int64}, AbstractCartesianIndex},N} where N} where A<:Union{ReinterpretArray{T,N,S,A} where S where A<:Union{SubArray{T,N,A,I,true} where I<:Union{Tuple{Vararg{Real,N} where N}, Tuple{AbstractUnitRange,Vararg{Any,N} where N}} where A<:DenseArray where N where T, DenseArray} where N where T, ReshapedArray{T,N,A,MI} where MI<:Tuple{Vararg{SignedMultiplicativeInverse{Int64},N} where N} where A<:Union{ReinterpretArray{T,N,S,A} where S where A<:Union{SubArray{T,N,A,I,true} where I<:Union{Tuple{Vararg{Real,N} where N}, Tuple{AbstractUnitRange,Vararg{Any,N} where N}} where A<:DenseArray where N where T, DenseArray} where N where T, SubArray{T,N,A,I,true} where I<:Union{Tuple{Vararg{Real,N} where N}, Tuple{AbstractUnitRange,Vararg{Any,N} where N}} where A<:DenseArray where N where T, DenseArray} where N where T, DenseArray}} where #s8<:Real}",
     "page": "Linear Algebra",
     "title": "Base.tan",
     "category": "method",
@@ -18053,7 +18021,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Linear Algebra",
     "title": "LinearAlgebra.lmul!",
     "category": "function",
-    "text": "lmul!(a::Number, B::AbstractArray)\n\nScale an array B by a scalar a overwriting B in-place.\n\nExamples\n\njulia> B = [1 2; 3 4]\n2×2 Array{Int64,2}:\n 1  2\n 3  4\n\njulia> lmul!(2, B)\n2×2 Array{Int64,2}:\n 2  4\n 6  8\n\n\n\n\n\nlmul!(A, B)\n\nCalculate the matrix-matrix product AB, overwriting B, and return the result.\n\nExamples\n\njulia> B = [0 1; 1 0];\n\njulia> A = LinearAlgebra.UpperTriangular([1 2; 0 3]);\n\njulia> LinearAlgebra.lmul!(A, B);\n\njulia> B\n2×2 Array{Int64,2}:\n 2  1\n 3  0\n\n\n\n\n\n"
+    "text": "lmul!(a::Number, B::AbstractArray)\n\nScale an array B by a scalar a overwriting B in-place.  Use rmul! to multiply scalar from right.  The scaling operation respects the semantics of the multiplication * between a and an element of B.  In particular, this also applies to multiplication involving non-finite numbers such as NaN and ±Inf.\n\ncompat: Julia 1.1\nPrior to Julia 1.1, NaN and ±Inf entries in B were treated inconsistently.\n\nExamples\n\njulia> B = [1 2; 3 4]\n2×2 Array{Int64,2}:\n 1  2\n 3  4\n\njulia> lmul!(2, B)\n2×2 Array{Int64,2}:\n 2  4\n 6  8\n\njulia> lmul!(0.0, [Inf])\n1-element Array{Float64,1}:\n NaN\n\n\n\n\n\nlmul!(A, B)\n\nCalculate the matrix-matrix product AB, overwriting B, and return the result.\n\nExamples\n\njulia> B = [0 1; 1 0];\n\njulia> A = LinearAlgebra.UpperTriangular([1 2; 0 3]);\n\njulia> LinearAlgebra.lmul!(A, B);\n\njulia> B\n2×2 Array{Int64,2}:\n 2  1\n 3  0\n\n\n\n\n\n"
 },
 
 {
@@ -18061,7 +18029,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Linear Algebra",
     "title": "LinearAlgebra.rmul!",
     "category": "function",
-    "text": "rmul!(A::AbstractArray, b::Number)\n\nScale an array A by a scalar b overwriting A in-place.\n\nExamples\n\njulia> A = [1 2; 3 4]\n2×2 Array{Int64,2}:\n 1  2\n 3  4\n\njulia> rmul!(A, 2)\n2×2 Array{Int64,2}:\n 2  4\n 6  8\n\n\n\n\n\nrmul!(A, B)\n\nCalculate the matrix-matrix product AB, overwriting A, and return the result.\n\nExamples\n\njulia> A = [0 1; 1 0];\n\njulia> B = LinearAlgebra.UpperTriangular([1 2; 0 3]);\n\njulia> LinearAlgebra.rmul!(A, B);\n\njulia> A\n2×2 Array{Int64,2}:\n 0  3\n 1  2\n\n\n\n\n\n"
+    "text": "rmul!(A::AbstractArray, b::Number)\n\nScale an array A by a scalar b overwriting A in-place.  Use lmul! to multiply scalar from left.  The scaling operation respects the semantics of the multiplication * between an element of A and b.  In particular, this also applies to multiplication involving non-finite numbers such as NaN and ±Inf.\n\ncompat: Julia 1.1\nPrior to Julia 1.1, NaN and ±Inf entries in A were treated inconsistently.\n\nExamples\n\njulia> A = [1 2; 3 4]\n2×2 Array{Int64,2}:\n 1  2\n 3  4\n\njulia> rmul!(A, 2)\n2×2 Array{Int64,2}:\n 2  4\n 6  8\n\njulia> rmul!([NaN], 0.0)\n1-element Array{Float64,1}:\n NaN\n\n\n\n\n\nrmul!(A, B)\n\nCalculate the matrix-matrix product AB, overwriting A, and return the result.\n\nExamples\n\njulia> A = [0 1; 1 0];\n\njulia> B = LinearAlgebra.UpperTriangular([1 2; 0 3]);\n\njulia> LinearAlgebra.rmul!(A, B);\n\njulia> A\n2×2 Array{Int64,2}:\n 0  3\n 1  2\n\n\n\n\n\n"
 },
 
 {
@@ -20509,7 +20477,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Sparse Arrays",
     "title": "SparseArrays.sparse",
     "category": "function",
-    "text": "sparse(A)\n\nConvert an AbstractMatrix A into a sparse matrix.\n\nExamples\n\njulia> A = Matrix(1.0I, 3, 3)\n3×3 Array{Float64,2}:\n 1.0  0.0  0.0\n 0.0  1.0  0.0\n 0.0  0.0  1.0\n\njulia> sparse(A)\n3×3 SparseMatrixCSC{Float64,Int64} with 3 stored entries:\n  [1, 1]  =  1.0\n  [2, 2]  =  1.0\n  [3, 3]  =  1.0\n\n\n\n\n\nsparse(I, J, V,[ m, n, combine])\n\nCreate a sparse matrix S of dimensions m x n such that S[I[k], J[k]] = V[k]. The combine function is used to combine duplicates. If m and n are not specified, they are set to maximum(I) and maximum(J) respectively. If the combine function is not supplied, combine defaults to + unless the elements of V are Booleans in which case combine defaults to |. All elements of I must satisfy 1 <= I[k] <= m, and all elements of J must satisfy 1 <= J[k] <= n. Numerical zeros in (I, J, V) are retained as structural nonzeros; to drop numerical zeros, use dropzeros!.\n\nFor additional documentation and an expert driver, see Base.SparseArrays.sparse!.\n\nExamples\n\njulia> Is = [1; 2; 3];\n\njulia> Js = [1; 2; 3];\n\njulia> Vs = [1; 2; 3];\n\njulia> sparse(Is, Js, Vs)\n3×3 SparseMatrixCSC{Int64,Int64} with 3 stored entries:\n  [1, 1]  =  1\n  [2, 2]  =  2\n  [3, 3]  =  3\n\n\n\n\n\n"
+    "text": "sparse(A)\n\nConvert an AbstractMatrix A into a sparse matrix.\n\nExamples\n\njulia> A = Matrix(1.0I, 3, 3)\n3×3 Array{Float64,2}:\n 1.0  0.0  0.0\n 0.0  1.0  0.0\n 0.0  0.0  1.0\n\njulia> sparse(A)\n3×3 SparseMatrixCSC{Float64,Int64} with 3 stored entries:\n  [1, 1]  =  1.0\n  [2, 2]  =  1.0\n  [3, 3]  =  1.0\n\n\n\n\n\nsparse(I, J, V,[ m, n, combine])\n\nCreate a sparse matrix S of dimensions m x n such that S[I[k], J[k]] = V[k]. The combine function is used to combine duplicates. If m and n are not specified, they are set to maximum(I) and maximum(J) respectively. If the combine function is not supplied, combine defaults to + unless the elements of V are Booleans in which case combine defaults to |. All elements of I must satisfy 1 <= I[k] <= m, and all elements of J must satisfy 1 <= J[k] <= n. Numerical zeros in (I, J, V) are retained as structural nonzeros; to drop numerical zeros, use dropzeros!.\n\nFor additional documentation and an expert driver, see SparseArrays.sparse!.\n\nExamples\n\njulia> Is = [1; 2; 3];\n\njulia> Js = [1; 2; 3];\n\njulia> Vs = [1; 2; 3];\n\njulia> sparse(Is, Js, Vs)\n3×3 SparseMatrixCSC{Int64,Int64} with 3 stored entries:\n  [1, 1]  =  1\n  [2, 2]  =  2\n  [3, 3]  =  3\n\n\n\n\n\n"
 },
 
 {
@@ -21969,19 +21937,11 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "devdocs/sysimg/#Main.BuildSysImg.build_sysimg",
-    "page": "System Image Building",
-    "title": "Main.BuildSysImg.build_sysimg",
-    "category": "function",
-    "text": "build_sysimg(sysimg_path=default_sysimg_path(), cpu_target=\"native\", userimg_path=nothing; force=false)\n\nRebuild the system image. Store it in sysimg_path, which defaults to a file named sys.ji that sits in the same folder as libjulia.{so,dylib}, except on Windows where it defaults to JULIA_HOME/../lib/julia/sys.ji.  Use the cpu instruction set given by cpu_target. Valid CPU targets are the same as for the -C option to julia, or the -march option to gcc.  Defaults to native, which means to use all CPU instructions available on the current processor. Include the user image file given by userimg_path, which should contain directives such as using MyPackage to include that package in the new system image. New system image will not replace an older image unless force is set to true.\n\n\n\n\n\n"
-},
-
-{
     "location": "devdocs/sysimg/#Building-the-Julia-system-image-1",
     "page": "System Image Building",
     "title": "Building the Julia system image",
     "category": "section",
-    "text": "Julia ships with a preparsed system image containing the contents of the Base module, named sys.ji.  This file is also precompiled into a shared library called sys.{so,dll,dylib} on as many platforms as possible, so as to give vastly improved startup times.  On systems that do not ship with a precompiled system image file, one can be generated from the source files shipped in Julia\'s DATAROOTDIR/julia/base folder.This operation is useful for multiple reasons.  A user may:Build a precompiled shared library system image on a platform that did not ship with one, thereby improving startup times.\nModify Base, rebuild the system image and use the new Base next time Julia is started.\nInclude a userimg.jl file that includes packages into the system image, thereby creating a system image that has packages embedded into the startup environment.Julia now ships with a script that automates the tasks of building the system image, wittingly named build_sysimg.jl that lives in DATAROOTDIR/julia/.  That is, to include it into a current Julia session, type:include(joinpath(Sys.BINDIR, Base.DATAROOTDIR, \"julia\", \"build_sysimg.jl\"))This will include a build_sysimg function:BuildSysImg.build_sysimgNote that this file can also be run as a script itself, with command line arguments taking the place of arguments passed to the build_sysimg function.  For example, to build a system image in /tmp/sys.{so,dll,dylib}, with the core2 CPU instruction set, a user image of ~/userimg.jl and force set to true, one would execute:julia build_sysimg.jl /tmp/sys core2 ~/userimg.jl --force"
+    "text": "Julia ships with a preparsed system image containing the contents of the Base module, named sys.ji.  This file is also precompiled into a shared library called sys.{so,dll,dylib} on as many platforms as possible, so as to give vastly improved startup times.  On systems that do not ship with a precompiled system image file, one can be generated from the source files shipped in Julia\'s DATAROOTDIR/julia/base folder.This operation is useful for multiple reasons.  A user may:Build a precompiled shared library system image on a platform that did not ship with one, thereby improving startup times.\nModify Base, rebuild the system image and use the new Base next time Julia is started.\nInclude a userimg.jl file that includes packages into the system image, thereby creating a system image that has packages embedded into the startup environment.The PackageCompiler.jl package contains convenient wrapper functions to automate this process."
 },
 
 {
