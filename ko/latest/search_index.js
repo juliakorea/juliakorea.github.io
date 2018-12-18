@@ -37,7 +37,15 @@ var documenterSearchIndex = {"docs": [
     "page": "Julia v1.2 Release Notes",
     "title": "New language features",
     "category": "section",
-    "text": ""
+    "text": "The extrema function now accepts a function argument in the same manner as minimum and maximum (#30323)."
+},
+
+{
+    "location": "NEWS/#Multi-threading-changes-1",
+    "page": "Julia v1.2 Release Notes",
+    "title": "Multi-threading changes",
+    "category": "section",
+    "text": "The Condition type now has a thread-safe replacement, accessed as Threads.Condition. With that addition, task scheduling primitives such as ReentrantLock are now thread-safe (#30061)."
 },
 
 {
@@ -3117,7 +3125,15 @@ var documenterSearchIndex = {"docs": [
     "page": "Code Loading",
     "title": "Code Loading",
     "category": "section",
-    "text": "Julia has two mechanisms for loading code:Code inclusion: e.g. include(\"source.jl\"). Inclusion allows you to split a single program across multiple source files. The expression include(\"source.jl\") causes the contents of the file source.jl to be evaluated in the global scope of the module where the include call occurs. If include(\"source.jl\") is called multiple times, source.jl is evaluated multiple times. The included path, source.jl, is interpreted relative to the file where the include call occurs. This makes it simple to relocate a subtree of source files. In the REPL, included paths are interpreted relative to the current working directory, pwd().\nPackage loading: e.g. import X or using X. The import mechanism allows you to load a package—i.e. an independent, reusable collection of Julia code, wrapped in a module—and makes the resulting module available by the name X inside of the importing module. If the same X package is imported multiple times in the same Julia session, it is only loaded the first time—on subsequent imports, the importing module gets a reference to the same module. Note though, that import X can load different packages in different contexts: X can refer to one package named X in the main project but potentially different packages named X in each dependency. More on this below.Code inclusion is quite straightforward: it simply parses and evaluates a source file in the context of the caller. Package loading is built on top of code inclusion and is a lot more complex. Therefore, the rest of this chapter focuses on the behavior and mechanics of package loading.note: Note\nYou only need to read this chapter if you want to understand the technical details of package loading. If you just want to install and use packages, simply use Julia\'s built-in package manager to add packages to your environment and write import X or using X in your code to load packages that you\'ve added.A package is a source tree with a standard layout providing functionality that can be reused by other Julia projects. A package is loaded by import X or  using X statements. These statements also make the module named X, which results from loading the package code, available within the module where the import statement occurs. The meaning of X in import X is context-dependent: which X package is loaded depends on what code the statement occurs in. The effect of import X depends on two questions:What package is X in this context?\nWhere can that X package be found?Understanding how Julia answers these questions is key to understanding package loading."
+    "text": "note: Note\nThis chapter covers the technical details of package loading. To install packages, use Pkg, Julia\'s built-in package manager, to add packages to your active environment. To use packages already in your active environment, write import X or using X, as described in the Modules documentation."
+},
+
+{
+    "location": "manual/code-loading/#Definitions-1",
+    "page": "Code Loading",
+    "title": "Definitions",
+    "category": "section",
+    "text": "Julia has two mechanisms for loading code:Code inclusion: e.g. include(\"source.jl\"). Inclusion allows you to split a single program across multiple source files. The expression include(\"source.jl\") causes the contents of the file source.jl to be evaluated in the global scope of the module where the include call occurs. If include(\"source.jl\") is called multiple times, source.jl is evaluated multiple times. The included path, source.jl, is interpreted relative to the file where the include call occurs. This makes it simple to relocate a subtree of source files. In the REPL, included paths are interpreted relative to the current working directory, pwd().\nPackage loading: e.g. import X or using X. The import mechanism allows you to load a package—i.e. an independent, reusable collection of Julia code, wrapped in a module—and makes the resulting module available by the name X inside of the importing module. If the same X package is imported multiple times in the same Julia session, it is only loaded the first time—on subsequent imports, the importing module gets a reference to the same module. Note though, that import X can load different packages in different contexts: X can refer to one package named X in the main project but potentially to different packages also named X in each dependency. More on this below.Code inclusion is quite straightforward and simple: it evaluates the given source file in the context of the caller. Package loading is built on top of code inclusion and serves a different purpose. The rest of this chapter focuses on the behavior and mechanics of package loading.A package is a source tree with a standard layout providing functionality that can be reused by other Julia projects. A package is loaded by import X or  using X statements. These statements also make the module named X—which results from loading the package code—available within the module where the import statement occurs. The meaning of X in import X is context-dependent: which X package is loaded depends on what code the statement occurs in. Thus, handling of import X happens in two stages: first, it determines what package is defined to be X in this context; second, it determines where that particular X package is found.These questions are answered by searching through the project environments listed in LOAD_PATH for project files (Project.toml or JuliaProject.toml), manifest files (Manifest.toml or JuliaManifest.toml), or folders of source files."
 },
 
 {
@@ -3125,7 +3141,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Code Loading",
     "title": "Federation of packages",
     "category": "section",
-    "text": "Julia supports federated management of packages. This means that multiple independent parties can maintain both public and private packages and registries of them, and that projects can depend on a mix of public and private packages from different registries. Packages from various registries are installed and managed using a common set of tools and workflows. The Pkg package manager ships with Julia 0.7/1.0 and lets you install and manage your projects\' dependencies. It does this by creating and manipulating project files that describe what your project depends on, and manifest files that snapshot exact versions of your project\'s complete dependency graph.One consequence of federation is that there cannot be a central authority for package naming. Different entities may use the same name to refer to unrelated packages. This possibility is unavoidable since these entities do not coordinate and may not even know about each other. Because of the lack of a central naming authority, a single project can quite possibly end up depending on different packages that have the same name. Julia\'s package loading mechanism handles this by not requiring package names to be globally unique, even within the dependency graph of a single project. Instead, packages are identified by universally unique identifiers (UUIDs) which are assigned to them before they are registered. The question \"what is X?\" is answered by determining the UUID of X.Since the decentralized naming problem is somewhat abstract, it may help to walk through a concrete scenario to understand the issue. Suppose you\'re developing an application called App, which uses two packages: Pub and  Priv. Priv is a private package that you created, whereas Pub is a public package that you use but don\'t control. When you created Priv, there was no public package by that name. Subsequently, however, an unrelated package also named Priv has been published and become popular. In fact, the Pub package has started to use it. Therefore, when you next upgrade Pub to get the latest bug fixes and features, App will end up—through no action of yours other than upgrading—depending on two different packages named Priv. App has a direct dependency on your private Priv package, and an indirect dependency, through Pub, on the new public Priv package. Since these two Priv packages are different but both required for App to continue working correctly, the expression import Priv must refer to different Priv packages depending on whether it occurs in App\'s code or in Pub\'s code. Julia\'s package loading mechanism allows this by distinguishing the two Priv packages by context and UUID. How this distinction works is determined by environments, as explained in the following sections."
+    "text": "Most of the time, a package is uniquely identifiable simply from its name. However, sometimes a project might encounter a situation where it needs to use two different packages that share the same name. While you might be able fix this by renaming one of the packages, being forced to do so can be highly disruptive in a large, shared code base. Instead, Julia\'s code loading mechanism allows the same package name to refer to different packages in different components of an application.Julia supports federated package management, which means that multiple independent parties can maintain both public and private packages and registries of packages, and that projects can depend on a mix of public and private packages from different registries. Packages from various registries are installed and managed using a common set of tools and workflows. The Pkg package manager that ships with Julia lets you install and manage your projects\' dependencies. It assists in creating and manipulating project files (which describe what other projects that your project depends on), and manifest files (which snapshot exact versions of your project\'s complete dependency graph).One consequence of federation is that there cannot be a central authority for package naming. Different entities may use the same name to refer to unrelated packages. This possibility is unavoidable since these entities do not coordinate and may not even know about each other. Because of the lack of a central naming authority, a single project may end up depending on different packages that have the same name. Julia\'s package loading mechanism does not require package names to be globally unique, even within the dependency graph of a single project. Instead, packages are identified by universally unique identifiers (UUIDs), which get assigned when each package is created. Usually you won\'t have to work directly with these somewhat cumbersome 128-bit identifiers since Pkg will take care of generating and tracking them for you. However, these UUIDs provide the definitive answer to the question of \"what package does X refer to?\"Since the decentralized naming problem is somewhat abstract, it may help to walk through a concrete scenario to understand the issue. Suppose you\'re developing an application called App, which uses two packages: Pub and  Priv. Priv is a private package that you created, whereas Pub is a public package that you use but don\'t control. When you created Priv, there was no public package by the name Priv. Subsequently, however, an unrelated package also named Priv has been published and become popular. In fact, the Pub package has started to use it. Therefore, when you next upgrade Pub to get the latest bug fixes and features, App will end up depending on two different packages named Priv—through no action of yours other than upgrading. App has a direct dependency on your private Priv package, and an indirect dependency, through Pub, on the new public Priv package. Since these two Priv packages are different but are both required for App to continue working correctly, the expression import Priv must refer to different Priv packages depending on whether it occurs in App\'s code or in Pub\'s code. To handle this, Julia\'s package loading mechanism distinguishes the two Priv packages by their UUID and picks the correct one based on its context (the module that called import). How this distinction works is determined by environments, as explained in the following sections."
 },
 
 {
@@ -3133,7 +3149,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Code Loading",
     "title": "Environments",
     "category": "section",
-    "text": "An environment determines what import X and using X mean in various code contexts and what files these statements cause to be loaded. Julia understands three kinds of environments:A project environment is a directory with a project file and an optional manifest file. The project file determines what the names and identities of the direct dependencies of a project are. The manifest file, if present, gives a complete dependency graph, including all direct and indirect dependencies, exact versions of each dependency, and sufficient information to locate and load the correct version.\nA package directory is a directory containing the source trees of a set of packages as subdirectories. This kind of environment was the only kind that existed in Julia 0.6 and earlier. If X is a subdirectory of a package directory and X/src/X.jl exists, then the package X is available in the package directory environment and X/src/X.jl is the source file by which it is loaded.\nA stacked environment is an ordered set of project environments and package directories, overlaid to make a single composite environment in which all the packages available in its constituent environments are available. Julia\'s load path is a stacked environment, for example.These three kinds of environment each serve a different purpose:Project environments provide reproducibility. By checking a project environment into version control—e.g. a git repository—along with the rest of the project\'s source code, you can reproduce the exact state of the project and all of its dependencies since the manifest file captures the exact version of every dependency.\nPackage directories provide low-overhead convenience when a project environment isn\'t needed. Package directories are handy when you have a set of packages that you just want to put somewhere and use them as they are, without having to create and maintain a project environment for them.\nStacked environments allow for augmentation of the primary environment with additional tools. You can push an environment including development tools onto the stack and they will be available from the REPL and scripts but not from inside packages.As an abstraction, an environment provides three maps: roots, graph and paths. When resolving the meaning of import X, roots and graph are used to determine the identity of X and answer the question \"what is X?\", while the paths map is used to locate the source code of X and answer the question \"where is X?\" The specific roles of the three maps are:roots: name::Symbol ⟶ uuid::UUID\nAn environment\'s roots map assigns package names to UUIDs for all the top-level dependencies that the environment makes available to the main project (i.e. the ones that can be loaded in Main). When Julia encounters import X in the main project, it looks up the identity of X as roots[:X].\ngraph: context::UUID ⟶ name::Symbol ⟶ uuid::UUID\nAn environment\'s graph is a multilevel map which assigns, for each context UUID, a map from names to UUIDs, similar to the roots map but specific to that context. When Julia sees import X in the code of the package whose UUID is context, it looks up the identity of X as graph[context][:X]. In particular, this means that import X can refer to different packages depending on context.\npaths: uuid::UUID × name::Symbol ⟶ path::String\nThe paths map assigns to each package UUID-name pair, the location of that package\'s entry-point source file. After the identity of X in import X has been resolved to a UUID via roots or graph (depending on whether it is loaded from the main project or a dependency), Julia determines what file to load to acquire X by looking up paths[uuid,:X] in the environment. Including this file should create a module named X. Once this package is loaded, i.e. after its first import, any subsequent import resolving to the same uuid will simply create a new binding to the original already-loaded package module.Each kind of environment defines these three maps differently, as detailed in the following sections.note: Note\nFor ease of understanding, the examples throughout this chapter show full data structures for roots, graph and paths. However, for efficiency, Julia\'s package loading code does not actually create them. Instead, it queries them through internal APIs and lazily computes only as much of each structure as it needs to load a given package."
+    "text": "An environment determines what import X and using X mean in various code contexts and what files these statements cause to be loaded. Julia understands two kinds of environments:A project environment is a directory with a project file and an optional manifest file, and forms an explicit environement. The project file determines what the names and identities of the direct dependencies of a project are. The manifest file, if present, gives a complete dependency graph, including all direct and indirect dependencies, exact versions of each dependency, and sufficient information to locate and load the correct version.\nA package directory is a directory containing the source trees of a set of packages as subdirectories, and forms an implicit environment. If X is a subdirectory of a package directory and X/src/X.jl exists, then the package X is available in the package directory environment and X/src/X.jl is the source file by which it is loaded.These can be intermixed to create a stacked environment: an ordered set of project environments and package directories, overlaid to make a single composite environment. The precedence and visibility rules then combine to determine which packages are available and where they get loaded from. Julia\'s load path forms a stacked environment, for example.These environment each serve a different purpose:Project environments provide reproducibility. By checking a project environment into version control—e.g. a git repository—along with the rest of the project\'s source code, you can reproduce the exact state of the project and all of its dependencies. The manifest file, in particular, captures the exact version of every dependency, identified by a cryptographic hash of its source tree, which makes it possible for Pkg to retrieve the correct versions and be sure that you are running the exact code that was recorded for all dependencies.\nPackage directories provide convenience when a full carefully-tracked project environment is unnecessary. They are useful when you want to put a set of packages somewhere and be able to directly use them, without needing to create a project environment for them.\nStacked environments allow for adding tools to the primary environment. You can push an environment of development tools onto the end of the stack to make them available from the REPL and scripts, but not from inside packages.At a high-level, each environment conceptually defines three maps: roots, graph and paths. When resolving the meaning of import X, the roots and graph maps are used to determine the identity of X, while the paths map is used to locate the source code of X. The specific roles of the three maps are:roots: name::Symbol ⟶ uuid::UUID\nAn environment\'s roots map assigns package names to UUIDs for all the top-level dependencies that the environment makes available to the main project (i.e. the ones that can be loaded in Main). When Julia encounters import X in the main project, it looks up the identity of X as roots[:X].\ngraph: context::UUID ⟶ name::Symbol ⟶ uuid::UUID\nAn environment\'s graph is a multilevel map which assigns, for each context UUID, a map from names to UUIDs, similar to the roots map but specific to that context. When Julia sees import X in the code of the package whose UUID is context, it looks up the identity of X as graph[context][:X]. In particular, this means that import X can refer to different packages depending on context.\npaths: uuid::UUID × name::Symbol ⟶ path::String\nThe paths map assigns to each package UUID-name pair, the location of that package\'s entry-point source file. After the identity of X in import X has been resolved to a UUID via roots or graph (depending on whether it is loaded from the main project or a dependency), Julia determines what file to load to acquire X by looking up paths[uuid,:X] in the environment. Including this file should define a module named X. Once this package is loaded, any subsequent import resolving to the same uuid will create a new binding to the already-loaded package module.Each kind of environment defines these three maps differently, as detailed in the following sections.note: Note\nFor ease of understanding, the examples throughout this chapter show full data structures for roots, graph and paths. However, Julia\'s package loading code does not explicitly create these. Instead, it lazily computes only as much of each structure as it needs to load a given package."
 },
 
 {
@@ -3141,7 +3157,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Code Loading",
     "title": "Project environments",
     "category": "section",
-    "text": "A project environment is determined by a directory containing a project file called Project.toml, and optionally a manifest file called Manifest.toml. These files may also be called JuliaProject.toml and JuliaManifest.toml, in which case Project.toml and Manifest.toml are ignored. (This allows for coexistence with other tools that might consider files called Project.toml and Manifest.toml significant.) For pure Julia projects, however, the names Project.toml and Manifest.toml are preferred. The roots, graph and paths maps of a project environment are defined as follows.The roots map of the environment is determined by the contents of the project file, specifically, its top-level name and uuid entries and its [deps] section (all optional). Consider the following example project file for the hypothetical application, App, as described earlier:name = \"App\"\nuuid = \"8f986787-14fe-4607-ba5d-fbff2944afa9\"\n\n[deps]\nPriv = \"ba13f791-ae1d-465a-978b-69c3ad90f72b\"\nPub  = \"c07ecb7d-0dc9-4db7-8803-fadaaeaf08e1\"This project file implies the following roots map, if it was represented by a Julia dictionary:roots = Dict(\n    :App  => UUID(\"8f986787-14fe-4607-ba5d-fbff2944afa9\"),\n    :Priv => UUID(\"ba13f791-ae1d-465a-978b-69c3ad90f72b\"),\n    :Pub  => UUID(\"c07ecb7d-0dc9-4db7-8803-fadaaeaf08e1\"),\n)Given this roots map, in App\'s code the statement import Priv will cause Julia to look up roots[:Priv], which yields ba13f791-ae1d-465a-978b-69c3ad90f72b, the UUID of the Priv package that is to be loaded in that context. This UUID identifies which Priv package to load and use when the main application evaluates import Priv.The dependency graph of a project environment is determined by the contents of the manifest file, if present. If there is no manifest file, graph is empty. A manifest file contains a stanza for each of a project\'s direct or indirect dependencies, including for each one, its UUID and a source tree hash or an explicit path to the source code. Consider the following example manifest file for App:[[Priv]] # the private one\ndeps = [\"Pub\", \"Zebra\"]\nuuid = \"ba13f791-ae1d-465a-978b-69c3ad90f72b\"\npath = \"deps/Priv\"\n\n[[Priv]] # the public one\nuuid = \"2d15fe94-a1f7-436c-a4d8-07a9a496e01c\"\ngit-tree-sha1 = \"1bf63d3be994fe83456a03b874b409cfd59a6373\"\nversion = \"0.1.5\"\n\n[[Pub]]\nuuid = \"c07ecb7d-0dc9-4db7-8803-fadaaeaf08e1\"\ngit-tree-sha1 = \"9ebd50e2b0dd1e110e842df3b433cb5869b0dd38\"\nversion = \"2.1.4\"\n\n  [Pub.deps]\n  Priv = \"2d15fe94-a1f7-436c-a4d8-07a9a496e01c\"\n  Zebra = \"f7a24cb4-21fc-4002-ac70-f0e3a0dd3f62\"\n\n[[Zebra]]\nuuid = \"f7a24cb4-21fc-4002-ac70-f0e3a0dd3f62\"\ngit-tree-sha1 = \"e808e36a5d7173974b90a15a353b564f3494092f\"\nversion = \"3.4.2\"This manifest file describes a possible complete dependency graph for the App project:There are two different Priv packages that the application needs—a private one which is a direct dependency and a public one which is an indirect dependency through Pub:\nThe private Priv depends on the Pub and Zebra packages.\nThe public Priv has no dependencies.\nThe application also depends on the Pub package, which in turn depends on the public Priv and the same Zebra package which the private Priv package depends on.This dependency graph represented as a dictionary, looks like this:graph = Dict{UUID,Dict{Symbol,UUID}}(\n    # Priv – the private one:\n    UUID(\"ba13f791-ae1d-465a-978b-69c3ad90f72b\") => Dict{Symbol,UUID}(\n        :Pub   => UUID(\"c07ecb7d-0dc9-4db7-8803-fadaaeaf08e1\"),\n        :Zebra => UUID(\"f7a24cb4-21fc-4002-ac70-f0e3a0dd3f62\"),\n    ),\n    # Priv – the public one:\n    UUID(\"2d15fe94-a1f7-436c-a4d8-07a9a496e01c\") => Dict{Symbol,UUID}(),\n    # Pub:\n    UUID(\"c07ecb7d-0dc9-4db7-8803-fadaaeaf08e1\") => Dict{Symbol,UUID}(\n        :Priv  => UUID(\"2d15fe94-a1f7-436c-a4d8-07a9a496e01c\"),\n        :Zebra => UUID(\"f7a24cb4-21fc-4002-ac70-f0e3a0dd3f62\"),\n    ),\n    # Zebra:\n    UUID(\"f7a24cb4-21fc-4002-ac70-f0e3a0dd3f62\") => Dict{Symbol,UUID}(),\n)Given this dependency graph, when Julia sees import Priv in the Pub package—which has UUID c07ecb7d-0dc9-4db7-8803-fadaaeaf08e1—it looks up:graph[UUID(\"c07ecb7d-0dc9-4db7-8803-fadaaeaf08e1\")][:Priv]and gets 2d15fe94-a1f7-436c-a4d8-07a9a496e01c, which indicates that in the context of the Pub package, import Priv refers to the public Priv package, rather than the private one which the app depends on directly. This is how the name Priv can refer to different packages in the main project than it does in one of its package\'s dependencies, which allows for duplicate names in the package ecosystem.What happens if import Zebra is evaluated in the main App code base? Since Zebra does not appear in the project file, the import will fail even though Zebra does appear in the manifest file. Moreover, if import Zebra occurs in the public Priv package—the one with UUID 2d15fe94-a1f7-436c-a4d8-07a9a496e01c—then that would also fail since that Priv package has no declared dependencies in the manifest file and therefore cannot load any packages. The Zebra package can only be loaded by packages for which it appear as an explicit dependency in the manifest file: the  Pub package and one of the Priv packages.The paths map of a project environment is also determined by the manifest file if present and is empty if there is no manifest. The path of a package uuid named X is determined by these two rules:If the manifest stanza matching uuid has a path entry, use that path relative to the manifest file.\nOtherwise, if the manifest stanza matching uuid has a git-tree-sha1 entry, compute a deterministic hash function of uuid and git-tree-sha1—call it slug—and look for packages/X/$slug in each directory in the Julia DEPOT_PATH global array. Use the first such directory that exists.If applying these rules doesn\'t find a loadable path, the package should be considered not installed and the system should raise an error or prompt the user to install the appropriate package version.In the example manifest file above, to find the path of the first Priv package—the one with UUID ba13f791-ae1d-465a-978b-69c3ad90f72b—Julia looks for its stanza in the manifest file, sees that it has a path entry, looks at deps/Priv relative to the App project directory—let\'s suppose the App code lives in /home/me/projects/App—sees that /home/me/projects/App/deps/Priv exists and therefore loads Priv from there.If, on the other hand, Julia was loading the other Priv package—the one with UUID 2d15fe94-a1f7-436c-a4d8-07a9a496e01c—it finds its stanza in the manifest, see that it does not have a path entry, but that it does have a git-tree-sha1 entry. It then computes the slug for this UUID/SHA-1 pair, which is HDkr (the exact details of this computation aren\'t important, but it is consistent and deterministic). This means that the path to this Priv package will be packages/Priv/HDkr/src/Priv.jl in one of the package depots. Suppose the contents of DEPOT_PATH is [\"/home/me/.julia\", \"/usr/local/julia\"]; then Julia will look at the following paths to see if they exist:/home/me/.julia/packages/Priv/HDkr/src/Priv.jl\n/usr/local/julia/packages/Priv/HDkr/src/Priv.jlJulia uses the first of these that exists to load the public Priv package.Here is a representation of the paths map for the App project environment:paths = Dict{Tuple{UUID,Symbol},String}(\n    # Priv – the private one:\n    (UUID(\"ba13f791-ae1d-465a-978b-69c3ad90f72b\"), :Priv) =>\n        # relative entry-point inside `App` repo:\n        \"/home/me/projects/App/deps/Priv/src/Priv.jl\",\n    # Priv – the public one:\n    (UUID(\"2d15fe94-a1f7-436c-a4d8-07a9a496e01c\"), :Priv) =>\n        # package installed in the system depot:\n        \"/usr/local/julia/packages/Priv/HDkr/src/Priv.jl\",\n    # Pub:\n    (UUID(\"c07ecb7d-0dc9-4db7-8803-fadaaeaf08e1\"), :Pub) =>\n        # package installed in the user depot:\n        \"/home/me/.julia/packages/Pub/oKpw/src/Pub.jl\",\n    # Zebra:\n    (UUID(\"f7a24cb4-21fc-4002-ac70-f0e3a0dd3f62\"), :Zebra) =>\n        # package installed in the system depot:\n        \"/usr/local/julia/packages/Zebra/me9k/src/Zebra.jl\",\n)This example map includes three different kinds of package locations:The private Priv package is \"vendored\" inside the App repository.\nThe public Priv and Zebra packages are in the system depot, where packages installed and managed by the system administrator live. These are available to all users on the system.\nThe Pub package is in the user depot, where packages installed by the user live. These are only available to the user who installed them."
+    "text": "A project environment is determined by a directory containing a project file called Project.toml, and optionally a manifest file called Manifest.toml. These files may also be called JuliaProject.toml and JuliaManifest.toml, in which case Project.toml and Manifest.toml are ignored. This allows for coexistence with other tools that might consider files called Project.toml and Manifest.toml significant. For pure Julia projects, however, the names Project.toml and Manifest.toml are preferred.The roots, graph and paths maps of a project environment are defined as follows:The roots map of the environment is determined by the contents of the project file, specifically, its top-level name and uuid entries and its [deps] section (all optional). Consider the following example project file for the hypothetical application, App, as described earlier:name = \"App\"\nuuid = \"8f986787-14fe-4607-ba5d-fbff2944afa9\"\n\n[deps]\nPriv = \"ba13f791-ae1d-465a-978b-69c3ad90f72b\"\nPub  = \"c07ecb7d-0dc9-4db7-8803-fadaaeaf08e1\"This project file implies the following roots map, if it was represented by a Julia dictionary:roots = Dict(\n    :App  => UUID(\"8f986787-14fe-4607-ba5d-fbff2944afa9\"),\n    :Priv => UUID(\"ba13f791-ae1d-465a-978b-69c3ad90f72b\"),\n    :Pub  => UUID(\"c07ecb7d-0dc9-4db7-8803-fadaaeaf08e1\"),\n)Given this roots map, in App\'s code the statement import Priv will cause Julia to look up roots[:Priv], which yields ba13f791-ae1d-465a-978b-69c3ad90f72b, the UUID of the Priv package that is to be loaded in that context. This UUID identifies which Priv package to load and use when the main application evaluates import Priv.The dependency graph of a project environment is determined by the contents of the manifest file, if present. If there is no manifest file, graph is empty. A manifest file contains a stanza for each of a project\'s direct or indirect dependencies. For each dependency, the file lists the package\'s UUID and a source tree hash or an explicit path to the source code. Consider the following example manifest file for App:[[Priv]] # the private one\ndeps = [\"Pub\", \"Zebra\"]\nuuid = \"ba13f791-ae1d-465a-978b-69c3ad90f72b\"\npath = \"deps/Priv\"\n\n[[Priv]] # the public one\nuuid = \"2d15fe94-a1f7-436c-a4d8-07a9a496e01c\"\ngit-tree-sha1 = \"1bf63d3be994fe83456a03b874b409cfd59a6373\"\nversion = \"0.1.5\"\n\n[[Pub]]\nuuid = \"c07ecb7d-0dc9-4db7-8803-fadaaeaf08e1\"\ngit-tree-sha1 = \"9ebd50e2b0dd1e110e842df3b433cb5869b0dd38\"\nversion = \"2.1.4\"\n\n  [Pub.deps]\n  Priv = \"2d15fe94-a1f7-436c-a4d8-07a9a496e01c\"\n  Zebra = \"f7a24cb4-21fc-4002-ac70-f0e3a0dd3f62\"\n\n[[Zebra]]\nuuid = \"f7a24cb4-21fc-4002-ac70-f0e3a0dd3f62\"\ngit-tree-sha1 = \"e808e36a5d7173974b90a15a353b564f3494092f\"\nversion = \"3.4.2\"This manifest file describes a possible complete dependency graph for the App project:There are two different packages named Priv that the application uses. It uses a private package, which is a root dependency, and a public one, which is an indirect dependency through Pub. These are differentiated by their distinct UUIDs, and they have different deps:\nThe private Priv depends on the Pub and Zebra packages.\nThe public Priv has no dependencies.\nThe application also depends on the Pub package, which in turn depends on the public Priv and the same Zebra package that the private Priv package depends on.This dependency graph represented as a dictionary, looks like this:graph = Dict(\n    # Priv – the private one:\n    UUID(\"ba13f791-ae1d-465a-978b-69c3ad90f72b\") => Dict(\n        :Pub   => UUID(\"c07ecb7d-0dc9-4db7-8803-fadaaeaf08e1\"),\n        :Zebra => UUID(\"f7a24cb4-21fc-4002-ac70-f0e3a0dd3f62\"),\n    ),\n    # Priv – the public one:\n    UUID(\"2d15fe94-a1f7-436c-a4d8-07a9a496e01c\") => Dict(),\n    # Pub:\n    UUID(\"c07ecb7d-0dc9-4db7-8803-fadaaeaf08e1\") => Dict(\n        :Priv  => UUID(\"2d15fe94-a1f7-436c-a4d8-07a9a496e01c\"),\n        :Zebra => UUID(\"f7a24cb4-21fc-4002-ac70-f0e3a0dd3f62\"),\n    ),\n    # Zebra:\n    UUID(\"f7a24cb4-21fc-4002-ac70-f0e3a0dd3f62\") => Dict(),\n)Given this dependency graph, when Julia sees import Priv in the Pub package—which has UUID c07ecb7d-0dc9-4db7-8803-fadaaeaf08e1—it looks up:graph[UUID(\"c07ecb7d-0dc9-4db7-8803-fadaaeaf08e1\")][:Priv]and gets 2d15fe94-a1f7-436c-a4d8-07a9a496e01c, which indicates that in the context of the Pub package, import Priv refers to the public Priv package, rather than the private one which the app depends on directly. This is how the name Priv can refer to different packages in the main project than it does in one of its package\'s dependencies, which allows for duplicate names in the package ecosystem.What happens if import Zebra is evaluated in the main App code base? Since Zebra does not appear in the project file, the import will fail even though Zebra does appear in the manifest file. Moreover, if import Zebra occurs in the public Priv package—the one with UUID 2d15fe94-a1f7-436c-a4d8-07a9a496e01c—then that would also fail since that Priv package has no declared dependencies in the manifest file and therefore cannot load any packages. The Zebra package can only be loaded by packages for which it appear as an explicit dependency in the manifest file: the  Pub package and one of the Priv packages.The paths map of a project environment is extracted from the manifest file. The path of a package uuid named X is determined by these rules (in order):If the project file in the directory matches uuid and name X, then either:It has a toplevel path entry, then uuid will be mapped to that path, interpreted relative to the directory containing the project file.\nOtherwise, uuid is mapped to  src/X.jl relative to the directory containing the project file.If the above is not the case and the project file has a corresponding manifest file and the manifest contains a stanza matching uuid then:If it has a path entry, use that path (relative to the directory containing the manifest file).\nIf it has a git-tree-sha1 entry, compute a deterministic hash function of uuid and git-tree-sha1—call it slug—and look for a directory named packages/X/$slug in each directory in the Julia DEPOT_PATH global array. Use the first such directory that exists.If any of these result in success, the path to the source code entry point will be either that result, the relative path from that result plus src/X.jl; otherwise, there is no path mapping for uuid. When loading X, if no source code path is found, the lookup will fail, and the user may be prompted to install the appropriate package version or to take other corrective action (e.g. declaring X as a dependency).In the example manifest file above, to find the path of the first Priv package—the one with UUID ba13f791-ae1d-465a-978b-69c3ad90f72b—Julia looks for its stanza in the manifest file, sees that it has a path entry, looks at deps/Priv relative to the App project directory—let\'s suppose the App code lives in /home/me/projects/App—sees that /home/me/projects/App/deps/Priv exists and therefore loads Priv from there.If, on the other hand, Julia was loading the other Priv package—the one with UUID 2d15fe94-a1f7-436c-a4d8-07a9a496e01c—it finds its stanza in the manifest, see that it does not have a path entry, but that it does have a git-tree-sha1 entry. It then computes the slug for this UUID/SHA-1 pair, which is HDkrT (the exact details of this computation aren\'t important, but it is consistent and deterministic). This means that the path to this Priv package will be packages/Priv/HDkrT/src/Priv.jl in one of the package depots. Suppose the contents of DEPOT_PATH is [\"/home/me/.julia\", \"/usr/local/julia\"], then Julia will look at the following paths to see if they exist:/home/me/.julia/packages/Priv/HDkrT\n/usr/local/julia/packages/Priv/HDkrTJulia uses the first of these that exists to try to load the public Priv package from the file packages/Priv/HDKrT/src/Priv.jl in the depot where it was found.Here is a representation of a possible paths map for our example App project environment, as provided in the Manifest given above for the dependency graph, after searching the local file system:paths = Dict(\n    # Priv – the private one:\n    (UUID(\"ba13f791-ae1d-465a-978b-69c3ad90f72b\"), :Priv) =>\n        # relative entry-point inside `App` repo:\n        \"/home/me/projects/App/deps/Priv/src/Priv.jl\",\n    # Priv – the public one:\n    (UUID(\"2d15fe94-a1f7-436c-a4d8-07a9a496e01c\"), :Priv) =>\n        # package installed in the system depot:\n        \"/usr/local/julia/packages/Priv/HDkr/src/Priv.jl\",\n    # Pub:\n    (UUID(\"c07ecb7d-0dc9-4db7-8803-fadaaeaf08e1\"), :Pub) =>\n        # package installed in the user depot:\n        \"/home/me/.julia/packages/Pub/oKpw/src/Pub.jl\",\n    # Zebra:\n    (UUID(\"f7a24cb4-21fc-4002-ac70-f0e3a0dd3f62\"), :Zebra) =>\n        # package installed in the system depot:\n        \"/usr/local/julia/packages/Zebra/me9k/src/Zebra.jl\",\n)This example map includes three different kinds of package locations (the first and third are part of the default load path):The private Priv package is \"vendored\" inside the App repository.\nThe public Priv and Zebra packages are in the system depot, where packages installed and managed by the system administrator live. These are available to all users on the system.\nThe Pub package is in the user depot, where packages installed by the user live. These are only available to the user who installed them."
 },
 
 {
@@ -3149,7 +3165,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Code Loading",
     "title": "Package directories",
     "category": "section",
-    "text": "Package directories provide a kind of environment that approximates package loading in Julia 0.6 and earlier, and which resembles package loading in many other dynamic languages. The set of packages available in a package directory corresponds to the set of subdirectories it contains that look like packages: if X/src/X.jl is a file in a package directory, then X is considered to be a package and X/src/X.jl is the file Julia loads to get X. Which packages can \"see\" each other as dependencies depends on whether they contain project files, and if they do, on what appears in those project files\' [deps] sections.The roots map is determined by the subdirectories X of a package directory for which X/src/X.jl exists and whether X/Project.toml exists and has a top-level uuid entry. Specifically :X => uuid goes in roots for each such X where uuid is defined as:If X/Project.toml exists and has a uuid entry, then uuid is that value.\nIf X/Project.toml exists and but does not have a top-level UUID entry, uuid is a dummy UUID generated by hashing the canonical path of X/Project.toml.\nIf X/Project.toml does not exist, then uuid is the all-zero nil UUID.The dependency graph of a project directory is determined by the presence and contents of project files in the subdirectory of each package. The rules are:If a package subdirectory has no project file, then it is omitted from graph and import statements in its code are treated as top-level, the same as the main project and REPL.\nIf a package subdirectory has a project file, then the graph entry for its UUID is the [deps] map of the project file, which is considered to be empty if the section is absent.As an example, suppose a package directory has the following structure and content:Aardvark/\n    src/Aardvark.jl:\n        import Bobcat\n        import Cobra\n\nBobcat/\n    Project.toml:\n        [deps]\n        Cobra = \"4725e24d-f727-424b-bca0-c4307a3456fa\"\n        Dingo = \"7a7925be-828c-4418-bbeb-bac8dfc843bc\"\n\n    src/Bobcat.jl:\n        import Cobra\n        import Dingo\n\nCobra/\n    Project.toml:\n        uuid = \"4725e24d-f727-424b-bca0-c4307a3456fa\"\n        [deps]\n        Dingo = \"7a7925be-828c-4418-bbeb-bac8dfc843bc\"\n\n    src/Cobra.jl:\n        import Dingo\n\nDingo/\n    Project.toml:\n        uuid = \"7a7925be-828c-4418-bbeb-bac8dfc843bc\"\n\n    src/Dingo.jl:\n        # no importsHere is a corresponding roots structure, represented as a dictionary:roots = Dict{Symbol,UUID}(\n    :Aardvark => UUID(\"00000000-0000-0000-0000-000000000000\"), # no project file, nil UUID\n    :Bobcat   => UUID(\"85ad11c7-31f6-5d08-84db-0a4914d4cadf\"), # dummy UUID based on path\n    :Cobra    => UUID(\"4725e24d-f727-424b-bca0-c4307a3456fa\"), # UUID from project file\n    :Dingo    => UUID(\"7a7925be-828c-4418-bbeb-bac8dfc843bc\"), # UUID from project file\n)Here is the corresponding graph structure, represented as a dictionary:graph = Dict{UUID,Dict{Symbol,UUID}}(\n    # Bobcat:\n    UUID(\"85ad11c7-31f6-5d08-84db-0a4914d4cadf\") => Dict{Symbol,UUID}(\n        :Cobra => UUID(\"4725e24d-f727-424b-bca0-c4307a3456fa\"),\n        :Dingo => UUID(\"7a7925be-828c-4418-bbeb-bac8dfc843bc\"),\n    ),\n    # Cobra:\n    UUID(\"4725e24d-f727-424b-bca0-c4307a3456fa\") => Dict{Symbol,UUID}(\n        :Dingo => UUID(\"7a7925be-828c-4418-bbeb-bac8dfc843bc\"),\n    ),\n    # Dingo:\n    UUID(\"7a7925be-828c-4418-bbeb-bac8dfc843bc\") => Dict{Symbol,UUID}(),\n)A few general rules to note:A package without a project file can depend on any top-level dependency, and since every package in a package directory is available at the top-level, it can import all packages in the environment.\nA package with a project file cannot depend on one without a project file since packages with project files can only load packages in graph and packages without project files do not appear in graph.\nA package with a project file but no explicit UUID can only be depended on by packages without project files since dummy UUIDs assigned to these packages are strictly internal.Observe the following specific instances of these rules in our example:Aardvark can import on any of Bobcat, Cobra or Dingo; it does import Bobcat and Cobra.\nBobcat can and does import both Cobra and Dingo, which both have project files with UUIDs and are declared as dependencies in Bobcat\'s [deps] section.\nBobcat cannot depend on Aardvark since Aardvark does not have a project file.\nCobra can and does import Dingo, which has a project file and UUID, and is declared as a dependency in Cobra\'s  [deps] section.\nCobra cannot depend on Aardvark or Bobcat since neither have real UUIDs.\nDingo cannot import anything because it has a project file without a [deps] section.The paths map in a package directory is simple: it maps subdirectory names to their corresponding entry-point paths. In other words, if the path to our example project directory is /home/me/animals then the paths map could be represented by this dictionary:paths = Dict{Tuple{UUID,Symbol},String}(\n    (UUID(\"00000000-0000-0000-0000-000000000000\"), :Aardvark) =>\n        \"/home/me/AnimalPackages/Aardvark/src/Aardvark.jl\",\n    (UUID(\"85ad11c7-31f6-5d08-84db-0a4914d4cadf\"), :Bobcat) =>\n        \"/home/me/AnimalPackages/Bobcat/src/Bobcat.jl\",\n    (UUID(\"4725e24d-f727-424b-bca0-c4307a3456fa\"), :Cobra) =>\n        \"/home/me/AnimalPackages/Cobra/src/Cobra.jl\",\n    (UUID(\"7a7925be-828c-4418-bbeb-bac8dfc843bc\"), :Dingo) =>\n        \"/home/me/AnimalPackages/Dingo/src/Dingo.jl\",\n)Since all packages in a package directory environment are, by definition, subdirectories with the expected entry-point files, their paths map entries always have this form."
+    "text": "Package directories provide a simpler kind of environment without the ability to handle name collisions. In a package directory, the set of top-level packages is the set of subdirectories that \"look like\" packages. A package X is exists in a package directory if the directory contains one of the following \"entry point\" files:X.jl\nX/src/X.jl\nX.jl/src/X.jlWhich dependencies a package in a package directory can import depends on whether the package contains a project file:If it has a project file, it can only import those packages which are identified in the [deps] section of the project file.\nIf it does not have a project file, it can import any top-level package—i.e. the same packages that can be loaded in Main or the REPL.The roots map is determined by examining the contents of the package directory to generate a list of all packages that exist. Additionally, a UUID will be assigned to each entry as follows: For a given package found inside the folder X...If X/Project.toml exists and has a uuid entry, then uuid is that value.\nIf X/Project.toml exists and but does not have a top-level UUID entry, uuid is a dummy UUID generated by hashing the canonical (real) path to X/Project.toml.\nOtherwise (if Project.toml does not exist), then uuid is the all-zero nil UUID.The dependency graph of a project directory is determined by the presence and contents of project files in the subdirectory of each package. The rules are:If a package subdirectory has no project file, then it is omitted from graph and import statements in its code are treated as top-level, the same as the main project and REPL.\nIf a package subdirectory has a project file, then the graph entry for its UUID is the [deps] map of the project file, which is considered to be empty if the section is absent.As an example, suppose a package directory has the following structure and content:Aardvark/\n    src/Aardvark.jl:\n        import Bobcat\n        import Cobra\n\nBobcat/\n    Project.toml:\n        [deps]\n        Cobra = \"4725e24d-f727-424b-bca0-c4307a3456fa\"\n        Dingo = \"7a7925be-828c-4418-bbeb-bac8dfc843bc\"\n\n    src/Bobcat.jl:\n        import Cobra\n        import Dingo\n\nCobra/\n    Project.toml:\n        uuid = \"4725e24d-f727-424b-bca0-c4307a3456fa\"\n        [deps]\n        Dingo = \"7a7925be-828c-4418-bbeb-bac8dfc843bc\"\n\n    src/Cobra.jl:\n        import Dingo\n\nDingo/\n    Project.toml:\n        uuid = \"7a7925be-828c-4418-bbeb-bac8dfc843bc\"\n\n    src/Dingo.jl:\n        # no importsHere is a corresponding roots structure, represented as a dictionary:roots = Dict(\n    :Aardvark => UUID(\"00000000-0000-0000-0000-000000000000\"), # no project file, nil UUID\n    :Bobcat   => UUID(\"85ad11c7-31f6-5d08-84db-0a4914d4cadf\"), # dummy UUID based on path\n    :Cobra    => UUID(\"4725e24d-f727-424b-bca0-c4307a3456fa\"), # UUID from project file\n    :Dingo    => UUID(\"7a7925be-828c-4418-bbeb-bac8dfc843bc\"), # UUID from project file\n)Here is the corresponding graph structure, represented as a dictionary:graph = Dict(\n    # Bobcat:\n    UUID(\"85ad11c7-31f6-5d08-84db-0a4914d4cadf\") => Dict(\n        :Cobra => UUID(\"4725e24d-f727-424b-bca0-c4307a3456fa\"),\n        :Dingo => UUID(\"7a7925be-828c-4418-bbeb-bac8dfc843bc\"),\n    ),\n    # Cobra:\n    UUID(\"4725e24d-f727-424b-bca0-c4307a3456fa\") => Dict(\n        :Dingo => UUID(\"7a7925be-828c-4418-bbeb-bac8dfc843bc\"),\n    ),\n    # Dingo:\n    UUID(\"7a7925be-828c-4418-bbeb-bac8dfc843bc\") => Dict(),\n)A few general rules to note:A package without a project file can depend on any top-level dependency, and since every package in a package directory is available at the top-level, it can import all packages in the environment.\nA package with a project file cannot depend on one without a project file since packages with project files can only load packages in graph and packages without project files do not appear in graph.\nA package with a project file but no explicit UUID can only be depended on by packages without project files since dummy UUIDs assigned to these packages are strictly internal.Observe the following specific instances of these rules in our example:Aardvark can import on any of Bobcat, Cobra or Dingo; it does import Bobcat and Cobra.\nBobcat can and does import both Cobra and Dingo, which both have project files with UUIDs and are declared as dependencies in Bobcat\'s [deps] section.\nBobcat cannot depend on Aardvark since Aardvark does not have a project file.\nCobra can and does import Dingo, which has a project file and UUID, and is declared as a dependency in Cobra\'s  [deps] section.\nCobra cannot depend on Aardvark or Bobcat since neither have real UUIDs.\nDingo cannot import anything because it has a project file without a [deps] section.The paths map in a package directory is simple: it maps subdirectory names to their corresponding entry-point paths. In other words, if the path to our example project directory is /home/me/animals then the paths map could be represented by this dictionary:paths = Dict(\n    (UUID(\"00000000-0000-0000-0000-000000000000\"), :Aardvark) =>\n        \"/home/me/AnimalPackages/Aardvark/src/Aardvark.jl\",\n    (UUID(\"85ad11c7-31f6-5d08-84db-0a4914d4cadf\"), :Bobcat) =>\n        \"/home/me/AnimalPackages/Bobcat/src/Bobcat.jl\",\n    (UUID(\"4725e24d-f727-424b-bca0-c4307a3456fa\"), :Cobra) =>\n        \"/home/me/AnimalPackages/Cobra/src/Cobra.jl\",\n    (UUID(\"7a7925be-828c-4418-bbeb-bac8dfc843bc\"), :Dingo) =>\n        \"/home/me/AnimalPackages/Dingo/src/Dingo.jl\",\n)Since all packages in a package directory environment are, by definition, subdirectories with the expected entry-point files, their paths map entries always have this form."
 },
 
 {
@@ -3157,7 +3173,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Code Loading",
     "title": "Environment stacks",
     "category": "section",
-    "text": "The third and final kind of environment is one that combines other environments by overlaying several of them, making the packages in each available in a single composite environment. These composite environments are called environment stacks. The Julia LOAD_PATH global defines an environment stack—the environment in which the Julia process operates. If you want your Julia process to have access only to the packages in one project or package directory, make it the only entry in LOAD_PATH. It is often quite useful, however, to have access to some of your favorite tools—standard libraries, profilers, debuggers, personal utilities, etc.—even if they are not dependencies of the project you\'re working on. By pushing an environment containing these tools onto the load path, you immediately have access to them in top-level code without needing to add them to your project.The mechanism for combining the roots, graph and paths data structures of the components of an environment stack is simple: they are simply merged as dictionaries, favoring earlier entries over later ones in the case of key collisions. In other words, if we have stack = [env₁, env₂, …] then we have:roots = reduce(merge, reverse([roots₁, roots₂, …]))\ngraph = reduce(merge, reverse([graph₁, graph₂, …]))\npaths = reduce(merge, reverse([paths₁, paths₂, …]))The subscripted rootsᵢ, graphᵢ and pathsᵢ variables correspond to the subscripted environments, envᵢ, contained stack. The reverse is present because merge favors the last argument rather than first when there are collisions between keys in its argument dictionaries. That\'s all there is to stacked environments. There are a couple of noteworthy features of this design:The primary environment—i.e. the first environment in a stack—is faithfully embedded in a stacked environment. The full dependency graph of the first environment in a stack is guaranteed to be included intact in the stacked environment including the same versions of all dependencies.\nPackages in non-primary environments can end up using incompatible versions of their dependencies even if their own environments are entirely compatible. This can happen when one of their dependencies is shadowed by a version in an earlier environment in the stack.Since the primary environment is typically the environment of a project you\'re working on, while environments later in the stack contain additional tools, this is the right tradeoff: it\'s better to break your dev tools but keep the project working. When such incompatibilities occur, you\'ll typically want to upgrade your dev tools to versions that are compatible with the main project."
+    "text": "The third and final kind of environment is one that combines other environments by overlaying several of them, making the packages in each available in a single composite environment. These composite environments are called environment stacks. The Julia LOAD_PATH global defines an environment stack—the environment in which the Julia process operates. If you want your Julia process to have access only to the packages in one project or package directory, make it the only entry in LOAD_PATH. It is often quite useful, however, to have access to some of your favorite tools—standard libraries, profilers, debuggers, personal utilities, etc.—even if they are not dependencies of the project you\'re working on. By adding an environment containing these tools to the load path, you immediately have access to them in top-level code without needing to add them to your project.The mechanism for combining the roots, graph and paths data structures of the components of an environment stack is simple: they are merged as dictionaries, favoring earlier entries over later ones in the case of key collisions. In other words, if we have stack = [env₁, env₂, …] then we have:roots = reduce(merge, reverse([roots₁, roots₂, …]))\ngraph = reduce(merge, reverse([graph₁, graph₂, …]))\npaths = reduce(merge, reverse([paths₁, paths₂, …]))The subscripted rootsᵢ, graphᵢ and pathsᵢ variables correspond to the subscripted environments, envᵢ, contained in stack. The reverse is present because merge favors the last argument rather than first when there are collisions between keys in its argument dictionaries. There are a couple of noteworthy features of this design:The primary environment—i.e. the first environment in a stack—is faithfully embedded in a stacked environment. The full dependency graph of the first environment in a stack is guaranteed to be included intact in the stacked environment including the same versions of all dependencies.\nPackages in non-primary environments can end up using incompatible versions of their dependencies even if their own environments are entirely compatible. This can happen when one of their dependencies is shadowed by a version in an earlier environment in the stack (either by graph or path, or both).Since the primary environment is typically the environment of a project you\'re working on, while environments later in the stack contain additional tools, this is the right trade-off: it\'s better to break your development tools but keep the project working. When such incompatibilities occur, you\'ll typically want to upgrade your dev tools to versions that are compatible with the main project."
 },
 
 {
@@ -3165,7 +3181,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Code Loading",
     "title": "Conclusion",
     "category": "section",
-    "text": "Federated package management and precise software reproducibility are difficult but worthy goals in a package system. In combination, these goals lead to a more complex package loading mechanism than most dynamic languages have, but it also yields scalability and reproducibility that is more commonly associated with static languages. Fortunately, most Julia users can remain oblivious to the technical details of code loading and simply use the built-in package manager to add a package X to the appropriate project and manifest files and then write import X to load X without a further thought."
+    "text": "Federated package management and precise software reproducibility are difficult but worthy goals in a package system. In combination, these goals lead to a more complex package loading mechanism than most dynamic languages have, but it also yields scalability and reproducibility that is more commonly associated with static languages. Typically, Julia users should be able to use the built-in package manager to manage their projects without needing a precise understanding of these interactions. A call to Pkg.add(\"X\") will add to the appropriate project and manifest files, selected via Pkg.activate(\"Y\"), so that a future call to import X will load X without further thought."
 },
 
 {
@@ -3981,7 +3997,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Frequently Asked Questions",
     "title": "Why do concurrent writes to the same stream result in inter-mixed output?",
     "category": "section",
-    "text": "While the streaming I/O API is synchronous, the underlying implementation is fully asynchronous.Consider the printed output from the following:julia> @sync for i in 1:3\n           @async write(stdout, string(i), \" Foo \", \" Bar \")\n       end\n123 Foo  Foo  Foo  Bar  Bar  BarThis is happening because, while the write call is synchronous, the writing of each argument yields to other tasks while waiting for that part of the I/O to complete.print and println \"lock\" the stream during a call. Consequently changing write to println in the above example results in:julia> @sync for i in 1:3\n           @async println(stdout, string(i), \" Foo \", \" Bar \")\n       end\n1 Foo  Bar\n2 Foo  Bar\n3 Foo  BarYou can lock your writes with a ReentrantLock like this:julia> l = ReentrantLock()\nReentrantLock(nothing, Condition(Any[]), 0)\n\njulia> @sync for i in 1:3\n           @async begin\n               lock(l)\n               try\n                   write(stdout, string(i), \" Foo \", \" Bar \")\n               finally\n                   unlock(l)\n               end\n           end\n       end\n1 Foo  Bar 2 Foo  Bar 3 Foo  Bar"
+    "text": "While the streaming I/O API is synchronous, the underlying implementation is fully asynchronous.Consider the printed output from the following:julia> @sync for i in 1:3\n           @async write(stdout, string(i), \" Foo \", \" Bar \")\n       end\n123 Foo  Foo  Foo  Bar  Bar  BarThis is happening because, while the write call is synchronous, the writing of each argument yields to other tasks while waiting for that part of the I/O to complete.print and println \"lock\" the stream during a call. Consequently changing write to println in the above example results in:julia> @sync for i in 1:3\n           @async println(stdout, string(i), \" Foo \", \" Bar \")\n       end\n1 Foo  Bar\n2 Foo  Bar\n3 Foo  BarYou can lock your writes with a ReentrantLock like this:julia> l = ReentrantLock();\n\njulia> @sync for i in 1:3\n           @async begin\n               lock(l)\n               try\n                   write(stdout, string(i), \" Foo \", \" Bar \")\n               finally\n                   unlock(l)\n               end\n           end\n       end\n1 Foo  Bar 2 Foo  Bar 3 Foo  Bar"
 },
 
 {
@@ -5637,7 +5653,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Essentials",
     "title": "Base.Libc.getpid",
     "category": "function",
-    "text": "getpid() -> Int32\n\nGet Julia\'s process ID.\n\n\n\n\n\ngetpid(process) -> Int32\n\nGet the child process ID, if it still exists.\n\ncompat: Julia 1.1\nThis function requires at least Julia 1.1.\n\n\n\n\n\n"
+    "text": "getpid(process) -> Int32\n\nGet the child process ID, if it still exists.\n\ncompat: Julia 1.1\nThis function requires at least Julia 1.1.\n\n\n\n\n\ngetpid() -> Int32\n\nGet Julia\'s process ID.\n\n\n\n\n\n"
 },
 
 {
@@ -6493,7 +6509,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Collections and Data Structures",
     "title": "Base.isempty",
     "category": "function",
-    "text": "isempty(collection) -> Bool\n\nDetermine whether a collection is empty (has no elements).\n\nExamples\n\njulia> isempty([])\ntrue\n\njulia> isempty([1 2 3])\nfalse\n\n\n\n\n\n"
+    "text": "isempty(collection) -> Bool\n\nDetermine whether a collection is empty (has no elements).\n\nExamples\n\njulia> isempty([])\ntrue\n\njulia> isempty([1 2 3])\nfalse\n\n\n\n\n\nisempty(condition)\n\nReturn true if no tasks are waiting on the condition, false otherwise.\n\n\n\n\n\n"
 },
 
 {
@@ -6637,7 +6653,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Collections and Data Structures",
     "title": "Base.extrema",
     "category": "function",
-    "text": "extrema(itr) -> Tuple\n\nCompute both the minimum and maximum element in a single pass, and return them as a 2-tuple.\n\nExamples\n\njulia> extrema(2:10)\n(2, 10)\n\njulia> extrema([9,pi,4.5])\n(3.141592653589793, 9.0)\n\n\n\n\n\nextrema(A::AbstractArray; dims) -> Array{Tuple}\n\nCompute the minimum and maximum elements of an array over the given dimensions.\n\nExamples\n\njulia> A = reshape(Vector(1:2:16), (2,2,2))\n2×2×2 Array{Int64,3}:\n[:, :, 1] =\n 1  5\n 3  7\n\n[:, :, 2] =\n  9  13\n 11  15\n\njulia> extrema(A, dims = (1,2))\n1×1×2 Array{Tuple{Int64,Int64},3}:\n[:, :, 1] =\n (1, 7)\n\n[:, :, 2] =\n (9, 15)\n\n\n\n\n\n"
+    "text": "extrema(itr) -> Tuple\n\nCompute both the minimum and maximum element in a single pass, and return them as a 2-tuple.\n\nExamples\n\njulia> extrema(2:10)\n(2, 10)\n\njulia> extrema([9,pi,4.5])\n(3.141592653589793, 9.0)\n\n\n\n\n\nextrema(f, itr) -> Tuple\n\nCompute both the minimum and maximum of f applied to each element in itr and return them as a 2-tuple. Only one pass is made over itr.\n\ncompat: Julia 1.2\nThis method requires Julia 1.2 or later.\n\nExamples\n\njulia> extrema(sin, 0:π)\n(0.0, 0.9092974268256817)\n\n\n\n\n\nextrema(A::AbstractArray; dims) -> Array{Tuple}\n\nCompute the minimum and maximum elements of an array over the given dimensions.\n\nExamples\n\njulia> A = reshape(Vector(1:2:16), (2,2,2))\n2×2×2 Array{Int64,3}:\n[:, :, 1] =\n 1  5\n 3  7\n\n[:, :, 2] =\n  9  13\n 11  15\n\njulia> extrema(A, dims = (1,2))\n1×1×2 Array{Tuple{Int64,Int64},3}:\n[:, :, 1] =\n (1, 7)\n\n[:, :, 2] =\n (9, 15)\n\n\n\n\n\nextrema(f, A::AbstractArray; dims) -> Array{Tuple}\n\nCompute the minimum and maximum of f applied to each element in the given dimensions of A.\n\ncompat: Julia 1.2\nThis method requires Julia 1.2 or later.\n\n\n\n\n\n"
 },
 
 {
@@ -7405,7 +7421,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Mathematics",
     "title": "Base.:+",
     "category": "function",
-    "text": "dt::Date + t::Time -> DateTime\n\nThe addition of a Date with a Time produces a DateTime. The hour, minute, second, and millisecond parts of the Time are used along with the year, month, and day of the Date to create the new DateTime. Non-zero microseconds or nanoseconds in the Time type will result in an InexactError being thrown.\n\n\n\n\n\n+(x, y...)\n\nAddition operator. x+y+z+... calls this function with all arguments, i.e. +(x, y, z, ...).\n\nExamples\n\njulia> 1 + 20 + 4\n25\n\njulia> +(1, 20, 4)\n25\n\n\n\n\n\n"
+    "text": "+(x, y...)\n\nAddition operator. x+y+z+... calls this function with all arguments, i.e. +(x, y, z, ...).\n\nExamples\n\njulia> 1 + 20 + 4\n25\n\njulia> +(1, 20, 4)\n25\n\n\n\n\n\ndt::Date + t::Time -> DateTime\n\nThe addition of a Date with a Time produces a DateTime. The hour, minute, second, and millisecond parts of the Time are used along with the year, month, and day of the Date to create the new DateTime. Non-zero microseconds or nanoseconds in the Time type will result in an InexactError being thrown.\n\n\n\n\n\n"
 },
 
 {
@@ -9749,7 +9765,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Strings",
     "title": "Base.isvalid",
     "category": "method",
-    "text": "isvalid(value) -> Bool\n\nReturns true if the given value is valid for its type, which currently can be either AbstractChar or String.\n\nExamples\n\njulia> isvalid(Char(0xd800))\nfalse\n\njulia> isvalid(Char(0xd799))\ntrue\n\n\n\n\n\n"
+    "text": "isvalid(value) -> Bool\n\nReturns true if the given value is valid for its type, which currently can be either AbstractChar or String or SubString{String}.\n\nExamples\n\njulia> isvalid(Char(0xd800))\nfalse\n\njulia> isvalid(SubString(String(UInt8[0xfe,0x80,0x80,0x80,0x80,0x80]),1,2))\nfalse\n\njulia> isvalid(Char(0xd799))\ntrue\n\n\n\n\n\n"
 },
 
 {
@@ -9757,7 +9773,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Strings",
     "title": "Base.isvalid",
     "category": "method",
-    "text": "isvalid(T, value) -> Bool\n\nReturns true if the given value is valid for that type. Types currently can be either AbstractChar or String. Values for AbstractChar can be of type AbstractChar or UInt32. Values for String can be of that type, or Vector{UInt8}.\n\nExamples\n\njulia> isvalid(Char, 0xd800)\nfalse\n\njulia> isvalid(Char, 0xd799)\ntrue\n\n\n\n\n\n"
+    "text": "isvalid(T, value) -> Bool\n\nReturns true if the given value is valid for that type. Types currently can be either AbstractChar or String. Values for AbstractChar can be of type AbstractChar or UInt32. Values for String can be of that type, or Vector{UInt8} or SubString{String}.\n\nExamples\n\njulia> isvalid(Char, 0xd800)\nfalse\n\njulia> isvalid(String, SubString(\"thisisvalid\",1,5))\ntrue\n\njulia> isvalid(Char, 0xd799)\ntrue\n\n\n\n\n\n"
 },
 
 {
@@ -11233,6 +11249,54 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
+    "location": "base/parallel/#Base.@task",
+    "page": "Tasks",
+    "title": "Base.@task",
+    "category": "macro",
+    "text": "@task\n\nWrap an expression in a Task without executing it, and return the Task. This only creates a task, and does not run it.\n\nExamples\n\njulia> a1() = sum(i for i in 1:1000);\n\njulia> b = @task a1();\n\njulia> istaskstarted(b)\nfalse\n\njulia> schedule(b);\n\njulia> yield();\n\njulia> istaskdone(b)\ntrue\n\n\n\n\n\n"
+},
+
+{
+    "location": "base/parallel/#Base.@async",
+    "page": "Tasks",
+    "title": "Base.@async",
+    "category": "macro",
+    "text": "@async\n\nWrap an expression in a Task and add it to the local machine\'s scheduler queue.\n\n\n\n\n\n"
+},
+
+{
+    "location": "base/parallel/#Base.@sync",
+    "page": "Tasks",
+    "title": "Base.@sync",
+    "category": "macro",
+    "text": "@sync\n\nWait until all lexically-enclosed uses of @async, @spawn, @spawnat and @distributed are complete. All exceptions thrown by enclosed async operations are collected and thrown as a CompositeException.\n\n\n\n\n\n"
+},
+
+{
+    "location": "base/parallel/#Base.asyncmap",
+    "page": "Tasks",
+    "title": "Base.asyncmap",
+    "category": "function",
+    "text": "asyncmap(f, c...; ntasks=0, batch_size=nothing)\n\nUses multiple concurrent tasks to map f over a collection (or multiple equal length collections). For multiple collection arguments, f is applied elementwise.\n\nntasks specifies the number of tasks to run concurrently. Depending on the length of the collections, if ntasks is unspecified, up to 100 tasks will be used for concurrent mapping.\n\nntasks can also be specified as a zero-arg function. In this case, the number of tasks to run in parallel is checked before processing every element and a new task started if the value of ntasks_func is less than the current number of tasks.\n\nIf batch_size is specified, the collection is processed in batch mode. f must then be a function that must accept a Vector of argument tuples and must return a vector of results. The input vector will have a length of batch_size or less.\n\nThe following examples highlight execution in different tasks by returning the objectid of the tasks in which the mapping function is executed.\n\nFirst, with ntasks undefined, each element is processed in a different task.\n\njulia> tskoid() = objectid(current_task());\n\njulia> asyncmap(x->tskoid(), 1:5)\n5-element Array{UInt64,1}:\n 0x6e15e66c75c75853\n 0x440f8819a1baa682\n 0x9fb3eeadd0c83985\n 0xebd3e35fe90d4050\n 0x29efc93edce2b961\n\njulia> length(unique(asyncmap(x->tskoid(), 1:5)))\n5\n\nWith ntasks=2 all elements are processed in 2 tasks.\n\njulia> asyncmap(x->tskoid(), 1:5; ntasks=2)\n5-element Array{UInt64,1}:\n 0x027ab1680df7ae94\n 0xa23d2f80cd7cf157\n 0x027ab1680df7ae94\n 0xa23d2f80cd7cf157\n 0x027ab1680df7ae94\n\njulia> length(unique(asyncmap(x->tskoid(), 1:5; ntasks=2)))\n2\n\nWith batch_size defined, the mapping function needs to be changed to accept an array of argument tuples and return an array of results. map is used in the modified mapping function to achieve this.\n\njulia> batch_func(input) = map(x->string(\"args_tuple: \", x, \", element_val: \", x[1], \", task: \", tskoid()), input)\nbatch_func (generic function with 1 method)\n\njulia> asyncmap(batch_func, 1:5; ntasks=2, batch_size=2)\n5-element Array{String,1}:\n \"args_tuple: (1,), element_val: 1, task: 9118321258196414413\"\n \"args_tuple: (2,), element_val: 2, task: 4904288162898683522\"\n \"args_tuple: (3,), element_val: 3, task: 9118321258196414413\"\n \"args_tuple: (4,), element_val: 4, task: 4904288162898683522\"\n \"args_tuple: (5,), element_val: 5, task: 9118321258196414413\"\n\nnote: Note\nCurrently, all tasks in Julia are executed in a single OS thread co-operatively. Consequently, asyncmap is beneficial only when the mapping function involves any I/O - disk, network, remote worker invocation, etc.\n\n\n\n\n\n"
+},
+
+{
+    "location": "base/parallel/#Base.asyncmap!",
+    "page": "Tasks",
+    "title": "Base.asyncmap!",
+    "category": "function",
+    "text": "asyncmap!(f, results, c...; ntasks=0, batch_size=nothing)\n\nLike asyncmap, but stores output in results rather than returning a collection.\n\n\n\n\n\n"
+},
+
+{
+    "location": "base/parallel/#Base.fetch-Tuple{Task}",
+    "page": "Tasks",
+    "title": "Base.fetch",
+    "category": "method",
+    "text": "fetch(t::Task)\n\nWait for a Task to finish, then return its result value. If the task fails with an exception, the exception is propagated (re-thrown in the task that called fetch).\n\n\n\n\n\n"
+},
+
+{
     "location": "base/parallel/#Base.current_task",
     "page": "Tasks",
     "title": "Base.current_task",
@@ -11254,22 +11318,6 @@ var documenterSearchIndex = {"docs": [
     "title": "Base.istaskstarted",
     "category": "function",
     "text": "istaskstarted(t::Task) -> Bool\n\nDetermine whether a task has started executing.\n\nExamples\n\njulia> a3() = sum(i for i in 1:1000);\n\njulia> b = Task(a3);\n\njulia> istaskstarted(b)\nfalse\n\n\n\n\n\n"
-},
-
-{
-    "location": "base/parallel/#Base.yield",
-    "page": "Tasks",
-    "title": "Base.yield",
-    "category": "function",
-    "text": "yield()\n\nSwitch to the scheduler to allow another scheduled task to run. A task that calls this function is still runnable, and will be restarted immediately if there are no other runnable tasks.\n\n\n\n\n\nyield(t::Task, arg = nothing)\n\nA fast, unfair-scheduling version of schedule(t, arg); yield() which immediately yields to t before calling the scheduler.\n\n\n\n\n\n"
-},
-
-{
-    "location": "base/parallel/#Base.yieldto",
-    "page": "Tasks",
-    "title": "Base.yieldto",
-    "category": "function",
-    "text": "yieldto(t::Task, arg = nothing)\n\nSwitch to the given task. The first time a task is switched to, the task\'s function is called with no arguments. On subsequent switches, arg is returned from the task\'s last call to yieldto. This is a low-level call that only switches tasks, not considering states or scheduling in any way. Its use is discouraged.\n\n\n\n\n\n"
 },
 
 {
@@ -11297,11 +11345,67 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
+    "location": "base/parallel/#Tasks-1",
+    "page": "Tasks",
+    "title": "Tasks",
+    "category": "section",
+    "text": "Core.Task\nBase.@task\nBase.@async\nBase.@sync\nBase.asyncmap\nBase.asyncmap!\nBase.fetch(t::Task)\nBase.current_task\nBase.istaskdone\nBase.istaskstarted\nBase.task_local_storage(::Any)\nBase.task_local_storage(::Any, ::Any)\nBase.task_local_storage(::Function, ::Any, ::Any)"
+},
+
+{
+    "location": "base/parallel/#Base.yield",
+    "page": "Tasks",
+    "title": "Base.yield",
+    "category": "function",
+    "text": "yield()\n\nSwitch to the scheduler to allow another scheduled task to run. A task that calls this function is still runnable, and will be restarted immediately if there are no other runnable tasks.\n\n\n\n\n\nyield(t::Task, arg = nothing)\n\nA fast, unfair-scheduling version of schedule(t, arg); yield() which immediately yields to t before calling the scheduler.\n\n\n\n\n\n"
+},
+
+{
+    "location": "base/parallel/#Base.yieldto",
+    "page": "Tasks",
+    "title": "Base.yieldto",
+    "category": "function",
+    "text": "yieldto(t::Task, arg = nothing)\n\nSwitch to the given task. The first time a task is switched to, the task\'s function is called with no arguments. On subsequent switches, arg is returned from the task\'s last call to yieldto. This is a low-level call that only switches tasks, not considering states or scheduling in any way. Its use is discouraged.\n\n\n\n\n\n"
+},
+
+{
+    "location": "base/parallel/#Base.sleep",
+    "page": "Tasks",
+    "title": "Base.sleep",
+    "category": "function",
+    "text": "sleep(seconds)\n\nBlock the current task for a specified number of seconds. The minimum sleep time is 1 millisecond or input of 0.001.\n\n\n\n\n\n"
+},
+
+{
+    "location": "base/parallel/#Base.wait",
+    "page": "Tasks",
+    "title": "Base.wait",
+    "category": "function",
+    "text": "wait([x])\n\nBlock the current task until some event occurs, depending on the type of the argument:\n\nChannel: Wait for a value to be appended to the channel.\nCondition: Wait for notify on a condition.\nProcess: Wait for a process or process chain to exit. The exitcode field of a process can be used to determine success or failure.\nTask: Wait for a Task to finish. If the task fails with an exception, the exception is propagated (re-thrown in the task that called wait).\nRawFD: Wait for changes on a file descriptor (see the FileWatching package).\n\nIf no argument is passed, the task blocks for an undefined period. A task can only be restarted by an explicit call to schedule or yieldto.\n\nOften wait is called within a while loop to ensure a waited-for condition is met before proceeding.\n\n\n\n\n\nwait(r::Future)\n\nWait for a value to become available for the specified Future.\n\n\n\n\n\nwait(r::RemoteChannel, args...)\n\nWait for a value to become available on the specified RemoteChannel.\n\n\n\n\n\nSpecial note for Threads.Condition:\n\nThe caller must be holding the lock that owns c before calling this method. The calling task will be blocked until some other task wakes it, usually by calling notify` on the same Condition object. The lock will be atomically released when blocking (even if it was locked recursively), and will be reacquired before returning.\n\n\n\n\n\n"
+},
+
+{
+    "location": "base/parallel/#Base.timedwait",
+    "page": "Tasks",
+    "title": "Base.timedwait",
+    "category": "function",
+    "text": "timedwait(testcb::Function, secs::Float64; pollint::Float64=0.1)\n\nWaits until testcb returns true or for secs seconds, whichever is earlier. testcb is polled every pollint seconds.\n\n\n\n\n\n"
+},
+
+{
     "location": "base/parallel/#Base.Condition",
     "page": "Tasks",
     "title": "Base.Condition",
     "category": "type",
-    "text": "Condition()\n\nCreate an edge-triggered event source that tasks can wait for. Tasks that call wait on a Condition are suspended and queued. Tasks are woken up when notify is later called on the Condition. Edge triggering means that only tasks waiting at the time notify is called can be woken up. For level-triggered notifications, you must keep extra state to keep track of whether a notification has happened. The Channel type does this, and so can be used for level-triggered events.\n\n\n\n\n\n"
+    "text": "Condition()\n\nCreate an edge-triggered event source that tasks can wait for. Tasks that call wait on a Condition are suspended and queued. Tasks are woken up when notify is later called on the Condition. Edge triggering means that only tasks waiting at the time notify is called can be woken up. For level-triggered notifications, you must keep extra state to keep track of whether a notification has happened. The Channel and Event types do this, and can be used for level-triggered events.\n\nThis object is NOT thread-safe. See Threads.Condition for a thread-safe version.\n\n\n\n\n\n"
+},
+
+{
+    "location": "base/parallel/#Base.Threads.Condition",
+    "page": "Tasks",
+    "title": "Base.Threads.Condition",
+    "category": "type",
+    "text": "Threads.Condition([lock])\n\nA thread-safe version of Base.Condition.\n\ncompat: Julia 1.2\nThis functionality requires at least Julia 1.2.\n\n\n\n\n\n"
 },
 
 {
@@ -11321,19 +11425,83 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "base/parallel/#Base.@task",
+    "location": "base/parallel/#Base.Event",
     "page": "Tasks",
-    "title": "Base.@task",
-    "category": "macro",
-    "text": "@task\n\nWrap an expression in a Task without executing it, and return the Task. This only creates a task, and does not run it.\n\nExamples\n\njulia> a1() = sum(i for i in 1:1000);\n\njulia> b = @task a1();\n\njulia> istaskstarted(b)\nfalse\n\njulia> schedule(b);\n\njulia> yield();\n\njulia> istaskdone(b)\ntrue\n\n\n\n\n\n"
+    "title": "Base.Event",
+    "category": "type",
+    "text": "Event()\n\nCreate a level-triggered event source. Tasks that call wait on an Event are suspended and queued until notify is called on the Event. After notify is called, the Event remains in a signaled state and tasks will no longer block when waiting for it.\n\ncompat: Julia 1.1\nThis functionality requires at least Julia 1.1.\n\n\n\n\n\n"
 },
 
 {
-    "location": "base/parallel/#Base.sleep",
+    "location": "base/parallel/#Base.Semaphore",
     "page": "Tasks",
-    "title": "Base.sleep",
+    "title": "Base.Semaphore",
+    "category": "type",
+    "text": "Semaphore(sem_size)\n\nCreate a counting semaphore that allows at most sem_size acquires to be in use at any time. Each acquire must be matched with a release.\n\n\n\n\n\n"
+},
+
+{
+    "location": "base/parallel/#Base.acquire",
+    "page": "Tasks",
+    "title": "Base.acquire",
     "category": "function",
-    "text": "sleep(seconds)\n\nBlock the current task for a specified number of seconds. The minimum sleep time is 1 millisecond or input of 0.001.\n\n\n\n\n\n"
+    "text": "acquire(s::Semaphore)\n\nWait for one of the sem_size permits to be available, blocking until one can be acquired.\n\n\n\n\n\n"
+},
+
+{
+    "location": "base/parallel/#Base.release",
+    "page": "Tasks",
+    "title": "Base.release",
+    "category": "function",
+    "text": "release(s::Semaphore)\n\nReturn one permit to the pool, possibly allowing another task to acquire it and resume execution.\n\n\n\n\n\n"
+},
+
+{
+    "location": "base/parallel/#Base.AbstractLock",
+    "page": "Tasks",
+    "title": "Base.AbstractLock",
+    "category": "type",
+    "text": "AbstractLock\n\nAbstract supertype describing types that implement the synchronization primitives: lock, trylock, unlock, and islocked.\n\n\n\n\n\n"
+},
+
+{
+    "location": "base/parallel/#Base.lock",
+    "page": "Tasks",
+    "title": "Base.lock",
+    "category": "function",
+    "text": "lock(lock)\n\nAcquire the lock when it becomes available. If the lock is already locked by a different task/thread, wait for it to become available.\n\nEach lock must be matched by an unlock.\n\n\n\n\n\n"
+},
+
+{
+    "location": "base/parallel/#Base.unlock",
+    "page": "Tasks",
+    "title": "Base.unlock",
+    "category": "function",
+    "text": "unlock(lock)\n\nReleases ownership of the lock.\n\nIf this is a recursive lock which has been acquired before, decrement an internal counter and return immediately.\n\n\n\n\n\n"
+},
+
+{
+    "location": "base/parallel/#Base.trylock",
+    "page": "Tasks",
+    "title": "Base.trylock",
+    "category": "function",
+    "text": "trylock(lock) -> Success (Boolean)\n\nAcquire the lock if it is available, and return true if successful. If the lock is already locked by a different task/thread, return false.\n\nEach successful trylock must be matched by an unlock.\n\n\n\n\n\n"
+},
+
+{
+    "location": "base/parallel/#Base.islocked",
+    "page": "Tasks",
+    "title": "Base.islocked",
+    "category": "function",
+    "text": "islocked(lock) -> Status (Boolean)\n\nCheck whether the lock is held by any task/thread. This should not be used for synchronization (see instead trylock).\n\n\n\n\n\n"
+},
+
+{
+    "location": "base/parallel/#Base.ReentrantLock",
+    "page": "Tasks",
+    "title": "Base.ReentrantLock",
+    "category": "type",
+    "text": "ReentrantLock()\n\nCreates a re-entrant lock for synchronizing Tasks. The same task can acquire the lock as many times as required. Each lock must be matched with an unlock.\n\n\n\n\n\n"
 },
 
 {
@@ -11393,27 +11561,11 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "base/parallel/#Base.asyncmap",
+    "location": "base/parallel/#Scheduling-1",
     "page": "Tasks",
-    "title": "Base.asyncmap",
-    "category": "function",
-    "text": "asyncmap(f, c...; ntasks=0, batch_size=nothing)\n\nUses multiple concurrent tasks to map f over a collection (or multiple equal length collections). For multiple collection arguments, f is applied elementwise.\n\nntasks specifies the number of tasks to run concurrently. Depending on the length of the collections, if ntasks is unspecified, up to 100 tasks will be used for concurrent mapping.\n\nntasks can also be specified as a zero-arg function. In this case, the number of tasks to run in parallel is checked before processing every element and a new task started if the value of ntasks_func is less than the current number of tasks.\n\nIf batch_size is specified, the collection is processed in batch mode. f must then be a function that must accept a Vector of argument tuples and must return a vector of results. The input vector will have a length of batch_size or less.\n\nThe following examples highlight execution in different tasks by returning the objectid of the tasks in which the mapping function is executed.\n\nFirst, with ntasks undefined, each element is processed in a different task.\n\njulia> tskoid() = objectid(current_task());\n\njulia> asyncmap(x->tskoid(), 1:5)\n5-element Array{UInt64,1}:\n 0x6e15e66c75c75853\n 0x440f8819a1baa682\n 0x9fb3eeadd0c83985\n 0xebd3e35fe90d4050\n 0x29efc93edce2b961\n\njulia> length(unique(asyncmap(x->tskoid(), 1:5)))\n5\n\nWith ntasks=2 all elements are processed in 2 tasks.\n\njulia> asyncmap(x->tskoid(), 1:5; ntasks=2)\n5-element Array{UInt64,1}:\n 0x027ab1680df7ae94\n 0xa23d2f80cd7cf157\n 0x027ab1680df7ae94\n 0xa23d2f80cd7cf157\n 0x027ab1680df7ae94\n\njulia> length(unique(asyncmap(x->tskoid(), 1:5; ntasks=2)))\n2\n\nWith batch_size defined, the mapping function needs to be changed to accept an array of argument tuples and return an array of results. map is used in the modified mapping function to achieve this.\n\njulia> batch_func(input) = map(x->string(\"args_tuple: \", x, \", element_val: \", x[1], \", task: \", tskoid()), input)\nbatch_func (generic function with 1 method)\n\njulia> asyncmap(batch_func, 1:5; ntasks=2, batch_size=2)\n5-element Array{String,1}:\n \"args_tuple: (1,), element_val: 1, task: 9118321258196414413\"\n \"args_tuple: (2,), element_val: 2, task: 4904288162898683522\"\n \"args_tuple: (3,), element_val: 3, task: 9118321258196414413\"\n \"args_tuple: (4,), element_val: 4, task: 4904288162898683522\"\n \"args_tuple: (5,), element_val: 5, task: 9118321258196414413\"\n\nnote: Note\nCurrently, all tasks in Julia are executed in a single OS thread co-operatively. Consequently, asyncmap is beneficial only when the mapping function involves any I/O - disk, network, remote worker invocation, etc.\n\n\n\n\n\n"
-},
-
-{
-    "location": "base/parallel/#Base.asyncmap!",
-    "page": "Tasks",
-    "title": "Base.asyncmap!",
-    "category": "function",
-    "text": "asyncmap!(f, results, c...; ntasks=0, batch_size=nothing)\n\nLike asyncmap, but stores output in results rather than returning a collection.\n\n\n\n\n\n"
-},
-
-{
-    "location": "base/parallel/#Tasks-1",
-    "page": "Tasks",
-    "title": "Tasks",
+    "title": "Scheduling",
     "category": "section",
-    "text": "Core.Task\nBase.current_task\nBase.istaskdone\nBase.istaskstarted\nBase.yield\nBase.yieldto\nBase.task_local_storage(::Any)\nBase.task_local_storage(::Any, ::Any)\nBase.task_local_storage(::Function, ::Any, ::Any)\nBase.Condition\nBase.notify\nBase.schedule\nBase.@task\nBase.sleep\nBase.Channel\nBase.put!(::Channel, ::Any)\nBase.take!(::Channel)\nBase.isready(::Channel)\nBase.fetch(::Channel)\nBase.close(::Channel)\nBase.bind(c::Channel, task::Task)\nBase.asyncmap\nBase.asyncmap!"
+    "text": "Base.yield\nBase.yieldto\nBase.sleep\nBase.wait\nBase.timedwait\n\nBase.Condition\nBase.Threads.Condition\nBase.notify\nBase.schedule\n\nBase.Event\n\nBase.Semaphore\nBase.acquire\nBase.release\n\nBase.AbstractLock\nBase.lock\nBase.unlock\nBase.trylock\nBase.islocked\nBase.ReentrantLock\n\nBase.Channel\nBase.put!(::Channel, ::Any)\nBase.take!(::Channel)\nBase.isready(::Channel)\nBase.fetch(::Channel)\nBase.close(::Channel)\nBase.bind(c::Channel, task::Task)"
 },
 
 {
@@ -11549,7 +11701,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Multi-Threading",
     "title": "Multi-Threading",
     "category": "section",
-    "text": "This experimental interface supports Julia\'s multi-threading capabilities. Types and functions described here might (and likely will) change in the future.Base.Threads.threadid\nBase.Threads.nthreads\nBase.Threads.@threads\nBase.Threads.Atomic\nBase.Threads.atomic_cas!\nBase.Threads.atomic_xchg!\nBase.Threads.atomic_add!\nBase.Threads.atomic_sub!\nBase.Threads.atomic_and!\nBase.Threads.atomic_nand!\nBase.Threads.atomic_or!\nBase.Threads.atomic_xor!\nBase.Threads.atomic_max!\nBase.Threads.atomic_min!\nBase.Threads.atomic_fence"
+    "text": "This experimental interface supports Julia\'s multi-threading capabilities. Types and functions described here might (and likely will) change in the future.Base.Threads.threadid\nBase.Threads.nthreads\nBase.Threads.@threadsBase.Threads.Atomic\nBase.Threads.atomic_cas!\nBase.Threads.atomic_xchg!\nBase.Threads.atomic_add!\nBase.Threads.atomic_sub!\nBase.Threads.atomic_and!\nBase.Threads.atomic_nand!\nBase.Threads.atomic_or!\nBase.Threads.atomic_xor!\nBase.Threads.atomic_max!\nBase.Threads.atomic_min!\nBase.Threads.atomic_fence"
 },
 
 {
@@ -11569,54 +11721,6 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "base/multi-threading/#Base.Threads.AbstractLock",
-    "page": "Multi-Threading",
-    "title": "Base.Threads.AbstractLock",
-    "category": "type",
-    "text": "AbstractLock\n\nAbstract supertype describing types that implement the thread-safe synchronization primitives: lock, trylock, unlock, and islocked.\n\n\n\n\n\n"
-},
-
-{
-    "location": "base/multi-threading/#Base.lock",
-    "page": "Multi-Threading",
-    "title": "Base.lock",
-    "category": "function",
-    "text": "lock(lock)\n\nAcquire the lock when it becomes available. If the lock is already locked by a different task/thread, wait for it to become available.\n\nEach lock must be matched by an unlock.\n\n\n\n\n\n"
-},
-
-{
-    "location": "base/multi-threading/#Base.unlock",
-    "page": "Multi-Threading",
-    "title": "Base.unlock",
-    "category": "function",
-    "text": "unlock(lock)\n\nReleases ownership of the lock.\n\nIf this is a recursive lock which has been acquired before, decrement an internal counter and return immediately.\n\n\n\n\n\n"
-},
-
-{
-    "location": "base/multi-threading/#Base.trylock",
-    "page": "Multi-Threading",
-    "title": "Base.trylock",
-    "category": "function",
-    "text": "trylock(lock) -> Success (Boolean)\n\nAcquire the lock if it is available, and return true if successful. If the lock is already locked by a different task/thread, return false.\n\nEach successful trylock must be matched by an unlock.\n\n\n\n\n\n"
-},
-
-{
-    "location": "base/multi-threading/#Base.islocked",
-    "page": "Multi-Threading",
-    "title": "Base.islocked",
-    "category": "function",
-    "text": "islocked(lock) -> Status (Boolean)\n\nCheck whether the lock is held by any task/thread. This should not be used for synchronization (see instead trylock).\n\n\n\n\n\n"
-},
-
-{
-    "location": "base/multi-threading/#Base.ReentrantLock",
-    "page": "Multi-Threading",
-    "title": "Base.ReentrantLock",
-    "category": "type",
-    "text": "ReentrantLock()\n\nCreates a reentrant lock for synchronizing Tasks. The same task can acquire the lock as many times as required. Each lock must be matched with an unlock.\n\nThis lock is NOT threadsafe. See Threads.Mutex for a threadsafe lock.\n\n\n\n\n\n"
-},
-
-{
     "location": "base/multi-threading/#Base.Threads.Mutex",
     "page": "Multi-Threading",
     "title": "Base.Threads.Mutex",
@@ -11629,47 +11733,15 @@ var documenterSearchIndex = {"docs": [
     "page": "Multi-Threading",
     "title": "Base.Threads.SpinLock",
     "category": "type",
-    "text": "SpinLock()\n\nCreate a non-reentrant lock. Recursive use will result in a deadlock. Each lock must be matched with an unlock.\n\nTest-and-test-and-set spin locks are quickest up to about 30ish contending threads. If you have more contention than that, perhaps a lock is the wrong way to synchronize.\n\nSee also RecursiveSpinLock for a version that permits recursion.\n\nSee also Mutex for a more efficient version on one core or if the lock may be held for a considerable length of time.\n\n\n\n\n\n"
+    "text": "SpinLock()\n\nCreate a non-reentrant lock. Recursive use will result in a deadlock. Each lock must be matched with an unlock.\n\nTest-and-test-and-set spin locks are quickest up to about 30ish contending threads. If you have more contention than that, perhaps a lock is the wrong way to synchronize.\n\nSee also Mutex for a more efficient version on one core or if the lock may be held for a considerable length of time.\n\n\n\n\n\n"
 },
 
 {
-    "location": "base/multi-threading/#Base.Threads.RecursiveSpinLock",
+    "location": "base/multi-threading/#Low-level-synchronization-primitives-1",
     "page": "Multi-Threading",
-    "title": "Base.Threads.RecursiveSpinLock",
-    "category": "type",
-    "text": "RecursiveSpinLock()\n\nCreates a reentrant lock. The same thread can acquire the lock as many times as required. Each lock must be matched with an unlock.\n\nSee also SpinLock for a slightly faster version.\n\nSee also Mutex for a more efficient version on one core or if the lock may be held for a considerable length of time.\n\n\n\n\n\n"
-},
-
-{
-    "location": "base/multi-threading/#Base.Semaphore",
-    "page": "Multi-Threading",
-    "title": "Base.Semaphore",
-    "category": "type",
-    "text": "Semaphore(sem_size)\n\nCreate a counting semaphore that allows at most sem_size acquires to be in use at any time. Each acquire must be matched with a release.\n\nThis construct is NOT threadsafe.\n\n\n\n\n\n"
-},
-
-{
-    "location": "base/multi-threading/#Base.acquire",
-    "page": "Multi-Threading",
-    "title": "Base.acquire",
-    "category": "function",
-    "text": "acquire(s::Semaphore)\n\nWait for one of the sem_size permits to be available, blocking until one can be acquired.\n\n\n\n\n\n"
-},
-
-{
-    "location": "base/multi-threading/#Base.release",
-    "page": "Multi-Threading",
-    "title": "Base.release",
-    "category": "function",
-    "text": "release(s::Semaphore)\n\nReturn one permit to the pool, possibly allowing another task to acquire it and resume execution.\n\n\n\n\n\n"
-},
-
-{
-    "location": "base/multi-threading/#Synchronization-Primitives-1",
-    "page": "Multi-Threading",
-    "title": "Synchronization Primitives",
+    "title": "Low-level synchronization primitives",
     "category": "section",
-    "text": "Base.Threads.AbstractLock\nBase.lock\nBase.unlock\nBase.trylock\nBase.islocked\nBase.ReentrantLock\nBase.Threads.Mutex\nBase.Threads.SpinLock\nBase.Threads.RecursiveSpinLock\nBase.Semaphore\nBase.acquire\nBase.release"
+    "text": "These building blocks are used to create the regular synchronization objects.Base.Threads.Mutex\nBase.Threads.SpinLock"
 },
 
 {
@@ -13365,7 +13437,7 @@ var documenterSearchIndex = {"docs": [
     "page": "C Interface",
     "title": "Base.copyto!",
     "category": "function",
-    "text": "copyto!(dest::AbstractMatrix, src::UniformScaling)\n\nCopies a UniformScaling onto a matrix.\n\ncompat: Julia 1.1\nIn Julia 1.0 this method only supported a square destination matrix. Julia 1.1. added support for a rectangular matrix.\n\n\n\n\n\ncopyto!(dest, do, src, so, N)\n\nCopy N elements from collection src starting at offset so, to array dest starting at offset do. Return dest.\n\n\n\n\n\ncopyto!(dest::AbstractArray, src) -> dest\n\nCopy all elements from collection src to array dest, whose length must be greater than or equal to the length n of src. The first n elements of dest are overwritten, the other elements are left untouched.\n\nExamples\n\njulia> x = [1., 0., 3., 0., 5.];\n\njulia> y = zeros(7);\n\njulia> copyto!(y, x);\n\njulia> y\n7-element Array{Float64,1}:\n 1.0\n 0.0\n 3.0\n 0.0\n 5.0\n 0.0\n 0.0\n\n\n\n\n\ncopyto!(dest, Rdest::CartesianIndices, src, Rsrc::CartesianIndices) -> dest\n\nCopy the block of src in the range of Rsrc to the block of dest in the range of Rdest. The sizes of the two regions must match.\n\n\n\n\n\n"
+    "text": "copyto!(dest, do, src, so, N)\n\nCopy N elements from collection src starting at offset so, to array dest starting at offset do. Return dest.\n\n\n\n\n\ncopyto!(dest::AbstractArray, src) -> dest\n\nCopy all elements from collection src to array dest, whose length must be greater than or equal to the length n of src. The first n elements of dest are overwritten, the other elements are left untouched.\n\nExamples\n\njulia> x = [1., 0., 3., 0., 5.];\n\njulia> y = zeros(7);\n\njulia> copyto!(y, x);\n\njulia> y\n7-element Array{Float64,1}:\n 1.0\n 0.0\n 3.0\n 0.0\n 5.0\n 0.0\n 0.0\n\n\n\n\n\ncopyto!(dest, Rdest::CartesianIndices, src, Rsrc::CartesianIndices) -> dest\n\nCopy the block of src in the range of Rsrc to the block of dest in the range of Rdest. The sizes of the two regions must match.\n\n\n\n\n\ncopyto!(dest::AbstractMatrix, src::UniformScaling)\n\nCopies a UniformScaling onto a matrix.\n\ncompat: Julia 1.1\nIn Julia 1.0 this method only supported a square destination matrix. Julia 1.1. added support for a rectangular matrix.\n\n\n\n\n\n"
 },
 
 {
@@ -15089,14 +15161,6 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/Distributed/#Base.wait",
-    "page": "Distributed Computing",
-    "title": "Base.wait",
-    "category": "function",
-    "text": "wait([x])\n\nBlock the current task until some event occurs, depending on the type of the argument:\n\nChannel: Wait for a value to be appended to the channel.\nCondition: Wait for notify on a condition.\nProcess: Wait for a process or process chain to exit. The exitcode field of a process can be used to determine success or failure.\nTask: Wait for a Task to finish. If the task fails with an exception, the exception is propagated (re-thrown in the task that called wait).\nRawFD: Wait for changes on a file descriptor (see the FileWatching package).\n\nIf no argument is passed, the task blocks for an undefined period. A task can only be restarted by an explicit call to schedule or yieldto.\n\nOften wait is called within a while loop to ensure a waited-for condition is met before proceeding.\n\n\n\n\n\nwait(r::Future)\n\nWait for a value to become available for the specified Future.\n\n\n\n\n\nwait(r::RemoteChannel, args...)\n\nWait for a value to become available on the specified RemoteChannel.\n\n\n\n\n\n"
-},
-
-{
     "location": "stdlib/Distributed/#Base.fetch-Tuple{Any}",
     "page": "Distributed Computing",
     "title": "Base.fetch",
@@ -15249,14 +15313,6 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "stdlib/Distributed/#Base.timedwait",
-    "page": "Distributed Computing",
-    "title": "Base.timedwait",
-    "category": "function",
-    "text": "timedwait(testcb::Function, secs::Float64; pollint::Float64=0.1)\n\nWaits until testcb returns true or for secs seconds, whichever is earlier. testcb is polled every pollint seconds.\n\n\n\n\n\n"
-},
-
-{
     "location": "stdlib/Distributed/#Distributed.@spawn",
     "page": "Distributed Computing",
     "title": "Distributed.@spawn",
@@ -15286,22 +15342,6 @@ var documenterSearchIndex = {"docs": [
     "title": "Distributed.@fetchfrom",
     "category": "macro",
     "text": "@fetchfrom\n\nEquivalent to fetch(@spawnat p expr). See fetch and @spawnat.\n\nExamples\n\njulia> addprocs(3);\n\njulia> @fetchfrom 2 myid()\n2\n\njulia> @fetchfrom 4 myid()\n4\n\n\n\n\n\n"
-},
-
-{
-    "location": "stdlib/Distributed/#Base.@async",
-    "page": "Distributed Computing",
-    "title": "Base.@async",
-    "category": "macro",
-    "text": "@async\n\nWrap an expression in a Task and add it to the local machine\'s scheduler queue.\n\n\n\n\n\n"
-},
-
-{
-    "location": "stdlib/Distributed/#Base.@sync",
-    "page": "Distributed Computing",
-    "title": "Base.@sync",
-    "category": "macro",
-    "text": "@sync\n\nWait until all lexically-enclosed uses of @async, @spawn, @spawnat and @distributed are complete. All exceptions thrown by enclosed async operations are collected and thrown as a CompositeException.\n\n\n\n\n\n"
 },
 
 {
@@ -15373,7 +15413,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Distributed Computing",
     "title": "Distributed Computing",
     "category": "section",
-    "text": "DocTestSetup = :(using Distributed)Distributed.addprocs\nDistributed.nprocs\nDistributed.nworkers\nDistributed.procs()\nDistributed.procs(::Integer)\nDistributed.workers\nDistributed.rmprocs\nDistributed.interrupt\nDistributed.myid\nDistributed.pmap\nDistributed.RemoteException\nDistributed.Future\nDistributed.RemoteChannel\nDistributed.wait\nDistributed.fetch(::Any)\nDistributed.remotecall(::Any, ::Integer, ::Any...)\nDistributed.remotecall_wait(::Any, ::Integer, ::Any...)\nDistributed.remotecall_fetch(::Any, ::Integer, ::Any...)\nDistributed.remote_do(::Any, ::Integer, ::Any...)\nDistributed.put!(::RemoteChannel, ::Any...)\nDistributed.put!(::Future, ::Any)\nDistributed.take!(::RemoteChannel, ::Any...)\nDistributed.isready(::RemoteChannel, ::Any...)\nDistributed.isready(::Future)\nDistributed.WorkerPool\nDistributed.CachingPool\nDistributed.default_worker_pool\nDistributed.clear!(::CachingPool)\nDistributed.remote\nDistributed.remotecall(::Any, ::AbstractWorkerPool, ::Any...)\nDistributed.remotecall_wait(::Any, ::AbstractWorkerPool, ::Any...)\nDistributed.remotecall_fetch(::Any, ::AbstractWorkerPool, ::Any...)\nDistributed.remote_do(::Any, ::AbstractWorkerPool, ::Any...)\nDistributed.timedwait\nDistributed.@spawn\nDistributed.@spawnat\nDistributed.@fetch\nDistributed.@fetchfrom\nDistributed.@async\nDistributed.@sync\nDistributed.@distributed\nDistributed.@everywhere\nDistributed.clear!(::Any, ::Any; ::Any)\nDistributed.remoteref_id\nDistributed.channel_from_id\nDistributed.worker_id_from_socket\nDistributed.cluster_cookie()\nDistributed.cluster_cookie(::Any)"
+    "text": "DocTestSetup = :(using Distributed)Distributed.addprocs\nDistributed.nprocs\nDistributed.nworkers\nDistributed.procs()\nDistributed.procs(::Integer)\nDistributed.workers\nDistributed.rmprocs\nDistributed.interrupt\nDistributed.myid\nDistributed.pmap\nDistributed.RemoteException\nDistributed.Future\nDistributed.RemoteChannel\nDistributed.fetch(::Any)\nDistributed.remotecall(::Any, ::Integer, ::Any...)\nDistributed.remotecall_wait(::Any, ::Integer, ::Any...)\nDistributed.remotecall_fetch(::Any, ::Integer, ::Any...)\nDistributed.remote_do(::Any, ::Integer, ::Any...)\nDistributed.put!(::RemoteChannel, ::Any...)\nDistributed.put!(::Future, ::Any)\nDistributed.take!(::RemoteChannel, ::Any...)\nDistributed.isready(::RemoteChannel, ::Any...)\nDistributed.isready(::Future)\nDistributed.WorkerPool\nDistributed.CachingPool\nDistributed.default_worker_pool\nDistributed.clear!(::CachingPool)\nDistributed.remote\nDistributed.remotecall(::Any, ::AbstractWorkerPool, ::Any...)\nDistributed.remotecall_wait(::Any, ::AbstractWorkerPool, ::Any...)\nDistributed.remotecall_fetch(::Any, ::AbstractWorkerPool, ::Any...)\nDistributed.remote_do(::Any, ::AbstractWorkerPool, ::Any...)\nDistributed.@spawn\nDistributed.@spawnat\nDistributed.@fetch\nDistributed.@fetchfrom\nDistributed.@distributed\nDistributed.@everywhere\nDistributed.clear!(::Any, ::Any; ::Any)\nDistributed.remoteref_id\nDistributed.channel_from_id\nDistributed.worker_id_from_socket\nDistributed.cluster_cookie()\nDistributed.cluster_cookie(::Any)"
 },
 
 {
@@ -20357,7 +20397,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Sockets",
     "title": "Base.bind",
     "category": "function",
-    "text": "bind(socket::Union{UDPSocket, TCPSocket}, host::IPAddr, port::Integer; ipv6only=false, reuseaddr=false, kws...)\n\nBind socket to the given host:port. Note that 0.0.0.0 will listen on all devices.\n\nThe ipv6only parameter disables dual stack mode. If ipv6only=true, only an IPv6 stack is created.\nIf reuseaddr=true, multiple threads or processes can bind to the same address without error if they all set reuseaddr=true, but only the last to bind will receive any traffic.\n\n\n\n\n\nbind(chnl::Channel, task::Task)\n\nAssociate the lifetime of chnl with a task. Channel chnl is automatically closed when the task terminates. Any uncaught exception in the task is propagated to all waiters on chnl.\n\nThe chnl object can be explicitly closed independent of task termination. Terminating tasks have no effect on already closed Channel objects.\n\nWhen a channel is bound to multiple tasks, the first task to terminate will close the channel. When multiple channels are bound to the same task, termination of the task will close all of the bound channels.\n\nExamples\n\njulia> c = Channel(0);\n\njulia> task = @async foreach(i->put!(c, i), 1:4);\n\njulia> bind(c,task);\n\njulia> for i in c\n           @show i\n       end;\ni = 1\ni = 2\ni = 3\ni = 4\n\njulia> isopen(c)\nfalse\n\njulia> c = Channel(0);\n\njulia> task = @async (put!(c,1);error(\"foo\"));\n\njulia> bind(c,task);\n\njulia> take!(c)\n1\n\njulia> put!(c,1);\nERROR: foo\nStacktrace:\n[...]\n\n\n\n\n\n"
+    "text": "bind(chnl::Channel, task::Task)\n\nAssociate the lifetime of chnl with a task. Channel chnl is automatically closed when the task terminates. Any uncaught exception in the task is propagated to all waiters on chnl.\n\nThe chnl object can be explicitly closed independent of task termination. Terminating tasks have no effect on already closed Channel objects.\n\nWhen a channel is bound to multiple tasks, the first task to terminate will close the channel. When multiple channels are bound to the same task, termination of the task will close all of the bound channels.\n\nExamples\n\njulia> c = Channel(0);\n\njulia> task = @async foreach(i->put!(c, i), 1:4);\n\njulia> bind(c,task);\n\njulia> for i in c\n           @show i\n       end;\ni = 1\ni = 2\ni = 3\ni = 4\n\njulia> isopen(c)\nfalse\n\njulia> c = Channel(0);\n\njulia> task = @async (put!(c,1);error(\"foo\"));\n\njulia> bind(c,task);\n\njulia> take!(c)\n1\n\njulia> put!(c,1);\nERROR: foo\nStacktrace:\n[...]\n\n\n\n\n\nbind(socket::Union{UDPSocket, TCPSocket}, host::IPAddr, port::Integer; ipv6only=false, reuseaddr=false, kws...)\n\nBind socket to the given host:port. Note that 0.0.0.0 will listen on all devices.\n\nThe ipv6only parameter disables dual stack mode. If ipv6only=true, only an IPv6 stack is created.\nIf reuseaddr=true, multiple threads or processes can bind to the same address without error if they all set reuseaddr=true, but only the last to bind will receive any traffic.\n\n\n\n\n\n"
 },
 
 {
