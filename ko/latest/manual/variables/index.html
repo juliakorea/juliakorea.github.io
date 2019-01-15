@@ -50,13 +50,13 @@ julia&gt; sqrt = 4
 π = 3.1415926535897...
 
 julia&gt; pi = 3
-ERROR: cannot assign variable MathConstants.pi from module Main
+ERROR: cannot assign a value to variable MathConstants.pi from module Main
 
 julia&gt; sqrt(100)
 10.0
 
 julia&gt; sqrt = 4
-ERROR: cannot assign variable Base.sqrt from module Main</code></pre><p>##허용된 변수 이름</p><p>변수 이름은 문자(A-Z 또는 a-z), 밑줄 또는 00A0보다 큰 유니코드 코드의 하위 집합으로 시작해야 합니다. 특히 <a href="http://www.fileformat.info/info/unicode/category/index.htm">유니 코드 문자 범주</a>Lu/Ll/Lt/Lm/Lo/Nl(문자), Sc/So(통화 및 기타 기호) 및 기타 문자와 유사한 문자(예 : Sm 수학 기호의 서브 세트)가 허용됩니다. 그다음 문자는 !와 숫자 (0-9 및 Nd/No 범주의 다른 문자) 및 기타 유니코드 코드 포인트(Mn/Mc/Me/Sk 범주의 발음 구별 기호 및 기타 수정 표시, Pc 범주의 일부 구두점 커넥터, 소수(primes) 및 몇 가지 다른 문자)가 포함되어 있습니다.</p><p><code>+</code>와 같은 연산자도 유효한 식별자이지만 특별히 구문 분석됩니다. 일부 상황에서는 연산자 변수와 마찬가지로 사용할 수 있습니다. 예를 들어<code>(+)</code>는 더하기 함수를,<code>(+) = f</code>는그것을 재 할당합니다. <code>⊕ &#39;와 같은 대부분의 유니 코드 중온 연산자 (범주 Sm에서)는  파싱됩니다 중온 연산자 (infix operators)로 사용되며 사용자 정의 메소드 (예 :</code>const ⊗ = kron<code>를 사용할 수 있습니다. &#39;⊗</code>을 크로 니커 제품으로 정의). 연산자에는 수정 표시가 붙을 수 있습니다. 소수 (primes), 서브 / 윗 첨자 (sub / superscript). <code>+ ₐ &#39;</code>는<code>+</code>와 같은 우선 순위 를 가진 중위 연산자로 파싱됩니다. 명시 적으로 허용되지 않는 변수 이름은 내장 명령문의 이름입니다.</p><pre><code class="language-julia-repl">julia&gt; else = false
+ERROR: cannot assign a value to variable Base.sqrt from module Main</code></pre><p>##허용된 변수 이름</p><p>변수 이름은 문자(A-Z 또는 a-z), 밑줄 또는 00A0보다 큰 유니코드 코드의 하위 집합으로 시작해야 합니다. 특히 <a href="http://www.fileformat.info/info/unicode/category/index.htm">유니 코드 문자 범주</a>Lu/Ll/Lt/Lm/Lo/Nl(문자), Sc/So(통화 및 기타 기호) 및 기타 문자와 유사한 문자(예 : Sm 수학 기호의 서브 세트)가 허용됩니다. 그다음 문자는 !와 숫자 (0-9 및 Nd/No 범주의 다른 문자) 및 기타 유니코드 코드 포인트(Mn/Mc/Me/Sk 범주의 발음 구별 기호 및 기타 수정 표시, Pc 범주의 일부 구두점 커넥터, 소수(primes) 및 몇 가지 다른 문자)가 포함되어 있습니다.</p><p><code>+</code>와 같은 연산자도 유효한 식별자이지만 특별히 구문 분석됩니다. 일부 상황에서는 연산자 변수와 마찬가지로 사용할 수 있습니다. 예를 들어<code>(+)</code>는 더하기 함수를,<code>(+) = f</code>는그것을 재 할당합니다. <code>⊕ &#39;와 같은 대부분의 유니 코드 중온 연산자 (범주 Sm에서)는  파싱됩니다 중온 연산자 (infix operators)로 사용되며 사용자 정의 메소드 (예 :</code>const ⊗ = kron<code>를 사용할 수 있습니다. &#39;⊗</code>을 크로 니커 제품으로 정의). 연산자에는 수정 표시가 붙을 수 있습니다. 소수 (primes), 서브 / 윗 첨자 (sub / superscript). <code>+ ₐ &#39;</code>는<code>+</code>와 같은 우선 순위 를 가진 중위 연산자로 파싱됩니다. 명시 적으로 허용되지 않는 변수 이름은 내장 명령문의 이름입니다.</p><pre><code class="language-julia-repl">julia&gt; else = false
 ERROR: syntax: unexpected &quot;else&quot;
 
 julia&gt; try = &quot;No&quot;
