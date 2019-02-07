@@ -37,7 +37,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Julia v1.2 Release Notes",
     "title": "New language features",
     "category": "section",
-    "text": "The extrema function now accepts a function argument in the same manner as minimum and maximum (#30323).\nhasmethod can now check for matching keyword argument names (#30712)."
+    "text": "The extrema function now accepts a function argument in the same manner as minimum and maximum (#30323).\nhasmethod can now check for matching keyword argument names (#30712).\nstartswith and endswith now accept a Regex for the second argument (#29790)."
 },
 
 {
@@ -69,7 +69,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Julia v1.2 Release Notes",
     "title": "New library functions",
     "category": "section",
-    "text": "getipaddrs() function returns all the IP addresses of the local machine (#30349)"
+    "text": "getipaddrs() function returns all the IP addresses of the local machine (#30349)\nAdded Base.hasproperty and Base.hasfield (#28850).\nOne argument !=(x), >(x), >=(x), <(x), <=(x) has been added for currying, similar to the existing ==(x) and isequal(x) methods (#30915)."
 },
 
 {
@@ -77,7 +77,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Julia v1.2 Release Notes",
     "title": "Standard library changes",
     "category": "section",
-    "text": "Added Base.hasproperty and Base.hasfield (#28850)."
+    "text": ""
 },
 
 {
@@ -1853,7 +1853,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Metaprogramming",
     "title": "Basics",
     "category": "section",
-    "text": "Here is an extraordinarily simple macro:julia> macro sayhello()\n           return :( println(\"Hello, world!\") )\n       end\n@sayhello (macro with 1 method)Macros have a dedicated character in Julia\'s syntax: the @ (at-sign), followed by the unique name declared in a macro NAME ... end block. In this example, the compiler will replace all instances of @sayhello with::( println(\"Hello, world!\") )When @sayhello is entered in the REPL, the expression executes immediately, thus we only see the evaluation result:julia> @sayhello()\nHello, world!Now, consider a slightly more complex macro:julia> macro sayhello(name)\n           return :( println(\"Hello, \", $name) )\n       end\n@sayhello (macro with 1 method)This macro takes one argument: name. When @sayhello is encountered, the quoted expression is expanded to interpolate the value of the argument into the final expression:julia> @sayhello(\"human\")\nHello, humanWe can view the quoted return expression using the function macroexpand (important note: this is an extremely useful tool for debugging macros):julia> ex = macroexpand(Main, :(@sayhello(\"human\")) )\n:((Main.println)(\"Hello, \", \"human\"))\n\njulia> typeof(ex)\nExprWe can see that the \"human\" literal has been interpolated into the expression.There also exists a macro @macroexpand that is perhaps a bit more convenient than the macroexpand function:julia> @macroexpand @sayhello \"human\"\n:((println)(\"Hello, \", \"human\"))"
+    "text": "Here is an extraordinarily simple macro:julia> macro sayhello()\n           return :( println(\"Hello, world!\") )\n       end\n@sayhello (macro with 1 method)Macros have a dedicated character in Julia\'s syntax: the @ (at-sign), followed by the unique name declared in a macro NAME ... end block. In this example, the compiler will replace all instances of @sayhello with::( println(\"Hello, world!\") )When @sayhello is entered in the REPL, the expression executes immediately, thus we only see the evaluation result:julia> @sayhello()\nHello, world!Now, consider a slightly more complex macro:julia> macro sayhello(name)\n           return :( println(\"Hello, \", $name) )\n       end\n@sayhello (macro with 1 method)This macro takes one argument: name. When @sayhello is encountered, the quoted expression is expanded to interpolate the value of the argument into the final expression:julia> @sayhello(\"human\")\nHello, humanWe can view the quoted return expression using the function macroexpand (important note: this is an extremely useful tool for debugging macros):julia> ex = macroexpand(Main, :(@sayhello(\"human\")) )\n:(Main.println(\"Hello, \", \"human\"))\n\njulia> typeof(ex)\nExprWe can see that the \"human\" literal has been interpolated into the expression.There also exists a macro @macroexpand that is perhaps a bit more convenient than the macroexpand function:julia> @macroexpand @sayhello \"human\"\n:(println(\"Hello, \", \"human\"))"
 },
 
 {
@@ -1861,7 +1861,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Metaprogramming",
     "title": "Hold up: why macros?",
     "category": "section",
-    "text": "We have already seen a function f(::Expr...) -> Expr in a previous section. In fact, macroexpand is also such a function. So, why do macros exist?Macros are necessary because they execute when code is parsed, therefore, macros allow the programmer to generate and include fragments of customized code before the full program is run. To illustrate the difference, consider the following example:julia> macro twostep(arg)\n           println(\"I execute at parse time. The argument is: \", arg)\n           return :(println(\"I execute at runtime. The argument is: \", $arg))\n       end\n@twostep (macro with 1 method)\n\njulia> ex = macroexpand(Main, :(@twostep :(1, 2, 3)) );\nI execute at parse time. The argument is: $(Expr(:quote, :((1, 2, 3))))The first call to println is executed when macroexpand is called. The resulting expression contains only the second println:julia> typeof(ex)\nExpr\n\njulia> ex\n:((println)(\"I execute at runtime. The argument is: \", $(Expr(:copyast, :($(QuoteNode(:((1, 2, 3)))))))))\n\njulia> eval(ex)\nI execute at runtime. The argument is: (1, 2, 3)"
+    "text": "We have already seen a function f(::Expr...) -> Expr in a previous section. In fact, macroexpand is also such a function. So, why do macros exist?Macros are necessary because they execute when code is parsed, therefore, macros allow the programmer to generate and include fragments of customized code before the full program is run. To illustrate the difference, consider the following example:julia> macro twostep(arg)\n           println(\"I execute at parse time. The argument is: \", arg)\n           return :(println(\"I execute at runtime. The argument is: \", $arg))\n       end\n@twostep (macro with 1 method)\n\njulia> ex = macroexpand(Main, :(@twostep :(1, 2, 3)) );\nI execute at parse time. The argument is: $(Expr(:quote, :((1, 2, 3))))The first call to println is executed when macroexpand is called. The resulting expression contains only the second println:julia> typeof(ex)\nExpr\n\njulia> ex\n:(println(\"I execute at runtime. The argument is: \", $(Expr(:copyast, :($(QuoteNode(:((1, 2, 3)))))))))\n\njulia> eval(ex)\nI execute at runtime. The argument is: (1, 2, 3)"
 },
 
 {
@@ -1877,7 +1877,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Metaprogramming",
     "title": "Building an advanced macro",
     "category": "section",
-    "text": "Here is a simplified definition of Julia\'s @assert macro:julia> macro assert(ex)\n           return :( $ex ? nothing : throw(AssertionError($(string(ex)))) )\n       end\n@assert (macro with 1 method)This macro can be used like this:julia> @assert 1 == 1.0\n\njulia> @assert 1 == 0\nERROR: AssertionError: 1 == 0In place of the written syntax, the macro call is expanded at parse time to its returned result. This is equivalent to writing:1 == 1.0 ? nothing : throw(AssertionError(\"1 == 1.0\"))\n1 == 0 ? nothing : throw(AssertionError(\"1 == 0\"))That is, in the first call, the expression :(1 == 1.0) is spliced into the test condition slot, while the value of string(:(1 == 1.0)) is spliced into the assertion message slot. The entire expression, thus constructed, is placed into the syntax tree where the @assert macro call occurs. Then at execution time, if the test expression evaluates to true, then nothing is returned, whereas if the test is false, an error is raised indicating the asserted expression that was false. Notice that it would not be possible to write this as a function, since only the value of the condition is available and it would be impossible to display the expression that computed it in the error message.The actual definition of @assert in Julia Base is more complicated. It allows the user to optionally specify their own error message, instead of just printing the failed expression. Just like in functions with a variable number of arguments, this is specified with an ellipses following the last argument:julia> macro assert(ex, msgs...)\n           msg_body = isempty(msgs) ? ex : msgs[1]\n           msg = string(msg_body)\n           return :($ex ? nothing : throw(AssertionError($msg)))\n       end\n@assert (macro with 1 method)Now @assert has two modes of operation, depending upon the number of arguments it receives! If there\'s only one argument, the tuple of expressions captured by msgs will be empty and it will behave the same as the simpler definition above. But now if the user specifies a second argument, it is printed in the message body instead of the failing expression. You can inspect the result of a macro expansion with the aptly named @macroexpand macro:julia> @macroexpand @assert a == b\n:(if Main.a == Main.b\n        Main.nothing\n    else\n        (Main.throw)((Main.AssertionError)(\"a == b\"))\n    end)\n\njulia> @macroexpand @assert a==b \"a should equal b!\"\n:(if Main.a == Main.b\n        Main.nothing\n    else\n        (Main.throw)((Main.AssertionError)(\"a should equal b!\"))\n    end)There is yet another case that the actual @assert macro handles: what if, in addition to printing \"a should equal b,\" we wanted to print their values? One might naively try to use string interpolation in the custom message, e.g., @assert a==b \"a ($a) should equal b ($b)!\", but this won\'t work as expected with the above macro. Can you see why? Recall from string interpolation that an interpolated string is rewritten to a call to string. Compare:julia> typeof(:(\"a should equal b\"))\nString\n\njulia> typeof(:(\"a ($a) should equal b ($b)!\"))\nExpr\n\njulia> dump(:(\"a ($a) should equal b ($b)!\"))\nExpr\n  head: Symbol string\n  args: Array{Any}((5,))\n    1: String \"a (\"\n    2: Symbol a\n    3: String \") should equal b (\"\n    4: Symbol b\n    5: String \")!\"So now instead of getting a plain string in msg_body, the macro is receiving a full expression that will need to be evaluated in order to display as expected. This can be spliced directly into the returned expression as an argument to the string call; see error.jl for the complete implementation.The @assert macro makes great use of splicing into quoted expressions to simplify the manipulation of expressions inside the macro body."
+    "text": "Here is a simplified definition of Julia\'s @assert macro:julia> macro assert(ex)\n           return :( $ex ? nothing : throw(AssertionError($(string(ex)))) )\n       end\n@assert (macro with 1 method)This macro can be used like this:julia> @assert 1 == 1.0\n\njulia> @assert 1 == 0\nERROR: AssertionError: 1 == 0In place of the written syntax, the macro call is expanded at parse time to its returned result. This is equivalent to writing:1 == 1.0 ? nothing : throw(AssertionError(\"1 == 1.0\"))\n1 == 0 ? nothing : throw(AssertionError(\"1 == 0\"))That is, in the first call, the expression :(1 == 1.0) is spliced into the test condition slot, while the value of string(:(1 == 1.0)) is spliced into the assertion message slot. The entire expression, thus constructed, is placed into the syntax tree where the @assert macro call occurs. Then at execution time, if the test expression evaluates to true, then nothing is returned, whereas if the test is false, an error is raised indicating the asserted expression that was false. Notice that it would not be possible to write this as a function, since only the value of the condition is available and it would be impossible to display the expression that computed it in the error message.The actual definition of @assert in Julia Base is more complicated. It allows the user to optionally specify their own error message, instead of just printing the failed expression. Just like in functions with a variable number of arguments, this is specified with an ellipses following the last argument:julia> macro assert(ex, msgs...)\n           msg_body = isempty(msgs) ? ex : msgs[1]\n           msg = string(msg_body)\n           return :($ex ? nothing : throw(AssertionError($msg)))\n       end\n@assert (macro with 1 method)Now @assert has two modes of operation, depending upon the number of arguments it receives! If there\'s only one argument, the tuple of expressions captured by msgs will be empty and it will behave the same as the simpler definition above. But now if the user specifies a second argument, it is printed in the message body instead of the failing expression. You can inspect the result of a macro expansion with the aptly named @macroexpand macro:julia> @macroexpand @assert a == b\n:(if Main.a == Main.b\n        Main.nothing\n    else\n        Main.throw(Main.AssertionError(\"a == b\"))\n    end)\n\njulia> @macroexpand @assert a==b \"a should equal b!\"\n:(if Main.a == Main.b\n        Main.nothing\n    else\n        Main.throw(Main.AssertionError(\"a should equal b!\"))\n    end)There is yet another case that the actual @assert macro handles: what if, in addition to printing \"a should equal b,\" we wanted to print their values? One might naively try to use string interpolation in the custom message, e.g., @assert a==b \"a ($a) should equal b ($b)!\", but this won\'t work as expected with the above macro. Can you see why? Recall from string interpolation that an interpolated string is rewritten to a call to string. Compare:julia> typeof(:(\"a should equal b\"))\nString\n\njulia> typeof(:(\"a ($a) should equal b ($b)!\"))\nExpr\n\njulia> dump(:(\"a ($a) should equal b ($b)!\"))\nExpr\n  head: Symbol string\n  args: Array{Any}((5,))\n    1: String \"a (\"\n    2: Symbol a\n    3: String \") should equal b (\"\n    4: Symbol b\n    5: String \")!\"So now instead of getting a plain string in msg_body, the macro is receiving a full expression that will need to be evaluated in order to display as expected. This can be spliced directly into the returned expression as an argument to the string call; see error.jl for the complete implementation.The @assert macro makes great use of splicing into quoted expressions to simplify the manipulation of expressions inside the macro body."
 },
 
 {
@@ -4809,6 +4809,14 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
+    "location": "base/base/#Base.hasproperty",
+    "page": "Essentials",
+    "title": "Base.hasproperty",
+    "category": "function",
+    "text": "hasproperty(x, s::Symbol)\n\nReturn a boolean indicating whether the object x has s as one of its own properties.\n\ncompat: Julia 1.2\nThis function requires at least Julia 1.2.\n\n\n\n\n\n"
+},
+
+{
     "location": "base/base/#Core.getfield",
     "page": "Essentials",
     "title": "Core.getfield",
@@ -4885,7 +4893,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Essentials",
     "title": "All Objects",
     "category": "section",
-    "text": "Core.:(===)\nCore.isa\nBase.isequal\nBase.isless\nBase.ifelse\nCore.typeassert\nCore.typeof\nCore.tuple\nBase.ntuple\nBase.objectid\nBase.hash\nBase.finalizer\nBase.finalize\nBase.copy\nBase.deepcopy\nBase.getproperty\nBase.setproperty!\nBase.propertynames\nCore.getfield\nCore.setfield!\nCore.isdefined\nBase.@isdefined\nBase.convert\nBase.promote\nBase.oftype\nBase.widen\nBase.identity"
+    "text": "Core.:(===)\nCore.isa\nBase.isequal\nBase.isless\nBase.ifelse\nCore.typeassert\nCore.typeof\nCore.tuple\nBase.ntuple\nBase.objectid\nBase.hash\nBase.finalizer\nBase.finalize\nBase.copy\nBase.deepcopy\nBase.getproperty\nBase.setproperty!\nBase.propertynames\nBase.hasproperty\nCore.getfield\nCore.setfield!\nCore.isdefined\nBase.@isdefined\nBase.convert\nBase.promote\nBase.oftype\nBase.widen\nBase.identity"
 },
 
 {
@@ -5025,11 +5033,19 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
+    "location": "base/base/#Base.hasfield",
+    "page": "Essentials",
+    "title": "Base.hasfield",
+    "category": "function",
+    "text": "hasfield(T::Type, name::Symbol)\n\nReturn a boolean indicating whether T has name as one of its own fields.\n\ncompat: Julia 1.2\nThis function requires at least Julia 1.2.\n\n\n\n\n\n"
+},
+
+{
     "location": "base/base/#Declared-structure-1",
     "page": "Essentials",
     "title": "Declared structure",
     "category": "section",
-    "text": "Base.isimmutable\nBase.isabstracttype\nBase.isprimitivetype\nBase.isstructtype\nBase.nameof(::DataType)\nBase.fieldnames\nBase.fieldname"
+    "text": "Base.isimmutable\nBase.isabstracttype\nBase.isprimitivetype\nBase.isstructtype\nBase.nameof(::DataType)\nBase.fieldnames\nBase.fieldname\nBase.hasfield"
 },
 
 {
@@ -5757,7 +5773,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Essentials",
     "title": "Base.Libc.getpid",
     "category": "function",
-    "text": "getpid(process) -> Int32\n\nGet the child process ID, if it still exists.\n\ncompat: Julia 1.1\nThis function requires at least Julia 1.1.\n\n\n\n\n\ngetpid() -> Int32\n\nGet Julia\'s process ID.\n\n\n\n\n\n"
+    "text": "getpid() -> Int32\n\nGet Julia\'s process ID.\n\n\n\n\n\ngetpid(process) -> Int32\n\nGet the child process ID, if it still exists.\n\ncompat: Julia 1.1\nThis function requires at least Julia 1.1.\n\n\n\n\n\n"
 },
 
 {
@@ -7525,7 +7541,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Mathematics",
     "title": "Base.:+",
     "category": "function",
-    "text": "dt::Date + t::Time -> DateTime\n\nThe addition of a Date with a Time produces a DateTime. The hour, minute, second, and millisecond parts of the Time are used along with the year, month, and day of the Date to create the new DateTime. Non-zero microseconds or nanoseconds in the Time type will result in an InexactError being thrown.\n\n\n\n\n\n+(x, y...)\n\nAddition operator. x+y+z+... calls this function with all arguments, i.e. +(x, y, z, ...).\n\nExamples\n\njulia> 1 + 20 + 4\n25\n\njulia> +(1, 20, 4)\n25\n\n\n\n\n\n"
+    "text": "+(x, y...)\n\nAddition operator. x+y+z+... calls this function with all arguments, i.e. +(x, y, z, ...).\n\nExamples\n\njulia> 1 + 20 + 4\n25\n\njulia> +(1, 20, 4)\n25\n\n\n\n\n\ndt::Date + t::Time -> DateTime\n\nThe addition of a Date with a Time produces a DateTime. The hour, minute, second, and millisecond parts of the Time are used along with the year, month, and day of the Date to create the new DateTime. Non-zero microseconds or nanoseconds in the Time type will result in an InexactError being thrown.\n\n\n\n\n\n"
 },
 
 {
@@ -7749,7 +7765,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Mathematics",
     "title": "Base.::",
     "category": "function",
-    "text": "(:)(I::CartesianIndex, J::CartesianIndex)\n\nConstruct CartesianIndices from two CartesianIndex.\n\ncompat: Julia 1.1\nThis method requires at least Julia 1.1.\n\nExamples\n\njulia> I = CartesianIndex(2,1);\n\njulia> J = CartesianIndex(3,3);\n\njulia> I:J\n2×3 CartesianIndices{2,Tuple{UnitRange{Int64},UnitRange{Int64}}}:\n CartesianIndex(2, 1)  CartesianIndex(2, 2)  CartesianIndex(2, 3)\n CartesianIndex(3, 1)  CartesianIndex(3, 2)  CartesianIndex(3, 3)\n\n\n\n\n\n(:)(start, [step], stop)\n\nRange operator. a:b constructs a range from a to b with a step size of 1 (a UnitRange) , and a:s:b is similar but uses a step size of s (a StepRange).\n\n: is also used in indexing to select whole dimensions  and for Symbol literals, as in e.g. :hello.\n\n\n\n\n\n"
+    "text": "(:)(start, [step], stop)\n\nRange operator. a:b constructs a range from a to b with a step size of 1 (a UnitRange) , and a:s:b is similar but uses a step size of s (a StepRange).\n\n: is also used in indexing to select whole dimensions  and for Symbol literals, as in e.g. :hello.\n\n\n\n\n\n(:)(I::CartesianIndex, J::CartesianIndex)\n\nConstruct CartesianIndices from two CartesianIndex.\n\ncompat: Julia 1.1\nThis method requires at least Julia 1.1.\n\nExamples\n\njulia> I = CartesianIndex(2,1);\n\njulia> J = CartesianIndex(3,3);\n\njulia> I:J\n2×3 CartesianIndices{2,Tuple{UnitRange{Int64},UnitRange{Int64}}}:\n CartesianIndex(2, 1)  CartesianIndex(2, 2)  CartesianIndex(2, 3)\n CartesianIndex(3, 1)  CartesianIndex(3, 2)  CartesianIndex(3, 3)\n\n\n\n\n\n"
 },
 
 {
@@ -7789,7 +7805,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Mathematics",
     "title": "Base.:!=",
     "category": "function",
-    "text": "!=(x, y)\n≠(x,y)\n\nNot-equals comparison operator. Always gives the opposite answer as ==.\n\nImplementation\n\nNew types should generally not implement this, and rely on the fallback definition !=(x,y) = !(x==y) instead.\n\nExamples\n\njulia> 3 != 2\ntrue\n\njulia> \"foo\" ≠ \"foo\"\nfalse\n\n\n\n\n\n!=(x)\n\nCreate a function that compares its argument to x using !=, i.e. a function equivalent to y -> y != x. The returned function is of type Base.Fix2{typeof(!=)}, which can be used to implement specialized methods.\n\n\n\n\n\n"
+    "text": "!=(x, y)\n≠(x,y)\n\nNot-equals comparison operator. Always gives the opposite answer as ==.\n\nImplementation\n\nNew types should generally not implement this, and rely on the fallback definition !=(x,y) = !(x==y) instead.\n\nExamples\n\njulia> 3 != 2\ntrue\n\njulia> \"foo\" ≠ \"foo\"\nfalse\n\n\n\n\n\n!=(x)\n\nCreate a function that compares its argument to x using !=, i.e. a function equivalent to y -> y != x. The returned function is of type Base.Fix2{typeof(!=)}, which can be used to implement specialized methods.\n\ncompat: Julia 1.2\nThis functionality requires at least Julia 1.2.\n\n\n\n\n\n"
 },
 
 {
@@ -7805,7 +7821,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Mathematics",
     "title": "Base.:<",
     "category": "function",
-    "text": "<(x, y)\n\nLess-than comparison operator. Falls back to isless. Because of the behavior of floating-point NaN values, this operator implements a partial order.\n\nImplementation\n\nNew numeric types with a canonical partial order should implement this function for two arguments of the new type. Types with a canonical total order should implement isless instead. (x < y) | (x == y)\n\nExamples\n\njulia> \'a\' < \'b\'\ntrue\n\njulia> \"abc\" < \"abd\"\ntrue\n\njulia> 5 < 3\nfalse\n\n\n\n\n\n<(x)\n\nCreate a function that compares its argument to x using <, i.e. a function equivalent to y -> y < x. The returned function is of type Base.Fix2{typeof(<)}, which can be used to implement specialized methods.\n\n\n\n\n\n"
+    "text": "<(x, y)\n\nLess-than comparison operator. Falls back to isless. Because of the behavior of floating-point NaN values, this operator implements a partial order.\n\nImplementation\n\nNew numeric types with a canonical partial order should implement this function for two arguments of the new type. Types with a canonical total order should implement isless instead. (x < y) | (x == y)\n\nExamples\n\njulia> \'a\' < \'b\'\ntrue\n\njulia> \"abc\" < \"abd\"\ntrue\n\njulia> 5 < 3\nfalse\n\n\n\n\n\n<(x)\n\nCreate a function that compares its argument to x using <, i.e. a function equivalent to y -> y < x. The returned function is of type Base.Fix2{typeof(<)}, which can be used to implement specialized methods.\n\ncompat: Julia 1.2\nThis functionality requires at least Julia 1.2.\n\n\n\n\n\n"
 },
 
 {
@@ -7813,7 +7829,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Mathematics",
     "title": "Base.:<=",
     "category": "function",
-    "text": "<=(x, y)\n≤(x,y)\n\nLess-than-or-equals comparison operator. Falls back to (x < y) | (x == y).\n\nExamples\n\njulia> \'a\' <= \'b\'\ntrue\n\njulia> 7 ≤ 7 ≤ 9\ntrue\n\njulia> \"abc\" ≤ \"abc\"\ntrue\n\njulia> 5 <= 3\nfalse\n\n\n\n\n\n<=(x)\n\nCreate a function that compares its argument to x using <=, i.e. a function equivalent to y -> y <= x. The returned function is of type Base.Fix2{typeof(<=)}, which can be used to implement specialized methods.\n\n\n\n\n\n"
+    "text": "<=(x, y)\n≤(x,y)\n\nLess-than-or-equals comparison operator. Falls back to (x < y) | (x == y).\n\nExamples\n\njulia> \'a\' <= \'b\'\ntrue\n\njulia> 7 ≤ 7 ≤ 9\ntrue\n\njulia> \"abc\" ≤ \"abc\"\ntrue\n\njulia> 5 <= 3\nfalse\n\n\n\n\n\n<=(x)\n\nCreate a function that compares its argument to x using <=, i.e. a function equivalent to y -> y <= x. The returned function is of type Base.Fix2{typeof(<=)}, which can be used to implement specialized methods.\n\ncompat: Julia 1.2\nThis functionality requires at least Julia 1.2.\n\n\n\n\n\n"
 },
 
 {
@@ -7821,7 +7837,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Mathematics",
     "title": "Base.:>",
     "category": "function",
-    "text": ">(x, y)\n\nGreater-than comparison operator. Falls back to y < x.\n\nImplementation\n\nGenerally, new types should implement < instead of this function, and rely on the fallback definition >(x, y) = y < x.\n\nExamples\n\njulia> \'a\' > \'b\'\nfalse\n\njulia> 7 > 3 > 1\ntrue\n\njulia> \"abc\" > \"abd\"\nfalse\n\njulia> 5 > 3\ntrue\n\n\n\n\n\n>(x)\n\nCreate a function that compares its argument to x using >, i.e. a function equivalent to y -> y > x. The returned function is of type Base.Fix2{typeof(>)}, which can be used to implement specialized methods.\n\n\n\n\n\n"
+    "text": ">(x, y)\n\nGreater-than comparison operator. Falls back to y < x.\n\nImplementation\n\nGenerally, new types should implement < instead of this function, and rely on the fallback definition >(x, y) = y < x.\n\nExamples\n\njulia> \'a\' > \'b\'\nfalse\n\njulia> 7 > 3 > 1\ntrue\n\njulia> \"abc\" > \"abd\"\nfalse\n\njulia> 5 > 3\ntrue\n\n\n\n\n\n>(x)\n\nCreate a function that compares its argument to x using >, i.e. a function equivalent to y -> y > x. The returned function is of type Base.Fix2{typeof(>)}, which can be used to implement specialized methods.\n\ncompat: Julia 1.2\nThis functionality requires at least Julia 1.2.\n\n\n\n\n\n"
 },
 
 {
@@ -7829,7 +7845,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Mathematics",
     "title": "Base.:>=",
     "category": "function",
-    "text": ">=(x, y)\n≥(x,y)\n\nGreater-than-or-equals comparison operator. Falls back to y <= x.\n\nExamples\n\njulia> \'a\' >= \'b\'\nfalse\n\njulia> 7 ≥ 7 ≥ 3\ntrue\n\njulia> \"abc\" ≥ \"abc\"\ntrue\n\njulia> 5 >= 3\ntrue\n\n\n\n\n\n>=(x)\n\nCreate a function that compares its argument to x using >=, i.e. a function equivalent to y -> y >= x. The returned function is of type Base.Fix2{typeof(>=)}, which can be used to implement specialized methods.\n\n\n\n\n\n"
+    "text": ">=(x, y)\n≥(x,y)\n\nGreater-than-or-equals comparison operator. Falls back to y <= x.\n\nExamples\n\njulia> \'a\' >= \'b\'\nfalse\n\njulia> 7 ≥ 7 ≥ 3\ntrue\n\njulia> \"abc\" ≥ \"abc\"\ntrue\n\njulia> 5 >= 3\ntrue\n\n\n\n\n\n>=(x)\n\nCreate a function that compares its argument to x using >=, i.e. a function equivalent to y -> y >= x. The returned function is of type Base.Fix2{typeof(>=)}, which can be used to implement specialized methods.\n\ncompat: Julia 1.2\nThis functionality requires at least Julia 1.2.\n\n\n\n\n\n"
 },
 
 {
@@ -10053,7 +10069,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Strings",
     "title": "Base.startswith",
     "category": "function",
-    "text": "startswith(s::AbstractString, prefix::AbstractString)\n\nReturn true if s starts with prefix. If prefix is a vector or set of characters, test whether the first character of s belongs to that set.\n\nSee also endswith.\n\nExamples\n\njulia> startswith(\"JuliaLang\", \"Julia\")\ntrue\n\n\n\n\n\nstartswith(s::AbstractString, prefix::Regex)\n\nReturn true if s starts with the regex pattern, prefix.\n\nnote: Note\nstartswith does not compile the anchoring into the regular expression, but instead passes the anchoring as match_option to PCRE. If compile time is amortized, occursin(r\"^...\", s) is faster than startswith(s, r\"...\").\n\nSee also occursin and endswith.\n\nExamples\n\njulia> startswith(\"JuliaLang\", r\"Julia|Romeo\")\ntrue\n\n\n\n\n\n"
+    "text": "startswith(s::AbstractString, prefix::AbstractString)\n\nReturn true if s starts with prefix. If prefix is a vector or set of characters, test whether the first character of s belongs to that set.\n\nSee also endswith.\n\nExamples\n\njulia> startswith(\"JuliaLang\", \"Julia\")\ntrue\n\n\n\n\n\nstartswith(s::AbstractString, prefix::Regex)\n\nReturn true if s starts with the regex pattern, prefix.\n\nnote: Note\nstartswith does not compile the anchoring into the regular expression, but instead passes the anchoring as match_option to PCRE. If compile time is amortized, occursin(r\"^...\", s) is faster than startswith(s, r\"...\").\n\nSee also occursin and endswith.\n\ncompat: Julia 1.2\nThis method requires at least Julia 1.2.\n\nExamples\n\njulia> startswith(\"JuliaLang\", r\"Julia|Romeo\")\ntrue\n\n\n\n\n\n"
 },
 
 {
@@ -10061,7 +10077,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Strings",
     "title": "Base.endswith",
     "category": "function",
-    "text": "endswith(s::AbstractString, suffix::AbstractString)\n\nReturn true if s ends with suffix. If suffix is a vector or set of characters, test whether the last character of s belongs to that set.\n\nSee also startswith.\n\nExamples\n\njulia> endswith(\"Sunday\", \"day\")\ntrue\n\n\n\n\n\nendswith(s::AbstractString, suffix::Regex)\n\nReturn true if s ends with the regex pattern, suffix.\n\nnote: Note\nendswith does not compile the anchoring into the regular expression, but instead passes the anchoring as match_option to PCRE. If compile time is amortized, occursin(r\"...$\", s) is faster than endswith(s, r\"...\").\n\nSee also occursin and startswith.\n\nExamples\n\njulia> endswith(\"JuliaLang\", r\"Lang|Roberts\")\ntrue\n\n\n\n\n\n"
+    "text": "endswith(s::AbstractString, suffix::AbstractString)\n\nReturn true if s ends with suffix. If suffix is a vector or set of characters, test whether the last character of s belongs to that set.\n\nSee also startswith.\n\nExamples\n\njulia> endswith(\"Sunday\", \"day\")\ntrue\n\n\n\n\n\nendswith(s::AbstractString, suffix::Regex)\n\nReturn true if s ends with the regex pattern, suffix.\n\nnote: Note\nendswith does not compile the anchoring into the regular expression, but instead passes the anchoring as match_option to PCRE. If compile time is amortized, occursin(r\"...$\", s) is faster than endswith(s, r\"...\").\n\nSee also occursin and startswith.\n\ncompat: Julia 1.2\nThis method requires at least Julia 1.2.\n\nExamples\n\njulia> endswith(\"JuliaLang\", r\"Lang|Roberts\")\ntrue\n\n\n\n\n\n"
 },
 
 {
@@ -11509,7 +11525,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Tasks",
     "title": "Base.wait",
     "category": "function",
-    "text": "wait([x])\n\nBlock the current task until some event occurs, depending on the type of the argument:\n\nChannel: Wait for a value to be appended to the channel.\nCondition: Wait for notify on a condition.\nProcess: Wait for a process or process chain to exit. The exitcode field of a process can be used to determine success or failure.\nTask: Wait for a Task to finish. If the task fails with an exception, the exception is propagated (re-thrown in the task that called wait).\nRawFD: Wait for changes on a file descriptor (see the FileWatching package).\n\nIf no argument is passed, the task blocks for an undefined period. A task can only be restarted by an explicit call to schedule or yieldto.\n\nOften wait is called within a while loop to ensure a waited-for condition is met before proceeding.\n\n\n\n\n\nwait(r::Future)\n\nWait for a value to become available for the specified Future.\n\n\n\n\n\nwait(r::RemoteChannel, args...)\n\nWait for a value to become available on the specified RemoteChannel.\n\n\n\n\n\nSpecial note for Threads.Condition:\n\nThe caller must be holding the lock that owns c before calling this method. The calling task will be blocked until some other task wakes it, usually by calling notify` on the same Condition object. The lock will be atomically released when blocking (even if it was locked recursively), and will be reacquired before returning.\n\n\n\n\n\n"
+    "text": "wait(r::Future)\n\nWait for a value to become available for the specified Future.\n\n\n\n\n\nwait(r::RemoteChannel, args...)\n\nWait for a value to become available on the specified RemoteChannel.\n\n\n\n\n\nwait([x])\n\nBlock the current task until some event occurs, depending on the type of the argument:\n\nChannel: Wait for a value to be appended to the channel.\nCondition: Wait for notify on a condition.\nProcess: Wait for a process or process chain to exit. The exitcode field of a process can be used to determine success or failure.\nTask: Wait for a Task to finish. If the task fails with an exception, the exception is propagated (re-thrown in the task that called wait).\nRawFD: Wait for changes on a file descriptor (see the FileWatching package).\n\nIf no argument is passed, the task blocks for an undefined period. A task can only be restarted by an explicit call to schedule or yieldto.\n\nOften wait is called within a while loop to ensure a waited-for condition is met before proceeding.\n\n\n\n\n\nSpecial note for Threads.Condition:\n\nThe caller must be holding the lock that owns c before calling this method. The calling task will be blocked until some other task wakes it, usually by calling notify` on the same Condition object. The lock will be atomically released when blocking (even if it was locked recursively), and will be reacquired before returning.\n\n\n\n\n\n"
 },
 
 {
@@ -21021,7 +21037,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Unit Testing",
     "title": "Test.@inferred",
     "category": "macro",
-    "text": "@inferred [AllowedType] f(x)\n\nTests that the call expression f(x) returns a value of the same type inferred by the compiler. It is useful to check for type stability.\n\nf(x) can be any call expression. Returns the result of f(x) if the types match, and an Error Result if it finds different types.\n\nOptionally, AllowedType relaxes the test, by making it pass when either the type of f(x) matches the inferred type modulo AllowedType, or when the return type is a subtype of AllowedType. This is useful when testing type stability of functions returning a small union such as Union{Nothing, T} or Union{Missing, T}.\n\njulia> f(a) = a > 1 ? 1 : 1.0\nf (generic function with 1 method)\n\njulia> typeof(f(2))\nInt64\n\njulia> @code_warntype f(2)\nBody::UNION{FLOAT64, INT64}\n1 ─ %1 = (Base.slt_int)(1, a)::Bool\n└──      goto #3 if not %1\n2 ─      return 1\n3 ─      return 1.0\n\njulia> @inferred f(2)\nERROR: return type Int64 does not match inferred return type Union{Float64, Int64}\n[...]\n\njulia> @inferred max(1, 2)\n2\n\njulia> g(a) = a < 10 ? missing : 1.0\ng (generic function with 1 method)\n\njulia> @inferred g(20)\nERROR: return type Float64 does not match inferred return type Union{Missing, Float64}\n[...]\n\njulia> @inferred Missing g(20)\n1.0\n\njulia> h(a) = a < 10 ? missing : f(a)\nh (generic function with 1 method)\n\njulia> @inferred Missing h(20)\nERROR: return type Int64 does not match inferred return type Union{Missing, Float64, Int64}\n[...]\n\n\n\n\n\n"
+    "text": "@inferred [AllowedType] f(x)\n\nTests that the call expression f(x) returns a value of the same type inferred by the compiler. It is useful to check for type stability.\n\nf(x) can be any call expression. Returns the result of f(x) if the types match, and an Error Result if it finds different types.\n\nOptionally, AllowedType relaxes the test, by making it pass when either the type of f(x) matches the inferred type modulo AllowedType, or when the return type is a subtype of AllowedType. This is useful when testing type stability of functions returning a small union such as Union{Nothing, T} or Union{Missing, T}.\n\njulia> f(a) = a > 1 ? 1 : 1.0\nf (generic function with 1 method)\n\njulia> typeof(f(2))\nInt64\n\njulia> @code_warntype f(2)\nBody::UNION{FLOAT64, INT64}\n1 ─ %1 = Base.slt_int(1, a)::Bool\n└──      goto #3 if not %1\n2 ─      return 1\n3 ─      return 1.0\n\njulia> @inferred f(2)\nERROR: return type Int64 does not match inferred return type Union{Float64, Int64}\n[...]\n\njulia> @inferred max(1, 2)\n2\n\njulia> g(a) = a < 10 ? missing : 1.0\ng (generic function with 1 method)\n\njulia> @inferred g(20)\nERROR: return type Float64 does not match inferred return type Union{Missing, Float64}\n[...]\n\njulia> @inferred Missing g(20)\n1.0\n\njulia> h(a) = a < 10 ? missing : f(a)\nh (generic function with 1 method)\n\njulia> @inferred Missing h(20)\nERROR: return type Int64 does not match inferred return type Union{Missing, Float64, Int64}\n[...]\n\n\n\n\n\n"
 },
 
 {
@@ -21277,7 +21293,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Reflection and introspection",
     "title": "Expansion and lowering",
     "category": "section",
-    "text": "As discussed in the Metaprogramming section, the macroexpand function gives the unquoted and interpolated expression (Expr) form for a given macro. To use macroexpand, quote the expression block itself (otherwise, the macro will be evaluated and the result will be passed instead!). For example:julia> macroexpand(@__MODULE__, :(@edit println(\"\")) )\n:((InteractiveUtils.edit)(println, (Base.typesof)(\"\")))The functions Base.Meta.show_sexpr and dump are used to display S-expr style views and depth-nested detail views for any expression.Finally, the Meta.lower function gives the lowered form of any expression and is of particular interest for understanding how language constructs map to primitive operations such as assignments, branches, and calls:julia> Meta.lower(@__MODULE__, :( [1+2, sin(0.5)] ))\n:($(Expr(:thunk, CodeInfo(\n    @ none within `top-level scope\'\n1 ─ %1 = 1 + 2\n│   %2 = sin(0.5)\n│   %3 = (Base.vect)(%1, %2)\n└──      return %3\n))))"
+    "text": "As discussed in the Metaprogramming section, the macroexpand function gives the unquoted and interpolated expression (Expr) form for a given macro. To use macroexpand, quote the expression block itself (otherwise, the macro will be evaluated and the result will be passed instead!). For example:julia> macroexpand(@__MODULE__, :(@edit println(\"\")) )\n:(InteractiveUtils.edit(println, (Base.typesof)(\"\")))The functions Base.Meta.show_sexpr and dump are used to display S-expr style views and depth-nested detail views for any expression.Finally, the Meta.lower function gives the lowered form of any expression and is of particular interest for understanding how language constructs map to primitive operations such as assignments, branches, and calls:julia> Meta.lower(@__MODULE__, :( [1+2, sin(0.5)] ))\n:($(Expr(:thunk, CodeInfo(\n    @ none within `top-level scope\'\n1 ─ %1 = 1 + 2\n│   %2 = sin(0.5)\n│   %3 = Base.vect(%1, %2)\n└──      return %3\n))))"
 },
 
 {
@@ -21293,7 +21309,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Reflection and introspection",
     "title": "Printing of debug information",
     "category": "section",
-    "text": "The aforementioned functions and macros take the keyword argument debuginfo that controls the level debug information printed.julia> @code_typed debuginfo=:source +(1,1)\nCodeInfo(\n    @ int.jl:53 within `+\'\n1 ─ %1 = (Base.add_int)(x, y)::Int64\n└──      return %1\n) => Int64Possible values for debuginfo are: :none, :source, and:default. Per default debug information is not printed, but that can be changed by setting Base.IRShow.default_debuginfo[] = :source."
+    "text": "The aforementioned functions and macros take the keyword argument debuginfo that controls the level debug information printed.julia> @code_typed debuginfo=:source +(1,1)\nCodeInfo(\n    @ int.jl:53 within `+\'\n1 ─ %1 = Base.add_int(x, y)::Int64\n└──      return %1\n) => Int64Possible values for debuginfo are: :none, :source, and:default. Per default debug information is not printed, but that can be changed by setting Base.IRShow.default_debuginfo[] = :source."
 },
 
 {
