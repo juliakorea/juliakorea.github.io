@@ -77,7 +77,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Julia v1.2 Release Notes",
     "title": "Standard library changes",
     "category": "section",
-    "text": "The extrema function now accepts a function argument in the same manner as minimum and maximum (#30323).\nhasmethod can now check for matching keyword argument names (#30712).\nstartswith and endswith now accept a Regex for the second argument (#29790).\nretry supports arbitrary callable objects (#30382).\nA no-argument construct to Ptr{T} has been added which constructs a null pointer (#30919)"
+    "text": "The extrema function now accepts a function argument in the same manner as minimum and maximum (#30323).\nhasmethod can now check for matching keyword argument names (#30712).\nstartswith and endswith now accept a Regex for the second argument (#29790).\nretry supports arbitrary callable objects (#30382).\nA no-argument construct to Ptr{T} has been added which constructs a null pointer (#30919)\nstrip now accepts a function argument in the same manner as lstrip and rstrip (#31211)"
 },
 
 {
@@ -85,7 +85,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Julia v1.2 Release Notes",
     "title": "LinearAlgebra",
     "category": "section",
-    "text": "Added keyword arguments rtol, atol to pinv and nullspace (#29998).\nUniformScaling instances are now callable such that e.g. I(3) will produce a Diagonal matrix (#30298).\nEigenvalues λ of general matrices are now sorted lexicographically by (Re λ, Im λ) (#21598).\none for structured matrices (Diagonal, Bidiagonal, Tridiagonal, Symtridiagonal) now preserves structure and type. (#29777)"
+    "text": "Added keyword arguments rtol, atol to pinv and nullspace (#29998).\nUniformScaling instances are now callable such that e.g. I(3) will produce a Diagonal matrix (#30298).\nEigenvalues λ of general matrices are now sorted lexicographically by (Re λ, Im λ) (#21598).\none for structured matrices (Diagonal, Bidiagonal, Tridiagonal, Symtridiagonal) now preserves structure and type. (#29777)\ndiagm(v) is now a shorthand for diagm(0 => v). (#31125)."
 },
 
 {
@@ -1589,7 +1589,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Modules",
     "title": "Standard modules",
     "category": "section",
-    "text": "There are three important standard modules: Main, Core, and Base.Main is the top-level module, and Julia starts with Main set as the current module.  Variables defined at the prompt go in Main, and varinfo() lists variables in Main.Core contains all identifiers considered \"built in\" to the language, i.e. part of the core language and not libraries. Every module implicitly specifies using Core, since you can\'t do anything without those definitions.Base is a module that contains basic functionality (the contents of base/). All modules implicitly contain using Base, since this is needed in the vast majority of cases."
+    "text": "There are three important standard modules:Core contains all functionality \"built into\" the language.\nBase contains basic functionality that is useful in almost all cases.\nMain is the top-level module and the current module, when Julia is started."
 },
 
 {
@@ -4585,11 +4585,35 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
+    "location": "base/base/#Main",
+    "page": "Essentials",
+    "title": "Main",
+    "category": "module",
+    "text": "Main\n\nMain is the top-level module, and Julia starts with Main set as the current module.  Variables defined at the prompt go in Main, and varinfo lists variables in Main.\n\njulia> @__MODULE__\nMain\n\n\n\n\n\n"
+},
+
+{
+    "location": "base/base/#Core",
+    "page": "Essentials",
+    "title": "Core",
+    "category": "module",
+    "text": "Core\n\nCore is the module that contains all identifiers considered \"built in\" to the language, i.e. part of the core language and not libraries. Every module implicitly specifies using Core, since you can\'t do anything without those definitions.\n\n\n\n\n\n"
+},
+
+{
     "location": "base/base/#Base",
     "page": "Essentials",
     "title": "Base",
-    "category": "keyword",
-    "text": "The base library of Julia.\n\n\n\n\n\n"
+    "category": "module",
+    "text": "Base\n\nThe base library of Julia. Base is a module that contains basic functionality (the contents of base/). All modules implicitly contain using Base, since this is needed in the vast majority of cases.\n\n\n\n\n\n"
+},
+
+{
+    "location": "base/base/#Standard-Modules-1",
+    "page": "Essentials",
+    "title": "Standard Modules",
+    "category": "section",
+    "text": "Main\nCore\nBase"
 },
 
 {
@@ -4665,11 +4689,11 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "base/base/#Base-Modules-1",
+    "location": "base/base/#Base-Submodules-1",
     "page": "Essentials",
-    "title": "Base Modules",
+    "title": "Base Submodules",
     "category": "section",
-    "text": "Base.Base\nBase.Broadcast\nBase.Docs\nBase.Iterators\nBase.Libc\nBase.Meta\nBase.StackTraces\nBase.Sys\nBase.Threads\nBase.GC"
+    "text": "Base.Broadcast\nBase.Docs\nBase.Iterators\nBase.Libc\nBase.Meta\nBase.StackTraces\nBase.Sys\nBase.Threads\nBase.GC"
 },
 
 {
@@ -5361,11 +5385,19 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
+    "location": "base/base/#Core.Module",
+    "page": "Essentials",
+    "title": "Core.Module",
+    "category": "type",
+    "text": "Module\n\nA Module is a separate global variable workspace. See module and the manual section about modules for details.\n\n\n\n\n\n"
+},
+
+{
     "location": "base/base/#Special-Types-1",
     "page": "Essentials",
     "title": "Special Types",
     "category": "section",
-    "text": "Core.Any\nCore.Union\nUnion{}\nCore.UnionAll\nCore.Tuple\nCore.NamedTuple\nBase.Val\nCore.Vararg\nCore.Nothing\nBase.isnothing\nBase.Some\nBase.something\nBase.Enums.Enum\nBase.Enums.@enum\nCore.Expr\nCore.Symbol\nCore.Symbol(x...)"
+    "text": "Core.Any\nCore.Union\nUnion{}\nCore.UnionAll\nCore.Tuple\nCore.NamedTuple\nBase.Val\nCore.Vararg\nCore.Nothing\nBase.isnothing\nBase.Some\nBase.something\nBase.Enums.Enum\nBase.Enums.@enum\nCore.Expr\nCore.Symbol\nCore.Symbol(x...)\nCore.Module"
 },
 
 {
@@ -5593,11 +5625,19 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
+    "location": "base/base/#Base.@deprecate",
+    "page": "Essentials",
+    "title": "Base.@deprecate",
+    "category": "macro",
+    "text": "@deprecate old new [ex=true]\n\nThe first argument old is the signature of the deprecated method, the second one new is the call which replaces it. @deprecate exports old unless the optional third argument is false.\n\nExamples\n\njulia> @deprecate old(x) new(x)\nold (generic function with 1 method)\n\njulia> @deprecate old(x) new(x) false\nold (generic function with 1 method)\n\n\n\n\n\n"
+},
+
+{
     "location": "base/base/#Syntax-1",
     "page": "Essentials",
     "title": "Syntax",
     "category": "section",
-    "text": "Core.eval\nBase.MainInclude.eval\nBase.@eval\nBase.evalfile\nBase.esc\nBase.@inbounds\nBase.@boundscheck\nBase.@inline\nBase.@noinline\nBase.@nospecialize\nBase.@specialize\nBase.gensym\nBase.@gensym\nBase.@goto\nBase.@label\nBase.@simd\nBase.@polly\nBase.@generated\nBase.@pure"
+    "text": "Core.eval\nBase.MainInclude.eval\nBase.@eval\nBase.evalfile\nBase.esc\nBase.@inbounds\nBase.@boundscheck\nBase.@inline\nBase.@noinline\nBase.@nospecialize\nBase.@specialize\nBase.gensym\nBase.@gensym\nBase.@goto\nBase.@label\nBase.@simd\nBase.@polly\nBase.@generated\nBase.@pure\nBase.@deprecate"
 },
 
 {
@@ -6213,7 +6253,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Essentials",
     "title": "Core.UndefRefError",
     "category": "type",
-    "text": "UndefRefError()\n\nThe item or field is not defined for the given object.\n\nExamples\n\njulia> struct MyType\n           a::Int\n       end\n\njulia> A = MyType(5)\nMyType(5)\n\njulia> getfield(A, b)\nERROR: UndefVarError: b not defined\nStacktrace:\n[...]\n\n\n\n\n\n"
+    "text": "UndefRefError()\n\nThe item or field is not defined for the given object.\n\nExamples\n\njulia> struct MyType\n           a::Vector{Int}\n           MyType() = new()\n       end\n\njulia> A = MyType()\nMyType(#undef)\n\njulia> A.a\nERROR: UndefRefError: access to undefined reference\nStacktrace:\n[...]\n\n\n\n\n\n"
 },
 
 {
@@ -7113,6 +7153,14 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
+    "location": "base/collections/#Base.AbstractDict",
+    "page": "Collections and Data Structures",
+    "title": "Base.AbstractDict",
+    "category": "type",
+    "text": "AbstractDict{K, V}\n\nSupertype for dictionary-like types with keys of type K and values of type V. Dict, IdDict and other types are subtypes of this.\n\n\n\n\n\n"
+},
+
+{
     "location": "base/collections/#Base.Dict",
     "page": "Collections and Data Structures",
     "title": "Base.Dict",
@@ -7229,7 +7277,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Collections and Data Structures",
     "title": "Base.pairs",
     "category": "function",
-    "text": "pairs(collection)\n\nReturn an iterator over key => value pairs for any collection that maps a set of keys to a set of values. This includes arrays, where the keys are the array indices.\n\n\n\n\n\npairs(IndexLinear(), A)\npairs(IndexCartesian(), A)\npairs(IndexStyle(A), A)\n\nAn iterator that accesses each element of the array A, returning i => x, where i is the index for the element and x = A[i]. Identical to pairs(A), except that the style of index can be selected. Also similar to enumerate(A), except i will be a valid index for A, while enumerate always counts from 1 regardless of the indices of A.\n\nSpecifying IndexLinear() ensures that i will be an integer; specifying IndexCartesian() ensures that i will be a CartesianIndex; specifying IndexStyle(A) chooses whichever has been defined as the native indexing style for array A.\n\nMutation of the bounds of the underlying array will invalidate this iterator.\n\nExamples\n\njulia> A = [\"a\" \"d\"; \"b\" \"e\"; \"c\" \"f\"];\n\njulia> for (index, value) in pairs(IndexStyle(A), A)\n           println(\"$index $value\")\n       end\n1 a\n2 b\n3 c\n4 d\n5 e\n6 f\n\njulia> S = view(A, 1:2, :);\n\njulia> for (index, value) in pairs(IndexStyle(S), S)\n           println(\"$index $value\")\n       end\nCartesianIndex(1, 1) a\nCartesianIndex(2, 1) b\nCartesianIndex(1, 2) d\nCartesianIndex(2, 2) e\n\nSee also: IndexStyle, axes.\n\n\n\n\n\n"
+    "text": "pairs(IndexLinear(), A)\npairs(IndexCartesian(), A)\npairs(IndexStyle(A), A)\n\nAn iterator that accesses each element of the array A, returning i => x, where i is the index for the element and x = A[i]. Identical to pairs(A), except that the style of index can be selected. Also similar to enumerate(A), except i will be a valid index for A, while enumerate always counts from 1 regardless of the indices of A.\n\nSpecifying IndexLinear() ensures that i will be an integer; specifying IndexCartesian() ensures that i will be a CartesianIndex; specifying IndexStyle(A) chooses whichever has been defined as the native indexing style for array A.\n\nMutation of the bounds of the underlying array will invalidate this iterator.\n\nExamples\n\njulia> A = [\"a\" \"d\"; \"b\" \"e\"; \"c\" \"f\"];\n\njulia> for (index, value) in pairs(IndexStyle(A), A)\n           println(\"$index $value\")\n       end\n1 a\n2 b\n3 c\n4 d\n5 e\n6 f\n\njulia> S = view(A, 1:2, :);\n\njulia> for (index, value) in pairs(IndexStyle(S), S)\n           println(\"$index $value\")\n       end\nCartesianIndex(1, 1) a\nCartesianIndex(2, 1) b\nCartesianIndex(1, 2) d\nCartesianIndex(2, 2) e\n\nSee also: IndexStyle, axes.\n\n\n\n\n\npairs(collection)\n\nReturn an iterator over key => value pairs for any collection that maps a set of keys to a set of values. This includes arrays, where the keys are the array indices.\n\n\n\n\n\n"
 },
 
 {
@@ -7285,7 +7333,15 @@ var documenterSearchIndex = {"docs": [
     "page": "Collections and Data Structures",
     "title": "Dictionaries",
     "category": "section",
-    "text": "Dict is the standard dictionary. Its implementation uses hash as the hashing function for the key, and isequal to determine equality. Define these two functions for custom types to override how they are stored in a hash table.IdDict is a special hash table where the keys are always object identities.WeakKeyDict is a hash table implementation where the keys are weak references to objects, and thus may be garbage collected even when referenced in a hash table. Like Dict it uses hash for hashing and isequal for equality, unlike Dict it does not convert keys on insertion.Dicts can be created by passing pair objects constructed with => to a Dict constructor: Dict(\"A\"=>1, \"B\"=>2). This call will attempt to infer type information from the keys and values (i.e. this example creates a Dict{String, Int64}). To explicitly specify types use the syntax Dict{KeyType,ValueType}(...). For example, Dict{String,Int32}(\"A\"=>1, \"B\"=>2).Dictionaries may also be created with generators. For example, Dict(i => f(i) for i = 1:10).Given a dictionary D, the syntax D[x] returns the value of key x (if it exists) or throws an error, and D[x] = y stores the key-value pair x => y in D (replacing any existing value for the key x).  Multiple arguments to D[...] are converted to tuples; for example, the syntax D[x,y]  is equivalent to D[(x,y)], i.e. it refers to the value keyed by the tuple (x,y).Base.Dict\nBase.IdDict\nBase.WeakKeyDict\nBase.ImmutableDict\nBase.haskey\nBase.get(::Any, ::Any, ::Any)\nBase.get\nBase.get!(::Any, ::Any, ::Any)\nBase.get!(::Function, ::Any, ::Any)\nBase.getkey\nBase.delete!\nBase.pop!(::Any, ::Any, ::Any)\nBase.keys\nBase.values\nBase.pairs\nBase.merge\nBase.merge!(::AbstractDict, ::AbstractDict...)\nBase.merge!(::Function, ::AbstractDict, ::AbstractDict...)\nBase.sizehint!\nBase.keytype\nBase.valtypeFully implemented by:IdDict\nDict\nWeakKeyDictPartially implemented by:BitSet\nSet\nEnvDict\nArray\nBitArray\nImmutableDict\nIterators.Pairs"
+    "text": "Dict is the standard dictionary. Its implementation uses hash as the hashing function for the key, and isequal to determine equality. Define these two functions for custom types to override how they are stored in a hash table.IdDict is a special hash table where the keys are always object identities.WeakKeyDict is a hash table implementation where the keys are weak references to objects, and thus may be garbage collected even when referenced in a hash table. Like Dict it uses hash for hashing and isequal for equality, unlike Dict it does not convert keys on insertion.Dicts can be created by passing pair objects constructed with => to a Dict constructor: Dict(\"A\"=>1, \"B\"=>2). This call will attempt to infer type information from the keys and values (i.e. this example creates a Dict{String, Int64}). To explicitly specify types use the syntax Dict{KeyType,ValueType}(...). For example, Dict{String,Int32}(\"A\"=>1, \"B\"=>2).Dictionaries may also be created with generators. For example, Dict(i => f(i) for i = 1:10).Given a dictionary D, the syntax D[x] returns the value of key x (if it exists) or throws an error, and D[x] = y stores the key-value pair x => y in D (replacing any existing value for the key x).  Multiple arguments to D[...] are converted to tuples; for example, the syntax D[x,y]  is equivalent to D[(x,y)], i.e. it refers to the value keyed by the tuple (x,y).Base.AbstractDict\nBase.Dict\nBase.IdDict\nBase.WeakKeyDict\nBase.ImmutableDict\nBase.haskey\nBase.get(::Any, ::Any, ::Any)\nBase.get\nBase.get!(::Any, ::Any, ::Any)\nBase.get!(::Function, ::Any, ::Any)\nBase.getkey\nBase.delete!\nBase.pop!(::Any, ::Any, ::Any)\nBase.keys\nBase.values\nBase.pairs\nBase.merge\nBase.merge!(::AbstractDict, ::AbstractDict...)\nBase.merge!(::Function, ::AbstractDict, ::AbstractDict...)\nBase.sizehint!\nBase.keytype\nBase.valtypeFully implemented by:IdDict\nDict\nWeakKeyDictPartially implemented by:BitSet\nSet\nEnvDict\nArray\nBitArray\nImmutableDict\nIterators.Pairs"
+},
+
+{
+    "location": "base/collections/#Base.AbstractSet",
+    "page": "Collections and Data Structures",
+    "title": "Base.AbstractSet",
+    "category": "type",
+    "text": "AbstractSet{T}\n\nSupertype for set-like types whose elements are of type T. Set, BitSet and other types are subtypes of this.\n\n\n\n\n\n"
 },
 
 {
@@ -7405,7 +7461,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Collections and Data Structures",
     "title": "Set-Like Collections",
     "category": "section",
-    "text": "Base.Set\nBase.BitSet\nBase.union\nBase.union!\nBase.intersect\nBase.setdiff\nBase.setdiff!\nBase.symdiff\nBase.symdiff!\nBase.intersect!\nBase.issubset\nBase.:⊈\nBase.:⊊\nBase.issetequalFully implemented by:BitSet\nSetPartially implemented by:Array"
+    "text": "Base.AbstractSet\nBase.Set\nBase.BitSet\nBase.union\nBase.union!\nBase.intersect\nBase.setdiff\nBase.setdiff!\nBase.symdiff\nBase.symdiff!\nBase.intersect!\nBase.issubset\nBase.:⊈\nBase.:⊊\nBase.issetequalFully implemented by:BitSet\nSetPartially implemented by:Array"
 },
 
 {
@@ -10053,7 +10109,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Strings",
     "title": "Base.strip",
     "category": "function",
-    "text": "strip(str::AbstractString, [chars])\n\nRemove leading and trailing characters from str.\n\nThe default behaviour is to remove leading whitespace and delimiters: see isspace for precise details.\n\nThe optional chars argument specifies which characters to remove: it can be a single character, vector or set of characters, or a predicate function.\n\nExamples\n\njulia> strip(\"{3, 5}\\n\", [\'{\', \'}\', \'\\n\'])\n\"3, 5\"\n\n\n\n\n\n"
+    "text": "strip([pred=isspace,] str::AbstractString)\nstrip(str::AbstractString, chars)\n\nRemove leading and trailing characters from str, either those specified by chars or those for which the function pred returns true.\n\nThe default behaviour is to remove leading whitespace and delimiters: see isspace for precise details.\n\nThe optional chars argument specifies which characters to remove: it can be a single character, vector or set of characters.\n\ncompat: Julia 1.2\nThe method which accepts a predicate function requires Julia 1.2 or later.\n\nExamples\n\njulia> strip(\"{3, 5}\\n\", [\'{\', \'}\', \'\\n\'])\n\"3, 5\"\n\n\n\n\n\n"
 },
 
 {
@@ -11293,7 +11349,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Arrays",
     "title": "Base.rotl90",
     "category": "function",
-    "text": "rotl90(A)\n\nRotate matrix A left 90 degrees.\n\nExamples\n\njulia> a = [1 2; 3 4]\n2×2 Array{Int64,2}:\n 1  2\n 3  4\n\njulia> rotl90(a)\n2×2 Array{Int64,2}:\n 2  4\n 1  3\n\n\n\n\n\nrotl90(A, k)\n\nRotate matrix A left 90 degrees an integer k number of times. If k is zero or a multiple of four, this is equivalent to a copy.\n\nExamples\n\njulia> a = [1 2; 3 4]\n2×2 Array{Int64,2}:\n 1  2\n 3  4\n\njulia> rotl90(a,1)\n2×2 Array{Int64,2}:\n 2  4\n 1  3\n\njulia> rotl90(a,2)\n2×2 Array{Int64,2}:\n 4  3\n 2  1\n\njulia> rotl90(a,3)\n2×2 Array{Int64,2}:\n 3  1\n 4  2\n\njulia> rotl90(a,4)\n2×2 Array{Int64,2}:\n 1  2\n 3  4\n\n\n\n\n\n"
+    "text": "rotl90(A)\n\nRotate matrix A left 90 degrees.\n\nExamples\n\njulia> a = [1 2; 3 4]\n2×2 Array{Int64,2}:\n 1  2\n 3  4\n\njulia> rotl90(a)\n2×2 Array{Int64,2}:\n 2  4\n 1  3\n\n\n\n\n\nrotl90(A, k)\n\nLeft-rotate matrix A 90 degrees counterclockwise an integer k number of times. If k is a multiple of four (including zero), this is equivalent to a copy.\n\nExamples\n\njulia> a = [1 2; 3 4]\n2×2 Array{Int64,2}:\n 1  2\n 3  4\n\njulia> rotl90(a,1)\n2×2 Array{Int64,2}:\n 2  4\n 1  3\n\njulia> rotl90(a,2)\n2×2 Array{Int64,2}:\n 4  3\n 2  1\n\njulia> rotl90(a,3)\n2×2 Array{Int64,2}:\n 3  1\n 4  2\n\njulia> rotl90(a,4)\n2×2 Array{Int64,2}:\n 1  2\n 3  4\n\n\n\n\n\n"
 },
 
 {
@@ -11301,7 +11357,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Arrays",
     "title": "Base.rotr90",
     "category": "function",
-    "text": "rotr90(A)\n\nRotate matrix A right 90 degrees.\n\nExamples\n\njulia> a = [1 2; 3 4]\n2×2 Array{Int64,2}:\n 1  2\n 3  4\n\njulia> rotr90(a)\n2×2 Array{Int64,2}:\n 3  1\n 4  2\n\n\n\n\n\nrotr90(A, k)\n\nRotate matrix A right 90 degrees an integer k number of times. If k is zero or a multiple of four, this is equivalent to a copy.\n\nExamples\n\njulia> a = [1 2; 3 4]\n2×2 Array{Int64,2}:\n 1  2\n 3  4\n\njulia> rotr90(a,1)\n2×2 Array{Int64,2}:\n 3  1\n 4  2\n\njulia> rotr90(a,2)\n2×2 Array{Int64,2}:\n 4  3\n 2  1\n\njulia> rotr90(a,3)\n2×2 Array{Int64,2}:\n 2  4\n 1  3\n\njulia> rotr90(a,4)\n2×2 Array{Int64,2}:\n 1  2\n 3  4\n\n\n\n\n\n"
+    "text": "rotr90(A)\n\nRotate matrix A right 90 degrees.\n\nExamples\n\njulia> a = [1 2; 3 4]\n2×2 Array{Int64,2}:\n 1  2\n 3  4\n\njulia> rotr90(a)\n2×2 Array{Int64,2}:\n 3  1\n 4  2\n\n\n\n\n\nrotr90(A, k)\n\nRight-rotate matrix A 90 degrees clockwise an integer k number of times. If k is a multiple of four (including zero), this is equivalent to a copy.\n\nExamples\n\njulia> a = [1 2; 3 4]\n2×2 Array{Int64,2}:\n 1  2\n 3  4\n\njulia> rotr90(a,1)\n2×2 Array{Int64,2}:\n 3  1\n 4  2\n\njulia> rotr90(a,2)\n2×2 Array{Int64,2}:\n 4  3\n 2  1\n\njulia> rotr90(a,3)\n2×2 Array{Int64,2}:\n 2  4\n 1  3\n\njulia> rotr90(a,4)\n2×2 Array{Int64,2}:\n 1  2\n 3  4\n\n\n\n\n\n"
 },
 
 {
@@ -11533,7 +11589,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Tasks",
     "title": "Base.wait",
     "category": "function",
-    "text": "wait([x])\n\nBlock the current task until some event occurs, depending on the type of the argument:\n\nChannel: Wait for a value to be appended to the channel.\nCondition: Wait for notify on a condition.\nProcess: Wait for a process or process chain to exit. The exitcode field of a process can be used to determine success or failure.\nTask: Wait for a Task to finish. If the task fails with an exception, the exception is propagated (re-thrown in the task that called wait).\nRawFD: Wait for changes on a file descriptor (see the FileWatching package).\n\nIf no argument is passed, the task blocks for an undefined period. A task can only be restarted by an explicit call to schedule or yieldto.\n\nOften wait is called within a while loop to ensure a waited-for condition is met before proceeding.\n\n\n\n\n\nSpecial note for Threads.Condition:\n\nThe caller must be holding the lock that owns c before calling this method. The calling task will be blocked until some other task wakes it, usually by calling notify` on the same Condition object. The lock will be atomically released when blocking (even if it was locked recursively), and will be reacquired before returning.\n\n\n\n\n\nwait(r::Future)\n\nWait for a value to become available for the specified Future.\n\n\n\n\n\nwait(r::RemoteChannel, args...)\n\nWait for a value to become available on the specified RemoteChannel.\n\n\n\n\n\n"
+    "text": "wait(r::Future)\n\nWait for a value to become available for the specified Future.\n\n\n\n\n\nwait(r::RemoteChannel, args...)\n\nWait for a value to become available on the specified RemoteChannel.\n\n\n\n\n\nSpecial note for Threads.Condition:\n\nThe caller must be holding the lock that owns c before calling this method. The calling task will be blocked until some other task wakes it, usually by calling notify` on the same Condition object. The lock will be atomically released when blocking (even if it was locked recursively), and will be reacquired before returning.\n\n\n\n\n\nwait([x])\n\nBlock the current task until some event occurs, depending on the type of the argument:\n\nChannel: Wait for a value to be appended to the channel.\nCondition: Wait for notify on a condition.\nProcess: Wait for a process or process chain to exit. The exitcode field of a process can be used to determine success or failure.\nTask: Wait for a Task to finish. If the task fails with an exception, the exception is propagated (re-thrown in the task that called wait).\nRawFD: Wait for changes on a file descriptor (see the FileWatching package).\n\nIf no argument is passed, the task blocks for an undefined period. A task can only be restarted by an explicit call to schedule or yieldto.\n\nOften wait is called within a while loop to ensure a waited-for condition is met before proceeding.\n\n\n\n\n\n"
 },
 
 {
@@ -13049,6 +13105,14 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
+    "location": "base/io-network/#Base.Multimedia.AbstractDisplay",
+    "page": "I/O and Network",
+    "title": "Base.Multimedia.AbstractDisplay",
+    "category": "type",
+    "text": "AbstractDisplay\n\nAbstract supertype for rich display output devices. TextDisplay is a subtype of this.\n\n\n\n\n\n"
+},
+
+{
     "location": "base/io-network/#Base.Multimedia.display",
     "page": "I/O and Network",
     "title": "Base.Multimedia.display",
@@ -13149,7 +13213,7 @@ var documenterSearchIndex = {"docs": [
     "page": "I/O and Network",
     "title": "Multimedia I/O",
     "category": "section",
-    "text": "Just as text output is performed by print and user-defined types can indicate their textual representation by overloading show, Julia provides a standardized mechanism for rich multimedia output (such as images, formatted text, or even audio and video), consisting of three parts:A function display(x) to request the richest available multimedia display of a Julia object x (with a plain-text fallback).\nOverloading show allows one to indicate arbitrary multimedia representations (keyed by standard MIME types) of user-defined types.\nMultimedia-capable display backends may be registered by subclassing a generic AbstractDisplay type and pushing them onto a stack of display backends via pushdisplay.The base Julia runtime provides only plain-text display, but richer displays may be enabled by loading external modules or by using graphical Julia environments (such as the IPython-based IJulia notebook).Base.Multimedia.display\nBase.Multimedia.redisplay\nBase.Multimedia.displayable\nBase.show(::Any, ::Any, ::Any)\nBase.Multimedia.showable\nBase.repr(::MIME, ::Any)\nBase.MIME\nBase.@MIME_strAs mentioned above, one can also define new display backends. For example, a module that can display PNG images in a window can register this capability with Julia, so that calling display(x) on types with PNG representations will automatically display the image using the module\'s window.In order to define a new display backend, one should first create a subtype D of the abstract class AbstractDisplay.  Then, for each MIME type (mime string) that can be displayed on D, one should define a function display(d::D, ::MIME\"mime\", x) = ... that displays x as that MIME type, usually by calling show(io, mime, x) or repr(io, mime, x). A MethodError should be thrown if x cannot be displayed as that MIME type; this is automatic if one calls show or repr. Finally, one should define a function display(d::D, x) that queries showable(mime, x) for the mime types supported by D and displays the \"best\" one; a MethodError should be thrown if no supported MIME types are found for x.  Similarly, some subtypes may wish to override redisplay(d::D, ...). (Again, one should import Base.display to add new methods to display.) The return values of these functions are up to the implementation (since in some cases it may be useful to return a display \"handle\" of some type).  The display functions for D can then be called directly, but they can also be invoked automatically from display(x) simply by pushing a new display onto the display-backend stack with:Base.Multimedia.pushdisplay\nBase.Multimedia.popdisplay\nBase.Multimedia.TextDisplay\nBase.Multimedia.istextmime"
+    "text": "Just as text output is performed by print and user-defined types can indicate their textual representation by overloading show, Julia provides a standardized mechanism for rich multimedia output (such as images, formatted text, or even audio and video), consisting of three parts:A function display(x) to request the richest available multimedia display of a Julia object x (with a plain-text fallback).\nOverloading show allows one to indicate arbitrary multimedia representations (keyed by standard MIME types) of user-defined types.\nMultimedia-capable display backends may be registered by subclassing a generic AbstractDisplay type and pushing them onto a stack of display backends via pushdisplay.The base Julia runtime provides only plain-text display, but richer displays may be enabled by loading external modules or by using graphical Julia environments (such as the IPython-based IJulia notebook).Base.AbstractDisplay\nBase.Multimedia.display\nBase.Multimedia.redisplay\nBase.Multimedia.displayable\nBase.show(::Any, ::Any, ::Any)\nBase.Multimedia.showable\nBase.repr(::MIME, ::Any)\nBase.MIME\nBase.@MIME_strAs mentioned above, one can also define new display backends. For example, a module that can display PNG images in a window can register this capability with Julia, so that calling display(x) on types with PNG representations will automatically display the image using the module\'s window.In order to define a new display backend, one should first create a subtype D of the abstract class AbstractDisplay.  Then, for each MIME type (mime string) that can be displayed on D, one should define a function display(d::D, ::MIME\"mime\", x) = ... that displays x as that MIME type, usually by calling show(io, mime, x) or repr(io, mime, x). A MethodError should be thrown if x cannot be displayed as that MIME type; this is automatic if one calls show or repr. Finally, one should define a function display(d::D, x) that queries showable(mime, x) for the mime types supported by D and displays the \"best\" one; a MethodError should be thrown if no supported MIME types are found for x.  Similarly, some subtypes may wish to override redisplay(d::D, ...). (Again, one should import Base.display to add new methods to display.) The return values of these functions are up to the implementation (since in some cases it may be useful to return a display \"handle\" of some type).  The display functions for D can then be called directly, but they can also be invoked automatically from display(x) simply by pushing a new display onto the display-backend stack with:Base.Multimedia.pushdisplay\nBase.Multimedia.popdisplay\nBase.Multimedia.TextDisplay\nBase.Multimedia.istextmime"
 },
 
 {
@@ -13557,7 +13621,7 @@ var documenterSearchIndex = {"docs": [
     "page": "C Interface",
     "title": "Base.@cfunction",
     "category": "macro",
-    "text": "@cfunction(callable, ReturnType, (ArgumentTypes...,)) -> Ptr{Cvoid}\n@cfunction($callable, ReturnType, (ArgumentTypes...,)) -> CFunction\n\nGenerate a C-callable function pointer from the Julia function closure for the given type signature. To pass the return value to a ccall, use the argument type Ptr{Cvoid} in the signature.\n\nNote that the argument type tuple must be a literal tuple, and not a tuple-valued variable or expression (although it can include a splat expression). And that these arguments will be evaluated in global scope during compile-time (not deferred until runtime). Adding a \'$\' in front of the function argument changes this to instead create a runtime closure over the local variable callable.\n\nSee manual section on ccall and cfunction usage.\n\nExamples\n\njulia> function foo(x::Int, y::Int)\n           return x + y\n       end\n\njulia> @cfunction(foo, Int, (Int, Int))\nPtr{Cvoid} @0x000000001b82fcd0\n\n\n\n\n\n"
+    "text": "@cfunction(callable, ReturnType, (ArgumentTypes...,)) -> Ptr{Cvoid}\n@cfunction($callable, ReturnType, (ArgumentTypes...,)) -> CFunction\n\nGenerate a C-callable function pointer from the Julia function callable for the given type signature. To pass the return value to a ccall, use the argument type Ptr{Cvoid} in the signature.\n\nNote that the argument type tuple must be a literal tuple, and not a tuple-valued variable or expression (although it can include a splat expression). And that these arguments will be evaluated in global scope during compile-time (not deferred until runtime). Adding a \'$\' in front of the function argument changes this to instead create a runtime closure over the local variable callable.\n\nSee manual section on ccall and cfunction usage.\n\nExamples\n\njulia> function foo(x::Int, y::Int)\n           return x + y\n       end\n\njulia> @cfunction(foo, Int, (Int, Int))\nPtr{Cvoid} @0x000000001b82fcd0\n\n\n\n\n\n"
 },
 
 {
@@ -13621,7 +13685,7 @@ var documenterSearchIndex = {"docs": [
     "page": "C Interface",
     "title": "Base.copyto!",
     "category": "function",
-    "text": "copyto!(dest, do, src, so, N)\n\nCopy N elements from collection src starting at offset so, to array dest starting at offset do. Return dest.\n\n\n\n\n\ncopyto!(dest::AbstractArray, src) -> dest\n\nCopy all elements from collection src to array dest, whose length must be greater than or equal to the length n of src. The first n elements of dest are overwritten, the other elements are left untouched.\n\nExamples\n\njulia> x = [1., 0., 3., 0., 5.];\n\njulia> y = zeros(7);\n\njulia> copyto!(y, x);\n\njulia> y\n7-element Array{Float64,1}:\n 1.0\n 0.0\n 3.0\n 0.0\n 5.0\n 0.0\n 0.0\n\n\n\n\n\ncopyto!(dest, Rdest::CartesianIndices, src, Rsrc::CartesianIndices) -> dest\n\nCopy the block of src in the range of Rsrc to the block of dest in the range of Rdest. The sizes of the two regions must match.\n\n\n\n\n\ncopyto!(dest::AbstractMatrix, src::UniformScaling)\n\nCopies a UniformScaling onto a matrix.\n\ncompat: Julia 1.1\nIn Julia 1.0 this method only supported a square destination matrix. Julia 1.1. added support for a rectangular matrix.\n\n\n\n\n\n"
+    "text": "copyto!(dest::AbstractMatrix, src::UniformScaling)\n\nCopies a UniformScaling onto a matrix.\n\ncompat: Julia 1.1\nIn Julia 1.0 this method only supported a square destination matrix. Julia 1.1. added support for a rectangular matrix.\n\n\n\n\n\ncopyto!(dest, do, src, so, N)\n\nCopy N elements from collection src starting at offset so, to array dest starting at offset do. Return dest.\n\n\n\n\n\ncopyto!(dest::AbstractArray, src) -> dest\n\nCopy all elements from collection src to array dest, whose length must be greater than or equal to the length n of src. The first n elements of dest are overwritten, the other elements are left untouched.\n\nExamples\n\njulia> x = [1., 0., 3., 0., 5.];\n\njulia> y = zeros(7);\n\njulia> copyto!(y, x);\n\njulia> y\n7-element Array{Float64,1}:\n 1.0\n 0.0\n 3.0\n 0.0\n 5.0\n 0.0\n 0.0\n\n\n\n\n\ncopyto!(dest, Rdest::CartesianIndices, src, Rsrc::CartesianIndices) -> dest\n\nCopy the block of src in the range of Rsrc to the block of dest in the range of Rdest. The sizes of the two regions must match.\n\n\n\n\n\n"
 },
 
 {
@@ -17221,7 +17285,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Linear Algebra",
     "title": "Special matrices",
     "category": "section",
-    "text": "Matrices with special symmetries and structures arise often in linear algebra and are frequently associated with various matrix factorizations. Julia features a rich collection of special matrix types, which allow for fast computation with specialized routines that are specially developed for particular matrix types.The following tables summarize the types of special matrices that have been implemented in Julia, as well as whether hooks to various optimized methods for them in LAPACK are available.Type Description\nSymmetric Symmetric matrix\nHermitian Hermitian matrix\nUpperTriangular Upper triangular matrix\nLowerTriangular Lower triangular matrix\nTridiagonal Tridiagonal matrix\nSymTridiagonal Symmetric tridiagonal matrix\nBidiagonal Upper/lower bidiagonal matrix\nDiagonal Diagonal matrix\nUniformScaling Uniform scaling operator"
+    "text": "Matrices with special symmetries and structures arise often in linear algebra and are frequently associated with various matrix factorizations. Julia features a rich collection of special matrix types, which allow for fast computation with specialized routines that are specially developed for particular matrix types.The following tables summarize the types of special matrices that have been implemented in Julia, as well as whether hooks to various optimized methods for them in LAPACK are available.Type Description\nSymmetric Symmetric matrix\nHermitian Hermitian matrix\nUpperTriangular Upper triangular matrix\nUnitUpperTriangular Upper triangular matrix with unit diagonal\nLowerTriangular Lower triangular matrix\nUnitLowerTriangular Lower triangular matrix with unit diagonal\nTridiagonal Tridiagonal matrix\nSymTridiagonal Symmetric tridiagonal matrix\nBidiagonal Upper/lower bidiagonal matrix\nDiagonal Diagonal matrix\nUniformScaling Uniform scaling operator"
 },
 
 {
@@ -17229,7 +17293,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Linear Algebra",
     "title": "Elementary operations",
     "category": "section",
-    "text": "Matrix type + - * \\ Other functions with optimized methods\nSymmetric    MV inv, sqrt, exp\nHermitian    MV inv, sqrt, exp\nUpperTriangular   MV MV inv, det\nLowerTriangular   MV MV inv, det\nSymTridiagonal M M MS MV eigmax, eigmin\nTridiagonal M M MS MV \nBidiagonal M M MS MV \nDiagonal M M MV MV inv, det, logdet, /\nUniformScaling M M MVS MVS /Legend:Key Description\nM (matrix) An optimized method for matrix-matrix operations is available\nV (vector) An optimized method for matrix-vector operations is available\nS (scalar) An optimized method for matrix-scalar operations is available"
+    "text": "Matrix type + - * \\ Other functions with optimized methods\nSymmetric    MV inv, sqrt, exp\nHermitian    MV inv, sqrt, exp\nUpperTriangular   MV MV inv, det\nUnitUpperTriangular   MV MV inv, det\nLowerTriangular   MV MV inv, det\nUnitLowerTriangular   MV MV inv, det\nSymTridiagonal M M MS MV eigmax, eigmin\nTridiagonal M M MS MV \nBidiagonal M M MS MV \nDiagonal M M MV MV inv, det, logdet, /\nUniformScaling M M MVS MVS /Legend:Key Description\nM (matrix) An optimized method for matrix-matrix operations is available\nV (vector) An optimized method for matrix-vector operations is available\nS (scalar) An optimized method for matrix-scalar operations is available"
 },
 
 {
@@ -17237,7 +17301,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Linear Algebra",
     "title": "Matrix factorizations",
     "category": "section",
-    "text": "Matrix type LAPACK eigen eigvals eigvecs svd svdvals\nSymmetric SY  ARI   \nHermitian HE  ARI   \nUpperTriangular TR A A A  \nLowerTriangular TR A A A  \nSymTridiagonal ST A ARI AV  \nTridiagonal GT     \nBidiagonal BD    A A\nDiagonal DI  A   Legend:Key Description Example\nA (all) An optimized method to find all the characteristic values and/or vectors is available e.g. eigvals(M)\nR (range) An optimized method to find the ilth through the ihth characteristic values are available eigvals(M, il, ih)\nI (interval) An optimized method to find the characteristic values in the interval [vl, vh] is available eigvals(M, vl, vh)\nV (vectors) An optimized method to find the characteristic vectors corresponding to the characteristic values x=[x1, x2,...] is available eigvecs(M, x)"
+    "text": "Matrix type LAPACK eigen eigvals eigvecs svd svdvals\nSymmetric SY  ARI   \nHermitian HE  ARI   \nUpperTriangular TR A A A  \nUnitUpperTriangular TR A A A  \nLowerTriangular TR A A A  \nUnitLowerTriangular TR A A A  \nSymTridiagonal ST A ARI AV  \nTridiagonal GT     \nBidiagonal BD    A A\nDiagonal DI  A   Legend:Key Description Example\nA (all) An optimized method to find all the characteristic values and/or vectors is available e.g. eigvals(M)\nR (range) An optimized method to find the ilth through the ihth characteristic values are available eigvals(M, il, ih)\nI (interval) An optimized method to find the characteristic values in the interval [vl, vh] is available eigvals(M, vl, vh)\nV (vectors) An optimized method to find the characteristic vectors corresponding to the characteristic values x=[x1, x2,...] is available eigvecs(M, x)"
 },
 
 {
@@ -17358,6 +17422,22 @@ var documenterSearchIndex = {"docs": [
     "title": "LinearAlgebra.UpperTriangular",
     "category": "type",
     "text": "UpperTriangular(A::AbstractMatrix)\n\nConstruct an UpperTriangular view of the matrix A.\n\nExamples\n\njulia> A = [1.0 2.0 3.0; 4.0 5.0 6.0; 7.0 8.0 9.0]\n3×3 Array{Float64,2}:\n 1.0  2.0  3.0\n 4.0  5.0  6.0\n 7.0  8.0  9.0\n\njulia> UpperTriangular(A)\n3×3 UpperTriangular{Float64,Array{Float64,2}}:\n 1.0  2.0  3.0\n  ⋅   5.0  6.0\n  ⋅    ⋅   9.0\n\n\n\n\n\n"
+},
+
+{
+    "location": "stdlib/LinearAlgebra/#LinearAlgebra.UnitLowerTriangular",
+    "page": "Linear Algebra",
+    "title": "LinearAlgebra.UnitLowerTriangular",
+    "category": "type",
+    "text": "UnitLowerTriangular(A::AbstractMatrix)\n\nConstruct a UnitLowerTriangular view of the matrix A. Such a view has the oneunit of the eltype of A on its diagonal.\n\nExamples\n\njulia> A = [1.0 2.0 3.0; 4.0 5.0 6.0; 7.0 8.0 9.0]\n3×3 Array{Float64,2}:\n 1.0  2.0  3.0\n 4.0  5.0  6.0\n 7.0  8.0  9.0\n\njulia> UnitLowerTriangular(A)\n3×3 UnitLowerTriangular{Float64,Array{Float64,2}}:\n 1.0   ⋅    ⋅\n 4.0  1.0   ⋅\n 7.0  8.0  1.0\n\n\n\n\n\n"
+},
+
+{
+    "location": "stdlib/LinearAlgebra/#LinearAlgebra.UnitUpperTriangular",
+    "page": "Linear Algebra",
+    "title": "LinearAlgebra.UnitUpperTriangular",
+    "category": "type",
+    "text": "UnitUpperTriangular(A::AbstractMatrix)\n\nConstruct an UnitUpperTriangular view of the matrix A. Such a view has the oneunit of the eltype of A on its diagonal.\n\nExamples\n\njulia> A = [1.0 2.0 3.0; 4.0 5.0 6.0; 7.0 8.0 9.0]\n3×3 Array{Float64,2}:\n 1.0  2.0  3.0\n 4.0  5.0  6.0\n 7.0  8.0  9.0\n\njulia> UnitUpperTriangular(A)\n3×3 UnitUpperTriangular{Float64,Array{Float64,2}}:\n 1.0  2.0  3.0\n  ⋅   1.0  6.0\n  ⋅    ⋅   1.0\n\n\n\n\n\n"
 },
 
 {
@@ -17725,7 +17805,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Linear Algebra",
     "title": "LinearAlgebra.diagm",
     "category": "function",
-    "text": "diagm(kv::Pair{<:Integer,<:AbstractVector}...)\n\nConstruct a square matrix from Pairs of diagonals and vectors. Vector kv.second will be placed on the kv.first diagonal. diagm constructs a full matrix; if you want storage-efficient versions with fast arithmetic, see Diagonal, Bidiagonal Tridiagonal and SymTridiagonal.\n\nExamples\n\njulia> diagm(1 => [1,2,3])\n4×4 Array{Int64,2}:\n 0  1  0  0\n 0  0  2  0\n 0  0  0  3\n 0  0  0  0\n\njulia> diagm(1 => [1,2,3], -1 => [4,5])\n4×4 Array{Int64,2}:\n 0  1  0  0\n 4  0  2  0\n 0  5  0  3\n 0  0  0  0\n\n\n\n\n\n"
+    "text": "diagm(kv::Pair{<:Integer,<:AbstractVector}...)\n\nConstruct a square matrix from Pairs of diagonals and vectors. Vector kv.second will be placed on the kv.first diagonal. diagm constructs a full matrix; if you want storage-efficient versions with fast arithmetic, see Diagonal, Bidiagonal Tridiagonal and SymTridiagonal.\n\nExamples\n\njulia> diagm(1 => [1,2,3])\n4×4 Array{Int64,2}:\n 0  1  0  0\n 0  0  2  0\n 0  0  0  3\n 0  0  0  0\n\njulia> diagm(1 => [1,2,3], -1 => [4,5])\n4×4 Array{Int64,2}:\n 0  1  0  0\n 4  0  2  0\n 0  5  0  3\n 0  0  0  0\n\n\n\n\n\ndiagm(v::AbstractVector)\n\nConstruct a square matrix with elements of the vector as diagonal elements.\n\nExamples\n\njulia> diagm([1,2,3])\n3×3 Array{Int64,2}:\n 1  0  0\n 0  2  0\n 0  0  3\n\n\n\n\n\n"
 },
 
 {
@@ -18237,7 +18317,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Linear Algebra",
     "title": "Standard Functions",
     "category": "section",
-    "text": "Linear algebra functions in Julia are largely implemented by calling functions from LAPACK.  Sparse factorizations call functions from SuiteSparse.Base.:*(::AbstractMatrix, ::AbstractMatrix)\nBase.:\\(::AbstractMatrix, ::AbstractVecOrMat)\nLinearAlgebra.dot\nLinearAlgebra.cross\nLinearAlgebra.factorize\nLinearAlgebra.Diagonal\nLinearAlgebra.Bidiagonal\nLinearAlgebra.SymTridiagonal\nLinearAlgebra.Tridiagonal\nLinearAlgebra.Symmetric\nLinearAlgebra.Hermitian\nLinearAlgebra.LowerTriangular\nLinearAlgebra.UpperTriangular\nLinearAlgebra.UniformScaling\nLinearAlgebra.lu\nLinearAlgebra.lu!\nLinearAlgebra.cholesky\nLinearAlgebra.cholesky!\nLinearAlgebra.lowrankupdate\nLinearAlgebra.lowrankdowndate\nLinearAlgebra.lowrankupdate!\nLinearAlgebra.lowrankdowndate!\nLinearAlgebra.ldlt\nLinearAlgebra.ldlt!\nLinearAlgebra.qr\nLinearAlgebra.qr!\nLinearAlgebra.QR\nLinearAlgebra.QRCompactWY\nLinearAlgebra.QRPivoted\nLinearAlgebra.lq!\nLinearAlgebra.lq\nLinearAlgebra.bunchkaufman\nLinearAlgebra.bunchkaufman!\nLinearAlgebra.eigvals\nLinearAlgebra.eigvals!\nLinearAlgebra.eigmax\nLinearAlgebra.eigmin\nLinearAlgebra.eigvecs\nLinearAlgebra.eigen\nLinearAlgebra.eigen!\nLinearAlgebra.hessenberg\nLinearAlgebra.hessenberg!\nLinearAlgebra.schur!\nLinearAlgebra.schur\nLinearAlgebra.ordschur\nLinearAlgebra.ordschur!\nLinearAlgebra.svd\nLinearAlgebra.svd!\nLinearAlgebra.svdvals\nLinearAlgebra.svdvals!\nLinearAlgebra.Givens\nLinearAlgebra.givens\nLinearAlgebra.triu\nLinearAlgebra.triu!\nLinearAlgebra.tril\nLinearAlgebra.tril!\nLinearAlgebra.diagind\nLinearAlgebra.diag\nLinearAlgebra.diagm\nLinearAlgebra.rank\nLinearAlgebra.norm\nLinearAlgebra.opnorm\nLinearAlgebra.normalize!\nLinearAlgebra.normalize\nLinearAlgebra.cond\nLinearAlgebra.condskeel\nLinearAlgebra.tr\nLinearAlgebra.det\nLinearAlgebra.logdet\nLinearAlgebra.logabsdet\nBase.inv(::AbstractMatrix)\nLinearAlgebra.pinv\nLinearAlgebra.nullspace\nBase.kron\nLinearAlgebra.exp(::StridedMatrix{<:LinearAlgebra.BlasFloat})\nBase.:^(::AbstractMatrix, ::Number)\nBase.:^(::Number, ::AbstractMatrix)\nLinearAlgebra.log(::StridedMatrix)\nLinearAlgebra.sqrt(::StridedMatrix{<:Real})\nLinearAlgebra.cos(::StridedMatrix{<:Real})\nLinearAlgebra.sin(::StridedMatrix{<:Real})\nLinearAlgebra.sincos(::StridedMatrix{<:Real})\nLinearAlgebra.tan(::StridedMatrix{<:Real})\nLinearAlgebra.sec(::StridedMatrix)\nLinearAlgebra.csc(::StridedMatrix)\nLinearAlgebra.cot(::StridedMatrix)\nLinearAlgebra.cosh(::StridedMatrix)\nLinearAlgebra.sinh(::StridedMatrix)\nLinearAlgebra.tanh(::StridedMatrix)\nLinearAlgebra.sech(::StridedMatrix)\nLinearAlgebra.csch(::StridedMatrix)\nLinearAlgebra.coth(::StridedMatrix)\nLinearAlgebra.acos(::StridedMatrix)\nLinearAlgebra.asin(::StridedMatrix)\nLinearAlgebra.atan(::StridedMatrix)\nLinearAlgebra.asec(::StridedMatrix)\nLinearAlgebra.acsc(::StridedMatrix)\nLinearAlgebra.acot(::StridedMatrix)\nLinearAlgebra.acosh(::StridedMatrix)\nLinearAlgebra.asinh(::StridedMatrix)\nLinearAlgebra.atanh(::StridedMatrix)\nLinearAlgebra.asech(::StridedMatrix)\nLinearAlgebra.acsch(::StridedMatrix)\nLinearAlgebra.acoth(::StridedMatrix)\nLinearAlgebra.lyap\nLinearAlgebra.sylvester\nLinearAlgebra.issuccess\nLinearAlgebra.issymmetric\nLinearAlgebra.isposdef\nLinearAlgebra.isposdef!\nLinearAlgebra.istril\nLinearAlgebra.istriu\nLinearAlgebra.isdiag\nLinearAlgebra.ishermitian\nBase.transpose\nLinearAlgebra.transpose!\nBase.adjoint\nLinearAlgebra.adjoint!\nBase.copy(::Union{Transpose,Adjoint})\nLinearAlgebra.stride1\nLinearAlgebra.checksquare\nLinearAlgebra.peakflops"
+    "text": "Linear algebra functions in Julia are largely implemented by calling functions from LAPACK.  Sparse factorizations call functions from SuiteSparse.Base.:*(::AbstractMatrix, ::AbstractMatrix)\nBase.:\\(::AbstractMatrix, ::AbstractVecOrMat)\nLinearAlgebra.dot\nLinearAlgebra.cross\nLinearAlgebra.factorize\nLinearAlgebra.Diagonal\nLinearAlgebra.Bidiagonal\nLinearAlgebra.SymTridiagonal\nLinearAlgebra.Tridiagonal\nLinearAlgebra.Symmetric\nLinearAlgebra.Hermitian\nLinearAlgebra.LowerTriangular\nLinearAlgebra.UpperTriangular\nLinearAlgebra.UnitLowerTriangular\nLinearAlgebra.UnitUpperTriangular\nLinearAlgebra.UniformScaling\nLinearAlgebra.lu\nLinearAlgebra.lu!\nLinearAlgebra.cholesky\nLinearAlgebra.cholesky!\nLinearAlgebra.lowrankupdate\nLinearAlgebra.lowrankdowndate\nLinearAlgebra.lowrankupdate!\nLinearAlgebra.lowrankdowndate!\nLinearAlgebra.ldlt\nLinearAlgebra.ldlt!\nLinearAlgebra.qr\nLinearAlgebra.qr!\nLinearAlgebra.QR\nLinearAlgebra.QRCompactWY\nLinearAlgebra.QRPivoted\nLinearAlgebra.lq!\nLinearAlgebra.lq\nLinearAlgebra.bunchkaufman\nLinearAlgebra.bunchkaufman!\nLinearAlgebra.eigvals\nLinearAlgebra.eigvals!\nLinearAlgebra.eigmax\nLinearAlgebra.eigmin\nLinearAlgebra.eigvecs\nLinearAlgebra.eigen\nLinearAlgebra.eigen!\nLinearAlgebra.hessenberg\nLinearAlgebra.hessenberg!\nLinearAlgebra.schur!\nLinearAlgebra.schur\nLinearAlgebra.ordschur\nLinearAlgebra.ordschur!\nLinearAlgebra.svd\nLinearAlgebra.svd!\nLinearAlgebra.svdvals\nLinearAlgebra.svdvals!\nLinearAlgebra.Givens\nLinearAlgebra.givens\nLinearAlgebra.triu\nLinearAlgebra.triu!\nLinearAlgebra.tril\nLinearAlgebra.tril!\nLinearAlgebra.diagind\nLinearAlgebra.diag\nLinearAlgebra.diagm\nLinearAlgebra.rank\nLinearAlgebra.norm\nLinearAlgebra.opnorm\nLinearAlgebra.normalize!\nLinearAlgebra.normalize\nLinearAlgebra.cond\nLinearAlgebra.condskeel\nLinearAlgebra.tr\nLinearAlgebra.det\nLinearAlgebra.logdet\nLinearAlgebra.logabsdet\nBase.inv(::AbstractMatrix)\nLinearAlgebra.pinv\nLinearAlgebra.nullspace\nBase.kron\nLinearAlgebra.exp(::StridedMatrix{<:LinearAlgebra.BlasFloat})\nBase.:^(::AbstractMatrix, ::Number)\nBase.:^(::Number, ::AbstractMatrix)\nLinearAlgebra.log(::StridedMatrix)\nLinearAlgebra.sqrt(::StridedMatrix{<:Real})\nLinearAlgebra.cos(::StridedMatrix{<:Real})\nLinearAlgebra.sin(::StridedMatrix{<:Real})\nLinearAlgebra.sincos(::StridedMatrix{<:Real})\nLinearAlgebra.tan(::StridedMatrix{<:Real})\nLinearAlgebra.sec(::StridedMatrix)\nLinearAlgebra.csc(::StridedMatrix)\nLinearAlgebra.cot(::StridedMatrix)\nLinearAlgebra.cosh(::StridedMatrix)\nLinearAlgebra.sinh(::StridedMatrix)\nLinearAlgebra.tanh(::StridedMatrix)\nLinearAlgebra.sech(::StridedMatrix)\nLinearAlgebra.csch(::StridedMatrix)\nLinearAlgebra.coth(::StridedMatrix)\nLinearAlgebra.acos(::StridedMatrix)\nLinearAlgebra.asin(::StridedMatrix)\nLinearAlgebra.atan(::StridedMatrix)\nLinearAlgebra.asec(::StridedMatrix)\nLinearAlgebra.acsc(::StridedMatrix)\nLinearAlgebra.acot(::StridedMatrix)\nLinearAlgebra.acosh(::StridedMatrix)\nLinearAlgebra.asinh(::StridedMatrix)\nLinearAlgebra.atanh(::StridedMatrix)\nLinearAlgebra.asech(::StridedMatrix)\nLinearAlgebra.acsch(::StridedMatrix)\nLinearAlgebra.acoth(::StridedMatrix)\nLinearAlgebra.lyap\nLinearAlgebra.sylvester\nLinearAlgebra.issuccess\nLinearAlgebra.issymmetric\nLinearAlgebra.isposdef\nLinearAlgebra.isposdef!\nLinearAlgebra.istril\nLinearAlgebra.istriu\nLinearAlgebra.isdiag\nLinearAlgebra.ishermitian\nBase.transpose\nLinearAlgebra.transpose!\nBase.adjoint\nLinearAlgebra.adjoint!\nBase.copy(::Union{Transpose,Adjoint})\nLinearAlgebra.stride1\nLinearAlgebra.checksquare\nLinearAlgebra.peakflops"
 },
 
 {
@@ -19433,6 +19513,22 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
+    "location": "stdlib/Logging/#Logging.Logging",
+    "page": "Logging",
+    "title": "Logging.Logging",
+    "category": "module",
+    "text": "Utilities for capturing, filtering and presenting streams of log events. Normally you don\'t need to import Logging to create log events; for this the standard logging macros such as @info are already exported by Base and available by default.\n\n\n\n\n\n"
+},
+
+{
+    "location": "stdlib/Logging/#Logging-module-1",
+    "page": "Logging",
+    "title": "Logging module",
+    "category": "section",
+    "text": "Logging.Logging"
+},
+
+{
     "location": "stdlib/Logging/#Base.CoreLogging.@logmsg",
     "page": "Logging",
     "title": "Base.CoreLogging.@logmsg",
@@ -20457,6 +20553,14 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
+    "location": "stdlib/Sockets/#Sockets.Sockets",
+    "page": "Sockets",
+    "title": "Sockets.Sockets",
+    "category": "module",
+    "text": "Support for sockets. Provides IPAddr and subtypes, TCPSocket, and UDPSocket.\n\n\n\n\n\n"
+},
+
+{
     "location": "stdlib/Sockets/#Sockets.connect-Tuple{TCPSocket,Integer}",
     "page": "Sockets",
     "title": "Sockets.connect",
@@ -20545,11 +20649,19 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
+    "location": "stdlib/Sockets/#Sockets.IPAddr",
+    "page": "Sockets",
+    "title": "Sockets.IPAddr",
+    "category": "type",
+    "text": "IPAddr\n\nAbstract supertype for IP addresses. IPv4 and IPv6 are subtypes of this.\n\n\n\n\n\n"
+},
+
+{
     "location": "stdlib/Sockets/#Sockets.IPv4",
     "page": "Sockets",
     "title": "Sockets.IPv4",
     "category": "type",
-    "text": "IPv4(host::Integer) -> IPv4\n\nReturns an IPv4 object from ip address host formatted as an Integer.\n\njulia> IPv4(3223256218)\nip\"192.30.252.154\"\n\n\n\n\n\n"
+    "text": "IPv4(host::Integer) -> IPv4\n\nReturns an IPv4 object from ip address host formatted as an Integer.\n\nExamples\n\njulia> IPv4(3223256218)\nip\"192.30.252.154\"\n\n\n\n\n\n"
 },
 
 {
@@ -20557,7 +20669,15 @@ var documenterSearchIndex = {"docs": [
     "page": "Sockets",
     "title": "Sockets.IPv6",
     "category": "type",
-    "text": "IPv6(host::Integer) -> IPv6\n\nReturns an IPv6 object from ip address host formatted as an Integer.\n\njulia> IPv6(3223256218)\nip\"::c01e:fc9a\"\n\n\n\n\n\n"
+    "text": "IPv6(host::Integer) -> IPv6\n\nReturns an IPv6 object from ip address host formatted as an Integer.\n\nExamples\n\njulia> IPv6(3223256218)\nip\"::c01e:fc9a\"\n\n\n\n\n\n"
+},
+
+{
+    "location": "stdlib/Sockets/#Sockets.@ip_str",
+    "page": "Sockets",
+    "title": "Sockets.@ip_str",
+    "category": "macro",
+    "text": "@ip_str str -> IPAddr\n\nParse str as an IP address.\n\nExamples\n\njulia> ip\"127.0.0.1\"\nip\"127.0.0.1\"\n\njulia> @ip_str \"2001:db8:0:0:0:0:2:1\"\nip\"2001:db8::2:1\"\n\n\n\n\n\n"
 },
 
 {
@@ -20597,7 +20717,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Sockets",
     "title": "Base.bind",
     "category": "function",
-    "text": "bind(socket::Union{UDPSocket, TCPSocket}, host::IPAddr, port::Integer; ipv6only=false, reuseaddr=false, kws...)\n\nBind socket to the given host:port. Note that 0.0.0.0 will listen on all devices.\n\nThe ipv6only parameter disables dual stack mode. If ipv6only=true, only an IPv6 stack is created.\nIf reuseaddr=true, multiple threads or processes can bind to the same address without error if they all set reuseaddr=true, but only the last to bind will receive any traffic.\n\n\n\n\n\nbind(chnl::Channel, task::Task)\n\nAssociate the lifetime of chnl with a task. Channel chnl is automatically closed when the task terminates. Any uncaught exception in the task is propagated to all waiters on chnl.\n\nThe chnl object can be explicitly closed independent of task termination. Terminating tasks have no effect on already closed Channel objects.\n\nWhen a channel is bound to multiple tasks, the first task to terminate will close the channel. When multiple channels are bound to the same task, termination of the task will close all of the bound channels.\n\nExamples\n\njulia> c = Channel(0);\n\njulia> task = @async foreach(i->put!(c, i), 1:4);\n\njulia> bind(c,task);\n\njulia> for i in c\n           @show i\n       end;\ni = 1\ni = 2\ni = 3\ni = 4\n\njulia> isopen(c)\nfalse\n\njulia> c = Channel(0);\n\njulia> task = @async (put!(c,1);error(\"foo\"));\n\njulia> bind(c,task);\n\njulia> take!(c)\n1\n\njulia> put!(c,1);\nERROR: foo\nStacktrace:\n[...]\n\n\n\n\n\n"
+    "text": "bind(chnl::Channel, task::Task)\n\nAssociate the lifetime of chnl with a task. Channel chnl is automatically closed when the task terminates. Any uncaught exception in the task is propagated to all waiters on chnl.\n\nThe chnl object can be explicitly closed independent of task termination. Terminating tasks have no effect on already closed Channel objects.\n\nWhen a channel is bound to multiple tasks, the first task to terminate will close the channel. When multiple channels are bound to the same task, termination of the task will close all of the bound channels.\n\nExamples\n\njulia> c = Channel(0);\n\njulia> task = @async foreach(i->put!(c, i), 1:4);\n\njulia> bind(c,task);\n\njulia> for i in c\n           @show i\n       end;\ni = 1\ni = 2\ni = 3\ni = 4\n\njulia> isopen(c)\nfalse\n\njulia> c = Channel(0);\n\njulia> task = @async (put!(c,1);error(\"foo\"));\n\njulia> bind(c,task);\n\njulia> take!(c)\n1\n\njulia> put!(c,1);\nERROR: foo\nStacktrace:\n[...]\n\n\n\n\n\nbind(socket::Union{UDPSocket, TCPSocket}, host::IPAddr, port::Integer; ipv6only=false, reuseaddr=false, kws...)\n\nBind socket to the given host:port. Note that 0.0.0.0 will listen on all devices.\n\nThe ipv6only parameter disables dual stack mode. If ipv6only=true, only an IPv6 stack is created.\nIf reuseaddr=true, multiple threads or processes can bind to the same address without error if they all set reuseaddr=true, but only the last to bind will receive any traffic.\n\n\n\n\n\n"
 },
 
 {
@@ -20637,7 +20757,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Sockets",
     "title": "Sockets",
     "category": "section",
-    "text": "DocTestSetup = :(using Sockets)Sockets.connect(::TCPSocket, ::Integer)\nSockets.connect(::AbstractString)\nSockets.listen(::Any)\nSockets.listen(::AbstractString)\nSockets.getaddrinfo\nSockets.getipaddr\nSockets.getipaddrs\nSockets.getalladdrinfo\nSockets.getnameinfo\nSockets.getsockname\nSockets.getpeername\nSockets.IPv4\nSockets.IPv6\nSockets.TCPSocket\nSockets.UDPSocket\nSockets.accept\nSockets.listenany\nSockets.bind\nSockets.send\nSockets.recv\nSockets.recvfrom\nSockets.setoptDocTestSetup = nothing"
+    "text": "DocTestSetup = :(using Sockets)Sockets.Sockets\nSockets.connect(::TCPSocket, ::Integer)\nSockets.connect(::AbstractString)\nSockets.listen(::Any)\nSockets.listen(::AbstractString)\nSockets.getaddrinfo\nSockets.getipaddr\nSockets.getipaddrs\nSockets.getalladdrinfo\nSockets.getnameinfo\nSockets.getsockname\nSockets.getpeername\nSockets.IPAddr\nSockets.IPv4\nSockets.IPv6\nSockets.@ip_str\nSockets.TCPSocket\nSockets.UDPSocket\nSockets.accept\nSockets.listenany\nSockets.bind\nSockets.send\nSockets.recv\nSockets.recvfrom\nSockets.setoptDocTestSetup = nothing"
 },
 
 {
@@ -20869,7 +20989,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Statistics",
     "title": "Statistics.std",
     "category": "function",
-    "text": "std(v; corrected::Bool=true, mean=nothing, dims)\n\nCompute the sample standard deviation of a vector or array v, optionally along the given dimensions. The algorithm returns an estimator of the generative distribution\'s standard deviation under the assumption that each entry of v is an IID drawn from that generative distribution. This computation is equivalent to calculating sqrt(sum((v - mean(v)).^2) / (length(v) - 1)). A pre-computed mean may be provided. If corrected is true, then the sum is scaled with n-1, whereas the sum is scaled with n if corrected is false where n = length(v).\n\nnote: Note\nIf array contains NaN or missing values, the result is also NaN or missing (missing takes precedence if array contains both). Use the skipmissing function to omit missing entries and compute the standard deviation of non-missing values.\n\n\n\n\n\n"
+    "text": "std(itr; corrected::Bool=true, mean=nothing[, dims])\n\nCompute the sample standard deviation of collection itr.\n\nThe algorithm returns an estimator of the generative distribution\'s standard deviation under the assumption that each entry of itr is an IID drawn from that generative distribution. For arrays, this computation is equivalent to calculating sqrt(sum((itr .- mean(itr)).^2) / (length(itr) - 1)). If corrected is true, then the sum is scaled with n-1, whereas the sum is scaled with n if corrected is false with n the number of elements in itr.\n\nA pre-computed mean may be provided.\n\nIf itr is an AbstractArray, dims can be provided to compute the standard deviation over dimensions, and means may contain means for each dimension of itr.\n\nnote: Note\nIf array contains NaN or missing values, the result is also NaN or missing (missing takes precedence if array contains both). Use the skipmissing function to omit missing entries and compute the standard deviation of non-missing values.\n\n\n\n\n\n"
 },
 
 {
@@ -20877,7 +20997,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Statistics",
     "title": "Statistics.stdm",
     "category": "function",
-    "text": "stdm(v, m; corrected::Bool=true)\n\nCompute the sample standard deviation of a vector v with known mean m. If corrected is true, then the sum is scaled with n-1, whereas the sum is scaled with n if corrected is false where n = length(v).\n\nnote: Note\nIf array contains NaN or missing values, the result is also NaN or missing (missing takes precedence if array contains both). Use the skipmissing function to omit missing entries and compute the standard deviation of non-missing values.\n\n\n\n\n\n"
+    "text": "stdm(itr, m; corrected::Bool=true)\n\nCompute the sample standard deviation of collection itr, with known mean(s) m.\n\nThe algorithm returns an estimator of the generative distribution\'s standard deviation under the assumption that each entry of itr is an IID drawn from that generative distribution. For arrays, this computation is equivalent to calculating sqrt(sum((itr .- mean(itr)).^2) / (length(itr) - 1)). If corrected is true, then the sum is scaled with n-1, whereas the sum is scaled with n if corrected is false with n the number of elements in itr.\n\nA pre-computed mean may be provided.\n\nIf itr is an AbstractArray, dims can be provided to compute the standard deviation over dimensions, and m may contain means for each dimension of itr.\n\nnote: Note\nIf array contains NaN or missing values, the result is also NaN or missing (missing takes precedence if array contains both). Use the skipmissing function to omit missing entries and compute the standard deviation of non-missing values.\n\n\n\n\n\n"
 },
 
 {
@@ -20885,7 +21005,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Statistics",
     "title": "Statistics.var",
     "category": "function",
-    "text": "var(v; dims, corrected::Bool=true, mean=nothing)\n\nCompute the sample variance of a vector or array v, optionally along the given dimensions. The algorithm will return an estimator of the generative distribution\'s variance under the assumption that each entry of v is an IID drawn from that generative distribution. This computation is equivalent to calculating sum(abs2, v - mean(v)) / (length(v) - 1). If corrected is true, then the sum is scaled with n-1, whereas the sum is scaled with n if corrected is false where n = length(v). The mean mean over the region may be provided.\n\nnote: Note\nIf array contains NaN or missing values, the result is also NaN or missing (missing takes precedence if array contains both). Use the skipmissing function to omit missing entries and compute the variance of non-missing values.\n\n\n\n\n\n"
+    "text": "var(itr; dims, corrected::Bool=true, mean=nothing)\n\nCompute the sample variance of collection itr.\n\nThe algorithm returns an estimator of the generative distribution\'s variance under the assumption that each entry of itr is an IID drawn from that generative distribution. For arrays, this computation is equivalent to calculating sum((itr .- mean(itr)).^2) / (length(itr) - 1)). Ifcorrectedistrue, then the sum is scaled withn-1, whereas the sum is scaled withnifcorrectedisfalsewithnthe number of elements initr`.\n\nA pre-computed mean may be provided.\n\nIf itr is an AbstractArray, dims can be provided to compute the variance over dimensions, and mean may contain means for each dimension of itr.\n\nnote: Note\nIf array contains NaN or missing values, the result is also NaN or missing (missing takes precedence if array contains both). Use the skipmissing function to omit missing entries and compute the variance of non-missing values.\n\n\n\n\n\n"
 },
 
 {
@@ -20893,7 +21013,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Statistics",
     "title": "Statistics.varm",
     "category": "function",
-    "text": "varm(v, m; dims, corrected::Bool=true)\n\nCompute the sample variance of a collection v with known mean(s) m, optionally over the given dimensions. m may contain means for each dimension of v. If corrected is true, then the sum is scaled with n-1, whereas the sum is scaled with n if corrected is false where n = length(v).\n\nnote: Note\nIf array contains NaN or missing values, the result is also NaN or missing (missing takes precedence if array contains both). Use the skipmissing function to omit missing entries and compute the variance of non-missing values.\n\n\n\n\n\n"
+    "text": "varm(itr, m; dims, corrected::Bool=true)\n\nCompute the sample variance of collection itr, with known mean(s) m.\n\nThe algorithm returns an estimator of the generative distribution\'s variance under the assumption that each entry of itr is an IID drawn from that generative distribution. For arrays, this computation is equivalent to calculating sum((itr .- mean(itr)).^2) / (length(itr) - 1). If corrected is true, then the sum is scaled with n-1, whereas the sum is scaled with n if corrected is false with n the number of elements in itr.\n\nIf itr is an AbstractArray, dims can be provided to compute the variance over dimensions, and m may contain means for each dimension of itr.\n\nnote: Note\nIf array contains NaN or missing values, the result is also NaN or missing (missing takes precedence if array contains both). Use the skipmissing function to omit missing entries and compute the variance of non-missing values.\n\n\n\n\n\n"
 },
 
 {
