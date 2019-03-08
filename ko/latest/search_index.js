@@ -77,7 +77,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Julia v1.2 Release Notes",
     "title": "Standard library changes",
     "category": "section",
-    "text": "The extrema function now accepts a function argument in the same manner as minimum and maximum (#30323).\nhasmethod can now check for matching keyword argument names (#30712).\nstartswith and endswith now accept a Regex for the second argument (#29790).\nretry supports arbitrary callable objects (#30382).\nA no-argument construct to Ptr{T} has been added which constructs a null pointer (#30919)\nstrip now accepts a function argument in the same manner as lstrip and rstrip (#31211)"
+    "text": "The extrema function now accepts a function argument in the same manner as minimum and maximum (#30323).\nhasmethod can now check for matching keyword argument names (#30712).\nstartswith and endswith now accept a Regex for the second argument (#29790).\nretry supports arbitrary callable objects (#30382).\nfilter now supports SkipMissing-wrapped arrays (#31235).\nA no-argument construct to Ptr{T} has been added which constructs a null pointer (#30919)\nstrip now accepts a function argument in the same manner as lstrip and rstrip (#31211)"
 },
 
 {
@@ -7069,7 +7069,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Collections and Data Structures",
     "title": "Base.filter",
     "category": "function",
-    "text": "filter(f, a::AbstractArray)\n\nReturn a copy of a, removing elements for which f is false. The function f is passed one argument.\n\nExamples\n\njulia> a = 1:10\n1:10\n\njulia> filter(isodd, a)\n5-element Array{Int64,1}:\n 1\n 3\n 5\n 7\n 9\n\n\n\n\n\nfilter(f, d::AbstractDict)\n\nReturn a copy of d, removing elements for which f is false. The function f is passed key=>value pairs.\n\nExamples\n\njulia> d = Dict(1=>\"a\", 2=>\"b\")\nDict{Int64,String} with 2 entries:\n  2 => \"b\"\n  1 => \"a\"\n\njulia> filter(p->isodd(p.first), d)\nDict{Int64,String} with 1 entry:\n  1 => \"a\"\n\n\n\n\n\n"
+    "text": "filter(f, a::AbstractArray)\n\nReturn a copy of a, removing elements for which f is false. The function f is passed one argument.\n\nExamples\n\njulia> a = 1:10\n1:10\n\njulia> filter(isodd, a)\n5-element Array{Int64,1}:\n 1\n 3\n 5\n 7\n 9\n\n\n\n\n\nfilter(f, d::AbstractDict)\n\nReturn a copy of d, removing elements for which f is false. The function f is passed key=>value pairs.\n\nExamples\n\njulia> d = Dict(1=>\"a\", 2=>\"b\")\nDict{Int64,String} with 2 entries:\n  2 => \"b\"\n  1 => \"a\"\n\njulia> filter(p->isodd(p.first), d)\nDict{Int64,String} with 1 entry:\n  1 => \"a\"\n\n\n\n\n\nfilter(f, itr::SkipMissing{<:AbstractArray})\n\nReturn a vector similar to the array wrapped by the given SkipMissing iterator but with all missing elements and those for which f returns false removed.\n\ncompat: Julia 1.2\nThis method requires Julia 1.2 or later.\n\nExamples\n\njulia> x = [1 2; missing 4]\n2×2 Array{Union{Missing, Int64},2}:\n 1         2\n  missing  4\n\njulia> filter(isodd, skipmissing(x))\n1-element Array{Int64,1}:\n 1\n\n\n\n\n\n"
 },
 
 {
@@ -7277,7 +7277,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Collections and Data Structures",
     "title": "Base.pairs",
     "category": "function",
-    "text": "pairs(IndexLinear(), A)\npairs(IndexCartesian(), A)\npairs(IndexStyle(A), A)\n\nAn iterator that accesses each element of the array A, returning i => x, where i is the index for the element and x = A[i]. Identical to pairs(A), except that the style of index can be selected. Also similar to enumerate(A), except i will be a valid index for A, while enumerate always counts from 1 regardless of the indices of A.\n\nSpecifying IndexLinear() ensures that i will be an integer; specifying IndexCartesian() ensures that i will be a CartesianIndex; specifying IndexStyle(A) chooses whichever has been defined as the native indexing style for array A.\n\nMutation of the bounds of the underlying array will invalidate this iterator.\n\nExamples\n\njulia> A = [\"a\" \"d\"; \"b\" \"e\"; \"c\" \"f\"];\n\njulia> for (index, value) in pairs(IndexStyle(A), A)\n           println(\"$index $value\")\n       end\n1 a\n2 b\n3 c\n4 d\n5 e\n6 f\n\njulia> S = view(A, 1:2, :);\n\njulia> for (index, value) in pairs(IndexStyle(S), S)\n           println(\"$index $value\")\n       end\nCartesianIndex(1, 1) a\nCartesianIndex(2, 1) b\nCartesianIndex(1, 2) d\nCartesianIndex(2, 2) e\n\nSee also: IndexStyle, axes.\n\n\n\n\n\npairs(collection)\n\nReturn an iterator over key => value pairs for any collection that maps a set of keys to a set of values. This includes arrays, where the keys are the array indices.\n\n\n\n\n\n"
+    "text": "pairs(collection)\n\nReturn an iterator over key => value pairs for any collection that maps a set of keys to a set of values. This includes arrays, where the keys are the array indices.\n\n\n\n\n\npairs(IndexLinear(), A)\npairs(IndexCartesian(), A)\npairs(IndexStyle(A), A)\n\nAn iterator that accesses each element of the array A, returning i => x, where i is the index for the element and x = A[i]. Identical to pairs(A), except that the style of index can be selected. Also similar to enumerate(A), except i will be a valid index for A, while enumerate always counts from 1 regardless of the indices of A.\n\nSpecifying IndexLinear() ensures that i will be an integer; specifying IndexCartesian() ensures that i will be a CartesianIndex; specifying IndexStyle(A) chooses whichever has been defined as the native indexing style for array A.\n\nMutation of the bounds of the underlying array will invalidate this iterator.\n\nExamples\n\njulia> A = [\"a\" \"d\"; \"b\" \"e\"; \"c\" \"f\"];\n\njulia> for (index, value) in pairs(IndexStyle(A), A)\n           println(\"$index $value\")\n       end\n1 a\n2 b\n3 c\n4 d\n5 e\n6 f\n\njulia> S = view(A, 1:2, :);\n\njulia> for (index, value) in pairs(IndexStyle(S), S)\n           println(\"$index $value\")\n       end\nCartesianIndex(1, 1) a\nCartesianIndex(2, 1) b\nCartesianIndex(1, 2) d\nCartesianIndex(2, 2) e\n\nSee also: IndexStyle, axes.\n\n\n\n\n\n"
 },
 
 {
@@ -7605,7 +7605,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Mathematics",
     "title": "Base.:+",
     "category": "function",
-    "text": "dt::Date + t::Time -> DateTime\n\nThe addition of a Date with a Time produces a DateTime. The hour, minute, second, and millisecond parts of the Time are used along with the year, month, and day of the Date to create the new DateTime. Non-zero microseconds or nanoseconds in the Time type will result in an InexactError being thrown.\n\n\n\n\n\n+(x, y...)\n\nAddition operator. x+y+z+... calls this function with all arguments, i.e. +(x, y, z, ...).\n\nExamples\n\njulia> 1 + 20 + 4\n25\n\njulia> +(1, 20, 4)\n25\n\n\n\n\n\n"
+    "text": "+(x, y...)\n\nAddition operator. x+y+z+... calls this function with all arguments, i.e. +(x, y, z, ...).\n\nExamples\n\njulia> 1 + 20 + 4\n25\n\njulia> +(1, 20, 4)\n25\n\n\n\n\n\ndt::Date + t::Time -> DateTime\n\nThe addition of a Date with a Time produces a DateTime. The hour, minute, second, and millisecond parts of the Time are used along with the year, month, and day of the Date to create the new DateTime. Non-zero microseconds or nanoseconds in the Time type will result in an InexactError being thrown.\n\n\n\n\n\n"
 },
 
 {
@@ -7829,7 +7829,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Mathematics",
     "title": "Base.::",
     "category": "function",
-    "text": "(:)(start, [step], stop)\n\nRange operator. a:b constructs a range from a to b with a step size of 1 (a UnitRange) , and a:s:b is similar but uses a step size of s (a StepRange).\n\n: is also used in indexing to select whole dimensions  and for Symbol literals, as in e.g. :hello.\n\n\n\n\n\n(:)(I::CartesianIndex, J::CartesianIndex)\n\nConstruct CartesianIndices from two CartesianIndex.\n\ncompat: Julia 1.1\nThis method requires at least Julia 1.1.\n\nExamples\n\njulia> I = CartesianIndex(2,1);\n\njulia> J = CartesianIndex(3,3);\n\njulia> I:J\n2×3 CartesianIndices{2,Tuple{UnitRange{Int64},UnitRange{Int64}}}:\n CartesianIndex(2, 1)  CartesianIndex(2, 2)  CartesianIndex(2, 3)\n CartesianIndex(3, 1)  CartesianIndex(3, 2)  CartesianIndex(3, 3)\n\n\n\n\n\n"
+    "text": "(:)(I::CartesianIndex, J::CartesianIndex)\n\nConstruct CartesianIndices from two CartesianIndex.\n\ncompat: Julia 1.1\nThis method requires at least Julia 1.1.\n\nExamples\n\njulia> I = CartesianIndex(2,1);\n\njulia> J = CartesianIndex(3,3);\n\njulia> I:J\n2×3 CartesianIndices{2,Tuple{UnitRange{Int64},UnitRange{Int64}}}:\n CartesianIndex(2, 1)  CartesianIndex(2, 2)  CartesianIndex(2, 3)\n CartesianIndex(3, 1)  CartesianIndex(3, 2)  CartesianIndex(3, 3)\n\n\n\n\n\n(:)(start, [step], stop)\n\nRange operator. a:b constructs a range from a to b with a step size of 1 (a UnitRange) , and a:s:b is similar but uses a step size of s (a StepRange).\n\n: is also used in indexing to select whole dimensions  and for Symbol literals, as in e.g. :hello.\n\n\n\n\n\n"
 },
 
 {
@@ -8829,7 +8829,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Mathematics",
     "title": "Base.factorial",
     "category": "function",
-    "text": "factorial(n::Integer)\n\nFactorial of n. If n is an Integer, the factorial is computed as an integer (promoted to at least 64 bits). Note that this may overflow if n is not small, but you can use factorial(big(n)) to compute the result exactly in arbitrary precision.\n\nExamples\n\njulia> factorial(6)\n720\n\njulia> factorial(21)\nERROR: OverflowError: 21 is too large to look up in the table\nStacktrace:\n[...]\n\njulia> factorial(big(21))\n51090942171709440000\n\nSee also\n\nbinomial\n\nExternal links\n\nFactorial on Wikipedia.\n\n\n\n\n\n"
+    "text": "factorial(n::Integer)\n\nFactorial of n. If n is an Integer, the factorial is computed as an integer (promoted to at least 64 bits). Note that this may overflow if n is not small, but you can use factorial(big(n)) to compute the result exactly in arbitrary precision.\n\nExamples\n\njulia> factorial(6)\n720\n\njulia> factorial(21)\nERROR: OverflowError: 21 is too large to look up in the table; consider using `factorial(big(21))` instead\nStacktrace:\n[...]\n\njulia> factorial(big(21))\n51090942171709440000\n\nSee also\n\nbinomial\n\nExternal links\n\nFactorial on Wikipedia.\n\n\n\n\n\n"
 },
 
 {
@@ -11589,7 +11589,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Tasks",
     "title": "Base.wait",
     "category": "function",
-    "text": "wait(r::Future)\n\nWait for a value to become available for the specified Future.\n\n\n\n\n\nwait(r::RemoteChannel, args...)\n\nWait for a value to become available on the specified RemoteChannel.\n\n\n\n\n\nSpecial note for Threads.Condition:\n\nThe caller must be holding the lock that owns c before calling this method. The calling task will be blocked until some other task wakes it, usually by calling notify` on the same Condition object. The lock will be atomically released when blocking (even if it was locked recursively), and will be reacquired before returning.\n\n\n\n\n\nwait([x])\n\nBlock the current task until some event occurs, depending on the type of the argument:\n\nChannel: Wait for a value to be appended to the channel.\nCondition: Wait for notify on a condition.\nProcess: Wait for a process or process chain to exit. The exitcode field of a process can be used to determine success or failure.\nTask: Wait for a Task to finish. If the task fails with an exception, the exception is propagated (re-thrown in the task that called wait).\nRawFD: Wait for changes on a file descriptor (see the FileWatching package).\n\nIf no argument is passed, the task blocks for an undefined period. A task can only be restarted by an explicit call to schedule or yieldto.\n\nOften wait is called within a while loop to ensure a waited-for condition is met before proceeding.\n\n\n\n\n\n"
+    "text": "wait([x])\n\nBlock the current task until some event occurs, depending on the type of the argument:\n\nChannel: Wait for a value to be appended to the channel.\nCondition: Wait for notify on a condition.\nProcess: Wait for a process or process chain to exit. The exitcode field of a process can be used to determine success or failure.\nTask: Wait for a Task to finish. If the task fails with an exception, the exception is propagated (re-thrown in the task that called wait).\nRawFD: Wait for changes on a file descriptor (see the FileWatching package).\n\nIf no argument is passed, the task blocks for an undefined period. A task can only be restarted by an explicit call to schedule or yieldto.\n\nOften wait is called within a while loop to ensure a waited-for condition is met before proceeding.\n\n\n\n\n\nwait(r::Future)\n\nWait for a value to become available for the specified Future.\n\n\n\n\n\nwait(r::RemoteChannel, args...)\n\nWait for a value to become available on the specified RemoteChannel.\n\n\n\n\n\nSpecial note for Threads.Condition:\n\nThe caller must be holding the lock that owns c before calling this method. The calling task will be blocked until some other task wakes it, usually by calling notify` on the same Condition object. The lock will be atomically released when blocking (even if it was locked recursively), and will be reacquired before returning.\n\n\n\n\n\n"
 },
 
 {
@@ -12357,7 +12357,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Filesystem",
     "title": "Base.Filesystem.isdir",
     "category": "function",
-    "text": "isdir(path) -> Bool\n\nReturn true if path is a directory, false otherwise.\n\nExamples\n\njulia> isdir(homedir())\ntrue\n\njulia> isdir(\"not/a/directory\")\nfalse\n\n\n\n\n\n"
+    "text": "isdir(path) -> Bool\n\nReturn true if path is a directory, false otherwise.\n\nExamples\n\njulia> isdir(homedir())\ntrue\n\njulia> isdir(\"not/a/directory\")\nfalse\n\nSee also: isfile and ispath.\n\n\n\n\n\n"
 },
 
 {
@@ -12373,7 +12373,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Filesystem",
     "title": "Base.Filesystem.isfile",
     "category": "function",
-    "text": "isfile(path) -> Bool\n\nReturn true if path is a regular file, false otherwise.\n\nExamples\n\njulia> isfile(homedir())\nfalse\n\njulia> f = open(\"test_file.txt\", \"w\");\n\njulia> isfile(f)\ntrue\n\njulia> close(f); rm(\"test_file.txt\")\n\n\n\n\n\n"
+    "text": "isfile(path) -> Bool\n\nReturn true if path is a regular file, false otherwise.\n\nExamples\n\njulia> isfile(homedir())\nfalse\n\njulia> f = open(\"test_file.txt\", \"w\");\n\njulia> isfile(f)\ntrue\n\njulia> close(f); rm(\"test_file.txt\")\n\nSee also: isdir and ispath.\n\n\n\n\n\n"
 },
 
 {
@@ -12397,7 +12397,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Filesystem",
     "title": "Base.Filesystem.ispath",
     "category": "function",
-    "text": "ispath(path) -> Bool\n\nReturn true if path is a valid filesystem path, false otherwise.\n\n\n\n\n\n"
+    "text": "ispath(path) -> Bool\n\nReturn true if a valid filesystem entity exists at path, otherwise returns false. This is the generalization of isfile, isdir etc.\n\n\n\n\n\n"
 },
 
 {
@@ -13685,7 +13685,7 @@ var documenterSearchIndex = {"docs": [
     "page": "C Interface",
     "title": "Base.copyto!",
     "category": "function",
-    "text": "copyto!(dest::AbstractMatrix, src::UniformScaling)\n\nCopies a UniformScaling onto a matrix.\n\ncompat: Julia 1.1\nIn Julia 1.0 this method only supported a square destination matrix. Julia 1.1. added support for a rectangular matrix.\n\n\n\n\n\ncopyto!(dest, do, src, so, N)\n\nCopy N elements from collection src starting at offset so, to array dest starting at offset do. Return dest.\n\n\n\n\n\ncopyto!(dest::AbstractArray, src) -> dest\n\nCopy all elements from collection src to array dest, whose length must be greater than or equal to the length n of src. The first n elements of dest are overwritten, the other elements are left untouched.\n\nExamples\n\njulia> x = [1., 0., 3., 0., 5.];\n\njulia> y = zeros(7);\n\njulia> copyto!(y, x);\n\njulia> y\n7-element Array{Float64,1}:\n 1.0\n 0.0\n 3.0\n 0.0\n 5.0\n 0.0\n 0.0\n\n\n\n\n\ncopyto!(dest, Rdest::CartesianIndices, src, Rsrc::CartesianIndices) -> dest\n\nCopy the block of src in the range of Rsrc to the block of dest in the range of Rdest. The sizes of the two regions must match.\n\n\n\n\n\n"
+    "text": "copyto!(dest, do, src, so, N)\n\nCopy N elements from collection src starting at offset so, to array dest starting at offset do. Return dest.\n\n\n\n\n\ncopyto!(dest::AbstractArray, src) -> dest\n\nCopy all elements from collection src to array dest, whose length must be greater than or equal to the length n of src. The first n elements of dest are overwritten, the other elements are left untouched.\n\nExamples\n\njulia> x = [1., 0., 3., 0., 5.];\n\njulia> y = zeros(7);\n\njulia> copyto!(y, x);\n\njulia> y\n7-element Array{Float64,1}:\n 1.0\n 0.0\n 3.0\n 0.0\n 5.0\n 0.0\n 0.0\n\n\n\n\n\ncopyto!(dest, Rdest::CartesianIndices, src, Rsrc::CartesianIndices) -> dest\n\nCopy the block of src in the range of Rsrc to the block of dest in the range of Rdest. The sizes of the two regions must match.\n\n\n\n\n\ncopyto!(dest::AbstractMatrix, src::UniformScaling)\n\nCopies a UniformScaling onto a matrix.\n\ncompat: Julia 1.1\nIn Julia 1.0 this method only supported a square destination matrix. Julia 1.1. added support for a rectangular matrix.\n\n\n\n\n\n"
 },
 
 {
@@ -13709,7 +13709,7 @@ var documenterSearchIndex = {"docs": [
     "page": "C Interface",
     "title": "Base.pointer_from_objref",
     "category": "function",
-    "text": "pointer_from_objref(x)\n\nGet the memory address of a Julia object as a Ptr. The existence of the resulting Ptr will not protect the object from garbage collection, so you must ensure that the object remains referenced for the whole time that the Ptr will be used.\n\nThis function may not be called on immutable objects, since they do not have stable memory addresses.\n\n\n\n\n\n"
+    "text": "pointer_from_objref(x)\n\nGet the memory address of a Julia object as a Ptr. The existence of the resulting Ptr will not protect the object from garbage collection, so you must ensure that the object remains referenced for the whole time that the Ptr will be used.\n\nThis function may not be called on immutable objects, since they do not have stable memory addresses.\n\nSee also: unsafe_pointer_to_objref.\n\n\n\n\n\n"
 },
 
 {
@@ -13717,7 +13717,7 @@ var documenterSearchIndex = {"docs": [
     "page": "C Interface",
     "title": "Base.unsafe_pointer_to_objref",
     "category": "function",
-    "text": "unsafe_pointer_to_objref(p::Ptr)\n\nConvert a Ptr to an object reference. Assumes the pointer refers to a valid heap-allocated Julia object. If this is not the case, undefined behavior results, hence this function is considered \"unsafe\" and should be used with care.\n\n\n\n\n\n"
+    "text": "unsafe_pointer_to_objref(p::Ptr)\n\nConvert a Ptr to an object reference. Assumes the pointer refers to a valid heap-allocated Julia object. If this is not the case, undefined behavior results, hence this function is considered \"unsafe\" and should be used with care.\n\nSee also: pointer_from_objref.\n\n\n\n\n\n"
 },
 
 {
@@ -15673,6 +15673,22 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
+    "location": "stdlib/Distributed/#Distributed.ClusterManager",
+    "page": "Distributed Computing",
+    "title": "Distributed.ClusterManager",
+    "category": "type",
+    "text": "ClusterManager\n\nSupertype for cluster managers, which control workers processes as a cluster. Cluster managers implement how workers can be added, removed and communicated with. SSHManager and LocalManager are subtypes of this.\n\n\n\n\n\n"
+},
+
+{
+    "location": "stdlib/Distributed/#Distributed.WorkerConfig",
+    "page": "Distributed Computing",
+    "title": "Distributed.WorkerConfig",
+    "category": "type",
+    "text": "WorkerConfig\n\nType used by ClusterManagers to control workers added to their clusters. Some fields are used by all cluster managers to access a host:\n\nio – the connection used to access the worker (a subtype of IO or Nothing)\nhost – the host address (either an AbstractString or Nothing)\nport – the port on the host used to connect to the worker (either an Int or Nothing)\n\nSome are used by the cluster manager to add workers to an already-initialized host:\n\ncount – the number of workers to be launched on the host\nexename – the path to the Julia executable on the host, defaults to \"$(Sys.BINDIR)/julia\" or \"$(Sys.BINDIR)/julia-debug\"\nexeflags – flags to use when lauching Julia remotely\n\nThe userdata field is used to store information for each worker by external managers.\n\nSome fields are used by SSHManager and similar managers:\n\ntunnel – true (use tunneling), false (do not use tunneling), or nothing (use default for the manager)\nbind_addr – the address on the remote host to bind to\nsshflags – flags to use in establishing the SSH connection\nmax_parallel – the maximum number of workers to connect to in parallel on the host\n\nSome fields are used by both LocalManagers and SSHManagers:\n\nconnect_at – determines whether this is a worker-to-worker or driver-to-worker setup call\nprocess – the process which will be connected (usually the manager will assign this during addprocs)\nospid – the process ID according to the host OS, used to interrupt worker processes\nenviron – private dictionary used to store temporary information by Local/SSH managers\nident – worker as identified by the ClusterManager\nconnect_idents – list of worker ids the worker must connect to if using a custom topology\nenable_threaded_blas – true, false, or nothing, whether to use threaded BLAS or not on the workers\n\n\n\n\n\n"
+},
+
+{
     "location": "stdlib/Distributed/#Distributed.launch",
     "page": "Distributed Computing",
     "title": "Distributed.launch",
@@ -15733,7 +15749,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Distributed Computing",
     "title": "Cluster Manager Interface",
     "category": "section",
-    "text": "This interface provides a mechanism to launch and manage Julia workers on different cluster environments. There are two types of managers present in Base: LocalManager, for launching additional workers on the same host, and SSHManager, for launching on remote hosts via ssh. TCP/IP sockets are used to connect and transport messages between processes. It is possible for Cluster Managers to provide a different transport.Distributed.launch\nDistributed.manage\nDistributed.kill(::ClusterManager, ::Int, ::WorkerConfig)\nDistributed.connect(::ClusterManager, ::Int, ::WorkerConfig)\nDistributed.init_worker\nDistributed.start_worker\nDistributed.process_messagesDocTestSetup = nothing"
+    "text": "This interface provides a mechanism to launch and manage Julia workers on different cluster environments. There are two types of managers present in Base: LocalManager, for launching additional workers on the same host, and SSHManager, for launching on remote hosts via ssh. TCP/IP sockets are used to connect and transport messages between processes. It is possible for Cluster Managers to provide a different transport.Distributed.ClusterManager\nDistributed.WorkerConfig\nDistributed.launch\nDistributed.manage\nDistributed.kill(::ClusterManager, ::Int, ::WorkerConfig)\nDistributed.connect(::ClusterManager, ::Int, ::WorkerConfig)\nDistributed.init_worker\nDistributed.start_worker\nDistributed.process_messagesDocTestSetup = nothing"
 },
 
 {
@@ -17337,6 +17353,22 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
+    "location": "stdlib/LinearAlgebra/#LinearAlgebra.SingularException",
+    "page": "Linear Algebra",
+    "title": "LinearAlgebra.SingularException",
+    "category": "type",
+    "text": "SingularException\n\nException thrown when the input matrix has one or more zero-valued eigenvalues, and is not invertible. A linear solve involving such a matrix cannot be computed. The info field indicates the location of (one of) the singular value(s).\n\n\n\n\n\n"
+},
+
+{
+    "location": "stdlib/LinearAlgebra/#LinearAlgebra.PosDefException",
+    "page": "Linear Algebra",
+    "title": "LinearAlgebra.PosDefException",
+    "category": "type",
+    "text": "PosDefException\n\nException thrown when the input matrix was not positive definite. Some linear algebra functions and factorizations are only applicable to positive definite matrices. The info field indicates the location of (one of) the eigenvalue(s) which is (are) less than/equal to 0.\n\n\n\n\n\n"
+},
+
+{
     "location": "stdlib/LinearAlgebra/#LinearAlgebra.dot",
     "page": "Linear Algebra",
     "title": "LinearAlgebra.dot",
@@ -18317,7 +18349,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Linear Algebra",
     "title": "Standard Functions",
     "category": "section",
-    "text": "Linear algebra functions in Julia are largely implemented by calling functions from LAPACK.  Sparse factorizations call functions from SuiteSparse.Base.:*(::AbstractMatrix, ::AbstractMatrix)\nBase.:\\(::AbstractMatrix, ::AbstractVecOrMat)\nLinearAlgebra.dot\nLinearAlgebra.cross\nLinearAlgebra.factorize\nLinearAlgebra.Diagonal\nLinearAlgebra.Bidiagonal\nLinearAlgebra.SymTridiagonal\nLinearAlgebra.Tridiagonal\nLinearAlgebra.Symmetric\nLinearAlgebra.Hermitian\nLinearAlgebra.LowerTriangular\nLinearAlgebra.UpperTriangular\nLinearAlgebra.UnitLowerTriangular\nLinearAlgebra.UnitUpperTriangular\nLinearAlgebra.UniformScaling\nLinearAlgebra.lu\nLinearAlgebra.lu!\nLinearAlgebra.cholesky\nLinearAlgebra.cholesky!\nLinearAlgebra.lowrankupdate\nLinearAlgebra.lowrankdowndate\nLinearAlgebra.lowrankupdate!\nLinearAlgebra.lowrankdowndate!\nLinearAlgebra.ldlt\nLinearAlgebra.ldlt!\nLinearAlgebra.qr\nLinearAlgebra.qr!\nLinearAlgebra.QR\nLinearAlgebra.QRCompactWY\nLinearAlgebra.QRPivoted\nLinearAlgebra.lq!\nLinearAlgebra.lq\nLinearAlgebra.bunchkaufman\nLinearAlgebra.bunchkaufman!\nLinearAlgebra.eigvals\nLinearAlgebra.eigvals!\nLinearAlgebra.eigmax\nLinearAlgebra.eigmin\nLinearAlgebra.eigvecs\nLinearAlgebra.eigen\nLinearAlgebra.eigen!\nLinearAlgebra.hessenberg\nLinearAlgebra.hessenberg!\nLinearAlgebra.schur!\nLinearAlgebra.schur\nLinearAlgebra.ordschur\nLinearAlgebra.ordschur!\nLinearAlgebra.svd\nLinearAlgebra.svd!\nLinearAlgebra.svdvals\nLinearAlgebra.svdvals!\nLinearAlgebra.Givens\nLinearAlgebra.givens\nLinearAlgebra.triu\nLinearAlgebra.triu!\nLinearAlgebra.tril\nLinearAlgebra.tril!\nLinearAlgebra.diagind\nLinearAlgebra.diag\nLinearAlgebra.diagm\nLinearAlgebra.rank\nLinearAlgebra.norm\nLinearAlgebra.opnorm\nLinearAlgebra.normalize!\nLinearAlgebra.normalize\nLinearAlgebra.cond\nLinearAlgebra.condskeel\nLinearAlgebra.tr\nLinearAlgebra.det\nLinearAlgebra.logdet\nLinearAlgebra.logabsdet\nBase.inv(::AbstractMatrix)\nLinearAlgebra.pinv\nLinearAlgebra.nullspace\nBase.kron\nLinearAlgebra.exp(::StridedMatrix{<:LinearAlgebra.BlasFloat})\nBase.:^(::AbstractMatrix, ::Number)\nBase.:^(::Number, ::AbstractMatrix)\nLinearAlgebra.log(::StridedMatrix)\nLinearAlgebra.sqrt(::StridedMatrix{<:Real})\nLinearAlgebra.cos(::StridedMatrix{<:Real})\nLinearAlgebra.sin(::StridedMatrix{<:Real})\nLinearAlgebra.sincos(::StridedMatrix{<:Real})\nLinearAlgebra.tan(::StridedMatrix{<:Real})\nLinearAlgebra.sec(::StridedMatrix)\nLinearAlgebra.csc(::StridedMatrix)\nLinearAlgebra.cot(::StridedMatrix)\nLinearAlgebra.cosh(::StridedMatrix)\nLinearAlgebra.sinh(::StridedMatrix)\nLinearAlgebra.tanh(::StridedMatrix)\nLinearAlgebra.sech(::StridedMatrix)\nLinearAlgebra.csch(::StridedMatrix)\nLinearAlgebra.coth(::StridedMatrix)\nLinearAlgebra.acos(::StridedMatrix)\nLinearAlgebra.asin(::StridedMatrix)\nLinearAlgebra.atan(::StridedMatrix)\nLinearAlgebra.asec(::StridedMatrix)\nLinearAlgebra.acsc(::StridedMatrix)\nLinearAlgebra.acot(::StridedMatrix)\nLinearAlgebra.acosh(::StridedMatrix)\nLinearAlgebra.asinh(::StridedMatrix)\nLinearAlgebra.atanh(::StridedMatrix)\nLinearAlgebra.asech(::StridedMatrix)\nLinearAlgebra.acsch(::StridedMatrix)\nLinearAlgebra.acoth(::StridedMatrix)\nLinearAlgebra.lyap\nLinearAlgebra.sylvester\nLinearAlgebra.issuccess\nLinearAlgebra.issymmetric\nLinearAlgebra.isposdef\nLinearAlgebra.isposdef!\nLinearAlgebra.istril\nLinearAlgebra.istriu\nLinearAlgebra.isdiag\nLinearAlgebra.ishermitian\nBase.transpose\nLinearAlgebra.transpose!\nBase.adjoint\nLinearAlgebra.adjoint!\nBase.copy(::Union{Transpose,Adjoint})\nLinearAlgebra.stride1\nLinearAlgebra.checksquare\nLinearAlgebra.peakflops"
+    "text": "Linear algebra functions in Julia are largely implemented by calling functions from LAPACK.  Sparse factorizations call functions from SuiteSparse.Base.:*(::AbstractMatrix, ::AbstractMatrix)\nBase.:\\(::AbstractMatrix, ::AbstractVecOrMat)\nLinearAlgebra.SingularException\nLinearAlgebra.PosDefException\nLinearAlgebra.dot\nLinearAlgebra.cross\nLinearAlgebra.factorize\nLinearAlgebra.Diagonal\nLinearAlgebra.Bidiagonal\nLinearAlgebra.SymTridiagonal\nLinearAlgebra.Tridiagonal\nLinearAlgebra.Symmetric\nLinearAlgebra.Hermitian\nLinearAlgebra.LowerTriangular\nLinearAlgebra.UpperTriangular\nLinearAlgebra.UnitLowerTriangular\nLinearAlgebra.UnitUpperTriangular\nLinearAlgebra.UniformScaling\nLinearAlgebra.lu\nLinearAlgebra.lu!\nLinearAlgebra.cholesky\nLinearAlgebra.cholesky!\nLinearAlgebra.lowrankupdate\nLinearAlgebra.lowrankdowndate\nLinearAlgebra.lowrankupdate!\nLinearAlgebra.lowrankdowndate!\nLinearAlgebra.ldlt\nLinearAlgebra.ldlt!\nLinearAlgebra.qr\nLinearAlgebra.qr!\nLinearAlgebra.QR\nLinearAlgebra.QRCompactWY\nLinearAlgebra.QRPivoted\nLinearAlgebra.lq!\nLinearAlgebra.lq\nLinearAlgebra.bunchkaufman\nLinearAlgebra.bunchkaufman!\nLinearAlgebra.eigvals\nLinearAlgebra.eigvals!\nLinearAlgebra.eigmax\nLinearAlgebra.eigmin\nLinearAlgebra.eigvecs\nLinearAlgebra.eigen\nLinearAlgebra.eigen!\nLinearAlgebra.hessenberg\nLinearAlgebra.hessenberg!\nLinearAlgebra.schur!\nLinearAlgebra.schur\nLinearAlgebra.ordschur\nLinearAlgebra.ordschur!\nLinearAlgebra.svd\nLinearAlgebra.svd!\nLinearAlgebra.svdvals\nLinearAlgebra.svdvals!\nLinearAlgebra.Givens\nLinearAlgebra.givens\nLinearAlgebra.triu\nLinearAlgebra.triu!\nLinearAlgebra.tril\nLinearAlgebra.tril!\nLinearAlgebra.diagind\nLinearAlgebra.diag\nLinearAlgebra.diagm\nLinearAlgebra.rank\nLinearAlgebra.norm\nLinearAlgebra.opnorm\nLinearAlgebra.normalize!\nLinearAlgebra.normalize\nLinearAlgebra.cond\nLinearAlgebra.condskeel\nLinearAlgebra.tr\nLinearAlgebra.det\nLinearAlgebra.logdet\nLinearAlgebra.logabsdet\nBase.inv(::AbstractMatrix)\nLinearAlgebra.pinv\nLinearAlgebra.nullspace\nBase.kron\nLinearAlgebra.exp(::StridedMatrix{<:LinearAlgebra.BlasFloat})\nBase.:^(::AbstractMatrix, ::Number)\nBase.:^(::Number, ::AbstractMatrix)\nLinearAlgebra.log(::StridedMatrix)\nLinearAlgebra.sqrt(::StridedMatrix{<:Real})\nLinearAlgebra.cos(::StridedMatrix{<:Real})\nLinearAlgebra.sin(::StridedMatrix{<:Real})\nLinearAlgebra.sincos(::StridedMatrix{<:Real})\nLinearAlgebra.tan(::StridedMatrix{<:Real})\nLinearAlgebra.sec(::StridedMatrix)\nLinearAlgebra.csc(::StridedMatrix)\nLinearAlgebra.cot(::StridedMatrix)\nLinearAlgebra.cosh(::StridedMatrix)\nLinearAlgebra.sinh(::StridedMatrix)\nLinearAlgebra.tanh(::StridedMatrix)\nLinearAlgebra.sech(::StridedMatrix)\nLinearAlgebra.csch(::StridedMatrix)\nLinearAlgebra.coth(::StridedMatrix)\nLinearAlgebra.acos(::StridedMatrix)\nLinearAlgebra.asin(::StridedMatrix)\nLinearAlgebra.atan(::StridedMatrix)\nLinearAlgebra.asec(::StridedMatrix)\nLinearAlgebra.acsc(::StridedMatrix)\nLinearAlgebra.acot(::StridedMatrix)\nLinearAlgebra.acosh(::StridedMatrix)\nLinearAlgebra.asinh(::StridedMatrix)\nLinearAlgebra.atanh(::StridedMatrix)\nLinearAlgebra.asech(::StridedMatrix)\nLinearAlgebra.acsch(::StridedMatrix)\nLinearAlgebra.acoth(::StridedMatrix)\nLinearAlgebra.lyap\nLinearAlgebra.sylvester\nLinearAlgebra.issuccess\nLinearAlgebra.issymmetric\nLinearAlgebra.isposdef\nLinearAlgebra.isposdef!\nLinearAlgebra.istril\nLinearAlgebra.istriu\nLinearAlgebra.isdiag\nLinearAlgebra.ishermitian\nBase.transpose\nLinearAlgebra.transpose!\nBase.adjoint\nLinearAlgebra.adjoint!\nBase.copy(::Union{Transpose,Adjoint})\nLinearAlgebra.stride1\nLinearAlgebra.checksquare\nLinearAlgebra.peakflops"
 },
 
 {
@@ -19893,7 +19925,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Pkg",
     "title": "Pkg",
     "category": "section",
-    "text": "Pkg is Julia\'s builtin package manager, and handles operations such as installing, updating and removing packages.note: Note\nWhat follows is a very brief introduction to Pkg. It is highly recommended to read the full manual, which is available here: https://julialang.github.io/Pkg.jl/v1/.import Markdown\nfile = joinpath(Sys.STDLIB, \"Pkg\", \"docs\", \"src\", \"getting-started.md\")\nstr = read(file, String)\nstr = replace(str, r\"^#.*$\"m => \"\")\nMarkdown.parse(str)"
+    "text": "Pkg is Julia\'s builtin package manager, and handles operations such as installing, updating and removing packages.note: Note\nWhat follows is a very brief introduction to Pkg. It is highly recommended to read the full manual, which is available here: https://julialang.github.io/Pkg.jl/v1/.import Markdown\nfile = joinpath(Sys.STDLIB, \"Pkg\", \"docs\", \"src\", \"getting-started.md\")\nstr = read(file, String)\nstr = replace(str, r\"^#.*$\"m => \"\")\nstr = replace(str, \"[API Reference](@ref)\" =>\n          \"[API Reference](https://julialang.github.io/Pkg.jl/v1/api/)\")\nMarkdown.parse(str)"
 },
 
 {
@@ -20185,6 +20217,22 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
+    "location": "stdlib/Random/#Random.Random",
+    "page": "Random Numbers",
+    "title": "Random.Random",
+    "category": "module",
+    "text": "Random\n\nSupport for generating random numbers. Provides rand, randn, AbstractRNG, MersenneTwister, and RandomDevice.\n\n\n\n\n\n"
+},
+
+{
+    "location": "stdlib/Random/#Random-numbers-module-1",
+    "page": "Random Numbers",
+    "title": "Random numbers module",
+    "category": "section",
+    "text": "Random.Random"
+},
+
+{
     "location": "stdlib/Random/#Base.rand",
     "page": "Random Numbers",
     "title": "Base.rand",
@@ -20337,6 +20385,14 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
+    "location": "stdlib/Random/#Random.AbstractRNG",
+    "page": "Random Numbers",
+    "title": "Random.AbstractRNG",
+    "category": "type",
+    "text": "AbstractRNG\n\nSupertype for random number generators such as MersenneTwister and RandomDevice.\n\n\n\n\n\n"
+},
+
+{
     "location": "stdlib/Random/#Random.MersenneTwister",
     "page": "Random Numbers",
     "title": "Random.MersenneTwister",
@@ -20357,7 +20413,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Random Numbers",
     "title": "Generators (creation and seeding)",
     "category": "section",
-    "text": "Random.seed!\nRandom.MersenneTwister\nRandom.RandomDevice"
+    "text": "Random.seed!\nRandom.AbstractRNG\nRandom.MersenneTwister\nRandom.RandomDevice"
 },
 
 {
@@ -20505,6 +20561,22 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
+    "location": "stdlib/SharedArrays/#SharedArrays.SharedVector",
+    "page": "Shared Arrays",
+    "title": "SharedArrays.SharedVector",
+    "category": "type",
+    "text": "SharedVector\n\nA one-dimensional SharedArray.\n\n\n\n\n\n"
+},
+
+{
+    "location": "stdlib/SharedArrays/#SharedArrays.SharedMatrix",
+    "page": "Shared Arrays",
+    "title": "SharedArrays.SharedMatrix",
+    "category": "type",
+    "text": "SharedMatrix\n\nA two-dimensional SharedArray.\n\n\n\n\n\n"
+},
+
+{
     "location": "stdlib/SharedArrays/#Distributed.procs-Tuple{SharedArray}",
     "page": "Shared Arrays",
     "title": "Distributed.procs",
@@ -20541,7 +20613,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Shared Arrays",
     "title": "Shared Arrays",
     "category": "section",
-    "text": "SharedArrays.SharedArray\nSharedArrays.procs(::SharedArray)\nSharedArrays.sdata\nSharedArrays.indexpids\nSharedArrays.localindices"
+    "text": "SharedArrays.SharedArray\nSharedArrays.SharedVector\nSharedArrays.SharedMatrix\nSharedArrays.procs(::SharedArray)\nSharedArrays.sdata\nSharedArrays.indexpids\nSharedArrays.localindices"
 },
 
 {
@@ -20717,7 +20789,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Sockets",
     "title": "Base.bind",
     "category": "function",
-    "text": "bind(chnl::Channel, task::Task)\n\nAssociate the lifetime of chnl with a task. Channel chnl is automatically closed when the task terminates. Any uncaught exception in the task is propagated to all waiters on chnl.\n\nThe chnl object can be explicitly closed independent of task termination. Terminating tasks have no effect on already closed Channel objects.\n\nWhen a channel is bound to multiple tasks, the first task to terminate will close the channel. When multiple channels are bound to the same task, termination of the task will close all of the bound channels.\n\nExamples\n\njulia> c = Channel(0);\n\njulia> task = @async foreach(i->put!(c, i), 1:4);\n\njulia> bind(c,task);\n\njulia> for i in c\n           @show i\n       end;\ni = 1\ni = 2\ni = 3\ni = 4\n\njulia> isopen(c)\nfalse\n\njulia> c = Channel(0);\n\njulia> task = @async (put!(c,1);error(\"foo\"));\n\njulia> bind(c,task);\n\njulia> take!(c)\n1\n\njulia> put!(c,1);\nERROR: foo\nStacktrace:\n[...]\n\n\n\n\n\nbind(socket::Union{UDPSocket, TCPSocket}, host::IPAddr, port::Integer; ipv6only=false, reuseaddr=false, kws...)\n\nBind socket to the given host:port. Note that 0.0.0.0 will listen on all devices.\n\nThe ipv6only parameter disables dual stack mode. If ipv6only=true, only an IPv6 stack is created.\nIf reuseaddr=true, multiple threads or processes can bind to the same address without error if they all set reuseaddr=true, but only the last to bind will receive any traffic.\n\n\n\n\n\n"
+    "text": "bind(socket::Union{UDPSocket, TCPSocket}, host::IPAddr, port::Integer; ipv6only=false, reuseaddr=false, kws...)\n\nBind socket to the given host:port. Note that 0.0.0.0 will listen on all devices.\n\nThe ipv6only parameter disables dual stack mode. If ipv6only=true, only an IPv6 stack is created.\nIf reuseaddr=true, multiple threads or processes can bind to the same address without error if they all set reuseaddr=true, but only the last to bind will receive any traffic.\n\n\n\n\n\nbind(chnl::Channel, task::Task)\n\nAssociate the lifetime of chnl with a task. Channel chnl is automatically closed when the task terminates. Any uncaught exception in the task is propagated to all waiters on chnl.\n\nThe chnl object can be explicitly closed independent of task termination. Terminating tasks have no effect on already closed Channel objects.\n\nWhen a channel is bound to multiple tasks, the first task to terminate will close the channel. When multiple channels are bound to the same task, termination of the task will close all of the bound channels.\n\nExamples\n\njulia> c = Channel(0);\n\njulia> task = @async foreach(i->put!(c, i), 1:4);\n\njulia> bind(c,task);\n\njulia> for i in c\n           @show i\n       end;\ni = 1\ni = 2\ni = 3\ni = 4\n\njulia> isopen(c)\nfalse\n\njulia> c = Channel(0);\n\njulia> task = @async (put!(c,1);error(\"foo\"));\n\njulia> bind(c,task);\n\njulia> take!(c)\n1\n\njulia> put!(c,1);\nERROR: foo\nStacktrace:\n[...]\n\n\n\n\n\n"
 },
 
 {
