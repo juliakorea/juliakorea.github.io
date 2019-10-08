@@ -4,7 +4,7 @@
  <title>The Julia Blog</title>
  <link href="http://julialang.org/blog/feed.xml" rel="self"/>
  <link href="http://julialang.org/blog"/>
- <updated>2018-06-18T13:15:38+09:00</updated>
+ <updated>2019-10-08T12:17:28+09:00</updated>
  <id>http://julialang.org/blog</id>
  <author>
    <name>Julia Developers</name>
@@ -381,7 +381,7 @@ julia&amp;gt; 2𝜋
 6
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
-&lt;h3 id=&quot;the-phonogram-symbol-ⓟ&quot;&gt;The phonogram symbol Ⓟ&lt;/h3&gt;
+&lt;h3 id=&quot;the-phonogram-symbol-Ⓟ&quot;&gt;The phonogram symbol Ⓟ&lt;/h3&gt;
 
 &lt;p&gt;Not all fonts contain a suitable Greek π at &lt;code class=&quot;highlighter-rouge&quot;&gt;U+03C0&lt;/code&gt;. A few expensive fonts such as &lt;a href=&quot;https://www.typography.com/fonts/gotham/overview/&quot;&gt;Gotham&lt;/a&gt; offer the circled P symbol at &lt;code class=&quot;highlighter-rouge&quot;&gt;U+03c0&lt;/code&gt; instead of π. This is the “phonogram” (or “phonorecord”) symbol, which usually lives at &lt;code class=&quot;highlighter-rouge&quot;&gt;U+2117&lt;/code&gt; (the one at &lt;code class=&quot;highlighter-rouge&quot;&gt;U+24C5&lt;/code&gt; is also used), and it’s like the copyright symbol © but for sound recordings. The story behind this is that, particularly before the days of Unicode standardization, font companies sometimes favoured pragmatism over correctness. According to &lt;a href=&quot;http://www.typophile.com/node/45116&quot;&gt;David Berlow&lt;/a&gt;:&lt;/p&gt;
 
@@ -624,19 +624,19 @@ Happy coding!&lt;/p&gt;
 &lt;div class=&quot;footnotes&quot;&gt;
   &lt;ol&gt;
     &lt;li id=&quot;fn:greenspun&quot;&gt;
-      &lt;p&gt;出自 &lt;a href=&quot;https://en.wikipedia.org/wiki/Greenspun%27s_tenth_rule&quot;&gt;Philip Greenspun&lt;/a&gt;&amp;nbsp;&lt;a href=&quot;#fnref:greenspun&quot; class=&quot;reversefootnote&quot;&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
+      &lt;p&gt;出自 &lt;a href=&quot;https://en.wikipedia.org/wiki/Greenspun%27s_tenth_rule&quot;&gt;Philip Greenspun&lt;/a&gt; &lt;a href=&quot;#fnref:greenspun&quot; class=&quot;reversefootnote&quot;&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
     &lt;/li&gt;
     &lt;li id=&quot;fn:tf&quot;&gt;
-      &lt;p&gt;在這邊我們使用 TensorFlow 當作例子, 但也可以用其他”執行前定義(define-before-run)”的框架替換，像是 CNTK 還有 MXNet。&amp;nbsp;&lt;a href=&quot;#fnref:tf&quot; class=&quot;reversefootnote&quot;&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
+      &lt;p&gt;在這邊我們使用 TensorFlow 當作例子, 但也可以用其他”執行前定義(define-before-run)”的框架替換，像是 CNTK 還有 MXNet。 &lt;a href=&quot;#fnref:tf&quot; class=&quot;reversefootnote&quot;&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
     &lt;/li&gt;
     &lt;li id=&quot;fn:ast&quot;&gt;
-      &lt;p&gt;TensorFlow 的 graph 實際上是一個基於資料流的語法樹（AST）。&amp;nbsp;&lt;a href=&quot;#fnref:ast&quot; class=&quot;reversefootnote&quot;&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
+      &lt;p&gt;TensorFlow 的 graph 實際上是一個基於資料流的語法樹（AST）。 &lt;a href=&quot;#fnref:ast&quot; class=&quot;reversefootnote&quot;&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
     &lt;/li&gt;
     &lt;li id=&quot;fn:types&quot;&gt;
-      &lt;p&gt;雖然我們知道現存的系統內部將整個系統從完全的動態（PyTorch 以及他的 ATen 後端）延伸到極度的靜態（在 TensorFlow 的 XLA 及 MXNet 中，在運算 graph 之前所有維度都是已知的）&amp;nbsp;&lt;a href=&quot;#fnref:types&quot; class=&quot;reversefootnote&quot;&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
+      &lt;p&gt;雖然我們知道現存的系統內部將整個系統從完全的動態（PyTorch 以及他的 ATen 後端）延伸到極度的靜態（在 TensorFlow 的 XLA 及 MXNet 中，在運算 graph 之前所有維度都是已知的） &lt;a href=&quot;#fnref:types&quot; class=&quot;reversefootnote&quot;&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
     &lt;/li&gt;
     &lt;li id=&quot;fn:chris&quot;&gt;
-      &lt;p&gt;Google Brain 正在增加僱用像是&lt;a href=&quot;https://techcrunch.com/2017/08/14/swift-creator-chris-lattner-joins-google-brain-after-tesla-autopilot-stint/&quot;&gt;Chris Lattner&lt;/a&gt;的程式語言專家，在這時間點上是個很有趣的發展&amp;nbsp;&lt;a href=&quot;#fnref:chris&quot; class=&quot;reversefootnote&quot;&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
+      &lt;p&gt;Google Brain 正在增加僱用像是&lt;a href=&quot;https://techcrunch.com/2017/08/14/swift-creator-chris-lattner-joins-google-brain-after-tesla-autopilot-stint/&quot;&gt;Chris Lattner&lt;/a&gt;的程式語言專家，在這時間點上是個很有趣的發展 &lt;a href=&quot;#fnref:chris&quot; class=&quot;reversefootnote&quot;&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
     &lt;/li&gt;
   &lt;/ol&gt;
 &lt;/div&gt;
@@ -742,19 +742,19 @@ Happy coding!&lt;/p&gt;
 &lt;div class=&quot;footnotes&quot;&gt;
   &lt;ol&gt;
     &lt;li id=&quot;fn:greenspun&quot;&gt;
-      &lt;p&gt;引申自 &lt;a href=&quot;https://en.wikipedia.org/wiki/Greenspun%27s_tenth_rule&quot;&gt;Philip Greenspun&lt;/a&gt;&amp;nbsp;&lt;a href=&quot;#fnref:greenspun&quot; class=&quot;reversefootnote&quot;&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
+      &lt;p&gt;引申自 &lt;a href=&quot;https://en.wikipedia.org/wiki/Greenspun%27s_tenth_rule&quot;&gt;Philip Greenspun&lt;/a&gt; &lt;a href=&quot;#fnref:greenspun&quot; class=&quot;reversefootnote&quot;&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
     &lt;/li&gt;
     &lt;li id=&quot;fn:tf&quot;&gt;
-      &lt;p&gt;本文以 TensorFlow 为例。读者可以自行替换为其它“先定义—后计算”类型的框架，比如 CNTK 或 MXNet。&amp;nbsp;&lt;a href=&quot;#fnref:tf&quot; class=&quot;reversefootnote&quot;&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
+      &lt;p&gt;本文以 TensorFlow 为例。读者可以自行替换为其它“先定义—后计算”类型的框架，比如 CNTK 或 MXNet。 &lt;a href=&quot;#fnref:tf&quot; class=&quot;reversefootnote&quot;&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
     &lt;/li&gt;
     &lt;li id=&quot;fn:ast&quot;&gt;
-      &lt;p&gt;TensorFlow 的图本质上是一种基于数据流的抽象语法树（AST）。&amp;nbsp;&lt;a href=&quot;#fnref:ast&quot; class=&quot;reversefootnote&quot;&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
+      &lt;p&gt;TensorFlow 的图本质上是一种基于数据流的抽象语法树（AST）。 &lt;a href=&quot;#fnref:ast&quot; class=&quot;reversefootnote&quot;&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
     &lt;/li&gt;
     &lt;li id=&quot;fn:types&quot;&gt;
-      &lt;p&gt;不可否认，当前系统的内部已全范围覆盖从完全动态（PyTorch 和它的 ATen 后端）到异常地静态（TensorFlow 的 XLA 和 MXNet 中，所有维度在图运算之前都已知）等设计。&amp;nbsp;&lt;a href=&quot;#fnref:types&quot; class=&quot;reversefootnote&quot;&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
+      &lt;p&gt;不可否认，当前系统的内部已全范围覆盖从完全动态（PyTorch 和它的 ATen 后端）到异常地静态（TensorFlow 的 XLA 和 MXNet 中，所有维度在图运算之前都已知）等设计。 &lt;a href=&quot;#fnref:types&quot; class=&quot;reversefootnote&quot;&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
     &lt;/li&gt;
     &lt;li id=&quot;fn:chris&quot;&gt;
-      &lt;p&gt;一个有趣的佐证是，Google Brain 正加大力度雇用编程语言专家，比如 &lt;a href=&quot;https://techcrunch.com/2017/08/14/swift-creator-chris-lattner-joins-google-brain-after-tesla-autopilot-stint/&quot;&gt;Chris Lattner&lt;/a&gt;。&amp;nbsp;&lt;a href=&quot;#fnref:chris&quot; class=&quot;reversefootnote&quot;&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
+      &lt;p&gt;一个有趣的佐证是，Google Brain 正加大力度雇用编程语言专家，比如 &lt;a href=&quot;https://techcrunch.com/2017/08/14/swift-creator-chris-lattner-joins-google-brain-after-tesla-autopilot-stint/&quot;&gt;Chris Lattner&lt;/a&gt;。 &lt;a href=&quot;#fnref:chris&quot; class=&quot;reversefootnote&quot;&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
     &lt;/li&gt;
   &lt;/ol&gt;
 &lt;/div&gt;
@@ -859,19 +859,19 @@ By Mike Innes (Julia Computing), David Barber (UCL), Tim Besard (UGent), James B
 &lt;div class=&quot;footnotes&quot;&gt;
   &lt;ol&gt;
     &lt;li id=&quot;fn:greenspun&quot;&gt;
-      &lt;p&gt;After &lt;a href=&quot;https://en.wikipedia.org/wiki/Greenspun%27s_tenth_rule&quot;&gt;Philip Greenspun&lt;/a&gt;&amp;nbsp;&lt;a href=&quot;#fnref:greenspun&quot; class=&quot;reversefootnote&quot;&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
+      &lt;p&gt;After &lt;a href=&quot;https://en.wikipedia.org/wiki/Greenspun%27s_tenth_rule&quot;&gt;Philip Greenspun&lt;/a&gt; &lt;a href=&quot;#fnref:greenspun&quot; class=&quot;reversefootnote&quot;&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
     &lt;/li&gt;
     &lt;li id=&quot;fn:tf&quot;&gt;
-      &lt;p&gt;We use TensorFlow for example, but could substitute other “define-before-run” frameworks like CNTK or MXNet.&amp;nbsp;&lt;a href=&quot;#fnref:tf&quot; class=&quot;reversefootnote&quot;&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
+      &lt;p&gt;We use TensorFlow for example, but could substitute other “define-before-run” frameworks like CNTK or MXNet. &lt;a href=&quot;#fnref:tf&quot; class=&quot;reversefootnote&quot;&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
     &lt;/li&gt;
     &lt;li id=&quot;fn:ast&quot;&gt;
-      &lt;p&gt;TensorFlow’s graph is effectively a dataflow-based AST (Abstract Syntax Tree).&amp;nbsp;&lt;a href=&quot;#fnref:ast&quot; class=&quot;reversefootnote&quot;&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
+      &lt;p&gt;TensorFlow’s graph is effectively a dataflow-based AST (Abstract Syntax Tree). &lt;a href=&quot;#fnref:ast&quot; class=&quot;reversefootnote&quot;&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
     &lt;/li&gt;
     &lt;li id=&quot;fn:types&quot;&gt;
-      &lt;p&gt;Though we note that, internally, current systems span the gamut from fully dynamic (PyTorch and its ATen backend) to unusually static (TensorFlow’s XLA and MXNet, where all dimensions are known before the graph is run).&amp;nbsp;&lt;a href=&quot;#fnref:types&quot; class=&quot;reversefootnote&quot;&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
+      &lt;p&gt;Though we note that, internally, current systems span the gamut from fully dynamic (PyTorch and its ATen backend) to unusually static (TensorFlow’s XLA and MXNet, where all dimensions are known before the graph is run). &lt;a href=&quot;#fnref:types&quot; class=&quot;reversefootnote&quot;&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
     &lt;/li&gt;
     &lt;li id=&quot;fn:chris&quot;&gt;
-      &lt;p&gt;Google Brain’s increasing hiring of programming languages experts, such as &lt;a href=&quot;https://techcrunch.com/2017/08/14/swift-creator-chris-lattner-joins-google-brain-after-tesla-autopilot-stint/&quot;&gt;Chris Lattner&lt;/a&gt;, is an interesting development on this point.&amp;nbsp;&lt;a href=&quot;#fnref:chris&quot; class=&quot;reversefootnote&quot;&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
+      &lt;p&gt;Google Brain’s increasing hiring of programming languages experts, such as &lt;a href=&quot;https://techcrunch.com/2017/08/14/swift-creator-chris-lattner-joins-google-brain-after-tesla-autopilot-stint/&quot;&gt;Chris Lattner&lt;/a&gt;, is an interesting development on this point. &lt;a href=&quot;#fnref:chris&quot; class=&quot;reversefootnote&quot;&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
     &lt;/li&gt;
   &lt;/ol&gt;
 &lt;/div&gt;
@@ -5089,13 +5089,13 @@ University.&lt;/p&gt;
 &lt;div class=&quot;footnotes&quot;&gt;
   &lt;ol&gt;
     &lt;li id=&quot;fn:1&quot;&gt;
-      &lt;p&gt;See the &lt;a href=&quot;https://github.com/JuliaGPU/CUDAnative.jl/blob/0721783db9ac4cc2c2948cbf8cbff4aa5f7c4271/README.md#object-arguments&quot;&gt;README&lt;/a&gt; for a note on how expensive this currently is.&amp;nbsp;&lt;a href=&quot;#fnref:1&quot; class=&quot;reversefootnote&quot;&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
+      &lt;p&gt;See the &lt;a href=&quot;https://github.com/JuliaGPU/CUDAnative.jl/blob/0721783db9ac4cc2c2948cbf8cbff4aa5f7c4271/README.md#object-arguments&quot;&gt;README&lt;/a&gt; for a note on how expensive this currently is. &lt;a href=&quot;#fnref:1&quot; class=&quot;reversefootnote&quot;&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
     &lt;/li&gt;
     &lt;li id=&quot;fn:2&quot;&gt;
-      &lt;p&gt;The measurements include memory transfer time, which is why a CPU implementation was not included (realistically, data would be kept on the GPU as long as possible, making it an unfair comparison).&amp;nbsp;&lt;a href=&quot;#fnref:2&quot; class=&quot;reversefootnote&quot;&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
+      &lt;p&gt;The measurements include memory transfer time, which is why a CPU implementation was not included (realistically, data would be kept on the GPU as long as possible, making it an unfair comparison). &lt;a href=&quot;#fnref:2&quot; class=&quot;reversefootnote&quot;&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
     &lt;/li&gt;
     &lt;li id=&quot;fn:3&quot;&gt;
-      &lt;p&gt;Bounds-checked arrays are not supported yet, due to &lt;a href=&quot;https://github.com/JuliaGPU/CUDAnative.jl/issues/4&quot;&gt;a bug in the NVIDIA PTX compiler&lt;/a&gt;.&amp;nbsp;&lt;a href=&quot;#fnref:3&quot; class=&quot;reversefootnote&quot;&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
+      &lt;p&gt;Bounds-checked arrays are not supported yet, due to &lt;a href=&quot;https://github.com/JuliaGPU/CUDAnative.jl/issues/4&quot;&gt;a bug in the NVIDIA PTX compiler&lt;/a&gt;. &lt;a href=&quot;#fnref:3&quot; class=&quot;reversefootnote&quot;&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
     &lt;/li&gt;
   &lt;/ol&gt;
 &lt;/div&gt;
