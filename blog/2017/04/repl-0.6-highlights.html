@@ -259,10 +259,10 @@ In this blog post, we look into some of these changes and customizations to the 
 <span class="n">f</span> <span class="x">(</span><span class="n">generic</span> <span class="k">function</span><span class="nf"> with</span> <span class="mi">1</span> <span class="n">method</span><span class="x">)</span>
 
 <span class="n">julia</span><span class="o">&gt;</span> <span class="nd">@time</span> <span class="n">f</span><span class="x">();</span>
-  <span class="mf">0.052948</span> <span class="n">seconds</span> <span class="x">(</span><span class="mf">25.05</span> <span class="n">k</span> <span class="n">allocations</span><span class="x">:</span> <span class="mf">8.769</span> <span class="n">MiB</span><span class="x">)</span>
+  <span class="mf">0.052948</span> <span class="n">seconds</span> <span class="x">(</span><span class="mf">25.05</span> <span class="n">k</span> <span class="n">allocations</span><span class="o">:</span> <span class="mf">8.769</span> <span class="n">MiB</span><span class="x">)</span>
 </code></pre></div></div>
 
-<p>If you wanted to try out this code in 0.5, you would typically copy the code into a text editor, remove the <code class="highlighter-rouge">julia&gt; </code> prompt, remove the output, and then finally have code that looked like:</p>
+<p>If you wanted to try out this code in 0.5, you would typically copy the code into a text editor, remove the <code class="language-plaintext highlighter-rouge">julia&gt; </code> prompt, remove the output, and then finally have code that looked like:</p>
 
 <div class="language-julia highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">f</span><span class="x">()</span> <span class="o">=</span> <span class="n">rand</span><span class="x">(</span><span class="mi">10</span><span class="o">^</span><span class="mi">6</span><span class="x">);</span>
 
@@ -270,7 +270,7 @@ In this blog post, we look into some of these changes and customizations to the 
 </code></pre></div></div>
 
 <p>which could then be pasted back into the REPL to be executed.
-In 0.6, the REPL comes with a feature called <em>prompt pasting</em> by which a pasted expression starting with <code class="highlighter-rouge">julia&gt; </code> automatically has prompts and eventual output scrubbed before being executed.
+In 0.6, the REPL comes with a feature called <em>prompt pasting</em> by which a pasted expression starting with <code class="language-plaintext highlighter-rouge">julia&gt; </code> automatically has prompts and eventual output scrubbed before being executed.
 If you have a 0.6 REPL currently at hand, you can try to copy and paste the example with the prompt and output above directly into the REPL and you will see that it works in exactly the same way as if we had manually removed them.</p>
 
 <p>Unfortunately, for technical reasons (no support for bracket pasting), this feature does not work in the standard cmd-terminal on Windows.
@@ -300,14 +300,14 @@ In 0.6, this is what is currently shown for the same error:</p>
 Stack traces also no longer print entirely in bold; only function names and line information now appear in bold.
 These changes visually separate the most frequently sought information (the associated error message, function names and line information) from the surrounding text, making that information much easier to pick out.
 Additionally, each stack frame in the stack trace prints numbered, making individual stack frames easier to refer to.
-(Apart from these changes to stack trace presentation, <code class="highlighter-rouge">BoundsErrors</code> no longer display with the associated collection’s contents, decreasing visual noise.)
-Furthermore, you can now customize stack frame function and line information print colors by setting the environment variables <code class="highlighter-rouge">JULIA_STACKFRAME_FUNCTION_COLOR</code> and <code class="highlighter-rouge">JULIA_STACKFRAME_LINEINFO_COLOR</code> respectively.</p>
+(Apart from these changes to stack trace presentation, <code class="language-plaintext highlighter-rouge">BoundsErrors</code> no longer display with the associated collection’s contents, decreasing visual noise.)
+Furthermore, you can now customize stack frame function and line information print colors by setting the environment variables <code class="language-plaintext highlighter-rouge">JULIA_STACKFRAME_FUNCTION_COLOR</code> and <code class="language-plaintext highlighter-rouge">JULIA_STACKFRAME_LINEINFO_COLOR</code> respectively.</p>
 
 <p>For example, setting</p>
 
-<div class="language-julia highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">julia</span><span class="o">&gt;</span> <span class="n">ENV</span><span class="x">[</span><span class="s">"JULIA_STACKFRAME_LINEINFO_COLOR"</span><span class="x">]</span> <span class="o">=</span> <span class="x">:</span><span class="n">cyan</span><span class="x">;</span>
+<div class="language-julia highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">julia</span><span class="o">&gt;</span> <span class="nb">ENV</span><span class="x">[</span><span class="s">"JULIA_STACKFRAME_LINEINFO_COLOR"</span><span class="x">]</span> <span class="o">=</span> <span class="o">:</span><span class="n">cyan</span><span class="x">;</span>
 
-<span class="n">julia</span><span class="o">&gt;</span> <span class="n">ENV</span><span class="x">[</span><span class="s">"JULIA_STACKFRAME_FUNCTION_COLOR"</span><span class="x">]</span> <span class="o">=</span> <span class="x">:</span><span class="n">yellow</span><span class="x">;</span>
+<span class="n">julia</span><span class="o">&gt;</span> <span class="nb">ENV</span><span class="x">[</span><span class="s">"JULIA_STACKFRAME_FUNCTION_COLOR"</span><span class="x">]</span> <span class="o">=</span> <span class="o">:</span><span class="n">yellow</span><span class="x">;</span>
 </code></pre></div></div>
 
 <p>and rerunning the example above yields</p>
@@ -315,20 +315,20 @@ Furthermore, you can now customize stack frame function and line information pri
 <p><img src="/images/blog/2017-02-24-repl0.6/0.6stacktrace_conf.png" alt="Stacktrace in 0.6 with configured colors" /></p>
 
 <p>In addition to the visual changes to the stack trace, there is also a new interactive feature, possible now that we can refer to stack frames by number.
-After a stack trace has been printed, you can simply enter the number of one of the stack frames in the REPL, press <code class="highlighter-rouge">CTRL + Q</code> and the file will be opened in
+After a stack trace has been printed, you can simply enter the number of one of the stack frames in the REPL, press <code class="language-plaintext highlighter-rouge">CTRL + Q</code> and the file will be opened in
 an editor at the line number corresponding to that stack frame.
-To set the editor, use the environment variable <code class="highlighter-rouge">EDITOR</code>, for example <code class="highlighter-rouge">ENV["EDITOR"] = "subl"</code> for the Sublime Text editor.
+To set the editor, use the environment variable <code class="language-plaintext highlighter-rouge">EDITOR</code>, for example <code class="language-plaintext highlighter-rouge">ENV["EDITOR"] = "subl"</code> for the Sublime Text editor.
 This can be used when you quickly want to fix a typo or just to jump around with the editor in the call stack leading up to the error.
 Note that it is currently not possible to open the location of a stack frame that refers to code directly evaluated in the REPL.</p>
 
 <h2 id="more-colors">More colors</h2>
 
 <p>While not strictly related to the REPL, it is still within the scope of this post to describe some of the changes made to the color printing functionalities in Julia 0.6.
-Previously, it was only possible to use 8 colors for printing (see <code class="highlighter-rouge">help?&gt; Base.text_colors</code>) by using the function <code class="highlighter-rouge">print_with_color</code>.
-In 0.6, light versions of these colors (prefixed by <code class="highlighter-rouge">light_</code>) are also supported, increasing the number of named colors to 16.
+Previously, it was only possible to use 8 colors for printing (see <code class="language-plaintext highlighter-rouge">help?&gt; Base.text_colors</code>) by using the function <code class="language-plaintext highlighter-rouge">print_with_color</code>.
+In 0.6, light versions of these colors (prefixed by <code class="language-plaintext highlighter-rouge">light_</code>) are also supported, increasing the number of named colors to 16.
 In addition, an integer between 0 and 255 can now be used as a color (see <a href="https://commons.wikimedia.org/wiki/File:Xterm_256color_chart.svg">this chart</a> for a reference).
 These new colors are possible to use wherever an option previously existed to change the color of some element in the REPL.
-Another change is that, by default, the function <code class="highlighter-rouge">print_with_color</code> no longer prints in bold; instead a new keyword argument <code class="highlighter-rouge">bold::Bool</code> was introduced that controls this.</p>
+Another change is that, by default, the function <code class="language-plaintext highlighter-rouge">print_with_color</code> no longer prints in bold; instead a new keyword argument <code class="language-plaintext highlighter-rouge">bold::Bool</code> was introduced that controls this.</p>
 
 <p>Some examples of this functionality are given in the figure below:</p>
 
@@ -343,8 +343,8 @@ However, as the example below shows, it is possible to change this back to bold,
 
 <h2 id="taking-repl-customization-even-further">Taking REPL-customization even further</h2>
 
-<p>If you would like to take REPL customization even further, I would encourage you to take a look at the <a href="https://github.com/KristofferC/OhMyREPL.jl"><code class="highlighter-rouge">OhMyREPL</code></a> package (author of this post is also author of that package).
-Some of the features described in this post were upstreamed to Base Julia from that package, but for now, some of the more advanced features, like syntax highlighting, matching bracket highlighting and customization of input/output prompts, still live only in the <code class="highlighter-rouge">OhMyREPL</code> package.</p>
+<p>If you would like to take REPL customization even further, I would encourage you to take a look at the <a href="https://github.com/KristofferC/OhMyREPL.jl"><code class="language-plaintext highlighter-rouge">OhMyREPL</code></a> package (author of this post is also author of that package).
+Some of the features described in this post were upstreamed to Base Julia from that package, but for now, some of the more advanced features, like syntax highlighting, matching bracket highlighting and customization of input/output prompts, still live only in the <code class="language-plaintext highlighter-rouge">OhMyREPL</code> package.</p>
 
 <h2 id="acknowledgments">Acknowledgments</h2>
 

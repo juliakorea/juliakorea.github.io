@@ -253,7 +253,7 @@
 
 <ol>
   <li>We redefined the <strong>conic_form!</strong> of every affine atom to accept complex arguments.</li>
-  <li>Every complex variable z was internally represented as <code class="highlighter-rouge">z = z1 + i*z2</code>, where z1 and z2 are real.</li>
+  <li>Every complex variable z was internally represented as <code class="language-plaintext highlighter-rouge">z = z1 + i*z2</code>, where z1 and z2 are real.</li>
   <li>We introduced two new affine atoms <strong>real</strong> and <strong>imag</strong> which return the real and the imaginary parts of the complex variable respectively.</li>
   <li>transpose and ctranspose perform differently on complex variables so a new atom <strong>CTransposeAtom</strong> was created.</li>
   <li>A complex-equality constraint <em>RHS = LHS</em> can be decomposed into two corresponding real equalities constraint <em>real(RHS) = real(LHS)</em> and <em>imag(RHS) = imag(LHS)</em></li>
@@ -261,7 +261,7 @@
 
 <p>After above changes were made to the codebase, we wrote two use cases to demonstrate the usability and the correctness of our idea which I am presenting below:</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code># Importing Packages
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code># Importing Packages
 Pkg.clone("https://github.com/Ayush-iitkgp/Convex.jl/tree/gsoc2")
 using Convex
  

@@ -288,8 +288,8 @@ addition to this repository, I have collaborated in <a href="https://github.com/
 <ul>
   <li>First we have to generate points, denote with <strong>x*</strong> from the data generating process with the previously proposed parameters $\theta$.</li>
   <li>
-    <p>Then we compute the MLE of the auxiliary likelihood under <strong>x</strong> to get the parameters denoted by $\phi$. \
-<script type="math/tex">\phi(x^{\star}) = argmax_{\phi} (x^{\star}|\phi)</script></p>
+    <p>Then we compute the MLE of the auxiliary likelihood under <strong>x</strong> to get the parameters denoted by $\phi$. <br />
+\(\phi(x^{\star}) = argmax_{\phi} (x^{\star}|\phi)\)</p>
   </li>
   <li>Under these parameters \phi, we can now compute the likelihood of $\ell_{A}(y|\phi). It is desirable to have the auxiliary likelihood as close to the true likelihood as possible, in the sense of capturing relevant aspects of the model and the
 generated data.</li>
@@ -314,9 +314,9 @@ The novelty of this project was to find a way to fit every component together in
 
 <p>The discrete-time version of the Ornstein-Ulenbeck Stochastic - volatility model:</p>
 
-<script type="math/tex; mode=display">y_{t} = x_{t} + \epsilon_{t} where \epsilon_{t} ∼ \Chi^{2}(1)</script>
+\[y_{t} = x_{t} + \epsilon_{t} where \epsilon_{t} ∼ \Chi^{2}(1)\]
 
-<script type="math/tex; mode=display">x_{t} = \rho * x_{t-1} + \sigma * \nu_{t}  where \nu_{t} ∼ N(0, 1)</script>
+\[x_{t} = \rho * x_{t-1} + \sigma * \nu_{t}  where \nu_{t} ∼ N(0, 1)\]
 
 <p>The discrete-time version was used as the data-generating process. Where yₜ denotes the logarithm of return, $x_{t}$ is the logarithm of variance, while $\epsilon_{t}$ and $\nu_{t}$ are unobserved noise terms.</p>
 
@@ -328,9 +328,9 @@ The novelty of this project was to find a way to fit every component together in
 Matrix with differently lagged xs.
 """</span>
 <span class="k">function</span><span class="nf"> lag_matrix</span><span class="x">(</span><span class="n">xs</span><span class="x">,</span> <span class="n">ns</span><span class="x">,</span> <span class="n">K</span> <span class="o">=</span> <span class="n">maximum</span><span class="x">(</span><span class="n">ns</span><span class="x">))</span>
-    <span class="n">M</span> <span class="o">=</span> <span class="n">Matrix</span><span class="x">{</span><span class="n">eltype</span><span class="x">(</span><span class="n">xs</span><span class="x">)}(</span><span class="n">length</span><span class="x">(</span><span class="n">xs</span><span class="x">)</span><span class="o">-</span><span class="n">K</span><span class="x">,</span> <span class="n">maximum</span><span class="x">(</span><span class="n">ns</span><span class="x">))</span>
+    <span class="n">M</span> <span class="o">=</span> <span class="kt">Matrix</span><span class="x">{</span><span class="n">eltype</span><span class="x">(</span><span class="n">xs</span><span class="x">)}(</span><span class="n">length</span><span class="x">(</span><span class="n">xs</span><span class="x">)</span><span class="o">-</span><span class="n">K</span><span class="x">,</span> <span class="n">maximum</span><span class="x">(</span><span class="n">ns</span><span class="x">))</span>
     <span class="k">for</span> <span class="n">i</span> <span class="n">∈</span> <span class="n">ns</span>
-        <span class="n">M</span><span class="x">[:,</span> <span class="n">i</span><span class="x">]</span> <span class="o">=</span> <span class="n">lag</span><span class="x">(</span><span class="n">xs</span><span class="x">,</span> <span class="n">i</span><span class="x">,</span> <span class="n">K</span><span class="x">)</span>
+        <span class="n">M</span><span class="x">[</span><span class="o">:</span><span class="x">,</span> <span class="n">i</span><span class="x">]</span> <span class="o">=</span> <span class="n">lag</span><span class="x">(</span><span class="n">xs</span><span class="x">,</span> <span class="n">i</span><span class="x">,</span> <span class="n">K</span><span class="x">)</span>
     <span class="k">end</span>
     <span class="n">M</span>
 <span class="k">end</span>
@@ -338,15 +338,15 @@ Matrix with differently lagged xs.
 <span class="s">"first auxiliary regression y, X, meant to capture first differences"</span>
 <span class="k">function</span><span class="nf"> yX1</span><span class="x">(</span><span class="n">zs</span><span class="x">,</span> <span class="n">K</span><span class="x">)</span>
     <span class="n">Δs</span> <span class="o">=</span> <span class="n">diff</span><span class="x">(</span><span class="n">zs</span><span class="x">)</span>
-    <span class="n">lag</span><span class="x">(</span><span class="n">Δs</span><span class="x">,</span> <span class="mi">0</span><span class="x">,</span> <span class="n">K</span><span class="x">),</span> <span class="n">hcat</span><span class="x">(</span><span class="n">lag_matrix</span><span class="x">(</span><span class="n">Δs</span><span class="x">,</span> <span class="mi">1</span><span class="x">:</span><span class="n">K</span><span class="x">,</span> <span class="n">K</span><span class="x">),</span> <span class="n">ones</span><span class="x">(</span><span class="n">eltype</span><span class="x">(</span><span class="n">zs</span><span class="x">),</span> <span class="n">length</span><span class="x">(</span><span class="n">Δs</span><span class="x">)</span><span class="o">-</span><span class="n">K</span><span class="x">),</span> <span class="n">lag</span><span class="x">(</span><span class="n">zs</span><span class="x">,</span> <span class="mi">1</span><span class="x">,</span> <span class="n">K</span><span class="o">+</span><span class="mi">1</span><span class="x">))</span>
+    <span class="n">lag</span><span class="x">(</span><span class="n">Δs</span><span class="x">,</span> <span class="mi">0</span><span class="x">,</span> <span class="n">K</span><span class="x">),</span> <span class="n">hcat</span><span class="x">(</span><span class="n">lag_matrix</span><span class="x">(</span><span class="n">Δs</span><span class="x">,</span> <span class="mi">1</span><span class="o">:</span><span class="n">K</span><span class="x">,</span> <span class="n">K</span><span class="x">),</span> <span class="n">ones</span><span class="x">(</span><span class="n">eltype</span><span class="x">(</span><span class="n">zs</span><span class="x">),</span> <span class="n">length</span><span class="x">(</span><span class="n">Δs</span><span class="x">)</span><span class="o">-</span><span class="n">K</span><span class="x">),</span> <span class="n">lag</span><span class="x">(</span><span class="n">zs</span><span class="x">,</span> <span class="mi">1</span><span class="x">,</span> <span class="n">K</span><span class="o">+</span><span class="mi">1</span><span class="x">))</span>
 <span class="k">end</span>
 
 <span class="s">"second auxiliary regression y, X, meant to capture levels"</span>
 <span class="k">function</span><span class="nf"> yX2</span><span class="x">(</span><span class="n">zs</span><span class="x">,</span> <span class="n">K</span><span class="x">)</span>
-    <span class="n">lag</span><span class="x">(</span><span class="n">zs</span><span class="x">,</span> <span class="mi">0</span><span class="x">,</span> <span class="n">K</span><span class="x">),</span> <span class="n">hcat</span><span class="x">(</span><span class="n">ones</span><span class="x">(</span><span class="n">eltype</span><span class="x">(</span><span class="n">zs</span><span class="x">),</span> <span class="n">length</span><span class="x">(</span><span class="n">zs</span><span class="x">)</span><span class="o">-</span><span class="n">K</span><span class="x">),</span> <span class="n">lag_matrix</span><span class="x">(</span><span class="n">zs</span><span class="x">,</span> <span class="mi">1</span><span class="x">:</span><span class="n">K</span><span class="x">,</span> <span class="n">K</span><span class="x">))</span>
+    <span class="n">lag</span><span class="x">(</span><span class="n">zs</span><span class="x">,</span> <span class="mi">0</span><span class="x">,</span> <span class="n">K</span><span class="x">),</span> <span class="n">hcat</span><span class="x">(</span><span class="n">ones</span><span class="x">(</span><span class="n">eltype</span><span class="x">(</span><span class="n">zs</span><span class="x">),</span> <span class="n">length</span><span class="x">(</span><span class="n">zs</span><span class="x">)</span><span class="o">-</span><span class="n">K</span><span class="x">),</span> <span class="n">lag_matrix</span><span class="x">(</span><span class="n">zs</span><span class="x">,</span> <span class="mi">1</span><span class="o">:</span><span class="n">K</span><span class="x">,</span> <span class="n">K</span><span class="x">))</span>
 <span class="k">end</span>
 </code></pre></div></div>
-<p>The AR(2) process of the first differences can be summarized by: \
+<p>The AR(2) process of the first differences can be summarized by: <br />
 Given a series Y, it is the first difference of the first difference. The so called “change in the change” of Y at time t. The second difference of a discrete function can be interpreted as the second derivative of a continuous function, which is the “acceleration” of the function at a point in time t. In this model, we want to capture the “acceleration” of the logarithm of return.</p>
 
 <p>The AR(2) process of the original variables is needed to capture the effect of $\rho$. It turned out that the impact of ρ was rather weak in the AR(2) process of the first differences . That is why we need a second auxiliary model.</p>
@@ -355,32 +355,32 @@ Given a series Y, it is the first difference of the first difference. The so cal
 
 <p>Required packages for the StochasticVolatility model:</p>
 <div class="language-julia highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
-<span class="n">using</span> <span class="n">ArgCheck</span>
-<span class="n">using</span> <span class="n">Distributions</span>
-<span class="n">using</span> <span class="n">Parameters</span>
-<span class="n">using</span> <span class="n">DynamicHMC</span>
-<span class="n">using</span> <span class="n">StatsBase</span>
-<span class="n">using</span> <span class="n">Base</span><span class="o">.</span><span class="n">Test</span>
-<span class="n">using</span> <span class="n">ContinuousTransformations</span>
-<span class="n">using</span> <span class="n">DiffWrappers</span>
-<span class="k">import</span> <span class="n">Distributions</span><span class="x">:</span> <span class="n">Uniform</span><span class="x">,</span> <span class="n">InverseGamma</span>
+<span class="k">using</span> <span class="n">ArgCheck</span>
+<span class="k">using</span> <span class="n">Distributions</span>
+<span class="k">using</span> <span class="n">Parameters</span>
+<span class="k">using</span> <span class="n">DynamicHMC</span>
+<span class="k">using</span> <span class="n">StatsBase</span>
+<span class="k">using</span> <span class="n">Base</span><span class="o">.</span><span class="n">Test</span>
+<span class="k">using</span> <span class="n">ContinuousTransformations</span>
+<span class="k">using</span> <span class="n">DiffWrappers</span>
+<span class="k">import</span> <span class="n">Distributions</span><span class="o">:</span> <span class="n">Uniform</span><span class="x">,</span> <span class="n">InverseGamma</span>
 </code></pre></div></div>
 
 <ul>
   <li>First, we define a structure. This structure should contain the observed data, the priors, the shocks and the transformation performed on the parameters, but the components may vary depending on the estimated model.</li>
 </ul>
 
-<div class="language-julia highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">struct</span> <span class="n">StochasticVolatility</span><span class="x">{</span><span class="n">T</span><span class="x">,</span> <span class="n">Prior_ρ</span><span class="x">,</span> <span class="n">Prior_σ</span><span class="x">,</span> <span class="n">Ttrans</span><span class="x">}</span>
+<div class="language-julia highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">struct</span><span class="nc"> StochasticVolatility</span><span class="x">{</span><span class="n">T</span><span class="x">,</span> <span class="n">Prior_ρ</span><span class="x">,</span> <span class="n">Prior_σ</span><span class="x">,</span> <span class="n">Ttrans</span><span class="x">}</span>
     <span class="s">"observed data"</span>
-    <span class="n">ys</span><span class="o">::</span><span class="n">Vector</span><span class="x">{</span><span class="n">T</span><span class="x">}</span>
+    <span class="n">ys</span><span class="o">::</span><span class="kt">Vector</span><span class="x">{</span><span class="n">T</span><span class="x">}</span>
     <span class="s">"prior for ρ (persistence)"</span>
     <span class="n">prior_ρ</span><span class="o">::</span><span class="n">Prior_ρ</span>
     <span class="s">"prior for σ_v (volatility of volatility)"</span>
     <span class="n">prior_σ</span><span class="o">::</span><span class="n">Prior_σ</span>
     <span class="s">"χ^2 draws for simulation"</span>
-    <span class="n">ϵ</span><span class="o">::</span><span class="n">Vector</span><span class="x">{</span><span class="n">T</span><span class="x">}</span>
+    <span class="n">ϵ</span><span class="o">::</span><span class="kt">Vector</span><span class="x">{</span><span class="n">T</span><span class="x">}</span>
     <span class="s">"Normal(0,1) draws for simulation"</span>
-    <span class="n">ν</span><span class="o">::</span><span class="n">Vector</span><span class="x">{</span><span class="n">T</span><span class="x">}</span>
+    <span class="n">ν</span><span class="o">::</span><span class="kt">Vector</span><span class="x">{</span><span class="n">T</span><span class="x">}</span>
     <span class="s">"Transformations cached"</span>
     <span class="n">transformation</span><span class="o">::</span><span class="n">Ttrans</span>
 <span class="k">end</span>
@@ -398,10 +398,10 @@ Given a series Y, it is the first difference of the first difference. The so cal
 
     <span class="n">xs</span> <span class="o">=</span> <span class="n">simulate_stochastic</span><span class="x">(</span><span class="n">ρ</span><span class="x">,</span> <span class="n">σ</span><span class="x">,</span> <span class="n">ϵ</span><span class="x">,</span> <span class="n">ν</span><span class="x">)</span>
     <span class="n">Y_1</span><span class="x">,</span> <span class="n">X_1</span> <span class="o">=</span> <span class="n">yX1</span><span class="x">(</span><span class="n">xs</span><span class="x">,</span> <span class="mi">2</span><span class="x">)</span>
-    <span class="n">β₁</span> <span class="o">=</span> <span class="n">qrfact</span><span class="x">(</span><span class="n">X_1</span><span class="x">,</span> <span class="n">Val</span><span class="x">{</span><span class="n">true</span><span class="x">})</span> <span class="o">\</span> <span class="n">Y_1</span>
+    <span class="n">β₁</span> <span class="o">=</span> <span class="n">qrfact</span><span class="x">(</span><span class="n">X_1</span><span class="x">,</span> <span class="kt">Val</span><span class="x">{</span><span class="nb">true</span><span class="x">})</span> <span class="o">\</span> <span class="n">Y_1</span>
     <span class="n">v₁</span> <span class="o">=</span> <span class="n">mean</span><span class="x">(</span><span class="n">abs2</span><span class="x">,</span>  <span class="n">Y_1</span> <span class="o">-</span> <span class="n">X_1</span><span class="o">*</span><span class="n">β₁</span><span class="x">)</span>
     <span class="n">Y_2</span><span class="x">,</span> <span class="n">X_2</span> <span class="o">=</span> <span class="n">yX2</span><span class="x">(</span><span class="n">xs</span><span class="x">,</span> <span class="mi">2</span><span class="x">)</span>
-    <span class="n">β₂</span> <span class="o">=</span> <span class="n">qrfact</span><span class="x">(</span><span class="n">X_2</span><span class="x">,</span> <span class="n">Val</span><span class="x">{</span><span class="n">true</span><span class="x">})</span> <span class="o">\</span> <span class="n">Y_2</span>
+    <span class="n">β₂</span> <span class="o">=</span> <span class="n">qrfact</span><span class="x">(</span><span class="n">X_2</span><span class="x">,</span> <span class="kt">Val</span><span class="x">{</span><span class="nb">true</span><span class="x">})</span> <span class="o">\</span> <span class="n">Y_2</span>
     <span class="n">v₂</span> <span class="o">=</span> <span class="n">mean</span><span class="x">(</span><span class="n">abs2</span><span class="x">,</span>  <span class="n">Y_2</span> <span class="o">-</span> <span class="n">X_2</span><span class="o">*</span><span class="n">β₂</span><span class="x">)</span>
     <span class="c"># We work with first differences</span>
     <span class="n">y₁</span><span class="x">,</span> <span class="n">X₁</span> <span class="o">=</span> <span class="n">yX1</span><span class="x">(</span><span class="n">ys</span><span class="x">,</span> <span class="mi">2</span><span class="x">)</span>
@@ -449,7 +449,7 @@ Given a series Y, it is the first difference of the first difference. The so cal
   <li>The auxiliary model was a three component normal mixture model.</li>
 </ul>
 
-<p>We faced serious problems with this model. \
+<p>We faced serious problems with this model. <br />
 First of all, I coded the MLE of the finite component normal mixture model, which computes the means, variances and weights of the normals given the observed data and the desired number of mixtures.
 With the g-and-k quantile function, I experienced the so called “isolation”, which means that one observation point is an outlier getting weight 1, the other observed points get weight $\theta$, which results in variance equal to $\theta$. There are ways to disentangle the problem of isolation, but the parameters of interests still did not converge to the true values. There is work to be done with this model.</p>
 
@@ -462,9 +462,9 @@ With the g-and-k quantile function, I experienced the so called “isolation”,
     <div class="language-julia highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="k">function</span><span class="nf"> simulate_stochastic</span><span class="x">(</span><span class="n">ρ</span><span class="x">,</span> <span class="n">σ</span><span class="x">,</span> <span class="n">ϵs</span><span class="x">,</span> <span class="n">νs</span><span class="x">)</span>
 <span class="n">N</span> <span class="o">=</span> <span class="n">length</span><span class="x">(</span><span class="n">ϵs</span><span class="x">)</span>
 <span class="nd">@argcheck</span> <span class="n">N</span> <span class="o">==</span> <span class="n">length</span><span class="x">(</span><span class="n">νs</span><span class="x">)</span>
-<span class="n">xs</span> <span class="o">=</span> <span class="n">Vector</span><span class="x">(</span><span class="n">N</span><span class="x">)</span>
-<span class="k">for</span> <span class="n">i</span> <span class="k">in</span> <span class="mi">1</span><span class="x">:</span><span class="n">N</span>
-    <span class="n">xs</span><span class="x">[</span><span class="n">i</span><span class="x">]</span> <span class="o">=</span> <span class="x">(</span><span class="n">i</span> <span class="o">==</span> <span class="mi">1</span><span class="x">)</span> <span class="o">?</span> <span class="n">νs</span><span class="x">[</span><span class="mi">1</span><span class="x">]</span><span class="o">*</span><span class="n">σ</span><span class="o">*</span><span class="x">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">ρ</span><span class="o">^</span><span class="mi">2</span><span class="x">)</span><span class="o">^</span><span class="x">(</span><span class="o">-</span><span class="mf">0.5</span><span class="x">)</span> <span class="x">:</span> <span class="x">(</span><span class="n">ρ</span><span class="o">*</span><span class="n">xs</span><span class="x">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="x">]</span> <span class="o">+</span> <span class="n">σ</span><span class="o">*</span><span class="n">νs</span><span class="x">[</span><span class="n">i</span><span class="x">])</span>
+<span class="n">xs</span> <span class="o">=</span> <span class="kt">Vector</span><span class="x">(</span><span class="n">N</span><span class="x">)</span>
+<span class="k">for</span> <span class="n">i</span> <span class="k">in</span> <span class="mi">1</span><span class="o">:</span><span class="n">N</span>
+    <span class="n">xs</span><span class="x">[</span><span class="n">i</span><span class="x">]</span> <span class="o">=</span> <span class="x">(</span><span class="n">i</span> <span class="o">==</span> <span class="mi">1</span><span class="x">)</span> <span class="o">?</span> <span class="n">νs</span><span class="x">[</span><span class="mi">1</span><span class="x">]</span><span class="o">*</span><span class="n">σ</span><span class="o">*</span><span class="x">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">ρ</span><span class="o">^</span><span class="mi">2</span><span class="x">)</span><span class="o">^</span><span class="x">(</span><span class="o">-</span><span class="mf">0.5</span><span class="x">)</span> <span class="o">:</span> <span class="x">(</span><span class="n">ρ</span><span class="o">*</span><span class="n">xs</span><span class="x">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="x">]</span> <span class="o">+</span> <span class="n">σ</span><span class="o">*</span><span class="n">νs</span><span class="x">[</span><span class="n">i</span><span class="x">])</span>
 <span class="k">end</span>
 <span class="n">xs</span> <span class="o">+</span> <span class="n">log</span><span class="o">.</span><span class="x">(</span><span class="n">ϵs</span><span class="x">)</span> <span class="o">+</span> <span class="mf">1.27</span>
 <span class="k">end</span>
@@ -475,9 +475,9 @@ With the g-and-k quantile function, I experienced the so called “isolation”,
   <span class="n">N</span> <span class="o">=</span> <span class="n">length</span><span class="x">(</span><span class="n">ϵs</span><span class="x">)</span>
   <span class="nd">@argcheck</span> <span class="n">N</span> <span class="o">==</span> <span class="n">length</span><span class="x">(</span><span class="n">νs</span><span class="x">)</span>
   <span class="n">x₀</span> <span class="o">=</span> <span class="n">νs</span><span class="x">[</span><span class="mi">1</span><span class="x">]</span><span class="o">*</span><span class="n">σ</span><span class="o">*</span><span class="x">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">ρ</span><span class="o">^</span><span class="mi">2</span><span class="x">)</span><span class="o">^</span><span class="x">(</span><span class="o">-</span><span class="mf">0.5</span><span class="x">)</span>
-<span class="err"> </span> <span class="err"> </span> <span class="n">xs</span> <span class="o">=</span> <span class="n">Vector</span><span class="x">{</span><span class="nb">typeof</span><span class="x">(</span><span class="n">x₀</span><span class="x">)}(</span><span class="n">N</span><span class="x">)</span>
-<span class="err"> </span> <span class="err"> </span> <span class="k">for</span> <span class="n">i</span> <span class="k">in</span> <span class="mi">1</span><span class="x">:</span><span class="n">N</span>
-<span class="err"> </span> <span class="err"> </span> <span class="err"> </span> <span class="err"> </span> <span class="n">xs</span><span class="x">[</span><span class="n">i</span><span class="x">]</span> <span class="o">=</span> <span class="x">(</span><span class="n">i</span> <span class="o">==</span> <span class="mi">1</span><span class="x">)</span> <span class="o">?</span> <span class="n">x₀</span> <span class="x">:</span> <span class="x">(</span><span class="n">ρ</span><span class="o">*</span><span class="n">xs</span><span class="x">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="x">]</span> <span class="o">+</span> <span class="n">σ</span><span class="o">*</span><span class="n">νs</span><span class="x">[</span><span class="n">i</span><span class="x">])</span>
+<span class="err"> </span> <span class="err"> </span> <span class="n">xs</span> <span class="o">=</span> <span class="kt">Vector</span><span class="x">{</span><span class="n">typeof</span><span class="x">(</span><span class="n">x₀</span><span class="x">)}(</span><span class="n">N</span><span class="x">)</span>
+<span class="err"> </span> <span class="err"> </span> <span class="k">for</span> <span class="n">i</span> <span class="k">in</span> <span class="mi">1</span><span class="o">:</span><span class="n">N</span>
+<span class="err"> </span> <span class="err"> </span> <span class="err"> </span> <span class="err"> </span> <span class="n">xs</span><span class="x">[</span><span class="n">i</span><span class="x">]</span> <span class="o">=</span> <span class="x">(</span><span class="n">i</span> <span class="o">==</span> <span class="mi">1</span><span class="x">)</span> <span class="o">?</span> <span class="n">x₀</span> <span class="o">:</span> <span class="x">(</span><span class="n">ρ</span><span class="o">*</span><span class="n">xs</span><span class="x">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="x">]</span> <span class="o">+</span> <span class="n">σ</span><span class="o">*</span><span class="n">νs</span><span class="x">[</span><span class="n">i</span><span class="x">])</span>
 <span class="err"> </span> <span class="err"> </span> <span class="k">end</span>
   <span class="n">xs</span> <span class="o">+</span> <span class="n">log</span><span class="o">.</span><span class="x">(</span><span class="n">ϵs</span><span class="x">)</span> <span class="o">+</span> <span class="mf">1.27</span>
 <span class="k">end</span>

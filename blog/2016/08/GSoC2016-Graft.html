@@ -268,11 +268,11 @@ graph data analysis.</li>
   <li>Vertex and edge metadata : Key value pairs for vertices and edges.</li>
   <li>Vertex labelling : Allow vertices to be referenced, externally, through arbitrary Julia types.</li>
   <li>SQL like queries for edge data and metadata.</li>
-  <li>Compatibility with <code class="highlighter-rouge">LightGraphs</code></li>
+  <li>Compatibility with <code class="language-plaintext highlighter-rouge">LightGraphs</code></li>
 </ul>
 
 <h1 id="graft">Graft</h1>
-<p><code class="highlighter-rouge">ParallelGraphs</code> turned out to be a misnomer, since we were moving towards a more general purpose data analysis framework. So we chose the name <code class="highlighter-rouge">Graft</code>, a kind of abbreviation for Graph Toolkit. The following sections detail <code class="highlighter-rouge">Graft's</code> features:</p>
+<p><code class="language-plaintext highlighter-rouge">ParallelGraphs</code> turned out to be a misnomer, since we were moving towards a more general purpose data analysis framework. So we chose the name <code class="language-plaintext highlighter-rouge">Graft</code>, a kind of abbreviation for Graph Toolkit. The following sections detail <code class="language-plaintext highlighter-rouge">Graft's</code> features:</p>
 
 <h2 id="vertex-and-edge-metadata">Vertex and Edge Metadata</h2>
 <p>Graphs are often representations of real world entities, and the relationships between them. Such entities (and their relationships), often have data attached to them.
@@ -292,7 +292,7 @@ user experience and performance.</p>
 
 <p>If vertex labels were used in the internal implementation, the graph data structure would probably look like this:</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  Dict(
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  Dict(
      "Alice" =&gt; Dict(
         "age" =&gt; 34,
         "occupation"  =&gt; "Doctor",
@@ -319,7 +319,7 @@ user experience and performance.</p>
 <p>Cleary, using labels internally is a very bad idea. Any sort of data access would set off multiple dictionary look-ups. Instead, if a bidirectional map
 could be used to translate labels into vertex identifiers and back, the number of dictionary lookups could be reduced to one. The data would also be better structured for query processing.</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  # Label Map to resolve queries
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  # Label Map to resolve queries
   LabelMap(
      # Forward map : labels to vertex identifiers
      Dict("Alice" =&gt; 1, "David" =&gt; 4", "Charlie" =&gt; 3, Bob" =&gt; 2),
@@ -355,15 +355,15 @@ could be used to translate labels into vertex identifiers and back, the number o
 </code></pre></div></div>
 
 <h2 id="sql-like-queries">SQL Like Queries</h2>
-<p>Graft’s query notation is borrowed from <a href="https://github.com/davidagold/jplyr.jl">Jplyr</a>. The <code class="highlighter-rouge">@query</code> macro is used to simplify the query syntax, and
-accepts a pipeline of abstractions separated by the pipe operator <code class="highlighter-rouge">|&gt;</code>. The stages are described through abstractions:</p>
+<p>Graft’s query notation is borrowed from <a href="https://github.com/davidagold/jplyr.jl">Jplyr</a>. The <code class="language-plaintext highlighter-rouge">@query</code> macro is used to simplify the query syntax, and
+accepts a pipeline of abstractions separated by the pipe operator <code class="language-plaintext highlighter-rouge">|&gt;</code>. The stages are described through abstractions:</p>
 
 <h3 id="eachvertex">eachvertex</h3>
-<p>Accepts an expression, that is run over every vertex. Vertex properties can be expressed using the dot notation. Some reserved properties are <code class="highlighter-rouge">v.id</code>, <code class="highlighter-rouge">v.label</code>,
-<code class="highlighter-rouge">v.adj</code>, <code class="highlighter-rouge">v.indegree</code> and <code class="highlighter-rouge">v.outdegree</code>.
+<p>Accepts an expression, that is run over every vertex. Vertex properties can be expressed using the dot notation. Some reserved properties are <code class="language-plaintext highlighter-rouge">v.id</code>, <code class="language-plaintext highlighter-rouge">v.label</code>,
+<code class="language-plaintext highlighter-rouge">v.adj</code>, <code class="language-plaintext highlighter-rouge">v.indegree</code> and <code class="language-plaintext highlighter-rouge">v.outdegree</code>.
 Examples:</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  # Check if the user has overridden the default labels
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  # Check if the user has overridden the default labels
   julia&gt; @query(g |&gt; eachvertex(v.id == v.label)) |&gt; all
 
   # Kirchoff's law :P
@@ -371,12 +371,12 @@ Examples:</p>
 </code></pre></div></div>
 
 <h3 id="eachedge">eachedge</h3>
-<p>Accepts an expression, that is run over every edge. The symbol <code class="highlighter-rouge">s</code> is used to denote
-the source vertex, and <code class="highlighter-rouge">t</code> is used to denote the target vertex in the edge. The symbol <code class="highlighter-rouge">e</code> is used to denote
-the edge itself. Edge properties can be expressed through the dot notation. Some reserved properties are <code class="highlighter-rouge">e.source</code>, <code class="highlighter-rouge">e.target</code>, <code class="highlighter-rouge">e.mutualcount</code>, and <code class="highlighter-rouge">e.mutual</code>.
+<p>Accepts an expression, that is run over every edge. The symbol <code class="language-plaintext highlighter-rouge">s</code> is used to denote
+the source vertex, and <code class="language-plaintext highlighter-rouge">t</code> is used to denote the target vertex in the edge. The symbol <code class="language-plaintext highlighter-rouge">e</code> is used to denote
+the edge itself. Edge properties can be expressed through the dot notation. Some reserved properties are <code class="language-plaintext highlighter-rouge">e.source</code>, <code class="language-plaintext highlighter-rouge">e.target</code>, <code class="language-plaintext highlighter-rouge">e.mutualcount</code>, and <code class="language-plaintext highlighter-rouge">e.mutual</code>.
 Examples:</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  # Arithmetic expression on edge, source and target properties
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  # Arithmetic expression on edge, source and target properties
   julia&gt; @query g |&gt; eachedge(e.p1 - s.p1 - t.p1)
 
 
@@ -393,7 +393,7 @@ Examples:</p>
 of edges, or both.
 Examples:</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  # Remove vertices where property p1 equals property p2
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  # Remove vertices where property p1 equals property p2
   @query g |&gt; filter(v.p1 != v.p2)
 
   # Remove self loops from the graph
@@ -404,7 +404,7 @@ Examples:</p>
 <p>Returns a subgraph with a subset of vertex properties, or a subset of edge properties or both.
 Examples:</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  # Preserve vertex properties p1, p2 and nothing else
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  # Preserve vertex properties p1, p2 and nothing else
   @query g |&gt; select(v.p1, v.p2)
 
   # Preserve vertex property p1 and edge property p2
@@ -412,13 +412,13 @@ Examples:</p>
 </code></pre></div></div>
 
 <h1 id="demonstration">Demonstration</h1>
-<p>The typical workflow we hope to support with <code class="highlighter-rouge">Graft</code> is:</p>
+<p>The typical workflow we hope to support with <code class="language-plaintext highlighter-rouge">Graft</code> is:</p>
 
 <ul>
   <li>Load a graph from memory</li>
   <li>Use the query abstractions to construct new vertex/edge properties or obtain subgraphs.</li>
-  <li>Run complex queries on the subgraphs, or export data to <code class="highlighter-rouge">LightGraphs</code> and run computationally expensive algorithms there.</li>
-  <li>Bring the data back into <code class="highlighter-rouge">Graft</code> as a new property, or use it to modify the graphs structure.</li>
+  <li>Run complex queries on the subgraphs, or export data to <code class="language-plaintext highlighter-rouge">LightGraphs</code> and run computationally expensive algorithms there.</li>
+  <li>Bring the data back into <code class="language-plaintext highlighter-rouge">Graft</code> as a new property, or use it to modify the graphs structure.</li>
 </ul>
 
 <p>The following examples should demonstrate this workflow:</p>

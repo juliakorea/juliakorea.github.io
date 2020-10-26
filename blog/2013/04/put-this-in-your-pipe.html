@@ -255,7 +255,7 @@ In principle, there’s nothing stopping high-level languages from doing it at l
 There are two major impediments:</p>
 
 <ul>
-  <li>Some moderately tricky low-level UNIX plumbing using the <a href="https://developer.apple.com/library/mac/#documentation/Darwin/Reference/ManPages/man2/pipe.2.html"><code class="highlighter-rouge">pipe</code></a>, <a href="https://developer.apple.com/library/mac/#documentation/Darwin/Reference/ManPages/man2/dup2.2.html"><code class="highlighter-rouge">dup2</code></a>, <a href="https://developer.apple.com/library/mac/#documentation/Darwin/Reference/ManPages/man2/fork.2.html"><code class="highlighter-rouge">fork</code></a>, <a href="https://developer.apple.com/library/mac/#documentation/Darwin/Reference/ManPages/man2/close.2.html"><code class="highlighter-rouge">close</code></a>, and <a href="https://developer.apple.com/library/mac/#documentation/Darwin/Reference/ManPages/man2/execve.2.html"><code class="highlighter-rouge">exec</code></a> system calls;</li>
+  <li>Some moderately tricky low-level UNIX plumbing using the <a href="https://developer.apple.com/library/mac/#documentation/Darwin/Reference/ManPages/man2/pipe.2.html"><code class="language-plaintext highlighter-rouge">pipe</code></a>, <a href="https://developer.apple.com/library/mac/#documentation/Darwin/Reference/ManPages/man2/dup2.2.html"><code class="language-plaintext highlighter-rouge">dup2</code></a>, <a href="https://developer.apple.com/library/mac/#documentation/Darwin/Reference/ManPages/man2/fork.2.html"><code class="language-plaintext highlighter-rouge">fork</code></a>, <a href="https://developer.apple.com/library/mac/#documentation/Darwin/Reference/ManPages/man2/close.2.html"><code class="language-plaintext highlighter-rouge">close</code></a>, and <a href="https://developer.apple.com/library/mac/#documentation/Darwin/Reference/ManPages/man2/execve.2.html"><code class="language-plaintext highlighter-rouge">exec</code></a> system calls;</li>
   <li>The UX problem of designing an easy, flexible programming interface for commands and pipelines.</li>
 </ul>
 
@@ -267,9 +267,9 @@ After fixing this bug, we go into details of how Julia’s external command exec
 <h2 id="simple-pipeline-subtle-bug">Simple Pipeline, Subtle Bug</h2>
 
 <p>Here’s how you write the example of counting the number of lines in a directory containing the string “foo” in Julia
-(you can follow along at home if you have Julia installed from source by changing directories into the Julia source directory and doing <code class="highlighter-rouge">cp -a src "source code"; mkdir tmp</code> and then firing up the Julia repl):</p>
+(you can follow along at home if you have Julia installed from source by changing directories into the Julia source directory and doing <code class="language-plaintext highlighter-rouge">cp -a src "source code"; mkdir tmp</code> and then firing up the Julia repl):</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>julia&gt; dir = "src";
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>julia&gt; dir = "src";
 
 julia&gt; int(readchomp(`find $dir -type f -print0` |&gt; `xargs -0 grep foo` |&gt; `wc -l`))
 5
@@ -277,12 +277,12 @@ julia&gt; int(readchomp(`find $dir -type f -print0` |&gt; `xargs -0 grep foo` |&
 
 <p>This Julia command looks suspiciously similar to the naïve Ruby version we started with in the previous post:</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>`find #{dir} -type f -print0 | xargs -0 grep foo | wc -l`.to_i
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>`find #{dir} -type f -print0 | xargs -0 grep foo | wc -l`.to_i
 </code></pre></div></div>
 
 <p>However, it isn’t susceptible to the same problems:</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>julia&gt; dir = "source code";
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>julia&gt; dir = "source code";
 
 julia&gt; int(readchomp(`find $dir -type f -print0` |&gt; `xargs -0 grep foo` |&gt; `wc -l`))
 5
@@ -319,47 +319,47 @@ ERROR: failed processes:
   <li>prints error messages including exactly which commands failed.</li>
 </ul>
 
-<p>In the above examples, we can see that even when <code class="highlighter-rouge">dir</code> contains spaces or quotes, the expression still behaves exactly as intended – the value of <code class="highlighter-rouge">dir</code> is interpolated as a single argument to the <code class="highlighter-rouge">find</code> command.
-When <code class="highlighter-rouge">dir</code> is not the name of a directory that exists, <code class="highlighter-rouge">find</code> fails – as it should – and this failure is detected and automatically converted into an informative exception, including the fully expanded command-lines that failed.</p>
+<p>In the above examples, we can see that even when <code class="language-plaintext highlighter-rouge">dir</code> contains spaces or quotes, the expression still behaves exactly as intended – the value of <code class="language-plaintext highlighter-rouge">dir</code> is interpolated as a single argument to the <code class="language-plaintext highlighter-rouge">find</code> command.
+When <code class="language-plaintext highlighter-rouge">dir</code> is not the name of a directory that exists, <code class="language-plaintext highlighter-rouge">find</code> fails – as it should – and this failure is detected and automatically converted into an informative exception, including the fully expanded command-lines that failed.</p>
 
-<p>In the previous post, we observed that using the <code class="highlighter-rouge">pipefail</code> option for Bash allows detection of pipeline failures, like this one, occurring before the last process in the pipeline.
+<p>In the previous post, we observed that using the <code class="language-plaintext highlighter-rouge">pipefail</code> option for Bash allows detection of pipeline failures, like this one, occurring before the last process in the pipeline.
 However, it only allows us to detect that at least one thing in the pipeline failed.
 We still have to guess at what parts of the pipeline actually failed.
 In the Julia example, on the other hand, there is no guessing required:
-when a non-existent directory is given, we can see that both <code class="highlighter-rouge">find</code> and <code class="highlighter-rouge">xargs</code> fail.
-While it is unsurprising that <code class="highlighter-rouge">find</code> fails in this case, it is unexpected that <code class="highlighter-rouge">xargs</code> also fails.
-Why <em>does</em> <code class="highlighter-rouge">xargs</code> fail?</p>
+when a non-existent directory is given, we can see that both <code class="language-plaintext highlighter-rouge">find</code> and <code class="language-plaintext highlighter-rouge">xargs</code> fail.
+While it is unsurprising that <code class="language-plaintext highlighter-rouge">find</code> fails in this case, it is unexpected that <code class="language-plaintext highlighter-rouge">xargs</code> also fails.
+Why <em>does</em> <code class="language-plaintext highlighter-rouge">xargs</code> fail?</p>
 
-<p>One possibility to check for is that the <code class="highlighter-rouge">xargs</code> program fails with no input.
-We can use Julia’s <code class="highlighter-rouge">success</code> predicate to try it out:</p>
+<p>One possibility to check for is that the <code class="language-plaintext highlighter-rouge">xargs</code> program fails with no input.
+We can use Julia’s <code class="language-plaintext highlighter-rouge">success</code> predicate to try it out:</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>julia&gt; success(`cat /dev/null` |&gt; `xargs true`)
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>julia&gt; success(`cat /dev/null` |&gt; `xargs true`)
 true
 </code></pre></div></div>
 
-<p>Ok, so <code class="highlighter-rouge">xargs</code> seems perfectly happy with no input.
+<p>Ok, so <code class="language-plaintext highlighter-rouge">xargs</code> seems perfectly happy with no input.
 Maybe grep doesn’t like not getting any input?</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>julia&gt; success(`cat /dev/null` |&gt; `grep foo`)
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>julia&gt; success(`cat /dev/null` |&gt; `grep foo`)
 false
 </code></pre></div></div>
 
-<p>Aha! <code class="highlighter-rouge">grep</code> returns a non-zero status when it doesn’t get any input.
+<p>Aha! <code class="language-plaintext highlighter-rouge">grep</code> returns a non-zero status when it doesn’t get any input.
 Good to know.
-It turns out that <code class="highlighter-rouge">grep</code> indicates whether it matched anything or not with its return status.
-Most programs use their return status to indicate success or failure, but some, like <code class="highlighter-rouge">grep</code>, use it to indicate some other boolean condition – in this case “found something” versus “didn’t find anything”:</p>
+It turns out that <code class="language-plaintext highlighter-rouge">grep</code> indicates whether it matched anything or not with its return status.
+Most programs use their return status to indicate success or failure, but some, like <code class="language-plaintext highlighter-rouge">grep</code>, use it to indicate some other boolean condition – in this case “found something” versus “didn’t find anything”:</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>julia&gt; success(`echo foo` |&gt; `grep foo`)
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>julia&gt; success(`echo foo` |&gt; `grep foo`)
 true
 
 julia&gt; success(`echo bar` |&gt; `grep foo`)
 false
 </code></pre></div></div>
 
-<p>Now we know why <code class="highlighter-rouge">grep</code> is “failing” – and <code class="highlighter-rouge">xargs</code> too, since it returns a non-zero status if the program it runs returns non-zero.
+<p>Now we know why <code class="language-plaintext highlighter-rouge">grep</code> is “failing” – and <code class="language-plaintext highlighter-rouge">xargs</code> too, since it returns a non-zero status if the program it runs returns non-zero.
 This means that our Julia pipeline and the “responsible” Ruby version are both susceptible to bogus failures when we search an existing directory that happens not to contain the string “foo” anywhere:</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>julia&gt; dir = "tmp";
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>julia&gt; dir = "tmp";
 
 julia&gt; int(readchomp(`find $dir -type f -print0` |&gt; `xargs -0 grep foo` |&gt; `wc -l`))
 ERROR: failed process: Process(`xargs -0 grep foo`, ProcessExited(123)) [123]
@@ -370,12 +370,12 @@ ERROR: failed process: Process(`xargs -0 grep foo`, ProcessExited(123)) [123]
  in readchomp at io.jl:172
 </code></pre></div></div>
 
-<p>Since <code class="highlighter-rouge">grep</code> indicates not finding anything using a non-zero return status, the <code class="highlighter-rouge">readall</code> function concludes that its pipeline failed and raises an error to that effect.
+<p>Since <code class="language-plaintext highlighter-rouge">grep</code> indicates not finding anything using a non-zero return status, the <code class="language-plaintext highlighter-rouge">readall</code> function concludes that its pipeline failed and raises an error to that effect.
 In this case, this default behavior is undesirable:
-we want the expression to just return <code class="highlighter-rouge">0</code> without raising an error.
+we want the expression to just return <code class="language-plaintext highlighter-rouge">0</code> without raising an error.
 The simple fix in Julia is this:</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>julia&gt; dir = "tmp";
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>julia&gt; dir = "tmp";
 
 julia&gt; int(readchomp(`find $dir -type f -print0` |&gt; ignorestatus(`xargs -0 grep foo`) |&gt; `wc -l`))
 0
@@ -391,38 +391,38 @@ Without such detailed error reporting, this bug would be pretty difficult to tra
 Unlike in these predecessors, however, in Julia backticks don’t immediately run commands, nor do they necessarily indicate that you want to capture the output of the command.
 Instead, backticks just construct an object representing a command:</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>julia&gt; `echo Hello`
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>julia&gt; `echo Hello`
 `echo Hello`
 
 julia&gt; typeof(ans)
 Cmd
 </code></pre></div></div>
 
-<p>(In the Julia repl, <code class="highlighter-rouge">ans</code> is automatically bound to the value of the last evaluated input.)
+<p>(In the Julia repl, <code class="language-plaintext highlighter-rouge">ans</code> is automatically bound to the value of the last evaluated input.)
 In order to actually run a command, you have to <em>do</em> something with a command object.
-To run a command and capture its output into a string – what other languages do with backticks automatically – you can apply the <code class="highlighter-rouge">readall</code> function:</p>
+To run a command and capture its output into a string – what other languages do with backticks automatically – you can apply the <code class="language-plaintext highlighter-rouge">readall</code> function:</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>julia&gt; readall(`echo Hello`)
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>julia&gt; readall(`echo Hello`)
 "Hello\n"
 </code></pre></div></div>
 
-<p>Since it’s very common to want to discard the trailing line break at the end of a command’s output, Julia provides the <code class="highlighter-rouge">readchomp(x)</code> command which is equivalent to writing <code class="highlighter-rouge">chomp(readall(x))</code>:</p>
+<p>Since it’s very common to want to discard the trailing line break at the end of a command’s output, Julia provides the <code class="language-plaintext highlighter-rouge">readchomp(x)</code> command which is equivalent to writing <code class="language-plaintext highlighter-rouge">chomp(readall(x))</code>:</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>julia&gt; readchomp(`echo Hello`)
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>julia&gt; readchomp(`echo Hello`)
 "Hello"
 </code></pre></div></div>
 
-<p>To run a command without capturing its output, letting it just print to the same <code class="highlighter-rouge">stdout</code> stream as the main process – i.e. what the <code class="highlighter-rouge">system</code> function does when given a command as a string in other languages – use the <code class="highlighter-rouge">run</code> function:</p>
+<p>To run a command without capturing its output, letting it just print to the same <code class="language-plaintext highlighter-rouge">stdout</code> stream as the main process – i.e. what the <code class="language-plaintext highlighter-rouge">system</code> function does when given a command as a string in other languages – use the <code class="language-plaintext highlighter-rouge">run</code> function:</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>julia&gt; run(`echo Hello`)
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>julia&gt; run(`echo Hello`)
 Hello
 </code></pre></div></div>
 
-<p>The <code class="highlighter-rouge">"Hello\n"</code> after the <code class="highlighter-rouge">readall</code> command is a returned value, whereas the <code class="highlighter-rouge">Hello</code> after the <code class="highlighter-rouge">run</code> command is printed output.
+<p>The <code class="language-plaintext highlighter-rouge">"Hello\n"</code> after the <code class="language-plaintext highlighter-rouge">readall</code> command is a returned value, whereas the <code class="language-plaintext highlighter-rouge">Hello</code> after the <code class="language-plaintext highlighter-rouge">run</code> command is printed output.
 (If your terminal supports color, these are colored differently so that you can easily distinguish them visually.)
-Nothing is returned by the <code class="highlighter-rouge">run</code> command, but if something goes wrong, an exception is raised:</p>
+Nothing is returned by the <code class="language-plaintext highlighter-rouge">run</code> command, but if something goes wrong, an exception is raised:</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>julia&gt; run(`false`)
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>julia&gt; run(`false`)
 ERROR: failed process: Process(`false`, ProcessExited(1)) [1]
  in error at error.jl:22
  in pipeline_error at process.jl:394
@@ -436,10 +436,10 @@ ERROR: failed process: Process(`notaprogram`, ProcessExited(-1)) [-1]
  in run at process.jl:384
 </code></pre></div></div>
 
-<p>As with <code class="highlighter-rouge">xargs</code> and <code class="highlighter-rouge">grep</code> above, this may not always be desirable.
-In such cases, you can use <code class="highlighter-rouge">ignorestatus</code> to indicate that the command returning a non-zero value should not be considered an error:</p>
+<p>As with <code class="language-plaintext highlighter-rouge">xargs</code> and <code class="language-plaintext highlighter-rouge">grep</code> above, this may not always be desirable.
+In such cases, you can use <code class="language-plaintext highlighter-rouge">ignorestatus</code> to indicate that the command returning a non-zero value should not be considered an error:</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>julia&gt; run(ignorestatus(`false`))
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>julia&gt; run(ignorestatus(`false`))
 
 julia&gt; run(ignorestatus(`notaprogram`))
 execvp(): No such file or directory
@@ -454,9 +454,9 @@ ERROR: failed process: Process(`notaprogram`, ProcessExited(-1)) [-1]
 <p>Although Julia’s backtick syntax intentionally mimics the shell as closely as possible, there is an important distinction:
 the command string is never passed to a shell to be interpreted and executed;
 instead it is parsed in Julia code, using the same rules the shell uses to determine what the command and arguments are.
-Command objects allow you to see what the program and arguments were determined to be by accessing the <code class="highlighter-rouge">.exec</code> field:</p>
+Command objects allow you to see what the program and arguments were determined to be by accessing the <code class="language-plaintext highlighter-rouge">.exec</code> field:</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>julia&gt; cmd = `perl -e 'print "Hello\n"'`
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>julia&gt; cmd = `perl -e 'print "Hello\n"'`
 `perl -e 'print "Hello\n"'`
 
 julia&gt; cmd.exec
@@ -473,9 +473,9 @@ julia&gt; cmd.exec
 <p>The purpose of the backtick notation in Julia is to provide a familiar, shell-like syntax for making objects representing commands with arguments.
 To that end, quotes and spaces work just as they do in the shell.
 The real power of backtick syntax doesn’t emerge, however, until we begin constructing commands programmatically.
-Just as in the shell (and in Julia strings), you can interpolate values into commands using the dollar sign (<code class="highlighter-rouge">$</code>):</p>
+Just as in the shell (and in Julia strings), you can interpolate values into commands using the dollar sign (<code class="language-plaintext highlighter-rouge">$</code>):</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>julia&gt; dir = "src";
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>julia&gt; dir = "src";
 
 julia&gt; `find $dir -type f`.exec
 4-element Union(UTF8String,ASCIIString) Array:
@@ -487,7 +487,7 @@ julia&gt; `find $dir -type f`.exec
 
 <p>Unlike in the shell, however, Julia values interpolated into commands are interpolated as a single verbatim argument – no characters inside the value are interpreted as special after the value has been interpolated:</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>julia&gt; dir = "two words";
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>julia&gt; dir = "two words";
 
 julia&gt; `find $dir -type f`.exec
 4-element Union(UTF8String,ASCIIString) Array:
@@ -506,9 +506,9 @@ julia&gt; `find $dir -type f`.exec
  "f"
 </code></pre></div></div>
 
-<p>This works no matter what the contents of the interpolated value is, allowing simple interpolation of characters that are quite difficult to pass as parts of command-line arguments even in the shell (for the following examples, <code class="highlighter-rouge">tmp/a.tsv</code> and <code class="highlighter-rouge">tmp/b.tsv</code> can be created in the shell with <code class="highlighter-rouge">echo -e "foo\tbar\nbaz\tqux" &gt; tmp/a.tsv; echo -e "foo\t1\nbaz\t2" &gt; tmp/b.tsv</code>):</p>
+<p>This works no matter what the contents of the interpolated value is, allowing simple interpolation of characters that are quite difficult to pass as parts of command-line arguments even in the shell (for the following examples, <code class="language-plaintext highlighter-rouge">tmp/a.tsv</code> and <code class="language-plaintext highlighter-rouge">tmp/b.tsv</code> can be created in the shell with <code class="language-plaintext highlighter-rouge">echo -e "foo\tbar\nbaz\tqux" &gt; tmp/a.tsv; echo -e "foo\t1\nbaz\t2" &gt; tmp/b.tsv</code>):</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>julia&gt; tab = "\t";
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>julia&gt; tab = "\t";
 
 julia&gt; cmd = `join -t$tab tmp/a.tsv tmp/b.tsv`;
 
@@ -524,9 +524,9 @@ foo     bar     1
 baz     qux     2
 </code></pre></div></div>
 
-<p>Moreover, what comes after the <code class="highlighter-rouge">$</code> can actually be any valid Julia expression, not just a variable name:</p>
+<p>Moreover, what comes after the <code class="language-plaintext highlighter-rouge">$</code> can actually be any valid Julia expression, not just a variable name:</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>julia&gt; `join -t$"\t" tmp/a.tsv tmp/b.tsv`.exec
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>julia&gt; `join -t$"\t" tmp/a.tsv tmp/b.tsv`.exec
 4-element Union(UTF8String,ASCIIString) Array:
  "join"
  "-t\t"
@@ -536,7 +536,7 @@ baz     qux     2
 
 <p>A tab character is somewhat harder to pass in the shell, requiring command interpolation and some tricky quoting:</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>bash-3.2$ join -t"$(printf '\t')" tmp/a.tsv tmp/b.tsv
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>bash-3.2$ join -t"$(printf '\t')" tmp/a.tsv tmp/b.tsv
 foo	    bar	    1
 baz	    qux	    2
 </code></pre></div></div>
@@ -549,7 +549,7 @@ In languages with first-class array types, however, there’s a much better opti
 consistently interpolate single values as single arguments and interpolate arrays as multiple values.
 This is precisely what Julia’s backtick interpolation does:</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>julia&gt; dirs = ["foo", "bar", "baz"];
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>julia&gt; dirs = ["foo", "bar", "baz"];
 
 julia&gt; `find $dirs -type f`.exec
 6-element Union(UTF8String,ASCIIString) Array:
@@ -565,31 +565,31 @@ julia&gt; `find $dirs -type f`.exec
 Julia’s backticks have one more fancy trick up their sleeve.
 We saw earlier (without really remarking on it) that you could interpolate single values into a larger argument:</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>julia&gt; x = "bar";
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>julia&gt; x = "bar";
 
 julia&gt; `echo foo$x`
 `echo foobar`
 </code></pre></div></div>
 
-<p>What happens if <code class="highlighter-rouge">x</code> is an array?
+<p>What happens if <code class="language-plaintext highlighter-rouge">x</code> is an array?
 Only one way to find out:</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>julia&gt; x = ["bar", "baz"];
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>julia&gt; x = ["bar", "baz"];
 
 julia&gt; `echo foo$x`
 `echo foobar foobaz`
 </code></pre></div></div>
 
-<p>Julia does what the shell would do if you wrote <code class="highlighter-rouge">echo foo{bar,baz}</code>.
+<p>Julia does what the shell would do if you wrote <code class="language-plaintext highlighter-rouge">echo foo{bar,baz}</code>.
 This even works correctly for multiple values interpolated into the same shell word:</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>julia&gt; dir = "/data"; names = ["foo","bar"]; exts=["csv","tsv"];
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>julia&gt; dir = "/data"; names = ["foo","bar"]; exts=["csv","tsv"];
 
 julia&gt; `cat $dir/$names.$exts`
 `cat /data/foo.csv /data/foo.tsv /data/bar.csv /data/bar.tsv`
 </code></pre></div></div>
 
-<p>This is the same Cartesian product expansion that the shell does if multiple <code class="highlighter-rouge">{...}</code> expressions are used in the same word.</p>
+<p>This is the same Cartesian product expansion that the shell does if multiple <code class="language-plaintext highlighter-rouge">{...}</code> expressions are used in the same word.</p>
 
 <h2 id="further-reading">Further Reading</h2>
 

@@ -35,7 +35,7 @@
     
     <p>Define the following function:</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>function sumrange(r::Range1{Int})
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>function sumrange(r::Range1{Int})
     c::Int64 = 0
     for i = r
         c += i
@@ -48,7 +48,7 @@ julia&gt; a = @spawnat 2 sumrange(1:500000); b = @spawnat 1 sumrange(500001:1000
 500000500000
 </code></pre></div></div>
 
-<p>Note that on a 32-bit machine, you’ll get the wrong answer unless you use <code class="highlighter-rouge">Int64</code>.</p>
+<p>Note that on a 32-bit machine, you’ll get the wrong answer unless you use <code class="language-plaintext highlighter-rouge">Int64</code>.</p>
 
     <div class="footer">
       Julia is a <a href="https://numfocus.org/projects/index.html">NumFocus project</a>.

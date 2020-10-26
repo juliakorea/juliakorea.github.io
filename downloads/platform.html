@@ -254,18 +254,18 @@
 
 <p>The <a href="https://github.com/JuliaLang/julia/blob/master/README.windows.md">Windows README</a> contains information on dependencies.</p>
 
-<p>Uninstallation is performed by deleting the extracted directory and the packages directory in <code class="highlighter-rouge">%HOME%/.julia</code>. If you would also like to remove your preferences files, remove <code class="highlighter-rouge">%HOME%/.juliarc.jl</code> and <code class="highlighter-rouge">%HOME%/.julia_history</code>.</p>
+<p>Uninstallation is performed by deleting the extracted directory and the packages directory in <code class="language-plaintext highlighter-rouge">%HOME%/.julia</code>. If you would also like to remove your preferences files, remove <code class="language-plaintext highlighter-rouge">%HOME%/.juliarc.jl</code> and <code class="language-plaintext highlighter-rouge">%HOME%/.julia_history</code>.</p>
 
 <h2 id="macos">macOS</h2>
 
-<p>On Mac, a <code class="highlighter-rouge">Julia-&lt;version&gt;.dmg</code> file is provided, which contains Julia.app. Installation is the same as any other Mac software – copy the <code class="highlighter-rouge">Julia-&lt;version&gt;.app</code> to your hard-drive (anywhere) or run from the disk image. Julia runs on macOS 10.8 and later releases.</p>
+<p>On Mac, a <code class="language-plaintext highlighter-rouge">Julia-&lt;version&gt;.dmg</code> file is provided, which contains Julia.app. Installation is the same as any other Mac software – copy the <code class="language-plaintext highlighter-rouge">Julia-&lt;version&gt;.app</code> to your hard-drive (anywhere) or run from the disk image. Julia runs on macOS 10.8 and later releases.</p>
 
-<p>Uninstall Julia by deleting Julia.app and the packages directory in ~/.julia. Multiple Julia.app binaries can co-exist without interfering with each other. If you would also like to remove your preferences files, remove <code class="highlighter-rouge">~/.juliarc.jl</code>.</p>
+<p>Uninstall Julia by deleting Julia.app and the packages directory in ~/.julia. Multiple Julia.app binaries can co-exist without interfering with each other. If you would also like to remove your preferences files, remove <code class="language-plaintext highlighter-rouge">~/.juliarc.jl</code>.</p>
 
 <p>An alternative to installing Julia from the downloaded .dmg is by using the <a href="https://brew.sh/">Homebrew package manager</a>. 
 In your terminal, run</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>brew cask install julia
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>brew cask install julia
 </code></pre></div></div>
 
 <h2 id="linux-and-freebsd">Linux and FreeBSD</h2>
@@ -274,20 +274,20 @@ In your terminal, run</p>
 
 <h3 id="generic-binaries">Generic Binaries</h3>
 
-<p>The generic Linux and FreeBSD binaries do not require any special installation steps, but you will need to ensure that your system can find the <code class="highlighter-rouge">julia</code> executable. First, extract the <code class="highlighter-rouge">.tar.gz</code> file downloaded from the <a href="index.html">downloads page</a> to a folder on your computer. To run Julia, you can do any of the following:</p>
+<p>The generic Linux and FreeBSD binaries do not require any special installation steps, but you will need to ensure that your system can find the <code class="language-plaintext highlighter-rouge">julia</code> executable. First, extract the <code class="language-plaintext highlighter-rouge">.tar.gz</code> file downloaded from the <a href="index.html">downloads page</a> to a folder on your computer. To run Julia, you can do any of the following:</p>
 
 <ul>
-  <li>Create a symbolic link to <code class="highlighter-rouge">julia</code> inside a folder which is on your system <code class="highlighter-rouge">PATH</code></li>
-  <li>Add Julia’s <code class="highlighter-rouge">bin</code> folder to your system <code class="highlighter-rouge">PATH</code> environment variable</li>
-  <li>Invoke the <code class="highlighter-rouge">julia</code> executable by using its full path, as in <code class="highlighter-rouge">&lt;where you extracted Julia&gt;/bin/julia</code></li>
+  <li>Create a symbolic link to <code class="language-plaintext highlighter-rouge">julia</code> inside a folder which is on your system <code class="language-plaintext highlighter-rouge">PATH</code></li>
+  <li>Add Julia’s <code class="language-plaintext highlighter-rouge">bin</code> folder to your system <code class="language-plaintext highlighter-rouge">PATH</code> environment variable</li>
+  <li>Invoke the <code class="language-plaintext highlighter-rouge">julia</code> executable by using its full path, as in <code class="language-plaintext highlighter-rouge">&lt;where you extracted Julia&gt;/bin/julia</code></li>
 </ul>
 
-<p>For example, to create a symbolic link to <code class="highlighter-rouge">julia</code> inside the <code class="highlighter-rouge">/usr/local/bin</code> folder, you can do the following:</p>
+<p>For example, to create a symbolic link to <code class="language-plaintext highlighter-rouge">julia</code> inside the <code class="language-plaintext highlighter-rouge">/usr/local/bin</code> folder, you can do the following:</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>sudo ln -s &lt;where you extracted the julia archive&gt;/bin/julia /usr/local/bin/julia
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>sudo ln -s &lt;where you extracted the julia archive&gt;/bin/julia /usr/local/bin/julia
 </code></pre></div></div>
 
-<p>On some Linux distributions, you may need to use a folder other than <code class="highlighter-rouge">/usr/local/bin</code>. To check which folders are on your <code class="highlighter-rouge">PATH</code>, you can run <code class="highlighter-rouge">echo $PATH</code>.</p>
+<p>On some Linux distributions, you may need to use a folder other than <code class="language-plaintext highlighter-rouge">/usr/local/bin</code>. To check which folders are on your <code class="language-plaintext highlighter-rouge">PATH</code>, you can run <code class="language-plaintext highlighter-rouge">echo $PATH</code>.</p>
 
 <h3 id="distribution-specific-packages">Distribution-Specific Packages</h3>
 
@@ -302,17 +302,17 @@ In your terminal, run</p>
 
 <p>If you are using Fedora (version 19 or higher), directly run:</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>sudo dnf copr enable nalimilan/julia
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>sudo dnf copr enable nalimilan/julia
 sudo yum install julia
 </code></pre></div></div>
 
 <p>If you are using CentOS (version 7 or higher), directly run:</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>sudo yum-config-manager --add-repo https://copr.fedorainfracloud.org/coprs/nalimilan/julia/repo/epel-7/nalimilan-julia-epel-7.repo
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>sudo yum-config-manager --add-repo https://copr.fedorainfracloud.org/coprs/nalimilan/julia/repo/epel-7/nalimilan-julia-epel-7.repo
 sudo yum install julia
 </code></pre></div></div>
 
-<p>If both <code class="highlighter-rouge">dnf</code> and <code class="highlighter-rouge">yum-config-manager</code> are not available for your distribution, download the relevant <code class="highlighter-rouge">.repo</code> file from the Copr webpage, copy it to <code class="highlighter-rouge">/etc/yum.repos</code>, and run the second command.</p>
+<p>If both <code class="language-plaintext highlighter-rouge">dnf</code> and <code class="language-plaintext highlighter-rouge">yum-config-manager</code> are not available for your distribution, download the relevant <code class="language-plaintext highlighter-rouge">.repo</code> file from the Copr webpage, copy it to <code class="language-plaintext highlighter-rouge">/etc/yum.repos</code>, and run the second command.</p>
 
 <p>Note that Fedora guidelines advise against uploading new breaking releases to official repositories: therefore your distribution will not provide the new major versions of Julia which were published after it. When reporting issues, please ensure you are using the latest available release by using one of the Copr repositories displayed on this page.</p>
 
@@ -323,35 +323,35 @@ sudo yum install julia
 
 <p>If you are using Fedora (version 19 or higher), directly run:</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>sudo dnf copr enable nalimilan/julia-nightlies
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>sudo dnf copr enable nalimilan/julia-nightlies
 sudo yum install julia
 </code></pre></div></div>
 
-<p>If <code class="highlighter-rouge">dnf</code> is not available for your distribution, download the relevant <code class="highlighter-rouge">.repo</code> file from the Copr webpage, copy it to <code class="highlighter-rouge">/etc/yum.repos</code>, and run the second command.</p>
+<p>If <code class="language-plaintext highlighter-rouge">dnf</code> is not available for your distribution, download the relevant <code class="language-plaintext highlighter-rouge">.repo</code> file from the Copr webpage, copy it to <code class="language-plaintext highlighter-rouge">/etc/yum.repos</code>, and run the second command.</p>
 
 <p>New versions are built every night. If you have already installed julia and you want to upgrade to the latest version, do:</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>sudo yum upgrade julia
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>sudo yum upgrade julia
 </code></pre></div></div>
 
 <h3 id="freebsd-ports">FreeBSD Ports</h3>
 
 <p>Julia is available in the <a href="https://svnweb.freebsd.org/ports/head/lang/julia/">Ports Collection</a>.
-To install from the FreeBSD binary package manager, <code class="highlighter-rouge">pkg</code>, run</p>
+To install from the FreeBSD binary package manager, <code class="language-plaintext highlighter-rouge">pkg</code>, run</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>pkg install julia
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>pkg install julia
 </code></pre></div></div>
 
 <p>To build and install Julia from source within the Ports framework, run</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>cd /usr/ports/lang/julia
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>cd /usr/ports/lang/julia
 make clean
 make install
 </code></pre></div></div>
 
 <h2 id="uninstalling-julia">Uninstalling Julia</h2>
 
-<p>Uninstallation depends on the method you used to install Julia. If you installed from a package manager such as <code class="highlighter-rouge">apt-get</code> or <code class="highlighter-rouge">yum</code>, use the package manager to remove julia, for example <code class="highlighter-rouge">apt-get remove julia</code> or <code class="highlighter-rouge">yum remove julia</code>. If you did a source build, you can remove it by deleting your julia source folder. If you would also like to remove your preferences files, they are <code class="highlighter-rouge">~/.julia</code> and <code class="highlighter-rouge">~/.juliarc.jl</code>.</p>
+<p>Uninstallation depends on the method you used to install Julia. If you installed from a package manager such as <code class="language-plaintext highlighter-rouge">apt-get</code> or <code class="language-plaintext highlighter-rouge">yum</code>, use the package manager to remove julia, for example <code class="language-plaintext highlighter-rouge">apt-get remove julia</code> or <code class="language-plaintext highlighter-rouge">yum remove julia</code>. If you did a source build, you can remove it by deleting your julia source folder. If you would also like to remove your preferences files, they are <code class="language-plaintext highlighter-rouge">~/.julia</code> and <code class="language-plaintext highlighter-rouge">~/.juliarc.jl</code>.</p>
 
 
     <div class="footer">

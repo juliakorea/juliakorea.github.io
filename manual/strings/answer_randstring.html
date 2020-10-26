@@ -33,7 +33,7 @@
 <body>
   <div id="site" class="site">
     
-    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>function randstring(len::Int)
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>function randstring(len::Int)
     const cset = char([0x30:0x39,0x41:0x5a,0x61:0x7a])
 const strset = convert(ASCIIString,strcat(cset...))
     index = int(ceil(strlen(strset)*rand(len)))

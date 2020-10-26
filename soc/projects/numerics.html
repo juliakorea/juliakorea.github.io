@@ -262,7 +262,7 @@ ready(function () {
 
 <h2 id="implementing-eigenvalue-problem-solvers-for-sparse-matrices">Implementing eigenvalue problem solvers for sparse matrices</h2>
 
-<p>The <a href="https://github.com/JuliaLang/IterativeSolvers.jl">IterativeSolvers.jl</a> package is lacking iterative methods for the (generalized) eigenvalue problem Ax = λBx. The goal of this project is to implement the Arnoldi or Lanczos method as a solver for the eigenvalue problem and to compare its performance with the <code class="highlighter-rouge">eigs</code> function.</p>
+<p>The <a href="https://github.com/JuliaLang/IterativeSolvers.jl">IterativeSolvers.jl</a> package is lacking iterative methods for the (generalized) eigenvalue problem Ax = λBx. The goal of this project is to implement the Arnoldi or Lanczos method as a solver for the eigenvalue problem and to compare its performance with the <code class="language-plaintext highlighter-rouge">eigs</code> function.</p>
 
 <p>For instance, the student can start by implementing the Arnoldi method for non-Hermitian eigenvalue problems Ax = λx. The method should then be improved with the implicit restart procedure (IRAM) and finally extended to the generalized eigenvalue problem Ax = λBx.</p>
 
@@ -338,7 +338,7 @@ moment, many of these are implemented in external libraries such as
 implementing these functions in native Julia (possibly utilising the work in
 <a href="https://github.com/nolta/SpecialFunctions.jl">SpecialFunctions.jl</a>),
 seeking out opportunties for possible improvements along the way, such as supporting
-<code class="highlighter-rouge">Float32</code> and <code class="highlighter-rouge">BigFloat</code>, exploiting fused multiply-add operations, and improving errors
+<code class="language-plaintext highlighter-rouge">Float32</code> and <code class="language-plaintext highlighter-rouge">BigFloat</code>, exploiting fused multiply-add operations, and improving errors
 and boundary cases.</p>
 
 <p><strong>Recommended Skills</strong>: A strong understanding of calculus.</p>
@@ -364,7 +364,7 @@ and boundary cases.</p>
 <h2 id="a-standards-compliant-interval-arithmetic-library">A standards-compliant interval arithmetic library</h2>
 
 <p>Interval arithmetic provides a way to perform computations with floating-point numbers that are guaranteed to be correct, by
-wrapping each operand in an interval. <a href="https://github.com/dpsanders/ValidatedNumerics.jl"><code class="highlighter-rouge">ValidatedNumerics.jl</code></a> is a native Julia package providing interval functions that has a significant amount of functionality.</p>
+wrapping each operand in an interval. <a href="https://github.com/dpsanders/ValidatedNumerics.jl"><code class="language-plaintext highlighter-rouge">ValidatedNumerics.jl</code></a> is a native Julia package providing interval functions that has a significant amount of functionality.</p>
 
 <p>This project proposes to achieve compliance of this package with the <a href="https://standards.ieee.org/findstds/standard/1788-2015.html">IEEE 1788-2015 Standard</a>, which specifies how interval arithmetic packages should behave. This would make the package one of the first few packages to be fully compliant with the standard. It would involve adding some functions, writing documentation, improving the test suite, writing a compliance document, and overhauling and simplifying the code that already exists. The goal is to make this package a reference for interval arithmetic implementations.</p>
 
@@ -380,7 +380,7 @@ wrapping each operand in an interval. <a href="https://github.com/dpsanders/Vali
 
 <p>This can be used to find roots (zeros) of functions in a <em>guaranteed</em> way, by excluding regions where there are no roots and zooming in on roots, but always within a given interval.</p>
 
-<p>A basic branch-and-prune algorithm has been implemented in  <a href="https://github.com/JuliaIntervals/IntervalRootFinding.jl"><code class="highlighter-rouge">IntervalRootFinding.jl</code></a>.</p>
+<p>A basic branch-and-prune algorithm has been implemented in  <a href="https://github.com/JuliaIntervals/IntervalRootFinding.jl"><code class="language-plaintext highlighter-rouge">IntervalRootFinding.jl</code></a>.</p>
 
 <p>This project proposes to significantly improve these methods using techniques found in the interval arithmetic literature.</p>
 
@@ -397,7 +397,7 @@ wrapping each operand in an interval. <a href="https://github.com/dpsanders/Vali
 <p>This can be used to do global optimization of functions in a deterministic way, that is, find the global minimum of a non-convex, nonlinear function $f:\mathbb{R}^n \to \mathbb{R}$.
 Interval methods for global optimization provide a guaranteed bound for the global optimum, and sets that contain the optimizers.</p>
 
-<p>A basic branch-and-bound algorithm has already been implemented in  <a href="https://github.com/JuliaIntervals/IntervalOptimization.jl"><code class="highlighter-rouge">IntervalOptimization.jl</code></a>, but it can be significantly improved.</p>
+<p>A basic branch-and-bound algorithm has already been implemented in  <a href="https://github.com/JuliaIntervals/IntervalOptimization.jl"><code class="language-plaintext highlighter-rouge">IntervalOptimization.jl</code></a>, but it can be significantly improved.</p>
 
 <p>This project proposes to develop a state-of-the-art global optimization routine in Julia, by applying techniques found in the interval arithmetic and global optimization literature.
 This may involve developing code for McCormick relaxations and/or affine arithmetic.</p>

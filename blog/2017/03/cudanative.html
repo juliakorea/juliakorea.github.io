@@ -272,7 +272,7 @@ source is well documented in the <a href="https://github.com/JuliaLang/julia/blo
 README</a>.
 Most of the time it boils down to the following commands:</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ git clone https://github.com/JuliaLang/julia.git
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ git clone https://github.com/JuliaLang/julia.git
 $ cd julia
 $ git checkout v0.6.0-pre.alpha  # or any later tag
 $ make                           # add -jN for N parallel jobs
@@ -283,14 +283,14 @@ $ ./julia
 the package manager. Do note that you need to be using the NVIDIA binary driver, and have
 the CUDA toolkit installed.</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&gt; Pkg.add("CUDAnative")
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&gt; Pkg.add("CUDAnative")
 
 # Optional: test the package
 &gt; Pkg.test("CUDAnative")
 </code></pre></div></div>
 
 <p>At this point, you can start writing kernels and execute them on the GPU using CUDAnative’s
-<code class="highlighter-rouge">@cuda</code>! Be sure to check out the
+<code class="language-plaintext highlighter-rouge">@cuda</code>! Be sure to check out the
 <a href="https://github.com/JuliaGPU/CUDAnative.jl/tree/master/examples">examples</a>, or continue
 reading for a more textual introduction.</p>
 
@@ -300,7 +300,7 @@ reading for a more textual introduction.</p>
 is to perform a vector addition. The snippet below does exactly that using Julia and
 CUDAnative.jl:</p>
 
-<div class="language-julia highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">using</span> <span class="n">CUDAdrv</span><span class="x">,</span> <span class="n">CUDAnative</span>
+<div class="language-julia highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">using</span> <span class="n">CUDAdrv</span><span class="x">,</span> <span class="n">CUDAnative</span>
 
 <span class="k">function</span><span class="nf"> kernel_vadd</span><span class="x">(</span><span class="n">a</span><span class="x">,</span> <span class="n">b</span><span class="x">,</span> <span class="n">c</span><span class="x">)</span>
     <span class="c"># from CUDAnative: (implicit) CuDeviceArray type,</span>
@@ -308,7 +308,7 @@ CUDAnative.jl:</p>
     <span class="n">i</span> <span class="o">=</span> <span class="x">(</span><span class="n">blockIdx</span><span class="x">()</span><span class="o">.</span><span class="n">x</span><span class="o">-</span><span class="mi">1</span><span class="x">)</span> <span class="o">*</span> <span class="n">blockDim</span><span class="x">()</span><span class="o">.</span><span class="n">x</span> <span class="o">+</span> <span class="n">threadIdx</span><span class="x">()</span><span class="o">.</span><span class="n">x</span>
     <span class="n">c</span><span class="x">[</span><span class="n">i</span><span class="x">]</span> <span class="o">=</span> <span class="n">a</span><span class="x">[</span><span class="n">i</span><span class="x">]</span> <span class="o">+</span> <span class="n">b</span><span class="x">[</span><span class="n">i</span><span class="x">]</span>
 
-    <span class="k">return</span> <span class="n">nothing</span>
+    <span class="k">return</span> <span class="nb">nothing</span>
 <span class="k">end</span>
 
 <span class="n">dev</span> <span class="o">=</span> <span class="n">CuDevice</span><span class="x">(</span><span class="mi">0</span><span class="x">)</span>
@@ -326,9 +326,9 @@ CUDAnative.jl:</p>
 
 <span class="c"># execute and fetch results</span>
 <span class="nd">@cuda</span> <span class="x">(</span><span class="mi">1</span><span class="x">,</span><span class="n">len</span><span class="x">)</span> <span class="n">kernel_vadd</span><span class="x">(</span><span class="n">d_a</span><span class="x">,</span> <span class="n">d_b</span><span class="x">,</span> <span class="n">d_c</span><span class="x">)</span>    <span class="c"># from CUDAnative.jl</span>
-<span class="n">c</span> <span class="o">=</span> <span class="n">Array</span><span class="x">(</span><span class="n">d_c</span><span class="x">)</span>
+<span class="n">c</span> <span class="o">=</span> <span class="kt">Array</span><span class="x">(</span><span class="n">d_c</span><span class="x">)</span>
 
-<span class="n">using</span> <span class="n">Base</span><span class="o">.</span><span class="n">Test</span>
+<span class="k">using</span> <span class="n">Base</span><span class="o">.</span><span class="n">Test</span>
 <span class="nd">@test</span> <span class="n">c</span> <span class="o">==</span> <span class="n">a</span> <span class="o">+</span> <span class="n">b</span>
 
 <span class="n">destroy</span><span class="x">(</span><span class="n">ctx</span><span class="x">)</span>
@@ -338,8 +338,8 @@ CUDAnative.jl:</p>
 
 <p>Most of this example does not rely on CUDAnative.jl, but uses functionality from CUDAdrv.jl.
 This package makes it possible to interact with CUDA hardware through user-friendly wrappers
-of CUDA’s driver API. For example, it provides an array type <code class="highlighter-rouge">CuArray</code>, takes care of memory
-management, integrates with Julia’s garbage collector, implements <code class="highlighter-rouge">@elapsed</code> using GPU
+of CUDA’s driver API. For example, it provides an array type <code class="language-plaintext highlighter-rouge">CuArray</code>, takes care of memory
+management, integrates with Julia’s garbage collector, implements <code class="language-plaintext highlighter-rouge">@elapsed</code> using GPU
 events, etc. It is meant to form a strong foundation for all interactions with the CUDA
 driver, and does not require a bleeding-edge version of Julia. A slightly higher-level
 alternative is available under <a href="https://github.com/JuliaGPU/CUDArt.jl">CUDArt.jl</a>, building
@@ -357,9 +357,9 @@ calls to CPU libraries, simplified exceptions, …)</li>
 GPU</li>
 </ol>
 
-<p>All this is hidden behind the call to <code class="highlighter-rouge">@cuda</code>, which generates code to compile our kernel
+<p>All this is hidden behind the call to <code class="language-plaintext highlighter-rouge">@cuda</code>, which generates code to compile our kernel
 upon first use. Every subsequent invocation will re-use that code, convert and upload
-arguments<sup id="fnref:1"><a href="#fn:1" class="footnote">1</a></sup>, and finally launch the kernel. And much like we’re used to on the CPU, you
+arguments<sup id="fnref:1" role="doc-noteref"><a href="#fn:1" class="footnote">1</a></sup>, and finally launch the kernel. And much like we’re used to on the CPU, you
 can introspect this code using runtime reflection:</p>
 
 <div class="language-julia highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># CUDAnative.jl provides alternatives to the @code_ macros,</span>
@@ -378,15 +378,15 @@ can introspect this code using runtime reflection:</p>
 <span class="c"># or manually specify types (this is error prone!)</span>
 <span class="n">julia</span><span class="o">&gt;</span> <span class="n">code_sass</span><span class="x">(</span><span class="n">kernel_vadd</span><span class="x">,</span> <span class="x">(</span><span class="n">CuDeviceArray</span><span class="x">{</span><span class="kt">Float32</span><span class="x">,</span><span class="mi">2</span><span class="x">},</span><span class="n">CuDeviceArray</span><span class="x">{</span><span class="kt">Float32</span><span class="x">,</span><span class="mi">2</span><span class="x">},</span><span class="n">CuDeviceArray</span><span class="x">{</span><span class="kt">Float32</span><span class="x">,</span><span class="mi">2</span><span class="x">}))</span>
 <span class="n">code</span> <span class="k">for</span> <span class="n">sm_20</span>
-        <span class="n">Function</span> <span class="x">:</span> <span class="n">julia_kernel_vadd_68481</span>
+        <span class="kt">Function</span> <span class="o">:</span> <span class="n">julia_kernel_vadd_68481</span>
 <span class="x">[</span><span class="n">SASS</span> <span class="n">CODE</span><span class="x">]</span>
 </code></pre></div></div>
 
 <p>Another important part of CUDAnative.jl are the intrinsics: special functions and macros
 that provide functionality hard or impossible to express using normal functions. For
-example, the <code class="highlighter-rouge">{thread,block,grid}{Idx,Dim}</code> functions provide access to the size and index
-of each level of work. Local shared memory can be created using the <code class="highlighter-rouge">@cuStaticSharedMem</code> and
-<code class="highlighter-rouge">@cuDynamicSharedMem</code> macros, while <code class="highlighter-rouge">@cuprintf</code> can be used to display a formatted string
+example, the <code class="language-plaintext highlighter-rouge">{thread,block,grid}{Idx,Dim}</code> functions provide access to the size and index
+of each level of work. Local shared memory can be created using the <code class="language-plaintext highlighter-rouge">@cuStaticSharedMem</code> and
+<code class="language-plaintext highlighter-rouge">@cuDynamicSharedMem</code> macros, while <code class="language-plaintext highlighter-rouge">@cuprintf</code> can be used to display a formatted string
 from within a kernel function. Many <a href="https://github.com/JuliaGPU/CUDAnative.jl/blob/0721783db9ac4cc2c2948cbf8cbff4aa5f7c4271/src/device/intrinsics.jl#L499-L807">math
 functions</a> are also available;
 these should be used instead of similar functions in the standard library.</p>
@@ -395,12 +395,12 @@ these should be used instead of similar functions in the standard library.</p>
 
 <p>As I’ve already hinted, we don’t support all features of the Julia language yet. For
 example, it is currently impossible to call any function from the Julia C runtime library
-(aka. <code class="highlighter-rouge">libjulia.so</code>). This makes dynamic allocations impossible, cripples exceptions, etc.
+(aka. <code class="language-plaintext highlighter-rouge">libjulia.so</code>). This makes dynamic allocations impossible, cripples exceptions, etc.
 As a result, large parts of the standard library are unavailable for use on the GPU. We will
 obviously try to improve this in the future, but for now the compiler will error when it
 encounters unsupported language features:</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>julia&gt; nope() = println(42)
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>julia&gt; nope() = println(42)
 nope (generic function with 1 method)
 
 julia&gt; @cuda (1,1) nope()
@@ -429,11 +429,11 @@ viable communication medium.</p>
 looks pretty similar to the CUDA original: this is as intended, because CUDAnative.jl is a
 counterpart to CUDA C. The new version is much more generic though, specializing both on the
 reduction operator and value type. And just like we’re used to with regular Julia code, the
-<code class="highlighter-rouge">@cuda</code> macro will just-in-time compile and dispatch to the correct specialization based on
+<code class="language-plaintext highlighter-rouge">@cuda</code> macro will just-in-time compile and dispatch to the correct specialization based on
 the argument types.</p>
 
 <p>So how does it perform? Turns out, pretty good! The chart below compares the performance of
-both the CUDAnative.jl and CUDA C implementations<sup id="fnref:2"><a href="#fn:2" class="footnote">2</a></sup>, using BenchmarkTools.jl to <a href="https://github.com/JuliaGPU/CUDAnative.jl/blob/0721783db9ac4cc2c2948cbf8cbff4aa5f7c4271/examples/reduce/benchmark.jl">measure
+both the CUDAnative.jl and CUDA C implementations<sup id="fnref:2" role="doc-noteref"><a href="#fn:2" class="footnote">2</a></sup>, using BenchmarkTools.jl to <a href="https://github.com/JuliaGPU/CUDAnative.jl/blob/0721783db9ac4cc2c2948cbf8cbff4aa5f7c4271/examples/reduce/benchmark.jl">measure
 the execution time</a>. The small
 constant overhead (note the logarithmic scale) is due to a deficiency in argument passing,
 and will be fixed.</p>
@@ -443,9 +443,9 @@ implementations." /></p>
 
 <p>We also aim to be compatible with tools from the CUDA toolkit. For example, you can <a href="/images/blog/2017-03-14-cudanative/nvvp.png">profile
 Julia kernels</a> using the NVIDIA Visual
-Profiler, or use <code class="highlighter-rouge">cuda-memcheck</code> to detect out-of-bound accesses<sup id="fnref:3"><a href="#fn:3" class="footnote">3</a></sup>:</p>
+Profiler, or use <code class="language-plaintext highlighter-rouge">cuda-memcheck</code> to detect out-of-bound accesses<sup id="fnref:3" role="doc-noteref"><a href="#fn:3" class="footnote">3</a></sup>:</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ cuda-memcheck julia examples/oob.jl
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ cuda-memcheck julia examples/oob.jl
 ========= CUDA-MEMCHECK
 ========= Invalid __global__ write of size 4
 =========     at 0x00000148 in examples/oob.jl:14:julia_memset_66041
@@ -454,7 +454,7 @@ Profiler, or use <code class="highlighter-rouge">cuda-memcheck</code> to detect 
 </code></pre></div></div>
 
 <p>Full debug information <a href="https://github.com/JuliaGPU/CUDAnative.jl/issues/31">is not
-available</a> yet, so <code class="highlighter-rouge">cuda-gdb</code> and
+available</a> yet, so <code class="language-plaintext highlighter-rouge">cuda-gdb</code> and
 friends will not work very well.</p>
 
 <h2 id="try-it-out">Try it out!</h2>
@@ -486,16 +486,16 @@ also grateful to Bjorn De Sutter, and IWT Vlaanderen, for supporting my time at 
 University.</p>
 
 <hr />
-<div class="footnotes">
+<div class="footnotes" role="doc-endnotes">
   <ol>
-    <li id="fn:1">
-      <p>See the <a href="https://github.com/JuliaGPU/CUDAnative.jl/blob/0721783db9ac4cc2c2948cbf8cbff4aa5f7c4271/README.md#object-arguments">README</a> for a note on how expensive this currently is. <a href="#fnref:1" class="reversefootnote">&#8617;</a></p>
+    <li id="fn:1" role="doc-endnote">
+      <p>See the <a href="https://github.com/JuliaGPU/CUDAnative.jl/blob/0721783db9ac4cc2c2948cbf8cbff4aa5f7c4271/README.md#object-arguments">README</a> for a note on how expensive this currently is. <a href="#fnref:1" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
     </li>
-    <li id="fn:2">
-      <p>The measurements include memory transfer time, which is why a CPU implementation was not included (realistically, data would be kept on the GPU as long as possible, making it an unfair comparison). <a href="#fnref:2" class="reversefootnote">&#8617;</a></p>
+    <li id="fn:2" role="doc-endnote">
+      <p>The measurements include memory transfer time, which is why a CPU implementation was not included (realistically, data would be kept on the GPU as long as possible, making it an unfair comparison). <a href="#fnref:2" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
     </li>
-    <li id="fn:3">
-      <p>Bounds-checked arrays are not supported yet, due to <a href="https://github.com/JuliaGPU/CUDAnative.jl/issues/4">a bug in the NVIDIA PTX compiler</a>. <a href="#fnref:3" class="reversefootnote">&#8617;</a></p>
+    <li id="fn:3" role="doc-endnote">
+      <p>Bounds-checked arrays are not supported yet, due to <a href="https://github.com/JuliaGPU/CUDAnative.jl/issues/4">a bug in the NVIDIA PTX compiler</a>. <a href="#fnref:3" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
     </li>
   </ol>
 </div>

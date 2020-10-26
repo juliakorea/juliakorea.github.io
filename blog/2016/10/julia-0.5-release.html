@@ -282,10 +282,10 @@ This is a major breaking changes, but has been made to make the indexing rules m
     <p>Experimental support for <a href="https://github.com/JuliaLang/julia/issues/16260">arrays whose indexing</a> starts from values other than 1. Standard Julia arrays are still 1-based, but external packages can implement array types with indexing from arbitrary indices.</p>
   </li>
   <li>
-    <p>Major simplification of the <a href="https://github.com/JuliaLang/julia/issues/16107">string types</a>, unifying <code class="highlighter-rouge">ASCIIString</code> and <code class="highlighter-rouge">UTF8String</code> as <code class="highlighter-rouge">String</code>, as well as moving types and functions related to different encodings out of the standard library.</p>
+    <p>Major simplification of the <a href="https://github.com/JuliaLang/julia/issues/16107">string types</a>, unifying <code class="language-plaintext highlighter-rouge">ASCIIString</code> and <code class="language-plaintext highlighter-rouge">UTF8String</code> as <code class="language-plaintext highlighter-rouge">String</code>, as well as moving types and functions related to different encodings out of the standard library.</p>
   </li>
   <li>
-    <p><a href="https://github.com/JuliaLang/julia/issues/11196">Package operations</a> now use the <code class="highlighter-rouge">libgit2</code> library rather than shelling out to command line git. This makes these calls to package related functions much faster, and more reliable, especially on Windows.</p>
+    <p><a href="https://github.com/JuliaLang/julia/issues/11196">Package operations</a> now use the <code class="language-plaintext highlighter-rouge">libgit2</code> library rather than shelling out to command line git. This makes these calls to package related functions much faster, and more reliable, especially on Windows.</p>
   </li>
   <li>
     <p>And <a href="https://github.com/JuliaLang/julia/blob/release-0.5/NEWS.md#julia-v050-release-notes">many many more</a> changes and improvements…</p>

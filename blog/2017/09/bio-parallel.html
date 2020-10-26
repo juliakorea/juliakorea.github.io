@@ -266,8 +266,8 @@ may be boosted by utilizing it.</p>
 generate finite state machine (FSM) from regular expressions. We use it to
 generate high-performance parsers for various file formats used in
 bioinformatics.  The loop unrolling factor can be specified as an argument of
-<a href="http://biojulia.net/Automa.jl/latest/references.html#Automa.CodeGenContext"><code class="highlighter-rouge">Automa.CodeGenContext</code></a>.
-For example, you can specify the value 8 in this way: <code class="highlighter-rouge">context =
+<a href="http://biojulia.net/Automa.jl/latest/references.html#Automa.CodeGenContext"><code class="language-plaintext highlighter-rouge">Automa.CodeGenContext</code></a>.
+For example, you can specify the value 8 in this way: <code class="language-plaintext highlighter-rouge">context =
 Automa.CodeGenContext(loopunroll=8)</code> and that is all. The code generator of
 Automa.jl will automatically unroll loops found in an FSM.</p>
 
@@ -295,10 +295,10 @@ is no need to use more CPU cores.</p>
 
 <p><a href="https://github.com/bicycle1885/ConcurrentCalls.jl">ConcurrentCalls.jl</a> is a
 package that makes function calls (or tasks) run concurrently. It exports a
-macro <code class="highlighter-rouge">@cc</code> that transforms Julia code to code that calls functions on remote
+macro <code class="language-plaintext highlighter-rouge">@cc</code> that transforms Julia code to code that calls functions on remote
 processes.  This is a conceptual example of running tasks in parallel:</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>addprocs(2)
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>addprocs(2)
 using ConcurrentCalls
 
 function multitask()
@@ -323,10 +323,10 @@ end
 multitask()  # =&gt; 24
 </code></pre></div></div>
 
-<p>In the example above, <code class="highlighter-rouge">x = sum(1, 2)</code> and <code class="highlighter-rouge">y = sum(3, 4)</code> will be executed in
+<p>In the example above, <code class="language-plaintext highlighter-rouge">x = sum(1, 2)</code> and <code class="language-plaintext highlighter-rouge">y = sum(3, 4)</code> will be executed in
 parallel on different processes. These function calls are arranged by a
 scheduler of ConcurrentCalls.jl and each taks is assigned to a worker process
-based on some heuristics. The third line inside the <code class="highlighter-rouge">@cc</code> macro has two function
+based on some heuristics. The third line inside the <code class="language-plaintext highlighter-rouge">@cc</code> macro has two function
 calls. Each of them will also be assigned to a worker but it never starts until
 the first two finish. Dependencies of tasks are handled by the scheduler and a
 task will not be executed until all of its arguments are finished and results
@@ -337,7 +337,7 @@ be apparent from the code. Data dependencies are naturally expressed by
 arguments passed to functions.  The code below shows three examples that use a
 for loop to describe a job:</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code># independent tasks
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code># independent tasks
 @cc begin
     for i in 1:100
         task()

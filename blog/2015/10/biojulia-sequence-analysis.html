@@ -282,11 +282,11 @@ packages in this post.</p>
 <h2 id="intarraysjl">IntArrays.jl</h2>
 
 <p><a href="https://github.com/bicycle1885/IntArrays.jl">IntArrays.jl</a> is a package for arrays of unsigned integer.
-So, is it useful? Yes, it is! This is because the <code class="highlighter-rouge">IntArray</code> type implemented in this package can store integers as small space as possible.
-The <code class="highlighter-rouge">IntArray</code> type has a type parameter <code class="highlighter-rouge">w</code> that represents the number of bits required to encode elements in an array.
-For example, if each element is an integer between 0 and 3, you only need to use two bits to encode it and <code class="highlighter-rouge">w</code> can be set to 2 or greater.
+So, is it useful? Yes, it is! This is because the <code class="language-plaintext highlighter-rouge">IntArray</code> type implemented in this package can store integers as small space as possible.
+The <code class="language-plaintext highlighter-rouge">IntArray</code> type has a type parameter <code class="language-plaintext highlighter-rouge">w</code> that represents the number of bits required to encode elements in an array.
+For example, if each element is an integer between 0 and 3, you only need to use two bits to encode it and <code class="language-plaintext highlighter-rouge">w</code> can be set to 2 or greater.
 These 2-bit integers are packed into a buffer and therefore the array consumes only one fourth of the space compared to the usual array.
-The following is a case of a byte sequence of <code class="highlighter-rouge">[0x01, 0x03, 0x02, 0x00]</code>:</p>
+The following is a case of a byte sequence of <code class="language-plaintext highlighter-rouge">[0x01, 0x03, 0x02, 0x00]</code>:</p>
 
 <pre>
     index:                           1          2          3          4
@@ -296,16 +296,16 @@ The following is a case of a byte sequence of <code class="highlighter-rouge">[0
     in-memory layout:         00101101
 </pre>
 
-<p>The full type definition is <code class="highlighter-rouge">IntArray{w,T,n}</code>, where <code class="highlighter-rouge">w</code> is the number of bits
-for each element as I explained, <code class="highlighter-rouge">T</code> is the type of elements, and <code class="highlighter-rouge">n</code> is the
-dimension of the array.  This type is a subtype of the <code class="highlighter-rouge">AbstractArray{T,n}</code> and
+<p>The full type definition is <code class="language-plaintext highlighter-rouge">IntArray{w,T,n}</code>, where <code class="language-plaintext highlighter-rouge">w</code> is the number of bits
+for each element as I explained, <code class="language-plaintext highlighter-rouge">T</code> is the type of elements, and <code class="language-plaintext highlighter-rouge">n</code> is the
+dimension of the array.  This type is a subtype of the <code class="language-plaintext highlighter-rouge">AbstractArray{T,n}</code> and
 will behave like a familiar array; allocation, random access and update are
-supported.  <code class="highlighter-rouge">IntVector</code> and <code class="highlighter-rouge">IntMatrix</code> are also defined as type aliases like
-<code class="highlighter-rouge">Vector</code> and <code class="highlighter-rouge">Matrix</code>, respectively.</p>
+supported.  <code class="language-plaintext highlighter-rouge">IntVector</code> and <code class="language-plaintext highlighter-rouge">IntMatrix</code> are also defined as type aliases like
+<code class="language-plaintext highlighter-rouge">Vector</code> and <code class="language-plaintext highlighter-rouge">Matrix</code>, respectively.</p>
 
 <p>Here is an example:</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>julia&gt; IntArray{2,UInt8}(2, 3)
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>julia&gt; IntArray{2,UInt8}(2, 3)
 2x3 IntArrays.IntArray{2,UInt8,2}:
  0x00  0x00  0x01
  0x00  0x00  0x03
@@ -341,9 +341,9 @@ julia&gt; sort!(array)
  0x03
 </code></pre></div></div>
 
-<p>And the memory footprint of <code class="highlighter-rouge">IntArray</code> is much smaller:</p>
+<p>And the memory footprint of <code class="language-plaintext highlighter-rouge">IntArray</code> is much smaller:</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>julia&gt; sizeof(IntVector{2,UInt8}(1_000_000))
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>julia&gt; sizeof(IntVector{2,UInt8}(1_000_000))
 250000
 
 julia&gt; sizeof(Vector{UInt8}(1_000_000))
@@ -351,11 +351,11 @@ julia&gt; sizeof(Vector{UInt8}(1_000_000))
 </code></pre></div></div>
 
 <p>Since packing and unpacking integers in a buffer require additional operations,
-there are overheads in operations and <code class="highlighter-rouge">IntArray</code> is often slower than <code class="highlighter-rouge">Array</code>.
-I’ve tried to keep this discrepancy as small as possible, but the <code class="highlighter-rouge">IntArray</code> is
+there are overheads in operations and <code class="language-plaintext highlighter-rouge">IntArray</code> is often slower than <code class="language-plaintext highlighter-rouge">Array</code>.
+I’ve tried to keep this discrepancy as small as possible, but the <code class="language-plaintext highlighter-rouge">IntArray</code> is
 about 4-5 times slower when sorting it:</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>julia&gt; array = rand(0x00:0x03, 2^24);
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>julia&gt; array = rand(0x00:0x03, 2^24);
 
 julia&gt; sort(array); @time sort(array);
   0.488779 seconds (8 allocations: 16.000 MB)
@@ -371,18 +371,18 @@ julia&gt; sort(iarray); @time sort(iarray);
 <h2 id="indexablebitvectorsjl">IndexableBitVectors.jl</h2>
 
 <p>The next package is <a href="https://github.com/BioJulia/IndexableBitVectors.jl">IndexableBitVectors.jl</a>.
-You must be familiar with the <code class="highlighter-rouge">BitVector</code> type in the standard library; types defined in my package is a static but indexable version of it.
+You must be familiar with the <code class="language-plaintext highlighter-rouge">BitVector</code> type in the standard library; types defined in my package is a static but indexable version of it.
 Here “indexable” means that a query to ask the number of bits between an arbitrary range can be answered <strong>in constant time</strong>.
 If you are already familiar with <a href="https://en.wikipedia.org/wiki/Succinct_data_structure">succinct data structures</a>, you may know this is an important building block of other succinct data structures like wavelet trees, LOUDS, etcetera.</p>
 
-<p>The package exports two variants of such bit vectors: <code class="highlighter-rouge">SucVector</code> and <code class="highlighter-rouge">RRR</code>.
-<code class="highlighter-rouge">SucVector</code> is simpler and faster than <code class="highlighter-rouge">RRR</code>, but <code class="highlighter-rouge">RRR</code> is compressible and will be smaller if 0/1 bits are localized in a bit vector.
+<p>The package exports two variants of such bit vectors: <code class="language-plaintext highlighter-rouge">SucVector</code> and <code class="language-plaintext highlighter-rouge">RRR</code>.
+<code class="language-plaintext highlighter-rouge">SucVector</code> is simpler and faster than <code class="language-plaintext highlighter-rouge">RRR</code>, but <code class="language-plaintext highlighter-rouge">RRR</code> is compressible and will be smaller if 0/1 bits are localized in a bit vector.
 Both types split a bit vector into blocks and cache the number of bits up to the position.
-In <code class="highlighter-rouge">SucVector</code>, the extra space is about 1/4 bits per bit, so it will become ~25% larger than the original bit vector.</p>
+In <code class="language-plaintext highlighter-rouge">SucVector</code>, the extra space is about 1/4 bits per bit, so it will become ~25% larger than the original bit vector.</p>
 
-<p>The most important query operation over these data structures would be the <code class="highlighter-rouge">rank1(bv, i)</code> query, which counts the number of 1 bits within <code class="highlighter-rouge">bv[1:i]</code>. Owing to the cached bit counts, we can finish the rank operation in constant time:</p>
+<p>The most important query operation over these data structures would be the <code class="language-plaintext highlighter-rouge">rank1(bv, i)</code> query, which counts the number of 1 bits within <code class="language-plaintext highlighter-rouge">bv[1:i]</code>. Owing to the cached bit counts, we can finish the rank operation in constant time:</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>julia&gt; using IndexableBitVectors
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>julia&gt; using IndexableBitVectors
 
 julia&gt; bv = bitrand(2^30);
 
@@ -409,15 +409,15 @@ julia&gt; rank1(rrr, 2^29); @time rank1(rrr, 2^29);  # much faster, too!
   0.000004 seconds (6 allocations: 192 bytes)
 </code></pre></div></div>
 
-<p>The <code class="highlighter-rouge">select1(bv, j)</code> query is also useful in many cases, which locates the
-<code class="highlighter-rouge">j</code>-th 1 bit in the bit vector <code class="highlighter-rouge">bv</code>.  For example, if a set of positive
+<p>The <code class="language-plaintext highlighter-rouge">select1(bv, j)</code> query is also useful in many cases, which locates the
+<code class="language-plaintext highlighter-rouge">j</code>-th 1 bit in the bit vector <code class="language-plaintext highlighter-rouge">bv</code>.  For example, if a set of positive
 integers is represented in this bit vector, you can efficiently query the
-<code class="highlighter-rouge">j</code>-th smallest member in the set.</p>
+<code class="language-plaintext highlighter-rouge">j</code>-th smallest member in the set.</p>
 
-<p>Let’s see the internal representation of <code class="highlighter-rouge">SucVector</code> to understand the magic.
+<p>Let’s see the internal representation of <code class="language-plaintext highlighter-rouge">SucVector</code> to understand the magic.
 A bit vector is separated into large blocks:</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>type SucVector &lt;: AbstractIndexableBitVector
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>type SucVector &lt;: AbstractIndexableBitVector
     blocks::Vector{Block}
     len::Int
 end
@@ -429,7 +429,7 @@ starting position of it and a small block stores <em>local</em> 1s’ count star
 the beginning position of its parent large block.  Bits itself are stored in
 four bit chunks corresponding to small blocks:</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>immutable Block
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>immutable Block
     # large block
     large::UInt32
     # small blocks
@@ -445,8 +445,8 @@ end
 
 <p>Since the bit count of the first small block is always zero, we can exploit
 this space to extend the cache of the large block (red frame).  When running
-the <code class="highlighter-rouge">rank1(bv, i)</code> query, it first picks a large and small block pair that the
-<code class="highlighter-rouge">i</code>-th bit belongs to and then adds their cached bit counts, finally counts
+the <code class="language-plaintext highlighter-rouge">rank1(bv, i)</code> query, it first picks a large and small block pair that the
+<code class="language-plaintext highlighter-rouge">i</code>-th bit belongs to and then adds their cached bit counts, finally counts
 remaining 1 bits in a chunk on the fly.</p>
 
 <p>As I mentioned, this data structure can be used as a building block of various
@@ -456,7 +456,7 @@ data structures. The next package I’m going to introduce is one of them.</p>
 
 <p>You may already know about the <a href="https://en.wikipedia.org/wiki/Wavelet_Tree">wavelet
 tree</a>, which supports the <em>rank</em>
-and <em>select</em> queries like <code class="highlighter-rouge">SucVector</code> and <code class="highlighter-rouge">RRR</code>, but elements are not
+and <em>select</em> queries like <code class="language-plaintext highlighter-rouge">SucVector</code> and <code class="language-plaintext highlighter-rouge">RRR</code>, but elements are not
 restricted to 0/1 bits.  In fact, the <em>rank</em> and <em>select</em> queries are available
 on arbitrary unsigned integers. The wavelet tree can be thought as a
 generalization of indexable bit vectors in this respect.  What I’ve implemented
@@ -466,11 +466,11 @@ You can find an implementation and a link to a paper at
 According to the authors of the paper, the wavelet matrix is “simpler to build,
 simpler to query, and faster in practice than the levelwise wavelet tree”.</p>
 
-<p>The <code class="highlighter-rouge">WaveletMatrix</code> type takes three type parameters: <code class="highlighter-rouge">w</code>, <code class="highlighter-rouge">T</code>, and <code class="highlighter-rouge">B</code>.  <code class="highlighter-rouge">w</code>
-and <code class="highlighter-rouge">T</code> are analogous to those of <code class="highlighter-rouge">IntArray{w,T,n}</code>, and <code class="highlighter-rouge">B</code> is a type of
+<p>The <code class="language-plaintext highlighter-rouge">WaveletMatrix</code> type takes three type parameters: <code class="language-plaintext highlighter-rouge">w</code>, <code class="language-plaintext highlighter-rouge">T</code>, and <code class="language-plaintext highlighter-rouge">B</code>.  <code class="language-plaintext highlighter-rouge">w</code>
+and <code class="language-plaintext highlighter-rouge">T</code> are analogous to those of <code class="language-plaintext highlighter-rouge">IntArray{w,T,n}</code>, and <code class="language-plaintext highlighter-rouge">B</code> is a type of
 indexable bit vector.</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>julia&gt; using WaveletMatrices
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>julia&gt; using WaveletMatrices
 
 julia&gt; wm = WaveletMatrix{2}([0x00, 0x01, 0x02, 0x03])
 4-element WaveletMatrices.WaveletMatrix{2,UInt8,IndexableBitVectors.SucVector}:
@@ -517,7 +517,7 @@ really simple.  For example, counting the number of occurrences of a given
 pattern in a text can be written as follows (slightly simplified for explanatory
 purpose):</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>function count(query, index::FMIndex)
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>function count(query, index::FMIndex)
     sp, ep = 1, length(index)
     # backward search
     i = length(query)
@@ -548,18 +548,18 @@ text can be restored from an index.</p>
 <p>Building an index for full-text search is ridiculously simple: just passing a
 sequence to a constructor:</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>julia&gt; using FMIndexes
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>julia&gt; using FMIndexes
 
 julia&gt; fmindex = FMIndex("abracadabra");
 </code></pre></div></div>
 
-<p>The <code class="highlighter-rouge">FMIndex</code> type supports two main queries: <code class="highlighter-rouge">count</code> and <code class="highlighter-rouge">locate</code>.  The
-<code class="highlighter-rouge">count(query, index)</code> query literally counts the number of occurrences of the
-<code class="highlighter-rouge">query</code> string and the <code class="highlighter-rouge">locate(query, index)</code> locates starting positions of the
-<code class="highlighter-rouge">query</code>.  In order to restore the original text, you can use the <code class="highlighter-rouge">restore</code>
+<p>The <code class="language-plaintext highlighter-rouge">FMIndex</code> type supports two main queries: <code class="language-plaintext highlighter-rouge">count</code> and <code class="language-plaintext highlighter-rouge">locate</code>.  The
+<code class="language-plaintext highlighter-rouge">count(query, index)</code> query literally counts the number of occurrences of the
+<code class="language-plaintext highlighter-rouge">query</code> string and the <code class="language-plaintext highlighter-rouge">locate(query, index)</code> locates starting positions of the
+<code class="language-plaintext highlighter-rouge">query</code>.  In order to restore the original text, you can use the <code class="language-plaintext highlighter-rouge">restore</code>
 function.  Here is a simple usage:</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>julia&gt; count("a", fmindex)
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>julia&gt; count("a", fmindex)
 5
 
 julia&gt; count("abra", fmindex)
@@ -592,7 +592,7 @@ free!):</p>
 
 <p><strong>index.jl</strong></p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>using Bio.Seq
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>using Bio.Seq
 using IntArrays
 using FMIndexes
 
@@ -621,7 +621,7 @@ end
 <p>OK, then create an index for chromosome 22 of human (you can download it from
 <a href="http://hgdownload.cse.ucsc.edu/goldenPath/hg38/chromosomes/">here</a>):</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ julia4 index.jl chr22.fa
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ julia4 index.jl chr22.fa
 chr22: 50818468bp
 $ ls -lh chr22.fa.index
 -rw-r--r--+ 1 kenta  staff    74M  9 26 06:30 chr22.fa.index
@@ -630,14 +630,14 @@ $ ls -lh chr22.fa.index
 <p>After construction finished (this will take several minutes), read the index in
 REPL:</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>julia&gt; using FMIndexes
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>julia&gt; using FMIndexes
 
 julia&gt; fmindex = open(deserialize, "chr22.fa.index");
 </code></pre></div></div>
 
 <p>Now that you can execute queries to search a DNA fragment:</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>julia&gt; using Bio.Seq
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>julia&gt; using Bio.Seq
 
 julia&gt; count(dna"GACTTTCAC", fmindex)  # this DNA fragment hits at 111 locations
 111

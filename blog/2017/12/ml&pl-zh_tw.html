@@ -243,7 +243,7 @@
   </p>
 
   <blockquote>
-  <p>任何足夠複雜的機器學習系統都包含一個特別設置、不符規範、充滿 bug 又緩慢實作的程式語言半成品。<sup id="fnref:greenspun"><a href="#fn:greenspun" class="footnote">1</a></sup></p>
+  <p>任何足夠複雜的機器學習系統都包含一個特別設置、不符規範、充滿 bug 又緩慢實作的程式語言半成品。<sup id="fnref:greenspun" role="doc-noteref"><a href="#fn:greenspun" class="footnote">1</a></sup></p>
 </blockquote>
 
 <div style="font-size:75%">
@@ -260,7 +260,7 @@
   <p>譯者註：Pig Latin 是指是在英語上加上一點規則使發音改變的暗語。由在德國的英國戰俘發明來瞞混德軍守衛的，多半被兒童用來瞞著大人秘密溝通，有時則只是說著好玩。</p>
 </blockquote>
 
-<p>TensorFlow (TF) 家族<sup id="fnref:tf"><a href="#fn:tf" class="footnote">2</a></sup><a href="https://dl.acm.org/citation.cfm?doid=3088525.3088527">儼然成為程式語言</a>，儘管有些限制。這對那些用Python 來寫 TF 的人來說會有點震驚。不過，想想 TF 需要你用 Python 語法來<a href="https://www.tensorflow.org/programmers_guide/graphs">建構表達式</a>，並且在他的內部語言運算求值。</p>
+<p>TensorFlow (TF) 家族<sup id="fnref:tf" role="doc-noteref"><a href="#fn:tf" class="footnote">2</a></sup><a href="https://dl.acm.org/citation.cfm?doid=3088525.3088527">儼然成為程式語言</a>，儘管有些限制。這對那些用Python 來寫 TF 的人來說會有點震驚。不過，想想 TF 需要你用 Python 語法來<a href="https://www.tensorflow.org/programmers_guide/graphs">建構表達式</a>，並且在他的內部語言運算求值。</p>
 
 <p>事實上，你可以用任何語言寫出 TensorFlow 的“惰性(lazy)”風格。參考底下的 JavaScript 程式，用這種風格實作了簡單的加法：</p>
 
@@ -268,12 +268,12 @@
   <span class="k">return</span> <span class="s2">`</span><span class="p">${</span><span class="nx">a</span><span class="p">}</span><span class="s2">+</span><span class="p">${</span><span class="nx">b</span><span class="p">}</span><span class="s2">`</span><span class="p">;</span>
 <span class="p">}</span>
 <span class="nx">x</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span> <span class="nx">y</span> <span class="o">=</span> <span class="mi">2</span>
-<span class="nx">z</span> <span class="o">=</span> <span class="nx">add</span><span class="p">(</span><span class="s1">'x'</span><span class="p">,</span> <span class="s1">'y'</span><span class="p">)</span> <span class="c1">// 'x+y'</span>
-<span class="kr">eval</span><span class="p">(</span><span class="nx">z</span><span class="p">)</span> <span class="c1">// 3</span>
+<span class="nx">z</span> <span class="o">=</span> <span class="nx">add</span><span class="p">(</span><span class="dl">'</span><span class="s1">x</span><span class="dl">'</span><span class="p">,</span> <span class="dl">'</span><span class="s1">y</span><span class="dl">'</span><span class="p">)</span> <span class="c1">// 'x+y'</span>
+<span class="nb">eval</span><span class="p">(</span><span class="nx">z</span><span class="p">)</span> <span class="c1">// 3</span>
 <span class="nx">x</span> <span class="o">=</span> <span class="mi">4</span>
-<span class="kr">eval</span><span class="p">(</span><span class="nx">z</span><span class="p">)</span> <span class="c1">// 6</span></code></pre></figure>
+<span class="nb">eval</span><span class="p">(</span><span class="nx">z</span><span class="p">)</span> <span class="c1">// 6</span></code></pre></figure>
 
-<p>在這邊我們用了 <em>metaprogramming</em> —— 用程式碼產生程式碼。在這種情況下模板語言與目標語言都是相同的(JavaScript)，但他們也可以是不同的（就像是 C 的前置處理器(preprocessor) 對應到 C），或者我們也可以用一個資料結構（一個語法樹(<a href="https://en.wikipedia.org/wiki/Abstract_syntax_tree">AST</a>)）來代替字串 —— 原則是相同的。在 TensorFlow 中，Python 作為一個模板語言用來編寫 TF 的 graph-based laguage<sup id="fnref:ast"><a href="#fn:ast" class="footnote">3</a></sup>。如果你不相信，思考看看 TensorFlow 的 graph 甚至支援像是<a href="https://www.tensorflow.org/programmers_guide/variables">變數作用域</a>跟<a href="https://www.tensorflow.org/api_docs/python/tf/cond">控制流程</a>的構造元素 —— 而不是利用 Python 本身的語法，你正在透過 API 操作這些構造元素。</p>
+<p>在這邊我們用了 <em>metaprogramming</em> —— 用程式碼產生程式碼。在這種情況下模板語言與目標語言都是相同的(JavaScript)，但他們也可以是不同的（就像是 C 的前置處理器(preprocessor) 對應到 C），或者我們也可以用一個資料結構（一個語法樹(<a href="https://en.wikipedia.org/wiki/Abstract_syntax_tree">AST</a>)）來代替字串 —— 原則是相同的。在 TensorFlow 中，Python 作為一個模板語言用來編寫 TF 的 graph-based laguage<sup id="fnref:ast" role="doc-noteref"><a href="#fn:ast" class="footnote">3</a></sup>。如果你不相信，思考看看 TensorFlow 的 graph 甚至支援像是<a href="https://www.tensorflow.org/programmers_guide/variables">變數作用域</a>跟<a href="https://www.tensorflow.org/api_docs/python/tf/cond">控制流程</a>的構造元素 —— 而不是利用 Python 本身的語法，你正在透過 API 操作這些構造元素。</p>
 
 <p>TensorFlow 以及其他相似的工具表示他們只是套件而已，但是他們是非常不尋常的一類，大多數的套件只提供一個簡單的函數及資料結構的集合而不是整個程式系統以及 runtime。
 為什麼會需要這麼一個複雜的方式？</p>
@@ -303,7 +303,7 @@
 
 <p>除了 ML 外，還有其他領域也碰到需要語言層級的設計問題，但這並非是史無前例的。在像是<a href="https://coq.inria.fr/">形式化推論及驗證</a>或是<a href="https://chapel-lang.org/">叢集運算</a>的領域上，新量身訂做的語言已經證實了是有效的解決方案。同樣的，我們期望看到一個新的或是現存的語言對 ML 的數值系統，可微分，可平行且甚至是機率計算的需求做客製化。</p>
 
-<p>對於 ML 語言，一個明顯的挑戰是同時達到通用性以及高效能，而提早混合的方式將會需要更大量的開發工作。我們希望未來的 ML runtimes 將會需要支援隨心所欲的混合各種方法(靜態的 computational graph 中嵌入動態的當中又嵌入靜態…）以及在部屬環境讓編譯動態程式碼做的更好。理想上，只會剩下單一種彈性的”graph format”（或是 AST)。這個 AST 需要有能夠靜態描述動態行為的語法（比如：一個 <code class="highlighter-rouge">for</code> loop) ― 換句話說，他應該看起來更像是個標準的程式語言。</p>
+<p>對於 ML 語言，一個明顯的挑戰是同時達到通用性以及高效能，而提早混合的方式將會需要更大量的開發工作。我們希望未來的 ML runtimes 將會需要支援隨心所欲的混合各種方法(靜態的 computational graph 中嵌入動態的當中又嵌入靜態…）以及在部屬環境讓編譯動態程式碼做的更好。理想上，只會剩下單一種彈性的”graph format”（或是 AST)。這個 AST 需要有能夠靜態描述動態行為的語法（比如：一個 <code class="language-plaintext highlighter-rouge">for</code> loop) ― 換句話說，他應該看起來更像是個標準的程式語言。</p>
 
 <p><em>可程式化語意</em>將會開啟彈性的新階段， 而且可以提供一個類似 macros 的功能。 這將會允許類似多 GPU　訓練功能可以被建立在核心系統上，並且指定純資料流語意的程式碼（相對的是標準命令式語意，雖然較為彈性但是容易有負作用，對於優化來說較為不安全)。他同樣可以用來操作 probailistic programming ，或是自然語言處理模型常手動實作的<a href="https://www.cs.cmu.edu/~guyb/papers/Ble90.pdf">向量化</a>(批量處理）傳遞。</p>
 
@@ -313,7 +313,7 @@
 
 <p>想像一個世界，在一個加入新硬體資源(或是新的資料表示法)可以簡單地被使用者透過高階語言達成，不需要改變原本的系統。這邊我們期望 ML 系統可以從現存已經可以輕鬆<a href="https://arxiv.org/pdf/1604.03410.pdf">處理這些問題</a>的數值計算語言借鏡。</p>
 
-<p>型別系統也可以有安全性好處，但目前的不適合在重度使用陣列的程式碼，而其中陣列的維度是有意義的（舉例來說，影像中的空間維度 vs RGB 維度 vs 批次維度）。這些差別只被視為<a href="https://github.com/pytorch/pytorch/issues/1220">純粹的使用慣例</a>，粗魯的維度排列程式碼並沒有去避免錯誤，給關注陣列的型別系統留下很大的空間。我們期待動態型別的趨勢繼續<sup id="fnref:types"><a href="#fn:types" class="footnote">4</a></sup>，主要是因為從業人員偏好互動性以及撰寫腳本，但希望看到更多創新像是 <a href="https://cntk.ai/pythondocs/sequence.html">CNTK 的選擇性動態維度</a>。</p>
+<p>型別系統也可以有安全性好處，但目前的不適合在重度使用陣列的程式碼，而其中陣列的維度是有意義的（舉例來說，影像中的空間維度 vs RGB 維度 vs 批次維度）。這些差別只被視為<a href="https://github.com/pytorch/pytorch/issues/1220">純粹的使用慣例</a>，粗魯的維度排列程式碼並沒有去避免錯誤，給關注陣列的型別系統留下很大的空間。我們期待動態型別的趨勢繼續<sup id="fnref:types" role="doc-noteref"><a href="#fn:types" class="footnote">4</a></sup>，主要是因為從業人員偏好互動性以及撰寫腳本，但希望看到更多創新像是 <a href="https://cntk.ai/pythondocs/sequence.html">CNTK 的選擇性動態維度</a>。</p>
 
 <p>ML 工程師對傳統<a href="https://papers.nips.cc/paper/5656-hidden-technical-debt-in-machine-learning-systems.pdf">軟體工程的問題</a>(像是維護性以及產品系統的擴展性)的興趣正在提升。 <a href="https://medium.com/@karpathy/software-2-0-a64152b37c35">ML 程式模型</a>讓他很難去創造抽象化以及元件之間的界面，而重新訓練模型可能輕易的打破向後相容性。 ML 語言可能可以整合正常語言對這些問題的解法，不過這依然是個設計上的開放問題。</p>
 
@@ -328,7 +328,7 @@
 
 <p>任何的新語言的缺點就是需要一個新的套件生態系統，因為只有為新 runtime 寫的程式會受惠於新語言。舉例來說，TensorFlow 開發者需要在 graph language 中為了像是<a href="https://www.tensorflow.org/api_guides/python/image">影像處理</a>以及<a href="https://www.tensorflow.org/api_docs/python/tf/TextLineReader">檔案讀寫</a>這類事情重寫函式庫，而不是去再利用 Python 的生態，不考慮類似 SciPy 專案背後巨大的努力。這可能是前進的唯一道路，但是 ML 的從業者不應該跟廣大的數值運算跟高效能運算（HPC）社群分離。一個理想的 ML 生態系是一個理想的數值運算生態系，反之亦然，並且與這些社群攜手合作將會讓大家的努力成果有加成效應。</p>
 
-<p>我們期待看到這些開發者們從各種觀點而來。 Graph 的 IR 以及格式（像是 <a href="https://www.tensorflow.org/performance/xla/">XLA</a>, <a href="https://github.com/onnx/onnx">ONNX</a> 以及 <a href="https://github.com/dmlc/nnvm">NNVM</a>）的發展變得更加的複雜且將很可能會從傳統語言設計<sup id="fnref:chris"><a href="#fn:chris" class="footnote">5</a></sup>上借鏡更多，也許甚至是加入表面的語法變成一個完整的程式語言。 TensorFlow 的 XLA 已經開始朝向一個特殊目的的編譯器堆包含 <a href="http://tvmlang.org/">TVM</a>, <a href="http://dlvm.org/">DLVM</a>, <a href="https://github.com/google/sling/tree/master/myelin">myelin</a> 以及其他的進行中的專案。 同時間，像是 <a href="https://github.com/pytorch/pytorch/tree/master/torch/csrc/jit">PyTorch JIT</a>, <a href="https://mxnet.incubator.apache.org/api/python/gluon.html">Gluon</a> 以及 <a href="https://github.com/google/tangent">Tangent</a> 的專案正在努力讓 Python 本身變成一個更好的建模語言，儘管有這些巨大的挑戰。我們已經討論過 ML 是一個數值程式語言問題，所以對 Julia 社群的我們來說感覺這是一個絕佳的素材讓我們來實驗這些語言層級的問題，並且會繼續在像是 <a href="https://github.com/denizyuret/Knet.jl">Knet</a>, <a href="https://fluxml.github.io/">Flux</a>, <a href="https://github.com/jrevels/Cassette.jl">Cassette</a>, <a href="https://github.com/JuliaGPU/CUDAnative.jl">CUDAnative</a>, <a href="https://github.com/MikeInnes/DataFlow.jl">DataFlow.jl</a>,…… 等這些專案中挑戰極限。</p>
+<p>我們期待看到這些開發者們從各種觀點而來。 Graph 的 IR 以及格式（像是 <a href="https://www.tensorflow.org/performance/xla/">XLA</a>, <a href="https://github.com/onnx/onnx">ONNX</a> 以及 <a href="https://github.com/dmlc/nnvm">NNVM</a>）的發展變得更加的複雜且將很可能會從傳統語言設計<sup id="fnref:chris" role="doc-noteref"><a href="#fn:chris" class="footnote">5</a></sup>上借鏡更多，也許甚至是加入表面的語法變成一個完整的程式語言。 TensorFlow 的 XLA 已經開始朝向一個特殊目的的編譯器堆包含 <a href="http://tvmlang.org/">TVM</a>, <a href="http://dlvm.org/">DLVM</a>, <a href="https://github.com/google/sling/tree/master/myelin">myelin</a> 以及其他的進行中的專案。 同時間，像是 <a href="https://github.com/pytorch/pytorch/tree/master/torch/csrc/jit">PyTorch JIT</a>, <a href="https://mxnet.incubator.apache.org/api/python/gluon.html">Gluon</a> 以及 <a href="https://github.com/google/tangent">Tangent</a> 的專案正在努力讓 Python 本身變成一個更好的建模語言，儘管有這些巨大的挑戰。我們已經討論過 ML 是一個數值程式語言問題，所以對 Julia 社群的我們來說感覺這是一個絕佳的素材讓我們來實驗這些語言層級的問題，並且會繼續在像是 <a href="https://github.com/denizyuret/Knet.jl">Knet</a>, <a href="https://fluxml.github.io/">Flux</a>, <a href="https://github.com/jrevels/Cassette.jl">Cassette</a>, <a href="https://github.com/JuliaGPU/CUDAnative.jl">CUDAnative</a>, <a href="https://github.com/MikeInnes/DataFlow.jl">DataFlow.jl</a>,…… 等這些專案中挑戰極限。</p>
 
 <h2 id="結論an-inference-about-machine-learning">結論：An Inference about Machine Learning</h2>
 
@@ -337,22 +337,22 @@
 <p>所有的這些暗示了 ML 系統的設計師有巨大的挑戰在他們面前。但是雖然這些都是千真萬確，還是有好消息的： 這些同樣的問題，如果還沒被解決，已經被語言學家在過去數十年間深入地探索過！要將這個新領域達到他的真正潛力，機器學習跟程式語言社群需要結合他們的力量，而真正的挑戰是要結合這兩群迥異領域的專家們。</p>
 
 <p>我們能不能建立一個把數值、微分、以及平行當作是首要目標的系統，且這個系統不犧牲掉傳統程式語言的想法以及智慧？這是一個在接來十年程式語言需要去回答的更根本之問題。</p>
-<div class="footnotes">
+<div class="footnotes" role="doc-endnotes">
   <ol>
-    <li id="fn:greenspun">
-      <p>出自 <a href="https://en.wikipedia.org/wiki/Greenspun%27s_tenth_rule">Philip Greenspun</a> <a href="#fnref:greenspun" class="reversefootnote">&#8617;</a></p>
+    <li id="fn:greenspun" role="doc-endnote">
+      <p>出自 <a href="https://en.wikipedia.org/wiki/Greenspun%27s_tenth_rule">Philip Greenspun</a> <a href="#fnref:greenspun" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
     </li>
-    <li id="fn:tf">
-      <p>在這邊我們使用 TensorFlow 當作例子, 但也可以用其他”執行前定義(define-before-run)”的框架替換，像是 CNTK 還有 MXNet。 <a href="#fnref:tf" class="reversefootnote">&#8617;</a></p>
+    <li id="fn:tf" role="doc-endnote">
+      <p>在這邊我們使用 TensorFlow 當作例子, 但也可以用其他”執行前定義(define-before-run)”的框架替換，像是 CNTK 還有 MXNet。 <a href="#fnref:tf" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
     </li>
-    <li id="fn:ast">
-      <p>TensorFlow 的 graph 實際上是一個基於資料流的語法樹（AST）。 <a href="#fnref:ast" class="reversefootnote">&#8617;</a></p>
+    <li id="fn:ast" role="doc-endnote">
+      <p>TensorFlow 的 graph 實際上是一個基於資料流的語法樹（AST）。 <a href="#fnref:ast" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
     </li>
-    <li id="fn:types">
-      <p>雖然我們知道現存的系統內部將整個系統從完全的動態（PyTorch 以及他的 ATen 後端）延伸到極度的靜態（在 TensorFlow 的 XLA 及 MXNet 中，在運算 graph 之前所有維度都是已知的） <a href="#fnref:types" class="reversefootnote">&#8617;</a></p>
+    <li id="fn:types" role="doc-endnote">
+      <p>雖然我們知道現存的系統內部將整個系統從完全的動態（PyTorch 以及他的 ATen 後端）延伸到極度的靜態（在 TensorFlow 的 XLA 及 MXNet 中，在運算 graph 之前所有維度都是已知的） <a href="#fnref:types" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
     </li>
-    <li id="fn:chris">
-      <p>Google Brain 正在增加僱用像是<a href="https://techcrunch.com/2017/08/14/swift-creator-chris-lattner-joins-google-brain-after-tesla-autopilot-stint/">Chris Lattner</a>的程式語言專家，在這時間點上是個很有趣的發展 <a href="#fnref:chris" class="reversefootnote">&#8617;</a></p>
+    <li id="fn:chris" role="doc-endnote">
+      <p>Google Brain 正在增加僱用像是<a href="https://techcrunch.com/2017/08/14/swift-creator-chris-lattner-joins-google-brain-after-tesla-autopilot-stint/">Chris Lattner</a>的程式語言專家，在這時間點上是個很有趣的發展 <a href="#fnref:chris" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
     </li>
   </ol>
 </div>

@@ -1019,7 +1019,7 @@ See the <a href="/benchmarks/">benchmarks page</a> for more information.
 <figure class="highlight"><pre><code class="language-julia" data-lang="julia"><span class="k">function</span><span class="nf"> mandel</span><span class="x">(</span><span class="n">z</span><span class="x">)</span>
     <span class="n">c</span> <span class="o">=</span> <span class="n">z</span>
     <span class="n">maxiter</span> <span class="o">=</span> <span class="mi">80</span>
-    <span class="k">for</span> <span class="n">n</span> <span class="o">=</span> <span class="mi">1</span><span class="x">:</span><span class="n">maxiter</span>
+    <span class="k">for</span> <span class="n">n</span> <span class="o">=</span> <span class="mi">1</span><span class="o">:</span><span class="n">maxiter</span>
         <span class="k">if</span> <span class="n">abs2</span><span class="x">(</span><span class="n">z</span><span class="x">)</span> <span class="o">&gt;</span> <span class="mi">4</span>
             <span class="k">return</span> <span class="n">n</span><span class="o">-</span><span class="mi">1</span>
         <span class="k">end</span>
@@ -1032,7 +1032,7 @@ See the <a href="/benchmarks/">benchmarks page</a> for more information.
     <span class="n">n</span> <span class="o">=</span> <span class="mi">5</span>
     <span class="n">v</span> <span class="o">=</span> <span class="n">zeros</span><span class="x">(</span><span class="n">t</span><span class="x">)</span>
     <span class="n">w</span> <span class="o">=</span> <span class="n">zeros</span><span class="x">(</span><span class="n">t</span><span class="x">)</span>
-    <span class="k">for</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">1</span><span class="x">:</span><span class="n">t</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">1</span><span class="o">:</span><span class="n">t</span>
         <span class="n">a</span> <span class="o">=</span> <span class="n">randn</span><span class="x">(</span><span class="n">n</span><span class="x">,</span><span class="n">n</span><span class="x">)</span>
         <span class="n">b</span> <span class="o">=</span> <span class="n">randn</span><span class="x">(</span><span class="n">n</span><span class="x">,</span><span class="n">n</span><span class="x">)</span>
         <span class="n">c</span> <span class="o">=</span> <span class="n">randn</span><span class="x">(</span><span class="n">n</span><span class="x">,</span><span class="n">n</span><span class="x">)</span>
@@ -1047,7 +1047,7 @@ See the <a href="/benchmarks/">benchmarks page</a> for more information.
 
 <p>The code above is quite clear, and should feel familiar to anyone who
 has programmed in other mathematical languages.  The Julia
-implementation of <code class="highlighter-rouge">randmatstat</code> is considerably simpler than the
+implementation of <code class="language-plaintext highlighter-rouge">randmatstat</code> is considerably simpler than the
 equivalent <a href="https://github.com/JuliaLang/julia/blob/master/test/perf/micro/perf.c#L126">C
 implementation</a>,
 without giving up much performance. Planned compiler optimizations
@@ -1064,11 +1064,11 @@ programming and is very much an intentional feature of the language.</p>
 Instead, it provides a number of <a href="http://docs.julialang.org/en/stable/manual/parallel-computing">key building blocks for distributed computation</a>, making it flexible enough to support a number of styles of parallelism, and allowing users to add more.
 The following simple example demonstrates how to count the number of heads in a large number of coin tosses in parallel.</p>
 
-<figure class="highlight"><pre><code class="language-julia" data-lang="julia"><span class="n">nheads</span> <span class="o">=</span> <span class="nd">@parallel</span> <span class="x">(</span><span class="o">+</span><span class="x">)</span> <span class="k">for</span> <span class="n">i</span><span class="o">=</span><span class="mi">1</span><span class="x">:</span><span class="mi">100000000</span>
+<figure class="highlight"><pre><code class="language-julia" data-lang="julia"><span class="n">nheads</span> <span class="o">=</span> <span class="nd">@parallel</span> <span class="x">(</span><span class="o">+</span><span class="x">)</span> <span class="k">for</span> <span class="n">i</span><span class="o">=</span><span class="mi">1</span><span class="o">:</span><span class="mi">100000000</span>
   <span class="n">rand</span><span class="x">(</span><span class="kt">Bool</span><span class="x">)</span>
 <span class="k">end</span></code></pre></figure>
 
-<p>This computation is automatically distributed across all available compute nodes, and the result, reduced by summation (<code class="highlighter-rouge">+</code>), is returned at the calling node.</p>
+<p>This computation is automatically distributed across all available compute nodes, and the result, reduced by summation (<code class="language-plaintext highlighter-rouge">+</code>), is returned at the calling node.</p>
 
 <p>Here is a screenshot of a web-based interactive <a href="https://github.com/JuliaLang/IJulia.jl">IJulia Notebook</a> session, using <a href="https://github.com/dcjones/Gadfly.jl">Gadfly</a>. <a href="http://www.juliabox.com">JuliaBox</a> provides a way to run IJulia notebooks in your browser on Docker sandboxed containers provisioned on demand.</p>
 

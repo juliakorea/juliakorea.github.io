@@ -283,9 +283,9 @@ fundamental IDE functionality.</p>
 the most performant and reliable manner possible.</p>
 
 <h3 id="collecting-information">Collecting Information</h3>
-<p>DocSeeker.jl contains a function <code class="highlighter-rouge">alldocs()</code>, which will return information about all
+<p>DocSeeker.jl contains a function <code class="language-plaintext highlighter-rouge">alldocs()</code>, which will return information about all
 symbols available in the current Julia session. Those symbols are easily found by recursing
-through all currently loaded <code class="highlighter-rouge">Module</code>s and calling <code class="highlighter-rouge">Base.names()</code> on them. Additionally,
+through all currently loaded <code class="language-plaintext highlighter-rouge">Module</code>s and calling <code class="language-plaintext highlighter-rouge">Base.names()</code> on them. Additionally,
 Julia’s docsystem collects all symbols with attached docstrings, which can be easily retrieved.</p>
 
 <p>All of that is pretty slow – it takes on the order of half a second on my machine with a
@@ -294,7 +294,7 @@ the available symbols don’t change too often, so caching is a viable solution.
 
 <h3 id="filtering">Filtering</h3>
 <p>There are all sorts of possible options to consider when filtering and searching through the
-symbols (and attached docstrings) returned by <code class="highlighter-rouge">alldocs</code>, but I’ve decided on a few that
+symbols (and attached docstrings) returned by <code class="language-plaintext highlighter-rouge">alldocs</code>, but I’ve decided on a few that
 turned out to be most important while testing:</p>
 
 <ul>
@@ -317,8 +317,8 @@ but shelling out to Java or JavaScript seemed like overkill for the problem at h
 SQL.jl was giving me quite a hard time <em>and</em> doesn’t ship the FTS extension by default.</p>
 
 <p>A custom implementation did not seem too hard at first, but requires a <em>good</em> scoring function
-that, given a search query <code class="highlighter-rouge">needle</code>, maps a docstring to a number between 0 and 1:
-<script type="math/tex">score: (needle,\\,docstr) \\mapsto [0, 1]</script>
+that, given a search query <code class="language-plaintext highlighter-rouge">needle</code>, maps a docstring to a number between 0 and 1:
+\(score: (needle,\\,docstr) \\mapsto [0, 1]\)
 At first I tried rolling my own string comparison function (with mixed success), but then I
 stumbled upon the excellent <a href="https://github.com/matthieugomez/StringDistances.jl">StringDistances.jl</a>
 which does pretty much all I needed.</p>
@@ -343,7 +343,7 @@ of general improvements.</p>
 module, whether the binding is exported etc.); a click on the binding will take you to the
 defining location and a click on the module will give some information on that. Links also
 generally work fine (external ones will open in your default browser, while those defined with
-Documenter.jl’s <code class="highlighter-rouge">[link](@ref)</code> syntax will start a new search).</p>
+Documenter.jl’s <code class="language-plaintext highlighter-rouge">[link](@ref)</code> syntax will start a new search).</p>
 
 <h2 id="try-it">Try it!</h2>
 <p>These features will have been integrated into Juno at the beginning of September 2017, so feel

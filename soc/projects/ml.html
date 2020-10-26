@@ -345,7 +345,7 @@ ready(function () {
 
 <p><em>Reader enhancements:</em></p>
 
-<p>Read a file as a NamedTuple of vectors (using NamedTuples.jl on Julia 0.6). This is on similar lines, but different from the current cursor-based reader. Probably as an implementation of <code class="highlighter-rouge">AbstractBuilder</code> that returns NamedTuple of column vectors, combined with a new iterator/cursor that returns a bunch of records instead of individual records.</p>
+<p>Read a file as a NamedTuple of vectors (using NamedTuples.jl on Julia 0.6). This is on similar lines, but different from the current cursor-based reader. Probably as an implementation of <code class="language-plaintext highlighter-rouge">AbstractBuilder</code> that returns NamedTuple of column vectors, combined with a new iterator/cursor that returns a bunch of records instead of individual records.</p>
 
 <p><em>Writer support:</em></p>
 
@@ -364,14 +364,14 @@ Optionally auto detect compression scheme based on the data.</li>
 
 <ul>
   <li>Copy a table to GPU – this may be as simple as converting every column into a CuArray or GPUArray</li>
-  <li><code class="highlighter-rouge">map</code>, <code class="highlighter-rouge">reduce</code> and <code class="highlighter-rouge">filter</code> operation – apply simple functions on a large table that is on the GPU
+  <li><code class="language-plaintext highlighter-rouge">map</code>, <code class="language-plaintext highlighter-rouge">reduce</code> and <code class="language-plaintext highlighter-rouge">filter</code> operation – apply simple functions on a large table that is on the GPU
     <ul>
       <li>Ensure that columnar storage format is made use of in the lower level code generated.</li>
     </ul>
   </li>
-  <li>The <code class="highlighter-rouge">groupby</code> and <code class="highlighter-rouge">join</code> operations may involve first implementing an efficient <a href="https://docs.julialang.org/en/stable/stdlib/sort/#Base.sortperm"><code class="highlighter-rouge">sortperm</code></a> that utilize the GPU, or an efficient hash table on the GPU</li>
-  <li><code class="highlighter-rouge">groupby</code> kernel on GPU</li>
-  <li><code class="highlighter-rouge">join</code> kernel on GPU (stretch goal)</li>
+  <li>The <code class="language-plaintext highlighter-rouge">groupby</code> and <code class="language-plaintext highlighter-rouge">join</code> operations may involve first implementing an efficient <a href="https://docs.julialang.org/en/stable/stdlib/sort/#Base.sortperm"><code class="language-plaintext highlighter-rouge">sortperm</code></a> that utilize the GPU, or an efficient hash table on the GPU</li>
+  <li><code class="language-plaintext highlighter-rouge">groupby</code> kernel on GPU</li>
+  <li><code class="language-plaintext highlighter-rouge">join</code> kernel on GPU (stretch goal)</li>
 </ul>
 
 <p><strong>Mentors</strong>: <a href="https://shashi.github.io">Shashi Gowda</a>, <a href="http://mikeinnes.github.io/">Mike Innes</a></p>

@@ -277,26 +277,26 @@ One option is to write Ruby code that reads the contents of the given directory,
 However, that’s a lot of work and it’s going to be much slower than using a pipeline of standard UNIX commands, which are written in C and heavily optimized.
 The most natural and convenient thing to do in Ruby is to shell out, using backticks to capture output:</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>`find #{dir} -type f -print0 | xargs -0 grep foo | wc -l`.to_i
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>`find #{dir} -type f -print0 | xargs -0 grep foo | wc -l`.to_i
 </code></pre></div></div>
 
-<p>This expression interpolates the <code class="highlighter-rouge">dir</code> variable into a command, spawns a Bash shell to execute the resulting command, captures the output into a string, and then converts that string to an integer.
-The command uses the <code class="highlighter-rouge">-print0</code> and <code class="highlighter-rouge">-0</code> options to correctly handle strange characters in file names piped from <code class="highlighter-rouge">find</code> to <code class="highlighter-rouge">xargs</code> (these options cause file names to be delimited by <a href="http://en.wikipedia.org/wiki/Null_character">NULs</a> instead of whitespace).
+<p>This expression interpolates the <code class="language-plaintext highlighter-rouge">dir</code> variable into a command, spawns a Bash shell to execute the resulting command, captures the output into a string, and then converts that string to an integer.
+The command uses the <code class="language-plaintext highlighter-rouge">-print0</code> and <code class="language-plaintext highlighter-rouge">-0</code> options to correctly handle strange characters in file names piped from <code class="language-plaintext highlighter-rouge">find</code> to <code class="language-plaintext highlighter-rouge">xargs</code> (these options cause file names to be delimited by <a href="http://en.wikipedia.org/wiki/Null_character">NULs</a> instead of whitespace).
 Even with extra-careful options, this code for shelling out is simple and clear.
 Here it is in action:</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>irb(main):001:0&gt; dir="src"
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>irb(main):001:0&gt; dir="src"
 =&gt; "src"
 irb(main):002:0&gt; `find #{dir} -type f -print0 | xargs -0 grep foo | wc -l`.to_i
 =&gt; 5
 </code></pre></div></div>
 
 <p>Great.
-However, this only works as expected if the directory name <code class="highlighter-rouge">dir</code> doesn’t contain any characters that the shell considers special.
+However, this only works as expected if the directory name <code class="language-plaintext highlighter-rouge">dir</code> doesn’t contain any characters that the shell considers special.
 For example, the shell decides what constitutes a single argument to a command using whitespace.
-Thus, if the value of <code class="highlighter-rouge">dir</code> is a directory name containing a space, this will fail:</p>
+Thus, if the value of <code class="language-plaintext highlighter-rouge">dir</code> is a directory name containing a space, this will fail:</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>irb(main):003:0&gt; dir="source code"
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>irb(main):003:0&gt; dir="source code"
 =&gt; "source code"
 irb(main):004:0&gt; `find #{dir} -type f -print0 | xargs -0 grep foo | wc -l`.to_i
 find: `source': No such file or directory
@@ -306,7 +306,7 @@ find: `code': No such file or directory
 
 <p>The simple solution to the problem of spaces is to surround the interpolated directory name in quotes, telling the shell to treat spaces inside as normal characters:</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>irb(main):005:0&gt; `find '#{dir}' -type f -print0 | xargs -0 grep foo | wc -l`.to_i
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>irb(main):005:0&gt; `find '#{dir}' -type f -print0 | xargs -0 grep foo | wc -l`.to_i
 =&gt; 5
 </code></pre></div></div>
 
@@ -317,7 +317,7 @@ What if a file name has a quote character in it?
 Let’s try it.
 First, let’s create a very weirdly named directory:</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>bash-3.2$ mkdir "foo'bar"
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>bash-3.2$ mkdir "foo'bar"
 bash-3.2$ echo foo &gt; "foo'bar"/test.txt
 bash-3.2$ ls -ld foo*bar
 drwxr-xr-x 3 stefan staff 102 Feb  3 16:17 foo'bar/
@@ -326,7 +326,7 @@ drwxr-xr-x 3 stefan staff 102 Feb  3 16:17 foo'bar/
 <p>That’s an admittedly strange directory name, but it’s perfectly legal in UNIXes of all flavors.
 Now back to Ruby:</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>irb(main):006:0&gt; dir="foo'bar"
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>irb(main):006:0&gt; dir="foo'bar"
 =&gt; "foo'bar"
 irb(main):007:0&gt; `find '#{dir}' -type f -print0  | xargs -0 grep foo | wc -l`.to_i
 sh: -c: line 0: unexpected EOF while looking for matching `''
@@ -337,9 +337,9 @@ sh: -c: line 1: syntax error: unexpected end of file
 <p>Doh.
 Although this may seem like an unlikely corner case that one needn’t realistically worry about, there are serious security ramifications.
 Suppose the name of the directory came from an untrusted source — like a web submission, or an argument to a setuid program from an untrusted user.
-Suppose an attacker could arrange for any value of <code class="highlighter-rouge">dir</code> they wanted:</p>
+Suppose an attacker could arrange for any value of <code class="language-plaintext highlighter-rouge">dir</code> they wanted:</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>irb(main):008:0&gt; dir="foo'; echo MALICIOUS ATTACK 1&gt;&amp;2; echo '"
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>irb(main):008:0&gt; dir="foo'; echo MALICIOUS ATTACK 1&gt;&amp;2; echo '"
 =&gt; "foo'; echo MALICIOUS ATTACK 1&gt;&amp;2; echo '"
 irb(main):009:0&gt; `find '#{dir}' -type f -print0  | xargs -0 grep foo | wc -l`.to_i
 find: `foo': No such file or directory
@@ -350,12 +350,12 @@ grep:  -type f -print0
 </code></pre></div></div>
 
 <p>Your box is now owned.
-Of course, you could sanitize the value of the <code class="highlighter-rouge">dir</code> variable, but there’s a fundamental tug-of-war between security (as limited as possible) and flexibility (as unlimited as possible).
+Of course, you could sanitize the value of the <code class="language-plaintext highlighter-rouge">dir</code> variable, but there’s a fundamental tug-of-war between security (as limited as possible) and flexibility (as unlimited as possible).
 The ideal behavior is to allow any directory name, no matter how bizarre, as long as it actually exists, but “defang” all shell metacharacters.</p>
 
 <p>The only two way to fully protect against these sorts of metacharacter attacks — whether malicious or accidental — while still using an external shell to construct the pipeline, is to do full shell metacharacter escaping:</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>irb(main):010:0&gt; require 'shellwords'
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>irb(main):010:0&gt; require 'shellwords'
 =&gt; true
 irb(main):011:0&gt; `find #{Shellwords.shellescape(dir)} -type f -print0  | xargs -0 grep foo | wc -l`.to_i
 find: `foo\'; echo MALICIOUS ATTACK 1&gt;&amp;2; echo \'': No such file or directory
@@ -369,9 +369,9 @@ Instead, code that shells out with programmatically constructed commands is typi
 <h2 id="indirection-and-inefficiency">Indirection and Inefficiency</h2>
 
 <p>If we were using the above code to count the number of lines with the string “foo” in a directory, we would want to check to see if everything worked and respond appropriately if something went wrong.
-In Ruby, you can check if a shelled out command was successful using the bizarrely named <code class="highlighter-rouge">$?.success?</code> indicator:</p>
+In Ruby, you can check if a shelled out command was successful using the bizarrely named <code class="language-plaintext highlighter-rouge">$?.success?</code> indicator:</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>irb(main):012:0&gt; dir="src"
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>irb(main):012:0&gt; dir="src"
 =&gt; "src"
 irb(main):013:0&gt; `find #{Shellwords.shellescape(dir)} -type f -print0  | xargs -0 grep foo | wc -l`.to_i
 =&gt; 5
@@ -382,7 +382,7 @@ irb(main):014:0&gt; $?.success?
 <p>Ok, that correctly indicates success.
 Let’s make sure that it can detect failure:</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>irb(main):015:0&gt; dir="nonexistent"
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>irb(main):015:0&gt; dir="nonexistent"
 =&gt; "nonexistent"
 irb(main):016:0&gt; `find #{Shellwords.shellescape(dir)} -type f -print0  | xargs -0 grep foo | wc -l`.to_i
 find: `nonexistent': No such file or directory
@@ -396,14 +396,14 @@ That wasn’t successful.
 What’s going on?</p>
 
 <p>The heart of the problem is that when you shell out, the commands in the pipeline are not immediate children of the main program, but rather its grandchildren:
-the program spawns a shell, which makes a bunch of UNIX pipes, forks child processes, connects inputs and outputs to pipes using the <a href="https://developer.apple.com/library/IOs/#documentation/System/Conceptual/ManPages_iPhoneOS/man2/dup2.2.html"><code class="highlighter-rouge">dup2</code> system call</a>, and then execs the appropriate commands.
+the program spawns a shell, which makes a bunch of UNIX pipes, forks child processes, connects inputs and outputs to pipes using the <a href="https://developer.apple.com/library/IOs/#documentation/System/Conceptual/ManPages_iPhoneOS/man2/dup2.2.html"><code class="language-plaintext highlighter-rouge">dup2</code> system call</a>, and then execs the appropriate commands.
 As a result, your main program is not the parent of the commands in the pipeline, but rather, their grandparent.
 Therefore, it doesn’t know their process IDs, nor can it wait on them or get their exit statuses when they terminate.
 The shell process, which is their parent, has to do all of that.
 Your program can only wait for the shell to finish and see if <em>that</em> was successful.
 If the shell is only executing a single command, this is fine:</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>irb(main):018:0&gt; `cat /dev/null`
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>irb(main):018:0&gt; `cat /dev/null`
 =&gt; ""
 irb(main):019:0&gt; $?.success?
 =&gt; true
@@ -416,21 +416,21 @@ irb(main):021:0&gt; $?.success?
 
 <p>Unfortunately, by default the shell is quite lenient about what it considers to be a successful pipeline:</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>irb(main):022:0&gt; `cat /dev/nada | sort`
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>irb(main):022:0&gt; `cat /dev/nada | sort`
 cat: /dev/nada: No such file or directory
 =&gt; ""
 irb(main):023:0&gt; $?.success?
 =&gt; true
 </code></pre></div></div>
 
-<p>As long as the last command in a pipeline succeeds — in this case <code class="highlighter-rouge">sort</code> — the entire pipeline is considered a success.
+<p>As long as the last command in a pipeline succeeds — in this case <code class="language-plaintext highlighter-rouge">sort</code> — the entire pipeline is considered a success.
 Thus, even when one or more of the earlier programs in a pipeline fails spectacularly, the last command may not, leading the shell to consider the entire pipeline to be successful.
 This is probably not what you meant by success.</p>
 
-<p>Bash’s notion of pipeline success can fortunately be made stricter with the <code class="highlighter-rouge">pipefail</code> option.
+<p>Bash’s notion of pipeline success can fortunately be made stricter with the <code class="language-plaintext highlighter-rouge">pipefail</code> option.
 This option causes the shell to consider a pipeline successful only if all of its commands are successful:</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>irb(main):024:0&gt; `set -o pipefail; cat /dev/nada | sort`
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>irb(main):024:0&gt; `set -o pipefail; cat /dev/nada | sort`
 cat: /dev/nada: No such file or directory
 =&gt; ""
 irb(main):025:0&gt; $?.success?
@@ -438,10 +438,10 @@ irb(main):025:0&gt; $?.success?
 </code></pre></div></div>
 
 <p>Since shelling out spawns a new shell every time, this option has to be set for every multi-command pipeline in order to be able to determine its true success status.
-Of course, just like shell-escaping every interpolated variable, setting <code class="highlighter-rouge">pipefail</code> at the start of every command is simply something that no one actually does.
-Moreover, even with the <code class="highlighter-rouge">pipefail</code> option, your program has no way of determining <em>which</em> commands in a pipeline were unsuccessful — it just knows that something somewhere went wrong.
+Of course, just like shell-escaping every interpolated variable, setting <code class="language-plaintext highlighter-rouge">pipefail</code> at the start of every command is simply something that no one actually does.
+Moreover, even with the <code class="language-plaintext highlighter-rouge">pipefail</code> option, your program has no way of determining <em>which</em> commands in a pipeline were unsuccessful — it just knows that something somewhere went wrong.
 While that’s better than silently failing and continuing as if there were no problem, its not very helpful for postmortem debugging:
-many programs are not as well-behaved as <code class="highlighter-rouge">cat</code> and don’t actually identify themselves or the specific problem when printing error messages before going belly up.</p>
+many programs are not as well-behaved as <code class="language-plaintext highlighter-rouge">cat</code> and don’t actually identify themselves or the specific problem when printing error messages before going belly up.</p>
 
 <p>Given the other problems caused by the indirection of shelling out, it seems like a barely relevant afterthought to mention that execing a shell process just to spawn a bunch of other processes is inefficient.
 However, it is a real source of unnecessary overhead:
@@ -456,16 +456,16 @@ So programming languages have traditionally relied on the shell to setup pipelin
 <p>Let’s return to our example of shelling out to count “foo” lines.
 Here’s the total expression we need to use in order to shell out without being susceptible to metacharacter breakage and so we can actually tell whether the entire pipeline succeeded:</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>`set -o pipefail; find #{Shellwords.shellescape(dir)} -type f -print0  | xargs -0 grep foo | wc -l`.to_i
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>`set -o pipefail; find #{Shellwords.shellescape(dir)} -type f -print0  | xargs -0 grep foo | wc -l`.to_i
 </code></pre></div></div>
 
 <p>However, an error isn’t raised by default when a shelled out command fails.
-To avoid silent errors, we need to explicitly check <code class="highlighter-rouge">$?.success?</code> after every time we shell out and raise an exception if it indicates failure.
+To avoid silent errors, we need to explicitly check <code class="language-plaintext highlighter-rouge">$?.success?</code> after every time we shell out and raise an exception if it indicates failure.
 Of course, doing this manually is tedious, and as a result, it largely isn’t done.
 The default behavior — and therefore the easiest and most common behavior — is to assume that shelled out commands worked and completely ignore failures.
 To make our “foo” counting example well-behaved, we would have to wrap it in a function like so:</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>def foo_count(dir)
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>def foo_count(dir)
   n = `set -o pipefail;
        find #{Shellwords.shellescape(dir)} -type f -print0  | xargs -0 grep foo | wc -l`.to_i
   raise("pipeline failed") unless $?.success?
@@ -475,7 +475,7 @@ end
 
 <p>This function behaves the way we would like it to:</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>irb(main):026:0&gt; foo_count("src")
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>irb(main):026:0&gt; foo_count("src")
 =&gt; 5
 irb(main):027:0&gt; foo_count("source code")
 =&gt; 5
@@ -495,7 +495,7 @@ RuntimeError: pipeline failed
 
 <p>However, this 6-line, 200-character function is a far cry from the clarity and brevity we started with:</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>`find #{dir} -type f -print0 | xargs -0 grep foo | wc -l`.to_i
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>`find #{dir} -type f -print0 | xargs -0 grep foo | wc -l`.to_i
 </code></pre></div></div>
 
 <p>If most programmers saw the longer, safer version of this in a program, they’d probably wonder why someone was writing such verbose, cryptic code to get something so simple and straightforward done.</p>
@@ -506,7 +506,7 @@ RuntimeError: pipeline failed
 
 <ol>
   <li>Shell-escaping all values used to construct commands</li>
-  <li>Prefixing each multi-command pipeline with “<code class="highlighter-rouge">set -o pipefail;</code>”</li>
+  <li>Prefixing each multi-command pipeline with “<code class="language-plaintext highlighter-rouge">set -o pipefail;</code>”</li>
   <li>Explicitly checking for failure after each shelled out command.</li>
 </ol>
 
@@ -517,9 +517,9 @@ In short, shelling out responsibly kind of sucks.</p>
 If a program constructs and executes pipelines itself, it remains in control of all the subprocesses, can determine their individual exit conditions, automatically handle errors appropriately, and give accurate, comprehensive diagnostic messages when things go wrong.
 Moreover, without a shell to interpret commands, there is also no shell to treat metacharacters specially, and therefore no danger of metacharacter brittleness.
 <a href="http://python.org/">Python</a> gets this right:
-using <a href="http://docs.python.org/library/os.html#os.popen"><code class="highlighter-rouge">os.popen</code></a> to shell out is officially deprecated, and the recommended way to call external programs is to use the <a href="http://docs.python.org/library/subprocess.html"><code class="highlighter-rouge">subprocess</code></a> module, which spawns external programs without using a shell.
-Constructing pipelines using <code class="highlighter-rouge">subprocess</code> <a href="http://docs.python.org/library/subprocess.html#replacing-shell-pipeline">can be a little verbose</a>, but it is safe and avoids all the problems that shelling out is prone to.
-In my <a href="/blog/2013/04/put-this-in-your-pipe">followup post</a>, I will describe how Julia makes constructing and executing pipelines of external commands as safe as Python’s <code class="highlighter-rouge">subprocess</code> and as convenient as shelling out.</p>
+using <a href="http://docs.python.org/library/os.html#os.popen"><code class="language-plaintext highlighter-rouge">os.popen</code></a> to shell out is officially deprecated, and the recommended way to call external programs is to use the <a href="http://docs.python.org/library/subprocess.html"><code class="language-plaintext highlighter-rouge">subprocess</code></a> module, which spawns external programs without using a shell.
+Constructing pipelines using <code class="language-plaintext highlighter-rouge">subprocess</code> <a href="http://docs.python.org/library/subprocess.html#replacing-shell-pipeline">can be a little verbose</a>, but it is safe and avoids all the problems that shelling out is prone to.
+In my <a href="/blog/2013/04/put-this-in-your-pipe">followup post</a>, I will describe how Julia makes constructing and executing pipelines of external commands as safe as Python’s <code class="language-plaintext highlighter-rouge">subprocess</code> and as convenient as shelling out.</p>
 
 
 </div>

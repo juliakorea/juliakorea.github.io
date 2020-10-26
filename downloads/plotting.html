@@ -245,7 +245,7 @@ brings many different plotting packages under a single API, making it easy to sw
 between plotting “backends”. Installation and example usage is as follows:</p>
 
 <figure class="highlight"><pre><code class="language-julia" data-lang="julia"><span class="n">Pkg</span><span class="o">.</span><span class="n">add</span><span class="x">(</span><span class="s">"Plots"</span><span class="x">)</span>
-<span class="n">using</span> <span class="n">Plots</span>
+<span class="k">using</span> <span class="n">Plots</span>
 <span class="n">plotly</span><span class="x">()</span> <span class="c"># Choose the Plotly.jl backend for web interactivity</span>
 <span class="n">plot</span><span class="x">(</span><span class="n">rand</span><span class="x">(</span><span class="mi">5</span><span class="x">,</span><span class="mi">5</span><span class="x">),</span><span class="n">linewidth</span><span class="o">=</span><span class="mi">2</span><span class="x">,</span><span class="n">title</span><span class="o">=</span><span class="s">"My Plot"</span><span class="x">)</span>
 <span class="n">Pkg</span><span class="o">.</span><span class="n">add</span><span class="x">(</span><span class="s">"PyPlot"</span><span class="x">)</span> <span class="c"># Install a different backend</span>
@@ -268,7 +268,7 @@ Python and MatPlotlib are correctly installed. Installation of
 PyPlot.jl and example usage are as follows:</p>
 
 <figure class="highlight"><pre><code class="language-julia" data-lang="julia"><span class="n">Pkg</span><span class="o">.</span><span class="n">add</span><span class="x">(</span><span class="s">"PyPlot"</span><span class="x">)</span>
-<span class="n">using</span> <span class="n">PyPlot</span>
+<span class="k">using</span> <span class="n">PyPlot</span>
 <span class="n">x</span> <span class="o">=</span> <span class="n">linspace</span><span class="x">(</span><span class="mi">0</span><span class="x">,</span><span class="mi">2</span><span class="o">*</span><span class="nb">pi</span><span class="x">,</span><span class="mi">1000</span><span class="x">);</span> <span class="n">y</span> <span class="o">=</span> <span class="n">sin</span><span class="o">.</span><span class="x">(</span><span class="mi">3</span><span class="o">*</span><span class="n">x</span> <span class="o">+</span> <span class="mi">4</span><span class="o">*</span><span class="n">cos</span><span class="o">.</span><span class="x">(</span><span class="mi">2</span><span class="o">*</span><span class="n">x</span><span class="x">))</span>
 <span class="n">plot</span><span class="x">(</span><span class="n">x</span><span class="x">,</span> <span class="n">y</span><span class="x">,</span> <span class="n">color</span><span class="o">=</span><span class="s">"red"</span><span class="x">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mf">2.0</span><span class="x">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s">"--"</span><span class="x">)</span></code></pre></figure>
 
@@ -280,7 +280,7 @@ style grammar of graphics in Julia. Add the Gadfly package to your
 Julia installation with the following command on the Julia prompt:</p>
 
 <figure class="highlight"><pre><code class="language-julia" data-lang="julia"><span class="n">Pkg</span><span class="o">.</span><span class="n">add</span><span class="x">(</span><span class="s">"Gadfly"</span><span class="x">)</span>
-<span class="n">using</span> <span class="n">Gadfly</span>
+<span class="k">using</span> <span class="n">Gadfly</span>
 <span class="n">draw</span><span class="x">(</span><span class="n">SVG</span><span class="x">(</span><span class="s">"output.svg"</span><span class="x">,</span> <span class="mi">6</span><span class="n">inch</span><span class="x">,</span> <span class="mi">3</span><span class="n">inch</span><span class="x">),</span> <span class="n">plot</span><span class="x">([</span><span class="n">sin</span><span class="x">,</span> <span class="n">cos</span><span class="x">],</span> <span class="mi">0</span><span class="x">,</span> <span class="mi">25</span><span class="x">))</span></code></pre></figure>
 
 <p>Gadfly’s interface will be familiar to users of R’s

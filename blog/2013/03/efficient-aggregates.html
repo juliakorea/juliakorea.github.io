@@ -254,7 +254,7 @@ out of more than 2400 total issues so far.</p>
 types that represent small number-like values, or that wrap a small number
 of other objects. Consider an RGB pixel type:</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>immutable Pixel
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>immutable Pixel
     r::Uint8
     g::Uint8
     b::Uint8
@@ -267,7 +267,7 @@ to act like normal first-class objects. To see how we might use
 this, here is a function that converts an RGB image in standard 24-bit
 framebuffer format to grayscale:</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>function rgb2gray!(img::Array{Pixel})
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>function rgb2gray!(img::Array{Pixel})
     for i=1:length(img)
         p = img[i]
         v = uint8(0.30*p.r + 0.59*p.g + 0.11*p.b)
@@ -280,7 +280,7 @@ end
 have not done thorough benchmarking, but this is in fact likely to be the
 fastest way to write this function in Julia from now on.</p>
 
-<p>The key to this behavior is the new <code class="highlighter-rouge">immutable</code> keyword, which means
+<p>The key to this behavior is the new <code class="language-plaintext highlighter-rouge">immutable</code> keyword, which means
 instances of the type cannot be modified. At first this sounds like
 a mere restriction — how come I’m not allowed to modify one? — but
 what it really means is that the object is identified with its contents,
@@ -292,11 +292,11 @@ a value, and no time-varying behavior. Its location does not matter. It is
 
 <p>Julia has always had some immutable values, in the form of bits types,
 which are used to represent fixed-bit-width numbers. It is highly intuitive
-that numbers are immutable. If <code class="highlighter-rouge">x</code> equals 2, you might later change the value
-of <code class="highlighter-rouge">x</code>, but it is understood that the value of 2 itself does not change.
-The <code class="highlighter-rouge">immutable</code> keyword generalizes this idea to structured data types with
+that numbers are immutable. If <code class="language-plaintext highlighter-rouge">x</code> equals 2, you might later change the value
+of <code class="language-plaintext highlighter-rouge">x</code>, but it is understood that the value of 2 itself does not change.
+The <code class="language-plaintext highlighter-rouge">immutable</code> keyword generalizes this idea to structured data types with
 named fields. Julia variables and containers, including arrays, are all
-still mutable. While a <code class="highlighter-rouge">Pixel</code> object itself can’t change, a new <code class="highlighter-rouge">Pixel</code>
+still mutable. While a <code class="language-plaintext highlighter-rouge">Pixel</code> object itself can’t change, a new <code class="language-plaintext highlighter-rouge">Pixel</code>
 can be written over an old one within an array, since the array is mutable.</p>
 
 <p>Let’s take a look at the benefits of this feature.</p>
@@ -316,9 +316,9 @@ the following:</p>
 
     <p>item = lookup(collection, index)
    modify!(item)
-The question here is whether we have modified the same <code class="highlighter-rouge">item</code> that is in
+The question here is whether we have modified the same <code class="language-plaintext highlighter-rouge">item</code> that is in
 the collection, or if we have modified a local copy. In Julia there are
-only two possibilities: either <code class="highlighter-rouge">item</code> is mutable, in which case we modified the
+only two possibilities: either <code class="language-plaintext highlighter-rouge">item</code> is mutable, in which case we modified the
 one and only copy of it, or it is immutable, in which case modifying it is
 not allowed.</p>
   </li>
@@ -332,13 +332,13 @@ description:</p>
        k::Int
        ModInt(k) = new(mod(k,n))
    end
-Since a given <code class="highlighter-rouge">ModInt</code> doesn’t need to exist at a particular address, it
+Since a given <code class="language-plaintext highlighter-rouge">ModInt</code> doesn’t need to exist at a particular address, it
 can be passed to functions, stored in arrays, and so on, as efficiently as
-a single <code class="highlighter-rouge">Int</code>, with no wrapping overhead. But, in Julia, the overhead will not
-<em>always</em> be zero. The <code class="highlighter-rouge">ModInt</code> type information will “follow the data around”
+a single <code class="language-plaintext highlighter-rouge">Int</code>, with no wrapping overhead. But, in Julia, the overhead will not
+<em>always</em> be zero. The <code class="language-plaintext highlighter-rouge">ModInt</code> type information will “follow the data around”
 at compile time to the extent possible, but heap-allocated wrappers will be
 added as needed at run time. Typically these wrappers will be short-lived;
-if the final destination of a <code class="highlighter-rouge">ModInt</code> is in a <code class="highlighter-rouge">ModInt</code> array, for example,
+if the final destination of a <code class="language-plaintext highlighter-rouge">ModInt</code> is in a <code class="language-plaintext highlighter-rouge">ModInt</code> array, for example,
 the wrapper can be discarded when the value is assigned. But if the value is
 only used locally inside a function, there will most likely be no wrappers
 at all.</p>
@@ -351,7 +351,7 @@ constructor cannot be violated. At this time, uninitialized arrays are an
 exception to this rule. New arrays of “plain data” immutable types have
 unspecified contents, so it is possible to obtain an invalid value from one.
 This is usually harmless in practice, since arrays must be initialized anyway,
-and are often created through functions like <code class="highlighter-rouge">zeros</code> that do so.</p>
+and are often created through functions like <code class="language-plaintext highlighter-rouge">zeros</code> that do so.</p>
   </li>
   <li>
     <p>We can automatically type-specialize fields. Since field values at
@@ -372,33 +372,33 @@ and other similar niceties.</p>
 
 <p>For purposes of calling C and writing reflective code, it helps to know a
 bit about how immutable types are implemented. Before this change, we had
-types <code class="highlighter-rouge">AbstractKind</code>, <code class="highlighter-rouge">BitsKind</code>, and <code class="highlighter-rouge">CompositeKind</code>, for separating which
+types <code class="language-plaintext highlighter-rouge">AbstractKind</code>, <code class="language-plaintext highlighter-rouge">BitsKind</code>, and <code class="language-plaintext highlighter-rouge">CompositeKind</code>, for separating which
 types are abstract, which are represented by immutable bit strings, and which
 are mutable aggregates. It was sometimes convenient that the type system
 reflected these differences, but also a bit unwarranted since all these
 types participate in the same hierarchy and follow the same subtyping rules.</p>
 
 <p>Now, the type landscape is both simpler and more complex. The three Kinds
-have been merged into a single kind called <code class="highlighter-rouge">DataType</code>. The type of every
-value in Julia is now either a <code class="highlighter-rouge">DataType</code>, or else a tuple type (union types
+have been merged into a single kind called <code class="language-plaintext highlighter-rouge">DataType</code>. The type of every
+value in Julia is now either a <code class="language-plaintext highlighter-rouge">DataType</code>, or else a tuple type (union types
 still exist, but of course are always abstract). To find out the details
-of a <code class="highlighter-rouge">DataType</code>’s physical representation, you must query its properties.
-<code class="highlighter-rouge">DataType</code>s have three boolean properties <code class="highlighter-rouge">abstract</code>, <code class="highlighter-rouge">mutable</code>, and
-<code class="highlighter-rouge">pointerfree</code>, and an integer property <code class="highlighter-rouge">size</code>. The <code class="highlighter-rouge">CompositeKind</code> properties
-<code class="highlighter-rouge">names</code> and <code class="highlighter-rouge">types</code> are still there to describe fields.</p>
+of a <code class="language-plaintext highlighter-rouge">DataType</code>’s physical representation, you must query its properties.
+<code class="language-plaintext highlighter-rouge">DataType</code>s have three boolean properties <code class="language-plaintext highlighter-rouge">abstract</code>, <code class="language-plaintext highlighter-rouge">mutable</code>, and
+<code class="language-plaintext highlighter-rouge">pointerfree</code>, and an integer property <code class="language-plaintext highlighter-rouge">size</code>. The <code class="language-plaintext highlighter-rouge">CompositeKind</code> properties
+<code class="language-plaintext highlighter-rouge">names</code> and <code class="language-plaintext highlighter-rouge">types</code> are still there to describe fields.</p>
 
-<p>The <code class="highlighter-rouge">abstract</code> property indicates that the type was declared with the
-<code class="highlighter-rouge">abstract</code> keyword and has no direct instances. <code class="highlighter-rouge">mutable</code> indicates, for
-concrete types, whether instances are mutable. <code class="highlighter-rouge">pointerfree</code> means that
+<p>The <code class="language-plaintext highlighter-rouge">abstract</code> property indicates that the type was declared with the
+<code class="language-plaintext highlighter-rouge">abstract</code> keyword and has no direct instances. <code class="language-plaintext highlighter-rouge">mutable</code> indicates, for
+concrete types, whether instances are mutable. <code class="language-plaintext highlighter-rouge">pointerfree</code> means that
 instances contain “just data” and no references to other Julia values.
-<code class="highlighter-rouge">size</code> gives the size of an instance in bytes.</p>
+<code class="language-plaintext highlighter-rouge">size</code> gives the size of an instance in bytes.</p>
 
-<p>What used to be <code class="highlighter-rouge">BitsKind</code>s are now <code class="highlighter-rouge">DataType</code>s that are immutable, concrete,
-have no fields, and have non-zero size. The former <code class="highlighter-rouge">CompositeKind</code>s are
+<p>What used to be <code class="language-plaintext highlighter-rouge">BitsKind</code>s are now <code class="language-plaintext highlighter-rouge">DataType</code>s that are immutable, concrete,
+have no fields, and have non-zero size. The former <code class="language-plaintext highlighter-rouge">CompositeKind</code>s are
 mutable and concrete, and either have fields or are zero size if they
 have zero fields. Clearly, new combinations are now possible. We have
 already mentioned immutable types with fields. We could have the equivalent
-of mutable <code class="highlighter-rouge">BitsKind</code>s, but this combination is not exposed in the language,
+of mutable <code class="language-plaintext highlighter-rouge">BitsKind</code>s, but this combination is not exposed in the language,
 since it is easily emulated using mutable fields. Another new combination
 is abstract types with fields, which would allow you to declare that all
 subtypes of some abstract type should have certain fields. That one is
@@ -407,7 +407,7 @@ definitely useful, and we plan to provide syntax for it.</p>
 <p>Typically, the only time you need to worry about these things
 is when calling native code, when you want to know whether some array
 or struct has C-compatible data layout. This is handled by the type
-predicate <code class="highlighter-rouge">isbits(T)</code>.</p>
+predicate <code class="language-plaintext highlighter-rouge">isbits(T)</code>.</p>
 
 
 </div>

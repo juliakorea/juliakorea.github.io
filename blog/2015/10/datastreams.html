@@ -250,11 +250,11 @@
 <p>The DataStreams processing framework provides a consistent interface for working with data, from source to sink and eventually every step in-between. It’s really about putting forth an interface (specific types and methods) to go about ingesting and transferring data sources that hopefully makes for a consistent experience for users, no matter what kind of data they’re working with.</p>
 
 <p>######How does it work?
-DataStreams is all about creating “sources” (Julia types that represent true data sources; e.g. csv files, database backends, etc.), “sinks” or data destinations, and defining the appropriate <code class="highlighter-rouge">Data.stream!(source, sink)</code> methods to actually transfer data from source to sink. Let’s look at a quick example.</p>
+DataStreams is all about creating “sources” (Julia types that represent true data sources; e.g. csv files, database backends, etc.), “sinks” or data destinations, and defining the appropriate <code class="language-plaintext highlighter-rouge">Data.stream!(source, sink)</code> methods to actually transfer data from source to sink. Let’s look at a quick example.</p>
 
 <p>Say I have a table of data in a CSV file on my local machine and need to do a little cleaning and aggregation on the data before building a model with the <a href="https://github.com/JuliaStats/GLM.jl">GLM.jl</a> package. Let’s see some code in action:</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>using CSV, SQLite, DataStreams, DataFrames
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>using CSV, SQLite, DataStreams, DataFrames
 
 # let's create a Julia type that understands our data file
 csv_source = CSV.Source("datafile.csv")
@@ -285,7 +285,7 @@ df = DataFrame(dt)
 OLS = glm(Y~X,df,Normal(),IdentityLink())
 </code></pre></div></div>
 
-<p>Here we see it’s quite simple to create a <code class="highlighter-rouge">Source</code> type by wrapping a true datasource (our CSV file), a destination for that data (an SQLite table), and to transfer the data. We can then turn our <code class="highlighter-rouge">SQLite.Sink</code> into an <code class="highlighter-rouge">SQLite.Source</code> for getting the data back out again.</p>
+<p>Here we see it’s quite simple to create a <code class="language-plaintext highlighter-rouge">Source</code> type by wrapping a true datasource (our CSV file), a destination for that data (an SQLite table), and to transfer the data. We can then turn our <code class="language-plaintext highlighter-rouge">SQLite.Sink</code> into an <code class="language-plaintext highlighter-rouge">SQLite.Source</code> for getting the data back out again.</p>
 
 <h5 id="so-what-have-you-really-been-working-on">So What Have You Really Been Working On?</h5>
 
@@ -303,7 +303,7 @@ OLS = glm(Y~X,df,Normal(),IdentityLink())
   <li><a href="https://github.com/JuliaDB/ODBC.jl">ODBC.jl</a>: the next package to get the DataStreams makeover is ODBC. I’ve already started work on this and hopefully should be ready soon.</li>
   <li>Other packages: I’m always on the hunt for new ways to spread the framework; if you’d be interested in implementing DataStreams for your own package or want to collaborate, just <a href="https://github.com/quinnj">ping</a> me and I’m happy to discuss!</li>
   <li>transforms: an important part of data processing tasks is not just connecting to and moving the data to somewhere else: often you need to clean/transform/aggregate the data in some way in-between. Right now, that’s up to users, but I have some ideas around creating DataStreams-friendly ways to easily incorporate transform steps as data is streamed from one place to another.</li>
-  <li>DataStreams for chaining pipelines + transforms: I’m also excited about the idea of creating entire <code class="highlighter-rouge">DataStreams</code>, which would define entire data processing tasks end-to-end. Setting up a pipeline that could consistently move and process data gets even more powerful as we start looking into automatic-parallelism and extensibility.</li>
+  <li>DataStreams for chaining pipelines + transforms: I’m also excited about the idea of creating entire <code class="language-plaintext highlighter-rouge">DataStreams</code>, which would define entire data processing tasks end-to-end. Setting up a pipeline that could consistently move and process data gets even more powerful as we start looking into automatic-parallelism and extensibility.</li>
   <li>DataStream scheduling/management: I’m also interested in developing capabilities around scheduling and managing DataStreams.</li>
 </ul>
 

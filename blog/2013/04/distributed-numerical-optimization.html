@@ -265,7 +265,7 @@ optimization side of things.</p>
 
 <p>The cutting-plane algorithm is a method for solving the optimization problem</p>
 
-<script type="math/tex; mode=display">\min_{x \in \mathbb R^d} \sum_{i=1}^n f_i(x)</script>
+\[\min_{x \in \mathbb R^d} \sum_{i=1}^n f_i(x)\]
 
 <p>where the functions \( f_i \) are convex but not necessarily differentiable.
 The absolute value function \( |x| \) and the 1-norm \( ||x|| _ 1 \) are
@@ -294,7 +294,7 @@ optimization solvers under <a href="http://juliaopt.org/">JuliaOpt</a>.)</p>
 
 <p>Abstracting the math, we can write the algorithm using the following Julia code.</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code># functions initialize, isconverged, solvesubproblem, and process implemented elsewhere
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code># functions initialize, isconverged, solvesubproblem, and process implemented elsewhere
 state, subproblems = initialize()
 while !isconverged(state)
     results = map(solvesubproblem,subproblems)
@@ -302,21 +302,21 @@ while !isconverged(state)
 end
 </code></pre></div></div>
 
-<p>The function <code class="highlighter-rouge">solvesubproblem</code> corresponds to evaluating \( f_i(x) \) for a
-given \( i \) and \( x \) (the elements of <code class="highlighter-rouge">subproblems</code> could be tuples
-<code class="highlighter-rouge">(i,x)</code>). The function <code class="highlighter-rouge">process</code> corresponds to minimizing the model in step
+<p>The function <code class="language-plaintext highlighter-rouge">solvesubproblem</code> corresponds to evaluating \( f_i(x) \) for a
+given \( i \) and \( x \) (the elements of <code class="language-plaintext highlighter-rouge">subproblems</code> could be tuples
+<code class="language-plaintext highlighter-rouge">(i,x)</code>). The function <code class="language-plaintext highlighter-rouge">process</code> corresponds to minimizing the model in step
 3, and it produces a new state and a new set of subproblems to solve.</p>
 
 <p>Note that the algorithm looks much like a map-reduce that would be easy to
 parallelize using many existing frameworks. Indeed, in Julia we can simply
-replace <code class="highlighter-rouge">map</code> with <code class="highlighter-rouge">pmap</code> (parallel map). Let’s consider a twist that makes
+replace <code class="language-plaintext highlighter-rouge">map</code> with <code class="language-plaintext highlighter-rouge">pmap</code> (parallel map). Let’s consider a twist that makes
 the parallelism not so straightforward.</p>
 
 <h3 id="asynchronous-variant">Asynchronous variant</h3>
 
-<p>Variability in the time taken by the <code class="highlighter-rouge">solvesubproblem</code> function can lead to
+<p>Variability in the time taken by the <code class="language-plaintext highlighter-rouge">solvesubproblem</code> function can lead to
 load imbalance and limit parallel efficiency as workers sit idle waiting for new
-tasks. Such variability arises naturally if <code class="highlighter-rouge">solvesubproblem</code> itself requires
+tasks. Such variability arises naturally if <code class="language-plaintext highlighter-rouge">solvesubproblem</code> itself requires
 solving a optimization problem, or if the workers and network are shared, as is
 often the case with cloud computing.</p>
 
@@ -335,16 +335,16 @@ algorithm remains convergent, although the total number of iterations may
 increase. For more details, see this <a href="http://dx.doi.org/10.1023/A:1021858008222">paper</a> by Jeff Linderoth and
 Stephen Wright.</p>
 
-<p>By introducing asynchronicity we can no longer use a nice black-box <code class="highlighter-rouge">pmap</code>
+<p>By introducing asynchronicity we can no longer use a nice black-box <code class="language-plaintext highlighter-rouge">pmap</code>
 function and have to dig deeper into the parallel implementation. Fortunately,
 this is easy to do in Julia.</p>
 
 <h3 id="parallel-implementation-in-julia">Parallel implementation in Julia</h3>
 
 <p>Julia implements distributed-memory parallelism based on one-sided message
-passing, where process push work onto others (via <code class="highlighter-rouge">remotecall</code>) and the
-results are retrieved (via <code class="highlighter-rouge">fetch</code>) by the process which requires them. Macros
-such as <code class="highlighter-rouge">@spawn</code> and <code class="highlighter-rouge">@parallel</code> provide pretty syntax around this low-level
+passing, where process push work onto others (via <code class="language-plaintext highlighter-rouge">remotecall</code>) and the
+results are retrieved (via <code class="language-plaintext highlighter-rouge">fetch</code>) by the process which requires them. Macros
+such as <code class="language-plaintext highlighter-rouge">@spawn</code> and <code class="language-plaintext highlighter-rouge">@parallel</code> provide pretty syntax around this low-level
 functionality.  This model of parallelism is very different from the typical
 SIMD style of MPI. Both approaches are useful in different contexts, and I
 expect an MPI wrapper for Julia will appear in the future (see also <a href="https://github.com/lcw/julia-mpi">here</a>).</p>
@@ -353,9 +353,9 @@ expect an MPI wrapper for Julia will appear in the future (see also <a href="htt
 on parallel computing is highly recommended, and I won’t try to reproduce it in
 this post. Instead, we’ll dig into and extend one of the examples it presents.</p>
 
-<p>The implementation of <code class="highlighter-rouge">pmap</code> in Julia is</p>
+<p>The implementation of <code class="language-plaintext highlighter-rouge">pmap</code> in Julia is</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>function pmap(f, lst)
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>function pmap(f, lst)
     np = nprocs()  # determine the number of processors available
     n = length(lst)
     results = cell(n)
@@ -382,21 +382,21 @@ this post. Instead, we’ll dig into and extend one of the examples it presents.
 end
 </code></pre></div></div>
 
-<p>On first sight, this code is not particularly intuitive. The <code class="highlighter-rouge">@spawnlocal</code>
+<p>On first sight, this code is not particularly intuitive. The <code class="language-plaintext highlighter-rouge">@spawnlocal</code>
 macro creates a <em><a href="http://docs.julialang.org/en/latest/manual/control-flow/#man-tasks">task</a></em>
 on the <em>master process</em> (e.g. process 1). Each task feeds work to a
-corresponding worker; the call <code class="highlighter-rouge">remotecall_fetch(p, f, lst[idx])</code> function
-calls <code class="highlighter-rouge">f</code> on process <code class="highlighter-rouge">p</code> and returns the result when finished. Tasks are
+corresponding worker; the call <code class="language-plaintext highlighter-rouge">remotecall_fetch(p, f, lst[idx])</code> function
+calls <code class="language-plaintext highlighter-rouge">f</code> on process <code class="language-plaintext highlighter-rouge">p</code> and returns the result when finished. Tasks are
 uninterruptable and only surrender control at specific points such as
-<code class="highlighter-rouge">remotecall_fetch</code>. Tasks cannot directly modify variables from the enclosing
-scope, but the same effect can be achieved by using the <code class="highlighter-rouge">next_idx</code> function to
-access and mutate <code class="highlighter-rouge">i</code>. <em>The task idiom functions in place of using a loop to
+<code class="language-plaintext highlighter-rouge">remotecall_fetch</code>. Tasks cannot directly modify variables from the enclosing
+scope, but the same effect can be achieved by using the <code class="language-plaintext highlighter-rouge">next_idx</code> function to
+access and mutate <code class="language-plaintext highlighter-rouge">i</code>. <em>The task idiom functions in place of using a loop to
 poll for results from each worker process.</em></p>
 
 <p>Implementing our asynchronous algorithm is not much more than a modification of
 the above code:</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code># given constants n and 0 &lt; alpha &lt;= 1
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code># given constants n and 0 &lt; alpha &lt;= 1
 # functions initialize and solvesubproblem defined elsewhere
 np = nprocs()
 state, subproblems = initialize()
@@ -442,19 +442,19 @@ end
 end
 </code></pre></div></div>
 
-<p>where <code class="highlighter-rouge">state</code> is an instance of a type defined as</p>
+<p>where <code class="language-plaintext highlighter-rouge">state</code> is an instance of a type defined as</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>type State
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>type State
     didtrigger::Vector{Bool}
     numback::Vector{Int}
     ...
 end
 </code></pre></div></div>
 
-<p>There is little difference in the structure of the code inside the <code class="highlighter-rouge">@sync</code>
-blocks, and the asynchronous logic is encapsulated in the local <code class="highlighter-rouge">updatemodel</code>
+<p>There is little difference in the structure of the code inside the <code class="language-plaintext highlighter-rouge">@sync</code>
+blocks, and the asynchronous logic is encapsulated in the local <code class="language-plaintext highlighter-rouge">updatemodel</code>
 function which conditionally generates new subproblems. A strength of Julia is
-that functions like <code class="highlighter-rouge">pmap</code> are implemented in Julia itself, so that it is
+that functions like <code class="language-plaintext highlighter-rouge">pmap</code> are implemented in Julia itself, so that it is
 particularly straightforward to make modifications like this.</p>
 
 <h3 id="running-it">Running it</h3>
@@ -464,29 +464,29 @@ additional variants) is implemented in <a href="https://github.com/mlubin/JuliaB
 specialized for <a href="http://en.wikipedia.org/wiki/Stochastic_programming">stochastic
 programming</a> where the cutting-plane algorithm is known as the <a href="http://www.springerreference.com/docs/html/chapterdbid/72429.html">L-shaped
 method</a> or Benders decomposition and is used to decompose the solution of
-large linear optimization problems. Here, <code class="highlighter-rouge">solvesubproblem</code> entails solving a
+large linear optimization problems. Here, <code class="language-plaintext highlighter-rouge">solvesubproblem</code> entails solving a
 relatively small linear optimization problem. Test instances are taken from the
 previously mentioned <a href="http://dx.doi.org/10.1023/A:1021858008222">paper</a>.</p>
 
 <p>We’ll first run on a large multicore server. The
-<code class="highlighter-rouge">runals.jl</code> (asynchronous L-shaped) file contains the algorithm we’ll use. Its
+<code class="language-plaintext highlighter-rouge">runals.jl</code> (asynchronous L-shaped) file contains the algorithm we’ll use. Its
 usage is</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>julia runals.jl [data source] [num subproblems] [async param] [block size]
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>julia runals.jl [data source] [num subproblems] [async param] [block size]
 </code></pre></div></div>
 
-<p>where <code class="highlighter-rouge">[num subproblems]</code> is the \(n\) as above and <code class="highlighter-rouge">[async param]</code> is
+<p>where <code class="language-plaintext highlighter-rouge">[num subproblems]</code> is the \(n\) as above and <code class="language-plaintext highlighter-rouge">[async param]</code> is
 the proportion \(\alpha\). By setting \(\alpha = 1\) we obtain the
 synchronous algorithm. For the asynchronous version we will take \(\alpha =
-0.6\). The <code class="highlighter-rouge">[block size]</code> parameter controls how many subproblems are sent to
+0.6\). The <code class="language-plaintext highlighter-rouge">[block size]</code> parameter controls how many subproblems are sent to
 a worker at once (in the previous code, this value was always 1). We will use
 4000 subproblems in our experiments.</p>
 
-<p>To run multiple Julia processes on a shared-memory machine, we pass the <code class="highlighter-rouge">-p N</code>
-option to the <code class="highlighter-rouge">julia</code> executable, which will start up <code class="highlighter-rouge">N</code> system processes.
+<p>To run multiple Julia processes on a shared-memory machine, we pass the <code class="language-plaintext highlighter-rouge">-p N</code>
+option to the <code class="language-plaintext highlighter-rouge">julia</code> executable, which will start up <code class="language-plaintext highlighter-rouge">N</code> system processes.
 To execute the asynchronous version with 10 workers, we run</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>julia -p 12 runals.jl Data/storm 4000 0.6 30
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>julia -p 12 runals.jl Data/storm 4000 0.6 30
 </code></pre></div></div>
 
 <p>Note that we start 12 processes. These are the 10 workers, the master (which
@@ -547,7 +547,7 @@ scaling observed with 20 workers is likely a system artifact.
 <p>There are a few more hoops to jump through in order to run on EC2. First we must
 build a system image (AMI) with Julia installed. Julia connects to workers over
 ssh, so I found it useful to put my EC2 ssh key on the AMI and also set
-<code class="highlighter-rouge">StrictHostKeyChecking no</code> in <code class="highlighter-rouge">/etc/ssh/ssh_config</code> to disable the
+<code class="language-plaintext highlighter-rouge">StrictHostKeyChecking no</code> in <code class="language-plaintext highlighter-rouge">/etc/ssh/ssh_config</code> to disable the
 authenticity prompt when connecting to new workers. Someone will likely correct
 me on if this is the right approach.</p>
 
@@ -556,15 +556,15 @@ m3.xlarge instance for the master and m1.medium instances for the workers.
 (Note: you can save a lot of money by using the spot market.)</p>
 
 <p>To add remote workers on startup, Julia accepts a file with a list of host names
-through the <code class="highlighter-rouge">--machinefile</code> option. We can generate this easily enough by
-using the EC2 API Tools (Ubuntu package <code class="highlighter-rouge">ec2-api-tools</code>) with the command</p>
+through the <code class="language-plaintext highlighter-rouge">--machinefile</code> option. We can generate this easily enough by
+using the EC2 API Tools (Ubuntu package <code class="language-plaintext highlighter-rouge">ec2-api-tools</code>) with the command</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ec2-describe-instances | grep running | awk '{ print $5; }' &gt; mfile
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ec2-describe-instances | grep running | awk '{ print $5; }' &gt; mfile
 </code></pre></div></div>
 
 <p>On the master instance we can then run</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>julia --machinefile mfile runatr.jl Data/storm 4000 0.6 30
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>julia --machinefile mfile runatr.jl Data/storm 4000 0.6 30
 </code></pre></div></div>
 
 <p>Results from various runs are presented in the table below.</p>

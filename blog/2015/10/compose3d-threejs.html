@@ -301,7 +301,7 @@ IJulia, albiet with some limitations.</p>
 illuminated from a corner. The camera in the scenes drawn by ThreeJS can be rotated, zoomed and panned using your mouse
 or trackpad, allowing you to explore the scene.</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>import ThreeJS
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>import ThreeJS
 ThreeJS.outerdiv() &lt;&lt; (ThreeJS.initscene() &lt;&lt;
     [
         ThreeJS.mesh(0.0, 0.0, 0.0) &lt;&lt;
@@ -320,7 +320,7 @@ ThreeJS.outerdiv() &lt;&lt; (ThreeJS.initscene() &lt;&lt;
 so Escher is the way to go if you want to interact with your 3D scene. So an example for this can be the same scene as before,
 but after adding a slider and make it such that the size of the cube is controlled by the slider.</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>import ThreeJS
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>import ThreeJS
 function main(window)
   push!(window.assets, "widgets")
   push!(window.assets, ("ThreeJS", "threejs"))
@@ -346,10 +346,10 @@ end
 <h3 id="you-can-also-do-animations">You can also do animations!</h3>
 
 <p>Small scale animations can also be created using Escher. Instead of using sliders to update the elements,
-we just update it at certain intervals using the <code class="highlighter-rouge">every</code> function or the <code class="highlighter-rouge">fpswhen</code> functions. A scene with a
+we just update it at certain intervals using the <code class="language-plaintext highlighter-rouge">every</code> function or the <code class="language-plaintext highlighter-rouge">fpswhen</code> functions. A scene with a
 rotating cube can be drawn using just a couple of modifications of the above code.</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>import ThreeJS
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>import ThreeJS
 function main(window)
   push!(window.assets, "widgets")
   push!(window.assets, ("ThreeJS", "threejs"))
@@ -380,10 +380,10 @@ end
 <h3 id="surf-and-mesh-plots-sort-of">Surf and mesh plots! (Sort of)</h3>
 
 <p>ThreeJS has support to render parametric surfaces, which are basically the kind of surfaces drawn by
-a typical <code class="highlighter-rouge">surf</code> plot. It also has support for drawing lines like a typical <code class="highlighter-rouge">mesh</code> plot. Colormaps can
+a typical <code class="language-plaintext highlighter-rouge">surf</code> plot. It also has support for drawing lines like a typical <code class="language-plaintext highlighter-rouge">mesh</code> plot. Colormaps can
 be applied to these surfaces by passing in an array of colors to be used. Colors to be applied are
-calculated and chosen by ThreeJS. These come into effect when put together with materials using the <code class="highlighter-rouge">colorkind</code>
-property of <code class="highlighter-rouge">vertex</code>. Screenshots of such surfaces drawn by ThreeJS are shown below.</p>
+calculated and chosen by ThreeJS. These come into effect when put together with materials using the <code class="language-plaintext highlighter-rouge">colorkind</code>
+property of <code class="language-plaintext highlighter-rouge">vertex</code>. Screenshots of such surfaces drawn by ThreeJS are shown below.</p>
 
 <p><img src="https://gist.github.com/rohitvarkey/1d65925850198bc284f5/raw/d1d8e389dd5baf5420cb24c1dfdf784bc61bf217/parametric.png" alt="Parametric surface" />
 <img src="https://gist.github.com/rohitvarkey/1d65925850198bc284f5/raw/d1d8e389dd5baf5420cb24c1dfdf784bc61bf217/meshlines.png" alt="Mesh lines" /></p>
@@ -398,7 +398,7 @@ structures, with very less code! Compose3D has similar features to Compose, with
 into the sections that we want and then just draw the pyramid in them! So the bottom half of the 3D space is split into 4,
 and then, a pyramid is arranged on top of them.</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>using Compose3D
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>using Compose3D
 
 function sierpinski(n)
     if n == 0
@@ -424,10 +424,10 @@ and animations!</p>
 
 <p>For example, the same Sierpinski example can be have some interactive elements, say a slider defining the
 number of levels of recursion and maybe some controlling the colors of the pyramid. This can be done easily
-in Escher just like it was done with ThreeJS. After defining the <code class="highlighter-rouge">sierpinski</code> function given below, just creating a slider
-and hooking it up to the <code class="highlighter-rouge">sierpinski</code> function will set this up!</p>
+in Escher just like it was done with ThreeJS. After defining the <code class="language-plaintext highlighter-rouge">sierpinski</code> function given below, just creating a slider
+and hooking it up to the <code class="language-plaintext highlighter-rouge">sierpinski</code> function will set this up!</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>function main(window)
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>function main(window)
     push!(window.assets, ("ThreeJS", "threejs")) #Push the threejs static assets
     push!(window.assets, "widgets")
     n = Input(0.0)
@@ -458,7 +458,7 @@ end
 <ul>
   <li>Several new primitives have been added in ThreeJS which don’t yet have corresponding primitives in Compose3D.</li>
   <li>Add support for text in ThreeJS allowing use of labels in plots.</li>
-  <li>Being able to use <code class="highlighter-rouge">surf</code> and <code class="highlighter-rouge">mesh</code> that will automatically draw scaled surface plots in browsers and a WebGL based
+  <li>Being able to use <code class="language-plaintext highlighter-rouge">surf</code> and <code class="language-plaintext highlighter-rouge">mesh</code> that will automatically draw scaled surface plots in browsers and a WebGL based
 plotting library around ThreeJS.</li>
   <li>Actually get Compose3D ready for public use!</li>
 </ul>

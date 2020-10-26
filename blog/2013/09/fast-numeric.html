@@ -264,14 +264,14 @@ Given a particular choice of algorithm, however, implementing it carefully and o
 
 <p>Consider the following:</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>r = exp(-abs(x-y))
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>r = exp(-abs(x-y))
 </code></pre></div></div>
 
 <p>Very simple expression, right?
 Behind the scenes, however, it takes a lot of steps and temporary arrays to get you the results of this expression.
 The following sequence of temporary array constructions is what is done to compute the above expression:</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>n = length(x)
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>n = length(x)
 
 tmp1 = Array(Float64, n)
 for i = 1:n
@@ -305,25 +305,25 @@ This introduces significant overhead:</p>
 
 <p>Such overhead is significant in practice, often leading to 2x to 3x slow down. To get optimal performance, one should <em>devectorize</em> this code like so:</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>r = similar(x) 
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>r = similar(x) 
 for i = 1:length(x)
     r[i] = exp(-abs(x[i]-y[i]))
 end
 </code></pre></div></div>
 
-<p>This version finishes the computation in one pass, without introducing any temporary arrays. Moreover, if <code class="highlighter-rouge">r</code> is pre-allocated, one can even omit the statment that creates <code class="highlighter-rouge">r</code>. The <a href="https://github.com/lindahua/Devectorize.jl"><em>Devectorize.jl</em></a> package provides a macro <code class="highlighter-rouge">@devec</code> that can automatically translate vectorized expressions into loops:</p>
+<p>This version finishes the computation in one pass, without introducing any temporary arrays. Moreover, if <code class="language-plaintext highlighter-rouge">r</code> is pre-allocated, one can even omit the statment that creates <code class="language-plaintext highlighter-rouge">r</code>. The <a href="https://github.com/lindahua/Devectorize.jl"><em>Devectorize.jl</em></a> package provides a macro <code class="language-plaintext highlighter-rouge">@devec</code> that can automatically translate vectorized expressions into loops:</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>using Devectorize
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>using Devectorize
 
 @devec r = exp(-abs(x-y))
 </code></pre></div></div>
 
 <p>The comprehension syntax also provides a concise syntax for devectorized computation:</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>r = [exp(-abs(x[i]-y[i])) for i = 1:length(x)]
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>r = [exp(-abs(x[i]-y[i])) for i = 1:length(x)]
 </code></pre></div></div>
 
-<p>Note that comprehension always creates new arrays to store the results. Hence, to write results to pre-allocated arrays, you still have to devectorize the computation manually or use the <code class="highlighter-rouge">@devec</code> macro.</p>
+<p>Note that comprehension always creates new arrays to store the results. Hence, to write results to pre-allocated arrays, you still have to devectorize the computation manually or use the <code class="language-plaintext highlighter-rouge">@devec</code> macro.</p>
 
 <h2 id="merge-computations-into-a-single-loop">Merge computations into a single loop</h2>
 
@@ -331,17 +331,17 @@ end
 Thus, it is desirable to minimize the number of round trips to memory as much as possible.
 For example, you may compute multiple maps with one loop:</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>for i = 1:length(x)
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>for i = 1:length(x)
     a[i] = x[i] + y[i]
     b[i] = x[i] - y[i]
 end
 </code></pre></div></div>
 
-<p>This is usually faster than writing <code class="highlighter-rouge">a = x + y; b = x - y</code>.</p>
+<p>This is usually faster than writing <code class="language-plaintext highlighter-rouge">a = x + y; b = x - y</code>.</p>
 
 <p>The following example shows how you can compute multiple statistics (e.g. sum, max, and min) over a dataset efficiently.</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>n = length(x)
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>n = length(x)
 rsum = rmax = rmin = x[1]
 for i = 2:n
     xi = x[i]
@@ -364,12 +364,12 @@ end
   <p>Access data in a pattern similar to how the data resides in memory – don’t jump around between non-contiguous locations in memory.</p>
 </blockquote>
 
-<p>This is sometimes referred to as the <em>principle of locality</em>. For example, if <code class="highlighter-rouge">x</code> is a contiguous array, then after reading <code class="highlighter-rouge">x[i]</code>, it is much more likely that <code class="highlighter-rouge">x[i+1]</code> is already in the cache than it is that <code class="highlighter-rouge">x[i+1000000]</code> is, in which case it will be <em>much</em> faster to access <code class="highlighter-rouge">x[i+1]</code> than <code class="highlighter-rouge">x[i+1000000]</code>.</p>
+<p>This is sometimes referred to as the <em>principle of locality</em>. For example, if <code class="language-plaintext highlighter-rouge">x</code> is a contiguous array, then after reading <code class="language-plaintext highlighter-rouge">x[i]</code>, it is much more likely that <code class="language-plaintext highlighter-rouge">x[i+1]</code> is already in the cache than it is that <code class="language-plaintext highlighter-rouge">x[i+1000000]</code> is, in which case it will be <em>much</em> faster to access <code class="language-plaintext highlighter-rouge">x[i+1]</code> than <code class="language-plaintext highlighter-rouge">x[i+1000000]</code>.</p>
 
 <p>Julia arrays are stored in column-major order, which means that the rows of a column are contiguous, but the columns of a row are generally not. It is therefore generally more efficient to access data column-by-column than row-by-row. 
 Consider the problem of computing the sum of each row in a matrix. It is natural to implement this as follows:</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>m, n = size(a)
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>m, n = size(a)
 r = Array(Float64, m)
 
 for i = 1:m
@@ -381,11 +381,11 @@ for i = 1:m
 end
 </code></pre></div></div>
 
-<p>The loop here accesses the elements row-by-row, as <code class="highlighter-rouge">a[i,1], a[i,2], ..., a[i,n]</code>. The interval between these elements is <code class="highlighter-rouge">m</code>. Intuitively, it jumps at the stride of length <code class="highlighter-rouge">m</code> from the begining of each row to the end in each inner loop, and then jumps back to the begining of next row. This is not very efficient, especially when <code class="highlighter-rouge">m</code> is large.</p>
+<p>The loop here accesses the elements row-by-row, as <code class="language-plaintext highlighter-rouge">a[i,1], a[i,2], ..., a[i,n]</code>. The interval between these elements is <code class="language-plaintext highlighter-rouge">m</code>. Intuitively, it jumps at the stride of length <code class="language-plaintext highlighter-rouge">m</code> from the begining of each row to the end in each inner loop, and then jumps back to the begining of next row. This is not very efficient, especially when <code class="language-plaintext highlighter-rouge">m</code> is large.</p>
 
 <p>This procedure can be made much more cache-friendly by changing the order of computation:</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>for i = 1:m
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>for i = 1:m
     r[i] = a[i,1]
 end
 
@@ -402,7 +402,7 @@ end
 
 <p>It is not uncommon that you want to update arrays in an iterative algorithm. For example, in K-means, you may want to update both the cluster means and distances in each iteration. A straightforward way to do this might look like:</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>while !converged &amp;&amp; t &lt; maxiter
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>while !converged &amp;&amp; t &lt; maxiter
     means = compute_means(x, labels)
     dists = compute_distances(x, means)
     labels = assign_labels(dists)
@@ -410,9 +410,9 @@ end
 end
 </code></pre></div></div>
 
-<p>In this implementation of K-means, the arrays <code class="highlighter-rouge">means</code>, <code class="highlighter-rouge">dists</code>, and <code class="highlighter-rouge">labels</code> are recreated at each iteration. This reallocation of memory on each step is unnecessary. The sizes of these arrays are fixed, and their storage can be reused across iterations. The following alternative code is a more efficient way to implement the same algorithm:</p>
+<p>In this implementation of K-means, the arrays <code class="language-plaintext highlighter-rouge">means</code>, <code class="language-plaintext highlighter-rouge">dists</code>, and <code class="language-plaintext highlighter-rouge">labels</code> are recreated at each iteration. This reallocation of memory on each step is unnecessary. The sizes of these arrays are fixed, and their storage can be reused across iterations. The following alternative code is a more efficient way to implement the same algorithm:</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>d, n = size(x)
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>d, n = size(x)
 
 # pre-allocate storage
 means = Array(Float64, d, K)
@@ -430,7 +430,7 @@ end
 <p>In this version, the functions invoked in the loop updates pre-allocated arrays in-place.</p>
 
 <p>If you are writing a package, it is recommended that you provide two versions for each function that outputs arrays: one that performs the update in-place, and another that returns a new array. The former can usually be implemented as a light-weight wrapper of the latter that copies the input array before modifying it.
-A good example is the <a href="https://github.com/JuliaStats/Distributions.jl"><em>Distributions.jl</em></a> package, which provides both <code class="highlighter-rouge">logpdf</code> and <code class="highlighter-rouge">logpdf!</code>, so that one can write <code class="highlighter-rouge">lp = logpdf(d,x)</code> when a new array is needed, or <code class="highlighter-rouge">logpdf!(lp,d,x)</code> when <code class="highlighter-rouge">lp</code> has been pre-allocated.</p>
+A good example is the <a href="https://github.com/JuliaStats/Distributions.jl"><em>Distributions.jl</em></a> package, which provides both <code class="language-plaintext highlighter-rouge">logpdf</code> and <code class="language-plaintext highlighter-rouge">logpdf!</code>, so that one can write <code class="language-plaintext highlighter-rouge">lp = logpdf(d,x)</code> when a new array is needed, or <code class="language-plaintext highlighter-rouge">logpdf!(lp,d,x)</code> when <code class="language-plaintext highlighter-rouge">lp</code> has been pre-allocated.</p>
 
 <h2 id="identify-opportunities-to-use-blas">Identify opportunities to use BLAS</h2>
 
@@ -438,24 +438,24 @@ A good example is the <a href="https://github.com/JuliaStats/Distributions.jl"><
 
 <p>For example, consider accumulating weighted versions of vectors as follows:</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>r = zeros(size(x,1))
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>r = zeros(size(x,1))
 for j = 1:size(x,2)
     r += x[:,j] * w[j]
 end
 </code></pre></div></div>
 
-<p>You can replace the statement <code class="highlighter-rouge">r += x[:,j] * w[j]</code> with a call to the BLAS <code class="highlighter-rouge">axpy!</code> function to get better performance:</p>
+<p>You can replace the statement <code class="language-plaintext highlighter-rouge">r += x[:,j] * w[j]</code> with a call to the BLAS <code class="language-plaintext highlighter-rouge">axpy!</code> function to get better performance:</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>for j = 1:size(x,2)
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>for j = 1:size(x,2)
     axpy!(w[j], x[:,j], r)
 end
 </code></pre></div></div>
 
-<p>This, however, is still far from being optimal. If you are familiar with linear algebra, you may have probably found that this is just matrix-vector multiplication, and can be written as <code class="highlighter-rouge">r = x * w</code>, which is not only shorter, simpler and clearer than either of the above loops – it also runs much faster than either versions.</p>
+<p>This, however, is still far from being optimal. If you are familiar with linear algebra, you may have probably found that this is just matrix-vector multiplication, and can be written as <code class="language-plaintext highlighter-rouge">r = x * w</code>, which is not only shorter, simpler and clearer than either of the above loops – it also runs much faster than either versions.</p>
 
 <p>Our next example is a subtler application of BLAS routines to computing pairwise Euclidean distances between columns in two matrices. Below is a straightforward implementation that directly computes pairwise distances:</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>m, n = size(a)
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>m, n = size(a)
 r = Array(Float64, m, n)
 
 for j = 1:n, i = 1:m
@@ -465,7 +465,7 @@ end
 
 <p>This is clearly suboptimal – a lot of temporary arrays are created in evaluating the expression in the inner loop. To speed this up, we can devectorize the inner expression:</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>d, m = size(a)
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>d, m = size(a)
 n = size(b,2)
 r = Array(Float64, m, n)
 
@@ -481,12 +481,12 @@ end
 
 <p>This version is much more performant than the vectorized form. But is it the best we can do? By employing an alternative strategy, we can write a even faster algorithm for computing pairwise distances. The trick is that the squared Euclidean distance between two vectors can be expanded as:</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>sum(abs2(x-y)) == sum(abs2(x)) + sum(abs2(y)) - 2*dot(x,y)
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>sum(abs2(x-y)) == sum(abs2(x)) + sum(abs2(y)) - 2*dot(x,y)
 </code></pre></div></div>
 
 <p>If we evaluate these three terms separately, the computation can be mapped to BLAS routines perfectly. Below, we have a new implementation of pairwise distances written using only BLAS routines, including the norm calls that are wrapped by the <a href="https://github.com/lindahua/NumericExtensions.jl"><em>NumericExtensions.jl</em></a> package:</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>using NumericExtensions   # for sqsum
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>using NumericExtensions   # for sqsum
 using Base.LinAlg.BLAS    # for gemm!
 
 m, n = size(a)
@@ -502,7 +502,7 @@ for i = 1:length(r)
 end
 </code></pre></div></div>
 
-<p>This version is over <em>100 times</em> faster than our original implementation — the <code class="highlighter-rouge">gemm</code> function in BLAS has been optimized to the extreme by many talented developers and engineers over the past few decades.</p>
+<p>This version is over <em>100 times</em> faster than our original implementation — the <code class="language-plaintext highlighter-rouge">gemm</code> function in BLAS has been optimized to the extreme by many talented developers and engineers over the past few decades.</p>
 
 <p>We should mention that you don’t have to implement this yourself if you really want to compute pairwise distances: the <a href="https://github.com/lindahua/Distance.jl"><em>Distance.jl</em></a> package provides optimized implementations of a broad variety of distance metrics, including this one. We presented this optimization trick as an example to illustrate the substantial performance gains that can be achieved by writing code that uses BLAS routines wherever possible.</p>
 

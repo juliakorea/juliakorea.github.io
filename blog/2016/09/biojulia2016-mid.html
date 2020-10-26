@@ -271,7 +271,7 @@ briefly introduce you to these new features one by one.</p>
 post, I have added exact, approximate and regex search algorithms.  The search
 interface of Bio.jl mimics that of Julia’s standard library.</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>julia&gt; using Bio.Seq
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>julia&gt; using Bio.Seq
 
 julia&gt; seq = dna"ACAGCGTAGCT"
 11nt DNA Sequence:
@@ -296,13 +296,13 @@ julia&gt; search(seq, biore"AGN*?G"d)
 store ambiguous nucleotides and this encoding does well in most cases. However,
 some biological sequences such as chromosomal sequences are so long especially
 for eukaryotic organisms and the default DNA sequences may result in a waste of
-memory space. <code class="highlighter-rouge">ReferenceSequence</code> is a new type introduced in Bio.jl that
+memory space. <code class="language-plaintext highlighter-rouge">ReferenceSequence</code> is a new type introduced in Bio.jl that
 compresses positions of ambiguous nucleotides using a sparse bit vector. This
 type can achieve almost 2-bit encoding in common reference sequences because
 most of the ambiguous nucleotides are clustered in a sequence and the number of
 them is small compared to other unambiguous nucleotides.</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code># Converting a DNASequence object to ReferenceSequence.
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code># Converting a DNASequence object to ReferenceSequence.
 julia&gt; ReferenceSequence(dna"ACGT"^10000)
 40000nt Reference Sequence:
 ACGTACGTACGTACGTACGTACGTACGTACGTACGTACG…CGTACGTACGTACGTACGTACGTACGTACGTACGTACGT
@@ -329,7 +329,7 @@ download page of UCSC</a> in this
 file format. An important advantage of 2bit is that sequences are indexed by its
 name and can be accessed immediately.</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code># Opening a sequence file of yeast (S.cerevisiae).
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code># Opening a sequence file of yeast (S.cerevisiae).
 julia&gt; reader = open(TwoBitReader, "sacCer3.2bit");
 
 # Loading a chromosome VI using random access index.
@@ -349,14 +349,14 @@ suitable for storing data in disks and processing with purpose-built softwares
 like <a href="https://samtools.github.io/">samtools</a>. The BAM data reader is carefully
 tuned so that users can use it in real analysis with large files. It is also
 feasible to read a <a href="http://www.ebi.ac.uk/ena/software/cram-toolkit">CRAM</a> file
-combining the BAM reader and <code class="highlighter-rouge">samtools view</code> command.</p>
+combining the BAM reader and <code class="language-plaintext highlighter-rouge">samtools view</code> command.</p>
 
 <p>An experimental feature is parallel processing using multiple threads.
 Multi-threading support is introduced in Julia 0.5 and we use it to parallelize
 decompression of BAM files. Here is a simple benchmark script to show how
 much reading speed can be improved with multiple threads:</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>using Bio.Align
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>using Bio.Align
 
 # Count the number of mapped records.
 function countmapped(reader)
@@ -375,10 +375,10 @@ end
 println(open(countmapped, BAMReader, ARGS[1]))
 </code></pre></div></div>
 
-<p><code class="highlighter-rouge">JULIA_NUM_THREADS</code> environment variable controls the number of worker threads.
+<p><code class="language-plaintext highlighter-rouge">JULIA_NUM_THREADS</code> environment variable controls the number of worker threads.
 The result below shows that the elapsed time is almost halved using two threads:</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>~/.j/v/Bio $ time julia countmapped.jl SRR1238088.sort.bam
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>~/.j/v/Bio $ time julia countmapped.jl SRR1238088.sort.bam
 28040186
        29.27 real        28.64 user         0.66 sys
 ~/.j/v/Bio $ env JULIA_NUM_THREADS=2 time julia countmapped.jl SRR1238088.sort.bam
@@ -398,7 +398,7 @@ I/O streams and it is built on top of our
 <a href="https://github.com/BioJulia/Libz.jl">Libz.jl</a> package. Parallel decompression
 mentioned above is implemented in this package layer.</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>julia&gt; using BGZFStreams
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>julia&gt; using BGZFStreams
 
 julia&gt; stream = BGZFStream("/Users/kenta/.julia/v0.5/BGZFStreams/test/bar.bgz")
 BGZFStreams.BGZFStream{IOStream}(&lt;mode=read&gt;)
@@ -421,7 +421,7 @@ the best matching barcode from a barcode set.  The demultiplexer algorithm
 implemented in Bio.jl is based on a trie-like data structure, and efficiently
 finds the optimal barcode from the prefix of a given DNA sequence.</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code># Set DNA barcode pool.
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code># Set DNA barcode pool.
 julia&gt; barcodes = DNASequence["ATGG", "CAGA", "GGAA", "TACG"];
 
 # Create a sequence demultiplexer that allows one errors at most.

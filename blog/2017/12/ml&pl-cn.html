@@ -243,7 +243,7 @@
   </p>
 
   <blockquote>
-  <p>任何足够复杂的机器学习系统，里面都拼凑了半个不规范，处处错误，且运行缓慢的编程语言。<sup id="fnref:greenspun"><a href="#fn:greenspun" class="footnote">1</a></sup></p>
+  <p>任何足够复杂的机器学习系统，里面都拼凑了半个不规范，处处错误，且运行缓慢的编程语言。<sup id="fnref:greenspun" role="doc-noteref"><a href="#fn:greenspun" class="footnote">1</a></sup></p>
 </blockquote>
 
 <div style="font-size:75%">
@@ -256,20 +256,20 @@
 
 <h2 id="儿童黑话及其它隐匿语言"><a href="https://zh.wikipedia.org/zh-hk/兒童黑話">儿童黑话</a>及其它隐匿语言</h2>
 
-<p>TensorFlow（TF）等框架<sup id="fnref:tf"><a href="#fn:tf" class="footnote">2</a></sup><a href="https://dl.acm.org/citation.cfm?doid=3088525.3088527">已被公认属于编程语言</a>，尽管它们在某些方面还有局限。这多少有些意料之外，毕竟大家 TF 编程时用的是 Python。然而琢磨一下就会发现，TF 只是让你用 Python 代码<a href="https://www.tensorflow.org/programmers_guide/graphs">构造了一个表达式树</a>，这个表达式树是用其内部语言表示的，之后再进行计算。</p>
+<p>TensorFlow（TF）等框架<sup id="fnref:tf" role="doc-noteref"><a href="#fn:tf" class="footnote">2</a></sup><a href="https://dl.acm.org/citation.cfm?doid=3088525.3088527">已被公认属于编程语言</a>，尽管它们在某些方面还有局限。这多少有些意料之外，毕竟大家 TF 编程时用的是 Python。然而琢磨一下就会发现，TF 只是让你用 Python 代码<a href="https://www.tensorflow.org/programmers_guide/graphs">构造了一个表达式树</a>，这个表达式树是用其内部语言表示的，之后再进行计算。</p>
 
-<p>实际上，可以在任何语言上实现 TensorFlow 这种“延迟”计算的风格。如下 JavaScript 代码就用此风格写了一个 <code class="highlighter-rouge">add</code> 函数:</p>
+<p>实际上，可以在任何语言上实现 TensorFlow 这种“延迟”计算的风格。如下 JavaScript 代码就用此风格写了一个 <code class="language-plaintext highlighter-rouge">add</code> 函数:</p>
 
 <figure class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="kd">function</span> <span class="nx">add</span><span class="p">(</span><span class="nx">a</span><span class="p">,</span><span class="nx">b</span><span class="p">)</span> <span class="p">{</span>
   <span class="k">return</span> <span class="s2">`</span><span class="p">${</span><span class="nx">a</span><span class="p">}</span><span class="s2">+</span><span class="p">${</span><span class="nx">b</span><span class="p">}</span><span class="s2">`</span><span class="p">;</span>
 <span class="p">}</span>
 <span class="nx">x</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span> <span class="nx">y</span> <span class="o">=</span> <span class="mi">2</span>
-<span class="nx">z</span> <span class="o">=</span> <span class="nx">add</span><span class="p">(</span><span class="s1">'x'</span><span class="p">,</span> <span class="s1">'y'</span><span class="p">)</span> <span class="c1">// 'x+y'</span>
-<span class="kr">eval</span><span class="p">(</span><span class="nx">z</span><span class="p">)</span> <span class="c1">// 3</span>
+<span class="nx">z</span> <span class="o">=</span> <span class="nx">add</span><span class="p">(</span><span class="dl">'</span><span class="s1">x</span><span class="dl">'</span><span class="p">,</span> <span class="dl">'</span><span class="s1">y</span><span class="dl">'</span><span class="p">)</span> <span class="c1">// 'x+y'</span>
+<span class="nb">eval</span><span class="p">(</span><span class="nx">z</span><span class="p">)</span> <span class="c1">// 3</span>
 <span class="nx">x</span> <span class="o">=</span> <span class="mi">4</span>
-<span class="kr">eval</span><span class="p">(</span><span class="nx">z</span><span class="p">)</span> <span class="c1">// 6</span></code></pre></figure>
+<span class="nb">eval</span><span class="p">(</span><span class="nx">z</span><span class="p">)</span> <span class="c1">// 6</span></code></pre></figure>
 
-<p>这就是<em>元编程</em>——编写用于写代码的代码。这个例子里的元语言和目标语言是一致的（都是 JavaScript），但它们完全可以是两种不同的语言（如 C 语言预处理器之于 C 语言）。同理，元编程也可以通过某种数据结构（<a href="https://en.wikipedia.org/wiki/Abstract_syntax_tree">AST</a>）来实现，而不仅限于字符串层面的处理。对 TensorFlow 而言，Python 就是一个用来书写 TF 基于图的编程语言<sup id="fnref:ast"><a href="#fn:ast" class="footnote">3</a></sup>的元语言。如果您对此还有疑虑，那么请想一想，TensorFlow 在实现图的<a href="https://www.tensorflow.org/programmers_guide/variables">变量作用域</a>和<a href="https://www.tensorflow.org/api_docs/python/tf/cond">流程控制</a>这些编程结构时并没有采用 Python 语法，而是利用 API 来实现的。</p>
+<p>这就是<em>元编程</em>——编写用于写代码的代码。这个例子里的元语言和目标语言是一致的（都是 JavaScript），但它们完全可以是两种不同的语言（如 C 语言预处理器之于 C 语言）。同理，元编程也可以通过某种数据结构（<a href="https://en.wikipedia.org/wiki/Abstract_syntax_tree">AST</a>）来实现，而不仅限于字符串层面的处理。对 TensorFlow 而言，Python 就是一个用来书写 TF 基于图的编程语言<sup id="fnref:ast" role="doc-noteref"><a href="#fn:ast" class="footnote">3</a></sup>的元语言。如果您对此还有疑虑，那么请想一想，TensorFlow 在实现图的<a href="https://www.tensorflow.org/programmers_guide/variables">变量作用域</a>和<a href="https://www.tensorflow.org/api_docs/python/tf/cond">流程控制</a>这些编程结构时并没有采用 Python 语法，而是利用 API 来实现的。</p>
 
 <p>TensorFlow 及类似的工具以“我仅仅是个库”的姿态出现。然而作为库，它们却异乎寻常。大多数的库只提供简单的一组函数和数据结构，而不是给一整套新的编程系统和运行时。那么，为什么说采用这样一种复杂的方式是有必要的呢？</p>
 
@@ -299,7 +299,7 @@
 
 <p>没有几个领域像机器学习这样对语言层面的设计有如此苛刻的要求。当然不是说这没有先例，在<a href="https://coq.inria.fr/">形式推理与验证</a>和<a href="https://chapel-lang.org/">集群计算</a>中的经验就证实了，新的定制的语言是非常有效的解决方案。同样，我们也希望看到，不论是创造新的还是利用现有的，为机器学习所需的数值、微分、并行及概率计算等功能而定制的语言。</p>
 
-<p>机器学习语言一个公认的挑战是兼顾通用性与性能，早期的混合方案在这方面还需多加努力。我们希望将来的机器学习运行时支持任意方式的混合（静态的计算图包含在一个动态的图里，继而包含在另一个静态图里……），也更好地支持编译动态代码和部署。理想情况是用单个灵活的“图格式”（或 AST）。这个 AST 应当有一种语法可以静态地描述动态行为（比如写一个 <code class="highlighter-rouge">for</code> 循环）——换言之，它更像一个标准的编程语言。</p>
+<p>机器学习语言一个公认的挑战是兼顾通用性与性能，早期的混合方案在这方面还需多加努力。我们希望将来的机器学习运行时支持任意方式的混合（静态的计算图包含在一个动态的图里，继而包含在另一个静态图里……），也更好地支持编译动态代码和部署。理想情况是用单个灵活的“图格式”（或 AST）。这个 AST 应当有一种语法可以静态地描述动态行为（比如写一个 <code class="language-plaintext highlighter-rouge">for</code> 循环）——换言之，它更像一个标准的编程语言。</p>
 
 <p><em>可编程语义</em>开启了灵活性的新层次，而且可以用类似于宏这样的功能来实现。这样的话，只要在核心系统上指定哪些代码应该有纯数据流语义，就可以实现多 GPU 训练这样的功能（与此对照，标准的祈使语义更灵活，但有不能安全优化的副作用）。它也可以实现概率编程语言所需的操作，以及 NLP 模型中通常手动实现的<a href="https://www.cs.cmu.edu/~guyb/papers/Ble90.pdf">向量化处理</a>（批处理）。</p>
 
@@ -309,7 +309,7 @@
 
 <p>让我们想象这样一个世界：增加一个新的硬件支持或数据表示可以用高层代码轻松解决，而不必对原有系统做任何更改。当前数值计算语言<a href="https://arxiv.org/pdf/1604.03410.pdf">已经能轻松处理这些任务</a>，我们期望机器学习系统能从中汲取灵感。</p>
 
-<p>众所周知类型系统有安全性的优点，但当前的系统却不能适应充斥着数组的代码，因为数组的维度是有意义的（例如图像中有空间、通道和批别三种维度）。维度的区分<a href="https://github.com/pytorch/pytorch/issues/1220">全靠约定</a>，置换维度的繁杂代码无法保证正确性，所以说完美支持数组的类型系统还有很大的探索空间。鉴于实践者们对交互和脚本的偏好，我们预计动态类型的趋势仍将继续，<sup id="fnref:types"><a href="#fn:types" class="footnote">4</a></sup>我们也希望看到更多像 <a href="https://cntk.ai/pythondocs/sequence.html">CNTK 的可选动态维度</a>这样的创新。</p>
+<p>众所周知类型系统有安全性的优点，但当前的系统却不能适应充斥着数组的代码，因为数组的维度是有意义的（例如图像中有空间、通道和批别三种维度）。维度的区分<a href="https://github.com/pytorch/pytorch/issues/1220">全靠约定</a>，置换维度的繁杂代码无法保证正确性，所以说完美支持数组的类型系统还有很大的探索空间。鉴于实践者们对交互和脚本的偏好，我们预计动态类型的趋势仍将继续，<sup id="fnref:types" role="doc-noteref"><a href="#fn:types" class="footnote">4</a></sup>我们也希望看到更多像 <a href="https://cntk.ai/pythondocs/sequence.html">CNTK 的可选动态维度</a>这样的创新。</p>
 
 <p>机器学习工程师们对传统<a href="https://papers.nips.cc/paper/5656-hidden-technical-debt-in-machine-learning-systems.pdf">软件工程问题</a>——比如生产系统的维护与扩展——的兴趣日益增加。<a href="https://medium.com/@karpathy/software-2-0-a64152b37c35">机器学习编程模型</a>让组件间抽象界限的区分和接口的设计更加困难，向后兼容性也可能因为重新训练一个模型就被破坏。正如普通语言要解决这些问题，机器学习语言也有希望配备相应的解决方案，虽然怎么做还是个公开的设计问题。</p>
 
@@ -324,7 +324,7 @@
 
 <p>任何新语言不能回避的一个不利因素是要构建新的库生态系统，因为只有专为新运行时写的代码才能从中受益。举个例子，TensorFlow 开发者们必须用图语言重写<a href="https://www.tensorflow.org/api_guides/python/image">图像处理</a>和<a href="https://www.tensorflow.org/api_docs/python/tf/TextLineReader">文件输入输出</a>这些功能，而不是复用 Python 生态系统中已有的库，即使对 SciPy 这类投入巨大的项目也得忍痛割爱。虽说这是跨在前进路上的独木桥，但机器学习实践者们不应因此把自己孤立于广大的数值与高性能计算社区之外。理想的机器学习生态系统一定是理想的数值计算生态系统，反之亦然。社区间的通力合作能让所有人的努力事半功倍。</p>
 
-<p>我们预计进展会来自几个方面。图 IR 及像 <a href="https://www.tensorflow.org/performance/xla/">XLA</a>、<a href="https://github.com/onnx/onnx">ONNX</a> 和 <a href="https://github.com/dmlc/nnvm">NNVM</a> 等格式已变得日益复杂并可能去传统语言设计中寻求更多的灵感。<sup id="fnref:chris"><a href="#fn:chris" class="footnote">5</a></sup> 再加上一些表层语法，它们或许就成了完备的编程语言。TensorFlow 的 XLA 开始向专用的编译栈方向发展，现在已经有 <a href="http://tvmlang.org/">TVM</a>、<a href="http://dlvm.org/">DLVM</a>、<a href="https://github.com/google/sling/tree/master/myelin">myelin</a> 和其它一些推进中的项目。与此同时，<a href="https://github.com/pytorch/pytorch/tree/master/torch/csrc/jit">PyTorch JIT</a>、<a href="https://mxnet.incubator.apache.org/api/python/gluon.html">Gluon</a> 和 <a href="https://github.com/google/tangent">Tangent</a> 等正努力让 Python 本身变成一个更好的建模语言，尽管它们面对的是巨大的挑战。刚才讨论过，机器学习是一个数值计算语言的问题，我们 Julia 社区认为这个观点也为探讨语言层面的问题奠定了良好的基石。我们会继续用<a href="https://github.com/denizyuret/Knet.jl">Knet</a>、<a href="https://fluxml.github.io/">Flux</a>、<a href="https://github.com/jrevels/Cassette.jl">Cassette</a>、<a href="https://github.com/JuliaGPU/CUDAnative.jl">CUDAnative</a> 和 <a href="https://github.com/MikeInnes/DataFlow.jl">DataFlow.jl</a> 等项目去开拓新的疆土。</p>
+<p>我们预计进展会来自几个方面。图 IR 及像 <a href="https://www.tensorflow.org/performance/xla/">XLA</a>、<a href="https://github.com/onnx/onnx">ONNX</a> 和 <a href="https://github.com/dmlc/nnvm">NNVM</a> 等格式已变得日益复杂并可能去传统语言设计中寻求更多的灵感。<sup id="fnref:chris" role="doc-noteref"><a href="#fn:chris" class="footnote">5</a></sup> 再加上一些表层语法，它们或许就成了完备的编程语言。TensorFlow 的 XLA 开始向专用的编译栈方向发展，现在已经有 <a href="http://tvmlang.org/">TVM</a>、<a href="http://dlvm.org/">DLVM</a>、<a href="https://github.com/google/sling/tree/master/myelin">myelin</a> 和其它一些推进中的项目。与此同时，<a href="https://github.com/pytorch/pytorch/tree/master/torch/csrc/jit">PyTorch JIT</a>、<a href="https://mxnet.incubator.apache.org/api/python/gluon.html">Gluon</a> 和 <a href="https://github.com/google/tangent">Tangent</a> 等正努力让 Python 本身变成一个更好的建模语言，尽管它们面对的是巨大的挑战。刚才讨论过，机器学习是一个数值计算语言的问题，我们 Julia 社区认为这个观点也为探讨语言层面的问题奠定了良好的基石。我们会继续用<a href="https://github.com/denizyuret/Knet.jl">Knet</a>、<a href="https://fluxml.github.io/">Flux</a>、<a href="https://github.com/jrevels/Cassette.jl">Cassette</a>、<a href="https://github.com/JuliaGPU/CUDAnative.jl">CUDAnative</a> 和 <a href="https://github.com/MikeInnes/DataFlow.jl">DataFlow.jl</a> 等项目去开拓新的疆土。</p>
 
 <h2 id="结论一个关于机器学习的推断">结论：一个关于机器学习的推断</h2>
 
@@ -333,22 +333,22 @@
 <p>所有这些表明，机器学习系统的设计者要面对极其严峻的挑战。诚然如是，也有好消息：相同的问题也曾困扰语言研究者们数十年！如果说离彻底解决尚远，那这些问题至少已被深入地研究过了。想要发挥这个新领域的全部潜能，机器学习和编程语言社区必须联合起来。那时真正的挑战是如何把两组完全不同的专业知识整合为一体。</p>
 
 <p>我们能创造一个把数值、微分、并行作为基本功能，且毋须牺牲传统的编程理念和智慧的系统吗？这将是编程语言在接下来十年里需要回答的一个基本问题。</p>
-<div class="footnotes">
+<div class="footnotes" role="doc-endnotes">
   <ol>
-    <li id="fn:greenspun">
-      <p>引申自 <a href="https://en.wikipedia.org/wiki/Greenspun%27s_tenth_rule">Philip Greenspun</a> <a href="#fnref:greenspun" class="reversefootnote">&#8617;</a></p>
+    <li id="fn:greenspun" role="doc-endnote">
+      <p>引申自 <a href="https://en.wikipedia.org/wiki/Greenspun%27s_tenth_rule">Philip Greenspun</a> <a href="#fnref:greenspun" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
     </li>
-    <li id="fn:tf">
-      <p>本文以 TensorFlow 为例。读者可以自行替换为其它“先定义—后计算”类型的框架，比如 CNTK 或 MXNet。 <a href="#fnref:tf" class="reversefootnote">&#8617;</a></p>
+    <li id="fn:tf" role="doc-endnote">
+      <p>本文以 TensorFlow 为例。读者可以自行替换为其它“先定义—后计算”类型的框架，比如 CNTK 或 MXNet。 <a href="#fnref:tf" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
     </li>
-    <li id="fn:ast">
-      <p>TensorFlow 的图本质上是一种基于数据流的抽象语法树（AST）。 <a href="#fnref:ast" class="reversefootnote">&#8617;</a></p>
+    <li id="fn:ast" role="doc-endnote">
+      <p>TensorFlow 的图本质上是一种基于数据流的抽象语法树（AST）。 <a href="#fnref:ast" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
     </li>
-    <li id="fn:types">
-      <p>不可否认，当前系统的内部已全范围覆盖从完全动态（PyTorch 和它的 ATen 后端）到异常地静态（TensorFlow 的 XLA 和 MXNet 中，所有维度在图运算之前都已知）等设计。 <a href="#fnref:types" class="reversefootnote">&#8617;</a></p>
+    <li id="fn:types" role="doc-endnote">
+      <p>不可否认，当前系统的内部已全范围覆盖从完全动态（PyTorch 和它的 ATen 后端）到异常地静态（TensorFlow 的 XLA 和 MXNet 中，所有维度在图运算之前都已知）等设计。 <a href="#fnref:types" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
     </li>
-    <li id="fn:chris">
-      <p>一个有趣的佐证是，Google Brain 正加大力度雇用编程语言专家，比如 <a href="https://techcrunch.com/2017/08/14/swift-creator-chris-lattner-joins-google-brain-after-tesla-autopilot-stint/">Chris Lattner</a>。 <a href="#fnref:chris" class="reversefootnote">&#8617;</a></p>
+    <li id="fn:chris" role="doc-endnote">
+      <p>一个有趣的佐证是，Google Brain 正加大力度雇用编程语言专家，比如 <a href="https://techcrunch.com/2017/08/14/swift-creator-chris-lattner-joins-google-brain-after-tesla-autopilot-stint/">Chris Lattner</a>。 <a href="#fnref:chris" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
     </li>
   </ol>
 </div>

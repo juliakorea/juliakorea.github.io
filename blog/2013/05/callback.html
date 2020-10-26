@@ -251,10 +251,10 @@ arguments and convert return values.  For example, if you want to call
 <a href="http://www.gnu.org/software/gsl/">GNU GSL</a> to compute a special function
 like a <a href="http://linux.math.tifr.res.in/manuals/html/gsl-ref-html/gsl-ref_7.html">Debye integral</a>, it is as easy as:</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>debye_1(x) = ccall((:gsl_sf_debye_1,:libgsl), Cdouble, (Cdouble,), x)
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>debye_1(x) = ccall((:gsl_sf_debye_1,:libgsl), Cdouble, (Cdouble,), x)
 </code></pre></div></div>
 
-<p>at which point you can compute <code class="highlighter-rouge">debye_1(2)</code>, <code class="highlighter-rouge">debye_1(3.7)</code>, and so
+<p>at which point you can compute <code class="language-plaintext highlighter-rouge">debye_1(2)</code>, <code class="language-plaintext highlighter-rouge">debye_1(3.7)</code>, and so
 on.  (Even easier would be to use Jiahao Chen’s
 <a href="https://github.com/jiahao/GSL.jl">GSL package</a> for Julia, which has
 already created such wrappers for you.)  This makes a vast array of
@@ -274,32 +274,32 @@ C routines, which is straightforward and efficient but requires some
 lower-level understanding of how functions and other values are passed as
 arguments.</p>
 
-<p>The code in this post requires Julia 0.2 (or a recent <code class="highlighter-rouge">git</code> facsimile
+<p>The code in this post requires Julia 0.2 (or a recent <code class="language-plaintext highlighter-rouge">git</code> facsimile
 thereof); the key features needed for callback functions (especially
-<code class="highlighter-rouge">unsafe_pointer_to_objref</code>) are not available in Julia 0.1.</p>
+<code class="language-plaintext highlighter-rouge">unsafe_pointer_to_objref</code>) are not available in Julia 0.1.</p>
 
-<h2 id="sorting-with-qsort">Sorting with <code class="highlighter-rouge">qsort</code></h2>
+<h2 id="sorting-with-qsort">Sorting with <code class="language-plaintext highlighter-rouge">qsort</code></h2>
 
 <p>Perhaps the most well-known example of a callback parameter is
 provided by the
 <a href="http://pubs.opengroup.org/onlinepubs/009695399/functions/qsort.html">qsort</a>
 function, part of the ANSI C standard library and declared in C as:</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>void qsort(void *base, size_t nmemb, size_t size,
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>void qsort(void *base, size_t nmemb, size_t size,
            int(*compare)(const void *a, const void *b));
 </code></pre></div></div>
 
-<p>The <code class="highlighter-rouge">base</code> argument is a pointer to an array of length <code class="highlighter-rouge">nmemb</code>, with
-elements of <code class="highlighter-rouge">size</code> bytes each.  <code class="highlighter-rouge">compare</code> is a callback function which
-takes pointers to two elements <code class="highlighter-rouge">a</code> and <code class="highlighter-rouge">b</code> and returns an integer
-less/greater than zero if <code class="highlighter-rouge">a</code> should appear before/after <code class="highlighter-rouge">b</code> (or zero
-if any order is permitted).  Now, suppose that we have a 1d array <code class="highlighter-rouge">A</code>
-of values in Julia that we want to sort using the <code class="highlighter-rouge">qsort</code> function
-(rather than Julia’s built-in <code class="highlighter-rouge">sort</code> function).  Before we worry about
-calling <code class="highlighter-rouge">qsort</code> and passing arguments, we need to write a comparison
-function that works for some arbitrary type <code class="highlighter-rouge">T</code>, e.g.</p>
+<p>The <code class="language-plaintext highlighter-rouge">base</code> argument is a pointer to an array of length <code class="language-plaintext highlighter-rouge">nmemb</code>, with
+elements of <code class="language-plaintext highlighter-rouge">size</code> bytes each.  <code class="language-plaintext highlighter-rouge">compare</code> is a callback function which
+takes pointers to two elements <code class="language-plaintext highlighter-rouge">a</code> and <code class="language-plaintext highlighter-rouge">b</code> and returns an integer
+less/greater than zero if <code class="language-plaintext highlighter-rouge">a</code> should appear before/after <code class="language-plaintext highlighter-rouge">b</code> (or zero
+if any order is permitted).  Now, suppose that we have a 1d array <code class="language-plaintext highlighter-rouge">A</code>
+of values in Julia that we want to sort using the <code class="language-plaintext highlighter-rouge">qsort</code> function
+(rather than Julia’s built-in <code class="language-plaintext highlighter-rouge">sort</code> function).  Before we worry about
+calling <code class="language-plaintext highlighter-rouge">qsort</code> and passing arguments, we need to write a comparison
+function that works for some arbitrary type <code class="language-plaintext highlighter-rouge">T</code>, e.g.</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>function mycompare{T}(a_::Ptr{T}, b_::Ptr{T})
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>function mycompare{T}(a_::Ptr{T}, b_::Ptr{T})
     a = unsafe_load(a_)
     b = unsafe_load(b_)
     return a &lt; b ? cint(-1) : a &gt; b ? cint(+1) : cint(0)
@@ -307,26 +307,26 @@ end
 cint(n) = convert(Cint, n)
 </code></pre></div></div>
 
-<p>Notice that we use the built-in function <code class="highlighter-rouge">unsafe_load</code> to fetch the
-values pointed to by the arguments <code class="highlighter-rouge">a_</code> and <code class="highlighter-rouge">b_</code> (which is “unsafe”
-because it will crash if these are not valid pointers, but <code class="highlighter-rouge">qsort</code>
+<p>Notice that we use the built-in function <code class="language-plaintext highlighter-rouge">unsafe_load</code> to fetch the
+values pointed to by the arguments <code class="language-plaintext highlighter-rouge">a_</code> and <code class="language-plaintext highlighter-rouge">b_</code> (which is “unsafe”
+because it will crash if these are not valid pointers, but <code class="language-plaintext highlighter-rouge">qsort</code>
 will always pass valid pointers).  Also, we have to be a little
-careful about return values: <code class="highlighter-rouge">qsort</code> expects a function returning a C
-<code class="highlighter-rouge">int</code>, so we must be sure to return <code class="highlighter-rouge">Cint</code> (the corresponding type in
-Julia) via a call to <code class="highlighter-rouge">convert</code>.</p>
+careful about return values: <code class="language-plaintext highlighter-rouge">qsort</code> expects a function returning a C
+<code class="language-plaintext highlighter-rouge">int</code>, so we must be sure to return <code class="language-plaintext highlighter-rouge">Cint</code> (the corresponding type in
+Julia) via a call to <code class="language-plaintext highlighter-rouge">convert</code>.</p>
 
 <p>Now, how do we pass this to C?  A function pointer in C is essentially
 just a pointer to the memory location of the machine code implementing
-that function, whereas a function value <code class="highlighter-rouge">mycompare</code> (of type
-<code class="highlighter-rouge">Function</code>) in Julia is quite different.  Thanks to Julia’s <a href="http://en.wikipedia.org/wiki/Just-in-time_compilation">JIT
+that function, whereas a function value <code class="language-plaintext highlighter-rouge">mycompare</code> (of type
+<code class="language-plaintext highlighter-rouge">Function</code>) in Julia is quite different.  Thanks to Julia’s <a href="http://en.wikipedia.org/wiki/Just-in-time_compilation">JIT
 compilation</a>
 approach,a Julia function may not even be <em>compiled</em> until the first
 time it is called, and in general the <em>same</em> Julia function may be
 compiled into <em>multiple</em> machine-code instantiations, which are
-specialized for arguments of different types (e.g. different <code class="highlighter-rouge">T</code> in
-this case).  So, you can imagine that <code class="highlighter-rouge">mycompare</code> must internally
-point to a rather complicated data structure (a <code class="highlighter-rouge">jl_function_t</code> in
-<code class="highlighter-rouge">julia.h</code>, if you are interested), which holds information about the
+specialized for arguments of different types (e.g. different <code class="language-plaintext highlighter-rouge">T</code> in
+this case).  So, you can imagine that <code class="language-plaintext highlighter-rouge">mycompare</code> must internally
+point to a rather complicated data structure (a <code class="language-plaintext highlighter-rouge">jl_function_t</code> in
+<code class="language-plaintext highlighter-rouge">julia.h</code>, if you are interested), which holds information about the
 argument types, the compiled versions (if any), and so on.  In
 general, it must store a
 <a href="http://en.wikipedia.org/wiki/Closure_%28computer_science%29">closure</a>
@@ -334,59 +334,59 @@ with information about the environment in which the function was
 defined; we will talk more about this below.  In any case, it is a
 very different object than a simple pointer to machine code for one
 set of argument types.  Fortunately, we can get the latter simply by
-calling a <a href="docs.julialang.org/en/latest/stdlib/base.html#c-interface">built-in Julia function</a> called <code class="highlighter-rouge">cfunction</code>:</p>
+calling a <a href="docs.julialang.org/en/latest/stdlib/base.html#c-interface">built-in Julia function</a> called <code class="language-plaintext highlighter-rouge">cfunction</code>:</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>const mycompare_c = cfunction(mycompare, Cint, (Ptr{Cdouble}, Ptr{Cdouble}))
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>const mycompare_c = cfunction(mycompare, Cint, (Ptr{Cdouble}, Ptr{Cdouble}))
 </code></pre></div></div>
 
-<p>Here, we pass <code class="highlighter-rouge">cfunction</code> three arguments: the function <code class="highlighter-rouge">mycompare</code>,
-the return type <code class="highlighter-rouge">Cint</code>, and a tuple of the argument types, in this case to
-sort an array of <code class="highlighter-rouge">Cdouble</code> (<code class="highlighter-rouge">Float64</code>) elements.  Julia compiles a version of
-<code class="highlighter-rouge">mycompare</code> specialized for these argument types (if it has not done
-so already), and returns a <code class="highlighter-rouge">Ptr{Void}</code> holding the address of the
-machine code, <em>exactly</em> what we need to pass to <code class="highlighter-rouge">qsort</code>.  We are
-now ready to call <code class="highlighter-rouge">qsort</code> on some sample data:</p>
+<p>Here, we pass <code class="language-plaintext highlighter-rouge">cfunction</code> three arguments: the function <code class="language-plaintext highlighter-rouge">mycompare</code>,
+the return type <code class="language-plaintext highlighter-rouge">Cint</code>, and a tuple of the argument types, in this case to
+sort an array of <code class="language-plaintext highlighter-rouge">Cdouble</code> (<code class="language-plaintext highlighter-rouge">Float64</code>) elements.  Julia compiles a version of
+<code class="language-plaintext highlighter-rouge">mycompare</code> specialized for these argument types (if it has not done
+so already), and returns a <code class="language-plaintext highlighter-rouge">Ptr{Void}</code> holding the address of the
+machine code, <em>exactly</em> what we need to pass to <code class="language-plaintext highlighter-rouge">qsort</code>.  We are
+now ready to call <code class="language-plaintext highlighter-rouge">qsort</code> on some sample data:</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>A = [1.3, -2.7, 4.4, 3.1]
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>A = [1.3, -2.7, 4.4, 3.1]
 ccall(:qsort, Void, (Ptr{Cdouble}, Csize_t, Csize_t, Ptr{Void}),
       A, length(A), sizeof(eltype(A)), mycompare_c)
 </code></pre></div></div>
 
-<p>After this executes, <code class="highlighter-rouge">A</code> is changed to the sorted array <code class="highlighter-rouge">[ -2.7, 1.3,
+<p>After this executes, <code class="language-plaintext highlighter-rouge">A</code> is changed to the sorted array <code class="language-plaintext highlighter-rouge">[ -2.7, 1.3,
 3.1, 4.4]</code>.  Note that Julia knows how to convert an array
-<code class="highlighter-rouge">A::Vector{Cdouble}</code> into a <code class="highlighter-rouge">Ptr{Cdouble}</code>, how to compute the <code class="highlighter-rouge">sizeof</code>
-a type in bytes (identical to C’s <code class="highlighter-rouge">sizeof</code> operator), and so on.  For fun,
-try inserting a <code class="highlighter-rouge">println("mycompare($a,$b)")</code> line into mycompare, which
-will allow you to see the comparisons that <code class="highlighter-rouge">qsort</code> is performing (and to verify
+<code class="language-plaintext highlighter-rouge">A::Vector{Cdouble}</code> into a <code class="language-plaintext highlighter-rouge">Ptr{Cdouble}</code>, how to compute the <code class="language-plaintext highlighter-rouge">sizeof</code>
+a type in bytes (identical to C’s <code class="language-plaintext highlighter-rouge">sizeof</code> operator), and so on.  For fun,
+try inserting a <code class="language-plaintext highlighter-rouge">println("mycompare($a,$b)")</code> line into mycompare, which
+will allow you to see the comparisons that <code class="language-plaintext highlighter-rouge">qsort</code> is performing (and to verify
 that it is really calling the Julia function that you passed to it).</p>
 
 <h2 id="the-problem-with-closures">The problem with closures</h2>
 
 <p>We aren’t done yet, however.  If you start passing callback functions to
-C routines, it won’t be long before you discover that <code class="highlighter-rouge">cfunction</code> doesn’t
+C routines, it won’t be long before you discover that <code class="language-plaintext highlighter-rouge">cfunction</code> doesn’t
 always work.  For example, suppose we tried to declare our comparison
 function inline, via:</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>mycomp = cfunction((a_,b_) -&gt; unsafe_load(a_) &lt; unsafe_load(b_) ? 
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>mycomp = cfunction((a_,b_) -&gt; unsafe_load(a_) &lt; unsafe_load(b_) ? 
                               cint(-1) : cint(+1),
                    Cint, (Ptr{Cdouble}, Ptr{Cdouble}))
 </code></pre></div></div>
 
-<p>Julia barfs on this, printing <code class="highlighter-rouge">ERROR: function is not yet c-callable</code>.  In
-general, <code class="highlighter-rouge">cfunction</code> only works for “top-level” functions: named
+<p>Julia barfs on this, printing <code class="language-plaintext highlighter-rouge">ERROR: function is not yet c-callable</code>.  In
+general, <code class="language-plaintext highlighter-rouge">cfunction</code> only works for “top-level” functions: named
 functions defined in the top-level (global or module) scope, but <em>not</em>
-anonymous (<code class="highlighter-rouge">args -&gt; value</code>) functions and not functions defined within
+anonymous (<code class="language-plaintext highlighter-rouge">args -&gt; value</code>) functions and not functions defined within
 other functions (“nested” functions).  The reason for this stems from
 one important concept in computer science: a
 <a href="http://en.wikipedia.org/wiki/Closure_%28computer_science%29">closure</a>.</p>
 
 <p>To understand the need for closures, and the difficulty they pose for
 callback functions, suppose that we wanted to provide a nicer interface
-for qsort, one which permitted the user to simply pass a <code class="highlighter-rouge">lessthan</code> function
-returning <code class="highlighter-rouge">true</code> or <code class="highlighter-rouge">false</code> while hiding all of the low-level business with
-pointers, <code class="highlighter-rouge">Cint</code>, and so on.  We might <em>like</em> to do something of the form:</p>
+for qsort, one which permitted the user to simply pass a <code class="language-plaintext highlighter-rouge">lessthan</code> function
+returning <code class="language-plaintext highlighter-rouge">true</code> or <code class="language-plaintext highlighter-rouge">false</code> while hiding all of the low-level business with
+pointers, <code class="language-plaintext highlighter-rouge">Cint</code>, and so on.  We might <em>like</em> to do something of the form:</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>function qsort!{T}(A::Vector{T}, lessthan::Function)
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>function qsort!{T}(A::Vector{T}, lessthan::Function)
     function mycompare(a_::Ptr{T}, b_::Ptr{T})
         a = unsafe_load(a_)
         b = unsafe_load(b_)
@@ -399,12 +399,12 @@ pointers, <code class="highlighter-rouge">Cint</code>, and so on.  We might <em>
 end
 </code></pre></div></div>
 
-<p>Then we could simply call <code class="highlighter-rouge">qsort!([1.3, -2.7, 4.4, 3.1], &lt;)</code> to sort
-in ascending order using the built-in <code class="highlighter-rouge">&lt;</code> comparison, or any other
-comparison function we wanted.  Unfortunately <code class="highlighter-rouge">cfunction</code> will again
-barf when you try to call <code class="highlighter-rouge">qsort!</code>, and it is no longer so difficult
-to understand why.  Notice that the nested <code class="highlighter-rouge">mycompare</code> function is no
-longer self-contained: it uses the variable <code class="highlighter-rouge">lessthan</code> from the
+<p>Then we could simply call <code class="language-plaintext highlighter-rouge">qsort!([1.3, -2.7, 4.4, 3.1], &lt;)</code> to sort
+in ascending order using the built-in <code class="language-plaintext highlighter-rouge">&lt;</code> comparison, or any other
+comparison function we wanted.  Unfortunately <code class="language-plaintext highlighter-rouge">cfunction</code> will again
+barf when you try to call <code class="language-plaintext highlighter-rouge">qsort!</code>, and it is no longer so difficult
+to understand why.  Notice that the nested <code class="language-plaintext highlighter-rouge">mycompare</code> function is no
+longer self-contained: it uses the variable <code class="language-plaintext highlighter-rouge">lessthan</code> from the
 surrounding scope.  This is a common pattern for nested functions and
 anonymous functions: often, they are parameterized by local variables
 in the environment where the function is defined.  Technically, the
@@ -413,7 +413,7 @@ scoping</a> in
 a programming language like Julia, and is typical of any language in
 which functions are
 “<a href="http://en.wikipedia.org/wiki/First-class_function">first-class</a>”
-objects.  In order to support lexical scoping, a Julia <code class="highlighter-rouge">Function</code>
+objects.  In order to support lexical scoping, a Julia <code class="language-plaintext highlighter-rouge">Function</code>
 object needs to internally carry around a pointer to the variables in
 the enclosing environment, and this encapsulation is called a
 <em>closure</em>.</p>
@@ -429,18 +429,18 @@ with two options, neither of which is especially attractive:</p>
 
 <ul>
   <li>
-    <p>We could store <code class="highlighter-rouge">lessthan</code> in a global variable, and reference that
-from a top-level <code class="highlighter-rouge">mycompare</code> function.  (This is the traditional solution
-for C programmers calling <code class="highlighter-rouge">qsort</code> with parameterized comparison functions.)
-The problem with this strategy is that it is not <a href="http://en.wikipedia.org/wiki/Reentrancy_%28computing%29">re-entrant</a>: it prevents us from calling <code class="highlighter-rouge">qsort!</code>
+    <p>We could store <code class="language-plaintext highlighter-rouge">lessthan</code> in a global variable, and reference that
+from a top-level <code class="language-plaintext highlighter-rouge">mycompare</code> function.  (This is the traditional solution
+for C programmers calling <code class="language-plaintext highlighter-rouge">qsort</code> with parameterized comparison functions.)
+The problem with this strategy is that it is not <a href="http://en.wikipedia.org/wiki/Reentrancy_%28computing%29">re-entrant</a>: it prevents us from calling <code class="language-plaintext highlighter-rouge">qsort!</code>
 recursively (e.g. if the comparison function itself needs to do a sort, for
-some complicated datastructure), or from calling <code class="highlighter-rouge">qsort!</code> from multiple
+some complicated datastructure), or from calling <code class="language-plaintext highlighter-rouge">qsort!</code> from multiple
 threads (when a future Julia version supports shared-memory parallelism).
 Still, this is better than nothing.</p>
   </li>
   <li>
-    <p>Every time <code class="highlighter-rouge">qsort!</code> is called, Julia could JIT-compile a new version
-of <code class="highlighter-rouge">mycompare</code>, which hard-codes the reference to the <code class="highlighter-rouge">lessthan</code>
+    <p>Every time <code class="language-plaintext highlighter-rouge">qsort!</code> is called, Julia could JIT-compile a new version
+of <code class="language-plaintext highlighter-rouge">mycompare</code>, which hard-codes the reference to the <code class="language-plaintext highlighter-rouge">lessthan</code>
 argument passed on that call.  This is technically possible and has
 been implemented in some languages (e.g. reportedly <a href="http://www.gnu.org/software/guile/manual/html_node/Dynamic-FFI.html">GNU
 Guile</a>
@@ -462,35 +462,35 @@ closure as a callback.</p>
 
 <h2 id="passing-closures-via-pass-through-pointers">Passing closures via pass-through pointers</h2>
 
-<p>The <code class="highlighter-rouge">qsort</code> interface is nowadays considered rather antiquated.  Years
+<p>The <code class="language-plaintext highlighter-rouge">qsort</code> interface is nowadays considered rather antiquated.  Years
 ago, it was supplemented on BSD-Unix systems, and eventually in GNU
-libc, by a function called <code class="highlighter-rouge">qsort_r</code> that solves the problem of passing
+libc, by a function called <code class="language-plaintext highlighter-rouge">qsort_r</code> that solves the problem of passing
 parameters to the callback in a re-entrant way.  This is how the BSD (e.g. MacOS)
-<code class="highlighter-rouge">qsort_r</code> function <a href="https://developer.apple.com/library/mac/documentation/Darwin/Reference/ManPages/man3/qsort_r.3.html">is defined</a>:</p>
+<code class="language-plaintext highlighter-rouge">qsort_r</code> function <a href="https://developer.apple.com/library/mac/documentation/Darwin/Reference/ManPages/man3/qsort_r.3.html">is defined</a>:</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>void qsort_r(void *base, size_t nmemb, size_t size, void *thunk,
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>void qsort_r(void *base, size_t nmemb, size_t size, void *thunk,
              int (*compare)(void *thunk, const void *a, const void *b));
 </code></pre></div></div>
 
-<p>Compared to <code class="highlighter-rouge">qsort</code>, there is an extra <code class="highlighter-rouge">thunk</code> parameter, and this is
-<em>passed through</em> to the <code class="highlighter-rouge">compare</code> function as its first argument.  In this
+<p>Compared to <code class="language-plaintext highlighter-rouge">qsort</code>, there is an extra <code class="language-plaintext highlighter-rouge">thunk</code> parameter, and this is
+<em>passed through</em> to the <code class="language-plaintext highlighter-rouge">compare</code> function as its first argument.  In this
 way, you can pass a pointer to <em>arbitrary</em> data through to your callback,
 and we can exploit this to pass a closure through for an arbitrary Julia
 callback.</p>
 
-<p>All we need is a way to convert a Julia <code class="highlighter-rouge">Function</code> into an opaque
-<code class="highlighter-rouge">Ptr{Void}</code> so that we can pass it through to our callback, and then a
-way to convert the opaque pointer back into a <code class="highlighter-rouge">Function</code>.  The former
-is automatic if we simply declare the <code class="highlighter-rouge">ccall</code> argument as type <code class="highlighter-rouge">Any</code>
+<p>All we need is a way to convert a Julia <code class="language-plaintext highlighter-rouge">Function</code> into an opaque
+<code class="language-plaintext highlighter-rouge">Ptr{Void}</code> so that we can pass it through to our callback, and then a
+way to convert the opaque pointer back into a <code class="language-plaintext highlighter-rouge">Function</code>.  The former
+is automatic if we simply declare the <code class="language-plaintext highlighter-rouge">ccall</code> argument as type <code class="language-plaintext highlighter-rouge">Any</code>
 (which passes the argument as an opaque Julia object pointer), and the
 latter is accomplished by the built-in function
-<code class="highlighter-rouge">unsafe_pointer_to_objref</code>.  (Technically, we could use type
-<code class="highlighter-rouge">Function</code> or an explicit call to <code class="highlighter-rouge">pointer_from_objref</code> instead of
-<code class="highlighter-rouge">Any</code>.)  Using these, we can now define a working high-level <code class="highlighter-rouge">qsort!</code>
-function that takes an arbitrary <code class="highlighter-rouge">lessthan</code> comparison-function
+<code class="language-plaintext highlighter-rouge">unsafe_pointer_to_objref</code>.  (Technically, we could use type
+<code class="language-plaintext highlighter-rouge">Function</code> or an explicit call to <code class="language-plaintext highlighter-rouge">pointer_from_objref</code> instead of
+<code class="language-plaintext highlighter-rouge">Any</code>.)  Using these, we can now define a working high-level <code class="language-plaintext highlighter-rouge">qsort!</code>
+function that takes an arbitrary <code class="language-plaintext highlighter-rouge">lessthan</code> comparison-function
 argument:</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>function qsort!_compare{T}(lessthan_::Ptr{Void}, a_::Ptr{T}, b_::Ptr{T})
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>function qsort!_compare{T}(lessthan_::Ptr{Void}, a_::Ptr{T}, b_::Ptr{T})
     a = unsafe_load(a_)
     b = unsafe_load(b_)
     lessthan = unsafe_pointer_to_objref(lessthan_)::Function
@@ -505,47 +505,47 @@ function qsort!{T}(A::Vector{T}, lessthan::Function=&lt;)
 end
 </code></pre></div></div>
 
-<p><code class="highlighter-rouge">qsort!_compare</code> is a top-level function, so <code class="highlighter-rouge">cfunction</code> has no
-problem with it, and it will only be compiled once per type <code class="highlighter-rouge">T</code> to be
-sorted (rather than once per call to <code class="highlighter-rouge">qsort!</code> or per <code class="highlighter-rouge">lessthan</code>
-function).  We use the explicit <code class="highlighter-rouge">::Function</code> assertion to tell
-the compiler that we will only pass <code class="highlighter-rouge">Function</code> pointers in
-<code class="highlighter-rouge">lessthan_</code>. Note that we gave the <code class="highlighter-rouge">lessthan</code> argument a default value
-of <code class="highlighter-rouge">&lt;</code> (default arguments being a <a href="https://github.com/JuliaLang/julia/issues/1817">recent
+<p><code class="language-plaintext highlighter-rouge">qsort!_compare</code> is a top-level function, so <code class="language-plaintext highlighter-rouge">cfunction</code> has no
+problem with it, and it will only be compiled once per type <code class="language-plaintext highlighter-rouge">T</code> to be
+sorted (rather than once per call to <code class="language-plaintext highlighter-rouge">qsort!</code> or per <code class="language-plaintext highlighter-rouge">lessthan</code>
+function).  We use the explicit <code class="language-plaintext highlighter-rouge">::Function</code> assertion to tell
+the compiler that we will only pass <code class="language-plaintext highlighter-rouge">Function</code> pointers in
+<code class="language-plaintext highlighter-rouge">lessthan_</code>. Note that we gave the <code class="language-plaintext highlighter-rouge">lessthan</code> argument a default value
+of <code class="language-plaintext highlighter-rouge">&lt;</code> (default arguments being a <a href="https://github.com/JuliaLang/julia/issues/1817">recent
 feature</a> added to
 Julia).</p>
 
-<p>We can now do <code class="highlighter-rouge">qsort!([1.3, -2.7, 4.4, 3.1])</code> and it will
-return the array sorted in ascending order, or <code class="highlighter-rouge">qsort!([1.3, -2.7,
+<p>We can now do <code class="language-plaintext highlighter-rouge">qsort!([1.3, -2.7, 4.4, 3.1])</code> and it will
+return the array sorted in ascending order, or <code class="language-plaintext highlighter-rouge">qsort!([1.3, -2.7,
 4.4, 3.1], &gt;)</code> to sort in descending order.</p>
 
-<h4 id="warning-qsort_r-is-not-portable">Warning: <code class="highlighter-rouge">qsort_r</code> is not portable</h4>
+<h4 id="warning-qsort_r-is-not-portable">Warning: <code class="language-plaintext highlighter-rouge">qsort_r</code> is not portable</h4>
 
 <p>The example above has one major problem that has nothing to do with
-Julia: the <code class="highlighter-rouge">qsort_r</code> function is not portable.  The above example
+Julia: the <code class="language-plaintext highlighter-rouge">qsort_r</code> function is not portable.  The above example
 won’t work on Windows, since the Windows C library doesn’t define
-<code class="highlighter-rouge">qsort_r</code> (instead, it has a function called
+<code class="language-plaintext highlighter-rouge">qsort_r</code> (instead, it has a function called
 <a href="http://msdn.microsoft.com/en-us/library/4xc60xas%28VS.80%29.aspx">qsort_s</a>,
 which of course uses an argument order incompatible with <em>both</em> the
-BSD and GNU <code class="highlighter-rouge">qsort_r</code> functions).  Worse, it will crash on GNU/Linux
-systems, which <em>do</em> provide <code class="highlighter-rouge">qsort_r</code> but with an
+BSD and GNU <code class="language-plaintext highlighter-rouge">qsort_r</code> functions).  Worse, it will crash on GNU/Linux
+systems, which <em>do</em> provide <code class="language-plaintext highlighter-rouge">qsort_r</code> but with an
 <a href="http://www.memoryhole.net/kyle/2009/11/qsort_r.html">incompatible</a>
 <a href="http://www.cygwin.com/ml/libc-alpha/2008-12/msg00008.html">calling
 convention</a>. And
-as a result it is difficult to use <code class="highlighter-rouge">qsort_r</code> in a way that does not
+as a result it is difficult to use <code class="language-plaintext highlighter-rouge">qsort_r</code> in a way that does not
 crash either on GNU/Linux or BSD (e.g. MacOS) systems.  This is how
-glibc’s <code class="highlighter-rouge">qsort_r</code> is defined:</p>
+glibc’s <code class="language-plaintext highlighter-rouge">qsort_r</code> is defined:</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>void qsort_r(void *base, size_t nmemb, size_t size,
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>void qsort_r(void *base, size_t nmemb, size_t size,
              int (*compare)(const void *a, const void *b, void *thunk),
               void *thunk);
 </code></pre></div></div>
 
-<p>Note that the position of the <code class="highlighter-rouge">thunk</code> argument is moved, both in <code class="highlighter-rouge">qsort_r</code> itself and
-in the comparison function.   So, the corresponding <code class="highlighter-rouge">qsort!</code> Julia code on
+<p>Note that the position of the <code class="language-plaintext highlighter-rouge">thunk</code> argument is moved, both in <code class="language-plaintext highlighter-rouge">qsort_r</code> itself and
+in the comparison function.   So, the corresponding <code class="language-plaintext highlighter-rouge">qsort!</code> Julia code on
 GNU/Linux systems should be:</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>function qsort!_compare{T}(a_::Ptr{T}, b_::Ptr{T}, lessthan_::Ptr{Void})
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>function qsort!_compare{T}(a_::Ptr{T}, b_::Ptr{T}, lessthan_::Ptr{Void})
     a = unsafe_load(a_)
     b = unsafe_load(b_)
     lessthan = unsafe_pointer_to_objref(lessthan_)::Function
@@ -560,11 +560,11 @@ function qsort!{T}(A::Vector{T}, lessthan::Function=&lt;)
 end
 </code></pre></div></div>
 
-<p>If you really needed to call <code class="highlighter-rouge">qsort_r</code> from Julia, you could use the
-above definitions if <code class="highlighter-rouge">OS_NAME == :Linux</code> and the BSD definitions
-otherwise, with a third version using <code class="highlighter-rouge">qsort_s</code> on Windows, but
+<p>If you really needed to call <code class="language-plaintext highlighter-rouge">qsort_r</code> from Julia, you could use the
+above definitions if <code class="language-plaintext highlighter-rouge">OS_NAME == :Linux</code> and the BSD definitions
+otherwise, with a third version using <code class="language-plaintext highlighter-rouge">qsort_s</code> on Windows, but
 fortunately there is not much need as Julia comes with its own
-perfectly adequate <code class="highlighter-rouge">sort</code> and <code class="highlighter-rouge">sort!</code> routines.</p>
+perfectly adequate <code class="language-plaintext highlighter-rouge">sort</code> and <code class="language-plaintext highlighter-rouge">sort!</code> routines.</p>
 
 <h2 id="passing-closures-in-data-structures">Passing closures in data structures</h2>
 
@@ -577,23 +577,23 @@ work below for you, but it is instructive to look at how this is
 implemented because GSL simulates closures in a slightly different
 way, with data structures.</p>
 
-<p>Like most modern C libraries accepting callbacks, GSL uses a <code class="highlighter-rouge">void*</code> pass-through
+<p>Like most modern C libraries accepting callbacks, GSL uses a <code class="language-plaintext highlighter-rouge">void*</code> pass-through
 parameter to allow arbitrary data to be passed through to the callback routine,
-and we can use that to support arbitrary closures in Julia.   Unlike <code class="highlighter-rouge">qsort_r</code>,
+and we can use that to support arbitrary closures in Julia.   Unlike <code class="language-plaintext highlighter-rouge">qsort_r</code>,
 however, GSL wraps both the C function pointer and the pass-through pointer in
-a data structure called <code class="highlighter-rouge">gsl_function</code>:</p>
+a data structure called <code class="language-plaintext highlighter-rouge">gsl_function</code>:</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>struct {
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>struct {
     double (*function)(double x, void *params);
     void *params;
 } gsl_function;
 </code></pre></div></div>
 
-<p>Using the techniques above, we can easily declare a <code class="highlighter-rouge">GSL_Function</code> type in Julia
-that mirrors this C type, and with a constructor <code class="highlighter-rouge">GSL_Function(f::Function)</code> that
-creates a wrapper around an arbitrary Julia function <code class="highlighter-rouge">f</code>:</p>
+<p>Using the techniques above, we can easily declare a <code class="language-plaintext highlighter-rouge">GSL_Function</code> type in Julia
+that mirrors this C type, and with a constructor <code class="language-plaintext highlighter-rouge">GSL_Function(f::Function)</code> that
+creates a wrapper around an arbitrary Julia function <code class="language-plaintext highlighter-rouge">f</code>:</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>function gsl_function_wrap(x::Cdouble, params::Ptr{Void})
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>function gsl_function_wrap(x::Cdouble, params::Ptr{Void})
     f = unsafe_pointer_to_objref(params)::Function
     convert(Cdouble, f(x))::Cdouble
 end
@@ -608,21 +608,21 @@ end
 </code></pre></div></div>
 
 <p>One subtlety with the above code is that we need to explicitly
-<code class="highlighter-rouge">convert</code> the return value of <code class="highlighter-rouge">f</code> to a <code class="highlighter-rouge">Cdouble</code> (in case the caller’s
-code returns some other numeric type for some <code class="highlighter-rouge">x</code>, such as an <code class="highlighter-rouge">Int</code>).
-Moreover, we need to explicitly assert (<code class="highlighter-rouge">::Cdouble</code>) that the result
-of the <code class="highlighter-rouge">convert</code> was a <code class="highlighter-rouge">Cdouble</code>.  As with the <code class="highlighter-rouge">qsort</code> example, this
-is because <code class="highlighter-rouge">cfunction</code> only works if Julia can guarantee that
-<code class="highlighter-rouge">gsl_function_wrap</code> returns the specified <code class="highlighter-rouge">Cdouble</code> type, and
-Julia cannot infer the return type of <code class="highlighter-rouge">convert</code> since it does not
-know the return type of <code class="highlighter-rouge">f(x)</code>.</p>
+<code class="language-plaintext highlighter-rouge">convert</code> the return value of <code class="language-plaintext highlighter-rouge">f</code> to a <code class="language-plaintext highlighter-rouge">Cdouble</code> (in case the caller’s
+code returns some other numeric type for some <code class="language-plaintext highlighter-rouge">x</code>, such as an <code class="language-plaintext highlighter-rouge">Int</code>).
+Moreover, we need to explicitly assert (<code class="language-plaintext highlighter-rouge">::Cdouble</code>) that the result
+of the <code class="language-plaintext highlighter-rouge">convert</code> was a <code class="language-plaintext highlighter-rouge">Cdouble</code>.  As with the <code class="language-plaintext highlighter-rouge">qsort</code> example, this
+is because <code class="language-plaintext highlighter-rouge">cfunction</code> only works if Julia can guarantee that
+<code class="language-plaintext highlighter-rouge">gsl_function_wrap</code> returns the specified <code class="language-plaintext highlighter-rouge">Cdouble</code> type, and
+Julia cannot infer the return type of <code class="language-plaintext highlighter-rouge">convert</code> since it does not
+know the return type of <code class="language-plaintext highlighter-rouge">f(x)</code>.</p>
 
 <p>Given the above definitions, it is a simple matter to pass this to the
 <a href="http://www.gnu.org/software/gsl/manual/html_node/QAG-adaptive-integration.html">GSL
 adaptive-integration</a>
-routines in a wrapper function <code class="highlighter-rouge">gsl_integration_qag</code>:</p>
+routines in a wrapper function <code class="language-plaintext highlighter-rouge">gsl_integration_qag</code>:</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>function gsl_integration_qag(f::Function, a::Real, b::Real, epsrel::Real=1e-12,
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>function gsl_integration_qag(f::Function, a::Real, b::Real, epsrel::Real=1e-12,
                              maxintervals::Integer=10^7)
     s = ccall((:gsl_integration_workspace_alloc,:libgsl), Ptr{Void}, (Csize_t,),
               maxintervals)
@@ -637,32 +637,32 @@ routines in a wrapper function <code class="highlighter-rouge">gsl_integration_q
 end
 </code></pre></div></div>
 
-<p>Note that <code class="highlighter-rouge">&amp;GSL_Function(f)</code> passes a pointer to a <code class="highlighter-rouge">GSL_Function</code>
-“struct” containing a pointer to <code class="highlighter-rouge">gsl_function_wrap_c</code> and <code class="highlighter-rouge">f</code>, corresponding
-to the <code class="highlighter-rouge">gsl_function*</code> argument in C.  The return value is a tuple of the estimated
+<p>Note that <code class="language-plaintext highlighter-rouge">&amp;GSL_Function(f)</code> passes a pointer to a <code class="language-plaintext highlighter-rouge">GSL_Function</code>
+“struct” containing a pointer to <code class="language-plaintext highlighter-rouge">gsl_function_wrap_c</code> and <code class="language-plaintext highlighter-rouge">f</code>, corresponding
+to the <code class="language-plaintext highlighter-rouge">gsl_function*</code> argument in C.  The return value is a tuple of the estimated
 integral and an estimated error.</p>
 
-<p>For example, <code class="highlighter-rouge">gsl_integration_qag(cos, 0, 1)</code> returns
-<code class="highlighter-rouge">(0.8414709848078965,9.34220461887732e-15)</code>, which computes the
-correct integral <code class="highlighter-rouge">sin(1)</code> to machine precision.</p>
+<p>For example, <code class="language-plaintext highlighter-rouge">gsl_integration_qag(cos, 0, 1)</code> returns
+<code class="language-plaintext highlighter-rouge">(0.8414709848078965,9.34220461887732e-15)</code>, which computes the
+correct integral <code class="language-plaintext highlighter-rouge">sin(1)</code> to machine precision.</p>
 
 <h2 id="taking-out-the-trash-or-not">Taking out the trash (or not)</h2>
 
 <p>In the above examples, we pass an opaque pointer (object reference) to a
-Julia <code class="highlighter-rouge">Function</code> into C.  Whenever one passes pointers to Julia data into C
+Julia <code class="language-plaintext highlighter-rouge">Function</code> into C.  Whenever one passes pointers to Julia data into C
 code, one has to ensure that the Julia data is not garbage-collected until
 the C code is done with it, and functions are no exception to this rule.
 An anonymous function that is no longer referred to by any Julia variable
 may be garbage collected, at which point any C pointers to it become invalid.</p>
 
 <p>This sounds scary, but in practice you don’t need to worry about it very often,
-because Julia guarantees that <code class="highlighter-rouge">ccall</code> arguments won’t be garbage-collected until
-the <code class="highlighter-rouge">ccall</code> exits.  So, in all of the above examples, we are safe: the <code class="highlighter-rouge">Function</code>
-only needs to live as long as the <code class="highlighter-rouge">ccall</code>.</p>
+because Julia guarantees that <code class="language-plaintext highlighter-rouge">ccall</code> arguments won’t be garbage-collected until
+the <code class="language-plaintext highlighter-rouge">ccall</code> exits.  So, in all of the above examples, we are safe: the <code class="language-plaintext highlighter-rouge">Function</code>
+only needs to live as long as the <code class="language-plaintext highlighter-rouge">ccall</code>.</p>
 
 <p>The only danger arises when you pass a function pointer to C and the C code
-<em>saves the pointer</em> in some data structure which it will use in a <em>later</em> <code class="highlighter-rouge">ccall</code>.
-In that case, you are responsible for ensuring that the <code class="highlighter-rouge">Function</code> variable lives
+<em>saves the pointer</em> in some data structure which it will use in a <em>later</em> <code class="language-plaintext highlighter-rouge">ccall</code>.
+In that case, you are responsible for ensuring that the <code class="language-plaintext highlighter-rouge">Function</code> variable lives
 (is referred to by some Julia variable) as long as the C code might need it.</p>
 
 <p>For example, in the GSL <a href="http://www.gnu.org/software/gsl/manual/html_node/One-dimensional-Minimization.html">one-dimensional minimization
@@ -676,7 +676,7 @@ until this process is complete.  The easiest way to ensure this is to create
 a Julia wrapper type around the minimizer object that stores an <em>explicit</em>
 reference to the Julia function, like this:</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>type GSL_Minimizer
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>type GSL_Minimizer
     m::Ptr{Void} # the gsl_min_fminimizer pointer
     f::Any  # explicit reference to objective, to prevent garbage-collection
     function GSL_Minimizer(t)
@@ -689,27 +689,27 @@ reference to the Julia function, like this:</p>
 end
 </code></pre></div></div>
 
-<p>This wraps around a <code class="highlighter-rouge">gsl_min_fminimizer</code> object of type <code class="highlighter-rouge">t</code>, with a
-placeholder <code class="highlighter-rouge">f</code> to store a reference to the objective function (once
-it is set below), including a <code class="highlighter-rouge">finalizer</code> to deallocate the GSL object
-when the <code class="highlighter-rouge">GSL_Minimizer</code> is garbage-collected.  The parameter <code class="highlighter-rouge">t</code> is
+<p>This wraps around a <code class="language-plaintext highlighter-rouge">gsl_min_fminimizer</code> object of type <code class="language-plaintext highlighter-rouge">t</code>, with a
+placeholder <code class="language-plaintext highlighter-rouge">f</code> to store a reference to the objective function (once
+it is set below), including a <code class="language-plaintext highlighter-rouge">finalizer</code> to deallocate the GSL object
+when the <code class="language-plaintext highlighter-rouge">GSL_Minimizer</code> is garbage-collected.  The parameter <code class="language-plaintext highlighter-rouge">t</code> is
 used to specify the minimization algorithm, which could default to
 Brent’s algorithm via:</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>const gsl_brent = unsafe_load(cglobal((:gsl_min_fminimizer_brent,:libgsl), Ptr{Void}))
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>const gsl_brent = unsafe_load(cglobal((:gsl_min_fminimizer_brent,:libgsl), Ptr{Void}))
 GSL_Minimizer() = GSL_Minimizer(gsl_brent)
 </code></pre></div></div>
 
-<p>(The call to <code class="highlighter-rouge">cglobal</code> yields a pointer to the
-<code class="highlighter-rouge">gsl_min_fminimizer_brent</code> global variable in GSL, which we then
-dereference to get the <em>actual</em> pointer via <code class="highlighter-rouge">unsafe_load</code>.)</p>
+<p>(The call to <code class="language-plaintext highlighter-rouge">cglobal</code> yields a pointer to the
+<code class="language-plaintext highlighter-rouge">gsl_min_fminimizer_brent</code> global variable in GSL, which we then
+dereference to get the <em>actual</em> pointer via <code class="language-plaintext highlighter-rouge">unsafe_load</code>.)</p>
 
 <p>Then, when we set the function to minimize (the “objective”), we store
-an extra reference to it in the <code class="highlighter-rouge">GSL_Minimizer</code> to prevent
-garbage-collection for the lifetime of the <code class="highlighter-rouge">GSL_Minimizer</code>, again
-using the <code class="highlighter-rouge">GSL_Function</code> type defined above to wrap the callback:</p>
+an extra reference to it in the <code class="language-plaintext highlighter-rouge">GSL_Minimizer</code> to prevent
+garbage-collection for the lifetime of the <code class="language-plaintext highlighter-rouge">GSL_Minimizer</code>, again
+using the <code class="language-plaintext highlighter-rouge">GSL_Function</code> type defined above to wrap the callback:</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>function gsl_minimizer_set!(m::GSL_Minimizer, f, x0, xmin, xmax)
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>function gsl_minimizer_set!(m::GSL_Minimizer, f, x0, xmin, xmax)
     ccall((:gsl_min_fminimizer_set,:libgsl), Cint,
           (Ptr{Void}, Ptr{GSL_Function}, Cdouble, Cdouble, Cdouble),
           m.m, &amp;GSL_Function(f), x0, xmin, xmax)
@@ -719,9 +719,9 @@ end
 </code></pre></div></div>
 
 <p>There are then various GSL routines to iterate the minimizer and to check the
-current <code class="highlighter-rouge">x</code>, objective value, or bounds on the minimum, which are convenient to wrap:</p>
+current <code class="language-plaintext highlighter-rouge">x</code>, objective value, or bounds on the minimum, which are convenient to wrap:</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>gsl_minimizer_iterate!(m::GSL_Minimizer) =
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>gsl_minimizer_iterate!(m::GSL_Minimizer) =
     ccall((:gsl_min_fminimizer_iterate,:libgsl), Cint, (Ptr{Void},), m.m)
 
 gsl_minimizer_x(m::GSL_Minimizer) =
@@ -736,10 +736,10 @@ gsl_minimizer_xmax(m::GSL_Minimizer) =
     ccall((:gsl_min_fminimizer_x_upper,:libgsl), Cdouble, (Ptr{Void},), m.m)
 </code></pre></div></div>
 
-<p>Putting all of these together, we can minimize a simple function <code class="highlighter-rouge">sin(x)</code> in 
+<p>Putting all of these together, we can minimize a simple function <code class="language-plaintext highlighter-rouge">sin(x)</code> in 
 the interval [-3,1], with a starting guess -1, via:</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>m = GSL_Minimizer()
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>m = GSL_Minimizer()
 gsl_minimizer_set!(m, sin, -1, -3, 1)
 while gsl_minimizer_xmax(m) - gsl_minimizer_xmin(m) &gt; 1e-6
     println("iterating at x = $(gsl_minimizer_x(m))")
@@ -748,7 +748,7 @@ end
 println("found minimum $(gsl_minimizer_f(m)) at x = $(gsl_minimizer_x(m))")
 </code></pre></div></div>
 
-<p>After a few iterations, it prints <code class="highlighter-rouge">found minimum -1.0 at x =
+<p>After a few iterations, it prints <code class="language-plaintext highlighter-rouge">found minimum -1.0 at x =
 -1.5707963269964016</code>, which is the correct minimum (−π/2) to
 about 10 digits.</p>
 
@@ -762,7 +762,7 @@ NLopt are actually quite similar to those used for GSL.</p>
 <p>An even more complicated version of these techniques can be found in
 the <a href="https://github.com/stevengj/PyCall.jl">PyCall package</a> to call
 Python from Julia.  In order to pass a Julia function to Python, we
-again use <code class="highlighter-rouge">cfunction</code> on a wrapper function that handles the type
+again use <code class="language-plaintext highlighter-rouge">cfunction</code> on a wrapper function that handles the type
 conversions and so on, and pass the actual Julia closure through via a
 pass-through pointer.  But in that case, the pass-through pointer
 consists of a Python object that has been created with a new type that
